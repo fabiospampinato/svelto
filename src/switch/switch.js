@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../draggable/draggable.js
  * @requires ../transform/transform.js
  * ========================================================================= */
@@ -20,6 +19,7 @@
 
   let config = {
     name: 'switch',
+    plugin: true,
     selector: '.switch',
     options: {
       colors: {
@@ -225,13 +225,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Switch = Switch;
-  Svelto.Switch.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Switch );
+  $.factory ( Switch, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

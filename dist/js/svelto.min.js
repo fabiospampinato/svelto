@@ -737,6 +737,435 @@
 
 
 /* =========================================================================
+ * Svelto - Pointer
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../browser/browser.js
+ * ========================================================================= */
+
+//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  window.Pointer = {
+    options: {
+      events: {
+        prefix: 'spointer'
+      },
+      dbltap: {
+        interval: 300
+      },
+    }
+  };
+
+  /* EVENTS */
+
+  let events = {
+    tap: Pointer.options.events.prefix + 'tap',
+    dbltap: Pointer.options.events.prefix + 'dbltap',
+    click: 'click',
+    dblclick: 'dblclick',
+    down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
+    move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
+    up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
+    cancel: $.browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
+    over: 'mouseover',
+    enter: 'mouseenter',
+    out: 'mouseout',
+    leave: 'mouseleave'
+  };
+
+  /* EVENTS METHODS */
+
+  for ( let name in events ) {
+
+    if ( events.hasOwnProperty ( name ) ) {
+
+      Pointer[name] = events[name];
+
+      if ( !( name in $.fn ) ) {
+
+        $.fn[name] = function ( fn ) {
+
+          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
+
+        };
+
+      }
+
+    }
+
+  }
+
+  /* ----- POINTER LOGIC ----- */
+
+  /* VARIABLES */
+
+  let $document = $(document),
+      target,
+      $target,
+      prevTapTimestamp = 0,
+      motion;
+
+  /* EVENT CREATOR */
+
+  function createEvent ( name, originalEvent ) {
+
+    let event = $.Event ( name );
+
+    event.originalEvent = originalEvent;
+
+    return event;
+
+  }
+
+  /* HANDLERS */
+
+  function downHandler ( event ) {
+
+    target = event.target;
+    $target = $(target);
+
+    motion = false;
+
+    $target.one ( Pointer.move, moveHandler );
+    $target.one ( Pointer.up, upHandler );
+    $target.one ( Pointer.cancel, cancelHandler );
+
+  }
+
+  function moveHandler () {
+
+    motion = true;
+
+  }
+
+  function upHandler ( event ) {
+
+    if ( !$.browser.is.touchDevice || !motion ) {
+
+      let tapTimestamp = event.timeStamp || Date.now ();
+
+      $target.trigger ( createEvent ( Pointer.tap, event ) );
+
+      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+
+        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+
+      }
+
+      prevTapTimestamp = tapTimestamp;
+
+    }
+
+    if ( !motion ) {
+
+      $target.off ( Pointer.move, moveHandler );
+
+    }
+
+    $target.off ( Pointer.cancel, cancelHandler );
+
+  }
+
+  function cancelHandler () {
+
+    if ( !motion ) {
+
+      $target.off ( Pointer.move, moveHandler );
+
+    }
+
+    $target.off ( Pointer.up, upHandler );
+
+  }
+
+  /* BIND */
+
+  $document.on ( Pointer.down, downHandler );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Widgetize
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* WIDGETIZE */
+
+  window.Widgetize = new class {
+
+    constructor () {
+
+      this.widgetizers = {};
+
+    }
+
+    add ( selector, widgetizer, data ) {
+
+      if ( !(selector in this.widgetizers) ) {
+
+        this.widgetizers[selector] = [];
+
+      }
+
+      this.widgetizers[selector].push ( [widgetizer, data] );
+
+    }
+
+    get () {
+
+      return this.widgetizers;
+
+    }
+
+    remove ( selector, widgetizer ) {
+
+      if ( selector in this.widgetizers ) {
+
+        for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
+
+          if ( this.widgetizers[selector][i][0] === widgetizer ) {
+
+            this.widgetizers[selector].splice ( i, 1 );
+
+          }
+
+        }
+
+        if ( this.widgetizers[selector].length === 0 ) {
+
+          delete this.widgetizers[selector];
+
+        }
+
+      }
+
+    }
+
+    on ( $roots ) {
+
+      for ( let selector in this.widgetizers ) {
+
+        if ( this.widgetizers.hasOwnProperty ( selector ) ) {
+
+          this.trigger ( selector, $roots.filter ( selector ) );
+          this.trigger ( selector, $roots.find ( selector ) );
+
+        }
+
+      }
+
+    }
+
+    trigger ( selector, $widgets ) {
+
+      for ( let widget of $widgets ) {
+
+        for ( let [widgetizer, data] of this.widgetizers[selector] ) {
+
+          widgetizer ( $(widget), data );
+
+        }
+
+      }
+
+    }
+
+  };
+
+  /* JQUERY PLUGIN */
+
+  $.fn.widgetize = function () {
+
+    Widgetize.on ( this );
+
+    return this;
+
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $body.widgetize ();
+
+  });
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Factory
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../widgetize/widgetize.js
+ *=========================================================================*/
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* FACTORY */
+
+  $.factory = function ( Widget, config, namespace ) {
+
+    /* CONFIGURE */
+
+    $.factory.configure ( Widget, config );
+
+    /* NAMESPACE */
+
+    $.factory.namespace ( Widget, namespace );
+
+    /* WIDGETIZE */
+
+    $.factory.widgetize ( Widget );
+
+    /* PLUGIN */
+
+    $.factory.plugin ( Widget );
+
+  };
+
+  /* FACTORY CONFIGURE */
+
+  $.factory.configure = function ( Widget, config = {} ) {
+
+    Widget.config = config;
+
+  };
+
+  /* FACTORY NAMESPACE */
+
+  $.factory.namespace = function ( Widget, namespace ) {
+
+    if ( _.isObject ( namespace ) ) {
+
+      let name = _.capitalize ( Widget.config.name );
+
+      namespace[name] = Widget;
+
+    }
+
+  };
+
+  /* FACTORY WIDGETIZE */
+
+  $.factory.widgetize = function ( Widget ) {
+
+    if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
+
+      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
+
+    }
+
+  };
+
+  /* FACTORY PLUGIN */
+
+  $.factory.plugin = function ( Widget ) {
+
+    if ( Widget.config.plugin ) {
+
+      /* NAME */
+
+      let name = Widget.config.name;
+
+      /* JQUERY PLUGIN */
+
+      $.fn[name] = function ( options, ...args ) {
+
+        if ( _.isString ( options ) ) { //INFO: Calling a method
+
+          if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
+
+            /* METHOD CALL */
+
+            for ( let element of this ) {
+
+              /* VARIABLES */
+
+              let instance = $.factory.instance ( Widget, false, element );
+
+              /* CHECKING VALID CALL */
+
+              if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
+
+              /* CALLING */
+
+              let returnValue = instance[options]( ...args );
+
+              if ( !_.isUndefined ( returnValue ) ) {
+
+                return returnValue;
+
+              }
+
+            }
+
+          }
+
+        } else {
+
+          /* INSTANCE */
+
+          for ( let element of this ) {
+
+            $.factory.instance ( Widget, options, element );
+
+          }
+
+        }
+
+        return this;
+
+      };
+
+    }
+
+  };
+
+  /* FACTORY INSTANCE */
+
+  $.factory.instance = function ( Widget, options, element ) {
+
+    let name = Widget.config.name,
+        instance = $.data ( element, 'instance.' + name );
+
+    if ( !instance ) {
+
+      instance = new Widget ( options, element );
+
+    }
+
+    return instance;
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - Widget
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -744,6 +1173,8 @@
  * =========================================================================
  * @requires ../core/core.js
  * @requires ../tmpl/tmpl.js
+ * @requires ../pointer/pointer.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
@@ -755,8 +1186,9 @@
   /* CONFIG */
 
   let config = {
-    name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
-    selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
+    name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
+    selector: false, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
@@ -1261,432 +1693,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Widget = Widget;
-  Svelto.Widget.config = config;
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Widgetize
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/svelto.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* WIDGETIZE */
-
-  window.Widgetize = new class {
-
-    constructor () {
-
-      this.widgetizers = {};
-
-    }
-
-    add ( selector, widgetizer, data ) {
-
-      if ( !(selector in this.widgetizers) ) {
-
-        this.widgetizers[selector] = [];
-
-      }
-
-      this.widgetizers[selector].push ( [widgetizer, data] );
-
-    }
-
-    get () {
-
-      return this.widgetizers;
-
-    }
-
-    remove ( selector, widgetizer ) {
-
-      if ( selector in this.widgetizers ) {
-
-        for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
-
-          if ( this.widgetizers[selector][i][0] === widgetizer ) {
-
-            this.widgetizers[selector].splice ( i, 1 );
-
-          }
-
-        }
-
-        if ( this.widgetizers[selector].length === 0 ) {
-
-          delete this.widgetizers[selector];
-
-        }
-
-      }
-
-    }
-
-    on ( $roots ) {
-
-      for ( let selector in this.widgetizers ) {
-
-        if ( this.widgetizers.hasOwnProperty ( selector ) ) {
-
-          this.trigger ( selector, $roots.filter ( selector ) );
-          this.trigger ( selector, $roots.find ( selector ) );
-
-        }
-
-      }
-
-    }
-
-    trigger ( selector, $widgets ) {
-
-      for ( let widget of $widgets ) {
-
-        for ( let [widgetizer, data] of this.widgetizers[selector] ) {
-
-          widgetizer ( $(widget), data );
-
-        }
-
-      }
-
-    }
-
-  };
-
-  /* JQUERY PLUGIN */
-
-  $.fn.widgetize = function () {
-
-    Widgetize.on ( this );
-
-    return this;
-
-  };
-
-  /* READY */
-
-  $(function () {
-
-    $body.widgetize ();
-
-  });
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Pointer
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * @requires ../browser/browser.js
- * ========================================================================= */
-
-//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  window.Pointer = {
-    options: {
-      events: {
-        prefix: 'spointer'
-      },
-      dbltap: {
-        interval: 300
-      },
-    }
-  };
-
-  /* EVENTS */
-
-  let events = {
-    tap: Pointer.options.events.prefix + 'tap',
-    dbltap: Pointer.options.events.prefix + 'dbltap',
-    click: 'click',
-    dblclick: 'dblclick',
-    down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
-    move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
-    up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
-    cancel: $.browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
-    over: 'mouseover',
-    enter: 'mouseenter',
-    out: 'mouseout',
-    leave: 'mouseleave'
-  };
-
-  /* EVENTS METHODS */
-
-  for ( let name in events ) {
-
-    if ( events.hasOwnProperty ( name ) ) {
-
-      Pointer[name] = events[name];
-
-      if ( !( name in $.fn ) ) {
-
-        $.fn[name] = function ( fn ) {
-
-          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
-
-        };
-
-      }
-
-    }
-
-  }
-
-  /* ----- POINTER LOGIC ----- */
-
-  /* VARIABLES */
-
-  let $document = $(document),
-      target,
-      $target,
-      prevTapTimestamp = 0,
-      motion;
-
-  /* EVENT CREATOR */
-
-  function createEvent ( name, originalEvent ) {
-
-    let event = $.Event ( name );
-
-    event.originalEvent = originalEvent;
-
-    return event;
-
-  }
-
-  /* HANDLERS */
-
-  function downHandler ( event ) {
-
-    target = event.target;
-    $target = $(target);
-
-    motion = false;
-
-    $target.one ( Pointer.move, moveHandler );
-    $target.one ( Pointer.up, upHandler );
-    $target.one ( Pointer.cancel, cancelHandler );
-
-  }
-
-  function moveHandler () {
-
-    motion = true;
-
-  }
-
-  function upHandler ( event ) {
-
-    if ( !$.browser.is.touchDevice || !motion ) {
-
-      let tapTimestamp = event.timeStamp || Date.now ();
-
-      $target.trigger ( createEvent ( Pointer.tap, event ) );
-
-      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-      }
-
-      prevTapTimestamp = tapTimestamp;
-
-    }
-
-    if ( !motion ) {
-
-      $target.off ( Pointer.move, moveHandler );
-
-    }
-
-    $target.off ( Pointer.cancel, cancelHandler );
-
-  }
-
-  function cancelHandler () {
-
-    if ( !motion ) {
-
-      $target.off ( Pointer.move, moveHandler );
-
-    }
-
-    $target.off ( Pointer.up, upHandler );
-
-  }
-
-  /* BIND */
-
-  $document.on ( Pointer.down, downHandler );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Factory
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * @requires ../widget/widget.js
- * @requires ../widgetize/widgetize.js
- * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
- *=========================================================================*/
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
   /* FACTORY */
 
-  $.factory = function ( Widget, config, namespace ) {
-
-    /* COMBINE */
-
-    $.factory.combine ( Widget, config );
-
-    /* NAMESPACE */
-
-    $.factory.namespace ( Widget, namespace );
-
-    /* WIDGETIZE */
-
-    $.factory.widgetize ( Widget );
-
-    /* PLUGIN */
-
-    $.factory.plugin ( Widget );
-
-  };
-
-  /* FACTORY COMBINE */
-
-  $.factory.combine = function ( Widget, config ) {
-
-    Widget.config = config;
-
-  };
-
-  /* FACTORY NAMESPACE */
-
-  $.factory.namespace = function ( namespace, Widget ) {
-
-    namespace[Widget.config.name]
-
-  };
-
-  /* FACTORY WIDGETIZE */
-
-  $.factory.widgetize = function ( Widget ) {
-
-    if ( Widget.config.selector ) {
-
-      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
-
-    }
-
-  };
-
-  /* FACTORY PLUGIN */
-
-  $.factory.plugin = function ( Widget ) {
-
-    /* NAME */
-
-    let name = Widget.config.name;
-
-    /* JQUERY PLUGIN */
-
-    $.fn[name] = function ( options, ...args ) {
-
-      if ( _.isString ( options ) ) { //INFO: Calling a method
-
-        if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
-
-          /* METHOD CALL */
-
-          for ( let element of this ) {
-
-            /* VARIABLES */
-
-            let instance = $.factory.instance ( Widget, false, element );
-
-            /* CHECKING VALID CALL */
-
-            if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
-
-            /* CALLING */
-
-            let returnValue = instance[options]( ...args );
-
-            if ( !_.isUndefined ( returnValue ) ) {
-
-              return returnValue;
-
-            }
-
-          }
-
-        }
-
-      } else {
-
-        /* INSTANCE */
-
-        for ( let element of this ) {
-
-          $.factory.instance ( Widget, options, element );
-
-        }
-
-      }
-
-      return this;
-
-    };
-
-  };
-
-  /* FACTORY INSTANCE */
-
-  $.factory.instance = function ( Widget, options, element ) {
-
-    let name = Widget.config.name,
-        instance = $.data ( element, 'instance.' + name );
-
-    if ( !instance ) {
-
-      instance = new Widget ( options, element );
-
-    }
-
-    return instance;
-
-  };
+  $.factory ( Widget, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -1697,7 +1706,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -1708,6 +1717,7 @@
 
   let config = {
     name: 'expander',
+    plugin: true,
     selector: '.expander',
     options: {
       classes: {
@@ -1776,14 +1786,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Expander = Expander;
-  Svelto.Expander.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Expander );
+  $.factory ( Expander, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -1795,7 +1800,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../expander/expander.js
- * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -1806,6 +1810,7 @@
 
   let config = {
     name: 'accordion',
+    plugin: true,
     selector: '.accordion',
     options: {
       multiple: false, //INFO: Wheter to keep multiple expanders open or just one
@@ -1922,14 +1927,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Accordion = Accordion;
-  Svelto.Accordion.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Accordion );
+  $.factory ( Accordion, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -1940,7 +1940,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../factory/factory.js
+ * @requires ../../widget/widget.js
  * ========================================================================= */
 
 //INFO: It supports only `box-sizing: border-box` inputs
@@ -1953,6 +1953,7 @@
 
   let config = {
     name: 'autogrowInput',
+    plugin: true,
     selector: 'input.autogrow',
     options: {
       callbacks: {
@@ -2009,14 +2010,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.AutogrowInput = AutogrowInput;
-  Svelto.AutogrowInput.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.AutogrowInput );
+  $.factory ( AutogrowInput, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2027,7 +2023,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../factory/factory.js
+ * @requires ../../widget/widget.js
  * ========================================================================= */
 
 //INFO: It supports only `box-sizing: border-box` textareas
@@ -2040,6 +2036,7 @@
 
   let config = {
     name: 'autogrowTextarea',
+    plugin: true,
     selector: 'textarea.autogrow',
     options: {
       callbacks: {
@@ -2094,14 +2091,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.AutogrowTextarea = AutogrowTextarea;
-  Svelto.AutogrowTextarea.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.AutogrowTextarea );
+  $.factory ( AutogrowTextarea, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2136,7 +2128,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -2147,7 +2139,8 @@
 
   let config = {
     name: 'boilerplate',
-    selector: undefined,
+    plugin: false,
+    selector: false,
     templates: {
       base: false
     },
@@ -2161,6 +2154,7 @@
       classes: {},
       selectors: {},
       animations: {},
+      keystrokes: {},
       callbacks: {}
     }
   };
@@ -2197,14 +2191,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Boilerplate = Boilerplate;
-  Svelto.Boilerplate.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Boilerplate );
+  $.factory ( Boilerplate, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2239,7 +2228,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add slides drag support
@@ -2252,6 +2241,7 @@
 
   let config = {
     name: 'carousel',
+    plugin: true,
     selector: '.carousel',
     options: {
       startIndex: 0,
@@ -2537,14 +2527,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Carousel = Carousel;
-  Svelto.Carousel.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Carousel );
+  $.factory ( Carousel, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2555,7 +2540,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -2566,7 +2551,6 @@
 
   let config = {
     name: 'targeter',
-    selector: undefined,
     options: {
       widget: false, //INFO: The target's widget class
       datas: {
@@ -2593,10 +2577,9 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Targeter = Targeter;
-  Svelto.Targeter.config = config;
+  $.factory ( Targeter, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2607,7 +2590,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../targeter/targeter.js
  * ========================================================================= */
 
@@ -2619,7 +2602,6 @@
 
   let config = {
     name: 'closer',
-    selector: undefined,
     options: {
       methods: {
         isOpen: 'isOpen',
@@ -2666,10 +2648,9 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Closer = Closer;
-  Svelto.Closer.config = config;
+  $.factory ( Closer, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -3085,7 +3066,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../color/color.js
  * ========================================================================= */
 
@@ -3099,6 +3080,7 @@
 
   let config = {
     name: 'colorpicker',
+    plugin: true,
     selector: '.colorpicker',
     options: {
       defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
@@ -3412,14 +3394,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Colorpicker = Colorpicker;
-  Svelto.Colorpicker.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Colorpicker );
+  $.factory ( Colorpicker, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -3529,7 +3506,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add support for min and max date delimiter
@@ -3546,6 +3523,7 @@
 
   let config = {
     name: 'datepicker',
+    plugin: true,
     selector: '.datepicker',
     options: {
       names: {
@@ -3936,14 +3914,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Datepicker = Datepicker;
-  Svelto.Datepicker.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Datepicker );
+  $.factory ( Datepicker, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -3954,9 +3927,9 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
- 
+
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
@@ -3978,6 +3951,7 @@
 
   let config = {
     name: 'draggable',
+    plugin: true,
     selector: '.draggable',
     options: {
       draggable: () => true, //INFO: Checks if we can drag it or not
@@ -4250,14 +4224,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Draggable = Draggable;
-  Svelto.Draggable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Draggable );
+  $.factory ( Draggable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -4739,7 +4708,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../positionate/positionate.js
  * @requires ../embed_css/embed_css.js
  * ========================================================================= */
@@ -4752,6 +4721,7 @@
 
   let config = {
     name: 'dropdown',
+    plugin: true,
     selector: '.dropdown',
     options: {
       positionate: {}, //INFO: Overriding `$.positionate` options
@@ -5018,14 +4988,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Dropdown = Dropdown;
-  Svelto.Dropdown.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Dropdown );
+  $.factory ( Dropdown, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5048,6 +5013,7 @@
 
   let config = {
     name: 'dropdownCloser',
+    plugin: true,
     selector: '.dropdown-closer',
     options: {
       widget: Svelto.Dropdown
@@ -5058,14 +5024,9 @@
 
   class DropdownCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.DropdownCloser = DropdownCloser;
-  Svelto.DropdownCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownCloser );
+  $.factory ( DropdownCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5076,7 +5037,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../closer/closer.js
  * ========================================================================= */
 
@@ -5088,10 +5048,9 @@
 
   let config = {
     name: 'opener',
-    selector: undefined,
     options: {
       hover: {
-        active: true,
+        active: false,
         delays: {
           open: 750,
           close: 250
@@ -5251,10 +5210,9 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Opener = Opener;
-  Svelto.Opener.config = config;
+  $.factory ( Opener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5277,6 +5235,7 @@
 
   let config = {
     name: 'dropdownOpener',
+    plugin: true,
     selector: '.dropdown-opener',
     options: {
       widget: Svelto.Dropdown
@@ -5287,14 +5246,9 @@
 
   class DropdownOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.DropdownOpener = DropdownOpener;
-  Svelto.DropdownOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownOpener );
+  $.factory ( DropdownOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5305,7 +5259,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../opener/opener.js
  * ========================================================================= */
 
@@ -5317,7 +5270,6 @@
 
   let config = {
     name: 'toggler',
-    selector: undefined,
     options: {
       methods: {
         toggle: 'toggle'
@@ -5347,10 +5299,9 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Toggler = Toggler;
-  Svelto.Toggler.config = config;
+  $.factory ( Toggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5373,6 +5324,7 @@
 
   let config = {
     name: 'dropdownToggler',
+    plugin: true,
     selector: '.dropdown-toggler',
     options: {
       widget: Svelto.Dropdown
@@ -5383,14 +5335,9 @@
 
   class DropdownToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( DropdownToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5545,7 +5492,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../touching/touching.js
  * ========================================================================= */
 
@@ -5557,6 +5504,7 @@
 
   let config = {
     name: 'droppable',
+    plugin: true,
     selector: '.droppable',
     options: {
       selector: '*',
@@ -5676,14 +5624,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Droppable = Droppable;
-  Svelto.Droppable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Droppable );
+  $.factory ( Droppable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5706,6 +5649,7 @@
 
   let config = {
     name: 'expanderCloser',
+    plugin: true,
     selector: '.expander-closer',
     options: {
       widget: Svelto.Expander
@@ -5716,14 +5660,9 @@
 
   class ExpanderCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.ExpanderCloser = ExpanderCloser;
-  Svelto.ExpanderCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderCloser );
+  $.factory ( ExpanderCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5746,6 +5685,7 @@
 
   let config = {
     name: 'expanderOpener',
+    plugin: true,
     selector: '.expander-opener',
     options: {
       widget: Svelto.Expander
@@ -5756,14 +5696,9 @@
 
   class ExpanderOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.ExpanderOpener = ExpanderOpener;
-  Svelto.ExpanderOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderOpener );
+  $.factory ( ExpanderOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5786,6 +5721,7 @@
 
   let config = {
     name: 'expanderToggler',
+    plugin: true,
     selector: '.expander-toggler',
     options: {
       widget: Svelto.Expander
@@ -5796,14 +5732,9 @@
 
   class ExpanderToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.ExpanderToggler = ExpanderToggler;
-  Svelto.ExpanderToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderToggler );
+  $.factory ( ExpanderToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5814,7 +5745,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -5825,6 +5756,8 @@
 
   let config = {
     name: 'flickable',
+    plugin: true,
+    selector: '.flickable',
     options: {
       duration: 150, //INFO: Maximum duration of the flick gesture
       threshold: 5, //INFO: Minimum moving treshold of the flick gesture
@@ -5939,14 +5872,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Flickable = Flickable;
-  Svelto.Flickable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Flickable );
+  $.factory ( Flickable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5957,7 +5885,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -5968,6 +5896,7 @@
 
   let config = {
     name: 'flippable',
+    plugin: true,
     selector: '.flippable',
     options: {
       classes: {
@@ -6030,14 +5959,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Flippable = Flippable;
-  Svelto.Flippable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Flippable );
+  $.factory ( Flippable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -6060,6 +5984,7 @@
 
   let config = {
     name: 'flippableFlipper',
+    plugin: true,
     selector: '.flippable-flipper, .flippable .flipper',
     options: {
       widget: Svelto.Flippable,
@@ -6075,14 +6000,9 @@
 
   class FlippableFlipper extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.FlippableFlipper = FlippableFlipper;
-  Svelto.FlippableFlipper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FlippableFlipper );
+  $.factory ( FlippableFlipper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -6093,7 +6013,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -6104,6 +6024,7 @@
 
   let config = {
     name: 'overlay',
+    plugin: true,
     selector: '.overlay',
     options: {
       classes: {
@@ -6220,14 +6141,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Overlay = Overlay;
-  Svelto.Overlay.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Overlay );
+  $.factory ( Overlay, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -6239,7 +6155,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../overlay/overlay.js
- * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -6250,6 +6165,7 @@
 
   let config = {
     name: 'spinnerOverlay',
+    plugin: true,
     templates: {
       overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
                  '{% if ( o.labeled ) { %}' +
@@ -6352,14 +6268,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.SpinnerOverlay = SpinnerOverlay;
-  Svelto.SpinnerOverlay.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.SpinnerOverlay );
+  $.factory ( SpinnerOverlay, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -6370,7 +6281,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
@@ -6388,6 +6299,7 @@
 
   let config = {
     name: 'noty',
+    plugin: true,
     selector: '.noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
@@ -6704,14 +6616,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Noty = Noty;
-  Svelto.Noty.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Noty );
+  $.factory ( Noty, config, Svelto );
 
   /* READY */
 
@@ -6890,7 +6797,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../validator/validator.js
  * ========================================================================= */
 
@@ -6904,6 +6811,7 @@
 
   let config = {
     name: 'formValidate',
+    plugin: true,
     selector: 'form.validate',
     templates: {
       message: '<p class="form-validate-message {%=o.validity%}">' +
@@ -7355,14 +7263,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormValidate = FormValidate;
-  Svelto.FormValidate.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormValidate );
+  $.factory ( FormValidate, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7392,6 +7295,7 @@
 
   let config = {
     name: 'formAjax',
+    plugin: true,
     selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
@@ -7533,14 +7437,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormAjax = FormAjax;
-  Svelto.FormAjax.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormAjax );
+  $.factory ( FormAjax, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7551,7 +7450,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
@@ -7564,6 +7463,7 @@
 
   let config = {
     name: 'formSync',
+    plugin: true,
     selector: 'form[data-sync-group]',
     options: {
       live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
@@ -7660,14 +7560,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormSync = FormSync;
-  Svelto.FormSync.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormSync );
+  $.factory ( FormSync, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7856,7 +7751,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe add the ability to open it
@@ -7869,6 +7764,7 @@
 
   let config = {
     name: 'infobar',
+    plugin: true,
     selector: '.infobar',
     options: {
       callbacks: {
@@ -7903,14 +7799,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Infobar = Infobar;
-  Svelto.Infobar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Infobar );
+  $.factory ( Infobar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7933,6 +7824,7 @@
 
   let config = {
     name: 'infobarCloser',
+    plugin: true,
     selector: '.infobar-closer',
     options: {
       widget: Svelto.Infobar
@@ -7943,14 +7835,9 @@
 
   class InfobarCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.InfobarCloser = InfobarCloser;
-  Svelto.InfobarCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.InfobarCloser );
+  $.factory ( InfobarCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7961,7 +7848,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
@@ -7974,6 +7861,7 @@
 
   let config = {
     name: 'modal',
+    plugin: true,
     selector: '.modal',
     options: {
       classes: {
@@ -8111,14 +7999,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Modal = Modal;
-  Svelto.Modal.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Modal );
+  $.factory ( Modal, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8141,6 +8024,7 @@
 
   let config = {
     name: 'modalCloser',
+    plugin: true,
     selector: '.modal-closer',
     options: {
       widget: Svelto.Modal
@@ -8151,14 +8035,9 @@
 
   class ModalCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.ModalCloser = ModalCloser;
-  Svelto.ModalCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalCloser );
+  $.factory ( ModalCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8181,6 +8060,7 @@
 
   let config = {
     name: 'modalOpener',
+    plugin: true,
     selector: '.modal-opener',
     options: {
       widget: Svelto.Modal
@@ -8191,14 +8071,9 @@
 
   class ModalOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.ModalOpener = ModalOpener;
-  Svelto.ModalOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalOpener );
+  $.factory ( ModalOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8221,6 +8096,7 @@
 
   let config = {
     name: 'modalToggler',
+    plugin: true,
     selector: '.modal-toggler',
     options: {
       widget: Svelto.Modal
@@ -8231,15 +8107,10 @@
 
   class ModalToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.ModalToggler = ModalToggler;
-  Svelto.ModalToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalToggler );
-
+  $.factory ( ModalToggler, config, Svelto );
+  
 }( Svelto.$, Svelto._, window, document ));
 
 
@@ -8534,7 +8405,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
@@ -8552,6 +8423,7 @@
 
   let config = {
     name: 'navbar',
+    plugin: true,
     selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
@@ -8769,14 +8641,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Navbar = Navbar;
-  Svelto.Navbar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Navbar );
+  $.factory ( Navbar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8799,6 +8666,7 @@
 
   let config = {
     name: 'navbarCloser',
+    plugin: true,
     selector: '.navbar-closer',
     options: {
       widget: Svelto.Navbar
@@ -8809,14 +8677,9 @@
 
   class NavbarCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.NavbarCloser = NavbarCloser;
-  Svelto.NavbarCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarCloser );
+  $.factory ( NavbarCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8839,6 +8702,7 @@
 
   let config = {
     name: 'navbarOpener',
+    plugin: true,
     selector: '.navbar-opener',
     options: {
       widget: Svelto.Navbar
@@ -8849,14 +8713,9 @@
 
   class NavbarOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.NavbarOpener = NavbarOpener;
-  Svelto.NavbarOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarOpener );
+  $.factory ( NavbarOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8879,6 +8738,7 @@
 
   let config = {
     name: 'navbarToggler',
+    plugin: true,
     selector: '.navbar-toggler',
     options: {
       widget: Svelto.Navbar
@@ -8889,14 +8749,9 @@
 
   class NavbarToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.NavbarToggler = NavbarToggler;
-  Svelto.NavbarToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarToggler );
+  $.factory ( NavbarToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8907,7 +8762,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 
@@ -9011,6 +8865,7 @@
 
   let config = {
     name: 'overlayCloser',
+    plugin: true,
     selector: '.overlay-closer',
     options: {
       widget: Svelto.Overlay
@@ -9021,14 +8876,9 @@
 
   class OverlayCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.OverlayCloser = OverlayCloser;
-  Svelto.OverlayCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayCloser );
+  $.factory ( OverlayCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9051,6 +8901,7 @@
 
   let config = {
     name: 'overlayOpener',
+    plugin: true,
     selector: '.overlay-opener',
     options: {
       widget: Svelto.Overlay
@@ -9061,14 +8912,9 @@
 
   class OverlayOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.OverlayOpener = OverlayOpener;
-  Svelto.OverlayOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayOpener );
+  $.factory ( OverlayOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9091,6 +8937,7 @@
 
   let config = {
     name: 'overlayToggler',
+    plugin: true,
     selector: '.overlay-toggler',
     options: {
       widget: Svelto.Overlay
@@ -9101,14 +8948,9 @@
 
   class OverlayToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.OverlayToggler = OverlayToggler;
-  Svelto.OverlayToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayToggler );
+  $.factory ( OverlayToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9733,7 +9575,7 @@ Prism.languages.js = Prism.languages.javascript;
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 * =========================================================================
-* @requires ../factory/factory.js
+* @requires ../widget/widget.js
 * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -9744,6 +9586,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'progressbar',
+    plugin: true,
     selector: '.progressbar',
     templates: {
       base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.indeterminate ? "indeterminate" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
@@ -9889,14 +9732,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Progressbar = Progressbar;
-  Svelto.Progressbar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Progressbar );
+  $.factory ( Progressbar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9907,7 +9745,6 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 
@@ -9922,6 +9759,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'rater',
+    plugin: true,
     selector: '.rater',
     templates: {
       base: '<div class="rater">' +
@@ -10069,14 +9907,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Rater = Rater;
-  Svelto.Rater.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Rater );
+  $.factory ( Rater, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -10262,7 +10095,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -10273,6 +10106,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'ripple',
+    plugin: true,
     selector: '.ripple',
     templates: {
       circle: '<div class="ripple-circle"></div>'
@@ -10429,14 +10263,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Ripple = Ripple;
-  Svelto.Ripple.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Ripple );
+  $.factory ( Ripple, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -10447,7 +10276,6 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
@@ -10465,6 +10293,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'selectToggler',
+    plugin: true,
     selector: '.select-toggler',
     templates: {
       base: '<div class="dropdown select-dropdown attached card outlined {%=o.guc%}">' +
@@ -10710,14 +10539,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.SelectToggler = SelectToggler;
-  Svelto.SelectToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.SelectToggler );
+  $.factory ( SelectToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -10728,7 +10552,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -10739,6 +10563,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'selectable',
+    plugin: true,
     selector: 'table.selectable',
     options: {
       moveThreshold: 10,
@@ -11028,14 +10853,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Selectable = Selectable;
-  Svelto.Selectable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Selectable );
+  $.factory ( Selectable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -11046,7 +10866,6 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../draggable/draggable.js
  * @requires ../transform/transform.js
  * ========================================================================= */
@@ -11062,6 +10881,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'slider',
+    plugin: true,
     selector: '.slider',
     options: {
       min: 0,
@@ -11317,14 +11137,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Slider = Slider;
-  Svelto.Slider.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Slider );
+  $.factory ( Slider, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -11335,7 +11150,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
@@ -11349,6 +11164,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'sortable',
+    plugin: true,
     selector: 'table.sortable',
     options: {
       sorters: {
@@ -11590,14 +11406,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Sortable = Sortable;
-  Svelto.Sortable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Sortable );
+  $.factory ( Sortable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -11608,7 +11419,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -11619,6 +11430,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'stepper',
+    plugin: true,
     selector: '.stepper',
     options: {
       min: 0,
@@ -11809,14 +11621,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Stepper = Stepper;
-  Svelto.Stepper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Stepper );
+  $.factory ( Stepper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -11827,7 +11634,6 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../draggable/draggable.js
  * @requires ../transform/transform.js
  * ========================================================================= */
@@ -11842,6 +11648,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'switch',
+    plugin: true,
     selector: '.switch',
     options: {
       colors: {
@@ -12047,14 +11854,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Switch = Switch;
-  Svelto.Switch.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Switch );
+  $.factory ( Switch, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -12065,7 +11867,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -12076,6 +11878,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tableHelper',
+    plugin: true,
     selector: 'table.table',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
@@ -12253,14 +12056,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.TableHelper = TableHelper;
-  Svelto.TableHelper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TableHelper );
+  $.factory ( TableHelper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -12271,7 +12069,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
@@ -12286,6 +12084,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tabs',
+    plugin: true,
     selector: '.tabs',
     options: {
       direction: 'top',
@@ -12427,14 +12226,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Tabs = Tabs;
-  Svelto.Tabs.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tabs );
+  $.factory ( Tabs, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -12445,7 +12239,6 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 
@@ -12463,6 +12256,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tagbox',
+    plugin: true,
     selector: '.tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
@@ -12945,14 +12739,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.Tagbox = Tagbox;
-  Svelto.Tagbox.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tagbox );
+  $.factory ( Tagbox, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -12963,7 +12752,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -12974,6 +12763,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'timeAgo',
+    plugin: true,
     selector: '[data-timestamp], [data-timestamp-title]',
     options: {
       timestamp: false,
@@ -13048,14 +12838,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   }
 
-  /* BINDING */
-
-  Svelto.TimeAgo = TimeAgo;
-  Svelto.TimeAgo.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TimeAgo );
+  $.factory ( TimeAgo, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -13256,7 +13041,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -13274,14 +13059,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   class Tooltip extends Svelto.Dropdown {}
 
-  /* BINDING */
-
-  Svelto.Tooltip = Tooltip;
-  Svelto.Tooltip.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tooltip );
+  $.factory ( Tooltip, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -13304,6 +13084,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltipCloser',
+    plugin: true,
     selector: '.tooltip-closer, .tooltip .button',
     options: {
       widget: Svelto.Tooltip
@@ -13314,14 +13095,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   class TooltipCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.TooltipCloser = TooltipCloser;
-  Svelto.TooltipCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipCloser );
+  $.factory ( TooltipCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -13344,6 +13120,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltipOpener',
+    plugin: true,
     selector: '.tooltip-opener',
     options: {
       widget: Svelto.Tooltip,
@@ -13357,14 +13134,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   class TooltipOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.TooltipOpener = TooltipOpener;
-  Svelto.TooltipOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipOpener );
+  $.factory ( TooltipOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -13387,6 +13159,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltipToggler',
+    plugin: true,
     selector: '.tooltip-toggler',
     options: {
       widget: Svelto.Tooltip,
@@ -13400,13 +13173,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   class TooltipToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.TooltipToggler = TooltipToggler;
-  Svelto.TooltipToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipToggler );
+  $.factory ( TooltipToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,7 +16,8 @@
 
   let config = {
     name: 'boilerplate',
-    selector: undefined,
+    plugin: false,
+    selector: false,
     templates: {
       base: false
     },
@@ -30,6 +31,7 @@
       classes: {},
       selectors: {},
       animations: {},
+      keystrokes: {},
       callbacks: {}
     }
   };
@@ -66,13 +68,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Boilerplate = Boilerplate;
-  Svelto.Boilerplate.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Boilerplate );
+  $.factory ( Boilerplate, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

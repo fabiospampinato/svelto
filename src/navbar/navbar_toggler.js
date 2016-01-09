@@ -17,6 +17,7 @@
 
   let config = {
     name: 'navbarToggler',
+    plugin: true,
     selector: '.navbar-toggler',
     options: {
       widget: Svelto.Navbar
@@ -27,13 +28,8 @@
 
   class NavbarToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.NavbarToggler = NavbarToggler;
-  Svelto.NavbarToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarToggler );
+  $.factory ( NavbarToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

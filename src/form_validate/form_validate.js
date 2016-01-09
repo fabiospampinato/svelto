@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../validator/validator.js
  * ========================================================================= */
 
@@ -19,6 +19,7 @@
 
   let config = {
     name: 'formValidate',
+    plugin: true,
     selector: 'form.validate',
     templates: {
       message: '<p class="form-validate-message {%=o.validity%}">' +
@@ -470,13 +471,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormValidate = FormValidate;
-  Svelto.FormValidate.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormValidate );
+  $.factory ( FormValidate, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

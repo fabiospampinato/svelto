@@ -17,6 +17,7 @@
 
   let config = {
     name: 'overlayOpener',
+    plugin: true,
     selector: '.overlay-opener',
     options: {
       widget: Svelto.Overlay
@@ -27,13 +28,8 @@
 
   class OverlayOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.OverlayOpener = OverlayOpener;
-  Svelto.OverlayOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayOpener );
+  $.factory ( OverlayOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

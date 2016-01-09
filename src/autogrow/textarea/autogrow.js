@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../factory/factory.js
+ * @requires ../../widget/widget.js
  * ========================================================================= */
 
 //INFO: It supports only `box-sizing: border-box` textareas
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'autogrowTextarea',
+    plugin: true,
     selector: 'textarea.autogrow',
     options: {
       callbacks: {
@@ -72,13 +73,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.AutogrowTextarea = AutogrowTextarea;
-  Svelto.AutogrowTextarea.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.AutogrowTextarea );
+  $.factory ( AutogrowTextarea, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

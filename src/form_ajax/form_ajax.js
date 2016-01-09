@@ -24,6 +24,7 @@
 
   let config = {
     name: 'formAjax',
+    plugin: true,
     selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
@@ -165,13 +166,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormAjax = FormAjax;
-  Svelto.FormAjax.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormAjax );
+  $.factory ( FormAjax, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

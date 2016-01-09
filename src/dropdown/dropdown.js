@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../positionate/positionate.js
  * @requires ../embed_css/embed_css.js
  * ========================================================================= */
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'dropdown',
+    plugin: true,
     selector: '.dropdown',
     options: {
       positionate: {}, //INFO: Overriding `$.positionate` options
@@ -284,13 +285,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Dropdown = Dropdown;
-  Svelto.Dropdown.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Dropdown );
+  $.factory ( Dropdown, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

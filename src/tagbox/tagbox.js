@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 
@@ -23,6 +22,7 @@
 
   let config = {
     name: 'tagbox',
+    plugin: true,
     selector: '.tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
@@ -505,13 +505,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Tagbox = Tagbox;
-  Svelto.Tagbox.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tagbox );
+  $.factory ( Tagbox, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

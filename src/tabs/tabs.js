@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
@@ -20,6 +20,7 @@
 
   let config = {
     name: 'tabs',
+    plugin: true,
     selector: '.tabs',
     options: {
       direction: 'top',
@@ -161,13 +162,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Tabs = Tabs;
-  Svelto.Tabs.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tabs );
+  $.factory ( Tabs, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -17,6 +17,7 @@
 
   let config = {
     name: 'dropdownCloser',
+    plugin: true,
     selector: '.dropdown-closer',
     options: {
       widget: Svelto.Dropdown
@@ -27,13 +28,8 @@
 
   class DropdownCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.DropdownCloser = DropdownCloser;
-  Svelto.DropdownCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownCloser );
+  $.factory ( DropdownCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

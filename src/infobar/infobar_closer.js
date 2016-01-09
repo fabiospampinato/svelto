@@ -17,6 +17,7 @@
 
   let config = {
     name: 'infobarCloser',
+    plugin: true,
     selector: '.infobar-closer',
     options: {
       widget: Svelto.Infobar
@@ -27,13 +28,8 @@
 
   class InfobarCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.InfobarCloser = InfobarCloser;
-  Svelto.InfobarCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.InfobarCloser );
+  $.factory ( InfobarCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

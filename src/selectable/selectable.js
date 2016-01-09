@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'selectable',
+    plugin: true,
     selector: 'table.selectable',
     options: {
       moveThreshold: 10,
@@ -305,13 +306,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Selectable = Selectable;
-  Svelto.Selectable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Selectable );
+  $.factory ( Selectable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

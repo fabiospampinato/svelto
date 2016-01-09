@@ -17,6 +17,7 @@
 
   let config = {
     name: 'overlayToggler',
+    plugin: true,
     selector: '.overlay-toggler',
     options: {
       widget: Svelto.Overlay
@@ -27,13 +28,8 @@
 
   class OverlayToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.OverlayToggler = OverlayToggler;
-  Svelto.OverlayToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayToggler );
+  $.factory ( OverlayToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

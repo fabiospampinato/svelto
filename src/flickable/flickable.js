@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,8 @@
 
   let config = {
     name: 'flickable',
+    plugin: true,
+    selector: '.flickable',
     options: {
       duration: 150, //INFO: Maximum duration of the flick gesture
       threshold: 5, //INFO: Minimum moving treshold of the flick gesture
@@ -130,13 +132,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Flickable = Flickable;
-  Svelto.Flickable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Flickable );
+  $.factory ( Flickable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -17,6 +17,7 @@
 
   let config = {
     name: 'navbarCloser',
+    plugin: true,
     selector: '.navbar-closer',
     options: {
       widget: Svelto.Navbar
@@ -27,13 +28,8 @@
 
   class NavbarCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.NavbarCloser = NavbarCloser;
-  Svelto.NavbarCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarCloser );
+  $.factory ( NavbarCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

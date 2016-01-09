@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,7 +16,6 @@
 
   let config = {
     name: 'targeter',
-    selector: undefined,
     options: {
       widget: false, //INFO: The target's widget class
       datas: {
@@ -43,9 +42,8 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Targeter = Targeter;
-  Svelto.Targeter.config = config;
+  $.factory ( Targeter, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

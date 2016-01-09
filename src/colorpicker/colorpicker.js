@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../color/color.js
  * ========================================================================= */
 
@@ -19,6 +19,7 @@
 
   let config = {
     name: 'colorpicker',
+    plugin: true,
     selector: '.colorpicker',
     options: {
       defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
@@ -332,13 +333,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Colorpicker = Colorpicker;
-  Svelto.Colorpicker.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Colorpicker );
+  $.factory ( Colorpicker, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

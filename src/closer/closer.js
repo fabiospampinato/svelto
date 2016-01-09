@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * @requires ../targeter/targeter.js
  * ========================================================================= */
 
@@ -17,7 +17,6 @@
 
   let config = {
     name: 'closer',
-    selector: undefined,
     options: {
       methods: {
         isOpen: 'isOpen',
@@ -64,9 +63,8 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Closer = Closer;
-  Svelto.Closer.config = config;
+  $.factory ( Closer, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

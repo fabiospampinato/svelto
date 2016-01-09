@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 
@@ -20,6 +19,7 @@
 
   let config = {
     name: 'rater',
+    plugin: true,
     selector: '.rater',
     templates: {
       base: '<div class="rater">' +
@@ -167,13 +167,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Rater = Rater;
-  Svelto.Rater.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Rater );
+  $.factory ( Rater, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

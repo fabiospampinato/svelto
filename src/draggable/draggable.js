@@ -5,9 +5,9 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
- 
+
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
@@ -29,6 +29,7 @@
 
   let config = {
     name: 'draggable',
+    plugin: true,
     selector: '.draggable',
     options: {
       draggable: () => true, //INFO: Checks if we can drag it or not
@@ -301,13 +302,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Draggable = Draggable;
-  Svelto.Draggable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Draggable );
+  $.factory ( Draggable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

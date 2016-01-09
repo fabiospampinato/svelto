@@ -17,6 +17,7 @@
 
   let config = {
     name: 'tooltipCloser',
+    plugin: true,
     selector: '.tooltip-closer, .tooltip .button',
     options: {
       widget: Svelto.Tooltip
@@ -27,13 +28,8 @@
 
   class TooltipCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.TooltipCloser = TooltipCloser;
-  Svelto.TooltipCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipCloser );
+  $.factory ( TooltipCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

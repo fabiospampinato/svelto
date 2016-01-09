@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'stepper',
+    plugin: true,
     selector: '.stepper',
     options: {
       min: 0,
@@ -206,13 +207,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Stepper = Stepper;
-  Svelto.Stepper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Stepper );
+  $.factory ( Stepper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -17,6 +17,7 @@
 
   let config = {
     name: 'expanderOpener',
+    plugin: true,
     selector: '.expander-opener',
     options: {
       widget: Svelto.Expander
@@ -27,13 +28,8 @@
 
   class ExpanderOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.ExpanderOpener = ExpanderOpener;
-  Svelto.ExpanderOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderOpener );
+  $.factory ( ExpanderOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

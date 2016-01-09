@@ -17,6 +17,7 @@
 
   let config = {
     name: 'modalCloser',
+    plugin: true,
     selector: '.modal-closer',
     options: {
       widget: Svelto.Modal
@@ -27,13 +28,8 @@
 
   class ModalCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.ModalCloser = ModalCloser;
-  Svelto.ModalCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalCloser );
+  $.factory ( ModalCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

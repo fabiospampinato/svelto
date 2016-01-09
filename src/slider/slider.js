@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../draggable/draggable.js
  * @requires ../transform/transform.js
  * ========================================================================= */
@@ -21,6 +20,7 @@
 
   let config = {
     name: 'slider',
+    plugin: true,
     selector: '.slider',
     options: {
       min: 0,
@@ -276,13 +276,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Slider = Slider;
-  Svelto.Slider.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Slider );
+  $.factory ( Slider, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

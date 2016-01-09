@@ -17,6 +17,7 @@
 
   let config = {
     name: 'expanderToggler',
+    plugin: true,
     selector: '.expander-toggler',
     options: {
       widget: Svelto.Expander
@@ -27,13 +28,8 @@
 
   class ExpanderToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.ExpanderToggler = ExpanderToggler;
-  Svelto.ExpanderToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderToggler );
+  $.factory ( ExpanderToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

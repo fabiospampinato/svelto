@@ -17,6 +17,7 @@
 
   let config = {
     name: 'navbarOpener',
+    plugin: true,
     selector: '.navbar-opener',
     options: {
       widget: Svelto.Navbar
@@ -27,13 +28,8 @@
 
   class NavbarOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.NavbarOpener = NavbarOpener;
-  Svelto.NavbarOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.NavbarOpener );
+  $.factory ( NavbarOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

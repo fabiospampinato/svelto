@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add slides drag support
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'carousel',
+    plugin: true,
     selector: '.carousel',
     options: {
       startIndex: 0,
@@ -303,13 +304,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Carousel = Carousel;
-  Svelto.Carousel.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Carousel );
+  $.factory ( Carousel, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

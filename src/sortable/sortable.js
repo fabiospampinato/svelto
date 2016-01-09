@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
@@ -19,6 +19,7 @@
 
   let config = {
     name: 'sortable',
+    plugin: true,
     selector: 'table.sortable',
     options: {
       sorters: {
@@ -260,13 +261,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Sortable = Sortable;
-  Svelto.Sortable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Sortable );
+  $.factory ( Sortable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

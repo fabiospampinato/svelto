@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'ripple',
+    plugin: true,
     selector: '.ripple',
     templates: {
       circle: '<div class="ripple-circle"></div>'
@@ -172,13 +173,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Ripple = Ripple;
-  Svelto.Ripple.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Ripple );
+  $.factory ( Ripple, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

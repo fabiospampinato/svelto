@@ -17,6 +17,7 @@
 
   let config = {
     name: 'modalToggler',
+    plugin: true,
     selector: '.modal-toggler',
     options: {
       widget: Svelto.Modal
@@ -27,13 +28,8 @@
 
   class ModalToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.ModalToggler = ModalToggler;
-  Svelto.ModalToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalToggler );
-
+  $.factory ( ModalToggler, config, Svelto );
+  
 }( Svelto.$, Svelto._, window, document ));

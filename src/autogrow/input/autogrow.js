@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../factory/factory.js
+ * @requires ../../widget/widget.js
  * ========================================================================= */
 
 //INFO: It supports only `box-sizing: border-box` inputs
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'autogrowInput',
+    plugin: true,
     selector: 'input.autogrow',
     options: {
       callbacks: {
@@ -74,13 +75,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.AutogrowInput = AutogrowInput;
-  Svelto.AutogrowInput.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.AutogrowInput );
+  $.factory ( AutogrowInput, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

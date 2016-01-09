@@ -17,6 +17,7 @@
 
   let config = {
     name: 'tooltipOpener',
+    plugin: true,
     selector: '.tooltip-opener',
     options: {
       widget: Svelto.Tooltip,
@@ -30,13 +31,8 @@
 
   class TooltipOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.TooltipOpener = TooltipOpener;
-  Svelto.TooltipOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipOpener );
+  $.factory ( TooltipOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

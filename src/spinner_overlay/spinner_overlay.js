@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../overlay/overlay.js
- * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -17,6 +16,7 @@
 
   let config = {
     name: 'spinnerOverlay',
+    plugin: true,
     templates: {
       overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
                  '{% if ( o.labeled ) { %}' +
@@ -119,13 +119,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.SpinnerOverlay = SpinnerOverlay;
-  Svelto.SpinnerOverlay.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.SpinnerOverlay );
+  $.factory ( SpinnerOverlay, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../expander/expander.js
- * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -17,6 +16,7 @@
 
   let config = {
     name: 'accordion',
+    plugin: true,
     selector: '.accordion',
     options: {
       multiple: false, //INFO: Wheter to keep multiple expanders open or just one
@@ -133,13 +133,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Accordion = Accordion;
-  Svelto.Accordion.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Accordion );
+  $.factory ( Accordion, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

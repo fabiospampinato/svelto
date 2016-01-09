@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
@@ -23,6 +22,7 @@
 
   let config = {
     name: 'selectToggler',
+    plugin: true,
     selector: '.select-toggler',
     templates: {
       base: '<div class="dropdown select-dropdown attached card outlined {%=o.guc%}">' +
@@ -268,13 +268,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.SelectToggler = SelectToggler;
-  Svelto.SelectToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.SelectToggler );
+  $.factory ( SelectToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -17,6 +17,7 @@
 
   let config = {
     name: 'expanderCloser',
+    plugin: true,
     selector: '.expander-closer',
     options: {
       widget: Svelto.Expander
@@ -27,13 +28,8 @@
 
   class ExpanderCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.ExpanderCloser = ExpanderCloser;
-  Svelto.ExpanderCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ExpanderCloser );
+  $.factory ( ExpanderCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

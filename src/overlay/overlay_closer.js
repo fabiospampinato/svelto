@@ -17,6 +17,7 @@
 
   let config = {
     name: 'overlayCloser',
+    plugin: true,
     selector: '.overlay-closer',
     options: {
       widget: Svelto.Overlay
@@ -27,13 +28,8 @@
 
   class OverlayCloser extends Svelto.Closer {}
 
-  /* BINDING */
-
-  Svelto.OverlayCloser = OverlayCloser;
-  Svelto.OverlayCloser.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.OverlayCloser );
+  $.factory ( OverlayCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

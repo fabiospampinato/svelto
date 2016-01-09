@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add support for min and max date delimiter
@@ -22,6 +22,7 @@
 
   let config = {
     name: 'datepicker',
+    plugin: true,
     selector: '.datepicker',
     options: {
       names: {
@@ -412,13 +413,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Datepicker = Datepicker;
-  Svelto.Datepicker.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Datepicker );
+  $.factory ( Datepicker, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

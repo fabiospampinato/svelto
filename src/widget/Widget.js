@@ -7,6 +7,8 @@
  * =========================================================================
  * @requires ../core/core.js
  * @requires ../tmpl/tmpl.js
+ * @requires ../pointer/pointer.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
@@ -18,8 +20,9 @@
   /* CONFIG */
 
   let config = {
-    name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
-    selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
+    name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
+    selector: false, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
@@ -524,9 +527,8 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Widget = Widget;
-  Svelto.Widget.config = config;
+  $.factory ( Widget, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

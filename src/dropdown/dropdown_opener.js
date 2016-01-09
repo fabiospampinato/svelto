@@ -17,6 +17,7 @@
 
   let config = {
     name: 'dropdownOpener',
+    plugin: true,
     selector: '.dropdown-opener',
     options: {
       widget: Svelto.Dropdown
@@ -27,13 +28,8 @@
 
   class DropdownOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.DropdownOpener = DropdownOpener;
-  Svelto.DropdownOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownOpener );
+  $.factory ( DropdownOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

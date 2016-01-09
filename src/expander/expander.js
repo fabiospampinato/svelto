@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'expander',
+    plugin: true,
     selector: '.expander',
     options: {
       classes: {
@@ -84,13 +85,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Expander = Expander;
-  Svelto.Expander.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Expander );
+  $.factory ( Expander, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

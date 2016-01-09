@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -23,13 +23,8 @@
 
   class Tooltip extends Svelto.Dropdown {}
 
-  /* BINDING */
-
-  Svelto.Tooltip = Tooltip;
-  Svelto.Tooltip.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Tooltip );
+  $.factory ( Tooltip, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

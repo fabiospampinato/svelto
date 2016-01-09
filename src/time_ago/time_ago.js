@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'timeAgo',
+    plugin: true,
     selector: '[data-timestamp], [data-timestamp-title]',
     options: {
       timestamp: false,
@@ -90,13 +91,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.TimeAgo = TimeAgo;
-  Svelto.TimeAgo.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TimeAgo );
+  $.factory ( TimeAgo, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

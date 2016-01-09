@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'modal',
+    plugin: true,
     selector: '.modal',
     options: {
       classes: {
@@ -155,13 +156,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Modal = Modal;
-  Svelto.Modal.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Modal );
+  $.factory ( Modal, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

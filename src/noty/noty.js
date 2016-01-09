@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
@@ -23,6 +23,7 @@
 
   let config = {
     name: 'noty',
+    plugin: true,
     selector: '.noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
@@ -339,14 +340,9 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Noty = Noty;
-  Svelto.Noty.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Noty );
+  $.factory ( Noty, config, Svelto );
 
   /* READY */
 

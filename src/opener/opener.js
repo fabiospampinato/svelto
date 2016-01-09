@@ -5,7 +5,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../closer/closer.js
  * ========================================================================= */
 
@@ -17,10 +16,9 @@
 
   let config = {
     name: 'opener',
-    selector: undefined,
     options: {
       hover: {
-        active: true,
+        active: false,
         delays: {
           open: 750,
           close: 250
@@ -180,9 +178,8 @@
 
   }
 
-  /* BINDING */
+  /* FACTORY */
 
-  Svelto.Opener = Opener;
-  Svelto.Opener.config = config;
+  $.factory ( Opener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

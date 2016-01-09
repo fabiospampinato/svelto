@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'tableHelper',
+    plugin: true,
     selector: 'table.table',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
@@ -193,13 +194,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.TableHelper = TableHelper;
-  Svelto.TableHelper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TableHelper );
+  $.factory ( TableHelper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

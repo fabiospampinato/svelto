@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe add the ability to open it
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'infobar',
+    plugin: true,
     selector: '.infobar',
     options: {
       callbacks: {
@@ -52,13 +53,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Infobar = Infobar;
-  Svelto.Infobar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Infobar );
+  $.factory ( Infobar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

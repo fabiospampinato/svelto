@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
@@ -23,6 +23,7 @@
 
   let config = {
     name: 'navbar',
+    plugin: true,
     selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
@@ -240,13 +241,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Navbar = Navbar;
-  Svelto.Navbar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Navbar );
+  $.factory ( Navbar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

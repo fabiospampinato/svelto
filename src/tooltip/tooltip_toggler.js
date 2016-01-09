@@ -17,6 +17,7 @@
 
   let config = {
     name: 'tooltipToggler',
+    plugin: true,
     selector: '.tooltip-toggler',
     options: {
       widget: Svelto.Tooltip,
@@ -30,13 +31,8 @@
 
   class TooltipToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.TooltipToggler = TooltipToggler;
-  Svelto.TooltipToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.TooltipToggler );
+  $.factory ( TooltipToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

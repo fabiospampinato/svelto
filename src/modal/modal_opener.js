@@ -17,6 +17,7 @@
 
   let config = {
     name: 'modalOpener',
+    plugin: true,
     selector: '.modal-opener',
     options: {
       widget: Svelto.Modal
@@ -27,13 +28,8 @@
 
   class ModalOpener extends Svelto.Opener {}
 
-  /* BINDING */
-
-  Svelto.ModalOpener = ModalOpener;
-  Svelto.ModalOpener.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.ModalOpener );
+  $.factory ( ModalOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

@@ -5,7 +5,7 @@
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 * =========================================================================
-* @requires ../factory/factory.js
+* @requires ../widget/widget.js
 * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'progressbar',
+    plugin: true,
     selector: '.progressbar',
     templates: {
       base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.indeterminate ? "indeterminate" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
@@ -161,13 +162,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Progressbar = Progressbar;
-  Svelto.Progressbar.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Progressbar );
+  $.factory ( Progressbar, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

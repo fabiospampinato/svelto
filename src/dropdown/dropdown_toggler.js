@@ -17,6 +17,7 @@
 
   let config = {
     name: 'dropdownToggler',
+    plugin: true,
     selector: '.dropdown-toggler',
     options: {
       widget: Svelto.Dropdown
@@ -27,13 +28,8 @@
 
   class DropdownToggler extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( DropdownToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

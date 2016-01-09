@@ -17,6 +17,7 @@
 
   let config = {
     name: 'flippableFlipper',
+    plugin: true,
     selector: '.flippable-flipper, .flippable .flipper',
     options: {
       widget: Svelto.Flippable,
@@ -32,13 +33,8 @@
 
   class FlippableFlipper extends Svelto.Toggler {}
 
-  /* BINDING */
-
-  Svelto.FlippableFlipper = FlippableFlipper;
-  Svelto.FlippableFlipper.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FlippableFlipper );
+  $.factory ( FlippableFlipper, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

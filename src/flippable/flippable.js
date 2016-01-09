@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +16,7 @@
 
   let config = {
     name: 'flippable',
+    plugin: true,
     selector: '.flippable',
     options: {
       classes: {
@@ -78,13 +79,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.Flippable = Flippable;
-  Svelto.Flippable.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.Flippable );
+  $.factory ( Flippable, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

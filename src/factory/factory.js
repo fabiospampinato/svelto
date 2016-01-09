@@ -6,10 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
- * @requires ../widget/widget.js
  * @requires ../widgetize/widgetize.js
- * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
  *=========================================================================*/
 
 (function ( $, _, window, document, undefined ) {
@@ -18,7 +15,15 @@
 
   /* FACTORY */
 
-  $.factory = function ( Widget ) {
+  $.factory = function ( Widget, config, namespace ) {
+
+    /* CONFIGURE */
+
+    $.factory.configure ( Widget, config );
+
+    /* NAMESPACE */
+
+    $.factory.namespace ( Widget, namespace );
 
     /* WIDGETIZE */
 
@@ -30,11 +35,33 @@
 
   };
 
+  /* FACTORY CONFIGURE */
+
+  $.factory.configure = function ( Widget, config = {} ) {
+
+    Widget.config = config;
+
+  };
+
+  /* FACTORY NAMESPACE */
+
+  $.factory.namespace = function ( Widget, namespace ) {
+
+    if ( _.isObject ( namespace ) ) {
+
+      let name = _.capitalize ( Widget.config.name );
+
+      namespace[name] = Widget;
+
+    }
+
+  };
+
   /* FACTORY WIDGETIZE */
 
   $.factory.widgetize = function ( Widget ) {
 
-    if ( Widget.config.selector ) {
+    if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
       Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
 
@@ -46,59 +73,63 @@
 
   $.factory.plugin = function ( Widget ) {
 
-    /* NAME */
+    if ( Widget.config.plugin ) {
 
-    let name = Widget.config.name;
+      /* NAME */
 
-    /* JQUERY PLUGIN */
+      let name = Widget.config.name;
 
-    $.fn[name] = function ( options, ...args ) {
+      /* JQUERY PLUGIN */
 
-      if ( _.isString ( options ) ) { //INFO: Calling a method
+      $.fn[name] = function ( options, ...args ) {
 
-        if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
+        if ( _.isString ( options ) ) { //INFO: Calling a method
 
-          /* METHOD CALL */
+          if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
 
-          for ( let element of this ) {
+            /* METHOD CALL */
 
-            /* VARIABLES */
+            for ( let element of this ) {
 
-            let instance = $.factory.instance ( Widget, false, element );
+              /* VARIABLES */
 
-            /* CHECKING VALID CALL */
+              let instance = $.factory.instance ( Widget, false, element );
 
-            if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
+              /* CHECKING VALID CALL */
 
-            /* CALLING */
+              if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
 
-            let returnValue = instance[options]( ...args );
+              /* CALLING */
 
-            if ( !_.isUndefined ( returnValue ) ) {
+              let returnValue = instance[options]( ...args );
 
-              return returnValue;
+              if ( !_.isUndefined ( returnValue ) ) {
+
+                return returnValue;
+
+              }
 
             }
 
           }
 
+        } else {
+
+          /* INSTANCE */
+
+          for ( let element of this ) {
+
+            $.factory.instance ( Widget, options, element );
+
+          }
+
         }
 
-      } else {
+        return this;
 
-        /* INSTANCE */
+      };
 
-        for ( let element of this ) {
-
-          $.factory.instance ( Widget, options, element );
-
-        }
-
-      }
-
-      return this;
-
-    };
+    }
 
   };
 

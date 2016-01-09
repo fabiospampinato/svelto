@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
@@ -18,6 +18,7 @@
 
   let config = {
     name: 'formSync',
+    plugin: true,
     selector: 'form[data-sync-group]',
     options: {
       live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
@@ -114,13 +115,8 @@
 
   }
 
-  /* BINDING */
-
-  Svelto.FormSync = FormSync;
-  Svelto.FormSync.config = config;
-
   /* FACTORY */
 
-  $.factory ( Svelto.FormSync );
+  $.factory ( FormSync, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
