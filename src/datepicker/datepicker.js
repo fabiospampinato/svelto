@@ -59,8 +59,7 @@
         'right, down': 'nextMonth'
       },
       callbacks: {
-        change: _.noop,
-        refresh: _.noop
+        change: _.noop
       }
     }
   };
@@ -333,8 +332,6 @@
       this._highlightToday ();
       this._updateTitle ();
 
-      this._trigger ( 'refresh', this.options.date );
-
     }
 
     /* API */
@@ -379,7 +376,7 @@
 
           this._updateInput ();
 
-          this._trigger ( 'change', this.options.date );
+          this._trigger ( 'change' );
 
         }
 

@@ -3338,7 +3338,7 @@
 
       this.$input.val ( hexStr ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: hexStr } );
+      this._trigger ( 'change' );
 
     }
 
@@ -3560,8 +3560,7 @@
         'right, down': 'nextMonth'
       },
       callbacks: {
-        change: _.noop,
-        refresh: _.noop
+        change: _.noop
       }
     }
   };
@@ -3834,8 +3833,6 @@
       this._highlightToday ();
       this._updateTitle ();
 
-      this._trigger ( 'refresh', this.options.date );
-
     }
 
     /* API */
@@ -3880,7 +3877,7 @@
 
           this._updateInput ();
 
-          this._trigger ( 'change', this.options.date );
+          this._trigger ( 'change' );
 
         }
 
@@ -3935,6 +3932,7 @@
 //TODO: Add unhandlers
 //TODO: Add support for ghost element, that will happear when dragging instead of the element itself, it should also work well with droppable
 
+//FIXME: Make better _trigger datas, in linea con quelli che passiamo in droppable
 //FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
@@ -4137,7 +4135,7 @@
         this.isProxyed = ( this.options.$proxy && event.currentTarget === this.options.$proxy[0] );
         this.proxyXY = false;
 
-        this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
+        this._trigger ( 'start', { draggable: this.draggable, event: event, initialXY: this.initialXY } );
 
         this._on ( $document, Pointer.move, this.__move );
         this._on ( $document, Pointer.up, this.__up );
@@ -4165,7 +4163,7 @@
 
       let modifiedXY = this._actionMove ( deltaXY );
 
-      this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
+      this._trigger ( 'move', { draggable: this.draggable, event: event, initialXY: this.initialXY, moveXY: modifiedXY } );
 
     }
 
@@ -4208,7 +4206,7 @@
       this._off ( $document, Pointer.up, this.__up );
       this._off ( $document, Pointer.cancel, this.__cancel );
 
-      this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
+      this._trigger ( 'end', { draggable: this.draggable, event: event, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
     }
 
@@ -9873,10 +9871,7 @@ Prism.languages.js = Prism.languages.javascript;
 
               this.options.rated = true;
 
-              this._trigger ( 'change', {
-                value: this.options.value,
-                amount: this.options.amount
-              });
+              this._trigger ( 'change' );
 
             }
 
@@ -11452,9 +11447,7 @@ Prism.languages.js = Prism.languages.javascript;
         'right, up': 'increase'
       },
       callbacks: {
-        change: _.noop,
-        increase: _.noop,
-        decrease: _.noop
+        change: _.noop
       }
     }
   };
@@ -11588,8 +11581,6 @@ Prism.languages.js = Prism.languages.javascript;
           this._update ();
 
           this._trigger ( 'change' );
-
-          this._trigger ( ( this.options.value > this._prevValue ) ? 'increase' : 'decrease' );
 
           return;
 
@@ -12554,8 +12545,6 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      var previous = _.clone ( this.options.tag );
-
       var tags = tag.split ( this.options.characters.separator ),
           adds = _.map ( tags, this._add, this );
 
@@ -12567,10 +12556,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( !suppressTriggers ) {
 
-          this._trigger ( 'change', {
-            previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+          this._trigger ( 'change' );
 
           var addedTags = _.filter ( tags, function ( tag, index ) {
             return adds[index];
@@ -12624,8 +12610,6 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( tags.length > 0 ) {
 
-        var previous = _.clone ( this.options.tags );
-
         for ( var i = 0, l = tags.length; i < l; i++ ) {
 
           this._remove ( $tags[i], tags[i] );
@@ -12642,10 +12626,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( !suppressTriggers ) {
 
-          this._trigger ( 'change', {
-            previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+          this._trigger ( 'change' );
 
           this._trigger ( 'remove', tags );
 

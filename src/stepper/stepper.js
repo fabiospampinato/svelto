@@ -38,9 +38,7 @@
         'right, up': 'increase'
       },
       callbacks: {
-        change: _.noop,
-        increase: _.noop,
-        decrease: _.noop
+        change: _.noop
       }
     }
   };
@@ -174,8 +172,6 @@
           this._update ();
 
           this._trigger ( 'change' );
-
-          this._trigger ( ( this.options.value > this._prevValue ) ? 'increase' : 'decrease' );
 
           return;
 

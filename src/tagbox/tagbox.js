@@ -320,8 +320,6 @@
 
       }
 
-      var previous = _.clone ( this.options.tag );
-
       var tags = tag.split ( this.options.characters.separator ),
           adds = _.map ( tags, this._add, this );
 
@@ -333,10 +331,7 @@
 
         if ( !suppressTriggers ) {
 
-          this._trigger ( 'change', {
-            previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+          this._trigger ( 'change' );
 
           var addedTags = _.filter ( tags, function ( tag, index ) {
             return adds[index];
@@ -390,8 +385,6 @@
 
       if ( tags.length > 0 ) {
 
-        var previous = _.clone ( this.options.tags );
-
         for ( var i = 0, l = tags.length; i < l; i++ ) {
 
           this._remove ( $tags[i], tags[i] );
@@ -408,10 +401,7 @@
 
         if ( !suppressTriggers ) {
 
-          this._trigger ( 'change', {
-            previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+          this._trigger ( 'change' );
 
           this._trigger ( 'remove', tags );
 

@@ -133,10 +133,7 @@
 
               this.options.rated = true;
 
-              this._trigger ( 'change', {
-                value: this.options.value,
-                amount: this.options.amount
-              });
+              this._trigger ( 'change' );
 
             }
 

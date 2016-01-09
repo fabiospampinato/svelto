@@ -277,7 +277,7 @@
 
       this.$input.val ( hexStr ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: hexStr } );
+      this._trigger ( 'change' );
 
     }
 

@@ -13,6 +13,7 @@
 //TODO: Add unhandlers
 //TODO: Add support for ghost element, that will happear when dragging instead of the element itself, it should also work well with droppable
 
+//FIXME: Make better _trigger datas, in linea con quelli che passiamo in droppable
 //FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
@@ -215,7 +216,7 @@
         this.isProxyed = ( this.options.$proxy && event.currentTarget === this.options.$proxy[0] );
         this.proxyXY = false;
 
-        this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
+        this._trigger ( 'start', { draggable: this.draggable, event: event, initialXY: this.initialXY } );
 
         this._on ( $document, Pointer.move, this.__move );
         this._on ( $document, Pointer.up, this.__up );
@@ -243,7 +244,7 @@
 
       let modifiedXY = this._actionMove ( deltaXY );
 
-      this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
+      this._trigger ( 'move', { draggable: this.draggable, event: event, initialXY: this.initialXY, moveXY: modifiedXY } );
 
     }
 
@@ -286,7 +287,7 @@
       this._off ( $document, Pointer.up, this.__up );
       this._off ( $document, Pointer.cancel, this.__cancel );
 
-      this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
+      this._trigger ( 'end', { draggable: this.draggable, event: event, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
     }
 
