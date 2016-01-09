@@ -139,7 +139,7 @@
 
     _getTagHtml ( value ) {
 
-      return this._tmpl ( 'tag', _.merge ( { value: value }, this.options.tag ) );
+      return this._tmpl ( 'tag', _.extend ( { value: value }, this.options.tag ) );
 
     }
 

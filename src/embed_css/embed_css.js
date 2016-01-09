@@ -83,7 +83,7 @@
 
       let rule = _.isUndefined ( value ) ? property : { property: value };
 
-      tree[selector] = _.merge ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
+      tree[selector] = _.extend ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
 
     }
 

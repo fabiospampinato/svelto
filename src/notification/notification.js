@@ -20,7 +20,7 @@
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.extend ({
       title: false,
       body: false,
       img: false,

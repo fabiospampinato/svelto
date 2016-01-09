@@ -16,7 +16,7 @@
 
   $.oneTimeAction = function ( options ) {
 
-    return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
+    return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
 

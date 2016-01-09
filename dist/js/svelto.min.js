@@ -4681,7 +4681,7 @@
 
       let rule = _.isUndefined ( value ) ? property : { property: value };
 
-      tree[selector] = _.merge ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
+      tree[selector] = _.extend ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
 
     }
 
@@ -8775,7 +8775,7 @@
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.extend ({
       title: false,
       body: false,
       img: false,
@@ -8838,7 +8838,7 @@
 
   $.oneTimeAction = function ( options ) {
 
-    return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
+    return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
 
@@ -12364,7 +12364,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _getTagHtml ( value ) {
 
-      return this._tmpl ( 'tag', _.merge ( { value: value }, this.options.tag ) );
+      return this._tmpl ( 'tag', _.extend ( { value: value }, this.options.tag ) );
 
     }
 
