@@ -13,24 +13,28 @@
 
   'use strict';
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+    point: false, //INFO: Used for the punctual search
+    //  {
+    //    X: 0,
+    //    Y: 0
+    //  },
+    binarySearch: true, //INFO: toggle the binary search when performing a punctual search
+    $comparer: false, //INFO: Used for the overlapping search
+    $not: false,
+    onlyBest: false
+  };
+
   /* TOUCHING */
 
   $.fn.touching = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend ({
-      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-      point: false, //INFO: Used for the punctual search
-      //  {
-      //    X: 0,
-      //    Y: 0
-      //  },
-      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-      $comparer: false, //INFO: Used for the overlapping search
-      $not: false,
-      onlyBest: false
-    }, options );
+    options = _.extend ( {}, $.fn.touching.defaults, options );
 
     /* SEARCHABLE */
 
@@ -139,5 +143,9 @@
     }
 
   };
+
+  /* BINDING */
+
+  $.fn.touching.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));

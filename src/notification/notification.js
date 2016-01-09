@@ -14,18 +14,22 @@
 
   'use strict';
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    title: false,
+    body: false,
+    img: false,
+    ttl: Svelto.Noty.config.options.ttl
+  };
+
   /* NOTIFICATION */
 
   $.notification = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend ({
-      title: false,
-      body: false,
-      img: false,
-      ttl: Svelto.Noty.config.options.ttl
-    }, options );
+    options = _.extend ( {}, $.notification.defaults, options );
 
     /* NOTIFICATIONS */
 
@@ -62,5 +66,9 @@
     }
 
   };
+
+  /* BINDING */
+
+  $.notification.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));

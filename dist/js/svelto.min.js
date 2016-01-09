@@ -4364,6 +4364,30 @@
 
   };
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
+    axis: false, //INFO: Set a preferred axis
+    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
+      x: 'center', //INFO: `left`, center`, `right`
+      y: 'center' //INFOL `top`, center`, `bottom`
+    },
+    strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
+    $anchor: false, //INFO: Positionate next to an $anchor element
+    $pointer: false, //INFO: The element who is pointing to the anchor
+    point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
+    spacing: 0, //INFO: Extra space to leave around the positionable element
+    ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+      x: ['right', 'left'],
+      y: ['bottom', 'top'],
+      all: ['bottom', 'right', 'left', 'top']
+    },
+    callbacks: {
+      change: _.noop
+    }
+  };
+
   /* POSITIONATE */
 
   $.fn.positionate = function ( options ) {
@@ -4374,27 +4398,7 @@
 
     /* OPTIONS */
 
-    options = _.merge ({
-      direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
-      axis: false, //INFO: Set a preferred axis
-      alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-        x: 'center', //INFO: `left`, center`, `right`
-        y: 'center' //INFOL `top`, center`, `bottom`
-      },
-      strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
-      $anchor: false, //INFO: Positionate next to an $anchor element
-      $pointer: false, //INFO: The element who is pointing to the anchor
-      point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
-      spacing: 0, //INFO: Extra space to leave around the positionable element
-      ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
-        x: ['right', 'left'],
-        y: ['bottom', 'top'],
-        all: ['bottom', 'right', 'left', 'top']
-      },
-      callbacks: {
-        change: _.noop
-      }
-    }, options );
+    options = _.merge ( {}, $.fn.positionate.defaults, options );
 
     /* VARIABLES */
 
@@ -4593,6 +4597,10 @@
     return this;
 
   };
+
+  /* BINDING */
+
+  $.fn.positionate.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -5354,24 +5362,28 @@
 
   'use strict';
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+    point: false, //INFO: Used for the punctual search
+    //  {
+    //    X: 0,
+    //    Y: 0
+    //  },
+    binarySearch: true, //INFO: toggle the binary search when performing a punctual search
+    $comparer: false, //INFO: Used for the overlapping search
+    $not: false,
+    onlyBest: false
+  };
+
   /* TOUCHING */
 
   $.fn.touching = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend ({
-      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-      point: false, //INFO: Used for the punctual search
-      //  {
-      //    X: 0,
-      //    Y: 0
-      //  },
-      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-      $comparer: false, //INFO: Used for the overlapping search
-      $not: false,
-      onlyBest: false
-    }, options );
+    options = _.extend ( {}, $.fn.touching.defaults, options );
 
     /* SEARCHABLE */
 
@@ -5480,6 +5492,10 @@
     }
 
   };
+
+  /* BINDING */
+
+  $.fn.touching.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8341,25 +8357,29 @@
 
   'use strict';
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
+    action: false, //INFO: The action name
+    times: Infinity, //INFO: The times an action can be executed
+    expiry: false, //INFO: When a single action will expire and will then get removed from its group
+    fn: false, //INFO: The function to execute
+    cookie: { //INFO: Values that will get passed to `$.cookie` when appropriate
+      end: Infinity,
+      path: undefined,
+      domain: undefined,
+      secure: undefined
+    }
+  };
+
   /* N TIMES ACTION */
 
   $.nTimesAction = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.merge ({
-      group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
-      action: false, //INFO: The action name
-      times: Infinity, //INFO: The times an action can be executed
-      expiry: false, //INFO: When a single action will expire and will then get removed from its group
-      fn: false, //INFO: The function to execute
-      cookie: { //INFO: Values that will get passed to `$.cookie` when appropriate
-        end: Infinity,
-        path: undefined,
-        domain: undefined,
-        secure: undefined
-      }
-    }, options );
+    options = _.merge ( {}, $.nTimesAction.defaults, options );
 
     /* N TIMES ACTION */
 
@@ -8393,6 +8413,10 @@
     }
 
   };
+
+  /* BINDING */
+
+  $.nTimesAction.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -8769,18 +8793,22 @@
 
   'use strict';
 
+  /* DEFAULT OPTIONS */
+
+  let defaults = {
+    title: false,
+    body: false,
+    img: false,
+    ttl: Svelto.Noty.config.options.ttl
+  };
+
   /* NOTIFICATION */
 
   $.notification = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend ({
-      title: false,
-      body: false,
-      img: false,
-      ttl: Svelto.Noty.config.options.ttl
-    }, options );
+    options = _.extend ( {}, $.notification.defaults, options );
 
     /* NOTIFICATIONS */
 
@@ -8817,6 +8845,10 @@
     }
 
   };
+
+  /* BINDING */
+
+  $.notification.defaults = defaults;
 
 }( Svelto.$, Svelto._, window, document ));
 
