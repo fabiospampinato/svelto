@@ -26,6 +26,9 @@
         open: Svelto.animation.fast,
         close: Svelto.animation.fast
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -52,21 +55,6 @@
       /* KEYDOWN */
 
       this._onHover ( [$document, 'keydown', this.__keydown] );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this.close ();
-
-      }
 
     }
 

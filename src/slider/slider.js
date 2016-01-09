@@ -45,6 +45,10 @@
         handlerWrp: '.slider-handler-wrp',
         label: '.slider-label'
       },
+      keystrokes: {
+        'left, down': 'decrease',
+        'right, up': 'increase'
+      },
       callbacks: {
         change () {}
       }
@@ -195,32 +199,6 @@
 
       this._updateVariables ();
       this._updatePositions ();
-
-    }
-
-    /* LEFT / RIGHT ARROWS */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-        case Svelto.keyCode.DOWN:
-          this.decrease ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.UP:
-          this.increase ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 

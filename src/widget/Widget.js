@@ -403,51 +403,13 @@
 
     __keydown ( event ) {
 
-      //INFO: It only supports ctrl/cmd/meta/alt/shift + char/Svelto.keyCode[charName] //FIXME
-      //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead
-
-      let eventChar = String.fromCharCode ( event.keyCode ).toLowerCase ();
-
       for ( let keystrokes in this.options.keystrokes ) {
 
         if ( this.options.keystrokes.hasOwnProperty ( keystrokes ) ) {
 
-          keystrokes = keystrokes.split ( ',' );
+          for ( let keystroke of keystrokes.split ( ',' ) ) {
 
-          for ( let keystroke of keystrokes ) {
-
-            let keys = keystroke.split ( '+' ).map ( _.trim ),
-                isMatching = true;
-
-            for ( let key of keys ) {
-
-              if ( !isMatching ) break;
-
-              switch ( key ) {
-
-                case 'ctrl':
-                case 'cmd':
-                case 'meta':
-                  isMatching = $.hasCtrlOrCmd ( event );
-                  break;
-
-                case 'alt':
-                  isMatching = event.altKey;
-                  break;
-
-                case 'shift':
-                  isMatching = event.shiftKey;
-                  break;
-
-                default:
-                  isMatching = ( eventChar === key.toLowerCase () || event.keyCode === Svelto.keyCode[key.toUpperCase ()] );
-                  break;
-
-              }
-
-            }
-
-            if ( isMatching ) {
+            if ( $.matchKeystroke ( event, keystroke ) ) {
 
               this[this.options.keystrokes[keystrokes]]();
 

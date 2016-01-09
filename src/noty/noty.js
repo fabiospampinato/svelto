@@ -94,6 +94,9 @@
       animations: {
         remove: Svelto.animation.normal
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -249,20 +252,6 @@
       }
 
     }
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this.close ();
-
-      }
-
-    }
-
 
     /* PUBLIC */
 

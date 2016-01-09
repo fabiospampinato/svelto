@@ -20,13 +20,17 @@
 
   /* KEY CODE */
 
+  //TODO: Add more of them
+
   Svelto.keyCode = {
     BACKSPACE: 8,
     COMMA: 188,
+    DEL: 46,
     DELETE: 46,
     DOWN: 40,
     END: 35,
     ENTER: 13,
+    ESC: 27,
     ESCAPE: 27,
     HOME: 36,
     LEFT: 37,
@@ -35,6 +39,7 @@
     PERIOD: 190,
     RIGHT: 39,
     SPACE: 32,
+    SPACEBAR: 32,
     TAB: 9,
     UP: 38
   };

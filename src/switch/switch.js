@@ -40,6 +40,11 @@
         bar: '.switch-bar',
         handler: '.switch-handler'
       },
+      keystrokes: {
+        'left': 'uncheck',
+        'right': 'check',
+        'space': 'toggle'
+      },
       callbacks: {
         change () {},
         check () {},
@@ -117,34 +122,6 @@
     __change () {
 
       this.toggle ( this.$input.prop ( 'checked' ) );
-
-    }
-
-    /* KEYS */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-          this.uncheck ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-          this.check ();
-          break;
-
-        case Svelto.keyCode.SPACE:
-          this.toggle ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 

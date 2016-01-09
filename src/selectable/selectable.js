@@ -25,6 +25,11 @@
       selectors: {
         element: 'tbody tr:not(.empty)'
       },
+      keystrokes: {
+        'ctrl + a': 'all',
+        'ctrl + shift + a': 'clear',
+        'ctrl + i': 'invert'
+      },
       callbacks: {
         change () {}
       }
@@ -65,38 +70,6 @@
       /* CHANGE */
 
       this._on ( 'change sortable:sort', this.__change );
-
-    }
-
-    /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
-
-    __keydown ( event ) {
-
-      if ( $.hasCtrlOrCmd ( event ) ) {
-
-        switch ( event.keyCode ) {
-
-          case 65: //INFO: `A`
-            this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: Shift: all or none
-            break;
-
-          case 73: //INFO: `I`
-            this.$elements.toggleClass ( this.options.classes.selected );
-            break;
-
-          default:
-            return;
-
-        }
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this._resetPrev ();
-
-        this._trigger ( 'change' );
-
-      }
 
     }
 
@@ -297,6 +270,36 @@
     get () {
 
       return this.$elements.filter ( '.' + this.options.classes.selected );
+
+    }
+
+    all () {
+
+      this.$elements.addClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    clear () {
+
+      this.$elements.removeClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    invert () {
+
+      this.$elements.toggleClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
 
     }
 

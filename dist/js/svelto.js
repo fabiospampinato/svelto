@@ -20,13 +20,17 @@
 
   /* KEY CODE */
 
+  //TODO: Add more of them
+
   Svelto.keyCode = {
     BACKSPACE: 8,
     COMMA: 188,
+    DEL: 46,
     DELETE: 46,
     DOWN: 40,
     END: 35,
     ENTER: 13,
+    ESC: 27,
     ESCAPE: 27,
     HOME: 36,
     LEFT: 37,
@@ -35,6 +39,7 @@
     PERIOD: 190,
     RIGHT: 39,
     SPACE: 32,
+    SPACEBAR: 32,
     TAB: 9,
     UP: 38
   };
@@ -493,6 +498,33 @@
   $.fn.scrollable = function () {
 
     return this.removeClass ( 'overflow-hidden' );
+
+  };
+
+  const specialKeystrokesKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'];
+
+  $.matchKeystroke = function ( event, keystroke ) {
+
+    //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Svelto.keyCode[charName] //FIXME
+    //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead
+
+    let keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
+
+    if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
+    if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
+    if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
+
+    for ( let key of keys ) {
+
+      if ( !specialKeystrokesKeys.includes ( key ) ) {
+
+        if ( !( event.keyCode === Svelto.keyCode[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+
+      }
+
+    }
+
+    return true;
 
   };
 
@@ -1108,51 +1140,13 @@
 
     __keydown ( event ) {
 
-      //INFO: It only supports ctrl/cmd/meta/alt/shift + char/Svelto.keyCode[charName] //FIXME
-      //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead
-
-      let eventChar = String.fromCharCode ( event.keyCode ).toLowerCase ();
-
       for ( let keystrokes in this.options.keystrokes ) {
 
         if ( this.options.keystrokes.hasOwnProperty ( keystrokes ) ) {
 
-          keystrokes = keystrokes.split ( ',' );
+          for ( let keystroke of keystrokes.split ( ',' ) ) {
 
-          for ( let keystroke of keystrokes ) {
-
-            let keys = keystroke.split ( '+' ).map ( _.trim ),
-                isMatching = true;
-
-            for ( let key of keys ) {
-
-              if ( !isMatching ) break;
-
-              switch ( key ) {
-
-                case 'ctrl':
-                case 'cmd':
-                case 'meta':
-                  isMatching = $.hasCtrlOrCmd ( event );
-                  break;
-
-                case 'alt':
-                  isMatching = event.altKey;
-                  break;
-
-                case 'shift':
-                  isMatching = event.shiftKey;
-                  break;
-
-                default:
-                  isMatching = ( eventChar === key.toLowerCase () || event.keyCode === Svelto.keyCode[key.toUpperCase ()] );
-                  break;
-
-              }
-
-            }
-
-            if ( isMatching ) {
+            if ( $.matchKeystroke ( event, keystroke ) ) {
 
               this[this.options.keystrokes[keystrokes]]();
 
@@ -1569,7 +1563,15 @@
 
   /* FACTORY */
 
-  $.factory = function ( Widget ) {
+  $.factory = function ( Widget, config, namespace ) {
+
+    /* COMBINE */
+
+    $.factory.combine ( Widget, config );
+
+    /* NAMESPACE */
+
+    $.factory.namespace ( Widget, namespace );
 
     /* WIDGETIZE */
 
@@ -1578,6 +1580,22 @@
     /* PLUGIN */
 
     $.factory.plugin ( Widget );
+
+  };
+
+  /* FACTORY COMBINE */
+
+  $.factory.combine = function ( Widget, config ) {
+
+    Widget.config = config;
+
+  };
+
+  /* FACTORY NAMESPACE */
+
+  $.factory.namespace = function ( namespace, Widget ) {
+
+    namespace[Widget.config.name]
 
   };
 
@@ -2254,6 +2272,10 @@
       animations: {
         cycle: Svelto.animation.normal
       },
+      keystrokes: {
+        'left, up': 'previous',
+        'right, down, space': 'next'
+      },
       callbacks: {
         change () {}
       }
@@ -2322,33 +2344,6 @@
 
       this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
       this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-        case Svelto.keyCode.UP:
-          this.previous ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.DOWN:
-        case Svelto.keyCode.SPACE:
-          this.next ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
@@ -3582,6 +3577,10 @@
         title: '.datepicker-title',
         input: 'input'
       },
+      keystrokes: {
+        'up, left': 'prevMonth',
+        'right, down': 'nextMonth'
+      },
       callbacks: {
         change () {},
         refresh () {}
@@ -3670,32 +3669,6 @@
     __change () {
 
       this.set ( this.$input.val () );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.UP:
-        case Svelto.keyCode.LEFT:
-          this.prevMonth ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.DOWN:
-          this.nextMonth ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
@@ -6141,6 +6114,9 @@
         open: Svelto.animation.fast,
         close: Svelto.animation.fast
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -6167,21 +6143,6 @@
       /* KEYDOWN */
 
       this._onHover ( [$document, 'keydown', this.__keydown] );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this.close ();
-
-      }
 
     }
 
@@ -6498,6 +6459,9 @@
       animations: {
         remove: Svelto.animation.normal
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -6653,20 +6617,6 @@
       }
 
     }
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this.close ();
-
-      }
-
-    }
-
 
     /* PUBLIC */
 
@@ -8034,6 +7984,9 @@
         open: Svelto.animation.normal,
         close: Svelto.animation.normal
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -8069,21 +8022,6 @@
     __tap ( event ) {
 
       if ( event.target === this.modal ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
 
         this.close ();
 
@@ -8628,6 +8566,9 @@
         open: Svelto.animation.normal,
         close: Svelto.animation.normal,
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -8693,21 +8634,6 @@
     __tap ( event ) {
 
       if ( event.target === this.navbar ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
 
         this.close ();
 
@@ -10822,6 +10748,11 @@ Prism.languages.js = Prism.languages.javascript;
       selectors: {
         element: 'tbody tr:not(.empty)'
       },
+      keystrokes: {
+        'ctrl + a': 'all',
+        'ctrl + shift + a': 'clear',
+        'ctrl + i': 'invert'
+      },
       callbacks: {
         change () {}
       }
@@ -10862,38 +10793,6 @@ Prism.languages.js = Prism.languages.javascript;
       /* CHANGE */
 
       this._on ( 'change sortable:sort', this.__change );
-
-    }
-
-    /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
-
-    __keydown ( event ) {
-
-      if ( $.hasCtrlOrCmd ( event ) ) {
-
-        switch ( event.keyCode ) {
-
-          case 65: //INFO: `A`
-            this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: Shift: all or none
-            break;
-
-          case 73: //INFO: `I`
-            this.$elements.toggleClass ( this.options.classes.selected );
-            break;
-
-          default:
-            return;
-
-        }
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this._resetPrev ();
-
-        this._trigger ( 'change' );
-
-      }
 
     }
 
@@ -11097,6 +10996,36 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    all () {
+
+      this.$elements.addClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    clear () {
+
+      this.$elements.removeClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    invert () {
+
+      this.$elements.toggleClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
   }
 
   /* BINDING */
@@ -11156,6 +11085,10 @@ Prism.languages.js = Prism.languages.javascript;
         highlight: '.slider-highlight',
         handlerWrp: '.slider-handler-wrp',
         label: '.slider-label'
+      },
+      keystrokes: {
+        'left, down': 'decrease',
+        'right, up': 'increase'
       },
       callbacks: {
         change () {}
@@ -11307,32 +11240,6 @@ Prism.languages.js = Prism.languages.javascript;
 
       this._updateVariables ();
       this._updatePositions ();
-
-    }
-
-    /* LEFT / RIGHT ARROWS */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-        case Svelto.keyCode.DOWN:
-          this.decrease ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.UP:
-          this.increase ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
@@ -11728,6 +11635,10 @@ Prism.languages.js = Prism.languages.javascript;
         input: 'input',
         increaser: '.stepper-increaser'
       },
+      keystrokes: {
+        'left, down': 'decrease',
+        'right, up': 'increase'
+      },
       callbacks: {
         change () {},
         increase () {},
@@ -11837,32 +11748,6 @@ Prism.languages.js = Prism.languages.javascript;
     __inputChange () {
 
       this.set ( this.$input.val () );
-
-    }
-
-    /* LEFT / RIGHT ARROWS */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-        case Svelto.keyCode.DOWN:
-        this.decrease ();
-        break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.UP:
-          this.increase ();
-          break;
-
-        default:
-          break;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
@@ -11977,6 +11862,11 @@ Prism.languages.js = Prism.languages.javascript;
         bar: '.switch-bar',
         handler: '.switch-handler'
       },
+      keystrokes: {
+        'left': 'uncheck',
+        'right': 'check',
+        'space': 'toggle'
+      },
       callbacks: {
         change () {},
         check () {},
@@ -12054,34 +11944,6 @@ Prism.languages.js = Prism.languages.javascript;
     __change () {
 
       this.toggle ( this.$input.prop ( 'checked' ) );
-
-    }
-
-    /* KEYS */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-          this.uncheck ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-          this.check ();
-          break;
-
-        case Svelto.keyCode.SPACE:
-          this.toggle ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 

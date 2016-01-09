@@ -38,6 +38,10 @@
       animations: {
         cycle: Svelto.animation.normal
       },
+      keystrokes: {
+        'left, up': 'previous',
+        'right, down, space': 'next'
+      },
       callbacks: {
         change () {}
       }
@@ -106,33 +110,6 @@
 
       this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
       this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.LEFT:
-        case Svelto.keyCode.UP:
-          this.previous ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.DOWN:
-        case Svelto.keyCode.SPACE:
-          this.next ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 

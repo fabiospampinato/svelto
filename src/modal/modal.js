@@ -28,6 +28,9 @@
         open: Svelto.animation.normal,
         close: Svelto.animation.normal
       },
+      keystrokes: {
+        'esc': 'close'
+      },
       callbacks: {
         open () {},
         close () {}
@@ -63,21 +66,6 @@
     __tap ( event ) {
 
       if ( event.target === this.modal ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
 
         this.close ();
 

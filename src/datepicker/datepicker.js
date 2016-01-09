@@ -53,6 +53,10 @@
         title: '.datepicker-title',
         input: 'input'
       },
+      keystrokes: {
+        'up, left': 'prevMonth',
+        'right, down': 'nextMonth'
+      },
       callbacks: {
         change () {},
         refresh () {}
@@ -141,32 +145,6 @@
     __change () {
 
       this.set ( this.$input.val () );
-
-    }
-
-    /* KEYDOWN */
-
-    __keydown ( event ) {
-
-      switch ( event.keyCode ) {
-
-        case Svelto.keyCode.UP:
-        case Svelto.keyCode.LEFT:
-          this.prevMonth ();
-          break;
-
-        case Svelto.keyCode.RIGHT:
-        case Svelto.keyCode.DOWN:
-          this.nextMonth ();
-          break;
-
-        default:
-          return;
-
-      }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
