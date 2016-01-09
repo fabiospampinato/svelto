@@ -23,8 +23,8 @@
         flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       callbacks: {
-        front () {},
-        back () {}
+        front: _.noop,
+        back: _.noop
       }
     }
   };

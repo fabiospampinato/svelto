@@ -36,10 +36,10 @@
         redirect: 'Done! Redirecting...'
       },
       callbacks: {
-        beforesend () {},
-        error () {},
-        success () {},
-        complete () {}
+        beforesend: _.noop,
+        error: _.noop,
+        success: _.noop,
+        complete: _.noop
       }
     }
   };

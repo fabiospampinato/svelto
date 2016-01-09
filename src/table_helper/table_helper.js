@@ -41,10 +41,10 @@
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
-        add () {},
-        update () {},
-        remove () {},
-        clear () {}
+        add: _.noop,
+        update: _.noop,
+        remove: _.noop,
+        clear: _.noop
       }
     },
   };

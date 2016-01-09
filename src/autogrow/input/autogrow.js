@@ -22,7 +22,7 @@
     selector: 'input.autogrow',
     options: {
       callbacks: {
-        update () {}
+        update: _.noop
       }
     }
   };

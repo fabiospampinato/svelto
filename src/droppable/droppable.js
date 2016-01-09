@@ -26,9 +26,9 @@
         hover: false //INFO: The class to attach to the droppable when hovered by a draggable
       },
       callbacks: {
-        enter () {},
-        leave () {},
-        drop () {}
+        enter: _.noop,
+        leave: _.noop,
+        drop: _.noop
       }
     }
   };

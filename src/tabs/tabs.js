@@ -36,7 +36,7 @@
         containers: '.tabs-containers > *'
       },
       callbacks: {
-        set () {}
+        set: _.noop
       }
     }
   };

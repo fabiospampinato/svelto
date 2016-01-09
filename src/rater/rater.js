@@ -49,7 +49,7 @@
         star: '.rater-star'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     },
   };

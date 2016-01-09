@@ -35,8 +35,8 @@
         overlap: Svelto.animation.xslow / 100 * 58
       },
       callbacks: {
-        show () {},
-        hide () {}
+        show: _.noop,
+        hide: _.noop
       }
     }
   };

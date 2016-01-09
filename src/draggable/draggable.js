@@ -57,9 +57,9 @@
         handler: '.draggable-handler'
       },
       callbacks: {
-        start () {},
-        move () {},
-        end () {}
+        start: _.noop,
+        move: _.noop,
+        end: _.noop
       }
     }
   };

@@ -39,9 +39,9 @@
         close: Svelto.animation.fast
       },
       callbacks: {
-        beforeopen () {},
-        open () {},
-        close () {}
+        beforeopen: _.noop,
+        open: _.noop,
+        close: _.noop
       }
     }
   };

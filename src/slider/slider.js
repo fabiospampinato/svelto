@@ -50,7 +50,7 @@
         'right, up': 'increase'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };

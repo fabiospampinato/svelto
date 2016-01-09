@@ -76,7 +76,7 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick () {}
+                onClick: _.noop
              }],
       */
       type: 'alert',
@@ -99,8 +99,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };

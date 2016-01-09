@@ -38,9 +38,9 @@
         'right, up': 'increase'
       },
       callbacks: {
-        change () {},
-        increase () {},
-        decrease () {}
+        change: _.noop,
+        increase: _.noop,
+        decrease: _.noop
       }
     }
   };

@@ -32,7 +32,7 @@
         'ctrl + i': 'invert'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };

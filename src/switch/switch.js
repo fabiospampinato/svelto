@@ -46,9 +46,9 @@
         'space': 'toggle'
       },
       callbacks: {
-        change () {},
-        check () {},
-        uncheck () {}
+        change: _.noop,
+        check: _.noop,
+        uncheck: _.noop
       }
     }
   };

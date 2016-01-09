@@ -51,9 +51,9 @@
         button: '.button'
       },
       callbacks: {
-        open () {},
-        close () {},
-        change () {}
+        open: _.noop,
+        close: _.noop,
+        change: _.noop
       }
     }
   };

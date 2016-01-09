@@ -22,7 +22,7 @@
     selector: 'textarea.autogrow',
     options: {
       callbacks: {
-        update () {}
+        update: _.noop
       }
     }
   };

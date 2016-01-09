@@ -62,10 +62,10 @@
         tagRemover: '.tagbox-tag-remover'
       },
       callbacks: {
-        change () {},
-        add () {},
-        remove () {},
-        empty () {}
+        change: _.noop,
+        add: _.noop,
+        remove: _.noop,
+        empty: _.noop
       }
     }
   };

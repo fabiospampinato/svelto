@@ -59,8 +59,8 @@
         'right, down': 'nextMonth'
       },
       callbacks: {
-        change () {},
-        refresh () {}
+        change: _.noop,
+        refresh: _.noop
       }
     }
   };

@@ -22,7 +22,7 @@
       timestamp: false,
       title: false,
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };

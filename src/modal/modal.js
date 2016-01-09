@@ -33,8 +33,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };

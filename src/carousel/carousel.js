@@ -44,7 +44,7 @@
         'right, down, space': 'next'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     },
   };

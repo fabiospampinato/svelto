@@ -1724,8 +1724,8 @@
         open: 'open'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -1818,8 +1818,8 @@
         expander: Svelto.Expander.config.selector
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -1957,7 +1957,7 @@
     selector: 'input.autogrow',
     options: {
       callbacks: {
-        update () {}
+        update: _.noop
       }
     }
   };
@@ -2040,7 +2040,7 @@
     selector: 'textarea.autogrow',
     options: {
       callbacks: {
-        update () {}
+        update: _.noop
       }
     }
   };
@@ -2267,7 +2267,7 @@
         'right, down, space': 'next'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     },
   };
@@ -3097,7 +3097,7 @@
         input: 'input'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };
@@ -3560,8 +3560,8 @@
         'right, down': 'nextMonth'
       },
       callbacks: {
-        change () {},
-        refresh () {}
+        change: _.noop,
+        refresh: _.noop
       }
     }
   };
@@ -3979,9 +3979,9 @@
         handler: '.draggable-handler'
       },
       callbacks: {
-        start () {},
-        move () {},
-        end () {}
+        start: _.noop,
+        move: _.noop,
+        end: _.noop
       }
     }
   };
@@ -4394,7 +4394,7 @@
         all: ['bottom', 'right', 'left', 'top']
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }, options );
 
@@ -4742,9 +4742,9 @@
         close: Svelto.animation.fast
       },
       callbacks: {
-        beforeopen () {},
-        open () {},
-        close () {}
+        beforeopen: _.noop,
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -5513,9 +5513,9 @@
         hover: false //INFO: The class to attach to the droppable when hovered by a draggable
       },
       callbacks: {
-        enter () {},
-        leave () {},
-        drop () {}
+        enter: _.noop,
+        leave: _.noop,
+        drop: _.noop
       }
     }
   };
@@ -5762,7 +5762,7 @@
       duration: 150, //INFO: Maximum duration of the flick gesture
       threshold: 5, //INFO: Minimum moving treshold of the flick gesture
       callbacks: {
-        flick () {}
+        flick: _.noop
       }
     }
   };
@@ -5903,8 +5903,8 @@
         flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       callbacks: {
-        front () {},
-        back () {}
+        front: _.noop,
+        back: _.noop
       }
     }
   };
@@ -6039,8 +6039,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -6189,8 +6189,8 @@
         unlabeled: 'secondary'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -6352,7 +6352,7 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick () {}
+                onClick: _.noop
              }],
       */
       type: 'alert',
@@ -6375,8 +6375,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -7307,10 +7307,10 @@
         redirect: 'Done! Redirecting...'
       },
       callbacks: {
-        beforesend () {},
-        error () {},
-        success () {},
-        complete () {}
+        beforesend: _.noop,
+        error: _.noop,
+        success: _.noop,
+        complete: _.noop
       }
     }
   };
@@ -7768,7 +7768,7 @@
     selector: '.infobar',
     options: {
       callbacks: {
-        close () {}
+        close: _.noop
       }
     }
   };
@@ -7876,8 +7876,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -8442,8 +8442,8 @@
         'esc': 'close'
       },
       callbacks: {
-        open () {},
-        close () {}
+        open: _.noop,
+        close: _.noop
       }
     }
   };
@@ -9612,9 +9612,9 @@ Prism.languages.js = Prism.languages.javascript;
         highlight: '.progressbar-highlight'
       },
       callbacks: {
-        change () {},
-        empty () {},
-        full () {}
+        change: _.noop,
+        empty: _.noop,
+        full: _.noop
       }
     }
   };
@@ -9789,7 +9789,7 @@ Prism.languages.js = Prism.languages.javascript;
         star: '.rater-star'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     },
   };
@@ -10125,8 +10125,8 @@ Prism.languages.js = Prism.languages.javascript;
         overlap: Svelto.animation.xslow / 100 * 58
       },
       callbacks: {
-        show () {},
-        hide () {}
+        show: _.noop,
+        hide: _.noop
       }
     }
   };
@@ -10322,9 +10322,9 @@ Prism.languages.js = Prism.languages.javascript;
         button: '.button'
       },
       callbacks: {
-        open () {},
-        close () {},
-        change () {}
+        open: _.noop,
+        close: _.noop,
+        change: _.noop
       }
     }
   };
@@ -10579,7 +10579,7 @@ Prism.languages.js = Prism.languages.javascript;
         'ctrl + i': 'invert'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };
@@ -10911,7 +10911,7 @@ Prism.languages.js = Prism.languages.javascript;
         'right, up': 'increase'
       },
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };
@@ -11198,7 +11198,7 @@ Prism.languages.js = Prism.languages.javascript;
         rowCell: 'td'
       },
       callbacks: {
-        sort () {}
+        sort: _.noop
       }
     }
   };
@@ -11452,9 +11452,9 @@ Prism.languages.js = Prism.languages.javascript;
         'right, up': 'increase'
       },
       callbacks: {
-        change () {},
-        increase () {},
-        decrease () {}
+        change: _.noop,
+        increase: _.noop,
+        decrease: _.noop
       }
     }
   };
@@ -11675,9 +11675,9 @@ Prism.languages.js = Prism.languages.javascript;
         'space': 'toggle'
       },
       callbacks: {
-        change () {},
-        check () {},
-        uncheck () {}
+        change: _.noop,
+        check: _.noop,
+        uncheck: _.noop
       }
     }
   };
@@ -11903,10 +11903,10 @@ Prism.languages.js = Prism.languages.javascript;
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
-        add () {},
-        update () {},
-        remove () {},
-        clear () {}
+        add: _.noop,
+        update: _.noop,
+        remove: _.noop,
+        clear: _.noop
       }
     },
   };
@@ -12100,7 +12100,7 @@ Prism.languages.js = Prism.languages.javascript;
         containers: '.tabs-containers > *'
       },
       callbacks: {
-        set () {}
+        set: _.noop
       }
     }
   };
@@ -12296,10 +12296,10 @@ Prism.languages.js = Prism.languages.javascript;
         tagRemover: '.tagbox-tag-remover'
       },
       callbacks: {
-        change () {},
-        add () {},
-        remove () {},
-        empty () {}
+        change: _.noop,
+        add: _.noop,
+        remove: _.noop,
+        empty: _.noop
       }
     }
   };
@@ -12769,7 +12769,7 @@ Prism.languages.js = Prism.languages.javascript;
       timestamp: false,
       title: false,
       callbacks: {
-        change () {}
+        change: _.noop
       }
     }
   };

@@ -42,9 +42,9 @@
         highlight: '.progressbar-highlight'
       },
       callbacks: {
-        change () {},
-        empty () {},
-        full () {}
+        change: _.noop,
+        empty: _.noop,
+        full: _.noop
       }
     }
   };

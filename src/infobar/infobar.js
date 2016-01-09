@@ -22,7 +22,7 @@
     selector: '.infobar',
     options: {
       callbacks: {
-        close () {}
+        close: _.noop
       }
     }
   };

@@ -53,7 +53,7 @@
         rowCell: 'td'
       },
       callbacks: {
-        sort () {}
+        sort: _.noop
       }
     }
   };
