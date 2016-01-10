@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Move the different sections like `colors` or `breakpoints` to their respective files
+
 (function ( window, document, undefined ) {
 
   'use strict';
@@ -50,6 +52,16 @@
     LEFT: 0,
     MIDDLE: 1,
     RIGHT: 2
+  };
+
+  /* BREAKPOINTS */
+
+  Svelto.breakpoints = {
+    xsmall: 0,
+    small: 512,
+    medium: 768,
+    large: 1024,
+    xlarge: 1216
   };
 
   /* ANIMATION */
@@ -2194,6 +2206,71 @@
   /* FACTORY */
 
   $.factory ( Boilerplate, config, Svelto );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Breakpoints
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+//TODO: Make it work with `.layout` instead of just with the window
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  let intervals = _.sortBy ( _.values ( Svelto.breakpoints ) ),
+      previous;
+
+  /* FUNCTIONS */
+
+  function getBreakpoint () {
+
+    let width = $window.width ();
+
+    for ( let i = 0, l = intervals.length; i < l; i++ ) {
+
+      if ( width >= intervals[i] && ( i === l - 1 || width < intervals[i+1] ) ) {
+
+        return _.findKey ( Svelto.breakpoints, interval => interval === intervals[i] );
+
+      }
+
+    }
+
+  }
+
+  function update () {
+
+    let current = getBreakpoint ();
+
+    if ( current !== previous ) {
+
+      $window.trigger ( 'breakpoint:change', { breakpoint: current } );
+
+      previous = current;
+
+    }
+
+  }
+
+  /* READY */
+
+  $(function () {
+
+    update ();
+
+    $window.on ( 'resize', _.throttle ( update, 150 ) );
+
+  });
 
 }( Svelto.$, Svelto._, window, document ));
 

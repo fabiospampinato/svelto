@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Move the different sections like `colors` or `breakpoints` to their respective files
+
 (function ( window, document, undefined ) {
 
   'use strict';
@@ -50,6 +52,16 @@
     LEFT: 0,
     MIDDLE: 1,
     RIGHT: 2
+  };
+
+  /* BREAKPOINTS */
+
+  Svelto.breakpoints = {
+    xsmall: 0,
+    small: 512,
+    medium: 768,
+    large: 1024,
+    xlarge: 1216
   };
 
   /* ANIMATION */
