@@ -6301,24 +6301,29 @@ i.icon, .carousel.inset .carousel-prev:after,
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  /* PREVIOUS / NEXT */
+  /* BUTTON / PREVIOUS / NEXT */
   /* TITLE */
 }
 
+.datepicker-navigation .button,
 .datepicker-navigation .previous,
 .datepicker-navigation .next {
   width: 14.2857142857%;
   margin-bottom: 0;
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
 }
 
 .datepicker-navigation .datepicker-title {
   margin: 0 10px;
+  text-align: center;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 .datepicker-calendar {

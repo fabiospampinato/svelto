@@ -8,6 +8,8 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
+//TODO: Write it better
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';

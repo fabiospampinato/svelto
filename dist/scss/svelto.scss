@@ -7301,21 +7301,24 @@ i.icon {
   &-navigation {
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    /* PREVIOUS / NEXT */
+    /* BUTTON / PREVIOUS / NEXT */
 
+    .button,
     .previous,
     .next {
       width: $datepicker-block-width;
       margin-bottom: 0;
+      flex-grow: 0;
     }
 
     /* TITLE */
 
     .datepicker-title {
       margin: 0 $gutter;
+      text-align: center;
+      flex-grow: 1;
     }
 
   }

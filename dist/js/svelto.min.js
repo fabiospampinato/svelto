@@ -132,6 +132,7 @@
  * ========================================================================= */
 
 //TODO: Add something like a _.oppositeDirection ( direction )
+//TODO: Write it better
 
 (function ( _, window, document, undefined ) {
 
@@ -405,6 +406,8 @@
  * =========================================================================
  * @requires ../browser/browser.js
  * ========================================================================= */
+
+//TODO: Write it better
 
 (function ( $, _, window, document, undefined ) {
 
@@ -3621,8 +3624,9 @@
       },
       selectors: {
         navigation: {
-          prev: '.datepicker-navigation .previous',
-          next: '.datepicker-navigation .next'
+          previous: '.datepicker-navigation .previous',
+          next: '.datepicker-navigation .next',
+          today: '.datepicker-navigation .today'
         },
         day: {
           prev: '.datepicker-days .previous',
@@ -3653,9 +3657,10 @@
       this.$datepicker = this.$element;
       this.$input = this.$datepicker.find ( this.options.selectors.input );
 
-      this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
-      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.title );
+      this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.previous );
       this.$navigationNext = this.$datepicker.find ( this.options.selectors.navigation.next );
+      this.$navigationToday = this.$datepicker.find ( this.options.selectors.navigation.today );
+      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.title );
 
       this.$daysPrev = this.$datepicker.find ( this.options.selectors.day.prev );
       this.$daysCurrent = this.$datepicker.find ( this.options.selectors.day.current );
@@ -3670,7 +3675,7 @@
 
       if ( !(this.options.date.current instanceof Date) ) {
 
-        this.options.date.current = new Date ();
+        this.options.date.current = this.options.date.selected ? this._cloneDate ( this.options.date.selected ) : new Date ();
 
       }
 
@@ -3687,7 +3692,7 @@
 
       if ( this.options.date.selected instanceof Date ) {
 
-        this.options.date.current = new Date ( this.options.date.selected.getFullYear (), this.options.date.selected.getMonth (), this.options.date.selected.getDate () );
+        this.options.date.current = this._cloneDate ( this.options.date.selected );
 
       }
 
@@ -3701,20 +3706,29 @@
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
+      this._on ( true, this.$input, 'change', this.__change );
 
       /* KEYDOWN */
 
       this._onHover ( [$document, 'keydown', this.__keydown] );
 
-      /* NAVIGATION PREV / NEXT */
+      /* NAVIGATION PREV / NEXT / TODAY */
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
-      this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
+      this._on ( this.$navigationPrev, Pointer.tap, this.prevMonth );
+      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
+      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
 
       /* DAY TAP */
 
       this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+
+    }
+
+    /* PRIVATE */
+
+    _cloneDate ( date ) {
+
+      return new Date ( date.getTime () );
 
     }
 
@@ -3726,41 +3740,25 @@
 
     }
 
-    /* NAVIGATION */
-
-    __prevTap () {
-
-      this.prevMonth ();
-
-    }
-
-    __nextTap () {
-
-      this.nextMonth ();
-
-    }
-
-    /* SELECTION */
+    /* DAY TAP */
 
     __dayTap ( event ) {
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
-      let day = parseInt ( $(event.currentTarget).html (), 10 );
+      let $day = $(event.currentTarget),
+          day = parseInt ( $day.html (), 10 ),
+          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
 
-      this._unhighlightSelected ();
-
-      this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
-
-      this._highlightSelected ();
-
-      this._updateInput ();
+      this.set ( date );
 
     }
 
-    /* OTHERS */
+    /* BUILD */
 
     _buildCalendar () {
+
+      /* NUMBERS */
 
       let prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
@@ -3768,28 +3766,32 @@
 
       initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
 
-      this.$daysAll.removeClass ( 'hidden' );
-
       /* PREV */
 
       let exceedingDays = 31 - prevMonthDays,
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
-      this.$daysPrev.slice ( leftDays + neededDays, this.$daysPrev.length ).addClass ( 'hidden' );
       this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
+      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( 'hidden' );
+      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( 'hidden' );
 
       /* CURRENT */
 
-      this.$daysCurrent.slice ( currentMonthDays, this.$daysCurrent.lenght ).addClass ( 'hidden' );
+      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( 'hidden' );
+      this.$daysCurrent.slice ( currentMonthDays ).addClass ( 'hidden' );
 
       /* NEXT */
 
-      leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
+      neededDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
+      neededDays = ( neededDays === 0 ) ? 0 : 7 - neededDays;
 
-      this.$daysNext.slice ( ( leftDays === 0 ) ? 0 : 7 - leftDays ).addClass ( 'hidden' );
+      this.$daysNext.slice ( 0, neededDays ).removeClass ( 'hidden' );
+      this.$daysNext.slice ( neededDays ).addClass ( 'hidden' );
 
     }
+
+    /* HIGHLIGHT */
 
     _highlightDay ( day, cssClass ) {
 
@@ -3828,7 +3830,11 @@
 
     _highlightSelected () {
 
-      this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
+      if ( this.options.date.selected ) {
+
+        this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
+
+      }
 
     }
 
@@ -3844,9 +3850,15 @@
 
     _highlightToday () {
 
-      this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
+      if ( this.options.date.today ) {
+
+        this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
+
+      }
 
     }
+
+    /* UPDATE */
 
     _updateTitle () {
 
@@ -3864,12 +3876,14 @@
 
     }
 
+    /* EXPORT */
+
     _exportDate ( date )  {
 
       switch ( this.options.format.type ) {
 
         case 'YYYYMMDD':
-          return [date.getFullYear (), parseInt ( date.getMonth (), 10 ) + 1, date.getDate ()].join ( this.options.format.separator );
+          return [_.padLeft ( date.getFullYear (), 4, 0 ), _.padLeft ( parseInt ( date.getMonth (), 10 ) + 1, 2, 0 ), _.padLeft ( date.getDate (), 2, 0 )].join ( this.options.format.separator );
 
         default:
           return date.toUTCString ();
@@ -3878,6 +3892,8 @@
 
     }
 
+    /* IMPORT */
+
     _importDate ( date )  {
 
       if ( _.isString ( date ) ) {
@@ -3885,19 +3901,17 @@
         switch ( this.options.format.type ) {
 
           case 'YYYYMMDD':
-            let segments = date.split ( this.options.format.separator );
-            return new Date ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2] ) );
-
-          default:
-            return new Date ( date );
+            let segments = date.split ( this.options.format.separator ),
+                importedDate = new Date ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) );
+            if ( !_.isNaN ( importedDate.valueOf () ) ) {
+              return importedDate;
+            }
 
         }
 
-      } else {
-
-        return new Date ( date );
-
       }
+
+      return new Date ( date );
 
     }
 
@@ -3905,9 +3919,12 @@
 
       this._unhighlightSelected ();
       this._unhighlightToday ();
+
       this._buildCalendar ();
+
       this._highlightSelected ();
       this._highlightToday ();
+
       this._updateTitle ();
 
     }
@@ -3916,15 +3933,13 @@
 
     get ( formatted ) {
 
-      if ( formatted && this.options.date.selected ) {
+      if ( this.options.date.selected ) {
 
-        return this._exportDate ( this.options.date.selected );
-
-      } else {
-
-        return this.options.date.selected;
+        return formatted ? this._exportDate ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected );
 
       }
+
+      return null;
 
     }
 
@@ -3936,17 +3951,21 @@
 
         if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
 
+          if ( this.options.date.selected ) {
+
+            this._unhighlightSelected ();
+
+          }
+
           this.options.date.selected = date;
 
           if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-            this._unhighlightSelected ();
             this._highlightSelected ();
 
           } else {
 
-            this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
-            this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+            this.options.date.current = this._cloneDate ( this.options.date.selected );
 
             this._refresh ();
 
@@ -3983,6 +4002,18 @@
     nextMonth () {
 
       this.navigateMonth ( 1 );
+
+    }
+
+    navigateToToday () {
+
+      if ( this.options.date.current.getFullYear () !== this.options.date.today.getFullYear () || this.options.date.current.getMonth () !== this.options.date.today.getMonth () ) {
+
+        this.options.date.current = this._cloneDate ( this.options.date.today );
+
+        this._refresh ();
+
+      }
 
     }
 

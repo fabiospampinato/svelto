@@ -123,7 +123,6 @@
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
 
       /* KEYDOWN */
 
@@ -131,8 +130,6 @@
 
       /* NAVIGATION PREV / NEXT */
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
-      this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
 
       /* DAY TAP */
 
@@ -148,39 +145,24 @@
 
     }
 
-    /* NAVIGATION */
 
-    __prevTap () {
 
-      this.prevMonth ();
 
     }
 
-    __nextTap () {
-
-      this.nextMonth ();
-
-    }
-
-    /* SELECTION */
 
     __dayTap ( event ) {
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
-      let day = parseInt ( $(event.currentTarget).html (), 10 );
 
       this._unhighlightSelected ();
 
-      this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
 
-      this._highlightSelected ();
 
-      this._updateInput ();
 
     }
 
-    /* OTHERS */
 
     _buildCalendar () {
 
@@ -190,26 +172,20 @@
 
       initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
 
-      this.$daysAll.removeClass ( 'hidden' );
-
       /* PREV */
 
       let exceedingDays = 31 - prevMonthDays,
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
-      this.$daysPrev.slice ( leftDays + neededDays, this.$daysPrev.length ).addClass ( 'hidden' );
       this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
 
       /* CURRENT */
 
-      this.$daysCurrent.slice ( currentMonthDays, this.$daysCurrent.lenght ).addClass ( 'hidden' );
 
       /* NEXT */
 
-      leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
 
-      this.$daysNext.slice ( ( leftDays === 0 ) ? 0 : 7 - leftDays ).addClass ( 'hidden' );
 
     }
 
@@ -291,7 +267,6 @@
       switch ( this.options.format.type ) {
 
         case 'YYYYMMDD':
-          return [date.getFullYear (), parseInt ( date.getMonth (), 10 ) + 1, date.getDate ()].join ( this.options.format.separator );
 
         default:
           return date.toUTCString ();
@@ -310,14 +285,8 @@
             let segments = date.split ( this.options.format.separator );
             return new Date ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2] ) );
 
-          default:
-            return new Date ( date );
 
         }
-
-      } else {
-
-        return new Date ( date );
 
       }
 
@@ -338,13 +307,7 @@
 
     get ( formatted ) {
 
-      if ( formatted && this.options.date.selected ) {
 
-        return this._exportDate ( this.options.date.selected );
-
-      } else {
-
-        return this.options.date.selected;
 
       }
 
@@ -362,7 +325,6 @@
 
           if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-            this._unhighlightSelected ();
             this._highlightSelected ();
 
           } else {

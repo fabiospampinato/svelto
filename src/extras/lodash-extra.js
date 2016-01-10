@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add something like a _.oppositeDirection ( direction )
+//TODO: Write it better
 
 (function ( _, window, document, undefined ) {
 
