@@ -8,9 +8,8 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
- //INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
-
-//TODO: Add support for setting first day of the week
+//INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
+//INFO: Accordion to ISO 8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
@@ -58,6 +57,7 @@
         current: false,
         selected: false
       },
+      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`
       format: {
         type: 'YYYYMMDD', //INFO: One of the formats implemented in the exporters
         data: { //INFO: Passed to the called importer and exporter
@@ -220,7 +220,9 @@
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
           initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
-      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
+      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: Normalizing to 0 -> Monday
+      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); //INFO: Offsetting according to the provided setting
+      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; //INFO: Moving to the other side in case of negative offsetting
 
       /* PREV */
 
