@@ -135,7 +135,7 @@
 
           /* BEFORE */
 
-          &:not(.previous):not(.next):before {
+          &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
             @include z-depth ( $datepicker-day-selected-z-depth );
           }
 
@@ -156,9 +156,15 @@
         opacity: $datepicker-day-prev-next-opacity;
       }
 
+      /* CLAMPED */
+
+      .datepicker-day-clamped {
+        opacity: $datepicker-day-clamped-opacity;
+      }
+
       /* DAY */
 
-      :not(.previous):not(.next) {
+      :not(.previous):not(.next):not(.datepicker-day-clamped) {
         cursor: pointer;
       }
 
@@ -172,7 +178,7 @@
 
     /* DAY */
 
-    .datepicker-calendar .datepicker-days > :not(.previous):not(.next) {
+    .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
 
       /* HOVER */
 
