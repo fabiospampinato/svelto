@@ -1285,6 +1285,8 @@
 
   class Widget {
 
+    /* CONSTRUCTION */
+
     constructor ( options, element ) {
 
       /* ATTACH CONFIG */
@@ -1411,6 +1413,10 @@
 
     }
 
+    _createOptions () {} //INFO: Used to pass extra options
+
+    /* DESTRUCTION */
+
     destroy () {
 
       this._destroy ();
@@ -1419,11 +1425,11 @@
 
     }
 
+    _destroy () {} //INFO: Clean the stuff, remove possible memory leaks
+
     /* SPECIAL */
 
-    _createOptions () {} //INFO: Used to pass extra options
-
-    static widgetize ( $widget, name ) { //INFO: Add a widget instance to the $widget
+    static widgetize ( $widget, name ) { //INFO: Instanciate the $widget
 
       $widget[name]();
 
@@ -1432,8 +1438,6 @@
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
     _events () {} //INFO: Bind the event handlers inside this function
-
-    _destroy () {} //INFO: Clean the stuff, remove possible memory leaks
 
     /* WIDGET */
 
@@ -1484,6 +1488,12 @@
         }
 
       }
+
+    }
+
+    options ( obj ) {
+
+      return this.option ( obj );
 
     }
 
