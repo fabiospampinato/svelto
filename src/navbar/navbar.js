@@ -193,7 +193,7 @@
 
         this._isOpen = true;
 
-        $body.unscrollable ();
+        $body.disableScroll ();
 
         this._frame ( function () {
 
@@ -227,7 +227,7 @@
 
             this.$navbar.removeClass ( this.options.classes.show );
 
-            $body.scrollable ();
+            $body.enableScroll ();
 
             this._trigger ( 'close' );
 

@@ -506,7 +506,7 @@
 
   };
 
-  $.fn.unscrollable = function () {
+  $.fn.disableScroll = function () {
 
     //TODO: Preserve the scrollbars if possible
 
@@ -514,11 +514,29 @@
 
   };
 
-  $.fn.scrollable = function () {
+  $.fn.enableScroll = function () {
 
     return this.removeClass ( 'overflow-hidden' );
 
   };
+
+	$.fn.disableSelection = (function () {
+
+    let event = ( 'onselectstart' in document.createElement ( 'div' ) ) ? 'selectstart' : Pointer.down;
+
+    return function () {
+
+    	return this.on ( event + '.svelto-disable-selection', event => event.preventDefault () );
+
+    };
+
+	})();
+
+	$.fn.enableSelection = function () {
+
+		return this.off ( '.svelto-disable-selection' );
+
+	};
 
   const specialKeystrokesKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'];
 
@@ -1527,7 +1545,7 @@
 
     /* EVENTS */
 
-    _on ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
+    _on ( suppressDisabledCheck, $element, events, selector, handler, _onlyOne ) {
 
       //TODO: Add support for custom data
 
@@ -1535,7 +1553,7 @@
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -1546,7 +1564,7 @@
 
       if ( !( $element instanceof $ ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -1556,7 +1574,7 @@
 
       if ( !_.isString ( selector ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = false;
 
@@ -1582,7 +1600,7 @@
 
       /* TRIGGERING */
 
-      $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
+      $element[_onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
     }
 
@@ -8435,7 +8453,7 @@
 
         this._isOpen = true;
 
-        $body.unscrollable ();
+        $body.disableScroll ();
 
         this._frame ( function () {
 
@@ -8471,7 +8489,7 @@
 
             this.$modal.removeClass ( this.options.classes.show );
 
-            $body.scrollable ();
+            $body.enableScroll ();
 
             this._off ( $document, 'keydown', this.__keydown );
 
@@ -9089,7 +9107,7 @@
 
         this._isOpen = true;
 
-        $body.unscrollable ();
+        $body.disableScroll ();
 
         this._frame ( function () {
 
@@ -9123,7 +9141,7 @@
 
             this.$navbar.removeClass ( this.options.classes.show );
 
-            $body.scrollable ();
+            $body.enableScroll ();
 
             this._trigger ( 'close' );
 

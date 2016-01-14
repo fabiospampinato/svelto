@@ -104,7 +104,7 @@
 
         this._isOpen = true;
 
-        $body.unscrollable ();
+        $body.disableScroll ();
 
         this._frame ( function () {
 
@@ -140,7 +140,7 @@
 
             this.$modal.removeClass ( this.options.classes.show );
 
-            $body.scrollable ();
+            $body.enableScroll ();
 
             this._off ( $document, 'keydown', this.__keydown );
 

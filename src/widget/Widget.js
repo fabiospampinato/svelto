@@ -292,7 +292,7 @@
 
     /* EVENTS */
 
-    _on ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
+    _on ( suppressDisabledCheck, $element, events, selector, handler, _onlyOne ) {
 
       //TODO: Add support for custom data
 
@@ -300,7 +300,7 @@
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -311,7 +311,7 @@
 
       if ( !( $element instanceof $ ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -321,7 +321,7 @@
 
       if ( !_.isString ( selector ) ) {
 
-        onlyOne = handler;
+        _onlyOne = handler;
         handler = selector;
         selector = false;
 
@@ -347,7 +347,7 @@
 
       /* TRIGGERING */
 
-      $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
+      $element[_onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
     }
 
