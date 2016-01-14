@@ -1604,7 +1604,7 @@
 
       /* NORMALIZING PARAMETERS */
 
-      if ( !handler ) {
+      if ( !handler && !($element instanceof $) ) {
 
         handler = events;
         events = $element;
@@ -6747,6 +6747,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
+//TODO: Write it better
 //TODO: Add better support for swipe to dismiss
 //TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
@@ -6756,7 +6757,7 @@
 
   /* VARIABLES */
 
-  let notiesTimers = [];
+  let openNotiesData = {};
 
   /* CONFIG */
 
@@ -6821,7 +6822,7 @@
       type: 'alert',
       color: 'black',
       css: '',
-      persistent: false,
+      persistent: false, //INFO: Wether it should survive a change of page or not. Normally no extra code would be needed to support it, but when manipulating the history object it will be needed
       ttl: 3500,
       autoplay: true,
       timerMinimumRemaining: 1000,
@@ -6829,6 +6830,8 @@
         open: 'open'
       },
       selectors: {
+        queues: '.noty-queues',
+        queue: '.noty-queue',
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
@@ -6846,11 +6849,13 @@
 
   /* HELPER */
 
-  $.noty = function ( options ) {
+  $.noty = function ( options = {} ) {
 
     /* OPTIONS */
 
-    options = _.isString ( options ) ? { body: options } : ( options || {} );
+    options = _.isString ( options ) ? { body: options } : options;
+
+    /* TYPE */
 
     if ( options.buttons ) {
 
@@ -6860,7 +6865,7 @@
 
     /* NOTY */
 
-    return new Svelto.Noty ( options );
+    return new Noty ( options );
 
   };
 
@@ -6877,7 +6882,6 @@
 
       this.timer = false;
       this._isOpen = false;
-      this.neverOpened = true;
 
     }
 
@@ -6929,7 +6933,7 @@
 
         this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
 
-        notiesTimers.push ( this.timer );
+        openNotiesData[this.guid] = [this.timer, this.options.timerMinimumRemaining];
 
       }
 
@@ -6937,21 +6941,13 @@
 
     ___hover () {
 
-      var instance = this;
+      this.$noty.hover ( function () {
 
-      this.$noty.hover ( () => {
+        _.forIn ( openNotiesData, data => data[0].pause () );
 
-        notiesTimers.forEach ( timer => timer.pause () );
+      }, function () {
 
-      }, () => {
-
-        notiesTimers.forEach ( timer => {
-
-          timer.remaining ( Math.max ( instance.options.timerMinimumRemaining, timer.remaining () || 0 ) );
-
-          timer.play ();
-
-        });
+        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () || 0 ) ).play () );
 
       });
 
@@ -6979,15 +6975,51 @@
 
       if ( !this.options.persistent ) {
 
-        this._on ( $window, 'route', function ( event, data ) { //FIXME: Going back it doesn't work
+        this._on ( $window, 'route', this.__route );
 
-          // if ( data.url !== this._openUrl ) {
+      }
 
-            // this.close ();
+    }
 
-          // }
+    __route () {
 
-        });
+      let currentUrl = window.location.href.split ( '#' )[0];
+
+      if ( this._openUrl !== currentUrl ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    ___reset () {
+
+      // ___tap
+
+      if ( this.options.type !== 'action' ) {
+
+        this._off ( Pointer.tap, this.close );
+
+      }
+
+      // ___buttonTap
+
+      this._off ( this.$buttons, Pointer.tap );
+
+      // ___timer
+
+      if ( this.timer ) {
+
+        delete openNotiesData[this.guid];
+
+      }
+
+      // ___persistent
+
+      if ( !this.options.persistent ) {
+
+        this._off ( $window, 'route', this.__route );
 
       }
 
@@ -7003,53 +7035,42 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._isOpen ) return;
 
-        this._frame ( () => {
+      this._frame ( function () {
 
-            $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append ( this.$noty );
+          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
 
-            this._frame ( () => {
+          this._frame ( function () {
 
-              this.$noty.addClass ( this.options.classes.open );
+            this.$noty.addClass ( this.options.classes.open );
 
-            });
+          });
 
-        });
+      });
 
-        this._defer ( function () {
+      this._openUrl = window.location.href.split ( '#' )[0];
 
-          this._openUrl = window.location.href.split ( '#' )[0];
+      this.___timer ();
+      this.___tap ();
+      this.___flick ();
+      this.___buttonTap ();
+      this.___hover ();
+      this.___persistent ();
 
-        });
+      this._on ( $document, 'keydown', this.__keydown );
 
-        if ( this.neverOpened ) {
+      this._isOpen = true;
 
-          this.___tap ();
-          this.___flick ();
-          this.___buttonTap ();
-          this.___hover ();
-          this.___persistent ();
-
-          this.neverOpened = false;
-
-        }
-
-        this.___timer ();
-
-        this._on ( $document, 'keydown', this.__keydown );
-
-        this._isOpen = true;
-
-        this._trigger ( 'open' );
-
-      }
+      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( !this._isOpen ) return;
+
+      this._frame ( function () {
 
         this.$noty.removeClass ( this.options.classes.open );
 
@@ -7059,21 +7080,15 @@
 
         }, this.options.animations.remove );
 
-        if ( this.timer ) {
+      });
 
-          _.pull ( notiesTimers, this.timer );
+      this.___reset ();
 
-          this.timer.stop ();
+      this._off ( $document, 'keydown', this.__keydown );
 
-        }
+      this._isOpen = false;
 
-        this._off ( $document, 'keydown', this.__keydown );
-
-        this._isOpen = false;
-
-        this._trigger ( 'close' );
-
-      }
+      this._trigger ( 'close' );
 
     }
 

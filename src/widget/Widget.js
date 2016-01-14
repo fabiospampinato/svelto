@@ -369,7 +369,7 @@
 
       /* NORMALIZING PARAMETERS */
 
-      if ( !handler ) {
+      if ( !handler && !($element instanceof $) ) {
 
         handler = events;
         events = $element;
