@@ -36,7 +36,8 @@
       attributes: {}, //INFO: Attributes used by the widget
       datas: {}, //INFO: CSS data-* names
       classes: { //INFO: CSS classes to attach inside the widget
-        disabled: 'disabled' //INFO: Attached to disabled widgets
+        disabled: 'disabled', //INFO: Attached to disabled widgets
+        hidden: 'hidden' //INFO: Used to hide an element
       },
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur

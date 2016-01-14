@@ -89,10 +89,12 @@
 
       this.$sbHandler.draggable ({
         draggable: this.isEnabled.bind ( this ),
-        $proxy: this.$sbWrp,
+        proxy: {
+          $element: this.$sbWrp
+        },
         constrainer: {
           $element: this.$sbWrp,
-          constrainCenter: true
+          center: true
         },
         callbacks: {
           move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
@@ -109,7 +111,9 @@
       this.$hueHandler.draggable ({
         draggable: this.isEnabled.bind ( this ),
         axis: 'y',
-        $proxy: this.$hueWrp,
+        proxy: {
+          $element: this.$hueWrp
+        },
         constrainer: {
           $element: this.$hueWrp
         },
@@ -183,13 +187,13 @@
 
     __sbDragMove ( data ) {
 
-      this._sbDragSet ( data.moveXY, this.options.live );
+      this._sbDragSet ( data.dragXY, this.options.live );
 
     }
 
     __sbDragEnd ( data ) {
 
-      this._sbDragSet ( data.endXY, true );
+      this._sbDragSet ( data.dragXY, true );
 
     }
 
@@ -238,13 +242,13 @@
 
     __hueDragMove ( data ) {
 
-      this._hueDragSet ( data.moveXY, this.options.live );
+      this._hueDragSet ( data.dragXY, this.options.live );
 
     }
 
     __hueDragEnd ( data ) {
 
-      this._hueDragSet ( data.endXY, true );
+      this._hueDragSet ( data.dragXY, true );
 
     }
 

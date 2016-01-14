@@ -11,7 +11,7 @@
 
 //TODO: Add flick support
 
-(function ( $, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -105,8 +105,10 @@
       this.$handler.draggable ({
         draggable: this.isEnabled.bind ( this ),
         axis: 'x',
-        $proxy: this.$switch,
-        proxyWithoutMotion: false,
+        proxy: {
+          $element: this.$switch,
+          noMotion: false
+        },
         constrainer: {
           $element: this.$switch
         },
@@ -131,7 +133,7 @@
 
       if ( data.motion ) {
 
-        let isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        let isChecked = ( data.dragXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
 
         this.toggle ( isChecked, true );
 

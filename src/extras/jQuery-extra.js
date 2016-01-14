@@ -20,7 +20,7 @@
 
   /* HELPERS */
 
-  $.eventXY = function ( event ) {
+  $.eventXY = function ( event, X = 'pageX', Y = 'pageY' ) {
 
     if ( 'originalEvent' in event ) {
 
@@ -29,22 +29,22 @@
     } else if ( 'changedTouches' in event && event.changedTouches.length > 0 ) {
 
       return {
-        X: event.changedTouches[0].pageX,
-        Y: event.changedTouches[0].pageY
+        X: event.changedTouches[0][X],
+        Y: event.changedTouches[0][Y]
       };
 
     } else if ( 'touches' in event && event.touches.length > 0 ) {
 
       return {
-        X: event.touches[0].pageX,
-        Y: event.touches[0].pageY
+        X: event.touches[0][X],
+        Y: event.touches[0][Y]
       };
 
-    } else if ( 'pageX' in event ) {
+    } else if ( X in event ) {
 
       return {
-        X: event.pageX,
-        Y: event.pageY
+        X: event[X],
+        Y: event[Y]
       };
 
     }
@@ -141,6 +141,56 @@
     }
 
     return true;
+
+  };
+
+  //TODO: Not working but needed
+  // $.fn.scrollBottom = function ( value ) {
+  //
+  //   if ( !this.length ) return null;
+  //
+  //   let height = this.innerHeight (),
+  //       scrollHeight = this[0].scrollHeight || height;
+  //
+  //   return _.isUndefined ( value ) ? scrollHeight - height - this.scrollTop () : this.scrollTop ( scrollHeight - height - value);
+  //
+  // };
+  //
+  // $.fn.scrollRight = function ( value ) {
+  //
+  //   if ( !this.length ) return null;
+  //
+  //   let width = this.innerWidth (),
+  //       scrollWidth = this[0].scrollWidth || width;
+  //
+  //   return _.isUndefined ( value ) ? scrollWidth - width - this.scrollLeft () : this.scrollLeft ( scrollWidth - width - value);
+  //
+  // };
+
+  $.fn.scrollParent = function ( includeHidden ) { //INFO: Take from jQuery UI, optimized for performance
+
+    let position = this.css ( 'position' );
+
+    if ( position === 'fixed' ) return $document;
+
+    let excludeStaticParent = ( position === 'absolute' ),
+        overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+
+    for ( let parent of this.parents () ) {
+
+      let $parent = $(parent);
+
+      if ( excludeStaticParent && $parent.css ( 'position' ) === 'static' ) continue;
+
+      if ( overflowRegex.test ( $parent.css ( 'overflow' ) + $parent.css ( 'overflow-y' ) + $parent.css ( 'overflow-x' ) ) ) {
+
+        return $parent;
+
+      }
+
+    }
+
+    return $document;
 
   };
 

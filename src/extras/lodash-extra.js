@@ -200,7 +200,11 @@
 
       return number - left + ( left >= halfStep ? step : 0 );
 
-    }
+    },
+
+    true: _.constant ( true ),
+
+    false: _.constant ( false )
 
   });
 

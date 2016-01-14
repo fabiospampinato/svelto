@@ -81,9 +81,9 @@
 
     }
 
-    _isHovering ( event, data ) {
+    _isPointHovering ( pointXY ) {
 
-      return ( this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0 );
+      return !!this.$droppable.touching ({ point: pointXY }).length;
 
     }
 
@@ -93,13 +93,13 @@
 
       if ( this._isCompatible ( data.draggable ) ) {
 
-        let isHovering = this._isHovering ( event, data );
+        let isHovering = this._isPointHovering ( data.moveXY );
 
         if ( isHovering !== this._wasHovering ) {
 
           this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
 
-          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, droppable: this.droppable } );
+          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
 
         }
 
@@ -117,7 +117,7 @@
 
         this.$droppable.removeClass ( this.options.classes.droppable );
 
-        if ( this._isHovering ( event, data ) ) {
+        if ( this._isPointHovering ( data.endXY ) ) {
 
           if ( this._wasHovering ) {
 
@@ -125,7 +125,7 @@
 
           }
 
-          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
+          this._trigger ( 'drop', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
 
         }
 

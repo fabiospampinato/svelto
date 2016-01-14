@@ -120,10 +120,12 @@
       this.$handlerWrp.draggable ({
         draggable: this.isEnabled.bind ( this ),
         axis: 'x',
-        $proxy: this.$bar,
+        proxy: {
+          $element: this.$bar
+        },
         constrainer: {
           $element: this.$bar,
-          constrainCenter: true
+          center: true
         },
         modifiers: {
           x: this._dragModifierX.bind ( this )
@@ -214,13 +216,13 @@
 
       if ( this.options.live ) {
 
-        this.set ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) );
+        this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
 
       } else {
 
-        this.$highlight.translateX ( data.moveXY.X );
+        this.$highlight.translateX ( data.dragXY.X );
 
-        this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
+        this._updateLabel ( this._roundValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
 
       }
 
@@ -228,7 +230,7 @@
 
     __dragEnd ( data ) {
 
-      this.set ( this.options.min + ( data.endXY.X / this.stepWidth * this.options.step ) );
+      this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
 
     }
 
