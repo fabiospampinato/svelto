@@ -184,6 +184,18 @@
 
 	};
 
+  $.fn.topIndex = function () { //TODO: [MAYBE] Rename it
+
+    let topIndex = 1000000000;
+
+    return function () {
+
+      return this.zIndex ( ++topIndex );
+
+    };
+
+  };
+
   const specialKeystrokesKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'];
 
   $.matchKeystroke = function ( event, keystroke ) {
