@@ -27,19 +27,6 @@
 
   };
 
-  let getOpposite = function ( direction ) {
-
-    let opposites = {
-      'top'   : 'bottom',
-      'bottom': 'top',
-      'left'  : 'right',
-      'right' : 'left'
-    };
-
-    return opposites[direction];
-
-  };
-
   /* DEFAULT OPTIONS */
 
   let defaults = {
@@ -114,7 +101,7 @@
 
       if ( space < 0 ) {
 
-        let opposite = getOpposite ( directions[index] ),
+        let opposite = _.getOppositeDirection ( directions[index] ),
             oppositeIndex = directions.indexOf ( opposite );
 
         if ( oppositeIndex !== -1 ) {

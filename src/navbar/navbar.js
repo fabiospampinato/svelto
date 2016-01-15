@@ -10,9 +10,9 @@
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
 
+//TODO: Rename it to something like panel maybe
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-//TODO: Close with a flick (if not attached)
-//TODO: Add close with the ESC key (if not attached)
+
 //TODO: Maybe control the attaching process via js, so that we no longer have to put the navbar in any particular position also
 
 (function ( $, _, window, document, undefined ) {
@@ -26,20 +26,23 @@
     plugin: true,
     selector: '.navbar',
     options: {
-      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
+      direction: 'left',
+      flick: {
+        active: false,
+        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional //TODO: Replace the window with the closest `.layout`
+      },
       classes: {
-        defaultDirection: 'left',
-        directions: ['top', 'right', 'bottom', 'left'],
         show: 'show',
         open: 'open',
-        flickable: 'flickable'
+        flickable: 'flickable',
+        attached: 'attached'
       },
       animations: {
         open: Svelto.animation.normal,
         close: Svelto.animation.normal,
       },
       keystrokes: {
-        'esc': 'close'
+        'esc': '__esc'
       },
       callbacks: {
         open: _.noop,
@@ -54,26 +57,21 @@
 
     /* SPECIAL */
 
+    static widgetize ( $navbar ) {
+
+      $navbar.navbar ( $navbar.hasClass ( Svelto.Navbar.config.options.classes.flickable ) ? { flick: { active: true } } : undefined );
+
+    }
+
     _variables () {
 
       this.$navbar = this.$element;
       this.navbar = this.element;
 
-      this.direction = this.options.classes.defaultDirection;
-
-      for ( let direction of this.options.classes.directions ) {
-
-        if ( this.$navbar.hasClass ( direction ) ) {
-
-          this.direction = direction;
-          break;
-
-        }
-
-      }
+      this.options.direction = _.getDirections ().find ( direction => this.$navbar.hasClass ( direction ) ) || this.options.direction;
 
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
-      this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
+      this._isAttached = this.$navbar.hasClass ( this.options.classes.attached );
 
     }
 
@@ -89,11 +87,15 @@
 
       /* FLICK */
 
-      if ( this.isFlickable ) {
+      if ( this.options.flick.active ) {
 
-        $document.flickable ({
+        $document.flickable ();
+
+        this._on ( $document, 'flickable:flick', this.__documentFlick );
+
+        this.$navbar.flickable ({
           callbacks: {
-            flick: this.__flick.bind ( this )
+            flick: this.__navbarFlick.bind ( this )
           }
         });
 
@@ -113,53 +115,107 @@
 
     }
 
+    /* ESC */
+
+    __esc () {
+
+      if ( !this._isAttached ) {
+
+        this.close ();
+
+      }
+
+    }
+
     /* FLICK */
 
-    __flick ( data ) {
+    __documentFlick ( data ) {
 
-      if ( this._isOpen ) return;
+      if ( !this._isOpen ) return;
+
+      if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
 
       switch ( this.direction ) {
 
         case 'left':
+          if ( data.startXY.X <= this.options.flickableTreshold ) {
+            this.open ();
+          }
+          break;
+
         case 'right':
-          if ( data.orientation === 'horizontal' ) {
-            if ( this.direction === 'left' ) {
-              if ( data.direction === 'right' ) {
-                if ( data.startXY.X <= this.options.flickableRange ) {
-                  this.open ();
-                }
-              }
-            } else if ( this.direction === 'right' ) {
-              if ( data.direction === 'left' ) {
-                if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
-                  this.open ();
-                }
-              }
-            }
+          if ( $window.width () - data.startXY.X <= this.options.flickableTreshold ) {
+            this.open ();
           }
           break;
 
         case 'top':
+          if ( data.startXY.Y <= this.options.flickableTreshold ) {
+            this.open ();
+          }
+          break;
+
         case 'bottom':
-          if ( data.orientation === 'vertical' ) {
-            if ( this.direction === 'top' ) {
-              if ( data.direction === 'bottom' ) {
-                if ( data.startXY.Y <= this.options.flickableRange ) {
-                  this.open ();
-                }
-              }
-            } else if ( this.direction === 'bottom' ) {
-              if ( data.direction === 'top' ) {
-                if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
-                  this.open ();
-                }
-              }
-            }
+          if ( $window.height () - data.startXY.Y <= this.options.flickableTreshold ) {
+            this.open ();
           }
           break;
 
       }
+
+    }
+
+    __navbarFlick ( data ) {
+
+      if ( this._isOpen && !this._isAttached ) return;
+
+      if ( data.direction !== this.options.direction ) return;
+
+      this.close ();
+
+    }
+
+    /* ATTACHMENT */
+
+    _isAttached () {
+
+      return this._isAttached ();
+
+    }
+
+    _toggleAttachment ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isAttached;
+
+      }
+
+      if ( force !== this._isAttached ) {
+
+        this._isAttached = force;
+
+        this.$navbar.toggleClass ( this.options.classes.attached, this._isAttached );
+
+        if ( this._isAttached !== this._isOpen ) {
+
+          this.toggle ();
+
+        }
+
+      }
+
+    }
+
+    _attach () {
+
+      this._toggleAttachment ( true );
+
+    }
+
+    _detach () {
+
+      this._toggleAttachment ( false );
 
     }
 
@@ -189,53 +245,51 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._isOpen ) return;
 
-        this._isOpen = true;
+      this._isOpen = true;
 
-        $body.disableScroll ();
+      $body.disableScroll ();
+
+      this._frame ( function () {
+
+        this.$navbar.addClass ( this.options.classes.show );
 
         this._frame ( function () {
 
-          this.$navbar.addClass ( this.options.classes.show );
+          this.$navbar.addClass ( this.options.classes.open );
 
-          this._frame ( function () {
-
-            this.$navbar.addClass ( this.options.classes.open );
-
-            this._trigger ( 'open' );
-
-          });
+          this._trigger ( 'open' );
 
         });
 
-      }
+      });
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( !this._isOpen ) return;
 
-        this._isOpen = false;
+      this._isOpen = false;
 
-        this._frame ( function () {
+      this._frame ( function () {
 
-          this.$navbar.removeClass ( this.options.classes.open );
+        this._detach ();
+        
+        this.$navbar.removeClass ( this.options.classes.open );
 
-          this._delay ( function () {
+        this._delay ( function () {
 
-            this.$navbar.removeClass ( this.options.classes.show );
+          this.$navbar.removeClass ( this.options.classes.show );
 
-            $body.enableScroll ();
+          $body.enableScroll ();
 
-            this._trigger ( 'close' );
+          this._trigger ( 'close' );
 
-          }, this.options.animations.close );
+        }, this.options.animations.close );
 
-        });
-
-      }
+      });
 
     }
 

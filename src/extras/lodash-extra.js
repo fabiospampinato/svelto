@@ -214,6 +214,23 @@
 
     },
 
+    getDirections () {
+
+      return ['top', 'bottom', 'left', 'right'];
+
+    },
+
+    getOppositeDirection ( direction ) {
+
+      return {
+        'top'   : 'bottom',
+        'bottom': 'top',
+        'left'  : 'right',
+        'right' : 'left'
+      }[direction];
+
+    },
+
     true: _.constant ( true ),
 
     false: _.constant ( false )

@@ -55,9 +55,7 @@
 
       /* DIRECTION */
 
-      let directions = ['top', 'right', 'bottom', 'left'];
-
-      for ( let direction of directions ) {
+      for ( let direction of _.getDirections () ) {
 
         if ( this.$tabs.hasClass ( direction ) ) {
 
@@ -141,14 +139,7 @@
 
         if ( this.options.highlight ) {
 
-          let opposites = {
-            'top'   : 'bottom',
-            'bottom': 'top',
-            'left'  : 'right',
-            'right' : 'left'
-          };
-
-          $trigger.addClass ( 'highlighted' + ( ' highlight-' + opposites[this.options.direction] ) );
+          $trigger.addClass ( 'highlighted' + ( ' highlight-' + _.getOppositeDirection ( this.options.direction ) ) );
 
         }
 

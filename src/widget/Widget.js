@@ -41,6 +41,7 @@
       },
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
+      breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Svelto.breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
       keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
       keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Svelto.keyCode.UP: 'up' }`
       callbacks: {} //INFO: Callbacks to trigger on specific events
@@ -71,7 +72,7 @@
 
       for ( let tmpl in this.templates ) {
 
-        if ( this.templates[tmpl] ) {
+        if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
 
           let tmplName = this.name + '.' + tmpl;
 
@@ -112,6 +113,10 @@
       this._variables ();
       this._init ();
       this._events ();
+
+      /* BINDINGS */
+
+      this._on ( $window, 'breakpoint:change', this.__breakpoint );
 
     }
 
@@ -439,6 +444,60 @@
     }
 
     /* EVENTS HANDLERS */
+
+    __breakpoint ( event, data ) {
+
+      let current = Svelto.breakpoints[data.breakpoint];
+
+      /* UP */
+
+      for ( let breakpoint in this.options.breakpoints.up ) {
+
+        if ( this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) {
+
+          if ( current >= Svelto.breakpoints[breakpoint] ) {
+
+            this[this.options.breakpoints.up[breakpoint]]();
+
+          }
+
+        }
+
+      }
+
+      /* DOWN */
+
+      for ( let breakpoint in this.options.breakpoints.down ) {
+
+        if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
+
+          if ( current < Svelto.breakpoints[breakpoint] ) {
+
+            this[this.options.breakpoints.down[breakpoint]]();
+
+          }
+
+        }
+
+      }
+
+      /* RANGE */
+
+      for ( let breakpoint in this.options.breakpoints.range ) {
+
+        if ( this.options.breakpoints.range.hasOwnProperty ( breakpoint ) ) {
+
+          if ( current === Svelto.breakpoints[breakpoint] ) {
+
+            this[this.options.breakpoints.range[breakpoint]]();
+
+          }
+
+        }
+
+      }
+
+    }
 
     __keydown ( event ) {
 
