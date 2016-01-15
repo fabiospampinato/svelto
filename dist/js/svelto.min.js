@@ -6840,7 +6840,6 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//TODO: Write it better
 //TODO: Add better support for swipe to dismiss
 //TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
@@ -6975,6 +6974,7 @@
 
       this.timer = false;
       this._isOpen = false;
+      this._openUrl = false;
 
     }
 
@@ -6990,6 +6990,36 @@
 
     /* PRIVATE */
 
+    _getUrl () {
+
+      return window.location.href.split ( '#' )[0];
+
+    }
+
+    /* TIMER */
+
+    ___timer () {
+
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+
+        if ( !this.timer ) {
+
+          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+
+        } else {
+
+          this.timer.reset ();
+
+        }
+
+        openNotiesData[this.guid] = [this.timer, this.options.timerMinimumRemaining];
+
+      }
+
+    }
+
+    /* TAP */
+
     ___tap () {
 
       if ( this.options.type !== 'action' ) {
@@ -7000,37 +7030,31 @@
 
     }
 
+    /* BUTTON TAP */
+
     ___buttonTap () {
 
-      _.each ( this.options.buttons, function ( button, index ) {
-
-        this._on ( this.$buttons.eq ( index ), Pointer.tap, function ( event, data ) {
-
-          if ( button.onClick ) {
-
-            if ( button.onClick.apply ( this.$buttons[index], [event, data] ) === false ) return;
-
-          }
-
-          this.close ();
-
-        });
-
-      }, this );
+      this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
 
     }
 
-    ___timer () {
+    __buttonTap ( event, data ) {
 
-      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+      let $button = $(event.target),
+          index = this.$buttons.index ( $button ),
+          buttonObj = this.options.buttons[index];
 
-        this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+      if ( buttonObj.onClick ) {
 
-        openNotiesData[this.guid] = [this.timer, this.options.timerMinimumRemaining];
+        if ( buttonObj.onClick.apply ( $button[0], [event, data] ) === false ) return;
 
       }
 
+      this.close ();
+
     }
+
+    /* HOVER */
 
     ___hover () {
 
@@ -7045,6 +7069,8 @@
       });
 
     }
+
+    /* FLICK */
 
     ___flick () {
 
@@ -7064,6 +7090,8 @@
 
     }
 
+    /* PERSISTENT */
+
     ___persistent () {
 
       if ( !this.options.persistent ) {
@@ -7076,7 +7104,7 @@
 
     __route () {
 
-      let currentUrl = window.location.href.split ( '#' )[0];
+      let currentUrl = this._getUrl ();
 
       if ( this._openUrl !== currentUrl ) {
 
@@ -7086,35 +7114,25 @@
 
     }
 
-    ___reset () {
+    /* KEYDOWN */
 
-      // ___tap
+    ___keydown () {
 
-      if ( this.options.type !== 'action' ) {
+      this._on ( $document, 'keydown', this.__keydown );
 
-        this._off ( Pointer.tap, this.close );
+    }
 
-      }
+    /* RESET */
 
-      // ___buttonTap
+    _reset () {
 
-      this._off ( this.$buttons, Pointer.tap );
+      /* EVENTS */
 
-      // ___timer
+      this.$noty.off ( this.eventNamespace );
 
-      if ( this.timer ) {
+      /* TIMER */
 
-        delete openNotiesData[this.guid];
-
-      }
-
-      // ___persistent
-
-      if ( !this.options.persistent ) {
-
-        this._off ( $window, 'route', this.__route );
-
-      }
+      delete openNotiesData[this.guid];
 
     }
 
@@ -7142,17 +7160,15 @@
 
       });
 
-      this._openUrl = window.location.href.split ( '#' )[0];
-
       this.___timer ();
       this.___tap ();
       this.___flick ();
       this.___buttonTap ();
       this.___hover ();
       this.___persistent ();
+      this.___keydown ();
 
-      this._on ( $document, 'keydown', this.__keydown );
-
+      this._openUrl = this._getUrl ();
       this._isOpen = true;
 
       this._trigger ( 'open' );
@@ -7169,15 +7185,13 @@
 
         this._delay ( function () {
 
-          this.$noty.detach ();
+          this.$noty.remove ();
 
         }, this.options.animations.remove );
 
       });
 
-      this.___reset ();
-
-      this._off ( $document, 'keydown', this.__keydown );
+      this._reset ();
 
       this._isOpen = false;
 
