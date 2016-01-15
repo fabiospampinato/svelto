@@ -59,7 +59,6 @@
       this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
 
-      this.guc = 'dropdown-' + this.guid;
       this.$dropdown.addClass ( this.guc );
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );

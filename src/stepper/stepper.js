@@ -122,11 +122,11 @@
 
       if ( isMin || this._prevValue === this.options.min ) {
 
-        this.$decreaser.toggleClass ( 'disabled', isMin );
+        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
 
       } else if ( isMax || this._prevValue === this.options.max ) {
 
-        this.$increaser.toggleClass ( 'disabled', isMax );
+        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
 
       }
 

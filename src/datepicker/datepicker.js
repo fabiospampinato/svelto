@@ -230,14 +230,14 @@
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
-      this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
-      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( 'hidden' );
-      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( 'hidden' );
+      this.$daysPrev.slice ( 0, leftDays ).addClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( this.options.classes.hidden );
 
       /* CURRENT */
 
-      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( 'hidden' );
-      this.$daysCurrent.slice ( currentMonthDays ).addClass ( 'hidden' );
+      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( this.options.classes.hidden );
+      this.$daysCurrent.slice ( currentMonthDays ).addClass ( this.options.classes.hidden );
 
       /* CURRENT CLAMPED */
 
@@ -260,8 +260,8 @@
       neededDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
       neededDays = ( neededDays === 0 ) ? 0 : 7 - neededDays;
 
-      this.$daysNext.slice ( 0, neededDays ).removeClass ( 'hidden' );
-      this.$daysNext.slice ( neededDays ).addClass ( 'hidden' );
+      this.$daysNext.slice ( 0, neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysNext.slice ( neededDays ).addClass ( this.options.classes.hidden );
 
     }
 
@@ -342,7 +342,7 @@
 
         let lastDayPrevMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 );
 
-        this.$navigationPrev.toggleClass ( 'disabled', lastDayPrevMonth.getTime () < this.options.date.min.getTime () );
+        this.$navigationPrev.toggleClass ( this.options.classes.disabled, lastDayPrevMonth.getTime () < this.options.date.min.getTime () );
 
       }
 
@@ -352,7 +352,7 @@
 
         let firstDayNextMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 1 );
 
-        this.$navigationNext.toggleClass ( 'disabled', firstDayNextMonth.getTime () > this.options.date.max.getTime () );
+        this.$navigationNext.toggleClass ( this.options.classes.disabled, firstDayNextMonth.getTime () > this.options.date.max.getTime () );
 
       }
 
@@ -360,7 +360,7 @@
 
       if ( this.$navigationToday.length ) {
 
-        this.$navigationToday.toggleClass ( 'disabled', this.options.date.current.getFullYear () === this.options.date.today.getFullYear () && this.options.date.current.getMonth () === this.options.date.today.getMonth () );
+        this.$navigationToday.toggleClass ( this.options.classes.disabled, this.options.date.current.getFullYear () === this.options.date.today.getFullYear () && this.options.date.current.getMonth () === this.options.date.today.getMonth () );
 
       }
 

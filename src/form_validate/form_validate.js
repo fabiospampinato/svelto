@@ -97,7 +97,6 @@
         }
       },
       classes: {
-        disabled: 'disabled',
         invalid: 'invalid',
         valid: 'valid'
       },

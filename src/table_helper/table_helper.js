@@ -79,7 +79,7 @@
 
       let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
 
-      this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
+      this.$emptyRow.toggleClass ( this.options.classes.hidden, hasNonEmptyRows );
 
     }
 

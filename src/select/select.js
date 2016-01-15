@@ -11,9 +11,6 @@
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
 
-//FIXME: Doesn't work when the page is scrolled (check in the components/form)
-//FIXME: It shouldn't select the first one if none of them is selected
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -25,23 +22,32 @@
     plugin: true,
     selector: '.select-toggler',
     templates: {
-      base: '<div class="dropdown select-dropdown attached card outlined {%=o.guc%}">' +
-              '<div class="card-block">' +
+      base: '<div class="dropdown select-dropdown card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
+              '<div class="card-block inherit">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
                 '{% } %}' +
               '</div>' +
             '</div>',
       optgroup: '<div class="divider">' +
-                  '{%=o.prop%}' +
+                  '{%=o.opt.prop%}' +
                 '</div>',
-      option: '<div class="button" data-value="{%=o.prop%}">' +
-                '{%=o.value%}' +
+      option: '<div class="button {%=o.color%}" data-value="{%=o.opt.prop%}">' +
+                '{%=o.opt.value%}' +
               '</div>'
     },
     options: {
+      dropdown: {
+        size: '',
+        color: 'white',
+        css: 'attached outlined'
+      },
       classes: {
-        selected: 'active'
+        selected: 'active',
+        attached: 'attached'
+      },
+      datas: {
+        value: 'value'
       },
       selectors: {
         select: 'select',
@@ -72,9 +78,7 @@
       this.$label = this.$toggler.find ( this.options.selectors.label );
       this.$valueholder = this.$toggler.find ( this.options.selectors.valueholder );
 
-      this.guc = 'select-dropdown-' + this.guid;
-
-      if ( this.$valueholder.length === 0 ) {
+      if ( !this.$valueholder.length ) {
 
         this.$valueholder = this.$label;
 
@@ -93,7 +97,7 @@
 
       if ( !$.browser.is.touchDevice ) {
 
-        this.$select.addClass ( 'hidden' );
+        this.$select.addClass ( this.options.classes.hidden );
 
         this.___selectOptions ();
         this.___dropdown ();
@@ -106,13 +110,13 @@
 
       /* CHANGE */
 
-      this._on ( this.$select, 'change', this.__change );
+      this._on ( true, this.$select, 'change', this.__change );
 
       if ( !$.browser.is.touchDevice ) {
 
         /* BUTTON TAP */
 
-        this._on ( this.$buttons, Pointer.tap, this.__tap );
+        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
 
       }
 
@@ -130,18 +134,17 @@
 
     /* BUTTON TAP */
 
-    __tap ( event ) {
+    __buttonTap ( event ) {
 
-      this.$select.val ( $(event.currentTarget).data ( 'value' ) ).trigger ( 'change' );
+      this.set ( $(event.currentTarget).data ( 'value' ) );
 
     }
 
     /* PRIVATE */
 
-    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups levels
+    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups nesting levels
 
-      let previousOptgroup,
-          currentOptgroup;
+      let previousOptgroup;
 
       for ( let option of this.$options ) {
 
@@ -150,7 +153,7 @@
 
         if ( $parent.is ( 'optgroup' ) ) {
 
-          currentOptgroup = $parent.attr ( 'label' );
+          let currentOptgroup = $parent.attr ( 'label' );
 
           if ( currentOptgroup !== previousOptgroup ) {
 
@@ -175,35 +178,32 @@
 
     ___dropdown () {
 
-      let html = this._tmpl ( 'base', { guc: this.guc, options: this.selectOptions } );
+      let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
 
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
-
-      let self = this;
 
       this.$dropdown.dropdown ({
         positionate: {
           axis: 'y',
           strict: true
         },
-        selectors: {
-          closer: '.button'
-        },
         callbacks: {
-          beforeopen () {
-            self._setDropdownWidth ();
-          },
-          open () {
-            self._trigger ( 'open' );
-          },
-          close () {
-            self._trigger ( 'close' );
-          }
+          beforeopen: function () {
+            this._setDropdownWidth ();
+          }.bind ( this ),
+          open: function () {
+            this._trigger ( 'open' );
+          }.bind ( this ),
+          close: function () {
+            this._trigger ( 'close' );
+          }.bind ( this )
         }
       });
 
-      this.$toggler.attr ( 'data-target', '.' + this.guc ).dropdownToggler ();
+      this.$buttons.dropdownCloser ();
+
+      this.$toggler.attr ( 'data-' + Svelto.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
 
       this._updateDropdown ();
 
@@ -211,7 +211,11 @@
 
     _setDropdownWidth () {
 
-      this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
+      if ( this.$dropdown.is ( '.' + this.options.classes.attached ) ) {
+
+        this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
+
+      }
 
     }
 
@@ -235,7 +239,7 @@
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
-      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
+      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
 
     }
 
@@ -260,9 +264,15 @@
 
     }
 
-    select ( value ) {
+    set ( value ) {
 
-      this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
+      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
+
+      if ( $button.length ) {
+
+        this.$select.val ( value ).trigger ( 'change' );
+
+      }
 
     }
 

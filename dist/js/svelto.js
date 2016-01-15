@@ -1436,9 +1436,10 @@
 
       $.data ( this.element, 'instance.' + this.name, this );
 
-      /* SET GUID */
+      /* SET GUID / GUC */
 
       this.guid = $.guid++;
+      this.guc = this.name + this.guid;
 
       /* EVENT NAMESPACE */
 
@@ -4009,14 +4010,14 @@
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
-      this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
-      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( 'hidden' );
-      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( 'hidden' );
+      this.$daysPrev.slice ( 0, leftDays ).addClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( this.options.classes.hidden );
 
       /* CURRENT */
 
-      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( 'hidden' );
-      this.$daysCurrent.slice ( currentMonthDays ).addClass ( 'hidden' );
+      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( this.options.classes.hidden );
+      this.$daysCurrent.slice ( currentMonthDays ).addClass ( this.options.classes.hidden );
 
       /* CURRENT CLAMPED */
 
@@ -4039,8 +4040,8 @@
       neededDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
       neededDays = ( neededDays === 0 ) ? 0 : 7 - neededDays;
 
-      this.$daysNext.slice ( 0, neededDays ).removeClass ( 'hidden' );
-      this.$daysNext.slice ( neededDays ).addClass ( 'hidden' );
+      this.$daysNext.slice ( 0, neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysNext.slice ( neededDays ).addClass ( this.options.classes.hidden );
 
     }
 
@@ -4121,7 +4122,7 @@
 
         let lastDayPrevMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 );
 
-        this.$navigationPrev.toggleClass ( 'disabled', lastDayPrevMonth.getTime () < this.options.date.min.getTime () );
+        this.$navigationPrev.toggleClass ( this.options.classes.disabled, lastDayPrevMonth.getTime () < this.options.date.min.getTime () );
 
       }
 
@@ -4131,7 +4132,7 @@
 
         let firstDayNextMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 1 );
 
-        this.$navigationNext.toggleClass ( 'disabled', firstDayNextMonth.getTime () > this.options.date.max.getTime () );
+        this.$navigationNext.toggleClass ( this.options.classes.disabled, firstDayNextMonth.getTime () > this.options.date.max.getTime () );
 
       }
 
@@ -4139,7 +4140,7 @@
 
       if ( this.$navigationToday.length ) {
 
-        this.$navigationToday.toggleClass ( 'disabled', this.options.date.current.getFullYear () === this.options.date.today.getFullYear () && this.options.date.current.getMonth () === this.options.date.today.getMonth () );
+        this.$navigationToday.toggleClass ( this.options.classes.disabled, this.options.date.current.getFullYear () === this.options.date.today.getFullYear () && this.options.date.current.getMonth () === this.options.date.today.getMonth () );
 
       }
 
@@ -5356,7 +5357,6 @@
       this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
 
-      this.guc = 'dropdown-' + this.guid;
       this.$dropdown.addClass ( this.guc );
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
@@ -7524,7 +7524,6 @@
         }
       },
       classes: {
-        disabled: 'disabled',
         invalid: 'invalid',
         valid: 'valid'
       },
@@ -10918,9 +10917,6 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
 
-//FIXME: Doesn't work when the page is scrolled (check in the components/form)
-//FIXME: It shouldn't select the first one if none of them is selected
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -10932,23 +10928,32 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: '.select-toggler',
     templates: {
-      base: '<div class="dropdown select-dropdown attached card outlined {%=o.guc%}">' +
-              '<div class="card-block">' +
+      base: '<div class="dropdown select-dropdown card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
+              '<div class="card-block inherit">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
                 '{% } %}' +
               '</div>' +
             '</div>',
       optgroup: '<div class="divider">' +
-                  '{%=o.prop%}' +
+                  '{%=o.opt.prop%}' +
                 '</div>',
-      option: '<div class="button" data-value="{%=o.prop%}">' +
-                '{%=o.value%}' +
+      option: '<div class="button {%=o.color%}" data-value="{%=o.opt.prop%}">' +
+                '{%=o.opt.value%}' +
               '</div>'
     },
     options: {
+      dropdown: {
+        size: '',
+        color: 'white',
+        css: 'attached outlined'
+      },
       classes: {
-        selected: 'active'
+        selected: 'active',
+        attached: 'attached'
+      },
+      datas: {
+        value: 'value'
       },
       selectors: {
         select: 'select',
@@ -10979,9 +10984,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.$label = this.$toggler.find ( this.options.selectors.label );
       this.$valueholder = this.$toggler.find ( this.options.selectors.valueholder );
 
-      this.guc = 'select-dropdown-' + this.guid;
-
-      if ( this.$valueholder.length === 0 ) {
+      if ( !this.$valueholder.length ) {
 
         this.$valueholder = this.$label;
 
@@ -11000,7 +11003,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( !$.browser.is.touchDevice ) {
 
-        this.$select.addClass ( 'hidden' );
+        this.$select.addClass ( this.options.classes.hidden );
 
         this.___selectOptions ();
         this.___dropdown ();
@@ -11013,13 +11016,13 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* CHANGE */
 
-      this._on ( this.$select, 'change', this.__change );
+      this._on ( true, this.$select, 'change', this.__change );
 
       if ( !$.browser.is.touchDevice ) {
 
         /* BUTTON TAP */
 
-        this._on ( this.$buttons, Pointer.tap, this.__tap );
+        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
 
       }
 
@@ -11037,18 +11040,17 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* BUTTON TAP */
 
-    __tap ( event ) {
+    __buttonTap ( event ) {
 
-      this.$select.val ( $(event.currentTarget).data ( 'value' ) ).trigger ( 'change' );
+      this.set ( $(event.currentTarget).data ( 'value' ) );
 
     }
 
     /* PRIVATE */
 
-    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups levels
+    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups nesting levels
 
-      let previousOptgroup,
-          currentOptgroup;
+      let previousOptgroup;
 
       for ( let option of this.$options ) {
 
@@ -11057,7 +11059,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( $parent.is ( 'optgroup' ) ) {
 
-          currentOptgroup = $parent.attr ( 'label' );
+          let currentOptgroup = $parent.attr ( 'label' );
 
           if ( currentOptgroup !== previousOptgroup ) {
 
@@ -11082,35 +11084,32 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___dropdown () {
 
-      let html = this._tmpl ( 'base', { guc: this.guc, options: this.selectOptions } );
+      let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
 
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
-
-      let self = this;
 
       this.$dropdown.dropdown ({
         positionate: {
           axis: 'y',
           strict: true
         },
-        selectors: {
-          closer: '.button'
-        },
         callbacks: {
-          beforeopen () {
-            self._setDropdownWidth ();
-          },
-          open () {
-            self._trigger ( 'open' );
-          },
-          close () {
-            self._trigger ( 'close' );
-          }
+          beforeopen: function () {
+            this._setDropdownWidth ();
+          }.bind ( this ),
+          open: function () {
+            this._trigger ( 'open' );
+          }.bind ( this ),
+          close: function () {
+            this._trigger ( 'close' );
+          }.bind ( this )
         }
       });
 
-      this.$toggler.attr ( 'data-target', '.' + this.guc ).dropdownToggler ();
+      this.$buttons.dropdownCloser ();
+
+      this.$toggler.attr ( 'data-' + Svelto.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
 
       this._updateDropdown ();
 
@@ -11118,7 +11117,11 @@ Prism.languages.js = Prism.languages.javascript;
 
     _setDropdownWidth () {
 
-      this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
+      if ( this.$dropdown.is ( '.' + this.options.classes.attached ) ) {
+
+        this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
+
+      }
 
     }
 
@@ -11142,7 +11145,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
-      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
+      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
 
     }
 
@@ -11167,9 +11170,15 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    select ( value ) {
+    set ( value ) {
 
-      this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
+      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
+
+      if ( $button.length ) {
+
+        this.$select.val ( value ).trigger ( 'change' );
+
+      }
 
     }
 
@@ -12174,11 +12183,11 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( isMin || this._prevValue === this.options.min ) {
 
-        this.$decreaser.toggleClass ( 'disabled', isMin );
+        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
 
       } else if ( isMax || this._prevValue === this.options.max ) {
 
-        this.$increaser.toggleClass ( 'disabled', isMax );
+        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
 
       }
 
@@ -12577,7 +12586,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
 
-      this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
+      this.$emptyRow.toggleClass ( this.options.classes.hidden, hasNonEmptyRows );
 
     }
 

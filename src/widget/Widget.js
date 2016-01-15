@@ -98,9 +98,10 @@
 
       $.data ( this.element, 'instance.' + this.name, this );
 
-      /* SET GUID */
+      /* SET GUID / GUC */
 
       this.guid = $.guid++;
+      this.guc = this.name + this.guid;
 
       /* EVENT NAMESPACE */
 
