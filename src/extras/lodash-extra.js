@@ -202,6 +202,18 @@
 
     },
 
+    format ( msg, ...args ) {
+
+      for ( let i = 0, l = args.length; i < l; i++ ) {
+
+        msg = msg.replace ( '$' + i, args[i] );
+
+      }
+
+      return msg;
+
+    },
+
     true: _.constant ( true ),
 
     false: _.constant ( false )

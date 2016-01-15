@@ -344,7 +344,7 @@
 
             if ( !isValid ) {
 
-              let error = this._parseValidationInvalidMsg ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
+              let error = _.format ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
 
               errors.push ( error );
 
@@ -387,18 +387,6 @@
     }
 
     /* ERRORS */
-
-    _parseValidationInvalidMsg ( msg, ...args ) {
-
-      for ( let i = 0, l = args.length; i < l; i++ ) {
-
-        msg = msg.replace ( '$' + i, args[i] );
-
-      }
-
-      return msg;
-
-    }
 
     _updateMessage ( elementObj, message ) {
 

@@ -325,6 +325,18 @@
 
     },
 
+    format ( msg, ...args ) {
+
+      for ( let i = 0, l = args.length; i < l; i++ ) {
+
+        msg = msg.replace ( '$' + i, args[i] );
+
+      }
+
+      return msg;
+
+    },
+
     true: _.constant ( true ),
 
     false: _.constant ( false )
@@ -7759,7 +7771,7 @@
 
             if ( !isValid ) {
 
-              let error = this._parseValidationInvalidMsg ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
+              let error = _.format ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
 
               errors.push ( error );
 
@@ -7802,18 +7814,6 @@
     }
 
     /* ERRORS */
-
-    _parseValidationInvalidMsg ( msg, ...args ) {
-
-      for ( let i = 0, l = args.length; i < l; i++ ) {
-
-        msg = msg.replace ( '$' + i, args[i] );
-
-      }
-
-      return msg;
-
-    }
 
     _updateMessage ( elementObj, message ) {
 
@@ -12910,6 +12910,7 @@ Prism.languages.js = Prism.languages.javascript;
         css: 'compact outlined'
       },
       characters: {
+        forbid: true, //INFO: Forbid or not
         forbidden: [ '<', '>', ';', '`' ],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
         inserters: [Svelto.keyCode.ENTER, Svelto.keyCode.TAB] //INFO: They are keyCodes
@@ -12917,6 +12918,14 @@ Prism.languages.js = Prism.languages.javascript;
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: false, //INFO: Escape potential XSS characters
       deburr: false, //INFO: Replace non basic-latin characters
+      messages: {
+        tooShort: '`$1` is shorter than $2 characters',
+        duplicate: '`$1` is a duplicate',
+        forbidden: 'The character you entered is forbidden'
+      },
+      datas: {
+        value: 'tag-value'
+      },
       selectors: {
         input: 'input.hidden',
         partial: 'input.tagbox-partial, .tagbox-partial input',
@@ -12942,7 +12951,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     static widgetize ( $tagbox ) {
 
-      $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
+      $tagbox.tagbox ({ init: $tagbox.find ( Svelto.Tagbox.config.options.selectors.input ).val () });
 
     }
 
@@ -13033,13 +13042,13 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( valueTrimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
-          $.noty ( '`' + value + '` is shorter than ' + this.options.tag.minLength + ' characters' );
+          $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
         }
 
       } else if ( _.contains ( this.options.tags, value ) ) {
 
-        $.noty ( '`' + value + '` is a duplicate' );
+        $.noty ( _.format ( this.options.messages.duplicate, value ) );
 
       } else {
 
@@ -13126,9 +13135,9 @@ Prism.languages.js = Prism.languages.javascript;
 
         }
 
-      } else if ( _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+      } else if ( this.options.characters.forbid && _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
 
-        $.noty ( 'The character you entered is forbidden' );
+        $.noty ( this.options.messages.forbidden );
 
         event.preventDefault ();
         event.stopImmediatePropagation ();
@@ -13162,7 +13171,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __tapOnEmpty ( event ) {
 
-      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( 'input, ' + this.options.selectors.tagLabel ) ) {
+      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( this.options.selectors.partial + ',' + this.options.selectors.tagLabel ) ) {
 
         this.$partial.focus ();
 
@@ -13219,7 +13228,7 @@ Prism.languages.js = Prism.languages.javascript;
       if ( tag instanceof $ ) {
 
         $tags = [tag];
-        tags = [tag.data ( 'tag-value' )];
+        tags = [tag.data ( this.options.datas.value )];
 
       } else {
 
@@ -13234,7 +13243,7 @@ Prism.languages.js = Prism.languages.javascript;
         for ( let i = 0, l = tag.length; i < l; i++ ) {
 
           let value = this._sanitizeTag ( tag[i] ),
-              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-tag-value="' + value.replace ( /"/g, '\\"' ) + '"]' );
+              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-' + this.options.datas.value + '="' + value.replace ( /"/g, '\\"' ) + '"]' );
 
           if ( $tag.length === 1 ) {
 
