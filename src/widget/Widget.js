@@ -41,7 +41,8 @@
       },
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
-      keystrokes: {}, //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Svelto.keyCode.UP: 'up' }`
+      keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
+      keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Svelto.keyCode.UP: 'up' }`
       callbacks: {} //INFO: Callbacks to trigger on specific events
     }
   };
@@ -439,6 +440,8 @@
     /* EVENTS HANDLERS */
 
     __keydown ( event ) {
+
+      if ( !this.options.keyboard ) return;
 
       for ( let keystrokes in this.options.keystrokes ) {
 
