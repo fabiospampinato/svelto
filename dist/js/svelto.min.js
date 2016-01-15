@@ -1411,6 +1411,10 @@
 
       this.guid = $.guid++;
 
+      /* EVENT NAMESPACE */
+
+      this.eventNamespace = '.' + this.name + this.guid;
+
       /* CALLBACKS */
 
       this._variables ();
@@ -1500,7 +1504,7 @@
 
       this._destroy ();
 
-      $.removeData ( this.element, 'instance.' + this.name );
+      this.$element.off ( this.eventNamespace ).removeData ( 'instance.' + this.name );
 
     }
 
