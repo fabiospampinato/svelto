@@ -8,10 +8,6 @@
  * @requires ../noty/noty.js
  * ========================================================================= */
 
-//FIXME: Do we handle the insertion of characters like `&` or `'` propertly?
-//FIXME: Should we forbid characters or just escape them?
-//FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
-//FIXME: Partial's text cursor is not visible whan it's empty
 //FIXME: Auto focus on the partial input doesn't work good on mobile
 
 (function ( $, _, window, document, undefined ) {
@@ -25,16 +21,14 @@
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
-              '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                '<span>' +
-                  '{%=o.value%}' +
-                '</span>' +
-                '<div class="button gray compact xxsmall tagbox-tag-remover">' +
-                  '<i class="icon">close</i>' +
-                '</div>' +
-              '</div>' +
-            '</div>'
+      tag: '<div class="label tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
+             '<span>' +
+               '{%=o.value%}' +
+             '</span>' +
+             '<div class="button gray compact rounded xxsmall tagbox-tag-remover">' +
+               '<i class="icon">close</i>' +
+             '</div>' +
+           '</div>'
     },
     options: {
       init: '',
@@ -43,7 +37,7 @@
         minLength: 3,
         color: '',
         size: '',
-        css: 'outlined'
+        css: 'compact outlined'
       },
       characters: {
         forbidden: [ '<', '>', ';', '`' ],
@@ -51,7 +45,7 @@
         inserters: [Svelto.keyCode.ENTER, Svelto.keyCode.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
-      escape: true, //INFO: Escape potential XSS characters
+      escape: false, //INFO: Escape potential XSS characters
       deburr: false, //INFO: Replace non basic-latin characters
       selectors: {
         input: 'input.hidden',
@@ -76,7 +70,7 @@
 
     /* SPECIAL */
 
-    static widgetize ( $tagbox ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $tagbox ) {
 
       $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
 
@@ -161,8 +155,9 @@
 
     _add ( value ) {
 
-      var valueTrimmed = _.trim ( value ),
-          value = this._sanitizeTag ( value );
+      let valueTrimmed = _.trim ( value );
+
+      value = this._sanitizeTag ( value );
 
       if ( valueTrimmed.length < this.options.tag.minLength ) {
 
@@ -186,7 +181,7 @@
 
         }
 
-        var tagHtml = this._getTagHtml ( value );
+        let tagHtml = this._getTagHtml ( value );
 
         if ( this.options.tags.length === 1 ) {
 
@@ -198,7 +193,7 @@
 
         } else {
 
-          var index = this.options.tags.indexOf ( value );
+          let index = this.options.tags.indexOf ( value );
 
           if ( index === 0 ) {
 
@@ -232,11 +227,11 @@
 
     __keypressKeydown ( event ) {
 
-      var value = this.$partial.val ();
+      let value = this.$partial.val ();
 
       if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
-        var added = this.add ( value );
+        let added = this.add ( value );
 
         if ( added ) {
 
@@ -251,7 +246,7 @@
 
         if ( value.length === 0 && this.options.tags.length > 0 ) {
 
-          var $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
+          let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
               edit = !$.hasCtrlOrCmd ( event );
 
           this.remove ( $tag, edit );
@@ -279,14 +274,15 @@
         this.add ( event.originalEvent.clipboardData.getData ( 'text' ) );
 
         event.preventDefault ();
+        event.stopImmediatePropagation ();
 
     }
 
-    /* TAP ON CLOSE */
+    /* TAP ON TAG REMOVER */
 
     __tapOnTagRemover ( event ) {
 
-      var $tag = $(event.currentTarget).parents ( this.options.selectors.tag );
+      let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
 
       this.remove ( $tag );
 
@@ -320,10 +316,10 @@
 
       }
 
-      var tags = tag.split ( this.options.characters.separator ),
+      let tags = tag.split ( this.options.characters.separator ),
           adds = _.map ( tags, this._add, this );
 
-      var added = ( _.compact ( adds ).length > 0 );
+      let added = ( _.compact ( adds ).length > 0 );
 
       if ( added ) {
 
@@ -333,9 +329,7 @@
 
           this._trigger ( 'change' );
 
-          var addedTags = _.filter ( tags, function ( tag, index ) {
-            return adds[index];
-          });
+          let addedTags = _.filter ( tags, ( tag, index ) => adds[index] );
 
           this._trigger ( 'add', addedTags );
 
@@ -349,15 +343,15 @@
 
     remove ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
+      let $tags = [],
+          tags = [];
+
       if ( tag instanceof $ ) {
 
-        var $tags = [tag],
-            tags = [tag.data ( 'tag-value' )];
+        $tags = [tag];
+        tags = [tag.data ( 'tag-value' )];
 
       } else {
-
-        var $tags = [],
-            tags = [];
 
         if ( _.isArray ( tag ) ) {
 
@@ -367,10 +361,10 @@
 
         tag = tag.split ( this.options.characters.separator );
 
-        for ( var i = 0, l = tag.length; i < l; i++ ) {
+        for ( let i = 0, l = tag.length; i < l; i++ ) {
 
-          var value = this._sanitizeTag ( tag[i] ),
-              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-tag-value="' + value + '"]' );
+          let value = this._sanitizeTag ( tag[i] ),
+              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-tag-value="' + value.replace ( /"/g, '\\"' ) + '"]' );
 
           if ( $tag.length === 1 ) {
 
@@ -385,7 +379,7 @@
 
       if ( tags.length > 0 ) {
 
-        for ( var i = 0, l = tags.length; i < l; i++ ) {
+        for ( let i = 0, l = tags.length; i < l; i++ ) {
 
           this._remove ( $tags[i], tags[i] );
 
@@ -405,7 +399,7 @@
 
           this._trigger ( 'remove', tags );
 
-          if ( this.options.tags.length === 0 ) {
+          if ( !this.options.tags.length ) {
 
             this._trigger ( 'empty' );
 
@@ -421,10 +415,7 @@
 
       if ( this.options.tags.length > 0 ) {
 
-        var data = {
-          previous: _.clone ( this.options.tags ),
-          tags: []
-        };
+        let previous = this.options.tags;
 
         this.options.tags = [];
 
@@ -436,13 +427,9 @@
 
         if ( !suppressTriggers ) {
 
-          this._trigger ( 'change', data );
+          this._trigger ( 'change' );
 
-          if ( data.previous.length > 0 ) {
-
-            this._trigger ( 'remove', data.previous );
-
-          }
+          this._trigger ( 'remove', previous );
 
           this._trigger ( 'empty' );
 
@@ -454,7 +441,7 @@
 
     reset () {
 
-      var previous = _.clone ( this.options.tags );
+      let previous = this.options.tags;
 
       this.clear ( true );
 
@@ -462,12 +449,9 @@
 
       if ( !_.isEqual ( previous, this.options.tags ) ) {
 
-        this._trigger ( 'change', {
-          previous: previous,
-          tags: _.clone ( this.options.tags )
-        });
+        this._trigger ( 'change' );
 
-        var added = _.difference ( this.options.tags, previous );
+        let added = _.difference ( this.options.tags, previous );
 
         if ( added.length > 0 ) {
 
@@ -475,7 +459,7 @@
 
         }
 
-        var removed = _.difference ( previous, this.options.tags );
+        let removed = _.difference ( previous, this.options.tags );
 
         if ( removed.length > 0 ) {
 
