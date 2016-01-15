@@ -274,7 +274,7 @@
 
       let currentUrl = this._getUrl ();
 
-      if ( this._openUrl !== currentUrl ) {
+      if ( this._openUrl && this._openUrl !== currentUrl ) {
 
         this.close ();
 
@@ -314,8 +314,6 @@
 
     open () {
 
-      console.log("open");
-
       if ( this._isOpen ) return;
 
       this._frame ( function () {
@@ -338,7 +336,12 @@
       this.___persistent ();
       this.___keydown ();
 
-      this._openUrl = this._getUrl ();
+      this._defer ( function () {
+
+        this._openUrl = this._getUrl ();
+
+      });
+
       this._isOpen = true;
 
       this._trigger ( 'open' );
@@ -346,9 +349,6 @@
     }
 
     close () {
-
-      console.log("close");
-      // debugger;
 
       if ( !this._isOpen ) return;
 
@@ -366,6 +366,7 @@
 
       this._reset ();
 
+      this._openUrl = false;
       this._isOpen = false;
 
       this._trigger ( 'close' );
