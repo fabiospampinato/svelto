@@ -296,7 +296,7 @@
 
       /* EVENTS */
 
-      this.$noty.off ( this.eventNamespace );
+      this.$bindings.off ( this.eventNamespace );
 
       /* TIMER */
 
@@ -313,6 +313,8 @@
     }
 
     open () {
+
+      console.log("open");
 
       if ( this._isOpen ) return;
 
@@ -344,6 +346,9 @@
     }
 
     close () {
+
+      console.log("close");
+      // debugger;
 
       if ( !this._isOpen ) return;
 

@@ -1403,6 +1403,10 @@
       this.$element = $( element || this._tmpl ( 'base', this.options ) );
       this.element = this.$element[0];
 
+      /* BINDINGS */
+
+      this.$bindings = $empty;
+
       /* ATTACH INSTANCE */
 
       $.data ( this.element, 'instance.' + this.name, this );
@@ -1413,7 +1417,7 @@
 
       /* EVENT NAMESPACE */
 
-      this.eventNamespace = '.' + this.name + this.guid;
+      this.eventNamespace = '.swns' + this.guid;
 
       /* CALLBACKS */
 
@@ -1504,7 +1508,9 @@
 
       this._destroy ();
 
-      this.$element.off ( this.eventNamespace ).removeData ( 'instance.' + this.name );
+      this.$bindings.off ( this.eventNamespace );
+
+      this.$element.removeData ( 'instance.' + this.name );
 
     }
 
@@ -1614,7 +1620,7 @@
 
       //TODO: Add support for custom data
 
-      /* NORMALIZING PARAMETERS */
+      /* NORMALIZATION */
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
@@ -1645,6 +1651,10 @@
 
       }
 
+      /* BINDINGS */
+
+      this.$bindings = this.$bindings.add ( $element );
+
       /* PROXY */
 
       let handlerProxy = ( ...args ) => {
@@ -1661,7 +1671,7 @@
 
       /* EVENTS NAMESPACING */
 
-      events = events.split ( /\s+/ ).map ( event => event + '.swns' + this.guid ).join ( ' ' );
+      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
 
       /* TRIGGERING */
 
@@ -1679,12 +1689,20 @@
 
       //FIXME: If we remove the target we are still attaching and removing those events though (just performing the functions calls actually, probably)
 
+      /* NORMALIZATION */
+
       if ( !args ) {
 
         args = $element;
         $element = this.$element;
 
       }
+
+      /* BINDINGS */
+
+      this.$bindings = this.$bindings.add ( $element );
+
+      /* BINDING */
 
       this._on ( $element, Pointer.enter, () => this._on ( ...args ) );
       this._on ( $element, Pointer.leave, () => this._off ( ...args ) );
@@ -1707,7 +1725,7 @@
 
       /* EVENTS NAMESPACING */
 
-      events = events.split ( /\s+/ ).map ( event => event + '.swns' + this.guid ).join ( ' ' );
+      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
 
       /* REMOVING HANDLER */
 
@@ -7128,7 +7146,7 @@
 
       /* EVENTS */
 
-      this.$noty.off ( this.eventNamespace );
+      this.$bindings.off ( this.eventNamespace );
 
       /* TIMER */
 
@@ -7145,6 +7163,8 @@
     }
 
     open () {
+
+      console.log("open");
 
       if ( this._isOpen ) return;
 
@@ -7176,6 +7196,9 @@
     }
 
     close () {
+
+      console.log("close");
+      // debugger;
 
       if ( !this._isOpen ) return;
 
