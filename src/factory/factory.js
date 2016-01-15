@@ -25,6 +25,10 @@
 
     $.factory.namespace ( Widget, namespace );
 
+    /* READY */
+
+    $.factory.ready ( Widget );
+
     /* WIDGETIZE */
 
     $.factory.widgetize ( Widget );
@@ -54,6 +58,14 @@
       namespace[name] = Widget;
 
     }
+
+  };
+
+  /* FACTORY READY */
+
+  $.factory.ready = function ( Widget ) {
+
+    $(Widget.ready);
 
   };
 

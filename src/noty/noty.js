@@ -135,6 +135,29 @@
 
     /* SPECIAL */
 
+    static ready () {
+
+      $body.append (
+        '<div class="noty-queues top">' +
+          '<div class="noty-queue expanded"></div>' +
+          '<div class="noty-queues-row">' +
+            '<div class="noty-queue left"></div>' +
+            '<div class="noty-queue center"></div>' +
+            '<div class="noty-queue right"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="noty-queues bottom">' +
+          '<div class="noty-queues-row">' +
+            '<div class="noty-queue left"></div>' +
+            '<div class="noty-queue center"></div>' +
+            '<div class="noty-queue right"></div>' +
+          '</div>' +
+          '<div class="noty-queue expanded"></div>' +
+        '</div>'
+      );
+
+    }
+
     _variables () {
 
       this.$noty = this.$element;
@@ -378,30 +401,5 @@
   /* FACTORY */
 
   $.factory ( Noty, config, Svelto );
-
-  /* READY */
-
-  $(function () {
-
-    $body.append (
-      '<div class="noty-queues top">' +
-        '<div class="noty-queue expanded"></div>' +
-        '<div class="noty-queues-row">' +
-          '<div class="noty-queue left"></div>' +
-          '<div class="noty-queue center"></div>' +
-          '<div class="noty-queue right"></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="noty-queues bottom">' +
-        '<div class="noty-queues-row">' +
-          '<div class="noty-queue left"></div>' +
-          '<div class="noty-queue center"></div>' +
-          '<div class="noty-queue right"></div>' +
-        '</div>' +
-        '<div class="noty-queue expanded"></div>' +
-      '</div>'
-    );
-
-  });
 
 }( Svelto.$, Svelto._, window, document ));
