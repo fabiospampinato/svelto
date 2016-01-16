@@ -9883,7 +9883,7 @@
       this.panel = this.element;
 
       this.options.direction = _.getDirections ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
-      this.options.flick.open = this.$panel.hasClass ( this.options.classes.flickable );
+      this.options.flick.open = this.options.flick.open || this.$panel.hasClass ( this.options.classes.flickable );
 
       if ( this.options.pin ) {
 
