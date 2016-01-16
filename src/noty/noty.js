@@ -305,14 +305,6 @@
 
     }
 
-    /* KEYDOWN */
-
-    ___keydown () {
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-    }
-
     /* RESET */
 
     _reset () {
@@ -358,6 +350,7 @@
       this.___hover ();
       this.___persistent ();
       this.___keydown ();
+      this.___breakpoint ();
 
       this._defer ( function () {
 

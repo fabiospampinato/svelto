@@ -464,9 +464,9 @@ $panel-z-depth: 5 !default;
 
 $panel-transition-transform-duration: $transition-duration-normal !default;
 
-/* ATTACHED */
+/* PINNED */
 
-$panel-attached-z-depth: 5 !default;
+$panel-pinned-z-depth: $panel-z-depth !default;
 
 /* BACKGROUND */
 

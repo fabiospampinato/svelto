@@ -107,7 +107,7 @@
 
     //TODO: Preserve the scrollbars if possible, when disabling
 
-    return this.toggleClass ( 'overflow-hidden', force );
+    return this.toggleClass ( 'overflow-hidden', !force );
 
   };
 

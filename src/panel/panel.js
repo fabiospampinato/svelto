@@ -26,17 +26,19 @@
       direction: 'left',
       pin: false, //INFO: If is a valid key of `Svelto.breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
-        active: false,
+        open: false,
+        close: true,
         treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional
       },
       classes: {
         show: 'show',
         open: 'open',
-        flickable: 'flickable', //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
-        pinned: 'pinned'
+        slim: 'slim',
+        pinned: 'pinned',
+        flickable: 'flickable' //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
       },
       selectors: {
-        layout: '.layout, body' //TODO: Just use `.layout`
+        layout: '.layout, body' //TODO: Use only `.layout`
       },
       animations: {
         open: Svelto.animation.normal,
@@ -63,20 +65,17 @@
       this.$panel = this.$element;
       this.panel = this.element;
 
-      this.$layout = this.$panel.closest ( this.options.selectors.layout );
-      this.layoutPinnedClass = Svelto.Panel.config.name + '-' + this.options.classes.pinned + '-' + this.options.direction;
-
       this.options.direction = _.getDirections ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
-      this.options.flick.active = this.$panel.hasClass ( this.options.classes.flickable );
+      this.options.flick.open = this.$panel.hasClass ( this.options.classes.flickable );
 
       if ( this.options.pin ) {
 
         _.merge ( this.options.breakpoints, {
           up: {
-            [this.options.pin]: 'pin',
+            [this.options.pin]: '_autopin',
           },
           down: {
-            [this.options.pin]: 'unpin'
+            [this.options.pin]: '_autounpin'
           }
         });
 
@@ -84,42 +83,46 @@
 
       this._isOpen = this.$panel.hasClass ( this.options.classes.open );
       this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
+      this._isSlim = this.$panel.hasClass ( this.options.classes.slim );
+
+      this.$layout = this.$panel.closest ( this.options.selectors.layout );
+      this.layoutPinnedClass = Svelto.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
 
     }
 
     _events () {
 
-      /* TAP */
+      /* FLICK OPEN */
 
-      this._on ( Pointer.tap, this.__tap );
-
-      /* KEYDOWN */
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-      /* FLICK */
-
-      if ( this.options.flick.active ) {
+      if ( this.options.flick.open ) {
 
         /* DOCUMENT */
 
         $document.flickable ();
 
-        this._on ( $document, 'flickable:flick', this.__documentFlick );
+        this.___documentFlick ();
+
+      }
+
+      /* FLICK CLOSE */
+
+      if ( this.options.flick.close ) {
 
         /* PANEL */
 
-        this.$panel.flickable ({
-          callbacks: {
-            flick: this.__panelFlick.bind ( this )
-          }
-        });
+        this.$panel.flickable ();
 
       }
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 
@@ -145,7 +148,17 @@
 
     /* FLICK */
 
-    __documentFlick ( data ) {
+    ___documentFlick () {
+
+      if ( this.options.flick.open ) {
+
+        this._on ( $document, 'flickable:flick', this.__documentFlick );
+
+      }
+
+    }
+
+    __documentFlick ( event, data ) {
 
       if ( this._isOpen ) return;
 
@@ -153,37 +166,95 @@
 
       let layoutOffset = this.$layout.offset ();
 
-      switch ( this.direction ) {
+      switch ( this.options.direction ) {
 
         case 'left':
-          if ( data.startXY.X - layoutOffset.left > this.options.flickableTreshold ) return;
+          if ( data.startXY.X - layoutOffset.left > this.options.flick.treshold ) return;
           break;
 
         case 'right':
-          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.X > this.options.flickableTreshold ) return;
+          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.X > this.options.flick.treshold ) return;
           break;
 
         case 'top':
-          if ( data.startXY.Y - layoutOffset.top > this.options.flickableTreshold ) return;
+          if ( data.startXY.Y - layoutOffset.top > this.options.flick.treshold ) return;
           break;
 
         case 'bottom':
-          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.Y > this.options.flickableTreshold ) return;
+          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.Y > this.options.flick.treshold ) return;
           break;
 
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this.open ();
 
     }
 
-    __panelFlick ( data ) {
+    ___panelFlick () {
+
+      if ( this.options.flick.close ) {
+
+        this._on ( 'flickable:flick', this.__panelFlick );
+
+      }
+
+    }
+
+    __panelFlick ( evemt, data ) {
 
       if ( !this._isOpen ) return;
 
       if ( data.direction !== this.options.direction ) return;
 
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
       this.close ();
+
+    }
+
+    /* ROUTE */
+
+    ___route () {
+
+      this._on ( $window, 'route', this.__route );
+
+    }
+
+    __route () {
+
+      if ( this._isOpen ) {
+
+        this.$layout.enableScroll ();
+
+      }
+
+    }
+
+    /* RESET */
+
+    _reset () {
+
+      this.$bindings.off ( this.eventNamespace );
+
+    }
+
+    /* AUTO PINNING */
+
+    _autopin () {
+
+      this._wasAutoOpened = !this._isOpen;
+
+      this.pin ();
+
+    }
+
+    _autounpin () {
+
+      this[this._wasAutoOpened ? 'close' : 'unpin']();
 
     }
 
@@ -217,6 +288,14 @@
 
       this._isOpen = true;
 
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___tap ();
+      this.___keydown ();
+      this.___panelFlick ();
+      this.___route ();
+
       if ( !this._isPinned ) {
 
         this.$layout.disableScroll ();
@@ -243,11 +322,16 @@
 
       if ( !this._isOpen ) return;
 
+      this.unpin ( true );
+
       this._isOpen = false;
 
-      this._frame ( function () {
+      this._reset ();
 
-        this.unpin ();
+      this.___breakpoint ();
+      this.___documentFlick ();
+
+      this._frame ( function () {
 
         this.$panel.removeClass ( this.options.classes.open );
 
@@ -312,15 +396,19 @@
 
     }
 
-    unpin () {
+    unpin ( _closing ) {
 
       if ( !this._isOpen || !this._isPinned ) return;
 
       this._isPinned = false;
 
-      this.$panel.removeClass ( this.options.classes.pinned );
-
       this.$layout.removeClass ( this.layoutPinnedClass ).disableScroll ();
+
+      this._delay ( function () {
+
+        this.$panel.removeClass ( this.options.classes.pinned );
+
+      }, _closing ? this.options.animations.close : 0 );
 
     }
 

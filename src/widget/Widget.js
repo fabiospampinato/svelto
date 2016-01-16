@@ -116,7 +116,7 @@
 
       /* BINDINGS */
 
-      this._on ( $window, 'breakpoint:change', this.__breakpoint );
+      this.___breakpoint ();
 
     }
 
@@ -240,6 +240,8 @@
 
     /* OPTIONS */
 
+    //INFO: We cannot have a `options` alias to `option`, since `options` is already defined in the config
+
     option ( key, value ) {
 
       if ( !key ) {
@@ -271,12 +273,6 @@
         }
 
       }
-
-    }
-
-    options ( obj ) {
-
-      return this.option ( obj );
 
     }
 
@@ -445,6 +441,12 @@
 
     /* EVENTS HANDLERS */
 
+    ___breakpoint () {
+
+      this._on ( $window, 'breakpoint:change', this.__breakpoint );
+
+    }
+
     __breakpoint ( event, data ) {
 
       let current = Svelto.breakpoints[data.breakpoint];
@@ -496,6 +498,12 @@
         }
 
       }
+
+    }
+
+    ___keydown () {
+
+      this._on ( $document, 'keydown', this.__keydown );
 
     }
 

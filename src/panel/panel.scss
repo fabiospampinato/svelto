@@ -6,203 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: The `attached-*` panel must be placed before the header tag, otherwise the CSS selectors will not work
 //TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
 
 //TODO: Not working on Dolphin browser
 //FIXME: Not working on iPod's Safari
-
-/* MIXINS */
-
-@mixin show () {
-  display: flex !important;
-}
-
-@mixin open () {
-
-  transform: translateX(0) translateY(0) !important;
-
-  /* BEFORE (BACKGROUND) */
-
-  &:before {
-    opacity: 1;
-  }
-
-}
-
-@mixin attach () {
-
-  @include z-depth ( $panel-attached-z-depth );
-
-  /* BEFORE (BACKGROUND) */
-
-  &:before {
-    display: none;
-    opacity: 0;
-  }
-
-  /* LEFT */
-
-  &.left,
-  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
-
-    /* CONTENT */
-
-    ~ #content {
-
-      margin-left: $panel-vertical-width;
-
-      /* HEADER */
-
-      > header.fixed {
-        left: $panel-vertical-width;
-      }
-
-    }
-
-    /* SLIM */
-
-    &.slim {
-
-      /* CONTENT */
-
-      ~ #content {
-
-        margin-left: $panel-slim-vertical-width;
-
-        /* HEADER */
-
-        > header.fixed {
-          left: $panel-slim-vertical-width;
-        }
-
-      }
-
-    }
-
-  }
-
-  /* RIGHT */
-
-  &.right {
-
-    /* CONTENT */
-
-    ~ #content {
-
-      margin-right: $panel-vertical-width;
-
-      /* HEADER */
-
-      > header.fixed {
-        right: $panel-vertical-width;
-      }
-
-    }
-
-    /* SLIM */
-
-    &.slim {
-
-      /* CONTENT */
-
-      ~ #content {
-
-        margin-right: $panel-slim-vertical-width;
-
-        /* HEADER */
-
-        > header.fixed {
-          right: $panel-slim-vertical-width;
-        }
-
-      }
-
-    }
-
-  }
-
-  /* TOP */
-
-  &.top {
-
-    /* CONTENT */
-
-    ~ #content {
-
-      margin-top: $panel-horizontal-height;
-
-      /* HEADER */
-
-      > header.fixed {
-        top: $panel-horizontal-height;
-      }
-
-    }
-
-    /* SLIM */
-
-    &.slim {
-
-      /* CONTENT */
-
-      ~ #content {
-
-        margin-top: $panel-slim-horizontal-height;
-
-        /* HEADER */
-
-        > header.fixed {
-          top: $panel-slim-horizontal-height;
-        }
-
-      }
-
-    }
-
-  }
-
-  /* BOTTOM */
-
-  &.bottom {
-
-    /* CONTENT */
-
-    ~ #content {
-
-      margin-bottom: $panel-horizontal-height;
-
-      /* HEADER */
-
-      > header.fixed {
-        bottom: $panel-horizontal-height;
-      }
-
-    }
-
-    /* SLIM */
-
-    &.slim {
-
-      /* CONTENT */
-
-      ~ #content {
-
-        margin-bottom: $panel-slim-horizontal-height;
-
-        /* HEADER */
-
-        > header.fixed {
-          bottom: $panel-slim-horizontal-height;
-        }
-
-      }
-
-    }
-
-  }
-
-}
 
 /* PANEL */
 
@@ -316,70 +123,34 @@
   /* SHOW */
 
   &.show {
-    @include show ();
+    display: flex !important;
   }
 
   /* OPEN */
 
   &.open {
-    @include show ();
-    @include open ();
-  }
 
-  /* ATTACHED */
+    transform: translateX(0) translateY(0) !important;
 
-  &.attached {
-    @include show ();
-    @include open ();
-    @include attach ();
-  }
+    /* BEFORE (BACKGROUND) */
 
-  @include xsmall-up {
-
-    &.attached-xs {
-      @include show ();
-      @include open ();
-      @include attach ();
+    &:before {
+      opacity: 1;
     }
 
   }
 
-  @include small-up {
+  /* PINNED */
 
-    &.attached-sm {
-      @include show ();
-      @include open ();
-      @include attach ();
-    }
+  &.pinned {
 
-  }
+    @include z-depth ( $panel-pinned-z-depth );
 
-  @include medium-up {
+    /* BEFORE (BACKGROUND) */
 
-    &.attached-md {
-      @include show ();
-      @include open ();
-      @include attach ();
-    }
-
-  }
-
-  @include large-up {
-
-    &.attached-lg {
-      @include show ();
-      @include open ();
-      @include attach ();
-    }
-
-  }
-
-  @include xlarge-up {
-
-    &.attached-xl {
-      @include show ();
-      @include open ();
-      @include attach ();
+    &:before {
+      display: none;
+      opacity: 0;
     }
 
   }
@@ -398,6 +169,141 @@
     cursor: pointer;
     background-color: $panel-background-color;
     transition: opacity $panel-background-transition-opacity-duration;
+  }
+
+}
+
+/* LAYOUT */
+
+.layout,
+body { //TODO: Use only `.layout`
+
+  &.panel-pinned-left {
+
+    > #content {
+
+      margin-left: $panel-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        left: $panel-vertical-width;
+      }
+
+    }
+
+  }
+
+  &.panel-pinned-right {
+
+    > #content {
+
+      margin-right: $panel-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        right: $panel-vertical-width;
+      }
+
+    }
+
+  }
+
+  &.panel-pinned-top {
+
+    > #content {
+
+      margin-top: $panel-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        top: $panel-horizontal-height;
+      }
+
+    }
+
+  }
+
+  &.panel-pinned-bottom {
+
+    > #content {
+
+      margin-bottom: $panel-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        bottom: $panel-horizontal-height;
+      }
+
+    }
+
+  }
+
+  &.panel-slim-pinned-left {
+
+    > #content {
+
+      margin-left: $panel-slim-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        left: $panel-slim-vertical-width;
+      }
+
+    }
+
+  }
+
+  &.panel-slim-pinned-right {
+
+    > #content {
+
+      margin-right: $panel-slim-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        right: $panel-slim-vertical-width;
+      }
+
+    }
+
+  }
+
+  &.panel-slim-pinned-top {
+
+    > #content {
+
+      margin-top: $panel-slim-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        top: $panel-slim-horizontal-height;
+      }
+
+    }
+
+  }
+
+  &.panel-slim-pinned-bottom {
+
+    > #content {
+
+      margin-bottom: $panel-slim-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        bottom: $panel-slim-horizontal-height;
+      }
+
+    }
+
   }
 
 }
