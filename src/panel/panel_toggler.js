@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Nabar (Opener)
+ * Svelto - Panel (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires navbar.js
- * @requires ../opener/opener.js
+ * @requires panel.js
+ * @requires ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'navbarOpener',
+    name: 'panelToggler',
     plugin: true,
-    selector: '.navbar-opener',
+    selector: '.panel-toggler',
     options: {
-      widget: Svelto.Navbar
+      widget: Svelto.Panel
     }
   };
 
-  /* NAVBAR OPENER */
+  /* PANEL TOGGLER */
 
-  class NavbarOpener extends Svelto.Opener {}
+  class PanelToggler extends Svelto.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( NavbarOpener, config, Svelto );
+  $.factory ( PanelToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

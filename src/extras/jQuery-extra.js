@@ -103,17 +103,23 @@
 
   };
 
+  $.fn.toggleScroll = function ( force ) {
+
+    //TODO: Preserve the scrollbars if possible, when disabling
+
+    return this.toggleClass ( 'overflow-hidden', force );
+
+  };
+
   $.fn.disableScroll = function () {
 
-    //TODO: Preserve the scrollbars if possible
-
-    return this.addClass ( 'overflow-hidden' );
+    return this.toggleScroll ( false );
 
   };
 
   $.fn.enableScroll = function () {
 
-    return this.removeClass ( 'overflow-hidden' );
+    return this.toggleScroll ( true );
 
   };
 

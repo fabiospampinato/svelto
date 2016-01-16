@@ -1,0 +1,48 @@
+
+/* =========================================================================
+ * Svelto - Panel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+
+/* PANEL */
+
+$panel-z-index: 400 !default;
+$panel-z-depth: 5 !default;
+
+$panel-transition-transform-duration: $transition-duration-normal !default;
+
+/* ATTACHED */
+
+$panel-attached-z-depth: 5 !default;
+
+/* BACKGROUND */
+
+$panel-background-color: rgba(0, 0, 0, 0.5) !default;
+
+$panel-background-transition-opacity-duration: $transition-duration-normal !default;
+
+/* SIZES */
+
+$panel-extra-distance: 2.6666666667rem !default;
+
+$panel-horizontal-height: 7.5rem !default;
+$panel-horizontal-extra-distance: $panel-extra-distance !default;
+$panel-closed-horizontal-spacing: $panel-horizontal-height + $panel-horizontal-extra-distance !default;
+
+$panel-vertical-width: $panel-horizontal-height * 2 !default;
+$panel-vertical-extra-distance: $panel-extra-distance !default;
+$panel-closed-vertical-spacing: $panel-vertical-width + $panel-vertical-extra-distance !default;
+
+/* SLIM SIZES */
+
+$panel-slim-horizontal-height: 4.2666666667rem !default;
+$panel-slim-horizontal-extra-distance: $panel-extra-distance !default;
+$panel-slim-closed-horizontal-spacing: $panel-slim-horizontal-height + $panel-slim-horizontal-extra-distance !default;
+
+$panel-slim-vertical-width: $panel-slim-horizontal-height !default;
+$panel-slim-vertical-extra-distance: $panel-extra-distance !default;
+$panel-slim-closed-vertical-spacing: $panel-slim-vertical-width + $panel-slim-vertical-extra-distance !default;

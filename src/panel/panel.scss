@@ -1,13 +1,13 @@
 
 /* =========================================================================
- * Svelto - Navbar
+ * Svelto - Panel
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
-//TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+//INFO: The `attached-*` panel must be placed before the header tag, otherwise the CSS selectors will not work
+//TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
 
 //TODO: Not working on Dolphin browser
 //FIXME: Not working on iPod's Safari
@@ -32,7 +32,7 @@
 
 @mixin attach () {
 
-  @include z-depth ( $navbar-attached-z-depth );
+  @include z-depth ( $panel-attached-z-depth );
 
   /* BEFORE (BACKGROUND) */
 
@@ -50,12 +50,12 @@
 
     ~ #content {
 
-      margin-left: $navbar-vertical-width;
+      margin-left: $panel-vertical-width;
 
       /* HEADER */
 
       > header.fixed {
-        left: $navbar-vertical-width;
+        left: $panel-vertical-width;
       }
 
     }
@@ -68,12 +68,12 @@
 
       ~ #content {
 
-        margin-left: $navbar-slim-vertical-width;
+        margin-left: $panel-slim-vertical-width;
 
         /* HEADER */
 
         > header.fixed {
-          left: $navbar-slim-vertical-width;
+          left: $panel-slim-vertical-width;
         }
 
       }
@@ -90,12 +90,12 @@
 
     ~ #content {
 
-      margin-right: $navbar-vertical-width;
+      margin-right: $panel-vertical-width;
 
       /* HEADER */
 
       > header.fixed {
-        right: $navbar-vertical-width;
+        right: $panel-vertical-width;
       }
 
     }
@@ -108,12 +108,12 @@
 
       ~ #content {
 
-        margin-right: $navbar-slim-vertical-width;
+        margin-right: $panel-slim-vertical-width;
 
         /* HEADER */
 
         > header.fixed {
-          right: $navbar-slim-vertical-width;
+          right: $panel-slim-vertical-width;
         }
 
       }
@@ -130,12 +130,12 @@
 
     ~ #content {
 
-      margin-top: $navbar-horizontal-height;
+      margin-top: $panel-horizontal-height;
 
       /* HEADER */
 
       > header.fixed {
-        top: $navbar-horizontal-height;
+        top: $panel-horizontal-height;
       }
 
     }
@@ -148,12 +148,12 @@
 
       ~ #content {
 
-        margin-top: $navbar-slim-horizontal-height;
+        margin-top: $panel-slim-horizontal-height;
 
         /* HEADER */
 
         > header.fixed {
-          top: $navbar-slim-horizontal-height;
+          top: $panel-slim-horizontal-height;
         }
 
       }
@@ -170,12 +170,12 @@
 
     ~ #content {
 
-      margin-bottom: $navbar-horizontal-height;
+      margin-bottom: $panel-horizontal-height;
 
       /* HEADER */
 
       > header.fixed {
-        bottom: $navbar-horizontal-height;
+        bottom: $panel-horizontal-height;
       }
 
     }
@@ -188,12 +188,12 @@
 
       ~ #content {
 
-        margin-bottom: $navbar-slim-horizontal-height;
+        margin-bottom: $panel-slim-horizontal-height;
 
         /* HEADER */
 
         > header.fixed {
-          bottom: $navbar-slim-horizontal-height;
+          bottom: $panel-slim-horizontal-height;
         }
 
       }
@@ -204,17 +204,17 @@
 
 }
 
-/* NAVBAR */
+/* PANEL */
 
-.navbar {
+.panel {
 
-  @include z-depth ( $navbar-z-depth );
+  @include z-depth ( $panel-z-depth );
   display: none;
   position: fixed;
-  z-index: $navbar-z-index;
+  z-index: $panel-z-index;
   margin-bottom: 0;
   border-radius: 0;
-  transition: transform $navbar-transition-transform-duration;
+  transition: transform $panel-transition-transform-duration;
   overflow: visible !important; //INFO: Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
@@ -225,12 +225,12 @@
 
     top: 0;
     bottom: 0;
-    width: $navbar-vertical-width;
+    width: $panel-vertical-width;
 
     /* SLIM */
 
     &.slim {
-      width: $navbar-slim-vertical-width;
+      width: $panel-slim-vertical-width;
     }
 
   }
@@ -241,12 +241,12 @@
   &:not(.right):not(.top):not(.bottom) { //INFO: Default case
 
     left: 0;
-    transform: translateX(- $navbar-closed-vertical-spacing);
+    transform: translateX(- $panel-closed-vertical-spacing);
 
     /* SLIM */
 
     &.slim {
-      transform: translateX(- $navbar-slim-closed-vertical-spacing);
+      transform: translateX(- $panel-slim-closed-vertical-spacing);
     }
 
   }
@@ -256,12 +256,12 @@
   &.right {
 
     right: 0;
-    transform: translateX($navbar-closed-vertical-spacing);
+    transform: translateX($panel-closed-vertical-spacing);
 
     /* SLIM */
 
     &.slim {
-      transform: translateX($navbar-slim-closed-vertical-spacing);
+      transform: translateX($panel-slim-closed-vertical-spacing);
     }
 
   }
@@ -273,12 +273,12 @@
 
     right: 0;
     left: 0;
-    height: $navbar-horizontal-height;
+    height: $panel-horizontal-height;
 
     /* SLIM */
 
     &.slim {
-      height: $navbar-slim-horizontal-height;
+      height: $panel-slim-horizontal-height;
     }
 
   }
@@ -288,12 +288,12 @@
   &.top {
 
     top: 0;
-    transform: translateY(- $navbar-closed-horizontal-spacing);
+    transform: translateY(- $panel-closed-horizontal-spacing);
 
     /* SLIM */
 
     &.slim {
-      transform: translateY(- $navbar-slim-closed-horizontal-spacing);
+      transform: translateY(- $panel-slim-closed-horizontal-spacing);
     }
 
   }
@@ -303,12 +303,12 @@
   &.bottom {
 
     bottom: 0;
-    transform: translateY($navbar-closed-horizontal-spacing);
+    transform: translateY($panel-closed-horizontal-spacing);
 
     /* SLIM */
 
     &.slim {
-      transform: translateY($navbar-slim-closed-horizontal-spacing);
+      transform: translateY($panel-slim-closed-horizontal-spacing);
     }
 
   }
@@ -396,8 +396,8 @@
     left: -200vw;
     z-index: -1;
     cursor: pointer;
-    background-color: $navbar-background-color;
-    transition: opacity $navbar-background-transition-opacity-duration;
+    background-color: $panel-background-color;
+    transition: opacity $panel-background-transition-opacity-duration;
   }
 
 }

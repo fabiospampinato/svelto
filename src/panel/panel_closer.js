@@ -1,11 +1,11 @@
 
 /* =========================================================================
- * Svelto - Navbar (Closer)
+ * Svelto - Panel (Closer)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires navbar.js
+ * @requires panel.js
  * @requires ../closer/closer.js
  * ========================================================================= */
 
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'navbarCloser',
+    name: 'panelCloser',
     plugin: true,
-    selector: '.navbar-closer',
+    selector: '.panel-closer',
     options: {
-      widget: Svelto.Navbar
+      widget: Svelto.Panel
     }
   };
 
-  /* NAVBAR CLOSER */
+  /* PANEL CLOSER */
 
-  class NavbarCloser extends Svelto.Closer {}
+  class PanelCloser extends Svelto.Closer {}
 
   /* FACTORY */
 
-  $.factory ( NavbarCloser, config, Svelto );
+  $.factory ( PanelCloser, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));

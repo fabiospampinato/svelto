@@ -535,17 +535,23 @@
 
   };
 
+  $.fn.toggleScroll = function ( force ) {
+
+    //TODO: Preserve the scrollbars if possible, when disabling
+
+    return this.toggleClass ( 'overflow-hidden', force );
+
+  };
+
   $.fn.disableScroll = function () {
 
-    //TODO: Preserve the scrollbars if possible
-
-    return this.addClass ( 'overflow-hidden' );
+    return this.toggleScroll ( false );
 
   };
 
   $.fn.enableScroll = function () {
 
-    return this.removeClass ( 'overflow-hidden' );
+    return this.toggleScroll ( true );
 
   };
 
@@ -9093,417 +9099,6 @@
 
 
 /* =========================================================================
- * Svelto - Navbar
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../widget/widget.js
- * ========================================================================= */
-
-//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
-
-//TODO: Rename it to something like panel maybe
-//TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-
-//TODO: Maybe control the attaching process via js, so that we no longer have to put the navbar in any particular position also
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbar',
-    plugin: true,
-    selector: '.navbar',
-    options: {
-      direction: 'left',
-      flick: {
-        active: false,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional //TODO: Replace the window with the closest `.layout`
-      },
-      classes: {
-        show: 'show',
-        open: 'open',
-        flickable: 'flickable',
-        attached: 'attached'
-      },
-      animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal,
-      },
-      keystrokes: {
-        'esc': '__esc'
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* NAVBAR */
-
-  class Navbar extends Svelto.Widget {
-
-    /* SPECIAL */
-
-    static widgetize ( $navbar ) {
-
-      $navbar.navbar ( $navbar.hasClass ( Svelto.Navbar.config.options.classes.flickable ) ? { flick: { active: true } } : undefined );
-
-    }
-
-    _variables () {
-
-      this.$navbar = this.$element;
-      this.navbar = this.element;
-
-      this.options.direction = _.getDirections ().find ( direction => this.$navbar.hasClass ( direction ) ) || this.options.direction;
-
-      this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
-      this._isAttached = this.$navbar.hasClass ( this.options.classes.attached );
-
-    }
-
-    _events () {
-
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
-
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* FLICK */
-
-      if ( this.options.flick.active ) {
-
-        $document.flickable ();
-
-        this._on ( $document, 'flickable:flick', this.__documentFlick );
-
-        this.$navbar.flickable ({
-          callbacks: {
-            flick: this.__navbarFlick.bind ( this )
-          }
-        });
-
-      }
-
-    }
-
-    /* TAP */
-
-    __tap ( event ) {
-
-      if ( event.target === this.navbar ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* ESC */
-
-    __esc () {
-
-      if ( !this._isAttached ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* FLICK */
-
-    __documentFlick ( data ) {
-
-      if ( !this._isOpen ) return;
-
-      if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
-
-      switch ( this.direction ) {
-
-        case 'left':
-          if ( data.startXY.X <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'right':
-          if ( $window.width () - data.startXY.X <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'top':
-          if ( data.startXY.Y <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'bottom':
-          if ( $window.height () - data.startXY.Y <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-      }
-
-    }
-
-    __navbarFlick ( data ) {
-
-      if ( this._isOpen && !this._isAttached ) return;
-
-      if ( data.direction !== this.options.direction ) return;
-
-      this.close ();
-
-    }
-
-    /* ATTACHMENT */
-
-    _isAttached () {
-
-      return this._isAttached ();
-
-    }
-
-    _toggleAttachment ( force ) {
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isAttached;
-
-      }
-
-      if ( force !== this._isAttached ) {
-
-        this._isAttached = force;
-
-        this.$navbar.toggleClass ( this.options.classes.attached, this._isAttached );
-
-        if ( this._isAttached !== this._isOpen ) {
-
-          this.toggle ();
-
-        }
-
-      }
-
-    }
-
-    _attach () {
-
-      this._toggleAttachment ( true );
-
-    }
-
-    _detach () {
-
-      this._toggleAttachment ( false );
-
-    }
-
-    /* PUBLIC */
-
-    isOpen () {
-
-      return this._isOpen;
-
-    }
-
-    toggle ( force ) {
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
-
-        this[force ? 'open' : 'close']();
-
-      }
-
-    }
-
-    open () {
-
-      if ( this._isOpen ) return;
-
-      this._isOpen = true;
-
-      $body.disableScroll ();
-
-      this._frame ( function () {
-
-        this.$navbar.addClass ( this.options.classes.show );
-
-        this._frame ( function () {
-
-          this.$navbar.addClass ( this.options.classes.open );
-
-          this._trigger ( 'open' );
-
-        });
-
-      });
-
-    }
-
-    close () {
-
-      if ( !this._isOpen ) return;
-
-      this._isOpen = false;
-
-      this._frame ( function () {
-
-        this._detach ();
-        
-        this.$navbar.removeClass ( this.options.classes.open );
-
-        this._delay ( function () {
-
-          this.$navbar.removeClass ( this.options.classes.show );
-
-          $body.enableScroll ();
-
-          this._trigger ( 'close' );
-
-        }, this.options.animations.close );
-
-      });
-
-    }
-
-  }
-
-  /* FACTORY */
-
-  $.factory ( Navbar, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Navbar (Closer)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../closer/closer.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarCloser',
-    plugin: true,
-    selector: '.navbar-closer',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR CLOSER */
-
-  class NavbarCloser extends Svelto.Closer {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarCloser, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Nabar (Opener)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../opener/opener.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarOpener',
-    plugin: true,
-    selector: '.navbar-opener',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR OPENER */
-
-  class NavbarOpener extends Svelto.Opener {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarOpener, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Navbar (Toggler)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../toggler/toggler.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarToggler',
-    plugin: true,
-    selector: '.navbar-toggler',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR TOGGLER */
-
-  class NavbarToggler extends Svelto.Toggler {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarToggler, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Notification
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -9706,6 +9301,448 @@
   /* FACTORY */
 
   $.factory ( OverlayToggler, config, Svelto );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Panel
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.js
+ * ========================================================================= */
+
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
+
+//TODO: Replace flickable support with a smooth moving panel, so operate on drag
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'panel',
+    plugin: true,
+    selector: '.panel',
+    options: {
+      direction: 'left',
+      pin: false, //INFO: If is a valid key of `Svelto.breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
+      flick: {
+        active: false,
+        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional
+      },
+      classes: {
+        show: 'show',
+        open: 'open',
+        flickable: 'flickable', //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+        pinned: 'pinned'
+      },
+      selectors: {
+        layout: '.layout, body' //TODO: Just use `.layout`
+      },
+      animations: {
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal,
+      },
+      keystrokes: {
+        'esc': '__esc'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* PANEL */
+
+  class Panel extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$panel = this.$element;
+      this.panel = this.element;
+
+      this.$layout = this.$panel.closest ( this.options.selectors.layout );
+      this.layoutPinnedClass = Svelto.Panel.config.name + '-' + this.options.classes.pinned + '-' + this.options.direction;
+
+      this.options.direction = _.getDirections ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
+      this.options.flick.active = this.$panel.hasClass ( this.options.classes.flickable );
+
+      if ( this.options.pin ) {
+
+        _.merge ( this.options.breakpoints, {
+          up: {
+            [this.options.pin]: 'pin',
+          },
+          down: {
+            [this.options.pin]: 'unpin'
+          }
+        });
+
+      }
+
+      this._isOpen = this.$panel.hasClass ( this.options.classes.open );
+      this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
+
+    }
+
+    _events () {
+
+      /* TAP */
+
+      this._on ( Pointer.tap, this.__tap );
+
+      /* KEYDOWN */
+
+      this._on ( $document, 'keydown', this.__keydown );
+
+      /* FLICK */
+
+      if ( this.options.flick.active ) {
+
+        /* DOCUMENT */
+
+        $document.flickable ();
+
+        this._on ( $document, 'flickable:flick', this.__documentFlick );
+
+        /* PANEL */
+
+        this.$panel.flickable ({
+          callbacks: {
+            flick: this.__panelFlick.bind ( this )
+          }
+        });
+
+      }
+
+    }
+
+    /* TAP */
+
+    __tap ( event ) {
+
+      if ( event.target === this.panel && !this._isPinned ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* ESC */
+
+    __esc () {
+
+      if ( !this._isPinned ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* FLICK */
+
+    __documentFlick ( data ) {
+
+      if ( this._isOpen ) return;
+
+      if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
+
+      let layoutOffset = this.$layout.offset ();
+
+      switch ( this.direction ) {
+
+        case 'left':
+          if ( data.startXY.X - layoutOffset.left > this.options.flickableTreshold ) return;
+          break;
+
+        case 'right':
+          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.X > this.options.flickableTreshold ) return;
+          break;
+
+        case 'top':
+          if ( data.startXY.Y - layoutOffset.top > this.options.flickableTreshold ) return;
+          break;
+
+        case 'bottom':
+          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.Y > this.options.flickableTreshold ) return;
+          break;
+
+      }
+
+      this.open ();
+
+    }
+
+    __panelFlick ( data ) {
+
+      if ( !this._isOpen ) return;
+
+      if ( data.direction !== this.options.direction ) return;
+
+      this.close ();
+
+    }
+
+    /* PUBLIC */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( this._isOpen ) return;
+
+      this._isOpen = true;
+
+      if ( !this._isPinned ) {
+
+        this.$layout.disableScroll ();
+
+      }
+
+      this._frame ( function () {
+
+        this.$panel.addClass ( this.options.classes.show );
+
+        this._frame ( function () {
+
+          this.$panel.addClass ( this.options.classes.open );
+
+          this._trigger ( 'open' );
+
+        });
+
+      });
+
+    }
+
+    close () {
+
+      if ( !this._isOpen ) return;
+
+      this._isOpen = false;
+
+      this._frame ( function () {
+
+        this.unpin ();
+
+        this.$panel.removeClass ( this.options.classes.open );
+
+        this._delay ( function () {
+
+          this.$panel.removeClass ( this.options.classes.show );
+
+          this.$layout.enableScroll ();
+
+          this._trigger ( 'close' );
+
+        }, this.options.animations.close );
+
+      });
+
+    }
+
+
+    /* PINNING */
+
+    isPinned () {
+
+      return this._isPinned;
+
+    }
+
+    togglePin ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isPinned;
+
+      }
+
+      if ( force !== this._isPinned ) {
+
+        this[force ? 'pin' : 'unpin']();
+
+      }
+
+    }
+
+    pin () {
+
+      if ( this._isPinned ) return;
+
+      this._isPinned = true;
+
+      this.$panel.addClass ( this.options.classes.pinned );
+
+      this.$layout.addClass ( this.layoutPinnedClass );
+
+      if ( this._isOpen ) {
+
+        this.$layout.enableScroll ();
+
+      } else {
+
+        this.open ();
+
+      }
+
+    }
+
+    unpin () {
+
+      if ( !this._isOpen || !this._isPinned ) return;
+
+      this._isPinned = false;
+
+      this.$panel.removeClass ( this.options.classes.pinned );
+
+      this.$layout.removeClass ( this.layoutPinnedClass ).disableScroll ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  $.factory ( Panel, config, Svelto );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Panel (Closer)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires panel.js
+ * @requires ../closer/closer.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'panelCloser',
+    plugin: true,
+    selector: '.panel-closer',
+    options: {
+      widget: Svelto.Panel
+    }
+  };
+
+  /* PANEL CLOSER */
+
+  class PanelCloser extends Svelto.Closer {}
+
+  /* FACTORY */
+
+  $.factory ( PanelCloser, config, Svelto );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Nabar (Opener)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires panel.js
+ * @requires ../opener/opener.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'panelOpener',
+    plugin: true,
+    selector: '.panel-opener',
+    options: {
+      widget: Svelto.Panel
+    }
+  };
+
+  /* PANEL OPENER */
+
+  class PanelOpener extends Svelto.Opener {}
+
+  /* FACTORY */
+
+  $.factory ( PanelOpener, config, Svelto );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Panel (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires panel.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'panelToggler',
+    plugin: true,
+    selector: '.panel-toggler',
+    options: {
+      widget: Svelto.Panel
+    }
+  };
+
+  /* PANEL TOGGLER */
+
+  class PanelToggler extends Svelto.Toggler {}
+
+  /* FACTORY */
+
+  $.factory ( PanelToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
