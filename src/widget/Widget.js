@@ -256,7 +256,7 @@
 
         } else {
 
-          _.set ( this.options, key, value );
+          this._setOption ( key, value );
 
         }
 
@@ -266,7 +266,7 @@
 
           if ( key.hasOwnProperty ( prop ) ) {
 
-            _.set ( this.options, prop, key[prop] );
+            this._setOption ( key, value );
 
           }
 
@@ -274,6 +274,12 @@
 
       }
 
+    }
+
+    _setOption ( key, value ) {
+
+      _.set ( this.options, key, value );
+      
     }
 
     /* ENABLED */
@@ -444,7 +450,7 @@
     ___route () {
 
       this._on ( $window, 'route', this.__route );
-      
+
     }
 
     ___breakpoint () {

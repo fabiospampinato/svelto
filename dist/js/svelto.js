@@ -1617,7 +1617,7 @@
 
         } else {
 
-          _.set ( this.options, key, value );
+          this._setOption ( key, value );
 
         }
 
@@ -1627,7 +1627,7 @@
 
           if ( key.hasOwnProperty ( prop ) ) {
 
-            _.set ( this.options, prop, key[prop] );
+            this._setOption ( key, value );
 
           }
 
@@ -1635,6 +1635,12 @@
 
       }
 
+    }
+
+    _setOption ( key, value ) {
+
+      _.set ( this.options, key, value );
+      
     }
 
     /* ENABLED */
@@ -1805,7 +1811,7 @@
     ___route () {
 
       this._on ( $window, 'route', this.__route );
-      
+
     }
 
     ___breakpoint () {
@@ -13445,7 +13451,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _checkEmpty () {
 
-      let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
+      let hasNonEmptyRows = !!this.$body.find ( this.options.selectors.notEmptyRow ).length;
 
       this.$emptyRow.toggleClass ( this.options.classes.hidden, hasNonEmptyRows );
 
@@ -13463,7 +13469,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let rowId = id ? this._getRowId ( id ) : false;
 
-      if ( datas.length > 0 ) {
+      if ( datas.length ) {
 
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
@@ -13496,7 +13502,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let $row = $( '.' + this._getRowId ( id ) );
 
-      if ( datas.length > 0 && $row.length === 1 ) {
+      if ( datas.length && $row.length === 1 ) {
 
         let $rowCells = $row.find ( this.options.selectors.rowCell );
 
@@ -13544,7 +13550,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 
-      if ( $rows.length > 0 ) {
+      if ( $rows.length ) {
 
         $rows.remove ();
 
@@ -13910,7 +13916,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( valueTrimmed.length < this.options.tag.minLength ) {
 
-        if ( valueTrimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if ( valueTrimmed.length ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
           $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
@@ -13993,7 +13999,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       } else if ( event.keyCode === Svelto.keyCode.BACKSPACE ) {
 
-        if ( !value.length && this.options.tags.length > 0 ) {
+        if ( !value.length && this.options.tags.length ) {
 
           let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
               edit = !$.hasCtrlOrCmd ( event );
@@ -14068,7 +14074,7 @@ Prism.languages.js = Prism.languages.javascript;
       let tags = tag.split ( this.options.characters.separator ),
           adds = _.map ( tags, this._add, this );
 
-      let added = ( _.compact ( adds ).length > 0 );
+      let added = !!_.compact ( adds ).length;
 
       if ( added ) {
 
@@ -14126,7 +14132,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      if ( tags.length > 0 ) {
+      if ( tags.length ) {
 
         for ( let i = 0, l = tags.length; i < l; i++ ) {
 
@@ -14162,7 +14168,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     clear ( suppressTriggers ) {
 
-      if ( this.options.tags.length > 0 ) {
+      if ( this.options.tags.length ) {
 
         let previous = this.options.tags;
 
@@ -14202,7 +14208,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         let added = _.difference ( this.options.tags, previous );
 
-        if ( added.length > 0 ) {
+        if ( added.length ) {
 
           this._trigger ( 'add', added );
 
@@ -14210,7 +14216,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         let removed = _.difference ( previous, this.options.tags );
 
-        if ( removed.length > 0 ) {
+        if ( removed.length ) {
 
           this._trigger ( 'remove', removed );
 
