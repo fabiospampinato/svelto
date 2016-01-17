@@ -287,7 +287,7 @@
 
       if ( !this.options.persistent ) {
 
-        this._on ( $window, 'route', this.__route );
+        super.___route ();
 
       }
 

@@ -218,12 +218,6 @@
 
     /* ROUTE */
 
-    ___route () {
-
-      this._on ( $window, 'route', this.__route );
-
-    }
-
     __route () {
 
       if ( this._isOpen ) {

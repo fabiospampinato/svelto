@@ -441,6 +441,12 @@
 
     /* EVENTS HANDLERS */
 
+    ___route () {
+
+      this._on ( $window, 'route', this.__route );
+      
+    }
+
     ___breakpoint () {
 
       this._on ( $window, 'breakpoint:change', this.__breakpoint );
