@@ -114,9 +114,10 @@
       this._init ();
       this._events ();
 
-      /* BINDINGS */
+      /* BREAKPOINT */
 
-      this.___breakpoint ();
+      this.___breakpoint (); //INFO: It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+      this.__breakpoint ();
 
     }
 
@@ -451,7 +452,7 @@
       /* EVENT */
 
       event = $.Event ( event );
-      event.type = ( this.name + ':' + this.type ).toLowerCase ();
+      event.type = ( this.name + ':' + type ).toLowerCase ();
       event.target = this.element;
 
       let originalEvent = event.originalEvent;

@@ -1475,9 +1475,10 @@
       this._init ();
       this._events ();
 
-      /* BINDINGS */
+      /* BREAKPOINT */
 
-      this.___breakpoint ();
+      this.___breakpoint (); //INFO: It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+      this.__breakpoint ();
 
     }
 
@@ -1812,7 +1813,7 @@
       /* EVENT */
 
       event = $.Event ( event );
-      event.type = ( this.name + ':' + this.type ).toLowerCase ();
+      event.type = ( this.name + ':' + type ).toLowerCase ();
       event.target = this.element;
 
       let originalEvent = event.originalEvent;
@@ -2570,6 +2571,7 @@
 
     /* VARIABLES */
 
+    throttle: 150,
     previous: undefined,
     current: undefined,
 
@@ -2617,72 +2619,7 @@
 
     Svelto.Breakpoint.current = Svelto.Breakpoint.get ();
 
-    $window.on ( 'resize', _.throttle ( Svelto.Breakpoint.__resize.bind ( Svelto.Breakpoint ), 150 ) );
-
-  });
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Breakpoints
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/svelto.js
- * ========================================================================= */
-
-//TODO: Make it work with `.layout` instead of just with the window
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  let intervals = _.sortBy ( _.values ( Svelto.breakpoints ) ),
-      previous;
-
-  /* FUNCTIONS */
-
-  function getBreakpoint () {
-
-    let width = $window.width ();
-
-    for ( let i = 0, l = intervals.length; i < l; i++ ) {
-
-      if ( width >= intervals[i] && ( i === l - 1 || width < intervals[i+1] ) ) {
-
-        return _.findKey ( Svelto.breakpoints, interval => interval === intervals[i] );
-
-      }
-
-    }
-
-  }
-
-  function update () {
-
-    let current = getBreakpoint ();
-
-    if ( current !== previous ) {
-
-      $window.trigger ( 'breakpoint:change', { breakpoint: current } );
-
-      previous = current;
-
-    }
-
-  }
-
-  /* READY */
-
-  $(function () {
-
-    update ();
-
-    $window.on ( 'resize', _.throttle ( update, 150 ) );
+    $window.on ( 'resize', _.throttle ( Svelto.Breakpoint.__resize.bind ( Svelto.Breakpoint ), Svelto.Breakpoint.throttle ) );
 
   });
 
@@ -9232,309 +9169,6 @@
 
 
 /* =========================================================================
- * Svelto - Navbar
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../widget/widget.js
- * ========================================================================= */
-
-//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
-
-//TODO: Rename it to something like panel maybe
-//TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-
-//TODO: Maybe control the attaching process via js, so that we no longer have to put the navbar in any particular position also
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbar',
-    plugin: true,
-    selector: '.navbar',
-    options: {
-      direction: 'left',
-      flick: {
-        active: false,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional //TODO: Replace the window with the closest `.layout`
-      },
-      classes: {
-        show: 'show',
-        open: 'open',
-        flickable: 'flickable',
-        attached: 'attached'
-      },
-      animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal,
-      },
-      keystrokes: {
-        'esc': '__esc'
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* NAVBAR */
-
-  class Navbar extends Svelto.Widget {
-
-    /* SPECIAL */
-
-    static widgetize ( $navbar ) {
-
-      $navbar.navbar ( $navbar.hasClass ( Svelto.Navbar.config.options.classes.flickable ) ? { flick: { active: true } } : undefined );
-
-    }
-
-    _variables () {
-
-      this.$navbar = this.$element;
-      this.navbar = this.element;
-
-      this.options.direction = _.getDirections ().find ( direction => this.$navbar.hasClass ( direction ) ) || this.options.direction;
-
-      this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
-      this._isAttached = this.$navbar.hasClass ( this.options.classes.attached );
-
-    }
-
-    _events () {
-
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
-
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* FLICK */
-
-      if ( this.options.flick.active ) {
-
-        $document.flickable ();
-
-        this._on ( $document, 'flickable:flick', this.__documentFlick );
-
-        this.$navbar.flickable ({
-          callbacks: {
-            flick: this.__navbarFlick.bind ( this )
-          }
-        });
-
-      }
-
-    }
-
-    /* TAP */
-
-    __tap ( event ) {
-
-      if ( event.target === this.navbar ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* ESC */
-
-    __esc () {
-
-      if ( !this._isAttached ) {
-
-        this.close ();
-
-      }
-
-    }
-
-    /* FLICK */
-
-    __documentFlick ( data ) {
-
-      if ( !this._isOpen ) return;
-
-      if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
-
-      switch ( this.direction ) {
-
-        case 'left':
-          if ( data.startXY.X <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'right':
-          if ( $window.width () - data.startXY.X <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'top':
-          if ( data.startXY.Y <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-        case 'bottom':
-          if ( $window.height () - data.startXY.Y <= this.options.flickableTreshold ) {
-            this.open ();
-          }
-          break;
-
-      }
-
-    }
-
-    __navbarFlick ( data ) {
-
-      if ( this._isOpen && !this._isAttached ) return;
-
-      if ( data.direction !== this.options.direction ) return;
-
-      this.close ();
-
-    }
-
-    /* ATTACHMENT */
-
-    _isAttached () {
-
-      return this._isAttached ();
-
-    }
-
-    _toggleAttachment ( force ) {
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isAttached;
-
-      }
-
-      if ( force !== this._isAttached ) {
-
-        this._isAttached = force;
-
-        this.$navbar.toggleClass ( this.options.classes.attached, this._isAttached );
-
-        if ( this._isAttached !== this._isOpen ) {
-
-          this.toggle ();
-
-        }
-
-      }
-
-    }
-
-    _attach () {
-
-      this._toggleAttachment ( true );
-
-    }
-
-    _detach () {
-
-      this._toggleAttachment ( false );
-
-    }
-
-    /* PUBLIC */
-
-    isOpen () {
-
-      return this._isOpen;
-
-    }
-
-    toggle ( force ) {
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
-
-        this[force ? 'open' : 'close']();
-
-      }
-
-    }
-
-    open () {
-
-      if ( this._isOpen ) return;
-
-      this._isOpen = true;
-
-      $body.disableScroll ();
-
-      this._frame ( function () {
-
-        this.$navbar.addClass ( this.options.classes.show );
-
-        this._frame ( function () {
-
-          this.$navbar.addClass ( this.options.classes.open );
-
-          this._trigger ( 'open' );
-
-        });
-
-      });
-
-    }
-
-    close () {
-
-      if ( !this._isOpen ) return;
-
-      this._isOpen = false;
-
-      this._frame ( function () {
-
-        this._detach ();
-        
-        this.$navbar.removeClass ( this.options.classes.open );
-
-        this._delay ( function () {
-
-          this.$navbar.removeClass ( this.options.classes.show );
-
-          $body.enableScroll ();
-
-          this._trigger ( 'close' );
-
-        }, this.options.animations.close );
-
-      });
-
-    }
-
-  }
-
-  /* FACTORY */
-
-  $.factory ( Navbar, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Notification
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -9610,42 +9244,6 @@
 
 
 /* =========================================================================
- * Svelto - Navbar (Closer)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../closer/closer.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarCloser',
-    plugin: true,
-    selector: '.navbar-closer',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR CLOSER */
-
-  class NavbarCloser extends Svelto.Closer {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarCloser, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - One Time Action
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -9665,42 +9263,6 @@
     return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Nabar (Opener)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../opener/opener.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarOpener',
-    plugin: true,
-    selector: '.navbar-opener',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR OPENER */
-
-  class NavbarOpener extends Svelto.Opener {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarOpener, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9742,42 +9304,6 @@
 
 
 /* =========================================================================
- * Svelto - Navbar (Toggler)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires navbar.js
- * @requires ../toggler/toggler.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'navbarToggler',
-    plugin: true,
-    selector: '.navbar-toggler',
-    options: {
-      widget: Svelto.Navbar
-    }
-  };
-
-  /* NAVBAR TOGGLER */
-
-  class NavbarToggler extends Svelto.Toggler {}
-
-  /* FACTORY */
-
-  $.factory ( NavbarToggler, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Overlay (Opener)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -9814,81 +9340,6 @@
 
 
 /* =========================================================================
- * Svelto - Notification
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../noty/noty.js
- * ========================================================================= */
-
-//INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* DEFAULT OPTIONS */
-
-  let defaults = {
-    title: false,
-    body: false,
-    img: false,
-    ttl: Svelto.Noty.config.options.ttl
-  };
-
-  /* NOTIFICATION */
-
-  $.notification = function ( options ) {
-
-    /* OPTIONS */
-
-    options = _.extend ( {}, $.notification.defaults, options );
-
-    /* NOTIFICATIONS */
-
-    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
-
-      Notification.requestPermission ( function ( status ) {
-
-        if ( status === 'granted' ) {
-
-          let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
-
-          if ( _.isNumber ( options.ttl ) && !_.isNaN ( options.ttl ) && options.ttl !== Infinity ) {
-
-            setTimeout ( function () {
-
-              notification.close ();
-
-            }, options.ttl );
-
-          }
-
-        } else {
-
-          $.noty ( options );
-
-        }
-
-      });
-
-    } else {
-
-      $.noty ( options );
-
-    }
-
-  };
-
-  /* BINDING */
-
-  $.notification.defaults = defaults;
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Overlay (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -9920,30 +9371,6 @@
   /* FACTORY */
 
   $.factory ( OverlayToggler, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - One Time Action
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../n_times_action/n_times_action.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* ONE TIME ACTION */
-
-  $.oneTimeAction = function ( options ) {
-
-    return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
-
-  };
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -10152,7 +9579,7 @@
 
     }
 
-    __panelFlick ( evemt, data ) {
+    __panelFlick ( event, data ) {
 
       if ( !this._isOpen ) return;
 
@@ -10365,42 +9792,6 @@
 
 
 /* =========================================================================
- * Svelto - Overlay (Closer)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires overlay.js
- * @requires ../closer/closer.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'overlayCloser',
-    plugin: true,
-    selector: '.overlay-closer',
-    options: {
-      widget: Svelto.Overlay
-    }
-  };
-
-  /* OVERLAY CLOSER */
-
-  class OverlayCloser extends Svelto.Closer {}
-
-  /* FACTORY */
-
-  $.factory ( OverlayCloser, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Panel (Closer)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -10437,42 +9828,6 @@
 
 
 /* =========================================================================
- * Svelto - Overlay (Opener)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires overlay.js
- * @requires ../opener/opener.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'overlayOpener',
-    plugin: true,
-    selector: '.overlay-opener',
-    options: {
-      widget: Svelto.Overlay
-    }
-  };
-
-  /* OVERLAY OPENER */
-
-  class OverlayOpener extends Svelto.Opener {}
-
-  /* FACTORY */
-
-  $.factory ( OverlayOpener, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Nabar (Opener)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -10504,42 +9859,6 @@
   /* FACTORY */
 
   $.factory ( PanelOpener, config, Svelto );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Overlay (Toggler)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires overlay.js
- * @requires ../toggler/toggler.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'overlayToggler',
-    plugin: true,
-    selector: '.overlay-toggler',
-    options: {
-      widget: Svelto.Overlay
-    }
-  };
-
-  /* OVERLAY TOGGLER */
-
-  class OverlayToggler extends Svelto.Toggler {}
-
-  /* FACTORY */
-
-  $.factory ( OverlayToggler, config, Svelto );
 
 }( Svelto.$, Svelto._, window, document ));
 

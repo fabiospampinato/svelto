@@ -18,6 +18,7 @@
 
     /* VARIABLES */
 
+    throttle: 150,
     previous: undefined,
     current: undefined,
 
@@ -65,7 +66,7 @@
 
     Svelto.Breakpoint.current = Svelto.Breakpoint.get ();
 
-    $window.on ( 'resize', _.throttle ( Svelto.Breakpoint.__resize.bind ( Svelto.Breakpoint ), 150 ) );
+    $window.on ( 'resize', _.throttle ( Svelto.Breakpoint.__resize.bind ( Svelto.Breakpoint ), Svelto.Breakpoint.throttle ) );
 
   });
 

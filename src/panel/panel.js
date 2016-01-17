@@ -203,7 +203,7 @@
 
     }
 
-    __panelFlick ( evemt, data ) {
+    __panelFlick ( event, data ) {
 
       if ( !this._isOpen ) return;
 
