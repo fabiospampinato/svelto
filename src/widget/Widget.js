@@ -498,9 +498,9 @@
 
     }
 
-    __breakpoint ( event, data ) {
+    __breakpoint () {
 
-      let current = Svelto.breakpoints[data.breakpoint];
+      let current = Svelto.breakpoints[Svelto.Breakpoint.current];
 
       /* UP */
 
