@@ -12,8 +12,6 @@
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-//FIXME: Between -100 and 100, can't reach 0 by dragging
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -169,9 +167,9 @@
 
     }
 
-    _updateLabel ( value ) {
+    _updateLabel ( value = this.options.value ) {
 
-      this.$label.html ( value || this.options.value );
+      this.$label.html ( value );
 
     }
 
