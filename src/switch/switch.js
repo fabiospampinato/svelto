@@ -129,7 +129,7 @@
 
     /* DRAG */
 
-    __dragEnd ( data ) {
+    __dragEnd ( event, data ) {
 
       if ( data.motion ) {
 

@@ -12,6 +12,8 @@
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
+//FIXME: Between -100 and 100, can't reach 0 by dragging
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -212,7 +214,7 @@
 
     }
 
-    __dragMove ( data ) {
+    __dragMove ( event, data ) {
 
       if ( this.options.live ) {
 
@@ -228,7 +230,7 @@
 
     }
 
-    __dragEnd ( data ) {
+    __dragEnd ( event, data ) {
 
       this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
 

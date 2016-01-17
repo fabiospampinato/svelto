@@ -1640,7 +1640,7 @@
     _setOption ( key, value ) {
 
       _.set ( this.options, key, value );
-      
+
     }
 
     /* ENABLED */
@@ -1770,7 +1770,7 @@
 
     _off ( $element, events, handler ) {
 
-      /* NORMALIZING PARAMETERS */
+      /* NORMALIZATION */
 
       if ( !handler && !($element instanceof $) ) {
 
@@ -1790,29 +1790,68 @@
 
     }
 
-    _trigger ( events, data = {} ) {
+    _trigger ( type, event, data ) {
 
-      let name = this.name.toLowerCase ();
+      /* NORMALIZATION */
 
-      events = events.split ( ' ' );
+      if ( !data ) {
 
-      for ( let event of events ) {
+        if ( event instanceof $.Event ) {
 
-        this.$element.trigger ( name + ':' + event, data );
+          data = {};
 
-        this.options.callbacks[event].call ( this.element, data );
+        } else {
+
+          data = event || {};
+          event = undefined;
+
+        }
 
       }
 
+      /* EVENT */
+
+      event = $.Event ( event );
+      event.type = ( this.name + ':' + this.type ).toLowerCase ();
+      event.target = this.element;
+
+      let originalEvent = event.originalEvent;
+
+      if ( originalEvent ) {
+
+        for ( let prop in originalEvent ) {
+
+          if ( originalEvent.hasOwnProperty ( prop ) ) {
+
+            if ( !(prop in event) ) {
+
+              event[prop] = originalEvent[prop];
+
+            }
+
+          }
+
+        }
+
+      }
+
+      /* TRIGGERING */
+
+      this.$element.trigger ( event, data );
+
+      return !( this.options.callbacks[type].apply ( this.element, [event].concat ( data ) ) === false || event.isDefaultPrevented () );
+
     }
 
-    /* EVENTS HANDLERS */
+    /* ROUTE */
 
     ___route () {
 
       this._on ( $window, 'route', this.__route );
 
     }
+
+    /* BREAKPOINT */
 
     ___breakpoint () {
 
@@ -1873,6 +1912,8 @@
       }
 
     }
+
+    /* KEYDOWN */
 
     ___keydown () {
 
@@ -3623,13 +3664,13 @@
 
     }
 
-    __sbDragMove ( data ) {
+    __sbDragMove ( event, data ) {
 
       this._sbDragSet ( data.dragXY, this.options.live );
 
     }
 
-    __sbDragEnd ( data ) {
+    __sbDragEnd ( event, data ) {
 
       this._sbDragSet ( data.dragXY, true );
 
@@ -3678,13 +3719,13 @@
 
     }
 
-    __hueDragMove ( data ) {
+    __hueDragMove ( event, data ) {
 
       this._hueDragSet ( data.dragXY, this.options.live );
 
     }
 
-    __hueDragEnd ( data ) {
+    __hueDragEnd ( event, data ) {
 
       this._hueDragSet ( data.dragXY, true );
 
@@ -5517,7 +5558,7 @@
         $pointer: $pointer,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
-          change ( data ) {
+          change ( event, data ) {
             $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
@@ -7236,13 +7277,19 @@
 
         this.$noty.flickable ({
           callbacks: {
-            flick: function ( data ) {
-              if ( data.orientation === 'horizontal' ) {
-                this.close ();
-              }
-            }.bind ( this )
+            flick: this.__flick.bind ( this )
           }
         });
+
+      }
+
+    }
+
+    __flick ( event, data ) {
+
+      if ( data.orientation === 'horizontal' ) {
+
+        this.close ();
 
       }
 
@@ -11962,9 +12009,7 @@ Prism.languages.js = Prism.languages.javascript;
           strict: true
         },
         callbacks: {
-          beforeopen: function () {
-            this._setDropdownWidth ();
-          }.bind ( this ),
+          beforeopen: this.__setDropdownWidth.bind ( this ),
           open: function () {
             this._trigger ( 'open' );
           }.bind ( this ),
@@ -11982,7 +12027,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    _setDropdownWidth () {
+    __setDropdownWidth () {
 
       if ( this.$dropdown.is ( '.' + this.options.classes.attached ) ) {
 
@@ -12385,6 +12430,8 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
+//FIXME: Between -100 and 100, can't reach 0 by dragging
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -12585,7 +12632,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    __dragMove ( data ) {
+    __dragMove ( event, data ) {
 
       if ( this.options.live ) {
 
@@ -12601,7 +12648,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    __dragEnd ( data ) {
+    __dragEnd ( event, data ) {
 
       this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
 
@@ -13268,7 +13315,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* DRAG */
 
-    __dragEnd ( data ) {
+    __dragEnd ( event, data ) {
 
       if ( data.motion ) {
 

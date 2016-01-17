@@ -185,13 +185,13 @@
 
     }
 
-    __sbDragMove ( data ) {
+    __sbDragMove ( event, data ) {
 
       this._sbDragSet ( data.dragXY, this.options.live );
 
     }
 
-    __sbDragEnd ( data ) {
+    __sbDragEnd ( event, data ) {
 
       this._sbDragSet ( data.dragXY, true );
 
@@ -240,13 +240,13 @@
 
     }
 
-    __hueDragMove ( data ) {
+    __hueDragMove ( event, data ) {
 
       this._hueDragSet ( data.dragXY, this.options.live );
 
     }
 
-    __hueDragEnd ( data ) {
+    __hueDragEnd ( event, data ) {
 
       this._hueDragSet ( data.dragXY, true );
 

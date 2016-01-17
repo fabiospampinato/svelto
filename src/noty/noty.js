@@ -269,13 +269,19 @@
 
         this.$noty.flickable ({
           callbacks: {
-            flick: function ( data ) {
-              if ( data.orientation === 'horizontal' ) {
-                this.close ();
-              }
-            }.bind ( this )
+            flick: this.__flick.bind ( this )
           }
         });
+
+      }
+
+    }
+
+    __flick ( event, data ) {
+
+      if ( data.orientation === 'horizontal' ) {
+
+        this.close ();
 
       }
 

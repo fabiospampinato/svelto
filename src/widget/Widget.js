@@ -279,7 +279,7 @@
     _setOption ( key, value ) {
 
       _.set ( this.options, key, value );
-      
+
     }
 
     /* ENABLED */
@@ -409,7 +409,7 @@
 
     _off ( $element, events, handler ) {
 
-      /* NORMALIZING PARAMETERS */
+      /* NORMALIZATION */
 
       if ( !handler && !($element instanceof $) ) {
 
@@ -429,29 +429,68 @@
 
     }
 
-    _trigger ( events, data = {} ) {
+    _trigger ( type, event, data ) {
 
-      let name = this.name.toLowerCase ();
+      /* NORMALIZATION */
 
-      events = events.split ( ' ' );
+      if ( !data ) {
 
-      for ( let event of events ) {
+        if ( event instanceof $.Event ) {
 
-        this.$element.trigger ( name + ':' + event, data );
+          data = {};
 
-        this.options.callbacks[event].call ( this.element, data );
+        } else {
+
+          data = event || {};
+          event = undefined;
+
+        }
 
       }
 
+      /* EVENT */
+
+      event = $.Event ( event );
+      event.type = ( this.name + ':' + this.type ).toLowerCase ();
+      event.target = this.element;
+
+      let originalEvent = event.originalEvent;
+
+      if ( originalEvent ) {
+
+        for ( let prop in originalEvent ) {
+
+          if ( originalEvent.hasOwnProperty ( prop ) ) {
+
+            if ( !(prop in event) ) {
+
+              event[prop] = originalEvent[prop];
+
+            }
+
+          }
+
+        }
+
+      }
+
+      /* TRIGGERING */
+
+      this.$element.trigger ( event, data );
+
+      return !( this.options.callbacks[type].apply ( this.element, [event].concat ( data ) ) === false || event.isDefaultPrevented () );
+
     }
 
-    /* EVENTS HANDLERS */
+    /* ROUTE */
 
     ___route () {
 
       this._on ( $window, 'route', this.__route );
 
     }
+
+    /* BREAKPOINT */
 
     ___breakpoint () {
 
@@ -512,6 +551,8 @@
       }
 
     }
+
+    /* KEYDOWN */
 
     ___keydown () {
 

@@ -189,9 +189,7 @@
           strict: true
         },
         callbacks: {
-          beforeopen: function () {
-            this._setDropdownWidth ();
-          }.bind ( this ),
+          beforeopen: this.__setDropdownWidth.bind ( this ),
           open: function () {
             this._trigger ( 'open' );
           }.bind ( this ),
@@ -209,7 +207,7 @@
 
     }
 
-    _setDropdownWidth () {
+    __setDropdownWidth () {
 
       if ( this.$dropdown.is ( '.' + this.options.classes.attached ) ) {
 
