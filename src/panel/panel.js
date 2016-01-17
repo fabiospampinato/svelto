@@ -240,6 +240,8 @@
 
     _autopin () {
 
+      if ( this._isPinned ) return;
+
       this._wasAutoOpened = !this._isOpen;
 
       this.pin ();
@@ -247,6 +249,8 @@
     }
 
     _autounpin () {
+
+      if ( !this._isPinned ) return;
 
       this[this._wasAutoOpened ? 'close' : 'unpin']();
 
