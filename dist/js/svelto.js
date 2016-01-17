@@ -13606,7 +13606,7 @@ Prism.languages.js = Prism.languages.javascript;
         containers: '.tabs-containers > *'
       },
       callbacks: {
-        set: _.noop
+        change: _.noop
       }
     }
   };
@@ -13623,33 +13623,18 @@ Prism.languages.js = Prism.languages.javascript;
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
       this.$containers = this.$tabs.find ( this.options.selectors.containers );
 
-      /* DIRECTION */
+      this.options.direction = _.getDirections ().find ( direction => this.$tabs.hasClass ( direction ) ) || this.options.direction;
 
-      for ( let direction of _.getDirections () ) {
-
-        if ( this.$tabs.hasClass ( direction ) ) {
-
-          this.options.direction = direction;
-
-          break;
-
-        }
-
-      }
-
-      this.index = -1;
+      this.index = false;
 
     }
 
     _init () {
 
-      let $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
+      let $active = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first (),
+          index = this.$triggers.index ( $active );
 
-      $activeTrigger = ( $activeTrigger.length > 0 ) ? $activeTrigger : this.$triggers.first ();
-
-      let newIndex = this.$triggers.index ( $activeTrigger );
-
-      this.set ( newIndex );
+      this.set ( index );
 
     }
 
@@ -13663,11 +13648,49 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* PRIVATE */
 
+    _sanitizeIndex ( index ) {
+
+      return _.clamp ( 0, index, this.$triggers.length );
+
+    }
+
+    /* TAP */
+
     __tap ( event ) {
 
-      let newIndex = this.$triggers.index ( $(event.currentTarget) );
+      let index = this.$triggers.index ( $(event.currentTarget) );
 
-      this.set ( newIndex );
+      this.set ( index );
+
+    }
+
+    /* SELECTION */
+
+    _toggleSelection ( index, force ) {
+
+      let $trigger = this.$triggers.eq ( index ),
+          $container = this.$containers.eq ( index );
+
+      $trigger.toggleClass ( this.options.classes.active.trigger, force );
+      $container.toggleClass ( this.options.classes.active.container, force );
+
+      if ( this.options.highlight ) {
+
+        $trigger.toggleClass ( 'highlighted highlight-' + _.getOppositeDirection ( this.options.direction ), force );
+
+      }
+
+    }
+
+    _select ( index ) {
+
+      this._toggleSelection ( index, true );
+
+    }
+
+    _unselect ( index ) {
+
+      this._toggleSelection ( index, false );
 
     }
 
@@ -13681,19 +13704,15 @@ Prism.languages.js = Prism.languages.javascript;
 
     set ( index ) {
 
+      index = this._sanitizeIndex ( index );
+
       if ( this.index !== index ) {
 
         /* PREVIOUS */
 
-        let $prevTrigger = this.$triggers.eq ( this.index ),
-            $prevContainer = this.$containers.eq ( this.index );
+        if ( _.isNumber ( this.index ) ) {
 
-        $prevTrigger.removeClass ( this.options.classes.active.trigger );
-        $prevContainer.removeClass ( this.options.classes.active.container );
-
-        if ( this.options.highlight ) {
-
-          $prevTrigger.removeClass ( 'highlighted highlight-top highlight-bottom highlight-left highlight-right' );
+          this._unselect ( this.index );
 
         }
 
@@ -13701,21 +13720,11 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.index = index;
 
-        let $trigger = this.$triggers.eq ( this.index ),
-            $container = this.$containers.eq ( this.index );
-
-        $trigger.addClass ( this.options.classes.active.trigger );
-        $container.addClass ( this.options.classes.active.container );
-
-        if ( this.options.highlight ) {
-
-          $trigger.addClass ( 'highlighted' + ( ' highlight-' + _.getOppositeDirection ( this.options.direction ) ) );
-
-        }
+        this._select ( this.index );
 
         /* CALLBACKS */
 
-        this._trigger ( 'set' );
+        this._trigger ( 'change' );
 
       }
 
