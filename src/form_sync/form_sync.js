@@ -82,7 +82,7 @@
           name = $element.attr ( this.options.attributes.name ),
           $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
 
-      if ( $otherElements.length > 0 ) {
+      if ( $otherElements.length ) {
 
         let value = $element.val (),
             checked = !!$element.prop ( 'checked' );

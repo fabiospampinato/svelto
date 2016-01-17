@@ -57,7 +57,7 @@
 
     /* NO ELEMENTS */
 
-    if ( this.length === 0 ) return this;
+    if ( !this.length ) return this;
 
     /* OPTIONS */
 

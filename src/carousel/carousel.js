@@ -77,7 +77,7 @@
 
       let $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
 
-      if ( $current.length > 0 ) {
+      if ( $current.length ) {
 
         this._current = this._getItemObj ( this.$items.index ( $current ) );
 

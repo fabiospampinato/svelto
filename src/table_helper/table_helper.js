@@ -77,7 +77,7 @@
 
     _checkEmpty () {
 
-      let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
+      let hasNonEmptyRows = !!this.$body.find ( this.options.selectors.notEmptyRow ).length;
 
       this.$emptyRow.toggleClass ( this.options.classes.hidden, hasNonEmptyRows );
 
@@ -95,7 +95,7 @@
 
       let rowId = id ? this._getRowId ( id ) : false;
 
-      if ( datas.length > 0 ) {
+      if ( datas.length ) {
 
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
@@ -128,7 +128,7 @@
 
       let $row = $( '.' + this._getRowId ( id ) );
 
-      if ( datas.length > 0 && $row.length === 1 ) {
+      if ( datas.length && $row.length === 1 ) {
 
         let $rowCells = $row.find ( this.options.selectors.rowCell );
 
@@ -176,7 +176,7 @@
 
       let $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 
-      if ( $rows.length > 0 ) {
+      if ( $rows.length ) {
 
         $rows.remove ();
 

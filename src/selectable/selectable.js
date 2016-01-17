@@ -181,7 +181,7 @@
         let $selected = this.get (),
             $others = $selected.not ( this.$startElement );
 
-        if ( $others.length > 0  ) {
+        if ( $others.length  ) {
 
           $others.removeClass ( this.options.classes.selected );
 

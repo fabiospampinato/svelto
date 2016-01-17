@@ -154,7 +154,7 @@
 
         let $element = $(element),
             $wrappers = $element.parents ( this.options.selectors.wrapper ),
-            $wrapper = ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
+            $wrapper = $wrappers.length ? $wrappers.first () : $element,
             id = $.guid++,
             validationsStr = $element.data ( this.options.datas.validations ),
             validations = false;

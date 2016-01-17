@@ -54,7 +54,7 @@
 
         }
 
-        if ( this.widgetizers[selector].length === 0 ) {
+        if ( !this.widgetizers[selector].length ) {
 
           delete this.widgetizers[selector];
 

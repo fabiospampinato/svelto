@@ -225,7 +225,7 @@
 
       let $value = this.$select.val ();
 
-      if ( $value.length > 0 ) {
+      if ( $value.length ) {
 
         let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
 

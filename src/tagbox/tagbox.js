@@ -170,7 +170,7 @@
 
       if ( valueTrimmed.length < this.options.tag.minLength ) {
 
-        if ( valueTrimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if ( valueTrimmed.length ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
           $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
@@ -253,7 +253,7 @@
 
       } else if ( event.keyCode === Svelto.keyCode.BACKSPACE ) {
 
-        if ( value.length === 0 && this.options.tags.length > 0 ) {
+        if ( !value.length && this.options.tags.length ) {
 
           let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
               edit = !$.hasCtrlOrCmd ( event );
@@ -328,7 +328,7 @@
       let tags = tag.split ( this.options.characters.separator ),
           adds = _.map ( tags, this._add, this );
 
-      let added = ( _.compact ( adds ).length > 0 );
+      let added = !!_.compact ( adds ).length;
 
       if ( added ) {
 
@@ -386,7 +386,7 @@
 
       }
 
-      if ( tags.length > 0 ) {
+      if ( tags.length ) {
 
         for ( let i = 0, l = tags.length; i < l; i++ ) {
 
@@ -422,7 +422,7 @@
 
     clear ( suppressTriggers ) {
 
-      if ( this.options.tags.length > 0 ) {
+      if ( this.options.tags.length ) {
 
         let previous = this.options.tags;
 
@@ -462,7 +462,7 @@
 
         let added = _.difference ( this.options.tags, previous );
 
-        if ( added.length > 0 ) {
+        if ( added.length ) {
 
           this._trigger ( 'add', added );
 
@@ -470,13 +470,13 @@
 
         let removed = _.difference ( previous, this.options.tags );
 
-        if ( removed.length > 0 ) {
+        if ( removed.length ) {
 
           this._trigger ( 'remove', removed );
 
         }
 
-        if ( this.options.tags.length === 0 ) {
+        if ( !this.options.tags.length ) {
 
           this._trigger ( 'empty' );
 

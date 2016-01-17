@@ -103,7 +103,7 @@
 
       if ( this._isOpen && event !== this._toggleEvent ) {
 
-        if ( this.$dropdown.touching ({ point: $.eventXY ( event )} ).length === 0 ) {
+        if ( !this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) {
 
           this.close ();
 

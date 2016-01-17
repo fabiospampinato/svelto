@@ -38,7 +38,7 @@
       constrainer: { //INFO: Constrain the drag inside the $element
         $element: false, //INFO: If we want to keep the draggable inside this $element
         center: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
-        tollerance: { //INFO: The amount of pixel flexibility that a constrainer has
+        tolerance: { //INFO: The amount of pixel flexibility that a constrainer has
           x: 0,
           y: 0
         }
@@ -174,7 +174,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tollerance.x, translateX, this.translateX_max + this.options.constrainer.tollerance.x );
+          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tolerance.x, translateX, this.translateX_max + this.options.constrainer.tolerance.x );
 
         }
 
@@ -186,7 +186,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tollerance.y, translateY, this.translateY_max + this.options.constrainer.tollerance.y );
+          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tolerance.y, translateY, this.translateY_max + this.options.constrainer.tolerance.y );
 
         }
 

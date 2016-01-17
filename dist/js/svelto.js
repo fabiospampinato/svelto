@@ -458,14 +458,14 @@
 
       return $.eventXY ( event.originalEvent );
 
-    } else if ( 'changedTouches' in event && event.changedTouches.length > 0 ) {
+    } else if ( 'changedTouches' in event && event.changedTouches.length ) {
 
       return {
         X: event.changedTouches[0][X],
         Y: event.changedTouches[0][Y]
       };
 
-    } else if ( 'touches' in event && event.touches.length > 0 ) {
+    } else if ( 'touches' in event && event.touches.length ) {
 
       return {
         X: event.touches[0][X],
@@ -503,7 +503,7 @@
 
   $.fn.getRect = function () {
 
-    return this.length > 0 ? this[0].getBoundingClientRect () : undefined;
+    return this.length ? this[0].getBoundingClientRect () : undefined;
 
   };
 
@@ -1132,7 +1132,7 @@
 
         }
 
-        if ( this.widgetizers[selector].length === 0 ) {
+        if ( !this.widgetizers[selector].length ) {
 
           delete this.widgetizers[selector];
 
@@ -2671,7 +2671,7 @@
 
       let $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
 
-      if ( $current.length > 0 ) {
+      if ( $current.length ) {
 
         this._current = this._getItemObj ( this.$items.index ( $current ) );
 
@@ -4424,7 +4424,7 @@
       constrainer: { //INFO: Constrain the drag inside the $element
         $element: false, //INFO: If we want to keep the draggable inside this $element
         center: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
-        tollerance: { //INFO: The amount of pixel flexibility that a constrainer has
+        tolerance: { //INFO: The amount of pixel flexibility that a constrainer has
           x: 0,
           y: 0
         }
@@ -4560,7 +4560,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tollerance.x, translateX, this.translateX_max + this.options.constrainer.tollerance.x );
+          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tolerance.x, translateX, this.translateX_max + this.options.constrainer.tolerance.x );
 
         }
 
@@ -4572,7 +4572,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tollerance.y, translateY, this.translateY_max + this.options.constrainer.tollerance.y );
+          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tolerance.y, translateY, this.translateY_max + this.options.constrainer.tolerance.y );
 
         }
 
@@ -5066,7 +5066,7 @@
 
     /* NO ELEMENTS */
 
-    if ( this.length === 0 ) return this;
+    if ( !this.length ) return this;
 
     /* OPTIONS */
 
@@ -5484,7 +5484,7 @@
 
       if ( this._isOpen && event !== this._toggleEvent ) {
 
-        if ( this.$dropdown.touching ({ point: $.eventXY ( event )} ).length === 0 ) {
+        if ( !this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) {
 
           this.close ();
 
@@ -7657,7 +7657,7 @@
 
         let $element = $(element),
             $wrappers = $element.parents ( this.options.selectors.wrapper ),
-            $wrapper = ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
+            $wrapper = $wrappers.length ? $wrappers.first () : $element,
             id = $.guid++,
             validationsStr = $element.data ( this.options.datas.validations ),
             validations = false;
@@ -8225,7 +8225,7 @@
           name = $element.attr ( this.options.attributes.name ),
           $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
 
-      if ( $otherElements.length > 0 ) {
+      if ( $otherElements.length ) {
 
         let value = $element.val (),
             checked = !!$element.prop ( 'checked' );
@@ -11992,7 +11992,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let $value = this.$select.val ();
 
-      if ( $value.length > 0 ) {
+      if ( $value.length ) {
 
         let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
 
@@ -12234,7 +12234,7 @@ Prism.languages.js = Prism.languages.javascript;
         let $selected = this.get (),
             $others = $selected.not ( this.$startElement );
 
-        if ( $others.length > 0  ) {
+        if ( $others.length  ) {
 
           $others.removeClass ( this.options.classes.selected );
 
@@ -13993,7 +13993,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       } else if ( event.keyCode === Svelto.keyCode.BACKSPACE ) {
 
-        if ( value.length === 0 && this.options.tags.length > 0 ) {
+        if ( !value.length && this.options.tags.length > 0 ) {
 
           let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
               edit = !$.hasCtrlOrCmd ( event );
@@ -14216,7 +14216,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         }
 
-        if ( this.options.tags.length === 0 ) {
+        if ( !this.options.tags.length ) {
 
           this._trigger ( 'empty' );
 
