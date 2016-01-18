@@ -7478,7 +7478,7 @@
 
   /* VALIDATOR */
 
-  window.Validator = {
+  Svelto.Validator = {
 
     /* TYPE */
 
@@ -7599,10 +7599,10 @@
     options: {
       validators: {
         required ( value ) {
-          return !Validator.empty ( value );
+          return !Svelto.Validator.empty ( value );
         },
         values ( value, ...values ) {
-          return Validator.included ( value, values );
+          return Svelto.Validator.included ( value, values );
         },
         field ( value, fieldName ) {
           let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
@@ -7738,7 +7738,7 @@
 
             let validationName = matches[1],
                 validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
-                validator = this.options.validators[validationName] || Validator[validationName];
+                validator = this.options.validators[validationName] || Svelto.Validator[validationName];
 
             if ( !validator ) continue;
 

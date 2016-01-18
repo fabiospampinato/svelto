@@ -18,7 +18,7 @@
 
   /* VALIDATOR */
 
-  window.Validator = {
+  Svelto.Validator = {
 
     /* TYPE */
 
