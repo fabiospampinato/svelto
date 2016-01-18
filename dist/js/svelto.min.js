@@ -1543,9 +1543,9 @@
 
     destroy () {
 
-      this._destroy ();
+      this._reset ();
 
-      this.$bindings.off ( this.eventNamespace );
+      this._destroy ();
 
       this.$element.removeData ( 'instance.' + this.name );
 
@@ -1565,6 +1565,12 @@
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
     _events () {} //INFO: Bind the event handlers inside this function
+
+    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functoinality
+
+      this.$bindings.off ( this.eventNamespace );
+
+    }
 
     /* WIDGET */
 
