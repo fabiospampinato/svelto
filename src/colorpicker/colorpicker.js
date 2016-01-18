@@ -22,7 +22,7 @@
     plugin: true,
     selector: '.colorpicker',
     options: {
-      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Svelto.Color` obj
       live: false,
       selectors: {
         sb: {
@@ -256,7 +256,7 @@
 
     _updateSb () {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
+      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
           translateX = this.sbWrpSize / 100 * this.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
 
@@ -266,7 +266,7 @@
 
     _updateHue () {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
+      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
           translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
       this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
@@ -297,7 +297,7 @@
 
     _getHexStr () {
 
-      let hex = Color.hsv2hex ( this.hsv );
+      let hex = Svelto.Color.hsv2hex ( this.hsv );
 
       return '#' + hex.r + hex.g + hex.b;
 
@@ -313,7 +313,7 @@
 
     set ( color ) {
 
-      color = _.attempt ( () => new Color ( color ) );
+      color = _.attempt ( () => new Svelto.Color ( color ) );
 
       if ( !_.isError ( color ) ) {
 

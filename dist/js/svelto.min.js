@@ -3101,7 +3101,7 @@
 
   /* COLOR */
 
-  window.Color = class {
+  Svelto.Color = class {
 
     constructor ( color, colorspace ) {
 
@@ -3199,19 +3199,19 @@
 
     setRgb ( color ) {
 
-      this.hex = Color.rgb2hex ( color );
+      this.hex = Svelto.Color.rgb2hex ( color );
 
     }
 
     setHsv ( color ) {
 
-      this.hex = Color.hsv2hex ( color );
+      this.hex = Svelto.Color.hsv2hex ( color );
 
     }
 
     setHsl ( color ) {
 
-      this.hex = Color.hsl2hex ( color );
+      this.hex = Svelto.Color.hsl2hex ( color );
 
     }
 
@@ -3225,19 +3225,19 @@
 
     getRgb () {
 
-      return Color.hex2rgb ( this.hex );
+      return Svelto.Color.hex2rgb ( this.hex );
 
     }
 
     getHsv () {
 
-      return Color.hex2hsv ( this.hex );
+      return Svelto.Color.hex2hsv ( this.hex );
 
     }
 
     getHsl () {
 
-      return Color.hex2hsl ( this.hex );
+      return Svelto.Color.hex2hsl ( this.hex );
 
     }
 
@@ -3248,22 +3248,22 @@
     static hex2rgb ( hex ) {
 
       return {
-        r: Color.hex2dec ( hex.r ),
-        g: Color.hex2dec ( hex.g ),
-        b: Color.hex2dec ( hex.b )
+        r: Svelto.Color.hex2dec ( hex.r ),
+        g: Svelto.Color.hex2dec ( hex.g ),
+        b: Svelto.Color.hex2dec ( hex.b )
       };
 
     }
 
     static hex2hsv ( hex ) {
 
-      return Color.rgb2hsv ( Color.hex2rgb ( hex ) );
+      return Svelto.Color.rgb2hsv ( Svelto.Color.hex2rgb ( hex ) );
 
     }
 
     static hex2hsl ( hex ) {
 
-      return Color.hsv2hsl ( Color.hex2hsv ( hex ) );
+      return Svelto.Color.hsv2hsl ( Svelto.Color.hex2hsv ( hex ) );
 
     }
 
@@ -3272,9 +3272,9 @@
     static rgb2hex ( rgb ) {
 
       return {
-        r: Color.dec2hex ( rgb.r ),
-        g: Color.dec2hex ( rgb.g ),
-        b: Color.dec2hex ( rgb.b )
+        r: Svelto.Color.dec2hex ( rgb.r ),
+        g: Svelto.Color.dec2hex ( rgb.g ),
+        b: Svelto.Color.dec2hex ( rgb.b )
       };
 
     }
@@ -3339,7 +3339,7 @@
 
     static rgb2hsl ( rgb ) {
 
-      return Color.hsv2hsl ( Color.rgb2hsv ( rgb ) );
+      return Svelto.Color.hsv2hsl ( Svelto.Color.rgb2hsv ( rgb ) );
 
     }
 
@@ -3347,7 +3347,7 @@
 
     static hsv2hex ( hsv ) {
 
-      return Color.rgb2hex ( Color.hsv2rgb ( hsv ) );
+      return Svelto.Color.rgb2hex ( Svelto.Color.hsv2rgb ( hsv ) );
 
     }
 
@@ -3446,13 +3446,13 @@
 
     static hsl2hex ( hsl ) {
 
-      return Color.hsv2hex ( Color.hsl2hsv ( hsl ) );
+      return Svelto.Color.hsv2hex ( Svelto.Color.hsl2hsv ( hsl ) );
 
     }
 
     static hsl2rgb ( hsl ) {
 
-      return Color.hsv2rgb ( Color.hsl2hsv ( hsl ) );
+      return Svelto.Color.hsv2rgb ( Svelto.Color.hsl2hsv ( hsl ) );
 
     }
 
@@ -3511,7 +3511,7 @@
     plugin: true,
     selector: '.colorpicker',
     options: {
-      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Svelto.Color` obj
       live: false,
       selectors: {
         sb: {
@@ -3745,7 +3745,7 @@
 
     _updateSb () {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
+      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
           translateX = this.sbWrpSize / 100 * this.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
 
@@ -3755,7 +3755,7 @@
 
     _updateHue () {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
+      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
           translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
       this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
@@ -3786,7 +3786,7 @@
 
     _getHexStr () {
 
-      let hex = Color.hsv2hex ( this.hsv );
+      let hex = Svelto.Color.hsv2hex ( this.hsv );
 
       return '#' + hex.r + hex.g + hex.b;
 
@@ -3802,7 +3802,7 @@
 
     set ( color ) {
 
-      color = _.attempt ( () => new Color ( color ) );
+      color = _.attempt ( () => new Svelto.Color ( color ) );
 
       if ( !_.isError ( color ) ) {
 
