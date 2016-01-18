@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Lo-dash (Extras)
+ * Svelto - Lodash (Extras)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,7 +8,6 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Add something like a _.oppositeDirection ( direction )
 //TODO: Write it better
 
 (function ( _, window, document, undefined ) {

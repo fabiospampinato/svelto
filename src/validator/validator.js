@@ -23,22 +23,22 @@
     /* TYPE */
 
     alpha ( value ) {
-      return !!value.match ( RegExes.alpha );
+      return !!value.match ( Svelto.regexes.alpha );
     },
     alphanumeric ( value ) {
-      return !!value.match ( RegExes.alphanumeric );
+      return !!value.match ( Svelto.regexes.alphanumeric );
     },
     hexadecimal ( value ) {
-      return !!value.match ( RegExes.hexadecimal );
+      return !!value.match ( Svelto.regexes.hexadecimal );
     },
     number ( value ) {
-      return !!value.match ( RegExes.integer ) || !!value.match ( RegExes.float );
+      return !!value.match ( Svelto.regexes.integer ) || !!value.match ( Svelto.regexes.float );
     },
     integer ( value ) {
-      return !!value.match ( RegExes.integer );
+      return !!value.match ( Svelto.regexes.integer );
     },
     float ( value ) {
-      return !!value.match ( RegExes.float );
+      return !!value.match ( Svelto.regexes.float );
     },
 
     /* NUMBER */
@@ -73,19 +73,19 @@
     /* THINGS */
 
     email ( value ) {
-      return !!value.match ( RegExes.email );
+      return !!value.match ( Svelto.regexes.email );
     },
     cc ( value ) {
-      return !!value.match ( RegExes.cc );
+      return !!value.match ( Svelto.regexes.cc );
     },
     ssn ( value ) {
-      return !!value.match ( RegExes.ssn );
+      return !!value.match ( Svelto.regexes.ssn );
     },
     ipv4 ( value ) {
-      return !!value.match ( RegExes.ipv4 );
+      return !!value.match ( Svelto.regexes.ipv4 );
     },
     url ( value ) {
-      return !!value.match ( RegExes.url );
+      return !!value.match ( Svelto.regexes.url );
     },
 
     /* OTHERS */
