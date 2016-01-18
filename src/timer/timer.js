@@ -16,7 +16,7 @@
 
   /* TIMER */
 
-  window.Timer = class {
+  Svelto.Timer = class {
 
     constructor ( ...args ) {
 

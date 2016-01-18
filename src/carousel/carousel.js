@@ -69,7 +69,7 @@
       this._previous = false;
       this._current = false;
 
-      this.timer = new Timer ( this.next.bind ( this ), this.options.interval, false );
+      this.timer = new Svelto.Timer ( this.next.bind ( this ), this.options.interval, false );
 
     }
 

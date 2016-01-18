@@ -195,7 +195,7 @@
 
         if ( !this.timer ) {
 
-          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+          this.timer = new Svelto.Timer ( this.close.bind ( this ), this.options.ttl, true );
 
         } else {
 
