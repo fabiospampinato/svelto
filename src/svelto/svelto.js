@@ -15,7 +15,7 @@
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.3.0-beta2',
+    VERSION: '0.3.0-beta2',
     $: jQuery ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
     _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ) //INFO: Checking the version also in order to distinguish it from `underscore`
   };
