@@ -109,8 +109,8 @@
 
       /* CYCLE */
 
-      this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
-      this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
+      this._on ( true, this.$itemsWrp, Pointer.enter, this.__cycleEnter );
+      this._on ( true, this.$itemsWrp, Pointer.leave, this.__cycleLeave );
 
     }
 

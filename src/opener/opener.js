@@ -70,7 +70,7 @@
 
         this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
 
-        this._one ( Pointer.leave, this.__hoverLeave );
+        this._one ( true, Pointer.leave, this.__hoverLeave );
 
       } else if ( this._isHoverOpen ) {
 
@@ -82,7 +82,7 @@
 
         }
 
-        this._one ( Pointer.leave, this.__hoverLeave );
+        this._one ( true, Pointer.leave, this.__hoverLeave );
 
       }
 
@@ -116,7 +116,7 @@
 
         this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
-        this._one ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+        this._one ( true, this.$target, Pointer.enter, this.__hoverTargetEnter );
 
       }
 
@@ -150,7 +150,7 @@
 
       if ( this.isOpen () && this._isHoverOpen ) {
 
-        this._one ( this.$target, Pointer.leave, this.__hoverTargetLeave );
+        this._one ( true, this.$target, Pointer.leave, this.__hoverTargetLeave );
 
       }
 
@@ -162,7 +162,7 @@
 
         this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
-        this._one ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+        this._one ( true, this.$target, Pointer.enter, this.__hoverTargetEnter );
 
       }
 

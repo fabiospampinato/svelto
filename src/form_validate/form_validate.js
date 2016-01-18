@@ -128,7 +128,7 @@
 
       /* CHANGE */
 
-      this._on ( this.$elements, 'change', this.__change );
+      this._on ( true, this.$elements, 'change', this.__change );
 
       /* FOCUS */
 
@@ -140,7 +140,7 @@
 
       /* SUBMIT */
 
-      this._on ( 'submit', this.__submit );
+      this._on ( true, 'submit', this.__submit );
 
     }
 

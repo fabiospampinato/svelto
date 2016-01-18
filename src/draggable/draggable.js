@@ -399,9 +399,9 @@
 
         this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
 
-        this._on ( $document, Pointer.move, this.__move );
-        this._one ( $document, Pointer.up, this.__up );
-        this._one ( $document, Pointer.cancel, this.__cancel );
+        this._on ( true, $document, Pointer.move, this.__move );
+        this._one ( true, $document, Pointer.up, this.__up );
+        this._one ( true, $document, Pointer.cancel, this.__cancel );
 
       }
 

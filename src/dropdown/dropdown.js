@@ -75,7 +75,7 @@
 
     _bindParentsResizeScroll () {
 
-      this._on ( this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
+      this._on ( true, this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
 
     }
 
@@ -89,7 +89,7 @@
 
     _bindWindowTap () {
 
-      this._on ( $window, Pointer.tap, this.__windowTap );
+      this._on ( true, $window, Pointer.tap, this.__windowTap );
 
     }
 

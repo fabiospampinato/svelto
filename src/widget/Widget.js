@@ -487,7 +487,7 @@
 
     ___route () {
 
-      this._on ( $window, 'route', this.__route );
+      this._on ( true, $window, 'route', this.__route );
 
     }
 
@@ -495,7 +495,7 @@
 
     ___breakpoint () {
 
-      this._on ( $window, 'breakpoint:change', this.__breakpoint );
+      this._on ( $window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
 
     }
 

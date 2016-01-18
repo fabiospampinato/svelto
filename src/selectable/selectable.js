@@ -70,7 +70,7 @@
 
       /* CHANGE */
 
-      this._on ( 'change sortable:sort', this.__change );
+      this._on ( true, 'change sortable:sort', this.__change );
 
     }
 

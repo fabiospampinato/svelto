@@ -55,7 +55,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover ( true, [$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
 
     }
 

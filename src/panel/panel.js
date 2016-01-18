@@ -120,7 +120,7 @@
 
     ___tap () {
 
-      this._on ( Pointer.tap, this.__tap );
+      this._on ( true, Pointer.tap, this.__tap );
 
     }
 
@@ -135,6 +135,12 @@
     }
 
     /* ESC */
+
+    ___keydown () {
+
+      this._on ( true, $document, 'keydown', this.__keydown );
+
+    }
 
     __esc () {
 
@@ -197,7 +203,7 @@
 
       if ( this.options.flick.close ) {
 
-        this._on ( 'flickable:flick', this.__panelFlick );
+        this._on ( true, 'flickable:flick', this.__panelFlick );
 
       }
 
