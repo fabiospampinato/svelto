@@ -6,9 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
@@ -21,6 +22,13 @@
     options: {
       classes: {
         open: 'open'
+      },
+      selectors: {
+        content: '.expander-content'
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
       },
       callbacks: {
         open: _.noop,
@@ -38,6 +46,7 @@
     _variables () {
 
       this.$expander = this.$element;
+      this.$content = this.$expander.find ( this.options.selectors.content );
 
       this._isOpen = this.$expander.hasClass ( this.options.classes.open );
 
@@ -51,17 +60,11 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this._isOpen ) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if ( !!force !== this._isOpen ) {
 
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
-
-        this._isOpen = force;
+        this._isOpen = !!force;
 
         this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
 
@@ -89,4 +92,4 @@
 
   Factory.init ( Expander, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));

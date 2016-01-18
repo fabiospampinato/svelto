@@ -1186,11 +1186,11 @@
  * ========================================================================= */
 /* EXPANDER */
 .expander {
-  /* TOGGLER */
+  /* OPENER / CLOSER / TOGGLER */
   /* CLOSED */
 }
 
-.expander-toggler {
+.expander-opener, .expander-closer, .expander-toggler {
   cursor: pointer;
 }
 

@@ -2,7 +2,7 @@
 /* =========================================================================
  * Svelto - Svelto
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -43,7 +43,7 @@
 /* =========================================================================
  * Svelto - Animations
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -69,7 +69,7 @@
 /* =========================================================================
  * Svelto - Breakpoints
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -95,7 +95,7 @@
 /* =========================================================================
  * Svelto - Colors
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -142,7 +142,7 @@
 /* =========================================================================
  * Svelto - Lodash (Extras)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -382,8 +382,10 @@
 /* =========================================================================
  * Svelto - Browser
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -454,7 +456,7 @@
 /* =========================================================================
  * Svelto - jQuery (Extras)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../browser/browser.js
@@ -711,7 +713,7 @@
 /* =========================================================================
  * Svelto - Core
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -726,7 +728,7 @@
 /* =========================================================================
  * Svelto - Tmpl
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
@@ -856,7 +858,7 @@
 /* =========================================================================
  * Svelto - Pointer
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -1018,7 +1020,7 @@
 /* =========================================================================
  * Svelto - Widgetize
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -1139,7 +1141,7 @@
 /* =========================================================================
  * Svelto - Factory
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -1266,10 +1268,11 @@
 /* =========================================================================
  * Svelto - Breakpoint
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
+ * @requires breakpoints.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Breakpoints ) {
@@ -1342,16 +1345,91 @@
 
 
 /* =========================================================================
+ * Svelto - Keyboard
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* KEYBOARD */
+
+  let Keyboard = {
+    keys: {
+      BACKSPACE: 8,
+      COMMA: 188,
+      DEL: 46,
+      DELETE: 46,
+      DOWN: 40,
+      END: 35,
+      ENTER: 13,
+      ESC: 27,
+      ESCAPE: 27,
+      HOME: 36,
+      LEFT: 37,
+      PAGE_DOWN: 34,
+      PAGE_UP: 33,
+      PERIOD: 190,
+      RIGHT: 39,
+      SPACE: 32,
+      SPACEBAR: 32,
+      TAB: 9,
+      UP: 38
+    },
+    keystroke: {
+      match ( event, keystroke ) {
+
+        //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
+        //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
+
+        let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
+            keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
+
+        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
+        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
+        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
+
+        for ( let key of keys ) {
+
+          if ( !specialKeys.includes ( key ) ) {
+
+            if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+
+          }
+
+        }
+
+        return true;
+
+      }
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.Keyboard = Keyboard;
+
+}( Svelto.$, Svelto._, Svelto ));
+
+
+/* =========================================================================
  * Svelto - Widget
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
  * @requires ../tmpl/tmpl.js
  * @requires ../pointer/pointer.js
  * @requires ../factory/factory.js
+ * @requires ../breakpoints/breakpoints.js
  * @requires ../breakpoints/breakpoint.js
+ * @requires ../keyboard/keyboard.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
@@ -2049,9 +2127,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
@@ -2064,6 +2143,13 @@
     options: {
       classes: {
         open: 'open'
+      },
+      selectors: {
+        content: '.expander-content'
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
       },
       callbacks: {
         open: _.noop,
@@ -2081,6 +2167,7 @@
     _variables () {
 
       this.$expander = this.$element;
+      this.$content = this.$expander.find ( this.options.selectors.content );
 
       this._isOpen = this.$expander.hasClass ( this.options.classes.open );
 
@@ -2094,17 +2181,11 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this._isOpen ) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if ( !!force !== this._isOpen ) {
 
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
-
-        this._isOpen = force;
+        this._isOpen = !!force;
 
         this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
 
@@ -2132,7 +2213,7 @@
 
   Factory.init ( Expander, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -2155,7 +2236,7 @@
     plugin: true,
     selector: '.accordion',
     options: {
-      multiple: false, //INFO: Wheter to keep multiple expanders open or just one
+      multiple: false, //INFO: Wheter to allow multiple expanders open or not
       selectors: {
         expander: Widgets.Expander.config.selector
       },
@@ -2183,43 +2264,34 @@
 
     _events () {
 
-      /* EXPANDER OPEN */
-
-      this._on ( true, this.$expanders, 'expander:open', this.__open );
-
-      /* EXPANDER CLOSE */
-
-      this._on ( true, this.$expanders, 'expander:close', this.__close );
+      this.___open ();
+      this.___close ();
 
     }
 
     /* EXPANDER OPEN */
 
+    ___open () {
+
+      this._on ( true, this.$expanders, 'expander:open', this.__open );
+
+    }
+
     __open ( event ) {
 
       this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
 
-      /* SINGLE */
-
-      if ( !this.options.multiple ) {
-
-        /* CLOSE OTHERS */
-
-        for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
-
-          if ( this.$expanders[i] !== event.target ) {
-
-            this.instances[i].close ();
-
-          }
-
-        }
-
-      }
+      this.__multiple ( event.target );
 
     }
 
     /* EXPANDER CLOSE */
+
+    ___close () {
+
+      this._on ( true, this.$expanders, 'expander:close', this.__close );
+
+    }
 
     __close ( event ) {
 
@@ -2227,9 +2299,23 @@
 
     }
 
+    /* MULTIPLE */
+
+    __multiple ( expander ) {
+
+      if ( !this.options.multiple ) {
+
+        this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
+
+      }
+
+    }
+
     /* API OVERRIDES */
 
     enable () {
+
+      super.enable ();
 
       _.invoke ( this.instances, 'enable' );
 
@@ -2243,9 +2329,9 @@
 
     /* API */
 
-    areOpen () {
+    isOpen ( index ) {
 
-      return _.invoke ( this.instances, 'isOpen' );
+      return this.instances[index].isOpen ();
 
     }
 
@@ -2443,7 +2529,7 @@
 /* =========================================================================
  * Svelto - Blurred
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -2545,7 +2631,7 @@
 /* =========================================================================
  * Svelto - BT (BinaryTree) Each
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -2567,12 +2653,208 @@
 
 
 /* =========================================================================
+ * Svelto - Timer
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* TIMER */
+
+  let Timer = class {
+
+    constructor ( ...args ) {
+
+      this.set ( ...args );
+
+    }
+
+    set ( callback, time, autostart ) {
+
+      this.init = true;
+      this.action = callback;
+
+      if ( !isNaN ( time ) ) {
+
+        this.intervalTime = time;
+
+      }
+
+      if ( autostart && !this.isActive ) {
+
+        this.isActive = true;
+        this.setTimer ();
+
+      }
+
+      return this;
+
+    }
+
+    once ( time ) {
+
+      if ( isNaN ( time ) ) {
+
+        time = 0;
+
+      }
+
+      setTimeout ( () => this.action (), time );
+
+      return this;
+
+    }
+
+    play ( reset ) {
+
+      if ( !this.isActive ) {
+
+        if ( reset ) {
+
+          this.setTimer ();
+
+        } else {
+
+          this.setTimer ( this.remainingTime );
+
+        }
+
+        this.isActive = true;
+
+      }
+
+      return this;
+
+    }
+
+    pause () {
+
+      if ( this.isActive ) {
+
+        this.isActive = false;
+        this.remainingTime -= Date.now () - this.last;
+        this.clearTimer ();
+
+      }
+
+      return this;
+
+    }
+
+    stop () {
+
+      this.isActive = false;
+      this.remainingTime = this.intervalTime;
+      this.clearTimer ();
+
+      return this;
+
+    }
+
+    toggle ( reset ) {
+
+      if ( this.isActive ) {
+
+        this.pause ();
+
+      } else if ( reset ) {
+
+        this.play ( true );
+
+      } else {
+
+        this.play ();
+
+      }
+
+      return this;
+
+    }
+
+    reset () {
+
+      this.isActive = false;
+
+      this.play ( true );
+
+      return this;
+
+    }
+
+    clearTimer () {
+
+      clearTimeout ( this.timeoutObject );
+
+    }
+
+    setTimer ( time ) {
+
+      if ( isNaN ( time ) ) {
+
+        time = this.intervalTime;
+
+      }
+
+      this.remainingTime = time;
+      this.last = Date.now ();
+      this.clearTimer ();
+
+      this.timeoutObject = setTimeout ( () => this.go (), time );
+
+    }
+
+    go () {
+
+      if ( this.isActive ) {
+
+        this.action ();
+        this.setTimer ();
+
+      }
+
+    }
+
+
+    remaining ( value ) {
+
+      if ( _.isUndefined ( value ) ) {
+
+        return this.remainingTime;
+
+      }
+
+      this.remainingTime = value;
+
+      return this;
+
+    }
+
+  };
+
+  /* EXPORT */
+
+  Svelto.Timer = Timer;
+
+}( Svelto.$, Svelto._, Svelto ));
+
+
+/* =========================================================================
  * Svelto - Carousel
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../timer/timer.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add slides drag support
@@ -2881,7 +3163,7 @@
 /* =========================================================================
  * Svelto - Targeter
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -3002,7 +3284,7 @@
 /* =========================================================================
  * Svelto - Color
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -3756,7 +4038,7 @@
 /* =========================================================================
  * Svelto - Cookie
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
@@ -4898,7 +5180,7 @@
 /* =========================================================================
  * Svelto - Transform (Utilties)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -4992,7 +5274,7 @@
 /* =========================================================================
  * Svelto - Positionate
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -5261,7 +5543,7 @@
 /* =========================================================================
  * Svelto - Embedded CSS
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -5756,6 +6038,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../closer/closer.js
+ * @requires ../browser/browser.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
@@ -5974,7 +6257,7 @@
 /* =========================================================================
  * Svelto - Toggler
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../opener/opener.js
@@ -6063,7 +6346,7 @@
 /* =========================================================================
  * Svelto - Touching
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -6740,6 +7023,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -6877,7 +7161,7 @@
 /* =========================================================================
  * Svelto - Spinner Overlay
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../overlay/overlay.js
@@ -7008,6 +7292,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../timer/timer.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
@@ -7409,7 +7695,7 @@
 /* =========================================================================
  * Svelto - Regexes
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -7451,7 +7737,7 @@
 /* =========================================================================
  * Svelto - Validator
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -7565,6 +7851,7 @@
  * =========================================================================
  * @requires ../widget/widget.js
  * @requires ../validator/validator.js
+ * @requires ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
@@ -8454,7 +8741,7 @@
 /* =========================================================================
  * Svelto - Helpers
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -8596,85 +8883,13 @@
 
 
 /* =========================================================================
- * Svelto - Keyboard
- * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/svelto.js
- * ========================================================================= */
-
-(function ( $, _, Svelto ) {
-
-  'use strict';
-
-  /* KEYBOARD */
-
-  let Keyboard = {
-    keys: {
-      BACKSPACE: 8,
-      COMMA: 188,
-      DEL: 46,
-      DELETE: 46,
-      DOWN: 40,
-      END: 35,
-      ENTER: 13,
-      ESC: 27,
-      ESCAPE: 27,
-      HOME: 36,
-      LEFT: 37,
-      PAGE_DOWN: 34,
-      PAGE_UP: 33,
-      PERIOD: 190,
-      RIGHT: 39,
-      SPACE: 32,
-      SPACEBAR: 32,
-      TAB: 9,
-      UP: 38
-    },
-    keystroke: {
-      match ( event, keystroke ) {
-
-        //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
-        //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
-
-        let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
-            keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
-
-        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
-        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
-        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
-
-        for ( let key of keys ) {
-
-          if ( !specialKeys.includes ( key ) ) {
-
-            if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
-
-          }
-
-        }
-
-        return true;
-
-      }
-    }
-  };
-
-  /* EXPORT */
-
-  Svelto.Keyboard = Keyboard;
-
-}( Svelto.$, Svelto._, Svelto ));
-
-
-/* =========================================================================
  * Svelto - Modal
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
@@ -8943,7 +9158,7 @@
 /* =========================================================================
  * Svelto - Mouse
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
@@ -8973,7 +9188,7 @@
 /* =========================================================================
  * Svelto - N Times Action (Group)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -9134,7 +9349,7 @@
 /* =========================================================================
  * Svelto - N Times Action (Action)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -9187,7 +9402,7 @@
 /* =========================================================================
  * Svelto - N Times Action
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -9265,7 +9480,7 @@
 /* =========================================================================
  * Svelto - Notification
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../noty/noty.js
@@ -9340,7 +9555,7 @@
 /* =========================================================================
  * Svelto - One Time Action
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../n_times_action/n_times_action.js
@@ -9476,6 +9691,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
@@ -9898,7 +10114,7 @@
 /* =========================================================================
  * Svelto - Panel (Closer)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires panel.js
@@ -9934,7 +10150,7 @@
 /* =========================================================================
  * Svelto - Nabar (Opener)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires panel.js
@@ -9970,7 +10186,7 @@
 /* =========================================================================
  * Svelto - Panel (Toggler)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires panel.js
@@ -10620,7 +10836,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
 * Svelto - Progressbar
 * =========================================================================
-* Copyright (c) 2016 Fabio Spampinato
+* Copyright (c) 2015-2016 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 * =========================================================================
 * @requires ../widget/widget.js
@@ -10790,7 +11006,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Rater
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../noty/noty.js
@@ -10962,7 +11178,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Remote Modal
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../modal/modal.js
@@ -11137,10 +11353,13 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Ripple
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../browser/browser.js
+ * @requires ../mouse/mouse.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
@@ -11318,7 +11537,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Route
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
@@ -11388,10 +11607,11 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Select (Toggler)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../dropdown/dropdown.js
+ * @requires ../browser/browser.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -11672,10 +11892,12 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Selectable
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../browser/browser.js
+ * @requires ../mouse/mouse.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Mouse ) {
@@ -11986,7 +12208,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Slider
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../draggable/draggable.js
@@ -12272,7 +12494,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Sortable
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -12541,7 +12763,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Stepper
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -12752,7 +12974,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Switch
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../draggable/draggable.js
@@ -12987,7 +13209,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Table Helper
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -13189,7 +13411,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Tabs
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -13359,10 +13581,11 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Tagbox
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../noty/noty.js
+ * @requires ../keyboard/keyboard.js
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
@@ -13855,7 +14078,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Time Ago
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
@@ -13952,203 +14175,9 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Timer
- * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
- * =========================================================================
- * @requires ../svelto/svelto.js
- * ========================================================================= */
-
-(function ( $, _, Svelto ) {
-
-  'use strict';
-
-  /* TIMER */
-
-  let Timer = class {
-
-    constructor ( ...args ) {
-
-      this.set ( ...args );
-
-    }
-
-    set ( callback, time, autostart ) {
-
-      this.init = true;
-      this.action = callback;
-
-      if ( !isNaN ( time ) ) {
-
-        this.intervalTime = time;
-
-      }
-
-      if ( autostart && !this.isActive ) {
-
-        this.isActive = true;
-        this.setTimer ();
-
-      }
-
-      return this;
-
-    }
-
-    once ( time ) {
-
-      if ( isNaN ( time ) ) {
-
-        time = 0;
-
-      }
-
-      setTimeout ( () => this.action (), time );
-
-      return this;
-
-    }
-
-    play ( reset ) {
-
-      if ( !this.isActive ) {
-
-        if ( reset ) {
-
-          this.setTimer ();
-
-        } else {
-
-          this.setTimer ( this.remainingTime );
-
-        }
-
-        this.isActive = true;
-
-      }
-
-      return this;
-
-    }
-
-    pause () {
-
-      if ( this.isActive ) {
-
-        this.isActive = false;
-        this.remainingTime -= Date.now () - this.last;
-        this.clearTimer ();
-
-      }
-
-      return this;
-
-    }
-
-    stop () {
-
-      this.isActive = false;
-      this.remainingTime = this.intervalTime;
-      this.clearTimer ();
-
-      return this;
-
-    }
-
-    toggle ( reset ) {
-
-      if ( this.isActive ) {
-
-        this.pause ();
-
-      } else if ( reset ) {
-
-        this.play ( true );
-
-      } else {
-
-        this.play ();
-
-      }
-
-      return this;
-
-    }
-
-    reset () {
-
-      this.isActive = false;
-
-      this.play ( true );
-
-      return this;
-
-    }
-
-    clearTimer () {
-
-      clearTimeout ( this.timeoutObject );
-
-    }
-
-    setTimer ( time ) {
-
-      if ( isNaN ( time ) ) {
-
-        time = this.intervalTime;
-
-      }
-
-      this.remainingTime = time;
-      this.last = Date.now ();
-      this.clearTimer ();
-
-      this.timeoutObject = setTimeout ( () => this.go (), time );
-
-    }
-
-    go () {
-
-      if ( this.isActive ) {
-
-        this.action ();
-        this.setTimer ();
-
-      }
-
-    }
-
-
-    remaining ( value ) {
-
-      if ( _.isUndefined ( value ) ) {
-
-        return this.remainingTime;
-
-      }
-
-      this.remainingTime = value;
-
-      return this;
-
-    }
-
-  };
-
-  /* EXPORT */
-
-  Svelto.Timer = Timer;
-
-}( Svelto.$, Svelto._, Svelto ));
-
-
-/* =========================================================================
  * Svelto - Tooltip
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../dropdown/dropdown.js
@@ -14179,7 +14208,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Tooltip (Closer)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires tooltip.js
@@ -14215,7 +14244,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Tooltip (Opener)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires tooltip.js
@@ -14254,7 +14283,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* =========================================================================
  * Svelto - Tooltip (Toggler)
  * =========================================================================
- * Copyright (c) 2016 Fabio Spampinato
+ * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires tooltip.js

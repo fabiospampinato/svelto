@@ -7,6 +7,7 @@
  * =========================================================================
  * @requires ../widget/widget.js
  * @requires ../validator/validator.js
+ * @requires ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex

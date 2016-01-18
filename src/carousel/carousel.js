@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.js
+ * @requires ../timer/timer.js
+ * @requires ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add slides drag support

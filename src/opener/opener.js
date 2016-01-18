@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../closer/closer.js
+ * @requires ../browser/browser.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {

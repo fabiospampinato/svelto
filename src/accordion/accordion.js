@@ -19,7 +19,7 @@
     plugin: true,
     selector: '.accordion',
     options: {
-      multiple: false, //INFO: Wheter to keep multiple expanders open or just one
+      multiple: false, //INFO: Wheter to allow multiple expanders open or not
       selectors: {
         expander: Widgets.Expander.config.selector
       },
@@ -47,43 +47,34 @@
 
     _events () {
 
-      /* EXPANDER OPEN */
-
-      this._on ( true, this.$expanders, 'expander:open', this.__open );
-
-      /* EXPANDER CLOSE */
-
-      this._on ( true, this.$expanders, 'expander:close', this.__close );
+      this.___open ();
+      this.___close ();
 
     }
 
     /* EXPANDER OPEN */
 
+    ___open () {
+
+      this._on ( true, this.$expanders, 'expander:open', this.__open );
+
+    }
+
     __open ( event ) {
 
       this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
 
-      /* SINGLE */
-
-      if ( !this.options.multiple ) {
-
-        /* CLOSE OTHERS */
-
-        for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
-
-          if ( this.$expanders[i] !== event.target ) {
-
-            this.instances[i].close ();
-
-          }
-
-        }
-
-      }
+      this.__multiple ( event.target );
 
     }
 
     /* EXPANDER CLOSE */
+
+    ___close () {
+
+      this._on ( true, this.$expanders, 'expander:close', this.__close );
+
+    }
 
     __close ( event ) {
 
@@ -91,9 +82,23 @@
 
     }
 
+    /* MULTIPLE */
+
+    __multiple ( expander ) {
+
+      if ( !this.options.multiple ) {
+
+        this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
+
+      }
+
+    }
+
     /* API OVERRIDES */
 
     enable () {
+
+      super.enable ();
 
       _.invoke ( this.instances, 'enable' );
 
@@ -107,9 +112,9 @@
 
     /* API */
 
-    areOpen () {
+    isOpen ( index ) {
 
-      return _.invoke ( this.instances, 'isOpen' );
+      return this.instances[index].isOpen ();
 
     }
 

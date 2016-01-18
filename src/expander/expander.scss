@@ -14,10 +14,12 @@
 
 .expander {
 
-  /* TOGGLER */
+  /* OPENER / CLOSER / TOGGLER */
 
-  //INFO: The toggler should also have the `actionable` class to provide a better feedback
+  //INFO: It should also have the `actionable` class to provide a better feedback
 
+  &-opener,
+  &-closer,
   &-toggler {
     cursor: pointer;
   }

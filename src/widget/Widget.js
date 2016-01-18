@@ -9,7 +9,9 @@
  * @requires ../tmpl/tmpl.js
  * @requires ../pointer/pointer.js
  * @requires ../factory/factory.js
+ * @requires ../breakpoints/breakpoints.js
  * @requires ../breakpoints/breakpoint.js
+ * @requires ../keyboard/keyboard.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
