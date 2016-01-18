@@ -10,7 +10,7 @@
  * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
 
@@ -35,8 +35,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.fast,
-        close: Svelto.animation.fast
+        open: Animations.fast,
+        close: Animations.fast
       },
       callbacks: {
         beforeopen: _.noop,
@@ -288,4 +288,4 @@
 
   Factory.init ( Dropdown, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations ));

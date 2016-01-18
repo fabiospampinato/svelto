@@ -8,7 +8,7 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Breakpoints ) {
 
   'use strict';
 
@@ -43,14 +43,14 @@
 
     get () {
 
-      let intervals = _.sortBy ( _.values ( Svelto.breakpoints ) ),
+      let intervals = _.sortBy ( _.values ( Breakpoints ) ),
           width = $window.width ();
 
       for ( let i = 0, l = intervals.length; i < l; i++ ) {
 
         if ( width >= intervals[i] && ( i === l - 1 || width < intervals[i+1] ) ) {
 
-          return _.findKey ( Svelto.breakpoints, interval => interval === intervals[i] );
+          return _.findKey ( Breakpoints, interval => interval === intervals[i] );
 
         }
 
@@ -74,4 +74,4 @@
 
   Svelto.Breakpoint = Breakpoint;
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Breakpoints ));

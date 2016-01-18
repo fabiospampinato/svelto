@@ -1,14 +1,25 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Animations
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
- * @requires ../animations/animations.js
- * @requires ../breakpoints/breakpoints.js
- * @requires ../colors/colors.js
- * @requires ../extras/lodash-extra.js
- * @requires ../extras/jQuery-extra.js
  * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* ANIMATIONS */
+
+  Svelto.Animations = {
+    xslow: 900,
+    slow: 500,
+    normal: 350,
+    fast: 150,
+    xfast: 75
+  };
+
+}( Svelto.$, Svelto._, Svelto ));

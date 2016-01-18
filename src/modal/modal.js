@@ -10,7 +10,7 @@
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
@@ -26,8 +26,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal
+        open: Animations.normal,
+        close: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -160,4 +160,4 @@
 
   Factory.init ( Modal, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

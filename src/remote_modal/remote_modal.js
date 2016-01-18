@@ -11,7 +11,7 @@
 
 //FIXME: Not beautifully written
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Widgets, Animations ) {
 
   'use strict';
 
@@ -148,7 +148,7 @@
               $tempModal.animate ({
                 width: newRect.width,
                 height: newRect.height
-              }, Svelto.animation.normal, function () {
+              }, Animations.normal, function () {
 
                 $tempModal.css ({
                   width: '',
@@ -171,4 +171,4 @@
 
   };
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Animations ));

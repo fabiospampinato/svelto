@@ -12,7 +12,7 @@
 
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
@@ -24,7 +24,7 @@
     selector: '.panel',
     options: {
       direction: 'left',
-      pin: false, //INFO: If is a valid key of `Svelto.breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
+      pin: false, //INFO: If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
         close: true,
@@ -41,8 +41,8 @@
         layout: '.layout, body' //TODO: Use only `.layout`
       },
       animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal,
+        open: Animations.normal,
+        close: Animations.normal,
       },
       keystrokes: {
         'esc': '__esc'
@@ -422,4 +422,4 @@
 
   Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

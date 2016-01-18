@@ -13,7 +13,7 @@
 
 //TODO: Move to their own folders/files
 
-(function ( $, _, Svelto, Widgets, Factory, Widgetize, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Widgetize, Pointer, Animations ) {
 
   'use strict';
 
@@ -25,7 +25,7 @@
 
     $scroller.on ( Pointer.tap, function () {
 
-      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
+      $body.add ( $html ).animate ( { scrollTop: 0 }, Animations.normal );
 
     });
 
@@ -43,4 +43,4 @@
 
   });
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Widgetize, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations ));

@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
 
   'use strict';
 
@@ -30,9 +30,9 @@
         centered: 'ripple-centered'
       },
       animations: {
-        show: Svelto.animation.xslow,
-        hide: Svelto.animation.xslow,
-        overlap: Svelto.animation.xslow / 100 * 58
+        show: Animations.xslow,
+        hide: Animations.xslow,
+        overlap: Animations.xslow / 100 * 58
       },
       callbacks: {
         show: _.noop,
@@ -177,4 +177,4 @@
 
   Factory.init ( Ripple, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));

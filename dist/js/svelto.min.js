@@ -6,37 +6,56 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Move the different sections like `colors` or `breakpoints` to their respective files
-
 (function () {
 
   'use strict';
 
   /* SVELTO */
 
-  window.Svelto = {
+  let Svelto = {
     VERSION: '0.3.0-beta2',
     $: jQuery ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
-    _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ) //INFO: Checking the version also in order to distinguish it from `underscore`
+    _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
+    Widgets: {}
   };
 
-  /* WIDGETS */
+  /* ERRORS */
 
-  Svelto.Widgets = {};
+  if ( !Svelto.$ ) {
 
-  /* BREAKPOINTS */
+    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
 
-  Svelto.breakpoints = {
-    xsmall: 0,
-    small: 512,
-    medium: 768,
-    large: 1024,
-    xlarge: 1216
-  };
+  }
 
-  /* ANIMATION */
+  if ( !Svelto._ ) {
 
-  Svelto.animation = {
+    throw new Error ( 'Svelto depends upon lodash, dependency unmet' );
+
+  }
+
+  /* EXPORT */
+
+  window.Svelto = Svelto;
+
+}());
+
+
+/* =========================================================================
+ * Svelto - Animations
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* ANIMATIONS */
+
+  Svelto.Animations = {
     xslow: 900,
     slow: 500,
     normal: 350,
@@ -44,9 +63,51 @@
     xfast: 75
   };
 
+}( Svelto.$, Svelto._, Svelto ));
+
+
+/* =========================================================================
+ * Svelto - Breakpoints
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* BREAKPOINTS */
+
+  Svelto.Breakpoints = {
+    xsmall: 0,
+    small: 512,
+    medium: 768,
+    large: 1024,
+    xlarge: 1216
+  };
+
+}( Svelto.$, Svelto._, Svelto ));
+
+
+/* =========================================================================
+ * Svelto - Colors
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
   /* COLORS */
 
-  Svelto.colors = {
+  Svelto.Colors = {
     primary: '#1565c0',
     secondary: '#ef6c00',
     tertiary: '#6a1b9a',
@@ -75,21 +136,7 @@
     base: '#eceff1'
   };
 
-  /* ERRORS */
-
-  if ( !Svelto.$ ) {
-
-    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
-
-  }
-
-  if ( !Svelto._ ) {
-
-    throw new Error ( 'Svelto depends upon lodash, dependency unmet' );
-
-  }
-
-}());
+}( Svelto.$, Svelto._, Svelto ));
 
 
 /* =========================================================================
@@ -668,6 +715,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
+ * @requires ../animations/animations.js
+ * @requires ../breakpoints/breakpoints.js
+ * @requires ../colors/colors.js
  * @requires ../extras/lodash-extra.js
  * @requires ../extras/jQuery-extra.js
  * ========================================================================= */
@@ -1222,7 +1272,7 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Breakpoints ) {
 
   'use strict';
 
@@ -1257,14 +1307,14 @@
 
     get () {
 
-      let intervals = _.sortBy ( _.values ( Svelto.breakpoints ) ),
+      let intervals = _.sortBy ( _.values ( Breakpoints ) ),
           width = $window.width ();
 
       for ( let i = 0, l = intervals.length; i < l; i++ ) {
 
         if ( width >= intervals[i] && ( i === l - 1 || width < intervals[i+1] ) ) {
 
-          return _.findKey ( Svelto.breakpoints, interval => interval === intervals[i] );
+          return _.findKey ( Breakpoints, interval => interval === intervals[i] );
 
         }
 
@@ -1288,7 +1338,7 @@
 
   Svelto.Breakpoint = Breakpoint;
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Breakpoints ));
 
 
 /* =========================================================================
@@ -1306,7 +1356,7 @@
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoint ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
   'use strict';
 
@@ -1334,7 +1384,7 @@
       },
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
-      breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Svelto.breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
+      breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
       keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
       keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
       callbacks: {} //INFO: Callbacks to trigger on specific events
@@ -1794,7 +1844,7 @@
 
     __breakpoint () {
 
-      let current = Svelto.breakpoints[Breakpoint.current];
+      let current = Breakpoints[Breakpoint.current];
 
       /* UP */
 
@@ -1802,7 +1852,7 @@
 
         if ( this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current >= Svelto.breakpoints[breakpoint] ) {
+          if ( current >= Breakpoints[breakpoint] ) {
 
             this[this.options.breakpoints.up[breakpoint]]();
 
@@ -1818,7 +1868,7 @@
 
         if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current < Svelto.breakpoints[breakpoint] ) {
+          if ( current < Breakpoints[breakpoint] ) {
 
             this[this.options.breakpoints.down[breakpoint]]();
 
@@ -1834,7 +1884,7 @@
 
         if ( this.options.breakpoints.range.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current === Svelto.breakpoints[breakpoint] ) {
+          if ( current === Breakpoints[breakpoint] ) {
 
             this[this.options.breakpoints.range[breakpoint]]();
 
@@ -1983,7 +2033,7 @@
 
   Factory.init ( Widget, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoint ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));
 
 
 /* =========================================================================
@@ -2521,7 +2571,7 @@
 
 //TODO: Add slides drag support
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
   'use strict';
 
@@ -2548,7 +2598,7 @@
         item: ' > *'
       },
       animations: {
-        cycle: Svelto.animation.normal
+        cycle: Animations.normal
       },
       keystrokes: {
         'left, up': 'previous',
@@ -2819,7 +2869,7 @@
 
   Factory.init ( Carousel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -5376,7 +5426,7 @@
  * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
 
@@ -5401,8 +5451,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.fast,
-        close: Svelto.animation.fast
+        open: Animations.fast,
+        close: Animations.fast
       },
       callbacks: {
         beforeopen: _.noop,
@@ -5654,7 +5704,7 @@
 
   Factory.init ( Dropdown, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -6686,7 +6736,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
@@ -6702,8 +6752,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.fast,
-        close: Svelto.animation.fast
+        open: Animations.fast,
+        close: Animations.fast
       },
       keystrokes: {
         'esc': 'close'
@@ -6815,7 +6865,7 @@
 
   Factory.init ( Overlay, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -6957,7 +7007,7 @@
 //TODO: Add better support for swipe to dismiss
 //TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
   'use strict';
 
@@ -7041,7 +7091,7 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: Svelto.animation.normal
+        remove: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -7347,7 +7397,7 @@
 
   Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -8409,7 +8459,7 @@
 
 //TODO: Move to their own folders/files
 
-(function ( $, _, Svelto, Widgets, Factory, Widgetize, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Widgetize, Pointer, Animations ) {
 
   'use strict';
 
@@ -8421,7 +8471,7 @@
 
     $scroller.on ( Pointer.tap, function () {
 
-      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
+      $body.add ( $html ).animate ( { scrollTop: 0 }, Animations.normal );
 
     });
 
@@ -8439,7 +8489,7 @@
 
   });
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Widgetize, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -8623,7 +8673,7 @@
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
@@ -8639,8 +8689,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal
+        open: Animations.normal,
+        close: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -8773,7 +8823,7 @@
 
   Factory.init ( Modal, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -9426,7 +9476,7 @@
 
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
@@ -9438,7 +9488,7 @@
     selector: '.panel',
     options: {
       direction: 'left',
-      pin: false, //INFO: If is a valid key of `Svelto.breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
+      pin: false, //INFO: If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
         close: true,
@@ -9455,8 +9505,8 @@
         layout: '.layout, body' //TODO: Use only `.layout`
       },
       animations: {
-        open: Svelto.animation.normal,
-        close: Svelto.animation.normal,
+        open: Animations.normal,
+        close: Animations.normal,
       },
       keystrokes: {
         'esc': '__esc'
@@ -9836,7 +9886,7 @@
 
   Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -10915,7 +10965,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 //FIXME: Not beautifully written
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Widgets, Animations ) {
 
   'use strict';
 
@@ -11052,7 +11102,7 @@ Prism.languages.js = Prism.languages.javascript;
               $tempModal.animate ({
                 width: newRect.width,
                 height: newRect.height
-              }, Svelto.animation.normal, function () {
+              }, Animations.normal, function () {
 
                 $tempModal.css ({
                   width: '',
@@ -11075,7 +11125,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   };
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Animations ));
 
 
 /* =========================================================================
@@ -11087,7 +11137,7 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
 
   'use strict';
 
@@ -11109,9 +11159,9 @@ Prism.languages.js = Prism.languages.javascript;
         centered: 'ripple-centered'
       },
       animations: {
-        show: Svelto.animation.xslow,
-        hide: Svelto.animation.xslow,
-        overlap: Svelto.animation.xslow / 100 * 58
+        show: Animations.xslow,
+        hide: Animations.xslow,
+        overlap: Animations.xslow / 100 * 58
       },
       callbacks: {
         show: _.noop,
@@ -11256,7 +11306,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   Factory.init ( Ripple, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));
 
 
 /* =========================================================================

@@ -11,7 +11,7 @@
 //TODO: Add better support for swipe to dismiss
 //TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
   'use strict';
 
@@ -95,7 +95,7 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: Svelto.animation.normal
+        remove: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -401,4 +401,4 @@
 
   Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));

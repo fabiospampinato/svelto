@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
@@ -24,8 +24,8 @@
         open: 'open'
       },
       animations: {
-        open: Svelto.animation.fast,
-        close: Svelto.animation.fast
+        open: Animations.fast,
+        close: Animations.fast
       },
       keystrokes: {
         'esc': 'close'
@@ -137,4 +137,4 @@
 
   Factory.init ( Overlay, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
