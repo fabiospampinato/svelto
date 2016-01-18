@@ -15,7 +15,7 @@
 
   /* FACTORY */
 
-  Svelto.Factory = {
+  let Factory = {
 
     /* VARIABLES */
 
@@ -93,7 +93,7 @@
 
         for ( let element of this ) {
 
-          let instance = this.instance ( Widget, options, element );
+          let instance = Factory.instance ( Widget, options, element );
 
           if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 
@@ -116,5 +116,9 @@
     }
 
   };
+
+  /* EXPORT */
+
+  Svelto.Factory = Factory;
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgetize ));

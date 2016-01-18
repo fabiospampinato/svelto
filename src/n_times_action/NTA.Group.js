@@ -157,4 +157,4 @@
 
   NTA.Group = Group;
 
-}( Svelto.$, Svelto._, Svelto.Cookie, Svelto.NTA = {} ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Cookie, Svelto.NTA = {} ));
