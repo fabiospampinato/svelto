@@ -23,7 +23,7 @@
 
   Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
-    $scroller.on ( Pointer.tap, () => {
+    $scroller.on ( Pointer.tap, function () {
 
       $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
 

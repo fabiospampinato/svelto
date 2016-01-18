@@ -33,7 +33,7 @@
 
   /* BROWSER */
 
-  Svelto.Browser = {
+  let Browser = {
     is: {
       chrome: /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
       firefox: /firefox/i.test ( userAgent ),
@@ -63,5 +63,9 @@
       touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof window.DocumentTouch )
     }
   };
+
+  /* EXPORT */
+
+  Svelto.Browser = Browser;
 
 }( Svelto.$, Svelto._, Svelto ));

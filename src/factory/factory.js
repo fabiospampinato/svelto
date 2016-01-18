@@ -19,15 +19,15 @@
 
     /* VARIABLES */
 
-    workers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], //INFO: `Factory` methods, in order, to call when initing a `Widget`
+    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], //INFO: `Factory` methods, in order, to call when initing a `Widget`
 
     /* METHODS */
 
     init ( Widget, config, namespace ) {
 
-      for ( let worker of this.workers ) {
+      for ( let initializer of this.initializers ) {
 
-        this[worker]( Widget, config, namespace );
+        this[initializer]( Widget, config, namespace );
 
       }
 
@@ -52,6 +52,8 @@
     namespace ( Widget, config, namespace ) {
 
       if ( _.isObject ( namespace ) ) {
+
+        //TODO: Gets class name instead, does it get modified for instance when the code gets minified?
 
         let name = _.capitalize ( Widget.config.name );
 

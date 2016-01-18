@@ -18,7 +18,7 @@
 
   /* VALIDATOR */
 
-  Svelto.Validator = {
+  let Validator = {
 
     /* TYPE */
 
@@ -101,4 +101,8 @@
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.regexes ));
+  /* EXPORT */
+
+  Svelto.Validator = Validator;
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Regexes ));

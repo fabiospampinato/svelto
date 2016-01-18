@@ -14,7 +14,7 @@
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Breakpoint ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoint ) {
 
   'use strict';
 
@@ -572,7 +572,7 @@
 
           for ( let keystroke of keystrokes.split ( ',' ) ) {
 
-            if ( $.matchKeystroke ( event, keystroke ) ) {
+            if ( Keyboard.keystroke.match ( event, keystroke ) ) {
 
               this[this.options.keystrokes[keystrokes]]();
 
@@ -691,4 +691,4 @@
 
   Factory.init ( Widget, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Breakpoint ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoint ));

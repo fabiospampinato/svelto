@@ -8,6 +8,8 @@
 * @requires ../svelto/svelto.js
 * ========================================================================= */
 
+//TODO: Add a way to remove key/val pairs
+
 /* EMBED CSS */
 
 (function ( $, _, Svelto ) {

@@ -10,7 +10,7 @@
 
 //TODO: Write it better
 
-(function ( $, _, Svelto, Browser, Pointer, Keyboard ) {
+(function ( $, _, Svelto, Browser, Pointer ) {
 
   'use strict';
 
@@ -93,16 +93,6 @@
 
   };
 
-  $.fn.onHover = function ( ...args ) {
-
-    //FIXME: Does it handle `Pointer.cancel` properly?
-    //FIXME: If we remove the target we are still attaching and removing thos events though (just performing the functions calls actually, probably)
-
-    this.on ( Pointer.enter, () => this.on ( ...args ) );
-    this.on ( Pointer.leave, () => this.off ( ...args ) );
-
-  };
-
   $.fn.toggleScroll = function ( force ) {
 
     //TODO: Preserve the scrollbars if possible, when disabling
@@ -149,44 +139,42 @@
 
     }
 
-		if ( this.length ) {
+		if ( !this.length ) return 0;
 
-			let $elem = this.eq ( 0 ),
-          position,
-          value;
+		let $elem = this.eq ( 0 ),
+        position,
+        value;
 
-			while ( $elem.length && $elem[0] !== document ) {
+		while ( $elem.length && $elem[0] !== document ) {
 
-				// Ignore z-index if position is set to a value where z-index is ignored by the browser
-				// This makes behavior of this function consistent across browsers
-				// WebKit always returns auto if the element is positioned
+			// Ignore z-index if position is set to a value where z-index is ignored by the browser
+			// This makes behavior of this function consistent across browsers
+			// WebKit always returns auto if the element is positioned
 
-        position = $elem.css ( 'position' );
+      position = $elem.css ( 'position' );
 
-        if ( ['absolute', 'relative', 'fixed'].includes ( position ) ) {
+      if ( ['absolute', 'relative', 'fixed'].includes ( position ) ) {
 
-					// IE returns 0 when zIndex is not specified
-					// other browsers return a string
-					// we ignore the case of nested elements with an explicit value of 0
-					// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+				// IE returns 0 when zIndex is not specified
+				// other browsers return a string
+				// we ignore the case of nested elements with an explicit value of 0
+				// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
 
-					value = parseInt ( $elem.css ( 'zIndex' ), 10 );
+				value = parseInt ( $elem.css ( 'zIndex' ), 10 );
 
-					if ( !isNaN ( value ) && value !== 0 ) {
+				if ( !_.isNaN ( value ) && value !== 0 ) {
 
-						return value;
-
-					}
+					return value;
 
 				}
 
-				$elem = $elem.parent ();
-
 			}
+
+			$elem = $elem.parent ();
 
 		}
 
-		return 0;
+    return 0;
 
 	};
 
@@ -199,33 +187,6 @@
       return this.zIndex ( ++topIndex );
 
     };
-
-  };
-
-  const specialKeystrokesKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'];
-
-  $.matchKeystroke = function ( event, keystroke ) {
-
-    //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
-    //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead
-
-    let keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
-
-    if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
-    if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
-    if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
-
-    for ( let key of keys ) {
-
-      if ( !specialKeystrokesKeys.includes ( key ) ) {
-
-        if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
-
-      }
-
-    }
-
-    return true;
 
   };
 
@@ -283,8 +244,6 @@
 
   $(function () {
 
-    /* COMMON OBJECTS */
-
     window.$window = $(window);
     window.$document = $(document);
     window.$html = $(document.documentElement);
@@ -292,54 +251,6 @@
     window.$body = $(document.body);
     window.$empty = $();
 
-    /* PUSHSTATE EVENT */
-
-    (function ( history ) {
-
-      let pushState = history.pushState;
-
-      history.pushState = function ( state ) {
-
-        if ( _.isFunction ( history.onpushstate ) ) {
-
-          history.onpushstate ( { state: state } );
-
-        }
-
-        $window.trigger ( 'pushstate' );
-
-        return pushState.apply ( history, arguments );
-
-      };
-
-    })( window.history );
-
-    /* ROUTE EVENT */
-
-    (function () {
-
-      let previous = window.location.href.split ( '#' )[0];
-
-      $window.on ( 'popstate pushstate', function () {
-
-        _.defer ( function () { //INFO: We need the `window.location.href` updated before
-
-          let current = window.location.href.split ( '#' )[0];
-
-          if ( current !== previous ) {
-
-            previous = current;
-
-            $window.trigger ( 'route' );
-
-          }
-
-        });
-
-      });
-
-    })();
-
   });
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Pointer ));

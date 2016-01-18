@@ -14,7 +14,7 @@
 
   /* KEYBOARD */
 
-  Svelto.Keyboard = {
+  let Keyboard = {
     keys: {
       BACKSPACE: 8,
       COMMA: 188,
@@ -35,7 +35,38 @@
       SPACEBAR: 32,
       TAB: 9,
       UP: 38
+    },
+    keystroke: {
+      match ( event, keystroke ) {
+
+        //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
+        //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
+
+        let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
+            keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
+
+        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
+        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
+        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
+
+        for ( let key of keys ) {
+
+          if ( !specialKeys.includes ( key ) ) {
+
+            if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+
+          }
+
+        }
+
+        return true;
+
+      }
     }
   };
+
+  /* EXPORT */
+
+  Svelto.Keyboard = Keyboard;
 
 }( Svelto.$, Svelto._, Svelto ));

@@ -16,7 +16,7 @@
 
   /* TIMER */
 
-  Svelto.Timer = class {
+  let Timer = class {
 
     constructor ( ...args ) {
 
@@ -185,5 +185,9 @@
     }
 
   };
+
+  /* EXPORT */
+
+  Svelto.Timer = Timer;
 
 }( Svelto.$, Svelto._, Svelto ));

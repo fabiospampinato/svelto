@@ -14,12 +14,16 @@
 
   /* MOUSE */
 
-  Svelto.Mouse = {
+  let Mouse = {
     buttons: {
       LEFT: 0,
       MIDDLE: 1,
       RIGHT: 2
     }
   };
+
+  /* EXPORT */
+
+  Svelto.Mouse = Mouse;
 
 }( Svelto.$, Svelto._, Svelto ));
