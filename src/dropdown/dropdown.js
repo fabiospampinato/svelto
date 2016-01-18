@@ -7,10 +7,10 @@
  * =========================================================================
  * @requires ../widget/widget.js
  * @requires ../positionate/positionate.js
- * @requires ../embed_css/embed_css.js
+ * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS ) {
 
   'use strict';
 
@@ -130,7 +130,7 @@
         $pointer: $pointer,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
-          change ( event, data ) {
+          change ( data ) {
             $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
@@ -140,7 +140,7 @@
 
       if ( !noTip ) {
 
-        $.embedCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
+        EmbeddedCSS.set ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -288,4 +288,4 @@
 
   Factory.init ( Dropdown, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS ));
