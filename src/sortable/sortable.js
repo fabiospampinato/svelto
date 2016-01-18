@@ -11,7 +11,7 @@
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
 //TODO: Add support for sorting other things other than tables' rows
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -60,7 +60,7 @@
 
   /* SORTABLE */
 
-  class Sortable extends Svelto.Widget {
+  class Sortable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -263,6 +263,6 @@
 
   /* FACTORY */
 
-  $.factory ( Sortable, config, Svelto );
+  Factory.init ( Sortable, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

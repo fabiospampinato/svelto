@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.overlay-closer',
     options: {
-      widget: Svelto.Overlay
+      widget: Widgets.Overlay
     }
   };
 
   /* OVERLAY CLOSER */
 
-  class OverlayCloser extends Svelto.Closer {}
+  class OverlayCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( OverlayCloser, config, Svelto );
+  Factory.init ( OverlayCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

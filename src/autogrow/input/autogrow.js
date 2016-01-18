@@ -10,7 +10,7 @@
 
 //INFO: It supports only `box-sizing: border-box` inputs
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
   /* AUTOGROW INPUT */
 
-  class AutogrowInput extends Svelto.Widget {
+  class AutogrowInput extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -77,6 +77,6 @@
 
   /* FACTORY */
 
-  $.factory ( AutogrowInput, config, Svelto );
+  Factory.init ( AutogrowInput, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

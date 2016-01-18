@@ -11,7 +11,7 @@
 
 //TODO: Add flick support
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -55,7 +55,7 @@
 
   /* SWITCH */
 
-  class Switch extends Svelto.Widget {
+  class Switch extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -229,6 +229,6 @@
 
   /* FACTORY */
 
-  $.factory ( Switch, config, Svelto );
+  Factory.init ( Switch, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

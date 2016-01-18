@@ -15,7 +15,7 @@
 //FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse ) {
 
   'use strict';
 
@@ -68,7 +68,7 @@
 
   /* DRAGGABLE */
 
-  class Draggable extends Svelto.Widget {
+  class Draggable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -468,7 +468,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxy.noMotion && ( !event.button || event.button === Svelto.mouseButton.LEFT ) ) {
+        if ( this.options.proxy.noMotion && ( !event.button || event.button === Mouse.buttons.LEFT ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 
@@ -523,6 +523,6 @@
 
   /* FACTORY */
 
-  $.factory ( Draggable, config, Svelto );
+  Factory.init ( Draggable, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse ));

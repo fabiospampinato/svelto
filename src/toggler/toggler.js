@@ -8,7 +8,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -25,7 +25,7 @@
 
   /* TOGGLER */
 
-  class Toggler extends Svelto.Opener {
+  class Toggler extends Widgets.Opener {
 
     /* TAP */
 
@@ -47,6 +47,6 @@
 
   /* FACTORY */
 
-  $.factory ( Toggler, config, Svelto );
+  Factory.init ( Toggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

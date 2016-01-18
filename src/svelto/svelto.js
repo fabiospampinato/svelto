@@ -8,7 +8,7 @@
 
 //TODO: Move the different sections like `colors` or `breakpoints` to their respective files
 
-(function ( window, document, undefined ) {
+(function () {
 
   'use strict';
 
@@ -18,41 +18,11 @@
     version: '0.3.0-beta2',
     $: jQuery ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
     _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ) //INFO: Checking the version also in order to distinguish it from `underscore`
-  }
-
-  /* KEY CODE */
-
-  //TODO: Add more of them
-
-  Svelto.keyCode = {
-    BACKSPACE: 8,
-    COMMA: 188,
-    DEL: 46,
-    DELETE: 46,
-    DOWN: 40,
-    END: 35,
-    ENTER: 13,
-    ESC: 27,
-    ESCAPE: 27,
-    HOME: 36,
-    LEFT: 37,
-    PAGE_DOWN: 34,
-    PAGE_UP: 33,
-    PERIOD: 190,
-    RIGHT: 39,
-    SPACE: 32,
-    SPACEBAR: 32,
-    TAB: 9,
-    UP: 38
   };
 
-  /* MOUSE BUTTON */
+  /* WIDGETS */
 
-  Svelto.mouseButton = {
-    LEFT: 0,
-    MIDDLE: 1,
-    RIGHT: 2
-  };
+  Svelto.Widgets = {};
 
   /* BREAKPOINTS */
 
@@ -119,4 +89,4 @@
 
   }
 
-}( window, document ));
+}());

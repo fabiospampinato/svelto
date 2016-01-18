@@ -12,7 +12,7 @@
 //INFO: `value` is supposed to be a string
 //INFO: Strings will be trimmed inside some validators
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Regexes ) {
 
   'use strict';
 
@@ -23,22 +23,22 @@
     /* TYPE */
 
     alpha ( value ) {
-      return !!value.match ( Svelto.regexes.alpha );
+      return !!value.match ( Regexes.alpha );
     },
     alphanumeric ( value ) {
-      return !!value.match ( Svelto.regexes.alphanumeric );
+      return !!value.match ( Regexes.alphanumeric );
     },
     hexadecimal ( value ) {
-      return !!value.match ( Svelto.regexes.hexadecimal );
+      return !!value.match ( Regexes.hexadecimal );
     },
     number ( value ) {
-      return !!value.match ( Svelto.regexes.integer ) || !!value.match ( Svelto.regexes.float );
+      return !!value.match ( Regexes.integer ) || !!value.match ( Regexes.float );
     },
     integer ( value ) {
-      return !!value.match ( Svelto.regexes.integer );
+      return !!value.match ( Regexes.integer );
     },
     float ( value ) {
-      return !!value.match ( Svelto.regexes.float );
+      return !!value.match ( Regexes.float );
     },
 
     /* NUMBER */
@@ -73,19 +73,19 @@
     /* THINGS */
 
     email ( value ) {
-      return !!value.match ( Svelto.regexes.email );
+      return !!value.match ( Regexes.email );
     },
     cc ( value ) {
-      return !!value.match ( Svelto.regexes.cc );
+      return !!value.match ( Regexes.cc );
     },
     ssn ( value ) {
-      return !!value.match ( Svelto.regexes.ssn );
+      return !!value.match ( Regexes.ssn );
     },
     ipv4 ( value ) {
-      return !!value.match ( Svelto.regexes.ipv4 );
+      return !!value.match ( Regexes.ipv4 );
     },
     url ( value ) {
-      return !!value.match ( Svelto.regexes.url );
+      return !!value.match ( Regexes.url );
     },
 
     /* OTHERS */
@@ -101,4 +101,4 @@
 
   };
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.regexes ));

@@ -10,7 +10,7 @@
 
 //TODO: Add slides drag support
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer ) {
 
   'use strict';
 
@@ -51,7 +51,7 @@
 
   /* CAROUSEL */
 
-  class Carousel extends Svelto.Widget {
+  class Carousel extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -69,7 +69,7 @@
       this._previous = false;
       this._current = false;
 
-      this.timer = new Svelto.Timer ( this.next.bind ( this ), this.options.interval, false );
+      this.timer = new Timer ( this.next.bind ( this ), this.options.interval, false );
 
     }
 
@@ -306,6 +306,6 @@
 
   /* FACTORY */
 
-  $.factory ( Carousel, config, Svelto );
+  Factory.init ( Carousel, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer ));

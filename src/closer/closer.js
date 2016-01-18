@@ -9,7 +9,7 @@
  * @requires ../targeter/targeter.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -27,7 +27,7 @@
 
   /* CLOSER */
 
-  class Closer extends Svelto.Targeter {
+  class Closer extends Widgets.Targeter {
 
     /* SPECIAL */
 
@@ -65,6 +65,6 @@
 
   /* FACTORY */
 
-  $.factory ( Closer, config, Svelto );
+  Factory.init ( Closer, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

@@ -9,7 +9,7 @@
  * @requires ../bteach/bteach.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -148,4 +148,4 @@
 
   $.fn.touching.defaults = defaults;
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

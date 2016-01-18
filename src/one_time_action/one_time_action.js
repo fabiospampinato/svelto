@@ -8,7 +8,7 @@
  * @requires ../n_times_action/n_times_action.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -20,4 +20,4 @@
 
   };
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

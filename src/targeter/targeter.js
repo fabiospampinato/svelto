@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -26,7 +26,7 @@
 
   /* TARGETER */
 
-  class Targeter extends Svelto.Widget {
+  class Targeter extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -44,6 +44,6 @@
 
   /* FACTORY */
 
-  $.factory ( Targeter, config, Svelto );
+  Factory.init ( Targeter, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

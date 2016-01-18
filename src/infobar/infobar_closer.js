@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.infobar-closer',
     options: {
-      widget: Svelto.Infobar
+      widget: Widgets.Infobar
     }
   };
 
   /* INFOBAR CLOSER */
 
-  class InfobarCloser extends Svelto.Closer {}
+  class InfobarCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( InfobarCloser, config, Svelto );
+  Factory.init ( InfobarCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

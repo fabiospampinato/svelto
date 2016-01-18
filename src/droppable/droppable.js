@@ -9,7 +9,7 @@
  * @requires ../touching/touching.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -35,7 +35,7 @@
 
   /* DROPPABLE */
 
-  class Droppable extends Svelto.Widget {
+  class Droppable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -139,6 +139,6 @@
 
   /* FACTORY */
 
-  $.factory ( Droppable, config, Svelto );
+  Factory.init ( Droppable, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

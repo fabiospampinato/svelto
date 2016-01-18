@@ -12,7 +12,7 @@
 
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -56,7 +56,7 @@
 
   /* PANEL */
 
-  class Panel extends Svelto.Widget {
+  class Panel extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -86,7 +86,7 @@
       this._isSlim = this.$panel.hasClass ( this.options.classes.slim );
 
       this.$layout = this.$panel.closest ( this.options.selectors.layout );
-      this.layoutPinnedClass = Svelto.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
+      this.layoutPinnedClass = Widgets.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
 
     }
 
@@ -414,6 +414,6 @@
 
   /* FACTORY */
 
-  $.factory ( Panel, config, Svelto );
+  Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

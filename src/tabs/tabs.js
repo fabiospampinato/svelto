@@ -12,7 +12,7 @@
 //TODO: Not well written, make it better
 //TODO: Doesn't handle properly a change of the direction
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -43,7 +43,7 @@
 
   /* TABS */
 
-  class Tabs extends Svelto.Widget {
+  class Tabs extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -164,6 +164,6 @@
 
   /* FACTORY */
 
-  $.factory ( Tabs, config, Svelto );
+  Factory.init ( Tabs, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

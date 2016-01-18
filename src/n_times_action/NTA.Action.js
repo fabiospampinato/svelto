@@ -9,7 +9,7 @@
  * @requires NTA.Group.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, NTA ) {
 
   'use strict';
 
@@ -19,7 +19,7 @@
 
     constructor ( options ) {
 
-      this.group = new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
+      this.group = new NTA.Group ({ name: options.group, cookie: options.cookie });
       this.name = options.name;
       this.expiry = options.expiry;
 
@@ -47,6 +47,6 @@
 
   /* BINDING */
 
-  Svelto.NTA.Action = Action;
+  NTA.Action = Action;
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.NTA ));

@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -39,7 +39,7 @@
 
   /* OVERLAY */
 
-  class Overlay extends Svelto.Widget {
+  class Overlay extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -135,6 +135,6 @@
 
   /* FACTORY */
 
-  $.factory ( Overlay, config, Svelto );
+  Factory.init ( Overlay, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

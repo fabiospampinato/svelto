@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.panel-opener',
     options: {
-      widget: Svelto.Panel
+      widget: Widgets.Panel
     }
   };
 
   /* PANEL OPENER */
 
-  class PanelOpener extends Svelto.Opener {}
+  class PanelOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( PanelOpener, config, Svelto );
+  Factory.init ( PanelOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

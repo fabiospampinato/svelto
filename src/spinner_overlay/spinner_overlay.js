@@ -8,7 +8,7 @@
  * @requires ../overlay/overlay.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -48,7 +48,7 @@
 
   /* SPINNER OVERLAY */
 
-  class SpinnerOverlay extends Svelto.Widget {
+  class SpinnerOverlay extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -111,7 +111,7 @@
 
           this._trigger ( 'close' );
 
-        }, Svelto.Overlay.config.options.animations.close );
+        }, Widgets.Overlay.config.options.animations.close );
 
       }
 
@@ -121,6 +121,6 @@
 
   /* FACTORY */
 
-  $.factory ( SpinnerOverlay, config, Svelto );
+  Factory.init ( SpinnerOverlay, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

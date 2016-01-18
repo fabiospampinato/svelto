@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.modal-toggler',
     options: {
-      widget: Svelto.Modal
+      widget: Widgets.Modal
     }
   };
 
   /* MODAL TOGGLER */
 
-  class ModalToggler extends Svelto.Toggler {}
+  class ModalToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( ModalToggler, config, Svelto );
-  
-}( Svelto.$, Svelto._, window, document ));
+  Factory.init ( ModalToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

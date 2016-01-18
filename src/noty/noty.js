@@ -11,7 +11,7 @@
 //TODO: Add better support for swipe to dismiss
 //TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer ) {
 
   'use strict';
 
@@ -131,7 +131,7 @@
 
   /* NOTY */
 
-  class Noty extends Svelto.Widget {
+  class Noty extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -195,7 +195,7 @@
 
         if ( !this.timer ) {
 
-          this.timer = new Svelto.Timer ( this.close.bind ( this ), this.options.ttl, true );
+          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
 
         } else {
 
@@ -399,6 +399,6 @@
 
   /* FACTORY */
 
-  $.factory ( Noty, config, Svelto );
+  Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer ));

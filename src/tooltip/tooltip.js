@@ -8,7 +8,7 @@
  * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -21,10 +21,10 @@
 
   /* TOOLTIP */
 
-  class Tooltip extends Svelto.Dropdown {}
+  class Tooltip extends Widgets.Dropdown {}
 
   /* FACTORY */
 
-  $.factory ( Tooltip, config, Svelto );
+  Factory.init ( Tooltip, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -8,13 +8,13 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* WIDGETIZE */
 
-  Svelto.Widgetize = new class {
+  let Widgetize = new class {
 
     constructor () {
 
@@ -113,4 +113,8 @@
 
   });
 
-}( Svelto.$, Svelto._, window, document ));
+  /* EXPORT */
+
+  Svelto.Widgetize = Widgetize;
+
+}( Svelto.$, Svelto._, Svelto ));

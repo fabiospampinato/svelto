@@ -8,7 +8,7 @@
  * @requires ../expander/expander.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -21,7 +21,7 @@
     options: {
       multiple: false, //INFO: Wheter to keep multiple expanders open or just one
       selectors: {
-        expander: Svelto.Expander.config.selector
+        expander: Widgets.Expander.config.selector
       },
       callbacks: {
         open: _.noop,
@@ -32,7 +32,7 @@
 
   /* ACCORDION */
 
-  class Accordion extends Svelto.Widget {
+  class Accordion extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -135,6 +135,6 @@
 
   /* FACTORY */
 
-  $.factory ( Accordion, config, Svelto );
+  Factory.init ( Accordion, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

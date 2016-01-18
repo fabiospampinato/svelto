@@ -9,7 +9,7 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -265,4 +265,4 @@
 
   $.fn.positionate.defaults = defaults;
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

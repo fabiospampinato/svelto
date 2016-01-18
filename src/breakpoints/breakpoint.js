@@ -8,13 +8,13 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* BREAKPOINT */
 
-  Svelto.Breakpoint = {
+  let Breakpoint = {
 
     /* VARIABLES */
 
@@ -64,10 +64,14 @@
 
   $(function () {
 
-    Svelto.Breakpoint.current = Svelto.Breakpoint.get ();
+    Breakpoint.current = Breakpoint.get ();
 
-    $window.on ( 'resize', _.throttle ( Svelto.Breakpoint.__resize.bind ( Svelto.Breakpoint ), Svelto.Breakpoint.throttle ) );
+    $window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
 
   });
 
-}( Svelto.$, Svelto._, window, document ));
+  /* EXPORT */
+
+  Svelto.Breakpoint = Breakpoint;
+
+}( Svelto.$, Svelto._, Svelto ));

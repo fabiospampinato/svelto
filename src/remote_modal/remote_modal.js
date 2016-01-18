@@ -11,7 +11,7 @@
 
 //FIXME: Not beautifully written
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
@@ -25,7 +25,7 @@
 
       $modal.remove ();
 
-    }, Svelto.Modal.config.options.animations.close );
+    }, Widgets.Modal.config.options.animations.close );
 
   };
 
@@ -171,4 +171,4 @@
 
   };
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

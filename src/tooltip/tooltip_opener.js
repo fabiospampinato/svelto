@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,7 +20,7 @@
     plugin: true,
     selector: '.tooltip-opener',
     options: {
-      widget: Svelto.Tooltip,
+      widget: Widgets.Tooltip,
       hover: {
         active: true
       }
@@ -29,10 +29,10 @@
 
   /* TOOLTIP OPENER */
 
-  class TooltipOpener extends Svelto.Opener {}
+  class TooltipOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( TooltipOpener, config, Svelto );
+  Factory.init ( TooltipOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -11,7 +11,7 @@
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
 
   'use strict';
 
@@ -66,7 +66,7 @@
 
   /* SELECT TOGGLER */
 
-  class SelectToggler extends Svelto.Widget {
+  class SelectToggler extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -95,7 +95,7 @@
 
       this._updateValueholder ();
 
-      if ( !$.browser.is.touchDevice ) {
+      if ( !Browser.is.touchDevice ) {
 
         this.$select.addClass ( this.options.classes.hidden );
 
@@ -112,7 +112,7 @@
 
       this._on ( true, this.$select, 'change', this.__change );
 
-      if ( !$.browser.is.touchDevice ) {
+      if ( !Browser.is.touchDevice ) {
 
         /* BUTTON TAP */
 
@@ -201,7 +201,7 @@
 
       this.$buttons.dropdownCloser ();
 
-      this.$toggler.attr ( 'data-' + Svelto.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
+      this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
 
       this._updateDropdown ();
 
@@ -246,7 +246,7 @@
 
       this._updateValueholder ();
 
-      if ( !$.browser.is.touchDevice ) {
+      if ( !Browser.is.touchDevice ) {
 
         this._updateDropdown ();
 
@@ -278,6 +278,6 @@
 
   /* FACTORY */
 
-  $.factory ( SelectToggler, config, Svelto );
+  Factory.init ( SelectToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));

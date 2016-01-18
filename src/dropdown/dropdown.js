@@ -10,7 +10,7 @@
  * @requires ../embed_css/embed_css.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -48,7 +48,7 @@
 
   /* DROPDOWN */
 
-  class Dropdown extends Svelto.Widget {
+  class Dropdown extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -286,6 +286,6 @@
 
   /* FACTORY */
 
-  $.factory ( Dropdown, config, Svelto );
+  Factory.init ( Dropdown, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

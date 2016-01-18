@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Mouse ) {
 
   'use strict';
 
@@ -39,7 +39,7 @@
 
   /* SELECTABLE */
 
-  class Selectable extends Svelto.Widget {
+  class Selectable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -52,7 +52,7 @@
 
     _events () {
 
-      if ( $.browser.is.touchDevice ) {
+      if ( Browser.is.touchDevice ) {
 
         this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
 
@@ -88,7 +88,7 @@
 
     __down ( event ) {
 
-      if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; //INFO: Only the left click is allowed
 
       event.preventDefault ();
 
@@ -308,6 +308,6 @@
 
   /* FACTORY */
 
-  $.factory ( Selectable, config, Svelto );
+  Factory.init ( Selectable, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Mouse ));

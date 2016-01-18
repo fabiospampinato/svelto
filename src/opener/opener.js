@@ -8,7 +8,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
 
   'use strict';
 
@@ -32,7 +32,7 @@
 
   /* OPENER */
 
-  class Opener extends Svelto.Closer {
+  class Opener extends Widgets.Closer {
 
     /* SPECIAL */
 
@@ -44,7 +44,7 @@
 
       /* HOVER */
 
-      if ( this.options.hover.active && !$.browser.is.touchDevice ) {
+      if ( this.options.hover.active && !Browser.is.touchDevice ) {
 
         this._on ( Pointer.enter, this.__hoverEnter );
 
@@ -180,6 +180,6 @@
 
   /* FACTORY */
 
-  $.factory ( Opener, config, Svelto );
+  Factory.init ( Opener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));

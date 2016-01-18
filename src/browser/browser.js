@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -33,7 +33,7 @@
 
   /* BROWSER */
 
-  $.browser = {
+  Svelto.Browser = {
     is: {
       chrome: /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
       firefox: /firefox/i.test ( userAgent ),
@@ -64,4 +64,4 @@
     }
   };
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

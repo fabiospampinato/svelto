@@ -11,7 +11,7 @@
 
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Color, Keyboard ) {
 
   'use strict';
 
@@ -22,7 +22,7 @@
     plugin: true,
     selector: '.colorpicker',
     options: {
-      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Svelto.Color` obj
+      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
       live: false,
       selectors: {
         sb: {
@@ -43,7 +43,7 @@
 
   /* COLORPICKER */
 
-  class Colorpicker extends Svelto.Widget {
+  class Colorpicker extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -139,19 +139,19 @@
 
       switch ( event.keyCode ) {
 
-        case Svelto.keyCode.UP:
+        case Keyboard.keys.UP:
           this.hsv.v = Math.min ( 100, this.hsv.v + 1 );
           break;
 
-        case Svelto.keyCode.RIGHT:
+        case Keyboard.keys.RIGHT:
           this.hsv.s = Math.min ( 100, this.hsv.s + 1 );
           break;
 
-        case Svelto.keyCode.DOWN:
+        case Keyboard.keys.DOWN:
           this.hsv.v = Math.max ( 0, this.hsv.v - 1 );
           break;
 
-        case Svelto.keyCode.LEFT:
+        case Keyboard.keys.LEFT:
           this.hsv.s = Math.max ( 0, this.hsv.s - 1 );
           break;
 
@@ -203,11 +203,11 @@
 
       switch ( event.keyCode ) {
 
-        case Svelto.keyCode.UP:
+        case Keyboard.keys.UP:
           this.hsv.h = Math.min ( 359, this.hsv.h + 1 );
           break;
 
-        case Svelto.keyCode.DOWN:
+        case Keyboard.keys.DOWN:
           this.hsv.h = Math.max ( 0, this.hsv.h - 1 );
           break;
 
@@ -256,7 +256,7 @@
 
     _updateSb () {
 
-      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
+      let hsl = Color.hsv2hsl ( this.hsv ),
           translateX = this.sbWrpSize / 100 * this.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
 
@@ -266,7 +266,7 @@
 
     _updateHue () {
 
-      let hsl = Svelto.Color.hsv2hsl ( this.hsv ),
+      let hsl = Color.hsv2hsl ( this.hsv ),
           translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
       this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
@@ -297,7 +297,7 @@
 
     _getHexStr () {
 
-      let hex = Svelto.Color.hsv2hex ( this.hsv );
+      let hex = Color.hsv2hex ( this.hsv );
 
       return '#' + hex.r + hex.g + hex.b;
 
@@ -313,7 +313,7 @@
 
     set ( color ) {
 
-      color = _.attempt ( () => new Svelto.Color ( color ) );
+      color = _.attempt ( () => new Color ( color ) );
 
       if ( !_.isError ( color ) ) {
 
@@ -339,6 +339,6 @@
 
   /* FACTORY */
 
-  $.factory ( Colorpicker, config, Svelto );
+  Factory.init ( Colorpicker, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard ));

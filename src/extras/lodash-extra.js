@@ -10,7 +10,7 @@
 
 //TODO: Write it better
 
-(function ( _, window, document, undefined ) {
+(function ( _, Svelto ) {
 
   'use strict';
 
@@ -236,4 +236,4 @@
 
   });
 
-}( Svelto._, window, document ));
+}( Svelto._, Svelto ));

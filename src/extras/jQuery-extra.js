@@ -10,7 +10,7 @@
 
 //TODO: Write it better
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Browser, Pointer, Keyboard ) {
 
   'use strict';
 
@@ -59,7 +59,7 @@
 
   $.hasCtrlOrCmd = function ( event ) {
 
-    return ( !$.browser.is.mac && event.ctrlKey ) || ( $.browser.is.mac && event.metaKey );
+    return ( !Browser.is.mac && event.ctrlKey ) || ( Browser.is.mac && event.metaKey );
 
   };
 
@@ -206,7 +206,7 @@
 
   $.matchKeystroke = function ( event, keystroke ) {
 
-    //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Svelto.keyCode[charName] //FIXME
+    //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
     //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead
 
     let keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
@@ -219,7 +219,7 @@
 
       if ( !specialKeystrokesKeys.includes ( key ) ) {
 
-        if ( !( event.keyCode === Svelto.keyCode[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+        if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
 
       }
 
@@ -342,4 +342,4 @@
 
   });
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard ));

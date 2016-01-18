@@ -13,7 +13,7 @@
 
 //TODO: Move to their own folders/files
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Widgetize, Pointer ) {
 
   'use strict';
 
@@ -21,7 +21,7 @@
 
   //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
-  Svelto.Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
+  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
     $scroller.on ( Pointer.tap, () => {
 
@@ -37,10 +37,10 @@
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Rewrite a component for it
 
-  Svelto.Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
+  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
     $toggler.on ( Pointer.tap, screenfull.toggle );
 
   });
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Widgetize, Svelto.Pointer ));

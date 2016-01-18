@@ -13,7 +13,7 @@
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse ) {
 
   'use strict';
 
@@ -97,7 +97,7 @@
 
   /* DATEPICKER */
 
-  class Datepicker extends Svelto.Widget {
+  class Datepicker extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -197,7 +197,7 @@
 
     __dayTap ( event ) {
 
-      if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
+      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
 
       let $day = $(event.currentTarget);
 
@@ -504,6 +504,6 @@
 
   /* FACTORY */
 
-  $.factory ( Datepicker, config, Svelto );
+  Factory.init ( Datepicker, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse ));

@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.modal-closer',
     options: {
-      widget: Svelto.Modal
+      widget: Widgets.Modal
     }
   };
 
   /* MODAL CLOSER */
 
-  class ModalCloser extends Svelto.Closer {}
+  class ModalCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( ModalCloser, config, Svelto );
+  Factory.init ( ModalCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

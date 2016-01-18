@@ -10,7 +10,7 @@
 
 //TODO: Maybe add the ability to open it
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
   /* INFOBAR */
 
-  class Infobar extends Svelto.Widget {
+  class Infobar extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -55,6 +55,6 @@
 
   /* FACTORY */
 
-  $.factory ( Infobar, config, Svelto );
+  Factory.init ( Infobar, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

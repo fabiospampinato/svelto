@@ -8,7 +8,7 @@
 * @requires ../widget/widget.js
 * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -55,13 +55,13 @@
 
     options = _.isNumber ( options ) ? { value: options } : options;
 
-    return new Svelto.Progressbar ( options );
+    return new Widgets.Progressbar ( options );
 
   };
 
   /* PROGRESSBAR */
 
-  class Progressbar extends Svelto.Widget {
+  class Progressbar extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -164,6 +164,6 @@
 
   /* FACTORY */
 
-  $.factory ( Progressbar, config, Svelto );
+  Factory.init ( Progressbar, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

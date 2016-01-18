@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
   /* TIME AGO */
 
-  class TimeAgo extends Svelto.Widget {
+  class TimeAgo extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -93,6 +93,6 @@
 
   /* FACTORY */
 
-  $.factory ( TimeAgo, config, Svelto );
+  Factory.init ( TimeAgo, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

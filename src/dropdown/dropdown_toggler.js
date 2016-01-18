@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.dropdown-toggler',
     options: {
-      widget: Svelto.Dropdown
+      widget: Widgets.Dropdown
     }
   };
 
   /* DROPDOWN TOGGLER */
 
-  class DropdownToggler extends Svelto.Toggler {}
+  class DropdownToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( DropdownToggler, config, Svelto );
+  Factory.init ( DropdownToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

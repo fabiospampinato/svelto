@@ -13,7 +13,7 @@
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Breakpoint ) {
 
   'use strict';
 
@@ -43,7 +43,7 @@
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Svelto.breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
       keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Svelto.keyCode.UP: 'up' }`
+      keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
       callbacks: {} //INFO: Callbacks to trigger on specific events
     }
   };
@@ -501,7 +501,7 @@
 
     __breakpoint () {
 
-      let current = Svelto.breakpoints[Svelto.Breakpoint.current];
+      let current = Svelto.breakpoints[Breakpoint.current];
 
       /* UP */
 
@@ -688,6 +688,6 @@
 
   /* FACTORY */
 
-  $.factory ( Widget, config, Svelto );
+  Factory.init ( Widget, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Breakpoint ));

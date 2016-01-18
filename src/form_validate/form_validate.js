@@ -11,7 +11,7 @@
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Validator ) {
 
   'use strict';
 
@@ -34,10 +34,10 @@
     options: {
       validators: {
         required ( value ) {
-          return !Svelto.Validator.empty ( value );
+          return !Validator.empty ( value );
         },
         values ( value, ...values ) {
-          return Svelto.Validator.included ( value, values );
+          return Validator.included ( value, values );
         },
         field ( value, fieldName ) {
           let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
@@ -110,7 +110,7 @@
 
   /* FORM VALIDATE */
 
-  class FormValidate extends Svelto.Widget {
+  class FormValidate extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -173,7 +173,7 @@
 
             let validationName = matches[1],
                 validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
-                validator = this.options.validators[validationName] || Svelto.Validator[validationName];
+                validator = this.options.validators[validationName] || Validator[validationName];
 
             if ( !validator ) continue;
 
@@ -460,6 +460,6 @@
 
   /* FACTORY */
 
-  $.factory ( FormValidate, config, Svelto );
+  Factory.init ( FormValidate, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator ));

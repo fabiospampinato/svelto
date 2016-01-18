@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.dropdown-opener',
     options: {
-      widget: Svelto.Dropdown
+      widget: Widgets.Dropdown
     }
   };
 
   /* DROPDOWN OPENER */
 
-  class DropdownOpener extends Svelto.Opener {}
+  class DropdownOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( DropdownOpener, config, Svelto );
+  Factory.init ( DropdownOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

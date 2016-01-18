@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -51,7 +51,7 @@
 
   /* TABLE HELPER */
 
-  class TableHelper extends Svelto.Widget {
+  class TableHelper extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -196,6 +196,6 @@
 
   /* FACTORY */
 
-  $.factory ( TableHelper, config, Svelto );
+  Factory.init ( TableHelper, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

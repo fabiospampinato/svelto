@@ -10,7 +10,7 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -186,4 +186,4 @@
 
   };
 
-}( Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

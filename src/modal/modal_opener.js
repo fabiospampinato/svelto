@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.modal-opener',
     options: {
-      widget: Svelto.Modal
+      widget: Widgets.Modal
     }
   };
 
   /* MODAL OPENER */
 
-  class ModalOpener extends Svelto.Opener {}
+  class ModalOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( ModalOpener, config, Svelto );
+  Factory.init ( ModalOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

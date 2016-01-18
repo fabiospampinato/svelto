@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.expander-opener',
     options: {
-      widget: Svelto.Expander
+      widget: Widgets.Expander
     }
   };
 
   /* EXPANDER OPENER */
 
-  class ExpanderOpener extends Svelto.Opener {}
+  class ExpanderOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( ExpanderOpener, config, Svelto );
+  Factory.init ( ExpanderOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.overlay-toggler',
     options: {
-      widget: Svelto.Overlay
+      widget: Widgets.Overlay
     }
   };
 
   /* OVERLAY TOGGLER */
 
-  class OverlayToggler extends Svelto.Toggler {}
+  class OverlayToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( OverlayToggler, config, Svelto );
+  Factory.init ( OverlayToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

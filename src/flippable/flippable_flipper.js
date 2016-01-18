@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,7 +20,7 @@
     plugin: true,
     selector: '.flippable-flipper, .flippable .flipper',
     options: {
-      widget: Svelto.Flippable,
+      widget: Widgets.Flippable,
       methods: {
         toggle: 'flip',
         open: 'front',
@@ -31,10 +31,10 @@
 
   /* FLIPPABLE FLIPPER */
 
-  class FlippableFlipper extends Svelto.Toggler {}
+  class FlippableFlipper extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( FlippableFlipper, config, Svelto );
+  Factory.init ( FlippableFlipper, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

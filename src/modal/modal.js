@@ -10,7 +10,7 @@
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -41,7 +41,7 @@
 
   /* MODAL */
 
-  class Modal extends Svelto.Widget {
+  class Modal extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -158,6 +158,6 @@
 
   /* FACTORY */
 
-  $.factory ( Modal, config, Svelto );
+  Factory.init ( Modal, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

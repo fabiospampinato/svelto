@@ -9,7 +9,7 @@
  * @requires ../cookie/cookie.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Cookie, NTA ) {
 
   'use strict';
 
@@ -55,7 +55,7 @@
       this.name = options.name;
       this.cookie = options.cookie;
 
-      this.actions = config.decoder ( $.cookie.get ( this.name ) || '{}' );
+      this.actions = config.decoder ( Cookie.get ( this.name ) || '{}' );
 
     }
 
@@ -121,7 +121,7 @@
 
     update () {
 
-      $.cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
+      Cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
 
     }
 
@@ -145,7 +145,7 @@
 
         this.actions = {};
 
-        $.cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
+        Cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
 
       }
 
@@ -155,7 +155,6 @@
 
   /* BINDING */
 
-  Svelto.NTA = {};
-  Svelto.NTA.Group = Group;
+  NTA.Group = Group;
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto.Cookie, Svelto.NTA = {} ));

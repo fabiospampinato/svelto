@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,7 +20,7 @@
     plugin: true,
     selector: '.tooltip-toggler',
     options: {
-      widget: Svelto.Tooltip,
+      widget: Widgets.Tooltip,
       hover: {
         active: true
       }
@@ -29,10 +29,10 @@
 
   /* TOOLTIP TOGGLER */
 
-  class TooltipToggler extends Svelto.Toggler {}
+  class TooltipToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( TooltipToggler, config, Svelto );
+  Factory.init ( TooltipToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -10,7 +10,7 @@
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard ) {
 
   'use strict';
 
@@ -43,7 +43,7 @@
         forbid: true, //INFO: Forbid or not
         forbidden: [ '<', '>', ';', '`' ],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [Svelto.keyCode.ENTER, Svelto.keyCode.TAB] //INFO: They are keyCodes
+        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: false, //INFO: Escape potential XSS characters
@@ -75,13 +75,13 @@
 
   /* TAGBOX */
 
-  class Tagbox extends Svelto.Widget {
+  class Tagbox extends Widgets.Widget {
 
     /* SPECIAL */
 
     static widgetize ( $tagbox ) {
 
-      $tagbox.tagbox ({ init: $tagbox.find ( Svelto.Tagbox.config.options.selectors.input ).val () });
+      $tagbox.tagbox ({ init: $tagbox.find ( Widgets.Tagbox.config.options.selectors.input ).val () });
 
     }
 
@@ -251,7 +251,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-      } else if ( event.keyCode === Svelto.keyCode.BACKSPACE ) {
+      } else if ( event.keyCode === Keyboard.keys.BACKSPACE ) {
 
         if ( !value.length && this.options.tags.length ) {
 
@@ -490,6 +490,6 @@
 
   /* FACTORY */
 
-  $.factory ( Tagbox, config, Svelto );
+  Factory.init ( Tagbox, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard ));

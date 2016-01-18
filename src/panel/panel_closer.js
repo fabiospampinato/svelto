@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.panel-closer',
     options: {
-      widget: Svelto.Panel
+      widget: Widgets.Panel
     }
   };
 
   /* PANEL CLOSER */
 
-  class PanelCloser extends Svelto.Closer {}
+  class PanelCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( PanelCloser, config, Svelto );
+  Factory.init ( PanelCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

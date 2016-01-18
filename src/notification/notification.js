@@ -10,7 +10,7 @@
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
@@ -20,7 +20,7 @@
     title: false,
     body: false,
     img: false,
-    ttl: Svelto.Noty.config.options.ttl
+    ttl: Widgets.Noty.config.options.ttl
   };
 
   /* NOTIFICATION */
@@ -71,4 +71,4 @@
 
   $.notification.defaults = defaults;
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));

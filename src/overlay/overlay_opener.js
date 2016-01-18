@@ -9,7 +9,7 @@
  * @requires ../opener/opener.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.overlay-opener',
     options: {
-      widget: Svelto.Overlay
+      widget: Widgets.Overlay
     }
   };
 
   /* OVERLAY OPENER */
 
-  class OverlayOpener extends Svelto.Opener {}
+  class OverlayOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  $.factory ( OverlayOpener, config, Svelto );
+  Factory.init ( OverlayOpener, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -9,83 +9,77 @@
  * @requires ../widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgetize ) {
 
   'use strict';
 
   /* FACTORY */
 
-  $.factory = function ( Widget, config, namespace ) {
+  Svelto.Factory = {
 
-    /* CONFIGURE */
+    /* VARIABLES */
 
-    $.factory.configure ( Widget, config );
+    workers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], //INFO: `Factory` methods, in order, to call when initing a `Widget`
 
-    /* NAMESPACE */
+    /* METHODS */
 
-    $.factory.namespace ( Widget, namespace );
+    init ( Widget, config, namespace ) {
 
-    /* READY */
+      for ( let worker of this.workers ) {
 
-    $.factory.ready ( Widget );
+        this[worker]( Widget, config, namespace );
 
-    /* WIDGETIZE */
+      }
 
-    $.factory.widgetize ( Widget );
+    },
 
-    /* PLUGIN */
+    instance ( Widget, options, element ) {
 
-    $.factory.plugin ( Widget );
+      let name = Widget.config.name;
 
-  };
+      return $.data ( element, 'instance.' + name ) || new Widget ( options, element );
 
-  /* FACTORY CONFIGURE */
+    },
 
-  $.factory.configure = function ( Widget, config = {} ) {
+    /* WORKERS */
 
-    Widget.config = config;
+    configure ( Widget, config = {} ) {
 
-  };
+      Widget.config = config;
 
-  /* FACTORY NAMESPACE */
+    },
 
-  $.factory.namespace = function ( Widget, namespace ) {
+    namespace ( Widget, config, namespace ) {
 
-    if ( _.isObject ( namespace ) ) {
+      if ( _.isObject ( namespace ) ) {
 
-      let name = _.capitalize ( Widget.config.name );
+        let name = _.capitalize ( Widget.config.name );
 
-      namespace[name] = Widget;
+        namespace[name] = Widget;
 
-    }
+      }
 
-  };
+    },
 
-  /* FACTORY READY */
+    ready ( Widget ) {
 
-  $.factory.ready = function ( Widget ) {
+      $(Widget.ready);
 
-    $(Widget.ready);
+    },
 
-  };
+    widgetize ( Widget ) {
 
-  /* FACTORY WIDGETIZE */
+      if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
-  $.factory.widgetize = function ( Widget ) {
+        Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
 
-    if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
+      }
 
-      Svelto.Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
+    },
 
-    }
+    plugin ( Widget ) {
 
-  };
-
-  /* FACTORY PLUGIN */
-
-  $.factory.plugin = function ( Widget ) {
-
-    if ( Widget.config.plugin ) {
+      if ( !Widget.config.plugin ) return;
 
       /* NAME */
 
@@ -95,43 +89,21 @@
 
       $.fn[name] = function ( options, ...args ) {
 
-        if ( _.isString ( options ) ) { //INFO: Calling a method
+        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); //INFO: Methods starting with '_' are private
 
-          if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
+        for ( let element of this ) {
 
-            /* METHOD CALL */
+          let instance = this.instance ( Widget, options, element );
 
-            for ( let element of this ) {
+          if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 
-              /* VARIABLES */
+            let returnValue = instance[options]( ...args );
 
-              let instance = $.factory.instance ( Widget, false, element );
+            if ( !_.isUndefined ( returnValue ) ) {
 
-              /* CHECKING VALID CALL */
-
-              if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
-
-              /* CALLING */
-
-              let returnValue = instance[options]( ...args );
-
-              if ( !_.isUndefined ( returnValue ) ) {
-
-                return returnValue;
-
-              }
+              return returnValue;
 
             }
-
-          }
-
-        } else {
-
-          /* INSTANCE */
-
-          for ( let element of this ) {
-
-            $.factory.instance ( Widget, options, element );
 
           }
 
@@ -145,21 +117,4 @@
 
   };
 
-  /* FACTORY INSTANCE */
-
-  $.factory.instance = function ( Widget, options, element ) {
-
-    let name = Widget.config.name,
-        instance = $.data ( element, 'instance.' + name );
-
-    if ( !instance ) {
-
-      instance = new Widget ( options, element );
-
-    }
-
-    return instance;
-
-  };
-
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize ));

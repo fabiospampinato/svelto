@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.tooltip-closer, .tooltip .button',
     options: {
-      widget: Svelto.Tooltip
+      widget: Widgets.Tooltip
     }
   };
 
   /* TOOLTIP CLOSER */
 
-  class TooltipCloser extends Svelto.Closer {}
+  class TooltipCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( TooltipCloser, config, Svelto );
+  Factory.init ( TooltipCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

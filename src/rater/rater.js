@@ -11,7 +11,7 @@
 //FIXME: Crappy, not working atm, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -56,7 +56,7 @@
 
   /* SELECT */
 
-  class Rater extends Svelto.Widget {
+  class Rater extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -166,6 +166,6 @@
 
   /* FACTORY */
 
-  $.factory ( Rater, config, Svelto );
+  Factory.init ( Rater, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

@@ -12,7 +12,7 @@
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -57,7 +57,7 @@
 
   /* SLIDER */
 
-  class Slider extends Svelto.Widget {
+  class Slider extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -280,6 +280,6 @@
 
   /* FACTORY */
 
-  $.factory ( Slider, config, Svelto );
+  Factory.init ( Slider, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

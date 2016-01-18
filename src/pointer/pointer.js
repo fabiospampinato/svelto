@@ -11,13 +11,13 @@
 
 //INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Browser ) {
 
   'use strict';
 
-  /* CONFIG */
+  /* POINTER */
 
-  window.Pointer = {
+  let Pointer = {
     options: {
       events: {
         prefix: 'spointer'
@@ -35,10 +35,10 @@
     dbltap: Pointer.options.events.prefix + 'dbltap',
     click: 'click',
     dblclick: 'dblclick',
-    down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
-    move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
-    up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
-    cancel: $.browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
+    down: Browser.is.touchDevice ? 'touchstart' : 'mousedown',
+    move: Browser.is.touchDevice ? 'touchmove' : 'mousemove',
+    up: Browser.is.touchDevice ? 'touchend' : 'mouseup',
+    cancel: Browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
     over: 'mouseover',
     enter: 'mouseenter',
     out: 'mouseout',
@@ -112,7 +112,7 @@
 
   function upHandler ( event ) {
 
-    if ( !$.browser.is.touchDevice || !motion ) {
+    if ( !Browser.is.touchDevice || !motion ) {
 
       let tapTimestamp = event.timeStamp || Date.now ();
 
@@ -154,4 +154,8 @@
 
   $document.on ( Pointer.down, downHandler );
 
-}( Svelto.$, Svelto._, window, document ));
+  /* EXPORT */
+
+  Svelto.Pointer = Pointer;
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser ));

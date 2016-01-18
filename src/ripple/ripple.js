@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
 
   'use strict';
 
@@ -43,7 +43,7 @@
 
   /* RIPPLE */
 
-  class Ripple extends Svelto.Widget {
+  class Ripple extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -59,7 +59,7 @@
 
       /* DOWN / TAP */
 
-      this._on ( $.browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
 
     }
 
@@ -67,7 +67,7 @@
 
     __downTap ( event ) {
 
-      if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
+      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
 
       if ( this.$ripple.hasClass ( this.options.classes.centered ) ) {
 
@@ -175,6 +175,6 @@
 
   /* FACTORY */
 
-  $.factory ( Ripple, config, Svelto );
+  Factory.init ( Ripple, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));

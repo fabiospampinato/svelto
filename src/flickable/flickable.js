@@ -8,7 +8,7 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
   /* FLICKABLE */
 
-  class Flickable extends Svelto.Widget {
+  class Flickable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -134,6 +134,6 @@
 
   /* FACTORY */
 
-  $.factory ( Flickable, config, Svelto );
+  Factory.init ( Flickable, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

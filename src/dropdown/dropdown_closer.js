@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.dropdown-closer',
     options: {
-      widget: Svelto.Dropdown
+      widget: Widgets.Dropdown
     }
   };
 
   /* DROPDOWN CLOSER */
 
-  class DropdownCloser extends Svelto.Closer {}
+  class DropdownCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( DropdownCloser, config, Svelto );
+  Factory.init ( DropdownCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

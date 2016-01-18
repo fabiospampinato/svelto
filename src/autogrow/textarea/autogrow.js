@@ -10,7 +10,7 @@
 
 //INFO: It supports only `box-sizing: border-box` textareas
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
   /* AUTOGROW TEXTAREA */
 
-  class AutogrowTextarea extends Svelto.Widget {
+  class AutogrowTextarea extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -75,6 +75,6 @@
 
   /* FACTORY */
 
-  $.factory ( AutogrowTextarea, config, Svelto );
+  Factory.init ( AutogrowTextarea, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -12,7 +12,7 @@
 
 /* COOKIE */
 
-(function ( _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
@@ -25,7 +25,7 @@
 
   /* COOKIE */
 
-  $.cookie = {
+  Svelto.Cookie = {
 
     get ( key ) {
 
@@ -95,4 +95,4 @@
 
   };
 
-}( Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto ));

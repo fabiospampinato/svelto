@@ -16,7 +16,7 @@
 
 //FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -46,7 +46,7 @@
 
   /* FORM AJAX */
 
-  class FormAjax extends Svelto.Widget {
+  class FormAjax extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -168,6 +168,6 @@
 
   /* FACTORY */
 
-  $.factory ( FormAjax, config, Svelto );
+  Factory.init ( FormAjax, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

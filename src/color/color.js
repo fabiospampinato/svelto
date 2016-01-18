@@ -11,13 +11,13 @@
 //TODO: Add support for the alpha channel
 //TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format
 
-(function ( _, window, document, undefined ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* COLOR */
 
-  Svelto.Color = class {
+  let Color = class {
 
     constructor ( color, colorspace ) {
 
@@ -115,19 +115,19 @@
 
     setRgb ( color ) {
 
-      this.hex = Svelto.Color.rgb2hex ( color );
+      this.hex = Color.rgb2hex ( color );
 
     }
 
     setHsv ( color ) {
 
-      this.hex = Svelto.Color.hsv2hex ( color );
+      this.hex = Color.hsv2hex ( color );
 
     }
 
     setHsl ( color ) {
 
-      this.hex = Svelto.Color.hsl2hex ( color );
+      this.hex = Color.hsl2hex ( color );
 
     }
 
@@ -141,19 +141,19 @@
 
     getRgb () {
 
-      return Svelto.Color.hex2rgb ( this.hex );
+      return Color.hex2rgb ( this.hex );
 
     }
 
     getHsv () {
 
-      return Svelto.Color.hex2hsv ( this.hex );
+      return Color.hex2hsv ( this.hex );
 
     }
 
     getHsl () {
 
-      return Svelto.Color.hex2hsl ( this.hex );
+      return Color.hex2hsl ( this.hex );
 
     }
 
@@ -164,22 +164,22 @@
     static hex2rgb ( hex ) {
 
       return {
-        r: Svelto.Color.hex2dec ( hex.r ),
-        g: Svelto.Color.hex2dec ( hex.g ),
-        b: Svelto.Color.hex2dec ( hex.b )
+        r: Color.hex2dec ( hex.r ),
+        g: Color.hex2dec ( hex.g ),
+        b: Color.hex2dec ( hex.b )
       };
 
     }
 
     static hex2hsv ( hex ) {
 
-      return Svelto.Color.rgb2hsv ( Svelto.Color.hex2rgb ( hex ) );
+      return Color.rgb2hsv ( Color.hex2rgb ( hex ) );
 
     }
 
     static hex2hsl ( hex ) {
 
-      return Svelto.Color.hsv2hsl ( Svelto.Color.hex2hsv ( hex ) );
+      return Color.hsv2hsl ( Color.hex2hsv ( hex ) );
 
     }
 
@@ -188,9 +188,9 @@
     static rgb2hex ( rgb ) {
 
       return {
-        r: Svelto.Color.dec2hex ( rgb.r ),
-        g: Svelto.Color.dec2hex ( rgb.g ),
-        b: Svelto.Color.dec2hex ( rgb.b )
+        r: Color.dec2hex ( rgb.r ),
+        g: Color.dec2hex ( rgb.g ),
+        b: Color.dec2hex ( rgb.b )
       };
 
     }
@@ -255,7 +255,7 @@
 
     static rgb2hsl ( rgb ) {
 
-      return Svelto.Color.hsv2hsl ( Svelto.Color.rgb2hsv ( rgb ) );
+      return Color.hsv2hsl ( Color.rgb2hsv ( rgb ) );
 
     }
 
@@ -263,7 +263,7 @@
 
     static hsv2hex ( hsv ) {
 
-      return Svelto.Color.rgb2hex ( Svelto.Color.hsv2rgb ( hsv ) );
+      return Color.rgb2hex ( Color.hsv2rgb ( hsv ) );
 
     }
 
@@ -362,13 +362,13 @@
 
     static hsl2hex ( hsl ) {
 
-      return Svelto.Color.hsv2hex ( Svelto.Color.hsl2hsv ( hsl ) );
+      return Color.hsv2hex ( Color.hsl2hsv ( hsl ) );
 
     }
 
     static hsl2rgb ( hsl ) {
 
-      return Svelto.Color.hsv2rgb ( Svelto.Color.hsl2hsv ( hsl ) );
+      return Color.hsv2rgb ( Color.hsl2hsv ( hsl ) );
 
     }
 
@@ -401,4 +401,8 @@
 
   };
 
-}( Svelto._, window, document ));
+  /* EXPORT */
+
+  Svelto.Color = Color;
+
+}( Svelto.$, Svelto._, Svelto ));

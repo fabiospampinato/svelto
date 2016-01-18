@@ -9,7 +9,7 @@
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.expander-toggler',
     options: {
-      widget: Svelto.Expander
+      widget: Widgets.Expander
     }
   };
 
   /* EXPANDER TOGGLER */
 
-  class ExpanderToggler extends Svelto.Toggler {}
+  class ExpanderToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  $.factory ( ExpanderToggler, config, Svelto );
+  Factory.init ( ExpanderToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

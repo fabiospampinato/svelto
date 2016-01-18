@@ -9,7 +9,7 @@
  * @requires ../closer/closer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -20,16 +20,16 @@
     plugin: true,
     selector: '.expander-closer',
     options: {
-      widget: Svelto.Expander
+      widget: Widgets.Expander
     }
   };
 
   /* EXPANDER CLOSER */
 
-  class ExpanderCloser extends Svelto.Closer {}
+  class ExpanderCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  $.factory ( ExpanderCloser, config, Svelto );
+  Factory.init ( ExpanderCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, window, document ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
