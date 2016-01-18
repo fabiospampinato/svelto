@@ -2005,7 +2005,7 @@
               event.preventDefault ();
               event.stopImmediatePropagation ();
 
-              return true;
+              return;
 
             }
 
@@ -2014,8 +2014,6 @@
         }
 
       }
-
-      return false;
 
     }
 
