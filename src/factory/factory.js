@@ -75,7 +75,7 @@
 
     if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
-      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
+      Svelto.Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
 
     }
 

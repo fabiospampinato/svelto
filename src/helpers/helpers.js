@@ -21,7 +21,7 @@
 
   //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
-  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
+  Svelto.Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
     $scroller.on ( Pointer.tap, () => {
 
@@ -37,7 +37,7 @@
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Rewrite a component for it
 
-  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
+  Svelto.Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
     $toggler.on ( Pointer.tap, screenfull.toggle );
 

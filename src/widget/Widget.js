@@ -22,7 +22,7 @@
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
-    selector: false, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
+    selector: false, //INFO: The selector used to select the website in the DOM, used for `Svelto.Widgetize`
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },

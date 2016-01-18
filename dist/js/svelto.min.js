@@ -1091,7 +1091,7 @@
 
   /* WIDGETIZE */
 
-  window.Widgetize = new class {
+  Svelto.Widgetize = new class {
 
     constructor () {
 
@@ -1269,7 +1269,7 @@
 
     if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
-      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
+      Svelto.Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
 
     }
 
@@ -1382,7 +1382,7 @@
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
-    selector: false, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
+    selector: false, //INFO: The selector used to select the website in the DOM, used for `Svelto.Widgetize`
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
@@ -8480,7 +8480,7 @@
 
   //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
-  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
+  Svelto.Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
     $scroller.on ( Pointer.tap, () => {
 
@@ -8496,7 +8496,7 @@
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Rewrite a component for it
 
-  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
+  Svelto.Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
     $toggler.on ( Pointer.tap, screenfull.toggle );
 

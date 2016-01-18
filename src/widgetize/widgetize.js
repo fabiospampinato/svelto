@@ -14,7 +14,7 @@
 
   /* WIDGETIZE */
 
-  window.Widgetize = new class {
+  Svelto.Widgetize = new class {
 
     constructor () {
 
