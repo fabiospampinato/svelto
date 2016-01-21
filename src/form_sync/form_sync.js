@@ -87,7 +87,7 @@
 
     __sync ( event, data ) {
 
-      if ( data && data._form_synced ) return;
+      if ( data && data._formSynced ) return;
 
       let $element = $(event.target),
           name = $element.attr ( this.options.attributes.name ),
@@ -110,11 +110,11 @@
 
           if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _form_synced: true } );
+            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: true } );
 
           } else {
 
-            $otherElement.val ( value ).trigger ( 'change', { _form_synced: true } );
+            $otherElement.val ( value ).trigger ( 'change', { _formSynced: true } );
 
           }
 

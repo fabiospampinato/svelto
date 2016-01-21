@@ -257,7 +257,7 @@
 
       }, function () {
 
-        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () || 0 ) ).play () );
+        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
 
       });
 

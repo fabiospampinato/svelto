@@ -88,11 +88,9 @@
 
     __multiple ( expander ) {
 
-      if ( !this.options.multiple ) {
+      if ( this.options.multiple ) return;
 
-        this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
-
-      }
+      this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
 
     }
 

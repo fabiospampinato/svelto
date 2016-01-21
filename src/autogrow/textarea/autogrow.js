@@ -10,6 +10,8 @@
 
 //INFO: It supports only `box-sizing: border-box` textareas
 
+//TODO: Measure the needed height using canvas, if possible, improve the performance in general
+
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
@@ -47,7 +49,7 @@
 
     _events () {
 
-      this.___change ();
+      this.___inputChange ();
 
     }
 
@@ -55,19 +57,19 @@
 
     _getNeededHeight () {
 
-      //TODO: Do it with canvas, if possible, improve the performance in general
-
       return this.$textarea.height ( 0 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
 
     }
 
-    /* CHANGE / UPDATE */
+    /* INPUT / CHANGE */
 
-    ___change () {
+    ___inputChange () {
 
       this._on ( true, 'input change', this._update );
 
     }
+
+    /* UPDATE */
 
     _update () {
 

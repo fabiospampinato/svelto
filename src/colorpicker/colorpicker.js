@@ -22,7 +22,17 @@
     plugin: true,
     selector: '.colorpicker',
     options: {
+      exporters: {
+        hex ( color ) {
+          let hex = color.getHex ();
+          return '#' + hex.r + hex.g + hex.b;
+        }
+      },
       defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      format: {
+        type: 'hex', //INFO: One of the formats implemented in the exporters
+        data: undefined //INFO: Passed to the called the exporter
+      },
       live: false,
       selectors: {
         sb: {
@@ -67,7 +77,9 @@
 
     _init () {
 
-      if ( !this.set ( this.$input.val () ) ) {
+      this.set ( this.$input.val () );
+
+      if ( !this.hsv ) {
 
         this.set ( this.options.defaultColor );
 
@@ -84,6 +96,15 @@
 
       this.___hueKeydown ();
       this.___hueDrag ();
+
+    }
+
+    _destroy () {
+
+      /* DRAG */
+
+      this.$sbHandler.draggable ( 'destroy' );
+      this.$hueHandler.draggable ( 'destroy' );
 
     }
 
@@ -295,9 +316,7 @@
 
     _updateInput () {
 
-      let hexStr = this._getHexStr ();
-
-      this.$input.val ( hexStr ).trigger ( 'change' );
+      this.$input.val ( this._export () ).trigger ( 'change' );
 
       this._trigger ( 'change' );
 
@@ -311,13 +330,11 @@
 
     }
 
-    /* OTHERS */
+    /* EXPORT */
 
-    _getHexStr () {
+    _export () {
 
-      let hex = Color.hsv2hex ( this.hsv );
-
-      return '#' + hex.r + hex.g + hex.b;
+      return this.options.exporters[this.options.format.type] ( new Color ( this.hsv, 'hsv' ), this.options.format.data );
 
     }
 
@@ -325,7 +342,7 @@
 
     get () {
 
-      return this._getHexStr ();
+      return this._export ();
 
     }
 
@@ -343,13 +360,9 @@
 
           this._update ();
 
-          return true;
-
         }
 
       }
-
-      return false;
 
     }
 

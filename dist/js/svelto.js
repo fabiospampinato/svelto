@@ -2303,11 +2303,9 @@
 
     __multiple ( expander ) {
 
-      if ( !this.options.multiple ) {
+      if ( this.options.multiple ) return;
 
-        this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
-
-      }
+      this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
 
     }
 
@@ -2412,7 +2410,7 @@
 
     _events () {
 
-      this.___change ();
+      this.___inputChange ();
 
     }
 
@@ -2426,13 +2424,15 @@
 
     }
 
-    /* CHANGE / UPDATE */
+    /* INPUT / CHANGE */
 
-    ___change () {
+    ___inputChange () {
 
       this._on ( true, 'input change', this._update );
 
     }
+
+    /* UPDATE */
 
     _update () {
 
@@ -2461,6 +2461,8 @@
  * ========================================================================= */
 
 //INFO: It supports only `box-sizing: border-box` textareas
+
+//TODO: Measure the needed height using canvas, if possible, improve the performance in general
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -2499,7 +2501,7 @@
 
     _events () {
 
-      this.___change ();
+      this.___inputChange ();
 
     }
 
@@ -2507,19 +2509,19 @@
 
     _getNeededHeight () {
 
-      //TODO: Do it with canvas, if possible, improve the performance in general
-
       return this.$textarea.height ( 0 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
 
     }
 
-    /* CHANGE / UPDATE */
+    /* INPUT / CHANGE */
 
-    ___change () {
+    ___inputChange () {
 
       this._on ( true, 'input change', this._update );
 
     }
+
+    /* UPDATE */
 
     _update () {
 
@@ -2895,7 +2897,7 @@
         next: '.carousel-next',
         indicator: '.carousel-indicator',
         itemsWrp: '.carousel-items',
-        item: ' > *'
+        item: '.carousel-items > *'
       },
       animations: {
         cycle: Animations.normal
@@ -2923,7 +2925,7 @@
       this.$next = this.$carousel.find ( this.options.selectors.next );
       this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
       this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
-      this.$items = this.$itemsWrp.find ( this.options.selectors.item );
+      this.$items = this.$carousel.find ( this.options.selectors.item );
 
       this.maxIndex = this.$items.length - 1;
 
@@ -2952,30 +2954,67 @@
 
     _events () {
 
-      /* PREV */
+      this.___previousTap ();
+      this.___nextTap ();
+      this.___indicatorTap ();
+
+      this.___keydown ();
+      this.___cycle ();
+
+    }
+
+    _destroy () {
+
+      this.timer.stop ();
+
+    }
+
+    /* PREVIOUS TAP */
+
+    ___previousTap () {
 
       this._on ( this.$prev, Pointer.tap, this.previous );
 
-      /* NEXT */
+    }
+
+    /* NEXT TAP */
+
+    ___nextTap () {
 
       this._on ( this.$next, Pointer.tap, this.next );
 
-      /* KEYDOWN */
+    }
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+    /* INDICATOR TAP */
 
-      /* INDICATOR TAP */
+    ___indicatorTap () {
 
       this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
 
-      /* CYCLE */
+    }
+
+    __indicatorTap ( event ) {
+
+      this.set ( this.$indicators.index ( event.currentTarget ) );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* CYCLE */
+
+    ___cycle () {
 
       this._on ( true, this.$itemsWrp, Pointer.enter, this.__cycleEnter );
       this._on ( true, this.$itemsWrp, Pointer.leave, this.__cycleLeave );
 
     }
-
-    /* CYCLE */
 
     __cycleEnter () {
 
@@ -2991,19 +3030,11 @@
 
       if ( this.options.cycle ) {
 
-        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
 
         this.timer.play ();
 
       }
-
-    }
-
-    /* INDICATOR TAP */
-
-    __indicatorTap ( event ) {
-
-      this.set ( this.$indicators.index ( event.currentTarget ) );
 
     }
 
@@ -3039,7 +3070,7 @@
 
       super.enable ();
 
-      if ( this.options.cycle || this._wasCycle ) {
+      if ( this.options.cycle || this._wasCycling ) {
 
         this.play ();
 
@@ -3051,7 +3082,7 @@
 
       super.disable ();
 
-      this._wasCycle = this.options.cycle;
+      this._wasCycling = this.options.cycle;
 
       if ( this.options.cycle ) {
 
@@ -3073,9 +3104,9 @@
 
       index = Number ( index );
 
-      if ( !this._setting && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+      if ( !this._lock && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
 
-        this._setting = true;
+        this._lock = true;
 
         if ( this._current ) {
 
@@ -3098,8 +3129,6 @@
 
         this._delay ( function () {
 
-          this._setting = false;
-
           if ( this._previous ) {
 
             this._previous.$item.removeClass ( this.options.classes.prev );
@@ -3111,6 +3140,8 @@
             this.timer.play ();
 
           }
+
+          this._lock = false;
 
         }, this.options.animations.cycle );
 
@@ -3137,7 +3168,7 @@
     play () {
 
       this.options.cycle = true;
-      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
       this.timer.play ();
 
     }
@@ -3256,13 +3287,17 @@
 
     _events () {
 
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
+      this.___tap ();
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     __tap () {
 
@@ -3725,7 +3760,17 @@
     plugin: true,
     selector: '.colorpicker',
     options: {
+      exporters: {
+        hex ( color ) {
+          let hex = color.getHex ();
+          return '#' + hex.r + hex.g + hex.b;
+        }
+      },
       defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      format: {
+        type: 'hex', //INFO: One of the formats implemented in the exporters
+        data: undefined //INFO: Passed to the called the exporter
+      },
       live: false,
       selectors: {
         sb: {
@@ -3770,7 +3815,9 @@
 
     _init () {
 
-      if ( !this.set ( this.$input.val () ) ) {
+      this.set ( this.$input.val () );
+
+      if ( !this.hsv ) {
 
         this.set ( this.options.defaultColor );
 
@@ -3780,55 +3827,32 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this.___sbKeydown ();
+      this.___sbDrag ();
 
-      /* SB KEYDOWN */
+      this.___hueKeydown ();
+      this.___hueDrag ();
 
-      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+    }
 
-      /* SB DRAG */
+    _destroy () {
 
-      this.$sbHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        proxy: {
-          $element: this.$sbWrp
-        },
-        constrainer: {
-          $element: this.$sbWrp,
-          center: true
-        },
-        callbacks: {
-          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
-          end: this.__sbDragEnd.bind ( this )
-        }
-      });
+      /* DRAG */
 
-      /* HUE KEYDOWN */
-
-      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
-
-      /* HUE DRAG */
-
-      this.$hueHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        axis: 'y',
-        proxy: {
-          $element: this.$hueWrp
-        },
-        constrainer: {
-          $element: this.$hueWrp
-        },
-        callbacks: {
-          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
-          end: this.__hueDragEnd.bind ( this )
-        }
-      });
+      this.$sbHandler.draggable ( 'destroy' );
+      this.$hueHandler.draggable ( 'destroy' );
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -3837,6 +3861,12 @@
     }
 
     /* SB ARROWS */
+
+    ___sbKeydown () {
+
+      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+
+    }
 
     __sbKeydown ( event ) {
 
@@ -3873,6 +3903,25 @@
 
     /* SB DRAG */
 
+    ___sbDrag () {
+
+      this.$sbHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        proxy: {
+          $element: this.$sbWrp
+        },
+        constrainer: {
+          $element: this.$sbWrp,
+          center: true
+        },
+        callbacks: {
+          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
+          end: this.__sbDragEnd.bind ( this )
+        }
+      });
+
+    }
+
     _sbDragSet ( XY, update ) {
 
       this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
@@ -3902,6 +3951,12 @@
 
     /* HUE ARROWS */
 
+    ___hueKeydown () {
+
+      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
+
+    }
+
     __hueKeydown ( event ) {
 
       switch ( event.keyCode ) {
@@ -3928,6 +3983,25 @@
     }
 
     /* HUE DRAG */
+
+    ___hueDrag () {
+
+      this.$hueHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'y',
+        proxy: {
+          $element: this.$hueWrp
+        },
+        constrainer: {
+          $element: this.$hueWrp
+        },
+        callbacks: {
+          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
+          end: this.__hueDragEnd.bind ( this )
+        }
+      });
+
+    }
 
     _hueDragSet ( XY, update ) {
 
@@ -3980,9 +4054,7 @@
 
     _updateInput () {
 
-      let hexStr = this._getHexStr ();
-
-      this.$input.val ( hexStr ).trigger ( 'change' );
+      this.$input.val ( this._export () ).trigger ( 'change' );
 
       this._trigger ( 'change' );
 
@@ -3996,13 +4068,11 @@
 
     }
 
-    /* OTHERS */
+    /* EXPORT */
 
-    _getHexStr () {
+    _export () {
 
-      let hex = Color.hsv2hex ( this.hsv );
-
-      return '#' + hex.r + hex.g + hex.b;
+      return this.options.exporters[this.options.format.type] ( new Color ( this.hsv, 'hsv' ), this.options.format.data );
 
     }
 
@@ -4010,7 +4080,7 @@
 
     get () {
 
-      return this._getHexStr ();
+      return this._export ();
 
     }
 
@@ -4028,13 +4098,9 @@
 
           this._update ();
 
-          return true;
-
         }
 
       }
-
-      return false;
 
     }
 
@@ -4160,7 +4226,7 @@
  * ========================================================================= */
 
 //INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
-//INFO: Accordion to ISO 8601 the first day of the week is Monday
+//INFO: Accordion to ISO-8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
@@ -4230,6 +4296,7 @@
           previous: '.datepicker-days .previous',
           current: '.datepicker-days :not(.previous):not(.next)',
           next: '.datepicker-days .next',
+          today: '.datepicker-day-today',
           selected: '.datepicker-day-selected',
           clamped: '.datepicker-day-clamped'
         },
@@ -4237,7 +4304,7 @@
         input: 'input'
       },
       keystrokes: {
-        'up, left': 'prevMonth',
+        'up, left': 'previousMonth',
         'right, down': 'nextMonth'
       },
       callbacks: {
@@ -4267,12 +4334,17 @@
       this.$daysNext = this.$datepicker.find ( this.options.selectors.day.next );
       this.$daysAll = this.$daysPrev.add ( this.$daysCurrent ).add ( this.$daysNext );
 
-      this.$dayToday = false;
-      this.$daySelected = false;
+      this.$daySelected = this.$daysAll.filter ( this.options.selectors.day.selected );
+      this.$dayToday = this.$daysAll.filter ( this.options.selectors.day.today );
 
     }
 
     _init () {
+
+      /* RESETTING HIGHLIGHT */
+
+      this._unhighlightSelected ();
+      this._unhighlightToday ();
 
       /* TODAY */
 
@@ -4298,23 +4370,10 @@
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, this.$input, 'change', this.__change );
-
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* NAVIGATION PREV / NEXT / TODAY */
-
-      this._on ( this.$navigationPrev, Pointer.tap, this.prevMonth );
-      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
-      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
-
-      /* DAY TAP */
-
-      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+      this.___change ();
+      this.___keydown ();
+      this.___navigation ();
+      this.___dayTap ();
 
     }
 
@@ -4334,17 +4393,45 @@
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
     __change ( event, data ) {
 
-      if ( !data._datepicker_setted ) {
+      if ( data._datepickerSetted ) return;
 
-        this.set ( this.$input.val () );
+      this.set ( this.$input.val () );
 
-      }
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* NAVIGATION */
+
+    ___navigation () {
+
+      this._on ( this.$navigationPrev, Pointer.tap, this.previousMonth );
+      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
+      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
 
     }
 
     /* DAY TAP */
+
+    ___dayTap () {
+
+      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+
+    }
 
     __dayTap ( event ) {
 
@@ -4445,11 +4532,9 @@
 
     _unhighlightSelected () {
 
-      if ( this.$daySelected ) {
+      if ( !this.$daySelected.length ) return;
 
-        this.$daySelected.removeClass ( this.options.classes.selected );
-
-      }
+      this.$daySelected.removeClass ( this.options.classes.selected );
 
     }
 
@@ -4465,11 +4550,9 @@
 
     _unhighlightToday () {
 
-      if ( this.$dayToday ) {
+      if ( !this.$dayToday.length ) return;
 
-        this.$dayToday.removeClass ( this.options.classes.today );
-
-      }
+      this.$dayToday.removeClass ( this.options.classes.today );
 
     }
 
@@ -4527,7 +4610,7 @@
 
       if ( this.options.date.selected ) {
 
-        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepicker_setted: true } );
+        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepickerSetted: true } );
 
       }
 
@@ -4591,15 +4674,19 @@
 
           this.options.date.selected = date;
 
-          if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+          if ( this.options.date.current ) {
 
-            this._highlightSelected ();
+            if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-          } else {
+              this._highlightSelected ();
 
-            this.options.date.current = this._cloneDate ( this.options.date.selected );
+            } else {
 
-            this._refresh ();
+              this.options.date.current = this._cloneDate ( this.options.date.selected );
+
+              this._refresh ();
+
+            }
 
           }
 
@@ -4613,32 +4700,6 @@
 
     }
 
-    navigateMonth ( modifier ) {
-
-      if ( modifier ) {
-
-        this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
-
-        this.options.date.current = this._clampDate ( this.options.date.current );
-
-        this._refresh ();
-
-      }
-
-    }
-
-    prevMonth () {
-
-      this.navigateMonth ( -1 );
-
-    }
-
-    nextMonth () {
-
-      this.navigateMonth ( 1 );
-
-    }
-
     navigateToToday () {
 
       if ( this.options.date.current.getFullYear () !== this.options.date.today.getFullYear () || this.options.date.current.getMonth () !== this.options.date.today.getMonth () ) {
@@ -4648,6 +4709,30 @@
         this._refresh ();
 
       }
+
+    }
+
+    navigateMonth ( modifier ) {
+
+      if ( _.isNaN ( modifier ) ) return;
+
+      this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
+
+      this.options.date.current = this._clampDate ( this.options.date.current );
+
+      this._refresh ();
+
+    }
+
+    previousMonth () {
+
+      this.navigateMonth ( -1 );
+
+    }
+
+    nextMonth () {
+
+      this.navigateMonth ( 1 );
 
     }
 
@@ -4744,11 +4829,22 @@
 
     _events () {
 
-      /* DOWN */
+      this.___down ();
+      this.___proxy ();
+
+    }
+
+    /* DOWN */
+
+    ___down () {
 
       this._on ( this.$handlers, Pointer.down, this.__down );
 
-      /* PROXY */
+    }
+
+    /* PROXY */
+
+    ___proxy () {
 
       if ( this.options.proxy.$element ) {
 
@@ -6083,21 +6179,18 @@
 
     _events () {
 
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
-
-      /* HOVER */
-
-      if ( this.options.hover.active && !Browser.is.touchDevice ) {
-
-        this._on ( Pointer.enter, this.__hoverEnter );
-
-      }
+      this.___tap ();
+      this.___hover ();
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     __tap () {
 
@@ -6106,6 +6199,16 @@
     }
 
     /* HOVER */
+
+    ___hover () {
+
+      if ( this.options.hover.active && !Browser.is.touchDevice ) {
+
+        this._on ( Pointer.enter, this.__hoverEnter );
+
+      }
+
+    }
 
     __hoverEnter () {
 
@@ -6559,13 +6662,8 @@
 
     _events () {
 
-      /* DRAG MOVE */
-
-      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
-
-      /* DRAG END */
-
-      this._on ( $document, 'draggable:end', this.__dragEnd );
+      this.___dragMove ();
+      this.___dragEnd ();
 
     }
 
@@ -6597,6 +6695,12 @@
 
     /* DRAG MOVE */
 
+    ___dragMove () {
+
+      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
+
+    }
+
     __dragMove ( event, data ) {
 
       if ( this._isCompatible ( data.draggable ) ) {
@@ -6618,6 +6722,12 @@
     }
 
     /* DRAG END */
+
+    ___dragEnd () {
+
+      this._on ( $document, 'draggable:end', this.__dragEnd );
+
+    }
 
     __dragEnd ( event, data ) {
 
@@ -6796,13 +6906,17 @@
 
     _events () {
 
-      /* DOWN */
-
-      this._on ( Pointer.down, this.__down );
+      this.___down ();
 
     }
 
     /* HANDLERS */
+
+    ___down () {
+
+      this._on ( Pointer.down, this.__down );
+
+    }
 
     __down ( event ) {
 
@@ -6940,27 +7054,27 @@
 
       this.$flippable = this.$element;
 
-      this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
+      this._isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
 
     }
 
     /* PUBLIC */
 
-    flip ( force ) {
+    isFlipped () {
 
-      if ( !_.isBoolean ( force ) ) {
+      return this._isFlipped;
 
-        force = !this.isFlipped;
+    }
 
-      }
+    flip ( force = !this._isFlipped ) {
 
-      if ( force !== this.isFlipped ) {
+      if ( !!force !== this._isFlipped ) {
 
-        this.isFlipped = force;
+        this._isFlipped = force;
 
-        this.$flippable.toggleClass ( this.options.classes.flip, this.isFlipped );
+        this.$flippable.toggleClass ( this.options.classes.flip, this._isFlipped );
 
-        this._trigger ( this.isFlipped ? 'back' : 'front' );
+        this._trigger ( this._isFlipped ? 'back' : 'front' );
 
       }
 
@@ -7083,7 +7197,13 @@
 
     _events () {
 
-      /* KEYDOWN */
+      this.___keydown ();
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
 
       this._onHover ( true, [$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
 
@@ -7097,15 +7217,9 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this._isOpen ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
+      if ( !!force !== this._isOpen ) {
 
         this[force ? 'open' : 'close']();
 
@@ -7240,15 +7354,9 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this.isOpen () ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this.isOpen ();
-
-      }
-
-      if ( force !== this.isOpen () ) {
+      if ( !!force !== this.isOpen () ) {
 
         this[force ? 'open' : 'close']();
 
@@ -7555,7 +7663,7 @@
 
       }, function () {
 
-        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () || 0 ) ).play () );
+        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
 
       });
 
@@ -7983,21 +8091,10 @@
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, this.$elements, 'change', this.__change );
-
-      /* FOCUS */
-
-      this._on ( this.$textfields, 'focus', this.__focus );
-
-      /* BLUR */
-
-      this._on ( this.$textfields, 'blur', this.__blur );
-
-      /* SUBMIT */
-
-      this._on ( true, 'submit', this.__submit );
+      this.___change ();
+      this.___focus ();
+      this.___blur ();
+      this.___submit ();
 
     }
 
@@ -8073,6 +8170,12 @@
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$elements, 'change', this.__change );
+
+    }
+
     __change ( event ) {
 
       /* FORM */
@@ -8116,6 +8219,12 @@
 
     /* FOCUS */
 
+    ___focus () {
+
+      this._on ( this.$textfields, 'focus', this.__focus );
+
+    }
+
     __focus ( event ) {
 
       let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
@@ -8128,6 +8237,12 @@
 
     /* BLUR */
 
+    ___blur () {
+
+      this._on ( this.$textfields, 'blur', this.__blur );
+
+    }
+
     __blur ( event ) {
 
       let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
@@ -8137,6 +8252,12 @@
     }
 
     /* SUBMIT */
+
+    ___submit () {
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
 
     __submit ( event ) {
 
@@ -8382,13 +8503,17 @@
 
     _events () {
 
-      /* SUBMIT */
-
-      this._on ( true, 'submit', this.__submit );
+      this.___submit ();
 
     }
 
     /* PRIVATE */
+
+    ___submit () {
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
 
     __submit ( event ) {
 
@@ -8553,11 +8678,22 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
+      this.___input ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
 
       this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
 
-      /* INPUT */
+    }
+
+    /* LIVE */
+
+    ___live () {
 
       if ( this.options.live ) {
 
@@ -8573,7 +8709,7 @@
 
     __sync ( event, data ) {
 
-      if ( data && data._form_synced ) return;
+      if ( data && data._formSynced ) return;
 
       let $element = $(event.target),
           name = $element.attr ( this.options.attributes.name ),
@@ -8596,11 +8732,11 @@
 
           if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _form_synced: true } );
+            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: true } );
 
           } else {
 
-            $otherElement.val ( value ).trigger ( 'change', { _form_synced: true } );
+            $otherElement.val ( value ).trigger ( 'change', { _formSynced: true } );
 
           }
 
@@ -8952,13 +9088,17 @@
 
     _events () {
 
-      /* TAP */
-
-      this._on ( true, Pointer.tap, this.__tap );
+      this.___tap ();
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( true, Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 
@@ -8978,16 +9118,10 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this._isOpen ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
-
+      if ( !!force !== this._isOpen ) {
+        
         this[force ? 'open' : 'close']();
 
       }
@@ -9790,27 +9924,8 @@
 
     _events () {
 
-      /* FLICK OPEN */
-
-      if ( this.options.flick.open ) {
-
-        /* DOCUMENT */
-
-        $document.flickable ();
-
-        this.___documentFlick ();
-
-      }
-
-      /* FLICK CLOSE */
-
-      if ( this.options.flick.close ) {
-
-        /* PANEL */
-
-        this.$panel.flickable ();
-
-      }
+      this.___documentFlick ();
+      this.___panelFlick ();
 
     }
 
@@ -9868,6 +9983,8 @@
 
       if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
 
+      $document.flickable ();
+
       let layoutOffset = this.$layout.offset ();
 
       switch ( this.options.direction ) {
@@ -9899,11 +10016,11 @@
 
     ___panelFlick () {
 
-      if ( this.options.flick.close ) {
+      if ( !this.options.flick.close ) return;
 
-        this._on ( true, 'flickable:flick', this.__panelFlick );
+      this.$panel.flickable ();
 
-      }
+      this._on ( true, 'flickable:flick', this.__panelFlick );
 
     }
 
@@ -9968,15 +10085,9 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this._isOpen ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isOpen;
-
-      }
-
-      if ( force !== this._isOpen ) {
+      if ( !!force !== this._isOpen ) {
 
         this[force ? 'open' : 'close']();
 
@@ -10060,15 +10171,9 @@
 
     }
 
-    togglePin ( force ) {
+    togglePin ( force = !this._isPinned ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this._isPinned;
-
-      }
-
-      if ( force !== this._isPinned ) {
+      if ( !!force !== this._isPinned ) {
 
         this[force ? 'pin' : 'unpin']();
 
@@ -10160,7 +10265,7 @@
 
 
 /* =========================================================================
- * Svelto - Nabar (Opener)
+ * Svelto - Panel (Opener)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11095,7 +11200,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* UNRATED */
+      this.___tap ();
+
+    }
+
+    /* TAP */
+
+    ___tap () {
 
       if ( !this.options.rated ) {
 
@@ -11106,8 +11217,6 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
     }
-
-    /* TAP */
 
     __tap ( event ) {
 
@@ -11423,13 +11532,19 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* DOWN / TAP */
-
-      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+      this.___downTap ();
 
     }
 
     /* DOWN / TAP */
+
+    ___downTap () {
+
+      //INFO: Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
+
+      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+
+    }
 
     __downTap ( event ) {
 
@@ -11726,21 +11841,18 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, this.$select, 'change', this.__change );
-
-      if ( !Browser.is.touchDevice ) {
-
-        /* BUTTON TAP */
-
-        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
-
-      }
+      this.___change ();
+      this.___buttonTap ();
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$select, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -11751,6 +11863,18 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     /* BUTTON TAP */
+
+    ___buttonTap () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        /* BUTTON TAP */
+
+        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
+
+      }
+
+    }
 
     __buttonTap ( event ) {
 
@@ -11956,25 +12080,45 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
+      this.___keydown ();
+      this.___downTap ();
+      this.___change ();
+      
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        this._onHover ( [$document, 'keydown', this.__keydown] );
+
+      }
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change sortable:sort', this.__change );
+
+    }
+
+    /* DOWN / TAP */
+
+    ___downTap () {
+
       if ( Browser.is.touchDevice ) {
 
         this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
 
       } else {
 
-        /* KEYDOWN */
-
-        this._onHover ( [$document, 'keydown', this.__keydown] );
-
-        /* DOWN */
-
         this._on ( Pointer.down, this.options.selectors.element, this.__down );
 
       }
-
-      /* CHANGE */
-
-      this._on ( true, 'change sortable:sort', this.__change );
 
     }
 
@@ -12316,43 +12460,11 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* INPUT CHANGE */
-
-      this._on ( true, this.$input, 'change', this.__change );
-
-      /* WINDOW RESIZE */
-
-      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
-
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* MIN / MAX BUTTONS */
-
-      this._on ( this.$min, Pointer.tap, this.decrease );
-      this._on ( this.$max, Pointer.tap, this.increase );
-
-      /* DRAG */
-
-      this.$handlerWrp.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        axis: 'x',
-        proxy: {
-          $element: this.$bar
-        },
-        constrainer: {
-          $element: this.$bar,
-          center: true
-        },
-        modifiers: {
-          x: this._dragModifierX.bind ( this )
-        },
-        callbacks: {
-          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
-          end: this.__dragEnd.bind ( this )
-        }
-      });
+      this.___change ();
+      this.___resize ();
+      this.___keydown ();
+      this.___minMax ();
+      this.___drag ();
 
     }
 
@@ -12407,6 +12519,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
     __change () {
 
       this.set ( this.$input.val () );
@@ -12415,6 +12533,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* RESIZE */
 
+    ___resize () {
+
+      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+
+    }
+
     __resize () {
 
       this._updateVariables ();
@@ -12422,7 +12546,47 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* MIN / MAX */
+
+    ___minMax () {
+
+      this._on ( this.$min, Pointer.tap, this.decrease );
+      this._on ( this.$max, Pointer.tap, this.increase );
+
+    }
+
     /* DRAG */
+    
+    ___drag () {
+
+      this.$handlerWrp.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'x',
+        proxy: {
+          $element: this.$bar
+        },
+        constrainer: {
+          $element: this.$bar,
+          center: true
+        },
+        modifiers: {
+          x: this._dragModifierX.bind ( this )
+        },
+        callbacks: {
+          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
+          end: this.__dragEnd.bind ( this )
+        }
+      });
+
+    }
 
     _dragModifierX ( distance ) {
 
@@ -12601,17 +12765,18 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, 'change', this.__change );
-
-      /* TAP */
-
-      this._on ( this.$sortables, Pointer.tap, this.__tap );
+      this.___change ();
+      this.___tap ();
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -12626,7 +12791,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* CLICK */
+    /* TAP */
+
+    ___tap () {
+
+      this._on ( this.$sortables, Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 
@@ -12850,21 +13021,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* INPUT / CHANGE */
+      this.___inputChange ();
 
-      this._on ( true, this.$input, 'input change', this.__inputChange );
+      this.___keydown ();
 
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* INCREASE */
-
-      this._on ( this.$decreaser, Pointer.tap, this.decrease );
-
-      /* DECREASE */
-
-      this._on ( this.$increaser, Pointer.tap, this.increase );
+      this.___increaser ();
+      this.___decreaser ();
 
     }
 
@@ -12912,11 +13074,41 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* CHANGE */
+    /* INPUT / CHANGE */
+
+    ___inputChange () {
+
+      this._on ( true, this.$input, 'input change', this.__inputChange );
+
+    }
 
     __inputChange () {
 
       this.set ( this.$input.val () );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* INCREASER */
+
+    ___increaser () {
+
+      this._on ( this.$decreaser, Pointer.tap, this.decrease );
+
+    }
+
+    /* DECREASER */
+
+    ___decreaser () {
+
+      this._on ( this.$increaser, Pointer.tap, this.increase );
 
     }
 
@@ -13076,15 +13268,37 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
+      this.___keydown ();
+      this.___drag ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
 
       this._on ( true, this.$input, 'change', this.__change );
 
-      /* KEYDOWN */
+    }
+
+    __change () {
+
+      this.toggle ( this.$input.prop ( 'checked' ) );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
 
       this._onHover ( [$document, 'keydown', this.__keydown] );
 
-      /* DRAG */
+    }
+
+    /* DRAG */
+
+    ___drag () {
 
       this.$handler.draggable ({
         draggable: this.isEnabled.bind ( this ),
@@ -13102,16 +13316,6 @@ Prism.languages.js = Prism.languages.javascript;
       });
 
     }
-
-    /* CHANGE */
-
-    __change () {
-
-      this.toggle ( this.$input.prop ( 'checked' ) );
-
-    }
-
-    /* DRAG */
 
     __dragEnd ( event, data ) {
 
@@ -13491,9 +13695,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* TRIGGERS */
-
-      this._on ( this.$triggers, Pointer.tap, this.__tap );
+      this.___tap ();
 
     }
 
@@ -13506,6 +13708,12 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( this.$triggers, Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 
@@ -13694,19 +13902,10 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
-      /* PARTIAL */
+      this.___partial ();
 
-      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
-
-      this._on ( this.$partial, 'paste', this.__paste );
-
-      /* TAP ON EMPTY */
-
-      this._on ( Pointer.tap, this.__tapOnEmpty );
-
-      /* TAP ON TAG REMOVER */
-
-      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
+      this.___tapOnEmpty ();
+      this.___tapOnTagRemover ();
 
     }
 
@@ -13824,6 +14023,16 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    /* PARTIAL */
+
+    ___partial () {
+
+      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+
+      this._on ( this.$partial, 'paste', this.__paste );
+
+    }
+
     /* KEYPRESS / KEYDOWN */
 
     __keypressKeydown ( event ) {
@@ -13881,6 +14090,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* TAP ON TAG REMOVER */
 
+    ___tapOnTagRemover () {
+
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
+
+    }
+
     __tapOnTagRemover ( event ) {
 
       let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
@@ -13890,6 +14105,12 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     /* TAP ON EMPTY */
+
+    ___tapOnEmpty () {
+
+      this._on ( Pointer.tap, this.__tapOnEmpty );
+
+    }
 
     __tapOnEmpty ( event ) {
 

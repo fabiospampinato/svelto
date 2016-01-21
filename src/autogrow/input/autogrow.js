@@ -49,7 +49,7 @@
 
     _events () {
 
-      this.___change ();
+      this.___inputChange ();
 
     }
 
@@ -63,13 +63,15 @@
 
     }
 
-    /* CHANGE / UPDATE */
+    /* INPUT / CHANGE */
 
-    ___change () {
+    ___inputChange () {
 
       this._on ( true, 'input change', this._update );
 
     }
+
+    /* UPDATE */
 
     _update () {
 

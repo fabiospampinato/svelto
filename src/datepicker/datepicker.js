@@ -9,7 +9,7 @@
  * ========================================================================= */
 
 //INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
-//INFO: Accordion to ISO 8601 the first day of the week is Monday
+//INFO: Accordion to ISO-8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
@@ -79,6 +79,7 @@
           previous: '.datepicker-days .previous',
           current: '.datepicker-days :not(.previous):not(.next)',
           next: '.datepicker-days .next',
+          today: '.datepicker-day-today',
           selected: '.datepicker-day-selected',
           clamped: '.datepicker-day-clamped'
         },
@@ -86,7 +87,7 @@
         input: 'input'
       },
       keystrokes: {
-        'up, left': 'prevMonth',
+        'up, left': 'previousMonth',
         'right, down': 'nextMonth'
       },
       callbacks: {
@@ -116,12 +117,17 @@
       this.$daysNext = this.$datepicker.find ( this.options.selectors.day.next );
       this.$daysAll = this.$daysPrev.add ( this.$daysCurrent ).add ( this.$daysNext );
 
-      this.$dayToday = false;
-      this.$daySelected = false;
+      this.$daySelected = this.$daysAll.filter ( this.options.selectors.day.selected );
+      this.$dayToday = this.$daysAll.filter ( this.options.selectors.day.today );
 
     }
 
     _init () {
+
+      /* RESETTING HIGHLIGHT */
+
+      this._unhighlightSelected ();
+      this._unhighlightToday ();
 
       /* TODAY */
 
@@ -148,11 +154,8 @@
     _events () {
 
       this.___change ();
-
       this.___keydown ();
-
       this.___navigation ();
-
       this.___dayTap ();
 
     }
@@ -181,11 +184,9 @@
 
     __change ( event, data ) {
 
-      if ( !data._datepicker_setted ) {
+      if ( data._datepickerSetted ) return;
 
-        this.set ( this.$input.val () );
-
-      }
+      this.set ( this.$input.val () );
 
     }
 
@@ -201,7 +202,7 @@
 
     ___navigation () {
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.prevMonth );
+      this._on ( this.$navigationPrev, Pointer.tap, this.previousMonth );
       this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
       this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
 
@@ -314,11 +315,9 @@
 
     _unhighlightSelected () {
 
-      if ( this.$daySelected ) {
+      if ( !this.$daySelected.length ) return;
 
-        this.$daySelected.removeClass ( this.options.classes.selected );
-
-      }
+      this.$daySelected.removeClass ( this.options.classes.selected );
 
     }
 
@@ -334,11 +333,9 @@
 
     _unhighlightToday () {
 
-      if ( this.$dayToday ) {
+      if ( !this.$dayToday.length ) return;
 
-        this.$dayToday.removeClass ( this.options.classes.today );
-
-      }
+      this.$dayToday.removeClass ( this.options.classes.today );
 
     }
 
@@ -396,7 +393,7 @@
 
       if ( this.options.date.selected ) {
 
-        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepicker_setted: true } );
+        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepickerSetted: true } );
 
       }
 
@@ -460,15 +457,19 @@
 
           this.options.date.selected = date;
 
-          if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+          if ( this.options.date.current ) {
 
-            this._highlightSelected ();
+            if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-          } else {
+              this._highlightSelected ();
 
-            this.options.date.current = this._cloneDate ( this.options.date.selected );
+            } else {
 
-            this._refresh ();
+              this.options.date.current = this._cloneDate ( this.options.date.selected );
+
+              this._refresh ();
+
+            }
 
           }
 
@@ -482,32 +483,6 @@
 
     }
 
-    navigateMonth ( modifier ) {
-
-      if ( modifier ) {
-
-        this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
-
-        this.options.date.current = this._clampDate ( this.options.date.current );
-
-        this._refresh ();
-
-      }
-
-    }
-
-    prevMonth () {
-
-      this.navigateMonth ( -1 );
-
-    }
-
-    nextMonth () {
-
-      this.navigateMonth ( 1 );
-
-    }
-
     navigateToToday () {
 
       if ( this.options.date.current.getFullYear () !== this.options.date.today.getFullYear () || this.options.date.current.getMonth () !== this.options.date.today.getMonth () ) {
@@ -517,6 +492,30 @@
         this._refresh ();
 
       }
+
+    }
+
+    navigateMonth ( modifier ) {
+
+      if ( _.isNaN ( modifier ) ) return;
+
+      this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
+
+      this.options.date.current = this._clampDate ( this.options.date.current );
+
+      this._refresh ();
+
+    }
+
+    previousMonth () {
+
+      this.navigateMonth ( -1 );
+
+    }
+
+    nextMonth () {
+
+      this.navigateMonth ( 1 );
 
     }
 

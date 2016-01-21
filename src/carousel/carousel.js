@@ -36,7 +36,7 @@
         next: '.carousel-next',
         indicator: '.carousel-indicator',
         itemsWrp: '.carousel-items',
-        item: ' > *'
+        item: '.carousel-items > *'
       },
       animations: {
         cycle: Animations.normal
@@ -64,7 +64,7 @@
       this.$next = this.$carousel.find ( this.options.selectors.next );
       this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
       this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
-      this.$items = this.$itemsWrp.find ( this.options.selectors.item );
+      this.$items = this.$carousel.find ( this.options.selectors.item );
 
       this.maxIndex = this.$items.length - 1;
 
@@ -102,13 +102,21 @@
 
     }
 
-    /* PREVIOUS / NEXT */
+    _destroy () {
+
+      this.timer.stop ();
+
+    }
+
+    /* PREVIOUS TAP */
 
     ___previousTap () {
 
       this._on ( this.$prev, Pointer.tap, this.previous );
 
     }
+
+    /* NEXT TAP */
 
     ___nextTap () {
 
@@ -161,7 +169,7 @@
 
       if ( this.options.cycle ) {
 
-        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
 
         this.timer.play ();
 
@@ -201,7 +209,7 @@
 
       super.enable ();
 
-      if ( this.options.cycle || this._wasCycle ) {
+      if ( this.options.cycle || this._wasCycling ) {
 
         this.play ();
 
@@ -213,7 +221,7 @@
 
       super.disable ();
 
-      this._wasCycle = this.options.cycle;
+      this._wasCycling = this.options.cycle;
 
       if ( this.options.cycle ) {
 
@@ -235,9 +243,9 @@
 
       index = Number ( index );
 
-      if ( !this._setting && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+      if ( !this._lock && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
 
-        this._setting = true;
+        this._lock = true;
 
         if ( this._current ) {
 
@@ -260,8 +268,6 @@
 
         this._delay ( function () {
 
-          this._setting = false;
-
           if ( this._previous ) {
 
             this._previous.$item.removeClass ( this.options.classes.prev );
@@ -273,6 +279,8 @@
             this.timer.play ();
 
           }
+
+          this._lock = false;
 
         }, this.options.animations.cycle );
 
@@ -299,7 +307,7 @@
     play () {
 
       this.options.cycle = true;
-      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
       this.timer.play ();
 
     }
