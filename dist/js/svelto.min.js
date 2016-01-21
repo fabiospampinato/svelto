@@ -3299,9 +3299,9 @@
 
     }
 
-    __tap () {
+    __tap ( event ) {
 
-      this.close ();
+      this.close ( event );
 
     }
 
@@ -3313,9 +3313,9 @@
 
     }
 
-    close () {
+    close ( event ) {
 
-      return this._targetInstance[this.options.methods.close]( this.element );
+      return this._targetInstance[this.options.methods.close]( this.element, event );
 
     }
 
@@ -5822,6 +5822,8 @@
  * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
+//TODO: Add support for opening the dropdown relative to a point
+
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
@@ -5833,13 +5835,14 @@
     plugin: true,
     selector: '.dropdown',
     options: {
-      positionate: {}, //INFO: Overriding `$.positionate` options
+      positionate: {}, //INFO: Extending `$.positionate` options
       spacing: {
         attached: 0,
         noTip: 7,
         normal: 14
       },
       classes: {
+        anchorDirection: 'dropdown-anchor-$1',
         noTip: 'no-tip',
         attached: 'attached',
         moving: 'moving',
@@ -5868,60 +5871,52 @@
 
       this.$dropdown = this.$element;
 
-      this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
-      this.$togglerParents = $empty;
-
       this.$dropdown.addClass ( this.guc );
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
 
-      this._toggler = false;
-      this._prevToggler = false;
-
       this._isOpen = false;
 
     }
 
-    /* WINDOW RESIZE / SCROLL */
+    _destroy () {
 
-    _bindParentsResizeScroll () {
-
-      this._on ( true, this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
+      this.close ();
 
     }
 
-    _unbindParentsResizeScroll () {
+    /* PARENTS SCROLL */
 
-      this._off ( this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
+    ___parentsScroll () {
+
+      let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( $window );
+
+      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 250 ) );
+
+    }
+
+    /* RESIZE */
+
+    ___resize () {
+
+      this._on ( true, $window, 'resize', this._throttle ( this._positionate, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
 
     }
 
     /* WINDOW TAP */
 
-    _bindWindowTap () {
+    ___windowTap () {
 
       this._on ( true, $window, Pointer.tap, this.__windowTap );
 
     }
 
-    _unbindWindowTap () {
-
-      this._off ( $window, Pointer.tap, this.__windowTap );
-
-    }
-
     __windowTap ( event ) {
 
-      if ( this._isOpen && event !== this._toggleEvent ) {
+      if ( event === this._openEvent || this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) return;
 
-        if ( !this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) {
-
-          this.close ();
-
-        }
-
-      }
+      this.close ();
 
     }
 
@@ -5931,38 +5926,53 @@
 
       /* VARIABLES */
 
-      let $toggler = this._toggler,
-          noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
-          $pointer = noTip ? false : $('<div>');
+      let noTip = this.$anchor.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
+          spacing = this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
+
+      this.$mockTip = noTip ? false : $('<div>');
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ( _.extend ( {
-        $anchor: $toggler,
-        $pointer: $pointer,
-        spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
+      this.$dropdown.positionate ( _.extend ({
+        $anchor: this.$anchor,
+        $pointer: this.$mockTip,
+        spacing: spacing,
         callbacks: {
-          change ( data ) {
-            $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
-          }
+          change: this.__positionChange.bind ( this )
         }
       }, this.options.positionate ));
 
-      /* MOCK TIP */
+    }
 
-      if ( !noTip ) {
+    _toggleAnchorDirectonClass ( direction, force ) {
 
-        EmbeddedCSS.set ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
-
-      }
+      this.$anchor.toggleClass ( _.format ( this.options.classes.anchorDirection, direction ), force );
 
     }
 
-    _repositionate () {
+    __positionChange ( data ) {
 
-      if ( this._isOpen ) {
+      /* ANCHOR CLASS */
 
-        this._positionate ();
+      if ( this._prevDirection !== data.direction ) {
+
+        if ( this._prevDirection ) {
+
+          this._toggleAnchorDirectonClass ( this._prevDirection, false );
+
+        }
+
+        this._toggleAnchorDirectonClass ( data.direction, true );
+
+        this._prevDirection = data.direction;
+
+      }
+
+      /* PSEUDO ELEMENT TIP */
+
+      if ( this.$mockTip ) {
+
+        EmbeddedCSS.set ( '.' + this.guc + ':before', this.$mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -5976,51 +5986,67 @@
 
     }
 
-    toggle ( force, toggler, event ) {
-
-      this._toggleEvent = event;
+    toggle ( force, anchor, event ) {
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = toggler && ( !this._toggler || this._toggler && this._toggler[0] !== toggler ) ? true : !this._isOpen;
+        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor ? !this._isOpen : false );
 
       }
 
-      this[force ? 'open' : 'close']( toggler );
+      this[force ? 'open' : 'close']( anchor, event );
 
     }
 
-    open ( toggler ) {
+    open ( anchor, event ) {
 
-      //FIXME: Add support for opening relative to a point
+      /* RESTORING ANCHOR */
 
-      if ( !toggler && this._prevToggler ) {
+      if ( !anchor && this.$prevAnchor ) {
 
-        toggler = this._prevToggler[0];
+        anchor = this.$prevAnchor[0];
 
       }
 
-      if ( !this._isOpen || ( toggler && toggler !== this._toggler[0] ) ) {
+      /* CHECKING */
 
-        if ( this._toggler ) {
+      if ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
 
-          this._prevToggler = this._toggler;
+      /* VARIABLES */
 
-          this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+      this._openEvent = event;
+      this._wasMoving = false;
 
-          if ( this._isOpen ) {
+      /* PREVIOUS ANCHOR */
 
-            this.$dropdown.addClass ( this.options.classes.moving );
+      if ( this.$anchor ) {
 
-          }
+        this._toggleAnchorDirectonClass ( this._prevDirection, false );
+        this._prevDirection = false;
+
+        this.$prevAnchor = this.$anchor;
+
+        if ( this._isOpen ) {
+
+          this._wasMoving = true;
+
+          this.$dropdown.addClass ( this.options.classes.moving );
 
         }
 
-        let $toggler = $(toggler);
+      }
 
-        this._toggler = $toggler;
+      /* ANCHOR */
 
-        this._trigger ( 'beforeopen' );
+      this.$anchor = $(anchor);
+
+      /* BEFORE OPENING */
+
+      this._trigger ( 'beforeopen' );
+
+      /* OPENING */
+
+      this._frame ( function () {
 
         this.$dropdown.addClass ( 'show' );
 
@@ -6032,65 +6058,66 @@
 
         });
 
-        if ( this._prevToggler !== this._toggler ) {
+      });
 
-          if ( this._isOpen ) {
+      /* EVENTS */
 
-            this._unbindParentsResizeScroll ();
+      this._reset ();
+      this.___resize ();
+      this.___parentsScroll ();
+      this.___windowTap ();
 
-          }
+      /* FINALIZING */
 
-          this.$togglerParents = $toggler.parents ();
+      this._isOpen = true;
 
-          this._bindParentsResizeScroll ();
+      /* TRIGGERING */
 
-        }
-
-        if ( !this._isOpen ) {
-
-          this._delay ( this._bindWindowTap );
-
-        }
-
-        this._isOpen = true;
-
-        this._trigger ( 'open' );
-
-      }
+      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( !this._isOpen ) return;
 
-        this._prevToggler = this._toggler;
+      /* ANCHOR */
 
-        this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+      this._toggleAnchorDirectonClass ( this._prevDirection, false );
+      this._prevDirection = false;
 
-        delete this._toggler;
+      this.$prevAnchor = this.$anchor;
+      this.$anchor = false;
 
-        this._frame ( function () {
+      /* CLOSING */
 
-          this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
+      this._frame ( function () {
 
-          this._delay ( function () {
+        this.$dropdown.removeClass ( this.options.classes.open  );
 
-            this.$dropdown.removeClass ( this.options.classes.show );
+        if ( this._wasMoving ) {
 
-          }, this.options.animations.close );
+          this.$dropdown.removeClass ( this.options.classes.moving );
 
-        });
+        }
 
-        this._unbindParentsResizeScroll ();
+        this._delay ( function () {
 
-        this._unbindWindowTap ();
+          this.$dropdown.removeClass ( this.options.classes.show );
 
-        this._isOpen = false;
+        }, this.options.animations.close );
 
-        this._trigger ( 'close' );
+      });
 
-      }
+      /* RESETTING */
+
+      this._reset ();
+
+      this._isOpen = false;
+
+      /* TRIGGERING */
+
+      this._trigger ( 'close' );
 
     }
 
@@ -6192,9 +6219,9 @@
 
     }
 
-    __tap () {
+    __tap ( event ) {
 
-      this.open ();
+      this.open ( event );
 
     }
 
@@ -6318,9 +6345,9 @@
 
     /* PUBLIC */
 
-    open () {
+    open ( event ) {
 
-      return this._targetInstance[this.options.methods.open]( this.element );
+      return this._targetInstance[this.options.methods.open]( this.element, event );
 
     }
 
@@ -6401,15 +6428,15 @@
 
     __tap ( event ) {
 
-      this._targetInstance[this.options.methods.toggle]( undefined, this.element, event );
+      this.toggle ( undefined, event );
 
     }
 
     /* PUBLIC */
 
-    toggle ( force ) {
+    toggle ( force, event ) {
 
-      return this._targetInstance[this.options.methods.toggle]( force, this.element );
+      return this._targetInstance[this.options.methods.toggle]( force, this.element, event );
 
     }
 

@@ -45,9 +45,9 @@
 
     }
 
-    __tap () {
+    __tap ( event ) {
 
-      this.close ();
+      this.close ( event );
 
     }
 
@@ -59,9 +59,9 @@
 
     }
 
-    close () {
+    close ( event ) {
 
-      return this._targetInstance[this.options.methods.close]( this.element );
+      return this._targetInstance[this.options.methods.close]( this.element, event );
 
     }
 

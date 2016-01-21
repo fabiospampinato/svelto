@@ -31,15 +31,15 @@
 
     __tap ( event ) {
 
-      this._targetInstance[this.options.methods.toggle]( undefined, this.element, event );
+      this.toggle ( undefined, event );
 
     }
 
     /* PUBLIC */
 
-    toggle ( force ) {
+    toggle ( force, event ) {
 
-      return this._targetInstance[this.options.methods.toggle]( force, this.element );
+      return this._targetInstance[this.options.methods.toggle]( force, this.element, event );
 
     }
 

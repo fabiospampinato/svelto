@@ -52,9 +52,9 @@
 
     }
 
-    __tap () {
+    __tap ( event ) {
 
-      this.open ();
+      this.open ( event );
 
     }
 
@@ -178,9 +178,9 @@
 
     /* PUBLIC */
 
-    open () {
+    open ( event ) {
 
-      return this._targetInstance[this.options.methods.open]( this.element );
+      return this._targetInstance[this.options.methods.open]( this.element, event );
 
     }
 
