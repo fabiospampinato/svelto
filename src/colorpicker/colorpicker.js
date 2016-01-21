@@ -77,55 +77,23 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this.___sbKeydown ();
+      this.___sbDrag ();
 
-      /* SB KEYDOWN */
-
-      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
-
-      /* SB DRAG */
-
-      this.$sbHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        proxy: {
-          $element: this.$sbWrp
-        },
-        constrainer: {
-          $element: this.$sbWrp,
-          center: true
-        },
-        callbacks: {
-          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
-          end: this.__sbDragEnd.bind ( this )
-        }
-      });
-
-      /* HUE KEYDOWN */
-
-      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
-
-      /* HUE DRAG */
-
-      this.$hueHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        axis: 'y',
-        proxy: {
-          $element: this.$hueWrp
-        },
-        constrainer: {
-          $element: this.$hueWrp
-        },
-        callbacks: {
-          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
-          end: this.__hueDragEnd.bind ( this )
-        }
-      });
+      this.___hueKeydown ();
+      this.___hueDrag ();
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -134,6 +102,12 @@
     }
 
     /* SB ARROWS */
+
+    ___sbKeydown () {
+
+      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+
+    }
 
     __sbKeydown ( event ) {
 
@@ -170,6 +144,25 @@
 
     /* SB DRAG */
 
+    ___sbDrag () {
+
+      this.$sbHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        proxy: {
+          $element: this.$sbWrp
+        },
+        constrainer: {
+          $element: this.$sbWrp,
+          center: true
+        },
+        callbacks: {
+          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
+          end: this.__sbDragEnd.bind ( this )
+        }
+      });
+
+    }
+
     _sbDragSet ( XY, update ) {
 
       this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
@@ -199,6 +192,12 @@
 
     /* HUE ARROWS */
 
+    ___hueKeydown () {
+
+      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
+
+    }
+
     __hueKeydown ( event ) {
 
       switch ( event.keyCode ) {
@@ -225,6 +224,25 @@
     }
 
     /* HUE DRAG */
+
+    ___hueDrag () {
+
+      this.$hueHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'y',
+        proxy: {
+          $element: this.$hueWrp
+        },
+        constrainer: {
+          $element: this.$hueWrp
+        },
+        callbacks: {
+          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
+          end: this.__hueDragEnd.bind ( this )
+        }
+      });
+
+    }
 
     _hueDragSet ( XY, update ) {
 

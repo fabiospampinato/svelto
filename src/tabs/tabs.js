@@ -70,9 +70,7 @@
 
     _events () {
 
-      /* TRIGGERS */
-
-      this._on ( this.$triggers, Pointer.tap, this.__tap );
+      this.___tap ();
 
     }
 
@@ -85,6 +83,12 @@
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( this.$triggers, Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 

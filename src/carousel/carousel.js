@@ -93,30 +93,59 @@
 
     _events () {
 
-      /* PREV */
+      this.___previousTap ();
+      this.___nextTap ();
+      this.___indicatorTap ();
+
+      this.___keydown ();
+      this.___cycle ();
+
+    }
+
+    /* PREVIOUS / NEXT */
+
+    ___previousTap () {
 
       this._on ( this.$prev, Pointer.tap, this.previous );
 
-      /* NEXT */
+    }
+
+    ___nextTap () {
 
       this._on ( this.$next, Pointer.tap, this.next );
 
-      /* KEYDOWN */
+    }
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+    /* INDICATOR TAP */
 
-      /* INDICATOR TAP */
+    ___indicatorTap () {
 
       this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
 
-      /* CYCLE */
+    }
+
+    __indicatorTap ( event ) {
+
+      this.set ( this.$indicators.index ( event.currentTarget ) );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* CYCLE */
+
+    ___cycle () {
 
       this._on ( true, this.$itemsWrp, Pointer.enter, this.__cycleEnter );
       this._on ( true, this.$itemsWrp, Pointer.leave, this.__cycleLeave );
 
     }
-
-    /* CYCLE */
 
     __cycleEnter () {
 
@@ -137,14 +166,6 @@
         this.timer.play ();
 
       }
-
-    }
-
-    /* INDICATOR TAP */
-
-    __indicatorTap ( event ) {
-
-      this.set ( this.$indicators.index ( event.currentTarget ) );
 
     }
 

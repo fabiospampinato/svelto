@@ -51,13 +51,8 @@
 
     _events () {
 
-      /* DRAG MOVE */
-
-      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
-
-      /* DRAG END */
-
-      this._on ( $document, 'draggable:end', this.__dragEnd );
+      this.___dragMove ();
+      this.___dragEnd ();
 
     }
 
@@ -89,6 +84,12 @@
 
     /* DRAG MOVE */
 
+    ___dragMove () {
+
+      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
+
+    }
+
     __dragMove ( event, data ) {
 
       if ( this._isCompatible ( data.draggable ) ) {
@@ -110,6 +111,12 @@
     }
 
     /* DRAG END */
+
+    ___dragEnd () {
+
+      this._on ( $document, 'draggable:end', this.__dragEnd );
+
+    }
 
     __dragEnd ( event, data ) {
 

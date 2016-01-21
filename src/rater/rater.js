@@ -79,7 +79,13 @@
 
     _events () {
 
-      /* UNRATED */
+      this.___tap ();
+
+    }
+
+    /* TAP */
+
+    ___tap () {
 
       if ( !this.options.rated ) {
 
@@ -90,8 +96,6 @@
       }
 
     }
-
-    /* TAP */
 
     __tap ( event ) {
 

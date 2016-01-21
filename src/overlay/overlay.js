@@ -54,7 +54,13 @@
 
     _events () {
 
-      /* KEYDOWN */
+      this.___keydown ();
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
 
       this._onHover ( true, [$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
 

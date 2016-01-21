@@ -54,25 +54,45 @@
 
     _events () {
 
+      this.___keydown ();
+      this.___downTap ();
+      this.___change ();
+      
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        this._onHover ( [$document, 'keydown', this.__keydown] );
+
+      }
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change sortable:sort', this.__change );
+
+    }
+
+    /* DOWN / TAP */
+
+    ___downTap () {
+
       if ( Browser.is.touchDevice ) {
 
         this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
 
       } else {
 
-        /* KEYDOWN */
-
-        this._onHover ( [$document, 'keydown', this.__keydown] );
-
-        /* DOWN */
-
         this._on ( Pointer.down, this.options.selectors.element, this.__down );
 
       }
-
-      /* CHANGE */
-
-      this._on ( true, 'change sortable:sort', this.__change );
 
     }
 

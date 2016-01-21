@@ -93,27 +93,8 @@
 
     _events () {
 
-      /* FLICK OPEN */
-
-      if ( this.options.flick.open ) {
-
-        /* DOCUMENT */
-
-        $document.flickable ();
-
-        this.___documentFlick ();
-
-      }
-
-      /* FLICK CLOSE */
-
-      if ( this.options.flick.close ) {
-
-        /* PANEL */
-
-        this.$panel.flickable ();
-
-      }
+      this.___documentFlick ();
+      this.___panelFlick ();
 
     }
 
@@ -171,6 +152,8 @@
 
       if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
 
+      $document.flickable ();
+
       let layoutOffset = this.$layout.offset ();
 
       switch ( this.options.direction ) {
@@ -202,11 +185,11 @@
 
     ___panelFlick () {
 
-      if ( this.options.flick.close ) {
+      if ( !this.options.flick.close ) return;
 
-        this._on ( true, 'flickable:flick', this.__panelFlick );
+      this.$panel.flickable ();
 
-      }
+      this._on ( true, 'flickable:flick', this.__panelFlick );
 
     }
 

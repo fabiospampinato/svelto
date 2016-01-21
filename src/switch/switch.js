@@ -92,15 +92,37 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
+      this.___keydown ();
+      this.___drag ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
 
       this._on ( true, this.$input, 'change', this.__change );
 
-      /* KEYDOWN */
+    }
+
+    __change () {
+
+      this.toggle ( this.$input.prop ( 'checked' ) );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
 
       this._onHover ( [$document, 'keydown', this.__keydown] );
 
-      /* DRAG */
+    }
+
+    /* DRAG */
+
+    ___drag () {
 
       this.$handler.draggable ({
         draggable: this.isEnabled.bind ( this ),
@@ -118,16 +140,6 @@
       });
 
     }
-
-    /* CHANGE */
-
-    __change () {
-
-      this.toggle ( this.$input.prop ( 'checked' ) );
-
-    }
-
-    /* DRAG */
 
     __dragEnd ( event, data ) {
 

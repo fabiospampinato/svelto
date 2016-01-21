@@ -8,6 +8,8 @@
  * @requires ../expander/expander.js
  * ========================================================================= */
 
+//TODO: Add better support for changing `options.multiple` at runtime
+
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';

@@ -103,19 +103,10 @@
 
     _events () {
 
-      /* PARTIAL */
+      this.___partial ();
 
-      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
-
-      this._on ( this.$partial, 'paste', this.__paste );
-
-      /* TAP ON EMPTY */
-
-      this._on ( Pointer.tap, this.__tapOnEmpty );
-
-      /* TAP ON TAG REMOVER */
-
-      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
+      this.___tapOnEmpty ();
+      this.___tapOnTagRemover ();
 
     }
 
@@ -233,6 +224,16 @@
 
     }
 
+    /* PARTIAL */
+
+    ___partial () {
+
+      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+
+      this._on ( this.$partial, 'paste', this.__paste );
+
+    }
+
     /* KEYPRESS / KEYDOWN */
 
     __keypressKeydown ( event ) {
@@ -290,6 +291,12 @@
 
     /* TAP ON TAG REMOVER */
 
+    ___tapOnTagRemover () {
+
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
+
+    }
+
     __tapOnTagRemover ( event ) {
 
       let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
@@ -299,6 +306,12 @@
     }
 
     /* TAP ON EMPTY */
+
+    ___tapOnEmpty () {
+
+      this._on ( Pointer.tap, this.__tapOnEmpty );
+
+    }
 
     __tapOnEmpty ( event ) {
 

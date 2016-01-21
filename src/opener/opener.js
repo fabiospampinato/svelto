@@ -39,21 +39,18 @@
 
     _events () {
 
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
-
-      /* HOVER */
-
-      if ( this.options.hover.active && !Browser.is.touchDevice ) {
-
-        this._on ( Pointer.enter, this.__hoverEnter );
-
-      }
+      this.___tap ();
+      this.___hover ();
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     __tap () {
 
@@ -62,6 +59,16 @@
     }
 
     /* HOVER */
+
+    ___hover () {
+
+      if ( this.options.hover.active && !Browser.is.touchDevice ) {
+
+        this._on ( Pointer.enter, this.__hoverEnter );
+
+      }
+
+    }
 
     __hoverEnter () {
 

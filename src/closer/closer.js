@@ -33,13 +33,17 @@
 
     _events () {
 
-      /* TAP */
-
-      this._on ( Pointer.tap, this.__tap );
+      this.___tap ();
 
     }
 
     /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     __tap () {
 

@@ -22,7 +22,7 @@
     selector: 'textarea.autogrow',
     options: {
       callbacks: {
-        update: _.noop
+        change: _.noop
       }
     }
   };
@@ -47,9 +47,7 @@
 
     _events () {
 
-      /* INPUT / CHANGE */
-
-      this._on ( true, 'input change', this._update );
+      this.___change ();
 
     }
 
@@ -63,11 +61,19 @@
 
     }
 
+    /* CHANGE / UPDATE */
+
+    ___change () {
+
+      this._on ( true, 'input change', this._update );
+
+    }
+
     _update () {
 
       this.$textarea.height ( this._getNeededHeight () );
 
-      this._trigger ( 'update' );
+      this._trigger ( 'change' );
 
     }
 

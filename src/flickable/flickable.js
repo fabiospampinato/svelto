@@ -35,13 +35,17 @@
 
     _events () {
 
-      /* DOWN */
-
-      this._on ( Pointer.down, this.__down );
+      this.___down ();
 
     }
 
     /* HANDLERS */
+
+    ___down () {
+
+      this._on ( Pointer.down, this.__down );
+
+    }
 
     __down ( event ) {
 

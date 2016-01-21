@@ -83,11 +83,22 @@
 
     _events () {
 
-      /* DOWN */
+      this.___down ();
+      this.___proxy ();
+
+    }
+
+    /* DOWN */
+
+    ___down () {
 
       this._on ( this.$handlers, Pointer.down, this.__down );
 
-      /* PROXY */
+    }
+
+    /* PROXY */
+
+    ___proxy () {
 
       if ( this.options.proxy.$element ) {
 

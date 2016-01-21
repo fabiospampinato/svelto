@@ -56,11 +56,22 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
+      this.___input ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
 
       this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
 
-      /* INPUT */
+    }
+
+    /* LIVE */
+
+    ___live () {
 
       if ( this.options.live ) {
 

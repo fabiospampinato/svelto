@@ -147,23 +147,13 @@
 
     _events () {
 
-      /* CHANGE */
+      this.___change ();
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this.___keydown ();
 
-      /* KEYDOWN */
+      this.___navigation ();
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* NAVIGATION PREV / NEXT / TODAY */
-
-      this._on ( this.$navigationPrev, Pointer.tap, this.prevMonth );
-      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
-      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
-
-      /* DAY TAP */
-
-      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+      this.___dayTap ();
 
     }
 
@@ -183,6 +173,12 @@
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
     __change ( event, data ) {
 
       if ( !data._datepicker_setted ) {
@@ -193,7 +189,31 @@
 
     }
 
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* NAVIGATION */
+
+    ___navigation () {
+
+      this._on ( this.$navigationPrev, Pointer.tap, this.prevMonth );
+      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
+      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
+
+    }
+
     /* DAY TAP */
+
+    ___dayTap () {
+
+      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+
+    }
 
     __dayTap ( event ) {
 

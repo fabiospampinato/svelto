@@ -60,13 +60,19 @@
 
     _events () {
 
-      /* DOWN / TAP */
-
-      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+      this.___downTap ();
 
     }
 
     /* DOWN / TAP */
+
+    ___downTap () {
+
+      //INFO: Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
+
+      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+
+    }
 
     __downTap ( event ) {
 

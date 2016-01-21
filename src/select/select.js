@@ -109,21 +109,18 @@
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, this.$select, 'change', this.__change );
-
-      if ( !Browser.is.touchDevice ) {
-
-        /* BUTTON TAP */
-
-        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
-
-      }
+      this.___change ();
+      this.___buttonTap ();
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$select, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -134,6 +131,18 @@
     }
 
     /* BUTTON TAP */
+
+    ___buttonTap () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        /* BUTTON TAP */
+
+        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
+
+      }
+
+    }
 
     __buttonTap ( event ) {
 

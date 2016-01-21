@@ -127,21 +127,10 @@
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, this.$elements, 'change', this.__change );
-
-      /* FOCUS */
-
-      this._on ( this.$textfields, 'focus', this.__focus );
-
-      /* BLUR */
-
-      this._on ( this.$textfields, 'blur', this.__blur );
-
-      /* SUBMIT */
-
-      this._on ( true, 'submit', this.__submit );
+      this.___change ();
+      this.___focus ();
+      this.___blur ();
+      this.___submit ();
 
     }
 
@@ -217,6 +206,12 @@
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$elements, 'change', this.__change );
+
+    }
+
     __change ( event ) {
 
       /* FORM */
@@ -260,6 +255,12 @@
 
     /* FOCUS */
 
+    ___focus () {
+
+      this._on ( this.$textfields, 'focus', this.__focus );
+
+    }
+
     __focus ( event ) {
 
       let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
@@ -272,6 +273,12 @@
 
     /* BLUR */
 
+    ___blur () {
+
+      this._on ( this.$textfields, 'blur', this.__blur );
+
+    }
+
     __blur ( event ) {
 
       let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
@@ -281,6 +288,12 @@
     }
 
     /* SUBMIT */
+
+    ___submit () {
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
 
     __submit ( event ) {
 

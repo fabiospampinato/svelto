@@ -59,13 +59,17 @@
 
     _events () {
 
-      /* SUBMIT */
-
-      this._on ( true, 'submit', this.__submit );
+      this.___submit ();
 
     }
 
     /* PRIVATE */
+
+    ___submit () {
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
 
     __submit ( event ) {
 

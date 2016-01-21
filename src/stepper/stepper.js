@@ -77,21 +77,12 @@
 
     _events () {
 
-      /* INPUT / CHANGE */
+      this.___inputChange ();
 
-      this._on ( true, this.$input, 'input change', this.__inputChange );
+      this.___keydown ();
 
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* INCREASE */
-
-      this._on ( this.$decreaser, Pointer.tap, this.decrease );
-
-      /* DECREASE */
-
-      this._on ( this.$increaser, Pointer.tap, this.increase );
+      this.___increaser ();
+      this.___decreaser ();
 
     }
 
@@ -139,11 +130,41 @@
 
     }
 
-    /* CHANGE */
+    /* INPUT / CHANGE */
+
+    ___inputChange () {
+
+      this._on ( true, this.$input, 'input change', this.__inputChange );
+
+    }
 
     __inputChange () {
 
       this.set ( this.$input.val () );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* INCREASER */
+
+    ___increaser () {
+
+      this._on ( this.$decreaser, Pointer.tap, this.decrease );
+
+    }
+
+    /* DECREASER */
+
+    ___decreaser () {
+
+      this._on ( this.$increaser, Pointer.tap, this.increase );
 
     }
 

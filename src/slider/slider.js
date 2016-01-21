@@ -98,43 +98,11 @@
 
     _events () {
 
-      /* INPUT CHANGE */
-
-      this._on ( true, this.$input, 'change', this.__change );
-
-      /* WINDOW RESIZE */
-
-      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
-
-      /* KEYDOWN */
-
-      this._onHover ( [$document, 'keydown', this.__keydown] );
-
-      /* MIN / MAX BUTTONS */
-
-      this._on ( this.$min, Pointer.tap, this.decrease );
-      this._on ( this.$max, Pointer.tap, this.increase );
-
-      /* DRAG */
-
-      this.$handlerWrp.draggable ({
-        draggable: this.isEnabled.bind ( this ),
-        axis: 'x',
-        proxy: {
-          $element: this.$bar
-        },
-        constrainer: {
-          $element: this.$bar,
-          center: true
-        },
-        modifiers: {
-          x: this._dragModifierX.bind ( this )
-        },
-        callbacks: {
-          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
-          end: this.__dragEnd.bind ( this )
-        }
-      });
+      this.___change ();
+      this.___resize ();
+      this.___keydown ();
+      this.___minMax ();
+      this.___drag ();
 
     }
 
@@ -189,6 +157,12 @@
 
     /* CHANGE */
 
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
     __change () {
 
       this.set ( this.$input.val () );
@@ -197,6 +171,12 @@
 
     /* RESIZE */
 
+    ___resize () {
+
+      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+
+    }
+
     __resize () {
 
       this._updateVariables ();
@@ -204,7 +184,47 @@
 
     }
 
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* MIN / MAX */
+
+    ___minMax () {
+
+      this._on ( this.$min, Pointer.tap, this.decrease );
+      this._on ( this.$max, Pointer.tap, this.increase );
+
+    }
+
     /* DRAG */
+    
+    ___drag () {
+
+      this.$handlerWrp.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'x',
+        proxy: {
+          $element: this.$bar
+        },
+        constrainer: {
+          $element: this.$bar,
+          center: true
+        },
+        modifiers: {
+          x: this._dragModifierX.bind ( this )
+        },
+        callbacks: {
+          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
+          end: this.__dragEnd.bind ( this )
+        }
+      });
+
+    }
 
     _dragModifierX ( distance ) {
 

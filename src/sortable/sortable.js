@@ -97,17 +97,18 @@
 
     _events () {
 
-      /* CHANGE */
-
-      this._on ( true, 'change', this.__change );
-
-      /* TAP */
-
-      this._on ( this.$sortables, Pointer.tap, this.__tap );
+      this.___change ();
+      this.___tap ();
 
     }
 
     /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change', this.__change );
+
+    }
 
     __change () {
 
@@ -122,7 +123,13 @@
 
     }
 
-    /* CLICK */
+    /* TAP */
+
+    ___tap () {
+
+      this._on ( this.$sortables, Pointer.tap, this.__tap );
+
+    }
 
     __tap ( event ) {
 
