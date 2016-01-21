@@ -39,27 +39,27 @@
 
       this.$flippable = this.$element;
 
-      this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
+      this._isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
 
     }
 
     /* PUBLIC */
 
-    flip ( force ) {
+    isFlipped () {
 
-      if ( !_.isBoolean ( force ) ) {
+      return this._isFlipped;
 
-        force = !this.isFlipped;
+    }
 
-      }
+    flip ( force = !this._isFlipped ) {
 
-      if ( force !== this.isFlipped ) {
+      if ( !!force !== this._isFlipped ) {
 
-        this.isFlipped = force;
+        this._isFlipped = force;
 
-        this.$flippable.toggleClass ( this.options.classes.flip, this.isFlipped );
+        this.$flippable.toggleClass ( this.options.classes.flip, this._isFlipped );
 
-        this._trigger ( this.isFlipped ? 'back' : 'front' );
+        this._trigger ( this._isFlipped ? 'back' : 'front' );
 
       }
 

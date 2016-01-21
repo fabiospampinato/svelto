@@ -69,15 +69,9 @@
 
     }
 
-    toggle ( force ) {
+    toggle ( force = !this.isOpen () ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this.isOpen ();
-
-      }
-
-      if ( force !== this.isOpen () ) {
+      if ( !!force !== this.isOpen () ) {
 
         this[force ? 'open' : 'close']();
 
