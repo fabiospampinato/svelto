@@ -43,7 +43,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isFlipped () {
 

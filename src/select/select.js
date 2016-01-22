@@ -88,7 +88,6 @@
       this.selectOptions = [];
 
       this.$dropdown = false;
-      this.$buttons = false;
 
     }
 
@@ -110,7 +109,6 @@
     _events () {
 
       this.___change ();
-      this.___buttonTap ();
 
     }
 
@@ -138,7 +136,7 @@
 
         /* BUTTON TAP */
 
-        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
+        this._on ( this.$dropdown, Pointer.tap, this.options.selectors.button, this.__buttonTap );
 
       }
 
@@ -146,11 +144,13 @@
 
     __buttonTap ( event ) {
 
-      this.set ( $(event.currentTarget).data ( 'value' ) );
+      this.$dropdown.dropdown ( 'close' );
+
+      this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
 
     }
 
-    /* PRIVATE */
+    /* OPTIONS */
 
     ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups nesting levels
 
@@ -186,6 +186,8 @@
 
     }
 
+    /* DROPDOWN */
+
     ___dropdown () {
 
       let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
@@ -200,16 +202,10 @@
         },
         callbacks: {
           beforeopen: this.__setDropdownWidth.bind ( this ),
-          open: function () {
-            this._trigger ( 'open' );
-          }.bind ( this ),
-          close: function () {
-            this._trigger ( 'close' );
-          }.bind ( this )
+          open: this.__dropdownOpen.bind ( this ),
+          close: this.__dropdownClose.bind ( this )
         }
       });
-
-      this.$buttons.dropdownCloser ();
 
       this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
 
@@ -224,6 +220,24 @@
         this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
 
       }
+
+    }
+
+    __dropdownOpen () {
+
+      this.___buttonTap ();
+
+      this._trigger ( 'open' );
+
+    }
+
+    __dropdownClose () {
+
+      this._reset ();
+
+      this.___change ();
+
+      this._trigger ( 'close' );
 
     }
 
@@ -264,7 +278,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 

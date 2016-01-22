@@ -73,19 +73,25 @@
 
       /* CACHE TEMPLATES */
 
-      for ( let tmpl in this.templates ) {
+      if ( !$.tmpl.cached[this.name] ) {
 
-        if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
+        for ( let tmpl in this.templates ) {
 
-          let tmplName = this.name + '.' + tmpl;
+          if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
 
-          if ( !(tmplName in $.tmpl.cache) ) {
+            let tmplName = this.name + '.' + tmpl;
 
-            $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+            if ( !(tmplName in $.tmpl.cache) ) {
+
+              $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+
+            }
 
           }
 
         }
+
+        $.tmpl.cached[this.name] = true;
 
       }
 
@@ -175,7 +181,7 @@
 
       /* OPTIONS */
 
-      if ( options ) {
+      if ( _.isPlainObject ( options ) ) {
 
         configs.push ({ options: options });
 
@@ -185,7 +191,7 @@
 
       let createOptions = this._createOptions ();
 
-      if ( createOptions ) {
+      if ( _.isPlainObject ( createOptions ) ) {
 
         configs.push ({ options: createOptions });
 
@@ -226,7 +232,7 @@
     _init () {} //INFO: Perform the init stuff inside this function
     _events () {} //INFO: Bind the event handlers inside this function
 
-    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functoinality
+    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
 
       this.$bindings.off ( this.eventNamespace );
 

@@ -18,7 +18,7 @@
   let config = {
     name: 'flippableFlipper',
     plugin: true,
-    selector: '.flippable-flipper, .flippable .flipper',
+    selector: '.flippable-flipper',
     options: {
       widget: Widgets.Flippable,
       methods: {

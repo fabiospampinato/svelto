@@ -28,6 +28,9 @@
         YYYYMMDD ( date, data ) {
           return [_.padLeft ( date.getUTCFullYear (), 4, 0 ), _.padLeft ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padLeft ( date.getUTCDate (), 2, 0 )].join ( data.separator );
         },
+        UNIXTIMESTAMP ( date ) {
+          return Math.floor ( date.getTime () / 1000 );
+        },
         ISO ( date ) {
           return date.toISOString ();
         },
@@ -39,6 +42,9 @@
         YYYYMMDD ( date, data ) {
           let segments = date.split ( data.separator );
           return new Date ( Date.UTC ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) ) );
+        },
+        UNIXTIMESTAMP ( date ) {
+          return new Date ( date.length ? date * 1000 : NaN );
         },
         ISO ( date ) {
           return new Date ( date );
@@ -59,7 +65,7 @@
       },
       firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`
       format: {
-        type: 'YYYYMMDD', //INFO: One of the formats implemented in the exporters
+        type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
         data: { //INFO: Passed to the called importer and exporter
           separator: '/'
         }
@@ -184,7 +190,7 @@
 
     __change ( event, data ) {
 
-      if ( data._datepickerSetted ) return;
+      if ( data && data._datepickerId === this.guid ) return;
 
       this.set ( this.$input.val () );
 
@@ -225,7 +231,7 @@
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
 
       let day = parseInt ( $day.html (), 10 ),
-          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
+          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day, 12 );
 
       this.set ( date );
 
@@ -393,7 +399,7 @@
 
       if ( this.options.date.selected ) {
 
-        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepickerSetted: true } );
+        this.$input.val ( this._export ( this.options.date.selected ) ).trigger ( 'change', { _datepickerId: this.guid } );
 
       }
 
@@ -401,7 +407,7 @@
 
     /* EXPORT */
 
-    _exportDate ( date )  {
+    _export ( date )  {
 
       return this.options.exporters[this.options.format.type] ( date, this.options.format.data );
 
@@ -409,7 +415,7 @@
 
     /* IMPORT */
 
-    _importDate ( date )  {
+    _import ( date )  {
 
       return this.options.importers[this.options.format.type] ( date, this.options.format.data );
 
@@ -435,13 +441,13 @@
 
     get ( formatted ) {
 
-      return this.options.date.selected ? ( formatted ? this._exportDate ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected ) ) : false;
+      return this.options.date.selected ? ( formatted ? this._export ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected ) ) : false;
 
     }
 
     set ( date ) {
 
-      date = ( date instanceof Date ) ? date : this._importDate ( date );
+      date = ( date instanceof Date ) ? date : this._import ( date );
 
       if ( !_.isNaN ( date.valueOf () ) ) {
 

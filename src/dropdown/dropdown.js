@@ -30,7 +30,7 @@
         normal: 14
       },
       classes: {
-        anchorDirection: 'dropdown-anchor-$1',
+        anchorDirection: 'dropdown-anchor-$2',
         noTip: 'no-tip',
         attached: 'attached',
         moving: 'moving',
@@ -166,7 +166,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 

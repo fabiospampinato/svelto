@@ -24,7 +24,7 @@
         open: 'open'
       },
       selectors: {
-        content: '.expander-content'
+        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
       },
       animations: {
         open: Animations.normal,

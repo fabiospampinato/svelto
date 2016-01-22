@@ -61,13 +61,13 @@
             number: 'Only numbers are allowed',
             integer: 'Only integers numbers are allowed',
             float: 'Only floating point numbers are allowed',
-            min: 'The number must be at least $1',
-            max: 'The number must be at maximum $1',
-            range: 'The number must be between $1 and $2',
-            minLength: 'The lenght must be at least $1',
-            maxLength: 'The lenght must be at maximum $1',
-            rangeLength: 'The length must be between $1 and $2',
-            exactLength: 'The length must be exactly $1',
+            min: 'The number must be at least $2',
+            max: 'The number must be at maximum $2',
+            range: 'The number must be between $2 and $3',
+            minLength: 'The lenght must be at least $2',
+            maxLength: 'The lenght must be at maximum $2',
+            rangeLength: 'The length must be between $2 and $3',
+            exactLength: 'The length must be exactly $2',
             email: 'Enter a valid email address',
             cc: 'Enter a valid credit card number',
             ssn: 'Enter a valid Social Security Number',
@@ -302,7 +302,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-        $.noty ( this.messages.invalid );
+        $.noty ( this.options.messages.form.invalid );
 
       }
 

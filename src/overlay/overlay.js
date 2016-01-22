@@ -54,7 +54,11 @@
 
     _events () {
 
-      this.___keydown ();
+      if ( this._isOpen ) {
+
+        this.___keydown ();
+
+      }
 
     }
 
@@ -98,6 +102,8 @@
 
             this.$overlay.addClass ( this.options.classes.open );
 
+            this.___keydown ();
+
             this._trigger ( 'open' );
 
           });
@@ -111,6 +117,8 @@
     close () {
 
       if ( this._isOpen ) {
+
+        this._reset ();
 
         this._isOpen = false;
 

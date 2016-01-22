@@ -65,19 +65,19 @@
 
     ___change () {
 
-      this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
+      this._on ( true, this.$elements, 'change', this._debounce ( this.__sync, 100 ) );
 
     }
 
-    /* LIVE */
+    /* INPUT */
 
-    ___live () {
+    ___input () {
 
       if ( this.options.live ) {
 
         let $textfields = this.$elements.filter ( this.options.selectors.textfield );
 
-        this._on ( true, $textfields, 'input', this._throttle ( this.__sync, 100 ) );
+        this._on ( true, $textfields, 'input', this._debounce ( this.__sync, 100 ) );
 
       }
 
@@ -87,36 +87,34 @@
 
     __sync ( event, data ) {
 
-      if ( data && data._formSynced ) return;
+      if ( data && data._formSynced === this.group ) return;
 
       let $element = $(event.target),
           name = $element.attr ( this.options.attributes.name ),
           $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
 
-      if ( $otherElements.length ) {
+      if ( !$otherElements.length ) return;
 
-        let value = $element.val (),
-            checked = !!$element.prop ( 'checked' );
+      let value = $element.val (),
+          checked = !!$element.prop ( 'checked' );
 
-        for ( let otherElement of $otherElements ) {
+      for ( let otherElement of $otherElements ) {
 
-          let $otherElement = $(otherElement),
-              otherValue = $otherElement.val (),
-              otherChecked = !!$otherElement.prop ( 'checked' );
+        let $otherElement = $(otherElement),
+            otherValue = $otherElement.val (),
+            otherChecked = !!$otherElement.prop ( 'checked' );
 
-          if ( value === otherValue && checked === otherChecked ) continue;
+        if ( value === otherValue && checked === otherChecked ) continue;
 
-          if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
+        if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
 
-          if ( $element.is ( this.options.selectors.checkable ) ) {
+        if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: true } );
+          $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: this.group } );
 
-          } else {
+        } else {
 
-            $otherElement.val ( value ).trigger ( 'change', { _formSynced: true } );
-
-          }
+          $otherElement.val ( value ).trigger ( 'change', { _formSynced: this.group } );
 
         }
 

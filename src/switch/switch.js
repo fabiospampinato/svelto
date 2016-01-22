@@ -98,6 +98,12 @@
 
     }
 
+    _destroy () {
+
+      this.$handler.draggable ( 'destroy' );
+
+    }
+
     /* CHANGE */
 
     ___change () {

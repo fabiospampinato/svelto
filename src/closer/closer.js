@@ -51,7 +51,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 

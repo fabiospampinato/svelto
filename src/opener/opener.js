@@ -176,7 +176,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     open ( event ) {
 

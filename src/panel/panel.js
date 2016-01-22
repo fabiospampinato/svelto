@@ -134,7 +134,7 @@
 
     }
 
-    /* FLICK */
+    /* DOCUMENT FLICK */
 
     ___documentFlick () {
 
@@ -183,6 +183,8 @@
 
     }
 
+    /* PANEL FLICK */
+
     ___panelFlick () {
 
       if ( !this.options.flick.close ) return;
@@ -210,7 +212,7 @@
 
     __route () {
 
-      if ( this._isOpen ) {
+      if ( this._isOpen && !$.contains ( this.$layout[0], this.$panel[0] ) ) {
 
         this.$layout.enableScroll ();
 
@@ -246,7 +248,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -330,7 +332,6 @@
       });
 
     }
-
 
     /* PINNING */
 

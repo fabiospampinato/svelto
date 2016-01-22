@@ -54,10 +54,24 @@
 
     _events () {
 
+      this.___change ();
       this.___keydown ();
       this.___downTap ();
-      this.___change ();
-      
+
+    }
+
+    _destroy () {
+
+      this.clear ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change sortable:sort', this.__change );
+
     }
 
     /* KEYDOWN */
@@ -69,14 +83,6 @@
         this._onHover ( [$document, 'keydown', this.__keydown] );
 
       }
-
-    }
-
-    /* CHANGE */
-
-    ___change () {
-
-      this._on ( true, 'change sortable:sort', this.__change );
 
     }
 

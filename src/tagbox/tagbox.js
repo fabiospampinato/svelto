@@ -10,6 +10,7 @@
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
+//FIXME: Destroy, reinit and add something like `aaaaaa`, it gets added at the beginning even if `options.sort` is setted to false
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard ) {
 
@@ -323,7 +324,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 

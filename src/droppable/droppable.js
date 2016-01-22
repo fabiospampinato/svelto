@@ -51,8 +51,7 @@
 
     _events () {
 
-      this.___dragMove ();
-      this.___dragEnd ();
+      this.___drag ();
 
     }
 
@@ -79,6 +78,15 @@
     _isPointHovering ( pointXY ) {
 
       return !!this.$droppable.touching ({ point: pointXY }).length;
+
+    }
+
+    /* DRAG */
+
+    ___drag () {
+
+      this.___dragMove ();
+      this.___dragEnd ();
 
     }
 

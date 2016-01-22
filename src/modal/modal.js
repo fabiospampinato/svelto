@@ -26,6 +26,9 @@
         show: 'show',
         open: 'open'
       },
+      selectors: {
+        layout: '.layout, body' //TODO: Use only `.layout`
+      },
       animations: {
         open: Animations.normal,
         close: Animations.normal
@@ -51,13 +54,9 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
+      this.$layout = this.$modal.closest ( this.options.selectors.layout );
+
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
-
-    }
-
-    _events () {
-
-      this.___tap ();
 
     }
 
@@ -79,7 +78,19 @@
 
     }
 
-    /* PUBLIC */
+    /* ROUTE */
+
+    __route () {
+
+      if ( this._isOpen && !$.contains ( this.$layout[0], this.$modal[0] ) ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* API */
 
     isOpen () {
 
@@ -90,7 +101,7 @@
     toggle ( force = !this._isOpen ) {
 
       if ( !!force !== this._isOpen ) {
-        
+
         this[force ? 'open' : 'close']();
 
       }
@@ -99,57 +110,55 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._isOpen ) return;
 
-        this._isOpen = true;
+      this._isOpen = true;
 
-        $body.disableScroll ();
+      this.$layout.disableScroll ();
+
+      this._frame ( function () {
+
+        this.$modal.addClass ( this.options.classes.show );
 
         this._frame ( function () {
 
-          this.$modal.addClass ( this.options.classes.show );
+          this.$modal.addClass ( this.options.classes.open );
 
-          this._frame ( function () {
+          this.___keydown ();
+          this.___tap ();
+          this.___route ();
 
-            this.$modal.addClass ( this.options.classes.open );
-
-            this._on ( true, $document, 'keydown', this.__keydown );
-
-            this._trigger ( 'open' );
-
-          });
+          this._trigger ( 'open' );
 
         });
 
-      }
+      });
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( !this._isOpen ) return;
 
-        this._isOpen = false;
+      this._isOpen = false;
 
-        this._frame ( function () {
+      this._reset ();
 
-          this.$modal.removeClass ( this.options.classes.open );
+      this._frame ( function () {
 
-          this._delay ( function () {
+        this.$modal.removeClass ( this.options.classes.open );
 
-            this.$modal.removeClass ( this.options.classes.show );
+        this._delay ( function () {
 
-            $body.enableScroll ();
+          this.$modal.removeClass ( this.options.classes.show );
 
-            this._off ( $document, 'keydown', this.__keydown );
+          this.$layout.enableScroll ();
 
-            this._trigger ( 'close' );
+          this._trigger ( 'close' );
 
-          }, this.options.animations.close );
+        }, this.options.animations.close );
 
-        });
-
-      }
+      });
 
     }
 

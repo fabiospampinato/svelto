@@ -89,7 +89,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     add ( id, ...datas ) {
 

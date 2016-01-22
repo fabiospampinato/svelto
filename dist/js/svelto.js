@@ -150,7 +150,7 @@
 
 //TODO: Write it better
 
-(function ( _, Svelto ) {
+(function ( _ ) {
 
   'use strict';
 
@@ -345,7 +345,7 @@
 
       for ( let i = 0, l = args.length; i < l; i++ ) {
 
-        msg = msg.replace ( '$' + i, args[i] );
+        msg = msg.replace ( '$' + ( i + 1 ), args[i] );
 
       }
 
@@ -376,7 +376,7 @@
 
   });
 
-}( Svelto._, Svelto ));
+}( Svelto._ ));
 
 
 /* =========================================================================
@@ -801,7 +801,8 @@
 
   };
 
-  tmpl.cache = {};
+  tmpl.cache = {}; //INFO: Store the cached templates
+  tmpl.cached = {}; //INFO: Store pairs like: `noty: true`, so that we know that we already cached `noty`'s templates
 
   tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 
@@ -1491,19 +1492,25 @@
 
       /* CACHE TEMPLATES */
 
-      for ( let tmpl in this.templates ) {
+      if ( !$.tmpl.cached[this.name] ) {
 
-        if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
+        for ( let tmpl in this.templates ) {
 
-          let tmplName = this.name + '.' + tmpl;
+          if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
 
-          if ( !(tmplName in $.tmpl.cache) ) {
+            let tmplName = this.name + '.' + tmpl;
 
-            $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+            if ( !(tmplName in $.tmpl.cache) ) {
+
+              $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+
+            }
 
           }
 
         }
+
+        $.tmpl.cached[this.name] = true;
 
       }
 
@@ -1593,7 +1600,7 @@
 
       /* OPTIONS */
 
-      if ( options ) {
+      if ( _.isPlainObject ( options ) ) {
 
         configs.push ({ options: options });
 
@@ -1603,7 +1610,7 @@
 
       let createOptions = this._createOptions ();
 
-      if ( createOptions ) {
+      if ( _.isPlainObject ( createOptions ) ) {
 
         configs.push ({ options: createOptions });
 
@@ -1644,7 +1651,7 @@
     _init () {} //INFO: Perform the init stuff inside this function
     _events () {} //INFO: Bind the event handlers inside this function
 
-    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functoinality
+    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
 
       this.$bindings.off ( this.eventNamespace );
 
@@ -2143,7 +2150,7 @@
         open: 'open'
       },
       selectors: {
-        content: '.expander-content'
+        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
       },
       animations: {
         open: Animations.normal,
@@ -3305,7 +3312,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -4076,7 +4083,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 
@@ -4245,6 +4252,9 @@
         YYYYMMDD ( date, data ) {
           return [_.padLeft ( date.getUTCFullYear (), 4, 0 ), _.padLeft ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padLeft ( date.getUTCDate (), 2, 0 )].join ( data.separator );
         },
+        UNIXTIMESTAMP ( date ) {
+          return Math.floor ( date.getTime () / 1000 );
+        },
         ISO ( date ) {
           return date.toISOString ();
         },
@@ -4256,6 +4266,9 @@
         YYYYMMDD ( date, data ) {
           let segments = date.split ( data.separator );
           return new Date ( Date.UTC ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) ) );
+        },
+        UNIXTIMESTAMP ( date ) {
+          return new Date ( date.length ? date * 1000 : NaN );
         },
         ISO ( date ) {
           return new Date ( date );
@@ -4276,7 +4289,7 @@
       },
       firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`
       format: {
-        type: 'YYYYMMDD', //INFO: One of the formats implemented in the exporters
+        type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
         data: { //INFO: Passed to the called importer and exporter
           separator: '/'
         }
@@ -4401,7 +4414,7 @@
 
     __change ( event, data ) {
 
-      if ( data._datepickerSetted ) return;
+      if ( data && data._datepickerId === this.guid ) return;
 
       this.set ( this.$input.val () );
 
@@ -4442,7 +4455,7 @@
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
 
       let day = parseInt ( $day.html (), 10 ),
-          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
+          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day, 12 );
 
       this.set ( date );
 
@@ -4610,7 +4623,7 @@
 
       if ( this.options.date.selected ) {
 
-        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ( { _datepickerSetted: true } );
+        this.$input.val ( this._export ( this.options.date.selected ) ).trigger ( 'change', { _datepickerId: this.guid } );
 
       }
 
@@ -4618,7 +4631,7 @@
 
     /* EXPORT */
 
-    _exportDate ( date )  {
+    _export ( date )  {
 
       return this.options.exporters[this.options.format.type] ( date, this.options.format.data );
 
@@ -4626,7 +4639,7 @@
 
     /* IMPORT */
 
-    _importDate ( date )  {
+    _import ( date )  {
 
       return this.options.importers[this.options.format.type] ( date, this.options.format.data );
 
@@ -4652,13 +4665,13 @@
 
     get ( formatted ) {
 
-      return this.options.date.selected ? ( formatted ? this._exportDate ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected ) ) : false;
+      return this.options.date.selected ? ( formatted ? this._export ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected ) ) : false;
 
     }
 
     set ( date ) {
 
-      date = ( date instanceof Date ) ? date : this._importDate ( date );
+      date = ( date instanceof Date ) ? date : this._import ( date );
 
       if ( !_.isNaN ( date.valueOf () ) ) {
 
@@ -5842,7 +5855,7 @@
         normal: 14
       },
       classes: {
-        anchorDirection: 'dropdown-anchor-$1',
+        anchorDirection: 'dropdown-anchor-$2',
         noTip: 'no-tip',
         attached: 'attached',
         moving: 'moving',
@@ -5978,7 +5991,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -6343,7 +6356,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     open ( event ) {
 
@@ -6432,7 +6445,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     toggle ( force, event ) {
 
@@ -6689,8 +6702,7 @@
 
     _events () {
 
-      this.___dragMove ();
-      this.___dragEnd ();
+      this.___drag ();
 
     }
 
@@ -6717,6 +6729,15 @@
     _isPointHovering ( pointXY ) {
 
       return !!this.$droppable.touching ({ point: pointXY }).length;
+
+    }
+
+    /* DRAG */
+
+    ___drag () {
+
+      this.___dragMove ();
+      this.___dragEnd ();
 
     }
 
@@ -6937,7 +6958,7 @@
 
     }
 
-    /* HANDLERS */
+    /* DOWN */
 
     ___down () {
 
@@ -6952,15 +6973,31 @@
 
       this._motion = false;
 
+      this.___move ();
+      this.___up ();
+      this.___cancel ();
+
+    }
+
+    /* MOVE */
+
+    ___move () {
+
       this._one ( true, $document, Pointer.move, this.__move );
-      this._one ( true, $document, Pointer.up, this.__up );
-      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
     __move () {
 
       this._motion = true;
+
+    }
+
+    /* UP */
+
+    ___up () {
+
+      this._one ( true, $document, Pointer.up, this.__up );
 
     }
 
@@ -7017,6 +7054,14 @@
       }
 
       this._off ( $document, Pointer.cancel, this.__cancel );
+
+    }
+
+    /* CANCEL */
+
+    ___cancel () {
+
+      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -7085,7 +7130,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isFlipped () {
 
@@ -7147,7 +7192,7 @@
   let config = {
     name: 'flippableFlipper',
     plugin: true,
-    selector: '.flippable-flipper, .flippable .flipper',
+    selector: '.flippable-flipper',
     options: {
       widget: Widgets.Flippable,
       methods: {
@@ -7224,7 +7269,11 @@
 
     _events () {
 
-      this.___keydown ();
+      if ( this._isOpen ) {
+
+        this.___keydown ();
+
+      }
 
     }
 
@@ -7268,6 +7317,8 @@
 
             this.$overlay.addClass ( this.options.classes.open );
 
+            this.___keydown ();
+
             this._trigger ( 'open' );
 
           });
@@ -7281,6 +7332,8 @@
     close () {
 
       if ( this._isOpen ) {
+
+        this._reset ();
 
         this._isOpen = false;
 
@@ -7334,7 +7387,7 @@
                  '{% if ( o.labeled ) { %}' +
                    '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' +
                  '{% } %}' +
-                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' +
+                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ))%}">' +
                      '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
                    '</svg>' +
                  '{% if ( o.labeled ) { %}' +
@@ -7393,33 +7446,29 @@
 
     open () {
 
-      if ( !this.isOpen () ) {
+      if ( this.isOpen () ) return;
 
-        this.$overlay.prependTo ( this.$overlayed );
+      this.$overlay.prependTo ( this.$overlayed );
 
-        this.instance.open ();
+      this.instance.open ();
 
-        this._trigger ( 'open' );
-
-      }
+      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( this.isOpen () ) {
+      if ( !this.isOpen () ) return;
 
-        this.instance.close ();
+      this.instance.close ();
 
-        this._delay ( function () {
+      this._delay ( function () {
 
-          this.$overlay.detach ();
+        this.$overlay.detach ();
 
-          this._trigger ( 'close' );
+        this._trigger ( 'close' );
 
-        }, Widgets.Overlay.config.options.animations.close );
-
-      }
+      }, Widgets.Overlay.config.options.animations.close );
 
     }
 
@@ -7758,9 +7807,13 @@
 
       delete openNotiesData[this.guid];
 
+      /* FLICK */
+
+      this.$noty.flickable ( 'destroy' );
+
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -7774,13 +7827,13 @@
 
       this._frame ( function () {
 
-          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
+        $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
 
-          this._frame ( function () {
+        this._frame ( function () {
 
-            this.$noty.addClass ( this.options.classes.open );
+          this.$noty.addClass ( this.options.classes.open );
 
-          });
+        });
 
       });
 
@@ -8052,13 +8105,13 @@
             number: 'Only numbers are allowed',
             integer: 'Only integers numbers are allowed',
             float: 'Only floating point numbers are allowed',
-            min: 'The number must be at least $1',
-            max: 'The number must be at maximum $1',
-            range: 'The number must be between $1 and $2',
-            minLength: 'The lenght must be at least $1',
-            maxLength: 'The lenght must be at maximum $1',
-            rangeLength: 'The length must be between $1 and $2',
-            exactLength: 'The length must be exactly $1',
+            min: 'The number must be at least $2',
+            max: 'The number must be at maximum $2',
+            range: 'The number must be between $2 and $3',
+            minLength: 'The lenght must be at least $2',
+            maxLength: 'The lenght must be at maximum $2',
+            rangeLength: 'The length must be between $2 and $3',
+            exactLength: 'The length must be exactly $2',
             email: 'Enter a valid email address',
             cc: 'Enter a valid credit card number',
             ssn: 'Enter a valid Social Security Number',
@@ -8293,7 +8346,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-        $.noty ( this.messages.invalid );
+        $.noty ( this.options.messages.form.invalid );
 
       }
 
@@ -8714,19 +8767,19 @@
 
     ___change () {
 
-      this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
+      this._on ( true, this.$elements, 'change', this._debounce ( this.__sync, 100 ) );
 
     }
 
-    /* LIVE */
+    /* INPUT */
 
-    ___live () {
+    ___input () {
 
       if ( this.options.live ) {
 
         let $textfields = this.$elements.filter ( this.options.selectors.textfield );
 
-        this._on ( true, $textfields, 'input', this._throttle ( this.__sync, 100 ) );
+        this._on ( true, $textfields, 'input', this._debounce ( this.__sync, 100 ) );
 
       }
 
@@ -8736,36 +8789,34 @@
 
     __sync ( event, data ) {
 
-      if ( data && data._formSynced ) return;
+      if ( data && data._formSynced === this.group ) return;
 
       let $element = $(event.target),
           name = $element.attr ( this.options.attributes.name ),
           $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
 
-      if ( $otherElements.length ) {
+      if ( !$otherElements.length ) return;
 
-        let value = $element.val (),
-            checked = !!$element.prop ( 'checked' );
+      let value = $element.val (),
+          checked = !!$element.prop ( 'checked' );
 
-        for ( let otherElement of $otherElements ) {
+      for ( let otherElement of $otherElements ) {
 
-          let $otherElement = $(otherElement),
-              otherValue = $otherElement.val (),
-              otherChecked = !!$otherElement.prop ( 'checked' );
+        let $otherElement = $(otherElement),
+            otherValue = $otherElement.val (),
+            otherChecked = !!$otherElement.prop ( 'checked' );
 
-          if ( value === otherValue && checked === otherChecked ) continue;
+        if ( value === otherValue && checked === otherChecked ) continue;
 
-          if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
+        if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
 
-          if ( $element.is ( this.options.selectors.checkable ) ) {
+        if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: true } );
+          $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: this.group } );
 
-          } else {
+        } else {
 
-            $otherElement.val ( value ).trigger ( 'change', { _formSynced: true } );
-
-          }
+          $otherElement.val ( value ).trigger ( 'change', { _formSynced: this.group } );
 
         }
 
@@ -9004,9 +9055,7 @@
 
     close () {
 
-      //INFO: Maybe just detach it, so that we can open it again
-
-      this.$infobar.remove ();
+      this.$infobar.detach ();
 
       this._trigger ( 'close' );
 
@@ -9084,6 +9133,9 @@
         show: 'show',
         open: 'open'
       },
+      selectors: {
+        layout: '.layout, body' //TODO: Use only `.layout`
+      },
       animations: {
         open: Animations.normal,
         close: Animations.normal
@@ -9109,13 +9161,9 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
+      this.$layout = this.$modal.closest ( this.options.selectors.layout );
+
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
-
-    }
-
-    _events () {
-
-      this.___tap ();
 
     }
 
@@ -9137,7 +9185,19 @@
 
     }
 
-    /* PUBLIC */
+    /* ROUTE */
+
+    __route () {
+
+      if ( this._isOpen && !$.contains ( this.$layout[0], this.$modal[0] ) ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* API */
 
     isOpen () {
 
@@ -9148,7 +9208,7 @@
     toggle ( force = !this._isOpen ) {
 
       if ( !!force !== this._isOpen ) {
-        
+
         this[force ? 'open' : 'close']();
 
       }
@@ -9157,57 +9217,55 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._isOpen ) return;
 
-        this._isOpen = true;
+      this._isOpen = true;
 
-        $body.disableScroll ();
+      this.$layout.disableScroll ();
+
+      this._frame ( function () {
+
+        this.$modal.addClass ( this.options.classes.show );
 
         this._frame ( function () {
 
-          this.$modal.addClass ( this.options.classes.show );
+          this.$modal.addClass ( this.options.classes.open );
 
-          this._frame ( function () {
+          this.___keydown ();
+          this.___tap ();
+          this.___route ();
 
-            this.$modal.addClass ( this.options.classes.open );
-
-            this._on ( true, $document, 'keydown', this.__keydown );
-
-            this._trigger ( 'open' );
-
-          });
+          this._trigger ( 'open' );
 
         });
 
-      }
+      });
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( !this._isOpen ) return;
 
-        this._isOpen = false;
+      this._isOpen = false;
 
-        this._frame ( function () {
+      this._reset ();
 
-          this.$modal.removeClass ( this.options.classes.open );
+      this._frame ( function () {
 
-          this._delay ( function () {
+        this.$modal.removeClass ( this.options.classes.open );
 
-            this.$modal.removeClass ( this.options.classes.show );
+        this._delay ( function () {
 
-            $body.enableScroll ();
+          this.$modal.removeClass ( this.options.classes.show );
 
-            this._off ( $document, 'keydown', this.__keydown );
+          this.$layout.enableScroll ();
 
-            this._trigger ( 'close' );
+          this._trigger ( 'close' );
 
-          }, this.options.animations.close );
+        }, this.options.animations.close );
 
-        });
-
-      }
+      });
 
     }
 
@@ -9992,7 +10050,7 @@
 
     }
 
-    /* FLICK */
+    /* DOCUMENT FLICK */
 
     ___documentFlick () {
 
@@ -10041,6 +10099,8 @@
 
     }
 
+    /* PANEL FLICK */
+
     ___panelFlick () {
 
       if ( !this.options.flick.close ) return;
@@ -10068,7 +10128,7 @@
 
     __route () {
 
-      if ( this._isOpen ) {
+      if ( this._isOpen && !$.contains ( this.$layout[0], this.$panel[0] ) ) {
 
         this.$layout.enableScroll ();
 
@@ -10104,7 +10164,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -10188,7 +10248,6 @@
       });
 
     }
-
 
     /* PINNING */
 
@@ -11014,7 +11073,8 @@ Prism.languages.js = Prism.languages.javascript;
       size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
-        value: 'value'
+        value: 'value',
+        decimals: 'decimals'
       },
       selectors: {
         highlight: '.progressbar-highlight'
@@ -11046,8 +11106,8 @@ Prism.languages.js = Prism.languages.javascript;
     static widgetize ( $progressbar ) {
 
       $progressbar.progressbar ({
-        value: $progressbar.data ( 'value' ),
-        decimals: $progressbar.data ( 'decimals ')
+        value: $progressbar.data ( Widgets.Progressbar.config.options.datas.value ),
+        decimals: $progressbar.data ( Widgets.Progressbar.config.options.datas.decimals )
       });
 
     }
@@ -11104,7 +11164,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 
@@ -11847,7 +11907,6 @@ Prism.languages.js = Prism.languages.javascript;
       this.selectOptions = [];
 
       this.$dropdown = false;
-      this.$buttons = false;
 
     }
 
@@ -11869,7 +11928,6 @@ Prism.languages.js = Prism.languages.javascript;
     _events () {
 
       this.___change ();
-      this.___buttonTap ();
 
     }
 
@@ -11897,7 +11955,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         /* BUTTON TAP */
 
-        this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
+        this._on ( this.$dropdown, Pointer.tap, this.options.selectors.button, this.__buttonTap );
 
       }
 
@@ -11905,11 +11963,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     __buttonTap ( event ) {
 
-      this.set ( $(event.currentTarget).data ( 'value' ) );
+      this.$dropdown.dropdown ( 'close' );
+
+      this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
 
     }
 
-    /* PRIVATE */
+    /* OPTIONS */
 
     ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups nesting levels
 
@@ -11945,6 +12005,8 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    /* DROPDOWN */
+
     ___dropdown () {
 
       let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
@@ -11959,16 +12021,10 @@ Prism.languages.js = Prism.languages.javascript;
         },
         callbacks: {
           beforeopen: this.__setDropdownWidth.bind ( this ),
-          open: function () {
-            this._trigger ( 'open' );
-          }.bind ( this ),
-          close: function () {
-            this._trigger ( 'close' );
-          }.bind ( this )
+          open: this.__dropdownOpen.bind ( this ),
+          close: this.__dropdownClose.bind ( this )
         }
       });
-
-      this.$buttons.dropdownCloser ();
 
       this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
 
@@ -11983,6 +12039,24 @@ Prism.languages.js = Prism.languages.javascript;
         this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
 
       }
+
+    }
+
+    __dropdownOpen () {
+
+      this.___buttonTap ();
+
+      this._trigger ( 'open' );
+
+    }
+
+    __dropdownClose () {
+
+      this._reset ();
+
+      this.___change ();
+
+      this._trigger ( 'close' );
 
     }
 
@@ -12023,7 +12097,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 
@@ -12107,10 +12181,24 @@ Prism.languages.js = Prism.languages.javascript;
 
     _events () {
 
+      this.___change ();
       this.___keydown ();
       this.___downTap ();
-      this.___change ();
-      
+
+    }
+
+    _destroy () {
+
+      this.clear ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change sortable:sort', this.__change );
+
     }
 
     /* KEYDOWN */
@@ -12122,14 +12210,6 @@ Prism.languages.js = Prism.languages.javascript;
         this._onHover ( [$document, 'keydown', this.__keydown] );
 
       }
-
-    }
-
-    /* CHANGE */
-
-    ___change () {
-
-      this._on ( true, 'change sortable:sort', this.__change );
 
     }
 
@@ -12490,7 +12570,8 @@ Prism.languages.js = Prism.languages.javascript;
       this.___change ();
       this.___resize ();
       this.___keydown ();
-      this.___minMax ();
+      this.___minTap ();
+      this.___maxTap ();
       this.___drag ();
 
     }
@@ -12581,17 +12662,24 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* MIN / MAX */
+    /* MIN TAP */
 
-    ___minMax () {
+    ___minTap () {
 
       this._on ( this.$min, Pointer.tap, this.decrease );
+
+    }
+
+    /* MAX TAP */
+
+    ___maxTap () {
+
       this._on ( this.$max, Pointer.tap, this.increase );
 
     }
 
     /* DRAG */
-    
+
     ___drag () {
 
       this.$handlerWrp.draggable ({
@@ -13069,37 +13157,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* UPDATE */
-
-    _updateInput () {
-
-      this.$input.val ( this.options.value ).trigger ( 'change' );
-
-    }
-
-    _updateButtons () {
-
-      let isMin = ( this.options.value === this.options.min ),
-          isMax = ( this.options.value === this.options.max );
-
-      if ( isMin || this._prevValue === this.options.min ) {
-
-        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
-
-      } else if ( isMax || this._prevValue === this.options.max ) {
-
-        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
-
-      }
-
-    }
-
-    _update () {
-
-      this._updateInput ();
-      this._updateButtons ();
-
-    }
 
     /* INPUT / CHANGE */
 
@@ -13139,7 +13196,39 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* UPDATE */
+
+    _updateInput () {
+
+      this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _updateButtons () {
+
+      let isMin = ( this.options.value === this.options.min ),
+          isMax = ( this.options.value === this.options.max );
+
+      if ( isMin || this._prevValue === this.options.min ) {
+
+        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
+
+      } else if ( isMax || this._prevValue === this.options.max ) {
+
+        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
+
+      }
+
+    }
+
+    _update () {
+
+      this._updateInput ();
+      this._updateButtons ();
+
+    }
+
+    /* API */
 
     get () {
 
@@ -13298,6 +13387,12 @@ Prism.languages.js = Prism.languages.javascript;
       this.___change ();
       this.___keydown ();
       this.___drag ();
+
+    }
+
+    _destroy () {
+
+      this.$handler.draggable ( 'destroy' );
 
     }
 
@@ -13539,7 +13634,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     add ( id, ...datas ) {
 
@@ -13780,7 +13875,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 
@@ -13836,6 +13931,7 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
+//FIXME: Destroy, reinit and add something like `aaaaaa`, it gets added at the beginning even if `options.sort` is setted to false
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard ) {
 
@@ -14149,7 +14245,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 
@@ -14357,6 +14453,10 @@ Prism.languages.js = Prism.languages.javascript;
     options: {
       timestamp: false,
       title: false,
+      datas: {
+        timestamp: 'timestamp',
+        timestampTitle: 'timestamp-title'
+      },
       callbacks: {
         change: _.noop
       }
@@ -14371,7 +14471,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     static widgetize ( $element ) {
 
-      $element.timeAgo ({ title: $element.is ( '[data-timestamp-title]' ) });
+      $element.timeAgo ({ title: $element.is ( '[data-' + Widgets.TimeAgo.config.options.datas.timestampTitle + ']' ) });
 
     }
 
@@ -14385,25 +14485,37 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( !this.options.timestamp ) {
 
-        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? this.options.datas.timestampTitle : this.options.datas.timestamp );
 
       }
 
-      this._loop ( 0 );
+      if ( this.isEnabled () ) {
+
+        this._loop ();
+
+      }
 
     }
 
-    /* PRIVATE */
+    _destroy () {
 
-    _loop ( seconds ) {
+      clearTimeout ( this.loopId );
 
-      this._delay ( function () {
+    }
+
+    /* LOOP */
+
+    _loop ( seconds = 0 ) {
+
+      this.loopId = this._delay ( function () {
 
         this._loop ( this._update ().next );
 
       }, seconds * 1000 );
 
     }
+
+    /* UPDATE */
 
     _update () {
 
@@ -14415,7 +14527,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       } else {
 
-        this.$timeAgoElement.html ( timeAgo.str );
+        this.$timeAgoElement.text ( timeAgo.str );
 
       }
 
@@ -14425,13 +14537,31 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    /* API OVERRIDES */
+
+    enable () {
+
+      super.enable ();
+
+      this._loop ();
+
+    }
+
+    disable () {
+
+      super.disable ();
+
+      clearTimeout ( this.loopId );
+
+    }
+
   }
 
   /* FACTORY */
 
   Factory.init ( TimeAgo, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer ));
 
 
 /* =========================================================================

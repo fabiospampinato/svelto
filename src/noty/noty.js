@@ -325,9 +325,13 @@
 
       delete openNotiesData[this.guid];
 
+      /* FLICK */
+
+      this.$noty.flickable ( 'destroy' );
+
     }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
@@ -341,13 +345,13 @@
 
       this._frame ( function () {
 
-          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
+        $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
 
-          this._frame ( function () {
+        this._frame ( function () {
 
-            this.$noty.addClass ( this.options.classes.open );
+          this.$noty.addClass ( this.options.classes.open );
 
-          });
+        });
 
       });
 

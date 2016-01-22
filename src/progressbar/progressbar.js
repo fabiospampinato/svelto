@@ -36,7 +36,8 @@
       size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
-        value: 'value'
+        value: 'value',
+        decimals: 'decimals'
       },
       selectors: {
         highlight: '.progressbar-highlight'
@@ -68,8 +69,8 @@
     static widgetize ( $progressbar ) {
 
       $progressbar.progressbar ({
-        value: $progressbar.data ( 'value' ),
-        decimals: $progressbar.data ( 'decimals ')
+        value: $progressbar.data ( Widgets.Progressbar.config.options.datas.value ),
+        decimals: $progressbar.data ( Widgets.Progressbar.config.options.datas.decimals )
       });
 
     }
@@ -126,7 +127,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     get () {
 

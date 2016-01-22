@@ -101,7 +101,8 @@
       this.___change ();
       this.___resize ();
       this.___keydown ();
-      this.___minMax ();
+      this.___minTap ();
+      this.___maxTap ();
       this.___drag ();
 
     }
@@ -192,17 +193,24 @@
 
     }
 
-    /* MIN / MAX */
+    /* MIN TAP */
 
-    ___minMax () {
+    ___minTap () {
 
       this._on ( this.$min, Pointer.tap, this.decrease );
+
+    }
+
+    /* MAX TAP */
+
+    ___maxTap () {
+
       this._on ( this.$max, Pointer.tap, this.increase );
 
     }
 
     /* DRAG */
-    
+
     ___drag () {
 
       this.$handlerWrp.draggable ({

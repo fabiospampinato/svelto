@@ -98,37 +98,6 @@
 
     }
 
-    /* UPDATE */
-
-    _updateInput () {
-
-      this.$input.val ( this.options.value ).trigger ( 'change' );
-
-    }
-
-    _updateButtons () {
-
-      let isMin = ( this.options.value === this.options.min ),
-          isMax = ( this.options.value === this.options.max );
-
-      if ( isMin || this._prevValue === this.options.min ) {
-
-        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
-
-      } else if ( isMax || this._prevValue === this.options.max ) {
-
-        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
-
-      }
-
-    }
-
-    _update () {
-
-      this._updateInput ();
-      this._updateButtons ();
-
-    }
 
     /* INPUT / CHANGE */
 
@@ -168,7 +137,39 @@
 
     }
 
-    /* PUBLIC */
+    /* UPDATE */
+
+    _updateInput () {
+
+      this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _updateButtons () {
+
+      let isMin = ( this.options.value === this.options.min ),
+          isMax = ( this.options.value === this.options.max );
+
+      if ( isMin || this._prevValue === this.options.min ) {
+
+        this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
+
+      } else if ( isMax || this._prevValue === this.options.max ) {
+
+        this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
+
+      }
+
+    }
+
+    _update () {
+
+      this._updateInput ();
+      this._updateButtons ();
+
+    }
+
+    /* API */
 
     get () {
 

@@ -39,7 +39,7 @@
 
     }
 
-    /* HANDLERS */
+    /* DOWN */
 
     ___down () {
 
@@ -54,15 +54,31 @@
 
       this._motion = false;
 
+      this.___move ();
+      this.___up ();
+      this.___cancel ();
+
+    }
+
+    /* MOVE */
+
+    ___move () {
+
       this._one ( true, $document, Pointer.move, this.__move );
-      this._one ( true, $document, Pointer.up, this.__up );
-      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
     __move () {
 
       this._motion = true;
+
+    }
+
+    /* UP */
+
+    ___up () {
+
+      this._one ( true, $document, Pointer.up, this.__up );
 
     }
 
@@ -119,6 +135,14 @@
       }
 
       this._off ( $document, Pointer.cancel, this.__cancel );
+
+    }
+
+    /* CANCEL */
+
+    ___cancel () {
+
+      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 

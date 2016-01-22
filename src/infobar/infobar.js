@@ -43,9 +43,7 @@
 
     close () {
 
-      //INFO: Maybe just detach it, so that we can open it again
-
-      this.$infobar.remove ();
+      this.$infobar.detach ();
 
       this._trigger ( 'close' );
 

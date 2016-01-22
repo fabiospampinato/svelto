@@ -10,7 +10,7 @@
 
 //TODO: Write it better
 
-(function ( _, Svelto ) {
+(function ( _ ) {
 
   'use strict';
 
@@ -205,7 +205,7 @@
 
       for ( let i = 0, l = args.length; i < l; i++ ) {
 
-        msg = msg.replace ( '$' + i, args[i] );
+        msg = msg.replace ( '$' + ( i + 1 ), args[i] );
 
       }
 
@@ -236,4 +236,4 @@
 
   });
 
-}( Svelto._, Svelto ));
+}( Svelto._ ));

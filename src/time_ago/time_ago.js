@@ -21,6 +21,10 @@
     options: {
       timestamp: false,
       title: false,
+      datas: {
+        timestamp: 'timestamp',
+        timestampTitle: 'timestamp-title'
+      },
       callbacks: {
         change: _.noop
       }
@@ -35,7 +39,7 @@
 
     static widgetize ( $element ) {
 
-      $element.timeAgo ({ title: $element.is ( '[data-timestamp-title]' ) });
+      $element.timeAgo ({ title: $element.is ( '[data-' + Widgets.TimeAgo.config.options.datas.timestampTitle + ']' ) });
 
     }
 
@@ -49,25 +53,37 @@
 
       if ( !this.options.timestamp ) {
 
-        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? this.options.datas.timestampTitle : this.options.datas.timestamp );
 
       }
 
-      this._loop ( 0 );
+      if ( this.isEnabled () ) {
+
+        this._loop ();
+
+      }
 
     }
 
-    /* PRIVATE */
+    _destroy () {
 
-    _loop ( seconds ) {
+      clearTimeout ( this.loopId );
 
-      this._delay ( function () {
+    }
+
+    /* LOOP */
+
+    _loop ( seconds = 0 ) {
+
+      this.loopId = this._delay ( function () {
 
         this._loop ( this._update ().next );
 
       }, seconds * 1000 );
 
     }
+
+    /* UPDATE */
 
     _update () {
 
@@ -79,7 +95,7 @@
 
       } else {
 
-        this.$timeAgoElement.html ( timeAgo.str );
+        this.$timeAgoElement.text ( timeAgo.str );
 
       }
 
@@ -89,10 +105,28 @@
 
     }
 
+    /* API OVERRIDES */
+
+    enable () {
+
+      super.enable ();
+
+      this._loop ();
+
+    }
+
+    disable () {
+
+      super.disable ();
+
+      clearTimeout ( this.loopId );
+
+    }
+
   }
 
   /* FACTORY */
 
   Factory.init ( TimeAgo, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer ));

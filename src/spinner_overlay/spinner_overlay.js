@@ -22,7 +22,7 @@
                  '{% if ( o.labeled ) { %}' +
                    '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' +
                  '{% } %}' +
-                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' +
+                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ))%}">' +
                      '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
                    '</svg>' +
                  '{% if ( o.labeled ) { %}' +
@@ -81,33 +81,29 @@
 
     open () {
 
-      if ( !this.isOpen () ) {
+      if ( this.isOpen () ) return;
 
-        this.$overlay.prependTo ( this.$overlayed );
+      this.$overlay.prependTo ( this.$overlayed );
 
-        this.instance.open ();
+      this.instance.open ();
 
-        this._trigger ( 'open' );
-
-      }
+      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( this.isOpen () ) {
+      if ( !this.isOpen () ) return;
 
-        this.instance.close ();
+      this.instance.close ();
 
-        this._delay ( function () {
+      this._delay ( function () {
 
-          this.$overlay.detach ();
+        this.$overlay.detach ();
 
-          this._trigger ( 'close' );
+        this._trigger ( 'close' );
 
-        }, Widgets.Overlay.config.options.animations.close );
-
-      }
+      }, Widgets.Overlay.config.options.animations.close );
 
     }
 

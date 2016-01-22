@@ -35,7 +35,7 @@
 
     }
 
-    /* PUBLIC */
+    /* API */
 
     toggle ( force, event ) {
 
