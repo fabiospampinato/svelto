@@ -17,13 +17,12 @@
   let config = {
     name: 'timeAgo',
     plugin: true,
-    selector: '[data-timestamp], [data-timestamp-title]',
+    selector: '.timeago, .time-ago',
     options: {
       timestamp: false,
       title: false,
       datas: {
-        timestamp: 'timestamp',
-        timestampTitle: 'timestamp-title'
+        timestamp: 'timestamp'
       },
       callbacks: {
         change: _.noop
@@ -37,12 +36,6 @@
 
     /* SPECIAL */
 
-    static widgetize ( $element ) {
-
-      $element.timeAgo ({ title: $element.is ( '[data-' + Widgets.TimeAgo.config.options.datas.timestampTitle + ']' ) });
-
-    }
-
     _variables () {
 
       this.$timeAgoElement = this.$element;
@@ -53,7 +46,7 @@
 
       if ( !this.options.timestamp ) {
 
-        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? this.options.datas.timestampTitle : this.options.datas.timestamp );
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.datas.timestamp );
 
       }
 

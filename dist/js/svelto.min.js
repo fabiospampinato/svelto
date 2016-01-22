@@ -3229,6 +3229,7 @@
     name: 'targeter',
     options: {
       widget: false, //INFO: The target's widget class
+      target: false, //INFO: Selector used to select the target
       datas: {
         target: 'target'
       }
@@ -3243,7 +3244,7 @@
 
     _variables () {
 
-      this._targetSelector = this.$element.data ( this.options.datas.target );
+      this._targetSelector = this.options.target || this.$element.data ( this.options.datas.target );
 
       this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
 
@@ -14449,13 +14450,12 @@ Prism.languages.js = Prism.languages.javascript;
   let config = {
     name: 'timeAgo',
     plugin: true,
-    selector: '[data-timestamp], [data-timestamp-title]',
+    selector: '.timeago, .time-ago',
     options: {
       timestamp: false,
       title: false,
       datas: {
-        timestamp: 'timestamp',
-        timestampTitle: 'timestamp-title'
+        timestamp: 'timestamp'
       },
       callbacks: {
         change: _.noop
@@ -14469,12 +14469,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $element ) {
-
-      $element.timeAgo ({ title: $element.is ( '[data-' + Widgets.TimeAgo.config.options.datas.timestampTitle + ']' ) });
-
-    }
-
     _variables () {
 
       this.$timeAgoElement = this.$element;
@@ -14485,7 +14479,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( !this.options.timestamp ) {
 
-        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? this.options.datas.timestampTitle : this.options.datas.timestamp );
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.datas.timestamp );
 
       }
 

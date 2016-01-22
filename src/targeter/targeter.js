@@ -18,6 +18,7 @@
     name: 'targeter',
     options: {
       widget: false, //INFO: The target's widget class
+      target: false, //INFO: Selector used to select the target
       datas: {
         target: 'target'
       }
@@ -32,7 +33,7 @@
 
     _variables () {
 
-      this._targetSelector = this.$element.data ( this.options.datas.target );
+      this._targetSelector = this.options.target || this.$element.data ( this.options.datas.target );
 
       this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
 
