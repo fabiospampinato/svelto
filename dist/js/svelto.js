@@ -4454,7 +4454,7 @@
 
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
 
-      let day = parseInt ( $day.html (), 10 ),
+      let day = parseInt ( $day.text (), 10 ),
           date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day, 12 );
 
       this.set ( date );
@@ -4615,7 +4615,7 @@
 
     _updateTitle () {
 
-      this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
+      this.$navigationTitle.text ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
     }
 
@@ -11997,7 +11997,7 @@ Prism.languages.js = Prism.languages.javascript;
         }
 
         this.selectOptions.push ({
-          value: $option.html (),
+          value: $option.text (),
           prop: $option.attr ( 'value' )
         });
 
@@ -12070,7 +12070,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
 
-        this.$valueholder.html ( $selectedOption.html () );
+        this.$valueholder.text ( $selectedOption.text () );
 
       }
 
@@ -12607,7 +12607,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _updateLabel ( value = this.options.value ) {
 
-      this.$label.html ( value );
+      this.$label.text ( value );
 
     }
 

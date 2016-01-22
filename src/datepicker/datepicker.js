@@ -230,7 +230,7 @@
 
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
 
-      let day = parseInt ( $day.html (), 10 ),
+      let day = parseInt ( $day.text (), 10 ),
           date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day, 12 );
 
       this.set ( date );
@@ -391,7 +391,7 @@
 
     _updateTitle () {
 
-      this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
+      this.$navigationTitle.text ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
     }
 

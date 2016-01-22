@@ -138,7 +138,7 @@
 
     _updateLabel ( value = this.options.value ) {
 
-      this.$label.html ( value );
+      this.$label.text ( value );
 
     }
 

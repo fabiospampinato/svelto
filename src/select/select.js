@@ -178,7 +178,7 @@
         }
 
         this.selectOptions.push ({
-          value: $option.html (),
+          value: $option.text (),
           prop: $option.attr ( 'value' )
         });
 
@@ -251,7 +251,7 @@
 
         let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
 
-        this.$valueholder.html ( $selectedOption.html () );
+        this.$valueholder.text ( $selectedOption.text () );
 
       }
 
