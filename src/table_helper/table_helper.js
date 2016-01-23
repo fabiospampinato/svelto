@@ -100,7 +100,7 @@
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
         let chunks = _.chunk ( datas, this.columnsNr ),
-            $rows = $empty;
+            $rows = $();
 
         for ( let chunk of chunks ) {
 

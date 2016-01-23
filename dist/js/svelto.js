@@ -703,7 +703,6 @@
     window.$html = $(document.documentElement);
     window.$head = $(document.head);
     window.$body = $(document.body);
-    window.$empty = $();
 
   });
 
@@ -1534,7 +1533,7 @@
 
       /* BINDINGS */
 
-      this.$bindings = $empty;
+      this.$bindings = $();
 
       /* ATTACH INSTANCE */
 
@@ -6659,7 +6658,7 @@
 
         }, options.startIndex );
 
-        return $touched || $empty;
+        return $touched || $();
 
       } else {
 
@@ -6677,7 +6676,7 @@
 
         }
 
-        return $touched || $empty;
+        return $touched || $();
 
       }
 
@@ -13760,7 +13759,7 @@ Prism.languages.js = Prism.languages.javascript;
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
         let chunks = _.chunk ( datas, this.columnsNr ),
-            $rows = $empty;
+            $rows = $();
 
         for ( let chunk of chunks ) {
 

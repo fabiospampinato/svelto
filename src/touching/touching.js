@@ -118,7 +118,7 @@
 
         }, options.startIndex );
 
-        return $touched || $empty;
+        return $touched || $();
 
       } else {
 
@@ -136,7 +136,7 @@
 
         }
 
-        return $touched || $empty;
+        return $touched || $();
 
       }
 

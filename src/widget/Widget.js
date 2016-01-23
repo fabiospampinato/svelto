@@ -109,7 +109,7 @@
 
       /* BINDINGS */
 
-      this.$bindings = $empty;
+      this.$bindings = $();
 
       /* ATTACH INSTANCE */
 
