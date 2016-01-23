@@ -66,7 +66,7 @@
 
     ___keydown () {
 
-      this._onHover ( true, [$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+      this._onHover ( true, [this.$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
 
     }
 

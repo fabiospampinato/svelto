@@ -112,6 +112,11 @@
       this.$window = $(window);
       this.window = this.$window[0];
 
+      /* DOCUMENT */
+
+      this.$document = $(document);
+      this.document = this.$document[0];
+
       /* BINDINGS */
 
       this.$bindings = $();
@@ -579,7 +584,7 @@
 
     ___keydown () {
 
-      this._on ( $document, 'keydown', this.__keydown );
+      this._on ( this.$document, 'keydown', this.__keydown );
 
     }
 

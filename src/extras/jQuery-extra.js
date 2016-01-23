@@ -217,7 +217,7 @@
 
     let position = this.css ( 'position' );
 
-    if ( position === 'fixed' ) return $document;
+    if ( position === 'fixed' ) return $(document);
 
     let excludeStaticParent = ( position === 'absolute' ),
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
@@ -239,13 +239,5 @@
     return $document;
 
   };
-
-  /* READY */
-
-  $(function () {
-
-    window.$document = $(document);
-
-  });
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Pointer ));

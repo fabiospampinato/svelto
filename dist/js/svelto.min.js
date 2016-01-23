@@ -671,7 +671,7 @@
 
     let position = this.css ( 'position' );
 
-    if ( position === 'fixed' ) return $document;
+    if ( position === 'fixed' ) return $(document);
 
     let excludeStaticParent = ( position === 'absolute' ),
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
@@ -693,14 +693,6 @@
     return $document;
 
   };
-
-  /* READY */
-
-  $(function () {
-
-    window.$document = $(document);
-
-  });
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Pointer ));
 
@@ -923,8 +915,7 @@
 
   /* VARIABLES */
 
-  let $document = $(document),
-      target,
+  let target,
       $target,
       prevTapTimestamp = 0,
       motion;
@@ -1004,7 +995,7 @@
 
   /* BIND */
 
-  $document.on ( Pointer.down, downHandler );
+  $(document).on ( Pointer.down, downHandler );
 
   /* EXPORT */
 
@@ -1536,6 +1527,11 @@
       this.$window = $(window);
       this.window = this.$window[0];
 
+      /* DOCUMENT */
+
+      this.$document = $(document);
+      this.document = this.$document[0];
+
       /* BINDINGS */
 
       this.$bindings = $();
@@ -2003,7 +1999,7 @@
 
     ___keydown () {
 
-      this._on ( $document, 'keydown', this.__keydown );
+      this._on ( this.$document, 'keydown', this.__keydown );
 
     }
 
@@ -3032,7 +3028,7 @@
 
     ___keydown () {
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -3892,7 +3888,7 @@
 
     ___sbKeydown () {
 
-      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+      this._onHover ( this.$sbWrp, [this.$document, 'keydown', this.__sbKeydown] );
 
     }
 
@@ -3981,7 +3977,7 @@
 
     ___hueKeydown () {
 
-      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
+      this._onHover ( this.$hueWrp, [this.$document, 'keydown', this.__hueKeydown] );
 
     }
 
@@ -4445,7 +4441,7 @@
 
     ___keydown () {
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -7331,7 +7327,7 @@
 
     ___keydown () {
 
-      this._onHover ( true, [$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+      this._onHover ( true, [this.$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
 
     }
 
@@ -10134,7 +10130,7 @@
 
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-      this._on ( true, $document, 'keydown', this.__keydown );
+      this._on ( true, this.$document, 'keydown', this.__keydown );
 
     }
 
@@ -12307,7 +12303,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( !Browser.is.touchDevice ) {
 
-        this._onHover ( [$document, 'keydown', this.__keydown] );
+        this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
       }
 
@@ -12350,11 +12346,11 @@ Prism.languages.js = Prism.languages.javascript;
       this.startEvent = event;
       this.$startElement = $(event.currentTarget);
 
-      this._on ( true, $document, Pointer.move, this.__move );
+      this._on ( true, this.$document, Pointer.move, this.__move );
 
-      this._one ( true, $document, Pointer.up, this.__up );
+      this._one ( true, this.$document, Pointer.up, this.__up );
 
-      this._one ( true, $document, Pointer.cancel, this.__cancel );
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -12375,11 +12371,11 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( absDeltaXY.X >= this.options.moveThreshold || absDeltaXY.Y >= this.options.moveThreshold ) {
 
-        this._off ( $document, Pointer.move, this.__move );
+        this._off ( this.$document, Pointer.move, this.__move );
 
-        this._off ( $document, Pointer.up, this.__up );
+        this._off ( this.$document, Pointer.up, this.__up );
 
-        this._off ( $document, Pointer.cancel, this.__cancel );
+        this._off ( this.$document, Pointer.cancel, this.__cancel );
 
         this._resetPrev ();
 
@@ -12393,7 +12389,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this._on ( true, Pointer.enter, this.options.selectors.element, this.__dragEnter );
 
-        this._one ( true, $document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
+        this._one ( true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
 
         this._trigger ( 'change' );
 
@@ -12417,9 +12413,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     __up ( event ) {
 
-      this._off ( $document, Pointer.move, this.__move );
+      this._off ( this.$document, Pointer.move, this.__move );
 
-      this._off ( $document, Pointer.cancel, this.__cancel );
+      this._off ( this.$document, Pointer.cancel, this.__cancel );
 
       if ( event.shiftKey ) {
 
@@ -12458,9 +12454,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     __cancel () {
 
-      this._off ( $document, Pointer.move, this.__move );
+      this._off ( this.$document, Pointer.move, this.__move );
 
-      this._off ( $document, Pointer.up, this.__up );
+      this._off ( this.$document, Pointer.up, this.__up );
 
     }
 
@@ -13301,7 +13297,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___keydown () {
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
     }
 

@@ -71,8 +71,7 @@
 
   /* VARIABLES */
 
-  let $document = $(document),
-      target,
+  let target,
       $target,
       prevTapTimestamp = 0,
       motion;
@@ -152,7 +151,7 @@
 
   /* BIND */
 
-  $document.on ( Pointer.down, downHandler );
+  $(document).on ( Pointer.down, downHandler );
 
   /* EXPORT */
 

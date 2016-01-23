@@ -126,7 +126,7 @@
 
     ___sbKeydown () {
 
-      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+      this._onHover ( this.$sbWrp, [this.$document, 'keydown', this.__sbKeydown] );
 
     }
 
@@ -215,7 +215,7 @@
 
     ___hueKeydown () {
 
-      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
+      this._onHover ( this.$hueWrp, [this.$document, 'keydown', this.__hueKeydown] );
 
     }
 

@@ -128,7 +128,7 @@
 
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-      this._on ( true, $document, 'keydown', this.__keydown );
+      this._on ( true, this.$document, 'keydown', this.__keydown );
 
     }
 
