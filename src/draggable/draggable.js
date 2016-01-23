@@ -12,10 +12,9 @@
 //TODO: Maybe return less datas to triggered events and callbacks
 
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
-//FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
 
   'use strict';
 
@@ -27,6 +26,7 @@
     selector: '.draggable',
     options: {
       draggable: _.true, //INFO: Checks if we can drag it or not
+      threshold: Browser.is.touchDevice ? 5 : 0, //INFO: Minimum moving treshold for triggering a drag
       onlyHandlers: false, //INFO: Only an handler can drag it around
       revert: false, //INFO: On dragend take it back to the starting position
       axis: false, //INFO: Limit the movements to this axis
@@ -421,7 +421,17 @@
     __move ( event ) {
 
       let moveXY = $.eventXY ( event ),
+          deltaXY = {
+            X: moveXY.X - this.startXY.X,
+            Y: moveXY.Y - this.startXY.Y
+          },
+          absDeltaXY = {
+            X: Math.abs ( deltaXY.X ),
+            Y: Math.abs ( deltaXY.Y )
+          },
           dragXY;
+
+      if ( absDeltaXY.X < this.options.threshold && absDeltaXY.Y < this.options.threshold ) return;
 
       if ( !this.inited && this.isProxyed ) {
 
@@ -536,4 +546,4 @@
 
   Factory.init ( Draggable, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
