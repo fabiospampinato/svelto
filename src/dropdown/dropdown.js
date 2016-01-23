@@ -92,7 +92,7 @@
 
       let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( $window );
 
-      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 250 ) );
+      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
     }
 
@@ -100,7 +100,7 @@
 
     ___resize () {
 
-      this._on ( true, $window, 'resize', this._throttle ( this._positionate, 250 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+      this._on ( true, $window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
 
     }
 
