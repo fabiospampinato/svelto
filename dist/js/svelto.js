@@ -1461,7 +1461,9 @@
         disabled: 'disabled', //INFO: Attached to disabled widgets
         hidden: 'hidden' //INFO: Used to hide an element
       },
-      selectors: {}, //INFO: Selectors to use inside the widget
+      selectors: { //INFO: Selectors to use inside the widget
+        layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
+      },
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
       keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
@@ -1514,10 +1516,15 @@
 
       }
 
-      /* INIT ELEMENT */
+      /* ELEMENT */
 
       this.$element = $( element || this._tmpl ( 'base', this.options ) );
       this.element = this.$element[0];
+
+      /* LAYOUT */
+
+      this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
+      this.layout = this.$layout[0];
 
       /* BINDINGS */
 
@@ -2976,6 +2983,16 @@
 
     }
 
+    /* PRIVATE */
+
+    _sanitizeIndex ( index ) {
+
+      index = Number ( index );
+
+      return _.isNaN ( index ) ? NaN : _.clamp ( 0, index, this.maxIndex );
+
+    }
+
     /* PREVIOUS TAP */
 
     ___previousTap () {
@@ -3109,9 +3126,9 @@
 
     set ( index ) {
 
-      index = Number ( index );
+      index = this._sanitizeIndex ( index );
 
-      if ( !this._lock && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+      if ( !this._lock && !_.isNaN ( index ) && ( !this._current || index !== this._current.index ) ) {
 
         this._lock = true;
 
@@ -8552,7 +8569,7 @@
     plugin: true,
     selector: 'form.ajax',
     options: {
-      spinnerOverlay: true,
+      spinnerOverlay: true, //INFO: Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
       timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
@@ -9134,9 +9151,6 @@
         show: 'show',
         open: 'open'
       },
-      selectors: {
-        layout: '.layout, body' //TODO: Use only `.layout`
-      },
       animations: {
         open: Animations.normal,
         close: Animations.normal
@@ -9161,8 +9175,6 @@
 
       this.modal = this.element;
       this.$modal = this.$element;
-
-      this.$layout = this.$modal.closest ( this.options.selectors.layout );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -9190,7 +9202,7 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.$layout[0], this.$modal[0] ) ) {
+      if ( this._isOpen && !$.contains ( this.layout, this.$modal[0] ) ) {
 
         this.close ();
 
@@ -9955,9 +9967,6 @@
         pinned: 'pinned',
         flickable: 'flickable' //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
       },
-      selectors: {
-        layout: '.layout, body' //TODO: Use only `.layout`
-      },
       animations: {
         open: Animations.normal,
         close: Animations.normal,
@@ -10003,7 +10012,6 @@
       this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
       this._isSlim = this.$panel.hasClass ( this.options.classes.slim );
 
-      this.$layout = this.$panel.closest ( this.options.selectors.layout );
       this.layoutPinnedClass = Widgets.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
 
     }
@@ -10129,7 +10137,7 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.$layout[0], this.$panel[0] ) ) {
+      if ( this._isOpen && !$.contains ( this.layout, this.$panel[0] ) ) {
 
         this.$layout.enableScroll ();
 
@@ -12149,7 +12157,7 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 10,
+      moveThreshold: 5,
       classes: {
         selected: 'selected'
       },
@@ -12547,11 +12555,15 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
+      /* VARIABLES */
+
+      let value = Number ( this.$slider.val () );
+
       /* CONFIG */
 
       this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
       this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
-      this.options.value = Number ( this.$input.val () ) || this.options.value;
+      this.options.value = this._sanitizeValue ( value || this.options.value );
       this.options.step = Number ( this.$slider.data ( this.options.datas.step ) ) || this.options.step;
       this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) ) || this.options.decimals;
 
@@ -12562,7 +12574,17 @@ Prism.languages.js = Prism.languages.javascript;
       /* UPDATE */
 
       this._updateVariables ();
-      this._updatePositions ();
+
+      if ( value !== this.options.value ) {
+
+        this._update ();
+
+      } else {
+
+        this._updatePositions ();
+        this._updateLabel ();
+
+      }
 
     }
 
@@ -12579,7 +12601,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* PRIVATE */
 
-    _roundValue ( value ) {
+    _sanitizeValue ( value ) {
 
       return Number ( Number ( value ).toFixed ( this.options.decimals ) );
 
@@ -12720,7 +12742,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.$highlight.translateX ( data.dragXY.X );
 
-        this._updateLabel ( this._roundValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
+        this._updateLabel ( this._sanitizeValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
 
       }
 
@@ -12742,7 +12764,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     set ( value ) {
 
-      value = this._roundValue ( value );
+      value = this._sanitizeValue ( value );
 
       if ( !_.isNaN ( value ) ) {
 
@@ -13122,16 +13144,28 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
+      /* VARIABLES */
+
+      let value = Number ( this.$input.val () );
+
       /* CONFIG */
 
       this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
       this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );
       this.options.step = Number ( this.$stepper.data ( this.options.datas.step ) || this.options.step );
-      this.options.value = this._sanitizeValue ( Number ( this.$input.val () ) || this.options.value );
+      this.options.value = this._sanitizeValue ( value || this.options.value );
 
       /* UPDATE */
 
-      this._updateButtons ();
+      if ( value !== this.options.value ) {
+
+        this._update ();
+
+      } else {
+
+        this._updateButtons ();
+
+      }
 
     }
 
@@ -13157,7 +13191,6 @@ Prism.languages.js = Prism.languages.javascript;
       return _.clamp ( this.options.min, value, this.options.max );
 
     }
-
 
     /* INPUT / CHANGE */
 
@@ -14608,7 +14641,7 @@ Prism.languages.js = Prism.languages.javascript;
   let config = {
     name: 'tooltipCloser',
     plugin: true,
-    selector: '.tooltip-closer, .tooltip .button',
+    selector: '.tooltip-closer',
     options: {
       widget: Widgets.Tooltip
     }

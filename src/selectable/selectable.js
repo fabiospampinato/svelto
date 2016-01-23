@@ -21,7 +21,7 @@
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 10,
+      moveThreshold: 5,
       classes: {
         selected: 'selected'
       },

@@ -18,7 +18,7 @@
   let config = {
     name: 'tooltipCloser',
     plugin: true,
-    selector: '.tooltip-closer, .tooltip .button',
+    selector: '.tooltip-closer',
     options: {
       widget: Widgets.Tooltip
     }

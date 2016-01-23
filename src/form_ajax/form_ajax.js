@@ -27,7 +27,7 @@
     plugin: true,
     selector: 'form.ajax',
     options: {
-      spinnerOverlay: true,
+      spinnerOverlay: true, //INFO: Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
       timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
