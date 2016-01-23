@@ -5017,7 +5017,7 @@
 
     _toggleClasses ( force ) {
 
-      $html.toggleClass ( this.options.classes.dragging, force );
+      this.$layout.toggleClass ( this.options.classes.dragging, force );
       this.$movable.toggleClass ( this.options.classes.dragging, force );
 
     }
@@ -9041,12 +9041,15 @@
   /* SCROLL TO TOP */
 
   //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
+  //FIXME: It doesn't work if the layout is body, it also need html in some browsers
 
   Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
+    let $layout = $scroller.parent ().closest ( '.layout, body' ); //TODO: Use just `.layout`
+
     $scroller.on ( Pointer.tap, function () {
 
-      $body.add ( $html ).animate ( { scrollTop: 0 }, Animations.normal );
+      $layout.animate ( { scrollTop: 0 }, Animations.normal );
 
     });
 

@@ -241,7 +241,7 @@
 
     _toggleClasses ( force ) {
 
-      $html.toggleClass ( this.options.classes.dragging, force );
+      this.$layout.toggleClass ( this.options.classes.dragging, force );
       this.$movable.toggleClass ( this.options.classes.dragging, force );
 
     }
