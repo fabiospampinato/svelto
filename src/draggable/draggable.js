@@ -272,7 +272,7 @@
 
     _initHelper () {
 
-      this.$helper.appendTo ( $body );
+      this.$helper.appendTo ( this.$layout );
 
     }
 

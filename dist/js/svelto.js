@@ -5048,7 +5048,7 @@
 
     _initHelper () {
 
-      this.$helper.appendTo ( $body );
+      this.$helper.appendTo ( this.$layout );
 
     }
 
@@ -7659,7 +7659,7 @@
 
     static ready () {
 
-      $body.append (
+      $('.layout, body').first ().append ( //TODO: Use just `.layout`
         '<div class="noty-queues top">' +
           '<div class="noty-queue expanded"></div>' +
           '<div class="noty-queues-row">' +
@@ -11539,7 +11539,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       beforeSend () {
 
-        $tempModal.appendTo ( $body )
+        $tempModal.appendTo ( $('.layout, body').first () ) //TODO: Use just `.layout`
                   .modal ({
                     callbacks: {
                       close () {
@@ -12091,7 +12091,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
 
-      this.$dropdown = $(html).appendTo ( $body );
+      this.$dropdown = $(html).appendTo ( this.$layout );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
       this.$dropdown.dropdown ({

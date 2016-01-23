@@ -139,7 +139,7 @@
 
     static ready () {
 
-      $body.append (
+      $('.layout, body').first ().append ( //TODO: Use just `.layout`
         '<div class="noty-queues top">' +
           '<div class="noty-queue expanded"></div>' +
           '<div class="noty-queues-row">' +

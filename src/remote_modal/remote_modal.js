@@ -75,7 +75,7 @@
 
       beforeSend () {
 
-        $tempModal.appendTo ( $body )
+        $tempModal.appendTo ( $('.layout, body').first () ) //TODO: Use just `.layout`
                   .modal ({
                     callbacks: {
                       close () {

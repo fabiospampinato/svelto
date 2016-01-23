@@ -192,7 +192,7 @@
 
       let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
 
-      this.$dropdown = $(html).appendTo ( $body );
+      this.$dropdown = $(html).appendTo ( this.$layout );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
       this.$dropdown.dropdown ({
