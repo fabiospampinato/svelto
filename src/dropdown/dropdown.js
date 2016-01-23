@@ -74,7 +74,7 @@
 
         this.___resize ();
         this.___parentsScroll ();
-        this.___windowTap ();
+        this.___layoutTap ();
 
       }
 
@@ -104,15 +104,15 @@
 
     }
 
-    /* WINDOW TAP */
+    /* LAYOUT TAP */
 
-    ___windowTap () {
+    ___layoutTap () {
 
-      this._on ( true, $window, Pointer.tap, this.__windowTap );
+      this._on ( true, this.$layout, Pointer.tap, this.__layoutTap );
 
     }
 
-    __windowTap ( event ) {
+    __layoutTap ( event ) {
 
       if ( event === this._openEvent || this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) return;
 
@@ -271,7 +271,7 @@
 
       this._reset ();
 
-      this.___windowTap ();
+      this.___layoutTap ();
       this.___resize ();
       this.___parentsScroll ();
 
