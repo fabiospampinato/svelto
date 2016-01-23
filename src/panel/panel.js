@@ -38,9 +38,6 @@
         pinned: 'pinned',
         flickable: 'flickable' //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
       },
-      selectors: {
-        layout: '.layout, body' //TODO: Use only `.layout`
-      },
       animations: {
         open: Animations.normal,
         close: Animations.normal,
@@ -86,7 +83,6 @@
       this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
       this._isSlim = this.$panel.hasClass ( this.options.classes.slim );
 
-      this.$layout = this.$panel.closest ( this.options.selectors.layout );
       this.layoutPinnedClass = Widgets.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
 
     }
@@ -212,7 +208,7 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.$layout[0], this.$panel[0] ) ) {
+      if ( this._isOpen && !$.contains ( this.layout, this.$panel[0] ) ) {
 
         this.$layout.enableScroll ();
 

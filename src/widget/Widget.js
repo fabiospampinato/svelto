@@ -42,7 +42,9 @@
         disabled: 'disabled', //INFO: Attached to disabled widgets
         hidden: 'hidden' //INFO: Used to hide an element
       },
-      selectors: {}, //INFO: Selectors to use inside the widget
+      selectors: { //INFO: Selectors to use inside the widget
+        layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
+      },
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
       keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
@@ -95,10 +97,15 @@
 
       }
 
-      /* INIT ELEMENT */
+      /* ELEMENT */
 
       this.$element = $( element || this._tmpl ( 'base', this.options ) );
       this.element = this.$element[0];
+
+      /* LAYOUT */
+
+      this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
+      this.layout = this.$layout[0];
 
       /* BINDINGS */
 

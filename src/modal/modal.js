@@ -26,9 +26,6 @@
         show: 'show',
         open: 'open'
       },
-      selectors: {
-        layout: '.layout, body' //TODO: Use only `.layout`
-      },
       animations: {
         open: Animations.normal,
         close: Animations.normal
@@ -53,8 +50,6 @@
 
       this.modal = this.element;
       this.$modal = this.$element;
-
-      this.$layout = this.$modal.closest ( this.options.selectors.layout );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -82,7 +77,7 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.$layout[0], this.$modal[0] ) ) {
+      if ( this._isOpen && !$.contains ( this.layout, this.$modal[0] ) ) {
 
         this.close ();
 
