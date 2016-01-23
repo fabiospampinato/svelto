@@ -1181,6 +1181,12 @@
 
     },
 
+    widgetizer ( $widget, name ) {
+
+      $widget[name]();
+
+    },
+
     /* WORKERS */
 
     configure ( Widget, config = {} ) {
@@ -1213,7 +1219,7 @@
 
       if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
-        Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
+        Widgetize.add ( Widget.config.selector, this.widgetizer, Widget.config.name );
 
       }
 
@@ -1648,11 +1654,6 @@
     /* SPECIAL */
 
     static ready () {} //INFO: Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
-    static widgetize ( $widget, name ) { //INFO: Instanciate the $widget
-
-      $widget[name]();
-
-    }
 
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
@@ -11160,15 +11161,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $progressbar ) {
-
-      $progressbar.progressbar ({
-        value: $progressbar.data ( Widgets.Progressbar.config.options.datas.value ),
-        decimals: $progressbar.data ( Widgets.Progressbar.config.options.datas.decimals )
-      });
-
-    }
-
     _variables () {
 
       this.$progressbar = this.$element;
@@ -11178,7 +11170,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
-      this.options.value = this._sanitizeValue ( this.options.value );
+      /* OPTIONS */
+
+      this.options.value = this._sanitizeValue ( this.$progressbar.data ( this.options.datas.value ) || this.options.value );
+      this.options.decimals = Number ( this.$progressbar.data ( this.options.datas.decimals ) || this.options.decimals );
+
+      /* UPDATE */
 
       this._update ();
 
@@ -12607,7 +12604,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let value = Number ( this.$slider.val () );
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
       this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
@@ -13196,7 +13193,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let value = Number ( this.$input.val () );
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
       this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );
@@ -13449,7 +13446,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
       this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;
@@ -14084,12 +14081,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $tagbox ) {
-
-      $tagbox.tagbox ({ init: $tagbox.find ( Widgets.Tagbox.config.options.selectors.input ).val () });
-
-    }
-
     _variables () {
 
       this.$tagbox = this.$element;
@@ -14100,6 +14091,12 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     _init ( suppressTriggers ) {
+
+      /* OPTIONS */
+
+      this.options.init = this.$input.val () || this.options.init;
+
+      /* POPULATING */
 
       this.add ( this.options.init, suppressTriggers );
 

@@ -75,7 +75,7 @@
 
     _init () {
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
       this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;

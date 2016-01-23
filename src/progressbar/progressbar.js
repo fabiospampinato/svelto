@@ -66,15 +66,6 @@
 
     /* SPECIAL */
 
-    static widgetize ( $progressbar ) {
-
-      $progressbar.progressbar ({
-        value: $progressbar.data ( Widgets.Progressbar.config.options.datas.value ),
-        decimals: $progressbar.data ( Widgets.Progressbar.config.options.datas.decimals )
-      });
-
-    }
-
     _variables () {
 
       this.$progressbar = this.$element;
@@ -84,7 +75,12 @@
 
     _init () {
 
-      this.options.value = this._sanitizeValue ( this.options.value );
+      /* OPTIONS */
+
+      this.options.value = this._sanitizeValue ( this.$progressbar.data ( this.options.datas.value ) || this.options.value );
+      this.options.decimals = Number ( this.$progressbar.data ( this.options.datas.decimals ) || this.options.decimals );
+
+      /* UPDATE */
 
       this._update ();
 

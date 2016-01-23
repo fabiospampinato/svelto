@@ -81,12 +81,6 @@
 
     /* SPECIAL */
 
-    static widgetize ( $tagbox ) {
-
-      $tagbox.tagbox ({ init: $tagbox.find ( Widgets.Tagbox.config.options.selectors.input ).val () });
-
-    }
-
     _variables () {
 
       this.$tagbox = this.$element;
@@ -97,6 +91,12 @@
     }
 
     _init ( suppressTriggers ) {
+
+      /* OPTIONS */
+
+      this.options.init = this.$input.val () || this.options.init;
+
+      /* POPULATING */
 
       this.add ( this.options.init, suppressTriggers );
 

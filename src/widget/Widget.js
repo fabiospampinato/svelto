@@ -229,11 +229,6 @@
     /* SPECIAL */
 
     static ready () {} //INFO: Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
-    static widgetize ( $widget, name ) { //INFO: Instanciate the $widget
-
-      $widget[name]();
-
-    }
 
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function

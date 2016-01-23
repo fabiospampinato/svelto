@@ -66,7 +66,7 @@
 
       let value = Number ( this.$input.val () );
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
       this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );

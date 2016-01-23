@@ -81,7 +81,7 @@
 
       let value = Number ( this.$slider.val () );
 
-      /* CONFIG */
+      /* OPTIONS */
 
       this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
       this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
