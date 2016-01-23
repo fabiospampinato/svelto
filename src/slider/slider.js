@@ -43,7 +43,7 @@
         unhighlight: '.slider-unhighlight',
         highlight: '.slider-highlight',
         handlerWrp: '.slider-handler-wrp',
-        label: '.slider-label'
+        label: '.slider-handler-wrp .slider-label'
       },
       keystrokes: {
         'left, down': 'decrease',
@@ -71,7 +71,7 @@
       this.$unhighlight = this.$slider.find ( this.options.selectors.unhighlight );
       this.$highlight = this.$slider.find ( this.options.selectors.highlight );
       this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
-      this.$label = this.$handlerWrp.find ( this.options.selectors.label );
+      this.$label = this.$slider.find ( this.options.selectors.label );
 
     }
 

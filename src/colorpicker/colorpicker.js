@@ -37,11 +37,11 @@
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
-          handler: '.colorpicker-handler'
+          handler: '.colorpicker-sb .colorpicker-handler'
         },
         hue: {
           wrp: '.colorpicker-hue',
-          handler: '.colorpicker-handler'
+          handler: '.colorpicker-hue .colorpicker-handler'
         },
         input: 'input'
       },
@@ -61,9 +61,9 @@
 
       this.$colorpicker = this.$element;
       this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
-      this.$sbHandler = this.$sbWrp.find ( this.options.selectors.sb.handler );
+      this.$sbHandler = this.$colorpicker.find ( this.options.selectors.sb.handler );
       this.$hueWrp = this.$colorpicker.find ( this.options.selectors.hue.wrp );
-      this.$hueHandler = this.$hueWrp.find ( this.options.selectors.hue.handler );
+      this.$hueHandler = this.$colorpicker.find ( this.options.selectors.hue.handler );
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 

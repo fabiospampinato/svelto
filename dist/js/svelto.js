@@ -3799,11 +3799,11 @@
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
-          handler: '.colorpicker-handler'
+          handler: '.colorpicker-sb .colorpicker-handler'
         },
         hue: {
           wrp: '.colorpicker-hue',
-          handler: '.colorpicker-handler'
+          handler: '.colorpicker-hue .colorpicker-handler'
         },
         input: 'input'
       },
@@ -3823,9 +3823,9 @@
 
       this.$colorpicker = this.$element;
       this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
-      this.$sbHandler = this.$sbWrp.find ( this.options.selectors.sb.handler );
+      this.$sbHandler = this.$colorpicker.find ( this.options.selectors.sb.handler );
       this.$hueWrp = this.$colorpicker.find ( this.options.selectors.hue.wrp );
-      this.$hueHandler = this.$hueWrp.find ( this.options.selectors.hue.handler );
+      this.$hueHandler = this.$colorpicker.find ( this.options.selectors.hue.handler );
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 
@@ -12592,7 +12592,7 @@ Prism.languages.js = Prism.languages.javascript;
         unhighlight: '.slider-unhighlight',
         highlight: '.slider-highlight',
         handlerWrp: '.slider-handler-wrp',
-        label: '.slider-label'
+        label: '.slider-handler-wrp .slider-label'
       },
       keystrokes: {
         'left, down': 'decrease',
@@ -12620,7 +12620,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.$unhighlight = this.$slider.find ( this.options.selectors.unhighlight );
       this.$highlight = this.$slider.find ( this.options.selectors.highlight );
       this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
-      this.$label = this.$handlerWrp.find ( this.options.selectors.label );
+      this.$label = this.$slider.find ( this.options.selectors.label );
 
     }
 
