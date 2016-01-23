@@ -109,7 +109,7 @@
 
   $(function () {
 
-    $body.widgetize ();
+    $(document.body).widgetize ();
 
   });
 

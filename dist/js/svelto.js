@@ -700,7 +700,6 @@
 
     window.$window = $(window);
     window.$document = $(document);
-    window.$body = $(document.body);
 
   });
 
@@ -1125,7 +1124,7 @@
 
   $(function () {
 
-    $body.widgetize ();
+    $(document.body).widgetize ();
 
   });
 

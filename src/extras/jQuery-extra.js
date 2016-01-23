@@ -246,7 +246,6 @@
 
     window.$window = $(window);
     window.$document = $(document);
-    window.$body = $(document.body);
 
   });
 
