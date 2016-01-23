@@ -701,7 +701,6 @@
     window.$window = $(window);
     window.$document = $(document);
     window.$html = $(document.documentElement);
-    window.$head = $(document.head);
     window.$body = $(document.body);
 
   });
@@ -5823,7 +5822,7 @@
 
     attach () {
 
-      this.$stylesheet.appendTo ( $head );
+      this.$stylesheet.appendTo ( $(document.head) );
 
     }
 

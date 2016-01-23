@@ -135,7 +135,7 @@
 
     attach () {
 
-      this.$stylesheet.appendTo ( $head );
+      this.$stylesheet.appendTo ( $(document.head) );
 
     }
 
