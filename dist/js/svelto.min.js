@@ -3129,50 +3129,48 @@
 
       index = this._sanitizeIndex ( index );
 
-      if ( !this._lock && !_.isNaN ( index ) && ( !this._current || index !== this._current.index ) ) {
+      if ( this._lock || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
 
-        this._lock = true;
+      this._lock = true;
 
-        if ( this._current ) {
+      if ( this._current ) {
 
-          this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
-          this._current.$indicator.removeClass ( this.options.classes.current );
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
+        this._current.$indicator.removeClass ( this.options.classes.current );
 
-          this._previous = this._current;
+        this._previous = this._current;
+
+      }
+
+      this._current = this._getItemObj ( index );
+      this._current.$item.addClass ( this.options.classes.current );
+      this._current.$indicator.addClass ( this.options.classes.current );
+
+      if ( this.options.cycle ) {
+
+        this.timer.stop ();
+
+      }
+
+      this._delay ( function () {
+
+        if ( this._previous ) {
+
+          this._previous.$item.removeClass ( this.options.classes.prev );
 
         }
-
-        this._current = this._getItemObj ( index );
-        this._current.$item.addClass ( this.options.classes.current );
-        this._current.$indicator.addClass ( this.options.classes.current );
 
         if ( this.options.cycle ) {
 
-          this.timer.stop ();
+          this.timer.play ();
 
         }
 
-        this._delay ( function () {
-
-          if ( this._previous ) {
-
-            this._previous.$item.removeClass ( this.options.classes.prev );
-
-          }
-
-          if ( this.options.cycle ) {
-
-            this.timer.play ();
-
-          }
-
-          this._lock = false;
-
-        }, this.options.animations.cycle );
+        this._lock = false;
 
         this._trigger ( 'change' );
 
-      }
+      }, this.options.animations.cycle );
 
     }
 
@@ -6054,9 +6052,12 @@
 
       /* CHECKING */
 
-      if ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
+      if ( this._lock || !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
 
       /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = true;
 
       this._openEvent = event;
       this._wasMoving = false;
@@ -6100,6 +6101,10 @@
 
           this.$dropdown.addClass ( this.options.classes.open );
 
+          this._lock = false;
+
+          this._trigger ( 'open' );
+
         });
 
       });
@@ -6107,23 +6112,21 @@
       /* EVENTS */
 
       this._reset ();
+
+      this.___windowTap ();
       this.___resize ();
       this.___parentsScroll ();
-      this.___windowTap ();
-
-      /* FINALIZING */
-
-      this._isOpen = true;
-
-      /* TRIGGERING */
-
-      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
+
+      /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = false;
 
       /* ANCHOR */
 
@@ -6149,6 +6152,10 @@
 
           this.$dropdown.removeClass ( this.options.classes.show );
 
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
         }, this.options.animations.close );
 
       });
@@ -6156,12 +6163,6 @@
       /* RESETTING */
 
       this._reset ();
-
-      this._isOpen = false;
-
-      /* TRIGGERING */
-
-      this._trigger ( 'close' );
 
     }
 
@@ -7336,53 +7337,55 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._lock || this._isOpen ) return;
 
-        this._isOpen = true;
+      this._lock = true;
+      this._isOpen = true;
+
+      this._frame ( function () {
+
+        this.$overlay.addClass ( this.options.classes.show );
 
         this._frame ( function () {
 
-          this.$overlay.addClass ( this.options.classes.show );
+          this.$overlay.addClass ( this.options.classes.open );
 
-          this._frame ( function () {
+          this._lock = false;
 
-            this.$overlay.addClass ( this.options.classes.open );
-
-            this.___keydown ();
-
-            this._trigger ( 'open' );
-
-          });
+          this._trigger ( 'open' );
 
         });
 
-      }
+      });
+
+      this.___keydown ();
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( this._lock || !this._isOpen ) return;
 
-        this._reset ();
+      this._lock = true;
+      this._isOpen = false;
 
-        this._isOpen = false;
+      this._frame ( function () {
 
-        this._frame ( function () {
+        this.$overlay.removeClass ( this.options.classes.open );
 
-          this.$overlay.removeClass ( this.options.classes.open );
+        this._delay ( function () {
 
-          this._delay ( function () {
+          this.$overlay.removeClass ( this.options.classes.show );
 
-            this.$overlay.removeClass ( this.options.classes.show );
+          this._lock = false;
 
-            this._trigger ( 'close' );
+          this._trigger ( 'close' );
 
-          }, this.options.animations.close );
+        }, this.options.animations.close );
 
-        });
+      });
 
-      }
+      this._reset ();
 
     }
 
@@ -7477,7 +7480,7 @@
 
     open () {
 
-      if ( this.isOpen () ) return;
+      if ( this._lock || this.isOpen () ) return;
 
       this.$overlay.prependTo ( this.$overlayed );
 
@@ -7489,13 +7492,17 @@
 
     close () {
 
-      if ( !this.isOpen () ) return;
+      if ( this._lock || !this.isOpen () ) return;
+
+      this._lock = true;
 
       this.instance.close ();
 
       this._delay ( function () {
 
         this.$overlay.detach ();
+
+        this._lock = false;
 
         this._trigger ( 'close' );
 
@@ -7866,7 +7873,10 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
+
+      this._lock = true;
+      this._isOpen = true;
 
       this._frame ( function () {
 
@@ -7875,6 +7885,10 @@
         this._frame ( function () {
 
           this.$noty.addClass ( this.options.classes.open );
+
+          this._lock = false;
+
+          this._trigger ( 'open' );
 
         });
 
@@ -7895,15 +7909,15 @@
 
       });
 
-      this._isOpen = true;
-
-      this._trigger ( 'open' );
-
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
+
+      this._lock = true;
+      this._isOpen = false;
+      this._openUrl = false;
 
       this._frame ( function () {
 
@@ -7913,16 +7927,15 @@
 
           this.$noty.remove ();
 
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
         }, this.options.animations.remove );
 
       });
 
       this._reset ();
-
-      this._openUrl = false;
-      this._isOpen = false;
-
-      this._trigger ( 'close' );
 
     }
 
@@ -9267,8 +9280,9 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = true;
 
       this.$layout.disableScroll ();
@@ -9281,9 +9295,7 @@
 
           this.$modal.addClass ( this.options.classes.open );
 
-          this.___keydown ();
-          this.___tap ();
-          this.___route ();
+          this._lock = false;
 
           this._trigger ( 'open' );
 
@@ -9291,15 +9303,18 @@
 
       });
 
+      this.___keydown ();
+      this.___tap ();
+      this.___route ();
+
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this.lock || !this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = false;
-
-      this._reset ();
 
       this._frame ( function () {
 
@@ -9311,11 +9326,15 @@
 
           this.$layout.enableScroll ();
 
+          this._lock = false;
+
           this._trigger ( 'close' );
 
         }, this.options.animations.close );
 
       });
+
+      this._reset ();
 
     }
 
@@ -10242,17 +10261,10 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = true;
-
-      this._reset ();
-
-      this.___breakpoint ();
-      this.___tap ();
-      this.___keydown ();
-      this.___panelFlick ();
-      this.___route ();
 
       if ( !this._isPinned ) {
 
@@ -10268,26 +10280,32 @@
 
           this.$panel.addClass ( this.options.classes.open );
 
+          this._lock = false;
+
           this._trigger ( 'open' );
 
         });
 
       });
 
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___tap ();
+      this.___keydown ();
+      this.___panelFlick ();
+      this.___route ();
+
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
 
       this.unpin ( true );
 
+      this._lock = true;
       this._isOpen = false;
-
-      this._reset ();
-
-      this.___breakpoint ();
-      this.___documentFlick ();
 
       this._frame ( function () {
 
@@ -10299,11 +10317,18 @@
 
           this.$layout.enableScroll ();
 
+          this._lock = false;
+
           this._trigger ( 'close' );
 
         }, this.options.animations.close );
 
       });
+
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___documentFlick ();
 
     }
 

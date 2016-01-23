@@ -210,9 +210,12 @@
 
       /* CHECKING */
 
-      if ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
+      if ( this._lock || !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
 
       /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = true;
 
       this._openEvent = event;
       this._wasMoving = false;
@@ -256,6 +259,10 @@
 
           this.$dropdown.addClass ( this.options.classes.open );
 
+          this._lock = false;
+
+          this._trigger ( 'open' );
+
         });
 
       });
@@ -263,23 +270,21 @@
       /* EVENTS */
 
       this._reset ();
+
+      this.___windowTap ();
       this.___resize ();
       this.___parentsScroll ();
-      this.___windowTap ();
-
-      /* FINALIZING */
-
-      this._isOpen = true;
-
-      /* TRIGGERING */
-
-      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
+
+      /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = false;
 
       /* ANCHOR */
 
@@ -305,6 +310,10 @@
 
           this.$dropdown.removeClass ( this.options.classes.show );
 
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
         }, this.options.animations.close );
 
       });
@@ -312,12 +321,6 @@
       /* RESETTING */
 
       this._reset ();
-
-      this._isOpen = false;
-
-      /* TRIGGERING */
-
-      this._trigger ( 'close' );
 
     }
 

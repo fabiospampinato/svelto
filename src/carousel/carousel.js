@@ -253,50 +253,48 @@
 
       index = this._sanitizeIndex ( index );
 
-      if ( !this._lock && !_.isNaN ( index ) && ( !this._current || index !== this._current.index ) ) {
+      if ( this._lock || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
 
-        this._lock = true;
+      this._lock = true;
 
-        if ( this._current ) {
+      if ( this._current ) {
 
-          this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
-          this._current.$indicator.removeClass ( this.options.classes.current );
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
+        this._current.$indicator.removeClass ( this.options.classes.current );
 
-          this._previous = this._current;
+        this._previous = this._current;
+
+      }
+
+      this._current = this._getItemObj ( index );
+      this._current.$item.addClass ( this.options.classes.current );
+      this._current.$indicator.addClass ( this.options.classes.current );
+
+      if ( this.options.cycle ) {
+
+        this.timer.stop ();
+
+      }
+
+      this._delay ( function () {
+
+        if ( this._previous ) {
+
+          this._previous.$item.removeClass ( this.options.classes.prev );
 
         }
-
-        this._current = this._getItemObj ( index );
-        this._current.$item.addClass ( this.options.classes.current );
-        this._current.$indicator.addClass ( this.options.classes.current );
 
         if ( this.options.cycle ) {
 
-          this.timer.stop ();
+          this.timer.play ();
 
         }
 
-        this._delay ( function () {
-
-          if ( this._previous ) {
-
-            this._previous.$item.removeClass ( this.options.classes.prev );
-
-          }
-
-          if ( this.options.cycle ) {
-
-            this.timer.play ();
-
-          }
-
-          this._lock = false;
-
-        }, this.options.animations.cycle );
+        this._lock = false;
 
         this._trigger ( 'change' );
 
-      }
+      }, this.options.animations.cycle );
 
     }
 

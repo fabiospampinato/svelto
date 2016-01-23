@@ -276,17 +276,10 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = true;
-
-      this._reset ();
-
-      this.___breakpoint ();
-      this.___tap ();
-      this.___keydown ();
-      this.___panelFlick ();
-      this.___route ();
 
       if ( !this._isPinned ) {
 
@@ -302,26 +295,32 @@
 
           this.$panel.addClass ( this.options.classes.open );
 
+          this._lock = false;
+
           this._trigger ( 'open' );
 
         });
 
       });
 
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___tap ();
+      this.___keydown ();
+      this.___panelFlick ();
+      this.___route ();
+
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
 
       this.unpin ( true );
 
+      this._lock = true;
       this._isOpen = false;
-
-      this._reset ();
-
-      this.___breakpoint ();
-      this.___documentFlick ();
 
       this._frame ( function () {
 
@@ -333,11 +332,18 @@
 
           this.$layout.enableScroll ();
 
+          this._lock = false;
+
           this._trigger ( 'close' );
 
         }, this.options.animations.close );
 
       });
+
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___documentFlick ();
 
     }
 

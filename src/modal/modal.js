@@ -117,8 +117,9 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = true;
 
       this.$layout.disableScroll ();
@@ -131,9 +132,7 @@
 
           this.$modal.addClass ( this.options.classes.open );
 
-          this.___keydown ();
-          this.___tap ();
-          this.___route ();
+          this._lock = false;
 
           this._trigger ( 'open' );
 
@@ -141,15 +140,18 @@
 
       });
 
+      this.___keydown ();
+      this.___tap ();
+      this.___route ();
+
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this.lock || !this._isOpen ) return;
 
+      this._lock = true;
       this._isOpen = false;
-
-      this._reset ();
 
       this._frame ( function () {
 
@@ -161,11 +163,15 @@
 
           this.$layout.enableScroll ();
 
+          this._lock = false;
+
           this._trigger ( 'close' );
 
         }, this.options.animations.close );
 
       });
+
+      this._reset ();
 
     }
 

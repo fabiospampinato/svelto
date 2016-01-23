@@ -353,7 +353,10 @@
 
     open () {
 
-      if ( this._isOpen ) return;
+      if ( this._lock || this._isOpen ) return;
+
+      this._lock = true;
+      this._isOpen = true;
 
       this._frame ( function () {
 
@@ -362,6 +365,10 @@
         this._frame ( function () {
 
           this.$noty.addClass ( this.options.classes.open );
+
+          this._lock = false;
+
+          this._trigger ( 'open' );
 
         });
 
@@ -382,15 +389,15 @@
 
       });
 
-      this._isOpen = true;
-
-      this._trigger ( 'open' );
-
     }
 
     close () {
 
-      if ( !this._isOpen ) return;
+      if ( this._lock || !this._isOpen ) return;
+
+      this._lock = true;
+      this._isOpen = false;
+      this._openUrl = false;
 
       this._frame ( function () {
 
@@ -400,16 +407,15 @@
 
           this.$noty.remove ();
 
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
         }, this.options.animations.remove );
 
       });
 
       this._reset ();
-
-      this._openUrl = false;
-      this._isOpen = false;
-
-      this._trigger ( 'close' );
 
     }
 

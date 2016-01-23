@@ -90,53 +90,55 @@
 
     open () {
 
-      if ( !this._isOpen ) {
+      if ( this._lock || this._isOpen ) return;
 
-        this._isOpen = true;
+      this._lock = true;
+      this._isOpen = true;
+
+      this._frame ( function () {
+
+        this.$overlay.addClass ( this.options.classes.show );
 
         this._frame ( function () {
 
-          this.$overlay.addClass ( this.options.classes.show );
+          this.$overlay.addClass ( this.options.classes.open );
 
-          this._frame ( function () {
+          this._lock = false;
 
-            this.$overlay.addClass ( this.options.classes.open );
-
-            this.___keydown ();
-
-            this._trigger ( 'open' );
-
-          });
+          this._trigger ( 'open' );
 
         });
 
-      }
+      });
+
+      this.___keydown ();
 
     }
 
     close () {
 
-      if ( this._isOpen ) {
+      if ( this._lock || !this._isOpen ) return;
 
-        this._reset ();
+      this._lock = true;
+      this._isOpen = false;
 
-        this._isOpen = false;
+      this._frame ( function () {
 
-        this._frame ( function () {
+        this.$overlay.removeClass ( this.options.classes.open );
 
-          this.$overlay.removeClass ( this.options.classes.open );
+        this._delay ( function () {
 
-          this._delay ( function () {
+          this.$overlay.removeClass ( this.options.classes.show );
 
-            this.$overlay.removeClass ( this.options.classes.show );
+          this._lock = false;
 
-            this._trigger ( 'close' );
+          this._trigger ( 'close' );
 
-          }, this.options.animations.close );
+        }, this.options.animations.close );
 
-        });
+      });
 
-      }
+      this._reset ();
 
     }
 
