@@ -62,16 +62,28 @@
 
     _init () {
 
+      /* VARIABLES */
+
+      let value = Number ( this.$input.val () );
+
       /* CONFIG */
 
       this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
       this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );
       this.options.step = Number ( this.$stepper.data ( this.options.datas.step ) || this.options.step );
-      this.options.value = this._sanitizeValue ( Number ( this.$input.val () ) || this.options.value );
+      this.options.value = this._sanitizeValue ( value || this.options.value );
 
       /* UPDATE */
 
-      this._updateButtons ();
+      if ( value !== this.options.value ) {
+
+        this._update ();
+
+      } else {
+
+        this._updateButtons ();
+
+      }
 
     }
 
@@ -97,7 +109,6 @@
       return _.clamp ( this.options.min, value, this.options.max );
 
     }
-
 
     /* INPUT / CHANGE */
 

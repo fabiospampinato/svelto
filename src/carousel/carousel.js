@@ -108,6 +108,16 @@
 
     }
 
+    /* PRIVATE */
+
+    _sanitizeIndex ( index ) {
+
+      index = Number ( index );
+
+      return _.isNaN ( index ) ? NaN : _.clamp ( 0, index, this.maxIndex );
+
+    }
+
     /* PREVIOUS TAP */
 
     ___previousTap () {
@@ -241,9 +251,9 @@
 
     set ( index ) {
 
-      index = Number ( index );
+      index = this._sanitizeIndex ( index );
 
-      if ( !this._lock && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+      if ( !this._lock && !_.isNaN ( index ) && ( !this._current || index !== this._current.index ) ) {
 
         this._lock = true;
 

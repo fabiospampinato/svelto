@@ -77,11 +77,15 @@
 
     _init () {
 
+      /* VARIABLES */
+
+      let value = Number ( this.$slider.val () );
+
       /* CONFIG */
 
       this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
       this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
-      this.options.value = Number ( this.$input.val () ) || this.options.value;
+      this.options.value = this._sanitizeValue ( value || this.options.value );
       this.options.step = Number ( this.$slider.data ( this.options.datas.step ) ) || this.options.step;
       this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) ) || this.options.decimals;
 
@@ -92,7 +96,17 @@
       /* UPDATE */
 
       this._updateVariables ();
-      this._updatePositions ();
+
+      if ( value !== this.options.value ) {
+
+        this._update ();
+
+      } else {
+
+        this._updatePositions ();
+        this._updateLabel ();
+
+      }
 
     }
 
@@ -109,7 +123,7 @@
 
     /* PRIVATE */
 
-    _roundValue ( value ) {
+    _sanitizeValue ( value ) {
 
       return Number ( Number ( value ).toFixed ( this.options.decimals ) );
 
@@ -250,7 +264,7 @@
 
         this.$highlight.translateX ( data.dragXY.X );
 
-        this._updateLabel ( this._roundValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
+        this._updateLabel ( this._sanitizeValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
 
       }
 
@@ -272,7 +286,7 @@
 
     set ( value ) {
 
-      value = this._roundValue ( value );
+      value = this._sanitizeValue ( value );
 
       if ( !_.isNaN ( value ) ) {
 
