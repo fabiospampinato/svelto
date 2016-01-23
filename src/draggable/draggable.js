@@ -311,7 +311,7 @@
 
           	$document.scrollTop ( scrollTop - this.options.scroll.speed );
 
-          } else if ( $window.height () - ( pointXY.Y - scrollTop ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.height () - ( pointXY.Y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
           	$document.scrollTop ( scrollTop + this.options.scroll.speed );
 
@@ -327,7 +327,7 @@
 
           	$document.scrollLeft ( scrollLeft - this.options.scroll.speed );
 
-          } else if ( $window.width () - ( pointXY.X - scrollLeft ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.width () - ( pointXY.X - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
           	$document.scrollLeft ( scrollLeft + this.options.scroll.speed );
 

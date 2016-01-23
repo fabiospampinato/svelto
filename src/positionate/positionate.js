@@ -13,6 +13,10 @@
 
   'use strict';
 
+  /* VARIABLES */
+
+  let $window = $(window);
+
   /* UTILITES */
 
   let isHorizontal = function ( direction ) {

@@ -188,7 +188,7 @@
 
     ___resize () {
 
-      this._on ( true, $window, 'resize', this._debounce ( this.__resize, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+      this._on ( true, this.$window, 'resize', this._debounce ( this.__resize, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
 
     }
 

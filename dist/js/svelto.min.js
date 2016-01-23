@@ -698,7 +698,6 @@
 
   $(function () {
 
-    window.$window = $(window);
     window.$document = $(document);
 
   });
@@ -1282,6 +1281,10 @@
 
   'use strict';
 
+  /* VARIABLES */
+
+  let $window = $(window);
+
   /* BREAKPOINT */
 
   let Breakpoint = {
@@ -1527,6 +1530,11 @@
 
       this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
       this.layout = this.$layout[0];
+
+      /* WINDOW */
+
+      this.$window = $(window);
+      this.window = this.$window[0];
 
       /* BINDINGS */
 
@@ -1925,7 +1933,7 @@
 
     ___route () {
 
-      this._on ( true, $window, 'route', this.__route );
+      this._on ( true, this.$window, 'route', this.__route );
 
     }
 
@@ -1933,7 +1941,7 @@
 
     ___breakpoint () {
 
-      this._on ( $window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
+      this._on ( this.$window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
 
     }
 
@@ -5083,7 +5091,7 @@
 
           	$document.scrollTop ( scrollTop - this.options.scroll.speed );
 
-          } else if ( $window.height () - ( pointXY.Y - scrollTop ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.height () - ( pointXY.Y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
           	$document.scrollTop ( scrollTop + this.options.scroll.speed );
 
@@ -5099,7 +5107,7 @@
 
           	$document.scrollLeft ( scrollLeft - this.options.scroll.speed );
 
-          } else if ( $window.width () - ( pointXY.X - scrollLeft ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.width () - ( pointXY.X - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
           	$document.scrollLeft ( scrollLeft + this.options.scroll.speed );
 
@@ -5428,6 +5436,10 @@
 (function ( $, _, Svelto ) {
 
   'use strict';
+
+  /* VARIABLES */
+
+  let $window = $(window);
 
   /* UTILITES */
 
@@ -5938,7 +5950,7 @@
 
     ___parentsScroll () {
 
-      let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( $window );
+      let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( this.$window );
 
       this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
@@ -5948,7 +5960,7 @@
 
     ___resize () {
 
-      this._on ( true, $window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+      this._on ( true, this.$window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
 
     }
 
@@ -11851,7 +11863,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   $(function () {
 
-    let pushState = history.pushState;
+    let $window = $(window),
+        pushState = history.pushState;
 
     history.pushState = function ( state ) {
 
@@ -11879,7 +11892,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   $(function () {
 
-    let previous = window.location.href.split ( '#' )[0];
+    let $window = $(window),
+        previous = window.location.href.split ( '#' )[0];
 
     $window.on ( 'popstate pushstate', function () {
 
@@ -12743,7 +12757,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___resize () {
 
-      this._on ( true, $window, 'resize', this._debounce ( this.__resize, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$window`
+      this._on ( true, this.$window, 'resize', this._debounce ( this.__resize, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
 
     }
 

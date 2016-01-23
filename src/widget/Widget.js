@@ -107,6 +107,11 @@
       this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
       this.layout = this.$layout[0];
 
+      /* WINDOW */
+
+      this.$window = $(window);
+      this.window = this.$window[0];
+
       /* BINDINGS */
 
       this.$bindings = $();
@@ -504,7 +509,7 @@
 
     ___route () {
 
-      this._on ( true, $window, 'route', this.__route );
+      this._on ( true, this.$window, 'route', this.__route );
 
     }
 
@@ -512,7 +517,7 @@
 
     ___breakpoint () {
 
-      this._on ( $window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
+      this._on ( this.$window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
 
     }
 

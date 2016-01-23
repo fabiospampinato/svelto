@@ -244,7 +244,6 @@
 
   $(function () {
 
-    window.$window = $(window);
     window.$document = $(document);
 
   });

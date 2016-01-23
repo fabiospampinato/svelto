@@ -16,7 +16,8 @@
 
   $(function () {
 
-    let pushState = history.pushState;
+    let $window = $(window),
+        pushState = history.pushState;
 
     history.pushState = function ( state ) {
 
@@ -44,7 +45,8 @@
 
   $(function () {
 
-    let previous = window.location.href.split ( '#' )[0];
+    let $window = $(window),
+        previous = window.location.href.split ( '#' )[0];
 
     $window.on ( 'popstate pushstate', function () {
 
