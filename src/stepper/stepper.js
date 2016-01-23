@@ -64,7 +64,7 @@
 
       /* VARIABLES */
 
-      let value = Number ( this.$input.val () );
+      let value = this.$input.val ();
 
       /* OPTIONS */
 
@@ -75,7 +75,7 @@
 
       /* UPDATE */
 
-      if ( value !== this.options.value ) {
+      if ( Number ( value ) !== this.options.value ) {
 
         this._update ();
 

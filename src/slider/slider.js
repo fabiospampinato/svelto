@@ -79,15 +79,15 @@
 
       /* VARIABLES */
 
-      let value = Number ( this.$slider.val () );
+      let value = this.$input.val ();
 
       /* OPTIONS */
 
-      this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
-      this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
+      this.options.min = Number ( this.$min.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$max.data ( this.options.datas.max ) || this.options.max );
       this.options.value = this._sanitizeValue ( value || this.options.value );
-      this.options.step = Number ( this.$slider.data ( this.options.datas.step ) ) || this.options.step;
-      this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) ) || this.options.decimals;
+      this.options.step = Number ( this.$slider.data ( this.options.datas.step ) || this.options.step );
+      this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) || this.options.decimals );
 
       /* STEPS NR */
 
@@ -97,7 +97,7 @@
 
       this._updateVariables ();
 
-      if ( value !== this.options.value ) {
+      if ( Number ( value ) !== this.options.value ) {
 
         this._update ();
 
