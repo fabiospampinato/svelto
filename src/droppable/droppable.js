@@ -94,7 +94,7 @@
 
     ___dragMove () {
 
-      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
+      this._on ( this.$layout, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
 
     }
 
@@ -122,7 +122,7 @@
 
     ___dragEnd () {
 
-      this._on ( $document, 'draggable:end', this.__dragEnd );
+      this._on ( this.$layout, 'draggable:end', this.__dragEnd );
 
     }
 

@@ -99,7 +99,7 @@
 
       } else {
 
-        this.___documentFlick ();
+        this.___layoutFlick ();
         this.___panelFlick ();
 
       }
@@ -126,7 +126,7 @@
 
     /* ESC */
 
-    ___keydown () {
+    ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
       this._on ( true, $document, 'keydown', this.__keydown );
 
@@ -142,25 +142,23 @@
 
     }
 
-    /* DOCUMENT FLICK */
+    /* LAYOUT FLICK */
 
-    ___documentFlick () {
+    ___layoutFlick () {
 
-      if ( this.options.flick.open ) {
+      if ( !this.options.flick.open ) return;
 
-        this._on ( $document, 'flickable:flick', this.__documentFlick );
+      this.$layout.flickable ();
 
-      }
+      this._on ( this.$layout, 'flickable:flick', this.__layoutFlick );
 
     }
 
-    __documentFlick ( event, data ) {
+    __layoutFlick ( event, data ) {
 
       if ( this._isOpen ) return;
 
       if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
-
-      $document.flickable ();
 
       let layoutOffset = this.$layout.offset ();
 
@@ -343,7 +341,7 @@
       this._reset ();
 
       this.___breakpoint ();
-      this.___documentFlick ();
+      this.___layoutFlick ();
 
     }
 
