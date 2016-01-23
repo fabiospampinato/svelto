@@ -55,6 +55,18 @@
 
     }
 
+    _events () {
+
+      if ( this._isOpen ) {
+
+        this.___keydown ();
+        this.___tap ();
+        this.___route ();
+
+      }
+
+    }
+
     /* TAP */
 
     ___tap () {

@@ -68,6 +68,18 @@
 
     }
 
+    _events () {
+
+      if ( this._isOpen ) {
+
+        this.___resize ();
+        this.___parentsScroll ();
+        this.___windowTap ();
+
+      }
+
+    }
+
     _destroy () {
 
       this.close ();

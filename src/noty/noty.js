@@ -166,14 +166,26 @@
       this.$buttons = this.$noty.find ( this.options.selectors.button );
 
       this.timer = false;
-      this._isOpen = false;
       this._openUrl = false;
+
+      this._isOpen = this.$noty.hasClass ( this.options.classes.open );
 
     }
 
     _init () {
 
-      if ( this.options.autoplay ) {
+      if ( this._isOpen ) {
+
+        this.___timer ();
+        this.___tap ();
+        this.___flick ();
+        this.___buttonTap ();
+        this.___hover ();
+        this.___persistent ();
+        this.___keydown ();
+        this.___breakpoint ();
+
+      } else if ( this.options.autoplay ) {
 
         this.open ();
 

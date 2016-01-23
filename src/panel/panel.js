@@ -89,8 +89,20 @@
 
     _events () {
 
-      this.___documentFlick ();
-      this.___panelFlick ();
+      if ( this._isOpen ) {
+
+        this.___breakpoint ();
+        this.___tap ();
+        this.___keydown ();
+        this.___panelFlick ();
+        this.___route ();
+
+      } else {
+
+        this.___documentFlick ();
+        this.___panelFlick ();
+
+      }
 
     }
 
