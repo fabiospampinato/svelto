@@ -75,7 +75,13 @@
 
     _update () {
 
-      this.$input.width ( this._getNeededWidth () );
+      let width = this._getNeededWidth ();
+
+      if ( width === this._prevWidth ) return;
+
+      this._prevWidth = width;
+
+      this.$input.width ( width );
 
       this._trigger ( 'change' );
 
