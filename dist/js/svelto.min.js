@@ -2543,7 +2543,13 @@
 
     _update () {
 
-      this.$textarea.height ( this._getNeededHeight () );
+      let height = this._getNeededHeight ();
+
+      this.$textarea.height ( height );
+
+      if ( height === this._prevHeight ) return;
+
+      this._prevHeight = height;
 
       this._trigger ( 'change' );
 
