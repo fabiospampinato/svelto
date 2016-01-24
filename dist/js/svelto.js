@@ -13,23 +13,23 @@
   /* SVELTO */
 
   let Svelto = {
-    VERSION: '0.3.0-beta2',
-    $: jQuery ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
-    _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
-    Widgets: {}
+    VERSION: '0.3.0-beta3',
+    $: ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
+    _: ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
+    Widgets: {} //INFO: Namespace for the Svelto's widgets' classes
   };
 
   /* ERRORS */
 
   if ( !Svelto.$ ) {
 
-    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
+    throw new Error ( 'Svelto depends upon jQuery, dependency not found' );
 
   }
 
   if ( !Svelto._ ) {
 
-    throw new Error ( 'Svelto depends upon lodash, dependency unmet' );
+    throw new Error ( 'Svelto depends upon lodash, dependency not found' );
 
   }
 
@@ -107,7 +107,7 @@
 
   /* COLORS */
 
-  Svelto.Colors = {
+  let Colors = {
     primary: '#1565c0',
     secondary: '#ef6c00',
     tertiary: '#6a1b9a',
@@ -135,6 +135,10 @@
     transparent: 'rgba(0, 0, 0, 0)',
     base: '#eceff1'
   };
+
+  /* EXPORT */
+
+  Svelto.Colors = Colors;
 
 }( Svelto.$, Svelto._, Svelto ));
 
@@ -240,7 +244,7 @@
 
     },
 
-    clamp ( minimum, value, maximum ) {
+    clamp ( value, minimum, maximum ) {
 
       if ( !_.isUndefined ( maximum ) ) {
 
@@ -526,15 +530,6 @@
   $.fn.getRect = function () {
 
     return this.length ? this[0].getBoundingClientRect () : undefined;
-
-  };
-
-  $.getOverlappingArea = function ( rect1, rect2 ) {
-
-    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
-        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
-
-    return overlapX * overlapY;
 
   };
 
@@ -867,7 +862,7 @@
         prefix: 'spointer'
       },
       dbltap: {
-        interval: 300
+        interval: 300 //INFO: 2 taps within this interval will trigger a dbltap event
       },
     }
   };
@@ -1282,9 +1277,9 @@
 
     /* VARIABLES */
 
-    throttle: 150,
-    previous: undefined,
-    current: undefined,
+    throttle: 150, //INFO: The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
+    previous: undefined, //INFO: Previous breakpoint
+    current: undefined, //INFO: Current breakpoint
 
     /* RESIZE */
 
@@ -2613,6 +2608,8 @@
       classes: {},
       selectors: {},
       animations: {},
+      breakpoints: {},
+      keyboard: true,
       keystrokes: {},
       callbacks: {}
     }
@@ -2887,6 +2884,7 @@
  * ========================================================================= */
 
 //TODO: Add slides drag support
+//TODO: Add `wrap` option
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -2900,15 +2898,15 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
-      cycle: false,
-      interval: 5000,
-      intervalMinimumRemaining: 1000,
+      cycle: false, //INFO: If the carousel should auto-cycle or not
+      interval: 5000, //INFO: Interval between auto-cycling slides
+      intervalMinimumRemaining: 1000, //INFO: Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
-        prev: 'prev',
+        previous: 'previous',
         current: 'current'
       },
       selectors: {
-        prev: '.carousel-prev',
+        previous: '.carousel-previous',
         next: '.carousel-next',
         indicator: '.carousel-indicator',
         itemsWrp: '.carousel-items',
@@ -2936,7 +2934,7 @@
     _variables () {
 
       this.$carousel = this.$element;
-      this.$prev = this.$carousel.find ( this.options.selectors.prev );
+      this.$previous = this.$carousel.find ( this.options.selectors.previous );
       this.$next = this.$carousel.find ( this.options.selectors.next );
       this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
       this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
@@ -2990,7 +2988,7 @@
 
       index = Number ( index );
 
-      return _.isNaN ( index ) ? NaN : _.clamp ( 0, index, this.maxIndex );
+      return _.isNaN ( index ) ? NaN : _.clamp ( index, 0, this.maxIndex );
 
     }
 
@@ -2998,7 +2996,7 @@
 
     ___previousTap () {
 
-      this._on ( this.$prev, Pointer.tap, this.previous );
+      this._on ( this.$previous, Pointer.tap, this.previous );
 
     }
 
@@ -3135,7 +3133,7 @@
 
       if ( this._current ) {
 
-        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.previous );
         this._current.$indicator.removeClass ( this.options.classes.current );
 
         this._previous = this._current;
@@ -3156,7 +3154,7 @@
 
         if ( this._previous ) {
 
-          this._previous.$item.removeClass ( this.options.classes.prev );
+          this._previous.$item.removeClass ( this.options.classes.previous );
 
         }
 
@@ -3790,12 +3788,12 @@
           return '#' + hex.r + hex.g + hex.b;
         }
       },
-      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      startColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
       format: {
         type: 'hex', //INFO: One of the formats implemented in the exporters
         data: undefined //INFO: Passed to the called the exporter
       },
-      live: false,
+      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
@@ -3843,7 +3841,7 @@
 
       if ( !this.hsv ) {
 
-        this.set ( this.options.defaultColor );
+        this.set ( this.options.startColor );
 
       }
 
@@ -3948,8 +3946,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( XY.X, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( XY.Y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ();
 
@@ -4029,7 +4027,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( XY.Y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ();
 
@@ -4285,7 +4283,7 @@
           return new Date ( Date.UTC ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) ) );
         },
         UNIXTIMESTAMP ( date ) {
-          return new Date ( date.length ? date * 1000 : NaN );
+          return new Date ( ( _.isString ( date ) && date.length ) ? date * 1000 : NaN );
         },
         ISO ( date ) {
           return new Date ( date );
@@ -4294,17 +4292,15 @@
           return new Date ( date );
         }
       },
-      names: {
-        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-      },
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
       date: {
-        min: false,
-        max: false,
-        today: false,
-        current: false,
-        selected: false
+        min: false, //INFO: Minimum selectable date
+        max: false, //INFO: Maximum selectable date
+        today: false, //INFO: Today date
+        current: false, //INFO: Current date visible in the datepicker (basically the month we are viewing)
+        selected: false //INFO: The selcted date
       },
-      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`
       format: {
         type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
         data: { //INFO: Passed to the called importer and exporter
@@ -4417,7 +4413,7 @@
 
     _clampDate ( date ) {
 
-      return new Date ( _.clamp ( this.options.date.min ? this.options.date.min.getTime () : undefined, date.getTime (), this.options.date.max ? this.options.date.max.getTime () : undefined ) );
+      return new Date ( _.clamp ( date.getTime (), this.options.date.min ? this.options.date.min.getTime () : undefined, this.options.date.max ? this.options.date.max.getTime () : undefined ) );
 
     }
 
@@ -4632,7 +4628,7 @@
 
     _updateTitle () {
 
-      this.$navigationTitle.text ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
+      this.$navigationTitle.text ( this.options.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
     }
 
@@ -4961,7 +4957,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tolerance.x, translateX, this.translateX_max + this.options.constrainer.tolerance.x );
+          translateX = _.clamp ( translateX, this.translateX_min - this.options.constrainer.tolerance.x, this.translateX_max + this.options.constrainer.tolerance.x );
 
         }
 
@@ -4973,7 +4969,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tolerance.y, translateY, this.translateY_max + this.options.constrainer.tolerance.y );
+          translateY = _.clamp ( translateY, this.translateY_min - this.options.constrainer.tolerance.y, this.translateY_max + this.options.constrainer.tolerance.y );
 
         }
 
@@ -5454,21 +5450,21 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
     axis: false, //INFO: Set a preferred axis
-    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-      x: 'center', //INFO: `left`, center`, `right`
-      y: 'center' //INFOL `top`, center`, `bottom`
-    },
     strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, //INFO: Positionate next to an $anchor element
     $pointer: false, //INFO: The element who is pointing to the anchor
     point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
     spacing: 0, //INFO: Extra space to leave around the positionable element
-    ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
+    directions: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
       all: ['bottom', 'right', 'left', 'top']
+    },
+    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
+      x: 'center', //INFO: `left`, center`, `right`
+      y: 'center' //INFOL `top`, center`, `bottom`
     },
     callbacks: {
       change: _.noop
@@ -5494,7 +5490,7 @@
         positionableRect = $positionable.getRect (),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
-        directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.ranks.all : [] ) ),
+        directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
         anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* SPACES */
@@ -5626,8 +5622,8 @@
 
     if ( isAnchorVisible ) {
 
-      coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
-      coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
+      coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+      coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
 
     }
 
@@ -6558,15 +6554,22 @@
 
   'use strict';
 
+  /* UTILITIES */
+
+  let getOverlappingArea = function ( rect1, rect2 ) {
+
+    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
+
+    return overlapX * overlapY;
+
+  };
+
   /* DEFAULT OPTIONS */
 
   let defaults = {
     startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
     point: false, //INFO: Used for the punctual search
-    //  {
-    //    X: 0,
-    //    Y: 0
-    //  },
     binarySearch: true, //INFO: toggle the binary search when performing a punctual search
     $comparer: false, //INFO: Used for the overlapping search
     $not: false,
@@ -6596,7 +6599,7 @@
       for ( let searchable of $searchable ) {
 
         let rect2 = $.getRect ( searchable ),
-            area = $.getOverlappingArea ( rect1, rect2 );
+            area = getOverlappingArea ( rect1, rect2 );
 
         if ( area > 0 ) {
 
@@ -6717,10 +6720,10 @@
     plugin: true,
     selector: '.droppable',
     options: {
-      selector: '*',
+      selector: '*', //INFO: Only Draggables matching this selector will be able to drop inside this Droppable
       classes: {
-        droppable: false, //INFO: The class to attach to the droppable if the draggable can be dropped inside of it
-        hover: false //INFO: The class to attach to the droppable when hovered by a draggable
+        target: undefined, //INFO: The class to attach to the Droppable if the Draggable can be dropped inside of it
+        hover: undefined //INFO: The class to attach to the Droppable when hovered by a Draggable
       },
       callbacks: {
         enter: _.noop,
@@ -6762,7 +6765,7 @@
 
         if ( this.__isCompatible ) {
 
-          this.$droppable.addClass ( this.options.classes.droppable );
+          this.$droppable.addClass ( this.options.classes.target );
 
         }
 
@@ -6827,7 +6830,7 @@
 
       if ( this._isCompatible ( data.draggable ) ) {
 
-        this.$droppable.removeClass ( this.options.classes.droppable );
+        this.$droppable.removeClass ( this.options.classes.target );
 
         if ( this._isPointHovering ( data.endXY ) ) {
 
@@ -7153,7 +7156,7 @@
     selector: '.flippable',
     options: {
       classes: {
-        flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
+        flip: 'flipped' 
       },
       callbacks: {
         front: _.noop,
@@ -7598,9 +7601,9 @@
               '</div>'
     },
     options: {
-      anchor: {
-        y: 'bottom',
-        x: 'left'
+      anchor: { //INFO: Used for selecting the proper queue where this Noty should be attached
+        x: 'left',
+        y: 'bottom'
       },
       title: false,
       body: false,
@@ -7612,16 +7615,16 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop
+                onClick: _.noop //INFO: If it returns `false` the Noty won't be closed
              }],
       */
       type: 'alert',
       color: 'black',
       css: '',
-      persistent: false, //INFO: Wether it should survive a change of page or not. Normally no extra code would be needed to support it, but when manipulating the history object it will be needed
-      ttl: 3500,
+      persistent: false, //INFO: Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
-      timerMinimumRemaining: 1000,
+      ttl: 3500,
+      ttlMinimumRemaining: 1000, //INFO: Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         open: 'open'
       },
@@ -7631,7 +7634,8 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: Animations.normal
+        open: Animations.normal,
+        close: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -7751,7 +7755,7 @@
 
         }
 
-        openNotiesData[this.guid] = [this.timer, this.options.timerMinimumRemaining];
+        openNotiesData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
 
       }
 
@@ -7945,7 +7949,7 @@
 
           this._trigger ( 'close' );
 
-        }, this.options.animations.remove );
+        }, this.options.animations.close );
 
       });
 
@@ -8147,7 +8151,7 @@
                 '</ul>'
     },
     options: {
-      validators: {
+      validators: { //INFO: If not found here it will use `Validator`'s validators
         required ( value ) {
           return !Validator.empty ( value );
         },
@@ -8216,9 +8220,9 @@
         valid: 'valid'
       },
       selectors: {
-        element: 'input, textarea, select',
+        element: 'input:not([type="button"]), textarea, select',
         textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
-        wrapper: '.checkbox, .radio, .select-toggler, .slider, .switch, .datepicker, .colorpicker'
+        wrapper: '.checkbox, .colorpicker, .datepicker, .radio, .select-toggler, .slider, .switch'
       }
     }
   };
@@ -8625,9 +8629,9 @@
       timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
-        done: 'Done! A page refresh may be needed',
-        refresh: 'Done! Refreshing the page...',
-        redirect: 'Done! Redirecting...'
+        success: 'Done! A page refresh may be needed',
+        refreshing: 'Done! Refreshing the page...',
+        redirecting: 'Done! Redirecting...'
       },
       callbacks: {
         beforesend: _.noop,
@@ -8718,7 +8722,7 @@
 
             if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-              $.noty ( resj.msg || this.options.messages.refresh );
+              $.noty ( resj.msg || this.options.messages.refreshing );
 
               location.reload ();
 
@@ -8726,7 +8730,7 @@
 
               //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              $.noty ( resj.msg || this.options.messages.redirect );
+              $.noty ( resj.msg || this.options.messages.redirecting );
 
               location.assign ( resj.url );
 
@@ -9544,7 +9548,7 @@
 
   /* CONFIG */
 
-  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer 
+  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer
     encoder: JSON.stringify,
     decoder: JSON.parse
   };
@@ -10031,7 +10035,7 @@
       flick: {
         open: false,
         close: true,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional
+        treshold: 20 //INFO: Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
       classes: {
         show: 'show',
@@ -11227,7 +11231,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       let nr = Number ( value );
 
-      return _.clamp ( 0, _.isNaN ( nr ) ? 0 : nr, 100 );
+      return _.clamp ( _.isNaN ( nr ) ? 0 : nr, 0, 100 );
 
     }
 
@@ -11688,7 +11692,7 @@ Prism.languages.js = Prism.languages.javascript;
       animations: {
         show: Animations.xslow,
         hide: Animations.xslow,
-        overlap: Animations.xslow / 100 * 58
+        overlap: Animations.xslow / 100 * 58 //INFO: Used for triggering the hide animation while still opening, for a better visual effect
       },
       callbacks: {
         show: _.noop,
@@ -11973,9 +11977,9 @@ Prism.languages.js = Prism.languages.javascript;
         button: '.button'
       },
       callbacks: {
+        change: _.noop,
         open: _.noop,
-        close: _.noop,
-        change: _.noop
+        close: _.noop
       }
     }
   };
@@ -12244,7 +12248,7 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 5,
+      moveThreshold: 5, //INFO: Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
       classes: {
         selected: 'selected'
       },
@@ -12293,7 +12297,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___change () {
 
-      this._on ( true, 'change sortable:sort', this.__change );
+      this._on ( true, 'change tablehelper:change sortable:sort', this.__change );
 
     }
 
@@ -12591,9 +12595,9 @@ Prism.languages.js = Prism.languages.javascript;
       min: 0,
       max: 100,
       value: 0,
-      step: 1,
-      decimals: 0,
-      live: false,
+      step: 1, //INFO: Only multiples of `step` are valid values
+      decimals: 0, //INFO: Trunc the value to this amount of decimal numbers
+      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       datas: {
         min: 'min',
         max: 'max',
@@ -12855,7 +12859,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( !_.isNaN ( value ) ) {
 
-        value = _.clamp ( this.options.min, value, this.options.max );
+        value = _.clamp ( value, this.options.min, this.options.max );
 
         if ( value !== this.options.value ) {
 
@@ -12999,7 +13003,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___change () {
 
-      this._on ( true, 'change', this.__change );
+      this._on ( true, 'change tablehelper:change', this.__change );
 
     }
 
@@ -13191,7 +13195,7 @@ Prism.languages.js = Prism.languages.javascript;
       min: 0,
       max: 100,
       value: 0,
-      step: 1,
+      step: 1, //INFO: Only multiples of `step` are valid values
       datas: {
         min: 'min',
         max: 'max',
@@ -13199,8 +13203,8 @@ Prism.languages.js = Prism.languages.javascript;
       },
       selectors: {
         decreaser: '.stepper-decreaser',
-        input: 'input',
-        increaser: '.stepper-increaser'
+        increaser: '.stepper-increaser',
+        input: 'input'
       },
       keystrokes: {
         'left, down': 'decrease',
@@ -13275,7 +13279,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       value = _.isNaN ( value ) ? 0 : _.roundCloser ( value, this.options.step );
 
-      return _.clamp ( this.options.min, value, this.options.max );
+      return _.clamp ( value, this.options.min, this.options.max );
 
     }
 
@@ -13456,7 +13460,7 @@ Prism.languages.js = Prism.languages.javascript;
       keystrokes: {
         'left': 'uncheck',
         'right': 'check',
-        'space': 'toggle'
+        'spacebar': 'toggle'
       },
       callbacks: {
         change: _.noop,
@@ -13697,7 +13701,7 @@ Prism.languages.js = Prism.languages.javascript;
            '</tr>'
     },
     options: {
-      rowIdPrefix: 'rid',
+      rowIdPrefix: 'srid',
       selectors: {
         header: 'thead',
         body: 'tbody',
@@ -13707,6 +13711,7 @@ Prism.languages.js = Prism.languages.javascript;
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
+        change: _.noop,
         add: _.noop,
         update: _.noop,
         remove: _.noop,
@@ -13780,7 +13785,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'add', {
           $rows: $rows
@@ -13808,7 +13813,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         }
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'update', {
           $row: $row
@@ -13828,7 +13833,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'remove', {
           $row: $row
@@ -13848,7 +13853,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'clear', {
           $rows: $rows
@@ -13946,7 +13951,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _sanitizeIndex ( index ) {
 
-      return _.clamp ( 0, index, this.$triggers.length );
+      return _.clamp ( index, 0, this.$triggers.length );
 
     }
 
@@ -14075,7 +14080,7 @@ Prism.languages.js = Prism.languages.javascript;
            '</div>'
     },
     options: {
-      init: '',
+      init: '', //INFO: Initial value
       tags: [],
       tag: {
         minLength: 3,
@@ -14572,8 +14577,8 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: '.timeago, .time-ago',
     options: {
-      timestamp: false,
-      title: false,
+      timestamp: false, //INFO: UNIX timestamp
+      title: false, //INFO: Update the title or the text?
       datas: {
         timestamp: 'timestamp'
       },

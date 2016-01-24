@@ -2377,7 +2377,7 @@ i.icon {
 
       /* PREV */
 
-      > .prev {
+      > .previous {
         z-index: 2;
       }
 
@@ -2417,7 +2417,7 @@ i.icon {
 
       /* PREV */
 
-      > .prev {
+      > .previous {
         z-index: 2;
       }
 
@@ -2457,7 +2457,7 @@ i.icon {
 
       /* PREV */
 
-      > .prev {
+      > .previous {
         z-index: 2;
         opacity: 0;
       }
@@ -2497,7 +2497,7 @@ i.icon {
 
     /* PREV / NEXT */
 
-    .carousel-prev,
+    .carousel-previous,
     .carousel-next {
       align-self: center;
       margin-bottom: 0;
@@ -2505,7 +2505,7 @@ i.icon {
 
     /* PREV */
 
-    .carousel-prev {
+    .carousel-previous {
       order: 1;
       margin-left: $gutter;
       margin-right: $gutter;
@@ -2533,38 +2533,38 @@ i.icon {
 
     /* PREV / NEXT */
 
-    .carousel-prev,
+    .carousel-previous,
     .carousel-next {
 
       position: absolute;
-      z-index: $carousel-inset-prev-next-z-index;
+      z-index: $carousel-inset-previous-next-z-index;
       display: flex;
       align-items: center;
       top: 0;
       bottom: 0;
       cursor: pointer;
-      font-size: $carousel-inset-prev-next-font-size;
+      font-size: $carousel-inset-previous-next-font-size;
 
       /* AFTER (ICON) */
 
       &:after {
         @extend %icon;
         margin-bottom: 0;
-        color: $carousel-inset-prev-next-color;
-        opacity: $carousel-inset-prev-next-opacity;
-        transition: opacity $carousel-inset-prev-next-transition-opacity-duration;
+        color: $carousel-inset-previous-next-color;
+        opacity: $carousel-inset-previous-next-opacity;
+        transition: opacity $carousel-inset-previous-next-transition-opacity-duration;
       }
 
     }
 
     /* PREV */
 
-    .carousel-prev {
+    .carousel-previous {
 
       justify-content: flex-start;
       left: 0;
       padding-left: $gutter;
-      width: $carousel-inset-prev-width;
+      width: $carousel-inset-previous-width;
 
       /* AFTER (ICON) */
 
@@ -2597,13 +2597,13 @@ i.icon {
 
       /* PREV / NEXT */
 
-      .carousel-prev,
+      .carousel-previous,
       .carousel-next {
 
         /* AFTER (ICON) */
 
         &:after {
-          opacity: $carousel-inset-hover-prev-next-opacity;
+          opacity: $carousel-inset-hover-previous-next-opacity;
         }
 
         /* HOVER */
@@ -2613,7 +2613,7 @@ i.icon {
           /* AFTER (ICON) */
 
           &:after {
-            opacity: $carousel-inset-prev-next-hover-opacity;
+            opacity: $carousel-inset-previous-next-hover-opacity;
           }
 
         }

@@ -92,7 +92,7 @@
 
       let nr = Number ( value );
 
-      return _.clamp ( 0, _.isNaN ( nr ) ? 0 : nr, 100 );
+      return _.clamp ( _.isNaN ( nr ) ? 0 : nr, 0, 100 );
 
     }
 

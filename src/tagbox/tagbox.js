@@ -33,7 +33,7 @@
            '</div>'
     },
     options: {
-      init: '',
+      init: '', //INFO: Initial value
       tags: [],
       tag: {
         minLength: 3,

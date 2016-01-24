@@ -11,6 +11,7 @@
  * ========================================================================= */
 
 //TODO: Add slides drag support
+//TODO: Add `wrap` option
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -24,15 +25,15 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
-      cycle: false,
-      interval: 5000,
-      intervalMinimumRemaining: 1000,
+      cycle: false, //INFO: If the carousel should auto-cycle or not
+      interval: 5000, //INFO: Interval between auto-cycling slides
+      intervalMinimumRemaining: 1000, //INFO: Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
-        prev: 'prev',
+        previous: 'previous',
         current: 'current'
       },
       selectors: {
-        prev: '.carousel-prev',
+        previous: '.carousel-previous',
         next: '.carousel-next',
         indicator: '.carousel-indicator',
         itemsWrp: '.carousel-items',
@@ -60,7 +61,7 @@
     _variables () {
 
       this.$carousel = this.$element;
-      this.$prev = this.$carousel.find ( this.options.selectors.prev );
+      this.$previous = this.$carousel.find ( this.options.selectors.previous );
       this.$next = this.$carousel.find ( this.options.selectors.next );
       this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
       this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
@@ -114,7 +115,7 @@
 
       index = Number ( index );
 
-      return _.isNaN ( index ) ? NaN : _.clamp ( 0, index, this.maxIndex );
+      return _.isNaN ( index ) ? NaN : _.clamp ( index, 0, this.maxIndex );
 
     }
 
@@ -122,7 +123,7 @@
 
     ___previousTap () {
 
-      this._on ( this.$prev, Pointer.tap, this.previous );
+      this._on ( this.$previous, Pointer.tap, this.previous );
 
     }
 
@@ -259,7 +260,7 @@
 
       if ( this._current ) {
 
-        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.previous );
         this._current.$indicator.removeClass ( this.options.classes.current );
 
         this._previous = this._current;
@@ -280,7 +281,7 @@
 
         if ( this._previous ) {
 
-          this._previous.$item.removeClass ( this.options.classes.prev );
+          this._previous.$item.removeClass ( this.options.classes.previous );
 
         }
 

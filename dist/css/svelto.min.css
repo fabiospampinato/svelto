@@ -177,7 +177,7 @@
  * ========================================================================= */
 /* CAROUSEL */
 /* INDICATOR */
-/* INSET (PREV / NEXT) */
+/* INSET (PREVIOUS / NEXT) */
 /* SLIDE */
 /* FADE */
 /* =========================================================================
@@ -1659,7 +1659,7 @@ th {
 }
 
 /* WIDGET (PSEUDO ELEMENT) */
-.widget-pseudo, i.icon, .carousel.inset .carousel-prev:after,
+.widget-pseudo, i.icon, .carousel.inset .carousel-previous:after,
 .carousel.inset .carousel-next:after, .checkbox input:before, .radio input:before, .checkbox textarea:before, .radio textarea:before, .checkbox input:after, .radio input:after, .checkbox textarea:after, .radio textarea:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before, table.table.sortable th[data-sort]:after, .switch-handler:after {
   position: relative;
@@ -3716,74 +3716,74 @@ button {
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* SCALED ICON SIZES */
-i.xxxxsmall.icon, .carousel.inset .xxxxsmall.carousel-prev:after,
+i.xxxxsmall.icon, .carousel.inset .xxxxsmall.carousel-previous:after,
 .carousel.inset .xxxxsmall.carousel-next:after, .checkbox input.xxxxsmall:before, .radio input.xxxxsmall:before, .checkbox textarea.xxxxsmall:before, .radio textarea.xxxxsmall:before, .checkbox input.xxxxsmall:after, .radio input.xxxxsmall:after, .checkbox textarea.xxxxsmall:after, .radio textarea.xxxxsmall:after, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before, table.table.sortable th.xxxxsmall[data-sort]:after, .xxxxsmall.switch-handler:after, .xxxxsmall.icons, .checkbox input.xxxxsmall, .radio input.xxxxsmall, .checkbox textarea.xxxxsmall, .radio textarea.xxxxsmall {
   font-size: 0.375em !important;
 }
 
-i.xxxsmall.icon, .carousel.inset .xxxsmall.carousel-prev:after,
+i.xxxsmall.icon, .carousel.inset .xxxsmall.carousel-previous:after,
 .carousel.inset .xxxsmall.carousel-next:after, .checkbox input.xxxsmall:before, .radio input.xxxsmall:before, .checkbox textarea.xxxsmall:before, .radio textarea.xxxsmall:before, .checkbox input.xxxsmall:after, .radio input.xxxsmall:after, .checkbox textarea.xxxsmall:after, .radio textarea.xxxsmall:after, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before, table.table.sortable th.xxxsmall[data-sort]:after, .xxxsmall.switch-handler:after, .xxxsmall.icons, .checkbox input.xxxsmall, .radio input.xxxsmall, .checkbox textarea.xxxsmall, .radio textarea.xxxsmall {
   font-size: 0.5625em !important;
 }
 
-i.xxsmall.icon, .carousel.inset .xxsmall.carousel-prev:after,
+i.xxsmall.icon, .carousel.inset .xxsmall.carousel-previous:after,
 .carousel.inset .xxsmall.carousel-next:after, .checkbox input.xxsmall:before, .radio input.xxsmall:before, .checkbox textarea.xxsmall:before, .radio textarea.xxsmall:before, .checkbox input.xxsmall:after, .radio input.xxsmall:after, .checkbox textarea.xxsmall:after, .radio textarea.xxsmall:after, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before, table.table.sortable th.xxsmall[data-sort]:after, .xxsmall.switch-handler:after, .xxsmall.icons, .checkbox input.xxsmall, .radio input.xxsmall, .checkbox textarea.xxsmall, .radio textarea.xxsmall {
   font-size: 0.75em !important;
 }
 
-i.xsmall.icon, .carousel.inset .xsmall.carousel-prev:after,
+i.xsmall.icon, .carousel.inset .xsmall.carousel-previous:after,
 .carousel.inset .xsmall.carousel-next:after, .checkbox input.xsmall:before, .radio input.xsmall:before, .checkbox textarea.xsmall:before, .radio textarea.xsmall:before, .checkbox input.xsmall:after, .radio input.xsmall:after, .checkbox textarea.xsmall:after, .radio textarea.xsmall:after, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
 .slider:not(.disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before, table.table.sortable th.xsmall[data-sort]:after, .xsmall.switch-handler:after, .xsmall.icons, .checkbox input.xsmall, .radio input.xsmall, .checkbox textarea.xsmall, .radio textarea.xsmall {
   font-size: 1.125em !important;
 }
 
-i.small.icon, .carousel.inset .small.carousel-prev:after,
+i.small.icon, .carousel.inset .small.carousel-previous:after,
 .carousel.inset .small.carousel-next:after, .checkbox input.small:before, .radio input.small:before, .checkbox textarea.small:before, .radio textarea.small:before, .checkbox input.small:after, .radio input.small:after, .checkbox textarea.small:after, .radio textarea.small:after, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
 .slider:not(.disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before, table.table.sortable th.small[data-sort]:after, .small.switch-handler:after, .small.icons, .checkbox input.small, .radio input.small, .checkbox textarea.small, .radio textarea.small {
   font-size: 1.3125em !important;
 }
 
-i.medium.icon, .carousel.inset .medium.carousel-prev:after,
+i.medium.icon, .carousel.inset .medium.carousel-previous:after,
 .carousel.inset .medium.carousel-next:after, .checkbox input.medium:before, .radio input.medium:before, .checkbox textarea.medium:before, .radio textarea.medium:before, .checkbox input.medium:after, .radio input.medium:after, .checkbox textarea.medium:after, .radio textarea.medium:after, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
 .slider:not(.disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before, table.table.sortable th.medium[data-sort]:after, .medium.switch-handler:after, .medium.icons, .checkbox input.medium, .radio input.medium, .checkbox textarea.medium, .radio textarea.medium {
   font-size: 1.5em !important;
 }
 
-i.large.icon, .carousel.inset .large.carousel-prev:after,
+i.large.icon, .carousel.inset .large.carousel-previous:after,
 .carousel.inset .large.carousel-next:after, .checkbox input.large:before, .radio input.large:before, .checkbox textarea.large:before, .radio textarea.large:before, .checkbox input.large:after, .radio input.large:after, .checkbox textarea.large:after, .radio textarea.large:after, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
 .slider:not(.disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before, table.table.sortable th.large[data-sort]:after, .large.switch-handler:after, .large.icons, .checkbox input.large, .radio input.large, .checkbox textarea.large, .radio textarea.large {
   font-size: 1.875em !important;
 }
 
-i.xlarge.icon, .carousel.inset .xlarge.carousel-prev:after,
+i.xlarge.icon, .carousel.inset .xlarge.carousel-previous:after,
 .carousel.inset .xlarge.carousel-next:after, .checkbox input.xlarge:before, .radio input.xlarge:before, .checkbox textarea.xlarge:before, .radio textarea.xlarge:before, .checkbox input.xlarge:after, .radio input.xlarge:after, .checkbox textarea.xlarge:after, .radio textarea.xlarge:after, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
 .slider:not(.disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before, table.table.sortable th.xlarge[data-sort]:after, .xlarge.switch-handler:after, .xlarge.icons, .checkbox input.xlarge, .radio input.xlarge, .checkbox textarea.xlarge, .radio textarea.xlarge {
   font-size: 2.25em !important;
 }
 
-i.xxlarge.icon, .carousel.inset .xxlarge.carousel-prev:after,
+i.xxlarge.icon, .carousel.inset .xxlarge.carousel-previous:after,
 .carousel.inset .xxlarge.carousel-next:after, .checkbox input.xxlarge:before, .radio input.xxlarge:before, .checkbox textarea.xxlarge:before, .radio textarea.xxlarge:before, .checkbox input.xxlarge:after, .radio input.xxlarge:after, .checkbox textarea.xxlarge:after, .radio textarea.xxlarge:after, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before, table.table.sortable th.xxlarge[data-sort]:after, .xxlarge.switch-handler:after, .xxlarge.icons, .checkbox input.xxlarge, .radio input.xxlarge, .checkbox textarea.xxlarge, .radio textarea.xxlarge {
   font-size: 2.625em !important;
 }
 
-i.xxxlarge.icon, .carousel.inset .xxxlarge.carousel-prev:after,
+i.xxxlarge.icon, .carousel.inset .xxxlarge.carousel-previous:after,
 .carousel.inset .xxxlarge.carousel-next:after, .checkbox input.xxxlarge:before, .radio input.xxxlarge:before, .checkbox textarea.xxxlarge:before, .radio textarea.xxxlarge:before, .checkbox input.xxxlarge:after, .radio input.xxxlarge:after, .checkbox textarea.xxxlarge:after, .radio textarea.xxxlarge:after, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before, table.table.sortable th.xxxlarge[data-sort]:after, .xxxlarge.switch-handler:after, .xxxlarge.icons, .checkbox input.xxxlarge, .radio input.xxxlarge, .checkbox textarea.xxxlarge, .radio textarea.xxxlarge {
   font-size: 3em !important;
 }
 
-i.xxxxlarge.icon, .carousel.inset .xxxxlarge.carousel-prev:after,
+i.xxxxlarge.icon, .carousel.inset .xxxxlarge.carousel-previous:after,
 .carousel.inset .xxxxlarge.carousel-next:after, .checkbox input.xxxxlarge:before, .radio input.xxxxlarge:before, .checkbox textarea.xxxxlarge:before, .radio textarea.xxxxlarge:before, .checkbox input.xxxxlarge:after, .radio input.xxxxlarge:after, .checkbox textarea.xxxxlarge:after, .radio textarea.xxxxlarge:after, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before, table.table.sortable th.xxxxlarge[data-sort]:after, .xxxxlarge.switch-handler:after, .xxxxlarge.icons, .checkbox input.xxxxlarge, .radio input.xxxxlarge, .checkbox textarea.xxxxlarge, .radio textarea.xxxxlarge {
   font-size: 3.75em !important;
 }
 
 /* ICON */
-i.icon, .carousel.inset .carousel-prev:after,
+i.icon, .carousel.inset .carousel-previous:after,
 .carousel.inset .carousel-next:after, .checkbox input:before, .radio input:before, .checkbox textarea:before, .radio textarea:before, .checkbox input:after, .radio input:after, .checkbox textarea:after, .radio textarea:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before, table.table.sortable th[data-sort]:after, .switch-handler:after {
   display: inline-block;
@@ -3986,7 +3986,7 @@ i.icon, .carousel.inset .carousel-prev:after,
           transform: translateX(-100%);
 }
 
-.carousel.slide .carousel-items > .prev, .carousel.slide-horizontal .carousel-items > .prev, .carousel:not(.slide-vertical):not(.fade) .carousel-items > .prev {
+.carousel.slide .carousel-items > .previous, .carousel.slide-horizontal .carousel-items > .previous, .carousel:not(.slide-vertical):not(.fade) .carousel-items > .previous {
   z-index: 2;
 }
 
@@ -4020,7 +4020,7 @@ i.icon, .carousel.inset .carousel-prev:after,
           transform: translateY(-100%);
 }
 
-.carousel.slide-vertical .carousel-items > .prev {
+.carousel.slide-vertical .carousel-items > .previous {
   z-index: 2;
 }
 
@@ -4051,7 +4051,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   transition: opacity 0.35s;
 }
 
-.carousel.fade .carousel-items > .prev {
+.carousel.fade .carousel-items > .previous {
   z-index: 2;
   opacity: 0;
 }
@@ -4080,7 +4080,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* ITEMS */
 }
 
-.carousel:not(.inset) .carousel-prev,
+.carousel:not(.inset) .carousel-previous,
 .carousel:not(.inset) .carousel-next {
   -webkit-align-self: center;
       -ms-flex-item-align: center;
@@ -4088,7 +4088,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   margin-bottom: 0;
 }
 
-.carousel:not(.inset) .carousel-prev {
+.carousel:not(.inset) .carousel-previous {
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;
@@ -4117,7 +4117,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* HOVER */
 }
 
-.carousel.inset .carousel-prev,
+.carousel.inset .carousel-previous,
 .carousel.inset .carousel-next {
   position: absolute;
   z-index: 79;
@@ -4134,7 +4134,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* AFTER (ICON) */
 }
 
-.carousel.inset .carousel-prev:after,
+.carousel.inset .carousel-previous:after,
 .carousel.inset .carousel-next:after {
   margin-bottom: 0;
   color: #ffffff;
@@ -4142,7 +4142,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   transition: opacity 0.35s;
 }
 
-.carousel.inset .carousel-prev {
+.carousel.inset .carousel-previous {
   -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -4152,7 +4152,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* AFTER (ICON) */
 }
 
-.carousel.inset .carousel-prev:after {
+.carousel.inset .carousel-previous:after {
   content: 'chevron_left';
 }
 
@@ -4174,23 +4174,23 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* PREV / NEXT */
 }
 
-.carousel.inset:hover .carousel-prev,
+.carousel.inset:hover .carousel-previous,
 .carousel.inset:hover .carousel-next {
   /* AFTER (ICON) */
   /* HOVER */
 }
 
-.carousel.inset:hover .carousel-prev:after,
+.carousel.inset:hover .carousel-previous:after,
 .carousel.inset:hover .carousel-next:after {
   opacity: 0.5;
 }
 
-.carousel.inset:hover .carousel-prev:hover,
+.carousel.inset:hover .carousel-previous:hover,
 .carousel.inset:hover .carousel-next:hover {
   /* AFTER (ICON) */
 }
 
-.carousel.inset:hover .carousel-prev:hover:after,
+.carousel.inset:hover .carousel-previous:hover:after,
 .carousel.inset:hover .carousel-next:hover:after {
   opacity: 1;
 }

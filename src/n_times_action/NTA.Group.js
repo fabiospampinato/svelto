@@ -41,7 +41,7 @@
 
   /* CONFIG */
 
-  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer 
+  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer
     encoder: JSON.stringify,
     decoder: JSON.parse
   };

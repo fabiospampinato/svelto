@@ -78,7 +78,7 @@
 
     _sanitizeIndex ( index ) {
 
-      return _.clamp ( 0, index, this.$triggers.length );
+      return _.clamp ( index, 0, this.$triggers.length );
 
     }
 

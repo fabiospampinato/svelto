@@ -31,9 +31,9 @@
       timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
-        done: 'Done! A page refresh may be needed',
-        refresh: 'Done! Refreshing the page...',
-        redirect: 'Done! Redirecting...'
+        success: 'Done! A page refresh may be needed',
+        refreshing: 'Done! Refreshing the page...',
+        redirecting: 'Done! Redirecting...'
       },
       callbacks: {
         beforesend: _.noop,
@@ -124,7 +124,7 @@
 
             if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-              $.noty ( resj.msg || this.options.messages.refresh );
+              $.noty ( resj.msg || this.options.messages.refreshing );
 
               location.reload ();
 
@@ -132,7 +132,7 @@
 
               //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              $.noty ( resj.msg || this.options.messages.redirect );
+              $.noty ( resj.msg || this.options.messages.redirecting );
 
               location.assign ( resj.url );
 

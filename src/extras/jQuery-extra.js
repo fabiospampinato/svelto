@@ -75,15 +75,6 @@
 
   };
 
-  $.getOverlappingArea = function ( rect1, rect2 ) {
-
-    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
-        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
-
-    return overlapX * overlapY;
-
-  };
-
   $.fn.hsl = function ( h, s, l ) {
 
     //INFO: It only works for setting

@@ -106,7 +106,7 @@
 
     ___change () {
 
-      this._on ( true, 'change', this.__change );
+      this._on ( true, 'change tablehelper:change', this.__change );
 
     }
 

@@ -44,7 +44,7 @@
           return new Date ( Date.UTC ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) ) );
         },
         UNIXTIMESTAMP ( date ) {
-          return new Date ( date.length ? date * 1000 : NaN );
+          return new Date ( ( _.isString ( date ) && date.length ) ? date * 1000 : NaN );
         },
         ISO ( date ) {
           return new Date ( date );
@@ -53,17 +53,15 @@
           return new Date ( date );
         }
       },
-      names: {
-        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-      },
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
       date: {
-        min: false,
-        max: false,
-        today: false,
-        current: false,
-        selected: false
+        min: false, //INFO: Minimum selectable date
+        max: false, //INFO: Maximum selectable date
+        today: false, //INFO: Today date
+        current: false, //INFO: Current date visible in the datepicker (basically the month we are viewing)
+        selected: false //INFO: The selcted date
       },
-      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`
       format: {
         type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
         data: { //INFO: Passed to the called importer and exporter
@@ -176,7 +174,7 @@
 
     _clampDate ( date ) {
 
-      return new Date ( _.clamp ( this.options.date.min ? this.options.date.min.getTime () : undefined, date.getTime (), this.options.date.max ? this.options.date.max.getTime () : undefined ) );
+      return new Date ( _.clamp ( date.getTime (), this.options.date.min ? this.options.date.min.getTime () : undefined, this.options.date.max ? this.options.date.max.getTime () : undefined ) );
 
     }
 
@@ -391,7 +389,7 @@
 
     _updateTitle () {
 
-      this.$navigationTitle.text ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
+      this.$navigationTitle.text ( this.options.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
     }
 

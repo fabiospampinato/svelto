@@ -33,7 +33,7 @@
                 '</ul>'
     },
     options: {
-      validators: {
+      validators: { //INFO: If not found here it will use `Validator`'s validators
         required ( value ) {
           return !Validator.empty ( value );
         },
@@ -102,9 +102,9 @@
         valid: 'valid'
       },
       selectors: {
-        element: 'input, textarea, select',
+        element: 'input:not([type="button"]), textarea, select',
         textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
-        wrapper: '.checkbox, .radio, .select-toggler, .slider, .switch, .datepicker, .colorpicker'
+        wrapper: '.checkbox, .colorpicker, .datepicker, .radio, .select-toggler, .slider, .switch'
       }
     }
   };

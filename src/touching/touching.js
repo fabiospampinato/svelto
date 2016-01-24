@@ -13,15 +13,22 @@
 
   'use strict';
 
+  /* UTILITIES */
+
+  let getOverlappingArea = function ( rect1, rect2 ) {
+
+    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
+
+    return overlapX * overlapY;
+
+  };
+
   /* DEFAULT OPTIONS */
 
   let defaults = {
     startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
     point: false, //INFO: Used for the punctual search
-    //  {
-    //    X: 0,
-    //    Y: 0
-    //  },
     binarySearch: true, //INFO: toggle the binary search when performing a punctual search
     $comparer: false, //INFO: Used for the overlapping search
     $not: false,
@@ -51,7 +58,7 @@
       for ( let searchable of $searchable ) {
 
         let rect2 = $.getRect ( searchable ),
-            area = $.getOverlappingArea ( rect1, rect2 );
+            area = getOverlappingArea ( rect1, rect2 );
 
         if ( area > 0 ) {
 

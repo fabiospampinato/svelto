@@ -35,7 +35,7 @@
       animations: {
         show: Animations.xslow,
         hide: Animations.xslow,
-        overlap: Animations.xslow / 100 * 58
+        overlap: Animations.xslow / 100 * 58 //INFO: Used for triggering the hide animation while still opening, for a better visual effect
       },
       callbacks: {
         show: _.noop,

@@ -14,7 +14,7 @@
 
   /* COLORS */
 
-  Svelto.Colors = {
+  let Colors = {
     primary: '#1565c0',
     secondary: '#ef6c00',
     tertiary: '#6a1b9a',
@@ -42,5 +42,9 @@
     transparent: 'rgba(0, 0, 0, 0)',
     base: '#eceff1'
   };
+
+  /* EXPORT */
+
+  Svelto.Colors = Colors;
 
 }( Svelto.$, Svelto._, Svelto ));

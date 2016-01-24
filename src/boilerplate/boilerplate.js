@@ -31,6 +31,8 @@
       classes: {},
       selectors: {},
       animations: {},
+      breakpoints: {},
+      keyboard: true,
       keystrokes: {},
       callbacks: {}
     }

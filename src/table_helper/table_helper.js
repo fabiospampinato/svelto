@@ -31,7 +31,7 @@
            '</tr>'
     },
     options: {
-      rowIdPrefix: 'rid',
+      rowIdPrefix: 'srid',
       selectors: {
         header: 'thead',
         body: 'tbody',
@@ -41,6 +41,7 @@
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
+        change: _.noop,
         add: _.noop,
         update: _.noop,
         remove: _.noop,
@@ -114,7 +115,7 @@
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'add', {
           $rows: $rows
@@ -142,7 +143,7 @@
 
         }
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'update', {
           $row: $row
@@ -162,7 +163,7 @@
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'remove', {
           $row: $row
@@ -182,7 +183,7 @@
 
         this._checkEmpty ();
 
-        this.$table.trigger ( 'change' );
+        this._trigger ( 'change' );
 
         this._trigger ( 'clear', {
           $rows: $rows

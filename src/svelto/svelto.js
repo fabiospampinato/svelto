@@ -13,23 +13,23 @@
   /* SVELTO */
 
   let Svelto = {
-    VERSION: '0.3.0-beta2',
-    $: jQuery ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
-    _: lodash ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
-    Widgets: {}
+    VERSION: '0.3.0-beta3',
+    $: ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
+    _: ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
+    Widgets: {} //INFO: Namespace for the Svelto's widgets' classes
   };
 
   /* ERRORS */
 
   if ( !Svelto.$ ) {
 
-    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
+    throw new Error ( 'Svelto depends upon jQuery, dependency not found' );
 
   }
 
   if ( !Svelto._ ) {
 
-    throw new Error ( 'Svelto depends upon lodash, dependency unmet' );
+    throw new Error ( 'Svelto depends upon lodash, dependency not found' );
 
   }
 

@@ -29,7 +29,7 @@
       flick: {
         open: false,
         close: true,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the flick should be considered intentional
+        treshold: 20 //INFO: Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
       classes: {
         show: 'show',

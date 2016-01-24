@@ -185,7 +185,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tolerance.x, translateX, this.translateX_max + this.options.constrainer.tolerance.x );
+          translateX = _.clamp ( translateX, this.translateX_min - this.options.constrainer.tolerance.x, this.translateX_max + this.options.constrainer.tolerance.x );
 
         }
 
@@ -197,7 +197,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tolerance.y, translateY, this.translateY_max + this.options.constrainer.tolerance.y );
+          translateY = _.clamp ( translateY, this.translateY_min - this.options.constrainer.tolerance.y, this.translateY_max + this.options.constrainer.tolerance.y );
 
         }
 

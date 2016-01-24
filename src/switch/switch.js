@@ -43,7 +43,7 @@
       keystrokes: {
         'left': 'uncheck',
         'right': 'check',
-        'space': 'toggle'
+        'spacebar': 'toggle'
       },
       callbacks: {
         change: _.noop,

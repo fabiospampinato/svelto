@@ -26,9 +26,9 @@
       min: 0,
       max: 100,
       value: 0,
-      step: 1,
-      decimals: 0,
-      live: false,
+      step: 1, //INFO: Only multiples of `step` are valid values
+      decimals: 0, //INFO: Trunc the value to this amount of decimal numbers
+      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       datas: {
         min: 'min',
         max: 'max',
@@ -290,7 +290,7 @@
 
       if ( !_.isNaN ( value ) ) {
 
-        value = _.clamp ( this.options.min, value, this.options.max );
+        value = _.clamp ( value, this.options.min, this.options.max );
 
         if ( value !== this.options.value ) {
 

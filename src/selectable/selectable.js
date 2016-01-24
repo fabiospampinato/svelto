@@ -21,7 +21,7 @@
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 5,
+      moveThreshold: 5, //INFO: Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
       classes: {
         selected: 'selected'
       },
@@ -70,7 +70,7 @@
 
     ___change () {
 
-      this._on ( true, 'change sortable:sort', this.__change );
+      this._on ( true, 'change tablehelper:change sortable:sort', this.__change );
 
     }
 

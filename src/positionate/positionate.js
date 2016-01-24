@@ -34,21 +34,21 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
     axis: false, //INFO: Set a preferred axis
-    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-      x: 'center', //INFO: `left`, center`, `right`
-      y: 'center' //INFOL `top`, center`, `bottom`
-    },
     strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, //INFO: Positionate next to an $anchor element
     $pointer: false, //INFO: The element who is pointing to the anchor
     point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
     spacing: 0, //INFO: Extra space to leave around the positionable element
-    ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
+    directions: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
       all: ['bottom', 'right', 'left', 'top']
+    },
+    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
+      x: 'center', //INFO: `left`, center`, `right`
+      y: 'center' //INFOL `top`, center`, `bottom`
     },
     callbacks: {
       change: _.noop
@@ -74,7 +74,7 @@
         positionableRect = $positionable.getRect (),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
-        directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.ranks.all : [] ) ),
+        directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
         anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* SPACES */
@@ -206,8 +206,8 @@
 
     if ( isAnchorVisible ) {
 
-      coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
-      coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
+      coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+      coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
 
     }
 

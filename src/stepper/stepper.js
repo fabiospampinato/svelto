@@ -22,7 +22,7 @@
       min: 0,
       max: 100,
       value: 0,
-      step: 1,
+      step: 1, //INFO: Only multiples of `step` are valid values
       datas: {
         min: 'min',
         max: 'max',
@@ -30,8 +30,8 @@
       },
       selectors: {
         decreaser: '.stepper-decreaser',
-        input: 'input',
-        increaser: '.stepper-increaser'
+        increaser: '.stepper-increaser',
+        input: 'input'
       },
       keystrokes: {
         'left, down': 'decrease',
@@ -106,7 +106,7 @@
 
       value = _.isNaN ( value ) ? 0 : _.roundCloser ( value, this.options.step );
 
-      return _.clamp ( this.options.min, value, this.options.max );
+      return _.clamp ( value, this.options.min, this.options.max );
 
     }
 

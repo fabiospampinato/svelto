@@ -23,7 +23,7 @@
         prefix: 'spointer'
       },
       dbltap: {
-        interval: 300
+        interval: 300 //INFO: 2 taps within this interval will trigger a dbltap event
       },
     }
   };

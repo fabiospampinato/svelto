@@ -28,12 +28,12 @@
           return '#' + hex.r + hex.g + hex.b;
         }
       },
-      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      startColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
       format: {
         type: 'hex', //INFO: One of the formats implemented in the exporters
         data: undefined //INFO: Passed to the called the exporter
       },
-      live: false,
+      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
@@ -81,7 +81,7 @@
 
       if ( !this.hsv ) {
 
-        this.set ( this.options.defaultColor );
+        this.set ( this.options.startColor );
 
       }
 
@@ -186,8 +186,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( XY.X, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( XY.Y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ();
 
@@ -267,7 +267,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( XY.Y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ();
 

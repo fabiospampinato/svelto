@@ -64,9 +64,9 @@
               '</div>'
     },
     options: {
-      anchor: {
-        y: 'bottom',
-        x: 'left'
+      anchor: { //INFO: Used for selecting the proper queue where this Noty should be attached
+        x: 'left',
+        y: 'bottom'
       },
       title: false,
       body: false,
@@ -78,16 +78,16 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop
+                onClick: _.noop //INFO: If it returns `false` the Noty won't be closed
              }],
       */
       type: 'alert',
       color: 'black',
       css: '',
-      persistent: false, //INFO: Wether it should survive a change of page or not. Normally no extra code would be needed to support it, but when manipulating the history object it will be needed
-      ttl: 3500,
+      persistent: false, //INFO: Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
-      timerMinimumRemaining: 1000,
+      ttl: 3500,
+      ttlMinimumRemaining: 1000, //INFO: Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         open: 'open'
       },
@@ -97,7 +97,8 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: Animations.normal
+        open: Animations.normal,
+        close: Animations.normal
       },
       keystrokes: {
         'esc': 'close'
@@ -217,7 +218,7 @@
 
         }
 
-        openNotiesData[this.guid] = [this.timer, this.options.timerMinimumRemaining];
+        openNotiesData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
 
       }
 
@@ -411,7 +412,7 @@
 
           this._trigger ( 'close' );
 
-        }, this.options.animations.remove );
+        }, this.options.animations.close );
 
       });
 

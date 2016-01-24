@@ -100,7 +100,7 @@
 
     },
 
-    clamp ( minimum, value, maximum ) {
+    clamp ( value, minimum, maximum ) {
 
       if ( !_.isUndefined ( maximum ) ) {
 

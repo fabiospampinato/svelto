@@ -19,8 +19,8 @@
     plugin: true,
     selector: '.timeago, .time-ago',
     options: {
-      timestamp: false,
-      title: false,
+      timestamp: false, //INFO: UNIX timestamp
+      title: false, //INFO: Update the title or the text?
       datas: {
         timestamp: 'timestamp'
       },
