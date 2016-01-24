@@ -447,43 +447,39 @@
 
       date = ( date instanceof Date ) ? date : this._import ( date );
 
-      if ( !_.isNaN ( date.valueOf () ) ) {
+      if ( _.isNaN ( date.valueOf () ) ) return;
 
-        date = this._clampDate ( date );
+      date = this._clampDate ( date );
 
-        if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
+      if ( this.options.date.selected && date.getTime () === this.options.date.selected.getTime () ) return;
 
-          if ( this.options.date.selected ) {
+      if ( this.options.date.selected ) {
 
-            this._unhighlightSelected ();
+        this._unhighlightSelected ();
 
-          }
+      }
 
-          this.options.date.selected = date;
+      this.options.date.selected = date;
 
-          if ( this.options.date.current ) {
+      if ( this.options.date.current ) {
 
-            if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-              this._highlightSelected ();
+          this._highlightSelected ();
 
-            } else {
+        } else {
 
-              this.options.date.current = this._cloneDate ( this.options.date.selected );
+          this.options.date.current = this._cloneDate ( this.options.date.selected );
 
-              this._refresh ();
-
-            }
-
-          }
-
-          this._updateInput ();
-
-          this._trigger ( 'change' );
+          this._refresh ();
 
         }
 
       }
+
+      this._updateInput ();
+
+      this._trigger ( 'change' );
 
     }
 

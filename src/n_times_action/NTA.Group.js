@@ -85,37 +85,35 @@
 
       times = Number ( times );
 
-      if ( !_.isNaN ( times ) ) {
+      if ( _.isNaN ( times ) ) return;
 
-        if ( action in this.actions ) {
+      if ( action in this.actions ) {
 
-          if ( times === 0 && !this.actions[action].x ) {
+        if ( times === 0 && !this.actions[action].x ) {
 
-            return this.remove ( action );
-
-          } else {
-
-            this.actions[action].t = times;
-
-          }
+          return this.remove ( action );
 
         } else {
 
-          this.actions[action] = { t: times };
-
-          expiry = getExpiry ( expiry );
-
-          if ( expiry ) {
-
-            this.actions[action].x = expiry;
-
-          }
+          this.actions[action].t = times;
 
         }
 
-        this.update ();
+      } else {
+
+        this.actions[action] = { t: times };
+
+        expiry = getExpiry ( expiry );
+
+        if ( expiry ) {
+
+          this.actions[action].x = expiry;
+
+        }
 
       }
+
+      this.update ();
 
     }
 

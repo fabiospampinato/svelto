@@ -2481,6 +2481,7 @@
 //INFO: It supports only `box-sizing: border-box` textareas
 
 //TODO: Measure the needed height using canvas, if possible, improve the performance in general
+//FIXME: Don't measure the height by changing the height of the textarea, it would be much more performant if we don't do that
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -4124,19 +4125,15 @@
 
       color = _.attempt ( () => new Color ( color ) );
 
-      if ( !_.isError ( color ) ) {
+      if ( _.isError ( color ) ) return;
 
-        let hsv = color.getHsv ();
+      let hsv = color.getHsv ();
 
-        if ( !_.isEqual ( this.hsv, hsv ) ) {
+      if ( _.isEqual ( this.hsv, hsv ) ) return;
 
-          this.hsv = hsv;
+      this.hsv = hsv;
 
-          this._update ();
-
-        }
-
-      }
+      this._update ();
 
     }
 
@@ -4700,43 +4697,39 @@
 
       date = ( date instanceof Date ) ? date : this._import ( date );
 
-      if ( !_.isNaN ( date.valueOf () ) ) {
+      if ( _.isNaN ( date.valueOf () ) ) return;
 
-        date = this._clampDate ( date );
+      date = this._clampDate ( date );
 
-        if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
+      if ( this.options.date.selected && date.getTime () === this.options.date.selected.getTime () ) return;
 
-          if ( this.options.date.selected ) {
+      if ( this.options.date.selected ) {
 
-            this._unhighlightSelected ();
+        this._unhighlightSelected ();
 
-          }
+      }
 
-          this.options.date.selected = date;
+      this.options.date.selected = date;
 
-          if ( this.options.date.current ) {
+      if ( this.options.date.current ) {
 
-            if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-              this._highlightSelected ();
+          this._highlightSelected ();
 
-            } else {
+        } else {
 
-              this.options.date.current = this._cloneDate ( this.options.date.selected );
+          this.options.date.current = this._cloneDate ( this.options.date.selected );
 
-              this._refresh ();
-
-            }
-
-          }
-
-          this._updateInput ();
-
-          this._trigger ( 'change' );
+          this._refresh ();
 
         }
 
       }
+
+      this._updateInput ();
+
+      this._trigger ( 'change' );
 
     }
 
@@ -9606,37 +9599,35 @@
 
       times = Number ( times );
 
-      if ( !_.isNaN ( times ) ) {
+      if ( _.isNaN ( times ) ) return;
 
-        if ( action in this.actions ) {
+      if ( action in this.actions ) {
 
-          if ( times === 0 && !this.actions[action].x ) {
+        if ( times === 0 && !this.actions[action].x ) {
 
-            return this.remove ( action );
-
-          } else {
-
-            this.actions[action].t = times;
-
-          }
+          return this.remove ( action );
 
         } else {
 
-          this.actions[action] = { t: times };
-
-          expiry = getExpiry ( expiry );
-
-          if ( expiry ) {
-
-            this.actions[action].x = expiry;
-
-          }
+          this.actions[action].t = times;
 
         }
 
-        this.update ();
+      } else {
+
+        this.actions[action] = { t: times };
+
+        expiry = getExpiry ( expiry );
+
+        if ( expiry ) {
+
+          this.actions[action].x = expiry;
+
+        }
 
       }
+
+      this.update ();
 
     }
 
@@ -11288,23 +11279,21 @@ Prism.languages.js = Prism.languages.javascript;
 
       value = this._sanitizeValue ( value );
 
-      if ( value !== this.options.value ) {
+      if ( value === this.options.value ) return;
 
-        this.options.value = value;
+      this.options.value = value;
 
-        this._update ();
+      this._update ();
 
-        this._trigger ( 'change' );
+      this._trigger ( 'change' );
 
-        if ( this.options.value === 0 ) {
+      if ( this.options.value === 0 ) {
 
-          this._trigger ( 'empty' );
+        this._trigger ( 'empty' );
 
-        } else if ( this.options.value === 100 ) {
+      } else if ( this.options.value === 100 ) {
 
-          this._trigger ( 'full' );
-
-        }
+        this._trigger ( 'full' );
 
       }
 
@@ -12223,11 +12212,9 @@ Prism.languages.js = Prism.languages.javascript;
 
       let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
 
-      if ( $button.length ) {
+      if ( !$button.length ) return;
 
-        this.$select.val ( value ).trigger ( 'change' );
-
-      }
+      this.$select.val ( value ).trigger ( 'change' );
 
     }
 
@@ -12708,7 +12695,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _sanitizeValue ( value ) {
 
-      return Number ( Number ( value ).toFixed ( this.options.decimals ) );
+      return _.clamp ( Number ( Number ( value ).toFixed ( this.options.decimals ) ), this.options.min, this.options.max );
 
     }
 
@@ -12871,21 +12858,13 @@ Prism.languages.js = Prism.languages.javascript;
 
       value = this._sanitizeValue ( value );
 
-      if ( !_.isNaN ( value ) ) {
+      if ( _.isNaN ( value ) || value === this.options.value ) return;
 
-        value = _.clamp ( value, this.options.min, this.options.max );
+      this.options.value = value;
 
-        if ( value !== this.options.value ) {
+      this._update ();
 
-          this.options.value = value;
-
-          this._update ();
-
-          this._trigger ( 'change' );
-
-        }
-
-      }
+      this._trigger ( 'change' );
 
     }
 
@@ -14027,27 +14006,25 @@ Prism.languages.js = Prism.languages.javascript;
 
       index = this._sanitizeIndex ( index );
 
-      if ( this.index !== index ) {
+      if ( index === this.index ) return;
 
-        /* PREVIOUS */
+      /* PREVIOUS */
 
-        if ( _.isNumber ( this.index ) ) {
+      if ( _.isNumber ( this.index ) ) {
 
-          this._unselect ( this.index );
-
-        }
-
-        /* NEW */
-
-        this.index = index;
-
-        this._select ( this.index );
-
-        /* CALLBACKS */
-
-        this._trigger ( 'change' );
+        this._unselect ( this.index );
 
       }
+
+      /* NEW */
+
+      this.index = index;
+
+      this._select ( this.index );
+
+      /* CALLBACKS */
+
+      this._trigger ( 'change' );
 
     }
 

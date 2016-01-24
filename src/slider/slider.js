@@ -125,7 +125,7 @@
 
     _sanitizeValue ( value ) {
 
-      return Number ( Number ( value ).toFixed ( this.options.decimals ) );
+      return _.clamp ( Number ( Number ( value ).toFixed ( this.options.decimals ) ), this.options.min, this.options.max );
 
     }
 
@@ -288,21 +288,13 @@
 
       value = this._sanitizeValue ( value );
 
-      if ( !_.isNaN ( value ) ) {
+      if ( _.isNaN ( value ) || value === this.options.value ) return;
 
-        value = _.clamp ( value, this.options.min, this.options.max );
+      this.options.value = value;
 
-        if ( value !== this.options.value ) {
+      this._update ();
 
-          this.options.value = value;
-
-          this._update ();
-
-          this._trigger ( 'change' );
-
-        }
-
-      }
+      this._trigger ( 'change' );
 
     }
 

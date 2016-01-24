@@ -135,23 +135,21 @@
 
       value = this._sanitizeValue ( value );
 
-      if ( value !== this.options.value ) {
+      if ( value === this.options.value ) return;
 
-        this.options.value = value;
+      this.options.value = value;
 
-        this._update ();
+      this._update ();
 
-        this._trigger ( 'change' );
+      this._trigger ( 'change' );
 
-        if ( this.options.value === 0 ) {
+      if ( this.options.value === 0 ) {
 
-          this._trigger ( 'empty' );
+        this._trigger ( 'empty' );
 
-        } else if ( this.options.value === 100 ) {
+      } else if ( this.options.value === 100 ) {
 
-          this._trigger ( 'full' );
-
-        }
+        this._trigger ( 'full' );
 
       }
 

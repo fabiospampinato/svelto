@@ -140,27 +140,25 @@
 
       index = this._sanitizeIndex ( index );
 
-      if ( this.index !== index ) {
+      if ( index === this.index ) return;
 
-        /* PREVIOUS */
+      /* PREVIOUS */
 
-        if ( _.isNumber ( this.index ) ) {
+      if ( _.isNumber ( this.index ) ) {
 
-          this._unselect ( this.index );
-
-        }
-
-        /* NEW */
-
-        this.index = index;
-
-        this._select ( this.index );
-
-        /* CALLBACKS */
-
-        this._trigger ( 'change' );
+        this._unselect ( this.index );
 
       }
+
+      /* NEW */
+
+      this.index = index;
+
+      this._select ( this.index );
+
+      /* CALLBACKS */
+
+      this._trigger ( 'change' );
 
     }
 

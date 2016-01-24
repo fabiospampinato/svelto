@@ -290,11 +290,9 @@
 
       let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
 
-      if ( $button.length ) {
+      if ( !$button.length ) return;
 
-        this.$select.val ( value ).trigger ( 'change' );
-
-      }
+      this.$select.val ( value ).trigger ( 'change' );
 
     }
 

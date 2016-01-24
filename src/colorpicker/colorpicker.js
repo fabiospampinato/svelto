@@ -350,19 +350,15 @@
 
       color = _.attempt ( () => new Color ( color ) );
 
-      if ( !_.isError ( color ) ) {
+      if ( _.isError ( color ) ) return;
 
-        let hsv = color.getHsv ();
+      let hsv = color.getHsv ();
 
-        if ( !_.isEqual ( this.hsv, hsv ) ) {
+      if ( _.isEqual ( this.hsv, hsv ) ) return;
 
-          this.hsv = hsv;
+      this.hsv = hsv;
 
-          this._update ();
-
-        }
-
-      }
+      this._update ();
 
     }
 
