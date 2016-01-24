@@ -14,7 +14,7 @@
 
   /* WIDGETIZE */
 
-  let Widgetize = new class {
+  class Widgetize {
 
     constructor () {
 
@@ -70,8 +70,10 @@
 
         if ( this.widgetizers.hasOwnProperty ( selector ) ) {
 
-          this.trigger ( selector, $roots.filter ( selector ) );
-          this.trigger ( selector, $roots.find ( selector ) );
+          let widgetizers = this.widgetizers[selector];
+
+          this.worker ( widgetizers, $roots.filter ( selector ) );
+          this.worker ( widgetizers, $roots.find ( selector ) );
 
         }
 
@@ -79,11 +81,11 @@
 
     }
 
-    trigger ( selector, $widgets ) {
+    worker ( widgetizers, $widgets ) {
 
       for ( let widget of $widgets ) {
 
-        for ( let [widgetizer, data] of this.widgetizers[selector] ) {
+        for ( let [widgetizer, data] of widgetizers ) {
 
           widgetizer ( $(widget), data );
 
@@ -93,7 +95,11 @@
 
     }
 
-  };
+  }
+
+  /* EXPORT */
+
+  Svelto.Widgetize = new Widgetize ();
 
   /* JQUERY PLUGIN */
 
