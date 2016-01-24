@@ -1105,7 +1105,7 @@
 
   $.fn.widgetize = function () {
 
-    Widgetize.on ( this );
+    Svelto.Widgetize.on ( this );
 
     return this;
 
@@ -1118,10 +1118,6 @@
     $(document.body).widgetize ();
 
   });
-
-  /* EXPORT */
-
-  Svelto.Widgetize = Widgetize;
 
 }( Svelto.$, Svelto._, Svelto ));
 
