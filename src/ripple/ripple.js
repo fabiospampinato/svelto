@@ -93,7 +93,7 @@
 
       }
 
-      this._one ( true, $document, Pointer.up, this.__up );
+      this._one ( true, this.$document, Pointer.up, this.__up );
 
     }
 

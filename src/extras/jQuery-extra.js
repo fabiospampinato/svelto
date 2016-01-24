@@ -236,7 +236,7 @@
 
     }
 
-    return $document;
+    return $(document);
 
   };
 

@@ -64,7 +64,7 @@
 
     ___move () {
 
-      this._one ( true, $document, Pointer.move, this.__move );
+      this._one ( true, this.$document, Pointer.move, this.__move );
 
     }
 
@@ -78,7 +78,7 @@
 
     ___up () {
 
-      this._one ( true, $document, Pointer.up, this.__up );
+      this._one ( true, this.$document, Pointer.up, this.__up );
 
     }
 
@@ -130,11 +130,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( $document, Pointer.move, this.__move );
+        this._off ( this.$document, Pointer.move, this.__move );
 
       }
 
-      this._off ( $document, Pointer.cancel, this.__cancel );
+      this._off ( this.$document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -142,7 +142,7 @@
 
     ___cancel () {
 
-      this._one ( true, $document, Pointer.cancel, this.__cancel );
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -150,11 +150,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( $document, Pointer.move, this.__move );
+        this._off ( this.$document, Pointer.move, this.__move );
 
       }
 
-      this._off ( $document, Pointer.up, this.__up );
+      this._off ( this.$document, Pointer.up, this.__up );
 
     }
 
