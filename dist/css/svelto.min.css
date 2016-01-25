@@ -265,6 +265,16 @@
 /* TEXT */
 /* SPACER */
 /* =========================================================================
+ * Svelto - Draggable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+/* DRAGGING */
+/* REVERTING */
+/* =========================================================================
  * Svelto - Embedded (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2366,14 +2376,6 @@ html {
   -webkit-touch-callout: none;
 }
 
-html.dragging {
-  cursor: move !important;
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-      -ms-user-select: none !important;
-          user-select: none !important;
-}
-
 /* BODY */
 body {
   background: #eceff1 ;
@@ -2854,10 +2856,6 @@ _:-ms-input-placeholder, :root #content {
       -ms-flex-negative: 1;
           flex-shrink: 1;
   margin-bottom: 10px;
-}
-
-.dragging {
-  z-index: 1000000 !important;
 }
 
 .centered:not(.multiple) {
@@ -6638,6 +6636,33 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   font-weight: bold;
   margin: 0 5px 5px;
   opacity: 0.75;
+}
+
+/* =========================================================================
+ * Svelto - Draggable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* DRAGGING */
+.draggable-layout-dragging {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+  cursor: move !important;
+}
+
+.draggable-dragging {
+  cursor: move !important;
+  z-index: 1000000 !important;
+}
+
+/* REVERTING */
+.draggable-reverting {
+  transition: -webkit-transform 0.15s !important;
+  transition: transform 0.15s !important;
+  transition: transform 0.15s, -webkit-transform 0.15s !important;
 }
 
 /* =========================================================================
@@ -11260,13 +11285,13 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider:not(.disabled) .slider-bar:active .slider-handler,
-.slider:not(.disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler {
+.slider:not(.disabled) .slider-bar .slider-handler-wrp.draggable-dragging .slider-handler {
   -webkit-transform: scale(1.35);
           transform: scale(1.35);
 }
 
 .slider:not(.disabled) .slider-bar:active .slider-handler:before,
-.slider:not(.disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler:before {
+.slider:not(.disabled) .slider-bar .slider-handler-wrp.draggable-dragging .slider-handler:before {
   -webkit-transform: scale(1.6180339887);
           transform: scale(1.6180339887);
   opacity: 0.25;
@@ -11277,12 +11302,12 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider:hover, .slider:active,
-.slider .slider-handler-wrp.dragging {
+.slider .slider-handler-wrp.draggable-dragging {
   /* LABEL */
 }
 
 .slider:hover .slider-label, .slider:active .slider-label,
-.slider .slider-handler-wrp.dragging .slider-label {
+.slider .slider-handler-wrp.draggable-dragging .slider-label {
   -webkit-transform: scale(1);
           transform: scale(1);
   opacity: 1;
@@ -11942,7 +11967,7 @@ svg.spinner.multicolor circle {
   transition-duration: 0.15s;
 }
 
-.switch-handler.dragging {
+.switch-handler.draggable-dragging {
   transition-property: background-color;
 }
 
@@ -12043,7 +12068,7 @@ svg.spinner.multicolor circle {
   cursor: ew-resize;
 }
 
-.switch:not(.disabled) .switch-handler:active:before, .switch:not(.disabled) .switch-handler.dragging:before {
+.switch:not(.disabled) .switch-handler:active:before, .switch:not(.disabled) .switch-handler.draggable-dragging:before {
   opacity: 0.25;
   -webkit-transform: scale(1.6180339887);
           transform: scale(1.6180339887);

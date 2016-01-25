@@ -319,10 +319,6 @@
   margin-bottom: $gutter;
 }
 
-.dragging { //TODO: Move it to it's own decorator
-  z-index: $dragging-z-index !important;
-}
-
 .centered:not(.multiple) { //TODO: Move it to it's own decorator
   @include center-margin ();
 }

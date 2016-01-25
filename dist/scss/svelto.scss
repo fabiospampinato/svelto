@@ -979,6 +979,24 @@ $divider-spacer-height: $gutter-half !default;
 
 
 /* =========================================================================
+ * Svelto - Draggable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+
+/* DRAGGING */
+
+$draggable-dragging-z-index: 1000000 !default;
+
+/* REVERTING */
+
+$draggable-reverting-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
  * Svelto - Embedded (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2200,8 +2218,6 @@ $rotating-animation-duration: 0.9s !default;
 /* OTHERS */
 
 $spacer-flex-grow: 1000000 !default;
-
-$dragging-z-index: 1000000 !default;
 
 
 /* =========================================================================
@@ -4892,19 +4908,12 @@ textarea.autogrow {
 /* HTML */
 
 html {
-
   @include fill-absolute (); // This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-size: $font-size;
   box-sizing: border-box;
-
+  
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-
-  &.dragging {
-    cursor: move !important;
-    user-select: none !important; //TODO: Maybe set it as default, and override it when selectable... but doesn't it work???
-  }
-
 }
 
 /* BODY */
@@ -5351,10 +5360,6 @@ _:-ms-input-placeholder, :root #content {
   flex-grow: $spacer-flex-grow !important;
   flex-shrink: 1; // IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
-}
-
-.dragging { //TODO: Move it to it's own decorator
-  z-index: $dragging-z-index !important;
 }
 
 .centered:not(.multiple) { //TODO: Move it to it's own decorator
@@ -7625,6 +7630,32 @@ hr {
     opacity: $divider-text-opacity;
   }
 
+}
+
+
+/* =========================================================================
+ * Svelto - Draggable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DRAGGING */
+
+.draggable-layout-dragging {
+  user-select: none !important; //TODO: Maybe set it as default, and override it when selectable... but doesn't it work???
+  cursor: move !important;
+}
+
+.draggable-dragging {
+  cursor: move !important;
+  z-index: $draggable-dragging-z-index !important;
+}
+
+/* REVERTING */
+
+.draggable-reverting {
+  transition: transform $draggable-reverting-transition-all-duration !important;
 }
 
 
@@ -11035,7 +11066,7 @@ table.table.selectable {
       cursor: pointer;
 
       &:active,
-      .slider-handler-wrp.dragging {
+      .slider-handler-wrp.draggable-dragging {
 
         .slider-handler {
 
@@ -11064,7 +11095,7 @@ table.table.selectable {
 
   &:hover,
   &:active,
-  .slider-handler-wrp.dragging {
+  .slider-handler-wrp.draggable-dragging {
 
     /* LABEL */
 
@@ -11524,7 +11555,7 @@ svg.spinner {
 
     /* DRAGGING */
 
-    &.dragging {
+    &.draggable-dragging {
       transition-property: background-color;
     }
 
@@ -11605,7 +11636,7 @@ svg.spinner {
       cursor: ew-resize;
 
       &:active,
-      &.dragging {
+      &.draggable-dragging {
 
         &:before {
           opacity: $switch-handler-before-active-opacity;

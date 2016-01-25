@@ -82,7 +82,7 @@
 
     /* DRAGGING */
 
-    &.dragging {
+    &.draggable-dragging {
       transition-property: background-color;
     }
 
@@ -163,7 +163,7 @@
       cursor: ew-resize;
 
       &:active,
-      &.dragging {
+      &.draggable-dragging {
 
         &:before {
           opacity: $switch-handler-before-active-opacity;

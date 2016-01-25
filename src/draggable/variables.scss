@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Helpers (Variables)
+ * Svelto - Draggable (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,21 +8,10 @@
  * @requires ../svelto/variables.scss
  * ========================================================================= */
 
-/* BLUR */
+/* DRAGGING */
 
-$blurred-blur-amount: 3px !default;
-$blurred-transition-duration: $transition-duration-fast !default;
+$draggable-dragging-z-index: 1000000 !default;
 
-/* BORDER */
+/* REVERTING */
 
-$rounded-border-radius: 1000000px !default;
-$smooth-border-radius: $border-radius-medium !default;
-$sharp-border-radius: 0 !default;
-
-/* ROTATE */
-
-$rotating-animation-duration: 0.9s !default;
-
-/* OTHERS */
-
-$spacer-flex-grow: 1000000 !default;
+$draggable-reverting-transition-all-duration: $transition-duration-fast !default;

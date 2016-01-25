@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Draggable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DRAGGING */
+
+.draggable-layout-dragging {
+  user-select: none !important; //TODO: Maybe set it as default, and override it when selectable... but doesn't it work???
+  cursor: move !important;
+}
+
+.draggable-dragging {
+  cursor: move !important;
+  z-index: $draggable-dragging-z-index !important;
+}
+
+/* REVERTING */
+
+.draggable-reverting {
+  transition: transform $draggable-reverting-transition-all-duration !important;
+}

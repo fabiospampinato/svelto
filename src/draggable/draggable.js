@@ -14,7 +14,7 @@
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, Browser, Pointer, Mouse ) {
 
   'use strict';
 
@@ -53,10 +53,15 @@
         sensitivity: 50 // How close it should be to tbe borders
       },
       classes: {
-        dragging: 'dragging'
+        dragging: 'draggable-dragging',
+        layoutDragging: 'draggable-layout-dragging',
+        reverting: 'draggable-reverting'
       },
       selectors: {
         handler: '.draggable-handler'
+      },
+      animations: {
+        revert: Animations.fast
       },
       callbacks: {
         start: _.noop,
@@ -241,7 +246,7 @@
 
     _toggleClasses ( force ) {
 
-      this.$layout.toggleClass ( this.options.classes.dragging, force );
+      this.$layout.toggleClass ( this.options.classes.layoutDragging, force );
       this.$movable.toggleClass ( this.options.classes.dragging, force );
 
     }
@@ -371,50 +376,76 @@
 
     }
 
+    /* REVERT */
+
+    _revert () {
+
+      this._lock = true;
+
+      this._frame ( function () {
+
+        this.$movable.addClass ( this.options.classes.reverting );
+
+        this._frame ( function () {
+
+          this.$movable.translate ( this.initialXY.X, this.initialXY.Y );
+
+          this._delay ( function () {
+
+            this.$movable.removeClass ( this.options.classes.reverting );
+
+            this._lock = false;
+
+          }, this.options.animations.revert );
+
+        });
+
+      });
+
+    }
+
     /* HANDLERS */
 
     __down ( event ) {
 
-      if ( this.options.draggable () ) {
+      if ( this._lock || !this.options.draggable () ) return;
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
-        this.inited = false;
-        this.motion = false;
-        this.scrollInited = false;
+      this.inited = false;
+      this.motion = false;
+      this.scrollInited = false;
 
-        this.$helper = this._getHelper ();
-        this.helper = this.$helper ? this.$helper[0] : false;
+      this.$helper = this._getHelper ();
+      this.helper = this.$helper ? this.$helper[0] : false;
 
-        this.$movable = ( this.$helper || this.$draggable );
+      this.$movable = ( this.$helper || this.$draggable );
 
-        this.startEvent = event;
-        this.startXY = $.eventXY ( event );
+      this.startEvent = event;
+      this.startXY = $.eventXY ( event );
 
-        if ( this.$helper ) {
+      if ( this.$helper ) {
 
-          this._initHelper ();
-          this.initialXY = this.$movable.translate ();
-          this.initialXY = this._centerToPoint ( this.startXY );
+        this._initHelper ();
+        this.initialXY = this.$movable.translate ();
+        this.initialXY = this._centerToPoint ( this.startXY );
 
-        } else {
+      } else {
 
-          this.initialXY = this.$movable.translate ();
-
-        }
-
-        this.isProxyed = ( this.options.proxy.$element && event.currentTarget === this.options.proxy.$element[0] );
-
-        this.proxyXY = false;
-
-        this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
-
-        this._on ( true, this.$document, Pointer.move, this.__move );
-        this._one ( true, this.$document, Pointer.up, this.__up );
-        this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+        this.initialXY = this.$movable.translate ();
 
       }
+
+      this.isProxyed = ( this.options.proxy.$element && event.currentTarget === this.options.proxy.$element[0] );
+
+      this.proxyXY = false;
+
+      this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
+
+      this._on ( true, this.$document, Pointer.move, this.__move );
+      this._one ( true, this.$document, Pointer.up, this.__up );
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -479,7 +510,7 @@
 
         if ( this.options.revert ) {
 
-          this.$movable.translate ( this.initialXY.X, this.initialXY.Y );
+          this._revert ();
 
         } else {
 
@@ -525,7 +556,7 @@
 
         if ( this.options.revert ) {
 
-          this.$movable.translate ( this.initialXY.X, this.initialXY.Y );
+          this._revert ();
 
           dragXY = this.initialXY;
 
@@ -546,4 +577,4 @@
 
   Factory.init ( Draggable, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));

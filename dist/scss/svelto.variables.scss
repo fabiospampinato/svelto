@@ -979,6 +979,24 @@ $divider-spacer-height: $gutter-half !default;
 
 
 /* =========================================================================
+ * Svelto - Draggable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+
+/* DRAGGING */
+
+$draggable-dragging-z-index: 1000000 !default;
+
+/* REVERTING */
+
+$draggable-reverting-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
  * Svelto - Embedded (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2200,8 +2218,6 @@ $rotating-animation-duration: 0.9s !default;
 /* OTHERS */
 
 $spacer-flex-grow: 1000000 !default;
-
-$dragging-z-index: 1000000 !default;
 
 
 /* =========================================================================

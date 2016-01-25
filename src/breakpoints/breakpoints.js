@@ -14,12 +14,16 @@
 
   /* BREAKPOINTS */
 
-  Svelto.Breakpoints = {
+  let Breakpoints = {
     xsmall: 0,
     small: 512,
     medium: 768,
     large: 1024,
     xlarge: 1216
   };
+
+  /* EXPORT */
+
+  Svelto.Breakpoints = Breakpoints;
 
 }( Svelto.$, Svelto._, Svelto ));

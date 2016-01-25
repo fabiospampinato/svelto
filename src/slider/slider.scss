@@ -221,7 +221,7 @@
       cursor: pointer;
 
       &:active,
-      .slider-handler-wrp.dragging {
+      .slider-handler-wrp.draggable-dragging {
 
         .slider-handler {
 
@@ -250,7 +250,7 @@
 
   &:hover,
   &:active,
-  .slider-handler-wrp.dragging {
+  .slider-handler-wrp.draggable-dragging {
 
     /* LABEL */
 
