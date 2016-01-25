@@ -7648,7 +7648,6 @@
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
-//TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -7867,9 +7866,17 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( Pointer.tap, this.close );
+        this._on ( Pointer.tap, this.__tap );
 
       }
+
+    }
+
+    __tap ( event ) {
+
+      event.preventDefault (); // Otherwise the click goes through the noty in Chrome for iOS
+
+      this.close ();
 
     }
 
@@ -9646,7 +9653,7 @@
 
   /* CONFIG */
 
-  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer
+  let config = {
     encoder: JSON.stringify,
     decoder: JSON.parse
   };
@@ -9660,7 +9667,7 @@
       this.name = options.name;
       this.cookie = options.cookie;
 
-      this.actions = config.decoder ( Cookie.get ( this.name ) || '{}' );
+      this.actions = NTA.Group.config.decoder ( Cookie.get ( this.name ) || '{}' );
 
     }
 
@@ -9724,7 +9731,7 @@
 
     update () {
 
-      Cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
+      Cookie.set ( this.name, NTA.Group.config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
 
     }
 
@@ -9759,6 +9766,7 @@
   /* BINDING */
 
   NTA.Group = Group;
+  NTA.Group.config = config;
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Cookie, Svelto.NTA = {} ));
 

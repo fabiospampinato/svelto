@@ -41,7 +41,7 @@
 
   /* CONFIG */
 
-  let config = { //TODO: Export this object so that it gets customizable, maybe rename encoder to serializer
+  let config = {
     encoder: JSON.stringify,
     decoder: JSON.parse
   };
@@ -55,7 +55,7 @@
       this.name = options.name;
       this.cookie = options.cookie;
 
-      this.actions = config.decoder ( Cookie.get ( this.name ) || '{}' );
+      this.actions = NTA.Group.config.decoder ( Cookie.get ( this.name ) || '{}' );
 
     }
 
@@ -119,7 +119,7 @@
 
     update () {
 
-      Cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
+      Cookie.set ( this.name, NTA.Group.config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
 
     }
 
@@ -154,5 +154,6 @@
   /* BINDING */
 
   NTA.Group = Group;
+  NTA.Group.config = config;
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Cookie, Svelto.NTA = {} ));
