@@ -4129,9 +4129,14 @@ i.icon, .carousel.inset .carousel-previous:after,
           align-items: center;
   top: 0;
   bottom: 0;
-  cursor: pointer;
   font-size: 1.5em;
+  /* ENABLED */
   /* AFTER (ICON) */
+}
+
+.carousel.inset .carousel-previous:not(.disabled),
+.carousel.inset .carousel-next:not(.disabled) {
+  cursor: pointer;
 }
 
 .carousel.inset .carousel-previous:after,
@@ -4185,13 +4190,13 @@ i.icon, .carousel.inset .carousel-previous:after,
   opacity: 0.5;
 }
 
-.carousel.inset:hover .carousel-previous:hover,
-.carousel.inset:hover .carousel-next:hover {
+.carousel.inset:hover .carousel-previous:not(.disabled):hover,
+.carousel.inset:hover .carousel-next:not(.disabled):hover {
   /* AFTER (ICON) */
 }
 
-.carousel.inset:hover .carousel-previous:hover:after,
-.carousel.inset:hover .carousel-next:hover:after {
+.carousel.inset:hover .carousel-previous:not(.disabled):hover:after,
+.carousel.inset:hover .carousel-next:not(.disabled):hover:after {
   opacity: 1;
 }
 

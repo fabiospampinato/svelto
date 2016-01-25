@@ -2542,8 +2542,13 @@ i.icon {
       align-items: center;
       top: 0;
       bottom: 0;
-      cursor: pointer;
       font-size: $carousel-inset-previous-next-font-size;
+
+      /* ENABLED */
+
+      &:not(.disabled) {
+        cursor: pointer;
+      }
 
       /* AFTER (ICON) */
 
@@ -2608,7 +2613,7 @@ i.icon {
 
         /* HOVER */
 
-        &:hover {
+        &:not(.disabled):hover {
 
           /* AFTER (ICON) */
 

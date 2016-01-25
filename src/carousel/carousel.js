@@ -11,7 +11,6 @@
  * ========================================================================= */
 
 //TODO: Add slides drag support
-//TODO: Add `wrap` option
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -25,6 +24,7 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
+      wrap: true, // Wether we should connect the start with the end, so that when calling `previous` from the start we reach the end and vice versa
       cycle: false, // If the carousel should auto-cycle or not
       interval: 5000, // Interval between auto-cycling slides
       intervalMinimumRemaining: 1000, // Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
@@ -204,13 +204,22 @@
 
     _getPrevIndex ( index ) {
 
-      return ( index > 0 ) ? index - 1 : this.maxIndex;
+      return ( index > 0 ) ? index - 1 : ( this.options.wrap ? this.maxIndex : 0 );
 
     }
 
     _getNextIndex ( index ) {
 
-      return ( index < this.maxIndex ) ? index + 1 : 0;
+      return ( index < this.maxIndex ) ? index + 1 : ( this.options.wrap ? 0 : this.maxIndex );
+
+    }
+
+    /* UPDATE */
+
+    _updatePreviousNext () {
+
+      this.$previous.toggleClass ( this.options.classes.disabled, ( this._current.index === 0 && !this.options.wrap ) );
+      this.$next.toggleClass ( this.options.classes.disabled, ( this._current.index === this.maxIndex && !this.options.wrap ) );
 
     }
 
@@ -270,6 +279,8 @@
       this._current = this._getItemObj ( index );
       this._current.$item.addClass ( this.options.classes.current );
       this._current.$indicator.addClass ( this.options.classes.current );
+
+      this._updatePreviousNext ();
 
       if ( this.options.cycle ) {
 
