@@ -222,7 +222,7 @@
 
     __dayTap ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
+      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return;
 
       let $day = $(event.currentTarget);
 

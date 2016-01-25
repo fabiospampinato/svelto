@@ -4504,7 +4504,7 @@
 
     __dayTap ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
+      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return;
 
       let $day = $(event.currentTarget);
 
@@ -4819,7 +4819,6 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//TODO: Animate `revert`
 //TODO: Maybe return less datas to triggered events and callbacks
 
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
@@ -5331,7 +5330,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxy.noMotion && ( !event.button || event.button === Mouse.buttons.LEFT ) ) {
+        if ( this.options.proxy.noMotion && ( _.isUndefined ( event.button ) || event.button === Mouse.buttons.LEFT ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 
@@ -5523,10 +5522,17 @@
     axis: false, // Set a preferred axis
     strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, // Positionate next to an $anchor element
-    $pointer: false, // The element who is pointing to the anchor
+    $pointer: false, // The element who is ging to the anchor
     point: false, // Positionate at coordinates, ex: { x: number, y: number }
     spacing: 0, // Extra space to leave around the positionable element
-    direction: false, // Set a preferred direction, it has greater priority over the axis
+    constrainer: { // Constrain the $positionable inside the $element
+      $element: false, // If we want to keep the $positionable inside this $element
+      center: false, // Set the constrain type, it will constrain the whole shape, or the center
+      tolerance: { // The amount of pixel flexibility that a constrainer has
+        x: 0,
+        y: 0
+      }
+    },
     directions: { // How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
@@ -5685,15 +5691,30 @@
 
     }
 
-    /* CONSTRAIN TO THE WINDOW */
+    /* CONSTRAIN */
 
-    let oppositeSpace = spaces[bestIndex],
-        isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+    if ( options.$anchor ) {
 
-    if ( isAnchorVisible ) {
+      let oppositeSpace = spaces[bestIndex],
+          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-      coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
-      coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+      if ( isAnchorVisible ) {
+
+        coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+        coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+
+      }
+
+    } else if ( options.constrainer.$element ) {
+
+      let constrainerRect = options.constrainer.$element.getRect (),
+          halfWidth = options.constrainer.center ? positionableRect.width / 2 : 0,
+          halfHeight = options.constrainer.center ? positionableRect.height / 2 : 0;
+
+      /* COORDINATES */
+
+      coordinates.top = _.clamp ( coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + options.spacing, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - options.spacing );
+      coordinates.left = _.clamp ( coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + options.spacing, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - options.spacing );
 
     }
 
@@ -5932,8 +5953,6 @@
  * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
-//TODO: Add support for opening the dropdown relative to a point
-
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
@@ -6012,7 +6031,7 @@
 
     ___parentsScroll () {
 
-      let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( this.$window );
+      let $parents = this.$dropdown.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
 
       this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
@@ -6048,7 +6067,7 @@
 
       /* VARIABLES */
 
-      let noTip = this.$anchor.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
+      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAttached,
           spacing = this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
 
       this.$mockTip = noTip ? false : $('<div>');
@@ -6067,6 +6086,8 @@
     }
 
     _toggleAnchorDirectonClass ( direction, force ) {
+
+      if ( !this.$anchor ) return;
 
       this.$anchor.toggleClass ( _.format ( this.options.classes.anchorDirection, direction ), force );
 
@@ -6112,7 +6133,7 @@
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor ? !this._isOpen : false );
+        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor || 'point' in this.options.positionate ? !this._isOpen : false );
 
       }
 
@@ -6124,7 +6145,7 @@
 
       /* RESTORING ANCHOR */
 
-      if ( !anchor && this.$prevAnchor ) {
+      if ( !anchor && this.$prevAnchor && !('point' in this.options.positionate) ) {
 
         anchor = this.$prevAnchor[0];
 
@@ -6132,7 +6153,7 @@
 
       /* CHECKING */
 
-      if ( this._lock || !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
+      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) ) ) return;
 
       /* VARIABLES */
 
@@ -6163,7 +6184,7 @@
 
       /* ANCHOR */
 
-      this.$anchor = $(anchor);
+      this.$anchor = anchor ? $(anchor) : false;
 
       /* BEFORE OPENING */
 
@@ -11799,7 +11820,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __downTap ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
+      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return;
 
       if ( this.$ripple.hasClass ( this.options.classes.centered ) ) {
 
@@ -12407,7 +12428,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __down ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; // Only the left click is allowed
+      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return; // Only the left click is allowed
 
       event.preventDefault ();
 

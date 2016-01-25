@@ -10,8 +10,6 @@
  * @requires ../embedded_css/embedded_css.js
  * ========================================================================= */
 
-//TODO: Add support for opening the dropdown relative to a point
-
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
@@ -90,7 +88,7 @@
 
     ___parentsScroll () {
 
-      let $parents = this.$dropdown.parents ().add ( this.$anchor.parents () ).add ( this.$window );
+      let $parents = this.$dropdown.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
 
       this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
@@ -126,7 +124,7 @@
 
       /* VARIABLES */
 
-      let noTip = this.$anchor.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
+      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAttached,
           spacing = this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
 
       this.$mockTip = noTip ? false : $('<div>');
@@ -145,6 +143,8 @@
     }
 
     _toggleAnchorDirectonClass ( direction, force ) {
+
+      if ( !this.$anchor ) return;
 
       this.$anchor.toggleClass ( _.format ( this.options.classes.anchorDirection, direction ), force );
 
@@ -190,7 +190,7 @@
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor ? !this._isOpen : false );
+        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor || 'point' in this.options.positionate ? !this._isOpen : false );
 
       }
 
@@ -202,7 +202,7 @@
 
       /* RESTORING ANCHOR */
 
-      if ( !anchor && this.$prevAnchor ) {
+      if ( !anchor && this.$prevAnchor && !('point' in this.options.positionate) ) {
 
         anchor = this.$prevAnchor[0];
 
@@ -210,7 +210,7 @@
 
       /* CHECKING */
 
-      if ( this._lock || !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) return;
+      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) ) ) return;
 
       /* VARIABLES */
 
@@ -241,7 +241,7 @@
 
       /* ANCHOR */
 
-      this.$anchor = $(anchor);
+      this.$anchor = anchor ? $(anchor) : false;
 
       /* BEFORE OPENING */
 

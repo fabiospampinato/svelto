@@ -8,7 +8,6 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//TODO: Animate `revert`
 //TODO: Maybe return less datas to triggered events and callbacks
 
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
@@ -520,7 +519,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxy.noMotion && ( !event.button || event.button === Mouse.buttons.LEFT ) ) {
+        if ( this.options.proxy.noMotion && ( _.isUndefined ( event.button ) || event.button === Mouse.buttons.LEFT ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 

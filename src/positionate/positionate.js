@@ -37,10 +37,17 @@
     axis: false, // Set a preferred axis
     strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, // Positionate next to an $anchor element
-    $pointer: false, // The element who is pointing to the anchor
+    $pointer: false, // The element who is ging to the anchor
     point: false, // Positionate at coordinates, ex: { x: number, y: number }
     spacing: 0, // Extra space to leave around the positionable element
-    direction: false, // Set a preferred direction, it has greater priority over the axis
+    constrainer: { // Constrain the $positionable inside the $element
+      $element: false, // If we want to keep the $positionable inside this $element
+      center: false, // Set the constrain type, it will constrain the whole shape, or the center
+      tolerance: { // The amount of pixel flexibility that a constrainer has
+        x: 0,
+        y: 0
+      }
+    },
     directions: { // How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
@@ -199,15 +206,30 @@
 
     }
 
-    /* CONSTRAIN TO THE WINDOW */
+    /* CONSTRAIN */
 
-    let oppositeSpace = spaces[bestIndex],
-        isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+    if ( options.$anchor ) {
 
-    if ( isAnchorVisible ) {
+      let oppositeSpace = spaces[bestIndex],
+          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-      coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
-      coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+      if ( isAnchorVisible ) {
+
+        coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+        coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+
+      }
+
+    } else if ( options.constrainer.$element ) {
+
+      let constrainerRect = options.constrainer.$element.getRect (),
+          halfWidth = options.constrainer.center ? positionableRect.width / 2 : 0,
+          halfHeight = options.constrainer.center ? positionableRect.height / 2 : 0;
+
+      /* COORDINATES */
+
+      coordinates.top = _.clamp ( coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + options.spacing, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - options.spacing );
+      coordinates.left = _.clamp ( coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + options.spacing, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - options.spacing );
 
     }
 

@@ -76,7 +76,7 @@
 
     __downTap ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return;
+      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return;
 
       if ( this.$ripple.hasClass ( this.options.classes.centered ) ) {
 
