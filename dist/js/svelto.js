@@ -1939,7 +1939,7 @@
 
     ___breakpoint () {
 
-      this._on ( this.$window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
+      this._on ( this.$window, 'breakpoint:change', this.__breakpoint );
 
     }
 
@@ -12910,7 +12910,7 @@ Prism.languages.js = Prism.languages.javascript;
           x: this._dragModifierX.bind ( this )
         },
         callbacks: {
-          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
+          move: this.__dragMove.bind ( this ),
           end: this.__dragEnd.bind ( this )
         }
       });

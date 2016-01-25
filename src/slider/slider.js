@@ -241,7 +241,7 @@
           x: this._dragModifierX.bind ( this )
         },
         callbacks: {
-          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
+          move: this.__dragMove.bind ( this ),
           end: this.__dragEnd.bind ( this )
         }
       });

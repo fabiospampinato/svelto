@@ -522,7 +522,7 @@
 
     ___breakpoint () {
 
-      this._on ( this.$window, 'breakpoint:change', this.__breakpoint ); //TODO: Should we use `suppressDisabledCheck`? I'm not sure...
+      this._on ( this.$window, 'breakpoint:change', this.__breakpoint );
 
     }
 
