@@ -181,7 +181,7 @@
 
   };
 
-  //TODO: Not working but needed
+  //TODO: Not working but probably needed, like for scrolling down a chat
   // $.fn.scrollBottom = function ( value ) {
   //
   //   if ( !this.length ) return null;

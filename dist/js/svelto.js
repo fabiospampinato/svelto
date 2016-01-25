@@ -318,23 +318,22 @@
 
      },
 
-     mkize ( number ) {
+     mkize ( number, decimals = 0 ) {
 
-      //TODO: Add support for a `precision` extra argument
+      let bases = [1000000000, 1000000, 1000],
+          suffixes = ['B', 'M', 'K'];
 
-    	if ( number >= 1000000 ) {
+      for ( let i = 0, l = bases.length; i < l; i++ ) {
 
-    		return Math.floor ( number / 1000000 ) + 'M';
+        if ( number >= bases[i] ) {
 
-    	} else if ( number >= 1000 ) {
+          return Number ( ( number / bases[i] ).toFixed ( decimals ) ) + suffixes[i];
 
-    		return Math.floor ( number / 1000 ) + 'K';
+        }
 
-    	} else {
+      }
 
-    		return number;
-
-    	}
+      return number;
 
     },
 
@@ -647,7 +646,7 @@
 
   };
 
-  //TODO: Not working but needed
+  //TODO: Not working but probably needed, like for scrolling down a chat
   // $.fn.scrollBottom = function ( value ) {
   //
   //   if ( !this.length ) return null;
