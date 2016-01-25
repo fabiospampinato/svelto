@@ -15,12 +15,12 @@ textarea {
 
   @extend input;
   resize: vertical;
-  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
 
   /* COMPACT */
 
   &.compact {
-    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
   }
 
   /* UNRESIZABLE */

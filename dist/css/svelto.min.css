@@ -2286,13 +2286,13 @@ input.autogrow.compact.outlined, textarea.autogrow.compact.outlined {
 /* TEXTAREA */
 textarea {
   resize: vertical;
-  min-height: 8.142857143em !important;
+  min-height: 8.142857143em;
   /* COMPACT */
   /* UNRESIZABLE */
 }
 
 textarea.compact {
-  min-height: 8.142857143em !important;
+  min-height: 8.142857143em;
 }
 
 textarea.unresizable, textarea[disabled], textarea.disabled,
@@ -2315,12 +2315,12 @@ textarea:-moz-ui-invalid {
  * ========================================================================= */
 /* TEXTAREA AUTOGROW */
 textarea.autogrow {
-  min-height: 8.142857143em !important;
+  min-height: 8.142857143em;
   /* COMPACT */
 }
 
 textarea.autogrow.compact {
-  min-height: 8.142857143em !important;
+  min-height: 8.142857143em;
 }
 
 /* =========================================================================

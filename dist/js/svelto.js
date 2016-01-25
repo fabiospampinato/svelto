@@ -2235,7 +2235,7 @@
  * @requires ../expander/expander.js
  * ========================================================================= */
 
-//TODO: Add better support for changing `options.multiple` at runtime
+//TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -2480,8 +2480,7 @@
 
 // It supports only `box-sizing: border-box` textareas
 
-//TODO: Measure the needed height using canvas, if possible, improve the performance in general
-//FIXME: Don't measure the height by changing the height of the textarea, it would be much more performant if we don't do that
+//TODO: Measure the needed height using canvas, if possible, it would make it super fast
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -2510,6 +2509,14 @@
 
       this.$textarea = this.$element;
 
+      this.$tempTextarea = $('<textarea>').css ({
+                              'position': 'fixed',
+                              'visibility': 'hidden',
+                              'padding': 0,
+                              'min-height': 0,
+                              'height': 0
+                            });
+
     }
 
     _init () {
@@ -2528,7 +2535,13 @@
 
     _getNeededHeight () {
 
-      return this.$textarea.height ( 0 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
+      this.$tempTextarea.css ( 'font', this.$textarea.css ( 'font' ) ).val ( this.$textarea.val () ).appendTo ( this.$layout );
+
+      let height = this.$tempTextarea[0].scrollHeight;
+
+      this.$tempTextarea.detach ();
+
+      return height;
 
     }
 
@@ -2546,9 +2559,9 @@
 
       let height = this._getNeededHeight ();
 
-      this.$textarea.height ( height );
-
       if ( height === this._prevHeight ) return;
+
+      this.$textarea.height ( height );
 
       this._prevHeight = height;
 
