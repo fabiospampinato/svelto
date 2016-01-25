@@ -38,7 +38,7 @@
 
   /* TRANSFORMATIONS */
 
-  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //INFO: Their index is also the corresponsing index when applying `transform: matrix()`
+  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; // Their index is also the corresponsing index when applying `transform: matrix()`
 
   for ( let i = 0, l = transformations.length; i < l; i++ ) {
 

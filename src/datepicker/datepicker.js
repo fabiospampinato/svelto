@@ -8,8 +8,8 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
-//INFO: Accordion to ISO-8601 the first day of the week is Monday
+// When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
+// Accordion to ISO-8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
@@ -54,17 +54,17 @@
         }
       },
       months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
+      firstDayOfWeek: 0, // Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
       date: {
-        min: false, //INFO: Minimum selectable date
-        max: false, //INFO: Maximum selectable date
-        today: false, //INFO: Today date
-        current: false, //INFO: Current date visible in the datepicker (basically the month we are viewing)
-        selected: false //INFO: The selcted date
+        min: false, // Minimum selectable date
+        max: false, // Maximum selectable date
+        today: false, // Today date
+        current: false, // Current date visible in the datepicker (basically the month we are viewing)
+        selected: false // The selcted date
       },
       format: {
-        type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
-        data: { //INFO: Passed to the called importer and exporter
+        type: 'UNIXTIMESTAMP', // One of the formats implemented in the exporters
+        data: { // Passed to the called importer and exporter
           separator: '/'
         }
       },
@@ -245,9 +245,9 @@
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
           initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
-      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: Normalizing to 0 -> Monday
-      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); //INFO: Offsetting according to the provided setting
-      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; //INFO: Moving to the other side in case of negative offsetting
+      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; // Normalizing to 0 -> Monday
+      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); // Offsetting according to the provided setting
+      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; // Moving to the other side in case of negative offsetting
 
       /* PREV */
 

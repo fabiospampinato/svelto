@@ -18,25 +18,25 @@ $color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
 
 /* BASE */
 
-$color-primary: #1565c0 !default; //INFO: Blue-800
-$color-secondary: #ef6c00 !default; //INFO: Orange-800
-$color-tertiary: #6a1b9a !default; //INFO: Purple-800
-$color-quaternary: #2e7d32 !default; //INFO: Green-800
+$color-primary: #1565c0 !default; // Blue-800
+$color-secondary: #ef6c00 !default; // Orange-800
+$color-tertiary: #6a1b9a !default; // Purple-800
+$color-quaternary: #2e7d32 !default; // Green-800
 
 $color-white: #ffffff !default;
-$color-gray: #e0e0e0 !default; //INFO: Gray-300
-$color-black: #212121 !default; //INFO: Gray-900
-$color-yellow: #fabf40 !default; //INFO: Yellow-700
-$color-olive: #cddc39 !default; //INFO: Lime-500
-$color-green: #4caf50 !default; //INFO: Green-500
-$color-blue: #2196f3 !default; //INFO: Blue-500
-$color-violet: #673ab7 !default; //INFO: Deep-Purple-500
-$color-orange: #ff9800 !default; //INFO: Orange-500
-$color-purple: #9c27b0 !default; //INFO: Purple-500
-$color-red: #f44336 !default; //INFO: Red-500
-$color-pink: #e91e63 !default; //INFO: Pink-500
-$color-teal: #009688 !default; //INFO: Teal-500
-$color-brown: #795548 !default; //INFO: Brown-500
+$color-gray: #e0e0e0 !default; // Gray-300
+$color-black: #212121 !default; // Gray-900
+$color-yellow: #fabf40 !default; // Yellow-700
+$color-olive: #cddc39 !default; // Lime-500
+$color-green: #4caf50 !default; // Green-500
+$color-blue: #2196f3 !default; // Blue-500
+$color-violet: #673ab7 !default; // Deep-Purple-500
+$color-orange: #ff9800 !default; // Orange-500
+$color-purple: #9c27b0 !default; // Purple-500
+$color-red: #f44336 !default; // Red-500
+$color-pink: #e91e63 !default; // Pink-500
+$color-teal: #009688 !default; // Teal-500
+$color-brown: #795548 !default; // Brown-500
 
 $color-error: $color-red !default;
 $color-warning: $color-yellow !default;
@@ -44,7 +44,7 @@ $color-success: $color-green !default;
 
 $color-transparent: rgba(0, 0, 0, 0) !default;
 $color-inherit: inherit !default;
-$color-base: #eceff1 !default; //INFO: Blue-Gray-50
+$color-base: #eceff1 !default; // Blue-Gray-50
 
 /* PRIMARY */
 
@@ -53,7 +53,7 @@ $color-primary-bg-hover: lighten( $color-primary-bg, $color-hover-lighten-amount
 $color-primary-bg-active: darken( $color-primary-bg, $color-active-darken-amount ) !default;
 $color-primary-border: darken( $color-primary-bg, $color-border-darken-amount ) !default;
 $color-primary-accent: $color-secondary !default;
-$color-primary-text: #ffffff !default; //INFO: Contrast ratio: 5.7
+$color-primary-text: #ffffff !default; // Contrast ratio: 5.7
 $color-primary-link: $color-primary-accent !default;
 $color-primary-link-hover: lighten( $color-primary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -64,7 +64,7 @@ $color-secondary-bg-hover: lighten( $color-secondary-bg, $color-hover-lighten-am
 $color-secondary-bg-active: darken( $color-secondary-bg, $color-active-darken-amount ) !default;
 $color-secondary-border: darken( $color-secondary-bg, $color-border-darken-amount ) !default;
 $color-secondary-accent: $color-primary !default;
-$color-secondary-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-secondary-text: #ffffff !default; // Contrast ratio: 3.1
 $color-secondary-link: $color-secondary-accent !default;
 $color-secondary-link-hover: lighten( $color-secondary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -75,7 +75,7 @@ $color-tertiary-bg-hover: lighten( $color-tertiary-bg, $color-hover-lighten-amou
 $color-tertiary-bg-active: darken( $color-tertiary-bg, $color-active-darken-amount ) !default;
 $color-tertiary-border: darken( $color-tertiary-bg, $color-border-darken-amount ) !default;
 $color-tertiary-accent: $color-quaternary !default;
-$color-tertiary-text: #ffffff !default; //INFO: Contrast ratio: 9.4
+$color-tertiary-text: #ffffff !default; // Contrast ratio: 9.4
 $color-tertiary-link: $color-tertiary-accent !default;
 $color-tertiary-link-hover: lighten( $color-tertiary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -86,7 +86,7 @@ $color-quaternary-bg-hover: lighten( $color-quaternary-bg, $color-hover-lighten-
 $color-quaternary-bg-active: darken( $color-quaternary-bg, $color-active-darken-amount ) !default;
 $color-quaternary-border: darken( $color-quaternary-bg, $color-border-darken-amount ) !default;
 $color-quaternary-accent: $color-tertiary !default;
-$color-quaternary-text: #ffffff !default; //INFO: Contrast ratio: 5.1
+$color-quaternary-text: #ffffff !default; // Contrast ratio: 5.1
 $color-quaternary-link: $color-quaternary-accent !default;
 $color-quaternary-link-hover: lighten( $color-quaternary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -97,7 +97,7 @@ $color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !d
 $color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
 $color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
 $color-white-accent: $color-secondary !default;
-$color-white-text: #3f3f3f !default; //INFO: Contrast ratio: 10.5
+$color-white-text: #3f3f3f !default; // Contrast ratio: 10.5
 $color-white-link: $color-primary !default;
 $color-white-link-hover: lighten( $color-white-link, $color-link-hover-lighten-amount ) !default;
 
@@ -108,7 +108,7 @@ $color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !de
 $color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
 $color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
 $color-gray-accent: $color-black !default;
-$color-gray-text: #3f3f3f !default; //INFO: Contrast ratio: 8
+$color-gray-text: #3f3f3f !default; // Contrast ratio: 8
 $color-gray-link: $color-white !default;
 $color-gray-link-hover: lighten( $color-gray-link, $color-link-hover-lighten-amount ) !default;
 
@@ -119,7 +119,7 @@ $color-black-bg-hover: lighten( $color-black-bg, $color-hover-lighten-amount ) !
 $color-black-bg-active: darken( $color-black-bg, $color-active-darken-amount ) !default;
 $color-black-border: darken( $color-black-bg, $color-border-darken-amount ) !default;
 $color-black-accent: $color-white !default;
-$color-black-text: #ffffff !default; //INFO: Contrast ratio: 16.1
+$color-black-text: #ffffff !default; // Contrast ratio: 16.1
 $color-black-link: $color-gray !default;
 $color-black-link-hover: lighten( $color-black-link, $color-link-hover-lighten-amount ) !default;
 
@@ -130,7 +130,7 @@ $color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount )
 $color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
 $color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
 $color-yellow-accent: $color-red !default;
-$color-yellow-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-yellow-text: #ffffff !default; // Contrast ratio 1.7
 $color-yellow-link: $color-yellow-accent !default;
 $color-yellow-link-hover: lighten( $color-yellow-link, $color-link-hover-lighten-amount ) !default;
 
@@ -141,7 +141,7 @@ $color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !
 $color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
 $color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
 $color-olive-accent: $color-orange !default;
-$color-olive-text: #ffffff !default; //INFO: Contrast ratio: 1.7
+$color-olive-text: #ffffff !default; // Contrast ratio: 1.7
 $color-olive-link: $color-olive-accent !default;
 $color-olive-link-hover: lighten( $color-olive-link, $color-link-hover-lighten-amount ) !default;
 
@@ -152,7 +152,7 @@ $color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !
 $color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
 $color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
 $color-green-accent: $color-violet !default;
-$color-green-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-green-text: #ffffff !default; // Contrast ratio: 2.8
 $color-green-link: $color-green-accent !default;
 $color-green-link-hover: lighten( $color-green-link, $color-link-hover-lighten-amount ) !default;
 
@@ -163,7 +163,7 @@ $color-blue-bg-hover: lighten( $color-blue-bg, $color-hover-lighten-amount ) !de
 $color-blue-bg-active: darken( $color-blue-bg, $color-active-darken-amount ) !default;
 $color-blue-border: darken( $color-blue-bg, $color-border-darken-amount ) !default;
 $color-blue-accent: $color-red !default;
-$color-blue-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-blue-text: #ffffff !default; // Contrast ratio: 3.1
 $color-blue-link: $color-blue-accent !default;
 $color-blue-link-hover: lighten( $color-blue-link, $color-link-hover-lighten-amount ) !default;
 
@@ -174,7 +174,7 @@ $color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount )
 $color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
 $color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
 $color-violet-accent: $color-orange !default;
-$color-violet-text: #ffffff !default; //INFO: Contrast ratio: 7.1
+$color-violet-text: #ffffff !default; // Contrast ratio: 7.1
 $color-violet-link: $color-violet-accent !default;
 $color-violet-link-hover: lighten( $color-violet-link, $color-link-hover-lighten-amount ) !default;
 
@@ -185,7 +185,7 @@ $color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount )
 $color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
 $color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
 $color-orange-accent: $color-blue !default;
-$color-orange-text: #ffffff !default; //INFO: Contrast ratio 2.2
+$color-orange-text: #ffffff !default; // Contrast ratio 2.2
 $color-orange-link: $color-orange-accent !default;
 $color-orange-link-hover: lighten( $color-orange-link, $color-link-hover-lighten-amount ) !default;
 
@@ -196,7 +196,7 @@ $color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount )
 $color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
 $color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
 $color-purple-accent: $color-yellow !default;
-$color-purple-text: #ffffff !default; //INFO: Contrast ratio: 6.3
+$color-purple-text: #ffffff !default; // Contrast ratio: 6.3
 $color-purple-link: $color-purple-accent !default;
 $color-purple-link-hover: lighten( $color-purple-link, $color-link-hover-lighten-amount ) !default;
 
@@ -207,7 +207,7 @@ $color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !defa
 $color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
 $color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
 $color-red-accent: $color-yellow !default;
-$color-red-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-red-text: #ffffff !default; // Contrast ratio: 3.7
 $color-red-link: $color-red-accent !default;
 $color-red-link-hover: lighten( $color-red-link, $color-link-hover-lighten-amount ) !default;
 
@@ -218,7 +218,7 @@ $color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !de
 $color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
 $color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
 $color-pink-accent: $color-teal !default;
-$color-pink-text: #ffffff !default; //INFO: Contrast ratio: 4.3
+$color-pink-text: #ffffff !default; // Contrast ratio: 4.3
 $color-pink-link: $color-pink-accent !default;
 $color-pink-link-hover: lighten( $color-pink-link, $color-link-hover-lighten-amount ) !default;
 
@@ -229,7 +229,7 @@ $color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !de
 $color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
 $color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
 $color-teal-accent: $color-pink !default;
-$color-teal-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-teal-text: #ffffff !default; // Contrast ratio: 3.7
 $color-teal-link: $color-teal-accent !default;
 $color-teal-link-hover: lighten( $color-teal-link, $color-link-hover-lighten-amount ) !default;
 
@@ -240,7 +240,7 @@ $color-brown-bg-hover: lighten( $color-brown-bg, $color-hover-lighten-amount ) !
 $color-brown-bg-active: darken( $color-brown-bg, $color-active-darken-amount ) !default;
 $color-brown-border: darken( $color-brown-bg, $color-border-darken-amount ) !default;
 $color-brown-accent: $color-orange !default;
-$color-brown-text: #ffffff !default; //INFO: Contrast ratio: 6.6
+$color-brown-text: #ffffff !default; // Contrast ratio: 6.6
 $color-brown-link: $color-brown-accent !default;
 $color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
 
@@ -251,7 +251,7 @@ $color-error-bg-hover: lighten( $color-error-bg, $color-hover-lighten-amount ) !
 $color-error-bg-active: darken( $color-error-bg, $color-active-darken-amount ) !default;
 $color-error-border: darken( $color-error-bg, $color-border-darken-amount ) !default;
 $color-error-accent: $color-yellow !default;
-$color-error-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-error-text: #ffffff !default; // Contrast ratio: 3.7
 $color-error-link: $color-error-accent !default;
 $color-error-link-hover: lighten( $color-error-link, $color-link-hover-lighten-amount ) !default;
 
@@ -262,7 +262,7 @@ $color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount
 $color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
 $color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
 $color-warning-accent: $color-red !default;
-$color-warning-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-warning-text: #ffffff !default; // Contrast ratio 1.7
 $color-warning-link: $color-warning-accent !default;
 $color-warning-link-hover: lighten( $color-warning-link, $color-link-hover-lighten-amount ) !default;
 
@@ -273,7 +273,7 @@ $color-success-bg-hover: lighten( $color-success-bg, $color-hover-lighten-amount
 $color-success-bg-active: darken( $color-success-bg, $color-active-darken-amount ) !default;
 $color-success-border: darken( $color-success-bg, $color-border-darken-amount ) !default;
 $color-success-accent: $color-violet !default;
-$color-success-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-success-text: #ffffff !default; // Contrast ratio: 2.8
 $color-success-link: $color-success-accent !default;
 $color-success-link-hover: lighten( $color-success-link, $color-link-hover-lighten-amount ) !default;
 
@@ -306,7 +306,7 @@ $color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !def
 $color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount * 2 ) !default;
 $color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
-$color-base-text: #3f3f3f !default; //INFO: Contrast ratio: 9.1
+$color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
 $color-base-link: $color-base-accent !default;
 $color-base-link-hover: lighten( $color-base-link, $color-link-hover-lighten-amount ) !default;
 

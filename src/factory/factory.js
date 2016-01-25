@@ -19,7 +19,7 @@
 
     /* VARIABLES */
 
-    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], //INFO: `Factory` methods, in order, to call when initing a `Widget`
+    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // `Factory` methods, in order, to call when initing a `Widget`
 
     /* METHODS */
 
@@ -97,7 +97,7 @@
 
       $.fn[name] = function ( options, ...args ) {
 
-        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); //INFO: Methods starting with '_' are private
+        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
 
         for ( let element of this ) {
 

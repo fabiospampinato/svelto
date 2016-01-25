@@ -69,7 +69,7 @@
 
       cache: false,
       data: _.omit ( data, 'url' ),
-      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
       type: _.size ( data ) > 1 ? 'POST' : 'GET',
       url: data.url,
 

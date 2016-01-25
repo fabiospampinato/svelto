@@ -34,21 +34,21 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    axis: false, //INFO: Set a preferred axis
-    strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
-    $anchor: false, //INFO: Positionate next to an $anchor element
-    $pointer: false, //INFO: The element who is pointing to the anchor
-    point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
-    spacing: 0, //INFO: Extra space to leave around the positionable element
-    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
-    directions: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+    axis: false, // Set a preferred axis
+    strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
+    $anchor: false, // Positionate next to an $anchor element
+    $pointer: false, // The element who is pointing to the anchor
+    point: false, // Positionate at coordinates, ex: { x: number, y: number }
+    spacing: 0, // Extra space to leave around the positionable element
+    direction: false, // Set a preferred direction, it has greater priority over the axis
+    directions: { // How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
       all: ['bottom', 'right', 'left', 'top']
     },
-    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-      x: 'center', //INFO: `left`, center`, `right`
-      y: 'center' //INFOL `top`, center`, `bottom`
+    alignment: { // Set the alignment of the positionable relative to the anchor
+      x: 'center', // `left`, center`, `right`
+      y: 'center' // `top`, center`, `bottom`
     },
     callbacks: {
       change: _.noop

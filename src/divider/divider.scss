@@ -36,7 +36,7 @@ hr {
   //FIXME: It doesn't work in IE10
 
   &.linear,
-  &:not(.block):not(.text):not(.spacer) { //INFO: The default one
+  &:not(.block):not(.text):not(.spacer) { // The default one
 
     /* EMPTY */
 
@@ -59,8 +59,8 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
+        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
         min-width: $gutter;
       }
 
@@ -85,7 +85,7 @@ hr {
         width: 1px;
         align-self: stretch;
         flex-grow: 0;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         margin: 0 $gutter-half $gutter !important;
       }
 
@@ -95,7 +95,7 @@ hr {
 
         flex-direction: column;
         flex-grow: 0 !important;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         align-self: stretch;
         // justify-content: center;
         margin: 0 $gutter-half $gutter;
@@ -107,7 +107,7 @@ hr {
           width: 1px;
           min-height: $gutter;
           flex-grow: 1;
-          flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+          flex-shrink: 1; // IE-10-11 default it to 0 instead
         }
 
         &:before {

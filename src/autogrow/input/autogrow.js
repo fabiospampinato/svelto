@@ -8,7 +8,7 @@
  * @requires ../../widget/widget.js
  * ========================================================================= */
 
-//INFO: It supports only `box-sizing: border-box` inputs
+// It supports only `box-sizing: border-box` inputs
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

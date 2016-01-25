@@ -35,7 +35,7 @@
 
 html {
 
-  @include fill-absolute (); //INFO: This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  @include fill-absolute (); // This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-size: $font-size;
   box-sizing: border-box;
 
@@ -61,8 +61,8 @@ body {
   line-height: $line-height;
 }
 
-//INFO: Sticky footer at bottom fixes for IE10+
-//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+// Sticky footer at bottom fixes for IE10+
+// We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
 
 _:-ms-input-placeholder, :root body,
 _:-ms-input-placeholder, :root #content {
@@ -76,7 +76,7 @@ _:-ms-input-placeholder, :root #content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   transition: margin $base-transition-all-duration;
   width: 100%;
 
@@ -105,7 +105,7 @@ _:-ms-input-placeholder, :root #content {
   > main {
     @include last-child-no-gutter ();
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     padding: $gutter;
   }
 

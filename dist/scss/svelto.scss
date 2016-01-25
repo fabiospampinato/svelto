@@ -8,7 +8,7 @@
 
 /* INPUT AUTOGROW */
 
-$input-autogrow-min-width: 1px !default; //INFO: So that the cursor icon is displayed if empty
+$input-autogrow-min-width: 1px !default; // So that the cursor icon is displayed if empty
 
 
 /* =========================================================================
@@ -34,7 +34,7 @@ $textarea-lines: 5 !default;
 
 /* INPUT AUTOGROW */
 
-$textarea-autogrow-min-lines: $textarea-lines !default; //INFO: So that the cursor icon is displayed if empty
+$textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor icon is displayed if empty
 
 
 /* =========================================================================
@@ -56,25 +56,25 @@ $color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
 
 /* BASE */
 
-$color-primary: #1565c0 !default; //INFO: Blue-800
-$color-secondary: #ef6c00 !default; //INFO: Orange-800
-$color-tertiary: #6a1b9a !default; //INFO: Purple-800
-$color-quaternary: #2e7d32 !default; //INFO: Green-800
+$color-primary: #1565c0 !default; // Blue-800
+$color-secondary: #ef6c00 !default; // Orange-800
+$color-tertiary: #6a1b9a !default; // Purple-800
+$color-quaternary: #2e7d32 !default; // Green-800
 
 $color-white: #ffffff !default;
-$color-gray: #e0e0e0 !default; //INFO: Gray-300
-$color-black: #212121 !default; //INFO: Gray-900
-$color-yellow: #fabf40 !default; //INFO: Yellow-700
-$color-olive: #cddc39 !default; //INFO: Lime-500
-$color-green: #4caf50 !default; //INFO: Green-500
-$color-blue: #2196f3 !default; //INFO: Blue-500
-$color-violet: #673ab7 !default; //INFO: Deep-Purple-500
-$color-orange: #ff9800 !default; //INFO: Orange-500
-$color-purple: #9c27b0 !default; //INFO: Purple-500
-$color-red: #f44336 !default; //INFO: Red-500
-$color-pink: #e91e63 !default; //INFO: Pink-500
-$color-teal: #009688 !default; //INFO: Teal-500
-$color-brown: #795548 !default; //INFO: Brown-500
+$color-gray: #e0e0e0 !default; // Gray-300
+$color-black: #212121 !default; // Gray-900
+$color-yellow: #fabf40 !default; // Yellow-700
+$color-olive: #cddc39 !default; // Lime-500
+$color-green: #4caf50 !default; // Green-500
+$color-blue: #2196f3 !default; // Blue-500
+$color-violet: #673ab7 !default; // Deep-Purple-500
+$color-orange: #ff9800 !default; // Orange-500
+$color-purple: #9c27b0 !default; // Purple-500
+$color-red: #f44336 !default; // Red-500
+$color-pink: #e91e63 !default; // Pink-500
+$color-teal: #009688 !default; // Teal-500
+$color-brown: #795548 !default; // Brown-500
 
 $color-error: $color-red !default;
 $color-warning: $color-yellow !default;
@@ -82,7 +82,7 @@ $color-success: $color-green !default;
 
 $color-transparent: rgba(0, 0, 0, 0) !default;
 $color-inherit: inherit !default;
-$color-base: #eceff1 !default; //INFO: Blue-Gray-50
+$color-base: #eceff1 !default; // Blue-Gray-50
 
 /* PRIMARY */
 
@@ -91,7 +91,7 @@ $color-primary-bg-hover: lighten( $color-primary-bg, $color-hover-lighten-amount
 $color-primary-bg-active: darken( $color-primary-bg, $color-active-darken-amount ) !default;
 $color-primary-border: darken( $color-primary-bg, $color-border-darken-amount ) !default;
 $color-primary-accent: $color-secondary !default;
-$color-primary-text: #ffffff !default; //INFO: Contrast ratio: 5.7
+$color-primary-text: #ffffff !default; // Contrast ratio: 5.7
 $color-primary-link: $color-primary-accent !default;
 $color-primary-link-hover: lighten( $color-primary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -102,7 +102,7 @@ $color-secondary-bg-hover: lighten( $color-secondary-bg, $color-hover-lighten-am
 $color-secondary-bg-active: darken( $color-secondary-bg, $color-active-darken-amount ) !default;
 $color-secondary-border: darken( $color-secondary-bg, $color-border-darken-amount ) !default;
 $color-secondary-accent: $color-primary !default;
-$color-secondary-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-secondary-text: #ffffff !default; // Contrast ratio: 3.1
 $color-secondary-link: $color-secondary-accent !default;
 $color-secondary-link-hover: lighten( $color-secondary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -113,7 +113,7 @@ $color-tertiary-bg-hover: lighten( $color-tertiary-bg, $color-hover-lighten-amou
 $color-tertiary-bg-active: darken( $color-tertiary-bg, $color-active-darken-amount ) !default;
 $color-tertiary-border: darken( $color-tertiary-bg, $color-border-darken-amount ) !default;
 $color-tertiary-accent: $color-quaternary !default;
-$color-tertiary-text: #ffffff !default; //INFO: Contrast ratio: 9.4
+$color-tertiary-text: #ffffff !default; // Contrast ratio: 9.4
 $color-tertiary-link: $color-tertiary-accent !default;
 $color-tertiary-link-hover: lighten( $color-tertiary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -124,7 +124,7 @@ $color-quaternary-bg-hover: lighten( $color-quaternary-bg, $color-hover-lighten-
 $color-quaternary-bg-active: darken( $color-quaternary-bg, $color-active-darken-amount ) !default;
 $color-quaternary-border: darken( $color-quaternary-bg, $color-border-darken-amount ) !default;
 $color-quaternary-accent: $color-tertiary !default;
-$color-quaternary-text: #ffffff !default; //INFO: Contrast ratio: 5.1
+$color-quaternary-text: #ffffff !default; // Contrast ratio: 5.1
 $color-quaternary-link: $color-quaternary-accent !default;
 $color-quaternary-link-hover: lighten( $color-quaternary-link, $color-link-hover-lighten-amount ) !default;
 
@@ -135,7 +135,7 @@ $color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !d
 $color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
 $color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
 $color-white-accent: $color-secondary !default;
-$color-white-text: #3f3f3f !default; //INFO: Contrast ratio: 10.5
+$color-white-text: #3f3f3f !default; // Contrast ratio: 10.5
 $color-white-link: $color-primary !default;
 $color-white-link-hover: lighten( $color-white-link, $color-link-hover-lighten-amount ) !default;
 
@@ -146,7 +146,7 @@ $color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !de
 $color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
 $color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
 $color-gray-accent: $color-black !default;
-$color-gray-text: #3f3f3f !default; //INFO: Contrast ratio: 8
+$color-gray-text: #3f3f3f !default; // Contrast ratio: 8
 $color-gray-link: $color-white !default;
 $color-gray-link-hover: lighten( $color-gray-link, $color-link-hover-lighten-amount ) !default;
 
@@ -157,7 +157,7 @@ $color-black-bg-hover: lighten( $color-black-bg, $color-hover-lighten-amount ) !
 $color-black-bg-active: darken( $color-black-bg, $color-active-darken-amount ) !default;
 $color-black-border: darken( $color-black-bg, $color-border-darken-amount ) !default;
 $color-black-accent: $color-white !default;
-$color-black-text: #ffffff !default; //INFO: Contrast ratio: 16.1
+$color-black-text: #ffffff !default; // Contrast ratio: 16.1
 $color-black-link: $color-gray !default;
 $color-black-link-hover: lighten( $color-black-link, $color-link-hover-lighten-amount ) !default;
 
@@ -168,7 +168,7 @@ $color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount )
 $color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
 $color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
 $color-yellow-accent: $color-red !default;
-$color-yellow-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-yellow-text: #ffffff !default; // Contrast ratio 1.7
 $color-yellow-link: $color-yellow-accent !default;
 $color-yellow-link-hover: lighten( $color-yellow-link, $color-link-hover-lighten-amount ) !default;
 
@@ -179,7 +179,7 @@ $color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !
 $color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
 $color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
 $color-olive-accent: $color-orange !default;
-$color-olive-text: #ffffff !default; //INFO: Contrast ratio: 1.7
+$color-olive-text: #ffffff !default; // Contrast ratio: 1.7
 $color-olive-link: $color-olive-accent !default;
 $color-olive-link-hover: lighten( $color-olive-link, $color-link-hover-lighten-amount ) !default;
 
@@ -190,7 +190,7 @@ $color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !
 $color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
 $color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
 $color-green-accent: $color-violet !default;
-$color-green-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-green-text: #ffffff !default; // Contrast ratio: 2.8
 $color-green-link: $color-green-accent !default;
 $color-green-link-hover: lighten( $color-green-link, $color-link-hover-lighten-amount ) !default;
 
@@ -201,7 +201,7 @@ $color-blue-bg-hover: lighten( $color-blue-bg, $color-hover-lighten-amount ) !de
 $color-blue-bg-active: darken( $color-blue-bg, $color-active-darken-amount ) !default;
 $color-blue-border: darken( $color-blue-bg, $color-border-darken-amount ) !default;
 $color-blue-accent: $color-red !default;
-$color-blue-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-blue-text: #ffffff !default; // Contrast ratio: 3.1
 $color-blue-link: $color-blue-accent !default;
 $color-blue-link-hover: lighten( $color-blue-link, $color-link-hover-lighten-amount ) !default;
 
@@ -212,7 +212,7 @@ $color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount )
 $color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
 $color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
 $color-violet-accent: $color-orange !default;
-$color-violet-text: #ffffff !default; //INFO: Contrast ratio: 7.1
+$color-violet-text: #ffffff !default; // Contrast ratio: 7.1
 $color-violet-link: $color-violet-accent !default;
 $color-violet-link-hover: lighten( $color-violet-link, $color-link-hover-lighten-amount ) !default;
 
@@ -223,7 +223,7 @@ $color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount )
 $color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
 $color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
 $color-orange-accent: $color-blue !default;
-$color-orange-text: #ffffff !default; //INFO: Contrast ratio 2.2
+$color-orange-text: #ffffff !default; // Contrast ratio 2.2
 $color-orange-link: $color-orange-accent !default;
 $color-orange-link-hover: lighten( $color-orange-link, $color-link-hover-lighten-amount ) !default;
 
@@ -234,7 +234,7 @@ $color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount )
 $color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
 $color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
 $color-purple-accent: $color-yellow !default;
-$color-purple-text: #ffffff !default; //INFO: Contrast ratio: 6.3
+$color-purple-text: #ffffff !default; // Contrast ratio: 6.3
 $color-purple-link: $color-purple-accent !default;
 $color-purple-link-hover: lighten( $color-purple-link, $color-link-hover-lighten-amount ) !default;
 
@@ -245,7 +245,7 @@ $color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !defa
 $color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
 $color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
 $color-red-accent: $color-yellow !default;
-$color-red-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-red-text: #ffffff !default; // Contrast ratio: 3.7
 $color-red-link: $color-red-accent !default;
 $color-red-link-hover: lighten( $color-red-link, $color-link-hover-lighten-amount ) !default;
 
@@ -256,7 +256,7 @@ $color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !de
 $color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
 $color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
 $color-pink-accent: $color-teal !default;
-$color-pink-text: #ffffff !default; //INFO: Contrast ratio: 4.3
+$color-pink-text: #ffffff !default; // Contrast ratio: 4.3
 $color-pink-link: $color-pink-accent !default;
 $color-pink-link-hover: lighten( $color-pink-link, $color-link-hover-lighten-amount ) !default;
 
@@ -267,7 +267,7 @@ $color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !de
 $color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
 $color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
 $color-teal-accent: $color-pink !default;
-$color-teal-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-teal-text: #ffffff !default; // Contrast ratio: 3.7
 $color-teal-link: $color-teal-accent !default;
 $color-teal-link-hover: lighten( $color-teal-link, $color-link-hover-lighten-amount ) !default;
 
@@ -278,7 +278,7 @@ $color-brown-bg-hover: lighten( $color-brown-bg, $color-hover-lighten-amount ) !
 $color-brown-bg-active: darken( $color-brown-bg, $color-active-darken-amount ) !default;
 $color-brown-border: darken( $color-brown-bg, $color-border-darken-amount ) !default;
 $color-brown-accent: $color-orange !default;
-$color-brown-text: #ffffff !default; //INFO: Contrast ratio: 6.6
+$color-brown-text: #ffffff !default; // Contrast ratio: 6.6
 $color-brown-link: $color-brown-accent !default;
 $color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
 
@@ -289,7 +289,7 @@ $color-error-bg-hover: lighten( $color-error-bg, $color-hover-lighten-amount ) !
 $color-error-bg-active: darken( $color-error-bg, $color-active-darken-amount ) !default;
 $color-error-border: darken( $color-error-bg, $color-border-darken-amount ) !default;
 $color-error-accent: $color-yellow !default;
-$color-error-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-error-text: #ffffff !default; // Contrast ratio: 3.7
 $color-error-link: $color-error-accent !default;
 $color-error-link-hover: lighten( $color-error-link, $color-link-hover-lighten-amount ) !default;
 
@@ -300,7 +300,7 @@ $color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount
 $color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
 $color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
 $color-warning-accent: $color-red !default;
-$color-warning-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-warning-text: #ffffff !default; // Contrast ratio 1.7
 $color-warning-link: $color-warning-accent !default;
 $color-warning-link-hover: lighten( $color-warning-link, $color-link-hover-lighten-amount ) !default;
 
@@ -311,7 +311,7 @@ $color-success-bg-hover: lighten( $color-success-bg, $color-hover-lighten-amount
 $color-success-bg-active: darken( $color-success-bg, $color-active-darken-amount ) !default;
 $color-success-border: darken( $color-success-bg, $color-border-darken-amount ) !default;
 $color-success-accent: $color-violet !default;
-$color-success-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-success-text: #ffffff !default; // Contrast ratio: 2.8
 $color-success-link: $color-success-accent !default;
 $color-success-link-hover: lighten( $color-success-link, $color-link-hover-lighten-amount ) !default;
 
@@ -344,7 +344,7 @@ $color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !def
 $color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount * 2 ) !default;
 $color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
-$color-base-text: #3f3f3f !default; //INFO: Contrast ratio: 9.1
+$color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
 $color-base-link: $color-base-accent !default;
 $color-base-link-hover: lighten( $color-base-link, $color-link-hover-lighten-amount ) !default;
 
@@ -390,7 +390,7 @@ $colors: (
 
 /* BREAKPOINTS */
 
-//INFO: We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
+// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
 
 $breakpoint-xsmall: 0px !default;
 $breakpoint-small: 512px !default;
@@ -431,9 +431,9 @@ $max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide sup
 
 /* BORDER RADIUS */
 
-$border-radius-small: 0.125em !default; //INFO: 2 / 16
-$border-radius-medium: 0.25em !default; //INFO: 4 / 16
-$border-radius-large: 0.375em !default; //INFO: 6 / 16
+$border-radius-small: 0.125em !default; // 2 / 16
+$border-radius-medium: 0.25em !default; // 4 / 16
+$border-radius-large: 0.375em !default; // 6 / 16
 
 /* TRANSITIONS */
 
@@ -614,7 +614,7 @@ $font-size: 16px !default;
 
 /* LINE HEIGHT */
 
-$line-height: 1.4285714286 !default; //INFO: 20/14
+$line-height: 1.4285714286 !default; // 20/14
 $line-height-em: 1em * $line-height !default;
 
 /* LINK */
@@ -696,8 +696,8 @@ $kbd-padding: 0.2em 0.3em !default;
 
 /* ICONS */
 
-$icon-best-size: 24px; //INFO: At this size the icons look the best
-$icon-scale-amount: $icon-best-size / $font-size !default; //INFO: This is the scale factor at which the icons are at their best dimensions at the default `medium` size
+$icon-best-size: 24px; // At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
 
 
 /* =========================================================================
@@ -783,10 +783,10 @@ $dropdown-tip-size: 0.75em !default;
 
 /* TIP BOX SHADOW */
 
-$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default; //INFO: Taken from z-depths
-$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default; //INFO: Taken from z-depths
-$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; //INFO: Taken from z-depths
-$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; //INFO: Taken from z-depths
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default; // Taken from z-depths
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default; // Taken from z-depths
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; // Taken from z-depths
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; // Taken from z-depths
 
 /* TRANSITIONS */
 
@@ -2536,7 +2536,7 @@ $ripple-circle-z-index: 50 !default;
 
 /* TRANSITIONS */
 
-$ripple-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default; //INFO: Taken from Angular Material
+$ripple-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default; // Taken from Angular Material
 $ripple-transition-show-duration: $transition-duration-xslow !default;
 $ripple-transition-hide-duration: $transition-duration-xslow !default;
 
@@ -2610,7 +2610,7 @@ $square-sample-p-size: 'xxsmall' !default;
 
 @function get_size ( $icon_size ) {
 
-  //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
 
   @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
 
@@ -2618,8 +2618,8 @@ $square-sample-p-size: 'xxsmall' !default;
 
 /* ICON SIZES */
 
-//INFO: The wanted icon size for the particular size
-//INFO: The [RECOMMENDED] sizes are those where the icons look better
+// The wanted icon size for the particular size
+// The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
 $size-xxxsmall-icon: 9px !default;
@@ -2635,7 +2635,7 @@ $size-xxxxlarge-icon: 60px !default;
 
 /* SIZES */
 
-//INFO: The [RECOMMENDED] sizes are those where the icons look better
+// The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
 $size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
@@ -2727,7 +2727,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 
 $slider-color: 'inherit' !default;
 
-$slider-height: $line-height-em + ( $label-padding-vertical * 2 ) !default; //INFO: Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
+$slider-height: $line-height-em + ( $label-padding-vertical * 2 ) !default; // Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
 
 /* MIN / MAX */
 
@@ -2879,7 +2879,7 @@ $statistic-secondary-size: 'small' !default;
 
 $table-color: inherit !default;
 
-$table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; //INFO: The same used in label sub left and right
+$table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; // The same used in label sub left and right
 
 /* EMPTY */
 
@@ -3075,10 +3075,10 @@ $z-depths: (
 
   }
 
-  @if $color_name != inherit { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
-    p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
-    span > a { //INFO: Same as `p > a`
+    p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+    span > a { // Same as `p > a`
 
       color: $link #{$extra};
 
@@ -3139,7 +3139,7 @@ $z-depths: (
 
 /* UP */
 
-//INFO: Screen equal or greater than breakpoint
+// Screen equal or greater than breakpoint
 
 @mixin xsmall-up {
 
@@ -3183,11 +3183,11 @@ $z-depths: (
 
 /* DOWN */
 
-//INFO: Screen equal or lesser than next breakpoint
+// Screen equal or lesser than next breakpoint
 
 @mixin xsmall-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -3195,7 +3195,7 @@ $z-depths: (
 
 @mixin small-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -3203,7 +3203,7 @@ $z-depths: (
 
 @mixin medium-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -3211,7 +3211,7 @@ $z-depths: (
 
 @mixin large-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -3227,7 +3227,7 @@ $z-depths: (
 
 /* RANGE */
 
-//INFO: Screen within the breakpoint and the next one
+// Screen within the breakpoint and the next one
 
 @mixin xsmall-range {
 
@@ -3620,7 +3620,7 @@ $z-depths: (
 
 }
 
-@mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-absolute ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;
 
@@ -3652,7 +3652,7 @@ $z-depths: (
 
 }
 
-@mixin center-transform-fixed ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-fixed ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: fixed;
 
@@ -3934,7 +3934,7 @@ $z-depths: (
     border-right-color: $color;
 
 
-  } @else { //INFO: Defaulting to `down`
+  } @else { // Defaulting to `down`
 
     border-bottom-width: 0;
     border-top-color: $color;
@@ -3986,7 +3986,7 @@ $z-depths: (
 
 @mixin z-depth-raised ( $depth, $extra: '' ) {
 
-  $z-depth-max: length(map-keys($z-depths)) - 1; //INFO: `-1` since we start from `0`
+  $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
 
   @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
 
@@ -4048,7 +4048,7 @@ $z-depths: (
 
   /* OPENER / CLOSER / TOGGLER */
 
-  //INFO: It should also have the `actionable` class to provide a better feedback
+  // It should also have the `actionable` class to provide a better feedback
 
   &-opener,
   &-closer,
@@ -4542,7 +4542,7 @@ th {
 
 }
 
-/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+/* WIDGET (PSEUDO ELEMENT) */ // It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
 
 .widget-pseudo {
   position: relative;
@@ -4650,7 +4650,7 @@ input {
   &[type="file"] {
 
     @include fill-absolute ();
-    width: 100%; //INFO: Or it will not stretch on mobile Chrome
+    width: 100%; // Or it will not stretch on mobile Chrome
     border: none;
     appearance: none;
     border-radius: inherit;
@@ -4893,7 +4893,7 @@ textarea.autogrow {
 
 html {
 
-  @include fill-absolute (); //INFO: This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  @include fill-absolute (); // This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-size: $font-size;
   box-sizing: border-box;
 
@@ -4919,8 +4919,8 @@ body {
   line-height: $line-height;
 }
 
-//INFO: Sticky footer at bottom fixes for IE10+
-//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+// Sticky footer at bottom fixes for IE10+
+// We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
 
 _:-ms-input-placeholder, :root body,
 _:-ms-input-placeholder, :root #content {
@@ -4934,7 +4934,7 @@ _:-ms-input-placeholder, :root #content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   transition: margin $base-transition-all-duration;
   width: 100%;
 
@@ -4963,7 +4963,7 @@ _:-ms-input-placeholder, :root #content {
   > main {
     @include last-child-no-gutter ();
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     padding: $gutter;
   }
 
@@ -5169,7 +5169,7 @@ _:-ms-input-placeholder, :root #content {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 100%; //INFO: Fixes a bug in IE 10
+  max-width: 100%; // Fixes a bug in IE 10
 }
 
 /* PADDING */
@@ -5264,7 +5264,7 @@ _:-ms-input-placeholder, :root #content {
 
 /* ATTACHED */
 
-//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
 
 %attached {
   margin-bottom: 0;
@@ -5349,7 +5349,7 @@ _:-ms-input-placeholder, :root #content {
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
 }
 
@@ -5418,7 +5418,7 @@ label {
 
   > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* OUTLINED */
@@ -5531,7 +5531,7 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
     & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
       margin-left: $label-center-extra-spacing;
@@ -5545,7 +5545,7 @@ label {
 
   &.compact {
 
-    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
       & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
         margin-left: $label-compact-center-extra-spacing;
@@ -5574,7 +5574,7 @@ label {
     }
 
     &.top-right,
-    &:not(.top-left):not(.bottom-left):not(.bottom-right) { //INFO: Default case
+    &:not(.top-left):not(.bottom-left):not(.bottom-right) { // Default case
       top: $label-badge-spacing;
       right: $label-badge-spacing;
     }
@@ -5723,7 +5723,7 @@ label {
     left: 0;
     border-top-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8 ));
     }
 
@@ -5741,7 +5741,7 @@ label {
     right: 0;
     border-top-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8));
     }
 
@@ -5759,7 +5759,7 @@ label {
     left: 0;
     border-bottom-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -5777,7 +5777,7 @@ label {
     right: 0;
     border-bottom-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -5799,7 +5799,7 @@ label {
     visibility: visible;
   }
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
     padding: $label-corner-padding-vertical $label-corner-padding-horizontal;
     height: $line-height-em + ( $label-corner-padding-vertical * 2 );
     width: $line-height-em + ( $label-corner-padding-horizontal * 2 );
@@ -5823,7 +5823,7 @@ label {
   margin-bottom: $gutter;
   z-index: 1;
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;
@@ -6064,7 +6064,7 @@ button {
 
   &-header,
   &-footer {
-    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
+    flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
   }
 
   /* FOOTER */
@@ -6076,8 +6076,8 @@ button {
   /* BLOCK */
 
   &-block {
-    flex-grow: 1; //INFO: Takes the remaining space, if any
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-grow: 1; // Takes the remaining space, if any
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     overflow: auto;
   }
 
@@ -6196,7 +6196,7 @@ button {
 /* ICON */
 
 %icon {
-  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend .widget-pseudo; // It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;
@@ -6210,7 +6210,7 @@ button {
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
-  overflow: hidden; //INFO: So that in case the font doesn't get loaded the text won't overflow the icon box
+  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */
@@ -6377,7 +6377,7 @@ i.icon {
     position: relative;
     overflow: hidden;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     background-color: $carousel-bg-color;
 
     /* ITEM */
@@ -6714,7 +6714,7 @@ i.icon {
   .chat-msg-content {
 
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     margin-bottom: 0;
 
     /* HEADER */
@@ -6815,7 +6815,7 @@ i.icon {
 
     }
 
-    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
     _:-ms-lang(x), & .chat-msg-content {
       margin-left: $gutter;
@@ -6836,11 +6836,11 @@ i.icon {
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
-      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
       _:-ms-lang(x), &:before {
         display: none !important;
@@ -6902,7 +6902,7 @@ i.icon {
 
     }
 
-    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
     _:-ms-lang(x), & .chat-msg-content {
       margin-right: $gutter;
@@ -6923,11 +6923,11 @@ i.icon {
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
       }
 
-      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
       _:-ms-lang(x), &:before {
         display: none !important;
@@ -7504,7 +7504,7 @@ hr {
   //FIXME: It doesn't work in IE10
 
   &.linear,
-  &:not(.block):not(.text):not(.spacer) { //INFO: The default one
+  &:not(.block):not(.text):not(.spacer) { // The default one
 
     /* EMPTY */
 
@@ -7527,8 +7527,8 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
+        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
         min-width: $gutter;
       }
 
@@ -7553,7 +7553,7 @@ hr {
         width: 1px;
         align-self: stretch;
         flex-grow: 0;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         margin: 0 $gutter-half $gutter !important;
       }
 
@@ -7563,7 +7563,7 @@ hr {
 
         flex-direction: column;
         flex-grow: 0 !important;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         align-self: stretch;
         // justify-content: center;
         margin: 0 $gutter-half $gutter;
@@ -7575,7 +7575,7 @@ hr {
           width: 1px;
           min-height: $gutter;
           flex-grow: 1;
-          flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+          flex-shrink: 1; // IE-10-11 default it to 0 instead
         }
 
         &:before {
@@ -7722,7 +7722,7 @@ hr {
     box-sizing: content-box;
   }
 
-  //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
   _:-ms-lang(x), &:before {
     display: none;
@@ -7743,7 +7743,7 @@ hr {
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); // The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -7766,7 +7766,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); // The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -7789,7 +7789,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -7812,7 +7812,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }
@@ -7857,7 +7857,7 @@ hr {
 
 }
 
-//INFO: Card dropdown max height fix for IE10+
+// Card dropdown max height fix for IE10+
 
 _:-ms-input-placeholder, :root .dropdown.card {
 
@@ -8191,7 +8191,7 @@ header {
 
 /* HIDDEN-*-UP */
 
-//INFO: Screen equal or greater than breakpoint
+// Screen equal or greater than breakpoint
 
 @include xsmall-up {
 
@@ -8235,7 +8235,7 @@ header {
 
 /* HIDDEN-*-DOWN */
 
-//INFO: Screen equal or lesser than next breakpoint
+// Screen equal or lesser than next breakpoint
 
 @include xsmall-down {
 
@@ -8352,7 +8352,7 @@ header {
 
   &.highlight-bottom,
   &.highlight-all,
-  &:not(.highlight-top):not(.highlight-right):not(.highlight-left) { //INFO: Default direction if no one has been specified
+  &:not(.highlight-top):not(.highlight-right):not(.highlight-left) { // Default direction if no one has been specified
 
     &:after {
       border-bottom-width: $highlight-size;
@@ -8416,7 +8416,7 @@ img {
   border-color: $border;
   width: 100%;
   height: auto;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 }
 
 p > img,
@@ -8436,7 +8436,7 @@ span > img {
   @include color ( $image-color );
   display: flex;
   flex-direction: column;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 
   /* LINK */
 
@@ -8569,7 +8569,7 @@ span > img {
 
   &-center {
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     flex-basis: 0;
     order: 1;
   }
@@ -8642,7 +8642,7 @@ span > img {
 
 //FIXME: Not working on iPod's Safari
 
-//INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
+// In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
 
 .modal {
 
@@ -8657,7 +8657,7 @@ span > img {
   transition-duration: $modal-transition-all-duration;
   margin: 0;
   cursor: pointer;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* CHILDREN */
 
@@ -8724,7 +8724,7 @@ span > img {
 
 .multiple {
 
-  border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  border-color: inherit; // So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -8732,7 +8732,7 @@ span > img {
 
   /* HORIZONTAL GUTTER */
 
-  &:not(.no-wrap):not(.vertical):not(.joined) { //INFO: Here the gutter is needed
+  &:not(.no-wrap):not(.vertical):not(.joined) { // Here the gutter is needed
 
     @include margin-horizontal ( - $gutter-half );
 
@@ -8742,7 +8742,7 @@ span > img {
 
   }
 
-  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { //INFO: Here we just need the gutter in between
+  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { // Here we just need the gutter in between
 
     &:not(:first-child) {
       margin-left: $gutter-half;
@@ -8817,7 +8817,7 @@ span > img {
 
       > input,
       > textarea {
-        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 
     }
@@ -8831,7 +8831,7 @@ span > img {
   /* EQUAL */
 
   &.equal > * {
-    flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+    flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
   }
 
   /* JOINED */
@@ -8942,7 +8942,7 @@ span > img {
 
       > * {
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
       }
 
     }
@@ -8973,7 +8973,7 @@ span > img {
 
 /* MULTIPLE IN TABLE CELL */
 
-table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
+table > :not(tfoot) td .multiple:only-child { // Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
   display: inline-flex;
 }
 
@@ -9076,7 +9076,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 }
 
-//INFO: IE-10-11 Fix so that noties won't expand over the viewport
+// IE-10-11 Fix so that noties won't expand over the viewport
 
 _:-ms-input-placeholder, :root .noty-queues  {
 
@@ -9378,7 +9378,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 //FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
 
 /* OVERLAY */
@@ -9412,7 +9412,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
   /* SIBLINGS */
 
   ~ * {
-    transition: opacity $overlay-siblings-transition-opacity-duration; //INFO: It interferes with other widgets probably //FIXME
+    transition: opacity $overlay-siblings-transition-opacity-duration; // It interferes with other widgets probably //FIXME
   }
 
   /* DIMMER */
@@ -9519,13 +9519,13 @@ _:-ms-input-placeholder, :root .noty-queues  {
   margin-bottom: 0;
   border-radius: 0;
   transition: transform $panel-transition-transform-duration;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
 
   &.left,
   &.right,
-  &:not(.top):not(.bottom) { //INFO: Default case
+  &:not(.top):not(.bottom) { // Default case
 
     top: 0;
     bottom: 0;
@@ -9542,7 +9542,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
   /* LEFT */
 
   &.left,
-  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
+  &:not(.right):not(.top):not(.bottom) { // Default case
 
     left: 0;
     transform: translateX(- $panel-closed-vertical-spacing);
@@ -10013,7 +10013,7 @@ code[class*='language-'] {
   overflow: hidden;
   height: $progressbar-height;
   border-radius: $progressbar-border-radius;
-  transform: translateZ(0); //INFO: Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
+  transform: translateZ(0); // Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
 
   /* HIGHLIGHT */
 
@@ -10226,7 +10226,7 @@ code[class*='language-'] {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+// The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
 
 /* RAISABLE */
 
@@ -10238,7 +10238,7 @@ code[class*='language-'] {
 
     @each $depth, $shadow in $z-depths {
 
-      @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+      @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
 
         &:hover {
           @include z-depth-raised ( $depth, !important );
@@ -10274,7 +10274,7 @@ code[class*='language-'] {
 .rater {
 
   @extend .widget;
-  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
+  display: inline-flex; // Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
 
   /* STAR */
 
@@ -10457,7 +10457,7 @@ code[class*='language-'] {
 
   position: relative;
   overflow: hidden;
-  transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+  transform: translateZ(0); // For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
 
   /* CIRCLE */
 
@@ -10518,7 +10518,7 @@ code[class*='language-'] {
 
 }
 
-a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sure?
+a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
   z-index: -1;
 }
 
@@ -10549,8 +10549,8 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sur
 
   /* CENTER */
 
-  //INFO: Centering the center segment, if the left one xor the right one is missing
-  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+  // Centering the center segment, if the left one xor the right one is missing
+  // An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
 
   > .section-center:first-child,
   > .section-center:last-child {
@@ -10728,7 +10728,7 @@ table.table.selectable {
 %shape {
   @extend .widget;
   flex-grow: 0 !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
 }
 
 /* TRIANGLE */
@@ -10742,7 +10742,7 @@ table.table.selectable {
   }
 
   &.down,
-  &:not(.up):not(.left):not(.right) { //INFO: Default direction if no one has been specified {
+  &:not(.up):not(.left):not(.right) { // Default direction if no one has been specified {
     @include triangle ( $triangle-size, down );
   }
 
@@ -10892,7 +10892,7 @@ table.table.selectable {
     align-items: center;
     position: relative;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* UNHIGHLIGHT */
@@ -10904,7 +10904,7 @@ table.table.selectable {
     height: $slider-unhighlight-height;
     border-radius: $slider-unhighlight-border-radius;
     width: 100%;
-    transform: translateZ(0); //INFO: Otherwise the border radius is not always respected
+    transform: translateZ(0); // Otherwise the border radius is not always respected
   }
 
   /* HIGHLIGHT */
@@ -11244,14 +11244,14 @@ svg.spinner {
   /* CIRCLE */
 
   circle {
-    cx: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    cy: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    r: $spinner-radius; //INFO: This only works on Chrome //TODO: Maybe just strip them off
+    cx: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    cy: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    r: $spinner-radius; // This only works on Chrome //TODO: Maybe just strip them off
     fill: none;
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
-    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
+    stroke-dasharray: 0%, 240%; // Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
@@ -11632,7 +11632,7 @@ svg.spinner {
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
 
-table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
+table.table { // So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
   @include color ( $table-color );
@@ -11645,13 +11645,13 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   thead,
   tbody,
   tfoot {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   /* CELLS */
 
   tr {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   tr > * {
@@ -12008,7 +12008,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
     > * {
       margin-bottom: 0;
       flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-shrink: 1; // IE-10-11 default it to 0 instead
     }
 
   }
@@ -12038,7 +12038,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   &.top,
   &.left,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     /* TRIGGERS */
 
@@ -12077,7 +12077,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   &.top,
   &.bottom,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     flex-direction: column;
 
@@ -12103,7 +12103,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   /* TOP */
 
   &.top,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     /* TRIGGERS */
 
@@ -12205,13 +12205,13 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-shrink: 1; // IE-10-11 default it to 0 instead
 
       /* CONTAINER */
 
       > * {
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
       }
 
     }
@@ -12403,8 +12403,8 @@ a,
   color: inherit;
 }
 
-p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
-span > a, //INFO: Same reason as `p > a`
+p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, // Same reason as `p > a`
 .link {
 
   display: inline-block;
@@ -12440,7 +12440,7 @@ span > a {
   margin-bottom: 0;
 }
 
-//INFO: Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+// Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
 
 _:-ms-input-placeholder, :root a {
   display: block;
@@ -12496,7 +12496,7 @@ small {
 
 p {
   margin: 0 0 $gutter;
-  max-width: 100%; //INFO: This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+  max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 }
 
 /* MARK */

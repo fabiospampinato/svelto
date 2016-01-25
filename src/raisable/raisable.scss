@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+// The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
 
 /* RAISABLE */
 
@@ -18,7 +18,7 @@
 
     @each $depth, $shadow in $z-depths {
 
-      @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+      @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
 
         &:hover {
           @include z-depth-raised ( $depth, !important );

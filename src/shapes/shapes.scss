@@ -13,7 +13,7 @@
 %shape {
   @extend .widget;
   flex-grow: 0 !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
 }
 
 /* TRIANGLE */
@@ -27,7 +27,7 @@
   }
 
   &.down,
-  &:not(.up):not(.left):not(.right) { //INFO: Default direction if no one has been specified {
+  &:not(.up):not(.left):not(.right) { // Default direction if no one has been specified {
     @include triangle ( $triangle-size, down );
   }
 

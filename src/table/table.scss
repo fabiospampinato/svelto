@@ -15,7 +15,7 @@
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
 
-table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
+table.table { // So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
   @include color ( $table-color );
@@ -28,13 +28,13 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   thead,
   tbody,
   tfoot {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   /* CELLS */
 
   tr {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   tr > * {

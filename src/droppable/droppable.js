@@ -20,10 +20,10 @@
     plugin: true,
     selector: '.droppable',
     options: {
-      selector: '*', //INFO: Only Draggables matching this selector will be able to drop inside this Droppable
+      selector: '*', // Only Draggables matching this selector will be able to drop inside this Droppable
       classes: {
-        target: undefined, //INFO: The class to attach to the Droppable if the Draggable can be dropped inside of it
-        hover: undefined //INFO: The class to attach to the Droppable when hovered by a Draggable
+        target: undefined, // The class to attach to the Droppable if the Draggable can be dropped inside of it
+        hover: undefined // The class to attach to the Droppable when hovered by a Draggable
       },
       callbacks: {
         enter: _.noop,

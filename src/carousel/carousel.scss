@@ -84,7 +84,7 @@
     position: relative;
     overflow: hidden;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     background-color: $carousel-bg-color;
 
     /* ITEM */

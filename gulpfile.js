@@ -107,10 +107,10 @@ gulp.task ( 'images', function () {
              }))
              .pipe ( gulpif ( isProduction, bytediff.start () ) )
              .pipe ( gulpif ( isProduction && !isProduction, imagemin ({ //TODO: Re-enable, but fix the svg compression, right not it strips out pretty much everything, even the image
-               interlaced: true, //INFO: Affects GIF images
-               progressive: true, //INFO: Affects JPG images
-               optimizationLevel: 7, //INFO: Affects PNG images
-               multipass: true, //INFO: Affects SVG images
+               interlaced: true, // Affects GIF images
+               progressive: true, // Affects JPG images
+               optimizationLevel: 7, // Affects PNG images
+               multipass: true, // Affects SVG images
                svgoPlugins: [{
                  removeViewBox: false
                }],
@@ -148,7 +148,7 @@ gulp.task ( 'js-temp', function () {
                  map: path.basename
                }))
                .pipe ( flatten () )
-              //  .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) ) //INFO: Not needed anymore since we are outputing to the Meteor website
+              //  .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) ) // Not needed anymore since we are outputing to the Meteor website
                .on ( 'error', function ( err ) {
                  gutil.log ( err.message );
                })
@@ -206,7 +206,7 @@ gulp.task ( 'css', ['scss-full'], function () {
               precision: 10
             }).on ( 'error', sass.logError ) )
             .pipe ( autoprefixer ({
-              browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
+              browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], // Pointer events is available on IE 11+
               cascade: true,
               remove: true
             }))

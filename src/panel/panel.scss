@@ -22,13 +22,13 @@
   margin-bottom: 0;
   border-radius: 0;
   transition: transform $panel-transition-transform-duration;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
 
   &.left,
   &.right,
-  &:not(.top):not(.bottom) { //INFO: Default case
+  &:not(.top):not(.bottom) { // Default case
 
     top: 0;
     bottom: 0;
@@ -45,7 +45,7 @@
   /* LEFT */
 
   &.left,
-  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
+  &:not(.right):not(.top):not(.bottom) { // Default case
 
     left: 0;
     transform: translateX(- $panel-closed-vertical-spacing);

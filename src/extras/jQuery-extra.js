@@ -77,7 +77,7 @@
 
   $.fn.hsl = function ( h, s, l ) {
 
-    //INFO: It only works for setting
+    // It only works for setting
     //FIXME: I'm not sure if this plugin should exists
 
     return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
@@ -104,7 +104,7 @@
 
   };
 
-	$.fn.disableSelection = (function () { //INFO: Taken from jQuery UI
+	$.fn.disableSelection = (function () { // Taken from jQuery UI
 
     let event = ( 'onselectstart' in document.createElement ( 'div' ) ) ? 'selectstart' : Pointer.down;
 
@@ -116,13 +116,13 @@
 
 	})();
 
-	$.fn.enableSelection = function () { //INFO: Taken from jQuery UI
+	$.fn.enableSelection = function () { // Taken from jQuery UI
 
 		return this.off ( '.svelto-disable-selection' );
 
 	};
 
-	$.fn.zIndex = function ( val ) { //INFO: Taken from jQuery UI
+	$.fn.zIndex = function ( val ) { // Taken from jQuery UI
 
     if ( !_.isUndefined ( val ) ) {
 
@@ -204,7 +204,7 @@
   //
   // };
 
-  $.fn.scrollParent = function ( includeHidden ) { //INFO: Take from jQuery UI, optimized for performance
+  $.fn.scrollParent = function ( includeHidden ) { // Take from jQuery UI, optimized for performance
 
     let position = this.css ( 'position' );
 

@@ -65,10 +65,10 @@
 
   }
 
-  @if $color_name != inherit { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
-    p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
-    span > a { //INFO: Same as `p > a`
+    p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+    span > a { // Same as `p > a`
 
       color: $link #{$extra};
 
@@ -129,7 +129,7 @@
 
 /* UP */
 
-//INFO: Screen equal or greater than breakpoint
+// Screen equal or greater than breakpoint
 
 @mixin xsmall-up {
 
@@ -173,11 +173,11 @@
 
 /* DOWN */
 
-//INFO: Screen equal or lesser than next breakpoint
+// Screen equal or lesser than next breakpoint
 
 @mixin xsmall-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -185,7 +185,7 @@
 
 @mixin small-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -193,7 +193,7 @@
 
 @mixin medium-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -201,7 +201,7 @@
 
 @mixin large-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -217,7 +217,7 @@
 
 /* RANGE */
 
-//INFO: Screen within the breakpoint and the next one
+// Screen within the breakpoint and the next one
 
 @mixin xsmall-range {
 
@@ -610,7 +610,7 @@
 
 }
 
-@mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-absolute ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;
 
@@ -642,7 +642,7 @@
 
 }
 
-@mixin center-transform-fixed ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-fixed ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: fixed;
 
@@ -924,7 +924,7 @@
     border-right-color: $color;
 
 
-  } @else { //INFO: Defaulting to `down`
+  } @else { // Defaulting to `down`
 
     border-bottom-width: 0;
     border-top-color: $color;
@@ -976,7 +976,7 @@
 
 @mixin z-depth-raised ( $depth, $extra: '' ) {
 
-  $z-depth-max: length(map-keys($z-depths)) - 1; //INFO: `-1` since we start from `0`
+  $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
 
   @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
 

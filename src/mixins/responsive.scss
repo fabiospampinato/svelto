@@ -8,7 +8,7 @@
 
 /* UP */
 
-//INFO: Screen equal or greater than breakpoint
+// Screen equal or greater than breakpoint
 
 @mixin xsmall-up {
 
@@ -52,11 +52,11 @@
 
 /* DOWN */
 
-//INFO: Screen equal or lesser than next breakpoint
+// Screen equal or lesser than next breakpoint
 
 @mixin xsmall-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -64,7 +64,7 @@
 
 @mixin small-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -72,7 +72,7 @@
 
 @mixin medium-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -80,7 +80,7 @@
 
 @mixin large-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -96,7 +96,7 @@
 
 /* RANGE */
 
-//INFO: Screen within the breakpoint and the next one
+// Screen within the breakpoint and the next one
 
 @mixin xsmall-range {
 

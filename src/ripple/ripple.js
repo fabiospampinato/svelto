@@ -35,7 +35,7 @@
       animations: {
         show: Animations.xslow,
         hide: Animations.xslow,
-        overlap: Animations.xslow / 100 * 58 //INFO: Used for triggering the hide animation while still opening, for a better visual effect
+        overlap: Animations.xslow / 100 * 58 // Used for triggering the hide animation while still opening, for a better visual effect
       },
       callbacks: {
         show: _.noop,
@@ -68,7 +68,7 @@
 
     ___downTap () {
 
-      //INFO: Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
+      // Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
 
       this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
 
@@ -124,7 +124,7 @@
           insetY = point.Y - offset.top,
           sideX = Math.max ( insetX, this.$ripple.outerWidth () - insetX ),
           sideY = Math.max ( insetY, this.$ripple.outerHeight () - insetY ),
-          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), //INFO: Basically the max the distances from the point to the corners
+          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), // Basically the max the distances from the point to the corners
           diameter = radius * 2;
 
       /* ADDING */

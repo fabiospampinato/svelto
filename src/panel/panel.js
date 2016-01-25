@@ -9,7 +9,7 @@
  * @requires ../animations/animations.js
  * ========================================================================= */
 
-//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
+// Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
 
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
@@ -25,18 +25,18 @@
     selector: '.panel',
     options: {
       direction: 'left',
-      pin: false, //INFO: If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
+      pin: false, // If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
         close: true,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the opening flick gesture should be considered intentional
+        treshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
       classes: {
         show: 'show',
         open: 'open',
         slim: 'slim',
         pinned: 'pinned',
-        flickable: 'flickable' //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+        flickable: 'flickable' // As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
       },
       animations: {
         open: Animations.normal,

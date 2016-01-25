@@ -31,7 +31,7 @@
 
 }
 
-/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+/* WIDGET (PSEUDO ELEMENT) */ // It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
 
 .widget-pseudo {
   position: relative;

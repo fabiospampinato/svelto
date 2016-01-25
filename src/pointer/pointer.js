@@ -9,7 +9,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
+// Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
 (function ( $, _, Svelto, Browser ) {
 
@@ -23,7 +23,7 @@
         prefix: 'spointer'
       },
       dbltap: {
-        interval: 300 //INFO: 2 taps within this interval will trigger a dbltap event
+        interval: 300 // 2 taps within this interval will trigger a dbltap event
       },
     }
   };

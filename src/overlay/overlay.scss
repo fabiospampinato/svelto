@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 //FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
 
 /* OVERLAY */
@@ -40,7 +40,7 @@
   /* SIBLINGS */
 
   ~ * {
-    transition: opacity $overlay-siblings-transition-opacity-duration; //INFO: It interferes with other widgets probably //FIXME
+    transition: opacity $overlay-siblings-transition-opacity-duration; // It interferes with other widgets probably //FIXME
   }
 
   /* DIMMER */

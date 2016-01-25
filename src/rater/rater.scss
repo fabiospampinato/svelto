@@ -16,7 +16,7 @@
 .rater {
 
   @extend .widget;
-  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
+  display: inline-flex; // Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
 
   /* STAR */
 

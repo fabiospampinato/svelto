@@ -25,9 +25,9 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
-      cycle: false, //INFO: If the carousel should auto-cycle or not
-      interval: 5000, //INFO: Interval between auto-cycling slides
-      intervalMinimumRemaining: 1000, //INFO: Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
+      cycle: false, // If the carousel should auto-cycle or not
+      interval: 5000, // Interval between auto-cycling slides
+      intervalMinimumRemaining: 1000, // Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         previous: 'previous',
         current: 'current'

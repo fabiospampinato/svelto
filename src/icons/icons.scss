@@ -25,7 +25,7 @@
 /* ICON */
 
 %icon {
-  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend .widget-pseudo; // It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;
@@ -39,7 +39,7 @@
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
-  overflow: hidden; //INFO: So that in case the font doesn't get loaded the text won't overflow the icon box
+  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */

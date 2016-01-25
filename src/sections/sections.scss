@@ -25,8 +25,8 @@
 
   /* CENTER */
 
-  //INFO: Centering the center segment, if the left one xor the right one is missing
-  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+  // Centering the center segment, if the left one xor the right one is missing
+  // An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
 
   > .section-center:first-child,
   > .section-center:last-child {

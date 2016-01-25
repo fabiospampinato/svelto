@@ -25,32 +25,32 @@
     plugin: true,
     selector: '.draggable',
     options: {
-      draggable: _.true, //INFO: Checks if we can drag it or not
-      threshold: Browser.is.touchDevice ? 5 : 0, //INFO: Minimum moving treshold for triggering a drag
-      onlyHandlers: false, //INFO: Only an handler can drag it around
-      revert: false, //INFO: On dragend take it back to the starting position
-      axis: false, //INFO: Limit the movements to this axis
-      $helper: false, //INFO: An element to drag around instead of the draggable, can be `false` (in case the draggable will be dragged), a jQuery object or a function yiedling a jQuery object
+      draggable: _.true, // Checks if we can drag it or not
+      threshold: Browser.is.touchDevice ? 5 : 0, // Minimum moving treshold for triggering a drag
+      onlyHandlers: false, // Only an handler can drag it around
+      revert: false, // On dragend take it back to the starting position
+      axis: false, // Limit the movements to this axis
+      $helper: false, // An element to drag around instead of the draggable, can be `false` (in case the draggable will be dragged), a jQuery object or a function yiedling a jQuery object
       proxy: {
-        $element: false, //INFO: Drag the element also when we are triggering a drag from this element
-        noMotion: true //INFO: If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event (e.g. just a tap)
+        $element: false, // Drag the element also when we are triggering a drag from this element
+        noMotion: true // If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event (e.g. just a tap)
       },
-      constrainer: { //INFO: Constrain the drag inside the $element
-        $element: false, //INFO: If we want to keep the draggable inside this $element
-        center: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
-        tolerance: { //INFO: The amount of pixel flexibility that a constrainer has
+      constrainer: { // Constrain the drag inside the $element
+        $element: false, // If we want to keep the draggable inside this $element
+        center: false, // Set the constrain type, it will constrain the whole shape, or the center
+        tolerance: { // The amount of pixel flexibility that a constrainer has
           x: 0,
           y: 0
         }
       },
-      modifiers: { //INFO: It can modify the setted X and Y transforms values
+      modifiers: { // It can modify the setted X and Y transforms values
         x: _.true,
         y: _.true
       },
-      scroll: { //INFO: Autoscroll the window when near the border
-        active: false, //INFO: Active it or not
-        speed: 20, //INFO: The amount of autoscroll
-        sensitivity: 50 //INFO: How close it should be to tbe borders
+      scroll: { // Autoscroll the window when near the border
+        active: false, // Active it or not
+        speed: 20, // The amount of autoscroll
+        sensitivity: 50 // How close it should be to tbe borders
       },
       classes: {
         dragging: 'dragging'
@@ -210,7 +210,7 @@
             Y: this.options.modifiers.y ( translateY )
           };
 
-      if ( modifiedXY.X === false && modifiedXY.Y === false ) { //INFO: Aborted
+      if ( modifiedXY.X === false && modifiedXY.Y === false ) { // Aborted
 
         return baseXY;
 
@@ -299,7 +299,7 @@
 
       }
 
-      //INFO: Logic taken from jQuery UI
+      // Logic taken from jQuery UI
 
   		if ( this.scrollParentIsDocument ) {
 

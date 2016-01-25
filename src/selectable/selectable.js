@@ -21,7 +21,7 @@
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 5, //INFO: Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
+      moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
       classes: {
         selected: 'selected'
       },
@@ -102,7 +102,7 @@
 
     }
 
-    /* TAP */ //INFO: Just for touch devices
+    /* TAP */ // Just for touch devices
 
     __tapTouch ( event ) {
 
@@ -116,7 +116,7 @@
 
     __down ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; // Only the left click is allowed
 
       event.preventDefault ();
 
@@ -256,7 +256,7 @@
           minIndex = Math.min ( startIndex, endIndex ),
           maxIndex = Math.max ( startIndex, endIndex );
 
-      if ( minIndex === startIndex ) { //INFO: Direction: down
+      if ( minIndex === startIndex ) { // Direction: down
 
         minIndex += 1;
         maxIndex += 1;

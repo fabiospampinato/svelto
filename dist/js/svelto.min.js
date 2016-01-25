@@ -14,9 +14,9 @@
 
   let Svelto = {
     VERSION: '0.3.0-beta3',
-    $: ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), //INFO: Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
-    _: ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), //INFO: Checking the version also in order to distinguish it from `underscore`
-    Widgets: {} //INFO: Namespace for the Svelto's widgets' classes
+    $: ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), // Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
+    _: ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), // Checking the version also in order to distinguish it from `underscore`
+    Widgets: {} // Namespace for the Svelto's widgets' classes
   };
 
   /* ERRORS */
@@ -168,7 +168,7 @@
 
     },
 
-    timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo ( timestamp ) { // Timestamp is required in seconds
 
       let elapsed = _.nowSecs () - timestamp,
           justNow = 5;
@@ -399,7 +399,7 @@
   /* VARIABLES */
 
   let userAgent  = navigator.userAgent ? navigator.userAgent.toLowerCase () : '',
-      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
+      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', // Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
       appVersion = navigator.appVersion ? navigator.appVersion.toLowerCase () : '';
 
   /* CHECKS */
@@ -535,7 +535,7 @@
 
   $.fn.hsl = function ( h, s, l ) {
 
-    //INFO: It only works for setting
+    // It only works for setting
     //FIXME: I'm not sure if this plugin should exists
 
     return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
@@ -562,7 +562,7 @@
 
   };
 
-	$.fn.disableSelection = (function () { //INFO: Taken from jQuery UI
+	$.fn.disableSelection = (function () { // Taken from jQuery UI
 
     let event = ( 'onselectstart' in document.createElement ( 'div' ) ) ? 'selectstart' : Pointer.down;
 
@@ -574,13 +574,13 @@
 
 	})();
 
-	$.fn.enableSelection = function () { //INFO: Taken from jQuery UI
+	$.fn.enableSelection = function () { // Taken from jQuery UI
 
 		return this.off ( '.svelto-disable-selection' );
 
 	};
 
-	$.fn.zIndex = function ( val ) { //INFO: Taken from jQuery UI
+	$.fn.zIndex = function ( val ) { // Taken from jQuery UI
 
     if ( !_.isUndefined ( val ) ) {
 
@@ -662,7 +662,7 @@
   //
   // };
 
-  $.fn.scrollParent = function ( includeHidden ) { //INFO: Take from jQuery UI, optimized for performance
+  $.fn.scrollParent = function ( includeHidden ) { // Take from jQuery UI, optimized for performance
 
     let position = this.css ( 'position' );
 
@@ -783,8 +783,8 @@
 
   };
 
-  tmpl.cache = {}; //INFO: Store the cached templates
-  tmpl.cached = {}; //INFO: Store pairs like: `noty: true`, so that we know that we already cached `noty`'s templates
+  tmpl.cache = {}; // Store the cached templates
+  tmpl.cached = {}; // Store pairs like: `noty: true`, so that we know that we already cached `noty`'s templates
 
   tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 
@@ -848,7 +848,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
+// Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
 (function ( $, _, Svelto, Browser ) {
 
@@ -862,7 +862,7 @@
         prefix: 'spointer'
       },
       dbltap: {
-        interval: 300 //INFO: 2 taps within this interval will trigger a dbltap event
+        interval: 300 // 2 taps within this interval will trigger a dbltap event
       },
     }
   };
@@ -1142,7 +1142,7 @@
 
     /* VARIABLES */
 
-    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], //INFO: `Factory` methods, in order, to call when initing a `Widget`
+    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // `Factory` methods, in order, to call when initing a `Widget`
 
     /* METHODS */
 
@@ -1220,7 +1220,7 @@
 
       $.fn[name] = function ( options, ...args ) {
 
-        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); //INFO: Methods starting with '_' are private
+        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
 
         for ( let element of this ) {
 
@@ -1279,9 +1279,9 @@
 
     /* VARIABLES */
 
-    throttle: 150, //INFO: The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
-    previous: undefined, //INFO: Previous breakpoint
-    current: undefined, //INFO: Current breakpoint
+    throttle: 150, // The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
+    previous: undefined, // Previous breakpoint
+    current: undefined, // Current breakpoint
 
     /* RESIZE */
 
@@ -1378,8 +1378,8 @@
     keystroke: {
       match ( event, keystroke ) {
 
-        //INFO: It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
-        //INFO: ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
+        // It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
+        // ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
 
         let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
@@ -1435,33 +1435,33 @@
   /* CONFIG */
 
   let config = {
-    name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
-    plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
-    selector: false, //INFO: The selector used to select the website in the DOM, used for `Svelto.Widgetize`
+    name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
+    selector: false, // The selector used to select the website in the DOM, used for `Svelto.Widgetize`
     templates: {
-      base: false //INFO: It will be used as the constructor if no element is provided
+      base: false // It will be used as the constructor if no element is provided
     },
     options: {
-      characters: {}, //INFO: Used to store some characters needed by the widget
-      regexes: {}, //INFO: Contains the used regexes
-      errors: { //INFO: It contains all the errors that a widget can trigger
-        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' //INFO: Triggered when the widget is not initializable
+      characters: {}, // Used to store some characters needed by the widget
+      regexes: {}, // Contains the used regexes
+      errors: { // It contains all the errors that a widget can trigger
+        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' // Triggered when the widget is not initializable
       },
-      messages: {}, //INFO: Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
-      attributes: {}, //INFO: Attributes used by the widget
-      datas: {}, //INFO: CSS data-* names
-      classes: { //INFO: CSS classes to attach inside the widget
-        disabled: 'disabled', //INFO: Attached to disabled widgets
-        hidden: 'hidden' //INFO: Used to hide an element
+      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
+      attributes: {}, // Attributes used by the widget
+      datas: {}, // CSS data-* names
+      classes: { // CSS classes to attach inside the widget
+        disabled: 'disabled', // Attached to disabled widgets
+        hidden: 'hidden' // Used to hide an element
       },
-      selectors: { //INFO: Selectors to use inside the widget
+      selectors: { // Selectors to use inside the widget
         layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
       },
-      animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
-      breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
-      keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
-      callbacks: {} //INFO: Callbacks to trigger on specific events
+      animations: {}, // Object storing all the milliseconds required for each animation to occur
+      breakpoints: {}, // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
+      keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
+      keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
+      callbacks: {} // Callbacks to trigger on specific events
     }
   };
 
@@ -1554,7 +1554,7 @@
 
       /* BREAKPOINT */
 
-      this.___breakpoint (); //INFO: It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+      this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
       this.__breakpoint ();
 
     }
@@ -1581,7 +1581,7 @@
 
       }
 
-      configs.push ( {} ); //INFO: So that we merge them to a new object
+      configs.push ( {} ); // So that we merge them to a new object
 
       configs.reverse ();
 
@@ -1632,7 +1632,7 @@
 
     }
 
-    _createOptions () {} //INFO: Used to pass extra options
+    _createOptions () {} // Used to pass extra options
 
     /* DESTRUCTION */
 
@@ -1646,15 +1646,15 @@
 
     }
 
-    _destroy () {} //INFO: Clean the stuff, remove possible memory leaks
+    _destroy () {} // Clean the stuff, remove possible memory leaks
 
     /* SPECIAL */
 
-    static ready () {} //INFO: Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
+    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
 
-    _variables () {} //INFO: Init your variables inside this function
-    _init () {} //INFO: Perform the init stuff inside this function
-    _events () {} //INFO: Bind the event handlers inside this function
+    _variables () {} // Init your variables inside this function
+    _init () {} // Perform the init stuff inside this function
+    _events () {} // Bind the event handlers inside this function
 
     _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
 
@@ -1680,7 +1680,7 @@
 
     /* OPTIONS */
 
-    //INFO: We cannot have a `options` alias to `option`, since `options` is already defined in the config
+    // We cannot have a `options` alias to `option`, since `options` is already defined in the config
 
     option ( key, value ) {
 
@@ -2248,7 +2248,7 @@
     plugin: true,
     selector: '.accordion',
     options: {
-      multiple: false, //INFO: Wheter to allow multiple expanders open or not
+      multiple: false, // Wheter to allow multiple expanders open or not
       selectors: {
         expander: Widgets.Expander.config.selector
       },
@@ -2381,7 +2381,7 @@
  * @requires ../../widget/widget.js
  * ========================================================================= */
 
-//INFO: It supports only `box-sizing: border-box` inputs
+// It supports only `box-sizing: border-box` inputs
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -2478,7 +2478,7 @@
  * @requires ../../widget/widget.js
  * ========================================================================= */
 
-//INFO: It supports only `box-sizing: border-box` textareas
+// It supports only `box-sizing: border-box` textareas
 
 //TODO: Measure the needed height using canvas, if possible, improve the performance in general
 //FIXME: Don't measure the height by changing the height of the textarea, it would be much more performant if we don't do that
@@ -2913,9 +2913,9 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
-      cycle: false, //INFO: If the carousel should auto-cycle or not
-      interval: 5000, //INFO: Interval between auto-cycling slides
-      intervalMinimumRemaining: 1000, //INFO: Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
+      cycle: false, // If the carousel should auto-cycle or not
+      interval: 5000, // Interval between auto-cycling slides
+      intervalMinimumRemaining: 1000, // Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         previous: 'previous',
         current: 'current'
@@ -3257,8 +3257,8 @@
   let config = {
     name: 'targeter',
     options: {
-      widget: false, //INFO: The target's widget class
-      target: false, //INFO: Selector used to select the target
+      widget: false, // The target's widget class
+      target: false, // Selector used to select the target
       datas: {
         target: 'target'
       }
@@ -3449,7 +3449,7 @@
 
         color = _.trim ( color, '#' );
 
-        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars hex color notation
+        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { // Full 6-chars hex color notation
 
           return this.setHex ({
             r: color[0] + color[1],
@@ -3457,7 +3457,7 @@
             b: color[4] + color[5]
           });
 
-        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars hex color notation
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { // Shorthand 3-chars hex color notation
 
           return this.setHex ({
             r: color[0].repeat ( 2 ),
@@ -3803,12 +3803,12 @@
           return '#' + hex.r + hex.g + hex.b;
         }
       },
-      startColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      startColor: '#ff0000', // It can be anything supported by the `Color` obj
       format: {
-        type: 'hex', //INFO: One of the formats implemented in the exporters
-        data: undefined //INFO: Passed to the called the exporter
+        type: 'hex', // One of the formats implemented in the exporters
+        data: undefined // Passed to the called the exporter
       },
-      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
@@ -4258,8 +4258,8 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//INFO: When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
-//INFO: Accordion to ISO-8601 the first day of the week is Monday
+// When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
+// Accordion to ISO-8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
@@ -4304,17 +4304,17 @@
         }
       },
       months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      firstDayOfWeek: 0, //INFO: Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
+      firstDayOfWeek: 0, // Corresponding to the index in this array: `['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']`, setted to 0 since that to ISO-8601 the first day of the week is Monday
       date: {
-        min: false, //INFO: Minimum selectable date
-        max: false, //INFO: Maximum selectable date
-        today: false, //INFO: Today date
-        current: false, //INFO: Current date visible in the datepicker (basically the month we are viewing)
-        selected: false //INFO: The selcted date
+        min: false, // Minimum selectable date
+        max: false, // Maximum selectable date
+        today: false, // Today date
+        current: false, // Current date visible in the datepicker (basically the month we are viewing)
+        selected: false // The selcted date
       },
       format: {
-        type: 'UNIXTIMESTAMP', //INFO: One of the formats implemented in the exporters
-        data: { //INFO: Passed to the called importer and exporter
+        type: 'UNIXTIMESTAMP', // One of the formats implemented in the exporters
+        data: { // Passed to the called importer and exporter
           separator: '/'
         }
       },
@@ -4495,9 +4495,9 @@
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
           initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
-      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: Normalizing to 0 -> Monday
-      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); //INFO: Offsetting according to the provided setting
-      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; //INFO: Moving to the other side in case of negative offsetting
+      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; // Normalizing to 0 -> Monday
+      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); // Offsetting according to the provided setting
+      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; // Moving to the other side in case of negative offsetting
 
       /* PREV */
 
@@ -4804,32 +4804,32 @@
     plugin: true,
     selector: '.draggable',
     options: {
-      draggable: _.true, //INFO: Checks if we can drag it or not
-      threshold: Browser.is.touchDevice ? 5 : 0, //INFO: Minimum moving treshold for triggering a drag
-      onlyHandlers: false, //INFO: Only an handler can drag it around
-      revert: false, //INFO: On dragend take it back to the starting position
-      axis: false, //INFO: Limit the movements to this axis
-      $helper: false, //INFO: An element to drag around instead of the draggable, can be `false` (in case the draggable will be dragged), a jQuery object or a function yiedling a jQuery object
+      draggable: _.true, // Checks if we can drag it or not
+      threshold: Browser.is.touchDevice ? 5 : 0, // Minimum moving treshold for triggering a drag
+      onlyHandlers: false, // Only an handler can drag it around
+      revert: false, // On dragend take it back to the starting position
+      axis: false, // Limit the movements to this axis
+      $helper: false, // An element to drag around instead of the draggable, can be `false` (in case the draggable will be dragged), a jQuery object or a function yiedling a jQuery object
       proxy: {
-        $element: false, //INFO: Drag the element also when we are triggering a drag from this element
-        noMotion: true //INFO: If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event (e.g. just a tap)
+        $element: false, // Drag the element also when we are triggering a drag from this element
+        noMotion: true // If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event (e.g. just a tap)
       },
-      constrainer: { //INFO: Constrain the drag inside the $element
-        $element: false, //INFO: If we want to keep the draggable inside this $element
-        center: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
-        tolerance: { //INFO: The amount of pixel flexibility that a constrainer has
+      constrainer: { // Constrain the drag inside the $element
+        $element: false, // If we want to keep the draggable inside this $element
+        center: false, // Set the constrain type, it will constrain the whole shape, or the center
+        tolerance: { // The amount of pixel flexibility that a constrainer has
           x: 0,
           y: 0
         }
       },
-      modifiers: { //INFO: It can modify the setted X and Y transforms values
+      modifiers: { // It can modify the setted X and Y transforms values
         x: _.true,
         y: _.true
       },
-      scroll: { //INFO: Autoscroll the window when near the border
-        active: false, //INFO: Active it or not
-        speed: 20, //INFO: The amount of autoscroll
-        sensitivity: 50 //INFO: How close it should be to tbe borders
+      scroll: { // Autoscroll the window when near the border
+        active: false, // Active it or not
+        speed: 20, // The amount of autoscroll
+        sensitivity: 50 // How close it should be to tbe borders
       },
       classes: {
         dragging: 'dragging'
@@ -4989,7 +4989,7 @@
             Y: this.options.modifiers.y ( translateY )
           };
 
-      if ( modifiedXY.X === false && modifiedXY.Y === false ) { //INFO: Aborted
+      if ( modifiedXY.X === false && modifiedXY.Y === false ) { // Aborted
 
         return baseXY;
 
@@ -5078,7 +5078,7 @@
 
       }
 
-      //INFO: Logic taken from jQuery UI
+      // Logic taken from jQuery UI
 
   		if ( this.scrollParentIsDocument ) {
 
@@ -5367,7 +5367,7 @@
 
   /* TRANSFORMATIONS */
 
-  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //INFO: Their index is also the corresponsing index when applying `transform: matrix()`
+  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; // Their index is also the corresponsing index when applying `transform: matrix()`
 
   for ( let i = 0, l = transformations.length; i < l; i++ ) {
 
@@ -5457,21 +5457,21 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    axis: false, //INFO: Set a preferred axis
-    strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
-    $anchor: false, //INFO: Positionate next to an $anchor element
-    $pointer: false, //INFO: The element who is pointing to the anchor
-    point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
-    spacing: 0, //INFO: Extra space to leave around the positionable element
-    direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
-    directions: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+    axis: false, // Set a preferred axis
+    strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
+    $anchor: false, // Positionate next to an $anchor element
+    $pointer: false, // The element who is pointing to the anchor
+    point: false, // Positionate at coordinates, ex: { x: number, y: number }
+    spacing: 0, // Extra space to leave around the positionable element
+    direction: false, // Set a preferred direction, it has greater priority over the axis
+    directions: { // How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
       all: ['bottom', 'right', 'left', 'top']
     },
-    alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-      x: 'center', //INFO: `left`, center`, `right`
-      y: 'center' //INFOL `top`, center`, `bottom`
+    alignment: { // Set the alignment of the positionable relative to the anchor
+      x: 'center', // `left`, center`, `right`
+      y: 'center' // `top`, center`, `bottom`
     },
     callbacks: {
       change: _.noop
@@ -5882,7 +5882,7 @@
     plugin: true,
     selector: '.dropdown',
     options: {
-      positionate: {}, //INFO: Extending `$.positionate` options
+      positionate: {}, // Extending `$.positionate` options
       spacing: {
         attached: 0,
         noTip: 7,
@@ -6575,10 +6575,10 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-    point: false, //INFO: Used for the punctual search
-    binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-    $comparer: false, //INFO: Used for the overlapping search
+    startIndex : false, // Useful for speeding up the searching process if we may already guess the initial position...
+    point: false, // Used for the punctual search
+    binarySearch: true, // toggle the binary search when performing a punctual search
+    $comparer: false, // Used for the overlapping search
     $not: false,
     onlyBest: false
   };
@@ -6727,10 +6727,10 @@
     plugin: true,
     selector: '.droppable',
     options: {
-      selector: '*', //INFO: Only Draggables matching this selector will be able to drop inside this Droppable
+      selector: '*', // Only Draggables matching this selector will be able to drop inside this Droppable
       classes: {
-        target: undefined, //INFO: The class to attach to the Droppable if the Draggable can be dropped inside of it
-        hover: undefined //INFO: The class to attach to the Droppable when hovered by a Draggable
+        target: undefined, // The class to attach to the Droppable if the Draggable can be dropped inside of it
+        hover: undefined // The class to attach to the Droppable when hovered by a Draggable
       },
       callbacks: {
         enter: _.noop,
@@ -6994,8 +6994,8 @@
     plugin: true,
     selector: '.flickable',
     options: {
-      duration: 150, //INFO: Maximum duration of the flick gesture
-      threshold: 5, //INFO: Minimum moving treshold of the flick gesture
+      duration: 150, // Maximum duration of the flick gesture
+      threshold: 5, // Minimum moving treshold of the flick gesture
       callbacks: {
         flick: _.noop
       }
@@ -7608,7 +7608,7 @@
               '</div>'
     },
     options: {
-      anchor: { //INFO: Used for selecting the proper queue where this Noty should be attached
+      anchor: { // Used for selecting the proper queue where this Noty should be attached
         x: 'left',
         y: 'bottom'
       },
@@ -7622,16 +7622,16 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop //INFO: If it returns `false` the Noty won't be closed
+                onClick: _.noop // If it returns `false` the Noty won't be closed
              }],
       */
       type: 'alert',
       color: 'black',
       css: '',
-      persistent: false, //INFO: Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
       ttl: 3500,
-      ttlMinimumRemaining: 1000, //INFO: Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
+      ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         open: 'open'
       },
@@ -8025,8 +8025,8 @@
  * @requires ../regexes/regexes.js
  * ========================================================================= */
 
-//INFO: `value` is supposed to be a string
-//INFO: Strings will be trimmed inside some validators
+// `value` is supposed to be a string
+// Strings will be trimmed inside some validators
 
 (function ( $, _, Svelto, Regexes ) {
 
@@ -8158,7 +8158,7 @@
                 '</ul>'
     },
     options: {
-      validators: { //INFO: If not found here it will use `Validator`'s validators
+      validators: { // If not found here it will use `Validator`'s validators
         required ( value ) {
           return !Validator.empty ( value );
         },
@@ -8632,8 +8632,8 @@
     plugin: true,
     selector: 'form.ajax',
     options: {
-      spinnerOverlay: true, //INFO: Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
-      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
+      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
@@ -8735,7 +8735,7 @@
 
             } else if ( resj.url ) {
 
-              //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+              // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
               $.noty ( resj.msg || this.options.messages.redirecting );
 
@@ -8804,7 +8804,7 @@
     plugin: true,
     selector: 'form[data-sync-group]',
     options: {
-      live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
+      live: false, // Basically it triggers the syncing also when the `input` event is fired
       attributes: {
         name: 'name'
       },
@@ -9200,7 +9200,7 @@
  * @requires ../animations/animations.js
  * ========================================================================= */
 
-//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
+// Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
@@ -9742,12 +9742,12 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
-    action: false, //INFO: The action name
-    times: Infinity, //INFO: The times an action can be executed
-    expiry: false, //INFO: When a single action will expire and will then get removed from its group
-    fn: false, //INFO: The function to execute
-    cookie: { //INFO: Values that will get passed to `Cookie` when appropriate
+    group: 'nta', // The cookie name that holds the actions, a namespace for related actions basically
+    action: false, // The action name
+    times: Infinity, // The times an action can be executed
+    expiry: false, // When a single action will expire and will then get removed from its group
+    fn: false, // The function to execute
+    cookie: { // Values that will get passed to `Cookie` when appropriate
       end: Infinity,
       path: undefined,
       domain: undefined,
@@ -9812,7 +9812,7 @@
  * @requires ../noty/noty.js
  * ========================================================================= */
 
-//INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
 (function ( $, _, Svelto, Widgets ) {
 
@@ -10020,7 +10020,7 @@
  * @requires ../animations/animations.js
  * ========================================================================= */
 
-//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
+// Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
 
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
@@ -10036,18 +10036,18 @@
     selector: '.panel',
     options: {
       direction: 'left',
-      pin: false, //INFO: If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
+      pin: false, // If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
         close: true,
-        treshold: 20 //INFO: Amount of pixels close to the window border where the opening flick gesture should be considered intentional
+        treshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
       classes: {
         show: 'show',
         open: 'open',
         slim: 'slim',
         pinned: 'pinned',
-        flickable: 'flickable' //INFO: As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+        flickable: 'flickable' // As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
       },
       animations: {
         open: Animations.normal,
@@ -11168,16 +11168,16 @@ Prism.languages.js = Prism.languages.javascript;
             '</div>'
     },
     options: {
-      value: 0, //INFO: Percentage
-      colors: { //INFO: Colors to use for the progressbar
-        on: '', //INFO: Color of `.progressbar-highlight`
-        off: '' //INFO: Color of `.progressbar`
+      value: 0, // Percentage
+      colors: { // Colors to use for the progressbar
+        on: '', // Color of `.progressbar-highlight`
+        off: '' // Color of `.progressbar`
       },
-      striped: false, //INFO: Draw striped over it
-      indeterminate: false, //INFO: Indeterminate state
-      labeled: false, //INFO: Draw a label inside
-      decimals: 0, //INFO: Amount of decimals to round the label value to
-      size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
+      striped: false, // Draw striped over it
+      indeterminate: false, // Indeterminate state
+      labeled: false, // Draw a label inside
+      decimals: 0, // Amount of decimals to round the label value to
+      size: '', // Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
         value: 'value',
@@ -11554,7 +11554,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       cache: false,
       data: _.omit ( data, 'url' ),
-      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
       type: _.size ( data ) > 1 ? 'POST' : 'GET',
       url: data.url,
 
@@ -11695,7 +11695,7 @@ Prism.languages.js = Prism.languages.javascript;
       animations: {
         show: Animations.xslow,
         hide: Animations.xslow,
-        overlap: Animations.xslow / 100 * 58 //INFO: Used for triggering the hide animation while still opening, for a better visual effect
+        overlap: Animations.xslow / 100 * 58 // Used for triggering the hide animation while still opening, for a better visual effect
       },
       callbacks: {
         show: _.noop,
@@ -11728,7 +11728,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___downTap () {
 
-      //INFO: Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
+      // Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
 
       this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
 
@@ -11784,7 +11784,7 @@ Prism.languages.js = Prism.languages.javascript;
           insetY = point.Y - offset.top,
           sideX = Math.max ( insetX, this.$ripple.outerWidth () - insetX ),
           sideY = Math.max ( insetY, this.$ripple.outerHeight () - insetY ),
-          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), //INFO: Basically the max the distances from the point to the corners
+          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), // Basically the max the distances from the point to the corners
           diameter = radius * 2;
 
       /* ADDING */
@@ -11900,7 +11900,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     $window.on ( 'popstate pushstate', function () {
 
-      _.defer ( function () { //INFO: We need the `window.location.href` to get updated before
+      _.defer ( function () { // We need the `window.location.href` to get updated before
 
         let current = window.location.href.split ( '#' )[0];
 
@@ -12249,7 +12249,7 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: 'table.selectable',
     options: {
-      moveThreshold: 5, //INFO: Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
+      moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
       classes: {
         selected: 'selected'
       },
@@ -12330,7 +12330,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* TAP */ //INFO: Just for touch devices
+    /* TAP */ // Just for touch devices
 
     __tapTouch ( event ) {
 
@@ -12344,7 +12344,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __down ( event ) {
 
-      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== Mouse.buttons.LEFT ) return; // Only the left click is allowed
 
       event.preventDefault ();
 
@@ -12484,7 +12484,7 @@ Prism.languages.js = Prism.languages.javascript;
           minIndex = Math.min ( startIndex, endIndex ),
           maxIndex = Math.max ( startIndex, endIndex );
 
-      if ( minIndex === startIndex ) { //INFO: Direction: down
+      if ( minIndex === startIndex ) { // Direction: down
 
         minIndex += 1;
         maxIndex += 1;
@@ -12596,9 +12596,9 @@ Prism.languages.js = Prism.languages.javascript;
       min: 0,
       max: 100,
       value: 0,
-      step: 1, //INFO: Only multiples of `step` are valid values
-      decimals: 0, //INFO: Trunc the value to this amount of decimal numbers
-      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      step: 1, // Only multiples of `step` are valid values
+      decimals: 0, // Trunc the value to this amount of decimal numbers
+      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       datas: {
         min: 'min',
         max: 'max',
@@ -12964,11 +12964,11 @@ Prism.languages.js = Prism.languages.javascript;
       this.table = this.element;
       this.tbody = this.$tbody[0];
 
-      this.sortData = {}; //INFO: Caching object for datas and references to rows
+      this.sortData = {}; // Caching object for datas and references to rows
       this.isDirty = true;
 
       this.$currentSortable = false;
-      this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
+      this.currentIndex = false; // `$headers` index, not `$sortables` index
       this.currentDirection = false;
 
     }
@@ -13042,15 +13042,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       let $sortable = this.$headers.eq ( index );
 
-      if ( !$sortable.length ) return; //INFO: Bad index
+      if ( !$sortable.length ) return; // Bad index
 
       let sorterName = $sortable.data ( this.options.datas.sorter );
 
-      if ( !sorterName ) return; //INFO: Unsortable column
+      if ( !sorterName ) return; // Unsortable column
 
       let sorter = this.options.sorters[sorterName];
 
-      if ( !sorter ) return; //INFO: Unsupported sorter
+      if ( !sorter ) return; // Unsupported sorter
 
       direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
@@ -13113,15 +13113,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( index !== this.currentIndex || direction !== this.currentDirection || this.isDirty ) {
 
-        this.table.removeChild ( this.tbody ); //INFO: Detach
+        this.table.removeChild ( this.tbody ); // Detach
 
         for ( let i = 0, l = this.sortData[index].length; i < l; i++ ) {
 
-          this.tbody.appendChild ( this.sortData[index][i][0] ); //INFO: Reorder
+          this.tbody.appendChild ( this.sortData[index][i][0] ); // Reorder
 
         }
 
-        this.table.appendChild ( this.tbody ); //INFO: Attach
+        this.table.appendChild ( this.tbody ); // Attach
 
       }
 
@@ -13188,7 +13188,7 @@ Prism.languages.js = Prism.languages.javascript;
       min: 0,
       max: 100,
       value: 0,
-      step: 1, //INFO: Only multiples of `step` are valid values
+      step: 1, // Only multiples of `step` are valid values
       datas: {
         min: 'min',
         max: 'max',
@@ -14071,7 +14071,7 @@ Prism.languages.js = Prism.languages.javascript;
            '</div>'
     },
     options: {
-      init: '', //INFO: Initial value
+      init: '', // Initial value
       tags: [],
       tag: {
         minLength: 3,
@@ -14080,14 +14080,14 @@ Prism.languages.js = Prism.languages.javascript;
         css: 'compact outlined'
       },
       characters: {
-        forbid: true, //INFO: Forbid or not
+        forbid: true, // Forbid or not
         forbidden: [ '<', '>', ';', '`' ],
-        separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] //INFO: They are keyCodes
+        separator: ',', // It will also become kind of a forbidden character, used for insertion
+        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
       },
-      sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
-      escape: false, //INFO: Escape potential XSS characters
-      deburr: false, //INFO: Replace non basic-latin characters
+      sort: false, // The tags will be outputted in alphanumeric-sort order
+      escape: false, // Escape potential XSS characters
+      deburr: false, // Replace non basic-latin characters
       messages: {
         tooShort: '`$1` is shorter than $2 characters',
         duplicate: '`$1` is a duplicate',
@@ -14201,7 +14201,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( valueTrimmed.length < this.options.tag.minLength ) {
 
-        if ( valueTrimmed.length ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if ( valueTrimmed.length ) { // So it won't be triggered when the user presses enter and the $partial is empty
 
           $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
@@ -14267,7 +14267,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     ___partial () {
 
-      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); // `keypress` is for printable characters, `keydown` for the others
 
       this._on ( this.$partial, 'paste', this.__paste );
 
@@ -14370,7 +14370,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    add ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
+    add ( tag, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
       if ( _.isArray ( tag ) ) {
 
@@ -14403,7 +14403,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    remove ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
+    remove ( tag, edit, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
       let $tags = [],
           tags = [];
@@ -14568,8 +14568,8 @@ Prism.languages.js = Prism.languages.javascript;
     plugin: true,
     selector: '.timeago, .time-ago',
     options: {
-      timestamp: false, //INFO: UNIX timestamp
-      title: false, //INFO: Update the title or the text?
+      timestamp: false, // UNIX timestamp
+      title: false, // Update the title or the text?
       datas: {
         timestamp: 'timestamp'
       },

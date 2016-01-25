@@ -24,16 +24,16 @@
             '</div>'
     },
     options: {
-      value: 0, //INFO: Percentage
-      colors: { //INFO: Colors to use for the progressbar
-        on: '', //INFO: Color of `.progressbar-highlight`
-        off: '' //INFO: Color of `.progressbar`
+      value: 0, // Percentage
+      colors: { // Colors to use for the progressbar
+        on: '', // Color of `.progressbar-highlight`
+        off: '' // Color of `.progressbar`
       },
-      striped: false, //INFO: Draw striped over it
-      indeterminate: false, //INFO: Indeterminate state
-      labeled: false, //INFO: Draw a label inside
-      decimals: 0, //INFO: Amount of decimals to round the label value to
-      size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
+      striped: false, // Draw striped over it
+      indeterminate: false, // Indeterminate state
+      labeled: false, // Draw a label inside
+      decimals: 0, // Amount of decimals to round the label value to
+      size: '', // Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
         value: 'value',

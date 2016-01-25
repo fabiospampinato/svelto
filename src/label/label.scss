@@ -41,7 +41,7 @@ label {
 
   > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* OUTLINED */
@@ -154,7 +154,7 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
     & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
       margin-left: $label-center-extra-spacing;
@@ -168,7 +168,7 @@ label {
 
   &.compact {
 
-    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
       & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
         margin-left: $label-compact-center-extra-spacing;
@@ -197,7 +197,7 @@ label {
     }
 
     &.top-right,
-    &:not(.top-left):not(.bottom-left):not(.bottom-right) { //INFO: Default case
+    &:not(.top-left):not(.bottom-left):not(.bottom-right) { // Default case
       top: $label-badge-spacing;
       right: $label-badge-spacing;
     }
@@ -346,7 +346,7 @@ label {
     left: 0;
     border-top-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8 ));
     }
 
@@ -364,7 +364,7 @@ label {
     right: 0;
     border-top-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8));
     }
 
@@ -382,7 +382,7 @@ label {
     left: 0;
     border-bottom-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -400,7 +400,7 @@ label {
     right: 0;
     border-bottom-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -422,7 +422,7 @@ label {
     visibility: visible;
   }
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
     padding: $label-corner-padding-vertical $label-corner-padding-horizontal;
     height: $line-height-em + ( $label-corner-padding-vertical * 2 );
     width: $line-height-em + ( $label-corner-padding-horizontal * 2 );
@@ -446,7 +446,7 @@ label {
   margin-bottom: $gutter;
   z-index: 1;
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;

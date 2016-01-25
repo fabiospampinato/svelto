@@ -83,7 +83,7 @@
     align-items: center;
     position: relative;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* UNHIGHLIGHT */
@@ -95,7 +95,7 @@
     height: $slider-unhighlight-height;
     border-radius: $slider-unhighlight-border-radius;
     width: 100%;
-    transform: translateZ(0); //INFO: Otherwise the border radius is not always respected
+    transform: translateZ(0); // Otherwise the border radius is not always respected
   }
 
   /* HIGHLIGHT */

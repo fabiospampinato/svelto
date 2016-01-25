@@ -33,7 +33,7 @@
            '</div>'
     },
     options: {
-      init: '', //INFO: Initial value
+      init: '', // Initial value
       tags: [],
       tag: {
         minLength: 3,
@@ -42,14 +42,14 @@
         css: 'compact outlined'
       },
       characters: {
-        forbid: true, //INFO: Forbid or not
+        forbid: true, // Forbid or not
         forbidden: [ '<', '>', ';', '`' ],
-        separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] //INFO: They are keyCodes
+        separator: ',', // It will also become kind of a forbidden character, used for insertion
+        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
       },
-      sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
-      escape: false, //INFO: Escape potential XSS characters
-      deburr: false, //INFO: Replace non basic-latin characters
+      sort: false, // The tags will be outputted in alphanumeric-sort order
+      escape: false, // Escape potential XSS characters
+      deburr: false, // Replace non basic-latin characters
       messages: {
         tooShort: '`$1` is shorter than $2 characters',
         duplicate: '`$1` is a duplicate',
@@ -163,7 +163,7 @@
 
       if ( valueTrimmed.length < this.options.tag.minLength ) {
 
-        if ( valueTrimmed.length ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if ( valueTrimmed.length ) { // So it won't be triggered when the user presses enter and the $partial is empty
 
           $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
@@ -229,7 +229,7 @@
 
     ___partial () {
 
-      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); // `keypress` is for printable characters, `keydown` for the others
 
       this._on ( this.$partial, 'paste', this.__paste );
 
@@ -332,7 +332,7 @@
 
     }
 
-    add ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
+    add ( tag, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
       if ( _.isArray ( tag ) ) {
 
@@ -365,7 +365,7 @@
 
     }
 
-    remove ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
+    remove ( tag, edit, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
       let $tags = [],
           tags = [];

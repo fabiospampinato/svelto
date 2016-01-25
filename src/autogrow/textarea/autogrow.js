@@ -8,7 +8,7 @@
  * @requires ../../widget/widget.js
  * ========================================================================= */
 
-//INFO: It supports only `box-sizing: border-box` textareas
+// It supports only `box-sizing: border-box` textareas
 
 //TODO: Measure the needed height using canvas, if possible, improve the performance in general
 //FIXME: Don't measure the height by changing the height of the textarea, it would be much more performant if we don't do that

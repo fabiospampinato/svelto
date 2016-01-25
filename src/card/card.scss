@@ -53,7 +53,7 @@
 
   &-header,
   &-footer {
-    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
+    flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
   }
 
   /* FOOTER */
@@ -65,8 +65,8 @@
   /* BLOCK */
 
   &-block {
-    flex-grow: 1; //INFO: Takes the remaining space, if any
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-grow: 1; // Takes the remaining space, if any
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     overflow: auto;
   }
 

@@ -23,9 +23,9 @@
 
     /* VARIABLES */
 
-    throttle: 150, //INFO: The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
-    previous: undefined, //INFO: Previous breakpoint
-    current: undefined, //INFO: Current breakpoint
+    throttle: 150, // The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
+    previous: undefined, // Previous breakpoint
+    current: undefined, // Current breakpoint
 
     /* RESIZE */
 

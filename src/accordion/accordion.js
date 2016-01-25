@@ -21,7 +21,7 @@
     plugin: true,
     selector: '.accordion',
     options: {
-      multiple: false, //INFO: Wheter to allow multiple expanders open or not
+      multiple: false, // Wheter to allow multiple expanders open or not
       selectors: {
         expander: Widgets.Expander.config.selector
       },

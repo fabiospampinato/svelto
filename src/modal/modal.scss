@@ -13,7 +13,7 @@
 
 //FIXME: Not working on iPod's Safari
 
-//INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
+// In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
 
 .modal {
 
@@ -28,7 +28,7 @@
   transition-duration: $modal-transition-all-duration;
   margin: 0;
   cursor: pointer;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* CHILDREN */
 

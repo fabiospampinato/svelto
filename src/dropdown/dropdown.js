@@ -23,7 +23,7 @@
     plugin: true,
     selector: '.dropdown',
     options: {
-      positionate: {}, //INFO: Extending `$.positionate` options
+      positionate: {}, // Extending `$.positionate` options
       spacing: {
         attached: 0,
         noTip: 7,

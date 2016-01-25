@@ -22,7 +22,7 @@
       min: 0,
       max: 100,
       value: 0,
-      step: 1, //INFO: Only multiples of `step` are valid values
+      step: 1, // Only multiples of `step` are valid values
       datas: {
         min: 'min',
         max: 'max',

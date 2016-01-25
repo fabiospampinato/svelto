@@ -19,8 +19,8 @@
     plugin: true,
     selector: '.flickable',
     options: {
-      duration: 150, //INFO: Maximum duration of the flick gesture
-      threshold: 5, //INFO: Minimum moving treshold of the flick gesture
+      duration: 150, // Maximum duration of the flick gesture
+      threshold: 5, // Minimum moving treshold of the flick gesture
       callbacks: {
         flick: _.noop
       }

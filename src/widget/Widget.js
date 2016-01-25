@@ -23,33 +23,33 @@
   /* CONFIG */
 
   let config = {
-    name: 'widget', //INFO: The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
-    plugin: false, //INFO: A boolean that defines wheter the Widget is also a jQuery plugin or not
-    selector: false, //INFO: The selector used to select the website in the DOM, used for `Svelto.Widgetize`
+    name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
+    selector: false, // The selector used to select the website in the DOM, used for `Svelto.Widgetize`
     templates: {
-      base: false //INFO: It will be used as the constructor if no element is provided
+      base: false // It will be used as the constructor if no element is provided
     },
     options: {
-      characters: {}, //INFO: Used to store some characters needed by the widget
-      regexes: {}, //INFO: Contains the used regexes
-      errors: { //INFO: It contains all the errors that a widget can trigger
-        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' //INFO: Triggered when the widget is not initializable
+      characters: {}, // Used to store some characters needed by the widget
+      regexes: {}, // Contains the used regexes
+      errors: { // It contains all the errors that a widget can trigger
+        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' // Triggered when the widget is not initializable
       },
-      messages: {}, //INFO: Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
-      attributes: {}, //INFO: Attributes used by the widget
-      datas: {}, //INFO: CSS data-* names
-      classes: { //INFO: CSS classes to attach inside the widget
-        disabled: 'disabled', //INFO: Attached to disabled widgets
-        hidden: 'hidden' //INFO: Used to hide an element
+      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
+      attributes: {}, // Attributes used by the widget
+      datas: {}, // CSS data-* names
+      classes: { // CSS classes to attach inside the widget
+        disabled: 'disabled', // Attached to disabled widgets
+        hidden: 'hidden' // Used to hide an element
       },
-      selectors: { //INFO: Selectors to use inside the widget
+      selectors: { // Selectors to use inside the widget
         layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
       },
-      animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
-      breakpoints: {}, //INFO: Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
-      keyboard: true, //INFO: Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {},  //INFO: Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
-      callbacks: {} //INFO: Callbacks to trigger on specific events
+      animations: {}, // Object storing all the milliseconds required for each animation to occur
+      breakpoints: {}, // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
+      keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
+      keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
+      callbacks: {} // Callbacks to trigger on specific events
     }
   };
 
@@ -142,7 +142,7 @@
 
       /* BREAKPOINT */
 
-      this.___breakpoint (); //INFO: It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+      this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
       this.__breakpoint ();
 
     }
@@ -169,7 +169,7 @@
 
       }
 
-      configs.push ( {} ); //INFO: So that we merge them to a new object
+      configs.push ( {} ); // So that we merge them to a new object
 
       configs.reverse ();
 
@@ -220,7 +220,7 @@
 
     }
 
-    _createOptions () {} //INFO: Used to pass extra options
+    _createOptions () {} // Used to pass extra options
 
     /* DESTRUCTION */
 
@@ -234,15 +234,15 @@
 
     }
 
-    _destroy () {} //INFO: Clean the stuff, remove possible memory leaks
+    _destroy () {} // Clean the stuff, remove possible memory leaks
 
     /* SPECIAL */
 
-    static ready () {} //INFO: Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
+    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
 
-    _variables () {} //INFO: Init your variables inside this function
-    _init () {} //INFO: Perform the init stuff inside this function
-    _events () {} //INFO: Bind the event handlers inside this function
+    _variables () {} // Init your variables inside this function
+    _init () {} // Perform the init stuff inside this function
+    _events () {} // Bind the event handlers inside this function
 
     _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
 
@@ -268,7 +268,7 @@
 
     /* OPTIONS */
 
-    //INFO: We cannot have a `options` alias to `option`, since `options` is already defined in the config
+    // We cannot have a `options` alias to `option`, since `options` is already defined in the config
 
     option ( key, value ) {
 

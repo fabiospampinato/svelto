@@ -27,10 +27,10 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-    point: false, //INFO: Used for the punctual search
-    binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-    $comparer: false, //INFO: Used for the overlapping search
+    startIndex : false, // Useful for speeding up the searching process if we may already guess the initial position...
+    point: false, // Used for the punctual search
+    binarySearch: true, // toggle the binary search when performing a punctual search
+    $comparer: false, // Used for the overlapping search
     $not: false,
     onlyBest: false
   };

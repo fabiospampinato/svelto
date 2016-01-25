@@ -8,7 +8,7 @@
 
 /* BREAKPOINTS */
 
-//INFO: We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
+// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
 
 $breakpoint-xsmall: 0px !default;
 $breakpoint-small: 512px !default;

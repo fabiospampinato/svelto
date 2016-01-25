@@ -20,7 +20,7 @@ img {
   border-color: $border;
   width: 100%;
   height: auto;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 }
 
 p > img,
@@ -40,7 +40,7 @@ span > img {
   @include color ( $image-color );
   display: flex;
   flex-direction: column;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 
   /* LINK */
 

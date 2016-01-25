@@ -65,10 +65,10 @@
 
   }
 
-  @if $color_name != inherit { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
-    p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
-    span > a { //INFO: Same as `p > a`
+    p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+    span > a { // Same as `p > a`
 
       color: $link #{$extra};
 

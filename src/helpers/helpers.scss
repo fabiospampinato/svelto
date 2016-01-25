@@ -135,7 +135,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 100%; //INFO: Fixes a bug in IE 10
+  max-width: 100%; // Fixes a bug in IE 10
 }
 
 /* PADDING */
@@ -230,7 +230,7 @@
 
 /* ATTACHED */
 
-//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
 
 %attached {
   margin-bottom: 0;
@@ -315,7 +315,7 @@
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
 }
 

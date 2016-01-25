@@ -75,8 +75,8 @@
 
   };
 
-  tmpl.cache = {}; //INFO: Store the cached templates
-  tmpl.cached = {}; //INFO: Store pairs like: `noty: true`, so that we know that we already cached `noty`'s templates
+  tmpl.cache = {}; // Store the cached templates
+  tmpl.cached = {}; // Store pairs like: `noty: true`, so that we know that we already cached `noty`'s templates
 
   tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 

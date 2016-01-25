@@ -28,12 +28,12 @@
           return '#' + hex.r + hex.g + hex.b;
         }
       },
-      startColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
+      startColor: '#ff0000', // It can be anything supported by the `Color` obj
       format: {
-        type: 'hex', //INFO: One of the formats implemented in the exporters
-        data: undefined //INFO: Passed to the called the exporter
+        type: 'hex', // One of the formats implemented in the exporters
+        data: undefined // Passed to the called the exporter
       },
-      live: false, //INFO: Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',

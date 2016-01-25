@@ -16,7 +16,7 @@
 
   /* OPENER / CLOSER / TOGGLER */
 
-  //INFO: It should also have the `actionable` class to provide a better feedback
+  // It should also have the `actionable` class to provide a better feedback
 
   &-opener,
   &-closer,
@@ -510,7 +510,7 @@ th {
 
 }
 
-/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+/* WIDGET (PSEUDO ELEMENT) */ // It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
 
 .widget-pseudo {
   position: relative;
@@ -618,7 +618,7 @@ input {
   &[type="file"] {
 
     @include fill-absolute ();
-    width: 100%; //INFO: Or it will not stretch on mobile Chrome
+    width: 100%; // Or it will not stretch on mobile Chrome
     border: none;
     appearance: none;
     border-radius: inherit;
@@ -861,7 +861,7 @@ textarea.autogrow {
 
 html {
 
-  @include fill-absolute (); //INFO: This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  @include fill-absolute (); // This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-size: $font-size;
   box-sizing: border-box;
 
@@ -887,8 +887,8 @@ body {
   line-height: $line-height;
 }
 
-//INFO: Sticky footer at bottom fixes for IE10+
-//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+// Sticky footer at bottom fixes for IE10+
+// We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
 
 _:-ms-input-placeholder, :root body,
 _:-ms-input-placeholder, :root #content {
@@ -902,7 +902,7 @@ _:-ms-input-placeholder, :root #content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   transition: margin $base-transition-all-duration;
   width: 100%;
 
@@ -931,7 +931,7 @@ _:-ms-input-placeholder, :root #content {
   > main {
     @include last-child-no-gutter ();
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     padding: $gutter;
   }
 
@@ -1137,7 +1137,7 @@ _:-ms-input-placeholder, :root #content {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 100%; //INFO: Fixes a bug in IE 10
+  max-width: 100%; // Fixes a bug in IE 10
 }
 
 /* PADDING */
@@ -1232,7 +1232,7 @@ _:-ms-input-placeholder, :root #content {
 
 /* ATTACHED */
 
-//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
 
 %attached {
   margin-bottom: 0;
@@ -1317,7 +1317,7 @@ _:-ms-input-placeholder, :root #content {
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
 }
 
@@ -1386,7 +1386,7 @@ label {
 
   > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* OUTLINED */
@@ -1499,7 +1499,7 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
     & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
       margin-left: $label-center-extra-spacing;
@@ -1513,7 +1513,7 @@ label {
 
   &.compact {
 
-    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
 
       & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
         margin-left: $label-compact-center-extra-spacing;
@@ -1542,7 +1542,7 @@ label {
     }
 
     &.top-right,
-    &:not(.top-left):not(.bottom-left):not(.bottom-right) { //INFO: Default case
+    &:not(.top-left):not(.bottom-left):not(.bottom-right) { // Default case
       top: $label-badge-spacing;
       right: $label-badge-spacing;
     }
@@ -1691,7 +1691,7 @@ label {
     left: 0;
     border-top-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8 ));
     }
 
@@ -1709,7 +1709,7 @@ label {
     right: 0;
     border-top-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8));
     }
 
@@ -1727,7 +1727,7 @@ label {
     left: 0;
     border-bottom-left-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -1745,7 +1745,7 @@ label {
     right: 0;
     border-bottom-right-radius: inherit;
 
-    > * { //INFO: Both `.label` and `.button`
+    > * { // Both `.label` and `.button`
       transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
@@ -1767,7 +1767,7 @@ label {
     visibility: visible;
   }
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
     padding: $label-corner-padding-vertical $label-corner-padding-horizontal;
     height: $line-height-em + ( $label-corner-padding-vertical * 2 );
     width: $line-height-em + ( $label-corner-padding-horizontal * 2 );
@@ -1791,7 +1791,7 @@ label {
   margin-bottom: $gutter;
   z-index: 1;
 
-  > * { //INFO: Both `.label` and `.button`
+  > * { // Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;
@@ -2032,7 +2032,7 @@ button {
 
   &-header,
   &-footer {
-    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
+    flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
   }
 
   /* FOOTER */
@@ -2044,8 +2044,8 @@ button {
   /* BLOCK */
 
   &-block {
-    flex-grow: 1; //INFO: Takes the remaining space, if any
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-grow: 1; // Takes the remaining space, if any
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     overflow: auto;
   }
 
@@ -2164,7 +2164,7 @@ button {
 /* ICON */
 
 %icon {
-  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend .widget-pseudo; // It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;
@@ -2178,7 +2178,7 @@ button {
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
-  overflow: hidden; //INFO: So that in case the font doesn't get loaded the text won't overflow the icon box
+  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */
@@ -2345,7 +2345,7 @@ i.icon {
     position: relative;
     overflow: hidden;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     background-color: $carousel-bg-color;
 
     /* ITEM */
@@ -2682,7 +2682,7 @@ i.icon {
   .chat-msg-content {
 
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     margin-bottom: 0;
 
     /* HEADER */
@@ -2783,7 +2783,7 @@ i.icon {
 
     }
 
-    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
     _:-ms-lang(x), & .chat-msg-content {
       margin-left: $gutter;
@@ -2804,11 +2804,11 @@ i.icon {
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
-      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
       _:-ms-lang(x), &:before {
         display: none !important;
@@ -2870,7 +2870,7 @@ i.icon {
 
     }
 
-    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
     _:-ms-lang(x), & .chat-msg-content {
       margin-right: $gutter;
@@ -2891,11 +2891,11 @@ i.icon {
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
       }
 
-      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
       _:-ms-lang(x), &:before {
         display: none !important;
@@ -3472,7 +3472,7 @@ hr {
   //FIXME: It doesn't work in IE10
 
   &.linear,
-  &:not(.block):not(.text):not(.spacer) { //INFO: The default one
+  &:not(.block):not(.text):not(.spacer) { // The default one
 
     /* EMPTY */
 
@@ -3495,8 +3495,8 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
+        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
         min-width: $gutter;
       }
 
@@ -3521,7 +3521,7 @@ hr {
         width: 1px;
         align-self: stretch;
         flex-grow: 0;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         margin: 0 $gutter-half $gutter !important;
       }
 
@@ -3531,7 +3531,7 @@ hr {
 
         flex-direction: column;
         flex-grow: 0 !important;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
         align-self: stretch;
         // justify-content: center;
         margin: 0 $gutter-half $gutter;
@@ -3543,7 +3543,7 @@ hr {
           width: 1px;
           min-height: $gutter;
           flex-grow: 1;
-          flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+          flex-shrink: 1; // IE-10-11 default it to 0 instead
         }
 
         &:before {
@@ -3690,7 +3690,7 @@ hr {
     box-sizing: content-box;
   }
 
-  //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
 
   _:-ms-lang(x), &:before {
     display: none;
@@ -3711,7 +3711,7 @@ hr {
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); // The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -3734,7 +3734,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); // The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -3757,7 +3757,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -3780,7 +3780,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }
@@ -3825,7 +3825,7 @@ hr {
 
 }
 
-//INFO: Card dropdown max height fix for IE10+
+// Card dropdown max height fix for IE10+
 
 _:-ms-input-placeholder, :root .dropdown.card {
 
@@ -4159,7 +4159,7 @@ header {
 
 /* HIDDEN-*-UP */
 
-//INFO: Screen equal or greater than breakpoint
+// Screen equal or greater than breakpoint
 
 @include xsmall-up {
 
@@ -4203,7 +4203,7 @@ header {
 
 /* HIDDEN-*-DOWN */
 
-//INFO: Screen equal or lesser than next breakpoint
+// Screen equal or lesser than next breakpoint
 
 @include xsmall-down {
 
@@ -4320,7 +4320,7 @@ header {
 
   &.highlight-bottom,
   &.highlight-all,
-  &:not(.highlight-top):not(.highlight-right):not(.highlight-left) { //INFO: Default direction if no one has been specified
+  &:not(.highlight-top):not(.highlight-right):not(.highlight-left) { // Default direction if no one has been specified
 
     &:after {
       border-bottom-width: $highlight-size;
@@ -4384,7 +4384,7 @@ img {
   border-color: $border;
   width: 100%;
   height: auto;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 }
 
 p > img,
@@ -4404,7 +4404,7 @@ span > img {
   @include color ( $image-color );
   display: flex;
   flex-direction: column;
-  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 
   /* LINK */
 
@@ -4537,7 +4537,7 @@ span > img {
 
   &-center {
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
     flex-basis: 0;
     order: 1;
   }
@@ -4610,7 +4610,7 @@ span > img {
 
 //FIXME: Not working on iPod's Safari
 
-//INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
+// In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
 
 .modal {
 
@@ -4625,7 +4625,7 @@ span > img {
   transition-duration: $modal-transition-all-duration;
   margin: 0;
   cursor: pointer;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* CHILDREN */
 
@@ -4692,7 +4692,7 @@ span > img {
 
 .multiple {
 
-  border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  border-color: inherit; // So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -4700,7 +4700,7 @@ span > img {
 
   /* HORIZONTAL GUTTER */
 
-  &:not(.no-wrap):not(.vertical):not(.joined) { //INFO: Here the gutter is needed
+  &:not(.no-wrap):not(.vertical):not(.joined) { // Here the gutter is needed
 
     @include margin-horizontal ( - $gutter-half );
 
@@ -4710,7 +4710,7 @@ span > img {
 
   }
 
-  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { //INFO: Here we just need the gutter in between
+  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { // Here we just need the gutter in between
 
     &:not(:first-child) {
       margin-left: $gutter-half;
@@ -4785,7 +4785,7 @@ span > img {
 
       > input,
       > textarea {
-        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 
     }
@@ -4799,7 +4799,7 @@ span > img {
   /* EQUAL */
 
   &.equal > * {
-    flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+    flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
   }
 
   /* JOINED */
@@ -4910,7 +4910,7 @@ span > img {
 
       > * {
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
       }
 
     }
@@ -4941,7 +4941,7 @@ span > img {
 
 /* MULTIPLE IN TABLE CELL */
 
-table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
+table > :not(tfoot) td .multiple:only-child { // Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
   display: inline-flex;
 }
 
@@ -5044,7 +5044,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 }
 
-//INFO: IE-10-11 Fix so that noties won't expand over the viewport
+// IE-10-11 Fix so that noties won't expand over the viewport
 
 _:-ms-input-placeholder, :root .noty-queues  {
 
@@ -5346,7 +5346,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 //FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
 
 /* OVERLAY */
@@ -5380,7 +5380,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
   /* SIBLINGS */
 
   ~ * {
-    transition: opacity $overlay-siblings-transition-opacity-duration; //INFO: It interferes with other widgets probably //FIXME
+    transition: opacity $overlay-siblings-transition-opacity-duration; // It interferes with other widgets probably //FIXME
   }
 
   /* DIMMER */
@@ -5487,13 +5487,13 @@ _:-ms-input-placeholder, :root .noty-queues  {
   margin-bottom: 0;
   border-radius: 0;
   transition: transform $panel-transition-transform-duration;
-  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
+  overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
 
   &.left,
   &.right,
-  &:not(.top):not(.bottom) { //INFO: Default case
+  &:not(.top):not(.bottom) { // Default case
 
     top: 0;
     bottom: 0;
@@ -5510,7 +5510,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
   /* LEFT */
 
   &.left,
-  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
+  &:not(.right):not(.top):not(.bottom) { // Default case
 
     left: 0;
     transform: translateX(- $panel-closed-vertical-spacing);
@@ -5981,7 +5981,7 @@ code[class*='language-'] {
   overflow: hidden;
   height: $progressbar-height;
   border-radius: $progressbar-border-radius;
-  transform: translateZ(0); //INFO: Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
+  transform: translateZ(0); // Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
 
   /* HIGHLIGHT */
 
@@ -6194,7 +6194,7 @@ code[class*='language-'] {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//INFO: The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+// The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
 
 /* RAISABLE */
 
@@ -6206,7 +6206,7 @@ code[class*='language-'] {
 
     @each $depth, $shadow in $z-depths {
 
-      @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+      @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
 
         &:hover {
           @include z-depth-raised ( $depth, !important );
@@ -6242,7 +6242,7 @@ code[class*='language-'] {
 .rater {
 
   @extend .widget;
-  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
+  display: inline-flex; // Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
 
   /* STAR */
 
@@ -6425,7 +6425,7 @@ code[class*='language-'] {
 
   position: relative;
   overflow: hidden;
-  transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+  transform: translateZ(0); // For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
 
   /* CIRCLE */
 
@@ -6486,7 +6486,7 @@ code[class*='language-'] {
 
 }
 
-a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sure?
+a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
   z-index: -1;
 }
 
@@ -6517,8 +6517,8 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sur
 
   /* CENTER */
 
-  //INFO: Centering the center segment, if the left one xor the right one is missing
-  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+  // Centering the center segment, if the left one xor the right one is missing
+  // An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
 
   > .section-center:first-child,
   > .section-center:last-child {
@@ -6696,7 +6696,7 @@ table.table.selectable {
 %shape {
   @extend .widget;
   flex-grow: 0 !important;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
 }
 
 /* TRIANGLE */
@@ -6710,7 +6710,7 @@ table.table.selectable {
   }
 
   &.down,
-  &:not(.up):not(.left):not(.right) { //INFO: Default direction if no one has been specified {
+  &:not(.up):not(.left):not(.right) { // Default direction if no one has been specified {
     @include triangle ( $triangle-size, down );
   }
 
@@ -6860,7 +6860,7 @@ table.table.selectable {
     align-items: center;
     position: relative;
     flex-grow: 1;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
   }
 
   /* UNHIGHLIGHT */
@@ -6872,7 +6872,7 @@ table.table.selectable {
     height: $slider-unhighlight-height;
     border-radius: $slider-unhighlight-border-radius;
     width: 100%;
-    transform: translateZ(0); //INFO: Otherwise the border radius is not always respected
+    transform: translateZ(0); // Otherwise the border radius is not always respected
   }
 
   /* HIGHLIGHT */
@@ -7212,14 +7212,14 @@ svg.spinner {
   /* CIRCLE */
 
   circle {
-    cx: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    cy: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    r: $spinner-radius; //INFO: This only works on Chrome //TODO: Maybe just strip them off
+    cx: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    cy: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    r: $spinner-radius; // This only works on Chrome //TODO: Maybe just strip them off
     fill: none;
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
-    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
+    stroke-dasharray: 0%, 240%; // Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
@@ -7600,7 +7600,7 @@ svg.spinner {
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
 
-table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
+table.table { // So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
   @include color ( $table-color );
@@ -7613,13 +7613,13 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   thead,
   tbody,
   tfoot {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   /* CELLS */
 
   tr {
-    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+    border-color: inherit; // So that when the children also inherit the border color is actually inherited
   }
 
   tr > * {
@@ -7976,7 +7976,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
     > * {
       margin-bottom: 0;
       flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-shrink: 1; // IE-10-11 default it to 0 instead
     }
 
   }
@@ -8006,7 +8006,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   &.top,
   &.left,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     /* TRIGGERS */
 
@@ -8045,7 +8045,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   &.top,
   &.bottom,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     flex-direction: column;
 
@@ -8071,7 +8071,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   /* TOP */
 
   &.top,
-  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+  &:not(.bottom):not(.left):not(.right) { // Default case
 
     /* TRIGGERS */
 
@@ -8173,13 +8173,13 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-shrink: 1; // IE-10-11 default it to 0 instead
 
       /* CONTAINER */
 
       > * {
         flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10-11 default it to 0 instead
       }
 
     }
@@ -8371,8 +8371,8 @@ a,
   color: inherit;
 }
 
-p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
-span > a, //INFO: Same reason as `p > a`
+p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, // Same reason as `p > a`
 .link {
 
   display: inline-block;
@@ -8408,7 +8408,7 @@ span > a {
   margin-bottom: 0;
 }
 
-//INFO: Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+// Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
 
 _:-ms-input-placeholder, :root a {
   display: block;
@@ -8464,7 +8464,7 @@ small {
 
 p {
   margin: 0 0 $gutter;
-  max-width: 100%; //INFO: This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+  max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 }
 
 /* MARK */

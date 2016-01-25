@@ -24,7 +24,7 @@
 
     },
 
-    timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo ( timestamp ) { // Timestamp is required in seconds
 
       let elapsed = _.nowSecs () - timestamp,
           justNow = 5;

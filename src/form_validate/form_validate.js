@@ -33,7 +33,7 @@
                 '</ul>'
     },
     options: {
-      validators: { //INFO: If not found here it will use `Validator`'s validators
+      validators: { // If not found here it will use `Validator`'s validators
         required ( value ) {
           return !Validator.empty ( value );
         },

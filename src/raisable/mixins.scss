@@ -10,7 +10,7 @@
 
 @mixin z-depth-raised ( $depth, $extra: '' ) {
 
-  $z-depth-max: length(map-keys($z-depths)) - 1; //INFO: `-1` since we start from `0`
+  $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
 
   @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
 

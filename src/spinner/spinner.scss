@@ -30,14 +30,14 @@ svg.spinner {
   /* CIRCLE */
 
   circle {
-    cx: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    cy: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
-    r: $spinner-radius; //INFO: This only works on Chrome //TODO: Maybe just strip them off
+    cx: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    cy: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
+    r: $spinner-radius; // This only works on Chrome //TODO: Maybe just strip them off
     fill: none;
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
-    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
+    stroke-dasharray: 0%, 240%; // Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 

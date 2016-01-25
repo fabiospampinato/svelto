@@ -14,7 +14,7 @@
 
   position: relative;
   overflow: hidden;
-  transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+  transform: translateZ(0); // For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
 
   /* CIRCLE */
 
@@ -75,6 +75,6 @@
 
 }
 
-a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sure?
+a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
   z-index: -1;
 }

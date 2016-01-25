@@ -64,7 +64,7 @@
               '</div>'
     },
     options: {
-      anchor: { //INFO: Used for selecting the proper queue where this Noty should be attached
+      anchor: { // Used for selecting the proper queue where this Noty should be attached
         x: 'left',
         y: 'bottom'
       },
@@ -78,16 +78,16 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop //INFO: If it returns `false` the Noty won't be closed
+                onClick: _.noop // If it returns `false` the Noty won't be closed
              }],
       */
       type: 'alert',
       color: 'black',
       css: '',
-      persistent: false, //INFO: Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
       ttl: 3500,
-      ttlMinimumRemaining: 1000, //INFO: Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
+      ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
       classes: {
         open: 'open'
       },

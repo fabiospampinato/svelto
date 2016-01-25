@@ -9,8 +9,8 @@
  * @requires ../regexes/regexes.js
  * ========================================================================= */
 
-//INFO: `value` is supposed to be a string
-//INFO: Strings will be trimmed inside some validators
+// `value` is supposed to be a string
+// Strings will be trimmed inside some validators
 
 (function ( $, _, Svelto, Regexes ) {
 

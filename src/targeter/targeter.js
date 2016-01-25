@@ -17,8 +17,8 @@
   let config = {
     name: 'targeter',
     options: {
-      widget: false, //INFO: The target's widget class
-      target: false, //INFO: Selector used to select the target
+      widget: false, // The target's widget class
+      target: false, // Selector used to select the target
       datas: {
         target: 'target'
       }

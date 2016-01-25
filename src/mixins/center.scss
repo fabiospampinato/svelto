@@ -51,7 +51,7 @@
 
 }
 
-@mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-absolute ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;
 
@@ -83,7 +83,7 @@
 
 }
 
-@mixin center-transform-fixed ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-fixed ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: fixed;
 

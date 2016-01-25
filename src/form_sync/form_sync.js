@@ -21,7 +21,7 @@
     plugin: true,
     selector: 'form[data-sync-group]',
     options: {
-      live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
+      live: false, // Basically it triggers the syncing also when the `input` event is fired
       attributes: {
         name: 'name'
       },

@@ -27,8 +27,8 @@
     plugin: true,
     selector: 'form.ajax',
     options: {
-      spinnerOverlay: true, //INFO: Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
-      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
+      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
       messages: {
         error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
@@ -130,7 +130,7 @@
 
             } else if ( resj.url ) {
 
-              //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+              // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
               $.noty ( resj.msg || this.options.messages.redirecting );
 

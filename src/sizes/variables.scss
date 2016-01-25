@@ -13,7 +13,7 @@
 
 @function get_size ( $icon_size ) {
 
-  //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
 
   @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
 
@@ -21,8 +21,8 @@
 
 /* ICON SIZES */
 
-//INFO: The wanted icon size for the particular size
-//INFO: The [RECOMMENDED] sizes are those where the icons look better
+// The wanted icon size for the particular size
+// The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
 $size-xxxsmall-icon: 9px !default;
@@ -38,7 +38,7 @@ $size-xxxxlarge-icon: 60px !default;
 
 /* SIZES */
 
-//INFO: The [RECOMMENDED] sizes are those where the icons look better
+// The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
 $size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;

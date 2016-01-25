@@ -74,11 +74,11 @@
       this.table = this.element;
       this.tbody = this.$tbody[0];
 
-      this.sortData = {}; //INFO: Caching object for datas and references to rows
+      this.sortData = {}; // Caching object for datas and references to rows
       this.isDirty = true;
 
       this.$currentSortable = false;
-      this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
+      this.currentIndex = false; // `$headers` index, not `$sortables` index
       this.currentDirection = false;
 
     }
@@ -152,15 +152,15 @@
 
       let $sortable = this.$headers.eq ( index );
 
-      if ( !$sortable.length ) return; //INFO: Bad index
+      if ( !$sortable.length ) return; // Bad index
 
       let sorterName = $sortable.data ( this.options.datas.sorter );
 
-      if ( !sorterName ) return; //INFO: Unsortable column
+      if ( !sorterName ) return; // Unsortable column
 
       let sorter = this.options.sorters[sorterName];
 
-      if ( !sorter ) return; //INFO: Unsupported sorter
+      if ( !sorter ) return; // Unsupported sorter
 
       direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
@@ -223,15 +223,15 @@
 
       if ( index !== this.currentIndex || direction !== this.currentDirection || this.isDirty ) {
 
-        this.table.removeChild ( this.tbody ); //INFO: Detach
+        this.table.removeChild ( this.tbody ); // Detach
 
         for ( let i = 0, l = this.sortData[index].length; i < l; i++ ) {
 
-          this.tbody.appendChild ( this.sortData[index][i][0] ); //INFO: Reorder
+          this.tbody.appendChild ( this.sortData[index][i][0] ); // Reorder
 
         }
 
-        this.table.appendChild ( this.tbody ); //INFO: Attach
+        this.table.appendChild ( this.tbody ); // Attach
 
       }
 

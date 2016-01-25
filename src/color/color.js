@@ -83,7 +83,7 @@
 
         color = _.trim ( color, '#' );
 
-        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars hex color notation
+        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { // Full 6-chars hex color notation
 
           return this.setHex ({
             r: color[0] + color[1],
@@ -91,7 +91,7 @@
             b: color[4] + color[5]
           });
 
-        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars hex color notation
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { // Shorthand 3-chars hex color notation
 
           return this.setHex ({
             r: color[0].repeat ( 2 ),

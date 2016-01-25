@@ -16,12 +16,12 @@
   /* DEFAULT OPTIONS */
 
   let defaults = {
-    group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
-    action: false, //INFO: The action name
-    times: Infinity, //INFO: The times an action can be executed
-    expiry: false, //INFO: When a single action will expire and will then get removed from its group
-    fn: false, //INFO: The function to execute
-    cookie: { //INFO: Values that will get passed to `Cookie` when appropriate
+    group: 'nta', // The cookie name that holds the actions, a namespace for related actions basically
+    action: false, // The action name
+    times: Infinity, // The times an action can be executed
+    expiry: false, // When a single action will expire and will then get removed from its group
+    fn: false, // The function to execute
+    cookie: { // Values that will get passed to `Cookie` when appropriate
       end: Infinity,
       path: undefined,
       domain: undefined,
