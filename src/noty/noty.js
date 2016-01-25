@@ -11,7 +11,6 @@
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
-//TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -230,9 +229,17 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( Pointer.tap, this.close );
+        this._on ( Pointer.tap, this.__tap );
 
       }
+
+    }
+
+    __tap ( event ) {
+
+      event.preventDefault (); // Otherwise the click goes through the noty in Chrome for iOS
+
+      this.close ();
 
     }
 
