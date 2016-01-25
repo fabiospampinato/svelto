@@ -8,8 +8,6 @@
  * @requires ../widget/widget.js
  * ========================================================================= */
 
-//TODO: Maybe add the ability to open it
-
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';

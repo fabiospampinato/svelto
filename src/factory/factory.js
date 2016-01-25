@@ -59,8 +59,6 @@
 
       if ( _.isObject ( namespace ) ) {
 
-        //TODO: Gets class name instead, does it get modified for instance when the code gets minified?
-
         let name = _.capitalize ( Widget.config.name );
 
         namespace[name] = Widget;

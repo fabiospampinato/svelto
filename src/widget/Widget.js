@@ -685,27 +685,39 @@
 
     /* INSERTION */
 
-    insertBefore ( selector ) {
+    before ( ...content ) {
 
-      this.$element.insertBefore ( selector );
-
-    }
-
-    insertAfter ( selector ) {
-
-      this.$element.insertAfter ( selector );
+      this.$element.before ( ...content );
 
     }
 
-    prependTo ( selector ) {
+    insertBefore ( target ) {
 
-      this.$element.prependTo ( selector );
+      this.$element.insertBefore ( target );
 
     }
 
-    appendTo ( selector ) {
+    after ( ...content ) {
 
-      this.$element.appendTo ( selector );
+      this.$element.after ( ...content );
+
+    }
+
+    insertAfter ( target ) {
+
+      this.$element.insertAfter ( target );
+
+    }
+
+    prependTo ( target ) {
+
+      this.$element.prependTo ( target );
+
+    }
+
+    appendTo ( target ) {
+
+      this.$element.appendTo ( target );
 
     }
 
