@@ -7745,28 +7745,6 @@
     }
   };
 
-  /* HELPER */
-
-  $.noty = function ( options = {} ) {
-
-    /* OPTIONS */
-
-    options = _.isString ( options ) ? { body: options } : options;
-
-    /* TYPE */
-
-    if ( options.buttons ) {
-
-      options.type = 'action';
-
-    }
-
-    /* NOTY */
-
-    return new Noty ( options );
-
-  };
-
   /* NOTY */
 
   class Noty extends Widgets.Widget {
@@ -9977,6 +9955,44 @@
 
 
 /* =========================================================================
+ * Svelto - Noty (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires noty.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.noty = function ( options = {} ) {
+
+    /* OPTIONS */
+
+    options = _.isString ( options ) ? { body: options } : options;
+
+    /* TYPE */
+
+    if ( options.buttons ) {
+
+      options.type = 'action';
+
+    }
+
+    /* NOTY */
+
+    return new Widgets.Noty ( options );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
+
+/* =========================================================================
  * Svelto - One Time Action
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -11284,16 +11300,6 @@ Prism.languages.js = Prism.languages.javascript;
     }
   };
 
-  /* HELPER */
-
-  $.progressbar = function ( options ) {
-
-    options = _.isNumber ( options ) ? { value: options } : options;
-
-    return new Widgets.Progressbar ( options );
-
-  };
-
   /* PROGRESSBAR */
 
   class Progressbar extends Widgets.Widget {
@@ -11396,6 +11402,32 @@ Prism.languages.js = Prism.languages.javascript;
   Factory.init ( Progressbar, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
+
+/* =========================================================================
+ * Svelto - Progressbar (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires progressbar.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.progressbar = function ( options ) {
+
+    options = _.isNumber ( options ) ? { value: options } : options;
+
+    return new Widgets.Progressbar ( options );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
 
 
 /* =========================================================================
@@ -11575,84 +11607,6 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Remote (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  let config = {
-    name: 'remoteTrigger',
-    options: {
-      widget: false, // The `Remote` widget class to call
-      ajax: {}, // Using as `new widget ( ajax )`
-      attributes: {
-        href: 'href' // In order to better support `a` elements (the `method` data has higher priority)
-      },
-      datas: {
-        url: 'url',
-        data: 'data',
-        method: 'method'
-      }
-    }
-  };
-
-  /* REMOTE TRIGGER */
-
-  class RemoteTrigger extends Widgets.Widget {
-
-    /* SPECIAL */
-
-    _variables () {
-
-      this.$trigger = this.$element;
-
-      /* OPTIONS */
-
-      this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
-      this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;
-      this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
-
-    }
-
-    _events () {
-
-      this.___tap ();
-
-    }
-
-    /* TAP */
-
-    ___tap () {
-
-      this._on ( Pointer.tap, this.trigger );
-
-    }
-
-    /* API */
-
-    trigger () {
-
-      new this.options.widget ( { ajax: this.options.ajax } ).request ();
-
-    }
-
-  }
-
-  /* FACTORY */
-
-  Factory.init ( RemoteTrigger, config, Widgets );
-
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
-
-
-/* =========================================================================
  * Svelto - Remote
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -11805,14 +11759,6 @@ Prism.languages.js = Prism.languages.javascript;
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
-
-  /* HELPER */
-
-  $.remoteAction = function ( ajax ) {
-
-    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
-
-  };
 
   /* CONFIG */
 
@@ -12006,6 +11952,108 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
+ * Svelto - Remote - Action (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires action.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteAction = function ( ajax ) {
+
+    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
+
+  };
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
+
+/* =========================================================================
+ * Svelto - Remote (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteTrigger',
+    options: {
+      widget: false, // The `Remote` widget class to call
+      ajax: {}, // Using as `new widget ( ajax )`
+      attributes: {
+        href: 'href' // In order to better support `a` elements (the `method` data has higher priority)
+      },
+      datas: {
+        url: 'url',
+        data: 'data',
+        method: 'method'
+      }
+    }
+  };
+
+  /* REMOTE TRIGGER */
+
+  class RemoteTrigger extends Widgets.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$trigger = this.$element;
+
+      /* OPTIONS */
+
+      this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
+      this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;
+      this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
+
+    }
+
+    _events () {
+
+      this.___tap ();
+
+    }
+
+    /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.trigger );
+
+    }
+
+    /* API */
+
+    trigger () {
+
+      new this.options.widget ( { ajax: this.options.ajax } ).request ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( RemoteTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
+
+/* =========================================================================
  * Svelto - Remote - Action (Trigger)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -12057,14 +12105,6 @@ Prism.languages.js = Prism.languages.javascript;
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
-
-  /* HELPER */
-
-  $.remoteModal = function ( ajax ) {
-
-    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
-
-  };
 
   /* CONFIG */
 
@@ -12252,6 +12292,30 @@ Prism.languages.js = Prism.languages.javascript;
   Factory.init ( RemoteModal, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+
+
+/* =========================================================================
+ * Svelto - Remote - Modal (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires modal.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteModal = function ( ajax ) {
+
+    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
+
+  };
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
 
 
 /* =========================================================================

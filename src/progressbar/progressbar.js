@@ -50,16 +50,6 @@
     }
   };
 
-  /* HELPER */
-
-  $.progressbar = function ( options ) {
-
-    options = _.isNumber ( options ) ? { value: options } : options;
-
-    return new Widgets.Progressbar ( options );
-
-  };
-
   /* PROGRESSBAR */
 
   class Progressbar extends Widgets.Widget {

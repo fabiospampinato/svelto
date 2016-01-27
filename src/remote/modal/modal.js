@@ -16,14 +16,6 @@
 
   'use strict';
 
-  /* HELPER */
-
-  $.remoteModal = function ( ajax ) {
-
-    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
-
-  };
-
   /* CONFIG */
 
   let config = {

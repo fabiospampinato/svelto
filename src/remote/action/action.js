@@ -16,14 +16,6 @@
 
   'use strict';
 
-  /* HELPER */
-
-  $.remoteAction = function ( ajax ) {
-
-    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
-
-  };
-
   /* CONFIG */
 
   let config = {

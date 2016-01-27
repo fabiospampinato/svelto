@@ -109,28 +109,6 @@
     }
   };
 
-  /* HELPER */
-
-  $.noty = function ( options = {} ) {
-
-    /* OPTIONS */
-
-    options = _.isString ( options ) ? { body: options } : options;
-
-    /* TYPE */
-
-    if ( options.buttons ) {
-
-      options.type = 'action';
-
-    }
-
-    /* NOTY */
-
-    return new Noty ( options );
-
-  };
-
   /* NOTY */
 
   class Noty extends Widgets.Widget {
