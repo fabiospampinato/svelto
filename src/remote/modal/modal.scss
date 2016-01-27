@@ -18,7 +18,7 @@
 
   /* NOT LOADED */
 
-  &:not(.loaded) {
+  &:not(.remote-modal-loaded) {
 
     width: $remote-modal-placeholder-size;
     height: $remote-modal-placeholder-size;
@@ -35,7 +35,7 @@
 
   /* LOADED */
 
-  &.loaded {
+  &.remote-modal-loaded {
 
     /* CHILDREN */
 
@@ -53,7 +53,7 @@
 
     /* NOT ANIMATING */
 
-    &:not(.animating) {
+    &:not(.remote-modal-animating) {
 
       /* CHILDREN */
 

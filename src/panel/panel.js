@@ -226,14 +226,6 @@
 
     }
 
-    /* RESET */
-
-    _reset () {
-
-      this.$bindings.off ( this.eventNamespace );
-
-    }
-
     /* AUTO PINNING */
 
     _autopin () {

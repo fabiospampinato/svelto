@@ -10441,13 +10441,13 @@ code[class*='language-'] .namespace {
   overflow: hidden;
 }
 
-.remote-modal-placeholder:not(.loaded) {
+.remote-modal-placeholder:not(.remote-modal-loaded) {
   width: 9.25rem;
   height: 9.25rem;
   /* CARD BLOCK */
 }
 
-.remote-modal-placeholder:not(.loaded) > .card-block {
+.remote-modal-placeholder:not(.remote-modal-loaded) > .card-block {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -10459,30 +10459,30 @@ code[class*='language-'] .namespace {
           align-items: center;
 }
 
-.remote-modal-placeholder.loaded {
+.remote-modal-placeholder.remote-modal-loaded {
   /* CHILDREN */
   /* NOT ANIMATING */
 }
 
-.remote-modal-placeholder.loaded > * {
+.remote-modal-placeholder.remote-modal-loaded > * {
   transition: color 0.35s;
   /* CHILDREN */
 }
 
-.remote-modal-placeholder.loaded > * > * {
+.remote-modal-placeholder.remote-modal-loaded > * > * {
   transition: opacity 0.35s;
 }
 
-.remote-modal-placeholder.loaded:not(.animating) {
+.remote-modal-placeholder.remote-modal-loaded:not(.remote-modal-animating) {
   /* CHILDREN */
 }
 
-.remote-modal-placeholder.loaded:not(.animating) > * {
+.remote-modal-placeholder.remote-modal-loaded:not(.remote-modal-animating) > * {
   color: transparent;
   /* CHILDREN */
 }
 
-.remote-modal-placeholder.loaded:not(.animating) > * > * {
+.remote-modal-placeholder.remote-modal-loaded:not(.remote-modal-animating) > * > * {
   opacity: 0;
 }
 

@@ -337,10 +337,6 @@
 
     _reset () {
 
-      /* EVENTS */
-
-      this.$bindings.off ( this.eventNamespace );
-
       /* TIMER */
 
       delete openNotiesData[this.guid];
@@ -348,6 +344,10 @@
       /* FLICK */
 
       this.$noty.flickable ( 'destroy' );
+
+      /* SUPER */
+
+      super._reset ();
 
     }
 

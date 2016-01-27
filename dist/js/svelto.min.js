@@ -13,7 +13,7 @@
   /* SVELTO */
 
   let Svelto = {
-    VERSION: '0.3.0-beta3',
+    VERSION: '0.4.0-beta1',
     $: ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ), // Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
     _: ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ), // Checking the version also in order to distinguish it from `underscore`
     Widgets: {} // Namespace for the Svelto's widgets' classes
@@ -1449,9 +1449,7 @@
     options: {
       characters: {}, // Used to store some characters needed by the widget
       regexes: {}, // Contains the used regexes
-      errors: { // It contains all the errors that a widget can trigger
-        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' // Triggered when the widget is not initializable
-      },
+      errors: {}, // It contains all the errors that a widget can trigger
       messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
       attributes: {}, // Attributes used by the widget
       datas: {}, // CSS data-* names
@@ -1482,14 +1480,6 @@
 
       _.extend ( this, this._getConfig ( options, element ) );
 
-      /* CHECK IF INITIALIZABLE */
-
-      if ( !element && !this.templates.base ) {
-
-        this._throw ( this.errors.uninitializable );
-
-      }
-
       /* CACHE TEMPLATES */
 
       if ( !$.tmpl.cached[this.name] ) {
@@ -1516,12 +1506,13 @@
 
       /* ELEMENT */
 
-      this.$element = $( element || this._tmpl ( 'base', this.options ) );
+      this.$element = $( element ||  ( this.templates.base ? this._tmpl ( 'base', this.options ) : undefined ) );
       this.element = this.$element[0];
 
       /* LAYOUT */
 
-      this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
+      this.$layout = this.$element.length ? this.$element.parent ().closest ( this.options.selectors.layout ) : $(this.options.selectors.layout).first ();
+      this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first ();
       this.layout = this.$layout[0];
 
       /* WINDOW */
@@ -1540,7 +1531,11 @@
 
       /* ATTACH INSTANCE */
 
-      $.data ( this.element, 'instance.' + this.name, this );
+      if ( this.element ) {
+
+        $.data ( this.element, 'instance.' + this.name, this );
+
+      }
 
       /* SET GUID / GUC */
 
@@ -1647,7 +1642,11 @@
 
       this._destroy ();
 
-      this.$element.removeData ( 'instance.' + this.name );
+      if ( this.element ) {
+
+        this.$element.removeData ( 'instance.' + this.name );
+
+      }
 
     }
 
@@ -7974,10 +7973,6 @@
 
     _reset () {
 
-      /* EVENTS */
-
-      this.$bindings.off ( this.eventNamespace );
-
       /* TIMER */
 
       delete openNotiesData[this.guid];
@@ -7985,6 +7980,10 @@
       /* FLICK */
 
       this.$noty.flickable ( 'destroy' );
+
+      /* SUPER */
+
+      super._reset ();
 
     }
 
@@ -10336,14 +10335,6 @@
 
     }
 
-    /* RESET */
-
-    _reset () {
-
-      this.$bindings.off ( this.eventNamespace );
-
-    }
-
     /* AUTO PINNING */
 
     _autopin () {
@@ -11584,178 +11575,719 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Remote Modal
+ * Svelto - Remote (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteTrigger',
+    options: {
+      widget: false, // The `Remote` widget class to call
+      ajax: {}, // Using as `new widget ( ajax )`
+      attributes: {
+        href: 'href' // In order to better support `a` elements (the `method` data has higher priority)
+      },
+      datas: {
+        url: 'url',
+        data: 'data',
+        method: 'method'
+      }
+    }
+  };
+
+  /* REMOTE TRIGGER */
+
+  class RemoteTrigger extends Widgets.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$trigger = this.$element;
+
+      /* OPTIONS */
+
+      this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
+      this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;
+      this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
+
+    }
+
+    _events () {
+
+      this.___tap ();
+
+    }
+
+    /* TAP */
+
+    ___tap () {
+
+      this._on ( Pointer.tap, this.trigger );
+
+    }
+
+    /* API */
+
+    trigger () {
+
+      new this.options.widget ( { ajax: this.options.ajax } ).request ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( RemoteTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
+
+/* =========================================================================
+ * Svelto - Remote
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../modal/modal.js
- * @requires ../noty/noty.js
+ * @requires ../widget/widget.js
  * ========================================================================= */
 
-//FIXME: Not beautifully written
+//TODO: Add locking capabilities
 
-(function ( $, _, Svelto, Widgets, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
-  /* UTILITIES */
+  /* CONFIG */
 
-  let destroyModal = function ( $modal ) {
+  let config = {
+    name: 'remote',
+    options: {
+      ajax: { // Options to pass to `$.ajax`
+        cache: true, // If set to false, it will force the requested url not to be cached by the browser
+        method: 'GET', // Method of the remote request
+        timeout: 31000 // 1 second more than the default value of PHP's `max_execution_time` setting
+      },
+      callbacks: {
+        beforesend: _.noop,
+        complete: _.noop,
+        error: _.noop,
+        success: _.noop,
+        abort: _.noop
+      }
+    }
+  };
 
-    $modal.modal ( 'close' );
+  /* REMOTE */
 
-    setTimeout ( function () {
+  class Remote extends Widgets.Widget {
 
-      $modal.remove ();
+    /* SPECIAL */
 
-    }, Widgets.Modal.config.options.animations.close );
+    _reset () {
 
+      this.abort ();
+
+      super._reset ();
+
+    }
+
+    /* REQUEST HANDLERS */
+
+    __beforesend ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this._trigger ( 'beforesend', res );
+
+    }
+
+    __complete ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this._trigger ( 'complete', res );
+
+    }
+
+    __error ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this._trigger ( 'error', res );
+
+    }
+
+    __success ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this._trigger ( 'success', res );
+
+    }
+
+    __abort () {
+
+      this._trigger ( 'abort' );
+
+    }
+
+    /* API */
+
+    isRequesting () {
+
+      return !!this.xhr && ![0, 4].includes ( this.xhr.readyState ); // 0: UNSENT, 4: DONE
+
+    }
+
+    request () {
+
+      this._isAborted = false;
+
+      this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, {
+        beforeSend: this.__beforesend.bind ( this ),
+        complete: this.__complete.bind ( this ),
+        error: this.__error.bind ( this ),
+        success: this.__success.bind ( this )
+      }));
+
+    }
+
+    isAborted () {
+
+      return !!this._isAborted;
+
+    }
+
+    abort () {
+
+      if ( !this.xhr || !this.isRequesting () ) return;
+
+      this._isAborted = true;
+
+      this.xhr.abort ();
+
+      this.__abort ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( Remote, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
+
+/* =========================================================================
+ * Svelto - Remote - Action
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../remote.js
+ * @requires ../../noty/noty.js
+ * ========================================================================= */
+
+//TODO: Add locking capabilities
+//TODO: Not well written
+
+(function ( $, _, Svelto, Widgets, Factory ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteAction = function ( ajax ) {
+
+    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
+
+  };
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteAction',
+    options: {
+      closingDelay: Widgets.Noty.config.options.ttl / 2,
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      confirmation: { // Options to pass to a confirmation noty, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
+        body: 'Execute action?',
+        buttons: [{
+          text: 'Cancel'
+        }, {
+          text: 'Execute',
+          color: 'secondary',
+          isConfirmative: true
+        }]
+      },
+      messages: {
+        error: 'An error occurred, please try again later',
+        success: 'The action has been executed'
+      },
+      classes: {
+        spinner: {
+          color: 'white',
+          size: 'small',
+          css: '',
+        }
+      }
+    }
+  };
+
+  /* REMOTE ACTION */
+
+  class RemoteAction extends Widgets.Remote {
+
+    /* NOTY */
+
+    ___confirmationNoty () {
+
+      if ( this.$noty ) return;
+
+      /* VARIABLES */
+
+      let options = _.cloneDeep ( this.options.confirmation ),
+          index = _.findIndex ( options.buttons, 'isConfirmative' ),
+          button = ( index >= 0 ) ? options.buttons[index] : _.last ( options.buttons );
+
+      /* ON CLICK */
+
+      button.onClick = function () {
+        this.request ( true );
+        return false;
+      }.bind ( this );
+
+      /* OPENING */
+
+      this._replaceNoty ( options );
+
+    }
+
+    ___loadingNoty () {
+
+      this._replaceNoty ( '<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>' );
+
+    }
+
+    _replaceNoty ( options ) {
+
+      let instance = $.noty ( _.isString ( options ) ? { body: options, autoplay: false } : _.extend ( {}, options, { autoplay: false } ) );
+
+      instance.close ();
+
+      let $noty = instance.$element;
+
+      if ( this.$noty ) {
+
+        this.$noty.html ( $noty.html () ).widgetize ();
+
+      } else {
+
+        this.$noty = $noty;
+
+        this.$noty.noty ( 'open' );
+
+      }
+
+    }
+
+    _destroyNoty ( delay ) {
+
+      if ( !this.$noty ) return;
+
+      this._delay ( function () {
+
+        this.$noty.noty ( 'close' );
+
+        this._delay ( function () {
+
+          this.$noty.remove ();
+
+          this.$noty = false;
+
+        }, Widgets.Noty.config.options.animations.close );
+
+      }, delay ? this.options.closingDelay : 0 );
+
+    }
+
+    /* REQUEST HANDLERS */
+
+    __beforesend ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this.___loadingNoty ();
+
+      super.__beforesend ( res );
+
+    }
+
+    __error ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      let resj = _.attempt ( JSON.parse, res );
+
+      this._replaceNoty ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+
+      this._destroyNoty ( true );
+
+      super.__error ( res );
+
+    }
+
+    __success ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      let resj = _.attempt ( JSON.parse, res );
+
+      if ( _.isError ( resj ) ) {
+
+        return this.__error ( res );
+
+      } else {
+
+        this._replaceNoty ( 'msg' in resj ? resj.msg : this.options.messages.success );
+        this._destroyNoty ( true );
+
+        super.__success ( res );
+
+      }
+
+    }
+
+    /* API OVERRIDES */
+
+    request ( _confirmation ) {
+
+      if ( !_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length ) {
+
+        this.___confirmationNoty ();
+
+      } else {
+
+        super.request ();
+
+      }
+
+    }
+
+    abort () {
+
+      this._destroyNoty ();
+
+      super.abort ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( RemoteAction, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
+
+/* =========================================================================
+ * Svelto - Remote - Action (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../remote_trigger.js
+ * @requires action.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets, Factory ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteActionTrigger',
+    plugin: true,
+    selector: '.remote-action-trigger',
+    options: {
+      widget: Widgets.RemoteAction
+    }
+  };
+
+  /* REMOTE ACTION TRIGGER */
+
+  class RemoteActionTrigger extends Widgets.RemoteTrigger {}
+
+  /* FACTORY */
+
+  Factory.init ( RemoteActionTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
+
+/* =========================================================================
+ * Svelto - Remote - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../remote.js
+ * @requires ../../modal/modal.js
+ * @requires ../../noty/noty.js
+ * ========================================================================= */
+
+//TODO: Add locking capabilities, both at class-level and global-level
+
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteModal = function ( ajax ) {
+
+    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
+
+  };
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteModal',
+    options: {
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
+      classes: {
+        placeholder: 'remote-modal-placeholder',
+        loaded: 'remote-modal-loaded',
+        animating: 'remote-modal-animating'
+      },
+      animations: {
+        resize: Animations.normal
+      }
+    }
   };
 
   /* REMOTE MODAL */
 
-  $.remoteModal = function ( url, data ) {
+  class RemoteModal extends Widgets.Remote {
 
-    /* DATA */
+    /* MODAL */
 
-    if ( !data ) {
+    ___loadingModal () {
 
-      data = _.isPlainObject ( url ) ? url : { url: url };
+      /*
+        <div class="modal ' + this.options.classes.placeholder + ' card">
+          <div class="card-block">
+            <svg class="spinner">
+              <circle cx="1.625em" cy="1.625em" r="1.25em">
+            </svg>
+          </div>
+        </div>
+      */
 
-    } else {
-
-      data.url = url;
+      this.$modal = $('<div class="modal ' + this.options.classes.placeholder + ' card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( this.$layout );
 
     }
 
-    /* TEMPORARY MODAL */
+    _destroyModal () {
 
-    /*
-      <div class="modal remote-modal-placeholder card">
-        <div class="card-block">
-          <svg class="spinner">
-            <circle cx="1.625em" cy="1.625em" r="1.25em">
-          </svg>
-        </div>
-      </div>
-    */
+      if ( !this.$modal ) return;
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>');
+      this.$modal.modal ( 'close' );
 
-    /* VARIABLES */
+      this._delay ( function () {
 
-    let isAborted = false;
+        this.$modal.remove ();
 
-    /* AJAX */
+        this.$modal = false;
 
-    $.ajax ({
+      }, Widgets.Modal.config.options.animations.close );
 
-      cache: false,
-      data: _.omit ( data, 'url' ),
-      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
-      type: _.size ( data ) > 1 ? 'POST' : 'GET',
-      url: data.url,
+    }
 
-      beforeSend () {
+    /* ABORT */
 
-        $tempModal.appendTo ( $('.layout, body').first () ) //TODO: Use just `.layout`
-                  .modal ({
-                    callbacks: {
-                      close () {
-                        isAborted = true;
-                        destroyModal ( $tempModal );
-                      }
-                    }
-                  })
-                  .modal ( 'open' );
+    ___abort () {
 
-      },
+      this._on ( true, this.$modal, 'modal:close', this.abort );
 
-      error ( res ) {
+    }
 
-        if ( isAborted ) return;
+    /* REQUEST HANDLERS */
 
-        let resj = _.attempt ( JSON.parse, res );
+    __beforesend ( res ) {
 
-        $.noty ( _.isError ( resj ) || !( 'msg' in resj ) ? 'An error occurred, please try again later' : resj.msg );
+      if ( this.isAborted () ) return;
 
-        destroyModal ( $tempModal );
+      this.___loadingModal ();
+      this.___abort ();
 
-      },
+      this.$modal.modal ( 'open' );
 
-      success ( res ) {
+      super.__beforesend ( res );
 
-        if ( isAborted ) return;
+    }
 
-        let resj = _.attempt ( JSON.parse, res );
+    __error ( res ) {
 
-        if ( _.isError ( resj ) || !( 'modal' in resj ) ) {
+      if ( this.isAborted () ) return;
 
-          this.error ( res );
+      let resj = _.attempt ( JSON.parse, res );
 
-        } else {
+      $.noty ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
-          let prevRect = $tempModal.getRect (),
-              $remoteModal = $(resj.modal),
-              attributes = Array.from ( $remoteModal.prop ( 'attributes' ) );
+      this._destroyModal ();
 
-          for ( let attribute of attributes ) {
+      super.__error ( res );
 
-            if ( attribute.name !== 'class' ) {
+    }
 
-              $tempModal.attr ( attribute.name, attribute.value );
+    __success ( res ) {
 
-            }
+      if ( this.isAborted () ) return;
+
+      let resj = _.attempt ( JSON.parse, res );
+
+      if ( _.isError ( resj ) || !('modal' in resj) ) {
+
+        return this.__error ( res );
+
+      } else {
+
+        /* VARIABLES */
+
+        let prevRect = this.$modal.getRect (),
+            $remoteModal = $(resj.modal),
+            attributes = Array.from ( $remoteModal.prop ( 'attributes' ) );
+
+        /* CLONING ATTRIBUTES */
+
+        for ( let attribute of attributes ) {
+
+          if ( attribute.name !== 'class' ) {
+
+            this.$modal.attr ( attribute.name, attribute.value );
+
+          } else {
+
+            this.$modal.addClass ( attribute.value );
 
           }
 
-          $tempModal.addClass ( $remoteModal.attr ( 'class' ) );
+        }
 
-          $.frame ( function () {
+        /* RESIZING */
 
-            $tempModal.addClass ( 'loaded' );
+        this._frame ( function () {
 
-            $tempModal.html ( $remoteModal.html () );
+          this.$modal.addClass ( this.options.classes.loaded ).html ( $remoteModal.html () ).widgetize ();
 
-            let newRect = $tempModal.getRect ();
+          let newRect = this.$modal.getRect ();
 
-            $tempModal.css ({
-              width: prevRect.width,
-              height: prevRect.height
-            });
+          this.$modal.css ({
+            width: prevRect.width,
+            height: prevRect.height
+          });
 
-            $.frame ( function () {
+          this._frame ( function () {
 
-              $tempModal.addClass ( 'animating' );
+            this.$modal.addClass ( this.options.classes.animating );
 
-              $tempModal.animate ({
-                width: newRect.width,
-                height: newRect.height
-              }, Animations.normal, function () {
-
-                $tempModal.css ({
-                  width: '',
-                  height: ''
-                }).removeClass ( 'remote-modal-placeholder loaded animating' );
-
-              });
-
-              $tempModal.widgetize ();
-
-            });
+            this.$modal.animate ({
+              width: newRect.width,
+              height: newRect.height
+            }, this.options.animations.resize, function () {
+              this.$modal.css ({
+                width: '',
+                height: ''
+              }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.animating );
+            }.bind ( this ));
 
           });
 
-        }
+        });
+
+        super.__success ( res );
 
       }
 
-    });
+    }
 
+    /* API OVERRIDES */
+
+    abort () {
+
+      this._destroyModal ();
+
+      super.abort ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( RemoteModal, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+
+
+/* =========================================================================
+ * Svelto - Remote - Modal (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../remote_trigger.js
+ * @requires modal.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets, Factory ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'remoteModalTrigger',
+    plugin: true,
+    selector: '.remote-modal-trigger',
+    options: {
+      widget: Widgets.RemoteModal
+    }
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Animations ));
+  /* REMOTE MODAL TRIGGER */
+
+  class RemoteModalTrigger extends Widgets.RemoteTrigger {}
+
+  /* FACTORY */
+
+  Factory.init ( RemoteModalTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
 
 
 /* =========================================================================

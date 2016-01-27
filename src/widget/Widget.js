@@ -32,9 +32,7 @@
     options: {
       characters: {}, // Used to store some characters needed by the widget
       regexes: {}, // Contains the used regexes
-      errors: { // It contains all the errors that a widget can trigger
-        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' // Triggered when the widget is not initializable
-      },
+      errors: {}, // It contains all the errors that a widget can trigger
       messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
       attributes: {}, // Attributes used by the widget
       datas: {}, // CSS data-* names
@@ -65,14 +63,6 @@
 
       _.extend ( this, this._getConfig ( options, element ) );
 
-      /* CHECK IF INITIALIZABLE */
-
-      if ( !element && !this.templates.base ) {
-
-        this._throw ( this.errors.uninitializable );
-
-      }
-
       /* CACHE TEMPLATES */
 
       if ( !$.tmpl.cached[this.name] ) {
@@ -99,12 +89,13 @@
 
       /* ELEMENT */
 
-      this.$element = $( element || this._tmpl ( 'base', this.options ) );
+      this.$element = $( element ||  ( this.templates.base ? this._tmpl ( 'base', this.options ) : undefined ) );
       this.element = this.$element[0];
 
       /* LAYOUT */
 
-      this.$layout = this.$element.parent ().closest ( this.options.selectors.layout );
+      this.$layout = this.$element.length ? this.$element.parent ().closest ( this.options.selectors.layout ) : $(this.options.selectors.layout).first ();
+      this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first ();
       this.layout = this.$layout[0];
 
       /* WINDOW */
@@ -123,7 +114,11 @@
 
       /* ATTACH INSTANCE */
 
-      $.data ( this.element, 'instance.' + this.name, this );
+      if ( this.element ) {
+
+        $.data ( this.element, 'instance.' + this.name, this );
+
+      }
 
       /* SET GUID / GUC */
 
@@ -230,7 +225,11 @@
 
       this._destroy ();
 
-      this.$element.removeData ( 'instance.' + this.name );
+      if ( this.element ) {
+
+        this.$element.removeData ( 'instance.' + this.name );
+
+      }
 
     }
 
