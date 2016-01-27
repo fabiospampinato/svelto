@@ -11753,8 +11753,10 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../../noty/noty.js
  * ========================================================================= */
 
-//TODO: Add locking capabilities
-//TODO: Not well written
+//TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
+
+//FIXME: Not well written
+//FIXME: Clicking an error/success noty doesn't close it
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -12100,7 +12102,9 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../../noty/noty.js
  * ========================================================================= */
 
-//TODO: Add locking capabilities, both at class-level and global-level
+//TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
+
+//FIXME: Not well written
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
 

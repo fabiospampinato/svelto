@@ -10,7 +10,9 @@
  * @requires ../../noty/noty.js
  * ========================================================================= */
 
-//TODO: Add locking capabilities, both at class-level and global-level
+//TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
+
+//FIXME: Not well written
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
