@@ -8,9 +8,9 @@
 
 /* REQUIRE */
 
-var plugins      = require ( '../../pluginsig/project' ),
+var plugins      = require ( '../../config/project' ).plugins,
     util         = require ( '../../others/utilities' ),
-    gulp         = require ( 'gulp' ),
+    gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     merge        = require ( 'merge-stream' ),
     concat       = require ( 'gulp-concat' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
@@ -19,7 +19,7 @@ var plugins      = require ( '../../pluginsig/project' ),
 
 /* SCSS PARTS */
 
-gulp.task ( 'build-scss-parts', function () {
+gulp.task ( 'build-scss-parts', false, function () {
 
   var variables = gulp.src ( util.input.getPath ( 'scss.variables' ) )
                       .pipe ( newer ( util.output.getPath ( 'scss.variables' ) ) )

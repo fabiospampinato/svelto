@@ -11,7 +11,7 @@
 var env          = require ( '../../config/environment' ),
     plugins      = require ( '../../config/project' ).plugins,
     util         = require ( '../../others/utilities' ),
-    gulp         = require ( 'gulp' ),
+    gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     concat       = require ( 'gulp-concat' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
@@ -25,7 +25,7 @@ var env          = require ( '../../config/environment' ),
 
 /* JAVASCRIPT */
 
-gulp.task ( 'build-javascript', ['build-javascript-temp'], function () {
+gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], function () {
 
   if ( env.isDevelopment ) {
 

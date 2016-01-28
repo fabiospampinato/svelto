@@ -9,12 +9,12 @@
 /* REQUIRE */
 
 var util    = require ( '../../others/utilities' ),
-    gulp    = require ( 'gulp' ),
+    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
     flatten = require ( 'gulp-flatten' );
 
 /* FONTS */
 
-gulp.task ( 'build-fonts', function () {
+gulp.task ( 'build-fonts', 'Build fonts', function () {
 
   return gulp.src ( util.input.getPath ( 'fonts' ) )
              .pipe ( flatten () )

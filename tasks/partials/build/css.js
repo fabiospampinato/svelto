@@ -11,7 +11,7 @@
 var env          = require ( '../../config/environment' ),
     plugins      = require ( '../../config/project' ).plugins,
     util         = require ( '../../others/utilities' ),
-    gulp         = require ( 'gulp' ),
+    gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     autoprefixer = require ( 'gulp-autoprefixer' ),
     cssnano      = require ( 'gulp-cssnano' ),
     gulpif       = require ( 'gulp-if' ),
@@ -21,7 +21,7 @@ var env          = require ( '../../config/environment' ),
 
 /* CSS */
 
-gulp.task ( 'build-css', ['build-scss'], function () {
+gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
 
  return gulp.src ( util.output.getPath ( 'scss.full' ) )
             .pipe ( newer ( util.output.getPath ( 'css.uncompressed' ) ) )

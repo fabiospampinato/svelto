@@ -8,8 +8,8 @@
 
 /* REQUIRE */
 
-var gulp = require ( 'gulp' );
+var gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* BUILD */
 
-gulp.task ( 'build', ['build-fonts', 'build-images', 'build-javascript', 'build-css'] );
+gulp.task ( 'build', 'Build Svelto', ['build-fonts', 'build-images', 'build-javascript', 'build-css'] );

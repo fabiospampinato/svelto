@@ -13,7 +13,7 @@ var _            = require ( 'lodash' ),
     env          = require ( '../../config/environment' ),
     plugins      = require ( '../../config/project' ),
     util         = require ( '../../others/utilities' ),
-    gulp         = require ( 'gulp' ),
+    gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
     flatten      = require ( 'gulp-flatten' ),
@@ -25,7 +25,7 @@ var _            = require ( 'lodash' ),
 
 /* JAVASCRIPT TEMP */
 
-gulp.task ( 'build-javascript-temp', function () {
+gulp.task ( 'build-javascript-temp', false, function () {
 
   if ( !env.isDevelopment ) return;
 

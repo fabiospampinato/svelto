@@ -13,7 +13,7 @@ var util = require ( '../../others/utilities' ),
 
 /* JAVASCRIPT */
 
-gulp.task ( 'watch-javascript', function () {
+gulp.task ( 'watch-javascript', 'Watch javascript', function () {
 
   gulp.watch ( util.input.getPath ( 'javascript.all' ), ['build-javascript'] );
 

@@ -8,8 +8,8 @@
 
 /* REQUIRE */
 
-var gulp = require ( 'gulp' );
+var gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* WATCH */
 
-gulp.task ( 'watch', ['watch-fonts', 'watch-images', 'watch-javascript', 'watch-scss'] );
+gulp.task ( 'watch', 'Watch for changes and auto re-build', ['watch-fonts', 'watch-images', 'watch-javascript', 'watch-scss'] );

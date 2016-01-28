@@ -10,11 +10,11 @@
 
 var _       = require ( 'lodash' ),
     release = require ( './config/release' ),
-    gulp    = require ( 'gulp' );
+    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* VERSION */
 
-gulp.task ( 'version', function () {
+gulp.task ( 'version', 'Display Svelto\'s version', function () {
 
   console.log ( _.capitalize ( release.name ) + ' version: ' + release.version );
 

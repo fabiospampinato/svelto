@@ -9,11 +9,11 @@
 /* REQUIRE */
 
 var util = require ( '../../others/utilities' ),
-    gulp = require ( 'gulp' );
+    gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* FONTS */
 
-gulp.task ( 'watch-fonts', function () {
+gulp.task ( 'watch-fonts', 'Watch fonts', function () {
 
   gulp.watch ( util.input.getPath ( 'fonts' ), ['build-fonts'] );
 

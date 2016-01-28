@@ -9,11 +9,11 @@
 /* REQUIRE */
 
 var util = require ( '../../others/utilities' ),
-    gulp = require ( 'gulp' );
+    gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* IMAGES */
 
-gulp.task ( 'watch-images', function () {
+gulp.task ( 'watch-images', 'Watch images', function () {
 
   gulp.watch ( util.input.getPath ( 'images' ), ['build-images'] );
 

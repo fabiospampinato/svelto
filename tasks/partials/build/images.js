@@ -12,7 +12,7 @@ var path     = require ( 'path' ),
     env      = require ( '../../config/environment' ),
     plugins  = require ( '../../config/project' ).plugins,
     util     = require ( '../../others/utilities' ),
-    gulp     = require ( 'gulp' ),
+    gulp     = require ( 'gulp-help' )( require ( 'gulp' ) ),
     bytediff = require ( 'gulp-bytediff' ),
     flatten  = require ( 'gulp-flatten' ),
     gulpif   = require ( 'gulp-if' ),
@@ -24,7 +24,7 @@ var path     = require ( 'path' ),
 //FIXME: We shoudn't compress images lossly
 //FIXME: It doesn't work with SVGs, the blur.svg doesn't work anymore after
 
-gulp.task ( 'build-images', function () {
+gulp.task ( 'build-images', 'Build images', function () {
 
   return gulp.src ( util.input.getPath ( 'images' ) )
              .pipe ( newer ({ //TODO: Maybe flattening before won't require to set a map function?

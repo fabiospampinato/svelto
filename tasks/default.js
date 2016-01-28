@@ -8,8 +8,8 @@
 
 /* REQUIRE */
 
-var gulp = require ( 'gulp' );
+var gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* DEFAULT */
 
-gulp.task ( 'default', ['build'] );
+gulp.task ( 'default', false, ['build'] );
