@@ -8,7 +8,8 @@
 
 /* REQUIRE */
 
-var util    = require ( '../../others/utilities' ),
+var input   = require ( '../utilities/input' ),
+    output  = require ( '../utilities/output' ),
     gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
     flatten = require ( 'gulp-flatten' );
 
@@ -16,8 +17,8 @@ var util    = require ( '../../others/utilities' ),
 
 gulp.task ( 'build-fonts', 'Build fonts', function () {
 
-  return gulp.src ( util.input.getPath ( 'fonts' ) )
+  return gulp.src ( input.getPath ( 'fonts' ) )
              .pipe ( flatten () )
-             .pipe ( gulp.dest ( util.output.getPath ( 'fonts' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) );
 
 });

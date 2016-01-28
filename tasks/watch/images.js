@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Watch - Javascript
+ * Svelto - Tasks - Watch - Images
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,13 +8,13 @@
 
 /* REQUIRE */
 
-var util = require ( '../../others/utilities' ),
-    gulp = require ( 'gulp' );
+var input = require ( '../utilities/input' ),
+    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
 
-/* JAVASCRIPT */
+/* IMAGES */
 
-gulp.task ( 'watch-javascript', 'Watch javascript', function () {
+gulp.task ( 'watch-images', 'Watch images', function () {
 
-  gulp.watch ( util.input.getPath ( 'javascript.all' ), ['build-javascript'] );
+  gulp.watch ( input.getPath ( 'images' ), ['build-images'] );
 
 });

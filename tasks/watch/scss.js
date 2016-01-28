@@ -8,13 +8,13 @@
 
 /* REQUIRE */
 
-var util = require ( '../../others/utilities' ),
-    gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
+var input = require ( '../utilities/input' ),
+    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* SCSS */
 
 gulp.task ( 'watch-scss', 'Watch SCSS', function () {
 
-  gulp.watch ( util.input.getPath ( 'scss.all' ), ['build-css'] );
+  gulp.watch ( input.getPath ( 'scss.all' ), ['build-css'] );
 
 });

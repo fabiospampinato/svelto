@@ -8,9 +8,9 @@
 
 /* REQUIRE */
 
-var env          = require ( '../../config/environment' ),
-    plugins      = require ( '../../config/project' ).plugins,
-    util         = require ( '../../others/utilities' ),
+var env          = require ( '../config/environment' ),
+    output       = require ( '../utilities/output' ),
+    plugins      = require ( '../config/project' ).plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     autoprefixer = require ( 'gulp-autoprefixer' ),
     cssnano      = require ( 'gulp-cssnano' ),
@@ -23,14 +23,14 @@ var env          = require ( '../../config/environment' ),
 
 gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
 
- return gulp.src ( util.output.getPath ( 'scss.full' ) )
-            .pipe ( newer ( util.output.getPath ( 'css.uncompressed' ) ) )
+ return gulp.src ( output.getPath ( 'scss.full' ) )
+            .pipe ( newer ( output.getPath ( 'css.uncompressed' ) ) )
             .pipe ( sass ( plugins.sass ).on ( 'error', sass.logError ) )
             .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer ) ) )
-            .pipe ( rename ( util.output.getName ( 'css.uncompressed' ) ) )
-            .pipe ( gulp.dest ( util.output.getDir ( 'css.uncompressed' ) ) )
+            .pipe ( rename ( output.getName ( 'css.uncompressed' ) ) )
+            .pipe ( gulp.dest ( output.getDir ( 'css.uncompressed' ) ) )
             .pipe ( gulpif ( plugins.cssnano.enabled && !env.isDevelopment, cssnano ( plugins.cssnano ) ) )
-            .pipe ( rename ( util.output.getName ( 'css.compressed' ) ) )
-            .pipe ( gulp.dest ( util.output.getDir ( 'css.compressed' ) ) );
+            .pipe ( rename ( output.getName ( 'css.compressed' ) ) )
+            .pipe ( gulp.dest ( output.getDir ( 'css.compressed' ) ) );
 
 });

@@ -10,10 +10,10 @@
 
 var _        = require ( 'lodash' ),
     argv     = require ( 'yargs' ).argv,
-    util     = require ( '../others/utilities' ),
+    file     = require ( '../utilities/file' ),
     defaults = require ( './defaults' ),
-    custom   = util.loadFile ( '../../svelto.json', {} ),
-    dot      = util.loadFile ( '../../.svelto.json', {} );
+    custom   = file.load ( '../../svelto.json', {} ),
+    dot      = file.load ( '../../.svelto.json', {} );
 
 /* ENVIRONMENT */
 

@@ -8,7 +8,7 @@
 
 /* REQUIRE */
 
-var util   = require ( '../../others/utilities' ),
+var output = require ( '../utilities/output' ),
     gulp   = require ( 'gulp-help' )( require ( 'gulp' ) ),
     concat = require ( 'gulp-concat' ),
     newer  = require ( 'gulp-newer' );
@@ -17,9 +17,9 @@ var util   = require ( '../../others/utilities' ),
 
 gulp.task ( 'build-scss', 'Build SCSS', ['build-scss-parts'], function () {
 
- return gulp.src ( [util.output.getPath ( 'scss.variables' ), util.output.getPath ( 'scss.mixins' ), util.output.getPath ( 'scss.style' )] )
-            .pipe ( newer ( util.output.getPath ( 'scss.all' ) ) )
-            .pipe ( concat ( util.output.getName ( 'scss.all' ) ) )
-            .pipe ( gulp.dest ( util.output.getDir ( 'scss.all' ) ) );
+ return gulp.src ( [output.getPath ( 'scss.variables' ), output.getPath ( 'scss.mixins' ), output.getPath ( 'scss.style' )] )
+            .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
+            .pipe ( concat ( output.getName ( 'scss.all' ) ) )
+            .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
 
 });

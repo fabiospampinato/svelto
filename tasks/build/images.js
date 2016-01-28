@@ -9,9 +9,10 @@
 /* REQUIRE */
 
 var path     = require ( 'path' ),
-    env      = require ( '../../config/environment' ),
-    plugins  = require ( '../../config/project' ).plugins,
-    util     = require ( '../../others/utilities' ),
+    env      = require ( '../config/environment' ),
+    input    = require ( '../utilities/input' ),
+    output   = require ( '../utilities/output' ),
+    plugins  = require ( '../config/project' ).plugins,
     gulp     = require ( 'gulp-help' )( require ( 'gulp' ) ),
     bytediff = require ( 'gulp-bytediff' ),
     flatten  = require ( 'gulp-flatten' ),
@@ -26,15 +27,15 @@ var path     = require ( 'path' ),
 
 gulp.task ( 'build-images', 'Build images', function () {
 
-  return gulp.src ( util.input.getPath ( 'images' ) )
+  return gulp.src ( input.getPath ( 'images' ) )
              .pipe ( newer ({ //TODO: Maybe flattening before won't require to set a map function?
-               dest: util.output.getPath ( 'images' ),
+               dest: output.getPath ( 'images' ),
                map: path.basename
              }))
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.start () ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, imagemin ( plugins.imagemin ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.stop () ) )
              .pipe ( flatten () )
-             .pipe ( gulp.dest ( util.output.getPath ( 'images' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );
 
 });

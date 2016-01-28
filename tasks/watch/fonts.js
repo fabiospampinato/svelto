@@ -8,13 +8,13 @@
 
 /* REQUIRE */
 
-var util = require ( '../../others/utilities' ),
-    gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
+var input = require ( '../utilities/input' ),
+    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* FONTS */
 
 gulp.task ( 'watch-fonts', 'Watch fonts', function () {
 
-  gulp.watch ( util.input.getPath ( 'fonts' ), ['build-fonts'] );
+  gulp.watch ( input.getPath ( 'fonts' ), ['build-fonts'] );
 
 });

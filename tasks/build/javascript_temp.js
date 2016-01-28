@@ -10,9 +10,10 @@
 
 var _            = require ( 'lodash' ),
     path         = require ( 'path' ),
-    env          = require ( '../../config/environment' ),
-    plugins      = require ( '../../config/project' ),
-    util         = require ( '../../others/utilities' ),
+    env          = require ( '../config/environment' ),
+    input        = require ( '../utilities/input' ),
+    output       = require ( '../utilities/output' ),
+    plugins      = require ( '../config/project' ),
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
@@ -31,7 +32,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
 
   var dependencyIndex = 0;
 
-  return gulp.src ( util.input.getPath ( 'javascript.all' ) )
+  return gulp.src ( input.getPath ( 'javascript.all' ) )
              .pipe ( sort () )
              .pipe ( dependencies ( plugins.dependencies ) )
              .pipe ( foreach ( function ( stream, file ) {
@@ -40,7 +41,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
                return stream;
              }))
              .pipe ( newer ({ //TODO: Flattening it before won't require the use of a map function?
-               dest: util.output.getPath ( 'javascript.temp' ),
+               dest: output.getPath ( 'javascript.temp' ),
                map: path.basename
              }))
              .pipe ( flatten () )
@@ -48,6 +49,6 @@ gulp.task ( 'build-javascript-temp', false, function () {
              .on ( 'error', function ( err ) {
                gutil.log ( err.message );
              })
-             .pipe ( gulp.dest ( util.output.getPath ( 'javascript.temp' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) );
 
 });
