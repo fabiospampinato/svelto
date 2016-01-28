@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Gulpfile
+ * Svelto - Tasks - Config - Release
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,4 +8,8 @@
 
 /* REQUIRE */
 
-require ( 'require-dir' )( './tasks', { recurse: true } );
+var release = require ( '../../package.json' );
+
+/* EXPORT */
+
+module.exports = release;
