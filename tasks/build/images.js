@@ -28,14 +28,11 @@ var path     = require ( 'path' ),
 gulp.task ( 'build-images', 'Build images', function () {
 
   return gulp.src ( input.getPath ( 'images' ) )
-             .pipe ( newer ({ //TODO: Maybe flattening before won't require to set a map function?
-               dest: output.getPath ( 'images' ),
-               map: path.basename
-             }))
+             .pipe ( flatten () )
+             .pipe ( newer ( output.getPath ( 'images' ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.start () ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, imagemin ( plugins.imagemin.options ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.stop () ) )
-             .pipe ( flatten () )
              .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );
 
 });

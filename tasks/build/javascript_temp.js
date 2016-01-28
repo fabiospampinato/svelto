@@ -40,11 +40,8 @@ gulp.task ( 'build-javascript-temp', false, function () {
                file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex++, 3, 0 ) + '-' + basename );
                return stream;
              }))
-             .pipe ( newer ({ //TODO: Flattening it before won't require the use of a map function?
-               dest: output.getPath ( 'javascript.temp' ),
-               map: path.basename
-             }))
              .pipe ( flatten () )
+             .pipe ( newer ( output.getPath ( 'javascript.temp' ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
              .on ( 'error', function ( err ) {
                gutil.log ( err.message );

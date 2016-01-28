@@ -29,9 +29,8 @@ var plugins = {
       compact: false
     }
   },
-  clean: { //TODO: Replace with `rimraf`
+  del: {
     options: {
-      read: false,
       force: false
     }
   },
