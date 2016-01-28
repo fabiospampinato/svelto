@@ -15,9 +15,9 @@ var defaults = {
 
   /* GENERAL */
 
-  paths: require ( './defaults_paths' ),
-  components: require ( './defaults_components' ),
-  plugins: require ( './defaults_plugins' ),
+  paths: require ( './defaults/paths' ),
+  components: require ( './defaults/components' ),
+  plugins: require ( './defaults/plugins' ),
   isDevelopment: false,
 
   /* ENVIRONMENT */
