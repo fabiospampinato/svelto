@@ -23,13 +23,13 @@ var env          = require ( '../config/environment' ),
 
 gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
 
- return gulp.src ( output.getPath ( 'scss.full' ) )
+ return gulp.src ( output.getPath ( 'scss.all' ) )
             .pipe ( newer ( output.getPath ( 'css.uncompressed' ) ) )
-            .pipe ( sass ( plugins.sass ).on ( 'error', sass.logError ) )
-            .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer ) ) )
+            .pipe ( sass ( plugins.sass.options ).on ( 'error', sass.logError ) )
+            .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer.options ) ) )
             .pipe ( rename ( output.getName ( 'css.uncompressed' ) ) )
             .pipe ( gulp.dest ( output.getDir ( 'css.uncompressed' ) ) )
-            .pipe ( gulpif ( plugins.cssnano.enabled && !env.isDevelopment, cssnano ( plugins.cssnano ) ) )
+            .pipe ( gulpif ( plugins.cssnano.enabled && !env.isDevelopment, cssnano ( plugins.cssnano.options ) ) )
             .pipe ( rename ( output.getName ( 'css.compressed' ) ) )
             .pipe ( gulp.dest ( output.getDir ( 'css.compressed' ) ) );
 

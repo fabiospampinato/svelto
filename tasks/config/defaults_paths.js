@@ -14,13 +14,13 @@ var paths = {
     images: 'src/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
     javascript: {
       all: 'src/**/*.js', //TODO: Maybe rename it
-      temp: '.temp/js/**/*.js'
+      temp: '.temp/javascript/**/*.js'
     },
     scss: {
       all: 'src/**/*.scss', //TODO: Maybe rename it
-      variables: ['src/**/variables.scss', 'src/variables/**/*.scss'],
-      mixins: ['src/**/mixins.scss', 'src/mixins/**/*.scss'],
-      style: ['src/**/*.scss', '!src/**/variables.scss', '!src/variables/**/*.scss', '!src/**/mixins.scss', '!src/mixins/**/*.scss'],
+      variables: ['src/variables/**/*.scss', 'src/**/variables.scss'],
+      mixins: ['src/mixins/**/*.scss', 'src/**/mixins.scss'],
+      style: ['src/**/*.scss', '!src/variables/**/*.scss', '!src/**/variables.scss', '!src/mixins/**/*.scss', '!src/**/mixins.scss'],
       temp: '.temp/scss/**/*.scss'
     }
   },
@@ -28,9 +28,9 @@ var paths = {
     fonts: 'dist/fonts',
     images: 'dist/images',
     javascript: {
-      uncompressed: 'dist/js/svelto.js',
-      compressed: 'dist/js/svelto.min.js',
-      temp: '.temp/js'
+      uncompressed: 'dist/javascript/svelto.js',
+      compressed: 'dist/javascript/svelto.min.js',
+      temp: '.temp/javascript'
     },
     scss: {
       all: 'dist/scss/svelto.scss', //TODO: Maybe rename it

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clip-svg">
+	<defs>
+    <clipPath id="clip-left" clipPathUnits="objectBoundingBox">
+      <polygon points="0 0, 1 1, 1 0" />
+    </clipPath>
+    <clipPath id="clip-right" clipPathUnits="objectBoundingBox">
+      <polygon points="0 0, 1 1, 0 1" />
+    </clipPath>
+	</defs>
+</svg>

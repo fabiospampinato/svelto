@@ -33,7 +33,7 @@ gulp.task ( 'build-images', 'Build images', function () {
                map: path.basename
              }))
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.start () ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, imagemin ( plugins.imagemin ) ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, imagemin ( plugins.imagemin.options ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.stop () ) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );

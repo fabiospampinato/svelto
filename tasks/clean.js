@@ -18,6 +18,6 @@ var project  = require ( './config/project' ),
 gulp.task ( 'clean', 'Clean builded and temporary files', function () {
 
   return gulp.src ( project.paths.clean )
-             .pipe ( clean ( plugins.clean ) );
+             .pipe ( clean ( plugins.clean.options ) );
 
 });

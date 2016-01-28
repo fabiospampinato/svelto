@@ -25,21 +25,21 @@ gulp.task ( 'build-scss-parts', false, function () {
   var variables = gulp.src ( input.getPath ( 'scss.variables' ) )
                       .pipe ( newer ( output.getPath ( 'scss.variables' ) ) )
                       .pipe ( sort () )
-                      .pipe ( dependencies ( plugins.dependencies ) )
+                      .pipe ( dependencies ( plugins.dependencies.options ) )
                       .pipe ( concat ( output.getName ( 'scss.variables' ) ) )
                       .pipe ( gulp.dest ( output.getDir ( 'scss.variables' ) ) );
 
   var mixins = gulp.src ( input.getPath ( 'scss.mixins' ) )
                    .pipe ( newer ( output.getPath ( 'scss.mixins' ) )
                    .pipe ( sort () )
-                   .pipe ( dependencies ( plugins.dependencies ) )
+                   .pipe ( dependencies ( plugins.dependencies.options ) )
                    .pipe ( concat ( output.getName ( 'scss.mixins' ) ) ) )
                    .pipe ( gulp.dest ( output.getDir ( 'scss.mixins' ) ) );
 
   var style = gulp.src ( input.getPath ( 'scss.style' ) )
                   .pipe ( newer ( output.getPath ( 'scss.style' ) ) )
                   .pipe ( sort () )
-                  .pipe ( dependencies ( plugins.dependencies ) )
+                  .pipe ( dependencies ( plugins.dependencies.options ) )
                   .pipe ( concat ( output.getName ( 'scss.style' ) ) )
                   .pipe ( gulp.dest ( output.getDir ( 'scss.style' ) ) );
 

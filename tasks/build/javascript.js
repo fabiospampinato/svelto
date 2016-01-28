@@ -43,17 +43,17 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
     return gulp.src ( input.getPath ( 'javascript.all' ) )
               //  .pipe ( newer ( DEST.js + '/svelto.js' ) ) //FIXME: Maybe nothing is changed in the files, but we switched between development and production so we should recompile
                .pipe ( sort () )
-               .pipe ( dependencies ( plugins.dependencies ) )
+               .pipe ( dependencies ( plugins.dependencies.options ) )
                .pipe ( flatten () )
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
-               .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel ) ) )
+               .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
                .on ( 'error', function ( err ) {
                  gutil.log ( err.message );
                })
                .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
-               .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify ) ) )
-               .pipe ( rename ( output.getName ( 'javascript.uncompressed' ) ) )
-               .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) );
+               .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
+               .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
+               .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
 
   }
 
