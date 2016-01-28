@@ -6,11 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* REQUIRES */
-
-var pngquant = require ( 'imagemin-pngquant' ),
-    svgo     = require ( 'imagemin-svgo' );
-
 /* PLUGINS */
 
 var plugins = {
@@ -47,16 +42,16 @@ var plugins = {
     }
   },
   imagemin: {
-    enabled: false, //TODO: Re-enable, but fix it before
+    enabled: true,
     options: {
-      interlaced: true, // Affects GIF images
-      progressive: true, // Affects JPG images
-      optimizationLevel: 7, // Affects PNG images
-      multipass: true, // Affects SVG images
+      interlaced: true, // GIF
+      progressive: true, // JPG
+      optimizationLevel: 7, // PNG
+      multipass: true, // SVG
       svgoPlugins: [{
+        cleanupIDs: false,
         removeViewBox: false
-      }],
-      use: [pngquant (), svgo ()]
+      }]
     }
   },
   sass: {

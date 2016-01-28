@@ -8,8 +8,7 @@
 
 /* REQUIRE */
 
-var path     = require ( 'path' ),
-    env      = require ( '../config/environment' ),
+var env      = require ( '../config/environment' ),
     input    = require ( '../utilities/input' ),
     output   = require ( '../utilities/output' ),
     plugins  = require ( '../config/project' ).plugins,
@@ -21,9 +20,6 @@ var path     = require ( 'path' ),
     newer    = require ( 'gulp-newer' );
 
 /* IMAGES */
-
-//FIXME: We shoudn't compress images lossly
-//FIXME: It doesn't work with SVGs, the blur.svg doesn't work anymore after
 
 gulp.task ( 'build-images', 'Build images', function () {
 
