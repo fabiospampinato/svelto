@@ -59,6 +59,7 @@
     "merge-stream": "^1.0.0",
     "path": "^0.12.7",
     "require-dir": "^0.3.0",
+    "require-dot-file": "^0.4.0",
     "yargs": "^3.32.0"
   }
 }

@@ -6,16 +6,15 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Recurse directories upwards looking for a dot file (will make it trivial to create a `svelto-boilerplate`-like builder)
-
 /* REQUIRES */
 
 var _        = require ( 'lodash' ),
     argv     = require ( 'yargs' ).argv,
+    path     = require ( 'path' ),
     file     = require ( '../utilities/file' ),
     defaults = require ( './defaults' ),
-    custom   = file.load ( '../../svelto.json', {} ),
-    dot      = file.load ( '../../.svelto.json', {} );
+    custom   = file.load ( path.resolve ( __dirname, '../../svelto.json' ), {} ),
+    dot      = file.loadRecursive ( '.svelto.json', {} );
 
 /* ENVIRONMENT */
 
