@@ -1,5 +1,126 @@
 
 /* =========================================================================
+ * Svelto - Colors (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* COLOR */
+
+@mixin color ( $color_name, $basic: true, $extra: '' ) {
+
+  $colors: map-get($colors, $color_name);
+
+  $bg: nth($colors, 1);
+  $bg-hover: nth($colors, 2);
+  $bg-active: nth($colors, 3);
+  $border: nth($colors, 4);
+  $accent: nth($colors, 5);
+  $text: nth($colors, 6);
+  $link: nth($colors, 7);
+  $link-hover: nth($colors, 8);
+
+  background: $bg #{$extra};
+  border-color: $border #{$extra};
+  color: $text #{$extra};
+
+  @if $basic == false {
+
+    &.highlighted:after {
+      border-color: $accent #{$extra};
+    }
+
+    &.hover,
+    &.actionable:not(.disabled):hover {
+      background: $bg-hover #{$extra};
+    }
+
+    &.active,
+    &.actionable:not(.disabled):not(.ripple):active {
+      background: $bg-active #{$extra};
+    }
+
+    &.inverted {
+
+      background: inherit #{$extra};
+      border-color: $bg #{$extra};
+      color: $bg #{$extra};
+
+      &.hover,
+      &.actionable:not(.disabled):hover {
+        background: $bg-hover #{$extra};
+        border-color: $bg #{$extra};
+        color: $text #{$extra};
+      }
+
+      &.active,
+      &.actionable:not(.disabled):not(.ripple):active {
+        background: $bg-active #{$extra};
+        border-color: $bg-active #{$extra};
+        color: $text #{$extra};
+      }
+
+    }
+
+  }
+
+  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
+
+    p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+    span > a { // Same as `p > a`
+
+      color: $link #{$extra};
+
+      &:after {
+        border-color: $link-hover #{$extra};
+      }
+
+      &:hover {
+        color: $link-hover #{$extra};
+      }
+
+    }
+
+  }
+
+}
+
+/* TEXT */
+
+@mixin color-text ( $color_name, $extra: '' ) {
+
+  $colors: map-get($colors, $color_name);
+
+  $bg: nth($colors, 1);
+
+  color: $bg #{$extra};
+
+}
+
+/* LINK */
+
+@mixin color-link ( $color_name, $extra: '' ) {
+
+  $colors: map-get($colors, $color_name);
+
+  $bg: nth($colors, 1);
+  $bg-hover: nth($colors, 2);
+
+  color: $bg #{$extra};
+
+  &:after {
+    border-color: $bg-hover #{$extra};
+  }
+
+  &:hover {
+    color: $bg-hover #{$extra};
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Border Radius (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -26,6 +147,62 @@
 @mixin border-left-radius ( $radius ) {
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
+}
+
+
+/* =========================================================================
+ * Svelto - Fill (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FILL */
+
+@mixin fill {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin fill-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin fill-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin fill-viewport {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+/* =========================================================================
+ * Svelto - Margin (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MARGIN */
+
+@mixin margin-horizontal ( $margin ) {
+  margin-right: $margin;
+  margin-left: $margin;
+}
+
+@mixin margin-vertical ( $margin ) {
+  margin-top: $margin;
+  margin-bottom: $margin;
 }
 
 
@@ -147,42 +324,6 @@
 
 
 /* =========================================================================
- * Svelto - Fill (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* FILL */
-
-@mixin fill {
-  width: 100%;
-  height: 100%;
-}
-
-@mixin fill-absolute {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-@mixin fill-fixed {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-@mixin fill-viewport {
-  width: 100vw;
-  height: 100vh;
-}
-
-
-/* =========================================================================
  * Svelto - Gradients (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -263,26 +404,6 @@
 
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Margin (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* MARGIN */
-
-@mixin margin-horizontal ( $margin ) {
-  margin-right: $margin;
-  margin-left: $margin;
-}
-
-@mixin margin-vertical ( $margin ) {
-  margin-top: $margin;
-  margin-bottom: $margin;
 }
 
 
@@ -629,127 +750,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-
-/* =========================================================================
- * Svelto - Colors (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* COLOR */
-
-@mixin color ( $color_name, $basic: true, $extra: '' ) {
-
-  $colors: map-get($colors, $color_name);
-
-  $bg: nth($colors, 1);
-  $bg-hover: nth($colors, 2);
-  $bg-active: nth($colors, 3);
-  $border: nth($colors, 4);
-  $accent: nth($colors, 5);
-  $text: nth($colors, 6);
-  $link: nth($colors, 7);
-  $link-hover: nth($colors, 8);
-
-  background: $bg #{$extra};
-  border-color: $border #{$extra};
-  color: $text #{$extra};
-
-  @if $basic == false {
-
-    &.highlighted:after {
-      border-color: $accent #{$extra};
-    }
-
-    &.hover,
-    &.actionable:not(.disabled):hover {
-      background: $bg-hover #{$extra};
-    }
-
-    &.active,
-    &.actionable:not(.disabled):not(.ripple):active {
-      background: $bg-active #{$extra};
-    }
-
-    &.inverted {
-
-      background: inherit #{$extra};
-      border-color: $bg #{$extra};
-      color: $bg #{$extra};
-
-      &.hover,
-      &.actionable:not(.disabled):hover {
-        background: $bg-hover #{$extra};
-        border-color: $bg #{$extra};
-        color: $text #{$extra};
-      }
-
-      &.active,
-      &.actionable:not(.disabled):not(.ripple):active {
-        background: $bg-active #{$extra};
-        border-color: $bg-active #{$extra};
-        color: $text #{$extra};
-      }
-
-    }
-
-  }
-
-  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
-
-    p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-    span > a { // Same as `p > a`
-
-      color: $link #{$extra};
-
-      &:after {
-        border-color: $link-hover #{$extra};
-      }
-
-      &:hover {
-        color: $link-hover #{$extra};
-      }
-
-    }
-
-  }
-
-}
-
-/* TEXT */
-
-@mixin color-text ( $color_name, $extra: '' ) {
-
-  $colors: map-get($colors, $color_name);
-
-  $bg: nth($colors, 1);
-
-  color: $bg #{$extra};
-
-}
-
-/* LINK */
-
-@mixin color-link ( $color_name, $extra: '' ) {
-
-  $colors: map-get($colors, $color_name);
-
-  $bg: nth($colors, 1);
-  $bg-hover: nth($colors, 2);
-
-  color: $bg #{$extra};
-
-  &:after {
-    border-color: $bg-hover #{$extra};
-  }
-
-  &:hover {
-    color: $bg-hover #{$extra};
-  }
-
 }
 
 

@@ -8,10 +8,13 @@
 
 /* REQUIRE */
 
-var env          = require ( '../config/environment' ),
+var _            = require ( 'lodash' ),
+    env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
-    plugins      = require ( '../config/project' ).plugins,
+    project      = require ( '../config/project' ),
+    projectPrev  = require ( '../config/previous/project' ),
+    plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     concat       = require ( 'gulp-concat' ),
@@ -40,8 +43,13 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
 
   } else {
 
+    var needUpdate = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
+                     !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) ) ||
+                     _.get ( project, 'plugins.uglify.enabled' ) !== _.get ( projectPrev, 'plugins.uglify.enabled' ) ||
+                     !_.isEqual ( _.get ( project, 'plugins.uglify.options' ), _.get ( projectPrev, 'plugins.uglify.options' ) );
+
     return gulp.src ( input.getPath ( 'javascript.all' ) )
-              //  .pipe ( newer ( DEST.js + '/svelto.js' ) ) //FIXME: Maybe nothing is changed in the files, but we switched between development and production so we should recompile
+               .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
                .pipe ( sort () )
                .pipe ( dependencies ( plugins.dependencies.options ) )
                .pipe ( flatten () )

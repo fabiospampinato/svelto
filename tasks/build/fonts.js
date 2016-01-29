@@ -11,7 +11,8 @@
 var input   = require ( '../utilities/input' ),
     output  = require ( '../utilities/output' ),
     gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
-    flatten = require ( 'gulp-flatten' );
+    flatten = require ( 'gulp-flatten' ),
+    newer   = require ( 'gulp-newer' );
 
 /* FONTS */
 
@@ -19,6 +20,7 @@ gulp.task ( 'build-fonts', 'Build fonts', function () {
 
   return gulp.src ( input.getPath ( 'fonts' ) )
              .pipe ( flatten () )
+             .pipe ( newer ( output.getPath ( 'fonts' ) ) )
              .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) );
 
 });

@@ -30,10 +30,10 @@ gulp.task ( 'build-scss-parts', false, function () {
                       .pipe ( gulp.dest ( output.getDir ( 'scss.variables' ) ) );
 
   var mixins = gulp.src ( input.getPath ( 'scss.mixins' ) )
-                   .pipe ( newer ( output.getPath ( 'scss.mixins' ) )
+                   .pipe ( newer ( output.getPath ( 'scss.mixins' ) ) )
                    .pipe ( sort () )
                    .pipe ( dependencies ( plugins.dependencies.options ) )
-                   .pipe ( concat ( output.getName ( 'scss.mixins' ) ) ) )
+                   .pipe ( concat ( output.getName ( 'scss.mixins' ) ) )
                    .pipe ( gulp.dest ( output.getDir ( 'scss.mixins' ) ) );
 
   var style = gulp.src ( input.getPath ( 'scss.style' ) )

@@ -31,3 +31,5 @@ node_modules
 # Project specific folders to ignore
 .temp
 .svelto.json
+.environment.previous.json
+.project.previous.json

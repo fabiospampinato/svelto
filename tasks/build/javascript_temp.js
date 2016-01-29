@@ -13,7 +13,9 @@ var _            = require ( 'lodash' ),
     env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
-    plugins      = require ( '../config/project' ).plugins,
+    project      = require ( '../config/project' ),
+    projectPrev  = require ( '../config/previous/project' ),
+    plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
@@ -30,6 +32,9 @@ gulp.task ( 'build-javascript-temp', false, function () {
 
   if ( !env.isDevelopment ) return;
 
+  var needUpdate = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
+                   !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) );
+
   var dependencyIndex = 0;
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
@@ -41,7 +46,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
                return stream;
              }))
              .pipe ( flatten () )
-             .pipe ( newer ( output.getPath ( 'javascript.temp' ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.temp' ) ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
              .on ( 'error', function ( err ) {
                gutil.log ( err.message );

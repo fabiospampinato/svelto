@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Recurse directories upwards looking for a dot file (will make it trivial to create a `svelto-boilerplate`-like builder)
+
 /* REQUIRES */
 
 var _        = require ( 'lodash' ),

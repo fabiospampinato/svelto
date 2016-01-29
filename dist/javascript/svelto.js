@@ -2,9 +2,11 @@
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -13,8 +15,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -26,11 +26,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function () {
-  'use strict'
+
+  'use strict';
 
   /* SVELTO */
 
-  ;
   var Svelto = {
     VERSION: '0.4.0-beta1',
     $: jQuery && 'jquery' in jQuery() ? jQuery : $ && 'jquery' in $() ? $ : false, // Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
@@ -65,11 +65,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* ANIMATIONS */
 
-  ;
   var Animations = {
     xslow: 900,
     slow: 500,
@@ -93,11 +93,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* BREAKPOINTS */
 
-  ;
   var Breakpoints = {
     xsmall: 0,
     small: 512,
@@ -121,11 +121,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* COLORS */
 
-  ;
   var Colors = {
     primary: '#1565c0',
     secondary: '#ef6c00',
@@ -172,11 +172,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Write it better
 
 (function (_) {
-  'use strict'
+
+  'use strict';
 
   /* LODASH EXTRA */
 
-  ;
   _.mixin({
     nowSecs: function nowSecs() {
 
@@ -343,12 +343,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     },
     getOppositeDirection: function getOppositeDirection(direction) {
 
-      return ({
+      return {
         'top': 'bottom',
         'bottom': 'top',
         'left': 'right',
         'right': 'left'
-      })[direction];
+      }[direction];
     },
 
     true: _.constant(true),
@@ -368,11 +368,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* VARIABLES */
 
-  ;
   var userAgent = navigator.userAgent ? navigator.userAgent.toLowerCase() : '',
       vendor = navigator.vendor ? navigator.vendor.toLowerCase() : '',
       // Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
@@ -447,11 +447,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Write it better
 
 (function ($, _, Svelto, Browser, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* ITERATOR */
 
-  ;
   $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
   /* HELPERS */
@@ -529,7 +529,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return this.toggleScroll(true);
   };
 
-  $.fn.disableSelection = (function () {
+  $.fn.disableSelection = function () {
     // Taken from jQuery UI
 
     var event = 'onselectstart' in document.createElement('div') ? 'selectstart' : Pointer.down;
@@ -540,7 +540,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return event.preventDefault();
       });
     };
-  })();
+  }();
 
   $.fn.enableSelection = function () {
     // Taken from jQuery UI
@@ -744,11 +744,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  ***************************/
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* TMPL */
 
-  ;
   var tmpl = function tmpl(str, data) {
 
     var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] || tmpl(document.getElementById(str).innerHTML) : new Function(tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace(tmpl.regexp, tmpl.func) + "';return _s;");
@@ -768,12 +768,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     if (p1) {
       // whitespace, quote and backspace in HTML context
 
-      return ({
+      return {
         '\n': '\\n',
         '\r': '\\r',
         '\t': '\\t',
         ' ': ' '
-      })[p1] || '\\' + p1;
+      }[p1] || '\\' + p1;
     }
 
     if (p2) {
@@ -822,11 +822,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
 (function ($, _, Svelto, Browser) {
-  'use strict'
+
+  'use strict';
 
   /* POINTER */
 
-  ;
   var Pointer = {
     options: {
       events: {
@@ -969,13 +969,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* WIDGETIZE */
 
-  ;
-
-  var Widgetize = (function () {
+  var Widgetize = function () {
     function Widgetize() {
       _classCallCheck(this, Widgetize);
 
@@ -1092,7 +1091,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Widgetize;
-  })();
+  }();
 
   /* EXPORT */
 
@@ -1126,11 +1125,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *=========================================================================*/
 
 (function ($, _, Svelto, Widgetize) {
-  'use strict'
+
+  'use strict';
 
   /* FACTORY */
 
-  ;
   var Factory = {
 
     /* VARIABLES */
@@ -1278,11 +1277,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Breakpoints) {
-  'use strict'
+
+  'use strict';
 
   /* VARIABLES */
 
-  ;
   var $window = $(window);
 
   /* BREAKPOINT */
@@ -1361,11 +1360,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* KEYBOARD */
 
-  ;
   var Keyboard = {
     keys: {
       BACKSPACE: 8,
@@ -1459,11 +1458,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
@@ -1495,7 +1494,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* WIDGET */
 
-  var Widget = (function () {
+  var Widget = function () {
 
     /* CONSTRUCTION */
 
@@ -2196,7 +2195,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Widget;
-  })();
+  }();
 
   /* FACTORY */
 
@@ -2214,11 +2213,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'expander',
     plugin: true,
@@ -2243,7 +2242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER */
 
-  var Expander = (function (_Widgets$Widget) {
+  var Expander = function (_Widgets$Widget) {
     _inherits(Expander, _Widgets$Widget);
 
     function Expander() {
@@ -2302,7 +2301,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Expander;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -2321,11 +2320,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'accordion',
     plugin: true,
@@ -2344,7 +2343,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ACCORDION */
 
-  var Accordion = (function (_Widgets$Widget2) {
+  var Accordion = function (_Widgets$Widget2) {
     _inherits(Accordion, _Widgets$Widget2);
 
     function Accordion() {
@@ -2466,7 +2465,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Accordion;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -2485,11 +2484,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // It supports only `box-sizing: border-box` inputs
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'autogrowInput',
     plugin: true,
@@ -2503,7 +2502,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* AUTOGROW INPUT */
 
-  var AutogrowInput = (function (_Widgets$Widget3) {
+  var AutogrowInput = function (_Widgets$Widget3) {
     _inherits(AutogrowInput, _Widgets$Widget3);
 
     function AutogrowInput() {
@@ -2575,7 +2574,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return AutogrowInput;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -2596,11 +2595,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Measure the needed height using canvas, if possible, it would make it super fast
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'autogrowTextarea',
     plugin: true,
@@ -2614,7 +2613,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* AUTOGROW TEXTAREA */
 
-  var AutogrowTextarea = (function (_Widgets$Widget4) {
+  var AutogrowTextarea = function (_Widgets$Widget4) {
     _inherits(AutogrowTextarea, _Widgets$Widget4);
 
     function AutogrowTextarea() {
@@ -2696,7 +2695,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return AutogrowTextarea;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -2715,11 +2714,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Maybe rename it
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* BLURRED */
 
-  ;
   $.fn.blurred = function (force) {
 
     return this.toggleClass('blurred', force);
@@ -2736,11 +2735,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'boilerplate',
     plugin: false,
@@ -2767,7 +2766,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* BOILERPLATE */
 
-  var Boilerplate = (function (_Widgets$Widget5) {
+  var Boilerplate = function (_Widgets$Widget5) {
     _inherits(Boilerplate, _Widgets$Widget5);
 
     function Boilerplate() {
@@ -2802,7 +2801,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Boilerplate;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -2819,11 +2818,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* BINARY TREE .each () */
 
-  ;
   $.fn.btEach = function (callback, startIndex) {
 
     return _.btEach(this, callback, startIndex);
@@ -2842,12 +2841,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* TIMER */
 
-  ;
-  var Timer = (function () {
+  var Timer = function () {
     function Timer() {
       _classCallCheck(this, Timer);
 
@@ -3009,7 +3008,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Timer;
-  })();
+  }();
 
   /* EXPORT */
 
@@ -3030,11 +3029,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add slides drag support
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'carousel',
     plugin: true,
@@ -3071,7 +3070,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CAROUSEL */
 
-  var Carousel = (function (_Widgets$Widget6) {
+  var Carousel = function (_Widgets$Widget6) {
     _inherits(Carousel, _Widgets$Widget6);
 
     function Carousel() {
@@ -3382,7 +3381,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Carousel;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -3399,11 +3398,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'targeter',
     options: {
@@ -3417,7 +3416,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TARGETER */
 
-  var Targeter = (function (_Widgets$Widget7) {
+  var Targeter = function (_Widgets$Widget7) {
     _inherits(Targeter, _Widgets$Widget7);
 
     function Targeter() {
@@ -3442,7 +3441,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Targeter;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -3460,11 +3459,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'closer',
     options: {
@@ -3477,7 +3476,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CLOSER */
 
-  var Closer = (function (_Widgets$Targeter) {
+  var Closer = function (_Widgets$Targeter) {
     _inherits(Closer, _Widgets$Targeter);
 
     function Closer() {
@@ -3528,7 +3527,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Closer;
-  })(Widgets.Targeter);
+  }(Widgets.Targeter);
 
   /* FACTORY */
 
@@ -3548,12 +3547,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* COLOR */
 
-  ;
-  var Color = (function () {
+  var Color = function () {
     function Color(color, colorspace) {
       _classCallCheck(this, Color);
 
@@ -3930,7 +3929,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Color;
-  })();
+  }();
 
   /* EXPORT */
 
@@ -3950,11 +3949,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
 (function ($, _, Svelto, Widgets, Factory, Color, Keyboard) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'colorpicker',
     plugin: true,
@@ -3991,7 +3990,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* COLORPICKER */
 
-  var Colorpicker = (function (_Widgets$Widget8) {
+  var Colorpicker = function (_Widgets$Widget8) {
     _inherits(Colorpicker, _Widgets$Widget8);
 
     function Colorpicker() {
@@ -4318,7 +4317,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Colorpicker;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -4339,11 +4338,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* COOKIE */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* COOKIE */
 
-  ;
   var Cookie = {
 
     /* VARIABLES */
@@ -4430,11 +4429,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Mouse) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'datepicker',
     plugin: true,
@@ -4518,7 +4517,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATEPICKER */
 
-  var Datepicker = (function (_Widgets$Widget9) {
+  var Datepicker = function (_Widgets$Widget9) {
     _inherits(Datepicker, _Widgets$Widget9);
 
     function Datepicker() {
@@ -4942,7 +4941,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Datepicker;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -4964,11 +4963,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
 (function ($, _, Svelto, Widgets, Factory, Animations, Browser, Pointer, Mouse) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'draggable',
     plugin: true,
@@ -5022,7 +5021,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DRAGGABLE */
 
-  var Draggable = (function (_Widgets$Widget10) {
+  var Draggable = function (_Widgets$Widget10) {
     _inherits(Draggable, _Widgets$Widget10);
 
     function Draggable() {
@@ -5491,7 +5490,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Draggable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -5510,11 +5509,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* TRANSFORM UTILITIES */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* MATRIX */
 
-  ;
   var property = 'webkitTransform' in document.documentElement.style ? '-webkit-transform' : 'transform';
 
   $.fn.matrix = function (values) {
@@ -5540,7 +5539,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   for (var i = 0, l = transformations.length; i < l; i++) {
 
-    $.fn[transformations[i]] = (function (index) {
+    $.fn[transformations[i]] = function (index) {
 
       return function (value) {
 
@@ -5556,7 +5555,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return matrix[index];
         }
       };
-    })(i);
+    }(i);
   }
 
   /* TRANSLATE */
@@ -5592,11 +5591,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* VARIABLES */
 
-  ;
   var $window = $(window);
 
   /* UTILITES */
@@ -5873,13 +5872,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* EMBEDDED CSS */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* EMBEDDED CSS */
 
-  ;
-
-  var EmbeddedCSS = (function () {
+  var EmbeddedCSS = function () {
     function EmbeddedCSS() {
       _classCallCheck(this, EmbeddedCSS);
 
@@ -5998,7 +5996,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return EmbeddedCSS;
-  })();
+  }();
 
   /* EXPORT */
 
@@ -6024,11 +6022,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'dropdown',
     plugin: true,
@@ -6062,7 +6060,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPDOWN */
 
-  var Dropdown = (function (_Widgets$Widget11) {
+  var Dropdown = function (_Widgets$Widget11) {
     _inherits(Dropdown, _Widgets$Widget11);
 
     function Dropdown() {
@@ -6340,7 +6338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Dropdown;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -6358,11 +6356,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'dropdownCloser',
     plugin: true,
@@ -6374,7 +6372,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPDOWN CLOSER */
 
-  var DropdownCloser = (function (_Widgets$Closer) {
+  var DropdownCloser = function (_Widgets$Closer) {
     _inherits(DropdownCloser, _Widgets$Closer);
 
     function DropdownCloser() {
@@ -6384,7 +6382,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return DropdownCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -6402,11 +6400,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Browser, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'opener',
     options: {
@@ -6425,7 +6423,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OPENER */
 
-  var Opener = (function (_Widgets$Closer2) {
+  var Opener = function (_Widgets$Closer2) {
     _inherits(Opener, _Widgets$Closer2);
 
     function Opener() {
@@ -6579,7 +6577,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Opener;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -6597,11 +6595,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'dropdownOpener',
     plugin: true,
@@ -6613,7 +6611,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPDOWN OPENER */
 
-  var DropdownOpener = (function (_Widgets$Opener) {
+  var DropdownOpener = function (_Widgets$Opener) {
     _inherits(DropdownOpener, _Widgets$Opener);
 
     function DropdownOpener() {
@@ -6623,7 +6621,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return DropdownOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -6640,11 +6638,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'toggler',
     options: {
@@ -6656,7 +6654,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOGGLER */
 
-  var Toggler = (function (_Widgets$Opener2) {
+  var Toggler = function (_Widgets$Opener2) {
     _inherits(Toggler, _Widgets$Opener2);
 
     function Toggler() {
@@ -6686,7 +6684,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Toggler;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -6704,11 +6702,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'dropdownToggler',
     plugin: true,
@@ -6720,7 +6718,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPDOWN TOGGLER */
 
-  var DropdownToggler = (function (_Widgets$Toggler) {
+  var DropdownToggler = function (_Widgets$Toggler) {
     _inherits(DropdownToggler, _Widgets$Toggler);
 
     function DropdownToggler() {
@@ -6730,7 +6728,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return DropdownToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -6748,11 +6746,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* UTILITIES */
 
-  ;
   var getOverlappingArea = function getOverlappingArea(rect1, rect2) {
 
     var overlapX = Math.max(0, Math.min(rect1.right, rect2.right) - Math.max(rect1.left, rect2.left)),
@@ -6924,11 +6922,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'droppable',
     plugin: true,
@@ -6949,7 +6947,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPPABLE */
 
-  var Droppable = (function (_Widgets$Widget12) {
+  var Droppable = function (_Widgets$Widget12) {
     _inherits(Droppable, _Widgets$Widget12);
 
     function Droppable() {
@@ -7072,7 +7070,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Droppable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -7090,11 +7088,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'expanderCloser',
     plugin: true,
@@ -7106,7 +7104,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER CLOSER */
 
-  var ExpanderCloser = (function (_Widgets$Closer3) {
+  var ExpanderCloser = function (_Widgets$Closer3) {
     _inherits(ExpanderCloser, _Widgets$Closer3);
 
     function ExpanderCloser() {
@@ -7116,7 +7114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ExpanderCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -7134,11 +7132,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'expanderOpener',
     plugin: true,
@@ -7150,7 +7148,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER OPENER */
 
-  var ExpanderOpener = (function (_Widgets$Opener3) {
+  var ExpanderOpener = function (_Widgets$Opener3) {
     _inherits(ExpanderOpener, _Widgets$Opener3);
 
     function ExpanderOpener() {
@@ -7160,7 +7158,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ExpanderOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -7178,11 +7176,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'expanderToggler',
     plugin: true,
@@ -7194,7 +7192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER TOGGLER */
 
-  var ExpanderToggler = (function (_Widgets$Toggler2) {
+  var ExpanderToggler = function (_Widgets$Toggler2) {
     _inherits(ExpanderToggler, _Widgets$Toggler2);
 
     function ExpanderToggler() {
@@ -7204,7 +7202,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ExpanderToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -7221,11 +7219,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'flickable',
     plugin: true,
@@ -7241,7 +7239,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLICKABLE */
 
-  var Flickable = (function (_Widgets$Widget13) {
+  var Flickable = function (_Widgets$Widget13) {
     _inherits(Flickable, _Widgets$Widget13);
 
     function Flickable() {
@@ -7379,7 +7377,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Flickable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -7396,11 +7394,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'flippable',
     plugin: true,
@@ -7418,7 +7416,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLIPPABLE */
 
-  var Flippable = (function (_Widgets$Widget14) {
+  var Flippable = function (_Widgets$Widget14) {
     _inherits(Flippable, _Widgets$Widget14);
 
     function Flippable() {
@@ -7476,7 +7474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Flippable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -7494,11 +7492,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'flippableFlipper',
     plugin: true,
@@ -7515,7 +7513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLIPPABLE FLIPPER */
 
-  var FlippableFlipper = (function (_Widgets$Toggler3) {
+  var FlippableFlipper = function (_Widgets$Toggler3) {
     _inherits(FlippableFlipper, _Widgets$Toggler3);
 
     function FlippableFlipper() {
@@ -7525,7 +7523,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return FlippableFlipper;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -7543,11 +7541,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'overlay',
     plugin: true,
@@ -7573,7 +7571,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY */
 
-  var Overlay = (function (_Widgets$Widget15) {
+  var Overlay = function (_Widgets$Widget15) {
     _inherits(Overlay, _Widgets$Widget15);
 
     function Overlay() {
@@ -7683,7 +7681,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Overlay;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -7700,11 +7698,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'spinnerOverlay',
     plugin: true,
@@ -7729,7 +7727,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SPINNER OVERLAY */
 
-  var SpinnerOverlay = (function (_Widgets$Widget16) {
+  var SpinnerOverlay = function (_Widgets$Widget16) {
     _inherits(SpinnerOverlay, _Widgets$Widget16);
 
     function SpinnerOverlay() {
@@ -7803,7 +7801,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return SpinnerOverlay;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -7824,11 +7822,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add better support for swipe to dismiss
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* VARIABLES */
 
-  ;
   var openNotiesData = {};
 
   /* CONFIG */
@@ -7890,7 +7888,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NOTY */
 
-  var Noty = (function (_Widgets$Widget17) {
+  var Noty = function (_Widgets$Widget17) {
     _inherits(Noty, _Widgets$Widget17);
 
     function Noty() {
@@ -8174,7 +8172,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Noty;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -8191,11 +8189,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* REGEXES */
 
-  ;
   var Regexes = {
 
     /* TYPE */
@@ -8235,11 +8233,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Strings will be trimmed inside some validators
 
 (function ($, _, Svelto, Regexes) {
-  'use strict'
+
+  'use strict';
 
   /* VALIDATOR */
 
-  ;
   var Validator = {
 
     /* TYPE */
@@ -8343,11 +8341,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 
 (function ($, _, Svelto, Widgets, Factory, Validator) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'formValidate',
     plugin: true,
@@ -8440,7 +8438,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = (function (_Widgets$Widget18) {
+  var FormValidate = function (_Widgets$Widget18) {
     _inherits(FormValidate, _Widgets$Widget18);
 
     function FormValidate() {
@@ -8830,7 +8828,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return FormValidate;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -8855,11 +8853,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'formAjax',
     plugin: true,
@@ -8884,7 +8882,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM AJAX */
 
-  var FormAjax = (function (_Widgets$Widget19) {
+  var FormAjax = function (_Widgets$Widget19) {
     _inherits(FormAjax, _Widgets$Widget19);
 
     function FormAjax() {
@@ -9006,7 +9004,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return FormAjax;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -9025,11 +9023,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'formSync',
     plugin: true,
@@ -9055,7 +9053,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM SYNC */
 
-  var FormSync = (function (_Widgets$Widget20) {
+  var FormSync = function (_Widgets$Widget20) {
     _inherits(FormSync, _Widgets$Widget20);
 
     function FormSync() {
@@ -9166,7 +9164,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return FormSync;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -9178,7 +9176,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
-  var fn = (function () {
+  var fn = function () {
     var val;
     var valLength;
 
@@ -9203,7 +9201,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return false;
-  })();
+  }();
 
   var screenfull = {
     request: function request(elem) {
@@ -9278,14 +9276,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Move to their own folders/files
 
 (function ($, _, Svelto, Widgets, Factory, Widgetize, Pointer, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* SCROLL TO TOP */
 
   //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
   //FIXME: It doesn't work if the layout is body, it also need html in some browsers
 
-  ;
   Widgetize.add('.scroll-to-top', function ($scroller) {
 
     var $layout = $scroller.parent().closest('.layout, body'); //TODO: Use just `.layout`
@@ -9318,11 +9316,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'infobar',
     plugin: true,
@@ -9336,7 +9334,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR */
 
-  var Infobar = (function (_Widgets$Widget21) {
+  var Infobar = function (_Widgets$Widget21) {
     _inherits(Infobar, _Widgets$Widget21);
 
     function Infobar() {
@@ -9368,7 +9366,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Infobar;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -9386,11 +9384,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'infobarCloser',
     plugin: true,
@@ -9402,7 +9400,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR CLOSER */
 
-  var InfobarCloser = (function (_Widgets$Closer4) {
+  var InfobarCloser = function (_Widgets$Closer4) {
     _inherits(InfobarCloser, _Widgets$Closer4);
 
     function InfobarCloser() {
@@ -9412,7 +9410,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return InfobarCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -9432,11 +9430,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'modal',
     plugin: true,
@@ -9462,7 +9460,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL */
 
-  var Modal = (function (_Widgets$Widget22) {
+  var Modal = function (_Widgets$Widget22) {
     _inherits(Modal, _Widgets$Widget22);
 
     function Modal() {
@@ -9602,7 +9600,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Modal;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -9620,11 +9618,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'modalCloser',
     plugin: true,
@@ -9636,7 +9634,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL CLOSER */
 
-  var ModalCloser = (function (_Widgets$Closer5) {
+  var ModalCloser = function (_Widgets$Closer5) {
     _inherits(ModalCloser, _Widgets$Closer5);
 
     function ModalCloser() {
@@ -9646,7 +9644,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ModalCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -9664,11 +9662,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'modalOpener',
     plugin: true,
@@ -9680,7 +9678,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL OPENER */
 
-  var ModalOpener = (function (_Widgets$Opener4) {
+  var ModalOpener = function (_Widgets$Opener4) {
     _inherits(ModalOpener, _Widgets$Opener4);
 
     function ModalOpener() {
@@ -9690,7 +9688,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ModalOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -9708,11 +9706,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'modalToggler',
     plugin: true,
@@ -9724,7 +9722,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL TOGGLER */
 
-  var ModalToggler = (function (_Widgets$Toggler4) {
+  var ModalToggler = function (_Widgets$Toggler4) {
     _inherits(ModalToggler, _Widgets$Toggler4);
 
     function ModalToggler() {
@@ -9734,7 +9732,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return ModalToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -9751,11 +9749,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* MOUSE */
 
-  ;
   var Mouse = {
     buttons: {
       LEFT: 0,
@@ -9780,11 +9778,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Cookie, NTA) {
-  'use strict'
+
+  'use strict';
 
   /* UTILITIES */
 
-  ;
   var getExpiry = function getExpiry(expiry) {
 
     if (expiry) {
@@ -9816,7 +9814,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* GROUP */
 
-  var Group = (function () {
+  var Group = function () {
     function Group(options) {
       _classCallCheck(this, Group);
 
@@ -9907,7 +9905,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Group;
-  })();
+  }();
 
   /* BINDING */
 
@@ -9926,13 +9924,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, NTA) {
-  'use strict'
+
+  'use strict';
 
   /* ACTION */
 
-  ;
-
-  var Action = (function () {
+  var Action = function () {
     function Action(options) {
       _classCallCheck(this, Action);
 
@@ -9962,7 +9959,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Action;
-  })();
+  }();
 
   /* BINDING */
 
@@ -9980,11 +9977,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, NTA) {
-  'use strict'
+
+  'use strict';
 
   /* DEFAULT OPTIONS */
 
-  ;
   var defaults = {
     group: 'nta', // The cookie name that holds the actions, a namespace for related actions basically
     action: false, // The action name
@@ -10052,11 +10049,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
 (function ($, _, Svelto, Widgets) {
-  'use strict'
+
+  'use strict';
 
   /* DEFAULT OPTIONS */
 
-  ;
   var defaults = {
     title: false,
     body: false,
@@ -10117,11 +10114,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets) {
-  'use strict'
+
+  'use strict';
 
   /* HELPER */
 
-  ;
   $.noty = function () {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -10152,11 +10149,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto) {
-  'use strict'
+
+  'use strict';
 
   /* ONE TIME ACTION */
 
-  ;
   $.oneTimeAction = function (options) {
 
     return $.nTimesAction(_.extend({ group: 'ota' }, options, { times: 1 }));
@@ -10174,11 +10171,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'overlayCloser',
     plugin: true,
@@ -10190,7 +10187,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY CLOSER */
 
-  var OverlayCloser = (function (_Widgets$Closer6) {
+  var OverlayCloser = function (_Widgets$Closer6) {
     _inherits(OverlayCloser, _Widgets$Closer6);
 
     function OverlayCloser() {
@@ -10200,7 +10197,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return OverlayCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -10218,11 +10215,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'overlayOpener',
     plugin: true,
@@ -10234,7 +10231,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY OPENER */
 
-  var OverlayOpener = (function (_Widgets$Opener5) {
+  var OverlayOpener = function (_Widgets$Opener5) {
     _inherits(OverlayOpener, _Widgets$Opener5);
 
     function OverlayOpener() {
@@ -10244,7 +10241,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return OverlayOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -10262,11 +10259,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'overlayToggler',
     plugin: true,
@@ -10278,7 +10275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY TOGGLER */
 
-  var OverlayToggler = (function (_Widgets$Toggler5) {
+  var OverlayToggler = function (_Widgets$Toggler5) {
     _inherits(OverlayToggler, _Widgets$Toggler5);
 
     function OverlayToggler() {
@@ -10288,7 +10285,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return OverlayToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -10310,11 +10307,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'panel',
     plugin: true,
@@ -10350,7 +10347,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL */
 
-  var Panel = (function (_Widgets$Widget23) {
+  var Panel = function (_Widgets$Widget23) {
     _inherits(Panel, _Widgets$Widget23);
 
     function Panel() {
@@ -10694,7 +10691,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Panel;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -10712,11 +10709,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'panelCloser',
     plugin: true,
@@ -10728,7 +10725,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL CLOSER */
 
-  var PanelCloser = (function (_Widgets$Closer7) {
+  var PanelCloser = function (_Widgets$Closer7) {
     _inherits(PanelCloser, _Widgets$Closer7);
 
     function PanelCloser() {
@@ -10738,7 +10735,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return PanelCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -10756,11 +10753,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'panelOpener',
     plugin: true,
@@ -10772,7 +10769,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL OPENER */
 
-  var PanelOpener = (function (_Widgets$Opener6) {
+  var PanelOpener = function (_Widgets$Opener6) {
     _inherits(PanelOpener, _Widgets$Opener6);
 
     function PanelOpener() {
@@ -10782,7 +10779,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return PanelOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -10800,11 +10797,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'panelToggler',
     plugin: true,
@@ -10816,7 +10813,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL TOGGLER */
 
-  var PanelToggler = (function (_Widgets$Toggler6) {
+  var PanelToggler = function (_Widgets$Toggler6) {
     _inherits(PanelToggler, _Widgets$Toggler6);
 
     function PanelToggler() {
@@ -10826,7 +10823,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return PanelToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 
@@ -10845,7 +10842,7 @@ var _self = typeof window !== 'undefined' ? window // if in browser
  * @author Lea Verou http://lea.verou.me
  */
 
-var Prism = (function () {
+var Prism = function () {
 
   // Private helper vars
   var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
@@ -11256,7 +11253,7 @@ var Prism = (function () {
   }
 
   return _self.Prism;
-})();
+}();
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = Prism;
@@ -11452,11 +11449,11 @@ Prism.languages.js = Prism.languages.javascript;
 * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'progressbar',
     plugin: true,
@@ -11493,7 +11490,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* PROGRESSBAR */
 
-  var Progressbar = (function (_Widgets$Widget24) {
+  var Progressbar = function (_Widgets$Widget24) {
     _inherits(Progressbar, _Widgets$Widget24);
 
     function Progressbar() {
@@ -11598,7 +11595,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Progressbar;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -11615,11 +11612,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets) {
-  'use strict'
+
+  'use strict';
 
   /* HELPER */
 
-  ;
   $.progressbar = function (options) {
 
     options = _.isNumber(options) ? { value: options } : options;
@@ -11641,11 +11638,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'rater',
     plugin: true,
@@ -11681,7 +11678,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECT */
 
-  var Rater = (function (_Widgets$Widget25) {
+  var Rater = function (_Widgets$Widget25) {
     _inherits(Rater, _Widgets$Widget25);
 
     function Rater() {
@@ -11798,7 +11795,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Rater;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -11817,11 +11814,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add locking capabilities
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remote',
     options: {
@@ -11842,7 +11839,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE */
 
-  var Remote = (function (_Widgets$Widget26) {
+  var Remote = function (_Widgets$Widget26) {
     _inherits(Remote, _Widgets$Widget26);
 
     function Remote() {
@@ -11946,7 +11943,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Remote;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -11969,11 +11966,11 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: Clicking an error/success noty doesn't close it
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remoteAction',
     options: {
@@ -12008,7 +12005,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE ACTION */
 
-  var RemoteAction = (function (_Widgets$Remote) {
+  var RemoteAction = function (_Widgets$Remote) {
     _inherits(RemoteAction, _Widgets$Remote);
 
     function RemoteAction() {
@@ -12034,10 +12031,10 @@ Prism.languages.js = Prism.languages.javascript;
 
         /* ON CLICK */
 
-        button.onClick = (function () {
+        button.onClick = function () {
           this.request(true);
           return false;
-        }).bind(this);
+        }.bind(this);
 
         /* OPENING */
 
@@ -12159,7 +12156,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return RemoteAction;
-  })(Widgets.Remote);
+  }(Widgets.Remote);
 
   /* FACTORY */
 
@@ -12176,11 +12173,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets) {
-  'use strict'
+
+  'use strict';
 
   /* HELPER */
 
-  ;
   $.remoteAction = function (ajax) {
 
     new Widgets.RemoteAction({ ajax: ajax }).request();
@@ -12195,11 +12192,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remoteTrigger',
     options: {
@@ -12218,7 +12215,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE TRIGGER */
 
-  var RemoteTrigger = (function (_Widgets$Widget27) {
+  var RemoteTrigger = function (_Widgets$Widget27) {
     _inherits(RemoteTrigger, _Widgets$Widget27);
 
     function RemoteTrigger() {
@@ -12269,7 +12266,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return RemoteTrigger;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -12287,11 +12284,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remoteActionTrigger',
     plugin: true,
@@ -12303,7 +12300,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE ACTION TRIGGER */
 
-  var RemoteActionTrigger = (function (_Widgets$RemoteTrigge) {
+  var RemoteActionTrigger = function (_Widgets$RemoteTrigge) {
     _inherits(RemoteActionTrigger, _Widgets$RemoteTrigge);
 
     function RemoteActionTrigger() {
@@ -12313,7 +12310,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return RemoteActionTrigger;
-  })(Widgets.RemoteTrigger);
+  }(Widgets.RemoteTrigger);
 
   /* FACTORY */
 
@@ -12336,11 +12333,11 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: Not well written
 
 (function ($, _, Svelto, Widgets, Factory, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remoteModal',
     options: {
@@ -12364,7 +12361,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE MODAL */
 
-  var RemoteModal = (function (_Widgets$Remote2) {
+  var RemoteModal = function (_Widgets$Remote2) {
     _inherits(RemoteModal, _Widgets$Remote2);
 
     function RemoteModal() {
@@ -12520,12 +12517,12 @@ Prism.languages.js = Prism.languages.javascript;
                 this.$modal.animate({
                   width: newRect.width,
                   height: newRect.height
-                }, this.options.animations.resize, (function () {
+                }, this.options.animations.resize, function () {
                   this.$modal.css({
                     width: '',
                     height: ''
                   }).removeClass(this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.animating);
-                }).bind(this));
+                }.bind(this));
               });
             });
 
@@ -12547,7 +12544,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return RemoteModal;
-  })(Widgets.Remote);
+  }(Widgets.Remote);
 
   /* FACTORY */
 
@@ -12564,11 +12561,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets) {
-  'use strict'
+
+  'use strict';
 
   /* HELPER */
 
-  ;
   $.remoteModal = function (ajax) {
 
     new Widgets.RemoteModal({ ajax: ajax }).request();
@@ -12586,11 +12583,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'remoteModalTrigger',
     plugin: true,
@@ -12602,7 +12599,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE MODAL TRIGGER */
 
-  var RemoteModalTrigger = (function (_Widgets$RemoteTrigge2) {
+  var RemoteModalTrigger = function (_Widgets$RemoteTrigge2) {
     _inherits(RemoteModalTrigger, _Widgets$RemoteTrigge2);
 
     function RemoteModalTrigger() {
@@ -12612,7 +12609,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return RemoteModalTrigger;
-  })(Widgets.RemoteTrigger);
+  }(Widgets.RemoteTrigger);
 
   /* FACTORY */
 
@@ -12632,11 +12629,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'ripple',
     plugin: true,
@@ -12666,7 +12663,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* RIPPLE */
 
-  var Ripple = (function (_Widgets$Widget28) {
+  var Ripple = function (_Widgets$Widget28) {
     _inherits(Ripple, _Widgets$Widget28);
 
     function Ripple() {
@@ -12832,7 +12829,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Ripple;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -12851,6 +12848,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* PUSHSTATE */
 
 (function ($, _, Svelto, history) {
+
   'use strict';
 
   $(function () {
@@ -12875,6 +12873,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* ROUTE */
 
 (function ($, _, Svelto) {
+
   'use strict';
 
   $(function () {
@@ -12914,11 +12913,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add an input field for searching through the options
 
 (function ($, _, Svelto, Widgets, Factory, Browser, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'selectToggler',
     plugin: true,
@@ -12958,7 +12957,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECT TOGGLER */
 
-  var SelectToggler = (function (_Widgets$Widget29) {
+  var SelectToggler = function (_Widgets$Widget29) {
     _inherits(SelectToggler, _Widgets$Widget29);
 
     function SelectToggler() {
@@ -13215,7 +13214,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return SelectToggler;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -13234,11 +13233,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Browser, Mouse) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'selectable',
     plugin: true,
@@ -13264,7 +13263,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECTABLE */
 
-  var Selectable = (function (_Widgets$Widget30) {
+  var Selectable = function (_Widgets$Widget30) {
     _inherits(Selectable, _Widgets$Widget30);
 
     function Selectable() {
@@ -13564,7 +13563,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Selectable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -13585,11 +13584,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'slider',
     plugin: true,
@@ -13629,7 +13628,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SLIDER */
 
-  var Slider = (function (_Widgets$Widget31) {
+  var Slider = function (_Widgets$Widget31) {
     _inherits(Slider, _Widgets$Widget31);
 
     function Slider() {
@@ -13899,7 +13898,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Slider;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -13919,11 +13918,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add support for sorting other things other than tables' rows
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'sortable',
     plugin: true,
@@ -13967,7 +13966,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SORTABLE */
 
-  var Sortable = (function (_Widgets$Widget32) {
+  var Sortable = function (_Widgets$Widget32) {
     _inherits(Sortable, _Widgets$Widget32);
 
     function Sortable() {
@@ -14170,7 +14169,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Sortable;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -14187,11 +14186,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'stepper',
     plugin: true,
@@ -14223,7 +14222,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* STEPPER */
 
-  var Stepper = (function (_Widgets$Widget33) {
+  var Stepper = function (_Widgets$Widget33) {
     _inherits(Stepper, _Widgets$Widget33);
 
     function Stepper() {
@@ -14423,7 +14422,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Stepper;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -14443,11 +14442,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add flick support
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'switch',
     plugin: true,
@@ -14486,7 +14485,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SWITCH */
 
-  var Switch = (function (_Widgets$Widget34) {
+  var Switch = function (_Widgets$Widget34) {
     _inherits(Switch, _Widgets$Widget34);
 
     function Switch() {
@@ -14684,7 +14683,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Switch;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -14701,11 +14700,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tableHelper',
     plugin: true,
@@ -14735,7 +14734,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TABLE HELPER */
 
-  var TableHelper = (function (_Widgets$Widget35) {
+  var TableHelper = function (_Widgets$Widget35) {
     _inherits(TableHelper, _Widgets$Widget35);
 
     function TableHelper() {
@@ -14910,7 +14909,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return TableHelper;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -14931,11 +14930,11 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Doesn't handle properly a change of the direction
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tabs',
     plugin: true,
@@ -14961,7 +14960,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TABS */
 
-  var Tabs = (function (_Widgets$Widget36) {
+  var Tabs = function (_Widgets$Widget36) {
     _inherits(Tabs, _Widgets$Widget36);
 
     function Tabs() {
@@ -15096,7 +15095,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Tabs;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -15117,11 +15116,11 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: Destroy, reinit and add something like `aaaaaa`, it gets added at the beginning even if `options.sort` is setted to false
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Keyboard) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tagbox',
     plugin: true,
@@ -15174,7 +15173,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TAGBOX */
 
-  var Tagbox = (function (_Widgets$Widget37) {
+  var Tagbox = function (_Widgets$Widget37) {
     _inherits(Tagbox, _Widgets$Widget37);
 
     function Tagbox() {
@@ -15586,7 +15585,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return Tagbox;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -15603,11 +15602,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'timeAgo',
     plugin: true,
@@ -15626,7 +15625,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TIME AGO */
 
-  var TimeAgo = (function (_Widgets$Widget38) {
+  var TimeAgo = function (_Widgets$Widget38) {
     _inherits(TimeAgo, _Widgets$Widget38);
 
     function TimeAgo() {
@@ -15720,7 +15719,7 @@ Prism.languages.js = Prism.languages.javascript;
     }]);
 
     return TimeAgo;
-  })(Widgets.Widget);
+  }(Widgets.Widget);
 
   /* FACTORY */
 
@@ -15737,11 +15736,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tooltip',
     selector: '.tooltip'
@@ -15749,7 +15748,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TOOLTIP */
 
-  var Tooltip = (function (_Widgets$Dropdown) {
+  var Tooltip = function (_Widgets$Dropdown) {
     _inherits(Tooltip, _Widgets$Dropdown);
 
     function Tooltip() {
@@ -15759,7 +15758,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return Tooltip;
-  })(Widgets.Dropdown);
+  }(Widgets.Dropdown);
 
   /* FACTORY */
 
@@ -15777,11 +15776,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tooltipCloser',
     plugin: true,
@@ -15793,7 +15792,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TOOLTIP CLOSER */
 
-  var TooltipCloser = (function (_Widgets$Closer8) {
+  var TooltipCloser = function (_Widgets$Closer8) {
     _inherits(TooltipCloser, _Widgets$Closer8);
 
     function TooltipCloser() {
@@ -15803,7 +15802,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return TooltipCloser;
-  })(Widgets.Closer);
+  }(Widgets.Closer);
 
   /* FACTORY */
 
@@ -15821,11 +15820,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tooltipOpener',
     plugin: true,
@@ -15840,7 +15839,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TOOLTIP OPENER */
 
-  var TooltipOpener = (function (_Widgets$Opener7) {
+  var TooltipOpener = function (_Widgets$Opener7) {
     _inherits(TooltipOpener, _Widgets$Opener7);
 
     function TooltipOpener() {
@@ -15850,7 +15849,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return TooltipOpener;
-  })(Widgets.Opener);
+  }(Widgets.Opener);
 
   /* FACTORY */
 
@@ -15868,11 +15867,11 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory) {
-  'use strict'
+
+  'use strict';
 
   /* CONFIG */
 
-  ;
   var config = {
     name: 'tooltipToggler',
     plugin: true,
@@ -15887,7 +15886,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TOOLTIP TOGGLER */
 
-  var TooltipToggler = (function (_Widgets$Toggler7) {
+  var TooltipToggler = function (_Widgets$Toggler7) {
     _inherits(TooltipToggler, _Widgets$Toggler7);
 
     function TooltipToggler() {
@@ -15897,7 +15896,7 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return TooltipToggler;
-  })(Widgets.Toggler);
+  }(Widgets.Toggler);
 
   /* FACTORY */
 

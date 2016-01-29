@@ -8,7 +8,8 @@
 
 /* REQUIRE */
 
-var _ = require ( 'lodash' );
+var _  = require ( 'lodash' ),
+    fs = require ( 'fs' );
 
 /* FILE */
 
@@ -19,6 +20,12 @@ var file = {
     var file = _.attempt ( require, path );
 
     return _.isError ( file ) ? defaultValue : file;
+
+  },
+
+  write: function ( path, content ) {
+
+    fs.writeFileSync ( path, JSON.stringify ( content ) );
 
   }
 
