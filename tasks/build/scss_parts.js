@@ -10,6 +10,7 @@
 
 var input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
+    filter       = require ( '../plugins/filter' ),
     plugins      = require ( '../config/project' ).plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     merge        = require ( 'merge-stream' ),
@@ -24,6 +25,7 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var variables = gulp.src ( input.getPath ( 'scss.variables' ) )
                       .pipe ( newer ( output.getPath ( 'scss.variables' ) ) )
+                      .pipe ( filter () )
                       .pipe ( sort () )
                       .pipe ( dependencies ( plugins.dependencies.options ) )
                       .pipe ( concat ( output.getName ( 'scss.variables' ) ) )
@@ -31,6 +33,7 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var mixins = gulp.src ( input.getPath ( 'scss.mixins' ) )
                    .pipe ( newer ( output.getPath ( 'scss.mixins' ) ) )
+                   .pipe ( filter () )
                    .pipe ( sort () )
                    .pipe ( dependencies ( plugins.dependencies.options ) )
                    .pipe ( concat ( output.getName ( 'scss.mixins' ) ) )
@@ -38,6 +41,7 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var style = gulp.src ( input.getPath ( 'scss.style' ) )
                   .pipe ( newer ( output.getPath ( 'scss.style' ) ) )
+                  .pipe ( filter () )
                   .pipe ( sort () )
                   .pipe ( dependencies ( plugins.dependencies.options ) )
                   .pipe ( concat ( output.getName ( 'scss.style' ) ) )
