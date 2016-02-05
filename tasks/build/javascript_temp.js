@@ -9,10 +9,12 @@
 /* REQUIRE */
 
 var _            = require ( 'lodash' ),
+    del          = require ( 'del' ),
     path         = require ( 'path' ),
     env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
+    filter       = require ( '../plugins/filter' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
@@ -32,12 +34,18 @@ gulp.task ( 'build-javascript-temp', false, function () {
 
   if ( !env.isDevelopment ) return;
 
-  var needUpdate = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
-                   !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) );
+  var needCleaning = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) ) ||
+                     !_.isEqual ( _.get ( project, 'output' ), _.get ( projectPrev, 'output' ) ),
+      needUpdate   = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
+                     !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) );
 
   var dependencyIndex = 0;
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
+             .pipe ( gulpif ( needCleaning, function () {
+               return del ( output.getPath ( 'javascript.temp' ), plugins.del.options );
+             }))
+             .pipe ( filter () )
              .pipe ( sort () )
              .pipe ( dependencies ( plugins.dependencies.options ) )
              .pipe ( foreach ( function ( stream, file ) {

@@ -2726,89 +2726,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto);
 
 /* =========================================================================
- * Svelto - Boilerplate
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../widget/widget.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'boilerplate',
-    plugin: false,
-    selector: false,
-    templates: {
-      base: false
-    },
-    options: {
-      characters: {},
-      regexes: {},
-      errors: {},
-      messages: {},
-      attributes: {},
-      datas: {},
-      classes: {},
-      selectors: {},
-      animations: {},
-      breakpoints: {},
-      keyboard: true,
-      keystrokes: {},
-      callbacks: {}
-    }
-  };
-
-  /* BOILERPLATE */
-
-  var Boilerplate = function (_Widgets$Widget5) {
-    _inherits(Boilerplate, _Widgets$Widget5);
-
-    function Boilerplate() {
-      _classCallCheck(this, Boilerplate);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Boilerplate).apply(this, arguments));
-    }
-
-    _createClass(Boilerplate, [{
-      key: '_variables',
-      value: function _variables() {}
-    }, {
-      key: '_init',
-      value: function _init() {}
-    }, {
-      key: '_events',
-      value: function _events() {}
-    }, {
-      key: '_destroy',
-      value: function _destroy() {}
-
-      /* PRIVATE */
-
-      /* API */
-
-    }], [{
-      key: 'widgetize',
-
-      /* SPECIAL */
-
-      value: function widgetize() {}
-    }]);
-
-    return Boilerplate;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Boilerplate, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - BT (BinaryTree) Each
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2876,7 +2793,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'once',
       value: function once(time) {
-        var _this10 = this;
+        var _this9 = this;
 
         if (isNaN(time)) {
 
@@ -2884,7 +2801,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         setTimeout(function () {
-          return _this10.action();
+          return _this9.action();
         }, time);
 
         return this;
@@ -2967,7 +2884,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'setTimer',
       value: function setTimer(time) {
-        var _this11 = this;
+        var _this10 = this;
 
         if (isNaN(time)) {
 
@@ -2979,7 +2896,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clearTimer();
 
         this.timeoutObject = setTimeout(function () {
-          return _this11.go();
+          return _this10.go();
         }, time);
       }
     }, {
@@ -3070,8 +2987,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CAROUSEL */
 
-  var Carousel = function (_Widgets$Widget6) {
-    _inherits(Carousel, _Widgets$Widget6);
+  var Carousel = function (_Widgets$Widget5) {
+    _inherits(Carousel, _Widgets$Widget5);
 
     function Carousel() {
       _classCallCheck(this, Carousel);
@@ -3416,8 +3333,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TARGETER */
 
-  var Targeter = function (_Widgets$Widget7) {
-    _inherits(Targeter, _Widgets$Widget7);
+  var Targeter = function (_Widgets$Widget6) {
+    _inherits(Targeter, _Widgets$Widget6);
 
     function Targeter() {
       _classCallCheck(this, Targeter);
@@ -3990,8 +3907,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* COLORPICKER */
 
-  var Colorpicker = function (_Widgets$Widget8) {
-    _inherits(Colorpicker, _Widgets$Widget8);
+  var Colorpicker = function (_Widgets$Widget7) {
+    _inherits(Colorpicker, _Widgets$Widget7);
 
     function Colorpicker() {
       _classCallCheck(this, Colorpicker);
@@ -4517,8 +4434,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATEPICKER */
 
-  var Datepicker = function (_Widgets$Widget9) {
-    _inherits(Datepicker, _Widgets$Widget9);
+  var Datepicker = function (_Widgets$Widget8) {
+    _inherits(Datepicker, _Widgets$Widget8);
 
     function Datepicker() {
       _classCallCheck(this, Datepicker);
@@ -5021,8 +4938,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DRAGGABLE */
 
-  var Draggable = function (_Widgets$Widget10) {
-    _inherits(Draggable, _Widgets$Widget10);
+  var Draggable = function (_Widgets$Widget9) {
+    _inherits(Draggable, _Widgets$Widget9);
 
     function Draggable() {
       _classCallCheck(this, Draggable);
@@ -6060,8 +5977,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPDOWN */
 
-  var Dropdown = function (_Widgets$Widget11) {
-    _inherits(Dropdown, _Widgets$Widget11);
+  var Dropdown = function (_Widgets$Widget10) {
+    _inherits(Dropdown, _Widgets$Widget10);
 
     function Dropdown() {
       _classCallCheck(this, Dropdown);
@@ -6947,8 +6864,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPPABLE */
 
-  var Droppable = function (_Widgets$Widget12) {
-    _inherits(Droppable, _Widgets$Widget12);
+  var Droppable = function (_Widgets$Widget11) {
+    _inherits(Droppable, _Widgets$Widget11);
 
     function Droppable() {
       _classCallCheck(this, Droppable);
@@ -7239,8 +7156,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLICKABLE */
 
-  var Flickable = function (_Widgets$Widget13) {
-    _inherits(Flickable, _Widgets$Widget13);
+  var Flickable = function (_Widgets$Widget12) {
+    _inherits(Flickable, _Widgets$Widget12);
 
     function Flickable() {
       _classCallCheck(this, Flickable);
@@ -7416,8 +7333,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLIPPABLE */
 
-  var Flippable = function (_Widgets$Widget14) {
-    _inherits(Flippable, _Widgets$Widget14);
+  var Flippable = function (_Widgets$Widget13) {
+    _inherits(Flippable, _Widgets$Widget13);
 
     function Flippable() {
       _classCallCheck(this, Flippable);
@@ -7571,8 +7488,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY */
 
-  var Overlay = function (_Widgets$Widget15) {
-    _inherits(Overlay, _Widgets$Widget15);
+  var Overlay = function (_Widgets$Widget14) {
+    _inherits(Overlay, _Widgets$Widget14);
 
     function Overlay() {
       _classCallCheck(this, Overlay);
@@ -7727,8 +7644,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SPINNER OVERLAY */
 
-  var SpinnerOverlay = function (_Widgets$Widget16) {
-    _inherits(SpinnerOverlay, _Widgets$Widget16);
+  var SpinnerOverlay = function (_Widgets$Widget15) {
+    _inherits(SpinnerOverlay, _Widgets$Widget15);
 
     function SpinnerOverlay() {
       _classCallCheck(this, SpinnerOverlay);
@@ -7888,8 +7805,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NOTY */
 
-  var Noty = function (_Widgets$Widget17) {
-    _inherits(Noty, _Widgets$Widget17);
+  var Noty = function (_Widgets$Widget16) {
+    _inherits(Noty, _Widgets$Widget16);
 
     function Noty() {
       _classCallCheck(this, Noty);
@@ -8438,8 +8355,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = function (_Widgets$Widget18) {
-    _inherits(FormValidate, _Widgets$Widget18);
+  var FormValidate = function (_Widgets$Widget17) {
+    _inherits(FormValidate, _Widgets$Widget17);
 
     function FormValidate() {
       _classCallCheck(this, FormValidate);
@@ -8882,8 +8799,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM AJAX */
 
-  var FormAjax = function (_Widgets$Widget19) {
-    _inherits(FormAjax, _Widgets$Widget19);
+  var FormAjax = function (_Widgets$Widget18) {
+    _inherits(FormAjax, _Widgets$Widget18);
 
     function FormAjax() {
       _classCallCheck(this, FormAjax);
@@ -8919,7 +8836,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '__submit',
       value: function __submit(event) {
-        var _this36 = this;
+        var _this35 = this;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -8936,12 +8853,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           beforeSend: function beforeSend() {
 
-            if (_this36.options.spinnerOverlay) {
+            if (_this35.options.spinnerOverlay) {
 
-              _this36.$form.spinnerOverlay('open');
+              _this35.$form.spinnerOverlay('open');
             }
 
-            _this36._trigger('beforesend');
+            _this35._trigger('beforesend');
           },
 
           error: function error(res) {
@@ -8950,13 +8867,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (!_.isError(resj)) {
 
-              $.noty(resj.msg || _this36.options.messages.error);
+              $.noty(resj.msg || _this35.options.messages.error);
             } else {
 
-              $.noty(_this36.options.messages.error);
+              $.noty(_this35.options.messages.error);
             }
 
-            _this36._trigger('error');
+            _this35._trigger('error');
           },
 
           success: function success(res) {
@@ -8967,36 +8884,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-                $.noty(resj.msg || _this36.options.messages.refreshing);
+                $.noty(resj.msg || _this35.options.messages.refreshing);
 
                 location.reload();
               } else if (resj.url) {
 
                 // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-                $.noty(resj.msg || _this36.options.messages.redirecting);
+                $.noty(resj.msg || _this35.options.messages.redirecting);
 
                 location.assign(resj.url);
               } else {
 
-                $.noty(resj.msg || _this36.options.messages.success);
+                $.noty(resj.msg || _this35.options.messages.success);
               }
             } else {
 
-              $.noty(_this36.options.messages.success);
+              $.noty(_this35.options.messages.success);
             }
 
-            _this36._trigger('success');
+            _this35._trigger('success');
           },
 
           complete: function complete() {
 
-            if (_this36.options.spinnerOverlay) {
+            if (_this35.options.spinnerOverlay) {
 
-              _this36.$form.spinnerOverlay('close');
+              _this35.$form.spinnerOverlay('close');
             }
 
-            _this36._trigger('complete');
+            _this35._trigger('complete');
           }
 
         });
@@ -9053,8 +8970,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM SYNC */
 
-  var FormSync = function (_Widgets$Widget20) {
-    _inherits(FormSync, _Widgets$Widget20);
+  var FormSync = function (_Widgets$Widget19) {
+    _inherits(FormSync, _Widgets$Widget19);
 
     function FormSync() {
       _classCallCheck(this, FormSync);
@@ -9334,8 +9251,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR */
 
-  var Infobar = function (_Widgets$Widget21) {
-    _inherits(Infobar, _Widgets$Widget21);
+  var Infobar = function (_Widgets$Widget20) {
+    _inherits(Infobar, _Widgets$Widget20);
 
     function Infobar() {
       _classCallCheck(this, Infobar);
@@ -9460,8 +9377,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL */
 
-  var Modal = function (_Widgets$Widget22) {
-    _inherits(Modal, _Widgets$Widget22);
+  var Modal = function (_Widgets$Widget21) {
+    _inherits(Modal, _Widgets$Widget21);
 
     function Modal() {
       _classCallCheck(this, Modal);
@@ -10347,8 +10264,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL */
 
-  var Panel = function (_Widgets$Widget23) {
-    _inherits(Panel, _Widgets$Widget23);
+  var Panel = function (_Widgets$Widget22) {
+    _inherits(Panel, _Widgets$Widget22);
 
     function Panel() {
       _classCallCheck(this, Panel);
@@ -10362,13 +10279,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /* SPECIAL */
 
       value: function _variables() {
-        var _this48 = this;
+        var _this47 = this;
 
         this.$panel = this.$element;
         this.panel = this.element;
 
         this.options.direction = _.getDirections().find(function (direction) {
-          return _this48.$panel.hasClass(direction);
+          return _this47.$panel.hasClass(direction);
         }) || this.options.direction;
         this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
 
@@ -11490,8 +11407,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* PROGRESSBAR */
 
-  var Progressbar = function (_Widgets$Widget24) {
-    _inherits(Progressbar, _Widgets$Widget24);
+  var Progressbar = function (_Widgets$Widget23) {
+    _inherits(Progressbar, _Widgets$Widget23);
 
     function Progressbar() {
       _classCallCheck(this, Progressbar);
@@ -11678,8 +11595,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECT */
 
-  var Rater = function (_Widgets$Widget25) {
-    _inherits(Rater, _Widgets$Widget25);
+  var Rater = function (_Widgets$Widget24) {
+    _inherits(Rater, _Widgets$Widget24);
 
     function Rater() {
       _classCallCheck(this, Rater);
@@ -11730,7 +11647,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: '__tap',
       value: function __tap(event) {
-        var _this54 = this;
+        var _this53 = this;
 
         if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -11744,14 +11661,14 @@ Prism.languages.js = Prism.languages.javascript;
 
             beforeSend: function beforeSend() {
 
-              _this54.doingAjax = true;
+              _this53.doingAjax = true;
             },
 
             error: function error(res) {
 
               var resj = _.attempt(JSON.parse, res);
 
-              $.noty(_.isError(resj) || !('msg' in resj) ? _this54.options.messages.error : resj.msg);
+              $.noty(_.isError(resj) || !('msg' in resj) ? _this53.options.messages.error : resj.msg);
             },
 
             success: function success(res) {
@@ -11762,19 +11679,19 @@ Prism.languages.js = Prism.languages.javascript;
 
               if (!_.isError(resj)) {
 
-                _.merge(_this54.options, resj);
+                _.merge(_this53.options, resj);
 
-                _this54.$rater.html(_this54._tmpl('stars', _this54.options));
+                _this53.$rater.html(_this53._tmpl('stars', _this53.options));
 
-                _this54.options.rated = true;
+                _this53.options.rated = true;
 
-                _this54._trigger('change');
+                _this53._trigger('change');
               }
             },
 
             complete: function complete() {
 
-              _this54.doingAjax = false;
+              _this53.doingAjax = false;
             }
 
           });
@@ -11839,8 +11756,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE */
 
-  var Remote = function (_Widgets$Widget26) {
-    _inherits(Remote, _Widgets$Widget26);
+  var Remote = function (_Widgets$Widget25) {
+    _inherits(Remote, _Widgets$Widget25);
 
     function Remote() {
       _classCallCheck(this, Remote);
@@ -12215,8 +12132,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE TRIGGER */
 
-  var RemoteTrigger = function (_Widgets$Widget27) {
-    _inherits(RemoteTrigger, _Widgets$Widget27);
+  var RemoteTrigger = function (_Widgets$Widget26) {
+    _inherits(RemoteTrigger, _Widgets$Widget26);
 
     function RemoteTrigger() {
       _classCallCheck(this, RemoteTrigger);
@@ -12446,7 +12363,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: '__success',
       value: function __success(res) {
-        var _this60 = this;
+        var _this59 = this;
 
         if (this.isAborted()) return;
 
@@ -12460,7 +12377,7 @@ Prism.languages.js = Prism.languages.javascript;
 
             /* VARIABLES */
 
-            var prevRect = _this60.$modal.getRect(),
+            var prevRect = _this59.$modal.getRect(),
                 $remoteModal = $(resj.modal),
                 attributes = Array.from($remoteModal.prop('attributes'));
 
@@ -12476,10 +12393,10 @@ Prism.languages.js = Prism.languages.javascript;
 
                 if (attribute.name !== 'class') {
 
-                  _this60.$modal.attr(attribute.name, attribute.value);
+                  _this59.$modal.attr(attribute.name, attribute.value);
                 } else {
 
-                  _this60.$modal.addClass(attribute.value);
+                  _this59.$modal.addClass(attribute.value);
                 }
               }
 
@@ -12499,7 +12416,7 @@ Prism.languages.js = Prism.languages.javascript;
               }
             }
 
-            _this60._frame(function () {
+            _this59._frame(function () {
 
               this.$modal.addClass(this.options.classes.loaded).html($remoteModal.html()).widgetize();
 
@@ -12526,7 +12443,7 @@ Prism.languages.js = Prism.languages.javascript;
               });
             });
 
-            _get(Object.getPrototypeOf(RemoteModal.prototype), '__success', _this60).call(_this60, res);
+            _get(Object.getPrototypeOf(RemoteModal.prototype), '__success', _this59).call(_this59, res);
           })();
         }
       }
@@ -12663,8 +12580,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* RIPPLE */
 
-  var Ripple = function (_Widgets$Widget28) {
-    _inherits(Ripple, _Widgets$Widget28);
+  var Ripple = function (_Widgets$Widget27) {
+    _inherits(Ripple, _Widgets$Widget27);
 
     function Ripple() {
       _classCallCheck(this, Ripple);
@@ -12957,8 +12874,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECT TOGGLER */
 
-  var SelectToggler = function (_Widgets$Widget29) {
-    _inherits(SelectToggler, _Widgets$Widget29);
+  var SelectToggler = function (_Widgets$Widget28) {
+    _inherits(SelectToggler, _Widgets$Widget28);
 
     function SelectToggler() {
       _classCallCheck(this, SelectToggler);
@@ -13263,8 +13180,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SELECTABLE */
 
-  var Selectable = function (_Widgets$Widget30) {
-    _inherits(Selectable, _Widgets$Widget30);
+  var Selectable = function (_Widgets$Widget29) {
+    _inherits(Selectable, _Widgets$Widget29);
 
     function Selectable() {
       _classCallCheck(this, Selectable);
@@ -13628,8 +13545,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SLIDER */
 
-  var Slider = function (_Widgets$Widget31) {
-    _inherits(Slider, _Widgets$Widget31);
+  var Slider = function (_Widgets$Widget30) {
+    _inherits(Slider, _Widgets$Widget30);
 
     function Slider() {
       _classCallCheck(this, Slider);
@@ -13966,8 +13883,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SORTABLE */
 
-  var Sortable = function (_Widgets$Widget32) {
-    _inherits(Sortable, _Widgets$Widget32);
+  var Sortable = function (_Widgets$Widget31) {
+    _inherits(Sortable, _Widgets$Widget31);
 
     function Sortable() {
       _classCallCheck(this, Sortable);
@@ -14222,8 +14139,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* STEPPER */
 
-  var Stepper = function (_Widgets$Widget33) {
-    _inherits(Stepper, _Widgets$Widget33);
+  var Stepper = function (_Widgets$Widget32) {
+    _inherits(Stepper, _Widgets$Widget32);
 
     function Stepper() {
       _classCallCheck(this, Stepper);
@@ -14485,8 +14402,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* SWITCH */
 
-  var Switch = function (_Widgets$Widget34) {
-    _inherits(Switch, _Widgets$Widget34);
+  var Switch = function (_Widgets$Widget33) {
+    _inherits(Switch, _Widgets$Widget33);
 
     function Switch() {
       _classCallCheck(this, Switch);
@@ -14734,8 +14651,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TABLE HELPER */
 
-  var TableHelper = function (_Widgets$Widget35) {
-    _inherits(TableHelper, _Widgets$Widget35);
+  var TableHelper = function (_Widgets$Widget34) {
+    _inherits(TableHelper, _Widgets$Widget34);
 
     function TableHelper() {
       _classCallCheck(this, TableHelper);
@@ -14960,8 +14877,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TABS */
 
-  var Tabs = function (_Widgets$Widget36) {
-    _inherits(Tabs, _Widgets$Widget36);
+  var Tabs = function (_Widgets$Widget35) {
+    _inherits(Tabs, _Widgets$Widget35);
 
     function Tabs() {
       _classCallCheck(this, Tabs);
@@ -14975,14 +14892,14 @@ Prism.languages.js = Prism.languages.javascript;
       /* SPECIAL */
 
       value: function _variables() {
-        var _this71 = this;
+        var _this70 = this;
 
         this.$tabs = this.$element;
         this.$triggers = this.$tabs.find(this.options.selectors.triggers);
         this.$containers = this.$tabs.find(this.options.selectors.containers);
 
         this.options.direction = _.getDirections().find(function (direction) {
-          return _this71.$tabs.hasClass(direction);
+          return _this70.$tabs.hasClass(direction);
         }) || this.options.direction;
 
         this.index = false;
@@ -15173,8 +15090,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TAGBOX */
 
-  var Tagbox = function (_Widgets$Widget37) {
-    _inherits(Tagbox, _Widgets$Widget37);
+  var Tagbox = function (_Widgets$Widget36) {
+    _inherits(Tagbox, _Widgets$Widget36);
 
     function Tagbox() {
       _classCallCheck(this, Tagbox);
@@ -15625,8 +15542,8 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TIME AGO */
 
-  var TimeAgo = function (_Widgets$Widget38) {
-    _inherits(TimeAgo, _Widgets$Widget38);
+  var TimeAgo = function (_Widgets$Widget37) {
+    _inherits(TimeAgo, _Widgets$Widget37);
 
     function TimeAgo() {
       _classCallCheck(this, TimeAgo);

@@ -13,6 +13,7 @@ var _           = require ( 'lodash' ),
     envPrev     = require ( '../config/previous/environment' ),
     input       = require ( '../utilities/input' ),
     output      = require ( '../utilities/output' ),
+    filter      = require ( '../plugins/filter' ),
     project     = require ( '../config/project' ),
     projectPrev = require ( '../config/previous/project' ),
     plugins     = project.plugins,
@@ -31,6 +32,7 @@ gulp.task ( 'build-images', 'Build images', function () {
                    !_.isEqual ( _.get ( project, 'plugins.imagemin.options' ), _.get ( projectPrev, 'plugins.imagemin.options' ) );
 
   return gulp.src ( input.getPath ( 'images' ) )
+             .pipe ( filter () )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.start () ) )

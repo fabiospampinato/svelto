@@ -30,8 +30,8 @@ gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
   var needUpdate = !_.isEqual ( _.get ( project, 'plugins.sass.options' ), _.get ( projectPrev, 'plugins.sass.options' ) ) ||
                    _.get ( project, 'plugins.autoprefixer.enabled' ) !== _.get ( projectPrev, 'plugins.autoprefixer.enabled' ) ||
                    !_.isEqual ( _.get ( project, 'plugins.autoprefixer.options' ), _.get ( projectPrev, 'plugins.autoprefixer.options' ) ) ||
-                   !_.isEqual ( _.get ( project, 'plugins.cssnano.options' ), _.get ( projectPrev, 'plugins.cssnano.options' ) ) ||
-                   ( _.get ( project, 'plugins.cssnano.enabled' ) && !env.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.cssnano.enabled' ) && !envPrev.isDevelopment );
+                   ( _.get ( project, 'plugins.cssnano.enabled' ) && !env.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.cssnano.enabled' ) && !envPrev.isDevelopment ) ||
+                   !_.isEqual ( _.get ( project, 'plugins.cssnano.options' ), _.get ( projectPrev, 'plugins.cssnano.options' ) );
 
   return gulp.src ( output.getPath ( 'scss.all' ) )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'css.uncompressed' ) ) ) )

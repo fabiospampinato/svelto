@@ -12,6 +12,7 @@ var _            = require ( 'lodash' ),
     env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
+    filter       = require ( '../plugins/filter' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
@@ -43,12 +44,14 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
 
   } else {
 
-    var needUpdate = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
+    var needUpdate = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) ) ||
+                     _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
                      !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) ) ||
                      _.get ( project, 'plugins.uglify.enabled' ) !== _.get ( projectPrev, 'plugins.uglify.enabled' ) ||
                      !_.isEqual ( _.get ( project, 'plugins.uglify.options' ), _.get ( projectPrev, 'plugins.uglify.options' ) );
 
     return gulp.src ( input.getPath ( 'javascript.all' ) )
+               .pipe ( filter () )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
                .pipe ( sort () )
                .pipe ( dependencies ( plugins.dependencies.options ) )

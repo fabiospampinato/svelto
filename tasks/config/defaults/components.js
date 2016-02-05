@@ -64,7 +64,6 @@ var components = [
   'keyboard',
   'keyframes',
   'label',
-  // 'mixins', //FIXME: Does it behave as a component or is it a special folder?
   'modal',
   'mouse',
   'multiple',
@@ -122,7 +121,6 @@ var components = [
   'transform',
   'typography',
   'validator',
-  // 'variables', //FIXME: Does it behave as a component or is it a special folder?
   'widget',
   'widgetize',
   'z_depths'

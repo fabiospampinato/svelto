@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Test it with an array of globs
-
 /* REQUIRE */
 
 var _            = require ( 'lodash' ),
@@ -22,15 +20,17 @@ var filter = function () {
 
   return streamfilter ( function ( file, encoding, callback ) {
 
-    var parts = path.dirname ( file.relative ).split ( path.sep ),
+    var relative = file.relative;
+
+    if ( relative.indexOf ( path.sep ) === -1 ) return callback ( false );
+
+    var parts = path.dirname ( relative ).split ( path.sep ),
         pl = parts.length;
 
     for ( var i = 0, l = components.length; i < l; i++ ) {
 
       var component = components[i],
           cl = component.length;
-
-      //TODO: Make if faster by avoiding calling _.isEqual and .slice
 
       if ( pl > cl && _.isEqual ( parts.slice ( 0, cl ), component ) ||
            pl < cl && _.isEqual ( parts, component.slice ( 0, pl ) ) ||
