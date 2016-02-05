@@ -11,7 +11,6 @@
 var _            = require ( 'lodash' ),
     del          = require ( 'del' ),
     path         = require ( 'path' ),
-    env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     filter       = require ( '../plugins/filter' ),
@@ -32,7 +31,7 @@ var _            = require ( 'lodash' ),
 
 gulp.task ( 'build-javascript-temp', false, function () {
 
-  if ( !env.isDevelopment ) return;
+  if ( !project.isDevelopment ) return;
 
   var needCleaning = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) ) ||
                      !_.isEqual ( _.get ( project, 'output' ), _.get ( projectPrev, 'output' ) ),

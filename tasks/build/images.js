@@ -9,8 +9,6 @@
 /* REQUIRE */
 
 var _           = require ( 'lodash' ),
-    env         = require ( '../config/environment' ),
-    envPrev     = require ( '../config/previous/environment' ),
     input       = require ( '../utilities/input' ),
     output      = require ( '../utilities/output' ),
     filter      = require ( '../plugins/filter' ),
@@ -28,16 +26,16 @@ var _           = require ( 'lodash' ),
 
 gulp.task ( 'build-images', 'Build images', function () {
 
-  var needUpdate = ( _.get ( project, 'plugins.imagemin.enabled' ) && !env.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.imagemin.enabled' ) && !envPrev.isDevelopment ) ||
+  var needUpdate = ( _.get ( project, 'plugins.imagemin.enabled' ) && !project.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.imagemin.enabled' ) && !projectPrev.isDevelopment ) ||
                    !_.isEqual ( _.get ( project, 'plugins.imagemin.options' ), _.get ( projectPrev, 'plugins.imagemin.options' ) );
 
   return gulp.src ( input.getPath ( 'images' ) )
              .pipe ( filter () )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.start () ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, imagemin ( plugins.imagemin.options ) ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !env.isDevelopment, bytediff.stop () ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, bytediff.start () ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, imagemin ( plugins.imagemin.options ) ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, bytediff.stop () ) )
              .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );
 
 });

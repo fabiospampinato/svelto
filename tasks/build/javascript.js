@@ -9,7 +9,6 @@
 /* REQUIRE */
 
 var _            = require ( 'lodash' ),
-    env          = require ( '../config/environment' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     filter       = require ( '../plugins/filter' ),
@@ -32,7 +31,7 @@ var _            = require ( 'lodash' ),
 
 gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], function () {
 
-  if ( env.isDevelopment ) {
+  if ( !!project.isDevelopment ) {
 
     return gulp.src ( input.getPath ( 'javascript.temp' ) )
                .pipe ( newer ( output.getPath ( 'javascript.uncompressed' ) ) )

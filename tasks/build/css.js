@@ -9,8 +9,6 @@
 /* REQUIRE */
 
 var _            = require ( 'lodash' ),
-    env          = require ( '../config/environment' ),
-    envPrev      = require ( '../config/previous/environment' ),
     output       = require ( '../utilities/output' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
@@ -30,7 +28,7 @@ gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
   var needUpdate = !_.isEqual ( _.get ( project, 'plugins.sass.options' ), _.get ( projectPrev, 'plugins.sass.options' ) ) ||
                    _.get ( project, 'plugins.autoprefixer.enabled' ) !== _.get ( projectPrev, 'plugins.autoprefixer.enabled' ) ||
                    !_.isEqual ( _.get ( project, 'plugins.autoprefixer.options' ), _.get ( projectPrev, 'plugins.autoprefixer.options' ) ) ||
-                   ( _.get ( project, 'plugins.cssnano.enabled' ) && !env.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.cssnano.enabled' ) && !envPrev.isDevelopment ) ||
+                   ( _.get ( project, 'plugins.cssnano.enabled' ) && !project.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.cssnano.enabled' ) && !projectPrev.isDevelopment ) ||
                    !_.isEqual ( _.get ( project, 'plugins.cssnano.options' ), _.get ( projectPrev, 'plugins.cssnano.options' ) );
 
   return gulp.src ( output.getPath ( 'scss.all' ) )
@@ -39,7 +37,7 @@ gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
              .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer.options ) ) )
              .pipe ( rename ( output.getName ( 'css.uncompressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'css.uncompressed' ) ) )
-             .pipe ( gulpif ( plugins.cssnano.enabled && !env.isDevelopment, cssnano ( plugins.cssnano.options ) ) )
+             .pipe ( gulpif ( plugins.cssnano.enabled && !project.isDevelopment, cssnano ( plugins.cssnano.options ) ) )
              .pipe ( rename ( output.getName ( 'css.compressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'css.compressed' ) ) );
 
