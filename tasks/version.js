@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* REQUIRES */
+/* REQUIRE */
 
 var _       = require ( 'lodash' ),
     release = require ( './config/release' ),

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Clean
+ * Svelto - Tasks - Admin - Tag
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,15 +8,14 @@
 
 /* REQUIRE */
 
-var del     = require ( 'del' ),
-    project = require ( './config/project' ),
-    plugins = project.plugins,
-    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) );
+var gulp = require ( 'gulp-help' )( require ( 'gulp' ) ),
+    tag  = require ( 'gulp-tag-version' );
 
-/* CLEAN */
+/* RELEASE */
 
-gulp.task ( 'clean', 'Clean builded and temporary files', function () {
+gulp.task ( 'release', 'Release Svelto and tag it', function () {
 
-  return del ( project.paths.clean, plugins.del.options );
+  return gulp.src ( './package.json' )
+             .pipe ( tag () );
 
 });
