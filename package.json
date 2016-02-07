@@ -63,6 +63,7 @@
     "require-dir": "^0.3.0",
     "require-dot-file": "^0.4.0",
     "streamfilter": "^1.0.5",
+    "through2": "^2.0.0",
     "yargs": "^3.32.0"
   }
 }
