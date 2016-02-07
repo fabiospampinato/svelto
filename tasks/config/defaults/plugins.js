@@ -41,6 +41,12 @@ var plugins = {
       pattern: /\* @requires [\s-]*(.*\..*)/g
     }
   },
+  github: {
+    auth: {
+      type: 'oauth',
+      token: false
+    }
+  },
   imagemin: {
     enabled: true,
     options: {
