@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: Make it work in a different way, so that if we add new files we don't need to clean it up before (one may forget to do it)
+
 /* REQUIRE */
 
 var _            = require ( 'lodash' ),
@@ -14,6 +16,7 @@ var _            = require ( 'lodash' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     filter       = require ( '../plugins/filter' ),
+    extend       = require ( '../plugins/extend' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
@@ -47,6 +50,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
              .pipe ( filter () )
              .pipe ( sort () )
              .pipe ( dependencies ( plugins.dependencies.options ) )
+             .pipe ( extend () )
              .pipe ( foreach ( function ( stream, file ) {
                var basename = path.basename ( file.path );
                file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex++, 3, 0 ) + '-' + basename );

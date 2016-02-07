@@ -12,6 +12,7 @@ var _            = require ( 'lodash' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     filter       = require ( '../plugins/filter' ),
+    extend       = require ( '../plugins/extend' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
@@ -54,6 +55,7 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
                .pipe ( sort () )
                .pipe ( dependencies ( plugins.dependencies.options ) )
+               .pipe ( extend () )
                .pipe ( flatten () )
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
                .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )

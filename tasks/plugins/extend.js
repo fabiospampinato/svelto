@@ -83,7 +83,9 @@ var workerBefore = function ( files, paths ) {
 
   for ( var i = 0; i < files.length; i++ ) {
 
-    if ( needsTarget ( paths[i], 'before' ) ) {
+    if ( !paths[i]._done && needsTarget ( paths[i], 'before' ) ) {
+
+      paths[i]._done = true;
 
       var ti = getTargetIndex ( paths[i], paths );
 
@@ -122,7 +124,9 @@ var workerAfter = function ( files, paths ) {
 
   for ( var i = 0; i < files.length; i++ ) {
 
-    if ( needsTarget ( paths[i], 'after' ) ) {
+    if ( !paths[i]._done && needsTarget ( paths[i], 'after' ) ) {
+
+      paths[i]._done = true;
 
       var ti = getTargetIndex ( paths[i], paths );
 
@@ -161,7 +165,9 @@ var workerOverride = function ( files, paths ) {
 
   for ( var i = 0; i < files.length; i++ ) {
 
-    if ( needsTarget ( paths[i], 'override' ) ) {
+    if ( !paths[i]._done && needsTarget ( paths[i], 'override' ) ) {
+
+      paths[i]._done = true;
 
       var ti = getTargetIndex ( paths[i], paths );
 
@@ -170,10 +176,17 @@ var workerOverride = function ( files, paths ) {
         arrRemove ( files, i );
         arrRemove ( paths, i );
 
-      } else {
+      } else if ( ti > i ) {
 
         arrMove ( files, i, ti );
         arrMove ( paths, i, ti );
+        arrRemove ( files, ti - 1 );
+        arrRemove ( paths, ti - 1 );
+
+      } else if ( ti < i ) {
+
+        arrMove ( files, i, ti + 1 );
+        arrMove ( paths, i, ti + 1 );
         arrRemove ( files, ti );
         arrRemove ( paths, ti );
 

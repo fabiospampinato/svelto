@@ -13,6 +13,7 @@ var _            = require ( 'lodash' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     filter       = require ( '../plugins/filter' ),
+    extend       = require ( '../plugins/extend' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
@@ -34,6 +35,7 @@ gulp.task ( 'build-scss-parts', false, function () {
                       .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.variables' ) ) ) )
                       .pipe ( sort () )
                       .pipe ( dependencies ( plugins.dependencies.options ) )
+                      .pipe ( extend () )
                       .pipe ( concat ( output.getName ( 'scss.variables' ) ) )
                       .pipe ( gulp.dest ( output.getDir ( 'scss.variables' ) ) );
 
@@ -42,6 +44,7 @@ gulp.task ( 'build-scss-parts', false, function () {
                    .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.mixins' ) ) ) )
                    .pipe ( sort () )
                    .pipe ( dependencies ( plugins.dependencies.options ) )
+                   .pipe ( extend () )
                    .pipe ( concat ( output.getName ( 'scss.mixins' ) ) )
                    .pipe ( gulp.dest ( output.getDir ( 'scss.mixins' ) ) );
 
@@ -50,6 +53,7 @@ gulp.task ( 'build-scss-parts', false, function () {
                   .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.style' ) ) ) )
                   .pipe ( sort () )
                   .pipe ( dependencies ( plugins.dependencies.options ) )
+                  .pipe ( extend () )
                   .pipe ( concat ( output.getName ( 'scss.style' ) ) )
                   .pipe ( gulp.dest ( output.getDir ( 'scss.style' ) ) );
 
