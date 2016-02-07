@@ -19,7 +19,9 @@ var github = new GHAPI ({
   debug: true,
   protocol: 'https',
   timeout: 5000
-}).authenticate ( plugins.github.auth );
+});
+
+github.authenticate ( plugins.github.auth );
 
 /* EXPORT */
 

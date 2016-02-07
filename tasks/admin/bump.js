@@ -11,9 +11,9 @@
 var argv    = require ( 'yargs' ).argv,
     fs      = require ( 'fs' ),
     merge   = require ( 'merge-stream' ),
+    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
     bump    = require ( 'gulp-bump' ),
-    replace = require ( 'gulp-replace' ),
-    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) );
+    replace = require ( 'gulp-replace' );
 
 /* BUMP PACKAGE */
 
