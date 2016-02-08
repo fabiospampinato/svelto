@@ -1,0 +1,75 @@
+
+<!-- IMAGES -->
+
+<template name="image">
+
+  {{{sw.divider "Image"}}}
+
+  <div class="centerer">
+    {{{sample.image "xs-8 md-4"}}}
+  </div>
+
+  {{{sw.divider "With captions"}}}
+
+  <div class="multiple">
+    <div class="image-wrp xs-6 md-3 outlined">
+      {{{sample.image}}}
+    </div>
+    <div class="image-wrp xs-6 md-3">
+      {{{sample.image}}}
+      <div class="image-caption top">Top caption</div>
+      <div class="image-caption">Bottom caption</div>
+    </div>
+    <div class="image-wrp xs-6 md-3 smooth">
+      {{{sample.image}}}
+      <div class="image-caption on-hover top">[Hover] Top caption</div>
+      <div class="image-caption on-hover">[Hover] Bottom caption</div>
+    </div>
+    <div class="image-wrp xs-6 md-3">
+      {{{sample.image}}}
+      <div class="image-caption attached top">[Attached] Top caption</div>
+      <div class="image-caption attached">[Attached] Bottom caption</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="centerer">
+    <div class="image-wrp xs-8 md-4">
+      {{{sample.imageWide}}}
+      <div class="image-caption top transparent">
+        <div class="section-right">
+          <div class="button compact xsmall black">
+            <i class="icon">more_vert</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{> image_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="image_actions">
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+    {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+  </div>
+
+  <script>
+    function enable () {
+      $('img, .image-wrp').not('.image-wrp img').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('img, .image-wrp').not('.image-wrp img').addClass ( 'disabled' );
+    }
+  </script>
+
+</template>

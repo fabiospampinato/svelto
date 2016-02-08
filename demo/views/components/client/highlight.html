@@ -1,0 +1,107 @@
+
+<!-- HIGHLIGHT -->
+
+<template name="highlight">
+
+  {{{sw.divider "Highlighted"}}}
+
+  <div class="multiple">
+    <div class="label highlighted primary">Primary</div>
+    <div class="label highlighted secondary">Secondary</div>
+    <div class="label highlighted tertiary">Tertiary</div>
+    <div class="label highlighted quaternary">Quaternary</div>
+    <div class="label highlighted white">White</div>
+    <div class="label highlighted gray">Gray</div>
+    <div class="label highlighted black">Black</div>
+    <div class="label highlighted yellow">Yellow</div>
+    <div class="label highlighted olive">Olive</div>
+    <div class="label highlighted green">Green</div>
+    <div class="label highlighted blue">Blue</div>
+    <div class="label highlighted violet">Violet</div>
+    <div class="label highlighted orange">Orange</div>
+    <div class="label highlighted purple">Purple</div>
+    <div class="label highlighted red">Red</div>
+    <div class="label highlighted pink">Pink</div>
+    <div class="label highlighted teal">Teal</div>
+    <div class="label highlighted brown">Brown</div>
+    <div class="label highlighted error">Error</div>
+    <div class="label highlighted warning">Warning</div>
+    <div class="label highlighted success">Success</div>
+    <div class="label highlighted transparent">Transparent</div>
+    <div class="label highlighted inherit">Inherit</div>
+    <div class="label highlighted base">Base</div>
+  </div>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    <div class="label highlighted highlight-primary">Primary</div>
+    <div class="label highlighted highlight-secondary">Secondary</div>
+    <div class="label highlighted highlight-tertiary">Tertiary</div>
+    <div class="label highlighted highlight-quaternary">Quaternary</div>
+    <div class="label highlighted highlight-white">White</div>
+    <div class="label highlighted highlight-gray">Gray</div>
+    <div class="label highlighted highlight-black">Black</div>
+    <div class="label highlighted highlight-yellow">Yellow</div>
+    <div class="label highlighted highlight-olive">Olive</div>
+    <div class="label highlighted highlight-green">Green</div>
+    <div class="label highlighted highlight-blue">Blue</div>
+    <div class="label highlighted highlight-violet">Violet</div>
+    <div class="label highlighted highlight-orange">Orange</div>
+    <div class="label highlighted highlight-purple">Purple</div>
+    <div class="label highlighted highlight-red">Red</div>
+    <div class="label highlighted highlight-pink">Pink</div>
+    <div class="label highlighted highlight-teal">Teal</div>
+    <div class="label highlighted highlight-brown">Brown</div>
+    <div class="label highlighted highlight-error">Error</div>
+    <div class="label highlighted highlight-warning">Warning</div>
+    <div class="label highlighted highlight-success">Success</div>
+    <div class="label highlighted highlight-transparent">Transparent</div>
+    <div class="label highlighted highlight-inherit">Inherit</div>
+    <div class="label highlighted highlight-base">Base</div>
+  </div>
+
+  {{> highlight_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="highlight_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    <div class="multiple joined">
+      {{{sw.radioAction "Solid" "style" "set_style ( 'solid' )" true}}}
+      {{{sw.radioAction "Dotted" "style" "set_style ( 'dotted' )"}}}
+      {{{sw.radioAction "Dashed" "style" "set_style ( 'dashed' )"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Direction"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.checkAction "Top" "toggle_class ( 'highlight-top' )"}}}
+    {{{sw.checkAction "Right" "toggle_class ( 'highlight-right' )"}}}
+    {{{sw.checkAction "Left" "toggle_class ( 'highlight-left' )"}}}
+    {{{sw.checkAction "Bottom" "toggle_class ( 'highlight-bottom' )"}}}
+    {{{sw.checkAction "All" "toggle_class ( 'highlight-all' )"}}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('.label').toggleClass(css_class);
+    }
+
+    function set_style ( style ) {
+      var styles = ['solid', 'dotted', 'dashed'];
+      for ( var i = 0, l = styles.length; i < l; i++ ) {
+        $('.label').removeClass ( 'highlight-' + styles[i] );
+      }
+      $('.label').addClass ( 'highlight-' + style );
+    }
+  </script>
+
+</template>

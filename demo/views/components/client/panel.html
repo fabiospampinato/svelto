@@ -1,0 +1,156 @@
+
+<!-- PANEL -->
+
+<template name="panel">
+
+  {{{sw.divider "Normal"}}}
+
+  <div class="multiple">
+    <div class="button panel-toggler outlined" data-target="#left">
+      <span>Left</span>
+      <i class="icon">chevron_left</i>
+    </div>
+    <div class="button panel-toggler outlined" data-target="#top">
+      <span>Top</span>
+      <i class="icon">expand_less</i>
+    </div>
+    <div class="button panel-toggler outlined" data-target="#bottom">
+      <span>Bottom</span>
+      <i class="icon">expand_more</i>
+    </div>
+    <div class="button panel-toggler outlined" data-target="#right">
+      <span>Right</span>
+      <i class="icon">chevron_right</i>
+    </div>
+  </div>
+
+  {{{sw.divider "Slim"}}}
+
+  <div class="multiple">
+    <div class="button panel-toggler compact outlined" data-target="#left-slim">
+      <i class="icon">chevron_left</i>
+    </div>
+    <div class="button panel-toggler compact outlined" data-target="#top-slim">
+      <i class="icon">expand_less</i>
+    </div>
+    <div class="button panel-toggler compact outlined" data-target="#bottom-slim">
+      <i class="icon">expand_more</i>
+    </div>
+    <div class="button panel-toggler compact outlined" data-target="#right-slim">
+      <i class="icon">chevron_right</i>
+    </div>
+  </div>
+
+  {{{sw.divider "Pinned"}}}
+
+  <div class="multiple">
+    <div class="button panel-toggler outlined" data-target="#left-pinned">
+      <span>Left</span>
+      <i class="icon">chevron_left</i>
+    </div>
+    <div class="button panel-toggler compact outlined" data-target="#top-pinned">
+      <i class="icon">expand_less</i>
+    </div>
+    <div class="button panel-toggler compact outlined" data-target="#bottom-pinned">
+      <i class="icon">expand_more</i>
+    </div>
+    <div class="button panel-toggler outlined" data-target="#right-pinned">
+      <span>Right</span>
+      <i class="icon">chevron_right</i>
+    </div>
+  </div>
+
+  {{> panel_panels}}
+
+  {{> panel_actions}}
+
+</template>
+
+<!-- PANELS -->
+
+<template name="panel_panels">
+
+  <div id="left-pinned" class="panel left flickable card" data-options='{"pin":"large"}'>
+    <div class="card-block">Left Pinned</div>
+  </div>
+
+  <div id="top-pinned" class="panel top slim card" data-options='{"pin":"large"}'>
+    <div class="card-block">Top Pinned</div>
+  </div>
+
+  <div id="bottom-pinned" class="panel bottom slim card" data-options='{"pin":"large"}'>
+    <div class="card-block">Bottom pinned</div>
+  </div>
+
+  <div id="right-pinned" class="panel right flickable card" data-options='{"pin":"large"}'>
+    <div class="card-block">Right Pinned</div>
+  </div>
+
+  <div id="left" class="panel left card">
+    <div class="card-block">Left</div>
+  </div>
+
+  <div id="top" class="panel top card">
+    <div class="card-block">Top</div>
+  </div>
+
+  <div id="bottom" class="panel bottom card">
+    <div class="card-block">Bottom</div>
+  </div>
+
+  <div id="right" class="panel right card">
+    <div class="card-block">Right</div>
+  </div>
+
+  <div id="left-slim" class="panel left slim card">
+    <div class="card-block">Left slim</div>
+  </div>
+
+  <div id="top-slim" class="panel top slim card">
+    <div class="card-block">Top slim</div>
+  </div>
+
+  <div id="bottom-slim" class="panel bottom slim card">
+    <div class="card-block">Bottom slim</div>
+  </div>
+
+  <div id="right-slim" class="panel right slim card">
+    <div class="card-block">Right slim</div>
+  </div>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="panel_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple">
+    <div onclick="toggle_fixed_header ()" class="button outlined">Toggle fixed header</div>
+    <div onclick="remove_element ( 'header' )" class="button outlined">Remove header</div>
+    <div onclick="remove_element ( 'footer' )" class="button outlined">Remove footer</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function toggle_fixed_header() {
+      $('header').toggleClass('fixed');
+    }
+
+    function remove_element(selector) {
+      $(selector).remove();
+    }
+
+    function api (action) {
+      $('.panel-toggler').panelToggler (action);
+    }
+  </script>
+
+</template>

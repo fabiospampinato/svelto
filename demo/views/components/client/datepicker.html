@@ -1,0 +1,94 @@
+
+<!-- DATEPICKER -->
+
+<template name="datepicker">
+
+  {{{sw.divider "Datepicker"}}}
+
+  <div class="container outlined">
+    {{{sw.datepicker}}}
+  </div>
+
+  {{> datepicker_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="datepicker_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div class="multiple joined">
+      {{{sw.checkbox "Formatted" "formatted"}}}
+      <div onclick="api_get ()" class="button primary outlined">Get</div>
+    </div>
+    <div class="multiple joined">
+      <input name="set" placeholder="Set..." class="outlined">
+      <div onclick="api_set ()" class="button primary outlined">Set</div>
+    </div>
+    <div class="multiple joined">
+      <input name="delta_months" placeholder="Delta months..." class="outlined">
+      <div onclick="api_navigate ()" class="button secondary outlined">Navigate</div>
+    </div>
+    <div class="multiple joined">
+      <div onclick="api ( 'previousMonth' )" class="button compact outlined">
+        <i class="icon">chevron_left</i>
+      </div>
+      <div class="label outlined">Month</div>
+      <div onclick="api ( 'nextMonth' )" class="button compact outlined">
+        <i class="icon">chevron_right</i>
+      </div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get() {
+      var formatted = $("input[name='formatted']").prop('checked');
+      var date = $('.datepicker').datepicker('get', formatted);
+      $.noty(date ? (formatted ? date : date.toLocaleString()) : 'Null');
+    }
+
+    function api_set () {
+      $('.datepicker').datepicker ( 'set', getValue ( 'set' ) );
+    }
+
+    function api_navigate() {
+      var delta_months = Number ( getValue ( 'delta_months' ) );
+      $('.datepicker').datepicker('navigateMonth', delta_months);
+    }
+
+    function api(action) {
+      $('.datepicker').datepicker(action);
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.datepicker').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

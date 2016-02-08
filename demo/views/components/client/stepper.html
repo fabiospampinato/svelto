@@ -1,0 +1,86 @@
+
+<!-- STEPPER -->
+
+<template name="stepper">
+
+  {{{sw.divider "Stepper"}}}
+
+  <div class="multiple">
+    {{{sw.stepper min=-100 max=100 step=1 value=0}}}
+    {{{sw.stepper min=0 max=100 step=10 value=0}}}
+  </div>
+
+  {{> stepper_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="stepper_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div class="multiple joined">
+      <input name="value" placeholder="Value..." class="outlined">
+      <div onclick="api_set ()" class="button outlined secondary">Set</div>
+    </div>
+    <div class="multiple joined">
+      <div onclick="api ( 'decrease' )" class="button outlined compact">
+        <i class="icon">remove</i>
+      </div>
+      <div onclick="api ( 'increase' )" class="button outlined compact">
+        <i class="icon">add</i>
+      </div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Children outlined" "toggle_children_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Children compact" "toggle_children_class ( 'compact' )" true}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.stepper').toggleClass(css_class);
+    }
+
+    function toggle_children_class (css_class) {
+      $('.stepper > *').toggleClass(css_class);
+    }
+
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get() {
+      var gets = _.map($('.stepper'), function(stepper) {
+        return $(stepper).stepper('get');
+      });
+      $.noty(gets.join(' - '));
+    }
+
+    function api(action) {
+      $('.stepper').stepper(action);
+    }
+
+    function api_set() {
+      var value = Number ( getValue ( 'value' ) );
+      $('.stepper').stepper('set', value);
+    }
+  </script>
+
+</template>

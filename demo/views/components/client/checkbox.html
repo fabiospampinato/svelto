@@ -1,0 +1,74 @@
+
+<!-- CHECKBOX -->
+
+<template name="checkbox">
+
+  {{{sw.divider "Checkbox"}}}
+
+  <div class="multiple">
+    <label class="checkbox">
+      <input type="checkbox">
+    </label>
+    <label class="checkbox">
+      <span>Base</span>
+      <input type="checkbox">
+    </label>
+    <label class="checkbox">
+      <input type="checkbox">
+      <span>Inverse</span>
+    </label>
+    <label class="checkbox">
+      <span>Custom icons</span>
+      <input type="checkbox" data-icon-on="favorite" data-icon-off="favorite_border">
+    </label>
+  </div>
+
+  {{> checkbox_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="checkbox_actions">
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Button" "toggle_class ( 'button' )"}}}
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+      {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+    </div>
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.checkbox').slice ( 0, 4 ).toggleClass ( css_class );
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.checkbox').slice ( 0, 4 ).removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+
+    function enable () {
+      $('.checkbox').slice ( 0, 4 ).removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      console.log("disabling!");
+      $('.checkbox').slice ( 0, 4 ).addClass ( 'disabled' );
+    }
+  </script>
+
+</template>

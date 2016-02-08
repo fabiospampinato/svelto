@@ -1,0 +1,75 @@
+
+<!-- N TIMES ACTION -->
+
+<template name="n-times-action">
+
+  {{{sw.divider "Settings"}}}
+
+  <div class="multiple equal joined">
+    <input name="nta_group" placeholder="Group..." class="outlined">
+    <input name="nta_action" placeholder="Action..." class="outlined">
+    <input name="nta_times" placeholder="Times..." class="outlined">
+    <input name="nta_expiry" placeholder="Expiry..." class="outlined">
+  </div>
+
+  {{> ntimesaction_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="ntimesaction_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple actions">
+    <div onclick="nta_run ()" class="button outlined">Run</div>
+    <div onclick="nta_run ( false )" class="button outlined">Run (Return false)</div>
+    <div onclick="nta_get ()" class="button outlined">Get</div>
+    <div onclick="nta_set ()" class="button outlined">Set</div>
+    <div onclick="nta_remove ()" class="button outlined">Remove</div>
+  </div>
+
+  <script>
+    function nta_input(name) {
+      return $('input[name="nta_' + name + '"]').val();
+    }
+
+    function nta_run(returnValue) {
+      $.nTimesAction({
+        group: nta_input('group'),
+        action: nta_input('action'),
+        times: Number(nta_input('times')),
+        expiry: Number(nta_input('expiry')),
+        fn: function(group, action, time) {
+          $.noty(group + '`s action: ' + action + ' has been executed for the ' + time + ' time');
+          return returnValue;
+        }
+      });
+    }
+
+    function nta_get() {
+      $.noty($.nTimesAction({
+        group: nta_input('group'),
+        action: nta_input('action')
+      }).get() + ' times');
+    }
+
+    function nta_set() {
+      $.nTimesAction({
+        group: nta_input('group'),
+        action: nta_input('action')
+      }).set(Number(nta_input('times')));
+      $.noty('Setted ' + nta_input('times') + ' times');
+    }
+
+    function nta_remove() {
+      $.nTimesAction({
+        group: nta_input('group'),
+        action: nta_input('action')
+      }).remove();
+      $.noty('Removed');
+    }
+  </script>
+
+</template>

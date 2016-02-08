@@ -1,0 +1,175 @@
+
+<!-- DRAGGABLE -->
+
+<template name="draggable">
+
+  {{{sw.divider "Draggables"}}}
+
+  <div class="container constrainer outlined">
+    <div class="multiple">
+      <div class="label outlined draggable">Draggable</div>
+      <div class="label outlined scroll">Scroll</div>
+      <div class="label outlined helper">Helper</div>
+      {{{sw.checkbox "Toggable draggable"}}}
+      <div class="label outlined only-handler">
+        <span>Only handler</span>
+        <div class="sub right draggable-handler">
+          <i class="icon">menu</i>
+        </div>
+      </div>
+      <div class="label outlined revert">Revert</div>
+      <div class="label outlined x-axis">X-Axis</div>
+      <div class="label outlined y-axis">Y-Axis</div>
+      <div class="label outlined constrained">Constrained</div>
+      <div class="label outlined constrained-center">Constrained center</div>
+      <div class="label outlined constrained-tolerance">Constrained 100-50 tolerance</div>
+      <div class="label outlined constrained-coordinates-modifier">Modifier 2x</div>
+      <div class="label outlined proxyed">Proxy</div>
+    </div>
+  </div>
+
+  {{> draggables_init}}
+  {{> draggables_actions}}
+
+</template>
+
+<!-- INIT -->
+
+<template name="draggables_init">
+
+  {{sw.noty body="Drag the labels around" ttl="forever"}}
+
+  <script>
+    $('.scroll').draggable ({
+      scroll: {
+        active: true
+      }
+    });
+    $('.helper').draggable ({
+      $helper: $('<div class="container red" style="position: fixed;"><p>Hello darling!</p></div>')
+    });
+    $('.only-handler').draggable({
+      onlyHandlers: true
+    });
+    $('.no-handler').draggable();
+    $('.checkbox').draggable({
+      draggable: function() {
+        return !!$('.checkbox input').prop('checked');
+      }
+    });
+    $('.revert').draggable({
+      revert: true
+    });
+    $('.x-axis').draggable({
+      axis: 'x'
+    });
+    $('.y-axis').draggable({
+      axis: 'y'
+    });
+    $('.constrained').draggable({
+      constrainer: {
+        $element: $('.constrainer')
+      }
+    });
+    $('.constrained-center').draggable({
+      constrainer: {
+        $element: $('.constrainer'),
+        center: true
+      }
+    });
+    $('.constrained-tolerance').draggable({
+      constrainer: {
+        $element: $('.constrainer'),
+        tolerance: {
+          x: 100,
+          y: 50
+        }
+      }
+    });
+    $('.constrained-coordinates-modifier').draggable({
+      modifiers: {
+        x: function(x) {
+          return 2 * x;
+        },
+        y: function(y) {
+          return 2 * y;
+        }
+      }
+    });
+    $('.proxyed').draggable({
+      proxy: {
+        $element: $('.constrainer')
+      }
+    });
+  </script>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="draggables_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple actions">
+    <div onclick="remove_proxy ()" class="button outlined black">Remove proxy</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Scrollability"}}}
+
+  <div class="multiple actions joined">
+    {{{sw.radioAction "Base" "scroll" "no_scrollability ()" true}}}
+    {{{sw.radioAction "Body" "scroll" "toggle_body_scrollable ( true )"}}}
+    {{{sw.radioAction "Container" "scroll" "toggle_container_scrollable ( true )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function remove_proxy() {
+      $('.proxyed').remove();
+    }
+
+    function api(action) {
+      $('.label, .checkbox').draggable (action);
+    }
+
+    function no_scrollability () {
+      toggle_body_scrollable ( false );
+      toggle_container_scrollable ( false );
+    }
+
+    var isBodyScrollable = false;
+    function toggle_body_scrollable ( force ) {
+      if ( isBodyScrollable === force ) return;
+      isBodyScrollable = force;
+      $(document.body).css ({
+        'width': ( force ? '200%' : '100%' ),
+        'min-height': ( force ? '200%' : '100%' )
+      });
+      toggle_container_scrollable ( false );
+    }
+
+    var isContainerScrollable = false;
+    function toggle_container_scrollable ( force ) {
+      if ( isContainerScrollable === force ) return;
+      isContainerScrollable = force;
+      var $container = $('.container'),
+          $multiple = $container.find ( '.multiple' );
+      $container.css ({
+        'width': force ? '66%' : 'auto',
+        'height': force ? '120px' : 'auto',
+        'overflow': force ? 'auto' : 'visible'
+      })
+      $multiple.css ( 'width', force ? '130%' : 'auto' );
+      toggle_body_scrollable ( false );
+    }
+  </script>
+
+</template>

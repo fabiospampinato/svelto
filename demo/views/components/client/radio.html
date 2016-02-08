@@ -1,0 +1,74 @@
+
+<!-- RADIO -->
+
+<template name="radio">
+
+  {{{sw.divider "Radio"}}}
+
+  <div class="multiple">
+    <label class="radio">
+      <input type="radio" name="example">
+    </label>
+    <label class="radio">
+      <span>Base</span>
+      <input type="radio" name="example">
+    </label>
+    <label class="radio">
+      <input type="radio" name="example">
+      <span>Inverse</span>
+    </label>
+    <label class="radio">
+      <span>Custom icons</span>
+      <input type="radio" name="example" data-icon-on="thumb_up">
+    </label>
+  </div>
+
+  {{> radio_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="radio_actions">
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Button" "toggle_class ( 'button' )"}}}
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+      {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+    </div>
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      console.log("TOGGLING CLASS!");
+      $('.radio').not ( '.actions .radio' ).toggleClass ( css_class );
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.radio').not('.actions .radio').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+
+    function enable () {
+      $('.radio').slice ( 0, 4 ).removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('.radio').slice ( 0, 4 ).addClass ( 'disabled' );
+    }
+  </script>
+
+</template>

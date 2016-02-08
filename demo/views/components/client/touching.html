@@ -1,0 +1,151 @@
+
+<!-- TOUCHING -->
+
+<template name="touching">
+
+  {{{sw.divider "Squares - All matches"}}}
+
+  <div class="container squares_all outlined">
+    <div class="multiple">
+      {{#each sw.times 32}}
+        <div class="square xxxxlarge centerer">
+          <div class="xxxsmall">{{this}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple joined">
+    <input name="input_populate_all" placeholder="Squares number..." class="outlined">
+    <div onclick="populate_all ()" class="button secondary outlined">Populate</div>
+  </div>
+
+  {{{sw.divider "Squares - Most significant match"}}}
+
+  <div class="container squares_most outlined">
+    <div class="multiple">
+      {{#each sw.times 32}}
+        <div class="square xxxxlarge centerer">
+          <div class="xxxsmall">{{this}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple joined">
+    <input name="input_populate_most" placeholder="Squares number..." class="outlined">
+    <div onclick="populate_most ()" class="button secondary outlined">Populate</div>
+  </div>
+
+  {{{sw.divider "Squares - Punctual"}}}
+
+  <div class="container squares_punctual outlined">
+    <div class="multiple">
+      {{#each sw.times 32}}
+        <div class="square xxxxlarge centerer">
+          <div class="xxxsmall">{{this}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple joined">
+    <input name="input_populate_punctual" placeholder="Squares number..." class="outlined">
+    <div onclick="populate_punctual ()" class="button secondary outlined">Populate</div>
+  </div>
+
+  {{> touching_init}}
+
+</template>
+
+<template name="touching_init">
+
+  {{sw.noty body="Drag the squares, the green ones are the returned ones" ttl="forever"}}
+
+  <script>
+    /* POPULATE */
+
+    function get_squares_html(nr) {
+      var html = '';
+      for (var i = 0; i < Number(nr); i++) {
+        html += '<div class="square xxxxlarge centerer" style=""><div class="xxxsmall">' + (i + 1) + '</div></div>';
+      }
+      return html;
+    }
+
+    function populate_all() {
+      $('.squares_all .multiple').empty().append(get_squares_html($('input[name="input_populate_all"]').val()));
+      init_drag_all();
+    }
+
+    function populate_most() {
+      $('.squares_most .multiple').empty().append(get_squares_html($('input[name="input_populate_most"]').val()));
+      init_drag_most();
+    }
+
+    function populate_punctual() {
+      $('.squares_punctual .multiple').empty().append(get_squares_html($('input[name="input_populate_punctual"]').val()));
+      init_drag_punctual();
+    }
+
+    /* DRAGGING */
+
+    function init_drag_all() {
+      dragging('.squares_all .square', 'all');
+    }
+
+    function init_drag_most() {
+      dragging('.squares_most .square', 'most');
+    }
+
+    function init_drag_punctual() {
+      dragging('.squares_punctual .square', 'punctual');
+    }
+
+    function dragging(selector, select) {
+      var $squares = $(selector);
+      $squares.draggable({
+        revert: true,
+        callbacks: {
+          move: function(data) {
+            $squares.removeClass('green');
+            if (select === 'punctual') {
+              var pointXY = $.eventXY(data.event);
+              $squares.touching({
+                point: {
+                  X: pointXY.X - $(window).scrollLeft(),
+                  Y: pointXY.Y - $(window).scrollTop()
+                },
+                $not: $(this)
+              }).addClass('green');
+            } else {
+              $squares.touching({
+                $comparer: $(this),
+                $not: $(this),
+                onlyBest: select === 'most'
+              }).addClass('green');
+            }
+          },
+          end: function() {
+            $squares.removeClass('green');
+          }
+        }
+      });
+    }
+
+    /* READY */
+
+    $(function() {
+      init_drag_all();
+      init_drag_most();
+      init_drag_punctual();
+    });
+  </script>
+
+</template>

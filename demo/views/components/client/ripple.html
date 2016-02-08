@@ -1,0 +1,93 @@
+
+<!-- RIPPLE -->
+
+<template name="ripple">
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    <div class="button ripple ripple-primary">Primary</div>
+    <div class="button ripple ripple-secondary">Secondary</div>
+    <div class="button ripple ripple-tertiary">Tertiary</div>
+    <div class="button ripple ripple-quaternary">Quaternary</div>
+    <div class="button ripple ripple-white">White</div>
+    <div class="button ripple ripple-gray">Gray</div>
+    <div class="button ripple ripple-black">Black</div>
+    <div class="button ripple ripple-yellow">Yellow</div>
+    <div class="button ripple ripple-olive">Olive</div>
+    <div class="button ripple ripple-green">Green</div>
+    <div class="button ripple ripple-blue">Blue</div>
+    <div class="button ripple ripple-violet">Violet</div>
+    <div class="button ripple ripple-orange">Orange</div>
+    <div class="button ripple ripple-purple">Purple</div>
+    <div class="button ripple ripple-red">Red</div>
+    <div class="button ripple ripple-pink">Pink</div>
+    <div class="button ripple ripple-teal">Teal</div>
+    <div class="button ripple ripple-brown">Brown</div>
+    <div class="button ripple ripple-error">Error</div>
+    <div class="button ripple ripple-warning">Warning</div>
+    <div class="button ripple ripple-success">Success</div>
+    <div class="button ripple ripple-transparent">Transparent</div>
+    <div class="button ripple ripple-inherit">Inherit</div>
+    <div class="button ripple ripple-base">Base</div>
+  </div>
+
+  {{{sw.divider "Other shapes"}}}
+
+  <div class="multiple">
+    <div class="button rounded ripple ripple-primary">Test</div>
+    <div class="button ripple ripple-secondary">
+      <i class="icon">settings</i>
+    </div>
+    <div class="button rounded ripple ripple-tertiary">
+      <i class="icon">settings</i>
+    </div>
+    <div class="button transparent rounded ripple ripple-tertiary">
+      <i class="icon">settings</i>
+    </div>
+    <div class="button sharp ripple ripple-quaternary">Test</div>
+  </div>
+
+  {{{sw.divider "Paragraph"}}}
+
+  <div class="container ripple ripple-black outlined">
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> ripple_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="ripple_actions">
+
+  {{{sw.divider "Ripple"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Centered" "toggle_class ( 'ripple-centered' )"}}}
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.ripple').toggleClass ( css_class );
+    }
+
+    function api ( action ) {
+      $('.ripple').ripple ( action );
+    }
+  </script>
+
+</template>

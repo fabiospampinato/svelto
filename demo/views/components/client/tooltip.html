@@ -1,0 +1,88 @@
+
+<!-- TOOLTIP -->
+
+<template name="tooltip">
+
+  {{{sw.divider "Tooltip"}}}
+
+  <div class="multiple">
+    <div class="button tooltip-toggler outlined" data-target="#basic">
+      <span>Basic</span>
+      <i class="icon">info_outline</i>
+    </div>
+    <div class="button tooltip-toggler outlined" data-target="#tipless">
+      <span>Tipless</span>
+      <i class="icon">info_outline</i>
+    </div>
+    <div class="button tooltip-toggler outlined" data-target="#text">
+      <span>Text</span>
+      <i class="icon">info_outline</i>
+    </div>
+    <div class="button tooltip-toggler outlined" data-target="#image">
+      <span>Image</span>
+      <i class="icon">info_outline</i>
+    </div>
+    <div class="button tooltip-toggler outlined" data-target="#image2">
+      <span>Image2</span>
+      <i class="icon">info_outline</i>
+    </div>
+    <div class="button tooltip-toggler outlined" data-target="#advanced">
+      <span>Advanced</span>
+      <i class="icon">info_outline</i>
+    </div>
+  </div>
+
+  {{> tooltip_tooltips}}
+
+  {{> tooltip_actions}}
+
+</template>
+
+<!-- TOOLTIPS -->
+
+<template name="tooltip_tooltips">
+
+  <div id="basic" class="tooltip container">Hello there!</div>
+
+  <div id="tipless" class="tooltip container no-tip">Tipless!</div>
+
+  <div id="text" class="tooltip container">
+    <p>{{sample.text}}</p>
+  </div>
+
+  <div id="image" class="tooltip container outlined">
+    <img src="/sample.png">
+  </div>
+
+  <div id="image2" class="tooltip container">
+    <div class="image-wrp">
+      {{{sample.image}}}
+    </div>
+  </div>
+
+  <div id="advanced" class="tooltip card">
+    <div class="card-header inherit">Header</div>
+    <div class="card-block">Content</div>
+    <div class="card-footer">Footer</div>
+  </div>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="tooltip_actions">
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api (action) {
+      $('.tooltip-toggler').tooltipToggler ( action );
+    }
+  </script>
+
+</template>

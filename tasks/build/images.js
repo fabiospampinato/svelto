@@ -26,16 +26,16 @@ var _           = require ( 'lodash' ),
 
 gulp.task ( 'build-images', 'Build images', function () {
 
-  var needUpdate = ( _.get ( project, 'plugins.imagemin.enabled' ) && !project.isDevelopment ) !== ( _.get ( projectPrev, 'plugins.imagemin.enabled' ) && !projectPrev.isDevelopment ) ||
+  var needUpdate = _.get ( project, 'plugins.imagemin.enabled' ) !== _.get ( projectPrev, 'plugins.imagemin.enabled' ) ||
                    !_.isEqual ( _.get ( project, 'plugins.imagemin.options' ), _.get ( projectPrev, 'plugins.imagemin.options' ) );
 
   return gulp.src ( input.getPath ( 'images' ) )
              .pipe ( filter () )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, bytediff.start () ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, imagemin ( plugins.imagemin.options ) ) )
-             .pipe ( gulpif ( plugins.imagemin.enabled && !project.isDevelopment, bytediff.stop () ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.start () ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled, imagemin ( plugins.imagemin.options ) ) )
+             .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.stop () ) )
              .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );
 
 });

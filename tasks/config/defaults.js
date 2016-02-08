@@ -25,6 +25,8 @@ var defaults = {
   environments: {
     production: {},
     development: {
+      paths: require ( './defaults/development/paths' ),
+      plugins: require ( './defaults/development/plugins' ),
       isDevelopment: true
     }
   },

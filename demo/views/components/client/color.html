@@ -1,0 +1,201 @@
+
+<!-- COLOR -->
+
+<template name="color">
+
+  {{{sw.divider "HEX"}}}
+
+  <div class="multiple joined">
+    <div class="label compact outlined hex"></div>
+    <input name="hex_r" placeholder="Red..." class="outlined">
+    <input name="hex_g" placeholder="Green..." class="outlined">
+    <input name="hex_b" placeholder="Blue..." class="outlined">
+    <div class="label compact gray">To</div>
+    <div class="button outlined" onclick="hex2rgb ()">RGB</div>
+    <div class="button outlined" onclick="hex2hsv ()">HSV</div>
+    <div class="button outlined" onclick="hex2hsl ()">HSL</div>
+  </div>
+
+  {{{sw.divider "RGB"}}}
+
+  <div class="multiple joined">
+    <div class="label compact outlined rgb"></div>
+    <input name="rgb_r" placeholder="Red..." class="outlined">
+    <input name="rgb_g" placeholder="Green..." class="outlined">
+    <input name="rgb_b" placeholder="Blue..." class="outlined">
+    <div class="label compact gray">To</div>
+    <div class="button outlined" onclick="rgb2hex ()">HEX</div>
+    <div class="button outlined" onclick="rgb2hsv ()">HSV</div>
+    <div class="button outlined" onclick="rgb2hsl ()">HSL</div>
+  </div>
+
+  {{{sw.divider "HSV"}}}
+
+  <div class="multiple joined">
+    <div class="label compact outlined hsv">
+      <i class="icon">block</i>
+    </div>
+    <input name="hsv_h" placeholder="Hue..." class="outlined">
+    <input name="hsv_s" placeholder="Saturation..." class="outlined">
+    <input name="hsv_v" placeholder="Value..." class="outlined">
+    <div class="label compact gray">To</div>
+    <div class="button outlined" onclick="hsv2hex ()">HEX</div>
+    <div class="button outlined" onclick="hsv2rgb ()">RGB</div>
+    <div class="button outlined" onclick="hsv2hsl ()">HSL</div>
+  </div>
+
+  {{{sw.divider "HSL"}}}
+
+  <div class="multiple joined">
+    <div class="label compact outlined hsl"></div>
+    <input name="hsl_h" placeholder="Hue..." class="outlined">
+    <input name="hsl_s" placeholder="Saturation..." class="outlined">
+    <input name="hsl_l" placeholder="Lightness..." class="outlined">
+    <div class="label compact gray">To</div>
+    <div class="button outlined" onclick="hsl2hex ()">HEX</div>
+    <div class="button outlined" onclick="hsl2rgb ()">RGB</div>
+    <div class="button outlined" onclick="hsl2hsv ()">HSV</div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function setValue ( name, value ) {
+      return $('[name="' + name + '"]').val ( value );
+    }
+
+    function getHex () {
+      return {
+        r: getValue ( 'hex_r' ),
+        g: getValue ( 'hex_g' ),
+        b: getValue ( 'hex_b' )
+      };
+    }
+
+    function setHex ( hex ) {
+      setValue ( 'hex_r', hex.r );
+      setValue ( 'hex_g', hex.g );
+      setValue ( 'hex_b', hex.b );
+      updateHex ( hex );
+    }
+
+    function updateHex ( hex ) {
+      $('.hex').css ( 'background-color', '#' + hex.r + hex.g + hex.b );
+    }
+
+    $('input[name="hex_r"], input[name="hex_g"], input[name="hex_b"]').on ( 'change', function () {
+      updateHex ( getHex () );
+    });
+
+    function getRgb () {
+      return {
+        r: getValue ( 'rgb_r' ),
+        g: getValue ( 'rgb_g' ),
+        b: getValue ( 'rgb_b' )
+      };
+    }
+
+    function setRgb ( rgb ) {
+      setValue ( 'rgb_r', rgb.r );
+      setValue ( 'rgb_g', rgb.g );
+      setValue ( 'rgb_b', rgb.b );
+      updateRgb ( rgb );
+    }
+
+    function updateRgb ( rgb ) {
+      $('.rgb').css ( 'background-color', 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')' );
+    }
+
+    $('input[name="rgb_r"], input[name="rgb_g"], input[name="rgb_b"]').on ( 'change', function () {
+      updateRgb ( getRgb () );
+    });
+
+    function getHsv () {
+      return {
+        h: getValue ( 'hsv_h' ),
+        s: getValue ( 'hsv_s' ),
+        v: getValue ( 'hsv_v' )
+      };
+    }
+
+    function setHsv ( hsv ) {
+      setValue ( 'hsv_h', hsv.h );
+      setValue ( 'hsv_s', hsv.s );
+      setValue ( 'hsv_v', hsv.v );
+    }
+
+    function getHsl () {
+      return {
+        h: getValue ( 'hsl_h' ),
+        s: getValue ( 'hsl_s' ),
+        l: getValue ( 'hsl_l' )
+      };
+    }
+
+    function setHsl ( hsl ) {
+      setValue ( 'hsl_h', hsl.h );
+      setValue ( 'hsl_s', hsl.s );
+      setValue ( 'hsl_l', hsl.l );
+      updateHsl ( hsl );
+    }
+
+    function updateHsl ( hsl ) {
+      $('.hsl').css ( 'background-color', 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)' );
+    }
+
+    $('input[name="hsl_h"], input[name="hsl_s"], input[name="hsl_l"]').on ( 'change', function () {
+      updateHsl ( getHsl () );
+    });
+
+    function hex2rgb () {
+      setRgb ( Color.hex2rgb ( getHex () ) );
+    }
+
+    function hex2hsv () {
+      setHsv ( Color.hex2hsv ( getHex () ) );
+    }
+
+    function hex2hsl () {
+      setHsl ( Color.hex2hsl ( getHex () ) );
+    }
+
+    function rgb2hex () {
+      setHex ( Color.rgb2hex ( getRgb () ) );
+    }
+
+    function rgb2hsv () {
+      setHsv ( Color.rgb2hsv ( getRgb () ) );
+    }
+
+    function rgb2hsl () {
+      setHsl ( Color.rgb2hsl ( getRgb () ) );
+    }
+
+    function hsv2hex () {
+      setHex ( Color.hsv2hex ( getHsv () ) );
+    }
+
+    function hsv2rgb () {
+      setRgb ( Color.hsv2rgb ( getHsv () ) );
+    }
+
+    function hsv2hsl () {
+      setHsl ( Color.hsv2hsl ( getHsv () ) );
+    }
+
+    function hsl2hex () {
+      setHex ( Color.hsl2hex ( getHsl () ) );
+    }
+
+    function hsl2rgb () {
+      setRgb ( Color.hsl2rgb ( getHsl () ) );
+    }
+
+    function hsl2hsv () {
+      setHsv ( Color.hsl2hsv ( getHsl () ) );
+    }
+  </script>
+
+</template>

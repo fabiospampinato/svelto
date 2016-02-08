@@ -1,0 +1,57 @@
+
+<!-- TIME AGO -->
+
+<template name="time-ago">
+
+  {{{sw.divider "TimeAgo"}}}
+
+  <div class="container outlined">
+    <span class="timeago" data-timestamp="{{sw.nowSecs}}">{{sw.timeAgo sw.nowSecs}}</span>
+  </div>
+
+  {{{sw.divider "TimeAgo -90"}}}
+
+  <div class="container outlined">
+    <span class="timeago" data-timestamp="{{sw.nowSecs -90}}">{{sw.timeAgo sw.nowSecs -90}}</span>
+  </div>
+
+  {{{sw.divider "TimeAgo -120"}}}
+
+  <div class="container outlined">
+    <span class="timeago" data-timestamp="{{sw.nowSecs -120}}">{{sw.timeAgo sw.nowSecs -120}}</span>
+  </div>
+
+  {{{sw.divider "TimeAgo -3600"}}}
+
+  <div class="container outlined">
+    <span class="timeago" data-timestamp="{{sw.nowSecs -3600}}">{{sw.timeAgo sw.nowSecs -3600}}</span>
+  </div>
+
+  {{{sw.divider "TimeAgo title -7200"}}}
+
+  <div class="label outlined compact timeago" data-timestamp="{{sw.nowSecs -7200}}" data-options='{"title":true}' title="{{sw.timeAgo sw.nowSecs -7200}}">
+    <i class="icon">access_time</i>
+  </div>
+
+  {{> time_ago_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="time_ago_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('[data-timestamp], [data-timestamp-title]').timeAgo ( action );
+    }
+  </script>
+
+</template>

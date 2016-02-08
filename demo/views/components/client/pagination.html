@@ -1,0 +1,29 @@
+
+<!-- PAGINATION -->
+
+<template name="pagination">
+
+  {{{sw.divider "Base"}}}
+
+  {{{sw.pagination current=4 total=100}}}
+
+  {{{sw.divider "Few blocks"}}}
+
+  {{{sw.pagination current=4 total=100 blocks=2}}}
+  {{{sw.pagination current=4 total=100 blocks=3}}}
+
+  {{{sw.divider "Infinite"}}}
+
+  {{{sw.pagination current=4 total="Infinity"}}}
+
+  {{{sw.divider "Left"}}}
+
+  {{{sw.pagination current=3 total=100}}}
+  {{{sw.pagination current=1 total=100}}}
+
+  {{{sw.divider "Right"}}}
+
+  {{{sw.pagination current=98 total=100}}}
+  {{{sw.pagination current=100 total=100}}}
+
+</template>

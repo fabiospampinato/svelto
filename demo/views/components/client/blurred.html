@@ -1,0 +1,30 @@
+
+<!-- BLURRED -->
+
+<template name="blurred">
+
+  {{{sw.divider "Paragraph"}}}
+
+  <div class="container outlined">
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> blurred_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="blurred_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  {{{sw.checkAction "Blurred" "toggle_blur ()"}}}
+
+  <script>
+    function toggle_blur() {
+      $('.container').blurred();
+    }
+  </script>
+
+</template>

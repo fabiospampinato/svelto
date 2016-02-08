@@ -1,0 +1,185 @@
+
+<!-- CHAT -->
+
+<template name="chat">
+
+  {{{sw.divider "Chat"}}}
+
+  <div class="chat-msg level-1">
+    <a href="/" class="chat-msg-img" title="Fabio">
+      <div class="image-wrp rounded" title="Fabio">
+        {{{sample.image}}}
+      </div>
+    </a>
+    <div class="chat-msg-content card outlined">
+      <div class="card-header inherit outlined compact">
+        <div class="sections">
+          <div class="section-left">
+            <a href="/" title="Fabio" class="chat-msg-sender-name">Fabio</a>
+          </div>
+          <div class="section-right">
+            <div class="multiple">
+              <div class="button xsmall outlined compact" title="You are the owner">
+                <i class="icon">account_circle</i>
+              </div>
+              <div class="button xsmall outlined compact" title="Edit">
+                <i class="icon">mode_edit</i>
+              </div>
+              <div class="button xsmall outlined compact" title="Delete">
+                <i class="icon">delete</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <p>This is the message, do you like it?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-msg level-2">
+    <a href="/" class="chat-msg-img rounded" title="Francesca">
+      {{{sample.image}}}
+    </a>
+    <div class="chat-msg-content card outlined">
+      <div class="card-header inherit outlined compact">
+        <div class="sections">
+          <div class="section-left">
+            <a href="/" title="Francesca" class="chat-msg-sender-name">Francesca</a>
+          </div>
+          <div class="section-right">
+            <div class="multiple">
+              <div class="button xsmall outlined compact" title="Reply">
+                <i class="icon">reply</i>
+              </div>
+              <div class="button xsmall outlined compact" title="Edit">
+                <i class="icon">mode_edit</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <p>Not really...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-msg level-2">
+    <div class="chat-msg-content card outlined">
+      <div class="card-header inherit outlined compact">
+        <div class="sections">
+          <div class="section-left">
+            <a href="/" title="Valeria" class="chat-msg-sender-name">Valeria</a>
+          </div>
+          <div class="section-right">
+            <div class="button xsmall outlined compact" title="Reply">
+              <i class="icon">reply</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <p>Where's my avatar?!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-msg level-3">
+    <a href="/" class="chat-msg-img overlay-toggler" title="Valeria" data-target="#chat-overlay" data-options='{"hover":{"triggerable":true,"delays":{"open":50,"close":50}}}'>
+      <div id="chat-overlay" class="overlay dimmer centerer">
+        <i class="icon xlarge">person</i>
+      </div>
+      {{{sample.image}}}
+    </a>
+    <div class="chat-msg-content card outlined">
+      <div class="card-header inherit outlined compact">
+        <div class="sections">
+          <div class="section-left">
+            <a href="/" title="Valeria" class="chat-msg-sender-name">Valeria</a>
+          </div>
+          <div class="section-right">
+            <div class="button xsmall outlined compact" title="Reply">
+              <i class="icon">reply</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <p>Whoa I can reply to myself</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-msg level-4">
+    <a href="/" class="chat-msg-img" title="Valeria">
+      <div class="image-wrp rounded" title="Valeria">
+        {{{sample.image}}}
+      </div>
+    </a>
+    <div class="chat-msg-content card outlined">
+      <div class="card-header inherit outlined compact">
+        <div class="sections">
+          <div class="section-left">
+            <a href="/" title="Valeria" class="chat-msg-sender-name">Valeria</a>
+          </div>
+          <div class="section-right">
+            <div class="button xsmall outlined compact" title="Reply">
+              <i class="icon">reply</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <p>And again (Found my avatar btw)</p>
+      </div>
+    </div>
+  </div>
+
+  {{> chat_actions}}
+
+</template>
+
+<template name="chat_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "No tip" "toggle_class ( 'no-tip' )"}}}
+    {{{sw.checkAction "No img" "toggle_class ( 'no-img' )"}}}
+    <div class="multiple joined">
+      {{{sw.radioAction "Left" "direction" "set_direction ( 'left' )" true}}}
+      {{{sw.radioAction "Right" "direction" "set_direction ( 'right' )"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+    {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+  </div>
+
+  <script>
+    function toggle_class (  class_name ) {
+      $('.chat-msg').toggleClass ( class_name );
+    }
+
+    function enable () {
+      $('.chat-msg').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('.chat-msg').addClass ( 'disabled' );
+    }
+
+    function set_direction ( direction ) {
+      var directions = ['left', 'right'];
+      for ( var i = 0, l = directions.length; i < l; i++ ) {
+        $('.chat-msg').removeClass ( 'direction-' + directions[i] ).addClass ( 'direction-' + direction );
+      }
+    }
+  </script>
+
+</template>

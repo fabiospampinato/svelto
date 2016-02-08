@@ -1,0 +1,91 @@
+
+<!-- TABS -->
+
+<template name="tabs">
+
+  {{{sw.divider "Tabs"}}}
+
+  <div class="tabs">
+    <div class="tabs-triggers">
+      <div class="button outlined">
+        <i class="icon">chat</i>
+      </div>
+      <div class="button outlined">
+        <i class="icon">restore</i>
+      </div>
+      <div class="button outlined active">Text</div>
+      <div class="button outlined">
+        <i class="icon">settings</i>
+      </div>
+    </div>
+    <div class="tabs-containers">
+      <div class="container outlined">
+        <div class="label-corner bottom-right xsmall secondary">
+          <div class="label compact">1</div>
+        </div>
+        {{{sample.paragraph}}}
+      </div>
+      <div class="container outlined">
+        <div class="label-corner bottom-right xsmall secondary">
+          <div class="label compact">2</div>
+        </div>
+        {{{sample.paragraph}}}
+      </div>
+      <div class="container outlined active">
+        <div class="label-corner bottom-right xsmall secondary">
+          <div class="label compact">3</div>
+        </div>
+        {{{sample.paragraph}}}
+      </div>
+      <div class="container outlined">
+        <div class="label-corner bottom-right xsmall secondary">
+          <div class="label compact">4</div>
+        </div>
+        {{{sample.paragraph}}}
+      </div>
+    </div>
+  </div>
+
+  {{> tabs_actions}}
+
+</template>
+
+<template name="tabs_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Direction"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Top" "direction" "set_direction ( 'top' )" true}}}
+    {{{sw.radioAction "Right" "direction" "set_direction ( 'right' )"}}}
+    {{{sw.radioAction "Bottom" "direction" "set_direction ( 'bottom' )"}}}
+    {{{sw.radioAction "Left" "direction" "set_direction ( 'left' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function set_direction ( direction ) {
+      var directions = ['top', 'right', 'bottom', 'left'];
+      for ( var i = 0, l = directions.length; i < l; i++ ) {
+        $('.tabs').removeClass ( directions[i] ).addClass ( direction );
+      }
+    }
+
+    function api (action) {
+      $('.tabs').tabs (action);
+    }
+  </script>
+
+</template>

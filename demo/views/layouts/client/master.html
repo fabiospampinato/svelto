@@ -1,0 +1,58 @@
+
+<!-- MASTER -->
+
+<template name="master">
+  <div id="content">
+    {{> masterHeader}}
+    <main>{{> yield "main"}}</main>
+    {{> masterFooter}}
+  </div>
+</template>
+
+<!-- HEADER -->
+
+<template name="masterHeader">
+  <header class="fixed">
+    <div class="toolbar primary z-depth-4">
+      <div class="multiple centered">
+        <div class="button compact transparent">
+          <i class="icon">menu</i>
+        </div>
+        <a href="/" class="large">Svelto</a>
+        <div class="spacer"></div>
+        <div class="button compact transparent">
+          <i class="icon">refresh</i>
+        </div>
+        <div class="button compact transparent">
+          <i class="icon">more_vert</i>
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+
+<!-- FOOTER -->
+
+<template name="masterFooter">
+  <footer>
+    <p class="text-center">Svelto, the framework</p>
+  </footer>
+  <script>
+    var prevErrorId = '';
+    window.onerror = function ( message, file, line ) {
+      var errorId = message + file + line;
+      if ( errorId !== prevErrorId ) {
+        prevErrorId = errorId;
+        try {
+          $.noty ({
+            body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message,
+            ttl: 'forever',
+            color: 'red'
+          });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      }
+    };
+  </script>
+</template>

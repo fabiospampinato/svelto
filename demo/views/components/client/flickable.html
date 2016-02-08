@@ -1,0 +1,48 @@
+
+<!-- FLICKABLE -->
+
+<template name="flickable">
+
+  {{{sw.divider "Target"}}}
+
+  <div class="centerer">
+    <div class="square outlined target" style="height: 300px; width: 75%;"></div>
+  </div>
+
+  {{> flickable_init}}
+
+  {{> flickable_actions}}
+
+</template>
+
+<!-- INIT -->
+
+<template name="flickable_init">
+
+  <script>
+    $('.target').flickable ({
+      callbacks: {
+        flick: function ( event, data ) {
+          $.noty ( 'Orientation: ' + data.orientation + ', direction: ' + data.direction );
+        }
+      }
+    });
+  </script>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="flickable_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+
+  <script>
+    function api ( action ) {
+      $('.target').flickable ( action );
+    }
+  </script>
+
+</template>

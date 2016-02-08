@@ -1,0 +1,37 @@
+
+<!-- NOTIFICATION -->
+
+<template name="notification">
+
+  {{{sw.divider "Notifications"}}}
+
+  {{> notification_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="notification_actions">
+
+  <div class="multiple actions">
+    <div onclick="notification_trigger ()" class="button outlined">Trigger</div>
+    <div onclick="notification_trigger_delayed ( 2000 )" class="button outlined">Trigger delayed (2s)</div>
+  </div>
+
+  <script>
+    function notification_trigger() {
+      $.notification({
+        title: "Test title",
+        body: "Test description",
+        img: "/sample.png"
+      });
+    }
+
+    function notification_trigger_delayed(delay) {
+      setTimeout(function() {
+        notification_trigger();
+      }, delay);
+    }
+  </script>
+
+</template>

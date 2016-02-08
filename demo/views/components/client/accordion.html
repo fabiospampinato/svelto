@@ -1,0 +1,65 @@
+
+<!-- ACCORDION -->
+
+<template name="accordion">
+
+  {{{sw.divider "Accordion"}}}
+
+  <div class="accordion">
+    {{> expander_base}}
+    {{> expander_button}}
+    {{> expander_open}}
+  </div>
+
+  {{> accordion_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="accordion_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div class="multiple joined">
+      <input placeholder="Expander index..." name="index" type="number" class="outlined">
+      <div onclick="api_get ()" class="button outlined">isOpen</div>
+      <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
+      <div onclick="api ( 'open' )" class="button outlined">Open</div>
+      <div onclick="api ( 'close' )" class="button outlined">Close</div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Actions"}}}
+
+  {{{sw.checkAction "Multiple" "toggle_multiple ()"}}}
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get () {
+      $.noty(String ( $('.accordion').accordion ( 'isOpen', Number ( getValue ( 'index' ) ) ) ));
+    }
+
+    function api ( action ) {
+      $('.accordion').accordion ( action, Number ( getValue ( 'index' ) ) );
+    }
+
+    function toggle_multiple () {
+      $('.accordion').accordion ( 'option', 'multiple', !$('.accordion').accordion ( 'option', 'multiple' ) );
+    }
+  </script>
+
+</template>

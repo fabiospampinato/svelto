@@ -1,0 +1,61 @@
+
+<!-- COOKIE -->
+
+<template name="cookie">
+
+  {{{sw.divider "Cookie"}}}
+
+  <div class="multiple equal joined">
+    <input name="cookie_key" placeholder="Key..." class="outlined">
+    <input name="cookie_value" placeholder="Value..." class="outlined">
+    <input name="cookie_end" placeholder="End..." class="outlined">
+    <input name="cookie_path" placeholder="Path..." class="outlined">
+    <input name="cookie_domain" placeholder="Domain..." class="outlined">
+    <input name="cookie_secure" placeholder="Secure..." class="outlined">
+  </div>
+
+  {{> cookie_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="cookie_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    <div onclick="cookie_get ()" class="button outlined">Get</div>
+    <div onclick="cookie_set ()" class="button outlined">Set</div>
+    <div onclick="cookie_remove ()" class="button outlined">Remove</div>
+    <div onclick="cookie_has ()" class="button outlined">Has</div>
+    <div onclick="cookie_keys ()" class="button outlined">Keys</div>
+  </div>
+
+  <script>
+    function cookie_input(name) {
+      return $('input[name="cookie_' + name + '"]').val();
+    }
+
+    function cookie_get() {
+      $.noty('' + $.cookie.get(cookie_input('key')));
+    }
+
+    function cookie_set() {
+      $.cookie.set(cookie_input('key'), cookie_input('value'), Number(cookie_input('end')), cookie_input('path'), cookie_input('domain'), cookie_input('secure'));
+    }
+
+    function cookie_remove() {
+      $.cookie.remove(cookie_input('key'), cookie_input('path'), cookie_input('domain'));
+    }
+
+    function cookie_has() {
+      $.noty('' + $.cookie.has(cookie_input('key')));
+    }
+
+    function cookie_keys() {
+      $.noty($.cookie.keys().join(' - '));
+    }
+  </script>
+
+</template>

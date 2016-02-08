@@ -1,0 +1,213 @@
+
+<!-- POSITIONATE -->
+
+<template name="positionate">
+
+  {{{sw.divider "Anchor"}}}
+
+  <div class="square-sample anchor draggable" style="z-index: 1000; cursor: move;">
+    <p>{{sample.text 10}}</p>
+  </div>
+
+  <div class="square-sample positionable secondary" style="position:fixed; top:0; left: 0; z-index: 1001;">
+    <p>{{sample.text 10}}</p>
+  </div>
+
+  {{> positionate_positionate}}
+
+  {{> positionate_alignment}}
+
+  {{> positionate_strict}}
+
+  {{> positionate_sizes}}
+
+</template>
+
+<!-- POSITIONATE -->
+
+<template name="positionate_positionate">
+
+  {{sw.noty "The anchor is draggable"}}
+
+  {{{sw.divider "Positionate"}}}
+
+  <div class="multiple">
+    {{{sw.checkbox "Live"}}}
+    <div onclick="positionate2anchor ()" class="button outlined">Auto</div>
+    <div onclick="positionate2anchor ( 'top' )" class="button outlined">Top</div>
+    <div onclick="positionate2anchor ( 'bottom' )" class="button outlined">Bottom</div>
+    <div onclick="positionate2anchor ( 'left' )" class="button outlined">Left</div>
+    <div onclick="positionate2anchor ( 'right' )" class="button outlined">Right</div>
+    <div onclick="positionate2axis ( 'x' )" class="button outlined">X</div>
+    <div onclick="positionate2axis ( 'y' )" class="button outlined">Y</div>
+    <div onclick="positionate2diraxis ( 'top', 'x' )" class="button outlined">Top - X</div>
+    <div onclick="positionate2diraxis ( 'left', 'y' )" class="button outlined">Left - Y</div>
+    <div class="multiple joined">
+      <input name="x" placeholder="X axis..." class="outlined">
+      <input name="y" placeholder="Y axis..." class="outlined">
+      <div onclick="positionate2coordinates ()" class="button secondary outlined">Coordinates</div>
+    </div>
+  </div>
+
+  <script>
+    var $anchor = $('.anchor'),
+        $positionable = $('.positionable');
+
+    $('.checkbox input').on( 'change', function () {
+      if ( $('.checkbox input').prop ( 'checked' ) ) {
+        positionateLive();
+        $anchor.on ( 'draggable:move', positionateLive );
+      } else {
+        $anchor.off ( 'draggable:move', positionateLive );
+      }
+    });
+
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function positionate2anchor(direction) {
+      $positionable.positionate({
+        alignment: {
+          x: alignment_x,
+          y: alignment_y
+        },
+        strict: strict,
+        $anchor: $anchor,
+        direction: direction
+      });
+    }
+
+    function positionate2axis(axis) {
+      $positionable.positionate({
+        alignment: {
+          x: alignment_x,
+          y: alignment_y
+        },
+        strict: strict,
+        $anchor: $anchor,
+        axis: axis
+      });
+    }
+
+    function positionate2diraxis(direction, axis) {
+      $positionable.positionate({
+        alignment: {
+          x: alignment_x,
+          y: alignment_y
+        },
+        strict: strict,
+        $anchor: $anchor,
+        axis: axis,
+        direction: direction
+      });
+    }
+
+    function positionate2coordinates() {
+      $positionable.positionate({
+        alignment: {
+          x: alignment_x,
+          y: alignment_y
+        },
+        strict: strict,
+        point: {
+          x: Number(getValue("x")),
+          y: Number(getValue("y"))
+        }
+      });
+    }
+
+    function positionateLive() {
+      $positionable.positionate({
+        alignment: {
+          x: alignment_x,
+          y: alignment_y
+        },
+        strict: strict,
+        $anchor: $anchor
+      });
+    }
+  </script>
+
+</template>
+
+<!-- ALIGNMENT -->
+
+<template name="positionate_alignment">
+
+  {{{sw.divider "Alignment"}}}
+
+  <div class="multiple">
+    <div class="multiple joined actions">
+      <div class="label compact gray">X</div>
+      {{{sw.radioAction "Left" "alignment_x" "set_x_alignment ( 'left' )"}}}
+      {{{sw.radioAction "Center" "alignment_x" "set_x_alignment ( 'center' )" true}}}
+      {{{sw.radioAction "Right" "alignment_x" "set_x_alignment ( 'right' )"}}}
+    </div>
+    <div class="multiple joined actions">
+      <div class="label compact gray">Y</div>
+      {{{sw.radioAction "Top" "alignment_y" "set_y_alignment ( 'top' )"}}}
+      {{{sw.radioAction "Center" "alignment_y" "set_y_alignment ( 'center' )" true}}}
+      {{{sw.radioAction "Bottom" "alignment_y" "set_y_alignment ( 'bottom' )"}}}
+    </div>
+  </div>
+
+  <script>
+    var alignment_x = 'center',
+        alignment_y = 'center';
+
+    function set_x_alignment ( new_alignment ) {
+      alignment_x = new_alignment;
+    }
+
+    function set_y_alignment ( new_alignment ) {
+      alignment_y = new_alignment;
+    }
+  </script>
+
+</template>
+
+<!-- STRICT -->
+
+<template name="positionate_strict">
+
+  {{{sw.divider "Strictness"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Adaptable" "strict" "set_strict ()" true}}}
+    {{{sw.radioAction "Strict" "strict" "set_strict ( true )"}}}
+
+  </div>
+
+  <script>
+    var strict;
+
+    function set_strict ( new_strict ) {
+      strict = new_strict;
+    }
+  </script>
+
+</template>
+
+<!-- SIZES -->
+
+<template name="positionate_sizes">
+
+  {{{sw.divider "Positionable size"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "XXX-Small" "size" "set_size ( 'xxxsmall' )"}}}
+    {{{sw.radioAction "Medium" "size" "set_size ( 'medium' )" true}}}
+    {{{sw.radioAction "XXX-Large" "size" "set_size ( 'xxxlarge' )"}}}
+  </div>
+
+  <script>
+    function set_size ( size ) {
+      var sizes = ['xxxsmall', 'medium', 'xxxlarge'];
+      for ( var i = 0, l = sizes.length; i < l; i++ ) {
+        $positionable.removeClass ( sizes[i] ).addClass ( size );
+      }
+    }
+  </script>
+
+</template>

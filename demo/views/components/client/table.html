@@ -1,0 +1,135 @@
+
+<!-- TABLE -->
+
+<template name="table">
+
+  {{{sw.divider "Table"}}}
+
+  <div class="container outlined">
+    <table class="table bordered">
+      <thead>
+        <tr>
+          <th class="text-center xs-1">Int</th>
+          <th>String</th>
+          <th>Date</th>
+          <th class="text-center">Options</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="100%">
+            <div class="multiple centered">
+              <div class="centerer">20 Rows - Page 3 of 5</div>
+              <div class="spacer"></div>
+              {{{sw.pagination current=2 total=5}}}
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr class="table-row-empty hidden">
+          <td colspan="100%">Empty</td>
+        </tr>
+        <tr>
+          <td class="text-center">1</td>
+          <td>Foo</td>
+          <td>753462000</td>
+          <td class="text-center">-</td>
+        </tr>
+        <tr>
+          <td class="text-center">2</td>
+          <td>Bar</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="button outlined small disabled compact">
+              <i class="icon">settings</i>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">3</td>
+          <td>Baz</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="button outlined small compact">
+              <i class="icon">settings</i>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">4</td>
+          <td>Qux</td>
+          <td>November 16th, 1993</td>
+          <td class="text-center">
+            <div class="multiple joined">
+              <div class="button outlined small">Button</div>
+              <div class="button outlined small compact">
+                <i class="icon">more_vert</i>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {{> table_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="table_actions">
+
+  {{{sw.divider "Remove"}}}
+
+  <div class="multiple">
+    <div onclick="remove_element ( 'table.table thead' )" class="button outlined">Header</div>
+    <div onclick="remove_element ( 'table.table tbody' )" class="button outlined">Body</div>
+    <div onclick="remove_element ( 'table.table tfoot' )" class="button outlined">Footer</div>
+    <div onclick="clear_table ()" class="button outlined">Rows</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple">
+    {{{sw.checkAction "Outlined" "toggle_class( 'outlined' )"}}}
+    {{{sw.checkAction "Compact" "toggle_class( 'compact' )"}}}
+    {{{sw.checkAction "Collapse" "toggle_class( 'collapse' )"}}}
+    {{{sw.checkAction "Equal" "toggle_class( 'equal' )"}}}
+    {{{sw.checkAction "Separated" "toggle_class( 'separated' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class( 'bordered' )" true}}}
+    {{{sw.checkAction "Striped" "toggle_class( 'striped' )"}}}
+    {{{sw.checkAction "Hoverable" "toggle_class( 'hoverable' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+    {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('table.table').toggleClass(css_class);
+    }
+
+    function enable () {
+      $('table.table').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('table.table').addClass ( 'disabled' );
+    }
+
+    function clear_table () {
+      $('table.table').tableHelper ( 'clear' );
+    }
+
+    function remove_element ( selector ) {
+      $(selector).remove();
+    }
+  </script>
+
+</template>

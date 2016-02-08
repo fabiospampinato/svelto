@@ -1,0 +1,110 @@
+
+<!-- PROGRESSBAR -->
+
+<template name="progressbar">
+
+  {{{sw.divider "Base"}}}
+
+  <div class="container outlined">
+    {{{sw.progressbar}}}
+    {{{sw.progressbar 33}}}
+    {{{sw.progressbar 45.12}}}
+    {{{sw.progressbar 45.12 2}}}
+  </div>
+
+  {{> progressbar_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="progressbar_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div class="multiple joined">
+      <input name="value" placeholder="Value..." class="outlined">
+      <div onclick="api_set ()" class="button outlined secondary">Set</div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    <div class="multiple joined">
+      {{{sw.radioAction "Normal" "size" "set_size ()" true}}}
+      {{{sw.radioAction "Compact" "size" "set_size ( 'compact' )"}}}
+      {{{sw.radioAction "Slim" "size" "set_size ( 'slim' )"}}}
+    </div>
+    {{{sw.checkAction "Labeled" "toggle_class ( 'labeled' )"}}}
+    {{{sw.checkAction "Striped" "toggle_class ( 'striped' )"}}}
+    {{{sw.checkAction "Indeterminate" "toggle_class ( 'indeterminate' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function toggle_class(css_class) {
+      $('.progressbar').toggleClass(css_class);
+    }
+
+    function api_get() {
+      _.each($('.container'), function(container) {
+        var gets = [];
+        _.each($(container).find('.progressbar'), function(progressbar) {
+          gets.push($(progressbar).progressbar('get'));
+        });
+        if (gets.length > 0) {
+          $.noty(gets.join(' - '));
+        }
+      });
+    }
+
+    function api_set() {
+      var value = Number ( getValue ( 'value') );
+      $(".progressbar").each(function() {
+        $(this).progressbar('set', value);
+      });
+    }
+
+    function api ( action) {
+      $('.progressbar').progressbar ( action );
+    }
+
+    function set_size ( size ) {
+      var sizes = ['compact', 'slim'];
+      for ( var i = 0, l = sizes.length; i < l; i++ ) {
+        $('.progressbar').removeClass ( sizes[i] ).addClass ( size );
+      }
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.progressbar').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

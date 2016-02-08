@@ -1,0 +1,201 @@
+
+<!-- CARD -->
+
+<template name="card">
+
+  {{{sw.divider "Card"}}}
+
+  <div class="card">
+    <div class="card-header green">Header</div>
+    <div class="card-block">Block</div>
+    <div class="card-footer olive">Footer</div>
+  </div>
+
+  {{{sw.divider "Card with attached buttons"}}}
+
+  <div class="card">
+    <div class="card-header button primary">Something</div>
+    <div class="card-block">Block</div>
+    <div class="card-footer button secondary">Footer</div>
+  </div>
+
+  {{{sw.divider "Card with attached multiple"}}}
+
+  <div class="card">
+    <div class="card-header multiple joined equal">
+      <div class="button primary">Primary</div>
+      <div class="button secondary">Secondary</div>
+      <div class="button tertiary">Tertiary</div>
+    </div>
+    <div class="card-block">Block</div>
+    <div class="card-footer multiple joined equal">
+      <div class="button red">Red</div>
+      <div class="button green">Green</div>
+      <div class="button blue">Blue </div>
+    </div>
+  </div>
+
+  {{{sw.divider "With image"}}}
+
+  <div class="multiple">
+    <div class="card xs-12 sm-6 md-3">
+      <div class="infobar small">
+        <div class="infobar-left">
+          <i class="icon xxxlarge">settings</i>
+        </div>
+        <div class="infobar-center">
+          <div class="infobar-title">Lorem</div>
+          <div class="infobar-subtitle">Lorem ipsum</div>
+        </div>
+        <div class="infobar-right">
+          <div class="button outlined compact">
+            <i class="icon">more_vert</i>
+          </div>
+        </div>
+      </div>
+      <img src="/sample-wide.jpg">
+      <div class="card-block">Block</div>
+      <div class="card-footer">Footer</div>
+    </div>
+    <div class="card xs-12 sm-6 md-3">
+      <div class="image-wrp">
+        {{{sample.imageWide}}}
+        <div class="image-caption top on-hover">Caption</div>
+      </div>
+      <div class="card-block">Block</div>
+      <div class="card-block">And another block</div>
+      <div class="card-block">And so on...</div>
+    </div>
+    <div class="card xs-12 sm-6 md-3">
+      <div class="image-wrp">
+        {{{sample.imageWide}}}
+        <div class="image-caption top transparent">
+          <div class="section-right">
+            <div class="button compact xsmall black">
+              <i class="icon">more_vert</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">Footer </div>
+    </div>
+    <div class="card xs-12 sm-6 md-3">
+      <div class="card-header">Header</div>
+      <img src="/sample-wide.jpg">
+      <div class="card-block">Block</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="card advanced">
+    <div class="card-header teal">
+      <div class="sections">
+        <div class="section-left">
+          <div class="multiple">
+            <div class="button xsmall compact outlined">
+              <i class="icon">thumb_up</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">thumb_down</i>
+            </div>
+          </div>
+        </div>
+        <div class="section-center">
+          <p>Header</p>
+        </div>
+        <div class="section-right">
+          <div class="multiple">
+            <div class="button xsmall compact outlined">
+              <i class="icon">menu</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">apps</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">refresh</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">more_vert</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      {{{sample.paragraph}}}
+      {{{sample.paragraph}}}
+    </div>
+    <div class="card-footer pink">Footer</div>
+  </div>
+
+  {{> card_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="card_actions">
+
+  {{{sw.divider "Remove"}}}
+
+  <div class="multiple actions">
+    <div class="button outlined" onclick="remove_element ( '.card .image-wrp, .card > img' )">Image</div>
+    <div class="button outlined" onclick="remove_element ( '.card-header' )">Header</div>
+    <div class="button outlined" onclick="remove_element ( '.card-block' )">Block</div>
+    <div class="button outlined" onclick="remove_element ( '.card-footer' )">Footer</div>
+  </div>
+
+  {{{sw.divider "Toggle outlined"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Card" "toggle_class ( '.card', 'outlined' )"}}}
+    {{{sw.checkAction "Image" "toggle_class ( '.card .image-wrp, .card > img', 'outlined' )"}}}
+    {{{sw.checkAction "Header" "toggle_class ( '.card-header', 'outlined' )"}}}
+    {{{sw.checkAction "Block" "toggle_class ( '.card-block', 'outlined' )"}}}
+    {{{sw.checkAction "Footer" "toggle_class ( '.card-footer', 'outlined' )"}}}
+  </div>
+
+  {{{sw.divider "Toggle compact"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Card" "toggle_class ( '.card', 'compact' )"}}}
+    {{{sw.checkAction "Header" "toggle_class ( '.card-header', 'compact' )"}}}
+    {{{sw.checkAction "Block" "toggle_class ( '.card-block', 'compact' )"}}}
+    {{{sw.checkAction "Footer" "toggle_class ( '.card-footer', 'compact' )"}}}
+  </div>
+
+  {{{sw.divider "Others"}}}
+
+  {{{sw.checkAction "Advanced height limited" "toggle_height_limit ()"}}}
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+    {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+  </div>
+
+  <script>
+    function toggle_class ( selector, css_class ) {
+      $(selector).toggleClass(css_class);
+    }
+
+    function enable () {
+      $('.card').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('.card').addClass ( 'disabled' );
+    }
+
+    function remove_element ( selector ) {
+      $(selector).remove();
+    }
+
+    function toggle_height_limit () {
+      $('.card.advanced').height ( $('.card.advanced').height () > 250 ? 250 : 'auto' );
+    }
+  </script>
+
+</template>

@@ -1,0 +1,63 @@
+
+<!-- SELECT -->
+
+<template name="select">
+
+  {{{sw.divider "Select"}}}
+
+  <div class="multiple">
+    <div class="button outlined select-toggler">
+      <div class="select-label">Select</div>
+      <i class="icon">reorder</i>
+      {{{sample.select}}}
+    </div>
+    <div class="button outlined compact select-toggler">
+      <i class="icon">reorder</i>
+      {{{sample.select}}}
+    </div>
+    <div class="button outlined compact select-toggler">
+      <i class="icon">settings</i>
+      {{{sample.select}}}
+    </div>
+    <div class="button outlined compact rounded select-toggler">
+      <i class="icon">settings</i>
+      {{{sample.select}}}
+    </div>
+  </div>
+
+  {{> select_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="select_actions">
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
+  </div>
+
+  <script>
+    function api (action) {
+      $('.select-toggler').selectToggler ( action );
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.select-toggler').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

@@ -1,0 +1,198 @@
+
+<!-- HELPERS -->
+
+<template name="helpers">
+
+  {{{sw.divider "Blurred"}}}
+
+  <div class="container outlined">
+    {{{sample.square "blurred"}}}
+  </div>
+
+  {{{sw.divider "Border"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "outlined b-a-0"}}}
+      {{{sample.square "outlined b-t-0"}}}
+      {{{sample.square "outlined b-r-0"}}}
+      {{{sample.square "outlined b-b-0"}}}
+      {{{sample.square "outlined b-l-0"}}}
+      {{{sample.square "outlined b-x-0"}}}
+      {{{sample.square "outlined b-y-0"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Border radius"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "outlined rounded"}}}
+      {{{sample.square "outlined smooth"}}}
+      {{{sample.square "outlined sharp"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Display"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "hidden"}}}
+      {{{sample.square "show"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Visibility"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "invisible"}}}
+      {{{sample.square "visible"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Float"}}}
+
+  <div class="container outlined">
+    {{{sample.square "no-margin float-left"}}}
+    {{{sample.square "no-margin float-right"}}}
+    {{{sample.square "invisible"}}}
+  </div>
+
+  {{{sw.divider "Text alignment"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-left"}}}
+      {{{sample.square "text-center"}}}
+      {{{sample.square "text-right"}}}
+      {{{sample.square "text-justify"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Text transformation"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-lowercase"}}}
+      {{{sample.square "text-uppercase"}}}
+      {{{sample.square "text-capitalize"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Text others"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-nowrap"}}}
+      <p class="truncate">{{sample.text}}</p>
+    </div>
+  </div>
+
+  {{{sw.divider "Padding"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "p-a-0"}}}
+      {{{sample.square "p-t-0"}}}
+      {{{sample.square "p-r-0"}}}
+      {{{sample.square "p-b-0"}}}
+      {{{sample.square "p-l-0"}}}
+      {{{sample.square "p-x-0"}}}
+      {{{sample.square "p-y-0"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Margin"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "m-a-0"}}}
+      {{{sample.square "m-t-0"}}}
+      {{{sample.square "m-r-0"}}}
+      {{{sample.square "m-b-0"}}}
+      {{{sample.square "m-l-0"}}}
+      {{{sample.square "m-x-0"}}}
+      {{{sample.square "m-y-0"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Overflow"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "overflow-hidden"}}}
+      {{{sample.square "overflow-visible"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Flip"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "flip-x"}}}
+      {{{sample.square "flip-y"}}}
+      {{{sample.square "flip"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Rotate"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "rotate-left"}}}
+      {{{sample.square "rotate-right"}}}
+      {{{sample.square "rotating"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Attached"}}}
+
+  <div class="container outlined">
+    <div data-value="25" class="progressbar slim attached-top">
+      <div class="progressbar-highlight"></div>
+    </div>
+    <div data-value="75" class="progressbar slim attached-bottom">
+      <div class="progressbar-highlight"></div>
+    </div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{{sw.divider "Grow"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      <div class="widget outlined outline-gray grow">Grow</div>
+      <div class="widget outlined outline-gray no-grow">No grow</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Shrink"}}}
+
+  <div class="container outlined">
+    <div class="multiple fluid">
+      <div class="widget outlined outline-gray xs-4 no-shrink">No shrink</div>
+      <div class="widget outlined outline-gray shrink">Shrink</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Others"}}}
+
+  <div class="container outlined">
+    <div class="multiple fluid">
+      <div class="centerer outlined outline-gray" style="padding: 20px;">
+        {{{sample.square}}}
+      </div>
+      <div class="spacer outlined outline-gray">Spacer</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Scroll to top"}}}
+
+  <div class="button outlined scroll-to-top">Scroll to top</div>
+
+  {{{sw.divider "Fullscreen"}}}
+
+  <div class="button outlined fullscreen-toggler">Toggle fullscreen</div>
+
+</template>

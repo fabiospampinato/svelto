@@ -1,0 +1,123 @@
+
+<!-- INFOBAR -->
+
+<template name="infobar">
+
+  {{{sw.divider "Closable"}}}
+
+  <div class="infobar outlined">
+    <div class="infobar-left">
+      <i class="icon xxxlarge">settings</i>
+    </div>
+    <div class="infobar-center">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <div class="infobar-subtitle">{{sample.text 8}}</div>
+    </div>
+    <div class="infobar-right">
+      <div class="button red outlined infobar-closer compact">
+        <i class="icon">clear</i>
+      </div>
+    </div>
+  </div>
+
+  {{{sw.divider "Outside"}}}
+
+  <div class="infobar outlined limited">
+    <div class="infobar-title">{{sample.text 8}}</div>
+  </div>
+  <div class="infobar outlined">
+    <div class="infobar-title">{{sample.text 8}}</div>
+    <div class="infobar-subtitle">{{sample.text 8}}</div>
+  </div>
+  <div class="infobar outlined">
+    <div class="infobar-left">
+      <i class="icon xxxlarge">settings</i>
+    </div>
+    <div class="infobar-center">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <ul>
+        <li>{{sample.text 5}}</li>
+        <li>{{sample.text 5}}</li>
+        <ul>
+          <li>{{sample.text 5}}</li>
+        </ul>
+        <li>{{sample.text 5}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="infobar outlined">
+    <div class="infobar-left">
+      <i class="icon xxxlarge">settings</i>
+    </div>
+    <div class="infobar-center">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <div class="infobar-subtitle">{{sample.text 8}}</div>
+    </div>
+    <div class="infobar-right">
+      <div class="button outlined compact">
+        <i class="icon">more_vert</i>
+      </div>
+    </div>
+  </div>
+  <div class="infobar outlined">
+    <div class="infobar-left">
+      <i class="icon xxxlarge">settings</i>
+    </div>
+    <div class="infobar-center">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <div class="infobar-subtitle">{{sample.text 8}}</div>
+    </div>
+    <div class="infobar-right">
+      <div class="button outlined compact">
+        <i class="icon">more_vert</i>
+      </div>
+    </div>
+    <div class="infobar-bottom">
+      {{{sample.paragraph}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Inside"}}}
+
+  <div class="container outlined">
+    <div class="infobar teal">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <div class="infobar-subtitle">{{sample.text 8}}</div>
+    </div>
+    <div class="infobar inset">
+      <div class="infobar-title">{{sample.text 8}}</div>
+      <div class="infobar-subtitle">{{sample.text 8}}</div>
+    </div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> infobar_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="infobar_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'close' )" class="button outlined">Close</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api (action) {
+      $('.infobar').infobar(action);
+    }
+  </script>
+
+</template>

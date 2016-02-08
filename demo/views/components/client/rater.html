@@ -1,0 +1,45 @@
+
+<!-- RATER -->
+
+<template name="rater">
+
+  {{{sw.divider "Rater"}}}
+
+  <div class="container outlined">
+    {{{sw.rater 0 5}}}
+  </div>
+  <div class="container outlined">
+    {{{sw.rater 3 5}}}
+  </div>
+  <div class="container outlined">
+    {{{sw.rater 1.8 5}}}
+  </div>
+  <div class="container outlined">
+    {{{sw.rater 2 10}}}
+  </div>
+  <div class="container outlined">
+    {{{sw.rater 7.5 10}}}
+  </div>
+
+  {{> rater_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="rater_actions">
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('.rater').rater ( action );
+    }
+  </script>
+
+</template>

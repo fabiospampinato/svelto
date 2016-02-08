@@ -1,0 +1,113 @@
+
+<!-- TEXTAREA -->
+
+<template name="textarea">
+
+  {{{sw.divider "Base"}}}
+
+  <textarea placeholder="Base"></textarea>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      <textarea placeholder="Primary" class="primary">Primary</textarea>
+      <textarea placeholder="Secondary" class="secondary">Secondary</textarea>
+      <textarea placeholder="Tertiary" class="tertiary">Tertiary</textarea>
+      <textarea placeholder="Quaternary" class="quaternary">Quaternary</textarea>
+      <textarea placeholder="White" class="white">White</textarea>
+      <textarea placeholder="Gray" class="gray">Gray</textarea>
+      <textarea placeholder="Black" class="black">Black</textarea>
+      <textarea placeholder="Yellow" class="yellow">Yellow</textarea>
+      <textarea placeholder="Olive" class="olive">Olive</textarea>
+      <textarea placeholder="Green" class="green">Green</textarea>
+      <textarea placeholder="Blue" class="blue">Blue</textarea>
+      <textarea placeholder="Violet" class="violet">Violet</textarea>
+      <textarea placeholder="Orange" class="orange">Orange</textarea>
+      <textarea placeholder="Purple" class="purple">Purple</textarea>
+      <textarea placeholder="Red" class="red">Red</textarea>
+      <textarea placeholder="Pink" class="pink">Pink</textarea>
+      <textarea placeholder="Teal" class="teal">Teal</textarea>
+      <textarea placeholder="Brown" class="brown">Brown</textarea>
+      <textarea placeholder="Error" class="error">Error</textarea>
+      <textarea placeholder="Warning" class="warning">Warning</textarea>
+      <textarea placeholder="Success" class="success">Success</textarea>
+      <textarea placeholder="Transparent" class="transparent">Transparent</textarea>
+      <textarea placeholder="Inherit" class="inherit">Inherit</textarea>
+      <textarea placeholder="Base" class="base">Base</textarea>
+    </div>
+  </div>
+
+  {{{sw.divider "Fluid"}}}
+
+  <div class="container outlined">
+    <textarea placeholder="Fluid" class="fluid"></textarea>
+  </div>
+
+  {{{sw.divider "Unresizable"}}}
+
+  <div class="container outlined">
+    <textarea placeholder="Unresizable" class="unresizable"></textarea>
+  </div>
+
+  {{> textarea_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="textarea_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
+    {{{sw.checkAction "Disabled" "toggle_disable ()"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+      {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+    </div>
+    {{{sw.checkAction "Read only" "toggle_attr ( 'readonly' )"}}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('textarea').toggleClass(css_class);
+    }
+
+    function toggle_attr ( attr ) {
+      if ( _.isUndefined ( $('textarea').attr ( attr ) ) ) {
+        $('textarea').attr ( attr, attr );
+      } else {
+        $('textarea').removeAttr ( attr );
+      }
+    }
+
+    function enable () {
+      $('textarea').removeClass ( 'disabled' ).removeAttr ( 'disabled' );
+    }
+
+    function disable () {
+      $('textarea').addClass ( 'disabled' ).attr ( 'disabled', 'disabled' );
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('textarea' ).removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

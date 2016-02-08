@@ -1,0 +1,92 @@
+
+<!-- FLIPPABLE -->
+
+<template name="flippable">
+
+  {{{sw.divider "Horizontal"}}}
+
+  <div class="flippable text-center">
+    <div class="flippable-front">
+      <div class="container outlined red">
+        <p>Front</p>
+        <div class="button flippable-flipper">Flip</div>
+      </div>
+    </div>
+    <div class="flippable-back">
+      <div class="container outlined blue">
+        <p>Back</p>
+        <div class="button flippable-flipper">Flip</div>
+      </div>
+    </div>
+  </div>
+
+  {{{sw.divider "Vertical"}}}
+
+  <div class="flippable vertical text-center">
+    <div class="flippable-front">
+      <div class="container outlined red">
+        <p>Front</p>
+        <div class="button flippable-flipper">Flip</div>
+      </div>
+    </div>
+    <div class="flippable-back">
+      <div class="container outlined blue">
+        <p>Back</p>
+        <div class="button flippable-flipper">Flip</div>
+      </div>
+    </div>
+  </div>
+
+  {{> flippable_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="flippable_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'flip' )" class="button outlined">Flip</div>
+    <div onclick="api ( 'front' )" class="button outlined">Front</div>
+    <div onclick="api ( 'back' )" class="button outlined">Back</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Size"}}}
+
+  <div class="multiple joined actions">
+    <input placeholder="Width..." name="width" value="100" class="outlined">
+    <div class="label compact gray">x</div>
+    <input placeholder="Height..." name="height" value="100" class="outlined">
+    <div onclick="set_size ()" class="button outlined">Set</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api(action) {
+      $('.flippable').flippable(action);
+    }
+
+    function set_size(width, height) {
+      $(".flippable").css({
+        width: getValue ( 'width' ),
+        height: getValue ( 'height' )
+      });
+    }
+    set_size ();
+  </script>
+
+</template>

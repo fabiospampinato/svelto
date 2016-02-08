@@ -1,0 +1,16 @@
+
+<!-- RAISABLE -->
+
+<template name="raisable">
+
+  {{{sw.divider "Raisables"}}}
+
+  <div class="multiple centered">
+    {{#each sw.times 25 0}}
+      <div class="centerer" style="width: 150px; height: 150px;">
+        <div class="button z-depth-{{this}} raisable">{{this}}</div>
+      </div>
+    {{/each}}
+  </div>
+
+</template>

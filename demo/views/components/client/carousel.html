@@ -1,0 +1,122 @@
+
+<!-- CAROUSEL -->
+
+<template name="carousel">
+
+  {{{sw.divider "Carousel"}}}
+
+  <div class="carousel">
+    <div class="button compact rounded white z-depth-2 carousel-previous">
+      <i class="icon">chevron_left</i>
+    </div>
+    <div class="button compact rounded white z-depth-2 carousel-next">
+      <i class="icon">chevron_right</i>
+    </div>
+    <div class="carousel-indicators">
+      <div class="carousel-indicator"></div>
+      <div class="carousel-indicator"></div>
+      <div class="carousel-indicator"></div>
+      <div class="carousel-indicator"></div>
+      <div class="carousel-indicator"></div>
+    </div>
+    <div class="carousel-items">
+      <div class="container black centerer">Hello world!</div>
+      <div class="container primary centerer">1</div>
+      <div class="container secondary centerer">2</div>
+      <div class="container tertiary centerer">3</div>
+      <div class="container quaternary centerer">4</div>
+    </div>
+  </div>
+
+  {{> carousel_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="carousel_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div class="multiple joined">
+      <div onclick="api ( 'previous' )" class="button outlined compact">
+        <i class="icon">chevron_left</i>
+      </div>
+      <div class="label outlined">Slide</div>
+      <div onclick="api ( 'next' )" class="button outlined compact">
+        <i class="icon">chevron_right</i>
+      </div>
+    </div>
+    <div class="multiple joined">
+      <div onclick="api ( 'play' )" class="button outlined compact">
+        <i class="icon">play_arrow</i>
+      </div>
+      <div onclick="api ( 'pause' )" class="button outlined compact">
+        <i class="icon">pause</i>
+      </div>
+      <div onclick="api ( 'stop' )" class="button outlined compact">
+        <i class="icon">stop</i>
+      </div>
+    </div>
+    <div class="multiple joined">
+      <input name="index" placeholder="Page index..." class="outlined">
+      <div onclick="api_set ()" class="button outlined secondary">Set</div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Slide" "effect" "set_effect ( 'slide' )" true}}}
+      {{{sw.radioAction "Slide vertical" "effect" "set_effect ( 'slide-vertical' )"}}}
+      {{{sw.radioAction "Fade" "effect" "set_effect ( 'fade' )"}}}
+    </div>
+    {{{sw.checkAction "Inset" "toggle_inset ()"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get () {
+      $.noty(String($('.carousel').carousel('get')));
+    }
+
+    function api_set () {
+      $('.carousel').carousel('set', Number(getValue('index')));
+    }
+
+    function api ( action ) {
+      $('.carousel').carousel(action);
+    }
+
+    function set_effect ( effect ) {
+      var effects = ['slide', 'slide-vertical', 'fade'];
+      for ( var i = 0, l = effects.length; i < l; i++ ) {
+        $('.carousel').removeClass ( effects[i] );
+      }
+      $('.carousel').addClass ( effect );
+    }
+
+    function toggle_inset () {
+      var isInset = $('.carousel').hasClass ( 'inset' );
+      $('.carousel').toggleClass ( 'inset', !isInset );
+      $('.carousel > .carousel-previous, .carousel > .carousel-next').toggleClass ( 'button compact rounded white z-depth-2', isInset );
+      $('.carousel > .carousel-previous > i.icon, .carousel > .carousel-next > i.icon').toggleClass ( 'hidden', !isInset );
+    }
+  </script>
+
+</template>

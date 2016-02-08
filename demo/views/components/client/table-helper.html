@@ -1,0 +1,123 @@
+
+<!-- TABLE HELPER -->
+
+<template name="table-helper">
+
+  {{{sw.divider "Table"}}}
+
+  <div class="container outlined">
+    <table class="table bordered">
+      <thead>
+        <tr>
+          <th>First</th>
+          <th>Second</th>
+          <th>Third</th>
+          <th>Fourth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row-empty hidden">
+          <td colspan="100%">Empty</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {{> table_helper_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="table_helper_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple">
+    <div onclick="table_init()" class="button outlined">Init</div>
+    <div class="multiple joined">
+      <input name="id_add" placeholder="ID..." class="white outlined no-floating">
+      <input name="first_add" placeholder="First.." class="white outlined no-floating">
+      <input name="second_add" placeholder="Second..." class="white outlined no-floating">
+      <input name="third_add" placeholder="Third..." class="white outlined no-floating">
+      <input name="fourth_add" placeholder="Foruth..." class="white outlined no-floating">
+      <div onclick="table_row_add ()" class="button primary outlined">Add</div>
+    </div>
+    <div class="multiple joined">
+      <input name="id_update" placeholder="ID..." class="white outlined no-floating">
+      <input name="first_update" placeholder="First.." class="white outlined no-floating">
+      <input name="second_update" placeholder="Second..." class="white outlined no-floating">
+      <input name="third_update" placeholder="Third..." class="white outlined no-floating">
+      <input name="fourth_update" placeholder="Foruth..." class="white outlined no-floating">
+      <div onclick="table_row_update ()" class="button secondary outlined">Update</div>
+    </div>
+    <div class="multiple joined">
+      <input name="id_remove" placeholder="ID..." class="white outlined no-floating">
+      <div onclick="table_row_remove ()" class="button red outlined">Remove</div>
+    </div>
+    <div onclick="table_clear ()" class="button black outlined">Clear</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    var tableHelper;
+
+    function table_init() {
+      tableHelper = $('table').tableHelper('instance');
+    }
+
+    function table_row_add() {
+      if (tableHelper) {
+        var id = $('input[name="id_add"]').val(),
+        first = $('input[name="first_add"]').val(),
+        second = $('input[name="second_add"]').val(),
+        third = $('input[name="third_add"]').val(),
+        fourth = $('input[name="fourth_add"]').val();
+        tableHelper.add(id, first, second, third, fourth);
+      } else {
+        $.noty('You should init the tableHelper before');
+      }
+    }
+
+    function table_row_update() {
+      if (tableHelper) {
+        var id = $('input[name="id_update"]').val(),
+        first = $('input[name="first_update"]').val(),
+        second = $('input[name="second_update"]').val(),
+        third = $('input[name="third_update"]').val(),
+        fourth = $('input[name="fourth_update"]').val();
+        tableHelper.update(id, first, second, third, fourth);
+      } else {
+        $.noty('You should init the tableHelper before');
+      }
+    }
+
+    function table_row_remove() {
+      if (tableHelper) {
+        var id = $('input[name="id_remove"]').val();
+        tableHelper.remove(id);
+      } else {
+        $.noty('You should init the tableHelper before');
+      }
+    }
+
+    function table_clear() {
+      if (tableHelper) {
+        tableHelper.clear();
+      } else {
+        $.noty('You should init the tableHelper before');
+      }
+    }
+
+    function api ( action ) {
+      $('table.table').tableHelper ( action );
+    }
+  </script>
+
+</template>

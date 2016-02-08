@@ -1,0 +1,88 @@
+
+<!-- SPINNER OVERLAY -->
+
+<template name="spinner-overlay">
+
+  {{{sw.divider "Overlayerables"}}}
+
+  <div class="container outlined overlayerable">
+    {{{sample.paragraph}}}
+  </div>
+
+  <div class="card advanced outlined overlayerable">
+    <div class="card-header outlined teal">
+      <div class="sections">
+        <div class="section-left">
+          <div class="multiple">
+            <div class="button compact xsmall">
+              <i class="icon">thumb_down</i>
+            </div>
+            <div class="button compact xsmall">
+              <i class="icon">thumb_up</i>
+            </div>
+          </div>
+        </div>
+        <div class="section-center forced">
+          <p>Header</p>
+        </div>
+        <div class="section-right">
+          <div class="multiple">
+            <div class="button compact xsmall">
+              <i class="icon">apps</i>
+            </div>
+            <div class="button compact xsmall">
+              <i class="icon">menu</i>
+            </div>
+            <div class="button compact xsmall">
+              <i class="icon">more_vert</i>
+            </div>
+            <div class="button compact xsmall">
+              <i class="icon">refresh</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      {{{sample.paragraph}}}
+    </div>
+    <div class="card-footer outlined pink">Footer</div>
+  </div>
+
+  {{> spinnerOverlay_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="spinnerOverlay_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
+    <div onclick="api ( 'open' )" class="button outlined">Open</div>
+    <div onclick="api ( 'close' )" class="button outlined">Close</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get() {
+      var gets = _.map($('.overlayerable'), function(overlayerable) {
+        return $(overlayerable).spinnerOverlay('isOpen');
+      });
+      $.noty(gets.join(' - '));
+    }
+
+    function api(action) {
+      $('.overlayerable').spinnerOverlay(action);
+    }
+  </script>
+
+</template>

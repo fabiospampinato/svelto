@@ -1,0 +1,77 @@
+
+<!-- TIMER -->
+
+<template name="timer">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    <div class="multiple joined">
+      <input value="300" name="milliseconds" placeholder="Milliseconds..." class="outlined">
+      {{{sw.checkbox "Autostart" "autostart"}}}
+      <div onclick="timer_set ()" class="button outlined">Set</div>
+    </div>
+    <div class="multiple joined">
+      <input value="1000" name="milliseconds_once" placeholder="Milliseconds..." class="outlined">
+      <div onclick="timer_once ()" class="button outlined">Once</div>
+    </div>
+    <div onclick="timer_play ()" class="button outlined">Play</div>
+    <div onclick="timer_pause ()" class="button outlined">Pause</div>
+    <div onclick="timer_stop ()" class="button outlined">Stop</div>
+    <div onclick="timer_toggle ()" class="button outlined">Toggle</div>
+    <div onclick="timer_reset ()" class="button outlined">Reset</div>
+    <div onclick="timer_go ()" class="button outlined">Go</div>
+    <div onclick="timer_remaining ()" class="button outlined">Remaining</div>
+  </div>
+
+  <script>
+    var timer = false;
+
+    function timer_callback() {
+      $.noty({
+        body: 'Timer executed!',
+        color: 'green'
+      });
+    }
+
+    function timer_set() {
+      var milliseconds = Number($('input[name="milliseconds"]').val()),
+        autostart = $('input[name="autostart"]').prop('checked');
+      timer = new Timer(timer_callback, milliseconds, autostart);
+    }
+
+    function timer_once() {
+      var milliseconds = Number($('input[name="milliseconds_once"]').val());
+      timer.once(milliseconds);
+    }
+
+    function timer_play() {
+      timer.play();
+    }
+
+    function timer_pause() {
+      timer.pause();
+    }
+
+    function timer_stop() {
+      timer.stop();
+    }
+
+    function timer_toggle() {
+      timer.toggle();
+    }
+
+    function timer_reset() {
+      timer.reset();
+    }
+
+    function timer_go() {
+      timer.go();
+    }
+
+    function timer_remaining() {
+      $.noty('Remaining: ' + timer.remaining());
+    }
+  </script>
+
+</template>

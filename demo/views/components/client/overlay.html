@@ -1,0 +1,160 @@
+
+<!-- OVERLAY -->
+
+<template name="overlay">
+
+  {{{sw.divider "Overlay"}}}
+
+  <div class="container outlined">
+    <div class="overlay container">
+      <p>{{sample.text}}</p>
+    </div>
+    {{{sample.paragraph}}}
+  </div>
+
+  <div class="card advanced outlined">
+    <div class="overlay centerer">
+      <div class="xxlarge">
+        <i class="icon xxxxlarge">thumb_up</i>
+      </div>
+    </div>
+    <div class="card-header outlined teal">
+      <div class="sections">
+        <div class="section-left">
+          <div class="multiple">
+            <div class="button xsmall compact outlined">
+              <i class="icon">thumb_up</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">thumb_down</i>
+            </div>
+          </div>
+        </div>
+        <div class="section-center">
+          <p>Header</p>
+        </div>
+        <div class="section-right">
+          <div class="multiple">
+            <div class="button xsmall compact outlined">
+              <i class="icon">menu</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">apps</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">refresh</i>
+            </div>
+            <div class="button xsmall compact outlined">
+              <i class="icon">more_vert</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      {{{sample.paragraph}}}
+    </div>
+    <div class="card-footer outlined pink">Footer</div>
+  </div>
+
+  <div class="container outlined">
+    <div class="overlay card advanced">
+      <div class="card-header outlined teal">
+        <div class="sections">
+          <div class="section-left">
+            <div class="multiple">
+              <div class="button xsmall compact outlined">
+                <i class="icon">thumb_up</i>
+              </div>
+              <div class="button xsmall compact outlined">
+                <i class="icon">thumb_down</i>
+              </div>
+            </div>
+          </div>
+          <div class="section-center">
+            <p>Header</p>
+          </div>
+          <div class="section-right">
+            <div class="multiple">
+              <div class="button xsmall compact outlined">
+                <i class="icon">menu</i>
+              </div>
+              <div class="button xsmall compact outlined">
+                <i class="icon">apps</i>
+              </div>
+              <div class="button xsmall compact outlined">
+                <i class="icon">refresh</i>
+              </div>
+              <div class="button xsmall compact outlined">
+                <i class="icon">more_vert</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        {{{sample.paragraph}}}
+      </div>
+      <div class="card-footer outlined pink">Footer</div>
+    </div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="card outlined">
+    <div id="overlay-togglerable" class="overlay centerer">
+      <div class="button secondary overlay-closer">Closer</div>
+    </div>
+    <div class="card-block">
+      {{{sample.paragraph}}}
+    </div>
+    <div class="card-footer outlined centerer">
+      <div class="button primary overlay-toggler" data-target="#overlay-togglerable">Trigger</div>
+    </div>
+  </div>
+
+  {{> overlay_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="overlay_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
+    <div onclick="api ( 'open' )" class="button outlined">Open</div>
+    <div onclick="api ( 'close' )" class="button outlined">Close</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Dimmer" "toggle_class ( 'dimmer' )"}}}
+    {{{sw.checkAction "Blurrer" "toggle_class ( 'blurrer' )"}}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('.overlay').toggleClass(css_class);
+    }
+
+    function api_get() {
+      var gets = _.map($('.overlay'), function(overlay) {
+        return $(overlay).overlay('isOpen');
+      });
+      $.noty(gets.join(' - '));
+    }
+
+    function api(action) {
+      $('.overlay').overlay(action);
+    }
+  </script>
+
+</template>

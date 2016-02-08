@@ -1,0 +1,72 @@
+
+<!-- SWITCH -->
+
+<template name="switch">
+
+  {{{sw.divider "Switch"}}}
+
+  <div class="container outlined">
+    {{{sw.switch color-on="secondary" color-off="gray"}}}
+    {{{sw.switch color-on="secondary" color-off="gray" icon-on="add"}}}
+    {{{sw.switch color-on="green" color-off="red"}}}
+    {{{sw.switch color-on="green" color-off="red" icon-on="favorite" icon-off="favorite_outline"}}}
+  </div>
+
+  {{> switch_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="switch_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
+    <div onclick="api ( 'check' )" class="button outlined">Check</div>
+    <div onclick="api ( 'uncheck' )" class="button outlined">Uncheck</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get() {
+      var gets = _.map($('.switch'), function(switchEle) {
+        return $(switchEle).switch('get');
+      });
+      $.noty(gets.join(' - '));
+    }
+
+    function api(action) {
+      $('.switch').switch(action);
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.switch').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

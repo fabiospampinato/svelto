@@ -1,0 +1,373 @@
+
+<!-- MULTIPLE -->
+
+<template name="multiple">
+
+  {{{sw.divider "Multiple"}}}
+
+  <div class="multiple">
+    <div class="container outlined">1</div>
+    <div class="container outlined">2</div>
+    <div class="container outlined">3</div>
+    <div class="container outlined">4</div>
+    <div class="container outlined">5</div>
+    <div class="container outlined">6</div>
+    <div class="container outlined">7</div>
+    <div class="container outlined">8</div>
+    <div class="container outlined">9</div>
+    <div class="container outlined">10</div>
+  </div>
+
+  <div class="multiple">
+    <div class="container outlined">Left</div>
+    <div class="container outlined">Center</div>
+    <div class="container outlined">Right</div>
+  </div>
+
+  <div class="multiple">
+    <div class="button outlined">Left</div>
+    <div class="button outlined">Center</div>
+    <div class="button outlined">Right</div>
+  </div>
+
+  <div class="multiple">
+    <div class="container outlined">
+      <p class="truncate">{{sample.text 100}}</p>
+    </div>
+    <div class="container outlined">
+      {{{sample.paragraph}}}
+    </div>
+    <div class="container outlined">Right</div>
+  </div>
+
+  {{> multiple_actions}}
+
+  {{> multiple_tricky}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="multiple_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Centered" "toggle_class ( 'centered' )"}}}
+    {{{sw.checkAction "Centered X" "toggle_class ( 'centered-x' )"}}}
+    {{{sw.checkAction "Centered Y" "toggle_class ( 'centered-y' )"}}}
+    {{{sw.checkAction "Limited" "toggle_class ( 'limited' )"}}}
+    {{{sw.checkAction "No wrap" "toggle_class ( 'no-wrap' )"}}}
+    {{{sw.checkAction "Fluid" "toggle_class ( 'fluid' )"}}}
+    {{{sw.checkAction "Equal" "toggle_class ( 'equal' )"}}}
+    {{{sw.checkAction "Joined" "toggle_class ( 'joined' )"}}}
+    {{{sw.checkAction "No separators" "toggle_class ( 'no-separators' )"}}}
+    {{{sw.checkAction "Stretched" "toggle_class ( 'stretched' )"}}}
+    {{{sw.checkAction "Vertical" "toggle_class ( 'vertical' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.multiple').not('header .multiple').not ( '.actions' ).not('.expander .multiple').toggleClass(css_class);
+    }
+  </script>
+
+</template>
+
+<!-- TRICKY -->
+
+<template name="multiple_tricky">
+
+  {{{sw.divider "Tricky cases"}}}
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Concat</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+
+      {{{sw.divider "Concat no wrap"}}}
+
+      <div class="multiple">
+        <div class="multiple no-wrap">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple no-wrap">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple no-wrap">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+
+      {{{sw.divider "Concat vertical"}}}
+
+      <div class="multiple">
+        <div class="multiple vertical fluid">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple vertical fluid">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple vertical fluid">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+
+      {{{sw.divider "Concat joined"}}}
+
+      <div class="multiple">
+        <div class="multiple joined">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple joined">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple joined">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Concat fixed</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+
+      {{{sw.divider "Concat no wrap"}}}
+
+      <div class="multiple fluid">
+        <div class="multiple no-wrap xs-4">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple no-wrap xs-4">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple no-wrap xs-4">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+
+      {{{sw.divider "Concat vertical"}}}
+
+      <div class="multiple fluid">
+        <div class="multiple vertical fluid xs-4">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple vertical fluid xs-4">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple vertical fluid xs-4">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+
+      {{{sw.divider "Concat joined"}}}
+
+      <div class="multiple fluid">
+        <div class="multiple joined xs-4">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple joined xs-4">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple joined xs-4">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Nested</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+
+      {{{sw.divider "Nested no wrap"}}}
+
+      <div class="multiple no-wrap fluid">
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="multiple no-wrap fluid">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="multiple no-wrap fluid">
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Nested vertical"}}}
+
+      <div class="multiple vertical fluid">
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="multiple vertical fluid">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="multiple vertical fluid">
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Nested joined"}}}
+
+      <div class="multiple joined">
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="container outlined">1</div>
+        <div class="multiple joined">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="multiple joined">
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Nested fixed</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+
+      {{{sw.divider "Nested no wrap"}}}
+
+      <div class="multiple no-wrap fluid">
+        <div class="container outlined xs-1">1</div>
+        <div class="container outlined xs-1">1</div>
+        <div class="container outlined xs-1">1</div>
+        <div class="multiple no-wrap fluid xs-9">
+          <div class="container outlined xs-1">2</div>
+          <div class="container outlined xs-1">2</div>
+          <div class="container outlined xs-1">2</div>
+          <div class="multiple no-wrap fluid xs-9">
+            <div class="container outlined xs-3">3</div>
+            <div class="container outlined xs-3">3</div>
+            <div class="container outlined xs-3">3</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Nested vertical"}}}
+
+      <div class="multiple fluid">
+        <div class="container outlined xs-1">1</div>
+        <div class="container outlined xs-1">1</div>
+        <div class="container outlined xs-1">1</div>
+        <div class="multiple vertical fluid xs-9">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="multiple fluid">
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+            <div class="container outlined">3</div>
+          </div>
+          <div class="multiple fluid xs-9">
+            <div class="container outlined xs-1">4</div>
+            <div class="container outlined xs-1">4</div>
+            <div class="container outlined xs-1">4</div>
+            <div class="multiple vertical fluid xs-9">
+              <div class="container outlined">5</div>
+              <div class="container outlined">5</div>
+              <div class="container outlined">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Nested joined"}}}
+
+      <div class="multiple joined fluid">
+        <div class="container outlined xs-3">1</div>
+        <div class="container outlined xs-3">1</div>
+        <div class="container outlined xs-3">1</div>
+        <div class="multiple joined fluid xs-3">
+          <div class="container outlined xs-3">2</div>
+          <div class="container outlined xs-3">2</div>
+          <div class="container outlined xs-3">2</div>
+          <div class="multiple joined fluid xs-3">
+            <div class="container outlined xs-4">3</div>
+            <div class="container outlined xs-4">3</div>
+            <div class="container outlined xs-4">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

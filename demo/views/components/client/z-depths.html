@@ -1,0 +1,16 @@
+
+<!-- Z DEPTHS -->
+
+<template name="z-depths">
+
+  {{{sw.divider "Z-Depth-*"}}}
+
+  <div class="multiple centered z-depths">
+    {{#each sw.times 25 0}}
+      <div class="centerer" style="width: 150px; height: 150px;">
+        <div class="label z-depth-{{this}}">{{this}}</div>
+      </div>
+    {{/each}}
+  </div>
+
+</template>

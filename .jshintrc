@@ -86,6 +86,6 @@
   "globals"       : {         // Additional predefined global variables
     "_"           : true,     // Lodash
     "lodash"      : true,     // Lodash
-    "Svelto"      : true     // Svelto global object
+    "Svelto"      : true      // Svelto global object
   }
 }

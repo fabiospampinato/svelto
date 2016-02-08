@@ -1,0 +1,74 @@
+
+<!-- COLORPICKER -->
+
+<template name="colorpicker">
+
+  {{{sw.divider "Colorpicker"}}}
+
+  <div class="container outlined">
+    {{{sw.colorpicker}}}
+  </div>
+
+  {{> colorpicker_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="colorpicker_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div class="multiple joined">
+      <input name="color" placeholder="Color..." class="outlined">
+      <div onclick="api_set ()" class="button secondary outlined">Set</div>
+    </div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_get() {
+      var color = $('.colorpicker').colorpicker('get');
+      $.noty( '<div class="square smooth" style="background-color:' + color + '"></div>' );
+      $.noty(color);
+    }
+
+    function api_set() {
+      var color = getValue ( 'color' );
+      $('.colorpicker').colorpicker('set', color);
+    }
+
+    function api (action) {
+      $('.colorpicker').colorpicker(action);
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.colorpicker').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

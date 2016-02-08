@@ -1,0 +1,46 @@
+
+<!-- FORM -->
+
+<template name="form">
+
+  {{{sw.divider "Form"}}}
+
+  <form class="centered sm-12 md-10 lg-8 xl-6">
+    <div class="card outlined">
+      <div class="card-header primary outlined">Form</div>
+      <div class="card-block">
+        <div class="centered xs-8">
+          {{{sample.image}}}
+        </div>
+        <label>Input:</label>
+        <input name="input_1" placeholder="Input..." class="fluid outlined">
+        <label>Textarea:</label>
+        <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
+        <label>Fieldset:</label>
+        <fieldset>
+          <input name="input_fieldset_1" placeholder="Input inside a fieldset..." class="fluid outlined">
+          <input name="input_fieldset_2" placeholder="Not my favorite tag..." class="fluid outlined">
+          <input name="input_fieldset_3" placeholder="But someone will use it..." class="fluid outlined">
+        </fieldset>
+        <label>Checkboxes:</label>
+        <div class="multiple fluid">
+          {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+          {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
+        </div>
+        <label>Radios:</label>
+        <div class="multiple fluid">
+          {{{sw.radio "Radio 1" "radio_name" "true"}}}
+          {{{sw.radio "Radio 2" "radio_name" "false"}}}
+        </div>
+      </div>
+      <div class="card-footer outlined">
+        <div class="multiple">
+          <button type="submit" class="button gray outlined">Normal</button>
+          <button type="submit" class="button primary outlined">Primary</button>
+          <button type="submit" class="button secondary outlined">Secondary</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</template>

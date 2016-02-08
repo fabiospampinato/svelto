@@ -1,0 +1,192 @@
+
+<!-- SELECTABLE -->
+
+<template name="selectable">
+
+  {{{sw.divider "Selectable"}}}
+
+  <div class="container outlined">
+    <table class="table selectable bordered">
+      <thead>
+        <tr>
+          <th class="xs-1 text-center">Int</th>
+          <th>String</th>
+          <th>Date</th>
+          <th class="text-center">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row-empty hidden">
+          <td colspan="100%">Empty</td>
+        </tr>
+        <tr>
+          <td class="text-center">1</td>
+          <td>Foo</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">2</td>
+          <td>Bar</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">3</td>
+          <td>Foo</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">4</td>
+          <td>Bar</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">5</td>
+          <td>Foo</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">6</td>
+          <td>Bar</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">7</td>
+          <td>Foo</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">8</td>
+          <td>Bar</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">9</td>
+          <td>Foo</td>
+          <td>16/11/1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">10</td>
+          <td>Bar</td>
+          <td>16 Nov 1993</td>
+          <td class="text-center">
+            <div class="multiple centered">
+              <a href="#" class="button outlined small">Btn 1</a>
+              <a href="#" class="button outlined small">Btn 2</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {{{sw.divider "Other elements"}}}
+
+  <div class="container outlined other-elements">
+    {{{sample.paragraph}}}
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> selectable_init}}
+
+  {{> selectable_actions}}
+
+</template>
+
+<!-- SELECTABLE -->
+
+<template name="selectable_init">
+
+  <script>
+    $(function() {
+      $('.other-elements').selectable({
+        selectors: {
+          element: '.placeholder'
+        },
+        classes: {
+          selected: 'green'
+        }
+      });
+    });
+  </script>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="selectable_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('table.table.selectable, .other-elements').selectable ( action );
+    }
+  </script>
+
+</template>

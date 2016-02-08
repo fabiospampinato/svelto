@@ -1,0 +1,69 @@
+
+<!-- POINTER -->
+
+<template name="pointer">
+
+  {{{sw.divider "Target"}}}
+
+  <div class="centerer">
+    <div class="square outlined target" style="height: 300px; width: 75%;"></div>
+  </div>
+
+  {{{sw.divider "Triggered"}}}
+
+  <div class="multiple">
+    {{{sw.checkbox "Tap" "tap"}}}
+    {{{sw.checkbox "Double tap" "dbltap"}}}
+    {{{sw.checkbox "Down" "down"}}}
+    {{{sw.checkbox "Move" "move"}}}
+    {{{sw.checkbox "Up" "up"}}}
+    {{{sw.checkbox "Cancel" "cancel"}}}
+    {{{sw.checkbox "Over" "over"}}}
+    {{{sw.checkbox "Enter" "enter"}}}
+    {{{sw.checkbox "Out" "out"}}}
+    {{{sw.checkbox "Leave" "leave"}}}
+  </div>
+
+  {{> pointer_init}}
+
+  {{> pointer_actions}}
+
+</template>
+
+<!-- INIT -->
+
+<template name="pointer_init">
+
+  <script>
+    function pointer_handler(event, data) {
+      var name = event.data.name;
+      if (name === 'down') {
+        pointer_uncheck_all();
+      }
+      $('.checkbox input[name="' + name + '"]').prop ( 'checked', true );
+    }
+
+    function pointer_uncheck_all() {
+      $('.checkbox input').prop('checked', false);
+    }
+
+    for (var prop in Pointer) {
+      if (prop !== 'options') {
+        $('.target').on(Pointer[prop], {
+          name: prop
+        }, pointer_handler);
+      }
+    }
+  </script>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="pointer_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div onclick="pointer_uncheck_all ()" class="button outlined">Reset</div>
+
+</template>

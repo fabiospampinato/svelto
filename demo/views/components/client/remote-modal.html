@@ -1,0 +1,37 @@
+
+<!-- REMOTE MODAL -->
+
+<template name="remote-modal">
+
+  {{{sw.divider "Remote Modal"}}}
+
+  <div class="multiple">
+    <div class="button outlined remote-modal-trigger" data-url="/remote-modal-1">Load remote</div>
+    <div class="button outlined remote-modal-trigger" data-url="/remote-modal-2" data-data='{"color": "primary"}'>Load remote (Primary)</div>
+    <div class="button outlined remote-modal-trigger" data-url="/remote-modal-2" data-data='{"color": "secondary"}'>Load remote (Secondary)</div>
+    <div class="button outlined remote-modal-trigger" data-url="/remote-modal-fullscreen">Load remote (Fullscreen)</div>
+    <div class="button outlined remote-modal-trigger" data-url="/remote-modal-error">Load remote (Error)</div>
+  </div>
+
+  {{> remote_modal_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="remote_modal_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('.remote-modal-trigger').remoteModalTrigger ( action );
+    }
+  </script>
+
+</template>

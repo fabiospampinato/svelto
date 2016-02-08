@@ -1,0 +1,56 @@
+
+<!-- EMBEDDED -->
+
+<template name="embedded">
+
+  {{{sw.divider "Embedded"}}}
+
+  <div class="container outlined limited sm-12 md-9 lg-7 xl-6">
+    <div class="embedded ratio-16-9">
+      <iframe src="//www.youtube.com/embed/df-eLzao63I?rel=0" allowfullscreen="allowfullscreen"></iframe>
+    </div>
+  </div>
+
+  {{> embedded_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="embedded_actions">
+
+  {{{sw.divider "Ratio"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "21:9" "ratio" "set_ratio ( 21, 9 )"}}}
+    {{{sw.radioAction "16:9" "ratio" "set_ratio ( 16, 9 )" true}}}
+    {{{sw.radioAction "4:3" "ratio" "set_ratio ( 4, 3 )"}}}
+    {{{sw.radioAction "1:1" "ratio" "set_ratio ( 1, 1 )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+    {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+  </div>
+
+  <script>
+    function enable () {
+      $('.embedded').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('.embedded').addClass ( 'disabled' );
+    }
+
+    function set_ratio ( w, h ) {
+      var ratios = [[21,9], [16,9], [4,3], [1,1]];
+      for ( var i = 0, l = ratios.length; i < l; i++ ){
+        $('.embedded').removeClass ( 'ratio-' + ratios[i].join ( '-' ) );
+      }
+      $('.embedded').addClass ( 'ratio-' + w + '-' + h );
+    }
+  </script>
+
+</template>

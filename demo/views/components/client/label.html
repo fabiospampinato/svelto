@@ -1,0 +1,220 @@
+
+<!-- LABEL -->
+
+<template name="label">
+
+  {{{sw.divider "Label"}}}
+
+  <div class="label">Label</div>
+
+  {{{sw.divider "Fluid"}}}
+
+  <div class="label fluid">Fluid</div>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    <div class="label primary">Primary</div>
+    <div class="label secondary">Secondary</div>
+    <div class="label tertiary">Tertiary</div>
+    <div class="label quaternary">Quaternary</div>
+    <div class="label white">White</div>
+    <div class="label gray">Gray</div>
+    <div class="label black">Black</div>
+    <div class="label yellow">Yellow</div>
+    <div class="label olive">Olive</div>
+    <div class="label green">Green</div>
+    <div class="label blue">Blue</div>
+    <div class="label violet">Violet</div>
+    <div class="label orange">Orange</div>
+    <div class="label purple">Purple</div>
+    <div class="label red">Red</div>
+    <div class="label pink">Pink</div>
+    <div class="label teal">Teal</div>
+    <div class="label brown">Brown</div>
+    <div class="label error">Error</div>
+    <div class="label warning">Warning</div>
+    <div class="label success">Success</div>
+    <div class="label transparent">Transparent</div>
+    <div class="label inherit">Inherit</div>
+    <div class="label base">Base</div>
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="multiple">
+    <div class="label">
+      <i class="icon">settings</i>
+    </div>
+    <div class="label rounded">
+      <i class="icon">settings</i>
+    </div>
+    <div class="label">
+      <i class="icon">settings</i>
+      <span>Settings</span>
+    </div>
+    <div class="label">
+      <span>Settings</span>
+      <i class="icon">settings</i>
+    </div>
+    <div class="label">
+      <div class="sub left">
+        <i class="icon">settings</i>
+      </div>
+      <span>Settings</span>
+    </div>
+    <div class="label">
+      <span>Settings</span>
+      <div class="sub right">
+        <i class="icon">settings</i>
+      </div>
+    </div>
+  </div>
+
+  {{{sw.divider "Rounded"}}}
+
+  <div class="multiple">
+    <div class="label rounded primary">1</div>
+    <div class="label rounded secondary">2</div>
+    <div class="label rounded tertiary">3</div>
+    <div class="label rounded quaternary">4</div>
+    <div class="label rounded white">5</div>
+    <div class="label rounded gray">6</div>
+    <div class="label rounded black">7</div>
+    <div class="label rounded yellow">8</div>
+    <div class="label rounded olive">9</div>
+    <div class="label rounded green">10</div>
+    <div class="label rounded blue">11</div>
+    <div class="label rounded violet">12</div>
+    <div class="label rounded orange">13</div>
+    <div class="label rounded purple">14</div>
+    <div class="label rounded red">15</div>
+    <div class="label rounded pink">16</div>
+    <div class="label rounded teal">17</div>
+    <div class="label rounded brown">18</div>
+    <div class="label rounded error">19</div>
+    <div class="label rounded warning">20</div>
+    <div class="label rounded success">21</div>
+    <div class="label rounded transparent">22</div>
+    <div class="label rounded inherit">23</div>
+    <div class="label rounded base">24</div>
+  </div>
+
+  {{{sw.divider "Tag"}}}
+
+  <div class="multiple">
+    <div class="label-tag">
+      <div class="label">Normal</div>
+    </div>
+    <div class="label-tag">
+      <div class="label sharp">Sharp</div>
+    </div>
+    <div class="label-tag">
+      <div class="label primary tag-circle-white">Colored</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Ribbon"}}}
+
+  <div class="container centered xs-10 outlined z-depth-1">
+    <div class="label ribbon ribbon-left ribbon-right primary">Left & Right</div>
+    {{{sample.paragraph}}}
+    <div class="label ribbon ribbon-left secondary">Left</div>
+    {{{sample.paragraph}}}
+    <div class="label ribbon ribbon-right tertiary">Right</div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{{sw.divider "Corner"}}}
+
+  <div class="container outlined">
+    <div class="label-corner top-left primary">
+      <div class="label compact">S</div>
+    </div>
+    <div class="label-corner top-right secondary">
+      <div class="label compact">
+        <i class="icon small">file_download</i>
+      </div>
+    </div>
+    <div class="label-corner bottom-right quaternary">
+      <div class="label compact">
+        <i class="icon small">thumb_up</i>
+      </div>
+    </div>
+    <div class="label-corner bottom-left tertiary">
+      <div class="label compact">
+        <i class="icon small">favorite</i>
+      </div>
+    </div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{{sw.divider "Badge"}}}
+
+  <div class="multiple">
+    <div class="button compact">
+      <i class="icon">settings</i>
+      <div class="label rounded badge xxsmall quaternary top-left">1</div>
+      <div class="label rounded badge xxsmall primary top-right">2</div>
+      <div class="label rounded badge xxsmall tertiary bottom-left">3</div>
+      <div class="label rounded badge xxsmall secondary bottom-right">4</div>
+    </div>
+  </div>
+
+  {{{sw.divider "Floating"}}}
+
+  <div class="label floating rounded secondary large">
+    <i class="icon">settings</i>
+  </div>
+
+  {{> label_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="label_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "enable ()" true}}}
+      {{{sw.radioAction "Disabled" "state" "disable ()"}}}
+    </div>
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.label').toggleClass(css_class);
+    }
+
+    function enable () {
+      $('.label').removeClass ( 'disabled' );
+    }
+
+    function disable () {
+      $('.label').addClass ( 'disabled' );
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.label').removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+  </script>
+
+</template>

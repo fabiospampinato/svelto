@@ -1,0 +1,36 @@
+
+<!-- REMOTE ACTION -->
+
+<template name="remote-action">
+
+  {{{sw.divider "Remote Action"}}}
+
+  <div class="multiple">
+    <div class="button outlined remote-action-trigger" data-url="/remote-action-1">Load remote</div>
+    <div class="button outlined remote-action-trigger" data-url="/remote-action-2" data-data='{"color": "primary"}'>Load remote (Primary)</div>
+    <div class="button outlined remote-action-trigger" data-url="/remote-action-2" data-data='{"color": "secondary"}'>Load remote (Secondary)</div>
+    <div class="button outlined remote-action-trigger" data-url="/remote-action-error">Load remote (Error)</div>
+  </div>
+
+  {{> remote_action_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="remote_action_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('.remote-action-trigger').remoteActionTrigger ( action );
+    }
+  </script>
+
+</template>

@@ -1,0 +1,47 @@
+
+<!-- AUTOGROW -->
+
+<template name="autogrow">
+
+  {{{sw.divider "Input"}}}
+
+  <input value="Value" placeholder="Placeholder..." class="autogrow outlined">
+
+  {{{sw.divider "Textarea"}}}
+
+  <textarea placeholder="Placeholder..." class="autogrow outlined">Value</textarea>
+
+  {{> autogrow_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="autogrow_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( css_class ) {
+      $('.autogrow').toggleClass(css_class);
+    }
+
+    function api ( action ) {
+      $('input.autogrow').autogrowInput ( action );
+      $('textarea.autogrow').autogrowTextarea ( action );
+    }
+  </script>
+
+</template>

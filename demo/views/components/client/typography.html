@@ -1,0 +1,149 @@
+
+<!-- TYPOGRAPHY -->
+
+<template name="typography">
+
+  {{{sw.divider "Link"}}}
+
+  <div class="container outlined">
+    <p>Inside this paragraph there is a <a href="#">link</a>, does it look nice?</p>
+  </div>
+
+  {{{sw.divider "Headers"}}}
+
+  <div class="container outlined">
+    <h1>H1 - Heading title <small>Small subheader</small></h1>
+    <h2>H2 - Heading title <small>Small subheader</small></h2>
+    <h3>H3 - Heading title <small>Small subheader</small></h3>
+    <h4>H4 - Heading title <small>Small subheader</small></h4>
+    <h5>H5 - Heading title <small>Small subheader</small></h5>
+    <h6>H6 - Heading title <small>Small subheader</small></h6>
+  </div>
+
+  {{{sw.divider "Paragraph"}}}
+
+  <div class="container outlined">
+    <p>{{sample.text}}</p>
+  </div>
+
+  {{{sw.divider "Formatting"}}}
+
+  <div class="container outlined">
+    <p>
+      <span>Nothing</span>
+      <mark>marked</mark>
+      <del>deleted</del>
+      <s>striked</s>
+      <ins>inserted</ins> <u>underlined</u>
+      <small>small</small>
+      <strong>bold</strong>
+      <em>empathize</em> <i>italics</i>
+    </p>
+  </div>
+
+  {{{sw.divider "Abbr"}}}
+
+  <div class="container outlined">
+    <abbr title="HyperText Markup Language">HTML</abbr>
+  </div>
+
+  {{{sw.divider "Blockquote"}}}
+
+  <div class="container outlined">
+    <blockquote>
+      {{{sample.paragraph}}}
+    </blockquote>
+    <blockquote>
+      {{{sample.paragraph}}}
+      <footer>The source is
+        <cite>Someone</cite>
+      </footer>
+    </blockquote>
+  </div>
+
+  {{{sw.divider "List - Unordered"}}}
+
+  <div class="container outlined">
+    <ul>
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}
+        <ul>
+          <li>{{sample.text 5}}</li>
+          <li>{{sample.text 5}}</li>
+        </ul>
+      </li>
+      <li>{{sample.text 5}}</li>
+    </ul>
+  </div>
+
+  {{{sw.divider "List - Unordered - Unstyled"}}}
+
+  <div class="container outlined">
+    <ul class="unstyled">
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}
+        <ul>
+          <li>{{sample.text 5}}</li>
+          <li>{{sample.text 5}}</li>
+        </ul>
+      </li>
+      <li>{{sample.text 5}}</li>
+    </ul>
+  </div>
+
+  {{{sw.divider "List - Ordered"}}}
+
+  <div class="container outlined">
+    <ol>
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}</li>
+      <li>{{sample.text 5}}
+        <ul>
+          <li>{{sample.text 5}}</li>
+          <li>{{sample.text 5}}</li>
+        </ul>
+      </li>
+      <li>{{sample.text 5}}</li>
+    </ol>
+  </div>
+
+  {{{sw.divider "Definition list"}}}
+
+  <div class="container outlined">
+    <dl>
+      <dt>{{sample.text 5}}</dt>
+      <dd>{{sample.text 5}}</dd>
+    </dl>
+    <dl>
+      <dt>{{sample.text 5}}</dt>
+      <dd>{{sample.text 5}}</dd>
+    </dl>
+  </div>
+
+  {{{sw.divider "Code"}}}
+
+  <div class="container outlined">
+    <code>console.log ( 'This is an example code block' )</code>
+  </div>
+
+  {{{sw.divider "Section"}}}
+
+  <div class="container outlined">
+    <section>console.log ( 'This is an example section block' )</section>
+  </div>
+
+  {{{sw.divider "Pre"}}}
+
+  <div class="container outlined">
+    <pre>console.log ( 'This is an example pre block' )</pre>
+  </div>
+
+  {{{sw.divider "Kbd"}}}
+
+  <div class="container outlined">
+    <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>canc</kbd>, <kbd>ctrl + alt + canc</kbd>
+  </div>
+
+</template>

@@ -1,0 +1,137 @@
+
+<!-- FORM SYNC -->
+
+<template name="form-sync">
+
+  <div class="centerer">
+    <div class="xs-12 lg-10">
+      <div class="multiple">
+        <div class="xs-12 md-6">
+          {{{sw.divider "Form 1 (Synced)"}}}
+          <form data-sync-group="test" class="centered">
+            <div class="card outlined">
+              <div class="card-header primary outlined">Form</div>
+              <div class="card-block">
+                <div class="centered xs-8">
+                  {{{sample.image}}}
+                </div>
+                <label>Input:</label>
+                <input name="input_1" placeholder="Input..." class="fluid outlined">
+                <label>Textarea:</label>
+                <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
+                <label>Checkboxes:</label>
+                <div class="multiple fluid">
+                  {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+                  {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
+                </div>
+                <label>Radios:</label>
+                <div class="multiple fluid">
+                  {{{sw.radio "Radio 1" "radio_name" "true"}}}
+                  {{{sw.radio "Radio 2" "radio_name" "false"}}}
+                </div>
+                <label>Select:</label>
+                <div class="button select-toggler outlined fluid">
+                  <div class="select-label">Select</div>
+                  <i class="icon">reorder</i>
+                  {{{sample.select "select1"}}}
+                </div>
+                <label>Slider:</label>
+                {{{sw.slider min=0 value=75 max=100 step=1}}}
+                <div class="multiple">
+                  <label class="spacer">Switch:</label>
+                  {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
+                </div>
+                <label>Datepicker:</label>
+                {{{sw.datepicker}}}
+                <label>Colorpicker:</label>
+                <div class="centerer">
+                  {{{sw.colorpicker}}}
+                </div>
+              </div>
+              <div class="card-footer outlined">
+                <div class="multiple">
+                  <button type="submit" class="button gray outlined">Normal</button>
+                  <button type="submit" class="button primary outlined">Primary</button>
+                  <button type="submit" class="button secondary outlined">Secondary</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="xs-12 md-6">
+          {{{sw.divider "Form 2 (Synced)"}}}
+          <form data-sync-group="test" class="centered">
+            <div class="card outlined">
+              <div class="card-header primary outlined">Form</div>
+              <div class="card-block">
+                <div class="centered xs-8">
+                  {{{sample.image}}}
+                </div>
+                <label>Input:</label>
+                <input name="input_1" placeholder="Input..." class="fluid outlined">
+                <label>Textarea:</label>
+                <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
+                <label>Checkboxes:</label>
+                <div class="multiple fluid">
+                  {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+                  {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
+                </div>
+                <label>Radios:</label>
+                <div class="multiple fluid">
+                  {{{sw.radio "Radio 1" "radio_name" "true"}}}
+                  {{{sw.radio "Radio 2" "radio_name" "false"}}}                </div>
+                <label>Select:</label>
+                <div class="button select-toggler outlined fluid">
+                  <div class="select-label">Select</div>
+                  <i class="icon">reorder</i>
+                  {{{sample.select "select1"}}}
+                </div>
+                <label>Slider:</label>
+                {{{sw.slider min=0 value=75 max=100 step=1}}}
+                <div class="multiple">
+                  <label class="spacer">Switch:</label>
+                  {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
+                </div>
+                <label>Datepicker:</label>
+                {{{sw.datepicker}}}
+                <label>Colorpicker:</label>
+                <div class="centerer">
+                  {{{sw.colorpicker}}}
+                </div>
+              </div>
+              <div class="card-footer outlined">
+                <div class="multiple">
+                  <button type="submit" class="button gray outlined">Normal</button>
+                  <button type="submit" class="button primary outlined">Primary</button>
+                  <button type="submit" class="button secondary outlined">Secondary</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{> form_sync_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="form_sync_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('form[data-sync-group]').formSync ( action );
+    }
+  </script>
+
+</template>

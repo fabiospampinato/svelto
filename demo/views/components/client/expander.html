@@ -1,0 +1,112 @@
+
+<!-- EXPANDER -->
+
+<template name="expander">
+
+  {{{sw.divider "Expanders"}}}
+
+  {{> expander_base}}
+  {{> expander_button}}
+  {{> expander_open}}
+
+  {{> expander_actions}}
+
+</template>
+
+<!-- BASE -->
+
+<template name="expander_base">
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Header toggler</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+      {{{sample.paragraph}}}
+    </div>
+  </div>
+
+</template>
+
+<!-- BUTTON -->
+
+<template name="expander_button">
+
+  <div class="card outlined expander">
+    <div class="card-header outlined primary">
+      <div class="multiple centered">
+        <div class="spacer">Button toggler</div>
+        <div class="button xsmall compact expander-toggler">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+      {{{sample.paragraph}}}
+    </div>
+  </div>
+
+</template>
+
+<!-- OPEN -->
+
+<template name="expander_open">
+
+  <div class="card outlined expander open">
+    <div class="card-header outlined actionable primary expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Open</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+      {{{sample.paragraph}}}
+    </div>
+  </div>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="expander_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div onclick="api ()" class="button outlined">Init</div>
+    <div onclick="api_get ()" class="button outlined">Get</div>
+    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
+    <div onclick="api ( 'open' )" class="button outlined">Open</div>
+    <div onclick="api ( 'close' )" class="button outlined">Close</div>
+    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api_get () {
+      var gets = _.map($('.expander'), function(expander) {
+        return $(expander).expander('isOpen');
+      });
+      $.noty(gets.join(' - '));
+    }
+
+    function api ( action ) {
+      $('.expander').expander ( action );
+    }
+  </script>
+
+</template>
