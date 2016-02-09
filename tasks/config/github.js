@@ -21,7 +21,11 @@ var github = new GHAPI ({
   timeout: 5000
 });
 
-github.authenticate ( plugins.github.auth );
+if ( plugins.github.enabled ) {
+
+  github.authenticate ( plugins.github.auth );
+
+}
 
 /* EXPORT */
 

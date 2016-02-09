@@ -42,6 +42,7 @@ var plugins = {
     }
   },
   github: {
+    enabled: false,
     auth: {
       type: 'oauth',
       token: false
