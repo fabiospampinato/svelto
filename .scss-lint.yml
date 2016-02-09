@@ -1,11 +1,9 @@
 scss_files: "**/*.scss"
+
 plugin_directories: ['.scss-linters']
+plugin_gems: [] # List of gem names to load custom linters from (make sure they are already installed)
 
-# List of gem names to load custom linters from (make sure they are already
-# installed)
-plugin_gems: []
-
-linters:
+linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md
   BangFormat:
     enabled: true
     space_before_bang: true
@@ -17,7 +15,10 @@ linters:
 
   BorderZero:
     enabled: true
-    convention: zero # or `none`
+    convention: zero
+
+  ChainedClasses:
+    enabled: false
 
   ColorKeyword:
     enabled: true
@@ -26,7 +27,7 @@ linters:
     enabled: true
 
   Comment:
-    enabled: true
+    enabled: false
 
   DebugStatement:
     enabled: true
@@ -42,7 +43,7 @@ linters:
 
   ElsePlacement:
     enabled: true
-    style: same_line # or 'new_line'
+    style: same_line
 
   EmptyLineBetweenBlocks:
     enabled: true
@@ -60,11 +61,11 @@ linters:
 
   HexLength:
     enabled: true
-    style: short # or 'long'
+    style: short
 
   HexNotation:
     enabled: true
-    style: lowercase # or 'uppercase'
+    style: lowercase
 
   HexValidation:
     enabled: true
@@ -83,12 +84,12 @@ linters:
   Indentation:
     enabled: true
     allow_non_nested_indentation: false
-    character: space # or 'tab'
+    character: space
     width: 2
 
   LeadingZero:
     enabled: true
-    style: exclude_zero # or 'include_zero'
+    style: exclude_zero
 
   MergeableSelector:
     enabled: true
@@ -97,7 +98,7 @@ linters:
   NameFormat:
     enabled: true
     allow_leading_underscore: true
-    convention: hyphenated_lowercase # or 'camel_case', or 'snake_case', or a regex pattern
+    convention: hyphenated_lowercase
 
   NestingDepth:
     enabled: true
@@ -108,7 +109,7 @@ linters:
     enabled: false
 
   PropertyCount:
-    enabled: false
+    enabled: true
     include_nested: false
     max_properties: 10
 
@@ -135,6 +136,9 @@ linters:
       '%']                                     # Other
     properties: {}
 
+  PseudoElement:
+    enabled: true
+
   QualifyingElement:
     enabled: true
     allow_element_with_attribute: false
@@ -147,7 +151,7 @@ linters:
 
   SelectorFormat:
     enabled: true
-    convention: hyphenated_lowercase # or 'strict_BEM', or 'hyphenated_BEM', or 'snake_case', or 'camel_case', or a regex pattern
+    convention: hyphenated_lowercase
 
   Shorthand:
     enabled: true
@@ -165,7 +169,7 @@ linters:
 
   SpaceAfterPropertyColon:
     enabled: true
-    style: one_space # or 'no_space', or 'at_least_one_space', or 'aligned'
+    style: one_space
 
   SpaceAfterPropertyName:
     enabled: true
@@ -175,11 +179,11 @@ linters:
 
   SpaceAroundOperator:
     enabled: true
-    style: one_space # or 'no_space'
+    style: one_space
 
   SpaceBeforeBrace:
     enabled: true
-    style: space # or 'new_line'
+    style: space
     allow_single_line_padding: false
 
   SpaceBetweenParens:
@@ -188,7 +192,7 @@ linters:
 
   StringQuotes:
     enabled: true
-    style: single_quotes # or double_quotes
+    style: single_quotes
 
   TrailingSemicolon:
     enabled: true
@@ -215,8 +219,10 @@ linters:
     enabled: true
 
   VariableForProperty:
-    enabled: false
-    properties: []
+    enabled: true
+    properties:
+      - color
+      - font
 
   VendorPrefix:
     enabled: true
