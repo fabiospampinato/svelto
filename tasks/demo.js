@@ -24,7 +24,7 @@ var logBuffer = function ( buffer ) {
 
 /* DEMO */
 
-gulp.task ( 'demo', 'Serve the demos', function () {
+gulp.task ( 'demo', 'Serve the demos', ['watch'], function () {
 
   var demoPath = path.join ( process.cwd (), '/demo' ),
       port = !_.isNaN ( Number ( argv.port ) ) ? Number ( argv.port ) : 3333,
