@@ -1248,7 +1248,7 @@ th {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* WIDGET */
 .widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
@@ -1352,7 +1352,7 @@ th {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* INPUT */
@@ -1906,7 +1906,7 @@ input.autogrow.compact.outlined, textarea.autogrow.compact.outlined {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../input/input.scss
  * ========================================================================= */
 /* TEXTAREA */
@@ -1955,7 +1955,7 @@ textarea.autogrow.compact {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* RESETTING BOX SIZING */
 *,
@@ -2495,7 +2495,7 @@ _:-ms-input-placeholder, :root #content {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* DEFAULT */
@@ -3115,7 +3115,7 @@ label {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../helpers/helpers.scss
  * @requires ../label/label.scss
  * ========================================================================= */
@@ -6067,7 +6067,7 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* DIVIDER */
 hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .divider.linear:not(:empty):before, .divider.linear:not(:empty):after, .divider:not(.block):not(.text):not(.spacer):not(:empty):before, .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
@@ -7663,7 +7663,7 @@ i[class^="flag-"] {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../container/container.scss
  * ========================================================================= */
 /* FOOTER */
@@ -7698,7 +7698,7 @@ footer {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* DEFAULT FORM */
@@ -8119,7 +8119,7 @@ fieldset {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* HEADER */
@@ -8400,7 +8400,7 @@ span > a:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * @requires ../container/container.scss
  * ========================================================================= */
@@ -9883,7 +9883,7 @@ body.panel-slim-pinned-bottom > #content > header.fixed {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* PRISM */
 code[class*='language-'] {
@@ -10759,7 +10759,7 @@ a.ripple > .ripple-circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../input/input.scss
  * ========================================================================= */
 /* SELECT TOGGLER */
@@ -10825,7 +10825,7 @@ a.ripple > .ripple-circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* SELECTABLE TABLE */
 table.table.selectable {
@@ -11317,7 +11317,7 @@ table.table.selectable tbody tr.selected {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../icons/icons.scss
  * ========================================================================= */
 /* SORTABLE TABLE */
@@ -11434,7 +11434,7 @@ table.table.sortable th[data-sort].sort-desc:after, table.table.sortable th[data
  * =========================================================================
  * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* SPINNER */
@@ -11788,7 +11788,7 @@ svg.spinner.multicolor circle {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.scss
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * ========================================================================= */
 /* STEPPER */
 .stepper {
@@ -12078,7 +12078,7 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */
 /* TABLE */
@@ -12707,7 +12707,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
+ * @requires ../reset/reset.scss
  * @requires ../highlight/highlight.scss
  * @requires ../widget/widget.scss
  * ========================================================================= */

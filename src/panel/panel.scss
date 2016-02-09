@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../layout/layout.scss
  * ========================================================================= */
 
 //TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
@@ -175,135 +177,127 @@
 
 /* LAYOUT */
 
-.layout,
-body { //TODO: Use only `.layout`
+//FIXME: Since we introduced the layout component it needs
+
+.layout {
 
   &.panel-pinned-left {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-left: $panel-vertical-width;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        left: $panel-vertical-width;
-      }
-
+    > .layout-header.fixed {
+      left: $panel-vertical-width;
     }
 
   }
 
   &.panel-pinned-right {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-right: $panel-vertical-width;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        right: $panel-vertical-width;
-      }
-
+    > .layout-header.fixed {
+      right: $panel-vertical-width;
     }
 
   }
 
   &.panel-pinned-top {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-top: $panel-horizontal-height;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        top: $panel-horizontal-height;
-      }
-
+    > .layout-header.fixed {
+      top: $panel-horizontal-height;
     }
 
   }
 
   &.panel-pinned-bottom {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-bottom: $panel-horizontal-height;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        bottom: $panel-horizontal-height;
-      }
-
+    > .layout-header.fixed {
+      bottom: $panel-horizontal-height;
     }
 
   }
 
   &.panel-slim-pinned-left {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-left: $panel-slim-vertical-width;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        left: $panel-slim-vertical-width;
-      }
-
+    > .layout-header.fixed {
+      left: $panel-slim-vertical-width;
     }
 
   }
 
   &.panel-slim-pinned-right {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-right: $panel-slim-vertical-width;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        right: $panel-slim-vertical-width;
-      }
-
+    > .layout-header.fixed {
+      right: $panel-slim-vertical-width;
     }
 
   }
 
   &.panel-slim-pinned-top {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-top: $panel-slim-horizontal-height;
+    }
 
-      /* HEADER */
-
-      > header.fixed {
-        top: $panel-slim-horizontal-height;
-      }
-
+    > .layout-header.fixed {
+      top: $panel-slim-horizontal-height;
     }
 
   }
 
   &.panel-slim-pinned-bottom {
 
-    > #content {
-
+    > .layout-header:not(.fixed),
+    > .layout-content,
+    > .layout-footer {
       margin-bottom: $panel-slim-horizontal-height;
-
-      /* HEADER */
-
-      > header.fixed {
-        bottom: $panel-slim-horizontal-height;
-      }
-
     }
 
+    > .layout-header.fixed {
+      bottom: $panel-slim-horizontal-height;
+    }
+
+  }
+
+  > &-header,
+  > &-content,
+  > &-footer {
+    transition-property: top, right, left;
+    transition-duration: $panel-transition-transform-duration;
   }
 
 }

@@ -1,25 +1,17 @@
 
 /* =========================================================================
- * Svelto - Base (Variables)
+ * Svelto - Reset (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../colors/variables.scss
- * @requires ../panel/variables.scss
  * ========================================================================= */
 
-/* BASE */
+/* SELECTION */
 
-$base-selection-bg-color: lighten($color-primary-bg, 50) !default;
-
-$base-transition-all-duration: $panel-transition-transform-duration !default;
+$selection-bg-color: lighten($color-primary-bg, 50) !default;
 
 /* BODY */
 
 $body-color: 'base' !default;
-
-/* MAIN HEADER */
-
-$main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
-$main-header-fixed-z-index: 200 !default;
