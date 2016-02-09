@@ -8,9 +8,9 @@
 
 /* REQUIRE */
 
-var _                = require ( 'lodash' ),
-    fs               = require ( 'fs' ),
-    requireRecursive = require ( 'require-dot-file' );
+var _   = require ( 'lodash' ),
+    fs  = require ( 'fs' ),
+    rdf = require ( 'require-dot-file' );
 
 /* FILE */
 
@@ -26,9 +26,7 @@ var file = {
 
   loadRecursive: function ( name, defaultValue ) {
 
-    var file = _.attempt ( requireRecursive, name );
-
-    return _.isError ( file ) ? defaultValue : file;
+    return rdf ( name ) || defaultValue;
 
   },
 
