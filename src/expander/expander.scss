@@ -14,16 +14,6 @@
 
 .expander {
 
-  /* OPENER / CLOSER / TOGGLER */
-
-  // It should also have the `actionable` class to provide a better feedback
-
-  &-opener,
-  &-closer,
-  &-toggler {
-    cursor: pointer;
-  }
-
   /* CLOSED */
 
   &:not(.open) {

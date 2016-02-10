@@ -1,16 +1,20 @@
 
 /* =========================================================================
- * Svelto - Form (Variables)
+ * Svelto - Fieldset
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
- * @require ../input/variables.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 
 /* FIELDSET */
 
-$fieldset-bg-color: rgba(0, 0, 0, 0.035) !default;
-$fieldset-padding: $gutter !default;
-$fieldset-border-radius: $input-border-radius !default;
+fieldset {
+  @extend .widget;
+  background-color: $fieldset-bg-color;
+  border-radius: $fieldset-border-radius;
+  border-color: inherit;
+  padding: $fieldset-padding;
+}
