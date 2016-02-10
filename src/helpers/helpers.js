@@ -5,10 +5,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires ../widgetize/widgetize.js
- * @requires ../pointer/pointer.js
- * @requires vendor/screenfull.js
+ * @require ../svelto/svelto.js
+ * @require ../widgetize/widgetize.js
+ * @require ../pointer/pointer.js
+ * @require vendor/screenfull.js
  * ========================================================================= */
 
 //TODO: Move to their own folders/files

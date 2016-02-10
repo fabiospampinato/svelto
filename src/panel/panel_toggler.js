@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires panel.js
- * @requires ../toggler/toggler.js
+ * @require panel.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {

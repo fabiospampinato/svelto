@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote_trigger.js
- * @requires action.js
+ * @require ../remote_trigger.js
+ * @require action.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {

@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../targeter/targeter.js
+ * @require ../widget/widget.js
+ * @require ../targeter/targeter.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {

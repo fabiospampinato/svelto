@@ -38,7 +38,7 @@ var plugins = {
   },
   dependencies: {
     options: {
-      pattern: /\* @requires [\s-]*(.*\..*)/g
+      pattern: /\* @require [\s-]*(.*\..*)/g
     }
   },
   github: {

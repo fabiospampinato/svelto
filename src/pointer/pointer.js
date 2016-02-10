@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../browser/browser.js
+ * @require ../core/core.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event

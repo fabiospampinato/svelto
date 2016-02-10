@@ -5,13 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
- * @requires ../factory/factory.js
- * @requires ../breakpoints/breakpoints.js
- * @requires ../breakpoints/breakpoint.js
- * @requires ../keyboard/keyboard.js
+ * @require ../core/core.js
+ * @require ../tmpl/tmpl.js
+ * @require ../pointer/pointer.js
+ * @require ../factory/factory.js
+ * @require ../breakpoints/breakpoints.js
+ * @require ../breakpoints/breakpoint.js
+ * @require ../keyboard/keyboard.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...

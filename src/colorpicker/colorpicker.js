@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../color/color.js
+ * @require ../widget/widget.js
+ * @require ../color/color.js
  * ========================================================================= */
 
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional

@@ -5,9 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../validator/validator.js
- * @requires ../noty/noty.js
+ * @require ../widget/widget.js
+ * @require ../validator/validator.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex

@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../noty/noty.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 // If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
