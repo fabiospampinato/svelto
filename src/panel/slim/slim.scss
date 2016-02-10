@@ -1,0 +1,96 @@
+
+/* =========================================================================
+ * Svelto - Panel - Slim
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * @require ../../layout/layout.scss
+ * ========================================================================= */
+
+/* SLIM */
+
+.panel.slim {
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right,
+  &:not(.top):not(.bottom) { // Default case
+    width: $panel-slim-vertical-width;
+  }
+
+  /* LEFT */
+
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { // Default case
+    transform: translateX(- $panel-slim-closed-vertical-spacing);
+  }
+
+  /* RIGHT */
+
+  &.right {
+    transform: translateX($panel-slim-closed-vertical-spacing);
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
+    height: $panel-slim-horizontal-height;
+  }
+
+  /* TOP */
+
+  &.top {
+    transform: translateY(- $panel-slim-closed-horizontal-spacing);
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+    transform: translateY($panel-slim-closed-horizontal-spacing);
+  }
+
+}
+
+/* LAYOUT */
+
+.layout {
+
+  &.panel-slim-pinned-left {
+
+    padding-left: $panel-slim-vertical-width;
+
+    > .layout-header.fixed {
+      left: $panel-slim-vertical-width;
+    }
+
+  }
+
+  &.panel-slim-pinned-right {
+
+    padding-right: $panel-slim-vertical-width;
+
+    > .layout-header.fixed {
+      right: $panel-slim-vertical-width;
+    }
+
+  }
+
+  &.panel-slim-pinned-top {
+
+    padding-top: $panel-slim-horizontal-height;
+
+    > .layout-header.fixed {
+      top: $panel-slim-horizontal-height;
+    }
+
+  }
+
+  &.panel-slim-pinned-bottom {
+    padding-bottom: $panel-slim-horizontal-height;
+  }
+
+}

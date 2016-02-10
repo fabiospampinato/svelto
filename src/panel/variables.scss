@@ -24,19 +24,3 @@ $panel-pinned-z-depth: $panel-z-depth !default;
 $panel-background-color: rgba(0, 0, 0, .5) !default;
 
 $panel-background-transition-opacity-duration: $transition-duration-normal !default;
-
-/* SIZES */
-
-$panel-horizontal-height: 7.5rem !default;
-$panel-closed-horizontal-spacing: $panel-horizontal-height !default;
-
-$panel-vertical-width: $panel-horizontal-height * 2 !default;
-$panel-closed-vertical-spacing: $panel-vertical-width !default;
-
-/* SLIM SIZES */
-
-$panel-slim-horizontal-height: 4.2666666667rem !default;
-$panel-slim-closed-horizontal-spacing: $panel-slim-horizontal-height !default;
-
-$panel-slim-vertical-width: $panel-slim-horizontal-height !default;
-$panel-slim-closed-vertical-spacing: $panel-slim-vertical-width !default;

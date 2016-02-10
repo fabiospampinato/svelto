@@ -31,95 +31,41 @@
   &.left,
   &.right,
   &:not(.top):not(.bottom) { // Default case
-
     top: 0;
     bottom: 0;
-    width: $panel-vertical-width;
-
-    /* SLIM */
-
-    &.slim {
-      width: $panel-slim-vertical-width;
-    }
-
   }
 
   /* LEFT */
 
   &.left,
   &:not(.right):not(.top):not(.bottom) { // Default case
-
     left: 0;
-    transform: translateX(- $panel-closed-vertical-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateX(- $panel-slim-closed-vertical-spacing);
-    }
-
   }
 
   /* RIGHT */
 
   &.right {
-
     right: 0;
-    transform: translateX($panel-closed-vertical-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateX($panel-slim-closed-vertical-spacing);
-    }
-
   }
 
   /* TOP / BOTTOM */
 
   &.top,
   &.bottom {
-
     right: 0;
     left: 0;
-    height: $panel-horizontal-height;
-
-    /* SLIM */
-
-    &.slim {
-      height: $panel-slim-horizontal-height;
-    }
-
   }
 
   /* TOP */
 
   &.top {
-
     top: 0;
-    transform: translateY(- $panel-closed-horizontal-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateY(- $panel-slim-closed-horizontal-spacing);
-    }
-
   }
 
   /* BOTTOM */
 
   &.bottom {
-
     bottom: 0;
-    transform: translateY($panel-closed-horizontal-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateY($panel-slim-closed-horizontal-spacing);
-    }
-
   }
 
   /* SHOW */
@@ -177,79 +123,11 @@
 
 /* LAYOUT */
 
-//FIXME: Since we introduced the layout component it needs
+//FIXME: Maybe use an additional class for enabling the animations we need, or me may conflict with other components
 
 .layout {
 
   transition: padding $panel-transition-transform-duration;
-
-  &.panel-pinned-left {
-
-    padding-left: $panel-vertical-width;
-
-    > .layout-header.fixed {
-      left: $panel-vertical-width;
-    }
-
-  }
-
-  &.panel-pinned-right {
-
-    padding-right: $panel-vertical-width;
-
-    > .layout-header.fixed {
-      right: $panel-vertical-width;
-    }
-
-  }
-
-  &.panel-pinned-top {
-
-    padding-top: $panel-horizontal-height;
-
-    > .layout-header.fixed {
-      top: $panel-horizontal-height;
-    }
-
-  }
-
-  &.panel-pinned-bottom {
-    padding-bottom: $panel-horizontal-height;
-  }
-
-  &.panel-slim-pinned-left {
-
-    padding-left: $panel-slim-vertical-width;
-
-    > .layout-header.fixed {
-      left: $panel-slim-vertical-width;
-    }
-
-  }
-
-  &.panel-slim-pinned-right {
-
-    padding-right: $panel-slim-vertical-width;
-
-    > .layout-header.fixed {
-      right: $panel-slim-vertical-width;
-    }
-
-  }
-
-  &.panel-slim-pinned-top {
-
-    padding-top: $panel-slim-horizontal-height;
-
-    > .layout-header.fixed {
-      top: $panel-slim-horizontal-height;
-    }
-
-  }
-
-  &.panel-slim-pinned-bottom {
-    padding-bottom: $panel-slim-horizontal-height;
-  }
 
   > .layout-header.fixed {
     transition-property: top, right, bottom, left;

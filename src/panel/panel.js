@@ -25,6 +25,7 @@
     selector: '.panel',
     options: {
       direction: 'left',
+      type: 'default', // `default`, `slim` (officially supported) or any other implemented type
       pin: false, // If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
@@ -34,9 +35,11 @@
       classes: {
         show: 'show',
         open: 'open',
-        slim: 'slim',
         pinned: 'pinned',
         flickable: 'flickable' // As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+      },
+      datas: {
+        type: 'type'
       },
       animations: {
         open: Animations.normal,
@@ -81,9 +84,10 @@
 
       this._isOpen = this.$panel.hasClass ( this.options.classes.open );
       this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
-      this._isSlim = this.$panel.hasClass ( this.options.classes.slim );
 
-      this.layoutPinnedClass = Widgets.Panel.config.name + '-' + ( this._isSlim ? this.options.classes.slim + '-' : '' ) + this.options.classes.pinned + '-' + this.options.direction;
+      this.options.type = this.$panel.data ( this.options.datas.type ) || this.options.type;
+
+      this.layoutPinnedClass = Widgets.Panel.config.name + '-' + this.options.type + '-' + this.options.classes.pinned + '-' + this.options.direction;
 
     }
 
