@@ -8,7 +8,7 @@ for ( let component of components ) {
   Router.route ( '/' + component, {
     layoutTemplate: 'master',
     yieldRegions: {
-      [component]: { to: 'main' }
+      [component]: { to: 'content' }
     }
   });
 

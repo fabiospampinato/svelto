@@ -7640,8 +7640,8 @@ svg.spinner {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
  * @requires ../reset/reset.scss
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 
 /* STEPPER */
@@ -7654,7 +7654,7 @@ svg.spinner {
   @include color ( $label-color );
   display: flex;
   border-radius: $label-border-radius;
-  
+
   /* SEGMENTS */
 
   > * {

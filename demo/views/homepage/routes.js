@@ -4,7 +4,7 @@
 Router.route ( '/', {
   layoutTemplate: 'master',
   yieldRegions: {
-    'home': { to: 'main' }
+    'homepage': { to: 'content' }
   }
 });
 

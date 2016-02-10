@@ -22,6 +22,54 @@
  * ========================================================================= */
 /* INPUT AUTOGROW */
 /* =========================================================================
+ * Svelto - Breadcrumb (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* BREADCRUMB */
+/* AFTER CURRENT */
+/* =========================================================================
+ * Svelto - Breakpoints (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* BREAKPOINTS */
+/* BREAKPOINTS */
+/* =========================================================================
+ * Svelto - Svelto (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../breakpoints/variables.scss
+ * ========================================================================= */
+/* GUTTER */
+/* MAX WIDTH */
+/* BORDER RADIUS */
+/* TRANSITIONS */
+/* PATHS */
+/* =========================================================================
+ * Svelto - Container (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+/* CONTAINER */
+/* CONTAINER COMPACT */
+/* =========================================================================
+ * Svelto - Card (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/variables.scss
+ * ========================================================================= */
+/* CARD */
+/* =========================================================================
  * Svelto - Colors (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -54,79 +102,6 @@
 /* INHERIT */
 /* BASE */
 /* COLORS */
-/* =========================================================================
- * Svelto - Breakpoints (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* BREAKPOINTS */
-/* BREAKPOINTS */
-/* =========================================================================
- * Svelto - Svelto (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../breakpoints/variables.scss
- * ========================================================================= */
-/* GUTTER */
-/* MAX WIDTH */
-/* BORDER RADIUS */
-/* TRANSITIONS */
-/* PATHS */
-/* =========================================================================
- * Svelto - Panel (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/variables.scss
- * ========================================================================= */
-/* PANEL */
-/* PINNED */
-/* BACKGROUND */
-/* SIZES */
-/* SLIM SIZES */
-/* =========================================================================
- * Svelto - Base (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../panel/variables.scss
- * ========================================================================= */
-/* BASE */
-/* BODY */
-/* MAIN HEADER */
-/* =========================================================================
- * Svelto - Breadcrumb (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* BREADCRUMB */
-/* AFTER CURRENT */
-/* =========================================================================
- * Svelto - Container (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/variables.scss
- * ========================================================================= */
-/* CONTAINER */
-/* CONTAINER COMPACT */
-/* =========================================================================
- * Svelto - Card (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../container/variables.scss
- * ========================================================================= */
-/* CARD */
 /* =========================================================================
  * Svelto - Outline (Variables)
  * =========================================================================
@@ -406,6 +381,13 @@
  * ========================================================================= */
 /* TITLE */
 /* =========================================================================
+ * Svelto - Layout (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* HEADER */
+/* =========================================================================
  * Svelto - Modal (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -453,6 +435,19 @@
 /* OVERLAY */
 /* SIBLINGS */
 /* DIMMER */
+/* =========================================================================
+ * Svelto - Panel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+/* PANEL */
+/* PINNED */
+/* BACKGROUND */
+/* SIZES */
+/* SLIM SIZES */
 /* =========================================================================
  * Svelto - Parallax (Variables)
  * =========================================================================
@@ -513,6 +508,16 @@
  * ========================================================================= */
 /* REMOTE MODAL PLACEHOLDER */
 /* TRANSITIONS */
+/* =========================================================================
+ * Svelto - Reset (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * ========================================================================= */
+/* SELECTION */
+/* BODY */
 /* =========================================================================
  * Svelto - Ripple (Variables)
  * =========================================================================
@@ -1243,6 +1248,98 @@ th {
 }
 
 /* =========================================================================
+ * Svelto - Reset (Box sizing)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* BORDER BOX */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+/* =========================================================================
+ * Svelto - Reset (No outline)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* NO OUTLINE ON FOCUS */
+*:focus {
+  outline: none;
+}
+
+/* =========================================================================
+ * Svelto - Reset (Selection)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* SELECTION */
+::-moz-selection {
+  background: #d9e9fb;
+  text-shadow: none;
+}
+::selection {
+  background: #d9e9fb;
+  text-shadow: none;
+}
+
+/* =========================================================================
+ * Svelto - Reset
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires vendor/normalize.scss
+ * @requires box_sizing.scss
+ * @requires no_outline.scss
+ * @requires selection.scss
+ * ========================================================================= */
+/* HTML */
+html {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* BODY */
+body {
+  background: #eceff1 ;
+  border-color: #c0cad1 ;
+  color: #3f3f3f ;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.4285714286;
+}
+
+body p > a,
+body span > a {
+  color: #ef6c00 ;
+}
+
+body p > a:after,
+body span > a:after {
+  border-color: #f97100 ;
+}
+
+body p > a:hover,
+body span > a:hover {
+  color: #f97100 ;
+}
+
+/* =========================================================================
  * Svelto - Widget
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -1251,21 +1348,21 @@ th {
  * @requires ../reset/reset.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .layout, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, input > :last-child, textarea > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, input > :last-child, textarea > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, .layout > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, .layout > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, .layout > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, .layout > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
-.widget > script:last-child, .accordion > script:last-child, input > script:last-child, textarea > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
+.widget > script:last-child, .accordion > script:last-child, input > script:last-child, textarea > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, .layout > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
   display: block;
   font-size: 0;
   height: 0;
@@ -1274,13 +1371,13 @@ th {
   margin-top: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, input.disabled, textarea.disabled, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, input.disabled, textarea.disabled, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, .disabled.layout, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
   opacity: 0.5 !important;
 }
 
-.widget.disabled *, .disabled.accordion *, input.disabled *, textarea.disabled *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
+.widget.disabled *, .disabled.accordion *, input.disabled *, textarea.disabled *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, .disabled.layout *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
   cursor: default !important;
 }
 
@@ -1947,151 +2044,6 @@ textarea.autogrow {
 
 textarea.autogrow.compact {
   min-height: 8.142857143em;
-}
-
-/* =========================================================================
- * Svelto - Base
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../reset/reset.scss
- * ========================================================================= */
-/* RESETTING BOX SIZING */
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-/* NO OUTLINE ON FOCUS */
-*:focus {
-  outline: none;
-}
-
-/* CUSTOM SELECTION COLOR */
-::-moz-selection {
-  background: #d9e9fb;
-  text-shadow: none;
-}
-::selection {
-  background: #d9e9fb;
-  text-shadow: none;
-}
-
-/* HTML */
-html {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  font-size: 16px;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-}
-
-/* BODY */
-body {
-  background: #eceff1 ;
-  border-color: #c0cad1 ;
-  color: #3f3f3f ;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 100%;
-  width: 100%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1em;
-  line-height: 1.4285714286;
-}
-
-body p > a,
-body span > a {
-  color: #ef6c00 ;
-}
-
-body p > a:after,
-body span > a:after {
-  border-color: #f97100 ;
-}
-
-body p > a:hover,
-body span > a:hover {
-  color: #f97100 ;
-}
-
-_:-ms-input-placeholder, :root body,
-_:-ms-input-placeholder, :root #content {
-  min-height: 100vh;
-}
-
-/* #CONTENT */
-#content {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  transition: margin 0.35s;
-  width: 100%;
-}
-
-#content > header {
-  margin-bottom: 0;
-}
-
-#content > header.fixed {
-  position: fixed;
-  z-index: 200;
-  top: 0;
-  right: 0;
-  left: 0;
-  transition-property: top, right, left;
-  transition-duration: 0.35s;
-}
-
-#content > header.fixed + main {
-  margin-top: 56px;
-}
-
-#content > main {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  padding: 10px;
-}
-
-#content > main > :last-child {
-  margin-bottom: 0 !important;
-}
-
-#content > main > :last-child.multiple, #content > main > :last-child.pager, #content > main > :last-child.tagbox-tags {
-  margin-bottom: -10px !important;
-}
-
-#content > main > script:last-child {
-  display: block;
-  font-size: 0;
-  height: 0;
-  visibility: hidden;
-  pointer-events: none;
-  margin-top: -10px !important;
-}
-
-#content > footer {
-  margin-bottom: 0;
 }
 
 /* =========================================================================
@@ -3198,7 +3150,7 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   border-radius: 0.25em;
-  /* SECTIONS */
+  /* HEADER / BLOCK / FOOTER */
   /* HEADER / FOOTER */
   /* FOOTER */
   /* BLOCK */
@@ -8687,6 +8639,90 @@ span > img {
 }
 
 /* =========================================================================
+ * Svelto - Layout
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+/* LAYOUT */
+.layout {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* HEADER / CONTENT / FOOTER */
+  /* HEADER / FOOTER */
+  /* HEADER */
+  /* CONTENT */
+}
+
+.layout-header, .layout-content, .layout-footer {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.layout-header > :last-child, .layout-content > :last-child, .layout-footer > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.layout-header > :last-child.multiple, .layout-header > :last-child.pager, .layout-header > :last-child.tagbox-tags, .layout-content > :last-child.multiple, .layout-content > :last-child.pager, .layout-content > :last-child.tagbox-tags, .layout-footer > :last-child.multiple, .layout-footer > :last-child.pager, .layout-footer > :last-child.tagbox-tags {
+  margin-bottom: -10px !important;
+}
+
+.layout-header > script:last-child, .layout-content > script:last-child, .layout-footer > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
+.layout-header, .layout-footer {
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+}
+
+.layout-header {
+  /* FIXED */
+}
+
+.layout-header.fixed {
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.layout-header.fixed + .layout-content {
+  margin-top: 56px;
+}
+
+.layout-content {
+  padding: 10px;
+  -webkit-flex: 1 1;
+      -ms-flex: 1 1;
+          flex: 1 1;
+}
+
+/* BODY LAYOUT */
+body.layout {
+  min-height: 100%;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+body.layout _:-ms-input-placeholder, :root body.layout {
+  min-height: 100vh;
+}
+
+/* =========================================================================
  * Svelto - Modal
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -9546,6 +9582,8 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../layout/layout.scss
  * ========================================================================= */
 /* PANEL */
 .panel {
@@ -9682,92 +9720,91 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 }
 
 /* LAYOUT */
-.layout.panel-pinned-left > #content,
-body.panel-pinned-left > #content {
+.layout.panel-pinned-left > .layout-header:not(.fixed),
+.layout.panel-pinned-left > .layout-content,
+.layout.panel-pinned-left > .layout-footer {
   margin-left: 15rem;
-  /* HEADER */
 }
 
-.layout.panel-pinned-left > #content > header.fixed,
-body.panel-pinned-left > #content > header.fixed {
+.layout.panel-pinned-left > .layout-header.fixed {
   left: 15rem;
 }
 
-.layout.panel-pinned-right > #content,
-body.panel-pinned-right > #content {
+.layout.panel-pinned-right > .layout-header:not(.fixed),
+.layout.panel-pinned-right > .layout-content,
+.layout.panel-pinned-right > .layout-footer {
   margin-right: 15rem;
-  /* HEADER */
 }
 
-.layout.panel-pinned-right > #content > header.fixed,
-body.panel-pinned-right > #content > header.fixed {
+.layout.panel-pinned-right > .layout-header.fixed {
   right: 15rem;
 }
 
-.layout.panel-pinned-top > #content,
-body.panel-pinned-top > #content {
+.layout.panel-pinned-top > .layout-header:not(.fixed),
+.layout.panel-pinned-top > .layout-content,
+.layout.panel-pinned-top > .layout-footer {
   margin-top: 7.5rem;
-  /* HEADER */
 }
 
-.layout.panel-pinned-top > #content > header.fixed,
-body.panel-pinned-top > #content > header.fixed {
+.layout.panel-pinned-top > .layout-header.fixed {
   top: 7.5rem;
 }
 
-.layout.panel-pinned-bottom > #content,
-body.panel-pinned-bottom > #content {
+.layout.panel-pinned-bottom > .layout-header:not(.fixed),
+.layout.panel-pinned-bottom > .layout-content,
+.layout.panel-pinned-bottom > .layout-footer {
   margin-bottom: 7.5rem;
-  /* HEADER */
 }
 
-.layout.panel-pinned-bottom > #content > header.fixed,
-body.panel-pinned-bottom > #content > header.fixed {
+.layout.panel-pinned-bottom > .layout-header.fixed {
   bottom: 7.5rem;
 }
 
-.layout.panel-slim-pinned-left > #content,
-body.panel-slim-pinned-left > #content {
+.layout.panel-slim-pinned-left > .layout-header:not(.fixed),
+.layout.panel-slim-pinned-left > .layout-content,
+.layout.panel-slim-pinned-left > .layout-footer {
   margin-left: 4.2666666667rem;
-  /* HEADER */
 }
 
-.layout.panel-slim-pinned-left > #content > header.fixed,
-body.panel-slim-pinned-left > #content > header.fixed {
+.layout.panel-slim-pinned-left > .layout-header.fixed {
   left: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-right > #content,
-body.panel-slim-pinned-right > #content {
+.layout.panel-slim-pinned-right > .layout-header:not(.fixed),
+.layout.panel-slim-pinned-right > .layout-content,
+.layout.panel-slim-pinned-right > .layout-footer {
   margin-right: 4.2666666667rem;
-  /* HEADER */
 }
 
-.layout.panel-slim-pinned-right > #content > header.fixed,
-body.panel-slim-pinned-right > #content > header.fixed {
+.layout.panel-slim-pinned-right > .layout-header.fixed {
   right: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-top > #content,
-body.panel-slim-pinned-top > #content {
+.layout.panel-slim-pinned-top > .layout-header:not(.fixed),
+.layout.panel-slim-pinned-top > .layout-content,
+.layout.panel-slim-pinned-top > .layout-footer {
   margin-top: 4.2666666667rem;
-  /* HEADER */
 }
 
-.layout.panel-slim-pinned-top > #content > header.fixed,
-body.panel-slim-pinned-top > #content > header.fixed {
+.layout.panel-slim-pinned-top > .layout-header.fixed {
   top: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-bottom > #content,
-body.panel-slim-pinned-bottom > #content {
+.layout.panel-slim-pinned-bottom > .layout-header:not(.fixed),
+.layout.panel-slim-pinned-bottom > .layout-content,
+.layout.panel-slim-pinned-bottom > .layout-footer {
   margin-bottom: 4.2666666667rem;
-  /* HEADER */
 }
 
-.layout.panel-slim-pinned-bottom > #content > header.fixed,
-body.panel-slim-pinned-bottom > #content > header.fixed {
+.layout.panel-slim-pinned-bottom > .layout-header.fixed {
   bottom: 4.2666666667rem;
+}
+
+> .layout-header,
+> .layout-content,
+> .layout-footer {
+  transition-property: top, right, left;
+  transition-duration: 0.35s;
 }
 
 /* =========================================================================
@@ -11787,8 +11824,8 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
  * @requires ../reset/reset.scss
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 /* STEPPER */
 .stepper {

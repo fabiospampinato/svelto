@@ -2,17 +2,15 @@
 <!-- MASTER -->
 
 <template name="master">
-  <div id="content">
-    {{> masterHeader}}
-    <main>{{> yield "main"}}</main>
-    {{> masterFooter}}
-  </div>
+  {{> masterHeader}}
+  <div class="layout-content">{{> yield "content"}}</div>
+  {{> masterFooter}}
 </template>
 
 <!-- HEADER -->
 
 <template name="masterHeader">
-  <header class="fixed">
+  <header class="layout-header fixed">
     <div class="toolbar primary z-depth-4">
       <div class="multiple centered">
         <div class="button compact transparent">
@@ -34,7 +32,7 @@
 <!-- FOOTER -->
 
 <template name="masterFooter">
-  <footer>
+  <footer class="layout-footer">
     <p class="text-center">Svelto, the framework</p>
   </footer>
   <script>
