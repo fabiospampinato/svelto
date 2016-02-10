@@ -69,7 +69,6 @@ var components = [
   'infobar',
   'input',
   'keyboard',
-  'keyframes',
   'label',
   // 'label/badge',
   // 'label/corner',

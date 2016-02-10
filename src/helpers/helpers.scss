@@ -228,6 +228,15 @@
   animation: rotate $rotating-animation-duration linear infinite !important;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ATTACHED */
 
 // The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)

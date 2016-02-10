@@ -1,14 +1,18 @@
 
 /* =========================================================================
- * Svelto - Grid (Mixins)
+ * Svelto - Grid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* GRID WIDTHS */
+// This generates `size-#` classes that are used for lining up the content in a grid
 
-// XSMALL
+//FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Is it the best way to do it?
+
+//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
+
+/* XSMALL */
 
 @include xsmall-up {
 
@@ -19,8 +23,6 @@
     .xs-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %xs-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -48,7 +50,7 @@
 
 }
 
-// SMALL
+/* SMALL */
 
 @include small-up {
 
@@ -59,8 +61,6 @@
     .sm-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %sm-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -88,7 +88,7 @@
 
 }
 
-// MEDIUM
+/* MEDIUM */
 
 @include medium-up {
 
@@ -99,8 +99,6 @@
     .md-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %md-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -128,7 +126,7 @@
 
 }
 
-// LARGE
+/* LARGE */
 
 @include large-up {
 
@@ -139,8 +137,6 @@
     .lg-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %lg-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -168,7 +164,7 @@
 
 }
 
-// XLARGE
+/* XLARGE */
 
 @include xlarge-up {
 
@@ -179,8 +175,6 @@
     .xl-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %xl-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
