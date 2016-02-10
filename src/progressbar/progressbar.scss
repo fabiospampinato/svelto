@@ -62,75 +62,6 @@
 
   }
 
-  /* LABELED */
-
-  &.labeled {
-
-    /* AFTER (LABEL) */
-
-    .progressbar-highlight:after {
-      content: attr(data-value);
-      font-size: $progressbar-label-font-size;
-      padding: 0 $gutter-half;
-    }
-
-  }
-
-  /* STRIPED */
-
-  &.striped {
-
-    .progressbar-highlight:before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: - $progressbar-stripe-size;
-      right: 0;
-      background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
-      content: '';
-      background-size: $progressbar-stripe-size $progressbar-stripe-size;
-      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
-    }
-
-    /* COMPACT */
-
-    &.compact .progressbar-highlight:before {
-      background-size: ( $progressbar-stripe-size / 2 ) ( $progressbar-stripe-size / 2 );
-    }
-
-    /* SLIM */
-
-    &.slim .progressbar-highlight:before {
-      background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
-    }
-
-    /* DISABLED */
-
-    &.disabled .progressbar-highlight:before {
-      animation-play-state: paused;
-    }
-
-  }
-
-  /* INDETERMINATE */
-
-  &.indeterminate {
-
-    .progressbar-highlight {
-
-      animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
-
-      /* STRIPES / LABEL */
-
-      &:before,
-      &:after {
-        display: none;
-      }
-
-    }
-
-  }
-
   /* COMPACT */
 
   &.compact {
@@ -159,29 +90,4 @@
 
   }
 
-}
-
-/* KEYFRAMES */
-
-@keyframes progressbar-stripes-move {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX($progressbar-stripe-size);
-  }
-}
-
-@keyframes progressbar-indeterminate-highlight {
-  0% {
-    width: 100%;
-    transform: translateX(-60%) scaleX(0.15);
-  }
-  35% {
-    transform: translateX(-15%) scaleX(0.5);
-  }
-  100% {
-    width: 100%;
-    transform: translateX(51%) scaleX(0.05);
-  }
 }

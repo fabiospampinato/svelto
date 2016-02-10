@@ -1,0 +1,20 @@
+
+/* =========================================================================
+ * Svelto - Progressbar - Striped (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* STRIPE */
+
+$progressbar-stripe-size: 3.3333333333em !default;
+
+$progressbar-stripe-opacity: .05 !default;
+
+$progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
+$progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
+
+/* STRIPES */
+
+$progressbar-stripes-transition-move-duration: .5s !default;

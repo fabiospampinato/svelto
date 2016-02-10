@@ -1,0 +1,23 @@
+
+/* =========================================================================
+ * Svelto - Progressbar - Indeterminate (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes progressbar-indeterminate-highlight {
+  0% {
+    width: 100%;
+    transform: translateX(-60%) scaleX(.15);
+  }
+  35% {
+    transform: translateX(-15%) scaleX(.5);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(51%) scaleX(.05);
+  }
+}
