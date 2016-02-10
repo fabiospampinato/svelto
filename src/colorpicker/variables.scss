@@ -27,7 +27,7 @@ $colorpicker-hue-wrp-width: 1.5em !default;
 $colorpicker-handler-border-width: 2px !default;
 $colorpicker-handler-border-color: white !default;
 
-$colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.2) !default;
+$colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, .2) !default;
 
 /* HANDLER SB */
 
@@ -38,6 +38,6 @@ $colorpicker-handler-sb-border-radius: 50% !default;
 
 /* HANDLER HUE */
 
-$colorpicker-handler-hue-height: 0.5em !default;
+$colorpicker-handler-hue-height: .5em !default;
 
 $colorpicker-handler-hue-border-radius: $border-radius-small !default;

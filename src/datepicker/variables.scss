@@ -21,7 +21,7 @@ $datepicker-day-name-height: 2.5em !default;
 /* DAY */
 
 $datepicker-day-height: 2.5em !default;
-$datepicker-day-prev-next-opacity: 0.25 !default;
+$datepicker-day-prev-next-opacity: .25 !default;
 $datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 
 /* DAY CIRCLE */
@@ -29,7 +29,7 @@ $datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 $datepicker-day-circle-size: 2.375em !default;
 
 $datepicker-day-hover-color: $color-secondary-text !default;
-$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25) !default;
+$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, .25) !default;
 
 $datepicker-day-today-color: $color-secondary-bg !default;
 $datepicker-day-today-circle-color: transparent !default;

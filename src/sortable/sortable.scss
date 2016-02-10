@@ -51,14 +51,14 @@ table.table.sortable {
 
     &:before {
       content: 'arrow_drop_down';
-      top: 0.35em;
+      top: .35em;
     }
 
     /* AFTER */
 
     &:after {
       content: 'arrow_drop_up';
-      bottom: 0.35em;
+      bottom: .35em;
     }
 
     /* INACTIVE OPACITY */

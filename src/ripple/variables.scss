@@ -13,7 +13,7 @@
 
 $ripple-color-default: $color-black !default;
 
-$ripple-transparentize-amount: 0.8 !default;
+$ripple-transparentize-amount: .8 !default;
 
 /* CIRCLE */
 
@@ -21,6 +21,6 @@ $ripple-circle-z-index: 50 !default;
 
 /* TRANSITIONS */
 
-$ripple-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default; // Taken from Angular Material
+$ripple-transition-timing-function: cubic-bezier(0.25, .8, .25, 1) !default; // Taken from Angular Material
 $ripple-transition-show-duration: $transition-duration-xslow !default;
 $ripple-transition-hide-duration: $transition-duration-xslow !default;

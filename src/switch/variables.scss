@@ -18,7 +18,7 @@ $switch-color: 'gray' !default;
 /* BAR */
 
 $switch-bar-width: 1.7333333333em !default;
-$switch-bar-height: 0.9333333333em !default;
+$switch-bar-height: .9333333333em !default;
 
 /* HANDLER */
 
@@ -30,14 +30,14 @@ $switch-handler-half-size: $switch-handler-size / 2 !default;
 /* HANDLER ICON */
 
 $switch-handler-icon-size: 1.6666666667em !default;
-$switch-handler-icon-font-size: 0.8em !default;
+$switch-handler-icon-font-size: .8em !default;
 
 /* HANDLER:BEFORE */
 
 $switch-handler-before-scale-inactive: 0 !default;
 $switch-handler-before-scale-active: $GOLDEN-RATIO !default;
 
-$switch-handler-before-active-opacity: 0.25 !default;
+$switch-handler-before-active-opacity: .25 !default;
 
 /* OTHERS */
 

@@ -10,12 +10,12 @@
 
 $table-th-sortable-padding-horizontal: 1.75em !default;
 
-$table-th-sortable-hover-bg-color: rgba(255, 255, 255, 0.1) !default;
-$table-th-sortable-active-bg-color: rgba(0, 0, 0, 0.025) !default;
+$table-th-sortable-hover-bg-color: rgba(255, 255, 255, .1) !default;
+$table-th-sortable-active-bg-color: rgba(0, 0, 0, .025) !default;
 
 /* SORTABLE TABLE HEADER ICON */
 
-$table-th-sortable-icon-inactive-opacity: 0.35 !default;
+$table-th-sortable-icon-inactive-opacity: .35 !default;
 $table-th-sortable-icon-active-opacity: 1 !default;
 
-$table-th-sortable-icon-right: 0.15em !default;
+$table-th-sortable-icon-right: .15em !default;

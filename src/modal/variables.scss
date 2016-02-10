@@ -13,7 +13,7 @@
 $modal-z-index: 500 !default;
 $modal-z-depth: 6 !default;
 
-$modal-closed-scale: 0.7 !default;
+$modal-closed-scale: .7 !default;
 
 /* NOT FULLSCREEN */
 
@@ -22,7 +22,7 @@ $modal-max-height: 90vh !default;
 
 /* BEFORE (BACKGROUND) */
 
-$modal-background-color: rgba(0, 0, 0, 0.5) !default;
+$modal-background-color: rgba(0, 0, 0, .5) !default;
 
 /* TRANSITIONS */
 
