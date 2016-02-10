@@ -1,0 +1,45 @@
+
+/* =========================================================================
+ * Svelto - Table - Striped
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
+
+/* STRIPED */
+
+table.table.striped tbody tr {
+
+  &:first-child.table-row-empty ~ tr {
+
+    &:nth-child(even) {
+      background-color: $table-striped-row-even-color;
+    }
+
+    &:nth-child(odd) {
+      background-color: $table-striped-row-odd-color;
+    }
+
+  }
+
+  &:first-child:not(.table-row-empty) {
+
+    background-color: $table-striped-row-even-color;
+
+    ~ tr {
+
+      &:nth-child(odd) {
+        background-color: $table-striped-row-even-color;
+      }
+
+      &:nth-child(even) {
+        background-color: $table-striped-row-odd-color;
+      }
+
+    }
+
+  }
+
+}

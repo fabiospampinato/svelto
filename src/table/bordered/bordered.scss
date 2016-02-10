@@ -1,0 +1,66 @@
+
+/* =========================================================================
+ * Svelto - Table - Bordered
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * @require ../separated/separated.scss
+ * ========================================================================= */
+
+/* BORDERED */
+
+table.table.bordered {
+
+  @extend table.table.separated;
+
+  tr > * {
+
+    border-left-width: $table-bordered-border-width;
+
+    &:last-child {
+      border-right-width: $table-bordered-border-width;
+    }
+
+  }
+
+  tbody tr {
+
+    &:first-child td,
+    &.table-row-empty + tr td {
+      border-top-width: $table-bordered-border-width;
+    }
+
+    &:last-child td {
+      border-bottom-width: $table-bordered-border-width;
+    }
+
+  }
+
+  thead {
+
+    th {
+      border-top-width: $table-bordered-border-width;
+    }
+
+    ~ tbody tr:first-child td,
+    ~ tbody tr.table-row-empty + tr td {
+      border-top-width: 0;
+    }
+
+  }
+
+  tfoot {
+
+    td {
+      border-bottom-width: $table-bordered-border-width;
+    }
+
+    + tbody tr:last-child td {
+      border-bottom-width: 0;
+    }
+
+  }
+
+}

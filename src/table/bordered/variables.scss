@@ -1,17 +1,14 @@
 
 /* =========================================================================
- * Svelto - Table (Variables)
+ * Svelto - Table - Bordered (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../outline/variables.scss
  * ========================================================================= */
 
-/* TABLE */
+/* BORDERED */
 
-$table-color: inherit !default;
-
-$table-header-footer-bg-color: rgba(0, 0, 0, .05) !default; // The same used in label sub left and right
-
-/* EMPTY */
-
-$table-row-empty-height: 4.5em !default;
+$table-bordered-border-width: $outline-width !default;
+$table-bordered-border-color: inherit !default;

@@ -1,0 +1,53 @@
+
+/* =========================================================================
+ * Svelto - Table - Hoverable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
+
+/* HOVERABLE */
+
+table.table:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
+  background-color: $table-hoverable-row-even-color-hover;
+}
+
+/* STRIPED */
+
+table.table:not(.disabled).hoverable.striped tbody tr {
+
+  &:first-child.table-row-empty ~ tr {
+
+    &:nth-child(even):hover {
+      background-color: $table-hoverable-row-even-color-hover;
+    }
+
+    &:nth-child(odd):hover {
+      background-color: $table-hoverable-row-odd-color-hover;
+    }
+
+  }
+
+  &:first-child:not(.table-row-empty) {
+
+    &:hover {
+      background-color: $table-hoverable-row-even-color-hover;
+    }
+
+    ~ tr {
+
+      &:nth-child(odd):hover {
+        background-color: $table-hoverable-row-even-color-hover;
+      }
+
+      &:nth-child(even):hover {
+        background-color: $table-hoverable-row-odd-color-hover;
+      }
+
+    }
+
+  }
+
+}

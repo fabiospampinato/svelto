@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Table - Separated
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
+
+/* SEPARATED */
+
+table.table.separated {
+
+  thead th {
+    border-bottom-width: $table-bordered-border-width;
+  }
+
+  tbody tr:not(:last-child) td {
+    border-bottom-width: $table-bordered-border-width;
+  }
+
+  tfoot td {
+    border-top-width: $table-bordered-border-width;
+  }
+
+}
