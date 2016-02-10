@@ -1,0 +1,96 @@
+
+/* =========================================================================
+ * Svelto - Label - Ribbon
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RIBBON */
+
+//TODO: Maybe move it to it's own component
+
+.label.ribbon {
+
+  /* BEFORE / AFTER */
+
+  &.ribbon-left:before,
+  &.ribbon-right:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    border: $label-ribbon-size solid transparent;
+    border-top-color: inherit;
+    bottom: - $label-ribbon-size * 2;
+  }
+
+  /* LEFT */
+
+  &.ribbon-left {
+
+    @include border-left-radius ( 0 );
+    left: - ( $gutter + ( $label-ribbon-size * 2 ) );
+    padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
+
+    &:before {
+      left: 0;
+      border-right-color: inherit;
+    }
+
+  }
+
+  /* LEFT & RIGHT */
+
+  &.ribbon-left.ribbon-right {
+    width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 4)});
+  }
+
+  /* RIGHT */
+
+  &.ribbon-right {
+
+    @include border-right-radius ( 0 );
+    padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
+
+    &:after {
+      right: 0;
+      border-left-color: inherit;
+    }
+
+  }
+
+  /* ONLY RIGHT */
+
+  //FIXME: It is a pixel too far
+
+  &.ribbon-right:not(.ribbon-left) {
+    left: calc(100% + #{( $gutter * 2 ) + $label-ribbon-size});
+    transform: translateX(-100%);
+  }
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    /* BEFORE / AFTER */
+
+    &.ribbon-left:before,
+    &.ribbon-right:after {
+      bottom: - ( $label-ribbon-size * 2 + $outline-width );
+    }
+
+    /* BEFORE */
+
+    &.ribbon-left:before {
+      left: - $outline-width;
+    }
+
+    /* AFTER */
+
+    &.ribbon-right:after {
+      right: - $outline-width;
+    }
+
+  }
+
+}

@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Label - Tag (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * @require ../../constants/variables.scss
+ * @require ../../typography/variables.scss
+ * ========================================================================= */
+
+/* TAG */
+
+$label-tag-sharp-size: ( $line-height-em + ( $label-padding-vertical * 2 ) ) / $SQRT2 !default;
+$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-padding-vertical * 2 ) ) / $SQRT2 !default;
+
+$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
+$label-tag-smooth-compact-size: $label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
+
+/* CIRCLE */
+
+$label-tag-circle-scale: .25 !default;
+$label-tab-circle-background-color: $color-base !default;
+$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, .3) !default;

@@ -187,7 +187,7 @@ linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/li
     allow_single_line_padding: false
 
   SpaceBetweenParens:
-    enabled: true
+    enabled: false
     spaces: 0
 
   StringQuotes:

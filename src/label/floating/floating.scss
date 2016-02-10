@@ -1,0 +1,34 @@
+
+/* =========================================================================
+ * Svelto - Label - Floating
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FLOATING */
+
+.label.floating {
+
+  //TODO: Add it while scrolling to bottom, show him when scrolling to top
+  //TODO: Add sub floating actions
+
+  @include z-depth ( $label-floating-z-depth );
+  position: fixed;
+  z-index: $label-floating-z-index;
+  right: $label-floating-right;
+  bottom: $label-floating-bottom;
+  margin-bottom: 0;
+  padding: $label-floating-padding-vertical $label-floating-padding-horizontal;
+  min-height: $line-height-em + ( $label-floating-padding-vertical * 2 );
+  min-width: $line-height-em + ( $label-floating-padding-horizontal * 2 );
+
+  /* COMPACT */
+
+  &.compact {
+    padding: $label-floating-compact-padding-vertical $label-floating-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-floating-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-floating-compact-padding-horizontal * 2 );
+  }
+
+}

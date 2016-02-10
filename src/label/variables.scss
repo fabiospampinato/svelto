@@ -5,10 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../constants/variables.scss
  * @require ../container/variables.scss
- * @require ../typography/variables.scss
  * ========================================================================= */
 
 /* LABEL */
@@ -18,7 +15,7 @@ $label-color-basic: false !default;
 
 $label-border-radius: $container-border-radius !default;
 
-$label-padding-vertical: 0.5em !default;
+$label-padding-vertical: .5em !default;
 $label-padding-horizontal: $label-padding-vertical * 2 !default;
 
 /* LABEL COMPACT */
@@ -28,54 +25,9 @@ $label-compact-padding-horizontal: $label-padding-vertical !default;
 
 /* LEFT / RIGHT */
 
-$label-sub-bg-color: rgba(0, 0, 0, 0.05) !default;
+$label-sub-bg-color: rgba(0, 0, 0, .05) !default;
 
 /* CENTER EXTRA SPACING */
 
-$label-center-extra-spacing: 0.75em !default;
-$label-compact-center-extra-spacing: 0.5em !default;
-
-/* BADGE */
-
-$label-badge-spacing: -20% !default;
-
-/* TAG */
-
-$label-tag-sharp-size: ( $line-height-em + ( $label-padding-vertical * 2 ) ) / $SQRT2 !default;
-$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-padding-vertical * 2 ) ) / $SQRT2 !default;
-
-$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
-$label-tag-smooth-compact-size: $label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
-
-/* TAG CIRCLE */
-
-$label-tag-circle-scale: 0.25 !default;
-$label-tab-circle-background-color: $color-base !default;
-$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.3) !default;
-
-/* RIBBON */
-
-$label-ribbon-size: 8px !default;
-
-/* CORNER */
-
-$label-corner-z-index: 70 !default;
-
-$label-corner-padding-vertical: $label-compact-padding-vertical * 2 !default;
-$label-corner-padding-horizontal: $label-compact-padding-horizontal * 2 !default;
-
-/* FLOATING */
-
-$label-floating-z-index: 150 !default;
-$label-floating-z-depth: 4 !default;
-
-$label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;
-$label-floating-padding-horizontal: $label-padding-vertical * 1.6 !default;
-
-$label-floating-right: 24px !default;
-$label-floating-bottom: 24px !default;
-
-/* FLOATING COMPACT */
-
-$label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
-$label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
+$label-center-extra-spacing: .75em !default;
+$label-compact-center-extra-spacing: .5em !default;
