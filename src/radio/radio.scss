@@ -24,13 +24,13 @@
     /* BEFORE */
 
     &:before {
-      content: 'radio_button_unchecked';
+      content: $radio-icon-off;
     }
 
     /* AFTER */
 
     &:after {
-      content: 'radio_button_checked';
+      content: $radio-icon-off;
     }
 
   }

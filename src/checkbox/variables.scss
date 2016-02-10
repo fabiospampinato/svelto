@@ -10,5 +10,11 @@
 
 /* CHECKBOX */
 
+$checkbox-icon-off: 'check_box_outline_blank' !default;
+
+$checkbox-icon-on: 'check_box' !default;
 $checkbox-icon-on-color: 'secondary' !default;
+
+/* OTHERS */
+
 $checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
