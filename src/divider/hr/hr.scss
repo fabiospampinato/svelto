@@ -1,16 +1,20 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Divider - Hr
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/svelto.js
- * @require ../animations/animations.js
- * @require ../breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require ../reset/reset.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* HR */
+
+hr {
+  z-index: $hr-z-index;
+  height: $hr-height;
+  margin-top: - $gutter-half !important;
+  margin-bottom: $gutter-half !important;
+  border: none;
+  background-color: $hr-bg-color;
+}

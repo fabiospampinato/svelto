@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Maybe use an object and set it : true/false for including/skipping the specified component, this way we can include `typography` without `abbr` simply with a `{ typography: true, 'typography/abbr': false }`
+
 /* COMPONENTS */
 
 var components = [
@@ -37,6 +39,10 @@ var components = [
   'core',
   'datepicker',
   'divider',
+  // 'divider/block',
+  // 'divider/hr',
+  // 'divider/linear',
+  // 'divider/text',
   'draggable',
   'dropdown',
   'droppable',

@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - Divider - Block
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BLOCK */
+
+.divider.block {
+
+  margin-bottom: $gutter;
+  text-align: center;
+
+  /* CONTENT */
+
+  > .divider-content {
+    @include color ( $divider-block-color );
+    @include last-child-no-gutter ();
+    display: inline-block;
+    padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
+    border-radius: 10000px 10000px;
+  }
+
+}
