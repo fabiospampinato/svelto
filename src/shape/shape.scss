@@ -1,33 +1,16 @@
 
 /* =========================================================================
- * Svelto - Selectable
+ * Svelto - Shape
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 
-/* SELECTABLE TABLE */
+/* SHAPE */
 
-table.selectable {
-
-  /* ROW */
-
-  tbody tr {
-
-    /* SELECTABLE */
-
-    &:not(.empty) {
-      cursor: pointer;
-    }
-
-    /* SELECTED */
-
-    &.selected {
-      background-color: $table-selectable-row-selected-color !important;
-    }
-
-  }
-
+%shape {
+  @extend .widget;
+  flex: 0 1 !important; // IE-10-11 sets flex-shrink to 0
 }

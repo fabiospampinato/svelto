@@ -1,33 +1,26 @@
 
 /* =========================================================================
- * Svelto - Selectable
+ * Svelto - Shapes - Square - Sample
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
+ * @require ../../shape.scss
  * ========================================================================= */
 
-/* SELECTABLE TABLE */
+/* SAMPLE */
 
-table.selectable {
+.square-sample {
 
-  /* ROW */
+  @extend %shape;
+  @include square ( $square-sample-size );
+  overflow: hidden;
+  padding: $gutter-half;
 
-  tbody tr {
+  /* PARAGRAPH */
 
-    /* SELECTABLE */
-
-    &:not(.empty) {
-      cursor: pointer;
-    }
-
-    /* SELECTED */
-
-    &.selected {
-      background-color: $table-selectable-row-selected-color !important;
-    }
-
+  > p {
+    @include size ( $square-sample-p-size );
   }
 
 }

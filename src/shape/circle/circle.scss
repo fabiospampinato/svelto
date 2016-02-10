@@ -1,33 +1,16 @@
 
 /* =========================================================================
- * Svelto - Selectable
+ * Svelto - Shapes - Circle
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
+ * @require ../shape.scss
  * ========================================================================= */
 
-/* SELECTABLE TABLE */
+/* CIRCLE */
 
-table.selectable {
-
-  /* ROW */
-
-  tbody tr {
-
-    /* SELECTABLE */
-
-    &:not(.empty) {
-      cursor: pointer;
-    }
-
-    /* SELECTED */
-
-    &.selected {
-      background-color: $table-selectable-row-selected-color !important;
-    }
-
-  }
-
+.circle {
+  @extend %shape;
+  @include circle ( $circle-size );
 }
