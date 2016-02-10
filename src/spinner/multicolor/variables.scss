@@ -1,28 +1,16 @@
 
 /* =========================================================================
- * Svelto - Spinner (Variables)
+ * Svelto - Spinner - Multicolor (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../label/variables.scss
+ * @require ../../colors/colors.scss
  * ========================================================================= */
 
-/* SPINNER */
+/* MULTICOLOR */
 
-$spinner-size: 3.25em !default;
-
-$spinner-radius: 1.25em !default;
-
-/* STROKE */
-
-$spinner-stroke-width: .25em !default;
-
-$spinner-stroke-color: $color-secondary !default;
-
-/* ANIMATION */
-
-$spinner-animation-rotate-duration: 2s !default;
-
-$spinner-stroke-animation-dash-duration: 1.5s !default;
+$spinner-multicolor-stroke-color1: $color-blue !default;
+$spinner-multicolor-stroke-color2: $color-red !default;
+$spinner-multicolor-stroke-color3: $color-yellow !default;
+$spinner-multicolor-stroke-color4: $color-green !default;

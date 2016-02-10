@@ -1,28 +1,20 @@
 
 /* =========================================================================
- * Svelto - Spinner (Variables)
+ * Svelto - Spinner - Label (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../label/variables.scss
+ * @require ../../label/variables.scss
  * ========================================================================= */
 
-/* SPINNER */
+/* SPINNER LABEL */
 
-$spinner-size: 3.25em !default;
+$spinner-label-z-depth: 1 !default;
 
-$spinner-radius: 1.25em !default;
+$spinner-label-color: 'inherit' !default;
 
-/* STROKE */
+$spinner-label-padding-vertical: $label-compact-padding-vertical !default;
+$spinner-label-padding-horizontal: $label-compact-padding-horizontal !default;
 
-$spinner-stroke-width: .25em !default;
-
-$spinner-stroke-color: $color-secondary !default;
-
-/* ANIMATION */
-
-$spinner-animation-rotate-duration: 2s !default;
-
-$spinner-stroke-animation-dash-duration: 1.5s !default;
+$spinner-label-border-radius: 50% !default;

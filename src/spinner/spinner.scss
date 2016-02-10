@@ -9,6 +9,7 @@
  * =========================================================================
  * @require ../reset/reset.scss
  * @require ../widget/widget.scss
+ * @require keyframes.scss
  * ========================================================================= */
 
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
@@ -53,86 +54,4 @@ svg.spinner {
 
   }
 
-  /* MULTICOLOR */
-
-  &.multicolor {
-
-    /* CIRCLE */
-
-    circle {
-      animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
-                 multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
-    }
-
-  }
-
-}
-
-/* SPINNER LABEL */
-
-.spinner-label {
-
-  @extend .widget;
-  @include color ( $spinner-label-color );
-  @include z-depth ( $spinner-label-z-depth );
-  display: flex;
-  border-radius: $spinner-label-border-radius !important;
-  padding: $spinner-label-padding-vertical $spinner-label-padding-horizontal;
-
-  /* SPINNER */
-
-  .spinner {
-    margin-bottom: 0;
-  }
-
-  /* COLORS */
-
-  @each $name, $datas in $colors {
-
-    $accent: nth($datas, 5);
-
-    &.#{$name} .spinner circle {
-      stroke: $accent !important;
-    }
-
-  }
-
-}
-
-/* KEYFRAMES */
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 0%, 240%;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -60%;
-  }
-  100% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -240%;
-  }
-}
-
-@keyframes multicolor {
-  0%, 24% {
-    stroke: $spinner-multicolor-stroke-color1;
-  }
-  25%, 49% {
-    stroke: $spinner-multicolor-stroke-color2;
-  }
-  50%, 74% {
-    stroke: $spinner-multicolor-stroke-color3;
-  }
-  75%, 99% {
-    stroke: $spinner-multicolor-stroke-color4;
-  }
 }
