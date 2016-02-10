@@ -30,9 +30,9 @@
 
 /* FROM COLOR */
 
-@mixin gradient-horizontal-from-color ( $color_name, $extra: '' ) {
+@mixin gradient-horizontal-from-color ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $start: nth($colors, 2);
   $end: nth($colors, 3);
@@ -41,9 +41,9 @@
 
 }
 
-@mixin gradient-vertical-from-color ( $color_name, $extra: '' ) {
+@mixin gradient-vertical-from-color ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $start: nth($colors, 2);
   $end: nth($colors, 3);

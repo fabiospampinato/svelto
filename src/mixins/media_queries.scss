@@ -8,9 +8,9 @@
 
 /* WIDTH */
 
-@mixin screen ( $min_width, $max_width ) {
+@mixin screen ( $min-width, $max-width ) {
 
-  @media screen and (min-width: $min_width) and (max-width: $max_width) {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
     @content;
   }
 
@@ -34,9 +34,9 @@
 
 /* HEIGHT */
 
-@mixin screen-height ( $min_height, $max_height ) {
+@mixin screen-height ( $min-height, $max-height ) {
 
-  @media screen and (min-height: $min_height) and (max-height: $max_height)   {
+  @media screen and (min-height: $min-height) and (max-height: $max-height)   {
     @content;
   }
 
