@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../dropdown/dropdown.js
- * @requires ../browser/browser.js
+ * @require ../dropdown/dropdown.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)

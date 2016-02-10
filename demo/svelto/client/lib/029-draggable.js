@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe return less datas to triggered events and callbacks

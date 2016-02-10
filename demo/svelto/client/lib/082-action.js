@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote.js
- * @requires ../../noty/noty.js
+ * @require ../remote.js
+ * @require ../../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)

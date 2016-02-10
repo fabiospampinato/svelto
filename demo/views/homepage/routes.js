@@ -12,7 +12,7 @@ Router.route ( '/', {
 
 if ( Meteor.isClient ) {
 
-  Template.home.onRendered ( function () {
+  Template.homepage.onRendered ( function () {
 
     $(document.body).widgetize ();
 

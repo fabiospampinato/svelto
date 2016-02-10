@@ -5,9 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote.js
- * @requires ../../modal/modal.js
- * @requires ../../noty/noty.js
+ * @require ../remote.js
+ * @require ../../modal/modal.js
+ * @require ../../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)

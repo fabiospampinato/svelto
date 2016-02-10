@@ -117,7 +117,7 @@
 
     static ready () {
 
-      $('.layout, body').first ().append ( //TODO: Use just `.layout`
+      $('.layout, body').first ().append ( // `body` is used as a fallback
         '<div class="noty-queues top">' +
           '<div class="noty-queue expanded"></div>' +
           '<div class="noty-queues-row">' +

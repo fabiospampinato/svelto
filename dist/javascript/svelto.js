@@ -46,7 +46,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -76,7 +76,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -106,7 +106,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -157,7 +157,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 //TODO: Write it better
@@ -396,7 +396,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -470,7 +470,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../browser/browser.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 //TODO: Write it better
@@ -705,12 +705,12 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires ../animations/animations.js
- * @requires ../breakpoints/breakpoints.js
- * @requires ../colors/colors.js
- * @requires ../extras/lodash-extra.js
- * @requires ../extras/jQuery-extra.js
+ * @require ../svelto/svelto.js
+ * @require ../animations/animations.js
+ * @require ../breakpoints/breakpoints.js
+ * @require ../colors/colors.js
+ * @require ../extras/lodash-extra.js
+ * @require ../extras/jQuery-extra.js
  * ========================================================================= */
 
 
@@ -722,7 +722,7 @@
  * =========================================================================
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 /***************************
@@ -851,8 +851,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../browser/browser.js
+ * @require ../core/core.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
@@ -1012,7 +1012,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -1135,8 +1135,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../widgetize/widgetize.js
+ * @require ../core/core.js
+ * @require ../widgetize/widgetize.js
  *=========================================================================*/
 
 (function ( $, _, Svelto, Widgetize ) {
@@ -1266,8 +1266,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires breakpoints.js
+ * @require ../svelto/svelto.js
+ * @require breakpoints.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Breakpoints ) {
@@ -1349,7 +1349,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -1422,13 +1422,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
- * @requires ../factory/factory.js
- * @requires ../breakpoints/breakpoints.js
- * @requires ../breakpoints/breakpoint.js
- * @requires ../keyboard/keyboard.js
+ * @require ../core/core.js
+ * @require ../tmpl/tmpl.js
+ * @require ../pointer/pointer.js
+ * @require ../factory/factory.js
+ * @require ../breakpoints/breakpoints.js
+ * @require ../breakpoints/breakpoint.js
+ * @require ../keyboard/keyboard.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
@@ -1458,7 +1458,7 @@
         hidden: 'hidden' // Used to hide an element
       },
       selectors: { // Selectors to use inside the widget
-        layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
+        layout: '.layout, body' // `body` is used as a fallback
       },
       animations: {}, // Object storing all the milliseconds required for each animation to occur
       breakpoints: {}, // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
@@ -2152,8 +2152,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -2248,7 +2248,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../expander/expander.js
+ * @require ../expander/expander.js
  * ========================================================================= */
 
 //TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
@@ -2394,7 +2394,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../widget/widget.js
+ * @require ../../widget/widget.js
  * ========================================================================= */
 
 // It supports only `box-sizing: border-box` inputs
@@ -2491,7 +2491,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../widget/widget.js
+ * @require ../../widget/widget.js
  * ========================================================================= */
 
 // It supports only `box-sizing: border-box` textareas
@@ -2600,7 +2600,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @require ../core/core.js
  * ========================================================================= */
 
 //TODO: Maybe rename it
@@ -2626,7 +2626,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @require ../core/core.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -2652,7 +2652,7 @@
  * =========================================================================
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -2844,9 +2844,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../timer/timer.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../timer/timer.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add slides drag support
@@ -3207,7 +3207,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -3258,8 +3258,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../targeter/targeter.js
+ * @require ../widget/widget.js
+ * @require ../targeter/targeter.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
@@ -3333,7 +3333,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 //TODO: Add support for the alpha channel
@@ -3742,8 +3742,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../color/color.js
+ * @require ../widget/widget.js
+ * @require ../color/color.js
  * ========================================================================= */
 
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
@@ -4116,7 +4116,7 @@
  * =========================================================================
  * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 /* COOKIE */
@@ -4217,7 +4217,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 // When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
@@ -4746,7 +4746,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe return less datas to triggered events and callbacks
@@ -5326,7 +5326,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 /* TRANSFORM UTILITIES */
@@ -5420,8 +5420,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../transform/transform.js
+ * @require ../core/core.js
+ * @require ../transform/transform.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -5715,7 +5715,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 /* EMBEDDED CSS */
@@ -5878,9 +5878,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../positionate/positionate.js
- * @requires ../embedded_css/embedded_css.js
+ * @require ../widget/widget.js
+ * @require ../positionate/positionate.js
+ * @require ../embedded_css/embedded_css.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
@@ -6212,8 +6212,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../closer/closer.js
+ * @require dropdown.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6248,8 +6248,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../closer/closer.js
- * @requires ../browser/browser.js
+ * @require ../closer/closer.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
@@ -6442,8 +6442,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../opener/opener.js
+ * @require dropdown.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6478,7 +6478,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../opener/opener.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6531,8 +6531,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../toggler/toggler.js
+ * @require dropdown.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6567,8 +6567,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../bteach/bteach.js
+ * @require ../core/core.js
+ * @require ../bteach/bteach.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -6726,8 +6726,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../touching/touching.js
+ * @require ../widget/widget.js
+ * @require ../touching/touching.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6886,8 +6886,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires expander.js
- * @requires ../closer/closer.js
+ * @require expander.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6922,8 +6922,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires expander.js
- * @requires ../opener/opener.js
+ * @require expander.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6958,8 +6958,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires expander.js
- * @requires ../toggler/toggler.js
+ * @require expander.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -6994,7 +6994,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
@@ -7162,7 +7162,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -7249,8 +7249,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires flippable.js
- * @requires ../toggler/toggler.js
+ * @require flippable.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -7290,8 +7290,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -7442,7 +7442,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../overlay/overlay.js
+ * @require ../overlay/overlay.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -7563,9 +7563,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../timer/timer.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../timer/timer.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
@@ -7675,7 +7675,7 @@
 
     static ready () {
 
-      $('.layout, body').first ().append ( //TODO: Use just `.layout`
+      $('.layout, body').first ().append ( // `body` is used as a fallback
         '<div class="noty-queues top">' +
           '<div class="noty-queue expanded"></div>' +
           '<div class="noty-queues-row">' +
@@ -7978,7 +7978,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -8020,8 +8020,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires ../regexes/regexes.js
+ * @require ../svelto/svelto.js
+ * @require ../regexes/regexes.js
  * ========================================================================= */
 
 // `value` is supposed to be a string
@@ -8129,9 +8129,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../validator/validator.js
- * @requires ../noty/noty.js
+ * @require ../widget/widget.js
+ * @require ../validator/validator.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
@@ -8609,10 +8609,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../spinner_overlay/spinner_overlay.js
- * @requires ../noty/noty.js
- * @requires ../form_validate/form_validate.js
+ * @require ../core/core.js
+ * @require ../spinner_overlay/spinner_overlay.js
+ * @require ../noty/noty.js
+ * @require ../form_validate/form_validate.js
  * ========================================================================= */
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
@@ -8787,7 +8787,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
@@ -9050,10 +9050,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires ../widgetize/widgetize.js
- * @requires ../pointer/pointer.js
- * @requires vendor/screenfull.js
+ * @require ../svelto/svelto.js
+ * @require ../widgetize/widgetize.js
+ * @require ../pointer/pointer.js
+ * @require vendor/screenfull.js
  * ========================================================================= */
 
 //TODO: Move to their own folders/files
@@ -9100,7 +9100,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9157,8 +9157,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires infobar.js
- * @requires ../closer/closer.js
+ * @require infobar.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9193,8 +9193,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 // Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
@@ -9378,8 +9378,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires modal.js
- * @requires ../closer/closer.js
+ * @require modal.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9414,8 +9414,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires modal.js
- * @requires ../opener/opener.js
+ * @require modal.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9450,8 +9450,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires modal.js
- * @requires ../toggler/toggler.js
+ * @require modal.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9486,7 +9486,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/svelto.js
+ * @require ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -9516,8 +9516,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../cookie/cookie.js
+ * @require ../core/core.js
+ * @require ../cookie/cookie.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Cookie, NTA ) {
@@ -9676,8 +9676,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires NTA.Group.js
+ * @require ../core/core.js
+ * @require NTA.Group.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, NTA ) {
@@ -9729,8 +9729,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires NTA.Action.js
+ * @require ../core/core.js
+ * @require NTA.Action.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, NTA ) {
@@ -9807,7 +9807,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../noty/noty.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 // If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
@@ -9882,7 +9882,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires noty.js
+ * @require noty.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets ) {
@@ -9920,7 +9920,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../n_times_action/n_times_action.js
+ * @require ../n_times_action/n_times_action.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -9944,8 +9944,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires overlay.js
- * @requires ../closer/closer.js
+ * @require overlay.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -9980,8 +9980,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires overlay.js
- * @requires ../opener/opener.js
+ * @require overlay.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -10016,8 +10016,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires overlay.js
- * @requires ../toggler/toggler.js
+ * @require overlay.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -10052,8 +10052,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 // Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
@@ -10455,8 +10455,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires panel.js
- * @requires ../closer/closer.js
+ * @require panel.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -10491,8 +10491,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires panel.js
- * @requires ../opener/opener.js
+ * @require panel.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -10527,8 +10527,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires panel.js
- * @requires ../toggler/toggler.js
+ * @require panel.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -11177,7 +11177,7 @@ Prism.languages.js = Prism.languages.javascript;
 * Copyright (c) 2015-2016 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 * =========================================================================
-* @requires ../widget/widget.js
+* @require ../widget/widget.js
 * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -11332,7 +11332,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires progressbar.js
+ * @require progressbar.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets ) {
@@ -11358,7 +11358,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../noty/noty.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 //FIXME: Crappy, not working atm, maybe should get removed
@@ -11534,7 +11534,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities
@@ -11671,8 +11671,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote.js
- * @requires ../../noty/noty.js
+ * @require ../remote.js
+ * @require ../../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
@@ -11881,7 +11881,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires action.js
+ * @require action.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets ) {
@@ -11983,8 +11983,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote_trigger.js
- * @requires action.js
+ * @require ../remote_trigger.js
+ * @require action.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -12019,9 +12019,9 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote.js
- * @requires ../../modal/modal.js
- * @requires ../../noty/noty.js
+ * @require ../remote.js
+ * @require ../../modal/modal.js
+ * @require ../../noty/noty.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
@@ -12226,7 +12226,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires modal.js
+ * @require modal.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets ) {
@@ -12250,8 +12250,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../remote_trigger.js
- * @requires modal.js
+ * @require ../remote_trigger.js
+ * @require modal.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -12286,10 +12286,10 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../browser/browser.js
- * @requires ../mouse/mouse.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../browser/browser.js
+ * @require ../mouse/mouse.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
@@ -12476,7 +12476,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @require ../core/core.js
  * ========================================================================= */
 
 /* PUSHSTATE */
@@ -12548,8 +12548,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../dropdown/dropdown.js
- * @requires ../browser/browser.js
+ * @require ../dropdown/dropdown.js
+ * @require ../browser/browser.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -12854,9 +12854,9 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../browser/browser.js
- * @requires ../mouse/mouse.js
+ * @require ../widget/widget.js
+ * @require ../browser/browser.js
+ * @require ../mouse/mouse.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Mouse ) {
@@ -13196,8 +13196,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../draggable/draggable.js
- * @requires ../transform/transform.js
+ * @require ../draggable/draggable.js
+ * @require ../transform/transform.js
  * ========================================================================= */
 
 //TODO: Add vertical slider
@@ -13516,7 +13516,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
@@ -13792,7 +13792,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
@@ -14036,8 +14036,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../draggable/draggable.js
- * @requires ../transform/transform.js
+ * @require ../draggable/draggable.js
+ * @require ../transform/transform.js
  * ========================================================================= */
 
 //TODO: Add flick support
@@ -14289,7 +14289,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -14492,7 +14492,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
@@ -14664,8 +14664,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../noty/noty.js
- * @requires ../keyboard/keyboard.js
+ * @require ../noty/noty.js
+ * @require ../keyboard/keyboard.js
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
@@ -15175,7 +15175,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
+ * @require ../widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -15301,7 +15301,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../dropdown/dropdown.js
+ * @require ../dropdown/dropdown.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -15332,8 +15332,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires tooltip.js
- * @requires ../closer/closer.js
+ * @require tooltip.js
+ * @require ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -15368,8 +15368,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires tooltip.js
- * @requires ../opener/opener.js
+ * @require tooltip.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -15407,8 +15407,8 @@ Prism.languages.js = Prism.languages.javascript;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires tooltip.js
- * @requires ../toggler/toggler.js
+ * @require tooltip.js
+ * @require ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {

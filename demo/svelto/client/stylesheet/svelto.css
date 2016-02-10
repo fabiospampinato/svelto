@@ -18,7 +18,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../textarea/variables.scss
+ * @require ../../textarea/variables.scss
  * ========================================================================= */
 /* INPUT AUTOGROW */
 /* =========================================================================
@@ -43,7 +43,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../breakpoints/variables.scss
+ * @require ../breakpoints/variables.scss
  * ========================================================================= */
 /* GUTTER */
 /* MAX WIDTH */
@@ -56,7 +56,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* CONTAINER */
 /* CONTAINER COMPACT */
@@ -66,7 +66,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../container/variables.scss
+ * @require ../container/variables.scss
  * ========================================================================= */
 /* CARD */
 /* =========================================================================
@@ -115,9 +115,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../outline/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../outline/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* FONT FAMILY */
 /* FONT SIZE */
@@ -137,7 +137,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../typography/variables.scss
+ * @require ../typography/variables.scss
  * ========================================================================= */
 /* ICONS */
 /* =========================================================================
@@ -146,9 +146,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../icons/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../icons/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* CAROUSEL */
 /* INDICATOR */
@@ -161,7 +161,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* DROPDOWN */
 /* TIP */
@@ -173,10 +173,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../dropdown/variables.scss
- * @requires ../outline/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../dropdown/variables.scss
+ * @require ../outline/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* TIP */
 /* LEVELS */
@@ -188,7 +188,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* CHECKBOX */
 /* =========================================================================
@@ -197,8 +197,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../outline/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../outline/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* COLORPICKER */
 /* WRAPPERS */
@@ -219,8 +219,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* DATEPICKER */
 /* DAY NAME */
@@ -233,7 +233,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* BLOCK */
 /* LINEAR */
@@ -245,7 +245,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* DRAGGING */
 /* REVERTING */
@@ -262,7 +262,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* EXPANDER */
 /* =========================================================================
@@ -279,7 +279,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* FLIPPABLE */
 /* =========================================================================
@@ -288,7 +288,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
+ * @require ../colors/variables.scss
  * ========================================================================= */
 /* FOOTER */
 /* =========================================================================
@@ -297,10 +297,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../constants/variables.scss
- * @requires ../container/variables.scss
- * @requires ../typography/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../constants/variables.scss
+ * @require ../container/variables.scss
+ * @require ../typography/variables.scss
  * ========================================================================= */
 /* LABEL */
 /* LABEL COMPACT */
@@ -319,7 +319,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../label/variables.scss
+ * @require ../label/variables.scss
  * ========================================================================= */
 /* INPUT */
 /* COMPACT */
@@ -330,8 +330,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
- * @requires ../input/variables.scss
+ * @require ../svelto/variables.scss
+ * @require ../input/variables.scss
  * ========================================================================= */
 /* FIELDSET */
 /* =========================================================================
@@ -347,7 +347,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* BLUR */
 /* BORDER */
@@ -359,7 +359,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../outline/variables.scss
+ * @require ../outline/variables.scss
  * ========================================================================= */
 /* HIGHLIGHT */
 /* =========================================================================
@@ -368,7 +368,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* IMAGE */
 /* CAPTION */
@@ -393,7 +393,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* MODAL */
 /* NOT FULLSCREEN */
@@ -405,9 +405,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../breakpoints/variables.scss
- * @requires ../container/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../breakpoints/variables.scss
+ * @require ../container/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* NOTY */
 /* IMG */
@@ -419,7 +419,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* WIDGET */
 /* TRANSITION */
@@ -429,8 +429,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../widget/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../widget/variables.scss
  * ========================================================================= */
 /* OVERLAY */
 /* SIBLINGS */
@@ -441,7 +441,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* PANEL */
 /* PINNED */
@@ -471,7 +471,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* PROGRESSBAR */
 /* COMPACT */
@@ -487,7 +487,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* RAISABLE */
 /* TRANSIITION */
@@ -497,7 +497,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
+ * @require ../colors/variables.scss
  * ========================================================================= */
 /* RATER */
 /* =========================================================================
@@ -514,7 +514,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
+ * @require ../colors/variables.scss
  * ========================================================================= */
 /* SELECTION */
 /* BODY */
@@ -524,8 +524,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* RIPPLE */
 /* CIRCLE */
@@ -543,7 +543,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
+ * @require ../colors/variables.scss
  * ========================================================================= */
 /* SELECTABLE */
 /* =========================================================================
@@ -563,8 +563,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../icons/variables.scss
- * @requires ../typography/variables.scss
+ * @require ../icons/variables.scss
+ * @require ../typography/variables.scss
  * ========================================================================= */
 /* FUNCTION */
 /* ICON SIZES */
@@ -576,8 +576,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../constants/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../constants/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* SWITCH */
 /* BAR */
@@ -591,10 +591,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../label/variables.scss
- * @requires ../switch/variables.scss
- * @requires ../typography/variables.scss
- * @requires ../svelto/variables.scss
+ * @require ../label/variables.scss
+ * @require ../switch/variables.scss
+ * @require ../typography/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* SLIDER */
 /* MIN / MAX */
@@ -617,7 +617,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../svelto/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
 /* SPINNER OVERLAY */
 /* =========================================================================
@@ -626,8 +626,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../colors/variables.scss
- * @requires ../label/variables.scss
+ * @require ../colors/variables.scss
+ * @require ../label/variables.scss
  * ========================================================================= */
 /* SPINNER */
 /* STROKE */
@@ -648,7 +648,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../outline/variables.scss
+ * @require ../outline/variables.scss
  * ========================================================================= */
 /* TABLE */
 /* EMPTY */
@@ -721,8 +721,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires fill.scss
- * @requires margin.scss
+ * @require fill.scss
+ * @require margin.scss
  * ========================================================================= */
 /* CENTER */
 /* =========================================================================
@@ -1297,10 +1297,10 @@ html {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires vendor/normalize.scss
- * @requires box_sizing.scss
- * @requires no_outline.scss
- * @requires selection.scss
+ * @require vendor/normalize.scss
+ * @require box_sizing.scss
+ * @require no_outline.scss
+ * @require selection.scss
  * ========================================================================= */
 /* HTML */
 html {
@@ -1345,24 +1345,24 @@ body span > a:hover {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
+ * @require ../reset/reset.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .layout, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, input > :last-child, textarea > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, .layout > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, input > :last-child, textarea > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, .layout > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, .layout > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, .layout > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
-.widget > script:last-child, .accordion > script:last-child, input > script:last-child, textarea > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, .layout > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
+.widget > script:last-child, .accordion > script:last-child, input > script:last-child, textarea > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
   display: block;
   font-size: 0;
   height: 0;
@@ -1371,13 +1371,13 @@ body span > a:hover {
   margin-top: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, input.disabled, textarea.disabled, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, .disabled.layout, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, input.disabled, textarea.disabled, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
   opacity: 0.5 !important;
 }
 
-.widget.disabled *, .disabled.accordion *, input.disabled *, textarea.disabled *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, .disabled.layout *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
+.widget.disabled *, .disabled.accordion *, input.disabled *, textarea.disabled *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
   cursor: default !important;
 }
 
@@ -1395,8 +1395,8 @@ body span > a:hover {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../expander/expander.scss
- * @requires ../widget/widget.scss
+ * @require ../expander/expander.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 .accordion {
   /* EXPANDER */
@@ -1449,8 +1449,8 @@ body span > a:hover {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* INPUT */
 input, textarea {
@@ -1981,7 +1981,7 @@ input, textarea {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../input/input.scss
+ * @require ../../input/input.scss
  * ========================================================================= */
 /* INPUT AUTOGROW */
 input.autogrow, textarea.autogrow {
@@ -2003,8 +2003,8 @@ input.autogrow.compact.outlined, textarea.autogrow.compact.outlined {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../input/input.scss
+ * @require ../reset/reset.scss
+ * @require ../input/input.scss
  * ========================================================================= */
 /* TEXTAREA */
 textarea {
@@ -2034,7 +2034,7 @@ textarea:-moz-ui-invalid {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../../textarea/textarea.scss
+ * @require ../../textarea/textarea.scss
  * ========================================================================= */
 /* TEXTAREA AUTOGROW */
 textarea.autogrow {
@@ -2052,7 +2052,7 @@ textarea.autogrow.compact {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* BREADCRUMB */
 .breadcrumb {
@@ -2447,8 +2447,8 @@ textarea.autogrow.compact {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* DEFAULT */
 label {
@@ -3067,9 +3067,9 @@ label {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../helpers/helpers.scss
- * @requires ../label/label.scss
+ * @require ../reset/reset.scss
+ * @require ../helpers/helpers.scss
+ * @require ../label/label.scss
  * ========================================================================= */
 /* DEFAULT BUTTON */
 button {
@@ -3086,7 +3086,7 @@ button {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* CONTAINER */
 .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox {
@@ -3136,7 +3136,7 @@ button {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../container/container.scss
+ * @require ../container/container.scss
  * ========================================================================= */
 /* CARD */
 .card {
@@ -3279,7 +3279,7 @@ button {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* SCALED ICON SIZES */
 i.xxxxsmall.icon, .carousel.inset .xxxxsmall.carousel-previous:after,
@@ -3435,8 +3435,8 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../icons/icons.scss
- * @requires ../widget/widget.scss
+ * @require ../icons/icons.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* CAROUSEL */
 .carousel {
@@ -3772,7 +3772,7 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* CHAT */
 .chat-msg {
@@ -4005,8 +4005,8 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
- * @requires ../icons/icons.scss
+ * @require ../widget/widget.scss
+ * @require ../icons/icons.scss
  * ========================================================================= */
 /* CHECKBOX */
 .checkbox, .radio {
@@ -4120,7 +4120,7 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* COLORPICKER */
 .colorpicker {
@@ -5843,7 +5843,7 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* DATEPICKER */
 .datepicker {
@@ -6019,7 +6019,7 @@ i.icon, .carousel.inset .carousel-previous:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
+ * @require ../reset/reset.scss
  * ========================================================================= */
 /* DIVIDER */
 hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .divider.linear:not(:empty):before, .divider.linear:not(:empty):after, .divider:not(.block):not(.text):not(.spacer):not(:empty):before, .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
@@ -6444,7 +6444,7 @@ _:-ms-input-placeholder .card-block, :root .dropdown.card .card-block, :root .ca
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* EMBEDDED */
 .embedded {
@@ -7487,7 +7487,7 @@ i[class^="flag-"] {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* FLIPPABLE */
 .flippable {
@@ -7615,8 +7615,8 @@ i[class^="flag-"] {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../container/container.scss
+ * @require ../reset/reset.scss
+ * @require ../container/container.scss
  * ========================================================================= */
 /* FOOTER */
 footer {
@@ -7650,8 +7650,8 @@ footer {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* DEFAULT FORM */
 form {
@@ -8071,8 +8071,8 @@ fieldset {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* HEADER */
 header {
@@ -8352,9 +8352,9 @@ span > a:after,
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
- * @requires ../container/container.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
+ * @require ../container/container.scss
  * ========================================================================= */
 /* DEFAULT */
 img {
@@ -8488,7 +8488,7 @@ span > img {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../container/container.scss
+ * @require ../container/container.scss
  * ========================================================================= */
 /* INFOBAR */
 .infobar {
@@ -8644,16 +8644,21 @@ span > img {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* LAYOUT */
 .layout {
+  position: relative;
+  margin: 0 0 10px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   /* HEADER / CONTENT / FOOTER */
   /* HEADER / FOOTER */
   /* HEADER */
@@ -8662,7 +8667,7 @@ span > img {
 
 .layout-header, .layout-content, .layout-footer {
   margin-bottom: 0;
-  width: 100%;
+  border-radius: 0;
 }
 
 .layout-header > :last-child, .layout-content > :last-child, .layout-footer > :last-child {
@@ -9583,7 +9588,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../layout/layout.scss
+ * @require ../layout/layout.scss
  * ========================================================================= */
 /* PANEL */
 .panel {
@@ -9622,26 +9627,26 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 
 .panel.left, .panel:not(.right):not(.top):not(.bottom) {
   left: 0;
-  -webkit-transform: translateX(-17.6666666667rem);
-          transform: translateX(-17.6666666667rem);
+  -webkit-transform: translateX(-15rem);
+          transform: translateX(-15rem);
   /* SLIM */
 }
 
 .panel.left.slim, .panel:not(.right):not(.top):not(.bottom).slim {
-  -webkit-transform: translateX(-6.9333333334rem);
-          transform: translateX(-6.9333333334rem);
+  -webkit-transform: translateX(-4.2666666667rem);
+          transform: translateX(-4.2666666667rem);
 }
 
 .panel.right {
   right: 0;
-  -webkit-transform: translateX(17.6666666667rem);
-          transform: translateX(17.6666666667rem);
+  -webkit-transform: translateX(15rem);
+          transform: translateX(15rem);
   /* SLIM */
 }
 
 .panel.right.slim {
-  -webkit-transform: translateX(6.9333333334rem);
-          transform: translateX(6.9333333334rem);
+  -webkit-transform: translateX(4.2666666667rem);
+          transform: translateX(4.2666666667rem);
 }
 
 .panel.top, .panel.bottom {
@@ -9657,26 +9662,26 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 
 .panel.top {
   top: 0;
-  -webkit-transform: translateY(-10.1666666667rem);
-          transform: translateY(-10.1666666667rem);
+  -webkit-transform: translateY(-7.5rem);
+          transform: translateY(-7.5rem);
   /* SLIM */
 }
 
 .panel.top.slim {
-  -webkit-transform: translateY(-6.9333333334rem);
-          transform: translateY(-6.9333333334rem);
+  -webkit-transform: translateY(-4.2666666667rem);
+          transform: translateY(-4.2666666667rem);
 }
 
 .panel.bottom {
   bottom: 0;
-  -webkit-transform: translateY(10.1666666667rem);
-          transform: translateY(10.1666666667rem);
+  -webkit-transform: translateY(7.5rem);
+          transform: translateY(7.5rem);
   /* SLIM */
 }
 
 .panel.bottom.slim {
-  -webkit-transform: translateY(6.9333333334rem);
-          transform: translateY(6.9333333334rem);
+  -webkit-transform: translateY(4.2666666667rem);
+          transform: translateY(4.2666666667rem);
 }
 
 .panel.show {
@@ -9720,90 +9725,68 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 }
 
 /* LAYOUT */
-.layout.panel-pinned-left > .layout-header:not(.fixed),
-.layout.panel-pinned-left > .layout-content,
-.layout.panel-pinned-left > .layout-footer {
-  margin-left: 15rem;
+.layout {
+  transition: padding 0.35s;
+}
+
+.layout.panel-pinned-left {
+  padding-left: 15rem;
 }
 
 .layout.panel-pinned-left > .layout-header.fixed {
   left: 15rem;
 }
 
-.layout.panel-pinned-right > .layout-header:not(.fixed),
-.layout.panel-pinned-right > .layout-content,
-.layout.panel-pinned-right > .layout-footer {
-  margin-right: 15rem;
+.layout.panel-pinned-right {
+  padding-right: 15rem;
 }
 
 .layout.panel-pinned-right > .layout-header.fixed {
   right: 15rem;
 }
 
-.layout.panel-pinned-top > .layout-header:not(.fixed),
-.layout.panel-pinned-top > .layout-content,
-.layout.panel-pinned-top > .layout-footer {
-  margin-top: 7.5rem;
+.layout.panel-pinned-top {
+  padding-top: 7.5rem;
 }
 
 .layout.panel-pinned-top > .layout-header.fixed {
   top: 7.5rem;
 }
 
-.layout.panel-pinned-bottom > .layout-header:not(.fixed),
-.layout.panel-pinned-bottom > .layout-content,
-.layout.panel-pinned-bottom > .layout-footer {
-  margin-bottom: 7.5rem;
+.layout.panel-pinned-bottom {
+  padding-bottom: 7.5rem;
 }
 
-.layout.panel-pinned-bottom > .layout-header.fixed {
-  bottom: 7.5rem;
-}
-
-.layout.panel-slim-pinned-left > .layout-header:not(.fixed),
-.layout.panel-slim-pinned-left > .layout-content,
-.layout.panel-slim-pinned-left > .layout-footer {
-  margin-left: 4.2666666667rem;
+.layout.panel-slim-pinned-left {
+  padding-left: 4.2666666667rem;
 }
 
 .layout.panel-slim-pinned-left > .layout-header.fixed {
   left: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-right > .layout-header:not(.fixed),
-.layout.panel-slim-pinned-right > .layout-content,
-.layout.panel-slim-pinned-right > .layout-footer {
-  margin-right: 4.2666666667rem;
+.layout.panel-slim-pinned-right {
+  padding-right: 4.2666666667rem;
 }
 
 .layout.panel-slim-pinned-right > .layout-header.fixed {
   right: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-top > .layout-header:not(.fixed),
-.layout.panel-slim-pinned-top > .layout-content,
-.layout.panel-slim-pinned-top > .layout-footer {
-  margin-top: 4.2666666667rem;
+.layout.panel-slim-pinned-top {
+  padding-top: 4.2666666667rem;
 }
 
 .layout.panel-slim-pinned-top > .layout-header.fixed {
   top: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-bottom > .layout-header:not(.fixed),
-.layout.panel-slim-pinned-bottom > .layout-content,
-.layout.panel-slim-pinned-bottom > .layout-footer {
-  margin-bottom: 4.2666666667rem;
+.layout.panel-slim-pinned-bottom {
+  padding-bottom: 4.2666666667rem;
 }
 
-.layout.panel-slim-pinned-bottom > .layout-header.fixed {
-  bottom: 4.2666666667rem;
-}
-
-> .layout-header,
-> .layout-content,
-> .layout-footer {
-  transition-property: top, right, left;
+.layout > .layout-header.fixed {
+  transition-property: top, right, bottom, left;
   transition-duration: 0.35s;
 }
 
@@ -9813,7 +9796,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* PARALLAX */
 .parallax {
@@ -9881,7 +9864,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* PLACEHOLDER */
 .placeholder {
@@ -9920,7 +9903,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
+ * @require ../reset/reset.scss
  * ========================================================================= */
 /* PRISM */
 code[class*='language-'] {
@@ -9990,7 +9973,7 @@ code[class*='language-'] .namespace {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* PROGRESSBAR */
 .progressbar {
@@ -10215,7 +10198,7 @@ code[class*='language-'] .namespace {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../checkbox/checkbox.scss
+ * @require ../checkbox/checkbox.scss
  * ========================================================================= */
 /* RADIO */
 .radio {
@@ -10382,8 +10365,8 @@ code[class*='language-'] .namespace {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../icons/icons.scss
- * @requires ../widget/widget.scss
+ * @require ../icons/icons.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* RATER */
 .rater {
@@ -10796,8 +10779,8 @@ a.ripple > .ripple-circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../input/input.scss
+ * @require ../reset/reset.scss
+ * @require ../input/input.scss
  * ========================================================================= */
 /* SELECT TOGGLER */
 .select-toggler {
@@ -10862,7 +10845,7 @@ a.ripple > .ripple-circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
+ * @require ../reset/reset.scss
  * ========================================================================= */
 /* SELECTABLE TABLE */
 table.table.selectable {
@@ -10888,7 +10871,7 @@ table.table.selectable tbody tr.selected {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* SHAPE */
 .triangle, .square, .square-sample, .circle {
@@ -11011,8 +10994,8 @@ table.table.selectable tbody tr.selected {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../icons/icons.scss
- * @requires ../widget/widget.scss
+ * @require ../icons/icons.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* SLIDER */
 .slider {
@@ -11354,8 +11337,8 @@ table.table.selectable tbody tr.selected {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../icons/icons.scss
+ * @require ../reset/reset.scss
+ * @require ../icons/icons.scss
  * ========================================================================= */
 /* SORTABLE TABLE */
 table.table.sortable {
@@ -11471,8 +11454,8 @@ table.table.sortable th[data-sort].sort-desc:after, table.table.sortable th[data
  * =========================================================================
  * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* SPINNER */
 svg.spinner {
@@ -11795,7 +11778,7 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* STATISTIC */
 .statistic {
@@ -11824,8 +11807,8 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* STEPPER */
 .stepper {
@@ -11881,8 +11864,8 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
- * @requires ../icons/icons.scss
+ * @require ../widget/widget.scss
+ * @require ../icons/icons.scss
  * ========================================================================= */
 /* SWITCH */
 .switch {
@@ -12115,8 +12098,8 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* TABLE */
 table.table {
@@ -12382,7 +12365,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* TABS */
 .tabs {
@@ -12665,7 +12648,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../container/container.scss
+ * @require ../container/container.scss
  * ========================================================================= */
 /* TAGBOX */
 .tagbox {
@@ -12703,7 +12686,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* TOOLBAR */
 .toolbar {
@@ -12731,7 +12714,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../dropdown/dropdown.scss
+ * @require ../dropdown/dropdown.scss
  * ========================================================================= */
 /* TOOLTIP */
 .tooltip {
@@ -12744,9 +12727,9 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../reset/reset.scss
- * @requires ../highlight/highlight.scss
- * @requires ../widget/widget.scss
+ * @require ../reset/reset.scss
+ * @require ../highlight/highlight.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* LINK */
 a,

@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../noty/noty.js
+ * @require ../noty/noty.js
  * ========================================================================= */
 
 //FIXME: Crappy, not working atm, maybe should get removed

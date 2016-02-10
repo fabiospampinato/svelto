@@ -5,9 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/widget.js
- * @requires ../timer/timer.js
- * @requires ../animations/animations.js
+ * @require ../widget/widget.js
+ * @require ../timer/timer.js
+ * @require ../animations/animations.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
@@ -117,7 +117,7 @@
 
     static ready () {
 
-      $('.layout, body').first ().append ( //TODO: Use just `.layout`
+      $('.layout, body').first ().append ( // `body` is used as a fallback
         '<div class="noty-queues top">' +
           '<div class="noty-queue expanded"></div>' +
           '<div class="noty-queues-row">' +

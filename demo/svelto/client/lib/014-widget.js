@@ -5,13 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
- * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
- * @requires ../factory/factory.js
- * @requires ../breakpoints/breakpoints.js
- * @requires ../breakpoints/breakpoint.js
- * @requires ../keyboard/keyboard.js
+ * @require ../core/core.js
+ * @require ../tmpl/tmpl.js
+ * @require ../pointer/pointer.js
+ * @require ../factory/factory.js
+ * @require ../breakpoints/breakpoints.js
+ * @require ../breakpoints/breakpoint.js
+ * @require ../keyboard/keyboard.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
@@ -41,7 +41,7 @@
         hidden: 'hidden' // Used to hide an element
       },
       selectors: { // Selectors to use inside the widget
-        layout: '.layout, body' //FIXME: Just use `.layout`, but we need to add it in the CSS before
+        layout: '.layout, body' // `body` is used as a fallback
       },
       animations: {}, // Object storing all the milliseconds required for each animation to occur
       breakpoints: {}, // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins

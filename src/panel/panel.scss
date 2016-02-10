@@ -181,13 +181,11 @@
 
 .layout {
 
+  transition: padding $panel-transition-transform-duration;
+
   &.panel-pinned-left {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-left: $panel-vertical-width;
-    }
+    padding-left: $panel-vertical-width;
 
     > .layout-header.fixed {
       left: $panel-vertical-width;
@@ -197,11 +195,7 @@
 
   &.panel-pinned-right {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-right: $panel-vertical-width;
-    }
+    padding-right: $panel-vertical-width;
 
     > .layout-header.fixed {
       right: $panel-vertical-width;
@@ -211,11 +205,7 @@
 
   &.panel-pinned-top {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-top: $panel-horizontal-height;
-    }
+    padding-top: $panel-horizontal-height;
 
     > .layout-header.fixed {
       top: $panel-horizontal-height;
@@ -224,26 +214,12 @@
   }
 
   &.panel-pinned-bottom {
-
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-bottom: $panel-horizontal-height;
-    }
-
-    > .layout-header.fixed {
-      bottom: $panel-horizontal-height;
-    }
-
+    padding-bottom: $panel-horizontal-height;
   }
 
   &.panel-slim-pinned-left {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-left: $panel-slim-vertical-width;
-    }
+    padding-left: $panel-slim-vertical-width;
 
     > .layout-header.fixed {
       left: $panel-slim-vertical-width;
@@ -253,11 +229,7 @@
 
   &.panel-slim-pinned-right {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-right: $panel-slim-vertical-width;
-    }
+    padding-right: $panel-slim-vertical-width;
 
     > .layout-header.fixed {
       right: $panel-slim-vertical-width;
@@ -267,11 +239,7 @@
 
   &.panel-slim-pinned-top {
 
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-top: $panel-slim-horizontal-height;
-    }
+    padding-top: $panel-slim-horizontal-height;
 
     > .layout-header.fixed {
       top: $panel-slim-horizontal-height;
@@ -280,23 +248,11 @@
   }
 
   &.panel-slim-pinned-bottom {
-
-    > .layout-header:not(.fixed),
-    > .layout-content,
-    > .layout-footer {
-      margin-bottom: $panel-slim-horizontal-height;
-    }
-
-    > .layout-header.fixed {
-      bottom: $panel-slim-horizontal-height;
-    }
-
+    padding-bottom: $panel-slim-horizontal-height;
   }
 
-  > &-header,
-  > &-content,
-  > &-footer {
-    transition-property: top, right, left;
+  > .layout-header.fixed {
+    transition-property: top, right, bottom, left;
     transition-duration: $panel-transition-transform-duration;
   }
 

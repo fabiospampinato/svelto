@@ -101,7 +101,7 @@ linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/li
     convention: hyphenated_lowercase
 
   NestingDepth:
-    enabled: true
+    enabled: false
     max_depth: 3
     ignore_parent_selectors: false
 
@@ -140,7 +140,7 @@ linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/li
     enabled: true
 
   QualifyingElement:
-    enabled: true
+    enabled: false
     allow_element_with_attribute: false
     allow_element_with_class: false
     allow_element_with_id: false

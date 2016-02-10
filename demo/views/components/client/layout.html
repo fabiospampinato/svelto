@@ -1,0 +1,30 @@
+
+<!-- LAYOUT -->
+
+<template name="layout">
+
+  {{{sw.divider "Layout"}}}
+
+  <div class="layout outlined">
+    <header class="layout-header">Header</header>
+    <div class="layout-content">Content</div>
+    <footer class="layout-footer">Footer</footer>
+  </div>
+
+  {{{sw.divider "Layout - Modal"}}}
+
+  <div class="layout outlined">
+    <header class="layout-header">Header</header>
+    <div class="layout-content">{{> modal}}</div>
+    <footer class="layout-footer">Footer</footer>
+  </div>
+
+  {{{sw.divider "Layout - Panel"}}}
+
+  <div class="layout outlined">
+    <header class="layout-header">Header</header>
+    <div class="layout-content">{{> panel}}</div>
+    <footer class="layout-footer">Footer</footer>
+  </div>
+
+</template>
