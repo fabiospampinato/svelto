@@ -1,25 +1,15 @@
 
 /* =========================================================================
- * Svelto - Button
+ * Svelto - Button - Tag
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../helpers/helpers.scss
- * @require ../label/label.scss
+ * @require ../../label/tag/tag.scss
  * ========================================================================= */
 
-/* DEFAULT BUTTON */
+/* TAG */
 
-button {
-  border: none;
-  padding: 0;
-}
-
-/* BUTTON */
-
-.button {
-  @extend .label;
-  @extend .actionable;
+.button-tag {
+  @extend .label-tag;
 }

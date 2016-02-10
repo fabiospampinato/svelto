@@ -21,6 +21,8 @@ var components = [
   'browser',
   'bteach',
   'button',
+  // 'button/corner',
+  // 'button/tag',
   'card',
   'carousel',
   'chat',
