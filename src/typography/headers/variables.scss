@@ -1,20 +1,18 @@
 
 /* =========================================================================
- * Svelto - Typography (Variables)
+ * Svelto - Typography - Headers (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* FONT FAMILY */
+/* HEADERS */
 
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$h1-size: 'xxlarge' !default;
+$h2-size: 'xlarge' !default;
+$h3-size: 'large' !default;
+$h4-size: 'medium' !default;
+$h5-size: 'small' !default;
+$h6-size: 'xsmall' !default;
 
-/* FONT SIZE */
-
-$font-size: 16px !default;
-
-/* LINE HEIGHT */
-
-$line-height: 1.4285714286 !default; // 20/14
-$line-height-em: $line-height * 1em !default;
+$header-small-opacity: .85 !default;

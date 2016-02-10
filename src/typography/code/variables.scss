@@ -1,20 +1,17 @@
 
 /* =========================================================================
- * Svelto - Typography (Variables)
+ * Svelto - Typography - Code (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* FONT FAMILY */
+/* CODE */
 
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$code-bg-color: rgba(0, 0, 0, .03) !default;
 
-/* FONT SIZE */
+$code-border-radius: $border-radius-medium !default;
 
-$font-size: 16px !default;
-
-/* LINE HEIGHT */
-
-$line-height: 1.4285714286 !default; // 20/14
-$line-height-em: $line-height * 1em !default;
+$code-border-width: $outline-width !default;
+$code-border-style: 'solid' !default;
+$code-border-color: rgba(0, 0, 0, .15) !default;

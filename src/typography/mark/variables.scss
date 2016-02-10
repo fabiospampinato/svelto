@@ -1,20 +1,16 @@
 
 /* =========================================================================
- * Svelto - Typography (Variables)
+ * Svelto - Typography - Mark (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../svelto/variables.scss
  * ========================================================================= */
 
-/* FONT FAMILY */
+/* MARK */
 
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$mark-color: 'yellow' !default;
 
-/* FONT SIZE */
-
-$font-size: 16px !default;
-
-/* LINE HEIGHT */
-
-$line-height: 1.4285714286 !default; // 20/14
-$line-height-em: $line-height * 1em !default;
+$mark-padding: .3em .325em !default;
+$mark-border-radius: $border-radius-medium !default;

@@ -6,44 +6,19 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../reset/reset.scss
- * @require ../highlight/highlight.scss
- * @require ../widget/widget.scss
+ * @require ../abbr/abbr.scss
+ * @require ../blockquote/blockquote.scss
+ * @require ../code/code.scss
+ * @require ../headers/headers.scss
+ * @require ../kbd/kbd.scss
+ * @require ../link/link.scss
+ * @require ../lists/lists.scss
+ * @require ../mark/mark.scss
+ * @require ../paragraph/paragraph.scss
+ * @require ../small/small.scss
  * ========================================================================= */
 
-/* LINK */
-
-a,
-.link {
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-}
-
-p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-span > a, // Same reason as `p > a`
-.link {
-
-  display: inline-block;
-  cursor: pointer;
-
-  &:after {
-    @extend %highlight-after;
-    border-bottom-width: $a-underline-height;
-    opacity: 0;
-    transform: scaleX(0);
-    transition-property: opacity, transform;
-    transition-duration: $a-underline-transition-duration;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-
-}
-
-
-/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph
+/* SPAN / A */ //FIXME: Ugly fix for making them widget-like when they are not in a paragraph
 
 span,
 a {
@@ -64,169 +39,4 @@ _:-ms-input-placeholder, :root a {
 
 _:-ms-input-placeholder, :root p > a {
   display: initial;
-}
-
-/* HEADERS */
-
-h1, h2, h3, h4, h5, h6 {
-
-  margin: 0 0 $gutter;
-
-  > small {
-    opacity: $header-small-opacity;
-  }
-
-}
-
-h1 {
-  @include size ( $h1-size );
-}
-
-h2 {
-  @include size ( $h2-size );
-}
-
-h3 {
-  @include size ( $h3-size );
-}
-
-h4 {
-  @include size ( $h4-size );
-}
-
-h5 {
-  @include size ( $h5-size );
-}
-
-h6 {
-  @include size ( $h6-size );
-}
-
-/* SMALL */
-
-small {
-  font-size: $small-font-size;
-}
-
-/* PARAGRAPH */
-
-p {
-  margin: 0 0 $gutter;
-  max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
-}
-
-/* MARK */
-
-mark,
-.mark {
-  @include color ( $mark-color );
-  padding: $mark-padding;
-  border-radius: $mark-border-radius;
-}
-
-/* ABBR */
-
-//FIXME: There's a double border on Firefox Mobile
-
-abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
-  cursor: help;
-  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
-}
-
-/* BLOCKQUOTE */
-
-blockquote {
-
-  @extend .widget;
-  @include last-child-no-gutter ();
-  padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
-  border-radius: $blockquote-line-width;
-  background-color: $blockquote-bg-color;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: $blockquote-line-width;
-    content: '';
-    border-radius: $blockquote-line-width;
-    background-color: $blockquote-line-bg-color;
-  }
-
-  > footer {
-
-    @extend .widget;
-    @include last-child-no-gutter ();
-    background-color: $blockquote-footer-bg-color;
-    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
-    font-size: $blockquote-footer-font-size;
-    opacity: $blockquote-footer-opacity;
-
-    &:before {
-      content: '\2014 \00A0';
-      opacity: $blockquote-footer-opacity;
-    }
-
-  }
-
-}
-
-/* LIST */
-
-ul,
-ol {
-  margin: 0 0 $gutter;
-  padding-left: $list-padding-left;
-}
-
-li {
-  @include last-child-no-gutter ();
-}
-
-ul.unstyled {
-
-  padding-left: 0;
-  list-style-type: none;
-
-  li > ul {
-    list-style-type: none;
-  }
-
-}
-
-dl {
-  margin: 0;
-}
-
-dd {
-  margin-left: $gutter * 2;
-}
-
-/* CODE */
-
-code,
-section,
-pre {
-  display: block;
-  overflow-x: auto;
-  margin: 0;
-  padding: $gutter;
-  border: $code-border-width solid $code-border-color;
-  border-radius: $code-border-radius;
-  background-color: $code-bg-color;
-}
-
-/* KBD */
-
-kbd {
-  @include color ( $kbd-color );
-  font-size: $kbd-font-size;
-  font-weight: bold;
-  display: inline-block;
-  padding: $kbd-padding;
-  white-space: nowrap;
-  border-width: $kbd-border-width;
-  border-style: $kbd-border-style;
-  border-radius: $kdb-border-radius;
 }

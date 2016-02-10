@@ -1,20 +1,15 @@
 
 /* =========================================================================
- * Svelto - Typography (Variables)
+ * Svelto - Typography - Abbr (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../colors/variables.scss
  * ========================================================================= */
 
-/* FONT FAMILY */
+/* ABBR */
 
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif !default;
-
-/* FONT SIZE */
-
-$font-size: 16px !default;
-
-/* LINE HEIGHT */
-
-$line-height: 1.4285714286 !default; // 20/14
-$line-height-em: $line-height * 1em !default;
+$abbr-border-width: 1px !default;
+$abbr-border-style: 'dotted' !default;
+$abbr-border-color: $color-gray-border !default;

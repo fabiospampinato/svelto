@@ -1,0 +1,23 @@
+
+/* =========================================================================
+ * Svelto - Typography - Code
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../reset/reset.scss
+ * ========================================================================= */
+
+/* CODE */
+
+code,
+section,
+pre {
+  display: block;
+  overflow-x: auto;
+  margin: 0;
+  padding: $gutter;
+  border: $code-border-width $code-border-style $code-border-color;
+  border-radius: $code-border-radius;
+  background-color: $code-bg-color;
+}

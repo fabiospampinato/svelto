@@ -1,0 +1,22 @@
+
+/* =========================================================================
+ * Svelto - Typography - Kbd (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../svelto/variables.scss
+ * ========================================================================= */
+
+/* KBD */
+
+$kbd-color: 'white' !default;
+
+$kbd-border-width: 1px !default;
+$kbd-border-style: solid !default;
+$kdb-border-radius: $border-radius-medium !default;
+
+$kbd-font-size: 0.9em !default;
+$kbd-font-weight: bold !important;
+
+$kbd-padding: 0.2em 0.3em !default;

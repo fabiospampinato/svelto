@@ -9,7 +9,7 @@
 
   <div class="multiple">
     <a href="/grid" class="button outlined green">Grid</a>
-    <a href="/layout" class="button outlined red">Layout</a>
+    <a href="/layout" class="button outlined orange">Layout</a>
     <a href="/multiple" class="button outlined olive">Multiple</a>
     <a href="/sections" class="button outlined green">Sections</a>
     <a href="/typography" class="button outlined green">Typography</a>
@@ -129,12 +129,12 @@
 
   <script>
     $(function() {
-      var $buttons = $('main .button'),
-      green_nr = $buttons.filter('.green').length,
-      olive_nr = $buttons.filter('.olive').length,
-      orange_nr = $buttons.filter('.orange').length,
-      red_nr = $buttons.filter('.red').length,
-      others_nr = $buttons.length - green_nr - olive_nr - orange_nr - red_nr;
+      var $buttons = $('.layout-content .button'),
+          green_nr = $buttons.filter('.green').length,
+          olive_nr = $buttons.filter('.olive').length,
+          orange_nr = $buttons.filter('.orange').length,
+          red_nr = $buttons.filter('.red').length,
+          others_nr = $buttons.length - green_nr - olive_nr - orange_nr - red_nr;
       $.noty ({
         body: '<p>' +
                 '<span class="text-green">Ready (' + green_nr + ')</span><br/>' +
