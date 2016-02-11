@@ -64,6 +64,7 @@ var components = [
   'helpers',
   'helpers_responsive',
   'highlight',
+  'icon',
   'icons',
   'image',
   'infobar',

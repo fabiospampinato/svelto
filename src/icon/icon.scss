@@ -1,0 +1,51 @@
+
+/* =========================================================================
+ * Svelto - Icon
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/widget.scss
+ * ========================================================================= */
+
+/* SCALED ICON SIZES */
+
+%scaled-icon-sizes {
+
+  @each $name, $font-size in $sizes {
+
+    &.#{$name} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
+
+  }
+
+}
+
+/* ICON */
+
+%icon {
+  @extend .widget-pseudo; // It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em * $icon-scale-amount;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+i.icon {
+  @extend %icon;
+}
