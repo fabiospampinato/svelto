@@ -1,0 +1,155 @@
+
+/* =========================================================================
+ * Svelto - Noty - Queues
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../noty.scss
+ * @require ../queue/queue.scss
+ * ========================================================================= */
+
+/* QUEUES */
+
+.noty-queues {
+
+  position: fixed;
+  display: flex;
+  left: 0;
+  right: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  pointer-events: none;
+
+  /* TOP */
+
+  &.top {
+
+    top: 0;
+
+    /* ROW */
+
+    .noty-queues-row {
+      align-items: flex-start;
+    }
+
+    /* QUEUE */
+
+    .noty-queue {
+
+      flex-direction: column;
+
+      /* NOTY */
+
+      .noty {
+        margin-top: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-top-width: 0;
+        border-bottom-width: $outline-width;
+        border-bottom-style: solid;
+      }
+
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    bottom: 0;
+
+    /* ROW */
+
+    .noty-queues-row {
+      align-items: flex-end;
+    }
+
+    /* QUEUE */
+
+    .noty-queue {
+
+      flex-direction: column-reverse;
+
+      /* NOTY */
+
+      .noty {
+        margin-bottom: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-bottom-width: 0;
+        border-top-width: $outline-width;
+        border-top-style: solid;
+      }
+
+    }
+
+  }
+
+  /* ROW */
+
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+}
+
+// IE-10-11 Fix so that noties won't expand over the viewport
+
+_:-ms-input-placeholder, :root .noty-queues  {
+
+  /* TOP */
+
+  &.top {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* QUEUES ROW */
+
+  .noty-queues-row {
+    align-items: flex-start;
+  }
+
+  /* QUEUE */
+
+  .noty-queue:not(.expanded) {
+
+    width: calc(100% - #{$gutter * 2});
+    margin-right: $gutter;
+
+    /* NOTY */
+
+    .noty {
+      max-width: 100%;
+    }
+
+  }
+
+}

@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Noty - Queue (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MIXINS */
+
+@mixin expand-queue {
+
+  width: 100%;
+  margin: 0 !important;
+
+  &:not(:empty) {
+    @include z-depth ( $noty-z-depth );
+  }
+
+  .noty {
+    @include z-depth ( 0 );
+    width: 100%;
+    margin: 0 !important;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+  }
+
+}

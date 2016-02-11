@@ -1,0 +1,14 @@
+
+/* =========================================================================
+ * Svelto - Noty - Autoexpand (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../breakpoints/variables.scss
+ * ========================================================================= */
+
+/* AUTOEXPAND */
+
+$noty-autoexpand-breakpoint-size: 'small' !default;
+$noty-autoexpand-breakpoint: map-get($breakpoints, $noty-autoexpand-breakpoint-size) !default;

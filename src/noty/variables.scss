@@ -5,7 +5,6 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../breakpoints/variables.scss
  * @require ../container/variables.scss
  * @require ../svelto/variables.scss
  * ========================================================================= */
@@ -27,9 +26,3 @@ $noty-img-rounded: false !default;
 /* TRANSITIONS */
 
 $noty-transition-all-duration: $transition-duration-normal !default;
-
-/* BREAKPOINTS */
-
-$noty-full-enabled: true !default;
-$noty-full-breakpoint-size: 'small' !default;
-$noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !default;
