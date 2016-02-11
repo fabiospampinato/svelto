@@ -1,0 +1,70 @@
+
+/* =========================================================================
+ * Svelto - Typography - Characters (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: http://davidtheclark.github.io/scut/characters.html
+
+/* SPACES */
+
+$char-space: '\0020'; // Space
+$char-nbsp: '\00a0'; // Non-breaking space
+
+/* QUOTATION MARKS */
+
+$char-quot: '\0022'; // Quotation mark
+$char-lsquo: '\2018'; // Left single curly quote
+$char-rsquo: '\2019'; // Right single curly quote
+$char-ldquo: '\201C'; // Left double curly quote
+$char-rdquo: '\201D'; // Right double curly quote
+$char-lsaquo: '\2039'; // Left single angle quote (guillemet)
+$char-rsaquo: '\203A'; // Right single angle quote (guillemet)
+$char-laquo: '\00ab'; // Left double angle quote (guillemet)
+$char-raquo: '\00bb'; // Right double angle quote (guillemet)
+
+/* OTHER PUNCTUATION */
+
+$char-mdash: '\2014'; // Em dash (mutton)
+$char-ndash: '\2013'; // En dash (nut)
+$char-hyphen: '\2010'; // Hyphen
+$char-amp: '\0026'; // Ampersand
+$char-para: '\00b6'; // Paragraph symbol (pilcrow)
+$char-middot: '\00b7'; // Middot (interpunct, interpoint)
+$char-bull: '\2022'; // Bullet
+$char-whibull: '\25E6'; // White bullet
+$char-hellip: '\2026'; // Horizontal ellipsis
+$char-vellip: '\22EE'; // Vertical ellipsis
+$char-midhellip: '\22EF'; // Midline horizontal ellipsis
+
+/* VARIOUS SYMBOLS */
+
+$char-gt: '\003e'; // Greater than
+$char-lt: '\003c'; // Less than
+$char-times: '\00D7'; // Times
+$char-bigtimes: '\2715'; // Big times
+$char-checkmark: '\2713'; // Checkmark
+$char-sect: '\00a7'; // Section sign (double S, hurricane, sectional symbol, the legal doughnut, signum sectionis)
+$char-oslash: '\00f8'; // O-slash (slashed o)
+
+/* SHAPES */
+
+$char-utri: '\25b2'; // Up-pointing triangle
+$char-dtri: '\25bc'; // Down-pointing triangle
+$char-ltri: '\25c0'; // Left-pointing triangle
+$char-rtri: '\25b6'; // Right-pointing triangle
+$char-ustri: '\25b4'; // Up-pointing small triangle
+$char-dstri: '\25be'; // Down-pointing small triangle
+$char-lstri: '\25c2'; // Left-pointing small triangle
+$char-rstri: '\25b8'; // Right-pointing small triangle
+$char-diamond: '\25c6'; // Diamond
+$char-fisheye: '\25c9'; // Fisheye
+$char-bullseye: '\25ce'; // Bullseye
+$char-circle: '\25cf'; // Circle
+$char-whitecircle: '\25cb'; // White circle
+$char-square: '\25a0'; // Square
+$char-whitesquare: '\25a1'; // White square
+$char-ssquare: '\25aa'; // Small square
+$char-swhitesquare: '\25ab'; // Small white square

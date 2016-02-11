@@ -27,7 +27,7 @@
 
     &.right:before,
     &.left:before {
-      content: '\a0'; // &nbsp;
+      content: $char-nbsp;
     }
 
   }
