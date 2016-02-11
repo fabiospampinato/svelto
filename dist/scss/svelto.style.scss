@@ -14,16 +14,6 @@
 
 .expander {
 
-  /* OPENER / CLOSER / TOGGLER */
-
-  // It should also have the `actionable` class to provide a better feedback
-
-  &-opener,
-  &-closer,
-  &-toggler {
-    cursor: pointer;
-  }
-
   /* CLOSED */
 
   &:not(.open) {
@@ -189,7 +179,7 @@ dfn {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: .67em 0;
 }
 
 /**
@@ -430,7 +420,7 @@ input[type="search"]::-webkit-search-decoration {
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
+  padding: .35em .625em .75em;
 }
 
 /**
@@ -674,6 +664,67 @@ body {
 
 
 /* =========================================================================
+ * Svelto - Attached
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ATTACHED */
+
+// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+
+%attached {
+  position: absolute;
+  margin-bottom: 0;
+}
+
+/* TOP */
+
+.attached-top {
+  @extend %attached;
+  @include border-top-radius ( inherit !important );
+  @include border-bottom-radius ( 0 !important );
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+/* RIGHT */
+
+.attached-right {
+  @extend %attached;
+  @include border-right-radius ( inherit !important );
+  @include border-left-radius ( 0 !important );
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* BOTTOM */
+
+.attached-bottom {
+  @extend %attached;
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* LEFT */
+
+.attached-left {
+  @extend %attached;
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+/* =========================================================================
  * Svelto - Input
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -908,6 +959,27 @@ textarea.autogrow {
 
 
 /* =========================================================================
+ * Svelto - Blurred
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BLURRED */
+
+%blurred { //FIXME: Not working on Edge and IE
+  filter: url('#{$basepath}blurred.svg#blur') !important;
+  filter: blur($blurred-blur-amount) !important;
+}
+
+.blurred {
+  @extend %blurred;
+  transition: filter $blurred-transition-duration !important;
+  //TODO: If mobile remove the transition, it greatly improves performance
+}
+
+
+/* =========================================================================
  * Svelto - Breadcrumb
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -963,345 +1035,6 @@ textarea.autogrow {
 
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Helpers
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* BLURRED */
-
-%blurred { //FIXME: Not working on Edge and IE
-  filter: url('#{$basepath}blur.svg#blur') !important;
-  filter: blur($blurred-blur-amount) !important;
-}
-
-.blurred {
-  @extend %blurred;
-  transition: filter $blurred-transition-duration !important;
-  //TODO: If mobile remove the transition, it greatly improves performance
-}
-
-/* BORDER */
-
-.b-a-0 {
-  border-width: 0 !important;
-}
-
-.b-t-0,
-.b-y-0 {
-  border-top-width: 0 !important;
-}
-
-.b-r-0,
-.b-x-0 {
-  border-right-width: 0 !important;
-}
-
-.b-b-0,
-.b-y-0 {
-  border-bottom-width: 0 !important;
-}
-
-.b-l-0,
-.b-x-0 {
-  border-left-width: 0 !important;
-}
-
-/* BORDER RADIUS */
-
-.rounded {
-  border-radius: $rounded-border-radius $rounded-border-radius !important;
-}
-
-.smooth {
-  border-radius: $smooth-border-radius !important;
-}
-
-.sharp {
-  border-radius: $sharp-border-radius !important;
-}
-
-/* DISPLAY */
-
-.show {
-  display: block !important;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* VISIBILITY */
-
-.visible {
-  visibility: visible !important;
-}
-
-.invisible {
-  visibility: hidden !important;
-}
-
-/* FLOAT */
-
-.float-left {
-  float: left !important;
-}
-
-.float-right {
-  float: right !important;
-}
-
-/* TEXT ALIGNMENT */
-
-.text-left {
-  justify-content: flex-start !important;
-  text-align: left !important;
-}
-
-.text-center {
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-.text-right {
-  justify-content: flex-end !important;
-  text-align: right !important;
-}
-
-.text-justify {
-  text-align: justify !important;
-}
-
-/* TEXT TRANSFORMATION */
-
-.text-lowercase {
-  text-transform: lowercase !important;
-}
-
-.text-uppercase {
-  text-transform: uppercase !important;
-}
-
-.text-capitalize {
-  text-transform: capitalize !important;
-}
-
-/* TEXT OTHERS */
-
-.text-nowrap {
-  white-space: nowrap !important;
-}
-
-.text-ellipsis,
-.truncate {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%; // Fixes a bug in IE 10
-}
-
-/* PADDING */
-
-.p-a-0 {
-  padding: 0 !important;
-}
-
-.p-t-0,
-.p-y-0 {
-  padding-top: 0 !important;
-}
-
-.p-r-0,
-.p-x-0 {
-  padding-right: 0 !important;
-}
-
-.p-b-0,
-.p-y-0 {
-  padding-bottom: 0 !important;
-}
-
-.p-l-0,
-.p-x-0 {
-  padding-left: 0 !important;
-}
-
-/* MARGIN */
-
-.m-a-0 {
-  margin: 0 !important;
-}
-
-.m-t-0,
-.m-y-0 {
-  margin-top: 0 !important;
-}
-
-.m-r-0,
-.m-x-0 {
-  margin-right: 0 !important;
-}
-
-.m-b-0,
-.m-y-0 {
-  margin-bottom: 0 !important;
-}
-
-.m-l-0,
-.m-x-0 {
-  margin-left: 0 !important;
-}
-
-/* OVERFLOW */
-
-.overflow-visible {
-  overflow: visible !important;
-}
-
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
-/* FLIP */
-
-.flip-x {
-  transform: rotateY(180deg) !important;
-}
-
-.flip-y {
-  transform: rotateX(180deg) !important;
-}
-
-.flip {
-  transform: rotateY(180deg) rotateX(180deg) !important;
-}
-
-/* ROTATE */
-
-.rotate-left {
-  transform: rotate(-90deg) !important;
-}
-
-.rotate-right {
-  transform: rotate(90deg) !important;
-}
-
-.rotating { //TODO: Maybe move to an _helpers_animations
-  animation: rotate $rotating-animation-duration linear infinite !important;
-}
-
-/* ATTACHED */
-
-// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
-
-%attached {
-  margin-bottom: 0;
-}
-
-.attached-top {
-  @extend %attached;
-  @include border-top-radius ( inherit !important );
-  @include border-bottom-radius ( 0 !important );
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-}
-
-.attached-right {
-  @extend %attached;
-  @include border-right-radius ( inherit !important );
-  @include border-left-radius ( 0 !important );
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.attached-bottom {
-  @extend %attached;
-  @include border-top-radius ( 0 !important );
-  @include border-bottom-radius ( inherit !important );
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.attached-left {
-  @extend %attached;
-  @include border-right-radius ( 0 !important );
-  @include border-left-radius ( inherit !important );
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
-
-/* GROW */
-
-.grow {
-  flex-grow: 1 !important;
-}
-
-.no-grow {
-  flex-grow: 0 !important;
-}
-
-/* SHRINK */
-
-.shrink {
-  flex-shrink: 1 !important;
-}
-
-.no-shrink {
-  flex-shrink: 0 !important;
-}
-
-/* OTHERS */
-
-//TODO: Move to more appropriate files
-
-.centerer {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: $gutter;
-
-  > :last-child {
-    margin-bottom: 0 !important;
-  }
-
-}
-
-.spacer {
-  flex-grow: $spacer-flex-grow !important;
-  flex-shrink: 1; // IE-10-11 default it to 0 instead
-  margin-bottom: $gutter;
-}
-
-.centered:not(.multiple) { //TODO: Move it to it's own decorator
-  @include center-margin ();
-}
-
-.limited:not(.multiple) { //TODO: Move it to it's own decorator
-
-  @if $max-width-enabled {
-
-    @include center-margin ( $max-width );
-
-  }
-
-}
-
-.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
-  cursor: pointer;
 }
 
 
@@ -1488,153 +1221,42 @@ label {
 
   }
 
-  /* BADGE */
-
-  //TODO: Maybe move to it's own component
-
-  &.badge {
-
-    position: absolute;
-    margin: 0;
-
-    &.top-left {
-      top: $label-badge-spacing;
-      left: $label-badge-spacing;
-    }
-
-    &.top-right,
-    &:not(.top-left):not(.bottom-left):not(.bottom-right) { // Default case
-      top: $label-badge-spacing;
-      right: $label-badge-spacing;
-    }
-
-    &.bottom-left {
-      bottom: $label-badge-spacing;
-      left: $label-badge-spacing;
-    }
-
-    &.bottom-right {
-      bottom: $label-badge-spacing;
-      right: $label-badge-spacing;
-    }
-
-  }
-
-  /* FLOATING */
-
-  &.floating {
-
-    //TODO: Add it while scrolling to bottom, show him when scrolling to top
-    //TODO: Add sub floating actions
-
-    @include z-depth ( $label-floating-z-depth );
-    position: fixed;
-    z-index: $label-floating-z-index;
-    right: $label-floating-right;
-    bottom: $label-floating-bottom;
-    margin-bottom: 0;
-    padding: $label-floating-padding-vertical $label-floating-padding-horizontal;
-    min-height: $line-height-em + ( $label-floating-padding-vertical * 2 );
-    min-width: $line-height-em + ( $label-floating-padding-horizontal * 2 );
-
-    &.compact {
-      padding: $label-floating-compact-padding-vertical $label-floating-compact-padding-horizontal;
-      min-height: $line-height-em + ( $label-floating-compact-padding-vertical * 2 );
-      min-width: $line-height-em + ( $label-floating-compact-padding-horizontal * 2 );
-    }
-
-  }
-
-  /* RIBBON */
-
-  //TODO: Maybe move it to it's own component
-
-  &.ribbon {
-
-    /* BEFORE / AFTER */
-
-    &.ribbon-left:before,
-    &.ribbon-right:after {
-      position: absolute;
-      z-index: -1;
-      content: '';
-      border: $label-ribbon-size solid transparent;
-      border-top-color: inherit;
-      bottom: - $label-ribbon-size * 2;
-    }
-
-    /* LEFT */
-
-    &.ribbon-left {
-
-      @include border-left-radius ( 0 );
-      left: - ( $gutter + ( $label-ribbon-size * 2 ) );
-      padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
-
-      &:before {
-        left: 0;
-        border-right-color: inherit;
-      }
-
-    }
-
-    /* LEFT & RIGHT */
-
-    &.ribbon-left.ribbon-right {
-      width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 4)});
-    }
-
-    /* RIGHT */
-
-    &.ribbon-right {
-
-      @include border-right-radius ( 0 );
-      padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
-
-      &:after {
-        right: 0;
-        border-left-color: inherit;
-      }
-
-    }
-
-    /* ONLY RIGHT */
-
-    //FIXME: It is a pixel too far
-
-    &.ribbon-right:not(.ribbon-left) {
-      left: calc(100% + #{( $gutter * 2 ) + $label-ribbon-size});
-      transform: translateX(-100%);
-    }
-
-    /* OUTLINED */
-
-    &.outlined {
-
-      /* BEFORE / AFTER */
-
-      &.ribbon-left:before,
-      &.ribbon-right:after {
-        bottom: - ( $label-ribbon-size * 2 + $outline-width );
-      }
-
-      /* BEFORE */
-
-      &.ribbon-left:before {
-        left: - $outline-width;
-      }
-
-      /* AFTER */
-
-      &.ribbon-right:after {
-        right: - $outline-width;
-      }
-
-    }
-
-  }
-
 }
+
+
+/* =========================================================================
+ * Svelto - Button
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../reset/reset.scss
+ * @require ../label/label.scss
+ * ========================================================================= */
+
+/* DEFAULT BUTTON */
+
+button {
+  border: none;
+  padding: 0;
+}
+
+/* BUTTON */
+
+.button {
+  @extend .label;
+  @extend .actionable;
+}
+
+
+/* =========================================================================
+ * Svelto - Label - Corner
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
 
 /* LABEL CORNER */
 
@@ -1742,7 +1364,35 @@ label {
 
 }
 
-/* LABEL TAG */
+
+/* =========================================================================
+ * Svelto - Button - Corner
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../button.scss
+ * @require ../../label/corner/corner.scss
+ * ========================================================================= */
+
+/* BUTTON CORNER */
+
+.button-corner {
+  @extend .label-corner;
+  @extend .actionable;
+}
+
+
+/* =========================================================================
+ * Svelto - Label - Tag
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* TAG */
 
 //FIXME: Missing pointer outline in IE10
 //FIXME: The pointer is not clickable
@@ -1858,38 +1508,16 @@ label {
 
 
 /* =========================================================================
- * Svelto - Button
+ * Svelto - Button - Tag
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../helpers/helpers.scss
- * @require ../label/label.scss
+ * @require ../button.scss
+ * @require ../../label/tag/tag.scss
  * ========================================================================= */
 
-/* DEFAULT BUTTON */
-
-button {
-  border: none;
-  padding: 0;
-}
-
-/* BUTTON */
-
-.button {
-  @extend .label;
-  @extend .actionable;
-}
-
-/* BUTTON CORNER */
-
-.button-corner {
-  @extend .label-corner;
-  @extend .actionable;
-}
-
-/* BUTTON TAG */
+/* TAG */
 
 .button-tag {
   @extend .label-tag;
@@ -2100,7 +1728,7 @@ button {
 
 
 /* =========================================================================
- * Svelto - Icons
+ * Svelto - Icon
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2140,84 +1768,14 @@ button {
   text-transform: none;
   word-wrap: normal;
   overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
-  /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
-  /* Support for all WebKit browsers */
   text-rendering: optimizeLegibility;
-  /* Support for all WebKit browsers */
   -moz-osx-font-smoothing: grayscale;
-  /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
 }
 
 i.icon {
   @extend %icon;
-}
-
-/* ICONS */
-
-//FIXME: Scaling to large size for example doesn't work
-
-.icons {
-
-  @extend .widget;
-  @extend %scaled-icon-sizes;
-  display: inline-block;
-  width: 1em * $icon-scale-amount;
-  height: 1em * $icon-scale-amount;
-  position: relative;
-
-  /* ICON */
-
-  .icon {
-
-    margin-bottom: 0;
-
-    /* NOT CORNER */
-
-    &:not(.corner) {
-      @include fill-absolute ();
-    }
-
-    /* CORNER */
-
-    &.corner {
-
-      position: absolute;
-      font-size: 1em * $icon-scale-amount / 2;
-
-      /* TOP LEFT */
-
-      &.top-left {
-        top: 0;
-        left: 0;
-      }
-
-      /* TOP RIGHT */
-
-      &.top-right {
-        top: 0;
-        right: 0;
-      }
-
-      /* BOTTOM RIGHT */
-
-      &.bottom-right {
-        bottom: 0;
-        right: 0;
-      }
-
-      /* BOTTOM LEFT */
-
-      &.bottom-left {
-        bottom: 0;
-        left: 0;
-      }
-
-    }
-
-  }
-
 }
 
 
@@ -2227,12 +1785,13 @@ i.icon {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../icons/icons.scss
+ * @require ../icon/icon.scss
  * @require ../widget/widget.scss
  * ========================================================================= */
 
 //TODO: When inset add proper dark shadow at the left and the right
 //TODO: Add better support for img tags, .image-wrp, container and card
+//TODO: Modularize it
 
 /* CAROUSEL */
 
@@ -2881,12 +2440,90 @@ i.icon {
 
 
 /* =========================================================================
+ * Svelto - Icons
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/widget.scss
+ * @require ../icon/icon.scss
+ * ========================================================================= */
+
+/* ICONS */
+
+//FIXME: Scaling to large size for example doesn't work
+
+.icons {
+
+  @extend .widget;
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  width: 1em * $icon-scale-amount;
+  height: 1em * $icon-scale-amount;
+  position: relative;
+
+  /* ICON */
+
+  > .icon {
+
+    margin-bottom: 0;
+
+    /* NOT CORNER */
+
+    &:not(.corner) {
+      @include fill-absolute ();
+    }
+
+    /* CORNER */
+
+    &.corner {
+
+      position: absolute;
+      font-size: 1em * $icon-scale-amount / 2;
+
+      /* TOP LEFT */
+
+      &.top-left {
+        top: 0;
+        left: 0;
+      }
+
+      /* TOP RIGHT */
+
+      &.top-right {
+        top: 0;
+        right: 0;
+      }
+
+      /* BOTTOM RIGHT */
+
+      &.bottom-right {
+        bottom: 0;
+        right: 0;
+      }
+
+      /* BOTTOM LEFT */
+
+      &.bottom-left {
+        bottom: 0;
+        left: 0;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Checkbox
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../widget/widget.scss
+ * @require ../icon/icon.scss
  * @require ../icons/icons.scss
  * ========================================================================= */
 
@@ -2930,7 +2567,7 @@ i.icon {
     /* BEFORE */
 
     &:before {
-      content: 'check_box_outline_blank';
+      content: $checkbox-icon-off;
       opacity: 1;
     }
 
@@ -2938,7 +2575,7 @@ i.icon {
 
     &:after {
       @include color-text ( $checkbox-icon-on-color );
-      content: 'check_box';
+      content: $checkbox-icon-on;
       opacity: 0;
       z-index: 1;
     }
@@ -3402,158 +3039,168 @@ i.icon {
 
 
 /* =========================================================================
- * Svelto - Divider
+ * Svelto - Divider - Block
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BLOCK */
+
+.divider.block {
+
+  margin-bottom: $gutter;
+  text-align: center;
+
+  /* CONTENT */
+
+  > .divider-content {
+    @include color ( $divider-block-color );
+    @include last-child-no-gutter ();
+    display: inline-block;
+    padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
+    border-radius: 10000px 10000px;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Divider - Hr
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
+ * @require ../../reset/reset.scss
  * ========================================================================= */
 
-//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+/* HR */
 
-/* DIVIDER */
-
-%divider {
-  height: 1px;
+hr {
+  z-index: $hr-z-index;
+  height: $hr-height;
   margin-top: - $gutter-half !important;
   margin-bottom: $gutter-half !important;
   border: none;
-  background-color: $divider-linear-bg-color;
-  z-index: $divider-linear-z-index;
+  background-color: $hr-bg-color;
 }
 
-/* DEFAULT DIVIDER */
 
-hr {
-  @extend %divider;
-}
+/* =========================================================================
+ * Svelto - Divider - Linear
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../hr/hr.scss
+ * ========================================================================= */
 
-/* DIVIDER */
+/* LINEAR */
 
-.divider {
+//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+//FIXME: It doesn't work in IE10
+//FIXME: Don't make `.vertical` inherit `:not(.vertical)` properties
 
-  /* LINEAR */
+.divider.linear,
+.divider:not(.block):not(.text):not(.spacer) { // The default one
 
-  //FIXME: It doesn't work in IE10
+  /* EMPTY */
 
-  &.linear,
-  &:not(.block):not(.text):not(.spacer) { // The default one
+  &:empty {
+    @extend hr;
+  }
+
+  /* ADVANCED */
+
+  &:not(:empty) {
+
+    @include last-child-no-gutter ();
+    margin-bottom: $gutter;
+    display: flex;
+    align-items: center;
+
+    &:before,
+    &:after {
+      @extend hr;
+      content: '';
+      margin: 0;
+      flex: 1 1 0%; // IE-10-11 sets flex-shrink to 0 // IE-10-11 misinterpreter a unitless 0 flex-basis
+      min-width: $gutter;
+    }
+
+    &:before {
+      margin-right: $gutter;
+    }
+
+    &:after {
+      margin-left: $gutter;
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical {
 
     /* EMPTY */
 
     &:empty {
-      @extend %divider;
+      height: auto;
+      width: $hr-height;
+      align-self: stretch;
+      flex: 0 1; // IE-10-11 sets flex-shrink to 0
+      margin: 0 $gutter-half $gutter !important;
     }
 
     /* ADVANCED */
 
     &:not(:empty) {
 
-      @include last-child-no-gutter ();
-      margin-bottom: $gutter;
-      display: flex;
-      align-items: center;
+      flex-direction: column;
+      flex: 0 1 !important; // IE-10-11 sets flex-shrink to 0
+      align-self: stretch;
+      // justify-content: center;
+      margin: 0 $gutter-half $gutter;
 
       &:before,
       &:after {
-        @extend %divider;
-        content: '';
-        margin: 0;
+        margin: 0 !important;
+        min-width: 0;
+        width: $hr-height;
+        min-height: $gutter;
         flex-grow: 1;
         flex-shrink: 1; // IE-10-11 default it to 0 instead
-        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
-        min-width: $gutter;
       }
 
       &:before {
-        margin-right: $gutter;
+        margin-bottom: $gutter-half;
       }
 
       &:after {
-        margin-left: $gutter;
-      }
-
-    }
-
-    /* VERTICAL */
-
-    &.vertical {
-
-      /* EMPTY */
-
-      &:empty {
-        height: auto;
-        width: 1px;
-        align-self: stretch;
-        flex-grow: 0;
-        flex-shrink: 1; // IE-10-11 default it to 0 instead
-        margin: 0 $gutter-half $gutter !important;
-      }
-
-      /* ADVANCED */
-
-      &:not(:empty) {
-
-        flex-direction: column;
-        flex-grow: 0 !important;
-        flex-shrink: 1; // IE-10-11 default it to 0 instead
-        align-self: stretch;
-        // justify-content: center;
-        margin: 0 $gutter-half $gutter;
-
-        &:before,
-        &:after {
-          margin: 0 !important;
-          min-width: 0;
-          width: 1px;
-          min-height: $gutter;
-          flex-grow: 1;
-          flex-shrink: 1; // IE-10-11 default it to 0 instead
-        }
-
-        &:before {
-          margin-bottom: $gutter-half;
-        }
-
-        &:after {
-          margin-top: $gutter-half;
-        }
-
+        margin-top: $gutter-half;
       }
 
     }
 
   }
 
-  /* BLOCK */
+}
 
-  &.block {
 
-    margin-bottom: $gutter;
-    text-align: center;
+/* =========================================================================
+ * Svelto - Divider - Text
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
-    /* CONTENT */
+/* TEXT */
 
-    > .divider-content {
-      @include color ( $divider-block-color );
-      @include last-child-no-gutter ();
-      display: inline-block;
-      padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
-      border-radius: 10000px 10000px;
-    }
-
-  }
-
-  /* TEXT */
-
-  &.text {
-    @include size ( $divider-text-size );
-    font-weight: $divider-text-font-weight;
-    margin: 0 $gutter-half $gutter-half;
-    opacity: $divider-text-opacity;
-  }
-
+.divider.text {
+  @include size ( $divider-text-size );
+  font-weight: $divider-text-font-weight;
+  margin: 0 $gutter-half $gutter-half;
+  opacity: $divider-text-opacity;
 }
 
 
@@ -3877,38 +3524,6 @@ _:-ms-input-placeholder, :root .dropdown.card {
 
 
 /* =========================================================================
- * Svelto - Flags
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * Flags from https://www.flag-sprites.com/ - Blogpotato.de - FamFamFam
- * ========================================================================= */
-
-/* FLAG */
-
-i[class^="flag-"] {
-  display: inline-block;
-  vertical-align: middle;
-  width: $flag-width;
-  height: $flag-height;
-  background-image: url('#{$basepath}flags.png');
-}
-
-/* FLAGS */
-
-@each $country, $datas in $flags {
-
-  $background-position: nth($datas, 2);
-
-  .flag-#{$country} {
-    background-position: $background-position;
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Flippable
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -4078,26 +3693,14 @@ footer {
 
 
 /* =========================================================================
- * Svelto - Form
+ * Svelto - Fieldset
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../widget/widget.scss
+ * @require ../../reset/reset.scss
+ * @require ../../widget/widget.scss
  * ========================================================================= */
-
-/* DEFAULT FORM */
-
-form {
-
-  position: relative;
-
-  &:not(.multiple) {
-    @include last-child-no-gutter ();
-  }
-
-}
 
 /* FIELDSET */
 
@@ -4111,15 +3714,40 @@ fieldset {
 
 
 /* =========================================================================
- * Svelto - Grid (Mixins)
+ * Svelto - Form
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../reset/reset.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+form {
+
+  &:not(.multiple) {
+    @include last-child-no-gutter ();
+    position: relative;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Grid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* GRID WIDTHS */
+// This generates `size-#` classes that are used for lining up the content in a grid
 
-// XSMALL
+//FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Is it the best way to do it?
+
+//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
+
+/* XSMALL */
 
 @include xsmall-up {
 
@@ -4130,8 +3758,6 @@ fieldset {
     .xs-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %xs-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -4159,7 +3785,7 @@ fieldset {
 
 }
 
-// SMALL
+/* SMALL */
 
 @include small-up {
 
@@ -4170,8 +3796,6 @@ fieldset {
     .sm-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %sm-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -4199,7 +3823,7 @@ fieldset {
 
 }
 
-// MEDIUM
+/* MEDIUM */
 
 @include medium-up {
 
@@ -4210,8 +3834,6 @@ fieldset {
     .md-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %md-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -4239,7 +3861,7 @@ fieldset {
 
 }
 
-// LARGE
+/* LARGE */
 
 @include large-up {
 
@@ -4250,8 +3872,6 @@ fieldset {
     .lg-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %lg-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -4279,7 +3899,7 @@ fieldset {
 
 }
 
-// XLARGE
+/* XLARGE */
 
 @include xlarge-up {
 
@@ -4290,8 +3910,6 @@ fieldset {
     .xl-#{$nr} {
       width: $percentage;
     }
-
-    //FIXME: Is too ugly, and we generate too much CSS
 
     %xl-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
@@ -4353,11 +3971,302 @@ header {
 
 
 /* =========================================================================
- * Svelto - Helpers Responsive
+ * Svelto - Helpers - Border
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
+
+/* BORDER */
+
+.b-a-0 {
+  border-width: 0 !important;
+}
+
+.b-t-0,
+.b-y-0 {
+  border-top-width: 0 !important;
+}
+
+.b-r-0,
+.b-x-0 {
+  border-right-width: 0 !important;
+}
+
+.b-b-0,
+.b-y-0 {
+  border-bottom-width: 0 !important;
+}
+
+.b-l-0,
+.b-x-0 {
+  border-left-width: 0 !important;
+}
+
+/* BORDER RADIUS */
+
+.rounded {
+  border-radius: $rounded-border-radius $rounded-border-radius !important;
+}
+
+.smooth {
+  border-radius: $smooth-border-radius !important;
+}
+
+.sharp {
+  border-radius: $sharp-border-radius !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Center
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CENTERER */
+
+.centerer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $gutter;
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+}
+
+/* CENTERED */
+
+.centered:not(.multiple) { //TODO: Move it to it's own decorator
+  @include center-margin ();
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Display
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DISPLAY */
+
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Flexbox - Grow
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GROW */
+
+.grow {
+  flex-grow: 1 !important;
+}
+
+.no-grow {
+  flex-grow: 0 !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Flexbox - Shrink
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SHRINK */
+
+.shrink {
+  flex-shrink: 1 !important;
+}
+
+.no-shrink {
+  flex-shrink: 0 !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Flip
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FLIP */
+
+.flip-x {
+  transform: rotateY(180deg) !important;
+}
+
+.flip-y {
+  transform: rotateX(180deg) !important;
+}
+
+.flip {
+  transform: rotateY(180deg) rotateX(180deg) !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Float
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FLOAT */
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Margin
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MARGIN */
+
+.m-a-0 {
+  margin: 0 !important;
+}
+
+.m-t-0,
+.m-y-0 {
+  margin-top: 0 !important;
+}
+
+.m-r-0,
+.m-x-0 {
+  margin-right: 0 !important;
+}
+
+.m-b-0,
+.m-y-0 {
+  margin-bottom: 0 !important;
+}
+
+.m-l-0,
+.m-x-0 {
+  margin-left: 0 !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Others
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Move to their own, more appropriate, files
+
+/* OTHERS */
+
+.spacer {
+  flex-grow: $spacer-flex-grow !important;
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
+  margin-bottom: $gutter;
+}
+
+.limited:not(.multiple) { //TODO: Move it to it's own decorator
+
+  @if $max-width-enabled {
+
+    @include center-margin ( $max-width );
+
+  }
+
+}
+
+.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
+  cursor: pointer;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Overflow
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OVERFLOW */
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Padding
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PADDING */
+
+.p-a-0 {
+  padding: 0 !important;
+}
+
+.p-t-0,
+.p-y-0 {
+  padding-top: 0 !important;
+}
+
+.p-r-0,
+.p-x-0 {
+  padding-right: 0 !important;
+}
+
+.p-b-0,
+.p-y-0 {
+  padding-bottom: 0 !important;
+}
+
+.p-l-0,
+.p-x-0 {
+  padding-left: 0 !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Responsive
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
 
 /* HIDDEN-*-UP */
 
@@ -4445,6 +4354,104 @@ header {
     display: none !important;
   }
 
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Rotation
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ROTATION */
+
+.rotate-left {
+  transform: rotate(-90deg) !important;
+}
+
+.rotate-right {
+  transform: rotate(90deg) !important;
+}
+
+.rotating { //TODO: Maybe move to an _helpers_animations
+  animation: rotate $rotating-animation-duration linear infinite !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Text
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXT ALIGNMENT */
+
+.text-left {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.text-center {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.text-right {
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* TEXT TRANSFORMATION */
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* OTHERS */
+
+.text-nowrap,
+.text-no-wrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis,
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%; // Fixes a bug in IE 10
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Visibility
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* VISIBILITY */
+
+.visible {
+  visibility: visible !important;
+}
+
+.invisible {
+  visibility: hidden !important;
 }
 
 
@@ -4778,23 +4785,180 @@ span > img {
 
 
 /* =========================================================================
- * Svelto - Keyframes
+ * Svelto - Label - Badge
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
  * ========================================================================= */
 
-//TODO: Is it useful/needed?
+/* BADGE */
 
-/* KEYFRAMES */
+//TODO: Maybe move to it's own component
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+.label.badge {
+
+  position: absolute;
+  margin: 0;
+
+  &.top-left {
+    top: $label-badge-spacing;
+    left: $label-badge-spacing;
   }
-  to {
-    transform: rotate(360deg);
+
+  &.top-right,
+  &:not(.top-left):not(.bottom-left):not(.bottom-right) { // Default case
+    top: $label-badge-spacing;
+    right: $label-badge-spacing;
   }
+
+  &.bottom-left {
+    bottom: $label-badge-spacing;
+    left: $label-badge-spacing;
+  }
+
+  &.bottom-right {
+    bottom: $label-badge-spacing;
+    right: $label-badge-spacing;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Label - Floating
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* FLOATING */
+
+.label.floating {
+
+  //TODO: Add it while scrolling to bottom, show him when scrolling to top
+  //TODO: Add sub floating actions
+
+  @include z-depth ( $label-floating-z-depth );
+  position: fixed;
+  z-index: $label-floating-z-index;
+  right: $label-floating-right;
+  bottom: $label-floating-bottom;
+  margin-bottom: 0;
+  padding: $label-floating-padding-vertical $label-floating-padding-horizontal;
+  min-height: $line-height-em + ( $label-floating-padding-vertical * 2 );
+  min-width: $line-height-em + ( $label-floating-padding-horizontal * 2 );
+
+  /* COMPACT */
+
+  &.compact {
+    padding: $label-floating-compact-padding-vertical $label-floating-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-floating-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-floating-compact-padding-horizontal * 2 );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Label - Ribbon
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* RIBBON */
+
+//TODO: Maybe move it to it's own component
+
+.label.ribbon {
+
+  /* BEFORE / AFTER */
+
+  &.ribbon-left:before,
+  &.ribbon-right:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    border: $label-ribbon-size solid transparent;
+    border-top-color: inherit;
+    bottom: - $label-ribbon-size * 2;
+  }
+
+  /* LEFT */
+
+  &.ribbon-left {
+
+    @include border-left-radius ( 0 );
+    left: - ( $gutter + ( $label-ribbon-size * 2 ) );
+    padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
+
+    &:before {
+      left: 0;
+      border-right-color: inherit;
+    }
+
+  }
+
+  /* LEFT & RIGHT */
+
+  &.ribbon-left.ribbon-right {
+    width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 4)});
+  }
+
+  /* RIGHT */
+
+  &.ribbon-right {
+
+    @include border-right-radius ( 0 );
+    padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
+
+    &:after {
+      right: 0;
+      border-left-color: inherit;
+    }
+
+  }
+
+  /* ONLY RIGHT */
+
+  //FIXME: It is a pixel too far
+
+  &.ribbon-right:not(.ribbon-left) {
+    left: calc(100% + #{( $gutter * 2 ) + $label-ribbon-size});
+    transform: translateX(-100%);
+  }
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    /* BEFORE / AFTER */
+
+    &.ribbon-left:before,
+    &.ribbon-right:after {
+      bottom: - ( $label-ribbon-size * 2 + $outline-width );
+    }
+
+    /* BEFORE */
+
+    &.ribbon-left:before {
+      left: - $outline-width;
+    }
+
+    /* AFTER */
+
+    &.ribbon-right:after {
+      right: - $outline-width;
+    }
+
+  }
+
 }
 
 
@@ -5238,156 +5402,146 @@ table > :not(tfoot) td .multiple:only-child { // Here the `multiple` shouldn't t
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../infobar/infobar.scss
  * ========================================================================= */
 
 //TODO: Make noty scrollables, maybe, so that in no case they will fill up the entire screen
-//TODO: Add transparentize back, in a wise, space efficient way
+//TODO: Add transparentize back, in a wise, space-efficient way
+
+/* NOTY */
+
+.noty {
+
+  @include z-depth ( $noty-z-depth );
+  border-radius: $noty-border-radius;
+  pointer-events: auto;
+  transition-property: opacity, font-size, padding, margin;
+  transition-duration: $noty-transition-all-duration;
+  transform: translateZ(0);
+
+  /* INFOBAR */
+
+  .infobar {
+    background-color: transparent;
+    color: inherit;
+    margin-bottom: 0;
+    border-radius: inherit;
+  }
+
+  /* BUTTONS */
+
+  &-buttons {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+
+  /* IMG */
+
+  &-img {
+
+    width: $noty-img-size;
+
+    @if $noty-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $noty-border-radius;
+    }
+
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+    opacity: 0;
+    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
+    padding: 0;
+    margin: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Noty - Queue
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../noty.scss
+ * ========================================================================= */
+
 //FIXME: The columns doesn't shrink when necessary in IE-10-11
 
-/* MIXINS */
+/* QUEUE */
 
-@mixin expand-queue {
+.noty-queue {
 
-  width: 100%;
-  margin: 0 !important;
+  display: flex;
 
-  &:not(:empty) {
-    @include z-depth ( $noty-z-depth );
-  }
+  /* LEFT */
 
-  .noty {
-    @include z-depth ( 0 );
-    width: 100%;
-    margin: 0 !important;
-    border-right-width: 0;
-    border-left-width: 0;
-    border-radius: 0;
-  }
+  &.left {
 
-}
-
-/* MEDIA QUERIES */
-
-@if $noty-full-enabled == true {
-
-  @include max-screen ( $noty-full-breakpoint ) {
-
-    /* QUEUES */
-
-    .noty-queues {
-
-      // @include z-depth ( $noty-z-depth ); //FIXME: We should attach the z-depth only if actually there are some noties
-
-      /* TOP */
-
-      &.top {
-
-        /* ROW */
-
-        .noty-queues-row {
-          flex-direction: column;
-        }
-
-        /* NOTY */
-
-        .noty {
-          border-top-width: 0;
-          border-bottom-width: $outline-width;
-          border-bottom-style: solid;
-        }
-
-      }
-
-      /* BOTTOM */
-
-      &.bottom {
-
-        /* ROW */
-
-        .noty-queues-row {
-          flex-direction: column-reverse;
-        }
-
-        /* NOTY */
-
-        .noty {
-          border-bottom-width: 0;
-          border-top-width: $outline-width;
-          border-top-style: solid;
-        }
-
-      }
-
-    }
-
-    /* QUEUE */
-
-    .noty-queue {
-      @include expand-queue ();
-      box-shadow: none !important;
-    }
-
-  }
-
-}
-
-// IE-10-11 Fix so that noties won't expand over the viewport
-
-_:-ms-input-placeholder, :root .noty-queues  {
-
-  /* TOP */
-
-  &.top {
-
-    /* ROW */
-
-    .noty-queues-row {
-      flex-direction: column;
-    }
-
-  }
-
-  /* BOTTOM */
-
-  &.bottom {
-
-    /* ROW */
-
-    .noty-queues-row {
-      flex-direction: column;
-    }
-
-  }
-
-  /* QUEUES ROW */
-
-  .noty-queues-row {
     align-items: flex-start;
-  }
 
-  /* QUEUE */
-
-  .noty-queue:not(.expanded) {
-
-    width: calc(100% - #{$gutter * 2});
-    margin-right: $gutter;
-
-    /* NOTY */
-
-    .noty {
-      max-width: 100%;
+    &:not(:empty) {
+      margin-left: $gutter;
     }
 
   }
 
+  /* CENTER */
+
+  &.center {
+
+    align-items: center;
+    margin-right: $gutter;
+    margin-left: $gutter;
+
+    &:empty {
+      margin-right: $gutter-half;
+      margin-left: $gutter-half;
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    align-items: flex-end;
+
+    &:not(:empty) {
+      margin-right: $gutter;
+    }
+
+  }
+
+  /* EXPANDED */
+
+  &.expanded {
+    @include noty-queue-expand ();
+  }
+
 }
 
-/* NOTY QUEUES */
+
+/* =========================================================================
+ * Svelto - Noty - Queues
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../noty.scss
+ * @require ../queue/queue.scss
+ * ========================================================================= */
+
+/* QUEUES */
 
 .noty-queues {
 
   position: fixed;
-  z-index: $noty-z-index;
   display: flex;
   left: 0;
   right: 0;
@@ -5477,107 +5631,126 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 }
 
-/* NOTY QUEUE */
+// IE-10-11 Fix so that noties won't expand over the viewport
 
-.noty-queue {
+_:-ms-input-placeholder, :root .noty-queues  {
 
-  display: flex;
+  /* TOP */
 
-  /* LEFT */
+  &.top {
 
-  &.left {
+    /* ROW */
 
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* QUEUES ROW */
+
+  .noty-queues-row {
     align-items: flex-start;
-
-    &:not(:empty) {
-      margin-left: $gutter;
-    }
-
   }
 
-  /* CENTER */
+  /* QUEUE */
 
-  &.center {
+  .noty-queue:not(.expanded) {
 
-    align-items: center;
+    width: calc(100% - #{$gutter * 2});
     margin-right: $gutter;
-    margin-left: $gutter;
 
-    &:empty {
-      margin-right: $gutter-half;
-      margin-left: $gutter-half;
+    /* NOTY */
+
+    .noty {
+      max-width: 100%;
     }
 
-  }
-
-  /* RIGHT */
-
-  &.right {
-
-    align-items: flex-end;
-
-    &:not(:empty) {
-      margin-right: $gutter;
-    }
-
-  }
-
-  /* EXPANDED */
-
-  &.expanded {
-    @include expand-queue ();
   }
 
 }
 
-/* NOTY */
 
-.noty {
+/* =========================================================================
+ * Svelto - Noty - Autoexpand
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../noty.scss
+ * @require ../queues/queues.scss
+ * @require ../queue/queue.scss
+ * ========================================================================= */
 
-  @include z-depth ( $noty-z-depth );
-  border-radius: $noty-border-radius;
-  pointer-events: auto;
-  transition-property: opacity, font-size, padding, margin;
-  transition-duration: $noty-transition-all-duration;
-  transform: translateZ(0);
+/* AUTOEXPAND */
 
-  /* INFOBAR */
+@include max-screen ( $noty-autoexpand-breakpoint ) {
 
-  .infobar {
-    background-color: transparent;
-    color: inherit;
-    margin-bottom: 0;
-    border-radius: inherit;
-  }
+  /* QUEUES */
 
-  /* BUTTONS */
+  .noty-queues {
 
-  &-buttons {
-    padding-left: $gutter;
-    padding-right: $gutter;
-  }
+    // @include z-depth ( $noty-z-depth ); //FIXME: We should attach the z-depth only if actually there are some noties
 
-  /* IMG */
+    /* TOP */
 
-  &-img {
+    &.top {
 
-    width: $noty-img-size;
+      /* ROW */
 
-    @if $noty-img-rounded == true {
-      border-radius: 10000px 10000px;
-    } @else {
-      border-radius: $noty-border-radius;
+      .noty-queues-row {
+        flex-direction: column;
+      }
+
+      /* NOTY */
+
+      .noty {
+        border-top-width: 0;
+        border-bottom-width: $outline-width;
+        border-bottom-style: solid;
+      }
+
+    }
+
+    /* BOTTOM */
+
+    &.bottom {
+
+      /* ROW */
+
+      .noty-queues-row {
+        flex-direction: column-reverse;
+      }
+
+      /* NOTY */
+
+      .noty {
+        border-bottom-width: 0;
+        border-top-width: $outline-width;
+        border-top-style: solid;
+      }
+
     }
 
   }
 
-  /* CLOSED */
+  /* QUEUE */
 
-  &:not(.open) {
-    opacity: 0;
-    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
-    padding: 0;
-    margin: 0;
+  .noty-queue {
+    @include noty-queue-expand ();
+    box-shadow: none !important;
   }
 
 }
@@ -5783,95 +5956,41 @@ _:-ms-input-placeholder, :root .noty-queues  {
   &.left,
   &.right,
   &:not(.top):not(.bottom) { // Default case
-
     top: 0;
     bottom: 0;
-    width: $panel-vertical-width;
-
-    /* SLIM */
-
-    &.slim {
-      width: $panel-slim-vertical-width;
-    }
-
   }
 
   /* LEFT */
 
   &.left,
   &:not(.right):not(.top):not(.bottom) { // Default case
-
     left: 0;
-    transform: translateX(- $panel-closed-vertical-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateX(- $panel-slim-closed-vertical-spacing);
-    }
-
   }
 
   /* RIGHT */
 
   &.right {
-
     right: 0;
-    transform: translateX($panel-closed-vertical-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateX($panel-slim-closed-vertical-spacing);
-    }
-
   }
 
   /* TOP / BOTTOM */
 
   &.top,
   &.bottom {
-
     right: 0;
     left: 0;
-    height: $panel-horizontal-height;
-
-    /* SLIM */
-
-    &.slim {
-      height: $panel-slim-horizontal-height;
-    }
-
   }
 
   /* TOP */
 
   &.top {
-
     top: 0;
-    transform: translateY(- $panel-closed-horizontal-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateY(- $panel-slim-closed-horizontal-spacing);
-    }
-
   }
 
   /* BOTTOM */
 
   &.bottom {
-
     bottom: 0;
-    transform: translateY($panel-closed-horizontal-spacing);
-
-    /* SLIM */
-
-    &.slim {
-      transform: translateY($panel-slim-closed-horizontal-spacing);
-    }
-
   }
 
   /* SHOW */
@@ -5929,45 +6048,177 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 /* LAYOUT */
 
-//FIXME: Since we introduced the layout component it needs
+//FIXME: Maybe use an additional class for enabling the animations we need, or me may conflict with other components
 
 .layout {
 
   transition: padding $panel-transition-transform-duration;
 
-  &.panel-pinned-left {
+  > .layout-header.fixed {
+    transition-property: top, right, bottom, left;
+    transition-duration: $panel-transition-transform-duration;
+  }
 
-    padding-left: $panel-vertical-width;
+}
+
+
+/* =========================================================================
+ * Svelto - Panel - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * @require ../../layout/layout.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.panel,
+.panel.default { // Explicitly enforcing the type
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right,
+  &:not(.top):not(.bottom) { // Default case
+    width: $panel-default-vertical-width;
+  }
+
+  /* LEFT */
+
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { // Default case
+    transform: translateX(- $panel-default-closed-vertical-spacing);
+  }
+
+  /* RIGHT */
+
+  &.right {
+    transform: translateX($panel-default-closed-vertical-spacing);
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
+    height: $panel-default-horizontal-height;
+  }
+
+  /* TOP */
+
+  &.top {
+    transform: translateY(- $panel-default-closed-horizontal-spacing);
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+    transform: translateY($panel-default-closed-horizontal-spacing);
+  }
+
+}
+
+/* LAYOUT */
+
+.layout {
+
+  &.panel-default-pinned-left {
+
+    padding-left: $panel-default-vertical-width;
 
     > .layout-header.fixed {
-      left: $panel-vertical-width;
+      left: $panel-default-vertical-width;
     }
 
   }
 
-  &.panel-pinned-right {
+  &.panel-default-pinned-right {
 
-    padding-right: $panel-vertical-width;
+    padding-right: $panel-default-vertical-width;
 
     > .layout-header.fixed {
-      right: $panel-vertical-width;
+      right: $panel-default-vertical-width;
     }
 
   }
 
-  &.panel-pinned-top {
+  &.panel-default-pinned-top {
 
-    padding-top: $panel-horizontal-height;
+    padding-top: $panel-default-horizontal-height;
 
     > .layout-header.fixed {
-      top: $panel-horizontal-height;
+      top: $panel-default-horizontal-height;
     }
 
   }
 
-  &.panel-pinned-bottom {
-    padding-bottom: $panel-horizontal-height;
+  &.panel-default-pinned-bottom {
+    padding-bottom: $panel-default-horizontal-height;
   }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Panel - Slim
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * @require ../../layout/layout.scss
+ * ========================================================================= */
+
+/* SLIM */
+
+.panel.slim {
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right,
+  &:not(.top):not(.bottom) { // Default case
+    width: $panel-slim-vertical-width;
+  }
+
+  /* LEFT */
+
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { // Default case
+    transform: translateX(- $panel-slim-closed-vertical-spacing);
+  }
+
+  /* RIGHT */
+
+  &.right {
+    transform: translateX($panel-slim-closed-vertical-spacing);
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
+    height: $panel-slim-horizontal-height;
+  }
+
+  /* TOP */
+
+  &.top {
+    transform: translateY(- $panel-slim-closed-horizontal-spacing);
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+    transform: translateY($panel-slim-closed-horizontal-spacing);
+  }
+
+}
+
+/* LAYOUT */
+
+.layout {
 
   &.panel-slim-pinned-left {
 
@@ -6001,11 +6252,6 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
   &.panel-slim-pinned-bottom {
     padding-bottom: $panel-slim-horizontal-height;
-  }
-
-  > .layout-header.fixed {
-    transition-property: top, right, bottom, left;
-    transition-duration: $panel-transition-transform-duration;
   }
 
 }
@@ -6191,7 +6437,7 @@ code[class*='language-'] {
   }
 
   .namespace {
-  	opacity: 0.7;
+  	opacity: .7;
   }
 
 }
@@ -6260,75 +6506,6 @@ code[class*='language-'] {
 
   }
 
-  /* LABELED */
-
-  &.labeled {
-
-    /* AFTER (LABEL) */
-
-    .progressbar-highlight:after {
-      content: attr(data-value);
-      font-size: $progressbar-label-font-size;
-      padding: 0 $gutter-half;
-    }
-
-  }
-
-  /* STRIPED */
-
-  &.striped {
-
-    .progressbar-highlight:before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: - $progressbar-stripe-size;
-      right: 0;
-      background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
-      content: '';
-      background-size: $progressbar-stripe-size $progressbar-stripe-size;
-      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
-    }
-
-    /* COMPACT */
-
-    &.compact .progressbar-highlight:before {
-      background-size: ( $progressbar-stripe-size / 2 ) ( $progressbar-stripe-size / 2 );
-    }
-
-    /* SLIM */
-
-    &.slim .progressbar-highlight:before {
-      background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
-    }
-
-    /* DISABLED */
-
-    &.disabled .progressbar-highlight:before {
-      animation-play-state: paused;
-    }
-
-  }
-
-  /* INDETERMINATE */
-
-  &.indeterminate {
-
-    .progressbar-highlight {
-
-      animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
-
-      /* STRIPES / LABEL */
-
-      &:before,
-      &:after {
-        display: none;
-      }
-
-    }
-
-  }
-
   /* COMPACT */
 
   &.compact {
@@ -6359,29 +6536,107 @@ code[class*='language-'] {
 
 }
 
-/* KEYFRAMES */
 
-@keyframes progressbar-stripes-move {
-  0% {
-    transform: translateX(0);
+/* =========================================================================
+ * Svelto - Progressbar - Indeterminate
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../progressbar/progressbar.scss
+ * ========================================================================= */
+
+/* INDETERMINATE */
+
+.progressbar.indeterminate {
+
+  /* HIGHLIGHT */
+
+  .progressbar-highlight {
+
+    animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
+
+    /* STRIPES / LABEL */
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
   }
-  100% {
-    transform: translateX($progressbar-stripe-size);
-  }
+
 }
 
-@keyframes progressbar-indeterminate-highlight {
-  0% {
-    width: 100%;
-    transform: translateX(-60%) scaleX(0.15);
+
+/* =========================================================================
+ * Svelto - Progressbar - Labeled
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../progressbar/progressbar.scss
+ * ========================================================================= */
+
+/* LABELED */
+
+.progressbar.labeled {
+
+  /* AFTER (LABEL) */
+
+  .progressbar-highlight:after {
+    content: attr(data-value);
+    font-size: $progressbar-label-font-size;
+    padding: 0 $gutter-half;
   }
-  35% {
-    transform: translateX(-15%) scaleX(0.5);
+
+}
+
+
+/* =========================================================================
+ * Svelto - Progressbar - Striped
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../progressbar/progressbar.scss
+ * ========================================================================= */
+
+/* STRIPED */
+
+.progressbar.striped {
+
+  /* STRIPES */
+
+  .progressbar-highlight:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: - $progressbar-stripe-size;
+    right: 0;
+    background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
+    content: '';
+    background-size: $progressbar-stripe-size $progressbar-stripe-size;
+    animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
   }
-  100% {
-    width: 100%;
-    transform: translateX(51%) scaleX(0.05);
+
+  /* COMPACT */
+
+  &.compact .progressbar-highlight:before {
+    background-size: ( $progressbar-stripe-size / 2 ) ( $progressbar-stripe-size / 2 );
   }
+
+  /* SLIM */
+
+  &.slim .progressbar-highlight:before {
+    background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
+  }
+
+  /* DISABLED */
+
+  &.disabled .progressbar-highlight:before {
+    animation-play-state: paused;
+  }
+
 }
 
 
@@ -6410,13 +6665,13 @@ code[class*='language-'] {
     /* BEFORE */
 
     &:before {
-      content: 'radio_button_unchecked';
+      content: $radio-icon-off;
     }
 
     /* AFTER */
 
     &:after {
-      content: 'radio_button_checked';
+      content: $radio-icon-off;
     }
 
   }
@@ -6446,13 +6701,13 @@ code[class*='language-'] {
       @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
 
         &:hover {
-          @include z-depth-raised ( $depth, !important );
+          @include raisable ( $depth, !important );
         }
 
       }
 
       &.z-depth-#{$depth}:hover {
-        @include z-depth-raised ( $depth, !important );
+        @include raisable ( $depth, !important );
       }
 
     }
@@ -6468,7 +6723,7 @@ code[class*='language-'] {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../icons/icons.scss
+ * @require ../icon/icon.scss
  * @require ../widget/widget.scss
  * ========================================================================= */
 
@@ -6804,16 +7059,52 @@ a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
 
 
 /* =========================================================================
- * Svelto - Select
+ * Svelto - Select - Dropdown
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DROPDOWN */
+
+.select-dropdown {
+
+  @include z-depth ( $select-dropdown-z-depth );
+
+  /* CARD BLOCK */
+
+  .card-block {
+    padding: $gutter-half 0;
+  }
+
+  /* BUTTON */
+
+  .button {
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  /* DIVIDER */
+
+  .divider {
+    margin-top: $gutter-half;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Select - Toggler
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../input/input.scss
+ * @require ../../reset/reset.scss
+ * @require ../../input/input.scss
  * ========================================================================= */
 
-/* SELECT TOGGLER */
+/* TOGGLER */
 
 .select-toggler {
 
@@ -6856,34 +7147,6 @@ a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
 
 }
 
-/* SELECT DROPDOWN */
-
-.select-dropdown {
-
-  @include z-depth ( $select-z-depth );
-
-  /* CARD BLOCK */
-
-  .card-block {
-    padding: $gutter-half 0;
-  }
-
-  /* BUTTON */
-
-  .button {
-    display: block;
-    border-radius: 0;
-    margin-bottom: 0;
-  }
-
-  /* DIVIDER */
-
-  .divider {
-    margin-top: $gutter-half;
-  }
-
-}
-
 
 /* =========================================================================
  * Svelto - Selectable
@@ -6896,7 +7159,7 @@ a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
 
 /* SELECTABLE TABLE */
 
-table.table.selectable {
+table.selectable {
 
   /* ROW */
 
@@ -6920,7 +7183,7 @@ table.table.selectable {
 
 
 /* =========================================================================
- * Svelto - Shapes
+ * Svelto - Shape
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6932,9 +7195,79 @@ table.table.selectable {
 
 %shape {
   @extend .widget;
-  flex-grow: 0 !important;
-  flex-shrink: 1; // IE-10-11 default it to 0 instead
+  flex: 0 1 !important; // IE-10-11 sets flex-shrink to 0
 }
+
+
+/* =========================================================================
+ * Svelto - Shape - Circle
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../shape.scss
+ * ========================================================================= */
+
+/* CIRCLE */
+
+.circle {
+  @extend %shape;
+  @include circle ( $circle-size );
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Square - Sample
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../shape.scss
+ * ========================================================================= */
+
+/* SAMPLE */
+
+.square-sample {
+
+  @extend %shape;
+  @include square ( $square-sample-size );
+  overflow: hidden;
+  padding: $gutter-half;
+
+  /* PARAGRAPH */
+
+  > p {
+    @include size ( $square-sample-p-size );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Square
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../shape.scss
+ * ========================================================================= */
+
+/* SQUARE */
+
+.square {
+  @extend %shape;
+  @include square ( $square-size );
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Triangle
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../shape.scss
+ * ========================================================================= */
 
 /* TRIANGLE */
 
@@ -6959,37 +7292,6 @@ table.table.selectable {
     @include triangle ( $triangle-size, right );
   }
 
-}
-
-/* SQUARE */
-
-.square {
-  @extend %shape;
-  @include square ( $square-size );
-}
-
-/* SQUARE SAMPLE */
-
-.square-sample {
-
-  @extend %shape;
-  @include square ( $square-sample-size );
-  overflow: hidden;
-  padding: $gutter-half;
-
-  /* P */
-
-  > p {
-    @include size ( $square-sample-p-size );
-  }
-
-}
-
-/* CIRCLE */
-
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
 }
 
 
@@ -7019,7 +7321,7 @@ table.table.selectable {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../icons/icons.scss
+ * @require ../icon/icon.scss
  * @require ../widget/widget.scss
  * ========================================================================= */
 
@@ -7285,12 +7587,12 @@ table.table.selectable {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../reset/reset.scss
- * @require ../icons/icons.scss
+ * @require ../icon/icon.scss
  * ========================================================================= */
 
 /* SORTABLE TABLE */
 
-table.table.sortable {
+table.sortable {
 
   /* HEADER */
 
@@ -7330,14 +7632,14 @@ table.table.sortable {
 
     &:before {
       content: 'arrow_drop_down';
-      top: 0.35em;
+      top: .35em;
     }
 
     /* AFTER */
 
     &:after {
       content: 'arrow_drop_up';
-      bottom: 0.35em;
+      bottom: .35em;
     }
 
     /* INACTIVE OPACITY */
@@ -7457,7 +7759,7 @@ svg.spinner {
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
     stroke-dasharray: 0%, 240%; // Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
-    animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
+    animation: spinner-dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
   /* COLORS */
@@ -7472,22 +7774,19 @@ svg.spinner {
 
   }
 
-  /* MULTICOLOR */
-
-  &.multicolor {
-
-    /* CIRCLE */
-
-    circle {
-      animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
-                 multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
-    }
-
-  }
-
 }
 
-/* SPINNER LABEL */
+
+/* =========================================================================
+ * Svelto - Spinner - Label
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../spinner.scss
+ * ========================================================================= */
+
+/* LABEL */
 
 .spinner-label {
 
@@ -7518,42 +7817,27 @@ svg.spinner {
 
 }
 
-/* KEYFRAMES */
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
+/* =========================================================================
+ * Svelto - Spinner - Multicolor
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../spinner.scss
+ * ========================================================================= */
 
-@keyframes dash {
-  0% {
-    stroke-dasharray: 0%, 240%;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -60%;
-  }
-  100% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -240%;
-  }
-}
+/* MULTICOLOR */
 
-@keyframes multicolor {
-  0%, 24% {
-    stroke: $spinner-multicolor-stroke-color1;
+.spinner.multicolor {
+
+  /* CIRCLE */
+
+  circle {
+    animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
+               spinner-multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
   }
-  25%, 49% {
-    stroke: $spinner-multicolor-stroke-color2;
-  }
-  50%, 74% {
-    stroke: $spinner-multicolor-stroke-color3;
-  }
-  75%, 99% {
-    stroke: $spinner-multicolor-stroke-color4;
-  }
+
 }
 
 
@@ -7648,7 +7932,7 @@ svg.spinner {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../widget/widget.scss
- * @require ../icons/icons.scss
+ * @require ../icon/icon.scss
  * ========================================================================= */
 
 /* SWITCH */
@@ -8025,153 +8309,195 @@ table.table { // So that if someone need a plain basic table he can, just by don
 
   }
 
-  /* SEPARATED / BORDERED */
+}
 
-  &.separated,
-  &.bordered {
 
-    thead th {
-      border-bottom-width: $table-bordered-border-width;
+/* =========================================================================
+ * Svelto - Table - Separated
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
+
+/* SEPARATED */
+
+table.table.separated {
+
+  thead th {
+    border-bottom-width: $table-bordered-border-width;
+  }
+
+  tbody tr:not(:last-child) td {
+    border-bottom-width: $table-bordered-border-width;
+  }
+
+  tfoot td {
+    border-top-width: $table-bordered-border-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Table - Bordered
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * @require ../separated/separated.scss
+ * ========================================================================= */
+
+/* BORDERED */
+
+table.table.bordered {
+
+  @extend table.table.separated;
+
+  tr > * {
+
+    border-left-width: $table-bordered-border-width;
+
+    &:last-child {
+      border-right-width: $table-bordered-border-width;
     }
 
-    tbody tr:not(:last-child) td {
-      border-bottom-width: $table-bordered-border-width;
-    }
+  }
 
-    tfoot td {
+  tbody tr {
+
+    &:first-child td,
+    &.table-row-empty + tr td {
       border-top-width: $table-bordered-border-width;
     }
 
-  }
-
-  /* BORDERED */
-
-  &.bordered {
-
-    tr > * {
-
-      border-left-width: $table-bordered-border-width;
-
-      &:last-child {
-        border-right-width: $table-bordered-border-width;
-      }
-
-    }
-
-    tbody tr {
-
-      &:first-child td,
-      &.table-row-empty + tr td {
-        border-top-width: $table-bordered-border-width;
-      }
-
-      &:last-child td {
-        border-bottom-width: $table-bordered-border-width;
-      }
-
-    }
-
-    thead {
-
-      th {
-        border-top-width: $table-bordered-border-width;
-      }
-
-      ~ tbody tr:first-child td,
-      ~ tbody tr.table-row-empty + tr td {
-        border-top-width: 0;
-      }
-
-    }
-
-    tfoot {
-
-      td {
-        border-bottom-width: $table-bordered-border-width;
-      }
-
-      + tbody tr:last-child td {
-        border-bottom-width: 0;
-      }
-
+    &:last-child td {
+      border-bottom-width: $table-bordered-border-width;
     }
 
   }
 
-  /* STRIPED */
+  thead {
 
-  &.striped tbody tr {
-
-    &:first-child.table-row-empty ~ tr {
-
-      &:nth-child(even) {
-        background-color: $table-striped-row-even-color;
-      }
-
-      &:nth-child(odd) {
-        background-color: $table-striped-row-odd-color;
-      }
-
+    th {
+      border-top-width: $table-bordered-border-width;
     }
 
-    &:first-child:not(.table-row-empty) {
-
-      background-color: $table-striped-row-even-color;
-
-      ~ tr {
-
-        &:nth-child(odd) {
-          background-color: $table-striped-row-even-color;
-        }
-
-        &:nth-child(even) {
-          background-color: $table-striped-row-odd-color;
-        }
-
-      }
-
+    ~ tbody tr:first-child td,
+    ~ tbody tr.table-row-empty + tr td {
+      border-top-width: 0;
     }
 
   }
 
-  /* HOVERABLE */
+  tfoot {
 
-  &:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
-    background-color: $table-hoverable-row-even-color-hover;
+    td {
+      border-bottom-width: $table-bordered-border-width;
+    }
+
+    + tbody tr:last-child td {
+      border-bottom-width: 0;
+    }
+
   }
 
-  /* STRIPED & HOVERABLE */
+}
 
-  &.striped.hoverable tbody tr {
 
-    &:first-child.table-row-empty ~ tr {
+/* =========================================================================
+ * Svelto - Table - Hoverable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
 
-      &:nth-child(even):hover {
+/* HOVERABLE */
+
+table.table:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
+  background-color: $table-hoverable-row-even-color-hover;
+}
+
+/* STRIPED */
+
+table.table:not(.disabled).hoverable.striped tbody tr {
+
+  &:first-child.table-row-empty ~ tr {
+
+    &:nth-child(even):hover {
+      background-color: $table-hoverable-row-even-color-hover;
+    }
+
+    &:nth-child(odd):hover {
+      background-color: $table-hoverable-row-odd-color-hover;
+    }
+
+  }
+
+  &:first-child:not(.table-row-empty) {
+
+    &:hover {
+      background-color: $table-hoverable-row-even-color-hover;
+    }
+
+    ~ tr {
+
+      &:nth-child(odd):hover {
         background-color: $table-hoverable-row-even-color-hover;
       }
 
-      &:nth-child(odd):hover {
+      &:nth-child(even):hover {
         background-color: $table-hoverable-row-odd-color-hover;
       }
 
     }
 
-    &:first-child:not(.table-row-empty) {
+  }
 
-      &:hover {
-        background-color: $table-hoverable-row-even-color-hover;
+}
+
+
+/* =========================================================================
+ * Svelto - Table - Striped
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../table.scss
+ * ========================================================================= */
+
+/* STRIPED */
+
+table.table.striped tbody tr {
+
+  &:first-child.table-row-empty ~ tr {
+
+    &:nth-child(even) {
+      background-color: $table-striped-row-even-color;
+    }
+
+    &:nth-child(odd) {
+      background-color: $table-striped-row-odd-color;
+    }
+
+  }
+
+  &:first-child:not(.table-row-empty) {
+
+    background-color: $table-striped-row-even-color;
+
+    ~ tr {
+
+      &:nth-child(odd) {
+        background-color: $table-striped-row-even-color;
       }
 
-      ~ tr {
-
-        &:nth-child(odd):hover {
-          background-color: $table-hoverable-row-even-color-hover;
-        }
-
-        &:nth-child(even):hover {
-          background-color: $table-hoverable-row-odd-color-hover;
-        }
-
+      &:nth-child(even) {
+        background-color: $table-striped-row-odd-color;
       }
 
     }
@@ -8595,43 +8921,9 @@ table.table { // So that if someone need a plain basic table he can, just by don
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../reset/reset.scss
- * @require ../highlight/highlight.scss
- * @require ../widget/widget.scss
  * ========================================================================= */
 
-/* LINK */
-
-a,
-.link {
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-}
-
-p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-span > a, // Same reason as `p > a`
-.link {
-
-  display: inline-block;
-  cursor: pointer;
-
-  &:after {
-    @extend %highlight-after;
-    border-bottom-width: $a-underline-height;
-    opacity: 0;
-    transform: scaleX(0);
-    transition-property: opacity, transform;
-    transition-duration: $a-underline-transition-duration;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-
-}
-
-/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph
+/* SPAN / A */ //FIXME: Ugly fix for making them widget-like when they are not in a paragraph
 
 span,
 a {
@@ -8654,9 +8946,124 @@ _:-ms-input-placeholder, :root p > a {
   display: initial;
 }
 
+
+/* =========================================================================
+ * Svelto - Typography - Abbr
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* ABBR */
+
+//FIXME: There's a double border on Firefox Mobile
+
+abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
+  cursor: help;
+  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
+}
+
+
+/* =========================================================================
+ * Svelto - Typography - Blockquote
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* BLOCKQUOTE */
+
+blockquote {
+
+  @extend .widget;
+  @include last-child-no-gutter ();
+  padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
+  border-radius: $blockquote-line-width;
+  background-color: $blockquote-bg-color;
+
+  /* LINE */
+
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $blockquote-line-width;
+    content: '';
+    border-radius: $blockquote-line-width;
+    background-color: $blockquote-line-bg-color;
+  }
+
+  /* FOOTER */
+
+  > footer {
+
+    @extend .widget;
+    @include last-child-no-gutter ();
+    background-color: $blockquote-footer-bg-color;
+    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
+    font-size: $blockquote-footer-font-size;
+    opacity: $blockquote-footer-opacity;
+
+    &:before {
+      content: '\2014 \00A0';
+      opacity: $blockquote-footer-opacity;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Typography - Code
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* CODE */
+
+code,
+section,
+pre {
+  display: block;
+  overflow-x: auto;
+  margin: 0;
+  padding: $gutter;
+  border: $code-border-width $code-border-style $code-border-color;
+  border-radius: $code-border-radius;
+  background-color: $code-bg-color;
+}
+
+
+/* =========================================================================
+ * Svelto - Typography - Headers
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
 /* HEADERS */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 
   margin: 0 0 $gutter;
 
@@ -8690,77 +9097,90 @@ h6 {
   @include size ( $h6-size );
 }
 
-/* SMALL */
 
-small {
-  font-size: $small-font-size;
+/* =========================================================================
+ * Svelto - Typography - Kbd
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* KBD */
+
+kbd {
+  @include color ( $kbd-color );
+  font-size: $kbd-font-size;
+  font-weight: $kbd-font-weight;
+  display: inline-block;
+  padding: $kbd-padding;
+  white-space: nowrap;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-radius: $kdb-border-radius;
 }
 
-/* PARAGRAPH */
 
-p {
-  margin: 0 0 $gutter;
-  max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+/* =========================================================================
+ * Svelto - Typography - Link
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * @require ../../highlight/highlight.scss
+ * ========================================================================= */
+
+/* LINK */
+
+a,
+.link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* MARK */
+p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, // Same reason as `p > a`
+.link {
 
-mark,
-.mark {
-  @include color ( $mark-color );
-  padding: $mark-padding;
-  border-radius: $mark-border-radius;
-}
+  display: inline-block;
+  cursor: pointer;
 
-/* ABBR */
-
-//FIXME: There's a double border on Firefox Mobile
-
-abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
-  cursor: help;
-  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
-}
-
-/* BLOCKQUOTE */
-
-blockquote {
-
-  @extend .widget;
-  @include last-child-no-gutter ();
-  padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
-  border-radius: $blockquote-line-width;
-  background-color: $blockquote-bg-color;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: $blockquote-line-width;
-    content: '';
-    border-radius: $blockquote-line-width;
-    background-color: $blockquote-line-bg-color;
+  &:after {
+    @extend %highlight-after;
+    border-bottom-width: $a-underline-height;
+    transition-property: opacity, transform;
+    transition-duration: $a-underline-transition-duration;
   }
 
-  > footer {
-
-    @extend .widget;
-    @include last-child-no-gutter ();
-    background-color: $blockquote-footer-bg-color;
-    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
-    font-size: $blockquote-footer-font-size;
-    opacity: $blockquote-footer-opacity;
-
-    &:before {
-      content: '\2014 \00A0';
-      opacity: $blockquote-footer-opacity;
-    }
-
+  &:not(:hover):after { //FIXME: Does it work?
+    opacity: 0;
+    transform: scaleX(0);
   }
+
+  // &:hover:after {
+  //   opacity: 1;
+  //   transform: scaleX(1);
+  // }
 
 }
 
-/* LIST */
+
+/* =========================================================================
+ * Svelto - Typography - Lists
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* LISTS */
 
 ul,
 ol {
@@ -8791,32 +9211,59 @@ dd {
   margin-left: $gutter * 2;
 }
 
-/* CODE */
 
-code,
-section,
-pre {
-  display: block;
-  overflow-x: auto;
-  margin: 0;
-  padding: $gutter;
-  border: $code-border-width solid $code-border-color;
-  border-radius: $code-border-radius;
-  background-color: $code-bg-color;
+/* =========================================================================
+ * Svelto - Typography - Mark
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* MARK */
+
+mark,
+.mark {
+  @include color ( $mark-color );
+  padding: $mark-padding;
+  border-radius: $mark-border-radius;
 }
 
-/* KBD */
 
-kbd {
-  @include color ( $kbd-color );
-  font-size: $kbd-font-size;
-  font-weight: bold;
-  display: inline-block;
-  padding: $kbd-padding;
-  white-space: nowrap;
-  border-width: $kbd-border-width;
-  border-style: $kbd-border-style;
-  border-radius: $kdb-border-radius;
+/* =========================================================================
+ * Svelto - Typography - Paragrah
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* PARAGRAPH */
+
+p {
+  margin: 0 0 $gutter;
+  max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+}
+
+
+/* =========================================================================
+ * Svelto - Typography - Small
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../reset/reset.scss
+ * @require ../typography.scss
+ * ========================================================================= */
+
+/* SMALL */
+
+small {
+  font-size: $small-font-size;
 }
 
 

@@ -58,7 +58,7 @@
   /* EXPANDED */
 
   &.expanded {
-    @include expand-queue ();
+    @include noty-queue-expand ();
   }
 
 }

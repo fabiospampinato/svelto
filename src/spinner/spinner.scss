@@ -38,7 +38,7 @@ svg.spinner {
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
     stroke-dasharray: 0%, 240%; // Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
-    animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
+    animation: spinner-dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
   /* COLORS */

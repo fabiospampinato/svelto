@@ -1,0 +1,113 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Rotation (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ROTATION */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Progressbar - Indeterminate (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes progressbar-indeterminate-highlight {
+  0% {
+    width: 100%;
+    transform: translateX(-60%) scaleX(.15);
+  }
+  35% {
+    transform: translateX(-15%) scaleX(.5);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(51%) scaleX(.05);
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Progressbar - Striped (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes progressbar-stripes-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX($progressbar-stripe-size);
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Spinner (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../helpers/rotation/keyframes.scss
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dasharray: 0%, 240%;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -60%;
+  }
+  100% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -240%;
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Spinner - Multicolor (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes spinner-multicolor {
+  0%, 24% {
+    stroke: $spinner-multicolor-stroke-color1;
+  }
+  25%, 49% {
+    stroke: $spinner-multicolor-stroke-color2;
+  }
+  50%, 74% {
+    stroke: $spinner-multicolor-stroke-color3;
+  }
+  75%, 99% {
+    stroke: $spinner-multicolor-stroke-color4;
+  }
+}

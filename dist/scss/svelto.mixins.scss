@@ -121,7 +121,7 @@
 
 
 /* =========================================================================
- * Svelto - Border Radius (Mixins)
+ * Svelto - Helpers - Border (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -151,7 +151,7 @@
 
 
 /* =========================================================================
- * Svelto - Fill (Mixins)
+ * Svelto - Helpers - Fill (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -187,7 +187,7 @@
 
 
 /* =========================================================================
- * Svelto - Margin (Mixins)
+ * Svelto - Helpers - Margin (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -207,13 +207,13 @@
 
 
 /* =========================================================================
- * Svelto - Center (Mixins)
+ * Svelto - Helpers - Center (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require fill.scss
- * @require margin.scss
+ * @require ../fill/mixins.scss
+ * @require ../margin/mixins.scss
  * ========================================================================= */
 
 /* CENTER */
@@ -324,7 +324,7 @@
 
 
 /* =========================================================================
- * Svelto - Gradients (Mixins)
+ * Svelto - Helpers - Gradient (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -354,9 +354,9 @@
 
 /* FROM COLOR */
 
-@mixin gradient-horizontal-from-color ( $color_name, $extra: '' ) {
+@mixin gradient-horizontal-from-color ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $start: nth($colors, 2);
   $end: nth($colors, 3);
@@ -365,9 +365,9 @@
 
 }
 
-@mixin gradient-vertical-from-color ( $color_name, $extra: '' ) {
+@mixin gradient-vertical-from-color ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $start: nth($colors, 2);
   $end: nth($colors, 3);
@@ -378,7 +378,42 @@
 
 
 /* =========================================================================
- * Svelto - Image (Mixins)
+ * Svelto - Helpers - Gutter (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GUTTER */
+
+@mixin last-child-no-gutter () {
+
+  > :last-child {
+
+    margin-bottom: 0 !important;
+
+    &.multiple,
+    &.pager,
+    &.tagbox-tags {
+      margin-bottom: - $gutter !important;
+    }
+
+  }
+
+  > script:last-child {
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+    pointer-events: none;
+    margin-top: - $gutter !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Image (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -408,7 +443,7 @@
 
 
 /* =========================================================================
- * Svelto - Media Queries (Mixins)
+ * Svelto - Helpers - Media Queries (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -416,9 +451,9 @@
 
 /* WIDTH */
 
-@mixin screen ( $min_width, $max_width ) {
+@mixin screen ( $min-width, $max-width ) {
 
-  @media screen and (min-width: $min_width) and (max-width: $max_width) {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
     @content;
   }
 
@@ -442,9 +477,9 @@
 
 /* HEIGHT */
 
-@mixin screen-height ( $min_height, $max_height ) {
+@mixin screen-height ( $min-height, $max-height ) {
 
-  @media screen and (min-height: $min_height) and (max-height: $max_height)   {
+  @media screen and (min-height: $min-height) and (max-height: $max-height)   {
     @content;
   }
 
@@ -471,6 +506,7 @@
 @mixin hdpi ( $ratio: 2 ) {
 
   //FIXME: Do we need borwsers prefixes here?
+  // `min--moz-device-pixel-ratio` is not a typo, at least not on our side //TODO: Has it been fixed?
 
   @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
          only screen and (    min--moz-device-pixel-ratio: $ratio ),
@@ -485,44 +521,7 @@
 
 
 /* =========================================================================
- * Svelto - Others (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* OTHERS */
-
-//TODO: Move to their own proper files
-
-@mixin last-child-no-gutter () {
-
-  > :last-child {
-
-    margin-bottom: 0 !important;
-
-    &.multiple,
-    &.pager,
-    &.tagbox-tags {
-      margin-bottom: - $gutter !important;
-    }
-
-  }
-
-  > script:last-child {
-    display: block;
-    font-size: 0;
-    height: 0;
-    visibility: hidden;
-    pointer-events: none;
-    margin-top: - $gutter !important;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Padding (Mixins)
+ * Svelto - Helpers - Padding (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -542,11 +541,13 @@
 
 
 /* =========================================================================
- * Svelto - Responsive (Mixins)
+ * Svelto - Helpers - Responsive (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
+
+//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
 
 /* UP */
 
@@ -598,7 +599,7 @@
 
 @mixin xsmall-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'small') - .01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -606,7 +607,7 @@
 
 @mixin small-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'medium') - .01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -614,7 +615,7 @@
 
 @mixin medium-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'large') - .01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -622,7 +623,7 @@
 
 @mixin large-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
+  @media screen and (max-width: map-get($breakpoints, 'xlarge') - .01px) { // So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -682,7 +683,104 @@
 
 
 /* =========================================================================
- * Svelto - Shapes (Mixins)
+ * Svelto - Helpers - Text (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXT */
+
+@mixin text-truncate () {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================================
+ * Svelto - Noty - Queue (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MIXINS */
+
+@mixin noty-queue-expand {
+
+  width: 100%;
+  margin: 0 !important;
+
+  &:not(:empty) {
+    @include z-depth ( $noty-z-depth );
+  }
+
+  .noty {
+    @include z-depth ( 0 );
+    width: 100%;
+    margin: 0 !important;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Raisable (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RAISABLE */
+
+@mixin raisable ( $depth, $extra: '' ) {
+
+  $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
+
+  @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
+
+  transition: box-shadow $raisable-transition-box-shadow-duration;
+
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Circle (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CIRCLE */
+
+@mixin circle ( $size: 1em, $color: $color-gray ) {
+  @include square ( $size, $color );
+  border-radius: 50%;
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Square (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SQUARE */
+
+@mixin square ( $size: 1em, $color: $color-gray ) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+}
+
+
+/* =========================================================================
+ * Svelto - Shape - Triangle (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -718,57 +816,6 @@
     border-top-color: $color;
 
   }
-
-}
-
-/* SQUARE */
-
-@mixin square ( $size: 1em, $color: $color-gray ) {
-  width: $size;
-  height: $size;
-  background-color: $color;
-}
-
-/* CIRCLE */
-
-@mixin circle ( $size: 1em, $color: $color-gray ) {
-  @include square ( $size, $color );
-  border-radius: 50%;
-}
-
-
-/* =========================================================================
- * Svelto - Text (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TEXT */
-
-@mixin text-truncate () {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-
-/* =========================================================================
- * Svelto - Raisable (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* Z-DEPTH RAISED */
-
-@mixin z-depth-raised ( $depth, $extra: '' ) {
-
-  $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
-
-  @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
-
-  transition: box-shadow $raisable-transition-box-shadow-duration;
 
 }
 

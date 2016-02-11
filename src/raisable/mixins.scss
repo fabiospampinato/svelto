@@ -6,9 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* Z-DEPTH RAISED */
+/* RAISABLE */
 
-@mixin z-depth-raised ( $depth, $extra: '' ) {
+@mixin raisable ( $depth, $extra: '' ) {
 
   $z-depth-max: length(map-keys($z-depths)) - 1; // `-1` since we start from `0`
 

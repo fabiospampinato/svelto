@@ -6,8 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../widget/widget.js
- * @require ../positionate/positionate.js
  * @require ../embedded_css/embedded_css.js
+ * @require ../positionate/positionate.js
+ * @require ../touching/touching.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {

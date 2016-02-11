@@ -21,13 +21,13 @@
       @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
 
         &:hover {
-          @include z-depth-raised ( $depth, !important );
+          @include raisable ( $depth, !important );
         }
 
       }
 
       &.z-depth-#{$depth}:hover {
-        @include z-depth-raised ( $depth, !important );
+        @include raisable ( $depth, !important );
       }
 
     }

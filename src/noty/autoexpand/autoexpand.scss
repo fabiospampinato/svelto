@@ -65,7 +65,7 @@
   /* QUEUE */
 
   .noty-queue {
-    @include expand-queue ();
+    @include noty-queue-expand ();
     box-shadow: none !important;
   }
 
