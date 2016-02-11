@@ -1,0 +1,60 @@
+
+/* =========================================================================
+ * Svelto - Attached
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ATTACHED */
+
+// The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+
+%attached {
+  position: absolute;
+  margin-bottom: 0;
+}
+
+/* TOP */
+
+.attached-top {
+  @extend %attached;
+  @include border-top-radius ( inherit !important );
+  @include border-bottom-radius ( 0 !important );
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+/* RIGHT */
+
+.attached-right {
+  @extend %attached;
+  @include border-right-radius ( inherit !important );
+  @include border-left-radius ( 0 !important );
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* BOTTOM */
+
+.attached-bottom {
+  @extend %attached;
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* LEFT */
+
+.attached-left {
+  @extend %attached;
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+  top: 0;
+  bottom: 0;
+  left: 0;
+}

@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Image (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* IMAGE */
+
+@mixin image-retina ( $image-width, $image-height, $file-1x, $file-2x, $file-3x: false ) {
+
+  background-image: url('#{$basepath} #{$file-1x}');
+
+  @include hdpi ( 2 ) {
+    background-image: url('#{$basepath} #{$file-2x}');
+    background-size: $image-width $image-height;
+  }
+
+  @if $file-3x != false {
+
+    @include hdpi ( 3 ) {
+      background-image: url('#{$basepath} #{$file-2x}');
+      background-size: $image-width $image-height;
+    }
+
+  }
+
+}

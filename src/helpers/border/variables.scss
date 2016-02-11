@@ -1,16 +1,15 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Border (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../shape.scss
+ * @require ../../svelto/variables.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* BORDER RADIUS */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
-}
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: $border-radius-medium !default;
+$sharp-border-radius: 0 !default;

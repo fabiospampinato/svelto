@@ -1,0 +1,47 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Border
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BORDER */
+
+.b-a-0 {
+  border-width: 0 !important;
+}
+
+.b-t-0,
+.b-y-0 {
+  border-top-width: 0 !important;
+}
+
+.b-r-0,
+.b-x-0 {
+  border-right-width: 0 !important;
+}
+
+.b-b-0,
+.b-y-0 {
+  border-bottom-width: 0 !important;
+}
+
+.b-l-0,
+.b-x-0 {
+  border-left-width: 0 !important;
+}
+
+/* BORDER RADIUS */
+
+.rounded {
+  border-radius: $rounded-border-radius $rounded-border-radius !important;
+}
+
+.smooth {
+  border-radius: $smooth-border-radius !important;
+}
+
+.sharp {
+  border-radius: $sharp-border-radius !important;
+}

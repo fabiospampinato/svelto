@@ -1,16 +1,11 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Others (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* OTHERS */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
-}
+$spacer-flex-grow: 1000000 !default;

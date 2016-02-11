@@ -1,0 +1,53 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Gradient (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GENERAL */
+
+@mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent) #{$extra};
+  background-repeat: repeat-x #{$extra};
+}
+
+@mixin gradient-vertical ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent) #{$extra};
+  background-repeat: repeat-x #{$extra};
+}
+
+@mixin gradient-directional ( $start-color, $end-color, $deg: 45deg, $extra: '' ) {
+  background-repeat: repeat-x #{$extra};
+  background-image: linear-gradient($d #{$extra}eg, $start-color, $end-color);
+}
+
+@mixin gradient-radial ( $inner-color, $outer-color, $extra: '' ) {
+  background-image: radial-gradient(circle, $inner-color, $outer-color) #{$extra};
+  background-repeat: no-repeat #{$extra};
+}
+
+/* FROM COLOR */
+
+@mixin gradient-horizontal-from-color ( $color-name, $extra: '' ) {
+
+  $colors: map-get($colors, $color-name);
+
+  $start: nth($colors, 2);
+  $end: nth($colors, 3);
+
+  @include gradient-horizontal ( $start, $end, 0%, 100%, $extra );
+
+}
+
+@mixin gradient-vertical-from-color ( $color-name, $extra: '' ) {
+
+  $colors: map-get($colors, $color-name);
+
+  $start: nth($colors, 2);
+  $end: nth($colors, 3);
+
+  @include gradient-vertical ( $start, $end, 0%, 100%, $extra );
+
+}

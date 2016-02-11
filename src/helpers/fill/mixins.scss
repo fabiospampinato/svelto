@@ -1,16 +1,35 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Fill (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* FILL */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+@mixin fill {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin fill-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin fill-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin fill-viewport {
+  width: 100vw;
+  height: 100vh;
 }

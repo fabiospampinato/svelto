@@ -1,0 +1,31 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Others
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Move to their own, more appropriate, files
+
+/* OTHERS */
+
+.spacer {
+  flex-grow: $spacer-flex-grow !important;
+  flex-shrink: 1; // IE-10-11 default it to 0 instead
+  margin-bottom: $gutter;
+}
+
+.limited:not(.multiple) { //TODO: Move it to it's own decorator
+
+  @if $max-width-enabled {
+
+    @include center-margin ( $max-width );
+
+  }
+
+}
+
+.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
+  cursor: pointer;
+}

@@ -1,0 +1,57 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Text
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXT ALIGNMENT */
+
+.text-left {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.text-center {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.text-right {
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* TEXT TRANSFORMATION */
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* OTHERS */
+
+.text-nowrap,
+.text-no-wrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis,
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%; // Fixes a bug in IE 10
+}

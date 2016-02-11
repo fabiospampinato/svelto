@@ -1,16 +1,28 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Center
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* CENTERER */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+.centerer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $gutter;
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+}
+
+/* CENTERED */
+
+.centered:not(.multiple) { //TODO: Move it to it's own decorator
+  @include center-margin ();
 }

@@ -1,16 +1,15 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Shape - Square (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* SQUARE */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+@mixin square ( $size: 1em, $color: $color-gray ) {
+  width: $size;
+  height: $size;
+  background-color: $color;
 }

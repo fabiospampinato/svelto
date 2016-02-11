@@ -1,16 +1,23 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Blurred
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../shape.scss
+ * @require ../core.js
  * ========================================================================= */
 
-/* CIRCLE */
+(function ( $, _, Svelto ) {
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
-}
+  'use strict';
+
+  /* BLURRED */
+
+  $.fn.blurred = function ( force ) {
+
+    return this.toggleClass ( 'blurred', force );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto ));

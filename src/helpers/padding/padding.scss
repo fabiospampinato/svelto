@@ -1,16 +1,33 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Padding
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* PADDING */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+.p-a-0 {
+  padding: 0 !important;
+}
+
+.p-t-0,
+.p-y-0 {
+  padding-top: 0 !important;
+}
+
+.p-r-0,
+.p-x-0 {
+  padding-right: 0 !important;
+}
+
+.p-b-0,
+.p-y-0 {
+  padding-bottom: 0 !important;
+}
+
+.p-l-0,
+.p-x-0 {
+  padding-left: 0 !important;
 }

@@ -1,16 +1,17 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Display
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* DISPLAY */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
 }

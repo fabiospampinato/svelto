@@ -1,16 +1,21 @@
 
 /* =========================================================================
- * Svelto - Shape - Circle
+ * Svelto - Helpers - Rotation
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../shape.scss
  * ========================================================================= */
 
-/* CIRCLE */
+/* ROTATION */
 
-.circle {
-  @extend %shape;
-  @include circle ( $circle-size );
+.rotate-left {
+  transform: rotate(-90deg) !important;
+}
+
+.rotate-right {
+  transform: rotate(90deg) !important;
+}
+
+.rotating { //TODO: Maybe move to an _helpers_animations
+  animation: rotate $rotating-animation-duration linear infinite !important;
 }

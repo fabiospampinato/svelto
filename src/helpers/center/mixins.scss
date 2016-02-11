@@ -1,0 +1,116 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Center (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../fill/mixins.scss
+ * @require ../margin/mixins.scss
+ * ========================================================================= */
+
+/* CENTER */
+
+@mixin center-margin ( $max-width: false ) {
+
+  @include margin-horizontal ( auto );
+
+  @if $max-width {
+    max-width: $max-width;
+  }
+
+}
+
+@mixin center-absolute ( $width: false, $height: false ) {
+
+  position: absolute;
+
+  @if $width {
+    left: 50%;
+    margin-left: ( - $width / 2 );
+  }
+
+  @if $height {
+    top: 50%;
+    margin-top: ( - $height / 2 );
+  }
+
+}
+
+@mixin center-absolute-fill () {
+
+  @include fill-absolute ();
+  margin: auto;
+
+}
+
+@mixin center-fixed-fill () {
+
+  @include fill-fixed ();
+  margin: auto;
+
+}
+
+@mixin center-transform-absolute ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+
+  position: absolute;
+
+  @if $axis != x {
+    top: 50%;
+  }
+
+  @if $axis != y {
+    left: 50%;
+  }
+
+  $translate-val: null;
+
+  @if not($axis) {
+
+    $translate-val: translate(-50%, -50%);
+
+  } @else if $axis != x {
+
+    $translate-val: translateY(-50%);
+
+  } @else if $axis != y {
+
+    $translate-val: translateX(-50%);
+
+  }
+
+  transform: $translate-val;
+
+}
+
+@mixin center-transform-fixed ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+
+  position: fixed;
+
+  @if $axis != x {
+    top: 50%;
+  }
+
+  @if $axis != y {
+    left: 50%;
+  }
+
+  $translate-val: null;
+
+  @if not($axis) {
+
+    $translate-val: translate(-50%, -50%);
+
+  } @else if $axis != x {
+
+    $translate-val: translateY(-50%);
+
+  } @else if $axis != y {
+
+    $translate-val: translateX(-50%);
+
+  }
+
+  transform: $translate-val;
+
+}

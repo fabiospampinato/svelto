@@ -18,9 +18,9 @@ var paths = {
     },
     scss: {
       all: 'src/**/*.scss', //TODO: Maybe rename it
-      variables: ['src/variables/**/*.scss', 'src/**/variables.scss'],
-      mixins: ['src/mixins/**/*.scss', 'src/**/mixins.scss'],
-      style: ['src/**/*.scss', '!src/variables/**/*.scss', '!src/**/variables.scss', '!src/mixins/**/*.scss', '!src/**/mixins.scss'],
+      variables: 'src/**/variables.scss',
+      mixins: 'src/**/mixins.scss',
+      style: ['src/**/*.scss', '!src/**/variables.scss', '!src/**/mixins.scss'],
       temp: '.temp/scss/**/*.scss'
     }
   },
