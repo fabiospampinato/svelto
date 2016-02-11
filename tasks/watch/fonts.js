@@ -15,6 +15,6 @@ var input = require ( '../utilities/input' ),
 
 gulp.task ( 'watch-fonts', 'Watch fonts', function () {
 
-  gulp.watch ( input.getPath ( 'fonts' ), ['build-fonts'] );
+  return gulp.watch ( input.getPath ( 'fonts' ), ['build-fonts'] );
 
 });

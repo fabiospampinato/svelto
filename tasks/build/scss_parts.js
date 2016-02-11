@@ -30,33 +30,21 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var needUpdate = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) );
 
-  var variables = gulp.src ( input.getPath ( 'scss.variables' ) )
-                      .pipe ( filter () )
-                      .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.variables' ) ) ) )
-                      .pipe ( sort () )
-                      .pipe ( dependencies ( plugins.dependencies.options ) )
-                      .pipe ( extend () )
-                      .pipe ( concat ( output.getName ( 'scss.variables' ) ) )
-                      .pipe ( gulp.dest ( output.getDir ( 'scss.variables' ) ) );
+  var parts = ['variables', 'mixins', 'keyframes', 'style'];
 
-  var mixins = gulp.src ( input.getPath ( 'scss.mixins' ) )
-                   .pipe ( filter () )
-                   .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.mixins' ) ) ) )
-                   .pipe ( sort () )
-                   .pipe ( dependencies ( plugins.dependencies.options ) )
-                   .pipe ( extend () )
-                   .pipe ( concat ( output.getName ( 'scss.mixins' ) ) )
-                   .pipe ( gulp.dest ( output.getDir ( 'scss.mixins' ) ) );
+  var streams = parts.map ( function ( part ) {
 
-  var style = gulp.src ( input.getPath ( 'scss.style' ) )
-                  .pipe ( filter () )
-                  .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.style' ) ) ) )
-                  .pipe ( sort () )
-                  .pipe ( dependencies ( plugins.dependencies.options ) )
-                  .pipe ( extend () )
-                  .pipe ( concat ( output.getName ( 'scss.style' ) ) )
-                  .pipe ( gulp.dest ( output.getDir ( 'scss.style' ) ) );
+    return gulp.src ( input.getPath ( 'scss.' + part ) )
+               .pipe ( filter () )
+               .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
+               .pipe ( sort () )
+               .pipe ( dependencies ( plugins.dependencies.options ) )
+               .pipe ( extend () )
+               .pipe ( concat ( output.getName ( 'scss.' + part ) ) )
+               .pipe ( gulp.dest ( output.getDir ( 'scss.' + part ) ) );
 
-  return merge ( variables, mixins, style );
+  });
+
+  return merge.apply ( undefined, streams );
 
 });

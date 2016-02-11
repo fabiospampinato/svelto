@@ -15,6 +15,6 @@ var input = require ( '../utilities/input' ),
 
 gulp.task ( 'watch-javascript', 'Watch javascript', function () {
 
-  gulp.watch ( input.getPath ( 'javascript.all' ), ['build-javascript'] );
+  return gulp.watch ( input.getPath ( 'javascript.all' ), ['build-javascript'] );
 
 });

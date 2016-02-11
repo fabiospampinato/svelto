@@ -20,7 +20,8 @@ var paths = {
       all: 'src/**/*.scss', //TODO: Maybe rename it
       variables: 'src/**/variables.scss',
       mixins: 'src/**/mixins.scss',
-      style: ['src/**/*.scss', '!src/**/variables.scss', '!src/**/mixins.scss'],
+      keyframes: 'src/**/keyframes.scss',
+      style: ['src/**/*.scss', '!src/**/variables.scss', '!src/**/mixins.scss', '!src/**/keyframes.scss'],
       temp: '.temp/scss/**/*.scss'
     }
   },
@@ -36,6 +37,7 @@ var paths = {
       all: 'dist/scss/svelto.scss', //TODO: Maybe rename it
       variables: 'dist/scss/svelto.variables.scss',
       mixins: 'dist/scss/svelto.mixins.scss',
+      keyframes: 'dist/scss/svelto.keyframes.scss',
       style: 'dist/scss/svelto.style.scss',
       temp: '.temp/scss'
     },
