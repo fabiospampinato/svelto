@@ -5,20 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-/* BLURRED */
-
-%blurred { //FIXME: Not working on Edge and IE
-  filter: url('#{$basepath}blur.svg#blur') !important;
-  filter: blur($blurred-blur-amount) !important;
-}
-
-.blurred {
-  @extend %blurred;
-  transition: filter $blurred-transition-duration !important;
-  //TODO: If mobile remove the transition, it greatly improves performance
-}
-
+ 
 /* BORDER */
 
 .b-a-0 {
