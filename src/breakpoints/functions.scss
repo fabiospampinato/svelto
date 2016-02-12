@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../helpers/map/functions.scss
  * @require ../helpers/units/functions.scss
  * ========================================================================= */
 
@@ -12,19 +13,13 @@
 
 @function breakpoint-previous ( $breakpoint ) {
 
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index > 1, nth( $all, $index - 1 ), null );
+  @return map-previous( $breakpoints, $breakpoint );
 
 }
 
 @function breakpoint-next ( $breakpoint ) {
 
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
+  @return map-next( $breakpoints, $breakpoint );
 
 }
 

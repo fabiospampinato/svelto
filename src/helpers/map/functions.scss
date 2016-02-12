@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Map (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MAP */
+
+@function map-previous ( $map, $key ) {
+
+  $all: map-keys( $map );
+  $index: index( $all, $key );
+
+  @return if( $index > 1, nth( $all, $index - 1 ), null );
+
+}
+
+@function map-next ( $map, $key ) {
+
+  $all: map-keys( $map );
+  $index: index( $all, $key );
+
+  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
+
+}
