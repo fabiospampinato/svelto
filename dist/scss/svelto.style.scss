@@ -8986,7 +8986,7 @@ li {
   @include last-child-no-gutter ();
 }
 
-ul.unstyled {
+ul.no-bullet {
 
   padding-left: 0;
   list-style-type: none;

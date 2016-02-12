@@ -12810,12 +12810,12 @@ li > script:last-child {
   margin-top: -10px !important;
 }
 
-ul.unstyled {
+ul.no-bullet {
   padding-left: 0;
   list-style-type: none;
 }
 
-ul.unstyled li > ul {
+ul.no-bullet li > ul {
   list-style-type: none;
 }
 
