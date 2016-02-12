@@ -49,9 +49,14 @@
 }
 
 .text-ellipsis,
+.text-truncate,
 .truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%; // Fixes a bug in IE 10
+}
+
+.text-hide {
+  @include text-hide ();
 }

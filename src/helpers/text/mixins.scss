@@ -13,3 +13,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+
+@mixin text-hide () {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
