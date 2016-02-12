@@ -24,7 +24,7 @@ html {
 
 body {
   @include color ( $body-color );
-  font-family: $font-family;
+  font-family: $font-family-base;
   font-size: 1em;
   line-height: $line-height;
 }
