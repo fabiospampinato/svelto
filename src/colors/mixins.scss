@@ -8,9 +8,9 @@
 
 /* COLOR */
 
-@mixin color ( $color_name, $basic: true, $extra: '' ) {
+@mixin color ( $color-name, $basic: true, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
   $bg-hover: nth($colors, 2);
@@ -65,7 +65,7 @@
 
   }
 
-  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color-name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
     p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
     span > a { // Same as `p > a`
@@ -88,9 +88,9 @@
 
 /* TEXT */
 
-@mixin color-text ( $color_name, $extra: '' ) {
+@mixin color-text ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
 
@@ -100,9 +100,9 @@
 
 /* LINK */
 
-@mixin color-link ( $color_name, $extra: '' ) {
+@mixin color-link ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
   $bg-hover: nth($colors, 2);
