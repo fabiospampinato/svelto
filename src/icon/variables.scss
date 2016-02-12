@@ -6,9 +6,19 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../typography/variables.scss
+ * @require ../paths/variables.scss
  * ========================================================================= */
 
 /* ICONS */
 
 $icon-best-size: 24px; // At this size the icons look the best
 $icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
+
+/* FONT */
+
+$icon-path-fonts: $path-fonts !default;
+$icon-fonts-local: true !default;
+
+/* PATHS */
+
+$icon-path-fonts: $path-fonts !default;
