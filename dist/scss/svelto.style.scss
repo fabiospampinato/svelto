@@ -1039,6 +1039,42 @@ textarea.autogrow {
 
 
 /* =========================================================================
+ * Svelto - Breakpoints
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HIDDEN-*-UP/DOWN */
+
+@each $breakpoint, $value in $breakpoints {
+
+  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
+
+  /* UP */
+
+  @include media-breakpoint-up ( $breakpoint ) {
+
+    .hidden-#{$alias}-up {
+      display: none !important;
+    }
+
+  }
+
+  /* DOWN */
+
+  @include media-breakpoint-down ( $breakpoint ) {
+
+    .hidden-#{$alias}-down {
+      display: none !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Label
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -1740,9 +1776,11 @@ button {
 
 %scaled-icon-sizes {
 
-  @each $name, $font-size in $sizes {
+  @each $size, $font-size in $sizes {
 
-    &.#{$name} {
+    $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
+
+    &.#{$alias} {
       font-size: ( $font-size * $icon-scale-amount ) !important;
     }
 
@@ -3745,188 +3783,40 @@ form {
 
 //FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Is it the best way to do it?
 
-//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
+/* SIZE-# */
 
-/* XSMALL */
+@each $breakpoint, $value in $breakpoints {
 
-@include xsmall-up {
+  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
 
-  @for $nr from 1 through $grid-columns {
+  @include media-breakpoint-up ( $breakpoint ) {
 
-    $percentage: ( 100% / $grid-columns ) * $nr;
+    @for $nr from 1 through $grid-columns {
 
-    .xs-#{$nr} {
-      width: $percentage;
-    }
+      $percentage: ( 100% / $grid-columns ) * $nr;
 
-    %xs-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .xs-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %xs-#{$nr}-without-gutter;
+      .#{alias}-#{$nr} {
+        width: $percentage;
       }
 
-      &.multiple {
+      %without-gutter {
+        width: calc(#{$percentage} - #{$gutter});
+      }
 
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %xs-#{$nr}-without-gutter;
+      .multiple > .#{$alias}-#{$nr} {
+
+        &:not(.multiple) {
+          @extend %without-gutter;
         }
 
-      }
+        &.multiple {
 
-    }
+          &.no-wrap,
+          &.vertical,
+          &.joined {
+            @extend %without-gutter;
+          }
 
-  }
-
-}
-
-/* SMALL */
-
-@include small-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .sm-#{$nr} {
-      width: $percentage;
-    }
-
-    %sm-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .sm-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %sm-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %sm-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* MEDIUM */
-
-@include medium-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .md-#{$nr} {
-      width: $percentage;
-    }
-
-    %md-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .md-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %md-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %md-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* LARGE */
-
-@include large-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .lg-#{$nr} {
-      width: $percentage;
-    }
-
-    %lg-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .lg-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %lg-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %lg-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* XLARGE */
-
-@include xlarge-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .xl-#{$nr} {
-      width: $percentage;
-    }
-
-    %xl-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .xl-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %xl-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %xl-#{$nr}-without-gutter;
         }
 
       }
@@ -4256,104 +4146,6 @@ header {
 .p-l-0,
 .p-x-0 {
   padding-left: 0 !important;
-}
-
-
-/* =========================================================================
- * Svelto - Helpers - Responsive
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
-
-/* HIDDEN-*-UP */
-
-// Screen equal or greater than breakpoint
-
-@include xsmall-up {
-
-  .hidden-xs-up {
-    display: none !important;
-  }
-
-}
-
-@include small-up {
-
-  .hidden-sm-up {
-    display: none !important;
-  }
-
-}
-
-@include medium-up {
-
-  .hidden-md-up {
-    display: none !important;
-  }
-
-}
-
-@include large-up {
-
-  .hidden-lg-up {
-    display: none !important;
-  }
-
-}
-
-@include xlarge-up {
-
-  .hidden-xl-up {
-    display: none !important;
-  }
-
-}
-
-/* HIDDEN-*-DOWN */
-
-// Screen equal or lesser than next breakpoint
-
-@include xsmall-down {
-
-  .hidden-xs-down {
-    display: none !important;
-  }
-
-}
-
-@include small-down {
-
-  .hidden-sm-down {
-    display: none !important;
-  }
-
-}
-
-@include medium-down {
-
-  .hidden-md-down {
-    display: none !important;
-  }
-
-}
-
-@include large-down {
-
-  .hidden-lg-down {
-    display: none !important;
-  }
-
-}
-
-@include xlarge-down {
-
-  .hidden-xl-down {
-    display: none !important;
-  }
-
 }
 
 
@@ -5696,7 +5488,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 /* AUTOEXPAND */
 
-@include max-screen ( $noty-autoexpand-breakpoint ) {
+@include max-screen ( $noty-autoexpand-width ) {
 
   /* QUEUES */
 
@@ -7122,7 +6914,7 @@ a.ripple > .ripple-circle { // Firefox Bug: link not triggered //FIXME: Sure?
 
     &.right:before,
     &.left:before {
-      content: '\a0'; // &nbsp;
+      content: $char-nbsp;
     }
 
   }
@@ -7306,10 +7098,12 @@ table.selectable {
 
 /* SIZES */
 
-@each $name, $font-size in $sizes {
+@each $size, $font-size in $sizes {
 
-  .#{$name} {
-    @include size ( $name, !important );
+  $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
+
+  .#{$alias} {
+    @include size ( $size, !important );
   }
 
 }
@@ -9012,7 +8806,7 @@ blockquote {
     opacity: $blockquote-footer-opacity;
 
     &:before {
-      content: '\2014 \00A0';
+      content: $char-mdash + $char-nbsp;
       opacity: $blockquote-footer-opacity;
     }
 

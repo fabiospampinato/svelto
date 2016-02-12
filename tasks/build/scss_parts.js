@@ -30,7 +30,7 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var needUpdate = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) );
 
-  var parts = ['variables', 'mixins', 'keyframes', 'style'];
+  var parts = ['variables', 'functions', 'mixins', 'keyframes', 'style'];
 
   var streams = parts.map ( function ( part ) {
 

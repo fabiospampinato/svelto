@@ -46,9 +46,9 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
 /* BREAKPOINTS */
 
-// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
+// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` demo page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
 
-$breakpoint-xsmall: 0px !default;
+$breakpoint-xsmall: 0 !default;
 $breakpoint-small: 512px !default;
 $breakpoint-medium: 768px !default;
 $breakpoint-large: 1024px !default;
@@ -63,6 +63,12 @@ $breakpoints: (
   'large': $breakpoint-large,
   'xlarge': $breakpoint-xlarge
 ) !default;
+
+/* ALIASES */
+
+// The alias will be used for generating CSS classes
+
+$breakpoints-aliases: 'xs', 'sm', 'md', 'lg', 'xl' !default;
 
 
 /* =========================================================================
@@ -82,8 +88,8 @@ $gutter-half: $gutter / 2;
 /* MAX WIDTH */
 
 $max-width-enabled: true !default;
-$max-width-size: 'xlarge' !default;
-$max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide support for it
+$max-width-breakpoint: 'xlarge' !default;
+$max-width: map-get( $breakpoints, $max-width-breakpoint ) * 1.05 !default; //TODO: Provide support for it
 
 /* BORDER RADIUS */
 
@@ -92,6 +98,8 @@ $border-radius-medium: .25em !default; // 4 / 16
 $border-radius-large: .375em !default; // 6 / 16
 
 /* TRANSITIONS */
+
+//TODO: Rename to animation-duration and move to the animations component
 
 $transition-duration-xslow: .9s !default;
 $transition-duration-slow: .5s !default;
@@ -1277,8 +1285,8 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
 /* AUTOEXPAND */
 
-$noty-autoexpand-breakpoint-size: 'small' !default;
-$noty-autoexpand-breakpoint: map-get($breakpoints, $noty-autoexpand-breakpoint-size) !default;
+$noty-autoexpand-width-breakpoint: 'small' !default;
+$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint ) - .01px !default; //TODO: Rename it
 
 
 /* =========================================================================
@@ -1758,34 +1766,34 @@ $triangle-size: $shape-size !default;
 /* ICON SIZES */
 
 // The wanted icon size for the particular size
-// The [RECOMMENDED] sizes are those where the icons look better
+// The `RECOMMENDED` sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
 $size-xxxsmall-icon: 9px !default;
 $size-xxsmall-icon: 12px !default;
-$size-xsmall-icon: 18px !default; //- [RECOMMENDED]
+$size-xsmall-icon: 18px !default; // RECOMMENDED
 $size-small-icon: 21px !default;
-$size-medium-icon: 24px !default; //- [RECOMMENDED]
+$size-medium-icon: 24px !default; // RECOMMENDED
 $size-large-icon: 30px !default;
-$size-xlarge-icon: 36px !default; //- [RECOMMENDED]
+$size-xlarge-icon: 36px !default; // RECOMMENDED
 $size-xxlarge-icon: 42px !default;
-$size-xxxlarge-icon: 48px !default; //- [RECOMMENDED]
+$size-xxxlarge-icon: 48px !default; // RECOMMENDED
 $size-xxxxlarge-icon: 60px !default;
 
 /* SIZES */
 
-// The [RECOMMENDED] sizes are those where the icons look better
+// The `RECOMMENDED` sizes are those where the icons look better
 
 $size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
 $size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
 $size-xxsmall: get_size( $size-xxsmall-icon ) !default;
-$size-xsmall: get_size( $size-xsmall-icon ) !default; //- [RECOMMENDED]
+$size-xsmall: get_size( $size-xsmall-icon ) !default; // RECOMMENDED
 $size-small: get_size( $size-small-icon ) !default;
-$size-medium: get_size( $size-medium-icon ) !default; //- [RECOMMENDED]
+$size-medium: get_size( $size-medium-icon ) !default; // RECOMMENDED
 $size-large: get_size( $size-large-icon ) !default;
-$size-xlarge: get_size( $size-xlarge-icon ) !default; //- [RECOMMENDED]
+$size-xlarge: get_size( $size-xlarge-icon ) !default; // RECOMMENDED
 $size-xxlarge: get_size( $size-xxlarge-icon ) !default;
-$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; // RECOMMENDED
 $size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
 
 /* SIZES */
@@ -1803,6 +1811,12 @@ $sizes: (
   'xxxlarge': $size-xxxlarge,
   'xxxxlarge': $size-xxxxlarge
 ) !default;
+
+/* ALIASES */
+
+// The alias will be used for generating CSS classes
+
+$sizes-aliases: map-keys( $sizes ) !default;
 
 
 /* =========================================================================
@@ -2167,6 +2181,77 @@ $blockquote-footer-opacity: .85 !default;
 $blockquote-footer-bg-color: transparent !default;
 $blockquote-footer-padding-vertical: 0 !default;
 $blockquote-footer-padding-horizontal: 0 !default;
+
+
+/* =========================================================================
+ * Svelto - Typography - Characters (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: http://davidtheclark.github.io/scut/characters.html
+
+/* SPACES */
+
+$char-space: '\0020'; // Space
+$char-nbsp: '\00a0'; // Non-breaking space
+
+/* QUOTATION MARKS */
+
+$char-quot: '\0022'; // Quotation mark
+$char-lsquo: '\2018'; // Left single curly quote
+$char-rsquo: '\2019'; // Right single curly quote
+$char-ldquo: '\201C'; // Left double curly quote
+$char-rdquo: '\201D'; // Right double curly quote
+$char-lsaquo: '\2039'; // Left single angle quote (guillemet)
+$char-rsaquo: '\203A'; // Right single angle quote (guillemet)
+$char-laquo: '\00ab'; // Left double angle quote (guillemet)
+$char-raquo: '\00bb'; // Right double angle quote (guillemet)
+
+/* OTHER PUNCTUATION */
+
+$char-mdash: '\2014'; // Em dash (mutton)
+$char-ndash: '\2013'; // En dash (nut)
+$char-hyphen: '\2010'; // Hyphen
+$char-amp: '\0026'; // Ampersand
+$char-para: '\00b6'; // Paragraph symbol (pilcrow)
+$char-middot: '\00b7'; // Middot (interpunct, interpoint)
+$char-bull: '\2022'; // Bullet
+$char-whibull: '\25E6'; // White bullet
+$char-hellip: '\2026'; // Horizontal ellipsis
+$char-vellip: '\22EE'; // Vertical ellipsis
+$char-midhellip: '\22EF'; // Midline horizontal ellipsis
+
+/* VARIOUS SYMBOLS */
+
+$char-gt: '\003e'; // Greater than
+$char-lt: '\003c'; // Less than
+$char-times: '\00D7'; // Times
+$char-bigtimes: '\2715'; // Big times
+$char-checkmark: '\2713'; // Checkmark
+$char-sect: '\00a7'; // Section sign (double S, hurricane, sectional symbol, the legal doughnut, signum sectionis)
+$char-oslash: '\00f8'; // O-slash (slashed o)
+
+/* SHAPES */
+
+$char-utri: '\25b2'; // Up-pointing triangle
+$char-dtri: '\25bc'; // Down-pointing triangle
+$char-ltri: '\25c0'; // Left-pointing triangle
+$char-rtri: '\25b6'; // Right-pointing triangle
+$char-ustri: '\25b4'; // Up-pointing small triangle
+$char-dstri: '\25be'; // Down-pointing small triangle
+$char-lstri: '\25c2'; // Left-pointing small triangle
+$char-rstri: '\25b8'; // Right-pointing small triangle
+$char-diamond: '\25c6'; // Diamond
+$char-fisheye: '\25c9'; // Fisheye
+$char-bullseye: '\25ce'; // Bullseye
+$char-circle: '\25cf'; // Circle
+$char-whitecircle: '\25cb'; // White circle
+$char-square: '\25a0'; // Square
+$char-whitesquare: '\25a1'; // White square
+$char-ssquare: '\25aa'; // Small square
+$char-swhitesquare: '\25ab'; // Small white square
 
 
 /* =========================================================================

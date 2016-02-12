@@ -6,43 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* FUNCTIONS */
-
-@function breakpoint-previous ( $breakpoint ) {
-
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index > 1, nth( $all, $index - 1 ), null );
-
-}
-
-@function breakpoint-next ( $breakpoint ) {
-
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
-
-}
-
-@function breakpoint-min ( $breakpoint ) {
-
-  $value: map-get( $breakpoints, $breakpoint );
-
-  @return if( strip-unit( $value ) != 0, $value, null );
-
-}
-
-@function breakpoint-max ( $breakpoint ) {
-
-  $value: breakpoint-next( $breakpoint );
-
-  @return if( $value, breakpoint-min( $value ) - .01px, null );
-
-}
-
-/* MIXINS */
+/* BREAKPOINTS */
 
 // Viewport equal or greater than breakpoint
 

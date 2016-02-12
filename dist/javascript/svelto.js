@@ -1275,7 +1275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../svelto/svelto.js
- * @require breakpoints.js
+ * @require ../breakpoints/breakpoints.js
  * ========================================================================= */
 
 (function ($, _, Svelto, Breakpoints) {
@@ -1516,7 +1516,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../pointer/pointer.js
  * @require ../factory/factory.js
  * @require ../breakpoints/breakpoints.js
- * @require ../breakpoints/breakpoint.js
+ * @require ../breakpoint/breakpoint.js
  * @require ../keyboard/keyboard.js
  * @require ../route/route.js
  * ========================================================================= */
