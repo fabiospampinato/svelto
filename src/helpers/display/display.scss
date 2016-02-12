@@ -12,6 +12,7 @@
   display: block !important;
 }
 
-.hidden {
+.hidden,
+[hidden] { //SOURCE: PureCSS
   display: none !important;
 }
