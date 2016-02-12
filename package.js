@@ -14,12 +14,14 @@ Package.onUse ( function ( api ) {
   api.use ( 'stevezhu:lodash@3.10.1', 'client' );
   api.use ( 'jquery@1.11.4', 'client' );
 
+  //TODO: Add auto assets array generation
+
   var assets = [
     'dist/fonts/MaterialIcons-Regular.eot',
     'dist/fonts/MaterialIcons-Regular.ttf',
     'dist/fonts/MaterialIcons-Regular.woff',
     'dist/fonts/MaterialIcons-Regular.woff2',
-    'dist/images/blur.svg',
+    'dist/images/blurred.svg',
     'dist/images/chat-clips.svg',
     'dist/images/dropdown-clips.svg',
     'dist/images/flags.png'

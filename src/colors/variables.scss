@@ -303,7 +303,7 @@ $color-inherit-link-hover: $color-inherit !default;
 
 $color-base-bg: $color-base !default;
 $color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
-$color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount * 2 ) !default;
+$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount * 2 ) !default;
 $color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
 $color-base-text: #3f3f3f !default; // Contrast ratio: 9.1

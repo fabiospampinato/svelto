@@ -61,7 +61,7 @@ linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/li
 
   HexLength:
     enabled: true
-    style: short
+    style: long
 
   HexNotation:
     enabled: true
