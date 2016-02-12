@@ -23,10 +23,19 @@
  * ========================================================================= */
 /* INPUT AUTOGROW */
 /* =========================================================================
+ * Svelto - Helpers - Assert (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* ASSERT */
+/* =========================================================================
  * Svelto - Breakpoints (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../helpers/assert/mixins.scss
  * ========================================================================= */
 /* BREAKPOINTS */
 /* BREAKPOINTS */
@@ -686,6 +695,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../helpers/assert/mixins.scss
  * @require ../icon/variables.scss
  * @require ../typography/variables.scss
  * ========================================================================= */
@@ -965,6 +975,13 @@
 /* COLOR */
 /* TEXT */
 /* LINK */
+/* =========================================================================
+ * Svelto - Helpers - Assert (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* ASSERT */
 /* =========================================================================
  * Svelto - Helpers - Border (Mixins)
  * =========================================================================
