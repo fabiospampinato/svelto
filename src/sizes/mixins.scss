@@ -8,9 +8,9 @@
 
 /* SIZE */
 
-@mixin size ( $size_name, $extra: '' ) {
+@mixin size ( $size, $extra: '' ) {
 
-  $size: map-get($sizes, $size_name);
+  $size: map-get( $sizes, $size );
 
   font-size: $size #{$extra};
 

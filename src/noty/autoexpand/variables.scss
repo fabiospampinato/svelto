@@ -10,5 +10,5 @@
 
 /* AUTOEXPAND */
 
-$noty-autoexpand-breakpoint-size: 'small' !default;
-$noty-autoexpand-breakpoint: map-get($breakpoints, $noty-autoexpand-breakpoint-size) !default;
+$noty-autoexpand-width-breakpoint: 'small' !default;
+$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint ) - .01px !default; //TODO: Rename it

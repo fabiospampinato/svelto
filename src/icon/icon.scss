@@ -12,9 +12,11 @@
 
 %scaled-icon-sizes {
 
-  @each $name, $font-size in $sizes {
+  @each $size, $font-size in $sizes {
 
-    &.#{$name} {
+    $alias: nth( $sizes-aliases, index( $sizes, $size ) );
+
+    &.#{$alias} {
       font-size: ( $font-size * $icon-scale-amount ) !important;
     }
 

@@ -22,34 +22,34 @@
 /* ICON SIZES */
 
 // The wanted icon size for the particular size
-// The [RECOMMENDED] sizes are those where the icons look better
+// The `RECOMMENDED` sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
 $size-xxxsmall-icon: 9px !default;
 $size-xxsmall-icon: 12px !default;
-$size-xsmall-icon: 18px !default; //- [RECOMMENDED]
+$size-xsmall-icon: 18px !default; // RECOMMENDED
 $size-small-icon: 21px !default;
-$size-medium-icon: 24px !default; //- [RECOMMENDED]
+$size-medium-icon: 24px !default; // RECOMMENDED
 $size-large-icon: 30px !default;
-$size-xlarge-icon: 36px !default; //- [RECOMMENDED]
+$size-xlarge-icon: 36px !default; // RECOMMENDED
 $size-xxlarge-icon: 42px !default;
-$size-xxxlarge-icon: 48px !default; //- [RECOMMENDED]
+$size-xxxlarge-icon: 48px !default; // RECOMMENDED
 $size-xxxxlarge-icon: 60px !default;
 
 /* SIZES */
 
-// The [RECOMMENDED] sizes are those where the icons look better
+// The `RECOMMENDED` sizes are those where the icons look better
 
 $size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
 $size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
 $size-xxsmall: get_size( $size-xxsmall-icon ) !default;
-$size-xsmall: get_size( $size-xsmall-icon ) !default; //- [RECOMMENDED]
+$size-xsmall: get_size( $size-xsmall-icon ) !default; // RECOMMENDED
 $size-small: get_size( $size-small-icon ) !default;
-$size-medium: get_size( $size-medium-icon ) !default; //- [RECOMMENDED]
+$size-medium: get_size( $size-medium-icon ) !default; // RECOMMENDED
 $size-large: get_size( $size-large-icon ) !default;
-$size-xlarge: get_size( $size-xlarge-icon ) !default; //- [RECOMMENDED]
+$size-xlarge: get_size( $size-xlarge-icon ) !default; // RECOMMENDED
 $size-xxlarge: get_size( $size-xxlarge-icon ) !default;
-$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; // RECOMMENDED
 $size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
 
 /* SIZES */
@@ -67,3 +67,9 @@ $sizes: (
   'xxxlarge': $size-xxxlarge,
   'xxxxlarge': $size-xxxxlarge
 ) !default;
+
+/* ALIASES */
+
+// The alias will be used for generating CSS classes
+
+$sizes-aliases: map-keys( $sizes ) !default;

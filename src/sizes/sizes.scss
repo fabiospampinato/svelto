@@ -10,10 +10,12 @@
 
 /* SIZES */
 
-@each $name, $font-size in $sizes {
+@each $size, $font-size in $sizes {
 
-  .#{$name} {
-    @include size ( $name, !important );
+  $alias: nth( $sizes-aliases, index( $sizes, $size ) );
+
+  .#{$alias} {
+    @include size ( $size, !important );
   }
 
 }

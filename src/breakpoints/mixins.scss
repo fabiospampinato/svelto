@@ -1,0 +1,113 @@
+
+/* =========================================================================
+ * Svelto - Breakpoints (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FUNCTIONS */
+
+@function breakpoint-previous ( $breakpoint ) {
+
+  $all: map-keys( $breakpoints );
+  $index: index( $all, $breakpoint );
+
+  @return if( $index > 1, nth( $all, $index - 1 ), null );
+
+}
+
+@function breakpoint-next ( $breakpoint ) {
+
+  $all: map-keys( $breakpoints );
+  $index: index( $all, $breakpoint );
+
+  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
+
+}
+
+@function breakpoint-min ( $breakpoint ) {
+
+  $value: map-get( $breakpoints, $breakpoint );
+
+  @return if( strip-unit( $value ) != 0, $value, null );
+
+}
+
+@function breakpoint-max ( $breakpoint ) {
+
+  $value: breakpoint-next( $breakpoint, $breakpoints );
+
+  @return if( $value, breakpoint-min( $value, $breakpoints ) - .01px, null );
+
+}
+
+/* MIXINS */
+
+// Viewport equal or greater than breakpoint
+
+@mixin media-breakpoint-up ( $breakpoint ) {
+
+  $min: breakpoint-min( $breakpoint, $breakpoints );
+
+  @if $min {
+
+    @media (min-width: $min) {
+      @content;
+    }
+
+  } @else {
+
+    @content;
+
+  }
+
+}
+
+// Viewport equal or lower than breakpoint
+
+@mixin media-breakpoint-down ( $breakpoint ) {
+
+  $max: breakpoint-max( $breakpoint, $breakpoints );
+
+  @if $max {
+
+    @media (max-width: $max) {
+      @content;
+    }
+
+  } @else {
+
+    @content;
+
+  }
+
+}
+
+// Viewport within breakpoint
+
+@mixin media-breakpoint-only ( $breakpoint ) {
+
+  @include media-breakpoint-up( $breakpoint, $breakpoints ) {
+
+    @include media-breakpoint-down( $breakpoint, $breakpoints ) {
+      @content;
+    }
+
+  }
+
+}
+
+// Viewport within 2 breakpoints
+
+@mixin media-breakpoint-range ( $breakpoint-lower, $breakpoint-upper ) {
+
+  @include media-breakpoint-up( $breakpoint-lower, $breakpoints ) {
+
+    @include media-breakpoint-down( $breakpoint-upper, $breakpoints ) {
+      @content;
+    }
+
+  }
+
+}

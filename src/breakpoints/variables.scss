@@ -8,9 +8,9 @@
 
 /* BREAKPOINTS */
 
-// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
+// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` demo page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
 
-$breakpoint-xsmall: 0px !default;
+$breakpoint-xsmall: 0 !default;
 $breakpoint-small: 512px !default;
 $breakpoint-medium: 768px !default;
 $breakpoint-large: 1024px !default;
@@ -25,3 +25,9 @@ $breakpoints: (
   'large': $breakpoint-large,
   'xlarge': $breakpoint-xlarge
 ) !default;
+
+/* ALIASES */
+
+// The alias will be used for generating CSS classes
+
+$breakpoints-aliases: 'xs', 'sm', 'md', 'lg', 'xl' !default;

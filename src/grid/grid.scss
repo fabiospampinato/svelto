@@ -10,188 +10,40 @@
 
 //FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Is it the best way to do it?
 
-//TODO: Make it more general, don't just assume any many breakpoints there are and how they are called
+/* SIZE-# */
 
-/* XSMALL */
+@each $breakpoint, $value in $breakpoints {
 
-@include xsmall-up {
+  $alias: nth( $breakpoints-aliases, index( $breakpoints, $breakpoint ) );
 
-  @for $nr from 1 through $grid-columns {
+  @include media-breakpoint-up ( $breakpoint ) {
 
-    $percentage: ( 100% / $grid-columns ) * $nr;
+    @for $nr from 1 through $grid-columns {
 
-    .xs-#{$nr} {
-      width: $percentage;
-    }
+      $percentage: ( 100% / $grid-columns ) * $nr;
 
-    %xs-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .xs-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %xs-#{$nr}-without-gutter;
+      .#{alias}-#{$nr} {
+        width: $percentage;
       }
 
-      &.multiple {
+      %without-gutter {
+        width: calc(#{$percentage} - #{$gutter});
+      }
 
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %xs-#{$nr}-without-gutter;
+      .multiple > .#{$alias}-#{$nr} {
+
+        &:not(.multiple) {
+          @extend %without-gutter;
         }
 
-      }
+        &.multiple {
 
-    }
+          &.no-wrap,
+          &.vertical,
+          &.joined {
+            @extend %without-gutter;
+          }
 
-  }
-
-}
-
-/* SMALL */
-
-@include small-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .sm-#{$nr} {
-      width: $percentage;
-    }
-
-    %sm-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .sm-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %sm-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %sm-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* MEDIUM */
-
-@include medium-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .md-#{$nr} {
-      width: $percentage;
-    }
-
-    %md-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .md-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %md-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %md-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* LARGE */
-
-@include large-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .lg-#{$nr} {
-      width: $percentage;
-    }
-
-    %lg-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .lg-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %lg-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %lg-#{$nr}-without-gutter;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-/* XLARGE */
-
-@include xlarge-up {
-
-  @for $nr from 1 through $grid-columns {
-
-    $percentage: ( 100% / $grid-columns ) * $nr;
-
-    .xl-#{$nr} {
-      width: $percentage;
-    }
-
-    %xl-#{$nr}-without-gutter {
-      width: calc(#{$percentage} - #{$gutter});
-    }
-
-    .multiple > .xl-#{$nr} {
-
-      &:not(.multiple) {
-        @extend %xl-#{$nr}-without-gutter;
-      }
-
-      &.multiple {
-
-        &.no-wrap,
-        &.vertical,
-        &.joined {
-          @extend %xl-#{$nr}-without-gutter;
         }
 
       }
