@@ -8,7 +8,7 @@
 
 /* UNITS */
 
-@function strip-unit ( $num ) {
+@function unit-strip ( $num ) {
 
   @return $num / ( $num * 0 + 1 );
 

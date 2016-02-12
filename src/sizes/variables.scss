@@ -32,17 +32,17 @@ $size-xxxxlarge-icon: 60px !default;
 
 // The `RECOMMENDED` sizes are those where the icons look better
 
-$size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
-$size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
-$size-xxsmall: get_size( $size-xxsmall-icon ) !default;
-$size-xsmall: get_size( $size-xsmall-icon ) !default; // RECOMMENDED
-$size-small: get_size( $size-small-icon ) !default;
-$size-medium: get_size( $size-medium-icon ) !default; // RECOMMENDED
-$size-large: get_size( $size-large-icon ) !default;
-$size-xlarge: get_size( $size-xlarge-icon ) !default; // RECOMMENDED
-$size-xxlarge: get_size( $size-xxlarge-icon ) !default;
-$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; // RECOMMENDED
-$size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
+$size-xxxxsmall: size-from-icon-size( $size-xxxxsmall-icon ) !default;
+$size-xxxsmall: size-from-icon-size( $size-xxxsmall-icon ) !default;
+$size-xxsmall: size-from-icon-size( $size-xxsmall-icon ) !default;
+$size-xsmall: size-from-icon-size( $size-xsmall-icon ) !default; // RECOMMENDED
+$size-small: size-from-icon-size( $size-small-icon ) !default;
+$size-medium: size-from-icon-size( $size-medium-icon ) !default; // RECOMMENDED
+$size-large: size-from-icon-size( $size-large-icon ) !default;
+$size-xlarge: size-from-icon-size( $size-xlarge-icon ) !default; // RECOMMENDED
+$size-xxlarge: size-from-icon-size( $size-xxlarge-icon ) !default;
+$size-xxxlarge: size-from-icon-size( $size-xxxlarge-icon ) !default; // RECOMMENDED
+$size-xxxxlarge: size-from-icon-size( $size-xxxxlarge-icon ) !default;
 
 /* SIZES */
 

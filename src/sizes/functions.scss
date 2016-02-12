@@ -6,12 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* SIZES */
+/* SIZE */
 
-@function get_size ( $icon_size ) {
+@function size-from-icon-size ( $icon-size ) {
 
-  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+  // Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`
 
-  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
+  @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
 
 }

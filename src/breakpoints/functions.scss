@@ -32,7 +32,7 @@
 
   $value: map-get( $breakpoints, $breakpoint );
 
-  @return if( strip-unit( $value ) != 0, $value, null );
+  @return if( unit-strip( $value ) != 0, $value, null );
 
 }
 
