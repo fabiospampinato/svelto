@@ -9,7 +9,7 @@
 /* BLURRED */
 
 %blurred { //FIXME: Not working on Edge and IE
-  filter: url('#{$blurred-path-images}blurred.svg#blur') !important;
+  filter: url(#{$blurred-path-images}blurred.svg#blur) !important;
   filter: blur($blurred-blur-amount) !important;
 }
 
