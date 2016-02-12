@@ -43,3 +43,37 @@
   @return if( $value, breakpoint-min( $value ) - .01px, null );
 
 }
+
+/* ALIASES */
+
+@function breakpoints-get-aliases () {
+
+  //TODO: Write in a more general way, using a str-repeat and a map
+
+  $shorthands: (
+    'xxxxsmall': 'xxxxs',
+    'xxxsmall': 'xxxs',
+    'xxsmall': 'xxs',
+    'xsmall': 'xs',
+    'small': 'sm',
+    'medium': 'md',
+    'large': 'lg',
+    'xlarge': 'xl',
+    'xxlarge': 'xxl',
+    'xxxlarge': 'xxxl',
+    'xxxxlarge': 'xxxxl'
+  );
+
+  $aliases: ();
+
+  @each $breakpoint, $value in $breakpoints {
+
+    $shorthand: map-get( $shorthands, $breakpoint );
+
+    $aliases: append( $aliases, if( $shorthand, $shorthand, $breakpoint ) );
+
+  }
+
+  @return $aliases;
+
+}

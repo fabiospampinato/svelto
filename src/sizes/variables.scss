@@ -8,17 +8,8 @@
  * @require ../helpers/assert/mixins.scss
  * @require ../icon/variables.scss
  * @require ../typography/variables.scss
+ * @require functions.scss
  * ========================================================================= */
-
-/* FUNCTION */
-
-@function get_size ( $icon_size ) {
-
-  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
-
-  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
-
-}
 
 /* ICON SIZES */
 

@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../helpers/assert/mixins.scss
+ * @require functions.scss
  * ========================================================================= */
 
 /* BREAKPOINTS */
@@ -34,4 +35,4 @@ $breakpoints: (
 
 // The alias will be used for generating CSS classes
 
-$breakpoints-aliases: 'xs', 'sm', 'md', 'lg', 'xl' !default;
+$breakpoints-aliases: breakpoints-get-aliases() !default;

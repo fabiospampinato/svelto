@@ -59,3 +59,55 @@
   @return if( $value, breakpoint-min( $value ) - .01px, null );
 
 }
+
+/* ALIASES */
+
+@function breakpoints-get-aliases () {
+
+  //TODO: Write in a more general way, using a str-repeat and a map
+
+  $shorthands: (
+    'xxxxsmall': 'xxxxs',
+    'xxxsmall': 'xxxs',
+    'xxsmall': 'xxs',
+    'xsmall': 'xs',
+    'small': 'sm',
+    'medium': 'md',
+    'large': 'lg',
+    'xlarge': 'xl',
+    'xxlarge': 'xxl',
+    'xxxlarge': 'xxxl',
+    'xxxxlarge': 'xxxxl'
+  );
+
+  $aliases: ();
+
+  @each $breakpoint, $value in $breakpoints {
+
+    $shorthand: map-get( $shorthands, $breakpoint );
+
+    $aliases: append( $aliases, if( $shorthand, $shorthand, $breakpoint ) );
+
+  }
+
+  @return $aliases;
+
+}
+
+
+/* =========================================================================
+ * Svelto - Sizes (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SIZES */
+
+@function get_size ( $icon_size ) {
+
+  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+
+  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
+
+}
