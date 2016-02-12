@@ -9,10 +9,13 @@
  * @require ../typography.scss
  * ========================================================================= */
 
+//TODO: MAYBE add support for nested `kbd`
+
 /* KBD */
 
 kbd {
   @include color ( $kbd-color );
+  font-family: $font-family-monospace;
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;
   display: inline-block;
