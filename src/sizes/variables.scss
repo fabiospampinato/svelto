@@ -62,8 +62,6 @@ $sizes: (
 
 @include assert-ascending( $sizes, '`$sizes` values must be defined in ascending order' );
 
-/* ALIASES */
+/* CLASSES */
 
-// The alias will be used for generating CSS classes
-
-$sizes-aliases: map-keys( $sizes ) !default;
+$sizes-classes: map-keys( $sizes ) !default;

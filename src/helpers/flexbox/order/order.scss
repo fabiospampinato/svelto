@@ -10,7 +10,7 @@
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
+  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
 
   @include media-breakpoint-up ( $breakpoint ) {
 

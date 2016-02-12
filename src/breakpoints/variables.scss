@@ -31,8 +31,6 @@ $breakpoints: (
 
 @include assert-ascending( $breakpoints, '`$breakpoints` values must be defined in ascending order' );
 
-/* ALIASES */
+/* CLASSES */
 
-// The alias will be used for generating CSS classes
-
-$breakpoints-aliases: breakpoints-get-aliases() !default;
+$breakpoints-classes: breakpoints-get-classes() !default;

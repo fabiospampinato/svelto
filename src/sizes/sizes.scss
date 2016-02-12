@@ -12,7 +12,7 @@
 
 @each $size, $font-size in $sizes {
 
-  $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
+  $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
   .#{$alias} {
     @include size ( $size, !important );

@@ -44,9 +44,9 @@
 
 }
 
-/* ALIASES */
+/* CLASSES */
 
-@function breakpoints-get-aliases () {
+@function breakpoints-get-classes () {
 
   //TODO: Write in a more general way, using a str-repeat and a map
 
@@ -64,16 +64,16 @@
     'xxxxlarge': 'xxxxl'
   );
 
-  $aliases: ();
+  $classes: ();
 
   @each $breakpoint, $value in $breakpoints {
 
     $shorthand: map-get( $shorthands, $breakpoint );
 
-    $aliases: append( $aliases, if( $shorthand, $shorthand, $breakpoint ) );
+    $classes: append( $classes, if( $shorthand, $shorthand, $breakpoint ) );
 
   }
 
-  @return $aliases;
+  @return $classes;
 
 }
