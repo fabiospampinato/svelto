@@ -11,6 +11,7 @@
 *~
 *.sass-cache
 *.ruby-version
+*.rbenv-version
 
 # OS or Editor folders
 ._*
