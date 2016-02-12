@@ -9,6 +9,8 @@
 *.vi
 *.zip
 *~
+*.sass-cache
+*.ruby-version
 
 # OS or Editor folders
 ._*
@@ -24,11 +26,11 @@
 nbproject
 Thumbs.db
 
-# Folders to ignore
+# Other paths to ignore
 bower_components
 node_modules
 
-# Project specific folders to ignore
+# Project specific paths ignore
 .temp
 .svelto.json
 .project.previous.json
