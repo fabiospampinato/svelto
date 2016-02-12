@@ -11,7 +11,8 @@
 
 /* BLOCKQUOTE */
 
-blockquote {
+blockquote,
+.blockquote {
 
   @extend .widget;
   @include last-child-no-gutter ();
@@ -34,7 +35,8 @@ blockquote {
 
   /* FOOTER */
 
-  > footer {
+  > footer,
+  > .blockquote-footer {
 
     @extend .widget;
     @include last-child-no-gutter ();
