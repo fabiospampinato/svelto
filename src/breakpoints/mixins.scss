@@ -36,9 +36,9 @@
 
 @function breakpoint-max ( $breakpoint ) {
 
-  $value: breakpoint-next( $breakpoint, $breakpoints );
+  $value: breakpoint-next( $breakpoint );
 
-  @return if( $value, breakpoint-min( $value, $breakpoints ) - .01px, null );
+  @return if( $value, breakpoint-min( $value ) - .01px, null );
 
 }
 
@@ -48,7 +48,7 @@
 
 @mixin media-breakpoint-up ( $breakpoint ) {
 
-  $min: breakpoint-min( $breakpoint, $breakpoints );
+  $min: breakpoint-min( $breakpoint );
 
   @if $min {
 
@@ -68,7 +68,7 @@
 
 @mixin media-breakpoint-down ( $breakpoint ) {
 
-  $max: breakpoint-max( $breakpoint, $breakpoints );
+  $max: breakpoint-max( $breakpoint );
 
   @if $max {
 
@@ -88,9 +88,9 @@
 
 @mixin media-breakpoint-only ( $breakpoint ) {
 
-  @include media-breakpoint-up( $breakpoint, $breakpoints ) {
+  @include media-breakpoint-up( $breakpoint ) {
 
-    @include media-breakpoint-down( $breakpoint, $breakpoints ) {
+    @include media-breakpoint-down( $breakpoint ) {
       @content;
     }
 
@@ -102,9 +102,9 @@
 
 @mixin media-breakpoint-range ( $breakpoint-lower, $breakpoint-upper ) {
 
-  @include media-breakpoint-up( $breakpoint-lower, $breakpoints ) {
+  @include media-breakpoint-up( $breakpoint-lower ) {
 
-    @include media-breakpoint-down( $breakpoint-upper, $breakpoints ) {
+    @include media-breakpoint-down( $breakpoint-upper ) {
       @content;
     }
 

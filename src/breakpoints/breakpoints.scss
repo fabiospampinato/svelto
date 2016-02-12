@@ -10,7 +10,7 @@
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-aliases, index( $breakpoints, $breakpoint ) );
+  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
 
   /* UP */
 

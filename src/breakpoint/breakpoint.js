@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../svelto/svelto.js
- * @require breakpoints.js
+ * @require ../breakpoints/breakpoints.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Breakpoints ) {

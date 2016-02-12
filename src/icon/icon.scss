@@ -14,7 +14,7 @@
 
   @each $size, $font-size in $sizes {
 
-    $alias: nth( $sizes-aliases, index( $sizes, $size ) );
+    $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
 
     &.#{$alias} {
       font-size: ( $font-size * $icon-scale-amount ) !important;

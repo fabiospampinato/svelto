@@ -10,7 +10,7 @@
  * @require ../pointer/pointer.js
  * @require ../factory/factory.js
  * @require ../breakpoints/breakpoints.js
- * @require ../breakpoints/breakpoint.js
+ * @require ../breakpoint/breakpoint.js
  * @require ../keyboard/keyboard.js
  * @require ../route/route.js
  * ========================================================================= */
