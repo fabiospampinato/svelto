@@ -41,12 +41,12 @@
 
     > * {
 
-      transition: color $remote-modal-transition-all-duration;
+      transition: color $remote-modal-animation-duration;
 
       /* CHILDREN */
 
       > * {
-        transition: opacity $remote-modal-transition-all-duration;
+        transition: opacity $remote-modal-animation-duration;
       }
 
     }

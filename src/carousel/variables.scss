@@ -5,9 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
  * @require ../icon/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* CAROUSEL */
@@ -29,7 +29,7 @@ $carousel-indicator-opacity: .25 !default;
 $carousel-hover-indicator-opacity: .5 !default;
 $carousel-indicator-hover-opacity: 1 !default;
 
-$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
+$carousel-indicator-animation-duration: $animation-normal !default;
 
 /* INSET (PREVIOUS / NEXT) */
 
@@ -46,12 +46,12 @@ $carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-previous-next-transition-opacity-duration: $transition-duration-normal !default;
+$carousel-inset-previous-next-animation-opacity-duration: $animation-normal !default;
 
 /* SLIDE */
 
-$carousel-slide-transition-transform-duration: $transition-duration-normal !default;
+$carousel-slide-animation-transform-duration: $animation-normal !default;
 
 /* FADE */
 
-$carousel-fade-transition-opacity-duration: $transition-duration-normal !default;
+$carousel-fade-animation-opacity-duration: $animation-normal !default;

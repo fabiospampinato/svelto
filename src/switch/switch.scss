@@ -33,7 +33,7 @@
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
-    transition: background-color $switch-transition-all-duration;
+    transition: background-color $switch-animation-duration;
   }
 
   /* HANDLER */
@@ -50,7 +50,7 @@
     height: $switch-handler-size;
     border-radius: $switch-handler-size;
     transition-property: background-color, transform;
-    transition-duration: $switch-transition-all-duration;
+    transition-duration: $switch-animation-duration;
 
     /* BEFORE */
 
@@ -63,7 +63,7 @@
       opacity: 0;
       transform: scale($switch-handler-before-scale-inactive);
       transition-property: opacity, transform, background-color;
-      transition-duration: $switch-transition-all-duration;
+      transition-duration: $switch-animation-duration;
     }
 
     /* AFTER */
@@ -77,7 +77,7 @@
       line-height: $switch-handler-icon-size;
       text-align: center;
       transition-property: color;
-      transition-duration: $switch-transition-all-duration;
+      transition-duration: $switch-animation-duration;
     }
 
     /* DRAGGING */

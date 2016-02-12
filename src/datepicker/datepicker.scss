@@ -131,7 +131,7 @@
         &.datepicker-day-selected {
 
           color: $datepicker-day-selected-color;
-          transition: color $datepicker-transition-all-duration;
+          transition: color $datepicker-animation-duration;
 
           /* BEFORE */
 
@@ -142,7 +142,7 @@
           &:before {
             background-color: $datepicker-day-selected-circle-color;
             transition-property: box-shadow, background-color;
-            transition-duration: $datepicker-transition-all-duration;
+            transition-duration: $datepicker-animation-duration;
           }
 
         }

@@ -23,7 +23,7 @@
   z-index: $panel-z-index;
   margin-bottom: 0;
   border-radius: 0;
-  transition: transform $panel-transition-transform-duration;
+  transition: transform $panel-animation-transform-duration;
   overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
@@ -116,7 +116,7 @@
     z-index: -1;
     cursor: pointer;
     background-color: $panel-background-color;
-    transition: opacity $panel-background-transition-opacity-duration;
+    transition: opacity $panel-background-animation-opacity-duration;
   }
 
 }
@@ -127,11 +127,11 @@
 
 .layout {
 
-  transition: padding $panel-transition-transform-duration;
+  transition: padding $panel-animation-transform-duration;
 
   > .layout-header.fixed {
     transition-property: top, right, bottom, left;
-    transition-duration: $panel-transition-transform-duration;
+    transition-duration: $panel-animation-transform-duration;
   }
 
 }

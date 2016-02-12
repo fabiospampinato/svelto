@@ -12,5 +12,11 @@
 /* BLURRED */
 
 $blurred-blur-amount: 3px !default;
+
+/* PATHS */
+
 $blurred-path-images: $path-images !default;
-$blurred-transition-duration: $transition-duration-fast !default;
+
+/* ANIMATION */
+
+$blurred-animation-duration: $animation-fast !default;

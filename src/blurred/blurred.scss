@@ -15,6 +15,6 @@
 
 .blurred {
   @extend %blurred;
-  transition: filter $blurred-transition-duration !important;
+  transition: filter $blurred-animation-duration !important;
   //TODO: If mobile remove the transition, it greatly improves performance
 }

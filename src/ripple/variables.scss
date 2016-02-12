@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* RIPPLE */
@@ -19,8 +19,8 @@ $ripple-transparentize-amount: .8 !default;
 
 $ripple-circle-z-index: 50 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$ripple-transition-timing-function: cubic-bezier(0.25, .8, .25, 1) !default; // Taken from Angular Material
-$ripple-transition-show-duration: $transition-duration-xslow !default;
-$ripple-transition-hide-duration: $transition-duration-xslow !default;
+$ripple-transition-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material
+$ripple-animation-show-duration: $animation-xslow !default;
+$ripple-animation-hide-duration: $animation-xslow !default;

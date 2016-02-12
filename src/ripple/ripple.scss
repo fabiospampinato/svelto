@@ -36,7 +36,7 @@
       opacity: 0;
       transform: scale(0);
       transition-property: opacity, transform;
-      transition-duration: $ripple-transition-show-duration;
+      transition-duration: $ripple-animation-show-duration;
       transition-timing-function: $ripple-transition-timing-function;
     }
 

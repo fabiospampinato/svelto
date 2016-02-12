@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* CHECKBOX */
@@ -15,6 +15,6 @@ $checkbox-icon-off: 'check_box_outline_blank' !default;
 $checkbox-icon-on: 'check_box' !default;
 $checkbox-icon-on-color: 'secondary' !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
+$checkbox-icon-animation-opacity-duration: $animation-fast !default;

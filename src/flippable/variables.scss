@@ -5,11 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* FLIPPABLE */
 
 $flippable-perspective: 1000px !default;
 
-$flippable-transition-flip-duration: $transition-duration-slow !default;
+/* ANIMATION */
+
+$flippable-animation-flip-duration: $animation-slow !default;

@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* IMAGE */
@@ -17,6 +17,6 @@ $image-color: 'inherit' !default;
 $image-caption-color: 'black' !default;
 $image-caption-z-index: 30 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$image-caption-transition-opacity-duration: $transition-duration-fast !default;
+$image-caption-animation-opacity-duration: $animation-fast !default;

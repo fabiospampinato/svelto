@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* DATEPICKER */
@@ -38,6 +38,6 @@ $datepicker-day-selected-z-depth: 2 !default;
 $datepicker-day-selected-color: $color-secondary-text !default;
 $datepicker-day-selected-circle-color: $color-secondary-bg !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$datepicker-transition-all-duration: $transition-duration-fast !default;
+$datepicker-animation-duration: $animation-fast !default;

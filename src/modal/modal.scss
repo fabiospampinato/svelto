@@ -25,7 +25,7 @@
   position: fixed;
   z-index: $modal-z-index;
   transition-property: transform, opacity;
-  transition-duration: $modal-transition-all-duration;
+  transition-duration: $modal-animation-duration;
   margin: 0;
   cursor: pointer;
   overflow: visible !important; // Since we need the pseudo element to be showed

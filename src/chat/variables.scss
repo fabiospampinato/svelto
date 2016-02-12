@@ -5,11 +5,11 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
  * @require ../dropdown/variables.scss
  * @require ../outline/variables.scss
  * @require ../paths/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* CHAT */
@@ -33,6 +33,6 @@ $chat-msg-img-border-width: $outline-width !default;
 $chat-msg-img-border-color: $color-black !default;
 $chat-msg-img-opacity-hover: .8 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$chat-msg-img-transition-duration: $transition-duration-fast !default;
+$chat-msg-img-animation-duration: $animation-fast !default;

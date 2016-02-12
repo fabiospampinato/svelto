@@ -27,7 +27,7 @@
     overflow: hidden;
 
     img {
-      transition: opacity $chat-msg-img-transition-duration;
+      transition: opacity $chat-msg-img-animation-duration;
       width: $chat-msg-img-size;
       height: $chat-msg-img-size;
       border-radius: 100%;

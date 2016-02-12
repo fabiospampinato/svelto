@@ -18,7 +18,7 @@
   left: 0;
   max-width: $dropdown-max-width;
   margin-bottom: 0;
-  transition: opacity $dropdown-transition-all-duration;
+  transition: opacity $dropdown-animation-duration;
 
   /* NOT CONTAINER */
 
@@ -30,12 +30,12 @@
 
   &.moving {
 
-    transition: transform $dropdown-transition-all-duration;
+    transition: transform $dropdown-animation-duration;
 
     /* TIP */
 
     &:before {
-      transition: transform $dropdown-transition-all-duration;
+      transition: transform $dropdown-animation-duration;
     }
 
   }

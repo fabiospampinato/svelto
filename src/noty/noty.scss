@@ -19,7 +19,7 @@
   border-radius: $noty-border-radius;
   pointer-events: auto;
   transition-property: opacity, font-size, padding, margin;
-  transition-duration: $noty-transition-all-duration;
+  transition-duration: $noty-animation-duration;
   transform: translateZ(0);
 
   /* INFOBAR */

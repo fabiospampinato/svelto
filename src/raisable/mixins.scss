@@ -14,6 +14,6 @@
 
   @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
 
-  transition: box-shadow $raisable-transition-box-shadow-duration;
+  transition: box-shadow $raisable-animation-box-shadow-duration;
 
 }

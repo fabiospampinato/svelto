@@ -5,10 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../svelto/variables.scss
+ * @require ../../animations/variables.scss
  * ========================================================================= */
 
 /* LINK */
 
 $a-underline-height: 1px !default;
-$a-underline-transition-duration: $transition-duration-fast !default;
+
+/* ANIMATION */
+
+$a-underline-animation-duration: $animation-fast !default;

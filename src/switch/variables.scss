@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../constants/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* SWITCH */
@@ -39,6 +39,6 @@ $switch-handler-before-scale-active: $GOLDEN-RATIO !default;
 
 $switch-handler-before-active-opacity: .25 !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$switch-transition-all-duration: $transition-duration-fast !default;
+$switch-animation-duration: $animation-fast !default;

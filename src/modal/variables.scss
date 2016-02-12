@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* MODAL */
@@ -24,6 +24,6 @@ $modal-max-height: 90vh !default;
 
 $modal-background-color: rgba(0, 0, 0, .5) !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$modal-transition-all-duration: $transition-duration-normal !default;
+$modal-animation-duration: $animation-normal !default;
