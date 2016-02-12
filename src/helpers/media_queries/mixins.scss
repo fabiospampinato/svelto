@@ -62,16 +62,24 @@
 
 @mixin hdpi ( $ratio: 2 ) {
 
-  //FIXME: Do we need borwsers prefixes here?
-  // `min--moz-device-pixel-ratio` is not a typo, at least not on our side //TODO: Has it been fixed?
+  @if ( $ratio == 1 ) {
 
-  @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
-         only screen and (    min--moz-device-pixel-ratio: $ratio ),
-         only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
-         only screen and (         min-device-pixel-ratio: #{$ratio} ),
-         only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
-         only screen and (                 min-resolution: #{$ratio}dppx ) {
     @content;
+
+  } @else {
+
+    //FIXME: Do we need borwsers prefixes here?
+    // `min--moz-device-pixel-ratio` is not a typo, at least not on our side //TODO: Has it been fixed?
+
+    @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
+           only screen and (    min--moz-device-pixel-ratio: $ratio ),
+           only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
+           only screen and (         min-device-pixel-ratio: #{$ratio} ),
+           only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
+           only screen and (                 min-resolution: #{$ratio}dppx ) {
+      @content;
+    }
+
   }
 
 }
