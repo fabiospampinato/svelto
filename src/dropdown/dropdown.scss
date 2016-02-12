@@ -119,7 +119,7 @@
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); // The polygon is not supported on Firefox
+      clip-path: url('#{$dropdown-path-images}dropdown-clips.svg#clip-top'); // The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -142,7 +142,7 @@
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); // The polygon is not supported on Firefox
+      clip-path: url('#{$dropdown-path-images}dropdown-clips.svg#clip-bottom'); // The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -165,7 +165,7 @@
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); // The polygon is not supported on Firefox
+      clip-path: url('#{$dropdown-path-images}dropdown-clips.svg#clip-left'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -188,7 +188,7 @@
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); // The polygon is not supported on Firefox
+      clip-path: url('#{$dropdown-path-images}dropdown-clips.svg#clip-right'); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }

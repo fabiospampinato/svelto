@@ -8,8 +8,13 @@
  * @require ../colors/variables.scss
  * @require ../dropdown/variables.scss
  * @require ../outline/variables.scss
+ * @require ../paths/variables.scss
  * @require ../svelto/variables.scss
  * ========================================================================= */
+
+/* CHAT */
+
+$chat-path-images: $path-images !default;
 
 /* TIP */
 

@@ -15,14 +15,14 @@ i[class^="flag-"] {
   vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
-  background-image: url('#{$basepath}flags.png');
+  background-image: url('#{$flags-path-images}flags.png');
 }
 
 /* FLAGS */
 
 @each $country, $datas in $flags {
 
-  $background-position: nth($datas, 2);
+  $background-position: nth( $datas, 2 );
 
   .flag-#{$country} {
     background-position: $background-position;

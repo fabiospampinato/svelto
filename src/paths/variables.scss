@@ -1,16 +1,13 @@
 
 /* =========================================================================
- * Svelto - Blurred (Variables)
+ * Svelto - Paths (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../paths/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
-/* BLURRED */
+/* PATHS */
 
-$blurred-blur-amount: 3px !default;
-$blurred-path-images: $path-images !default;
-$blurred-transition-duration: $transition-duration-fast !default;
+$path-base: '/' !default;
+$path-fonts: $path-base + 'fonts/' !default;
+$path-images: $path-base + 'images/' !default;
