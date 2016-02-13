@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Color (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* COLOR */
+
+// Basically calculating `sRGB Luma`
+
+@function is-light ( $color ) {
+
+  $red: red( rgba( $color, 1 ) );
+  $green: green( rgba( $color, 1 ) );
+  $blue: blue( rgba( $color, 1 ) );
+
+  $luma: ( ( $red * .2126 ) + ( $green * .7152 ) + ( $blue * .0722 ) ) / 255;
+
+  @return $luma > .6;
+
+}
+
+@function is-dark ( $color ) {
+
+  @return not is-light ( $color );
+
+}
