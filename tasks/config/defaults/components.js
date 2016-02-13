@@ -88,7 +88,7 @@ var components = [
   // 'helpers/screen_reader',
   // 'helpers/selector',
   // 'helpers/text',
-  // 'helpers/units',
+  // 'helpers/unit',
   // 'helpers/visibility',
   'highlight',
   'icon',
