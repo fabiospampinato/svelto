@@ -9,7 +9,7 @@
  * @require ../margin/mixins.scss
  * ========================================================================= */
 
-/* CENTER */
+/* MARGIN */
 
 @mixin center-margin ( $max-width: false ) {
 
@@ -20,6 +20,8 @@
   }
 
 }
+
+/* ABSOLUTE */
 
 @mixin center-absolute ( $width: false, $height: false ) {
 
@@ -44,14 +46,7 @@
 
 }
 
-@mixin center-fixed-fill () {
-
-  @include fill-fixed ();
-  margin: auto;
-
-}
-
-@mixin center-transform-absolute ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-absolute-transform ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;
 
@@ -83,7 +78,16 @@
 
 }
 
-@mixin center-transform-fixed ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+/* FIXED */
+
+@mixin center-fixed-fill () {
+
+  @include fill-fixed ();
+  margin: auto;
+
+}
+
+@mixin center-fixed-transform ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: fixed;
 

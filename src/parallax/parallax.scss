@@ -62,7 +62,7 @@
   /* SAMPLE CONTENT */
 
   &-content-sample { //FIXME: Remove this component, it shouldn't be needed
-    @include center-transform-absolute ();
+    @include center-absolute-transform ();
   }
 
 }

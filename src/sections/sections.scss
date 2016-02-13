@@ -30,7 +30,7 @@
 
   > .section-center:first-child,
   > .section-center:last-child {
-    @include center-transform-absolute ();
+    @include center-absolute-transform ();
   }
 
 }
@@ -62,7 +62,7 @@
   justify-content: center;
 
   &:not(:only-child).forced {
-    @include center-transform-absolute ();
+    @include center-absolute-transform ();
   }
 
 }
