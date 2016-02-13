@@ -39,7 +39,7 @@ Package.onUse ( function ( api ) {
 
   api.addFiles ([
     'dist/css/svelto.css',
-    'dist/js/svelto.js'
+    'dist/javascript/svelto.js'
   ], 'client' );
 
 });

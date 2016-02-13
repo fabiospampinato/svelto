@@ -1197,6 +1197,1010 @@ $expander-animation-duration: $animation-normal !default; //TODO: Implement it
 
 
 /* =========================================================================
+ * Svelto - Flag (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../paths/variables.scss
+ * ========================================================================= */
+
+/* FLAGS */
+
+$flags: (
+  'ad': (
+    'andorra',
+    ( -16px 0 )
+  ),
+  'ae': (
+    'united-arab-emirates',
+    ( -32px 0 )
+  ),
+  'af': (
+    'afghanistan',
+    ( -48px 0 )
+  ),
+  'ag': (
+    'antigua',
+    ( -64px 0 )
+  ),
+  'ai': (
+    'anguilla',
+    ( -80px 0 )
+  ),
+  'al': (
+    'albania',
+    ( -96px 0 )
+  ),
+  'am': (
+    'armenia',
+    ( -112px 0 )
+  ),
+  'an': (
+    'netherlands-antilles',
+    ( -128px 0 )
+  ),
+  'ao': (
+    'angola',
+    ( -144px 0 )
+  ),
+  'ar': (
+    'argentina',
+    ( -160px 0 )
+  ),
+  'as': (
+    'american-samoa',
+    ( -176px 0 )
+  ),
+  'at': (
+    'austria',
+    ( -192px 0 )
+  ),
+  'au': (
+    'australia',
+    ( -208px 0 )
+  ),
+  'aw': (
+    'aruba',
+    ( -224px 0 )
+  ),
+  'az': (
+    'azerbaijan',
+    ( -240px 0 )
+  ),
+  'ba': (
+    'bosnia',
+    ( 0 -11px )
+  ),
+  'bb': (
+    'barbados',
+    ( -16px -11px )
+  ),
+  'bd': (
+    'bangladesh',
+    ( -32px -11px )
+  ),
+  'be': (
+    'belgium',
+    ( -48px -11px )
+  ),
+  'bf': (
+    'burkina-faso',
+    ( -64px -11px )
+  ),
+  'bg': (
+    'bulgaria',
+    ( -80px -11px )
+  ),
+  'bh': (
+    'bahrain',
+    ( -96px -11px )
+  ),
+  'bi': (
+    'burundi',
+    ( -112px -11px )
+  ),
+  'bj': (
+    'benin',
+    ( -128px -11px )
+  ),
+  'bm': (
+    'bermuda',
+    ( -144px -11px )
+  ),
+  'bn': (
+    'brunei',
+    ( -160px -11px )
+  ),
+  'bo': (
+    'bolivia',
+    ( -176px -11px )
+  ),
+  'br': (
+    'brazil',
+    ( -192px -11px )
+  ),
+  'bs': (
+    'bahamas',
+    ( -208px -11px )
+  ),
+  'bt': (
+    'bhutan',
+    ( -224px -11px )
+  ),
+  'bv': (
+    'bouvet-island',
+    ( -240px -11px )
+  ),
+  'bw': (
+    'botswana',
+    ( 0 -22px )
+  ),
+  'by': (
+    'belarus',
+    ( -16px -22px )
+  ),
+  'bz': (
+    'belize',
+    ( -32px -22px )
+  ),
+  'ca': (
+    'canada',
+    ( -48px -22px )
+  ),
+  'cd': (
+    'congo',
+    ( -80px -22px )
+  ),
+  'cf': (
+    'central-african-republic',
+    ( -96px -22px )
+  ),
+  'cg': (
+    'congo-brazzaville',
+    ( -112px -22px )
+  ),
+  'ch': (
+    'switzerland',
+    ( -128px -22px )
+  ),
+  'ci': (
+    'cote-divoire',
+    ( -144px -22px )
+  ),
+  'ck': (
+    'cook-islands',
+    ( -160px -22px )
+  ),
+  'cl': (
+    'chile',
+    ( -176px -22px )
+  ),
+  'cm': (
+    'cameroon',
+    ( -192px -22px )
+  ),
+  'cn': (
+    'china',
+    ( -208px -22px )
+  ),
+  'co': (
+    'colombia',
+    ( -224px -22px )
+  ),
+  'cr': (
+    'costa-rica',
+    ( -240px -22px )
+  ),
+  'cu': (
+    'cuba',
+    ( 0 -33px )
+  ),
+  'cv': (
+    'cape-verde',
+    ( -16px -33px )
+  ),
+  'cw': (
+    'curacao',
+    ( -32px -33px )
+  ),
+  'cy': (
+    'cyprus',
+    ( -48px -33px )
+  ),
+  'cz': (
+    'czech-republic',
+    ( -64px -33px )
+  ),
+  'de': (
+    'germany',
+    ( -80px -33px )
+  ),
+  'dj': (
+    'djibouti',
+    ( -96px -33px )
+  ),
+  'dk': (
+    'denmark',
+    ( -112px -33px )
+  ),
+  'dm': (
+    'dominica',
+    ( -128px -33px )
+  ),
+  'do': (
+    'dominican-republic',
+    ( -144px -33px )
+  ),
+  'dz': (
+    'algeria',
+    ( -160px -33px )
+  ),
+  'ec': (
+    'ecuador',
+    ( -176px -33px )
+  ),
+  'ee': (
+    'estonia',
+    ( -192px -33px )
+  ),
+  'eg': (
+    'egypt',
+    ( -208px -33px )
+  ),
+  'eh': (
+    'western-sahara',
+    ( -224px -33px )
+  ),
+  'er': (
+    'eritrea',
+    ( 0 -44px )
+  ),
+  'es': (
+    'spain',
+    ( -16px -44px )
+  ),
+  'et': (
+    'ethiopia',
+    ( -32px -44px )
+  ),
+  'eu': (
+    'european-union',
+    ( -48px -44px )
+  ),
+  'fi': (
+    'finland',
+    ( -64px -44px )
+  ),
+  'fj': (
+    'fiji',
+    ( -80px -44px )
+  ),
+  'fk': (
+    'falkland-islands',
+    ( -96px -44px )
+  ),
+  'fm': (
+    'micronesia',
+    ( -112px -44px )
+  ),
+  'fo': (
+    'faroe-islands',
+    ( -128px -44px )
+  ),
+  'fr': (
+    'france',
+    ( -144px -44px )
+  ),
+  'ga': (
+    'gabon',
+    ( -160px -44px )
+  ),
+  'gb': (
+    'england',
+    ( -176px -44px )
+  ),
+  'gd': (
+    'grenada',
+    ( -192px -44px )
+  ),
+  'ge': (
+    'georgia',
+    ( -208px -44px )
+  ),
+  'gf': (
+    'french-guiana',
+    ( -224px -44px )
+  ),
+  'gg': (
+    'guernsey',
+    ( -240px -44px )
+  ),
+  'gh': (
+    'ghana',
+    ( 0 -55px )
+  ),
+  'gi': (
+    'gibraltar',
+    ( -16px -55px )
+  ),
+  'gl': (
+    'greenland',
+    ( -32px -55px )
+  ),
+  'gm': (
+    'gambia',
+    ( -48px -55px )
+  ),
+  'gn': (
+    'guinea',
+    ( -64px -55px )
+  ),
+  'gp': (
+    'guadeloupe',
+    ( -80px -55px )
+  ),
+  'gq': (
+    'equatorial-guinea',
+    ( -96px -55px )
+  ),
+  'gr': (
+    'greece',
+    ( -112px -55px )
+  ),
+  'gs': (
+    'sandwich-islands',
+    ( -128px -55px )
+  ),
+  'gt': (
+    'guatemala',
+    ( -144px -55px )
+  ),
+  'gu': (
+    'guam',
+    ( -160px -55px )
+  ),
+  'gw': (
+    'guinea-bissau',
+    ( -176px -55px )
+  ),
+  'gy': (
+    'guyana',
+    ( -192px -55px )
+  ),
+  'hk': (
+    'hong-kong',
+    ( -208px -55px )
+  ),
+  'hm': (
+    'heard-island',
+    ( -224px -55px )
+  ),
+  'hn': (
+    'honduras',
+    ( -240px -55px )
+  ),
+  'hr': (
+    'croatia',
+    ( 0 -66px )
+  ),
+  'ht': (
+    'haiti',
+    ( -16px -66px )
+  ),
+  'hu': (
+    'hungary',
+    ( -32px -66px )
+  ),
+  'ic': (
+    'canary-islands',
+    ( -48px -66px )
+  ),
+  'id': (
+    'indonesia',
+    ( -64px -66px )
+  ),
+  'ie': (
+    'ireland',
+    ( -80px -66px )
+  ),
+  'il': (
+    'israel',
+    ( -96px -66px )
+  ),
+  'im': (
+    'isle-of-man',
+    ( -112px -66px )
+  ),
+  'in': (
+    'india',
+    ( -128px -66px )
+  ),
+  'io': (
+    'indian-ocean-territory',
+    ( -144px -66px )
+  ),
+  'iq': (
+    'iraq',
+    ( -160px -66px )
+  ),
+  'ir': (
+    'iran',
+    ( -176px -66px )
+  ),
+  'is': (
+    'iceland',
+    ( -192px -66px )
+  ),
+  'it': (
+    'italy',
+    ( -208px -66px )
+  ),
+  'je': (
+    'jersey',
+    ( -224px -66px )
+  ),
+  'jm': (
+    'jamaica',
+    ( -240px -66px )
+  ),
+  'jo': (
+    'jordan',
+    ( 0 -77px )
+  ),
+  'jp': (
+    'japan',
+    ( -16px -77px )
+  ),
+  'ke': (
+    'kenya',
+    ( -32px -77px )
+  ),
+  'kg': (
+    'kyrgyzstan',
+    ( -48px -77px )
+  ),
+  'kh': (
+    'cambodia',
+    ( -64px -77px )
+  ),
+  'ki': (
+    'kiribati',
+    ( -80px -77px )
+  ),
+  'km': (
+    'comoros',
+    ( -96px -77px )
+  ),
+  'kn': (
+    'saint-kitts-and-nevis',
+    ( -112px -77px )
+  ),
+  'kp': (
+    'north-korea',
+    ( -128px -77px )
+  ),
+  'kr': (
+    'south-korea',
+    ( -144px -77px )
+  ),
+  'kw': (
+    'kuwait',
+    ( -176px -77px )
+  ),
+  'ky': (
+    'cayman-islands',
+    ( -192px -77px )
+  ),
+  'kz': (
+    'kazakhstan',
+    ( -208px -77px )
+  ),
+  'la': (
+    'laos',
+    ( -224px -77px )
+  ),
+  'lb': (
+    'lebanon',
+    ( -240px -77px )
+  ),
+  'lc': (
+    'saint-lucia',
+    ( 0 -88px )
+  ),
+  'li': (
+    'liechtenstein',
+    ( -16px -88px )
+  ),
+  'lk': (
+    'sri-lanka',
+    ( -32px -88px )
+  ),
+  'lr': (
+    'liberia',
+    ( -48px -88px )
+  ),
+  'ls': (
+    'lesotho',
+    ( -64px -88px )
+  ),
+  'lt': (
+    'lithuania',
+    ( -80px -88px )
+  ),
+  'lu': (
+    'luxembourg',
+    ( -96px -88px )
+  ),
+  'lv': (
+    'latvia',
+    ( -112px -88px )
+  ),
+  'ly': (
+    'libya',
+    ( -128px -88px )
+  ),
+  'ma': (
+    'morocco',
+    ( -144px -88px )
+  ),
+  'mc': (
+    'monaco',
+    ( -160px -88px )
+  ),
+  'md': (
+    'moldova',
+    ( -176px -88px )
+  ),
+  'me': (
+    'montenegro',
+    ( -192px -88px )
+  ),
+  'mg': (
+    'madagascar',
+    ( -208px -88px )
+  ),
+  'mh': (
+    'marshall-islands',
+    ( -224px -88px )
+  ),
+  'mk': (
+    'macedonia',
+    ( -240px -88px )
+  ),
+  'ml': (
+    'mali',
+    ( 0 -99px )
+  ),
+  'mm': (
+    'burma',
+    ( -16px -99px )
+  ),
+  'mn': (
+    'mongolia',
+    ( -32px -99px )
+  ),
+  'mo': (
+    'macau',
+    ( -48px -99px )
+  ),
+  'mp': (
+    'northern-mariana-islands',
+    ( -64px -99px )
+  ),
+  'mq': (
+    'martinique',
+    ( -80px -99px )
+  ),
+  'mr': (
+    'mauritania',
+    ( -96px -99px )
+  ),
+  'ms': (
+    'montserrat',
+    ( -112px -99px )
+  ),
+  'mt': (
+    'malta',
+    ( -128px -99px )
+  ),
+  'mu': (
+    'mauritius',
+    ( -144px -99px )
+  ),
+  'mv': (
+    'maldives',
+    ( -160px -99px )
+  ),
+  'mw': (
+    'malawi',
+    ( -176px -99px )
+  ),
+  'mx': (
+    'mexico',
+    ( -192px -99px )
+  ),
+  'my': (
+    'malaysia',
+    ( -208px -99px )
+  ),
+  'mz': (
+    'mozambique',
+    ( -224px -99px )
+  ),
+  'na': (
+    'namibia',
+    ( -240px -99px )
+  ),
+  'nc': (
+    'new-caledonia',
+    ( 0 -110px )
+  ),
+  'ne': (
+    'niger',
+    ( -16px -110px )
+  ),
+  'nf': (
+    'norfolk-island',
+    ( -32px -110px )
+  ),
+  'ng': (
+    'nigeria',
+    ( -48px -110px )
+  ),
+  'ni': (
+    'nicaragua',
+    ( -64px -110px )
+  ),
+  'nl': (
+    'netherlands',
+    ( -80px -110px )
+  ),
+  'no': (
+    'norway',
+    ( -96px -110px )
+  ),
+  'np': (
+    'nepal',
+    ( -112px -110px )
+  ),
+  'nr': (
+    'nauru',
+    ( -128px -110px )
+  ),
+  'nu': (
+    'niue',
+    ( -144px -110px )
+  ),
+  'nz': (
+    'new-zealand',
+    ( -160px -110px )
+  ),
+  'om': (
+    'oman',
+    ( -176px -110px )
+  ),
+  'pa': (
+    'panama',
+    ( -192px -110px )
+  ),
+  'pe': (
+    'peru',
+    ( -208px -110px )
+  ),
+  'pf': (
+    'french-polynesia',
+    ( -224px -110px )
+  ),
+  'pg': (
+    'new-guinea',
+    ( -240px -110px )
+  ),
+  'ph': (
+    'philippines',
+    ( 0 -121px )
+  ),
+  'pk': (
+    'pakistan',
+    ( -16px -121px )
+  ),
+  'pl': (
+    'poland',
+    ( -32px -121px )
+  ),
+  'pm': (
+    'saint-pierre',
+    ( -48px -121px )
+  ),
+  'pn': (
+    'pitcairn-islands',
+    ( -64px -121px )
+  ),
+  'pr': (
+    'puerto-rico',
+    ( -80px -121px )
+  ),
+  'ps': (
+    'palestine',
+    ( -96px -121px )
+  ),
+  'pt': (
+    'portugal',
+    ( -112px -121px )
+  ),
+  'pw': (
+    'palau',
+    ( -128px -121px )
+  ),
+  'py': (
+    'paraguay',
+    ( -144px -121px )
+  ),
+  'qa': (
+    'qatar',
+    ( -160px -121px )
+  ),
+  're': (
+    'reunion',
+    ( -176px -121px )
+  ),
+  'ro': (
+    'romania',
+    ( -192px -121px )
+  ),
+  'rs': (
+    'serbia',
+    ( -208px -121px )
+  ),
+  'ru': (
+    'russia',
+    ( -224px -121px )
+  ),
+  'rw': (
+    'rwanda',
+    ( -240px -121px )
+  ),
+  'sa': (
+    'saudi-arabia',
+    ( 0 -132px )
+  ),
+  'sb': (
+    'solomon-islands',
+    ( -16px -132px )
+  ),
+  'sc': (
+    'seychelles',
+    ( -32px -132px )
+  ),
+  'sd': (
+    'sudan',
+    ( -64px -132px )
+  ),
+  'se': (
+    'sweden',
+    ( -80px -132px )
+  ),
+  'sg': (
+    'singapore',
+    ( -96px -132px )
+  ),
+  'sh': (
+    'saint-helena',
+    ( -112px -132px )
+  ),
+  'si': (
+    'slovenia',
+    ( -128px -132px )
+  ),
+  'sk': (
+    'slovakia',
+    ( -144px -132px )
+  ),
+  'sl': (
+    'sierra-leone',
+    ( -160px -132px )
+  ),
+  'sm': (
+    'san-marino',
+    ( -176px -132px )
+  ),
+  'sn': (
+    'senegal',
+    ( -192px -132px )
+  ),
+  'so': (
+    'somalia',
+    ( -208px -132px )
+  ),
+  'sr': (
+    'suriname',
+    ( -240px -132px )
+  ),
+  'ss': (
+    'south-sudan',
+    ( 0 -143px )
+  ),
+  'st': (
+    'sao-tome',
+    ( -16px -143px )
+  ),
+  'sv': (
+    'el-salvador',
+    ( -32px -143px )
+  ),
+  'sx': (
+    'sint-maarten',
+    ( -48px -143px )
+  ),
+  'sy': (
+    'syria',
+    ( -64px -143px )
+  ),
+  'sz': (
+    'swaziland',
+    ( -80px -143px )
+  ),
+  'tc': (
+    'caicos-islands',
+    ( -96px -143px )
+  ),
+  'td': (
+    'chad',
+    ( -112px -143px )
+  ),
+  'tf': (
+    'french-territories',
+    ( -128px -143px )
+  ),
+  'tg': (
+    'togo',
+    ( -144px -143px )
+  ),
+  'th': (
+    'thailand',
+    ( -160px -143px )
+  ),
+  'tj': (
+    'tajikistan',
+    ( -192px -143px )
+  ),
+  'tk': (
+    'tokelau',
+    ( -208px -143px )
+  ),
+  'tl': (
+    'timorleste',
+    ( -224px -143px )
+  ),
+  'tm': (
+    'turkmenistan',
+    ( -240px -143px )
+  ),
+  'tn': (
+    'tunisia',
+    ( 0 -154px )
+  ),
+  'to': (
+    'tonga',
+    ( -16px -154px )
+  ),
+  'tr': (
+    'turkey',
+    ( -32px -154px )
+  ),
+  'tt': (
+    'trinidad',
+    ( -48px -154px )
+  ),
+  'tv': (
+    'tuvalu',
+    ( -64px -154px )
+  ),
+  'tw': (
+    'taiwan',
+    ( -80px -154px )
+  ),
+  'tz': (
+    'tanzania',
+    ( -96px -154px )
+  ),
+  'ua': (
+    'ukraine',
+    ( -112px -154px )
+  ),
+  'ug': (
+    'uganda',
+    ( -128px -154px )
+  ),
+  'um': (
+    'us-minor-islands',
+    ( -144px -154px )
+  ),
+  'us': (
+    'united-states',
+    ( -160px -154px )
+  ),
+  'uy': (
+    'uruguay',
+    ( -176px -154px )
+  ),
+  'uz': (
+    'uzbekistan',
+    ( -192px -154px )
+  ),
+  'va': (
+    'vatican-city',
+    ( -208px -154px )
+  ),
+  'vc': (
+    'saint-vincent',
+    ( -224px -154px )
+  ),
+  've': (
+    'venezuela',
+    ( -240px -154px )
+  ),
+  'vg': (
+    'british-virgin-islands',
+    ( 0 -165px )
+  ),
+  'vi': (
+    'us-virgin-islands',
+    ( -16px -165px )
+  ),
+  'vn': (
+    'vietnam',
+    ( -32px -165px )
+  ),
+  'vu': (
+    'vanuatu',
+    ( -48px -165px )
+  ),
+  'wf': (
+    'wallis-and-futuna',
+    ( -80px -165px )
+  ),
+  'ws': (
+    'samoa',
+    ( -96px -165px )
+  ),
+  'xk': (
+    'kosovo',
+    ( -112px -165px )
+  ),
+  'ye': (
+    'yemen',
+    ( -128px -165px )
+  ),
+  'yt': (
+    'mayotte',
+    ( -144px -165px )
+  ),
+  'za': (
+    'south-africa',
+    ( -160px -165px )
+  ),
+  'zm': (
+    'zambia',
+    ( -192px -165px )
+  ),
+  'zw': (
+    'zimbabwe',
+    ( -208px -165px )
+  )
+) !default;
+
+/* PATHS */
+
+$flags-path-images: $path-images !default;
+
+/* SIZE */
+
+$flag-width: 16px !default;
+$flag-height: 11px !default;
+
+
+/* =========================================================================
  * Svelto - Flippable (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
