@@ -87,6 +87,7 @@ var components = [
   // 'helpers/rotation',
   // 'helpers/screen_reader',
   // 'helpers/selector',
+  // 'helpers/selector/quantity',
   // 'helpers/text',
   // 'helpers/unit',
   // 'helpers/visibility',
