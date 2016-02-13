@@ -19,17 +19,20 @@
 /// @param  {list | string} $selector - A single selector
 /// @return {string}                  - The last simple selector in $selector
 /// @example scss
-///   $result: _last-simple-selector(ul > li); // li
+///   $result: _last-simple-selector ( ul > li ); // li
 
-@function _last-simple-selector($selector) {
-    $parsed: selector-parse($selector);
+@function _last-simple-selector ( $selector ) {
 
-    @if length($parsed) > 1 {
-      @error '`#{$selector}` contains #{length($parsed)} selectors and the `_last-simple-selector()`function accepts only 1.';
-    }
-    $last-simple-selector: nth(nth($parsed, 1), -1);
+  $parsed: selector-parse( $selector );
 
-    @return $last-simple-selector;
+  @if length( $parsed ) > 1 {
+    @error '`#{$selector}` contains #{length($parsed)} selectors and the `_last-simple-selector()`function accepts only 1.';
+  }
+
+  $last-simple-selector: nth( nth( $parsed, 1 ), -1 );
+
+  @return $last-simple-selector;
+
 }
 
 // -----------------------------------------------------------------------------
@@ -42,16 +45,18 @@
 /// @param  {string} $last-selector        - The item's selector
 /// @return {list}                         - The final quantity query selector
 
-@function _build-quantity-selector($selector-append, $last-selector) {
-    $quantity-selector: ();
+@function _build-quantity-selector ( $selector-append, $last-selector ) {
 
-    @each $s in & {
-        $last-simple-selector: '~' + if($last-selector, $last-selector, _last-simple-selector($s));
-        $sel: selector-append($s, $selector-append);
-        $sel2: selector-nest($sel, $last-simple-selector);
-        $quantity-selector: append($quantity-selector, $sel, 'comma');
-        $quantity-selector: append($quantity-selector, $sel2 , 'comma');
-    }
+  $quantity-selector: ();
 
-    @return $quantity-selector;
+  @each $s in & {
+    $last-simple-selector: '~' + if( $last-selector, $last-selector, _last-simple-selector( $s ) );
+    $sel: selector-append( $s, $selector-append );
+    $sel2: selector-nest( $sel, $last-simple-selector );
+    $quantity-selector: append( $quantity-selector, $sel, 'comma' );
+    $quantity-selector: append( $quantity-selector, $sel2 , 'comma' );
+  }
+
+  @return $quantity-selector;
+
 }
