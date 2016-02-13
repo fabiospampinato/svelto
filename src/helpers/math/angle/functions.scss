@@ -1,0 +1,36 @@
+
+/* =========================================================================
+ * Svelto - Helpers - Math - Angle (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Implement 2 ways conversion, from unit to unit, so that we can use it in the trigonometric functions and support a wider range of parameters
+
+/* ANGLE */
+
+//SOURCE: http://thesassway.com/advanced/inverse-trigonometric-functions-with-sass
+
+@function angle-convert ( $angle, $unit ) {
+
+  $factors: (
+    rad: 1rad,
+    deg: 180deg / $PI,
+    grad: 200grad / $PI,
+    turn: .5turn / $PI
+  );
+
+  @if not unitless( $angle ) {
+    @error '`#{$angle}` must be unitless';
+    @return null;
+  }
+
+  @if not map-has-key( $factors, $unit ) {
+    @error 'Unit `#{$unit}` is not supported. Supported units: deg, rad, grad, turn';
+    @return null;
+  }
+
+  @return $angle * map-get( $factors, $unit );
+
+}
