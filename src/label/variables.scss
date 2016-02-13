@@ -15,13 +15,13 @@ $label-color-basic: false !default;
 
 $label-border-radius: $container-border-radius !default;
 
-$label-padding-vertical: .5em !default;
-$label-padding-horizontal: $label-padding-vertical * 2 !default;
+$label-padding-y: .5em !default;
+$label-padding-x: $label-padding-y * 2 !default;
 
 /* LABEL COMPACT */
 
-$label-compact-padding-vertical: $label-padding-vertical !default;
-$label-compact-padding-horizontal: $label-padding-vertical !default;
+$label-compact-padding-y: $label-padding-y !default;
+$label-compact-padding-x: $label-padding-y !default;
 
 /* LEFT / RIGHT */
 

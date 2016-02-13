@@ -17,12 +17,12 @@
   @extend .widget;
   @include color ( $container-color );
   border-radius: $container-border-radius;
-  padding: $container-padding-vertical $container-padding-horizontal;
+  padding: $container-padding-y $container-padding-x;
 
   /* COMPACT */
 
   &.compact {
-    padding: $container-compact-padding-vertical $container-compact-padding-horizontal;
+    padding: $container-compact-padding-y $container-compact-padding-x;
   }
 
   /* SCROLLABLE */

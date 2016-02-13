@@ -15,7 +15,7 @@ input.autogrow {
   /* OUTLINED */
 
   &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-    min-width: calc(#{( $input-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+    min-width: calc(#{( $input-padding-x * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
   }
 
   /* COMPACT */
@@ -23,7 +23,7 @@ input.autogrow {
   &.compact {
 
     &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-      min-width: calc(#{( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+      min-width: calc(#{( $input-compact-padding-x * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
     }
 
   }

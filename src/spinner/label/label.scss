@@ -17,7 +17,7 @@
   @include z-depth ( $spinner-label-z-depth );
   display: flex;
   border-radius: $spinner-label-border-radius !important;
-  padding: $spinner-label-padding-vertical $spinner-label-padding-horizontal;
+  padding: $spinner-label-padding-y $spinner-label-padding-x;
 
   /* SPINNER */
 

@@ -19,7 +19,7 @@
     @include color ( $divider-block-color );
     @include last-child-no-gutter ();
     display: inline-block;
-    padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
+    padding: $divider-block-y-padding $divider-block-x-padding;
     border-radius: 10000px 10000px;
   }
 

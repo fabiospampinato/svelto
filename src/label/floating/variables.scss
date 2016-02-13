@@ -13,13 +13,13 @@
 $label-floating-z-index: 150 !default;
 $label-floating-z-depth: 4 !default;
 
-$label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;
-$label-floating-padding-horizontal: $label-padding-vertical * 1.6 !default;
+$label-floating-padding-y: $label-padding-y * 1.6 !default;
+$label-floating-padding-x: $label-padding-y * 1.6 !default;
 
 $label-floating-right: 24px !default;
 $label-floating-bottom: 24px !default;
 
 /* COMPACT */
 
-$label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
-$label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
+$label-floating-compact-padding-y: $label-floating-padding-y / 2 !default;
+$label-floating-compact-padding-x: $label-floating-padding-x / 2 !default;

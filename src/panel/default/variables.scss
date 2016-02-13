@@ -8,8 +8,8 @@
 
 /* DEFAULT */
 
-$panel-default-horizontal-height: 7.5rem !default;
-$panel-default-closed-horizontal-spacing: $panel-default-horizontal-height !default;
+$panel-default-x-height: 7.5rem !default;
+$panel-default-closed-x-spacing: $panel-default-x-height !default;
 
-$panel-default-vertical-width: $panel-default-horizontal-height * 2 !default;
-$panel-default-closed-vertical-spacing: $panel-default-vertical-width !default;
+$panel-default-y-width: $panel-default-x-height * 2 !default;
+$panel-default-closed-y-spacing: $panel-default-y-width !default;

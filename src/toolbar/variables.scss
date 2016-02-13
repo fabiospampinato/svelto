@@ -8,10 +8,10 @@
 
 /* TOOLBAR */
 
-$toolbar-padding-vertical: .5em !default;
-$toolbar-padding-horizontal: 1em !default;
+$toolbar-padding-y: .5em !default;
+$toolbar-padding-x: 1em !default;
 
 /* VERTICAL */
 
-$toolbar-vertical-padding-vertical: $toolbar-padding-horizontal !default;
-$toolbar-vertical-padding-horizontal: $toolbar-padding-vertical !default;
+$toolbar-vertical-padding-y: $toolbar-padding-x !default;
+$toolbar-y-padding-x: $toolbar-padding-y !default;

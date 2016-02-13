@@ -32,7 +32,7 @@
 
     @include border-left-radius ( 0 );
     left: - ( $gutter + ( $label-ribbon-size * 2 ) );
-    padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
+    padding-left: calc(#{$label-padding-x} + #{$gutter});
 
     &:before {
       left: 0;
@@ -52,7 +52,7 @@
   &.ribbon-right {
 
     @include border-right-radius ( 0 );
-    padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
+    padding-right: calc(#{$label-padding-x} + #{$gutter});
 
     &:after {
       right: 0;

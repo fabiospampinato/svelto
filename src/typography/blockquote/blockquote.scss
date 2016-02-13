@@ -41,7 +41,7 @@ blockquote,
     @extend .widget;
     @include last-child-no-gutter ();
     background-color: $blockquote-footer-bg-color;
-    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
+    padding: $blockquote-footer-padding-y $blockquote-footer-padding-x;
     font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;
 
