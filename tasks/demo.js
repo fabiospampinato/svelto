@@ -8,19 +8,12 @@
 
 /* REQUIRE */
 
-var _     = require ( 'lodash' ),
-    argv  = require ( 'yargs' ).argv,
-    path  = require ( 'path' ),
-    spawn = require ( 'child_process' ).spawn,
-    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
-
-/* UTILITIES */
-
-var logBuffer = function ( buffer ) {
-
-  console.log ( buffer.toString ( 'utf8' ) );
-
-};
+var _      = require ( 'lodash' ),
+    argv   = require ( 'yargs' ).argv,
+    path   = require ( 'path' ),
+    spawn  = require ( 'child_process' ).spawn,
+    buffer = require ( './utilities/buffer' ),
+    gulp   = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* DEMO */
 
@@ -33,13 +26,13 @@ gulp.task ( 'demo', 'Serve the demos', ['watch'], function () {
 
   var meteor = spawn ( 'meteor', ['run', '--port', port], { cwd: demoPath } );
 
-  meteor.stdout.on ( 'data', logBuffer );
-  meteor.stderr.on ( 'data', logBuffer );
+  meteor.stdout.on ( 'data', buffer.log );
+  meteor.stderr.on ( 'data', buffer.log );
 
   var bs = spawn ( 'browser-sync', ['start', '--port', bsport, '--ui-port', uiport, '--proxy', 'localhost:' + port, '--no-open', '--files', '**/*.html, **/*.js, **/*.css'], { cwd: demoPath } );
 
-  bs.stdout.on ( 'data', logBuffer );
-  bs.stderr.on ( 'data', logBuffer );
+  bs.stdout.on ( 'data', buffer.log );
+  bs.stderr.on ( 'data', buffer.log );
 
 }, {
 
