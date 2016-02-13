@@ -7,6 +7,7 @@
  * =========================================================================
  * @require ../remote.js
  * @require ../../noty/noty.js
+ * @require ../../sizes/sizes.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
@@ -14,7 +15,7 @@
 //FIXME: Not well written
 //FIXME: Clicking an error/success noty doesn't close it
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Sizes ) {
 
   'use strict';
 
@@ -45,7 +46,7 @@
       classes: {
         spinner: {
           color: 'white',
-          size: 'small',
+          size: Sizes.small,
           css: '',
         }
       }
@@ -206,4 +207,4 @@
 
   Factory.init ( RemoteAction, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Sizes ));

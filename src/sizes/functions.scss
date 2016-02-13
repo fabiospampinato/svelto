@@ -8,9 +8,9 @@
 
 /* SIZE */
 
-@function size-from-icon-size ( $icon-size ) {
+// Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`
 
-  // Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`
+@function size-from-icon-size ( $icon-size ) {
 
   @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
 

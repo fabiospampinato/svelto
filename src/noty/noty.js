@@ -8,11 +8,12 @@
  * @require ../widget/widget.js
  * @require ../timer/timer.js
  * @require ../animations/animations.js
+ * @require ../sizes/sizes.js
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Sizes ) {
 
   'use strict';
 
@@ -58,7 +59,7 @@
                 '</div>' +
               '{% } %}' +
             '</div>',
-      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
+      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "' + Sizes.small + '")%} {%=(o.css || "")%}">' +
                 '{%#(o.text || "")%}' +
               '</div>'
     },
@@ -74,7 +75,7 @@
       /*
              : [{
                 color: 'white',
-                size: 'small',
+                size: Sizes.small,
                 css: '',
                 text: '',
                 onClick: _.noop // If it returns `false` the Noty won't be closed
@@ -411,4 +412,4 @@
 
   Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Sizes ));
