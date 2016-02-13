@@ -10,8 +10,9 @@
  * @require ../pointer/pointer.js
  * @require ../factory/factory.js
  * @require ../breakpoints/breakpoints.js
- * @require ../breakpoints/breakpoint.js
+ * @require ../breakpoint/breakpoint.js
  * @require ../keyboard/keyboard.js
+ * @require ../route/route.js
  * ========================================================================= */
 
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...

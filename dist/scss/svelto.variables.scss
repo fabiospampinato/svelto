@@ -1,5 +1,21 @@
 
 /* =========================================================================
+ * Svelto - Animations (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ANIMATIONS */
+
+$animation-xslow: .9s !default;
+$animation-slow: .5s !default;
+$animation-normal: .35s !default;
+$animation-fast: .15s !default;
+$animation-xfast: .075s !default;
+
+
+/* =========================================================================
  * Svelto - Autogrow - Input (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -35,6 +51,20 @@ $textarea-lines: 5 !default;
 /* INPUT AUTOGROW */
 
 $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor icon is displayed if empty
+
+
+/* =========================================================================
+ * Svelto - Paths (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PATHS */
+
+$path-base: '/' !default;
+$path-fonts: $path-base + 'fonts/' !default;
+$path-images: $path-base + 'images/' !default;
 
 
 /* =========================================================================
@@ -88,6 +118,87 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
 
 /* =========================================================================
+ * Svelto - Helpers - Map (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MAP */
+
+@function map-previous ( $map, $key ) {
+
+  $all: map-keys( $map );
+  $index: index( $all, $key );
+
+  @return if( $index > 1, nth( $all, $index - 1 ), null );
+
+}
+
+@function map-next ( $map, $key ) {
+
+  $all: map-keys( $map );
+  $index: index( $all, $key );
+
+  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
+
+}
+
+/* DEEP */
+
+//SOURCE: https://css-tricks.com/snippets/sass/deep-getset-maps
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+@function map-deep-set($map, $keys, $value) {
+  $maps: ($map,);
+  $result: null;
+
+  // If the last key is a map already
+  // Warn the user we will be overriding it with $value
+  @if type-of(nth($keys, -1)) == "map" {
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+  }
+
+  // If $keys is a single key
+  // Just merge and return
+  @if length($keys) == 1 {
+    @return map-merge($map, ($keys: $value));
+  }
+
+  // Loop from the first to the second to last key from $keys
+  // Store the associated map to this key in the $maps list
+  // If the key doesn't exist, throw an error
+  @for $i from 1 through length($keys) - 1 {
+    $current-key: nth($keys, $i);
+    $current-map: nth($maps, -1);
+    $current-get: map-get($current-map, $current-key);
+    @if $current-get == null {
+      @error "Key `#{$key}` doesn't exist at current level in map.";
+    }
+    $maps: append($maps, $current-get);
+  }
+
+  // Loop from the last map to the first one
+  // Merge it with the previous one
+  @for $i from length($maps) through 1 {
+    $current-map: nth($maps, $i);
+    $current-key: nth($keys, $i);
+    $current-val: if($i == length($maps), $value, $result);
+    $result: map-merge($current-map, ($current-key: $current-val));
+  }
+
+  // Return result
+  @return $result;
+}
+
+
+/* =========================================================================
  * Svelto - Helpers - Units (Fuctions)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -96,7 +207,7 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
 /* UNITS */
 
-@function strip-unit ( $num ) {
+@function unit-strip ( $num ) {
 
   @return $num / ( $num * 0 + 1 );
 
@@ -109,6 +220,7 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../helpers/map/functions.scss
  * @require ../helpers/units/functions.scss
  * ========================================================================= */
 
@@ -116,19 +228,13 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
 @function breakpoint-previous ( $breakpoint ) {
 
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index > 1, nth( $all, $index - 1 ), null );
+  @return map-previous( $breakpoints, $breakpoint );
 
 }
 
 @function breakpoint-next ( $breakpoint ) {
 
-  $all: map-keys( $breakpoints );
-  $index: index( $all, $breakpoint );
-
-  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
+  @return map-next( $breakpoints, $breakpoint );
 
 }
 
@@ -136,7 +242,7 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
   $value: map-get( $breakpoints, $breakpoint );
 
-  @return if( strip-unit( $value ) != 0, $value, null );
+  @return if( unit-strip( $value ) != 0, $value, null );
 
 }
 
@@ -148,9 +254,9 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
 
 }
 
-/* ALIASES */
+/* CLASSES */
 
-@function breakpoints-get-aliases () {
+@function breakpoints-get-classes () {
 
   //TODO: Write in a more general way, using a str-repeat and a map
 
@@ -168,17 +274,17 @@ $textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor ic
     'xxxxlarge': 'xxxxl'
   );
 
-  $aliases: ();
+  $classes: ();
 
   @each $breakpoint, $value in $breakpoints {
 
     $shorthand: map-get( $shorthands, $breakpoint );
 
-    $aliases: append( $aliases, if( $shorthand, $shorthand, $breakpoint ) );
+    $classes: append( $classes, if( $shorthand, $shorthand, $breakpoint ) );
 
   }
 
-  @return $aliases;
+  @return $classes;
 
 }
 
@@ -215,11 +321,9 @@ $breakpoints: (
 
 @include assert-ascending( $breakpoints, '`$breakpoints` values must be defined in ascending order' );
 
-/* ALIASES */
+/* CLASSES */
 
-// The alias will be used for generating CSS classes
-
-$breakpoints-aliases: breakpoints-get-aliases() !default;
+$breakpoints-classes: breakpoints-get-classes() !default;
 
 
 /* =========================================================================
@@ -248,20 +352,6 @@ $border-radius-small: .125em !default; // 2 / 16
 $border-radius-medium: .25em !default; // 4 / 16
 $border-radius-large: .375em !default; // 6 / 16
 
-/* TRANSITIONS */
-
-//TODO: Rename to animation-duration and move to the animations component
-
-$transition-duration-xslow: .9s !default;
-$transition-duration-slow: .5s !default;
-$transition-duration-normal: .35s !default;
-$transition-duration-fast: .15s !default;
-$transition-duration-xfast: .075s !default;
-
-/* PATHS */ //TODO: Not the appropriate file to be in, probably
-
-$basepath: '/' !default;
-
 
 /* =========================================================================
  * Svelto - Blurred (Variables)
@@ -269,13 +359,21 @@ $basepath: '/' !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../paths/variables.scss
  * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* BLURRED */
 
 $blurred-blur-amount: 3px !default;
-$blurred-transition-duration: $transition-duration-fast !default;
+
+/* PATHS */
+
+$blurred-path-images: $path-images !default;
+
+/* ANIMATION */
+
+$blurred-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -639,7 +737,7 @@ $color-inherit-link-hover: $color-inherit !default;
 
 $color-base-bg: $color-base !default;
 $color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
-$color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount * 2 ) !default;
+$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount * 2 ) !default;
 $color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
 $color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
@@ -688,7 +786,10 @@ $colors: (
 
 /* FONT FAMILY */
 
-$font-family: Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-base: $font-family-sans-serif !default;
 
 /* FONT SIZE */
 
@@ -707,12 +808,22 @@ $line-height-em: $line-height * 1em !default;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../typography/variables.scss
+ * @require ../paths/variables.scss
  * ========================================================================= */
 
 /* ICONS */
 
 $icon-best-size: 24px; // At this size the icons look the best
 $icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
+
+/* FONT */
+
+$icon-path-fonts: $path-fonts !default;
+$icon-fonts-local: true !default;
+
+/* PATHS */
+
+$icon-path-fonts: $path-fonts !default;
 
 
 /* =========================================================================
@@ -721,9 +832,9 @@ $icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale 
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
  * @require ../icon/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* CAROUSEL */
@@ -745,7 +856,7 @@ $carousel-indicator-opacity: .25 !default;
 $carousel-hover-indicator-opacity: .5 !default;
 $carousel-indicator-hover-opacity: 1 !default;
 
-$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
+$carousel-indicator-animation-duration: $animation-normal !default;
 
 /* INSET (PREVIOUS / NEXT) */
 
@@ -762,15 +873,15 @@ $carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-previous-next-transition-opacity-duration: $transition-duration-normal !default;
+$carousel-inset-previous-next-animation-opacity-duration: $animation-normal !default;
 
 /* SLIDE */
 
-$carousel-slide-transition-transform-duration: $transition-duration-normal !default;
+$carousel-slide-animation-transform-duration: $animation-normal !default;
 
 /* FADE */
 
-$carousel-fade-transition-opacity-duration: $transition-duration-normal !default;
+$carousel-fade-animation-opacity-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -779,7 +890,8 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
+ * @require ../paths/variables.scss
  * ========================================================================= */
 
 //FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
@@ -792,6 +904,10 @@ $dropdown-z-depth: 4 !default;
 $dropdown-max-width: 70vw !default;
 $dropdown-max-height: 60vh !default;
 
+/* PATHS */
+
+$dropdown-path-images: $path-images !default;
+
 /* TIP */
 
 $dropdown-tip-size: .75em !default;
@@ -803,9 +919,9 @@ $dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default; // Taken 
 $dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
 $dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$dropdown-transition-all-duration: $transition-duration-fast !default;
+$dropdown-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -827,11 +943,16 @@ $outline-style: solid !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
  * @require ../dropdown/variables.scss
  * @require ../outline/variables.scss
- * @require ../svelto/variables.scss
+ * @require ../paths/variables.scss
  * ========================================================================= */
+
+/* CHAT */
+
+$chat-path-images: $path-images !default;
 
 /* TIP */
 
@@ -850,9 +971,9 @@ $chat-msg-img-border-width: $outline-width !default;
 $chat-msg-img-border-color: $color-black !default;
 $chat-msg-img-opacity-hover: .8 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$chat-msg-img-transition-duration: $transition-duration-fast !default;
+$chat-msg-img-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -861,7 +982,7 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* CHECKBOX */
@@ -871,9 +992,9 @@ $checkbox-icon-off: 'check_box_outline_blank' !default;
 $checkbox-icon-on: 'check_box' !default;
 $checkbox-icon-on-color: 'secondary' !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
+$checkbox-icon-animation-opacity-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -940,8 +1061,8 @@ $SQRT2: 1.4142135624 !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* DATEPICKER */
@@ -973,9 +1094,9 @@ $datepicker-day-selected-z-depth: 2 !default;
 $datepicker-day-selected-color: $color-secondary-text !default;
 $datepicker-day-selected-circle-color: $color-secondary-bg !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$datepicker-transition-all-duration: $transition-duration-fast !default;
+$datepicker-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -1037,7 +1158,7 @@ $divider-text-opacity: .75 !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* DRAGGING */
@@ -1046,7 +1167,7 @@ $draggable-dragging-z-index: 1000000 !default;
 
 /* REVERTING */
 
-$draggable-reverting-transition-all-duration: $transition-duration-fast !default;
+$draggable-reverting-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -1067,12 +1188,12 @@ $embedded-ratios: ( 21 9 ) ( 16 9 ) ( 4 3 ) ( 1 1 ) !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* EXPANDER */
 
-$expander-transition-all-duration: $transition-duration-normal !default;
+$expander-animation-duration: $animation-normal !default; //TODO: Implement it
 
 
 /* =========================================================================
@@ -1081,14 +1202,16 @@ $expander-transition-all-duration: $transition-duration-normal !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* FLIPPABLE */
 
 $flippable-perspective: 1000px !default;
 
-$flippable-transition-flip-duration: $transition-duration-slow !default;
+/* ANIMATION */
+
+$flippable-animation-flip-duration: $animation-slow !default;
 
 
 /* =========================================================================
@@ -1260,7 +1383,7 @@ $highlight-size: 2px !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* IMAGE */
@@ -1272,9 +1395,9 @@ $image-color: 'inherit' !default;
 $image-caption-color: 'black' !default;
 $image-caption-z-index: 30 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$image-caption-transition-opacity-duration: $transition-duration-fast !default;
+$image-caption-animation-opacity-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -1401,7 +1524,7 @@ $layout-header-fixed-z-index: 200 !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* MODAL */
@@ -1420,9 +1543,9 @@ $modal-max-height: 90vh !default;
 
 $modal-background-color: rgba(0, 0, 0, .5) !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$modal-transition-all-duration: $transition-duration-normal !default;
+$modal-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -1446,8 +1569,8 @@ $noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../container/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* NOTY */
@@ -1464,9 +1587,9 @@ $noty-border-radius: $container-border-radius !default;
 $noty-img-size: 38px !default;
 $noty-img-rounded: false !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$noty-transition-all-duration: $transition-duration-normal !default;
+$noty-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -1475,16 +1598,16 @@ $noty-transition-all-duration: $transition-duration-normal !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* WIDGET */
 
 $widget-disabled-opacity: .5 !default;
 
-/* TRANSITION */
+/* ANIMATION */
 
-$widget-transition-opacity-duration: $transition-duration-fast !default;
+$widget-animation-opacity-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -1501,7 +1624,7 @@ $widget-transition-opacity-duration: $transition-duration-fast !default;
 
 $overlay-z-index: 100 !default;
 
-$overlay-transition-opacity-duration: $widget-transition-opacity-duration !default;
+$overlay-transition-opacity-duration: $widget-animation-opacity-duration !default;
 
 /* SIBLINGS */
 
@@ -1553,7 +1676,7 @@ $panel-slim-closed-vertical-spacing: $panel-slim-vertical-width !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* PANEL */
@@ -1561,7 +1684,7 @@ $panel-slim-closed-vertical-spacing: $panel-slim-vertical-width !default;
 $panel-z-index: 400 !default;
 $panel-z-depth: 5 !default;
 
-$panel-transition-transform-duration: $transition-duration-normal !default;
+$panel-animation-transform-duration: $animation-normal !default;
 
 /* PINNED */
 
@@ -1571,7 +1694,7 @@ $panel-pinned-z-depth: $panel-z-depth !default;
 
 $panel-background-color: rgba(0, 0, 0, .5) !default;
 
-$panel-background-transition-opacity-duration: $transition-duration-normal !default;
+$panel-background-animation-opacity-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -1667,7 +1790,7 @@ $progressbar-stripes-transition-move-duration: .5s !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* PROGRESSBAR */
@@ -1694,9 +1817,9 @@ $progressbar-slim-height: .25em !default;
 
 $progressbar-slim-label-font-size: 0 !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$progressbar-transition-all-duration: $transition-duration-fast !default;
+$progressbar-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -1718,16 +1841,16 @@ $radio-icon-on: 'radio_button_checked' !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* RAISABLE */
 
 $raisable-raise-amount: 2 !default;
 
-/* TRANSIITION */
+/* ANIMATION */
 
-$raisable-transition-box-shadow-duration: $transition-duration-normal !default;
+$raisable-animation-box-shadow-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -1749,15 +1872,17 @@ $rater-star-active-color: $color-secondary !default;
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../animations/variables.scss
  * ========================================================================= */
 
 /* REMOTE MODAL PLACEHOLDER */
 
 $remote-modal-placeholder-size: 9.25rem;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$remote-modal-transition-all-duration: $transition-duration-normal !default;
+$remote-modal-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -1784,8 +1909,8 @@ $body-color: 'base' !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../colors/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* RIPPLE */
@@ -1798,11 +1923,11 @@ $ripple-transparentize-amount: .8 !default;
 
 $ripple-circle-z-index: 50 !default;
 
-/* TRANSITIONS */
+/* ANIMATION */
 
-$ripple-transition-timing-function: cubic-bezier(0.25, .8, .25, 1) !default; // Taken from Angular Material
-$ripple-transition-show-duration: $transition-duration-xslow !default;
-$ripple-transition-hide-duration: $transition-duration-xslow !default;
+$ripple-transition-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material
+$ripple-animation-show-duration: $animation-xslow !default;
+$ripple-animation-hide-duration: $animation-xslow !default;
 
 
 /* =========================================================================
@@ -1901,13 +2026,13 @@ $triangle-size: $shape-size !default;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* SIZES */
+/* SIZE */
 
-@function get_size ( $icon_size ) {
+@function size-from-icon-size ( $icon-size ) {
 
-  // Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+  // Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`
 
-  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
+  @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
 
 }
 
@@ -1945,17 +2070,17 @@ $size-xxxxlarge-icon: 60px !default;
 
 // The `RECOMMENDED` sizes are those where the icons look better
 
-$size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
-$size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
-$size-xxsmall: get_size( $size-xxsmall-icon ) !default;
-$size-xsmall: get_size( $size-xsmall-icon ) !default; // RECOMMENDED
-$size-small: get_size( $size-small-icon ) !default;
-$size-medium: get_size( $size-medium-icon ) !default; // RECOMMENDED
-$size-large: get_size( $size-large-icon ) !default;
-$size-xlarge: get_size( $size-xlarge-icon ) !default; // RECOMMENDED
-$size-xxlarge: get_size( $size-xxlarge-icon ) !default;
-$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; // RECOMMENDED
-$size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
+$size-xxxxsmall: size-from-icon-size( $size-xxxxsmall-icon ) !default;
+$size-xxxsmall: size-from-icon-size( $size-xxxsmall-icon ) !default;
+$size-xxsmall: size-from-icon-size( $size-xxsmall-icon ) !default;
+$size-xsmall: size-from-icon-size( $size-xsmall-icon ) !default; // RECOMMENDED
+$size-small: size-from-icon-size( $size-small-icon ) !default;
+$size-medium: size-from-icon-size( $size-medium-icon ) !default; // RECOMMENDED
+$size-large: size-from-icon-size( $size-large-icon ) !default;
+$size-xlarge: size-from-icon-size( $size-xlarge-icon ) !default; // RECOMMENDED
+$size-xxlarge: size-from-icon-size( $size-xxlarge-icon ) !default;
+$size-xxxlarge: size-from-icon-size( $size-xxxlarge-icon ) !default; // RECOMMENDED
+$size-xxxxlarge: size-from-icon-size( $size-xxxxlarge-icon ) !default;
 
 /* SIZES */
 
@@ -1975,11 +2100,9 @@ $sizes: (
 
 @include assert-ascending( $sizes, '`$sizes` values must be defined in ascending order' );
 
-/* ALIASES */
+/* CLASSES */
 
-// The alias will be used for generating CSS classes
-
-$sizes-aliases: map-keys( $sizes ) !default;
+$sizes-classes: map-keys( $sizes ) !default;
 
 
 /* =========================================================================
@@ -1988,8 +2111,8 @@ $sizes-aliases: map-keys( $sizes ) !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../constants/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* SWITCH */
@@ -2022,9 +2145,9 @@ $switch-handler-before-scale-active: $GOLDEN-RATIO !default;
 
 $switch-handler-before-active-opacity: .25 !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$switch-transition-all-duration: $transition-duration-fast !default;
+$switch-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -2033,10 +2156,10 @@ $switch-transition-all-duration: $transition-duration-fast !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../animations/variables.scss
  * @require ../label/variables.scss
  * @require ../switch/variables.scss
  * @require ../typography/variables.scss
- * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* SLIDER */
@@ -2078,9 +2201,9 @@ $slider-handler-active-transform-scale: 1.35 !default;
 
 $slider-handler-label-font-size: .6em !default;
 
-/* OTHERS */
+/* ANIMATION */
 
-$slider-transition-all-duration: $transition-duration-fast !default;
+$slider-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -2111,12 +2234,12 @@ $table-th-sortable-icon-right: .15em !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../svelto/variables.scss
+ * @require ../animations/variables.scss
  * ========================================================================= */
 
 /* SPINNER OVERLAY */
 
-$spinner-overlay-transition-transform-duration: $transition-duration-normal !default;
+$spinner-overlay-animation-transform-duration: $animation-normal !default;
 
 
 /* =========================================================================
@@ -2485,13 +2608,16 @@ $kbd-padding: .2em .3em !default;
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../svelto/variables.scss
+ * @require ../../animations/variables.scss
  * ========================================================================= */
 
 /* LINK */
 
 $a-underline-height: 1px !default;
-$a-underline-transition-duration: $transition-duration-fast !default;
+
+/* ANIMATION */
+
+$a-underline-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Autogrow - Textarea
+ * Svelto - Autogrow - Input
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,9 +8,7 @@
  * @require ../../widget/widget.js
  * ========================================================================= */
 
-// It supports only `box-sizing: border-box` textareas
-
-//TODO: Measure the needed height using canvas, if possible, it would make it super fast
+// It supports only `box-sizing: border-box` inputs
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -19,9 +17,9 @@
   /* CONFIG */
 
   let config = {
-    name: 'autogrowTextarea',
+    name: 'autogrowInput',
     plugin: true,
-    selector: 'textarea.autogrow',
+    selector: 'input.autogrow',
     options: {
       callbacks: {
         change: _.noop
@@ -29,23 +27,17 @@
     }
   };
 
-  /* AUTOGROW TEXTAREA */
+  /* AUTOGROW INPUT */
 
-  class AutogrowTextarea extends Widgets.Widget {
+  class AutogrowInput extends Widgets.Widget {
 
     /* SPECIAL */
 
     _variables () {
 
-      this.$textarea = this.$element;
+      this.$input = this.$element;
 
-      this.$tempTextarea = $('<textarea>').css ({
-                              'position': 'fixed',
-                              'visibility': 'hidden',
-                              'padding': 0,
-                              'min-height': 0,
-                              'height': 0
-                            });
+      this.ctx = document.createElement ( 'canvas' ).getContext ( '2d' );
 
     }
 
@@ -63,15 +55,11 @@
 
     /* PRIVATE */
 
-    _getNeededHeight () {
+    _getNeededWidth () {
 
-      this.$tempTextarea.css ( 'font', this.$textarea.css ( 'font' ) ).val ( this.$textarea.val () ).appendTo ( this.$layout );
+      this.ctx.font = this.$input.css ( 'font' );
 
-      let height = this.$tempTextarea[0].scrollHeight;
-
-      this.$tempTextarea.detach ();
-
-      return height;
+      return this.ctx.measureText ( this.$input.val () ).width;
 
     }
 
@@ -87,13 +75,13 @@
 
     _update () {
 
-      let height = this._getNeededHeight ();
+      let width = this._getNeededWidth ();
 
-      if ( height === this._prevHeight ) return;
+      if ( width === this._prevWidth ) return;
 
-      this.$textarea.height ( height );
+      this._prevWidth = width;
 
-      this._prevHeight = height;
+      this.$input.width ( width );
 
       this._trigger ( 'change' );
 
@@ -103,6 +91,6 @@
 
   /* FACTORY */
 
-  Factory.init ( AutogrowTextarea, config, Widgets );
+  Factory.init ( AutogrowInput, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

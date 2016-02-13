@@ -500,7 +500,7 @@ html {
 /* NO OUTLINE ON FOCUS */
 
 *:focus {
-  outline: none;
+  outline: none !important;
 }
 
 
@@ -520,6 +520,40 @@ html {
 
 
 /* =========================================================================
+ * Svelto - Reset (Touch Action)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOUCH ACTION */
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+
+// Avoid 300ms click delay on touch devices that support the `touch-action` CSS property.
+//
+// In particular, unlike most other browsers, IE11+Edge on Windows 10 on touch devices and IE Mobile 10-11
+// DON'T remove the click delay when `<meta name="viewport" content="width=device-width">` is present.
+// However, they DO support removing the click delay via `touch-action: manipulation`.
+// See:
+// * http://v4-alpha.getbootstrap.com/content/reboot/#click-delay-optimization-for-touch
+// * http://caniuse.com/#feat=css-touch-action
+// * http://patrickhlauke.github.io/touch/tests/results/#suppressing-300ms-delay
+
+a,
+area,
+button,
+.button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
+
+/* =========================================================================
  * Svelto - Reset
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -529,6 +563,7 @@ html {
  * @require box_sizing.scss
  * @require no_outline.scss
  * @require selection.scss
+ * @require touch_action.scss
  * ========================================================================= */
 
 /* HTML */
@@ -544,7 +579,7 @@ html {
 
 body {
   @include color ( $body-color );
-  font-family: $font-family;
+  font-family: $font-family-base;
   font-size: 1em;
   line-height: $line-height;
 }
@@ -566,7 +601,7 @@ body {
   @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
-  transition: opacity $widget-transition-opacity-duration;
+  transition: opacity $widget-animation-opacity-duration;
 
   &.disabled {
 
@@ -968,13 +1003,13 @@ textarea.autogrow {
 /* BLURRED */
 
 %blurred { //FIXME: Not working on Edge and IE
-  filter: url('#{$basepath}blurred.svg#blur') !important;
+  filter: url(#{$blurred-path-images}blurred.svg#blur) !important;
   filter: blur($blurred-blur-amount) !important;
 }
 
 .blurred {
   @extend %blurred;
-  transition: filter $blurred-transition-duration !important;
+  transition: filter $blurred-animation-duration !important;
   //TODO: If mobile remove the transition, it greatly improves performance
 }
 
@@ -1049,7 +1084,7 @@ textarea.autogrow {
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
+  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
 
   /* UP */
 
@@ -1778,12 +1813,30 @@ button {
 
   @each $size, $font-size in $sizes {
 
-    $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
+    $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
     &.#{$alias} {
       font-size: ( $font-size * $icon-scale-amount ) !important;
     }
 
+  }
+
+}
+
+/* FONTS */
+
+@if $icon-fonts-local {
+
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$icon-path-fonts}MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2) format('woff2'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff) format('woff'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.ttf) format('truetype');
   }
 
 }
@@ -1868,7 +1921,7 @@ i.icon {
     cursor: pointer;
     opacity: $carousel-indicator-opacity;
     transition-property: background-color, opacity;
-    transition-duration: $carousel-indicator-transition-all-duration;
+    transition-duration: $carousel-indicator-animation-duration;
 
     /* HOVER */
 
@@ -1929,7 +1982,7 @@ i.icon {
       /* ITEM */
 
       > * {
-        transition: transform $carousel-slide-transition-transform-duration;
+        transition: transform $carousel-slide-animation-transform-duration;
         transform: translateX(-100%);
       }
 
@@ -1969,7 +2022,7 @@ i.icon {
       /* ITEM */
 
       > * {
-        transition: transform $carousel-slide-transition-transform-duration;
+        transition: transform $carousel-slide-animation-transform-duration;
         transform: translateY(-100%);
       }
 
@@ -2010,7 +2063,7 @@ i.icon {
 
       > * {
         opacity: 0;
-        transition: opacity $carousel-fade-transition-opacity-duration;
+        transition: opacity $carousel-fade-animation-opacity-duration;
       }
 
       /* PREV */
@@ -2115,7 +2168,7 @@ i.icon {
         margin-bottom: 0;
         color: $carousel-inset-previous-next-color;
         opacity: $carousel-inset-previous-next-opacity;
-        transition: opacity $carousel-inset-previous-next-transition-opacity-duration;
+        transition: opacity $carousel-inset-previous-next-animation-opacity-duration;
       }
 
     }
@@ -2218,7 +2271,7 @@ i.icon {
     overflow: hidden;
 
     img {
-      transition: opacity $chat-msg-img-transition-duration;
+      transition: opacity $chat-msg-img-animation-duration;
       width: $chat-msg-img-size;
       height: $chat-msg-img-size;
       border-radius: 100%;
@@ -2367,7 +2420,7 @@ i.icon {
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); // The polygon is not supported on Firefox
+        clip-path: url(#{$chat-path-images}chat-clips.svg#clip-right); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
@@ -2454,7 +2507,7 @@ i.icon {
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); // The polygon is not supported on Firefox
+        clip-path: url(#{$chat-path-images}chat-clips.svg#clip-left); // The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
       }
 
@@ -2598,7 +2651,7 @@ i.icon {
     &:after {
       @extend %icon;
       @include fill-absolute ();
-      transition: opacity $checkbox-icon-transition-opacity-duration;
+      transition: opacity $checkbox-icon-animation-opacity-duration;
       margin-bottom: 0 !important;
     }
 
@@ -3006,7 +3059,7 @@ i.icon {
         &.datepicker-day-selected {
 
           color: $datepicker-day-selected-color;
-          transition: color $datepicker-transition-all-duration;
+          transition: color $datepicker-animation-duration;
 
           /* BEFORE */
 
@@ -3017,7 +3070,7 @@ i.icon {
           &:before {
             background-color: $datepicker-day-selected-circle-color;
             transition-property: box-shadow, background-color;
-            transition-duration: $datepicker-transition-all-duration;
+            transition-duration: $datepicker-animation-duration;
           }
 
         }
@@ -3264,7 +3317,7 @@ hr {
 /* REVERTING */
 
 .draggable-reverting {
-  transition: transform $draggable-reverting-transition-all-duration !important;
+  transition: transform $draggable-reverting-animation-duration !important;
 }
 
 
@@ -3287,7 +3340,7 @@ hr {
   left: 0;
   max-width: $dropdown-max-width;
   margin-bottom: 0;
-  transition: opacity $dropdown-transition-all-duration;
+  transition: opacity $dropdown-animation-duration;
 
   /* NOT CONTAINER */
 
@@ -3299,12 +3352,12 @@ hr {
 
   &.moving {
 
-    transition: transform $dropdown-transition-all-duration;
+    transition: transform $dropdown-animation-duration;
 
     /* TIP */
 
     &:before {
-      transition: transform $dropdown-transition-all-duration;
+      transition: transform $dropdown-animation-duration;
     }
 
   }
@@ -3388,7 +3441,7 @@ hr {
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); // The polygon is not supported on Firefox
+      clip-path: url(#{$dropdown-path-images}dropdown-clips.svg#clip-top); // The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -3411,7 +3464,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); // The polygon is not supported on Firefox
+      clip-path: url(#{$dropdown-path-images}dropdown-clips.svg#clip-bottom); // The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -3434,7 +3487,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); // The polygon is not supported on Firefox
+      clip-path: url(#{$dropdown-path-images}dropdown-clips.svg#clip-left); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -3457,7 +3510,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); // The polygon is not supported on Firefox
+      clip-path: url(#{$dropdown-path-images}dropdown-clips.svg#clip-right); // The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }
@@ -3587,7 +3640,7 @@ _:-ms-input-placeholder, :root .dropdown.card {
     @include fill ();
     @include last-child-no-gutter ();
     backface-visibility: hidden;
-    transition: transform $flippable-transition-flip-duration;
+    transition: transform $flippable-animation-flip-duration;
     border-radius: inherit;
 
     > :only-child {
@@ -3760,6 +3813,8 @@ fieldset {
  * @require ../reset/reset.scss
  * ========================================================================= */
 
+//TODO: Add `legend` support
+
 /* DEFAULT */
 
 form {
@@ -3787,7 +3842,7 @@ form {
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-aliases, index( map-keys( $breakpoints ), $breakpoint ) );
+  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
 
   @include media-breakpoint-up ( $breakpoint ) {
 
@@ -3938,6 +3993,20 @@ header {
 
 
 /* =========================================================================
+ * Svelto - Helpers - Clearfix
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CLEARFIX */
+
+.clearfix {
+  @include clearfix ();
+}
+
+
+/* =========================================================================
  * Svelto - Helpers - Display
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -3950,7 +4019,8 @@ header {
   display: block !important;
 }
 
-.hidden {
+.hidden,
+[hidden] { //SOURCE: PureCSS
   display: none !important;
 }
 
@@ -3970,6 +4040,33 @@ header {
 
 .no-grow {
   flex-grow: 0 !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Flexbox - Order
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ORDER */
+
+@each $breakpoint, $value in $breakpoints {
+
+  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
+
+  @include media-breakpoint-up ( $breakpoint ) {
+
+    .flex-#{$alias}-first {
+      order: -1 !important;
+    }
+
+    .flex-#{$alias}-last {
+      order: 1000000 !important;
+    }
+  }
+
 }
 
 
@@ -4172,6 +4269,26 @@ header {
 
 
 /* =========================================================================
+ * Svelto - Helpers - Screen Reader
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SCREEN READER */
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+
+.screen-reader-only {
+  @include screen-reader-only ();
+}
+
+.screen-reader-only-focusable {
+  @include screen-reader-only-focusable ();
+}
+
+
+/* =========================================================================
  * Svelto - Helpers - Text
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -4221,11 +4338,16 @@ header {
 }
 
 .text-ellipsis,
+.text-truncate,
 .truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%; // Fixes a bug in IE 10
+}
+
+.text-hide {
+  @include text-hide ();
 }
 
 
@@ -4375,6 +4497,8 @@ header {
  * @require ../container/container.scss
  * ========================================================================= */
 
+//TODO: Add `figure` support
+
 /* DEFAULT */
 
 img {
@@ -4440,7 +4564,7 @@ span > img {
 
       &.on-hover {
         opacity: 0;
-        transition: opacity $image-caption-transition-opacity-duration;
+        transition: opacity $image-caption-animation-opacity-duration;
       }
 
       &:not(.top) {
@@ -4865,7 +4989,7 @@ body.layout {
   position: fixed;
   z-index: $modal-z-index;
   transition-property: transform, opacity;
-  transition-duration: $modal-transition-all-duration;
+  transition-duration: $modal-animation-duration;
   margin: 0;
   cursor: pointer;
   overflow: visible !important; // Since we need the pseudo element to be showed
@@ -5209,7 +5333,7 @@ table > :not(tfoot) td .multiple:only-child { // Here the `multiple` shouldn't t
   border-radius: $noty-border-radius;
   pointer-events: auto;
   transition-property: opacity, font-size, padding, margin;
-  transition-duration: $noty-transition-all-duration;
+  transition-duration: $noty-animation-duration;
   transform: translateZ(0);
 
   /* INFOBAR */
@@ -5740,7 +5864,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
   z-index: $panel-z-index;
   margin-bottom: 0;
   border-radius: 0;
-  transition: transform $panel-transition-transform-duration;
+  transition: transform $panel-animation-transform-duration;
   overflow: visible !important; // Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
@@ -5833,7 +5957,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
     z-index: -1;
     cursor: pointer;
     background-color: $panel-background-color;
-    transition: opacity $panel-background-transition-opacity-duration;
+    transition: opacity $panel-background-animation-opacity-duration;
   }
 
 }
@@ -5844,11 +5968,11 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 .layout {
 
-  transition: padding $panel-transition-transform-duration;
+  transition: padding $panel-animation-transform-duration;
 
   > .layout-header.fixed {
     transition-property: top, right, bottom, left;
-    transition-duration: $panel-transition-transform-duration;
+    transition-duration: $panel-animation-transform-duration;
   }
 
 }
@@ -6267,7 +6391,7 @@ code[class*='language-'] {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: min-width $progressbar-transition-all-duration;
+    transition: min-width $progressbar-animation-duration;
   }
 
   /* INVALID */
@@ -6484,7 +6608,7 @@ code[class*='language-'] {
 
 .raisable {
 
-  transition: box-shadow $raisable-transition-box-shadow-duration;
+  transition: box-shadow $raisable-animation-box-shadow-duration;
 
   &:not(.disabled) {
 
@@ -6659,12 +6783,12 @@ code[class*='language-'] {
 
     > * {
 
-      transition: color $remote-modal-transition-all-duration;
+      transition: color $remote-modal-animation-duration;
 
       /* CHILDREN */
 
       > * {
-        transition: opacity $remote-modal-transition-all-duration;
+        transition: opacity $remote-modal-animation-duration;
       }
 
     }
@@ -6731,7 +6855,7 @@ code[class*='language-'] {
       opacity: 0;
       transform: scale(0);
       transition-property: opacity, transform;
-      transition-duration: $ripple-transition-show-duration;
+      transition-duration: $ripple-animation-show-duration;
       transition-timing-function: $ripple-transition-timing-function;
     }
 
@@ -7100,7 +7224,7 @@ table.selectable {
 
 @each $size, $font-size in $sizes {
 
-  $alias: nth( $sizes-aliases, index( map-keys( $sizes ), $size ) );
+  $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
   .#{$alias} {
     @include size ( $size, !important );
@@ -7216,7 +7340,7 @@ table.selectable {
     right: 100%;
     width: 100%;
     height: 100%;
-    transition: background-color $slider-transition-all-duration;
+    transition: background-color $slider-animation-duration;
   }
 
   /* HANDLER WRAPPER */
@@ -7237,7 +7361,7 @@ table.selectable {
     width: $slider-handler-size;
     height: $slider-handler-size;
     transition-property: transform, background-color;
-    transition-duration: $slider-transition-all-duration;
+    transition-duration: $slider-animation-duration;
     border-radius: $slider-handler-border-radius;
     text-align: center;
 
@@ -7247,7 +7371,7 @@ table.selectable {
       content: '';
       transition-property: opacity, transform;
       transform: scale($switch-handler-before-scale-inactive);
-      transition-duration: $slider-transition-all-duration;
+      transition-duration: $slider-animation-duration;
       opacity: 0;
       border-radius: $slider-handler-border-radius;
       background-color: inherit;
@@ -7263,7 +7387,7 @@ table.selectable {
     vertical-align: middle;
     font-size: $slider-handler-label-font-size;
     transition-property: opacity, transform;
-    transition-duration: $slider-transition-all-duration;
+    transition-duration: $slider-animation-duration;
     transform: scale(0);
     opacity: 0;
   }
@@ -7476,7 +7600,7 @@ table.sortable {
   .spinner-label {
     margin-bottom: 0;
     transform: scale(0);
-    transition: transform $spinner-overlay-transition-transform-duration;
+    transition: transform $spinner-overlay-animation-transform-duration;
   }
 
   /* CLOSE */
@@ -7753,7 +7877,7 @@ svg.spinner {
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
-    transition: background-color $switch-transition-all-duration;
+    transition: background-color $switch-animation-duration;
   }
 
   /* HANDLER */
@@ -7770,7 +7894,7 @@ svg.spinner {
     height: $switch-handler-size;
     border-radius: $switch-handler-size;
     transition-property: background-color, transform;
-    transition-duration: $switch-transition-all-duration;
+    transition-duration: $switch-animation-duration;
 
     /* BEFORE */
 
@@ -7783,7 +7907,7 @@ svg.spinner {
       opacity: 0;
       transform: scale($switch-handler-before-scale-inactive);
       transition-property: opacity, transform, background-color;
-      transition-duration: $switch-transition-all-duration;
+      transition-duration: $switch-animation-duration;
     }
 
     /* AFTER */
@@ -7797,7 +7921,7 @@ svg.spinner {
       line-height: $switch-handler-icon-size;
       text-align: center;
       transition-property: color;
-      transition-duration: $switch-transition-all-duration;
+      transition-duration: $switch-animation-duration;
     }
 
     /* DRAGGING */
@@ -8717,6 +8841,8 @@ table.table.striped tbody tr {
  * @require ../reset/reset.scss
  * ========================================================================= */
 
+//TODO: Add `address` support
+
 /* SPAN / A */ //FIXME: Ugly fix for making them widget-like when they are not in a paragraph
 
 span,
@@ -8773,7 +8899,8 @@ abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe e
 
 /* BLOCKQUOTE */
 
-blockquote {
+blockquote,
+.blockquote {
 
   @extend .widget;
   @include last-child-no-gutter ();
@@ -8796,7 +8923,8 @@ blockquote {
 
   /* FOOTER */
 
-  > footer {
+  > footer,
+  > .blockquote-footer {
 
     @extend .widget;
     @include last-child-no-gutter ();
@@ -8825,11 +8953,14 @@ blockquote {
  * @require ../typography.scss
  * ========================================================================= */
 
+//TODO: Add support for `samp`
+
 /* CODE */
 
 code,
 section,
 pre {
+  font-family: $font-family-monospace;
   display: block;
   overflow-x: auto;
   margin: 0;
@@ -8841,7 +8972,7 @@ pre {
 
 
 /* =========================================================================
- * Svelto - Typography - Headers
+ * Svelto - Typography - Headings
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8850,44 +8981,59 @@ pre {
  * @require ../typography.scss
  * ========================================================================= */
 
-/* HEADERS */
+/* HEADINGS */
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+
+  //TODO: Add font-family, font-weight, line-height
 
   margin: 0 0 $gutter;
 
-  > small {
+  > small,
+  > .small {
     opacity: $header-small-opacity;
   }
 
 }
 
-h1 {
+h1,
+.h1 {
   @include size ( $h1-size );
 }
 
-h2 {
+h2,
+.h2 {
   @include size ( $h2-size );
 }
 
-h3 {
+h3,
+.h3 {
   @include size ( $h3-size );
 }
 
-h4 {
+h4,
+.h4 {
   @include size ( $h4-size );
 }
 
-h5 {
+h5,
+.h5 {
   @include size ( $h5-size );
 }
 
-h6 {
+h6,
+.h6 {
   @include size ( $h6-size );
 }
 
@@ -8902,10 +9048,13 @@ h6 {
  * @require ../typography.scss
  * ========================================================================= */
 
+//TODO: MAYBE add support for nested `kbd`
+
 /* KBD */
 
 kbd {
   @include color ( $kbd-color );
+  font-family: $font-family-monospace;
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;
   display: inline-block;
@@ -8948,7 +9097,7 @@ span > a, // Same reason as `p > a`
     @extend %highlight-after;
     border-bottom-width: $a-underline-height;
     transition-property: opacity, transform;
-    transition-duration: $a-underline-transition-duration;
+    transition-duration: $a-underline-animation-duration;
   }
 
   &:not(:hover):after { //FIXME: Does it work?
@@ -9056,7 +9205,8 @@ p {
 
 /* SMALL */
 
-small {
+small,
+.small {
   font-size: $small-font-size;
 }
 

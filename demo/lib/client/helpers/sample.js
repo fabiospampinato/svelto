@@ -7,13 +7,13 @@ SampleHelpers.registerAs ( 'sample' );
 
 SampleHelpers.define ( 'image', function ( classes ) {
 
-  return '<img src="/sample.png" class="' + ( classes || '' ) + '"/>';
+  return '<img src="/sample/sample.png" class="' + ( classes || '' ) + '"/>';
 
 });
 
 SampleHelpers.define ( 'imageWide', function () {
 
-  return '<img src="/sample-wide.jpg"';
+  return '<img src="/sample/sample-wide.jpg"';
 
 });
 

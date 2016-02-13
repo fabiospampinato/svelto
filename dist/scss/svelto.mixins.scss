@@ -86,9 +86,9 @@
 
 /* COLOR */
 
-@mixin color ( $color_name, $basic: true, $extra: '' ) {
+@mixin color ( $color-name, $basic: true, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
   $bg-hover: nth($colors, 2);
@@ -143,7 +143,7 @@
 
   }
 
-  @if $color_name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color-name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
     p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
     span > a { // Same as `p > a`
@@ -166,9 +166,9 @@
 
 /* TEXT */
 
-@mixin color-text ( $color_name, $extra: '' ) {
+@mixin color-text ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
 
@@ -178,9 +178,9 @@
 
 /* LINK */
 
-@mixin color-link ( $color_name, $extra: '' ) {
+@mixin color-link ( $color-name, $extra: '' ) {
 
-  $colors: map-get($colors, $color_name);
+  $colors: map-get($colors, $color-name);
 
   $bg: nth($colors, 1);
   $bg-hover: nth($colors, 2);
@@ -452,7 +452,7 @@
 
 
 /* =========================================================================
- * Svelto - Helpers - Float (Mixins)
+ * Svelto - Helpers - Clearfix (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -561,36 +561,6 @@
 
 
 /* =========================================================================
- * Svelto - Helpers - Image (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* IMAGE */
-
-@mixin image-retina ( $image-width, $image-height, $file-1x, $file-2x, $file-3x: false ) {
-
-  background-image: url('#{$basepath} #{$file-1x}');
-
-  @include hdpi ( 2 ) {
-    background-image: url('#{$basepath} #{$file-2x}');
-    background-size: $image-width $image-height;
-  }
-
-  @if $file-3x != false {
-
-    @include hdpi ( 3 ) {
-      background-image: url('#{$basepath} #{$file-2x}');
-      background-size: $image-width $image-height;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Helpers - Media Queries (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -653,16 +623,55 @@
 
 @mixin hdpi ( $ratio: 2 ) {
 
-  //FIXME: Do we need borwsers prefixes here?
-  // `min--moz-device-pixel-ratio` is not a typo, at least not on our side //TODO: Has it been fixed?
+  @if ( $ratio == 1 ) {
 
-  @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
-         only screen and (    min--moz-device-pixel-ratio: $ratio ),
-         only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
-         only screen and (         min-device-pixel-ratio: #{$ratio} ),
-         only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
-         only screen and (                 min-resolution: #{$ratio}dppx ) {
     @content;
+
+  } @else {
+
+    //FIXME: Do we need borwsers prefixes here?
+    // `min--moz-device-pixel-ratio` is not a typo, at least not on our side //TODO: Has it been fixed?
+
+    @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
+           only screen and (    min--moz-device-pixel-ratio: $ratio ),
+           only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
+           only screen and (         min-device-pixel-ratio: #{$ratio} ),
+           only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
+           only screen and (                 min-resolution: #{$ratio}dppx ) {
+      @content;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers - Image (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../media_queries/mixins.scss
+ * ========================================================================= */
+
+/* IMAGE */
+
+@mixin image-retina ( $width, $height, $images... ) {
+
+  @for $i from 1 through length( $images ) {
+
+    $image: nth( $images, $i );
+
+    @if $image {
+
+      @include hdpi ( $i ) {
+        background-image: url(#{$image});
+        background-size: $width $height;
+      }
+
+    }
+
   }
 
 }
@@ -726,6 +735,164 @@
 
 
 /* =========================================================================
+ * Svelto - Helpers - Selector (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* QUANTITY */
+
+//SOURCE: https://github.com/danielguillan/quantity-queries
+
+// -----------------------------------------------------------------------------
+// 1. At least
+// -----------------------------------------------------------------------------
+
+/// Query when total items is at least N items
+/// @param  {number} $count - Quantity to match (equal or more)
+/// @example scss - Make the items color red when there are 4 items or more
+///   ul li {
+///     @include at-least(4) { color: red; }
+///   }
+/// @example scss - Make the items color blue when there are 6 items or more and use '*' (element agnostic) as the item selector
+///   ul li {
+///     @include at-least(6, '*') { color: blue; }
+///   }
+
+@mixin at-least($count, $selector: null) {
+    $selector-append: ':nth-last-child(n+#{$count})';
+
+    @if type-of($count) != 'number' or not unitless($count) or $count < 1 {
+        @error '`#{$count}` is not a valid number for `at-least`';
+    }
+
+    @if $selector != null and (type-of($selector) != 'string' or length($selector) > 1) {
+        @error '`#{$selector}` is not a valid selector for `at-least`';
+    }
+
+    $at-least-selector: _build-quantity-selector($selector-append, $selector);
+
+
+    @at-root #{$at-least-selector} {
+        @content;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// 2. At most
+// -----------------------------------------------------------------------------
+
+/// Query when total items is at most N items
+/// @param  {number} $count - Quantity to match (equal or less)
+/// @example scss - Make the items color red when there are 4 items or less
+///   ul li {
+///     @include at-most(4) { color: red; }
+///   }
+/// @example scss - Make the items color blue when there are 6 items or less and use '*' (element agnostic) as the item selector
+///   ul li {
+///     @include at-most(6, '*') { color: blue; }
+///   }
+
+@mixin at-most($count, $selector: null) {
+    $selector-append: ':nth-last-child(-n+#{$count}):first-child';
+
+    @if type-of($count) != 'number' or not unitless($count) or $count < 1 {
+        @error '`#{$count}` is not a valid number for `at-most`.';
+    }
+
+    @if $selector != null and (type-of($selector) != 'string' or length($selector) > 1) {
+        @error '`#{$selector}` is not a valid selector for `at-most`';
+    }
+
+    $at-most-selector: _build-quantity-selector($selector-append, $selector);
+
+
+    @at-root #{$at-most-selector} {
+        @content;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Between
+// -----------------------------------------------------------------------------
+
+/// Query when total items is at least X items and at most Y items
+/// @param  {number} $at-least - Lower quantity of items to match
+/// @param  {number} $at-most - Higher quantity of items to match
+/// @example scss - Make the items color red when there are at least 2 and at most 4 items
+///   ul li {
+///     @include between(4, 8) { color: red; }
+///   }
+/// @example scss - Make the items color blue when there are at least 6 items and at most 10 items and use '*' (element agnostic) as the item selector
+///   ul li {
+///     @include between(6, 10, '*') { color: blue; }
+///   }
+
+
+@mixin between($first, $last, $selector: null) {
+    $selector-append: ':nth-last-child(n+#{$first}):nth-last-child(-n+#{$last}):first-child';
+
+    @if type-of($first) != 'number' or not unitless($first) or $first < 1 {
+        @error '`#{$first}` is not a valid number for `between`';
+    }
+
+    @if type-of($last) != 'number' or not unitless($last) or $last < 1 {
+        @error '`#{$last}` is not a valid number for `between`';
+    }
+
+    @if $first > $last {
+        @error '#{$first} can´t be larger that #{$last} for `between`';
+    }
+
+    @if $selector != null and (type-of($selector) != 'string' or length($selector) > 1) {
+        @error '`#{$selector}` is not a valid selector for `between`';
+    }
+
+    $between-selector: _build-quantity-selector($selector-append, $selector);
+
+
+    @at-root #{$between-selector} {
+        @content;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// 4. Exactly
+// -----------------------------------------------------------------------------
+
+/// Query when total items is exactly N items
+/// @param  {number} $count - Quantity to match (equal)
+/// @example scss - Make the items color red when there are exactly 4 items
+///   ul li {
+///     @include exactly(4) { color: red; }
+///   }
+/// @example scss - Make the items color blue when there are exactly 6 items and use '*' (element agnostic) as the item selector
+///   ul li {
+///     @include exactly(6, '*') { color: blue; }
+///   }
+
+@mixin exactly($count, $selector: null) {
+    $selector-append: ':nth-last-child(#{$count}):first-child';
+
+    @if type-of($count) != 'number' or not unitless($count) or $count < 1 {
+        @error '`#{$count}` is not a valid number for `exactly`';
+    }
+
+    @if $selector != null and (type-of($selector) != 'string' or length($selector) > 1) {
+        @error '`#{$selector}` is not a valid selector for `exactly`';
+    }
+
+    $exactly-selector: _build-quantity-selector($selector-append, $selector);
+
+
+    @at-root #{$exactly-selector} {
+        @content;
+    }
+}
+
+
+/* =========================================================================
  * Svelto - Helpers - Text (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -738,6 +905,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+
+@mixin text-hide () {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
 }
 
 
@@ -786,7 +963,7 @@
 
   @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
 
-  transition: box-shadow $raisable-transition-box-shadow-duration;
+  transition: box-shadow $raisable-animation-box-shadow-duration;
 
 }
 

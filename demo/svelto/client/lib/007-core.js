@@ -12,3 +12,5 @@
  * @require ../extras/lodash-extra.js
  * @require ../extras/jQuery-extra.js
  * ========================================================================= */
+
+//TODO: Remove it, it's a useful file in a useless component
