@@ -9,14 +9,42 @@
  * @require ../margin/mixins.scss
  * ========================================================================= */
 
-/* MARGIN */
+/* CENTER */
 
 @mixin center-margin ( $max-width: false ) {
 
-  @include margin-horizontal ( auto );
+  @include margin-x ( auto );
 
   @if $max-width {
     max-width: $max-width;
+  }
+
+}
+
+// `$axis` can be either: `x`, `y` or `false` for both
+
+@mixin center-transform ( $axis: false ) {
+
+  @if $axis != x {
+    top: 50%;
+  }
+
+  @if $axis != y {
+    left: 50%;
+  }
+
+  @if not $axis {
+
+    transform: translate(-50%, -50%);
+
+  } @else if $axis != x {
+
+    transform: translateY(-50%);
+
+  } @else if $axis != y {
+
+    transform: translateX(-50%);
+
   }
 
 }
@@ -46,35 +74,10 @@
 
 }
 
-@mixin center-absolute-transform ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-absolute-transform ( $axis: false ) {
 
+  @include center-transform ( $axis );
   position: absolute;
-
-  @if $axis != x {
-    top: 50%;
-  }
-
-  @if $axis != y {
-    left: 50%;
-  }
-
-  $translate-val: null;
-
-  @if not($axis) {
-
-    $translate-val: translate(-50%, -50%);
-
-  } @else if $axis != x {
-
-    $translate-val: translateY(-50%);
-
-  } @else if $axis != y {
-
-    $translate-val: translateX(-50%);
-
-  }
-
-  transform: $translate-val;
 
 }
 
@@ -87,34 +90,9 @@
 
 }
 
-@mixin center-fixed-transform ( $axis: false ) { // The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-fixed-transform ( $axis: false ) {
 
+  @include center-transform ( $axis );
   position: fixed;
-
-  @if $axis != x {
-    top: 50%;
-  }
-
-  @if $axis != y {
-    left: 50%;
-  }
-
-  $translate-val: null;
-
-  @if not($axis) {
-
-    $translate-val: translate(-50%, -50%);
-
-  } @else if $axis != x {
-
-    $translate-val: translateY(-50%);
-
-  } @else if $axis != y {
-
-    $translate-val: translateX(-50%);
-
-  }
-
-  transform: $translate-val;
 
 }

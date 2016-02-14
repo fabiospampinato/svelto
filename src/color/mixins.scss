@@ -8,7 +8,7 @@
 
 /* COLOR */
 
-// Basically calculating `sRGB Luma`
+// Based on the compute of `sRGB Luma`
 
 @function is-light ( $color ) {
 

@@ -45,23 +45,19 @@
   $maps: ($map,);
   $result: null;
 
-  // If the last key is a map already
-  // Warn the user we will be overriding it with $value
+  // If the last key is a map already warn the user we will be overriding it with $value
 
   @if type-of( nth( $keys, -1 ) ) == 'map' {
-    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+    @warn 'The last key you specified is a map; it will be overrided with `#{$value}`';
   }
 
-  // If $keys is a single key
-  // Just merge and return
+  // If `$keys` is a single key just merge and return
 
   @if length( $keys ) == 1 {
     @return map-merge( $map, ( $keys: $value ) );
   }
 
-  // Loop from the first to the second to last key from $keys
-  // Store the associated map to this key in the $maps list
-  // If the key doesn't exist, throw an error
+  // Loop from the first to the second to last key from `$keys` store the associated map to this key in the $maps list if the key doesn't exist, throw an error
 
   @for $i from 1 through length( $keys ) - 1 {
 
@@ -70,15 +66,14 @@
     $current-get: map-get( $current-map, $current-key );
 
     @if $current-get == null {
-      @error "Key `#{$key}` doesn't exist at current level in map.";
+      @error 'Key `#{$key}` does\'t exist at current level in map';
     }
 
     $maps: append( $maps, $current-get );
 
   }
 
-  // Loop from the last map to the first one
-  // Merge it with the previous one
+  // Loop from the last map to the first one merge it with the previous one
 
   @for $i from length( $maps ) through 1 {
     $current-map: nth( $maps, $i );

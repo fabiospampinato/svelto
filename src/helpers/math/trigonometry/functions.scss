@@ -7,7 +7,7 @@
  * =========================================================================
  * @require ../../unit/functions.scss
  * @require ../angle/functions.scss
- * @require ../others/functions.scss
+ * @require ../factorial/functions.scss
  * @require ../power/functions.scss
  * ========================================================================= */
 
@@ -19,10 +19,11 @@
 
 @function sin ( $angle ) {
 
+  $rounds: 10;
   $sin: 0;
   $angle: unit-strip( $angle ) / 180 * $PI;
 
-  @for $i from 0 through 10 {
+  @for $i from 0 through $rounds {
     $sin: $sin + pow( -1, $i ) * pow( $angle, ( 2 * $i + 1 ) ) / fact( 2 * $i + 1 );
   }
 
@@ -32,10 +33,11 @@
 
 @function cos ( $angle ) {
 
+  $rounds: 10;
   $cos: 0;
   $angle: unit-strip( $angle ) / 180 * $PI;
 
-  @for $i from 0 through 10 {
+  @for $i from 0 through $rounds {
     $cos: $cos + pow( -1, $i ) * pow( $angle, 2 * $i ) / fact( 2 * $i );
   }
 

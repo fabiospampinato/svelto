@@ -6,27 +6,16 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* QUANTITY */
-
 //SOURCE: https://github.com/danielguillan/quantity-queries
 
-// -----------------------------------------------------------------------------
-// 1. Last Simple Selector
-// -----------------------------------------------------------------------------
+/* QUANTITY */
 
-/// Find the last simple selector in a given selector
-/// @access private
-/// @param  {list | string} $selector - A single selector
-/// @return {string}                  - The last simple selector in $selector
-/// @example scss
-///   $result: _last-simple-selector ( ul > li ); // li
-
-@function _last-simple-selector ( $selector ) {
+@function _get-last-simple-selector ( $selector ) {
 
   $parsed: selector-parse( $selector );
 
   @if length( $parsed ) > 1 {
-    @error '`#{$selector}` contains #{length($parsed)} selectors and the `_last-simple-selector()`function accepts only 1.';
+    @error '`#{$selector}` contains #{length( $parsed )} selectors but the `_get-last-simple-selector()`function accepts only 1';
   }
 
   $last-simple-selector: nth( nth( $parsed, 1 ), -1 );
@@ -35,22 +24,12 @@
 
 }
 
-// -----------------------------------------------------------------------------
-// 2. Build Quantity Selector
-// -----------------------------------------------------------------------------
-
-/// Builds the selector for the quantity query
-/// @access private
-/// @param  {string} $selector-append      - The selector to be appended
-/// @param  {string} $last-selector        - The item's selector
-/// @return {list}                         - The final quantity query selector
-
 @function _build-quantity-selector ( $selector-append, $last-selector ) {
 
   $quantity-selector: ();
 
   @each $s in & {
-    $last-simple-selector: '~' + if( $last-selector, $last-selector, _last-simple-selector( $s ) );
+    $last-simple-selector: '~' + if( $last-selector, $last-selector, _get-last-simple-selector( $s ) );
     $sel: selector-append( $s, $selector-append );
     $sel2: selector-nest( $sel, $last-simple-selector );
     $quantity-selector: append( $quantity-selector, $sel, 'comma' );

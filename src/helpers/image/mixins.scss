@@ -10,22 +10,44 @@
 
 /* IMAGE */
 
-// The index of $image in $images is the hdpi value at which it should be loaded
+// If `$images` is a list, each index represent the hdpi value
+// If `$images` is a map, it must be on the form of `hdpi: image`
 
-@mixin image-retina ( $width, $height, $images... ) {
+@mixin image-retina ( $width, $height, $images ) {
 
-  @for $i from 1 through length( $images ) {
+  $type: type-of( $images );
 
-    $image: nth( $images, $i );
+  @if $type == 'list' {
 
-    @if $image {
+    @for $i from 1 through length( $images ) {
 
-      @include hdpi ( $i ) {
+      $image: nth( $images, $i );
+
+      @if $image {
+
+        @include hdpi ( $i ) {
+          background-image: url(#{$image});
+          background-size: $width $height;
+        }
+
+      }
+
+    }
+
+  } @elseif $type == 'map' {
+
+    @each $hdpi, $image in $images {
+
+      @include hdpi ( $hdpi ) {
         background-image: url(#{$image});
         background-size: $width $height;
       }
 
     }
+
+  } @else {
+
+    @warn '`#{$type}` is not a support $images type for `image-retina`';
 
   }
 

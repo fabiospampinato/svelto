@@ -63,13 +63,13 @@
     /* BEFORE */
 
     &:before {
-      @include gradient-horizontal ( white, transparent );
+      @include gradient-x ( white, transparent );
     }
 
     /* AFTER */
 
     &:after {
-      @include gradient-vertical ( transparent, black );
+      @include gradient-y ( transparent, black );
       z-index: 1;
     }
 

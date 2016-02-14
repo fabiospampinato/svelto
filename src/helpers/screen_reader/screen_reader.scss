@@ -6,9 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* SCREEN READER */
-
 //SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+
+/* SCREEN READER */
 
 .screen-reader-only {
   @include screen-reader-only ();

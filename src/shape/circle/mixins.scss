@@ -9,6 +9,8 @@
 /* CIRCLE */
 
 @mixin circle ( $size: 1em, $color: $color-gray ) {
-  @include square ( $size, $color );
+  width: $size;
+  height: $size;
+  background-color: $color;
   border-radius: 50%;
 }

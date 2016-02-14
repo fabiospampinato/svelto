@@ -23,12 +23,10 @@
     border-right-width: 0;
     border-left-color: $color;
 
-
   } @else if $direction == left {
 
     border-left-width: 0;
     border-right-color: $color;
-
 
   } @else { // Defaulting to `down`
 

@@ -8,7 +8,7 @@
 
 /* BREAKPOINTS */
 
-// Viewport equal or greater than breakpoint
+// Viewport equal or greater than `$breakpoint`
 
 @mixin media-breakpoint-up ( $breakpoint ) {
 
@@ -28,7 +28,7 @@
 
 }
 
-// Viewport equal or lower than breakpoint
+// Viewport equal or lower than `$breakpoint`
 
 @mixin media-breakpoint-down ( $breakpoint ) {
 
@@ -48,28 +48,32 @@
 
 }
 
-// Viewport within breakpoint
+// Viewport within `$breakpoint`
 
 @mixin media-breakpoint-only ( $breakpoint ) {
 
   @include media-breakpoint-up( $breakpoint ) {
 
     @include media-breakpoint-down( $breakpoint ) {
+
       @content;
+
     }
 
   }
 
 }
 
-// Viewport within 2 breakpoints
+// Viewport within 2 `$breakpoint-lower` and `$breakpoint-upper`
 
 @mixin media-breakpoint-range ( $breakpoint-lower, $breakpoint-upper ) {
 
   @include media-breakpoint-up( $breakpoint-lower ) {
 
     @include media-breakpoint-down( $breakpoint-upper ) {
+
       @content;
+
     }
 
   }

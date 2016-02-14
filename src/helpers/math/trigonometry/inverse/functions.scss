@@ -14,8 +14,9 @@
 
 /* INVERSE */
 
-@function asin ( $z, $unit: deg, $threshold: $PI / 180 / 50 ) {
+@function asin ( $z, $unit: deg ) {
 
+  $threshold: $PI / 180 / 50;
   $sum: 0;
   $complement: false;
   $sign: if( $z != 0, $z / abs( $z ), 1 );
@@ -36,6 +37,7 @@
   $k: 1;
 
   @while $term > $threshold {
+
     $sum: $sum + $term;
 
     $i: $i + 1;
@@ -43,16 +45,17 @@
     $j: 2 * $i + 1;
 
     $term: $k * pow( $z, $j ) / $j;
+
   }
 
   @return angle-convert( $sign * ( if( $complement, $PI / 2 - $sum, $sum ) ), $unit );
 
 }
 
-@function acos ( $z, $unit: deg, $threshold: $PI / 180 / 50 ) {
-  @return angle-convert( $PI / 2, $unit ) - asin( $z, $unit, $threshold );
+@function acos ( $z, $unit: deg ) {
+  @return angle-convert( $PI / 2, $unit ) - asin( $z, $unit );
 }
 
-@function atan ( $z, $unit: deg, $threshold: $PI / 180 / 50 ) {
-  @return asin( $z / sqrt( 1 + pow( $z, 2 ) ), $unit, $threshold );
+@function atan ( $z, $unit: deg ) {
+  @return asin( $z / sqrt( 1 + pow( $z, 2 ) ), $unit );
 }

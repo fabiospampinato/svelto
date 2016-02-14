@@ -8,12 +8,12 @@
 
 /* PADDING */
 
-@mixin padding-horizontal ( $padding ) {
+@mixin padding-x ( $padding ) {
   padding-right: $padding;
   padding-left: $padding;
 }
 
-@mixin padding-vertical ( $padding ) {
+@mixin padding-y ( $padding ) {
   padding-top: $padding;
   padding-bottom: $padding;
 }

@@ -6,11 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//SOURCE: http://thesassway.com/advanced/inverse-trigonometric-functions-with-sass
+
 //TODO: Implement 2 ways conversion, from unit to unit, so that we can use it in the trigonometric functions and support a wider range of parameters
 
 /* ANGLE */
-
-//SOURCE: http://thesassway.com/advanced/inverse-trigonometric-functions-with-sass
 
 @function angle-convert ( $angle, $unit ) {
 

@@ -1,19 +1,25 @@
 
 /* =========================================================================
- * Svelto - Raisable (Mixins)
+ * Svelto - Helpers - Math - Factorial (Functions)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* RAISABLE */
+/* FACTORIAL */
 
-@mixin raisable ( $depth, $extra: '' ) {
+@function fact ( $number ) {
 
-  $z-depth-max: length( map-keys( $z-depths ) ) - 1; // `-1` since we start from `0`
+  $result: 1;
 
-  @include z-depth ( min( $z-depth-max, $depth + $raisable-raise-amount ), $extra );
+  @if $number > 0 {
 
-  transition: box-shadow $raisable-animation-box-shadow-duration;
+    @for $i from 1 through $number {
+      $result: $result * $i;
+    }
+
+  }
+
+  @return $result;
 
 }

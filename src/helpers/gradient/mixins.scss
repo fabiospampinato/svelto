@@ -8,46 +8,34 @@
 
 /* GENERAL */
 
-@mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
-  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent) #{$extra};
+@mixin gradient-x ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
+  background-image: linear-gradient( to right, $start-color $start-percent, $end-color $end-percent ) #{$extra};
   background-repeat: repeat-x #{$extra};
 }
 
-@mixin gradient-vertical ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
-  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent) #{$extra};
+@mixin gradient-y ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100%, $extra: '' ) {
+  background-image: linear-gradient( to bottom, $start-color $start-percent, $end-color $end-percent ) #{$extra};
   background-repeat: repeat-x #{$extra};
 }
 
 @mixin gradient-directional ( $start-color, $end-color, $deg: 45deg, $extra: '' ) {
+  background-image: linear-gradient( $deg, $start-color, $end-color ) #{$extra};
   background-repeat: repeat-x #{$extra};
-  background-image: linear-gradient($d #{$extra}eg, $start-color, $end-color);
 }
 
 @mixin gradient-radial ( $inner-color, $outer-color, $extra: '' ) {
-  background-image: radial-gradient(circle, $inner-color, $outer-color) #{$extra};
+  background-image: radial-gradient( circle, $inner-color, $outer-color ) #{$extra};
   background-repeat: no-repeat #{$extra};
 }
 
 /* FROM COLOR */
 
-@mixin gradient-horizontal-from-color ( $color-name, $extra: '' ) {
-
-  $colors: map-get($colors, $color-name);
-
-  $start: nth($colors, 2);
-  $end: nth($colors, 3);
-
-  @include gradient-horizontal ( $start, $end, 0%, 100%, $extra );
-
+@mixin gradient-x-from-color ( $color, $extra: '' ) {
+  $start-end: gradient-get-start-end-from-color( $color );
+  @include gradient-x ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100%, $extra );
 }
 
-@mixin gradient-vertical-from-color ( $color-name, $extra: '' ) {
-
-  $colors: map-get($colors, $color-name);
-
-  $start: nth($colors, 2);
-  $end: nth($colors, 3);
-
-  @include gradient-vertical ( $start, $end, 0%, 100%, $extra );
-
+@mixin gradient-y-from-color ( $color, $extra: '' ) {
+  $start-end: gradient-get-start-end-from-color( $color );
+  @include gradient-y ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100%, $extra );
 }

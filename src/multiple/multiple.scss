@@ -22,10 +22,10 @@
 
   &:not(.no-wrap):not(.vertical):not(.joined) { // Here the gutter is needed
 
-    @include margin-horizontal ( - $gutter-half );
+    @include margin-x ( - $gutter-half );
 
     > * {
-      @include margin-horizontal ( $gutter-half );
+      @include margin-x ( $gutter-half );
     }
 
   }
@@ -44,7 +44,7 @@
 
   &.vertical > .multiple {
 
-    @include margin-horizontal ( 0 !important ); //FIXME: We shouldn't use `!important`
+    @include margin-x ( 0 !important ); //FIXME: We shouldn't use `!important`
 
     > :first-child {
       margin-left: 0;
@@ -77,7 +77,7 @@
       max-width: $max-width;
 
       @include min-screen ( $max-width ) {
-        @include margin-horizontal ( auto !important );
+        @include margin-x ( auto !important );
         display: flex;
       }
 

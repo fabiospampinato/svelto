@@ -8,12 +8,12 @@
 
 /* MARGIN */
 
-@mixin margin-horizontal ( $margin ) {
+@mixin margin-x ( $margin ) {
   margin-right: $margin;
   margin-left: $margin;
 }
 
-@mixin margin-vertical ( $margin ) {
+@mixin margin-y ( $margin ) {
   margin-top: $margin;
   margin-bottom: $margin;
 }

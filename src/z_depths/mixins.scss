@@ -10,7 +10,7 @@
 
 @mixin z-depth ( $depth, $extra: '' ) {
 
-  $z-depth: map-get($z-depths, $depth);
+  $z-depth: map-get( $z-depths, $depth );
 
   box-shadow: $z-depth #{$extra};
 
