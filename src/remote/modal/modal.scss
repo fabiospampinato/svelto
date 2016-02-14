@@ -20,8 +20,8 @@
 
   &:not(.remote-modal-loaded) {
 
-    width: $remote-modal-placeholder-size;
-    height: $remote-modal-placeholder-size;
+    width: $remote-modal-width;
+    height: $remote-modal-height;
 
     /* CARD BLOCK */
 

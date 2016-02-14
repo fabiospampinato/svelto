@@ -8,6 +8,6 @@
  * @require ../colors/variables.scss
  * ========================================================================= */
 
-/* SELECTABLE */
+/* SELECTABLE TABLE ROW */
 
-$table-selectable-row-selected-color: lighten($color-primary-bg, 50) !default;
+$selectable-table-row-selected-color: lighten( $color-primary, 50 ) !default;

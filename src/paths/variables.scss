@@ -8,6 +8,6 @@
 
 /* PATHS */
 
-$path-base: '/' !default;
-$path-fonts: $path-base + 'fonts/' !default;
-$path-images: $path-base + 'images/' !default;
+$path-root: '/' !default;
+$path-fonts: $path-root + 'fonts/' !default;
+$path-images: $path-root + 'images/' !default;

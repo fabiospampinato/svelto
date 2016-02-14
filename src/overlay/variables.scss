@@ -18,10 +18,11 @@ $overlay-transition-opacity-duration: $widget-animation-opacity-duration !defaul
 /* SIBLINGS */
 
 $overlay-siblings-opacity: .2 !default;
+
 $overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-duration !default;
 
 /* DIMMER */
 
 $overlay-dimmer-color: 'black' !default;
 
-$overlay-dimmer-background-color: transparentize($color-black, $overlay-siblings-opacity) !default;
+$overlay-dimmer-bg-transparentize-amount: $overlay-siblings-opacity !default;

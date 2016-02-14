@@ -18,8 +18,8 @@
   @include z-depth ( $label-floating-z-depth );
   position: fixed;
   z-index: $label-floating-z-index;
-  right: $label-floating-right;
-  bottom: $label-floating-bottom;
+  right: $label-floating-spacing;
+  bottom: $label-floating-spacing;
   margin-bottom: 0;
   padding: $label-floating-padding-y $label-floating-padding-x;
   min-height: $line-height-em + ( $label-floating-padding-y * 2 );

@@ -19,20 +19,22 @@ $dropdown-z-depth: 4 !default;
 $dropdown-max-width: 70vw !default;
 $dropdown-max-height: 60vh !default;
 
-/* PATHS */
-
-$dropdown-path-images: $path-images !default;
-
 /* TIP */
 
 $dropdown-tip-size: .75em !default;
 
 /* TIP BOX SHADOW */
 
-$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .7) !default; // Taken from z-depths
-$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default; // Taken from z-depths
-$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
-$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
+//TODO: Make them more genral, may get them from `$z-depths` on the basis of the value of `$dropdown-z-depth`
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .7) !default;
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default;
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+
+/* PATHS */
+
+$dropdown-path-images: $path-images !default;
 
 /* ANIMATION */
 

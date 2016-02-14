@@ -127,7 +127,7 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple">
-    <div onclick="toggle_fixed_header ()" class="button outlined">Toggle fixed header</div>
+    <div onclick="toggle_sticky_header ()" class="button outlined">Toggle sticky header</div>
     <div onclick="remove_element ( 'header' )" class="button outlined">Remove header</div>
     <div onclick="remove_element ( 'footer' )" class="button outlined">Remove footer</div>
   </div>
@@ -140,8 +140,8 @@
   </div>
 
   <script>
-    function toggle_fixed_header() {
-      $('header').toggleClass('fixed');
+    function toggle_sticky_header() {
+      $('header').toggleClass('sticky');
     }
 
     function remove_element(selector) {

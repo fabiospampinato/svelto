@@ -8,6 +8,6 @@
  * @require ../../textarea/variables.scss
  * ========================================================================= */
 
-/* INPUT AUTOGROW */
+/* TEXTAREA AUTOGROW */
 
-$textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor icon is displayed if empty
+$textarea-autogrow-lines: $textarea-lines !default;

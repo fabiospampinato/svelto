@@ -8,13 +8,8 @@
  * @require ../animations/variables.scss
  * @require ../colors/variables.scss
  * @require ../dropdown/variables.scss
- * @require ../outline/variables.scss
  * @require ../paths/variables.scss
  * ========================================================================= */
-
-/* CHAT */
-
-$chat-path-images: $path-images !default;
 
 /* TIP */
 
@@ -22,17 +17,26 @@ $chat-tip-size: $dropdown-tip-size !default;
 
 /* LEVELS */
 
-$chat-msg-level-3-spacing: 9em !default;
-$chat-msg-level-2-spacing: 4.5em !default;
 $chat-msg-level-1-spacing: 0 !default;
+$chat-msg-level-2-spacing: 4.5em !default;
+$chat-msg-level-3-spacing: 9em !default;
 
 /* IMAGE */
 
+//TODO: Add a $chat-msg-img-rounded: true !default;
+
 $chat-msg-img-size: 3em !default;
-$chat-msg-img-border-width: $outline-width !default;
+
+$chat-msg-img-border-width: 1px !default;
+$chat-msg-img-border-width: 'solid' !default;
 $chat-msg-img-border-color: $color-black !default;
+
 $chat-msg-img-opacity-hover: .8 !default;
+
+/* PATHS */
+
+$chat-path-images: $path-images !default;
 
 /* ANIMATION */
 
-$chat-msg-img-animation-duration: $animation-fast !default;
+$chat-animation-duration: $animation-fast !default;

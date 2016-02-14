@@ -30,9 +30,6 @@ svg.spinner {
   /* CIRCLE */
 
   circle {
-    cx: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
-    cy: $spinner-size / 2; // This only works on Chrome //TODO: Maybe just strip them off
-    r: $spinner-radius; // This only works on Chrome //TODO: Maybe just strip them off
     fill: none;
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;

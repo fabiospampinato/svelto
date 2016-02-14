@@ -9,34 +9,38 @@
  * @require ../colors/variables.scss
  * ========================================================================= */
 
-/* DATEPICKER */
+/* DAY */
 
-$datepicker-block-width: 100% / 7 !default;
+$datepicker-day-width: 100% / 7 !default;
+$datepicker-day-height: 2.5em !default;
+
+$datepicker-day-prev-next-opacity: .25 !default;
+$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 
 /* DAY NAME */
 
 $datepicker-day-name-font-weight: bold !default;
-$datepicker-day-name-height: 2.5em !default;
-
-/* DAY */
-
-$datepicker-day-height: 2.5em !default;
-$datepicker-day-prev-next-opacity: .25 !default;
-$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 
 /* DAY CIRCLE */
 
 $datepicker-day-circle-size: 2.375em !default;
 
-$datepicker-day-hover-color: $color-secondary-text !default;
-$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, .25) !default;
+/* DAY HOVER */
 
-$datepicker-day-today-color: $color-secondary-bg !default;
+$datepicker-day-hover-color: $color-secondary-text !default;
+$datepicker-day-hover-circle-color: transparentize( $color-secondary, .25 ) !default;
+
+/* DAY TODAY */
+
+$datepicker-day-today-color: $color-secondary !default;
 $datepicker-day-today-circle-color: transparent !default;
 
+/* DAY SELECTED */
+
 $datepicker-day-selected-z-depth: 2 !default;
+
 $datepicker-day-selected-color: $color-secondary-text !default;
-$datepicker-day-selected-circle-color: $color-secondary-bg !default;
+$datepicker-day-selected-circle-color: $color-secondary !default;
 
 /* ANIMATION */
 

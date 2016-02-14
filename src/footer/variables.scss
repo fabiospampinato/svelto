@@ -10,6 +10,4 @@
 
 /* FOOTER */
 
-$footer-bg-color-darken-amount: 10 !default;
-
-$footer-bg-color: darken($color-base-bg, $footer-bg-color-darken-amount) !default;
+$footer-bg-color: darken( $color-base, 10 ) !default;

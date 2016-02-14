@@ -19,19 +19,19 @@ table.sortable {
 
     position: relative;
     cursor: pointer;
-    padding-left: $table-th-sortable-padding-x;
-    padding-right: $table-th-sortable-padding-x;
+    padding-left: $sortable-table-th-padding-x;
+    padding-right: $sortable-table-th-padding-x;
 
     /* HOVER */
 
     &:hover {
-      background-color: $table-th-sortable-hover-bg-color;
+      background-color: $sortable-table-th-hover-bg-color;
     }
 
     /* ACTIVE */
 
     &:active {
-      background-color: $table-th-sortable-active-bg-color;
+      background-color: $sortable-table-th-active-bg-color;
     }
 
     /* BEFORE / AFTER */
@@ -40,7 +40,7 @@ table.sortable {
     &:after {
       @extend %icon;
       position: absolute;
-      right: $table-th-sortable-icon-right;
+      right: $sortable-table-th-icon-right;
       top: 0;
       bottom: 0;
       margin: auto;
@@ -67,14 +67,14 @@ table.sortable {
     &:hover:after,
     &.sort-desc:before,
     &.sort-asc:after {
-      opacity: $table-th-sortable-icon-inactive-opacity;
+      opacity: $sortable-table-th-icon-inactive-opacity;
     }
 
     /* ACTIVE OPACITY */
 
     &.sort-desc:after,
     &.sort-asc:before {
-      opacity: $table-th-sortable-icon-active-opacity;
+      opacity: $sortable-table-th-icon-active-opacity;
     }
 
   }

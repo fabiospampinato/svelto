@@ -30,7 +30,7 @@
     position: absolute;
     z-index: 2;
     box-sizing: border-box;
-    border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
+    border: $colorpicker-handler-border-width $colorpicker-handler-border-style $colorpicker-handler-border-color;
     background-color: $colorpicker-handler-border-color;
   }
 
@@ -40,16 +40,16 @@
   &-hue {
     position: relative;
     box-sizing: content-box;
-    height: $colorpicker-height;
+    height: $colorpicker-size;
     cursor: pointer;
-    border: $colorpicker-wrp-border-width solid $colorpicker-wrp-border-color;
+    border: $colorpicker-wrp-border-width $colorpicker-wrp-border-style $colorpicker-wrp-border-color;
   }
 
   /* SATURATION & BRIGHTNESS */
 
   &-sb {
 
-    width: $colorpicker-height;
+    width: $colorpicker-size;
     background-color: red;
 
     /* BEFORE / AFTER */
@@ -103,7 +103,7 @@
     /* HANDLER */
 
     .colorpicker-handler {
-      width: 100%;
+      width: $colorpicker-handler-hue-width;
       height: $colorpicker-handler-hue-height;
       margin-top: - ( $colorpicker-handler-hue-height / 2 );
       cursor: ns-resize;

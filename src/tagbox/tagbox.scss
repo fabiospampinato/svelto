@@ -36,7 +36,7 @@
 
   &-partial {
     @include color ( inherit );
-    min-width: $tagbox-input-min-width;
+    min-width: $tagbox-partial-min-width;
   }
 
 }

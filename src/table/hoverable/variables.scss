@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* HOVERABLE */
+/* HOVERABLE*/
 
 $table-hoverable-row-odd-color-hover: rgba(0, 0, 0, .06) !default;
-$table-hoverable-row-even-color-hover: rgba(0, 0, 0, .06) !default;
+$table-hoverable-row-even-color-hover: $table-hoverable-row-odd-color-hover !default;

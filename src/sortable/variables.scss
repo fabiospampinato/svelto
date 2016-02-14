@@ -8,14 +8,14 @@
 
 /* SORTABLE TABLE HEADER */
 
-$table-th-sortable-padding-x: 1.75em !default;
+$sortable-table-th-padding-x: 1.75em !default;
 
-$table-th-sortable-hover-bg-color: rgba(255, 255, 255, .1) !default;
-$table-th-sortable-active-bg-color: rgba(0, 0, 0, .025) !default;
+$sortable-table-th-hover-bg-color: rgba(255, 255, 255, .1) !default;
+$sortable-table-th-active-bg-color: rgba(0, 0, 0, .025) !default;
 
 /* SORTABLE TABLE HEADER ICON */
 
-$table-th-sortable-icon-inactive-opacity: .35 !default;
-$table-th-sortable-icon-active-opacity: 1 !default;
+$sortable-table-th-icon-inactive-opacity: .35 !default;
+$sortable-table-th-icon-active-opacity: 1 !default;
 
-$table-th-sortable-icon-right: .15em !default;
+$sortable-table-th-icon-right: .15em !default;

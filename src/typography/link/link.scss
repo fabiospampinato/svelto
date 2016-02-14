@@ -28,9 +28,9 @@ span > a, // Same reason as `p > a`
 
   &:after {
     @extend %highlight-after;
-    border-bottom-width: $a-underline-height;
+    border-bottom-width: $link-underline-height;
     transition-property: opacity, transform;
-    transition-duration: $a-underline-animation-duration;
+    transition-duration: $link-underline-animation-duration;
   }
 
   &:not(:hover):after { //FIXME: Does it work?

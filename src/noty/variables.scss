@@ -14,13 +14,13 @@
 $noty-z-index: 600 !default;
 $noty-z-depth: 7 !default;
 
-$noty-transparentize-amount: .05 !default; //TODO: Implement it
+$noty-bg-transparentize-amount: .05 !default; //TODO: Implement it
 
 $noty-border-radius: $container-border-radius !default;
 
 /* IMG */
 
-$noty-img-size: 38px !default;
+$noty-img-size: 2.25em !default;
 $noty-img-rounded: false !default;
 
 /* ANIMATION */

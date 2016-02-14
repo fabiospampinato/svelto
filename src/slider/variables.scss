@@ -40,7 +40,7 @@ $slider-handler-color: 'secondary' !default;
 $slider-handler-z-depth: 3 !default;
 
 $slider-handler-size: 1.55em !default;
-$slider-handler-half-size: $slider-handler-size / 2 !default;
+$slider-handler-half-size: $slider-handler-size / 2;
 
 $slider-handler-border-radius: 50% !default;
 

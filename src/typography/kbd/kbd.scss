@@ -19,7 +19,7 @@ kbd {
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;
   display: inline-block;
-  padding: $kbd-padding;
+  padding: $kbd-padding-y $kbd-padding-x;
   white-space: nowrap;
   border-width: $kbd-border-width;
   border-style: $kbd-border-style;

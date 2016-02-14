@@ -13,14 +13,16 @@
 $panel-z-index: 400 !default;
 $panel-z-depth: 5 !default;
 
-$panel-animation-transform-duration: $animation-normal !default;
-
-/* PINNED */
-
-$panel-pinned-z-depth: $panel-z-depth !default;
-
 /* BACKGROUND */
 
 $panel-background-color: rgba(0, 0, 0, .5) !default;
 
 $panel-background-animation-opacity-duration: $animation-normal !default;
+
+/* PINNED */
+
+$panel-pinned-z-depth: $panel-z-depth !default;
+
+/* ANIMATION */
+
+$panel-animation-transform-duration: $animation-normal !default;

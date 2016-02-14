@@ -6,10 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* DEFAULT */
+/* HORIZONTAL */
 
 $panel-default-x-height: 7.5rem !default;
-$panel-default-closed-x-spacing: $panel-default-x-height !default;
+$panel-default-closed-x-spacing: $panel-default-x-height !default; //TODO: Remove it
+
+/* VERTICAL */
 
 $panel-default-y-width: $panel-default-x-height * 2 !default;
-$panel-default-closed-y-spacing: $panel-default-y-width !default;
+$panel-default-closed-y-spacing: $panel-default-y-width !default; //TODO: Remove it

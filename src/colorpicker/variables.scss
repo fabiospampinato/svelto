@@ -5,18 +5,19 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../outline/variables.scss
+ * @require ../colors/variables.scss
  * @require ../svelto/variables.scss
  * ========================================================================= */
 
 /* COLORPICKER */
 
-$colorpicker-height: 11em !default;
+$colorpicker-size: 11em !default;
 
 /* WRAPPERS */
 
-$colorpicker-wrp-border-width: $outline-width !default;
-$colorpicker-wrp-border-color: black !default;
+$colorpicker-wrp-border-width: 1px !default;
+$colorpicker-wrp-border-style: 'solid' !default;
+$colorpicker-wrp-border-color: $color-black !default;
 
 /* WRAPPER HUE */
 
@@ -25,19 +26,21 @@ $colorpicker-hue-wrp-width: 1.5em !default;
 /* HANDLER */
 
 $colorpicker-handler-border-width: 2px !default;
-$colorpicker-handler-border-color: white !default;
+$colorpicker-handler-border-style: 'solid' !default;
+$colorpicker-handler-border-color: $color-white !default;
 
-$colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, .2) !default;
+$colorpicker-handler-shadow: 0 0 0 1px rgba( 0, 0, 0, .2 ) !default;
 
 /* HANDLER SB */
 
-$colorpicker-handler-sb-height: 1em !default;
 $colorpicker-handler-sb-width: 1em !default;
+$colorpicker-handler-sb-height: $colorpicker-handler-sb-width !default;
 
 $colorpicker-handler-sb-border-radius: 50% !default;
 
 /* HANDLER HUE */
 
+$colorpicker-handler-hue-width: 100% !default;
 $colorpicker-handler-hue-height: .5em !default;
 
 $colorpicker-handler-hue-border-radius: $border-radius-small !default;

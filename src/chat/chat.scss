@@ -22,12 +22,12 @@
     box-sizing: content-box;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
-    border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+    border: $chat-msg-img-border-width $chat-msg-img-border-style $chat-msg-img-border-color;
     border-radius: 100%;
     overflow: hidden;
 
     img {
-      transition: opacity $chat-msg-img-animation-duration;
+      transition: opacity $chat-animation-duration;
       width: $chat-msg-img-size;
       height: $chat-msg-img-size;
       border-radius: 100%;

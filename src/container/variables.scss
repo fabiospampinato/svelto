@@ -14,10 +14,10 @@ $container-color: 'white' !default;
 
 $container-border-radius: $border-radius-medium !default;
 
-$container-padding-y: $gutter !default;
 $container-padding-x: $gutter !default;
+$container-padding-y: $container-padding-x !default;
 
-/* CONTAINER COMPACT */
+/* COMPACT */
 
-$container-compact-padding-y: $gutter-half !default;
 $container-compact-padding-x: $gutter !default;
+$container-compact-padding-y: $container-compact-padding-x / 2 !default;

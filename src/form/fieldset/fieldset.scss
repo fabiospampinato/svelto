@@ -9,6 +9,8 @@
  * @require ../../widget/widget.scss
  * ========================================================================= */
 
+//TODO: Maybe just extend `.container` and change the background (?)
+
 /* FIELDSET */
 
 fieldset {
@@ -16,5 +18,5 @@ fieldset {
   background-color: $fieldset-bg-color;
   border-radius: $fieldset-border-radius;
   border-color: inherit;
-  padding: $fieldset-padding;
+  padding: $fieldset-padding-y $fieldset-padding-x;
 }

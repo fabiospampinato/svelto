@@ -9,15 +9,14 @@
  * @require ../paths/variables.scss
  * ========================================================================= */
 
-/* ICONS */
+/* ICON */
 
-$icon-best-size: 24px; // At this size the icons look the best
+$icon-best-size: 24px !default; // At this size the icons look the best
 $icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
 
 /* FONT */
 
-$icon-path-fonts: $path-fonts !default;
-$icon-fonts-local: true !default;
+$icon-font-local: true !default;
 
 /* PATHS */
 

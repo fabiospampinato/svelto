@@ -10,10 +10,12 @@
 
 /* GUTTER */
 
-$gutter: 10px !default;
+$gutter: 10px !default; //TODO: Maybe move to a rem version? (so that it won't affect the sizes that are based in em)
 $gutter-half: $gutter / 2;
 
 /* MAX WIDTH */
+
+//TODO: Make a whole component for it
 
 $max-width-enabled: true !default;
 $max-width-breakpoint: 'xlarge' !default;

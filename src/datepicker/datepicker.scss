@@ -45,7 +45,7 @@
     .button,
     .previous,
     .next {
-      width: $datepicker-block-width;
+      width: $datepicker-day-width;
       margin-bottom: 0;
       flex-grow: 0;
     }
@@ -69,14 +69,14 @@
     .datepicker-days-names {
 
       display: flex;
-      height: $datepicker-day-name-height;
+      height: $datepicker-day-height;
       align-items: center;
 
       /* DAY NAME */
 
       > * {
         font-weight: $datepicker-day-name-font-weight;
-        width: $datepicker-block-width;
+        width: $datepicker-day-width;
         text-align: center;
       }
 
@@ -96,7 +96,7 @@
         line-height: $datepicker-day-height;
         position: relative;
         z-index: 1;
-        width: $datepicker-block-width;
+        width: $datepicker-day-width;
         height: $datepicker-day-height;
         text-align: center;
 

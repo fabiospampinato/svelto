@@ -13,13 +13,12 @@
 $label-floating-z-index: 150 !default;
 $label-floating-z-depth: 4 !default;
 
-$label-floating-padding-y: $label-padding-y * 1.6 !default;
 $label-floating-padding-x: $label-padding-y * 1.6 !default;
+$label-floating-padding-y: $label-floating-padding-x !default;
 
-$label-floating-right: 24px !default;
-$label-floating-bottom: 24px !default;
+$label-floating-spacing: 24px !default; //TODO: Use rem instead (sure?)
 
 /* COMPACT */
 
-$label-floating-compact-padding-y: $label-floating-padding-y / 2 !default;
 $label-floating-compact-padding-x: $label-floating-padding-x / 2 !default;
+$label-floating-compact-padding-y: $label-floating-padding-y / 2 !default;

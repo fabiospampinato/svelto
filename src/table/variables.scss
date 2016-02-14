@@ -10,8 +10,14 @@
 
 $table-color: inherit !default;
 
-$table-header-footer-bg-color: rgba(0, 0, 0, .05) !default; // The same used in label sub left and right
+/* HEADER */
 
-/* EMPTY */
+$table-header-bg-color: rgba(0, 0, 0, .05) !default; // It's equal to the one used in label sub left/right
+
+/* FOOTER */
+
+$table-footer-bg-color: $table-header-bg-color !default;
+
+/* ROW EMPTY */
 
 $table-row-empty-height: 4.5em !default;

@@ -12,15 +12,15 @@
 
 /* CAROUSEL */
 
-$carousel-height: 12.5em !default;
+$carousel-height: 12.5em !default; //TODO: Should we set it?
 
-$carousel-bg-color: $color-black !default;
+$carousel-bg-color: $color-black !default; //TODO: Maybe use @include color ( $color );
 
 /* INDICATOR */
 
 $carousel-indicators-z-index: 80 !default;
 
-$carousel-indicator-color: $color-white !default;
+$carousel-indicator-color: $color-white !default; //TODO: Maybe use @include color ( $color );
 
 $carousel-indicator-size: .625em !default;
 $carousel-indicator-border-width: 2px !default;

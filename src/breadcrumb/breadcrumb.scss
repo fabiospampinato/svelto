@@ -28,11 +28,11 @@
   > :nth-child(even) {
 
     &:not(:first-child) {
-      margin-left: $breadcrumb-gutter;
+      margin-left: $breadcrumb-spacing;
     }
 
     &:not(:last-child) {
-      margin-right: $breadcrumb-gutter;
+      margin-right: $breadcrumb-spacing;
     }
 
   }

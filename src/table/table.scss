@@ -51,7 +51,7 @@ table.table { // So that if someone need a plain basic table he can, just by don
   thead {
 
     @include border-top-radius ( inherit );
-    background-color: $table-header-footer-bg-color;
+    background-color: $table-header-bg-color;
 
     tr {
 
@@ -157,7 +157,7 @@ table.table { // So that if someone need a plain basic table he can, just by don
   tfoot {
 
     @include border-bottom-radius ( inherit );
-    background-color: $table-header-footer-bg-color;
+    background-color: $table-footer-bg-color;
 
     tr {
 
