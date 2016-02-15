@@ -21,18 +21,6 @@
     display: none;
   }
 
-  /* INVALID */
-
-  &.invalid {
-    border: $outline-width solid $color-error;
-  }
-
-  /* VALID */
-
-  &.valid {
-    border: $outline-width solid $color-success;
-  }
-
   /* NAVIGATION */
 
   &-navigation {
