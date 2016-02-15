@@ -1,32 +1,24 @@
 
 /* =========================================================================
- * Svelto - Embedded
+ * Svelto - Embedded - Ratios
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../widget/widget.scss
+ * @require ../emebedded.scss
  * ========================================================================= */
 
-//FIXME: There's an extra pixel at the bottom of the demo video
-//FIXME: If we add a border-radius it won't be used after we press play on the video
+//TODO: Maybe make it a component of its own
 
-/* EMBEDDED */
+/* RATIOS */
 
-.embedded {
+@each $ratio in $embedded-ratios {
 
-  @extend .widget;
-  display: block;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
+  $width: nth($ratio, 1);
+  $height: nth($ratio, 2);
 
-  /* IFRAME / EMBED / VIDEO / OBJECT */
-
-  > * {
-    @include fill ();
-    @include fill-absolute ();
-    border: 0;
+  .embedded.ratio-#{$width}-#{$height} {
+    padding-bottom: ( $height * 100 / $width ) * 1%;
   }
 
 }
