@@ -25,7 +25,8 @@ $carousel-indicators-z-index: 80 !default;
 
 $carousel-indicator-color: $color-white !default;
 
-$carousel-indicator-size: .625em !default;
+$carousel-indicator-width: .625em !default;
+$carousel-indicator-height: $carousel-indicator-width !default;
 
 $carousel-indicator-border-width: 2px !default;
 
