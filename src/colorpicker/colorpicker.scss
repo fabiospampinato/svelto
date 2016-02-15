@@ -112,30 +112,4 @@
 
   }
 
-  /* INVALID */
-
-  &.invalid {
-
-    /* SATURATION & BRIGHTNESS */
-
-    .colorpicker-sb,
-    .colorpicker-hue {
-      border: $outline-width solid $color-error !important;
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* SATURATION & BRIGHTNESS */
-
-    .colorpicker-sb,
-    .colorpicker-hue {
-      border: $outline-width solid $color-success !important;
-    }
-
-  }
-
 }

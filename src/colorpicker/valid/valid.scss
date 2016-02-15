@@ -1,28 +1,22 @@
 
 /* =========================================================================
- * Svelto - Checkbox - Invalid
+ * Svelto - Colorpicker - Valid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../checkbox.scss
+ * @require ../colorpicker.scss
  * ========================================================================= */
 
-/* INVALID */
+/* VALID */
 
-.checkbox.invalid {
+.colorpicker.valid {
 
-  /* INPUT */
+  /* SATURATION & BRIGHTNESS */
 
-  input {
-
-    /* BEFORE / AFTER */
-
-    &:before,
-    &:after {
-      color: $color-error !important;
-    }
-
+  .colorpicker-sb,
+  .colorpicker-hue {
+    border: $outline-width solid $color-success !important;
   }
 
 }
