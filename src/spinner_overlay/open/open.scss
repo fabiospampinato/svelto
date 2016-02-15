@@ -1,24 +1,21 @@
 
 /* =========================================================================
- * Svelto - Spinner Overlay
+ * Svelto - Spinner Overlay - Open
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../spinner_overlay.scss
  * ========================================================================= */
 
-/* SPINNER OVERLAY */
+/* OPEN */
 
-.spinner-overlay {
-
-  align-items: center;
-  justify-content: center;
+.spinner-overlay.open {
 
   /* SPINNER LABEL */
 
   .spinner-label {
-    margin-bottom: 0;
-    transform: scale(0);
-    transition: transform $spinner-overlay-animation-duration;
+    transform: scale(1);
   }
 
 }
