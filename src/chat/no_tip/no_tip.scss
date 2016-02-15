@@ -1,0 +1,41 @@
+
+/* =========================================================================
+ * Svelto - Chat - No tip
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../chat.scss
+ * ========================================================================= */
+
+/* NO TIP */
+
+.chat-msg.no-tip {
+
+  /* TIP */
+
+  .chat-msg-content .card-header:before {
+    display: none;
+  }
+
+  /* LEFT */
+
+  &:not(.direction-right) {
+
+    .chat-msg-content {
+      margin-left: $gutter;
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.direction-right {
+
+    .chat-msg-content {
+      margin-right: $gutter;
+    }
+
+  }
+
+}

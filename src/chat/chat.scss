@@ -23,11 +23,16 @@
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
     border: $chat-msg-img-border-width $chat-msg-img-border-style $chat-msg-img-border-color;
-    border-radius: 100%;
     overflow: hidden;
 
+    @if $chat-msg-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $chat-msg-img-border-radius;
+    }
+
     img {
-      transition: opacity $chat-animation-duration;
+      transition: opacity $chat-msg-animation-duration;
       width: $chat-msg-img-size;
       height: $chat-msg-img-size;
       border-radius: 100%;
@@ -80,203 +85,6 @@
         border-width: $outline-width;
         border-style: solid;
         border-color: inherit;
-      }
-
-    }
-
-  }
-
-  /* NO TIP */
-
-  &.no-tip {
-
-    /* TIP */
-
-    .chat-msg-content .card-header:before {
-      display: none;
-    }
-
-  }
-
-  /* NO IMG */
-
-  &.no-img {
-
-    /* IMG */
-
-    .chat-msg-img {
-      display: none;
-    }
-
-  }
-
-  /* LEFT */
-
-  &:not(.direction-right) {
-
-    /* LEVELS */
-
-    &.level-3,
-    &[class*='level-'] {
-      margin-left: $chat-msg-level-3-spacing;
-    }
-
-    &.level-2 {
-      margin-left: $chat-msg-level-2-spacing;
-    }
-
-    &.level-1 {
-      margin-left: $chat-msg-level-1-spacing;
-    }
-
-    /* IMAGE */
-
-    .chat-msg-img {
-      order: 1;
-    }
-
-    /* TIP */
-
-    &:not(.no-tip) {
-
-      .chat-msg-content {
-        margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
-      }
-
-    }
-
-    /* NO TIP */
-
-    &.no-tip {
-
-      .chat-msg-content {
-        margin-left: $gutter;
-      }
-
-    }
-
-    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
-
-    _:-ms-lang(x), & .chat-msg-content {
-      margin-left: $gutter;
-    }
-
-    /* CONTENT */
-
-    .chat-msg-content {
-      order: 2;
-    }
-
-    /* HEADER */
-
-    .card-header {
-
-      /* TIP */
-
-      &:before {
-        left: - ( $dropdown-tip-size / 2 );
-        margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url(#{$chat-path-images}chat-clips.svg#clip-right); // The polygon is not supported on Firefox
-        clip-path: polygon(0 0, 100% 100%, 0 100%);
-      }
-
-      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
-
-      _:-ms-lang(x), &:before {
-        display: none !important;
-      }
-
-      /* TIP (OUTLINED) */
-
-      &.outlined:before {
-        margin-left: - $outline-width;
-      }
-
-    }
-
-  }
-
-  /* RIGHT */
-
-  &.direction-right {
-
-    /* LEVELS */
-
-    &.level-3,
-    &[class*='level-'] {
-      margin-right: $chat-msg-level-3-spacing;
-    }
-
-    &.level-2 {
-      margin-right: $chat-msg-level-2-spacing;
-    }
-
-    &.level-1 {
-      margin-right: $chat-msg-level-1-spacing;
-    }
-
-    /* IMAGE */
-
-    .chat-msg-img {
-      order: 2;
-      // margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
-    }
-
-    /* TIP */
-
-    &:not(.no-tip) {
-
-      .chat-msg-content {
-        margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
-      }
-
-    }
-
-    /* NO TIP */
-
-    &.no-tip {
-
-      .chat-msg-content {
-        margin-right: $gutter;
-      }
-
-    }
-
-    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
-
-    _:-ms-lang(x), & .chat-msg-content {
-      margin-right: $gutter;
-    }
-
-    /* CONTENT */
-
-    .chat-msg-content {
-      order: 1;
-    }
-
-    /* HEADER */
-
-    .card-header {
-
-      /* TIP */
-
-      &:before {
-        right: - ( $dropdown-tip-size / 2 );
-        margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url(#{$chat-path-images}chat-clips.svg#clip-left); // The polygon is not supported on Firefox
-        clip-path: polygon(0 0, 100% 100%, 100% 0);
-      }
-
-      // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
-
-      _:-ms-lang(x), &:before {
-        display: none !important;
-      }
-
-      /* TIP (OUTLINED) */
-
-      &.outlined:before {
-        margin-right: - $outline-width;
       }
 
     }

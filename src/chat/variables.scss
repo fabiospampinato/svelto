@@ -9,23 +9,25 @@
  * @require ../colors/variables.scss
  * @require ../dropdown/variables.scss
  * @require ../paths/variables.scss
+ * @require ../svelto/variables.scss
  * ========================================================================= */
-
-/* TIP */
-
-$chat-tip-size: $dropdown-tip-size !default;
 
 /* LEVELS */
 
 $chat-msg-level-1-spacing: 0 !default;
 $chat-msg-level-2-spacing: 4.5em !default;
-$chat-msg-level-3-spacing: 9em !default;
+$chat-msg-level-3-spacing: $chat-msg-level-2-spacing * 2 !default;
+
+/* TIP */
+
+$chat-tip-size: $dropdown-tip-size !default;
 
 /* IMAGE */
 
-//TODO: Add a $chat-msg-img-rounded: true !default;
-
 $chat-msg-img-size: 3em !default;
+$chat-msg-img-rounded: true !default;
+
+$chat-msg-img-border-radius: $border-radius-medium !default;
 
 $chat-msg-img-border-width: 1px !default;
 $chat-msg-img-border-width: 'solid' !default;
@@ -39,4 +41,4 @@ $chat-path-images: $path-images !default;
 
 /* ANIMATION */
 
-$chat-animation-duration: $animation-fast !default;
+$chat-msg-animation-duration: $animation-fast !default;
