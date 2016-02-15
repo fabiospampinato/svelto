@@ -8,18 +8,8 @@
  * @require ../progressbar.scss
  * ========================================================================= */
 
-//TODO: Modularize label
-
 /* SLIM */
 
 .progressbar.slim {
-
   height: $progressbar-slim-height;
-
-  /* AFTER (LABEL) */
-
-  .progressbar-highlight:after {
-    font-size: $progressbar-slim-label-font-size;
-  }
-
 }
