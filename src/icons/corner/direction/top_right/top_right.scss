@@ -1,32 +1,16 @@
 
 /* =========================================================================
- * Svelto - Icons
+ * Svelto - Icons - Corner - Direction - Top Right
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../widget/widget.scss
- * @require ../icon/icon.scss
+ * @require ../corner.scss
  * ========================================================================= */
 
-//FIXME: Scaling to large size for example doesn't work
+/* TOP RIGHT */
 
-/* ICONS */
-
-.icons {
-
-  @extend .widget;
-  @extend %scaled-icon-sizes;
-  display: inline-block;
-  width: 1em * $icon-scale-amount;
-  height: 1em * $icon-scale-amount;
-  position: relative;
-
-  /* ICON */
-
-  > .icon {
-    @include fill-absolute ();
-    margin-bottom: 0;
-  }
-
+.icons > i.icon.corner.top-right,
+.icons > i.icon.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
+  @include position ( absolute, 0 0 initial initial );
 }
