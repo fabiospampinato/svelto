@@ -1,20 +1,15 @@
 
 /* =========================================================================
- * Svelto - Container
+ * Svelto - Container - Compact
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../widget/widget.scss
+ * @require ../container.scss
  * ========================================================================= */
 
-/* CONTAINER */
+/* COMPACT */
 
-//FIXME: It's expanding over the visible viewport on Dolphin Browser
-
-.container {
-  @extend .widget;
-  @include color ( $container-color, $container-color-basic );
-  border-radius: $container-border-radius;
-  padding: $container-padding-y $container-padding-x;
+.container.compact {
+  padding: $container-compact-padding-y $container-compact-padding-x;
 }
