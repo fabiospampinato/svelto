@@ -17,15 +17,13 @@
   /* LEFT / RIGHT */
 
   &.left,
-  &.right,
-  &:not(.top):not(.bottom) { // Default case
+  &.right {
     width: $panel-default-y-width;
   }
 
   /* LEFT */
 
-  &.left,
-  &:not(.right):not(.top):not(.bottom) { // Default case
+  &.left {
     transform: translateX(- $panel-default-closed-y-spacing);
   }
 

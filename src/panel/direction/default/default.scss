@@ -1,15 +1,15 @@
 
 /* =========================================================================
- * Svelto - Panel - Direction - Left
+ * Svelto - Panel - Direction - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../panel.scss
+ * @require ../left/left.scss
  * ========================================================================= */
 
-/* LEFT */
+/* DEFAULT */
 
-.panel.left { 
-  @include position ( fixed, 0 initial 0 0 );
+.panel:not(.top):not(.right):not(.bottom) {
+  @extend .panel.left;
 }

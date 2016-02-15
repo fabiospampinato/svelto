@@ -16,15 +16,13 @@
   /* LEFT / RIGHT */
 
   &.left,
-  &.right,
-  &:not(.top):not(.bottom) { // Default case
+  &.right {
     width: $panel-slim-y-width;
   }
 
   /* LEFT */
 
-  &.left,
-  &:not(.right):not(.top):not(.bottom) { // Default case
+  &.left {
     transform: translateX(- $panel-slim-closed-y-spacing);
   }
 
