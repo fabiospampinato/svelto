@@ -179,28 +179,4 @@ table.table { // So that if someone need a plain basic table he can, just by don
 
   }
 
-  /* COMPACT */
-
-  &.compact tr > * {
-    padding: $gutter-half;
-  }
-
-  /* COLLAPSE */
-
-  &.collapse {
-    width: auto;
-  }
-
-  /* EQUAL */
-
-  &.equal {
-
-    table-layout: fixed;
-
-    tr > * {
-      width: 100%;
-    }
-
-  }
-
 }
