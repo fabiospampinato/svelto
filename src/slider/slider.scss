@@ -158,32 +158,6 @@
     opacity: 0;
   }
 
-  /* INVALID */
-
-  &.invalid {
-
-    /* HIGHLIGHT / HANDLER */
-
-    .slider-highlight,
-    .slider-handler {
-      @include color ( 'error', true, !important );
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* HIGHLIGHT / HANDLER */
-
-    .slider-highlight,
-    .slider-handler {
-      @include color ( 'success', true, !important );
-    }
-
-  }
-
   /* ENABLED */
 
   &:not(.disabled) {

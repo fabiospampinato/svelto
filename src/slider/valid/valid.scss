@@ -1,0 +1,22 @@
+
+/* =========================================================================
+ * Svelto - Slider - Valid
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../slider.scss
+ * ========================================================================= */
+
+/* VALID */
+
+.slider.valid {
+
+  /* HIGHLIGHT / HANDLER */
+
+  .slider-highlight,
+  .slider-handler {
+    @include color ( 'success', true, !important );
+  }
+
+}
