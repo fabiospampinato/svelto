@@ -251,7 +251,7 @@
 
     if ( prevDirection !== bestDirection ) {
 
-      $positionable.removeClass ( 'positionate-' + prevDirection ).addClass ( 'positionate-' + bestDirection );
+      $positionable.removeClass ( 'position-' + prevDirection ).addClass ( 'position-' + bestDirection );
 
       positionable._prevDirection = bestDirection;
 

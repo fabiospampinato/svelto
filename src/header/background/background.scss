@@ -1,16 +1,20 @@
 
 /* =========================================================================
- * Svelto - Header
+ * Svelto - Header - Background
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../reset/reset.scss
- * @require ../widget/widget.scss
  * ========================================================================= */
 
-/* HEADER */
+//FIXME: Object-fit is not cross-browser
 
-header {
-  @extend .widget;
+/* BAKGROUND */
+
+.header-background { //TODO: Scale it, make the image fill the space
+  @include fill-absolute ();
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; //FIXME: Not supported by IE, not even Edge
+  z-index: -1;
 }
