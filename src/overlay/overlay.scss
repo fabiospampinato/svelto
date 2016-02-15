@@ -6,8 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 //FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
+
+// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 
 /* OVERLAY */
 
@@ -41,59 +42,6 @@
 
   ~ * {
     transition: opacity $overlay-siblings-animation-duration; // It interferes with other widgets probably //FIXME
-  }
-
-  /* DIMMER */
-
-  &.dimmer {
-    @include color ( $overlay-dimmer-color, $overlay-dimmer-color-basic );
-    background-color: transparentize( nth( map-get( $colors, $overlay-dimmer-color ), 1 ) $overlay-dimmer-bg-transparentize-amount );
-  }
-
-  /* BLURRER */
-
-  &.blurrer {
-
-    /* SIBLINGS */
-
-    ~ * {
-      transition-property: opacity, filter !important;
-      transition-duration: $overlay-siblings-animation-duration !important;
-    }
-
-  }
-
-  /* SHOW / OPEN */
-
-  &.show,
-  &.open {
-    display: flex !important;
-  }
-
-  /* OPEN */
-
-  &.open {
-
-    opacity: 1;
-
-    /* SIBLINGS */
-
-    ~ * {
-      opacity: $overlay-siblings-opacity;
-    }
-
-    /* BLURRER */
-
-    &.blurrer {
-
-      /* SIBLINGS */
-
-      ~ * {
-        @extend %blurred;
-      }
-
-    }
-
   }
 
 }

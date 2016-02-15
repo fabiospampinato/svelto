@@ -1,22 +1,36 @@
 
 /* =========================================================================
- * Svelto - Overlay (Variables)
+ * Svelto - Overlay - Blurrer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../widget/variables.scss
+ * @require ../overlay.scss
  * ========================================================================= */
 
-/* OVERLAY */
+//TODO: Move `open` to its own file?
 
-$overlay-z-index: 100 !default;
+/* BLURRER */
 
-$overlay-animation-duration: $widget-animation-duration !default;
+.overlay.blurrer {
 
-/* SIBLINGS */
+  /* SIBLINGS */
 
-$overlay-siblings-opacity: .2 !default;
+  ~ * {
+    transition-property: opacity, filter !important;
+    transition-duration: $overlay-siblings-animation-duration !important;
+  }
 
-$overlay-siblings-animation-duration: $overlay-animation-duration !default;
+  /* OPEN */
+
+  &.open {
+
+    /* SIBLINGS */
+
+    ~ * {
+      @extend %blurred;
+    }
+
+  }
+
+}

@@ -1,22 +1,16 @@
 
 /* =========================================================================
- * Svelto - Overlay (Variables)
+ * Svelto - Overlay - Show
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../widget/variables.scss
+ * @require ../overlay.scss
  * ========================================================================= */
 
-/* OVERLAY */
+/* DIMMER */
 
-$overlay-z-index: 100 !default;
-
-$overlay-animation-duration: $widget-animation-duration !default;
-
-/* SIBLINGS */
-
-$overlay-siblings-opacity: .2 !default;
-
-$overlay-siblings-animation-duration: $overlay-animation-duration !default;
+.overlay.dimmer {
+  @include color ( $overlay-dimmer-color, $overlay-dimmer-color-basic );
+  background-color: transparentize( nth( map-get( $colors, $overlay-dimmer-color ), 1 ) $overlay-dimmer-bg-transparentize-amount );
+}

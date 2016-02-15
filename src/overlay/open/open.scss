@@ -1,22 +1,25 @@
 
 /* =========================================================================
- * Svelto - Overlay (Variables)
+ * Svelto - Overlay - Open
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../colors/variables.scss
- * @require ../widget/variables.scss
+ * @require ../overlay.scss
+ * @require ../show/show.scss
  * ========================================================================= */
 
-/* OVERLAY */
+/* OPEN */
 
-$overlay-z-index: 100 !default;
+.overlay.open {
 
-$overlay-animation-duration: $widget-animation-duration !default;
+  @extend .overlay.open;
+  opacity: 1;
 
-/* SIBLINGS */
+  /* SIBLINGS */
 
-$overlay-siblings-opacity: .2 !default;
+  ~ * {
+    opacity: $overlay-siblings-opacity;
+  }
 
-$overlay-siblings-animation-duration: $overlay-animation-duration !default;
+}
