@@ -8,10 +8,11 @@
  * @require ../container/container.scss
  * ========================================================================= */
 
-/* CARD */
-
 //FIXME: There's an overflow bug when scrolling the block-content, it goes a bit over the footer, but not if we zoom the page
 //FIXME: It's not good on Dolphin browser
+//TODO: Modularize it?
+
+/* CARD */
 
 .card {
 
