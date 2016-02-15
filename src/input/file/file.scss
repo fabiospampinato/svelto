@@ -1,0 +1,32 @@
+
+/* =========================================================================
+ * Svelto - Input - File
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* FILE */
+
+input[type="file"] {
+
+  @include fill-absolute ();
+  width: 100%; // Or it will not stretch on mobile Chrome
+  border: none;
+  appearance: none;
+  border-radius: inherit;
+  cursor: pointer;
+  font-size: 0;
+  opacity: 0;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  z-index: 99;
+
+  &::-webkit-file-upload-button {
+    display: none;
+  }
+
+}

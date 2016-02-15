@@ -1,0 +1,38 @@
+
+/* =========================================================================
+ * Svelto - Reset (Input)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BORDER */
+
+input {
+  border: none;
+}
+
+/* NUMBER */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* INVALID */
+
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* CLEAR ICON */
+
+input::-ms-clear {
+  display: none;
+}
+
+/* iOS SHADOW */
+
+input {
+  appearance: none !important; //FIXME: Does it work?
+}
