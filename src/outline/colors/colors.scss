@@ -1,14 +1,21 @@
 
 /* =========================================================================
- * Svelto - Outline
+ * Svelto - Outline - Color
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../outline.scss
  * ========================================================================= */
 
-/* OUTLINE */
+/* COLORS */
 
-.outlined {
-  border-width: $outline-width;
-  border-style: $outline-style;
+@each $name, $datas in $colors {
+
+  $bg: nth( $datas, 1 );
+
+  &.outline-#{$name} {
+    border-color: $bg !important;
+  }
+
 }
