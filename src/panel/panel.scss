@@ -9,7 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
-
+//TODO: Modularize directions
 //TODO: Not working on Dolphin browser
 //FIXME: Not working on iPod's Safari
 
@@ -66,41 +66,6 @@
 
   &.bottom {
     bottom: 0;
-  }
-
-  /* SHOW */
-
-  &.show {
-    display: flex !important;
-  }
-
-  /* OPEN */
-
-  &.open {
-
-    transform: translateX(0) translateY(0) !important;
-
-    /* BEFORE (BACKGROUND) */
-
-    &:before {
-      opacity: 1;
-    }
-
-  }
-
-  /* PINNED */
-
-  &.pinned {
-
-    @include z-depth ( $panel-pinned-z-depth );
-
-    /* BEFORE (BACKGROUND) */
-
-    &:before {
-      display: none;
-      opacity: 0;
-    }
-
   }
 
   /* BEFORE (BACKGROUND) */

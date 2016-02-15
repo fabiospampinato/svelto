@@ -1,24 +1,13 @@
 
 /* =========================================================================
- * Svelto - Panel (Variables)
+ * Svelto - Panel - Pinned (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
+ * @require ../variables.scss
  * ========================================================================= */
 
-/* PANEL */
+/* PINNED */
 
-$panel-z-index: 400 !default;
-$panel-z-depth: 5 !default;
-
-/* BACKGROUND */
-
-$panel-bg-color: rgba( 0, 0, 0, .5 ) !default;
-
-$panel-background-animation-opacity-duration: $animation-normal !default;
-
-/* ANIMATION */
-
-$panel-animation-duration: $animation-normal !default;
+$panel-pinned-z-depth: $panel-z-depth !default;

@@ -1,24 +1,25 @@
 
 /* =========================================================================
- * Svelto - Panel (Variables)
+ * Svelto - Panel - Open
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
+ * @require ../panel.scss
+ * @require ../show/show.scss
  * ========================================================================= */
 
-/* PANEL */
+/* OPEN */
 
-$panel-z-index: 400 !default;
-$panel-z-depth: 5 !default;
+&.open {
 
-/* BACKGROUND */
+  @extend .panel.show;
+  transform: translateX(0) translateY(0) !important;
 
-$panel-bg-color: rgba( 0, 0, 0, .5 ) !default;
+  /* BEFORE (BACKGROUND) */
 
-$panel-background-animation-opacity-duration: $animation-normal !default;
+  &:before {
+    opacity: 1;
+  }
 
-/* ANIMATION */
-
-$panel-animation-duration: $animation-normal !default;
+}
