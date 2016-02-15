@@ -55,18 +55,6 @@
 
   }
 
-  /* COLORS */
-
-  @each $name, $datas in $colors {
-
-    $bg: nth($datas, 1);
-
-    &.ripple-#{$name} > .ripple-circle:before {
-      background-color: $bg;
-    }
-
-  }
-
   /* ENABLED */
 
   &:not(.disabled) {
