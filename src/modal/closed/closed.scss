@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Modal - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.modal:not(.open) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale($modal-closed-scale);
+}
