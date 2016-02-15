@@ -9,6 +9,9 @@
  * @require ../widget/widget.scss
  * ========================================================================= */
 
+//TODO: `label` and `.label` have 2 different purposes, perhaps unificate them
+//TODO: Make `sub` a component of its own
+
 /* DEFAULT */
 
 label {
@@ -51,33 +54,6 @@ label {
     min-width: calc(#{$line-height-em + ( $label-padding-x * 2 )} + #{$outline-width * 2});
   }
 
-  /* INVALID */
-
-  &.invalid {
-
-    border: $outline-width solid $color-error !important;
-
-    /* ICON */
-
-    .icon {
-      color: $color-error !important;
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    border: $outline-width solid $color-success !important;
-
-    /* ICON */
-
-    .icon {
-      color: $color-success !important;
-    }
-
-  }
 
   /* COMPACT */
 
@@ -92,12 +68,6 @@ label {
       min-width: calc(#{$line-height-em + ( $label-compact-padding-x * 2 )} + #{$outline-width * 2});
     }
 
-  }
-
-  /* FLUID */
-
-  &.fluid {
-    display: flex;
   }
 
   /* LEFT / RIGHT */
