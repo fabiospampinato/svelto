@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - Remote Modal - Unloaded
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* UNLOADED */
+
+.remote-modal-placeholder:not(.remote-modal-loaded) {
+
+  width: $remote-modal-width;
+  height: $remote-modal-height;
+
+  /* CARD BLOCK */
+
+  > .card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

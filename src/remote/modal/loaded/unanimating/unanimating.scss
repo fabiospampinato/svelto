@@ -1,19 +1,29 @@
 
 /* =========================================================================
- * Svelto - Remote Modal
+ * Svelto - Remote Modal - Loaded - Unanimating
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../loaded.scss
  * ========================================================================= */
 
-/* REMOTE MODAL PLACEHOLDER */
+/* UNANIMATING */
 
-.remote-modal-placeholder {
+.remote-modal-placeholder.remote-modal-loaded:not(.remote-modal-animating) {
 
   /* CHILDREN */
 
   > * {
-    overflow: hidden;
+
+    color: transparent;
+
+    /* CHILDREN */
+
+    > * {
+      opacity: 0;
+    }
+
   }
 
 }
