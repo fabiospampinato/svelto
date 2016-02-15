@@ -14,7 +14,9 @@
 
 $carousel-height: 12.5em !default; //TODO: Should we set it?
 
-$carousel-bg-color: $color-black !default; //TODO: Maybe use @include color ( $color );
+/* ITEMS */
+
+$carousel-items-bg-color: $color-black !default; //TODO: Maybe use @include color ( $color );
 
 /* INDICATOR */
 

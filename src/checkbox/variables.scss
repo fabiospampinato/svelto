@@ -6,12 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../animations/variables.scss
+ * @require ../colors/variables.scss
  * ========================================================================= */
 
 /* CHECKBOX */
 
 $checkbox-icon-on: 'check_box' !default;
-$checkbox-icon-on-color: 'secondary' !default;
+$checkbox-icon-on-color: $color-secondary !default;
 
 $checkbox-icon-off: 'check_box_outline_blank' !default;
 

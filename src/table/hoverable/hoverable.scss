@@ -11,7 +11,7 @@
 /* HOVERABLE */
 
 table.table:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
-  background-color: $table-hoverable-row-even-color-hover;
+  background-color: $table-hoverable-row-even-bg-color-hover;
 }
 
 /* STRIPED */
@@ -21,11 +21,11 @@ table.table:not(.disabled).hoverable.striped tbody tr {
   &:first-child.table-row-empty ~ tr {
 
     &:nth-child(even):hover {
-      background-color: $table-hoverable-row-even-color-hover;
+      background-color: $table-hoverable-row-even-bg-color-hover;
     }
 
     &:nth-child(odd):hover {
-      background-color: $table-hoverable-row-odd-color-hover;
+      background-color: $table-hoverable-row-odd-bg-color-hover;
     }
 
   }
@@ -33,17 +33,17 @@ table.table:not(.disabled).hoverable.striped tbody tr {
   &:first-child:not(.table-row-empty) {
 
     &:hover {
-      background-color: $table-hoverable-row-even-color-hover;
+      background-color: $table-hoverable-row-even-bg-color-hover;
     }
 
     ~ tr {
 
       &:nth-child(odd):hover {
-        background-color: $table-hoverable-row-even-color-hover;
+        background-color: $table-hoverable-row-even-bg-color-hover;
       }
 
       &:nth-child(even):hover {
-        background-color: $table-hoverable-row-odd-color-hover;
+        background-color: $table-hoverable-row-odd-bg-color-hover;
       }
 
     }

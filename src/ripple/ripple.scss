@@ -32,7 +32,7 @@
       height: 100%;
       content: '';
       border-radius: 50%;
-      background-color: $ripple-bg-color;
+      background-color: $ripple-color;
       opacity: 0;
       transform: scale(0);
       transition-property: opacity, transform;
@@ -43,7 +43,7 @@
     /* SHOW */
 
     &.ripple-circle-show:before {
-      opacity: 1 - $ripple-bg-transparentize-amount;
+      opacity: 1 - $ripple-transparentize-amount;
       transform: scale(1);
     }
 

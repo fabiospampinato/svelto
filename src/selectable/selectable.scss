@@ -25,7 +25,7 @@ table.selectable {
     /* SELECTED */
 
     &.selected {
-      background-color: $selectable-table-row-selected-color !important;
+      background-color: $selectable-table-row-selected-bg-color !important;
     }
 
   }

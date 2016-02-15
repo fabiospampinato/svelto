@@ -15,27 +15,27 @@ table.table.striped tbody tr {
   &:first-child.table-row-empty ~ tr {
 
     &:nth-child(even) {
-      background-color: $table-striped-row-even-color;
+      background-color: $table-striped-row-even-bg-color;
     }
 
     &:nth-child(odd) {
-      background-color: $table-striped-row-odd-color;
+      background-color: $table-striped-row-odd-bg-color;
     }
 
   }
 
   &:first-child:not(.table-row-empty) {
 
-    background-color: $table-striped-row-even-color;
+    background-color: $table-striped-row-even-bg-color;
 
     ~ tr {
 
       &:nth-child(odd) {
-        background-color: $table-striped-row-even-color;
+        background-color: $table-striped-row-even-bg-color;
       }
 
       &:nth-child(even) {
-        background-color: $table-striped-row-odd-color;
+        background-color: $table-striped-row-odd-bg-color;
       }
 
     }
