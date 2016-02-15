@@ -29,7 +29,7 @@
   /* BAR */
 
   &-bar {
-    @include color ( $switch-color, true );
+    @include color ( $switch-bar-color, $switch-bar-color-basic );
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
@@ -40,7 +40,7 @@
 
   &-handler {
 
-    @include color ( $switch-color, true );
+    @include color ( $switch-handler-color, $switch-handler-color-basic );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
     z-index: 1;

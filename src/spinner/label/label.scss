@@ -13,7 +13,7 @@
 .spinner-label {
 
   @extend .widget;
-  @include color ( $spinner-label-color );
+  @include color ( $spinner-label-color, $spinner-label-color-basic );
   @include z-depth ( $spinner-label-z-depth );
   display: flex;
   border-radius: $spinner-label-border-radius !important;

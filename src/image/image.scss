@@ -39,7 +39,7 @@ span > img {
 .image-wrp {
 
   @extend .widget;
-  @include color ( $image-color );
+  @include color ( $image-color, $image-color-basic );
   display: flex;
   flex-direction: column;
   min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
@@ -63,7 +63,7 @@ span > img {
   .image-caption {
 
     @extend .container;
-    @include color ( $image-caption-color );
+    @include color ( $image-caption-color, $image-caption-color-basic );
     border-radius: 0;
     margin-bottom: 0;
     overflow: auto;

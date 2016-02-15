@@ -16,7 +16,7 @@
 .slider {
 
   @extend .widget;
-  @include color ( $slider-color );
+  @include color ( $slider-color, $slider-color-basic );
   display: flex;
   align-items: stretch;
   height: $slider-height;
@@ -89,7 +89,7 @@
   /* UNHIGHLIGHT */
 
   &-unhighlight {
-    @include color ( $slider-unhighlight-color );
+    @include color ( $slider-unhighlight-color, $slider-unhighlight-color-basic );
     position: relative;
     overflow: hidden;
     height: $slider-unhighlight-height;
@@ -101,7 +101,7 @@
   /* HIGHLIGHT */
 
   &-highlight {
-    @include color ( $slider-highlight-color );
+    @include color ( $slider-highlight-color, $slider-highlight-color-basic );
     position: absolute;
     right: 100%;
     width: 100%;
@@ -121,7 +121,7 @@
 
   &-handler {
 
-    @include color ( $slider-handler-color );
+    @include color ( $slider-handler-color, $slider-handler-color-basic );
     @include z-depth ( $slider-handler-z-depth );
     z-index: 1;
     width: $slider-handler-size;
