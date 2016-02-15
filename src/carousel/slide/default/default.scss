@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Carousel - Slide - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../carousel.scss
+ * @require ../horizontal/horizontal.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.carousel.slide,
+.carousel:not(.slide-vertical):not(.fade) {
+  @extend .carousel.slide-horizontal;
+}

@@ -10,9 +10,7 @@
 
 /* HORIZONTAL */
 
-.carousel.slide, // Horizontally by default
-.carousel.slide-horizontal,
-.carousel:not(.slide-vertical):not(.fade) { // Default transition effect
+.carousel.slide-horizontal { 
 
   /* ITEMS */
 
