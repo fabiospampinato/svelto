@@ -1,0 +1,22 @@
+
+/* =========================================================================
+ * Svelto - Switch - Valid
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../switch.scss
+ * ========================================================================= */
+
+/* VALID */
+
+&.valid {
+
+  /* BAR / HANDLER */
+
+  .switch-bar,
+  .switch-handler {
+    @include color ( 'success', true, !important );
+  }
+
+}

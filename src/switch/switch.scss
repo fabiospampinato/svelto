@@ -88,68 +88,6 @@
 
   }
 
-  /* INVALID */
-
-  &.invalid {
-
-    /* BAR / HANDLER */
-
-    .switch-bar,
-    .switch-handler {
-      @include color ( 'error', true, !important );
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* BAR / HANDLER */
-
-    .switch-bar,
-    .switch-handler {
-      @include color ( 'success', true, !important );
-    }
-
-  }
-
-  /* UNCHECKED */
-
-  &:not(.checked) {
-
-    /* HANDLER */
-
-    .switch-handler[data-icon-off] {
-
-      /* AFTER */
-
-      &:after {
-        content: attr(data-icon-off);
-      }
-
-    }
-
-  }
-
-  /* CHECKED */
-
-  &.checked {
-
-    /* HANDLER */
-
-    .switch-handler[data-icon-on] {
-
-      /* AFTER */
-
-      &:after {
-        content: attr(data-icon-on);
-      }
-
-    }
-
-  }
-
   /* ENABLED */
 
   &:not(.disabled) {
