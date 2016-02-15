@@ -1,18 +1,14 @@
 
 /* =========================================================================
- * Svelto - Image (Variables)
+ * Svelto - Image - Caption (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
  * ========================================================================= */
 
-/* IMAGE */
+/* CAPTION */
 
-$image-color: 'inherit' !default;
-$image-color-basic: true !default;
+$image-caption-z-index: 30 !default;
 
-/* ANIMATION */
-
-$image-caption-animation-duration: $animation-fast !default;
+$image-caption-color: 'black' !default;
+$image-caption-color-basic: true !default;
