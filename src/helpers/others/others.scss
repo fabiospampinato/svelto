@@ -16,16 +16,6 @@
   margin-bottom: $gutter;
 }
 
-.limited:not(.multiple) { //TODO: Move it to it's own decorator
-
-  @if $max-width-enabled {
-
-    @include center-margin ( $max-width );
-
-  }
-
-}
-
-.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
+.actionable:not(.disabled):not(.dragging) { 
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Svelto (Variables)
+ * Svelto - Limited (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,13 +8,7 @@
  * @require ../breakpoints/variables.scss
  * ========================================================================= */
 
-/* GUTTER */
+/* LIMITED */
 
-$gutter: 10px !default; //TODO: Maybe move to a rem version? (so that it won't affect the sizes that are based in em)
-$gutter-half: $gutter / 2;
-
-/* BORDER RADIUS */
-
-$border-radius-small: .125em !default; // 2 / 16
-$border-radius-medium: .25em !default; // 4 / 16
-$border-radius-large: .375em !default; // 6 / 16
+$limited-breakpoint: 'xlarge' !default;
+$limited-width: map-get( $breakpoints, $limited-breakpoint ) * 1.05 !default;

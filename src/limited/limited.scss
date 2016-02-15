@@ -1,0 +1,28 @@
+
+/* =========================================================================
+ * Svelto - Limited
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//FIXME: Test it, not sure it will work, particularly when also `.multiple`
+//TODO: Maybe rename it, limited is not very explicative of its purpose (restricting the width of an element to the setted limit)
+
+/* LIMITED */
+
+.limited {
+
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    max-width: $limited-width;
+  }
+
+  /* MULTIPLE */
+
+  &.multiple {
+    max-width: calc(#{$limited-width} - #{$gutter});
+  }
+
+}

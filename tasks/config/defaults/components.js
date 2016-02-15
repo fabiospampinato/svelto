@@ -112,6 +112,7 @@ var components = [
   // 'label/ribbon',
   // 'label/tag',
   'layout',
+  'limited',
   'modal',
   'mouse',
   'multiple',

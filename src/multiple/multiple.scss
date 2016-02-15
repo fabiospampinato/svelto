@@ -68,23 +68,6 @@
     align-items: center;
   }
 
-  /* LIMITED */
-
-  &.limited { //FIXME: It's not perfect... It's padded by the gutter, fix it if possible, or just remove it
-
-    @if $max-width-enabled {
-
-      max-width: $max-width;
-
-      @include min-screen ( $max-width ) {
-        @include margin-x ( auto !important );
-        display: flex;
-      }
-
-    }
-
-  }
-
   /* NO WRAP */
 
   &.no-wrap {
