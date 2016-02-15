@@ -1,29 +1,24 @@
 
 /* =========================================================================
- * Svelto - Highlight
+ * Svelto - Highlight - Direction - Right
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../highlight.scss
  * ========================================================================= */
 
-/* HIGHLIGHT:AFTER */
+/* RIGHT */
 
-%highlight-after {
-  @include fill-absolute ();
-  z-index: $highlight-z-index;
-  content: '';
-  pointer-events: none;
-  border-width: 0;
-  border-style: solid;
-  border-radius: inherit;
-}
-
-/* HIGHLIGHT */
-
-.highlighted {
+&.highlight-right {
 
   &:after {
-    @extend %highlight-after;
+    border-right-width: $highlight-size;
+  }
+  /* OUTLINED */
+
+  &.outlined:after {
+    right: - $outline-width;
   }
 
 }
