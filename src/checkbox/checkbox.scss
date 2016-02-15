@@ -10,9 +10,9 @@
  * @require ../icons/icons.scss
  * ========================================================================= */
 
-/* CHECKBOX */
-
 //TODO: Add support for input.checkbox
+
+/* CHECKBOX */
 
 .checkbox {
 
@@ -63,7 +63,7 @@
       z-index: 1;
     }
 
-    /* CUSTOM BEFORE / AFTER */
+    /* CUSTOM BEFORE / AFTER */ //TODO: Implement this logic also everywhere else we use a pseudo element icon
 
     &[data-icon-off]:before {
       content: attr(data-icon-off);
@@ -87,44 +87,6 @@
 
       &:after {
         opacity: 1;
-      }
-
-    }
-
-  }
-
-  /* INVALID */
-
-  &.invalid {
-
-    /* INPUT */
-
-    input {
-
-      /* BEFORE / AFTER */
-
-      &:before,
-      &:after {
-        color: $color-error !important;
-      }
-
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* INPUT */
-
-    input {
-
-      /* BEFORE / AFTER */
-
-      &:before,
-      &:after {
-        color: $color-success !important;
       }
 
     }
