@@ -1,17 +1,15 @@
 
 /* =========================================================================
- * Svelto - Label - Badge
+ * Svelto - Label - Direction - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../label.scss
+ * @require ../top_right/top_right.scss
  * ========================================================================= */
 
- //TODO: Maybe move to it's own component
+/* DEFAULT */
 
-/* BADGE */
-
-.label.badge {
-  margin: 0;
+.label.badge:not(.top-left):not(.bottom-left):not(.bottom-right) {
+  @extend .label.badge.top-right;
 }
