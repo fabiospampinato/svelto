@@ -13,9 +13,9 @@
 //FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
 //FIXME: It doesn't work in IE10
 //FIXME: Don't make `.vertical` inherit `:not(.vertical)` properties
+//TODO: Modularize it
 
-.divider.linear,
-.divider:not(.block):not(.text):not(.spacer) { // The default one
+.divider.linear {
 
   /* EMPTY */
 
