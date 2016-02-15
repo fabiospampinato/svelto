@@ -1,0 +1,33 @@
+
+/* =========================================================================
+ * Svelto - Carousel - Inset (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PREVIOUS / NEXT */
+
+$carousel-inset-previous-next-z-index: $carousel-indicators-z-index - 1 !default;
+
+$carousel-inset-previous-next-font-size: 1em * $icon-scale-amount !default;
+
+$carousel-inset-previous-next-color: $carousel-indicator-color !default;
+
+$carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
+$carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
+$carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
+
+$carousel-inset-previous-next-animation-duration: $animation-normal !default;
+
+/* PREVIOUS */
+
+$carousel-inset-previous-width: 20% !default;
+
+$carousel-inset-previous-icon: 'chevron_left' !default;
+
+/* NEXT */
+
+$carousel-inset-next-width: 100% - $carousel-inset-previous-width !default;
+
+$carousel-inset-next-icon: 'chevron_right' !default;

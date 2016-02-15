@@ -1,26 +1,42 @@
 
 /* =========================================================================
- * Svelto - Button
+ * Svelto - Carousel - Outset
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../label/label.scss
+ * @require ../carousel.scss
  * ========================================================================= */
 
-//TODO: Should `button` also extend `.label`? What about the default `label`? Its purpose is very different from the one of `.label`
+/* OUTSET */
 
-/* DEFAULT BUTTON */
+.carousel:not(.inset) {
 
-button {
-  border: none;
-  padding: 0;
-}
+  /* PREVIOUS / NEXT */
 
-/* BUTTON */
+  .carousel-previous,
+  .carousel-next {
+    @include margin-x ( $gutter );
+    align-self: center;
+    margin-bottom: 0;
+  }
 
-.button {
-  @extend .label;
-  @extend .actionable;
+  /* PREVIOUS */
+
+  .carousel-previous {
+    order: 1;
+  }
+
+  /* NEXT */
+
+  .carousel-next {
+    order: 3;
+  }
+
+  /* ITEMS */
+
+  .carousel-items {
+    order: 2;
+  }
+
 }

@@ -1,26 +1,13 @@
 
 /* =========================================================================
- * Svelto - Button
+ * Svelto - Carousel - Slide - Horizontal (Vertical)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../reset/reset.scss
- * @require ../label/label.scss
+ * @require ../../../animations/variables.scss
  * ========================================================================= */
 
-//TODO: Should `button` also extend `.label`? What about the default `label`? Its purpose is very different from the one of `.label`
+/* HORIZONTAL */
 
-/* DEFAULT BUTTON */
-
-button {
-  border: none;
-  padding: 0;
-}
-
-/* BUTTON */
-
-.button {
-  @extend .label;
-  @extend .actionable;
-}
+$carousel-slide-horizontal-animation-duration: $animation-normal !default;
