@@ -1,15 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widget
+ * Svelto - Widget - Disabled (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* WIDGET */
+/* DISABLED */
 
-.widget {
-  @include last-child-no-gutter ();
-  position: relative;
-  margin: 0 0 $gutter;
-}
+$widget-disabled-opacity: .5 !default;

@@ -22,7 +22,7 @@
 
   }
 
-  > script:last-child {
+  > script:last-child { //TODO: Also add `style` support?
     display: block;
     font-size: 0;
     height: 0;
