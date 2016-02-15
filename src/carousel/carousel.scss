@@ -111,7 +111,7 @@
       /* ITEM */
 
       > * {
-        transition: transform $carousel-slide-animation-transform-duration;
+        transition: transform $carousel-slide-animation-duration;
         transform: translateX(-100%);
       }
 
@@ -151,7 +151,7 @@
       /* ITEM */
 
       > * {
-        transition: transform $carousel-slide-animation-transform-duration;
+        transition: transform $carousel-slide-animation-duration;
         transform: translateY(-100%);
       }
 
@@ -192,7 +192,7 @@
 
       > * {
         opacity: 0;
-        transition: opacity $carousel-fade-animation-opacity-duration;
+        transition: opacity $carousel-fade-animation-duration;
       }
 
       /* PREV */
@@ -297,7 +297,7 @@
         margin-bottom: 0;
         color: $carousel-inset-previous-next-color;
         opacity: $carousel-inset-previous-next-opacity;
-        transition: opacity $carousel-inset-previous-next-animation-opacity-duration;
+        transition: opacity $carousel-inset-previous-next-animation-duration;
       }
 
     }

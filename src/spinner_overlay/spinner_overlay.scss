@@ -18,7 +18,7 @@
   .spinner-label {
     margin-bottom: 0;
     transform: scale(0);
-    transition: transform $spinner-overlay-animation-transform-duration;
+    transition: transform $spinner-overlay-animation-duration;
   }
 
   /* CLOSE */

@@ -12,7 +12,7 @@
 
 .raisable {
 
-  transition: box-shadow $raisable-animation-box-shadow-duration;
+  transition: box-shadow $raisable-animation-duration;
 
   &:not(.disabled) {
 

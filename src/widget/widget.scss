@@ -15,7 +15,7 @@
   @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
-  transition: opacity $widget-animation-opacity-duration;
+  transition: opacity $widget-animation-duration;
 
   &.disabled {
 

@@ -77,7 +77,7 @@ span > img {
 
       &.on-hover {
         opacity: 0;
-        transition: opacity $image-caption-animation-opacity-duration;
+        transition: opacity $image-caption-animation-duration;
       }
 
       &:not(.top) {

@@ -43,7 +43,7 @@
     &:after {
       @extend %icon;
       @include fill-absolute ();
-      transition: opacity $checkbox-icon-animation-opacity-duration;
+      transition: opacity $checkbox-icon-animation-duration;
       margin-bottom: 0 !important;
     }
 
