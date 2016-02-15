@@ -1,0 +1,47 @@
+
+/* =========================================================================
+ * Svelto - Card - Outlined
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../card.scss
+ * ========================================================================= */
+
+/* OUTLINED */
+
+.card.outlined {
+
+  /* INSET OUTLINED */
+
+  > .outlined {
+
+    margin-left: - $outline-width;
+    margin-right: - $outline-width;
+
+    /* FIRST / LAST */
+
+    &:first-child:not(.overlay):not(.ripple-circle) {
+      margin-top: - $outline-width;
+    }
+
+    &:last-child {
+      margin-bottom: - $outline-width !important;
+    }
+
+  }
+
+  /* INSET OUTLINED */
+
+  > :first-child.overlay + .outlined,
+  > :first-child.ripple-circle + .outlined {
+    margin-top: - $outline-width;
+  }
+
+  /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
+
+  > img.outlined {
+    width: calc(100% + #{$outline-width * 2}) !important;
+  }
+
+}

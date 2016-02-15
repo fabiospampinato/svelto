@@ -10,7 +10,6 @@
 
 //FIXME: There's an overflow bug when scrolling the block-content, it goes a bit over the footer, but not if we zoom the page
 //FIXME: It's not good on Dolphin browser
-//TODO: Modularize it?
 
 /* CARD */
 
@@ -42,10 +41,6 @@
         margin-bottom: 0 !important;
       }
 
-    }
-
-    .card.compact & {
-      @extend .container.compact;
     }
 
   }
@@ -109,44 +104,6 @@
 
     > :last-child {
       border-bottom-right-radius: inherit;
-    }
-
-  }
-
-  /* OUTLINED */
-
-  &.outlined {
-
-    /* INSET OUTLINED */
-
-    > .outlined {
-
-      margin-left: - $outline-width;
-      margin-right: - $outline-width;
-
-      /* FIRST / LAST */
-
-      &:first-child:not(.overlay):not(.ripple-circle) {
-        margin-top: - $outline-width;
-      }
-
-      &:last-child {
-        margin-bottom: - $outline-width !important; //FIXME: The `!important` shouldn't be necessary
-      }
-
-    }
-
-    /* INSET OUTLINED */
-
-    > :first-child.overlay + .outlined,
-    > :first-child.ripple-circle + .outlined {
-      margin-top: - $outline-width;
-    }
-
-    /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
-
-    > img.outlined {
-      width: calc(100% + #{$outline-width * 2}) !important;
     }
 
   }
