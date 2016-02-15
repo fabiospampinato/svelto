@@ -1,0 +1,38 @@
+
+/* =========================================================================
+ * Svelto - Dropdown - Position - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../dropdown.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.dropdown.position-top {
+
+  /* TIP */
+
+  &:before {
+    left: - ( $dropdown-tip-size / 2 );
+    bottom: - ( $dropdown-tip-size / 2 );
+    clip-path: url(#{$dropdown-path-images}dropdown-clips.svg#clip-top); // The polygon is not supported on Firefox
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    box-shadow: $dropdown-top-tip-box-shadow;
+  }
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    /* TIP */
+
+    &:before {
+      margin-bottom: - $outline-width;
+      margin-left: - $outline-width;
+    }
+
+  }
+
+}

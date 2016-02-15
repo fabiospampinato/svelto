@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Dropdown - Show
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../dropdown.scss
+ * ========================================================================= */
+
+/* SHOW */
+
+.dropdown.show {
+
+  /* CARD */
+
+  &.card {
+    display: flex !important;
+  }
+
+  /* OTHER */
+
+  &:not(.card) {
+    display: block !important;
+  }
+
+}
