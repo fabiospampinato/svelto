@@ -1,0 +1,23 @@
+
+/* =========================================================================
+ * Svelto - Progressbar - Invalid
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../progressbar.scss
+ * ========================================================================= */
+
+/* INVALID */
+
+.progressbar.invalid {
+
+  border-color: $color-error !important;
+
+  /* HIGHLIGHT */
+
+  .progressbar-highlight {
+    background-color: $color-error !important;
+  }
+
+}

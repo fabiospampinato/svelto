@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Progressbar - Slim
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../progressbar.scss
+ * ========================================================================= */
+
+//TODO: Modularize label
+
+/* SLIM */
+
+.progressbar.slim {
+
+  height: $progressbar-slim-height;
+
+  /* AFTER (LABEL) */
+
+  .progressbar-highlight:after {
+    font-size: $progressbar-slim-label-font-size;
+  }
+
+}
