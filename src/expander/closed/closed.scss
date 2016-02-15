@@ -1,15 +1,33 @@
 
 /* =========================================================================
- * Svelto - Expander
+ * Svelto - Expander - Closed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Add support for horizontal expander -> basically add support for horizontal cards
-//TODO: Add ability to rotate the proper icons (the pointing arrow for example) if the expander is open or close
-//TODO: Add a sliding animation
+/* CLOSED */
 
-/* EXPANDER */
+.expander:not(.open) {
 
-.expander {}
+  /* IS A CARD */
+
+  &.card {
+
+    > .card-header {
+      @include border-bottom-radius ( inherit );
+    }
+
+    &.outlined > .card-header {
+      margin-bottom: -1px !important;
+    }
+
+  }
+
+  /* CONTENT */
+
+  > .expander-content {
+    display: none;
+  }
+
+}
