@@ -15,13 +15,6 @@
   @extend .widget;
   padding: $toolbar-padding-y $toolbar-padding-x;
 
-  /* VERTICAL */
-
-  &.vertical {
-    display: inline-flex;
-    padding: $toolbar-vertical-padding-y $toolbar-vertical-padding-x;
-  }
-
   /* MULTIPLE */
 
   > .multiple {

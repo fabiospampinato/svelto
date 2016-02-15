@@ -1,12 +1,16 @@
 
 /* =========================================================================
- * Svelto - Toolbar (Variables)
+ * Svelto - Toolbar - Vertical
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../toolbar.scss
  * ========================================================================= */
 
-/* TOOLBAR */
+/* VERTICAL */
 
-$toolbar-padding-x: 1em !default;
-$toolbar-padding-y: $toolbar-padding-x / 2 !default;
+.toolbar.vertical {
+  display: inline-flex;
+  padding: $toolbar-vertical-padding-y $toolbar-vertical-padding-x;
+}
