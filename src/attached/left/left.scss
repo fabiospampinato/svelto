@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Attached - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+// The attached element shouldn't match `:last-child` or it may cause issues with the gutter
+
+/* LEFT */
+
+.attached-left {
+  @include position ( absolute, 0 false 0 0 );
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+}

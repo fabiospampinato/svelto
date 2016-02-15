@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Attached - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+// The attached element shouldn't match `:last-child` or it may cause issues with the gutter
+
+/* BOTTOM */
+
+.attached-bottom {
+  @include position ( absolute, false 0 0 0 );
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+}
