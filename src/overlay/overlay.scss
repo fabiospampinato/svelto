@@ -18,7 +18,7 @@
   z-index: $overlay-z-index;
   display: none;
   opacity: 0;
-  transition: opacity $overlay-transition-opacity-duration;
+  transition: opacity $overlay-animation-duration;
   background-color: transparent;
   border-radius: inherit;
 
@@ -40,7 +40,7 @@
   /* SIBLINGS */
 
   ~ * {
-    transition: opacity $overlay-siblings-transition-opacity-duration; // It interferes with other widgets probably //FIXME
+    transition: opacity $overlay-siblings-animation-duration; // It interferes with other widgets probably //FIXME
   }
 
   /* DIMMER */
@@ -58,7 +58,7 @@
 
     ~ * {
       transition-property: opacity, filter !important;
-      transition-duration: $overlay-siblings-transition-opacity-duration !important;
+      transition-duration: $overlay-siblings-animation-duration !important;
     }
 
   }

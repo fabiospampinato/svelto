@@ -13,13 +13,13 @@
 
 $overlay-z-index: 100 !default;
 
-$overlay-transition-opacity-duration: $widget-animation-opacity-duration !default;
+$overlay-animation-duration: $widget-animation-opacity-duration !default;
 
 /* SIBLINGS */
 
 $overlay-siblings-opacity: .2 !default;
 
-$overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-duration !default;
+$overlay-siblings-animation-duration: $overlay-animation-duration !default;
 
 /* DIMMER */
 

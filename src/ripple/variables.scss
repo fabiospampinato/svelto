@@ -20,7 +20,7 @@ $ripple-circle-z-index: 50 !default;
 
 /* ANIMATION */
 
-$ripple-transition-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material //TODO: Replace it with one of the standards
+$ripple-animation-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material //TODO: Replace it with one of the standards
 
 $ripple-animation-show-duration: $animation-xslow !default;
 $ripple-animation-hide-duration: $animation-xslow !default;
