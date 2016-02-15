@@ -8,9 +8,9 @@
  * @require ../widget/widget.scss
  * ========================================================================= */
 
-/* STATISTIC */
-
 //TODO: Add better support for icon + text
+
+/* STATISTIC */
 
 .statistic {
 
@@ -20,14 +20,14 @@
   /* VALUE */
 
   > .statistic-value {
-    @include size ( $statistic-primary-size );
+    @include size ( $statistic-value-size );
     justify-content: center;
   }
 
   /* DESCRIPTION */
 
   > .statistic-description {
-    @include size ( $statistic-secondary-size );
+    @include size ( $statistic-description-size );
     justify-content: center;
   }
 
