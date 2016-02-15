@@ -11,8 +11,7 @@
 
 /* TOP */
 
-.tabs.top,
-.tabs:not(.right):not(.bottom):not(.left) { // Default case
+.tabs.top { 
 
   @extend .tabs.vertical;
 
