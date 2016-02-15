@@ -8,26 +8,8 @@
  * @require ../../input/input.scss
  * ========================================================================= */
 
-//TODO: Modularize it?
+/* INPUT */
 
-/* INPUT AUTOGROW */
-
-input.autogrow {
-
-  /* OUTLINED */
-
-  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-    min-width: calc(#{( $input-padding-x * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
-  }
-
-  /* COMPACT */
-
-  &.compact {
-
-    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-      min-width: calc(#{( $input-compact-padding-x * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
-    }
-
-  }
-
+input.autogrow { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+  min-width: calc(#{( $input-padding-x * 2 )} + + #{$input-autogrow-min-width});
 }
