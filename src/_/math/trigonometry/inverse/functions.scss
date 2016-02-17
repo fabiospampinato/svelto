@@ -1,0 +1,62 @@
+
+/* =========================================================================
+ * Svelto - _ - Math - Trigonometry - Inverse (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/math/angle/functions.scss
+ * @require _/math/constants/variables.scss
+ * @require _/math/power/functions.scss
+ * @require _/math/trigonometry/functions.scss
+ * ========================================================================= */
+
+//SOURCE: http://thesassway.com/advanced/inverse-trigonometric-functions-with-sass
+
+/* INVERSE */
+
+@function asin ( $z, $unit: deg ) {
+
+  $threshold: $PI / 180 / 50;
+  $sum: 0;
+  $complement: false;
+  $sign: if( $z != 0, $z / abs( $z ), 1 );
+  $z: abs( $z );
+
+  @if $z > 1 {
+    @warn 'Illegal `#{$z}` value for function';
+    @return false;
+  }
+
+  @if $z > sin( $PI / 4 ) {
+    $complement: true;
+    $z: sqrt( 1 - pow( $z, 2 ) );
+  }
+
+  $term: $z;
+  $i: 0;
+  $k: 1;
+
+  @while $term > $threshold {
+
+    $sum: $sum + $term;
+
+    $i: $i + 1;
+    $k: $k * ( 2 * $i - 1 ) / ( 2 * $i );
+    $j: 2 * $i + 1;
+
+    $term: $k * pow( $z, $j ) / $j;
+
+  }
+
+  @return angle-convert( $sign * ( if( $complement, $PI / 2 - $sum, $sum ) ), $unit );
+
+}
+
+@function acos ( $z, $unit: deg ) {
+  @return angle-convert( $PI / 2, $unit ) - asin( $z, $unit );
+}
+
+@function atan ( $z, $unit: deg ) {
+  @return asin( $z / sqrt( 1 + pow( $z, 2 ) ), $unit );
+}

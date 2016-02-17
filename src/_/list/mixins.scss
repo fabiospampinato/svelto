@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - _ - List (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* LIST */
+
+@function first ( $list ) {
+  @return nth( $list, 1 );
+}
+
+@function last ( $list ) {
+  @return nth( $list, length( $list ) );
+}

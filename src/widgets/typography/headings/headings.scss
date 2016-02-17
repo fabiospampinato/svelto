@@ -1,0 +1,65 @@
+
+/* =========================================================================
+ * Svelto - Typography - Headings
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * ========================================================================= */
+
+/* HEADINGS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+
+  //TODO: Add font-family, font-weight, line-height
+
+  margin: 0 0 $gutter;
+
+  > small,
+  > .small {
+    opacity: $header-small-opacity;
+  }
+
+}
+
+h1,
+.h1 {
+  @include size ( $h1-size );
+}
+
+h2,
+.h2 {
+  @include size ( $h2-size );
+}
+
+h3,
+.h3 {
+  @include size ( $h3-size );
+}
+
+h4,
+.h4 {
+  @include size ( $h4-size );
+}
+
+h5,
+.h5 {
+  @include size ( $h5-size );
+}
+
+h6,
+.h6 {
+  @include size ( $h6-size );
+}

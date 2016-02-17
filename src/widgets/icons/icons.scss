@@ -1,16 +1,32 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Icons
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+//FIXME: Scaling to large size for example doesn't work
+
+/* ICONS */
+
+.icons {
+
+  @extend .widget;
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  width: 1em * $icon-scale-amount;
+  height: 1em * $icon-scale-amount;
+  position: relative;
+
+  /* ICON */
+
+  > .icon {
+    @include fill-absolute ();
+    margin-bottom: 0;
+  }
+
+}

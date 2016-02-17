@@ -1,16 +1,29 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Animations
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* ANIMATIONS */
+
+  let Animations = {
+    xslow: 900,
+    slow: 500,
+    normal: 350,
+    fast: 150,
+    xfast: 75
+  };
+
+  /* EXPORT */
+
+  Svelto.Animations = Animations;
+
+}( Svelto.$, Svelto._, Svelto ));

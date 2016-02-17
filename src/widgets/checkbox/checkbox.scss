@@ -1,0 +1,110 @@
+
+/* =========================================================================
+ * Svelto - Checkbox
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
+ * @require widgets/icons/icons.scss
+ * ========================================================================= */
+
+//TODO: Add support for input.checkbox
+
+/* CHECKBOX */
+
+.checkbox {
+
+  @extend .widget;
+  display: inline-flex;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(:first-child) {
+    margin-left: $label-compact-center-extra-spacing;
+  }
+
+  /* INPUT */
+
+  input {
+
+    @extend .icons;
+    min-height: 0;
+    background-color: transparent;
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend %icon;
+      @include fill-absolute ();
+      transition: opacity $checkbox-icon-animation-duration;
+      margin-bottom: 0 !important;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: $checkbox-icon-off;
+      opacity: 1;
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: $checkbox-icon-on;
+      color: $checkbox-icon-on-color;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* CUSTOM BEFORE / AFTER */ //TODO: Implement this logic also everywhere else we use a pseudo element icon
+
+    &[data-icon-off]:before {
+      content: attr(data-icon-off);
+    }
+
+    &[data-icon-on]:after {
+      content: attr(data-icon-on);
+    }
+
+    /* CHECKED */
+
+    &:checked {
+
+      /* BEFORE */
+
+      &:before {
+        opacity: 0;
+      }
+
+      /* AFTER */
+
+      &:after {
+        opacity: 1;
+      }
+
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    cursor: pointer;
+
+    /* INPUT */
+
+    input {
+      cursor: pointer;
+    }
+
+  }
+
+}

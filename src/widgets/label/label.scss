@@ -1,0 +1,155 @@
+
+/* =========================================================================
+ * Svelto - Label
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: `label` and `.label` have 2 different purposes, perhaps unificate them
+//TODO: Make `sub` a component of its own
+
+/* DEFAULT */
+
+label {
+  @extend .widget;
+  display: block;
+}
+
+/* LABEL */
+
+.label {
+
+  @extend .widget;
+  @include color ( $label-color, $label-color-basic );
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $label-border-radius;
+  padding: $label-padding-y $label-padding-x;
+  min-height: $line-height-em + ( $label-padding-y * 2 );
+  min-width: $line-height-em + ( $label-padding-x * 2 );
+
+  /* CHILDREN NO MARGIN BOTTOM */
+
+  > :not(.sub) {
+    margin-bottom: 0 !important;
+  }
+
+  /* TEXT GROW */
+
+  > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
+    flex-grow: 1;
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $label-padding-y * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $label-padding-x * 2 )} + #{$outline-width * 2});
+  }
+
+
+  /* COMPACT */
+
+  &.compact {
+
+    padding: $label-compact-padding-y $label-compact-padding-x;
+    min-height: $line-height-em + ( $label-compact-padding-y * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-x * 2 );
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $label-compact-padding-y * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $label-compact-padding-x * 2 )} + #{$outline-width * 2});
+    }
+
+  }
+
+  /* LEFT / RIGHT */
+
+  > .sub {
+
+    @include last-child-no-gutter ();
+    display: inline-flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    background-color: $label-sub-bg-color;
+    padding: $label-compact-padding-y $label-compact-padding-x;
+    min-height: $line-height-em + ( $label-compact-padding-y * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-x * 2 );
+
+    &.left {
+      @include border-left-radius ( inherit );
+      margin: ( - $label-padding-y ) $label-padding-x ( - $label-padding-y ) ( - $label-padding-x ) !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      @include border-right-radius ( inherit );
+      margin: ( - $label-padding-y ) ( - $label-padding-x ) ( - $label-padding-y ) $label-padding-x !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  &.compact > .sub {
+
+    &.left {
+      margin: ( - $label-compact-padding-y ) $label-compact-padding-x ( - $label-compact-padding-y ) ( - $label-compact-padding-x ) !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      margin: ( - $label-compact-padding-y ) ( - $label-compact-padding-x ) ( - $label-compact-padding-y ) $label-compact-padding-x !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  &.outlined > .sub {
+
+    &.left {
+      border-right: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      border-left: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  /* CENTER */
+
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
+
+    & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
+      margin-left: $label-center-extra-spacing;
+    }
+
+    & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+      margin-left: $label-center-extra-spacing / $icon-scale-amount;
+    }
+
+  }
+
+  &.compact {
+
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { // Both `.label` and `.button`
+
+      & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
+        margin-left: $label-compact-center-extra-spacing;
+      }
+
+      & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+        margin-left: $label-compact-center-extra-spacing / $icon-scale-amount;
+      }
+
+    }
+
+  }
+
+}

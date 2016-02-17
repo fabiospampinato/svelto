@@ -1,16 +1,22 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Overlay (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/colors/variables.scss
+ * @require core/widget/variables.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* OVERLAY */
+
+$overlay-z-index: 100 !default;
+
+$overlay-animation-duration: $widget-animation-duration !default;
+
+/* SIBLINGS */
+
+$overlay-siblings-opacity: .2 !default;
+
+$overlay-siblings-animation-duration: $overlay-animation-duration !default;

@@ -1,16 +1,28 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - _ - Fill (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require _/dimension/mixins.scss
+ * @require _/position/mixins.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* FILL */
+
+@mixin fill {
+  @include dimension ( 100% );
+}
+
+@mixin fill-absolute {
+  @include position ( absolute, 0 0 0 0 );
+}
+
+@mixin fill-fixed {
+  @include position ( fixed, 0 0 0 0 );
+}
+
+@mixin fill-viewport {
+  @include dimension ( 100vw, 100vh );
+}

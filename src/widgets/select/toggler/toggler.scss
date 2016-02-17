@@ -1,0 +1,55 @@
+
+/* =========================================================================
+ * Svelto - Select - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require widgets/input/input.scss
+ * ========================================================================= */
+
+//TODO: Modularize it
+
+/* TOGGLER */
+
+.select-toggler {
+
+  /* DEFAULT SELECT */
+
+  select {
+    @extend input[type="file"];
+  }
+
+  /* VALUEHOLDER */
+
+  .valueholder {
+
+    display: inline-block;
+
+    &.right:before,
+    &.left:before {
+      content: $char-nbsp;
+    }
+
+  }
+
+  /* TOGGLER DIRECTION */
+
+  &.dropdown-toggler-top {
+    @include border-top-radius ( 0 );
+  }
+
+  &.dropdown-toggler-bottom {
+    @include border-bottom-radius ( 0 );
+  }
+
+  &.dropdown-toggler-right {
+    @include border-right-radius ( 0 );
+  }
+
+  &.dropdown-toggler-left {
+    @include border-left-radius ( 0 );
+  }
+
+}

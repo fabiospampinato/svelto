@@ -1,0 +1,38 @@
+
+/* =========================================================================
+ * Svelto - Breakpoints (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/assert/mixins.scss
+ * @require core/breakpoints/functions.scss
+ * ========================================================================= */
+
+/* BREAKPOINTS */
+
+// We are using `px` instead of `rem` because if we use `rem` we have a buggy behaviour is Safari. In an old version of the `panel` demo page there was a strange animation at the beginning, caused by a faulty auto-attacch-panel media query (no longer CSS-only), caused probably by the browser changing viewport's width value for no reasons
+
+//TODO: If required add also rem support (at the moment we are doing things like $breakpoint - .01px that will break it, use percentage instead)
+
+$breakpoint-xsmall: 0 !default;
+$breakpoint-small: 512px !default;
+$breakpoint-medium: 768px !default;
+$breakpoint-large: 1024px !default;
+$breakpoint-xlarge: 1216px !default;
+
+/* BREAKPOINTS */
+
+$breakpoints: (
+  'xsmall': $breakpoint-xsmall,
+  'small': $breakpoint-small,
+  'medium': $breakpoint-medium,
+  'large': $breakpoint-large,
+  'xlarge': $breakpoint-xlarge
+) !default;
+
+@include assert-ascending( $breakpoints, '`$breakpoints` values must be defined in ascending order' );
+
+/* CLASSES */
+
+$breakpoints-classes: breakpoints-get-classes() !default;

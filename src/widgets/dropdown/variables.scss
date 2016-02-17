@@ -1,0 +1,41 @@
+
+/* =========================================================================
+ * Svelto - Dropdown (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
+ * ========================================================================= */
+
+//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
+
+/* DROPDOWN */
+
+$dropdown-z-index: 300 !default;
+$dropdown-z-depth: 4 !default;
+
+$dropdown-max-width: 70vw !default;
+$dropdown-max-height: 60vh !default;
+
+/* TIP */
+
+$dropdown-tip-size: .75em !default;
+
+/* TIP BOX SHADOW */
+
+//TODO: Make them more genral, may get them from `$z-depths` on the basis of the value of `$dropdown-z-depth`
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .7) !default;
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default;
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+
+/* PATHS */
+
+$dropdown-path-images: $path-images !default;
+
+/* ANIMATION */
+
+$dropdown-animation-duration: $animation-fast !default;

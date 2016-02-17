@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Reset (Touch Action)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+
+// Mainly for avoiding the 300ms click delay on touch devices that support the `touch-action` CSS property
+
+/* TOUCH ACTION */
+
+a,
+area,
+button,
+.button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}

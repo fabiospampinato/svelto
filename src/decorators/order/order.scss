@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - _ - Flexbox - Order
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ORDER */
+
+@each $breakpoint, $value in $breakpoints {
+
+  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
+
+  @include media-breakpoint-up ( $breakpoint ) {
+
+    .flex-#{$alias}-first {
+      order: -1 !important;
+    }
+
+    .flex-#{$alias}-last {
+      order: 1000000 !important;
+    }
+  }
+
+}

@@ -1,0 +1,55 @@
+
+/* =========================================================================
+ * Svelto - Noty
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/infobar/infobar.scss
+ * ========================================================================= */
+
+//TODO: Make noty scrollables, maybe, so that in no case they will fill up the entire screen
+//TODO: Add transparentize back, in a wise, space-efficient way
+
+/* NOTY */
+
+.noty {
+
+  @include z-depth ( $noty-z-depth );
+  border-radius: $noty-border-radius;
+  pointer-events: auto;
+  transition-property: opacity, font-size, padding, margin;
+  transition-duration: $noty-animation-duration;
+  transform: translateZ(0);
+
+  /* INFOBAR */
+
+  .infobar {
+    background-color: transparent;
+    color: inherit;
+    margin-bottom: 0;
+    border-radius: inherit;
+  }
+
+  /* BUTTONS */
+
+  &-buttons {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+
+  /* IMG */
+
+  &-img {
+
+    width: $noty-img-size;
+
+    @if $noty-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $noty-border-radius;
+    }
+
+  }
+
+}

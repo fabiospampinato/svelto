@@ -1,0 +1,51 @@
+
+/* =========================================================================
+ * Svelto - Input
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+input {
+
+  @extend .widget;
+  @include color ( $input-color );
+  display: flex;
+  flex-shrink: 1;
+  border-radius: $input-border-radius;
+  min-height: $line-height-em + ( $input-padding-y * 2 );
+  padding: $input-padding-y $input-padding-x;
+
+  /* PLACEHOLDER */
+
+  &::placeholder {
+    color: nth(map-get($colors, $input-color), 6);
+    opacity: $input-placeholder-opacity;
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $input-padding-y * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $input-padding-x * 2 )} + #{$outline-width * 2});
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    padding: $input-compact-padding-y $input-compact-padding-x;
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $input-compact-padding-y * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $input-compact-padding-x * 2 )} + #{$outline-width * 2});
+    }
+
+  }
+
+}

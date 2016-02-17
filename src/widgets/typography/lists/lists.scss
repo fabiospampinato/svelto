@@ -1,16 +1,40 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Typography - Lists
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/reset/reset.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* LISTS */
+
+ul,
+ol {
+  margin: 0 0 $gutter;
+  padding-left: $list-padding-left;
+}
+
+li {
+  @include last-child-no-gutter ();
+}
+
+ul.no-bullet {
+
+  padding-left: 0;
+  list-style-type: none;
+
+  li > ul {
+    list-style-type: none;
+  }
+
+}
+
+dl {
+  margin: 0;
+}
+
+dd {
+  margin-left: $gutter * 2;
+}

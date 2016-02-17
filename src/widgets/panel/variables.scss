@@ -1,16 +1,24 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Panel (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* PANEL */
+
+$panel-z-index: 400 !default;
+$panel-z-depth: 5 !default;
+
+/* BACKGROUND */
+
+$panel-bg-color: rgba( 0, 0, 0, .5 ) !default;
+
+$panel-background-animation-opacity-duration: $animation-normal !default;
+
+/* ANIMATION */
+
+$panel-animation-duration: $animation-normal !default;

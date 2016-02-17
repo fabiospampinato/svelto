@@ -1,0 +1,51 @@
+
+/* =========================================================================
+ * Svelto - Flippable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* FLIPPABLE */
+
+.flippable {
+
+  @extend .widget;
+  perspective: $flippable-perspective;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+
+  /* FRONT / BACK */
+
+  &-front,
+  &-back {
+
+    @include fill ();
+    @include last-child-no-gutter ();
+    backface-visibility: hidden;
+    transition: transform $flippable-animation-duration;
+    border-radius: inherit;
+
+    > :only-child {
+      @include fill ();
+      border-radius: inherit;
+    }
+
+  }
+
+  /* FRONT */
+
+  &-front {
+    z-index: 1;
+  }
+
+  /* BACK */
+
+  &-back {
+    position: absolute;
+    top: 0;
+  }
+
+}

@@ -1,0 +1,103 @@
+
+/* =========================================================================
+ * Svelto - _ - Selector - Quantity (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: https://github.com/danielguillan/quantity-queries
+
+/* QUANTITY */
+
+// Quantity equal or greater than `$min`
+
+@mixin quantity-up ( $min, $selector: null ) {
+
+  @if type-of( $min ) != 'number' or not unitless( $min ) or $min < 1 {
+    @error '`#{$min}` is not a valid number for `quantity-up`';
+  }
+
+  @if $selector != null and ( type-of( $selector ) != 'string' or length( $selector ) > 1 ) {
+    @error '`#{$selector}` is not a valid selector for `quantity-up`';
+  }
+
+  $selector-append: ':nth-last-child(n+#{$min})';
+  $selector-up: _build-quantity-selector( $selector-append, $selector );
+
+  @at-root #{$selector-up} {
+    @content;
+  }
+
+}
+
+// Quantity equal or lower than `$max`
+
+@mixin quantity-down ( $max, $selector: null ) {
+
+  @if type-of( $max ) != 'number' or not unitless( $max ) or $max < 1 {
+    @error '`#{$max}` is not a valid number for `quantity-down`.';
+  }
+
+  @if $selector != null and ( type-of( $selector ) != 'string' or length( $selector ) > 1 ) {
+    @error '`#{$selector}` is not a valid selector for `quantity-down`';
+  }
+
+  $selector-append: ':nth-last-child(-n+#{$max}):first-child';
+  $selector-down: _build-quantity-selector( $selector-append, $selector );
+
+  @at-root #{$selector-down} {
+    @content;
+  }
+
+}
+
+// Quantity equal to `$number`
+
+@mixin quantity-only ( $number, $selector: null ) {
+
+  @if type-of( $number ) != 'number' or not unitless( $number ) or $number < 1 {
+    @error '`#{$number}` is not a valid number for `quantity-only`';
+  }
+
+  @if $selector != null and ( type-of( $selector ) != 'string' or length( $selector ) > 1 ) {
+    @error '`#{$selector}` is not a valid selector for `quantity-only`';
+  }
+
+  $selector-append: ':nth-last-child(#{$number}):first-child';
+  $selector-only: _build-quantity-selector( $selector-append, $selector );
+
+  @at-root #{$selector-only} {
+    @content;
+  }
+
+}
+
+// Quantity within `$min` and `$max`
+
+@mixin quantity-range ( $min, $max, $selector: null ) {
+
+  @if type-of( $min ) != 'number' or not unitless( $min ) or $min < 1 {
+    @error '`#{$min}` is not a valid number for `quantity-range`';
+  }
+
+  @if type-of( $max ) != 'number' or not unitless( $max ) or $max < 1 {
+    @error '`#{$max}` is not a valid number for `quantity-range`';
+  }
+
+  @if $min > $max {
+    @error '#{$min} can\'t be larger that #{$max} for `quantity-range`';
+  }
+
+  @if $selector != null and ( type-of( $selector ) != 'string' or length( $selector ) > 1 ) {
+    @error '`#{$selector}` is not a valid selector for `quantity-range`';
+  }
+
+  $selector-append: ':nth-last-child(n+#{$min}):nth-last-child(-n+#{$max}):first-child';
+  $selector-range: _build-quantity-selector( $selector-append, $selector );
+
+  @at-root #{$selector-range} {
+    @content;
+  }
+
+}

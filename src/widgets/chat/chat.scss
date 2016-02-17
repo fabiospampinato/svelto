@@ -1,0 +1,94 @@
+
+/* =========================================================================
+ * Svelto - Chat
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* CHAT */
+
+.chat-msg {
+
+  @extend .widget;
+  display: flex;
+
+  /* IMAGE */
+
+  .chat-msg-img {
+
+    box-sizing: content-box;
+    width: $chat-msg-img-size;
+    height: $chat-msg-img-size;
+    border: $chat-msg-img-border-width $chat-msg-img-border-style $chat-msg-img-border-color;
+    overflow: hidden;
+
+    @if $chat-msg-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $chat-msg-img-border-radius;
+    }
+
+    img {
+      transition: opacity $chat-msg-animation-duration;
+      width: $chat-msg-img-size;
+      height: $chat-msg-img-size;
+      border-radius: 100%;
+      overflow: hidden;
+    }
+
+  }
+
+  a.chat-msg-img:hover {
+
+    img {
+      opacity: $chat-msg-img-opacity-hover;
+    }
+
+    .overlay + img,
+    .overlay + * > img {
+      opacity: 1;
+    }
+
+  }
+
+  /* CONTENT */
+
+  .chat-msg-content {
+
+    flex-grow: 1;
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
+    margin-bottom: 0;
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        @include square ( $chat-tip-size, inherit );
+        display: block;
+        transform: rotate(45deg);
+        position: absolute;
+        content: '';
+        z-index: 1;
+        box-sizing: content-box;
+        top: 50%;
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        border-width: $outline-width;
+        border-style: solid;
+        border-color: inherit;
+      }
+
+    }
+
+  }
+
+}

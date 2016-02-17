@@ -1,16 +1,23 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - One Time Action
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require lib/n_times_action/n_times_action.js
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+(function ( $, _, Svelto ) {
+
+  'use strict';
+
+  /* ONE TIME ACTION */
+
+  $.oneTimeAction = function ( options ) {
+
+    return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto ));

@@ -1,0 +1,48 @@
+
+/* =========================================================================
+ * Svelto - Stepper
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* STEPPER */
+
+//TODO: Add valid/invalid classes
+
+.stepper {
+
+  @extend .widget;
+  @include color ( $label-color );
+  display: flex;
+  border-radius: $label-border-radius;
+
+  /* SEGMENTS */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(:first-child) {
+    @include border-left-radius ( 0 );
+    border-left-width: 0;
+  }
+
+  > :not(:last-child) {
+    @include border-right-radius ( 0 );
+    border-right-width: 0;
+  }
+
+  /* INPUT */
+
+  input {
+    text-align: center;
+    // display: flex;
+    // flex-grow: 1;
+
+  }
+
+}

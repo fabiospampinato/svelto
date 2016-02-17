@@ -1,0 +1,116 @@
+
+/* =========================================================================
+ * Svelto - Carousel
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add better support for img tags, .image-wrp, container and card
+
+/* CAROUSEL */
+
+.carousel {
+
+  @extend .widget;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  height: $carousel-height;
+
+  /* INDICATORS */
+
+  &-indicators {
+    z-index: $carousel-indicators-z-index;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-self: center;
+    padding: $gutter;
+  }
+
+  /* INDICATOR */
+
+  &-indicator {
+
+    width: $carousel-indicator-width;
+    height: $carousel-indicator-height;
+    border: $carousel-indicator-border-width solid $carousel-indicator-color;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: $carousel-indicator-opacity;
+    transition-property: background-color, opacity;
+    transition-duration: $carousel-indicator-animation-duration;
+
+    /* HOVER */
+
+    &:hover {
+      opacity: $carousel-indicator-hover-opacity !important;
+    }
+
+    /* NOT FIRST */
+
+    &:not(:first-child) {
+      margin-left: $gutter-half / 2;
+    }
+
+    /* NOT LAST */
+
+    &:not(:last-child) {
+      margin-right: $gutter-half / 2;
+    }
+
+    /* CURRENT */
+
+    &.current {
+      background-color: $carousel-indicator-color;
+    }
+
+  }
+
+  /* ITEMS */
+
+  &-items {
+
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
+    background-color: $carousel-items-bg-color;
+
+    /* ITEM */
+
+    > * {
+      @include fill-absolute ();
+      margin-bottom: 0 !important;
+      border-radius: inherit;
+    }
+
+  }
+
+  /* HOVER */
+
+  &:hover {
+
+    /* INDICATORS */
+
+    .carousel-indicators {
+
+      /* INDICATOR */
+
+      .carousel-indicator {
+        opacity: $carousel-hover-indicator-opacity;
+      }
+
+    }
+
+  }
+
+}

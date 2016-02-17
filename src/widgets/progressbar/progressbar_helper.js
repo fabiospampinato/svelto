@@ -1,16 +1,25 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Progressbar (Helper)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require ./progressbar.js
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+(function ( $, _, Svelto, Widgets ) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.progressbar = function ( options ) {
+
+    options = _.isNumber ( options ) ? { value: options } : options;
+
+    return new Widgets.Progressbar ( options );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));

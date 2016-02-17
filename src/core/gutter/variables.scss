@@ -1,0 +1,12 @@
+
+/* =========================================================================
+ * Svelto - Gutter (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GUTTER */
+
+$gutter: 10px !default; //TODO: Maybe move to a rem version? (so that it won't affect the sizes that are based in em)
+$gutter-half: $gutter / 2;

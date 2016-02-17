@@ -1,16 +1,30 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Progressbar - Indeterminate
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require ../progressbar.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* INDETERMINATE */
+
+.progressbar.indeterminate {
+
+  /* HIGHLIGHT */
+
+  .progressbar-highlight {
+
+    animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
+
+    /* STRIPES / LABEL */
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+  }
+
+}

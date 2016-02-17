@@ -1,0 +1,54 @@
+
+/* =========================================================================
+ * Svelto - _ - Image (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/media_queries/mixins.scss
+ * ========================================================================= */
+
+/* IMAGE */
+
+// If `$images` is a list, each index represent the hdpi value
+// If `$images` is a map, it must be on the form of `hdpi: image`
+
+@mixin image-retina ( $width, $height, $images ) {
+
+  $type: type-of( $images );
+
+  @if $type == 'list' {
+
+    @for $i from 1 through length( $images ) {
+
+      $image: nth( $images, $i );
+
+      @if $image {
+
+        @include hdpi ( $i ) {
+          background-image: url(#{$image});
+          background-size: $width $height;
+        }
+
+      }
+
+    }
+
+  } @elseif $type == 'map' {
+
+    @each $hdpi, $image in $images {
+
+      @include hdpi ( $hdpi ) {
+        background-image: url(#{$image});
+        background-size: $width $height;
+      }
+
+    }
+
+  } @else {
+
+    @warn '`#{$type}` is not a support $images type for `image-retina`';
+
+  }
+
+}

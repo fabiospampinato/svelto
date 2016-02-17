@@ -1,0 +1,72 @@
+
+/* =========================================================================
+ * Svelto - Icon
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* SCALED ICON SIZES */
+
+%scaled-icon-sizes {
+
+  @each $size, $font-size in $sizes {
+
+    $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
+
+    &.#{$alias} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
+
+  }
+
+}
+
+/* FONTS */
+
+@if $icon-font-local {
+
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$icon-path-fonts}MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2) format('woff2'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff) format('woff'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.ttf) format('truetype');
+  }
+
+}
+
+/* ICON */
+
+%icon {
+  @extend %scaled-icon-sizes;
+  position: relative;
+  margin: 0 0 $gutter;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em * $icon-scale-amount;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+i.icon {
+  @extend %icon;
+}

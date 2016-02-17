@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Typography - Blockquote (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/variables.scss
+ * ========================================================================= */
+
+/* BLOCKQUOTE */
+
+$blockquote-bg-color: transparent !default;
+
+/* LINE */
+
+$blockquote-line-width: $gutter-half !default;
+$blockquote-line-bg-color: rgba( 0, 0, 0, .15 ) !default;
+
+/* FOOTER */
+
+$blockquote-footer-font-size: .85em !default;
+
+$blockquote-footer-bg-color: transparent !default;
+
+$blockquote-footer-opacity: .85 !default;
+
+$blockquote-footer-padding-x: 0 !default;
+$blockquote-footer-padding-y: 0 !default;

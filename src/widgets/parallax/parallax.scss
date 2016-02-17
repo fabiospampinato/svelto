@@ -1,0 +1,68 @@
+
+/* =========================================================================
+ * Svelto - Parallax
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* PARALLAX */
+
+//FIXME: Not working on Firefox, Edge and IE
+//TODO: Add a non scrollable, classic, parallax that react the mouse movements
+
+.parallax {
+
+  @extend .widget;
+  height: $parallax-height;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: $parallax-perspective;
+
+  /* LAYERS */
+
+  &-layers {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  /* LAYER */
+
+  &-layer {
+
+    @include fill-absolute ();
+
+    /* LAYER LEVEL */
+
+    &-deep {
+      transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);
+      z-index: 1;
+    }
+
+    &-background {
+      transform: translateZ($parallax-background-translate-z) scale($parallax-background-scale);
+      z-index: 2;
+    }
+
+    &-base {
+      transform: translateZ(0);
+      z-index: 3;
+    }
+
+    &-foreground {
+      transform: translateZ($parallax-foreground-translate-z) scale($parallax-foreground-scale);
+      z-index: 4;
+    }
+
+  }
+
+  /* SAMPLE CONTENT */
+
+  &-content-sample { //FIXME: Remove this component, it shouldn't be needed
+    @include center-absolute-transform ();
+  }
+
+}

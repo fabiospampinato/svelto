@@ -1,0 +1,37 @@
+
+/* =========================================================================
+ * Svelto - Carousel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* CAROUSEL */
+
+$carousel-height: 12.5em !default; //TODO: Should we set it?
+
+/* ITEMS */
+
+$carousel-items-bg-color: $color-black !default;
+
+/* INDICATORS */
+
+$carousel-indicators-z-index: 80 !default;
+
+/* INDICATOR */
+
+$carousel-indicator-color: $color-white !default;
+
+$carousel-indicator-width: .625em !default;
+$carousel-indicator-height: $carousel-indicator-width !default;
+
+$carousel-indicator-border-width: 2px !default;
+
+$carousel-indicator-opacity: .25 !default;
+$carousel-hover-indicator-opacity: .5 !default;
+$carousel-indicator-hover-opacity: 1 !default;
+
+$carousel-indicator-animation-duration: $animation-normal !default;

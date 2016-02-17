@@ -1,16 +1,30 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Tooltip
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require widgets/dropdown/dropdown.js
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+(function ( $, _, Svelto, Widgets, Factory ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'tooltip',
+    selector: '.tooltip'
+  };
+
+  /* TOOLTIP */
+
+  class Tooltip extends Widgets.Dropdown {}
+
+  /* FACTORY */
+
+  Factory.init ( Tooltip, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -1,16 +1,18 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Footer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/reset/reset.scss
+ * @require widgets/container/container.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* FOOTER */
+
+footer {
+  @extend .container;
+  border-radius: 0;
+  background-color: $footer-bg-color;
+}

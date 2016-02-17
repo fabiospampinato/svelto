@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Progressbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* PROGRESSBAR */
+
+$progressbar-color: 'gray' !default;
+$progressbar-color-basic: true !default;
+
+$progressbar-height: 1em !default;
+
+$progressbar-border-radius: $progressbar-height !default;
+
+/* HIGHLIGHT */
+
+$progressbar-highlight-color: 'secondary' !default;
+$progressbar-highlight-color-basic: true !default;
+
+/* ANIMATION */
+
+$progressbar-animation-duration: $animation-fast !default;

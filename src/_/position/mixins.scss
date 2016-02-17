@@ -1,0 +1,30 @@
+
+/* =========================================================================
+ * Svelto - _ - Position (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//FIXME: Make it work like padding: it should support setting also 1 or 2 values for all
+
+/* POSITION */
+
+@mixin position ( $position: absolute, $coordinates... ) {
+
+  position: $position;
+
+  $directions: 'top', 'right', 'bottom', 'left';
+
+  @for $i from 1 through length( $coordinates ) {
+
+    $direction: nth( $directions, $i );
+    $value: nth( $coordinates, $i );
+
+    @if $value != false and $value != null {
+      #{$direction}: $value;
+    }
+
+  }
+
+}

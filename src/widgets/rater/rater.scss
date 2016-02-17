@@ -1,0 +1,107 @@
+
+/* =========================================================================
+ * Svelto - Rater
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
+ * ========================================================================= */
+
+/* RATER */
+
+//FIXME: Only do the rating stuff if .ratable
+
+.rater {
+
+  @extend .widget;
+  display: inline-flex; // Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
+
+  /* STAR */
+
+  &-star {
+
+    /* BEFORE (ICON) */
+
+    &:before {
+      @extend %icon;
+      content: 'star_border';
+      margin-bottom: 0;
+    }
+
+    /* ACTIVE */
+
+    &.active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+    /* HALF ACTIVE */
+
+    &.half-active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star_half';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* HOVER / ACTIVE */
+
+    &:hover,
+    &:active {
+
+      /* STAR */
+
+      .rater-star {
+
+        /* BEFORE (ICON) */
+
+        &:before {
+          content: 'star';
+          color: $rater-star-active-color;
+        }
+
+        /* NEXT STARS */
+
+        &:hover ~ .rater-star,
+        &:active ~ .rater-star {
+
+          /* BEFORE (ICON) */
+
+          &:before {
+            content: 'star_border';
+            color: inherit;
+          }
+
+        }
+
+      }
+
+    }
+
+    /* STAR */
+
+    .rater-star {
+      cursor: pointer;
+    }
+
+  }
+
+}

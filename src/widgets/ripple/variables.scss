@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - Ripple (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* RIPPLE */
+
+$ripple-color: $color-black !default;
+$ripple-transparentize-amount: .8 !default;
+
+/* CIRCLE */
+
+$ripple-circle-z-index: 50 !default;
+
+/* ANIMATION */
+
+$ripple-animation-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material //TODO: Replace it with one of the standards
+
+$ripple-animation-show-duration: $animation-xslow !default;
+$ripple-animation-hide-duration: $animation-xslow !default;

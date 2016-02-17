@@ -1,0 +1,33 @@
+
+/* =========================================================================
+ * Svelto - Reset
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/vendor/normalize.scss
+ * @require core/reset/box_sizing.scss
+ * @require core/reset/input.scss
+ * @require core/reset/no_outline.scss
+ * @require core/reset/selection.scss
+ * @require core/reset/textarea.scss
+ * @require core/reset/touch_action.scss
+ * ========================================================================= */
+
+/* HTML */
+
+html {
+  @include fill-absolute (); // This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  font-size: $font-size;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* BODY */
+
+body {
+  @include color ( $body-color, $body-color-basic );
+  font-family: $font-family-root;
+  font-size: 1em;
+  line-height: $line-height;
+}

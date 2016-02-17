@@ -1,0 +1,47 @@
+
+/* =========================================================================
+ * Svelto - Progressbar - Striped
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../progressbar.scss
+ * ========================================================================= */
+
+/* STRIPED */
+
+.progressbar.striped {
+
+  /* STRIPES */
+
+  .progressbar-highlight:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: - $progressbar-stripe-size;
+    right: 0;
+    background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
+    content: '';
+    background-size: $progressbar-stripe-size $progressbar-stripe-size;
+    animation: progressbar-stripes-move $progressbar-stripes-animation-move-duration linear infinite;
+  }
+
+  /* COMPACT */
+
+  &.compact .progressbar-highlight:before {
+    background-size: ( $progressbar-stripe-size / 2 ) ( $progressbar-stripe-size / 2 );
+  }
+
+  /* SLIM */
+
+  &.slim .progressbar-highlight:before {
+    background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
+  }
+
+  /* DISABLED */
+
+  &.disabled .progressbar-highlight:before {
+    animation-play-state: paused;
+  }
+
+}

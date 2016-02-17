@@ -1,16 +1,22 @@
 
 /* =========================================================================
- * Svelto - Core
+ * Svelto - Blurred (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/animations/animations.js
- * @require core/breakpoints/breakpoints.js
- * @require ../colors/colors.js
- * @require ../extras/lodash-extra.js
- * @require ../extras/jQuery-extra.js
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
  * ========================================================================= */
 
-//TODO: Remove it, it's a useful file in a useless component
+/* BLURRED */
+
+$blurred-blur-amount: 3px !default; // Same as in `blurred.svg`
+
+/* PATHS */
+
+$blurred-path-images: $path-images !default;
+
+/* ANIMATION */
+
+$blurred-animation-duration: $animation-fast !default;
