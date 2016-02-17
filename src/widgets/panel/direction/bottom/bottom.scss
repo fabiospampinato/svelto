@@ -11,5 +11,5 @@
 /* BOTTOM */
 
 .panel.bottom {
-  @include position ( fixed, initial 0 0 0 );
+  @include fixed ( initial 0 0 0 );
 }

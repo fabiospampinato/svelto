@@ -11,5 +11,5 @@
 /* TOP */
 
 .panel.top {
-  @include position ( fixed, 0 0 initial 0 );
+  @include fixed ( 0 0 initial 0 );
 }

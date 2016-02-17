@@ -10,6 +10,6 @@
 
 /* LEFT */
 
-.panel.left { 
-  @include position ( fixed, 0 initial 0 0 );
+.panel.left {
+  @include fixed ( 0 initial 0 0 );
 }

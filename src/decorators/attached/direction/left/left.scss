@@ -11,7 +11,7 @@
 /* LEFT */
 
 .attached-left {
-  @include position ( absolute, 0 false 0 0 );
+  @include absolute ( 0 false 0 0 );
   @include border-right-radius ( 0 !important );
   @include border-left-radius ( inherit !important );
 }

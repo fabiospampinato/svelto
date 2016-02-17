@@ -11,5 +11,5 @@
 /* TOP LEFT */
 
 .icons > i.icon.corner.top-left {
-  @include position ( absolute, 0 initial initial 0 );
+  @include absolute ( 0 initial initial 0 );
 }

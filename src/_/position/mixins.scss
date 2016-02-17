@@ -6,25 +6,94 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: Make it work like padding: it should support setting also 1 or 2 values for all
+/* PRIVATE */
+
+@mixin _set-coordinate ( $type, $value ) {
+
+  @if $value != false and $value != null {
+    #{$type}: $value;
+  }
+
+}
 
 /* POSITION */
 
-@mixin position ( $position: absolute, $coordinates... ) {
+@mixin position ( $position, $coordinates ) {
 
-  position: $position;
+  @if $postion != false and $postion != null {
+    position: $position;
+  }
 
-  $directions: 'top', 'right', 'bottom', 'left';
+  $nr: lenth( $coordinates );
 
-  @for $i from 1 through length( $coordinates ) {
+  @if $nr == 1 {
 
-    $direction: nth( $directions, $i );
-    $value: nth( $coordinates, $i );
+    $value: first( $coordinates );
 
-    @if $value != false and $value != null {
-      #{$direction}: $value;
-    }
+    @include _set-coordinate( top, $value );
+    @include _set-coordinate( right, $value );
+    @include _set-coordinate( bottom, $value );
+    @include _set-coordinate( left, $value );
+
+  } @else if $nr == 2 {
+
+    $value-y: first( $coordinates );
+    $value-x: last ( $coordinates );
+
+    @include _set-coordinate( top, $value-y );
+    @include _set-coordinate( right, $value-x );
+    @include _set-coordinate( bottom, $value-y );
+    @include _set-coordinate( left, $value-x );
+
+  } @else if ( $nr == 3 ) {
+
+    $value-top: first( $coordinates );
+    $value-x: nth( $coordinates, 2 );
+    $value-bottom: last( $coordinates );
+
+    @include _set-coordinate( top, $value-top );
+    @include _set-coordinate( right, $value-x );
+    @include _set-coordinate( bottom, $value-bottom );
+    @include _set-coordinate( left, $value-x );
+
+  } @else if ( $nr == 4 ) {
+
+    $value-top: first( $coordinates );
+    $value-right: nth( $coordinates, 2 );
+    $value-bottom: nth( $coordinates, 3 );
+    $value-left: last( $coordinates );
+
+    @include _set-coordinate( top, $value-top );
+    @include _set-coordinate( right, $value-right );
+    @include _set-coordinate( bottom, $value-bottom );
+    @include _set-coordinate( left, $value-left );
 
   }
+
+}
+
+/* SPECIFIC */
+
+@mixin absolute ( $coordinates ) {
+
+  @include position ( absolute, $coordinates );
+
+}
+
+@mixin fixed ( $coordinates ) {
+
+  @include position ( fixed, $coordinates );
+
+}
+
+@mixin relative ( $coordinates ) {
+
+  @include position ( relative, $coordinates );
+
+}
+
+@mixin static ( $coordinates ) {
+
+  @include position ( static, $coordinates );
 
 }

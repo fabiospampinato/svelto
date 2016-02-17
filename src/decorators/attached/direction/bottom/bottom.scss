@@ -11,7 +11,7 @@
 /* BOTTOM */
 
 .attached-bottom {
-  @include position ( absolute, false 0 0 0 );
+  @include absolute ( false 0 0 0 );
   @include border-top-radius ( 0 !important );
   @include border-bottom-radius ( inherit !important );
 }
