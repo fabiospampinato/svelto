@@ -8,43 +8,91 @@
 
 /* ASSERT */
 
-//TODO: Add support for list
 // Values in a map are in ascending order
 
-@mixin assert-ascending ( $map, $error: "This map's values must be defined in ascending order" ) {
+@mixin assert-ascending ( $obj, $error: 'Values must be defined in ascending order' ) {
 
   $previous: null;
+  $type: type-of( $obj );
 
-  @each $key, $value in $map {
+  @if $type == 'list' {
 
-    @if $previous != null and $previous >= $value {
+    @for $i from 1 through length( $obj ) {
 
-      @error $error;
+      $value: nth( $obj, $i );
+
+      @if $previous != null and $previous >= $value {
+
+        @error $error;
+
+      }
+
+      $previous: $value;
 
     }
 
-    $previous: $value;
+  } @elseif $type == 'map' {
+
+    @each $key, $value in $obj {
+
+      @if $previous != null and $previous >= $value {
+
+        @error $error;
+
+      }
+
+      $previous: $value;
+
+    }
+
+  } @else {
+
+    @warn '`#{$type}` is not a supported $obj type for `assert-ascending`';
 
   }
 
 }
 
-//TODO: Add support for list
 // Values in a map are in descending order
 
-@mixin assert-descending ( $map, $error: "This map's values must be defined in descending order" ) {
+@mixin assert-descending ( $map, $error: 'Values must be defined in descending order' ) {
 
   $previous: null;
+  $type: type-of( $obj );
 
-  @each $key, $value in $map {
+  @if $type == 'list' {
 
-    @if $previous != null and $previous <= $value {
+    @for $i from 1 through length( $obj ) {
 
-      @error $error;
+      $value: nth( $obj, $i );
+
+      @if $previous != null and $previous <= $value {
+
+        @error $error;
+
+      }
+
+      $previous: $value;
 
     }
 
-    $previous: $value;
+  } @elseif $type == 'map' {
+
+    @each $key, $value in $obj {
+
+      @if $previous != null and $previous <= $value {
+
+        @error $error;
+
+      }
+
+      $previous: $value;
+
+    }
+
+  } @else {
+
+    @warn '`#{$type}` is not a supported $obj type for `assert-ascending`';
 
   }
 
