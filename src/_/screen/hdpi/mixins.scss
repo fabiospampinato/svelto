@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - _ - Screen - HDPI (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HDPI */
+
+@mixin media-hdpi ( $ratio: 2 ) {
+
+  @if $ratio > 1 {
+
+    @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
+           only screen and ( min-resolution: #{round( $ratio * 96 )}dpi ) {
+      @content;
+    }
+
+  } @else {
+
+    @content;
+
+  }
+
+}

@@ -1,0 +1,33 @@
+
+/* =========================================================================
+ * Svelto - _ - Screen - Width (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* WIDTH */
+
+@mixin media-width-up ( $width ) {
+
+  @media screen and ( min-width: $width ) {
+    @content;
+  }
+
+}
+
+@mixin media-width-down ( $width ) {
+
+  @media screen and ( max-width: $width ) {
+    @content;
+  }
+
+}
+
+@mixin media-width-range ( $width-min, $width-max ) {
+
+  @media screen and ( min-width: $width-min ) and ( max-width: $width-max ) {
+    @content;
+  }
+
+}

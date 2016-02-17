@@ -12,7 +12,7 @@
 
 /* AUTOEXPAND */
 
-@include max-screen ( $noty-autoexpand-width ) {
+@include media-screend-down ( $noty-autoexpand-width ) {
 
   /* QUEUES */
 
