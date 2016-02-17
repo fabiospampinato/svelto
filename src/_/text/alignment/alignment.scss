@@ -1,14 +1,12 @@
 
 /* =========================================================================
- * Svelto - _ - Text
+ * Svelto - _ - Text - Alignment
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Modularize it?
-
-/* TEXT ALIGNMENT */
+/* ALIGNMENT */
 
 .text-left {
   justify-content: flex-start !important;
@@ -27,37 +25,4 @@
 
 .text-justify {
   text-align: justify !important;
-}
-
-/* TEXT TRANSFORMATION */
-
-.text-lowercase {
-  text-transform: lowercase !important;
-}
-
-.text-uppercase {
-  text-transform: uppercase !important;
-}
-
-.text-capitalize {
-  text-transform: capitalize !important;
-}
-
-/* OTHERS */
-
-.text-nowrap,
-.text-no-wrap {
-  white-space: nowrap !important;
-}
-
-.text-ellipsis,
-.text-truncate {
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  max-width: 100% !important; // Fixes a bug in IE 10
-}
-
-.text-hide {
-  @include text-hide ();
 }

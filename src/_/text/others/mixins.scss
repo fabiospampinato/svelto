@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - _ - Text - Others (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OTHERS */
+
+@mixin text-truncate () {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+
+@mixin text-hide () {
+  font: 0/0 _;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}

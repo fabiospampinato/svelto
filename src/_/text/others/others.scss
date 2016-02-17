@@ -1,25 +1,26 @@
 
 /* =========================================================================
- * Svelto - _ - Text (Mixins)
+ * Svelto - _ - Text - Others
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TEXT */
+/* OTHERS */
 
-@mixin text-truncate () {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.text-nowrap,
+.text-no-wrap {
+  white-space: nowrap !important;
 }
 
-//SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
+.text-ellipsis,
+.text-truncate {
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  max-width: 100% !important; // Fixes a bug in IE 10
+}
 
-@mixin text-hide () {
-  font: 0/0 _;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
+.text-hide {
+  @include text-hide ();
 }
