@@ -24,7 +24,7 @@
   );
 
   @if not unitless( $angle ) {
-    @error '`#{$angle}` must be unitless';
+    @error 'The angle `#{$angle}` must be unitless';
   }
 
   @if not map-has-key( $factors, $unit ) {

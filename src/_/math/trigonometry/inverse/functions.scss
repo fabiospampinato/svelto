@@ -24,7 +24,7 @@
   $z: abs( $z );
 
   @if $z > 1 {
-    @warn 'Illegal `#{$z}` value for function';
+    @warn '`#{$z}` is not a valid input for `asin` function';
     @return false;
   }
 
