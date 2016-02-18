@@ -9,6 +9,9 @@
  * @require decorators/highlight/highlight.scss
  * ========================================================================= */
 
+//FIXME: We use an ugly fix for making it widget-like when it's not in a paragraph
+//TODO: Add `address` support (not the right place for this comment, but creating a file just for it seems overkilling)
+
 /* LINK */
 
 a,
@@ -16,14 +19,17 @@ a,
   position: relative;
   text-decoration: none;
   color: inherit;
+  margin-bottom: $gutter;
 }
 
 p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
+p > .link,
 span > a, // Same reason as `p > a`
-.link {
+span > .link {
 
   display: inline-block;
   cursor: pointer;
+  margin-bottom: 0;
 
   &:after {
     @extend %highlight-after;
@@ -42,4 +48,14 @@ span > a, // Same reason as `p > a`
   //   transform: scaleX(1);
   // }
 
+}
+
+// Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+
+_:-ms-input-placeholder, :root a {
+  display: block;
+}
+
+_:-ms-input-placeholder, :root p > a {
+  display: initial;
 }
