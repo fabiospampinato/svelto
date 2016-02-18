@@ -1,32 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Icons
+ * Svelto - Core - Icon (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
- * @require widgets/icon/icon.scss
+ * @require core/typography/variables.scss
  * ========================================================================= */
 
-//FIXME: Scaling to large size for example doesn't work
+/* ICON */
 
-/* ICONS */
-
-.icons {
-
-  @extend .widget;
-  @extend %scaled-icon-sizes;
-  display: inline-block;
-  width: $icon-scale-amount * 1em;
-  height: $icon-scale-amount * 1em;
-  position: relative;
-
-  /* ICON */
-
-  > .icon {
-    @include fill-absolute ();
-    margin-bottom: 0;
-  }
-
-}
+$icon-best-size: 24px !default; // At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default font size

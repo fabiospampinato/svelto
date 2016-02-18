@@ -5,14 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/typography/variables.scss
+ * @require core/icon/variables.scss
  * @require core/paths/variables.scss
  * ========================================================================= */
-
-/* ICON */
-
-$icon-best-size: 24px !default; // At this size the icons look the best
-$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
 
 /* FONT */
 
