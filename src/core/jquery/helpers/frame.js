@@ -1,29 +1,21 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - jQuery - Helpers - Frame
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
-(function () {
+(function ( $ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* FRAME */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
+  $.frame = function ( callback ) {
+
+    return requestAnimationFrame ( callback );
+
   };
 
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( jQuery ));

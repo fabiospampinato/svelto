@@ -10,7 +10,7 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse ) {
 
   'use strict';
 
@@ -156,7 +156,7 @@
 
         this._resetPrev ();
 
-        if ( !$.hasCtrlOrCmd ( event ) ) {
+        if ( !Keyboard.event.hasCtrlOrCmd ( event ) ) {
 
           this.$elements.removeClass ( this.options.classes.selected );
 
@@ -198,7 +198,7 @@
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
 
-      } else if ( $.hasCtrlOrCmd ( event ) ) {
+      } else if ( Keyboard.event.hasCtrlOrCmd ( event ) ) {
 
         this.$startElement.toggleClass ( this.options.classes.selected );
 
@@ -338,4 +338,4 @@
 
   Factory.init ( Selectable, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));

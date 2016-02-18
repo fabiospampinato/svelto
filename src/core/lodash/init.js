@@ -1,29 +1,29 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - lodash (Init)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
 (function () {
 
   'use strict';
 
-  /* SVELTO */
+  /* LODASH */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
-  };
+  let _ = ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ); // Checking the version also in order to distinguish it from `underscore`
+
+  /* CHECKING */
+
+  if ( !_ ) {
+
+    throw new Error ( 'Svelto depends upon lodash v3, dependency not found' );
+
+  }
 
   /* EXPORT */
 
-  window.Svelto = Svelto;
+  window.lodash = _;
 
 }());

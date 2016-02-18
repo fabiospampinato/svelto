@@ -1,29 +1,24 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - lodash - Helpers - Constants
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
-(function () {
+(function ( _ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* CONSTANTS */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
-  };
+  _.mixin ({
 
-  /* EXPORT */
+    true: _.constant ( true ),
 
-  window.Svelto = Svelto;
+    false: _.constant ( false )
 
-}());
+
+  });
+
+}( lodash ));

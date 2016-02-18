@@ -1,29 +1,25 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - lodash - Helpers - Move
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
-(function () {
+(function ( _ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* MOVE */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
-  };
+  _.mixin ({
 
-  /* EXPORT */
+     move ( arr, from, to ) {
 
-  window.Svelto = Svelto;
+       arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
 
-}());
+     }
+
+  });
+
+}( lodash ));

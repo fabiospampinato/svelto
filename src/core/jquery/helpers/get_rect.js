@@ -1,29 +1,27 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - jQuery - Helpers - Get rect
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
-(function () {
+(function ( $ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* RECT */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
+  $.getRect = function ( node ) {
+
+    return node.getBoundingClientRect ();
+
   };
 
-  /* EXPORT */
+  $.fn.getRect = function () {
 
-  window.Svelto = Svelto;
+    return this.length ? this[0].getBoundingClientRect () : undefined;
 
-}());
+  };
+
+}( jQuery ));

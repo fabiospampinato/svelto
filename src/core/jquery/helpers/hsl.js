@@ -1,29 +1,24 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - jQuery - Helpers - HSL
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
  * ========================================================================= */
 
-(function () {
+//FIXME: I'm not sure if this plugin should exists
+// It only works for setting
+
+(function ( $ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* HSL */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
+  $.fn.hsl = function ( h, s, l ) {
+
+    return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
+
   };
 
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( jQuery ));

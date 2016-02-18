@@ -6,9 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require core/browser.js
  * ========================================================================= */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Browser ) {
 
   'use strict';
 
@@ -37,6 +38,7 @@
       UP: 38
     },
     keystroke: {
+
       match ( event, keystroke ) {
 
         // It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //FIXME
@@ -45,7 +47,7 @@
         let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== $.hasCtrlOrCmd ( event ) ) return false;
+        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== Keyboard.event.hasCtrlOrCmd ( event ) ) return false;
         if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
         if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
 
@@ -62,6 +64,16 @@
         return true;
 
       }
+
+    },
+    event: {
+
+      hasCtrlOrCmd ( event ) {
+
+        return ( !Browser.is.mac && event.ctrlKey ) || ( Browser.is.mac && event.metaKey );
+
+      }
+
     }
   };
 
@@ -69,4 +81,4 @@
 
   Svelto.Keyboard = Keyboard;
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser ));

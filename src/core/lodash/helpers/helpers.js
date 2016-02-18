@@ -1,29 +1,17 @@
 
 /* =========================================================================
- * Svelto - Svelto
+ * Svelto - lodash - Helpers
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
+ * @require ./clamp.js
+ * @require ./constants.js
+ * @require ./direction.js
+ * @require ./format.js
+ * @require ./mkize.js
+ * @require ./move.js
+ * @require ./now_secs.js
+ * @require ./round_closer.js
+ * @require ./time_ago.js
  * ========================================================================= */
-
-(function () {
-
-  'use strict';
-
-  /* SVELTO */
-
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Widgets: {} // Widgets' classes namespace
-  };
-
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
