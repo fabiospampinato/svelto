@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/border_radius/variables.scss
+ * @require widgets/container/variables.scss
  * ========================================================================= */
 
 /* CODE */
@@ -16,4 +16,4 @@ $code-border-width: 1px !default;
 $code-border-style: 'solid' !default;
 $code-border-color: rgba(0, 0, 0, .15) !default;
 
-$code-border-radius: $border-radius-medium !default;
+$code-border-radius: $container-border-radius !default;

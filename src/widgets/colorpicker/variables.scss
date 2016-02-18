@@ -5,7 +5,6 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/border_radius/variables.scss
  * @require core/colors/variables.scss
  * ========================================================================= */
 
@@ -43,4 +42,4 @@ $colorpicker-handler-sb-border-radius: 50% !default;
 $colorpicker-handler-hue-width: 100% !default;
 $colorpicker-handler-hue-height: .5em !default;
 
-$colorpicker-handler-hue-border-radius: $border-radius-small !default;
+$colorpicker-handler-hue-border-radius: .125em !default; // 2 / 16

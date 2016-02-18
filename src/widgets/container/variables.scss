@@ -5,7 +5,6 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/border_radius/variables.scss
  * @require core/gutter/variables.scss
  * ========================================================================= */
 
@@ -14,7 +13,7 @@
 $container-color: 'white' !default;
 $container-color-basic: true !default;
 
-$container-border-radius: $border-radius-medium !default;
+$container-border-radius: .25em !default; // 4 / 16
 
 $container-padding-x: $gutter !default;
 $container-padding-y: $container-padding-x !default;
