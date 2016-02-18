@@ -6,15 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: Not working on Edge and IE
+//TODO: If mobile remove the transition, it greatly improves performance
+
 /* BLURRED */
 
-%blurred { //FIXME: Not working on Edge and IE
-  filter: url(#{$blurred-path-images}blurred.svg#blur) !important;
-  filter: blur($blurred-blur-amount) !important;
-}
-
 .blurred {
-  @extend %blurred;
-  transition: filter $blurred-animation-duration !important;
-  //TODO: If mobile remove the transition, it greatly improves performance
+  filter: url(#{$blurred-path-images}blurred.svg#blur);
+  filter: blur($blurred-blur-amount);
+  transition: filter $blurred-animation-duration;
 }

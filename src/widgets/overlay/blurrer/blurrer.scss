@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../overlay.scss
+ * @require decorators/blurred/blurred.scss
  * ========================================================================= */
 
 //TODO: Move `open` to its own file?
@@ -28,7 +29,7 @@
     /* SIBLINGS */
 
     ~ * {
-      @extend %blurred;
+      @extend .blurred;
     }
 
   }
