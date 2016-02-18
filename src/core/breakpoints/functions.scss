@@ -35,7 +35,7 @@
 
   $value: breakpoint-next( $breakpoint );
 
-  @return if( $value, breakpoint-min( $value ) - .01px, null );
+  @return if( $value, breakpoint-min( $value ) - $breakpoint-epsilon, null );
 
 }
 

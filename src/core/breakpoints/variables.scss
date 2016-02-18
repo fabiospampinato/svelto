@@ -11,9 +11,8 @@
 
 /* BREAKPOINTS */
 
-// We are using `px` instead of `rem` because if we use `rem` we have a buggy behaviour is Safari. In an old version of the `panel` demo page there was a strange animation at the beginning, caused by a faulty auto-attacch-panel media query (no longer CSS-only), caused probably by the browser changing viewport's width value for no reasons
-
-//TODO: If required add also rem support (at the moment we are doing things like $breakpoint - .01px that will break it, use percentage instead)
+// We are using `px` instead of `rem` because if we use `rem` we have a buggy behaviour is Safari. In an old version of the `panel` demo page there was a strange animation at the beginning, caused by a faulty auto-attacch-panel media query (no longer CSS-only), caused probably by the browser changing viewport's width value for apparently no good reason
+// `rem` or any other meaningful unit is supported as well
 
 $breakpoint-xsmall: 0 !default;
 $breakpoint-small: 512px !default;
@@ -36,3 +35,7 @@ $breakpoints: (
 /* CLASSES */
 
 $breakpoints-classes: breakpoints-get-classes() !default;
+
+/* EPSILON */
+
+$breakpoint-epsilon: .01 + ( map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 0 ) !default;
