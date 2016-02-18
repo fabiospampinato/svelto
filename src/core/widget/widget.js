@@ -5,13 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/core.js
  * @require core/breakpoint/breakpoint.js
  * @require core/breakpoints/breakpoints.js
  * @require core/factory/factory.js
  * @require core/keyboard/keyboard.js
  * @require core/pointer/pointer.js
  * @require core/route/route.js
+ * @require core/svelto/svelto.js
  * @require core/tmpl/tmpl.js
  * ========================================================================= */
 

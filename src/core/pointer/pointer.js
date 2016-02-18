@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
- * @require core/core.js
+ * @require core/svelto/svelto.js
  * ========================================================================= */
 
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event

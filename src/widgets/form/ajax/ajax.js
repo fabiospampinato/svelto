@@ -5,10 +5,10 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/core.js
- * @require widgets/spinner/overlay.js
- * @require widgets/noty/noty.js
  * @require ../validate/validate.js
+ * @require core/svelto/svelto.js
+ * @require widgets/noty/noty.js
+ * @require widgets/spinner/overlay.js
  * ========================================================================= */
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
