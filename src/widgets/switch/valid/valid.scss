@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../switch.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* VALID */
@@ -16,7 +17,7 @@
 
   .switch-bar,
   .switch-handler {
-    @include color ( 'success', true, !important );
+    @include color ( 'success', true );
   }
 
 }

@@ -1,14 +1,16 @@
 
 /* =========================================================================
- * Svelto - Decorators - Colors
+ * Svelto - Decorators - Colors - Inverted
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../colors.scss
  * ========================================================================= */
 
 //TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
 
-/* COLORS */
+/* INVERTED */
 
 @each $name, $datas in $colors {
 
@@ -18,18 +20,22 @@
   $border: nth( $datas, 4 );
   $text: nth( $datas, 6 );
 
-  .#{$name} {
+  .#{$name}.inverted {
 
-    background: $bg;
-    border-color: $border;
-    color: $text;
+    background: inherit;
+    border-color: $bg;
+    color: $bg;
 
     &.hover {
       background: $bg-hover;
+      border-color: $bg;
+      color: $text;
     }
 
     &.active {
       background: $bg-active;
+      border-color: $bg-active;
+      color: $text;
     }
 
   }

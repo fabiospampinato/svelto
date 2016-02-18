@@ -13,9 +13,14 @@
 @each $name, $datas in $colors {
 
   $bg: nth( $datas, 1 );
+  $accent: nth( $colors, 5 );
+
+  .#{$name}.highlighted:after {
+    border-color: $accent;
+  }
 
   .highlight-#{$name}:after {
-    border-color: $bg !important;
+    border-color: $bg;
   }
 
 }

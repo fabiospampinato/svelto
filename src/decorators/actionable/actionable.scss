@@ -6,10 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Move to their own, more appropriate, files
+//FIXME: .actionable should do it's work only if it's not child of .disabled or -disabled
 
-/* OTHERS */
+/* ACTIONABLE */
 
-.actionable:not(.disabled):not(.dragging) {
+.actionable:not(.disabled):not(.draggable-dragging) {
   cursor: pointer;
 }

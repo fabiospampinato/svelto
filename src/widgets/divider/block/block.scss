@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* BLOCK */
@@ -16,7 +18,7 @@
   /* CONTENT */
 
   > .divider-content {
-    @include color ( $divider-block-color, $divider-block-color-basic );
+    @include color ( $divider-block-color );
     @include last-child-no-gutter ();
     display: inline-block;
     padding: $divider-block-y-padding $divider-block-x-padding;

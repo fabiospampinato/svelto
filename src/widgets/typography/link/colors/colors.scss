@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../link.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* COLORS */
@@ -14,6 +15,34 @@
 
   $bg: nth( $datas, 1 );
   $bg-hover: nth( $datas, 2 );
+  $link: nth( $colors, 7 );
+  $link-hover: nth( $colors, 8 );
+
+  @if $name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
+
+    .#{$name} p, // We do it just under `p`s, because elsewhere might be an unwanted style
+    p.#{$name},
+    .#{$name} span, // Same as `p > a`
+    span.#{$name} {
+
+      > a,
+      > .link {
+
+        color: $link;
+
+        &:after {
+          border-color: $link-hover;
+        }
+
+        &:hover {
+          color: $link-hover;
+        }
+
+      }
+
+    }
+
+  }
 
   .link-#{$name} {
 

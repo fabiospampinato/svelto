@@ -7,6 +7,7 @@
  * =========================================================================
  * @require core/reset/reset.scss
  * @require core/widget/widget.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 //TODO: `label` and `.label` have 2 different purposes, perhaps unificate them
@@ -24,7 +25,7 @@ label {
 .label {
 
   @extend .widget;
-  @include color ( $label-color, $label-color-basic );
+  @include color ( $label-color );
   font-weight: bold;
   display: inline-flex;
   align-items: center;

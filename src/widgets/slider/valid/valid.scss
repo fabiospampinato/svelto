@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../slider.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* VALID */
@@ -16,7 +17,7 @@
 
   .slider-highlight,
   .slider-handler {
-    @include color ( 'success', true, !important );
+    @include color ( 'success', true );
   }
 
 }

@@ -1,21 +1,40 @@
 
 /* =========================================================================
- * Svelto - Widgets - Container
+ * Svelto - Decorators - Actionable - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
+ * @require ../actionable.scss
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-/* CONTAINER */
+/* COLORS */
 
-//FIXME: It's expanding over the visible viewport on Dolphin Browser
+@each $name, $datas in $colors {
 
-.container {
-  @extend .widget;
-  @include color ( $container-color );
-  border-radius: $container-border-radius;
-  padding: $container-padding-y $container-padding-x;
+  .actionable.#{$name}:not(.disabled) {
+
+    &:hover {
+      @extend .#{$name}.hover;
+    }
+
+    &:not(.ripple):active {
+      @extend .#{$name}.active;
+    }
+
+    &.inverted {
+
+      &:hover {
+        @extend .#{$name}.inverted.hover;
+      }
+
+      &:not(.ripple):active {
+        @extend .#{$name}.inverted.active;
+      }
+
+    }
+
+  }
+
 }

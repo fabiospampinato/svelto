@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/colors/colors.scss
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
@@ -16,7 +17,7 @@
 .slider {
 
   @extend .widget;
-  @include color ( $slider-color, $slider-color-basic );
+  @include color ( $slider-color );
   display: flex;
   align-items: stretch;
   height: $slider-height;
@@ -89,7 +90,7 @@
   /* UNHIGHLIGHT */
 
   &-unhighlight {
-    @include color ( $slider-unhighlight-color, $slider-unhighlight-color-basic );
+    @include color ( $slider-unhighlight-color );
     position: relative;
     overflow: hidden;
     height: $slider-unhighlight-height;
@@ -121,7 +122,7 @@
 
   &-handler {
 
-    @include color ( $slider-handler-color, $slider-handler-color-basic );
+    @include color ( $slider-handler-color );
     @include z-depth ( $slider-handler-z-depth );
     z-index: 1;
     width: $slider-handler-size;

@@ -16,7 +16,6 @@ $switch-width: 2.2666666667em !default;
 /* BAR */
 
 $switch-bar-color: 'gray' !default;
-$switch-bar-color-basic: true !default;
 
 $switch-bar-width: 1.7333333333em !default;
 $switch-bar-height: .9333333333em !default;
@@ -26,7 +25,6 @@ $switch-bar-height: .9333333333em !default;
 $switch-handler-z-depth: 3 !default;
 
 $switch-handler-color: 'gray' !default;
-$switch-handler-color-basic: true !default;
 
 $switch-handler-size: 1.3333333333em !default;
 $switch-handler-half-size: $switch-handler-size / 2;

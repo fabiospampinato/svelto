@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require decorators/colors/colors.scss
  * @require widgets/container/container.scss
  * ========================================================================= */
 
@@ -15,7 +16,7 @@
 .image-caption {
 
   @extend .container;
-  @include color ( $image-caption-color, $image-caption-color-basic );
+  @include color ( $image-caption-color );
   border-radius: 0;
   margin-bottom: 0;
   overflow: auto;

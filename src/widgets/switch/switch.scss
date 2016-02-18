@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/colors/colors.scss
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
@@ -29,7 +30,7 @@
   /* BAR */
 
   &-bar {
-    @include color ( $switch-bar-color, $switch-bar-color-basic );
+    @include color ( $switch-bar-color );
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
@@ -40,7 +41,7 @@
 
   &-handler {
 
-    @include color ( $switch-handler-color, $switch-handler-color-basic );
+    @include color ( $switch-handler-color );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
     z-index: 1;

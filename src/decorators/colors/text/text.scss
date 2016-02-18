@@ -1,21 +1,21 @@
 
 /* =========================================================================
- * Svelto - Widgets - Container
+ * Svelto - Decorators - Colors - Text
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
- * @require decorators/colors/colors.scss
+ * @require ../colors.scss
  * ========================================================================= */
 
-/* CONTAINER */
+/* TEXT */
 
-//FIXME: It's expanding over the visible viewport on Dolphin Browser
+@each $name, $datas in $colors {
 
-.container {
-  @extend .widget;
-  @include color ( $container-color );
-  border-radius: $container-border-radius;
-  padding: $container-padding-y $container-padding-x;
+  $bg: nth( $datas, 1 );
+
+  .text-#{$name} {
+    color: $bg;
+  }
+
 }

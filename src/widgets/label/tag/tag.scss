@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../label.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* TAG */
@@ -35,7 +36,7 @@
     }
 
     &:before {
-      @include color ( 'inherit' );
+      @include color ( 'inherit', true );
       z-index: -1;
     }
 
