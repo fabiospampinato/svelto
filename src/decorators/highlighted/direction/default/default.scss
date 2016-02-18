@@ -1,29 +1,15 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlight
+ * Svelto - Decorators - Highlighted - Direction - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../bottom/bottom.scss
  * ========================================================================= */
 
-/* HIGHLIGHT:AFTER */
+/* DEFAULT */
 
-%highlight-after {
-  @include fill-absolute ();
-  z-index: $highlight-z-index;
-  content: '';
-  pointer-events: none;
-  border-width: 0;
-  border-style: solid;
-  border-radius: inherit;
-}
-
-/* HIGHLIGHT */
-
-.highlighted {
-
-  &:after {
-    @extend %highlight-after;
-  }
-
+.highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left):not(.highlight-all) {
+  @extend .highlight-bottom;
 }

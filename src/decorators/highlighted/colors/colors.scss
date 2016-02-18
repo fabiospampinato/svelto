@@ -1,25 +1,33 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlight - Direction - Bottom
+ * Svelto - Decorators - Highlighted - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../highlight.scss
+ * @require ../highlight.scss
  * ========================================================================= */
 
-/* BOTTOM */
+/* AUTO */
 
-.highlight-bottom {
+@each $name, $datas in $colors {
 
-  &:after {
-    border-bottom-width: $highlight-size;
+  $accent: nth( $colors, 5 );
+
+  .#{$name}.highlighted:after {
+    border-color: $accent;
   }
 
-  /* OUTLINED */
+}
 
-  &.outlined:after {
-    bottom: - $outline-width;
+/* SPECIFIC */
+
+@each $name, $datas in $colors {
+
+  $bg: nth( $datas, 1 );
+
+  .highlight-#{$name}:after {
+    border-color: $bg;
   }
 
 }

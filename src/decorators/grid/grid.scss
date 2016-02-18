@@ -6,11 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-// This generates `size-#` classes that are used for lining up the content in a grid
+// This generates `breakpoint-1/12` classes that are used for lining up the content in a grid
 
-//FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Is it the best way to do it?
+//FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Isn't any other way to implement it?
+//TODO: Add a mixin for it, like we did with the colors
 
-/* SIZE-# */
+/* GRID */
 
 @each $breakpoint, $value in $breakpoints {
 

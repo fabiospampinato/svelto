@@ -1,25 +1,23 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlight - Direction - Top
+ * Svelto - Decorators - Highlighted - Style
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../highlight.scss
+ * @require ../highlight.scss
  * ========================================================================= */
 
-/* TOP */
+/* STYLE */
 
-&.highlight-top {
+.highlight-solid:after {
+  border-style: solid;
+}
 
-  &:after {
-    border-top-width: $highlight-size;
-  }
+.highlight-dotted:after {
+  border-style: dotted;
+}
 
-  /* OUTLINED */
-
-  &.outlined:after {
-    top: - $outline-width;
-  }
-
+.highlight-dashed:after {
+  border-style: dashed;
 }

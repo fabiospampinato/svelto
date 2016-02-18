@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlight - Direction - Right
+ * Svelto - Decorators - Highlighted - Direction - Top
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,17 +8,18 @@
  * @require ../../highlight.scss
  * ========================================================================= */
 
-/* RIGHT */
+/* TOP */
 
-&.highlight-right {
+.highlight-top {
 
   &:after {
-    border-right-width: $highlight-size;
+    border-top-width: $highlight-size;
   }
+
   /* OUTLINED */
 
   &.outlined:after {
-    right: - $outline-width;
+    top: - $outline-width;
   }
 
 }
