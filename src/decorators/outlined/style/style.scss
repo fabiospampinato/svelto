@@ -1,14 +1,23 @@
 
 /* =========================================================================
- * Svelto - Decorators - Outline
+ * Svelto - Decorators - Outlined - Style
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../outline.scss
  * ========================================================================= */
 
-/* OUTLINE */
+/* STYLE */
 
-.outlined {
-  border-width: $outline-width;
-  border-style: $outline-style;
+.outline-solid {
+  border-style: solid;
+}
+
+.outline-dotted {
+  border-style: dotted;
+}
+
+.outline-dashed {
+  border-style: dashed;
 }

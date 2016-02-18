@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Decorators - Outline - Style
+ * Svelto - Decorators - Outlined - Color
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,16 +8,14 @@
  * @require ../outline.scss
  * ========================================================================= */
 
-/* STYLE */
+/* COLORS */
 
-.outline-solid {
-  border-style: solid;
-}
+@each $name, $datas in $colors {
 
-.outline-dotted {
-  border-style: dotted;
-}
+  $bg: nth( $datas, 1 );
 
-.outline-dashed {
-  border-style: dashed;
+  .outline-#{$name} {
+    border-color: $bg !important;
+  }
+
 }

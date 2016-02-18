@@ -14,11 +14,11 @@
 
   @include media-breakpoint-up ( $breakpoint ) {
 
-    .flex-#{$alias}-first {
+    .#{$alias}-first {
       order: -1 !important;
     }
 
-    .flex-#{$alias}-last {
+    .#{$alias}-last {
       order: 1000000 !important;
     }
   }

@@ -1,21 +1,12 @@
 
 /* =========================================================================
- * Svelto - Decorators - Outline - Color
+ * Svelto - Decorators - Outlined (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../outline.scss
  * ========================================================================= */
 
-/* COLORS */
+/* OUTLINED */
 
-@each $name, $datas in $colors {
-
-  $bg: nth( $datas, 1 );
-
-  &.outline-#{$name} {
-    border-color: $bg !important;
-  }
-
-}
+$outline-width: 1px !default;
+$outline-style: solid !default;
