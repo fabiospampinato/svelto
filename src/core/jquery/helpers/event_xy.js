@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - jQuery - Helpers - Event XY
+ * Svelto - Core - jQuery - Helpers (Event XY)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
