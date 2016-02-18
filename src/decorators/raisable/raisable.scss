@@ -4,32 +4,31 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
 // The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+// It raises even if the `z-depth-0` class has not been included
 
 /* RAISABLE */
 
-.raisable {
+.raisable:not(.disabled) {
 
   transition: box-shadow $raisable-animation-duration;
 
-  &:not(.disabled) {
+  /* BASE */
 
-    @each $depth, $shadow in $z-depths {
+  &:hover {
+    @include z-depth ( raisable-next( 0 ) );
+  }
 
-      @if $depth == 0 { // Raise it even if the `z-depth-0` class has not been included
+  /* STEPS */
 
-        &:hover {
-          @include raisable ( $depth, !important );
-        }
+  @each $depth, $shadow in $z-depths {
 
-      }
-
-      &.z-depth-#{$depth}:hover {
-        @include raisable ( $depth, !important );
-      }
-
+    &.z-depth-#{$depth}:hover {
+      @include z-depth ( raisable-next( $depth ) );
     }
 
   }

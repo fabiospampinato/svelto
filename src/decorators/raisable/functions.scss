@@ -1,23 +1,18 @@
 
 /* =========================================================================
- * Svelto - Decorators - Raisable (Mixins)
+ * Svelto - Decorators - Raisable (Functions)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require decorators/z_depths/mixins.scss
  * ========================================================================= */
 
 /* RAISABLE */
 
-@mixin raisable ( $depth: false ) {
+@function raisable-next ( $depth: 0 ) {
 
-  @if $depth != false {
+  $z-depth-max: length( map-keys( $z-depths ) ) - 1; // `-1` since we start from `0`
+  $z-depth-raised: min( $z-depth-max, $depth + $raisable-raise-amount );
 
-    @include z-depth ( $depth );
-
-  }
-
-  @extend .raisable;
+  @return $z-depth-raised;
 
 }
