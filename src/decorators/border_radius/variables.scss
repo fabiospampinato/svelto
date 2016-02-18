@@ -1,15 +1,13 @@
 
 /* =========================================================================
- * Svelto - Decorators - Border (Variables)
+ * Svelto - Decorators - Border Radius (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/container/variables.scss
  * ========================================================================= */
 
 /* BORDER RADIUS */
 
 $rounded-border-radius: 1000000px !default;
-$smooth-border-radius: $container-border-radius !default;
+$smooth-border-radius: .25em !default; // 4 / 16, same as container's
 $sharp-border-radius: 0 !default;
