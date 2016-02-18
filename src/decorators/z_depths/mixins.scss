@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Core - Z-Depths (Mixins)
+ * Svelto - Decorators - Z-Depths (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,10 +8,18 @@
 
 /* Z-DEPTH */
 
-@mixin z-depth ( $depth, $extra: '' ) {
+@mixin z-depth ( $depth, $force: false ) {
 
-  $z-depth: map-get( $z-depths, $depth );
+  @if not $force {
 
-  box-shadow: $z-depth #{$extra};
+    &:not([class*='z-depth-']) {
+      @extend .z-depth-#{$depth};
+    }
+
+  } @else {
+
+    @extend .z-depth-#{$depth};
+
+  }
 
 }

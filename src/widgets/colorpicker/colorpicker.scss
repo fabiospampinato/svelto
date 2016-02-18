@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
 //FIXME: Not working on Dolphin Browser
@@ -26,7 +27,7 @@
   /* HANDLER */
 
   &-handler {
-    @include z-depth ( 2, ',' + $colorpicker-handler-shadow );
+    @include z-depth ( 2, ',' + $colorpicker-handler-shadow ); //TODO: Not supported now
     position: absolute;
     z-index: 2;
     box-sizing: border-box;
