@@ -1,24 +1,32 @@
 
 /* =========================================================================
- * Svelto - Decorators - Colors
+ * Svelto - Widgets - Typography - Link - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../link.scss
  * ========================================================================= */
-
-//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
-//FIXME: .actionable should do it's work only if it's not child of .disabled or -disabled
 
 /* COLORS */
 
 @each $name, $datas in $colors {
 
-  .#{$name} {
-    @include color ( $name, false, !important );
-  }
+  $bg: nth( $datas, 1 );
+  $bg-hover: nth( $datas, 2 );
 
-  .text-#{$name} {
-    color: nth($datas, 1);
+  .link-#{$name} {
+
+    color: $bg !important;
+
+    &:after {
+      border-color: $bg-hover !important;
+    }
+
+    &:hover {
+      color: $bg-hover !important;
+    }
+
   }
 
 }

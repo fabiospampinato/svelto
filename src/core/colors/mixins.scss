@@ -99,26 +99,3 @@
   color: $bg #{$extra};
 
 }
-
-/* LINK */
-
-//TODO: Remove it, undeeded
-
-@mixin color-link ( $color, $extra: '' ) {
-
-  $colors: map-get( $colors, $color );
-
-  $bg: nth( $colors, 1 );
-  $bg-hover: nth( $colors, 2 );
-
-  color: $bg #{$extra};
-
-  &:after {
-    border-color: $bg-hover #{$extra};
-  }
-
-  &:hover {
-    color: $bg-hover #{$extra};
-  }
-
-}
