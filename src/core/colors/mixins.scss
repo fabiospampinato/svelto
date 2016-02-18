@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Modularize it (possible?)
+
 /* COLOR */
 
 @mixin color ( $color, $basic: true, $extra: '' ) {
@@ -67,10 +69,10 @@
 
   @if $color != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
-    //TODO: Should also style `.link`
-
     p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-    span > a { // Same as `p > a`
+    p > .link,
+    span > a, // Same as `p > a`
+    span > .link {
 
       color: $link #{$extra};
 

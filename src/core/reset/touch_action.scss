@@ -15,11 +15,11 @@
 a,
 area,
 button,
-.button,
 input,
 label,
 select,
 summary,
-textarea {
+textarea,
+.actionable {
   touch-action: manipulation;
 }

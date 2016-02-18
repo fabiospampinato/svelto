@@ -15,7 +15,7 @@
  * @require core/tmpl/tmpl.js
  * ========================================================================= */
 
-//TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
+//TODO: Add support for destroying on remove, right now it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no clean way of doing it... //TODO: Test if by removing a modal its class is still in memory (take heap snapshots)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
@@ -383,7 +383,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is keeping a reference to `suppressDisabledCheck` wasted leak? Even if so tiny
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
 
         return handler.apply ( this, args );
 
@@ -411,8 +411,6 @@
 
     _onHover ( $element, args ) {
 
-      //FIXME: If we remove the target we are still attaching and removing those events though (just performing the functions calls actually, probably)
-
       /* NORMALIZATION */
 
       if ( !args ) {
@@ -433,7 +431,7 @@
 
     }
 
-    //TODO: Add a _offHover (Is it needed?)
+    //TODO: Maybe add a _offHover, is it needed?
 
     _off ( $element, events, handler ) {
 
