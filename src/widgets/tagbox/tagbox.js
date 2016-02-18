@@ -259,7 +259,7 @@
         if ( !value.length && this.options.tags.length ) {
 
           let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
-              edit = !Keyboard.event.hasCtrlOrCmd ( event );
+              edit = !Keyboard.keystroke.hasCtrlOrCmd ( event );
 
           this.remove ( $tag, edit );
 

@@ -156,7 +156,7 @@
 
         this._resetPrev ();
 
-        if ( !Keyboard.event.hasCtrlOrCmd ( event ) ) {
+        if ( !Keyboard.keystroke.hasCtrlOrCmd ( event ) ) {
 
           this.$elements.removeClass ( this.options.classes.selected );
 
@@ -198,7 +198,7 @@
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
 
-      } else if ( Keyboard.event.hasCtrlOrCmd ( event ) ) {
+      } else if ( Keyboard.keystroke.hasCtrlOrCmd ( event ) ) {
 
         this.$startElement.toggleClass ( this.options.classes.selected );
 

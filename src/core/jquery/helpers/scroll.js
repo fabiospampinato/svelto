@@ -64,9 +64,9 @@
 
   };
 
-  $.fn.toggleScroll = function ( force ) {
+  //TODO: Preserve the scrollbars if possible, when disabling
 
-    //TODO: Preserve the scrollbars if possible, when disabling
+  $.fn.toggleScroll = function ( force ) {
 
     return this.toggleClass ( 'overflow-hidden', !force );
 

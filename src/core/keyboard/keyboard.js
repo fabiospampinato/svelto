@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
  * @require core/browser.js
+ * @require core/svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Browser ) {
@@ -47,7 +47,7 @@
         let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== Keyboard.event.hasCtrlOrCmd ( event ) ) return false;
+        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
         if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
         if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
 
@@ -63,10 +63,7 @@
 
         return true;
 
-      }
-
-    },
-    event: {
+      },
 
       hasCtrlOrCmd ( event ) {
 
@@ -75,6 +72,7 @@
       }
 
     }
+
   };
 
   /* EXPORT */
