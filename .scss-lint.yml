@@ -222,6 +222,7 @@ linters: #DOC: https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/li
     enabled: true
     properties:
       - color
+      - content
       - font
 
   VendorPrefix:
