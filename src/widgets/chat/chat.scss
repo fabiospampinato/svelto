@@ -26,7 +26,7 @@
     overflow: hidden;
 
     @if $chat-msg-img-rounded == true {
-      border-radius: 10000px 10000px;
+      border-radius: 10000px;
     } @else {
       border-radius: $chat-msg-img-border-radius;
     }

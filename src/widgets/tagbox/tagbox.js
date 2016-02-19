@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/noty/noty.js
  * @require core/keyboard/keyboard.js
+ * @require widgets/noty/noty.js
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile

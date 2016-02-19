@@ -8,7 +8,7 @@
  * @require ../validate/validate.js
  * @require core/svelto/svelto.js
  * @require widgets/noty/noty.js
- * @require widgets/spinner/overlay.js
+ * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)

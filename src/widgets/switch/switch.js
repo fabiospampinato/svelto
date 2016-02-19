@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/draggable/draggable.js
  * @require lib/transform/transform.js
+ * @require widgets/draggable/draggable.js
  * ========================================================================= */
 
 //TODO: Add flick support

@@ -1,21 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Spinner - Colors
+ * Svelto - Widgets - Container - Compact (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../spinner.scss
+ * @require core/gutter/variables.scss
  * ========================================================================= */
 
-/* COLORS */
+/* COMPACT */
 
-@each $name, $datas in $colors {
-
-  $bg: nth( $datas, 1 );
-
-  svg.spinner.#{$name} circle {
-    stroke: $bg !important;
-  }
-
-}
+$container-compact-padding-x: $gutter !default;
+$container-compact-padding-y: $container-compact-padding-x / 2 !default;

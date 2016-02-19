@@ -9,18 +9,18 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-/* TAG */
+ //FIXME: Missing pointer outline in IE10
+ //FIXME: The pointer is not clickable
+ //TODO: Export default sharpness
 
-//FIXME: Missing pointer outline in IE10
-//FIXME: The pointer is not clickable
-//TODO: Export default sharpness
+/* TAG */
 
 .label-tag {
 
   margin-bottom: $gutter;
   z-index: 1;
 
-  > * { // Both `.label` and `.button`
+  > * { // Both `.label` and `.button` //FIXME: Aren't we extending .label anyway?
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;

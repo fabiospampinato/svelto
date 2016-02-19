@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../variables.scss
  * @require core/icon/variables.scss
  * ========================================================================= */
 
@@ -12,7 +13,7 @@
 
 $carousel-inset-previous-next-z-index: $carousel-indicators-z-index - 1 !default;
 
-$carousel-inset-previous-next-font-size: 1em * $icon-scale-amount !default;
+$carousel-inset-previous-next-font-size: $icon-scale-amount * 1em !default;
 
 $carousel-inset-previous-next-color: $carousel-indicator-color !default;
 

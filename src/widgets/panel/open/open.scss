@@ -11,7 +11,7 @@
 
 /* OPEN */
 
-&.open {
+.panel.open {
 
   @extend .panel.show;
   transform: translateX(0) translateY(0) !important;

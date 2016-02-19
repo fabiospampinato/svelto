@@ -24,22 +24,4 @@
     transform: rotateX(-180deg);
   }
 
-  /* FLIPPED */
-
-  &.flipped {
-
-    /* FRONT */
-
-    .flippable-front {
-      transform: rotateX(180deg);
-    }
-
-    /* BACK */
-
-    .flippable-back {
-      transform: rotateX(0deg);
-    }
-
-  }
-
 }
