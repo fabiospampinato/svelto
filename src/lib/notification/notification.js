@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/svelto/svelto.js
  * @require widgets/noty/noty.js
  * ========================================================================= */
 
@@ -14,7 +15,7 @@
 
   'use strict';
 
-  /* DEFAULT OPTIONS */
+  /* DEFAULTS */
 
   let defaults = {
     title: false,

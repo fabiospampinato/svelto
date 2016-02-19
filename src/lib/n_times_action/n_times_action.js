@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./NTA.Action.js
+ * @require ./NTA.Group.js
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
@@ -13,7 +14,7 @@
 
   'use strict';
 
-  /* DEFAULT OPTIONS */
+  /* DEFAULTS */
 
   let defaults = {
     group: 'nta', // The cookie name that holds the actions, a namespace for related actions basically

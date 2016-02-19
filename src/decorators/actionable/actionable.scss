@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: .actionable should do it's work only if it's not child of .disabled or -disabled
-
 /* ACTIONABLE */
 
 .actionable:not(.disabled):not(.draggable-dragging) {

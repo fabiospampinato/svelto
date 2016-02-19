@@ -31,7 +31,7 @@
 
   };
 
-  /* DEFAULT OPTIONS */
+  /* DEFAULTS */
 
   let defaults = {
     axis: false, // Set a preferred axis

@@ -24,7 +24,7 @@
 
   };
 
-  /* DEFAULT OPTIONS */
+  /* DEFAULTS */
 
   let defaults = {
     startIndex : false, // Useful for speeding up the searching process if we may already guess the initial position...
