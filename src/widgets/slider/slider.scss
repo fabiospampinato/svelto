@@ -181,13 +181,13 @@
     /* MIN */
 
     .slider-min:hover:after {
-      content: 'remove';
+      content: $slider-min-icon;
     }
 
     /* MAX */
 
     .slider-max:hover:after {
-      content: 'add';
+      content: $slider-max-icon;
     }
 
     /* BAR */

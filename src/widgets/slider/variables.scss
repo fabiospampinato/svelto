@@ -21,6 +21,9 @@ $slider-height: $line-height-em + ( $label-padding-y * 2 ) !default; // Label mi
 
 $slider-min-max-min-width: $slider-height !default;
 
+$slider-min-icon: 'remove' !default;
+$slider-max-icon: 'add' !default;
+
 /* UNHIGHLIGHT */
 
 $slider-unhighlight-color: 'gray' !default;

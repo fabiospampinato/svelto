@@ -74,7 +74,7 @@
         /* BEFORE (ICON) */
 
         &:before {
-          content: 'star';
+          content: $star-on-icon;
           color: $rater-star-active-color;
         }
 
@@ -86,7 +86,7 @@
           /* BEFORE (ICON) */
 
           &:before {
-            content: 'star_border';
+            content: $star-off-icon;
             color: inherit;
           }
 
