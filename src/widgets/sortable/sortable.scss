@@ -50,14 +50,14 @@ table.sortable {
     /* BEFORE */
 
     &:before {
-      content: 'arrow_drop_down';
+      content: $sortable-desc-icon;
       top: .35em;
     }
 
     /* AFTER */
 
     &:after {
-      content: 'arrow_drop_up';
+      content: $sortable-asc-icon;
       bottom: .35em;
     }
 
