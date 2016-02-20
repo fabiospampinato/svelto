@@ -38,7 +38,8 @@ var plugins = {
   },
   dependencies: {
     options: {
-      pattern: /\* @require [\s-]*(.*\..*)/g
+      require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
+      log: true //TODO: Change it to `false`
     }
   },
   github: {

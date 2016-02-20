@@ -12,7 +12,7 @@ var _            = require ( 'lodash' ),
     path         = require ( 'path' ),
     streamfilter = require ( 'streamfilter' ),
     project      = require ( '../config/project' ),
-    components   = project.components.map ( function ( component ) { return component.split ( '/' ); } );
+    components   = []; //project.components.map ( function ( component ) { return component.split ( '/' ); } );
 
 /* FILTER */
 

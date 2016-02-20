@@ -12,15 +12,15 @@ var _            = require ( 'lodash' ),
     merge        = require ( 'merge-stream' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
-    filter       = require ( '../plugins/filter' ),
+    dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
+    filter       = require ( '../plugins/filter' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     gulpif       = require ( 'gulp-if' ),
     concat       = require ( 'gulp-concat' ),
-    dependencies = require ( 'gulp-resolve-dependencies' ),
     newer        = require ( 'gulp-newer' ),
     sort         = require ( 'gulp-sort' );
 
@@ -37,7 +37,6 @@ gulp.task ( 'build-scss-parts', false, function () {
     return gulp.src ( input.getPath ( 'scss.' + part ) )
                .pipe ( filter () )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
-               .pipe ( sort () )
                .pipe ( dependencies ( plugins.dependencies.options ) )
                .pipe ( extend () )
                .pipe ( concat ( output.getName ( 'scss.' + part ) ) )

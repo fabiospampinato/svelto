@@ -15,14 +15,14 @@ var _            = require ( 'lodash' ),
     path         = require ( 'path' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
-    filter       = require ( '../plugins/filter' ),
+    dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
+    filter       = require ( '../plugins/filter' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
-    dependencies = require ( 'gulp-resolve-dependencies' ),
     flatten      = require ( 'gulp-flatten' ),
     foreach      = require ( 'gulp-foreach' ),
     gulpif       = require ( 'gulp-if' ),
@@ -48,7 +48,6 @@ gulp.task ( 'build-javascript-temp', false, function () {
                return del ( output.getPath ( 'javascript.temp' ), plugins.del.options );
              }))
              .pipe ( filter () )
-             .pipe ( sort () )
              .pipe ( dependencies ( plugins.dependencies.options ) )
              .pipe ( extend () )
              .pipe ( foreach ( function ( stream, file ) {
@@ -59,9 +58,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.temp' ) ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-             .on ( 'error', function ( err ) {
-               gutil.log ( err.message );
-             })
+             .on ( 'error', function ( err ) { gutil.log ( err.message ); })
              .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) );
 
 });

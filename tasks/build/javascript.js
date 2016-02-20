@@ -11,15 +11,15 @@
 var _            = require ( 'lodash' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
-    filter       = require ( '../plugins/filter' ),
+    dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
+    filter       = require ( '../plugins/filter' ),
     project      = require ( '../config/project' ),
     projectPrev  = require ( '../config/previous/project' ),
     plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     concat       = require ( 'gulp-concat' ),
-    dependencies = require ( 'gulp-resolve-dependencies' ),
     flatten      = require ( 'gulp-flatten' ),
     gulpif       = require ( 'gulp-if' ),
     gutil        = require ( 'gulp-util' ),
@@ -50,18 +50,17 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
                      _.get ( project, 'plugins.uglify.enabled' ) !== _.get ( projectPrev, 'plugins.uglify.enabled' ) ||
                      !_.isEqual ( _.get ( project, 'plugins.uglify.options' ), _.get ( projectPrev, 'plugins.uglify.options' ) );
 
+    needUpdate = true;
+
     return gulp.src ( input.getPath ( 'javascript.all' ) )
-               .pipe ( filter () )
+              //  .pipe ( filter () )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
-               .pipe ( sort () )
                .pipe ( dependencies ( plugins.dependencies.options ) )
-               .pipe ( extend () )
+              //  .pipe ( extend () )
                .pipe ( flatten () )
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
                .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-               .on ( 'error', function ( err ) {
-                 gutil.log ( err.message );
-               })
+               .on ( 'error', function ( err ) { gutil.log ( err.message ); })
                .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
                .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
                .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
