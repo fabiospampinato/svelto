@@ -132,7 +132,7 @@ var resolveGraph = function ( graph ) {
 
     }
 
-    return new gutil.PluginError ( 'Dependencies', 'Circular dependency found. Files involved: ' + nodes.join ( ', ' ) );
+    return new gutil.PluginError ( 'Dependencies', 'Circular dependencies found. Files involved: ' + nodes.join ( ', ' ) );
 
   } else {
 
@@ -144,11 +144,21 @@ var resolveGraph = function ( graph ) {
 
 var logFiles = function ( files ) {
 
+  var list = 'Dependencies order:\n';
+
   for ( var i = 0, l = files.length; i < l; i++ ) {
 
-    console.log ( _.padEnd ( i, l.toString ().length ) + ' - ' + files[i].path );
+    list += _.padRight ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
+
+    if ( i + 1 < l ) {
+
+      list += '\n';
+
+    }
 
   }
+
+  console.log ( list );
 
 };
 
