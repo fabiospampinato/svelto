@@ -13,22 +13,21 @@
 var _            = require ( 'lodash' ),
     del          = require ( 'del' ),
     path         = require ( 'path' ),
+    project      = require ( '../config/project' ),
+    plugins      = project.plugins,
+    changed      = require ( '../utilities/changed' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
     filter       = require ( '../plugins/filter' ),
-    project      = require ( '../config/project' ),
-    projectPrev  = require ( '../config/previous/project' ),
-    plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     flatten      = require ( 'gulp-flatten' ),
     foreach      = require ( 'gulp-foreach' ),
     gulpif       = require ( 'gulp-if' ),
     gutil        = require ( 'gulp-util' ),
-    newer        = require ( 'gulp-newer' ),
-    sort         = require ( 'gulp-sort' );
+    newer        = require ( 'gulp-newer' );
 
 /* JAVASCRIPT TEMP */
 
@@ -36,20 +35,21 @@ gulp.task ( 'build-javascript-temp', false, function () {
 
   if ( !project.isDevelopment ) return;
 
-  var needCleaning = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) ) ||
-                     !_.isEqual ( _.get ( project, 'output' ), _.get ( projectPrev, 'output' ) ),
-      needUpdate   = _.get ( project, 'plugins.babel.enabled' ) !== _.get ( projectPrev, 'plugins.babel.enabled' ) ||
-                     !_.isEqual ( _.get ( project, 'plugins.babel.options' ), _.get ( projectPrev, 'plugins.babel.options' ) );
+  var needCleaning = changed.project ( 'components' ) || changed.project ( 'output.javascript' ) || changed.plugins ( 'filter', 'dependencies', 'extend' ),
+      needUpdate   = needCleaning || changed.plugin ( 'babel' );
 
-  var dependencyIndex = 0;
+  if ( needCleaning ) {
+
+    del ( output.getPath ( 'javascript.temp' ), plugins.del.options );
+
+  }
+
+  var dependencyIndex = 1;
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
-             .pipe ( gulpif ( needCleaning, function () {
-               return del ( output.getPath ( 'javascript.temp' ), plugins.del.options );
-             }))
-             .pipe ( filter () )
-             .pipe ( dependencies ( plugins.dependencies.options ) )
-             .pipe ( extend () )
+             .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+             .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
+             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
              .pipe ( foreach ( function ( stream, file ) {
                var basename = path.basename ( file.path );
                file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex++, 3, 0 ) + '-' + basename );

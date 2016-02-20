@@ -8,8 +8,7 @@
 
 /* REQUIRE */
 
-var project = require ( './project' ),
-    plugins = project.plugins,
+var plugins = require ( './project' ).plugins,
     GHAPI   = require ( 'github' );
 
 /* GITHUB */

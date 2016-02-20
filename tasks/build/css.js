@@ -8,10 +8,8 @@
 
 /* REQUIRE */
 
-var _            = require ( 'lodash' ),
+var changed       = require ( '../utilities/changed' ),
     output       = require ( '../utilities/output' ),
-    project      = require ( '../config/project' ),
-    projectPrev  = require ( '../config/previous/project' ),
     plugins      = require ( '../config/project' ).plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     autoprefixer = require ( 'gulp-autoprefixer' ),
@@ -25,15 +23,11 @@ var _            = require ( 'lodash' ),
 
 gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
 
-  var needUpdate = !_.isEqual ( _.get ( project, 'plugins.sass.options' ), _.get ( projectPrev, 'plugins.sass.options' ) ) ||
-                   _.get ( project, 'plugins.autoprefixer.enabled' ) !== _.get ( projectPrev, 'plugins.autoprefixer.enabled' ) ||
-                   !_.isEqual ( _.get ( project, 'plugins.autoprefixer.options' ), _.get ( projectPrev, 'plugins.autoprefixer.options' ) ) ||
-                   _.get ( project, 'plugins.cssnano.enabled' ) !== _.get ( projectPrev, 'plugins.cssnano.enabled' ) ||
-                   !_.isEqual ( _.get ( project, 'plugins.cssnano.options' ), _.get ( projectPrev, 'plugins.cssnano.options' ) );
+  var needUpdate = changed.plugins ( 'sass', 'autoprefixer', 'cssnano' );
 
   return gulp.src ( output.getPath ( 'scss.all' ) )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'css.uncompressed' ) ) ) )
-             .pipe ( sass ( plugins.sass.options ).on ( 'error', sass.logError ) )
+             .pipe ( gulpif ( plugins.sass.enabled ( sass ( plugins.sass.options ).on ( 'error', sass.logError ) ) ) )
              .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer.options ) ) )
              .pipe ( rename ( output.getName ( 'css.uncompressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'css.uncompressed' ) ) )

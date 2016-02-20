@@ -11,8 +11,8 @@
 var _        = require ( 'lodash' ),
     argv     = require ( 'yargs' ).argv,
     path     = require ( 'path' ),
-    file     = require ( '../utilities/file' ),
     defaults = require ( './defaults' ),
+    file     = require ( '../utilities/file' ),
     custom   = file.load ( path.resolve ( __dirname, '../../svelto.json' ), {} ),
     dot      = file.loadRecursive ( '.svelto.json', {} );
 

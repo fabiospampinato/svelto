@@ -8,37 +8,34 @@
 
 /* REQUIRE */
 
-var _            = require ( 'lodash' ),
-    merge        = require ( 'merge-stream' ),
+var merge        = require ( 'merge-stream' ),
+    plugins      = require ( '../config/project' ).plugins,
+    changed      = require ( '../utilities/changed' ),
     input        = require ( '../utilities/input' ),
     output       = require ( '../utilities/output' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
     filter       = require ( '../plugins/filter' ),
-    project      = require ( '../config/project' ),
-    projectPrev  = require ( '../config/previous/project' ),
-    plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     gulpif       = require ( 'gulp-if' ),
     concat       = require ( 'gulp-concat' ),
-    newer        = require ( 'gulp-newer' ),
-    sort         = require ( 'gulp-sort' );
+    newer        = require ( 'gulp-newer' );
 
 /* SCSS PARTS */
 
 gulp.task ( 'build-scss-parts', false, function () {
 
-  var needUpdate = !_.isEqual ( _.get ( project, 'components' ), _.get ( projectPrev, 'components' ) );
+  var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'dependencies', 'extend' );
 
   var parts = ['variables', 'functions', 'mixins', 'keyframes', 'style'];
 
   var streams = parts.map ( function ( part ) {
 
     return gulp.src ( input.getPath ( 'scss.' + part ) )
-               .pipe ( filter () )
+               .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
-               .pipe ( dependencies ( plugins.dependencies.options ) )
-               .pipe ( extend () )
+               .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
+               .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
                .pipe ( concat ( output.getName ( 'scss.' + part ) ) )
                .pipe ( gulp.dest ( output.getDir ( 'scss.' + part ) ) );
 
