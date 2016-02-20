@@ -43,8 +43,6 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
 
     var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'dependencies', 'extend', 'babel', 'uglify' );
 
-    needUpdate = true; //TODO: REMOVE
-
     return gulp.src ( input.getPath ( 'javascript.all' ) )
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
@@ -52,10 +50,10 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
                .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
                .pipe ( flatten () )
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
-              //  .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-              //  .on ( 'error', function ( err ) { gutil.log ( err.message ); })
+               .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
+               .on ( 'error', function ( err ) { gutil.log ( err.message ); })
                .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
-              //  .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
+               .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
                .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
                .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
 

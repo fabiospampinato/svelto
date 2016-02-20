@@ -10,21 +10,10 @@
 
 var _       = require ( 'lodash' ),
     path    = require ( 'path' ),
-    through = require ( 'through2' );
+    through = require ( 'through2' ),
+    gutil   = require ( 'gulp-util' );
 
 /* UTILITIES */
-
-var arrRemove = function ( arr, index ) {
-
-  arr.splice ( index, 1 );
-
-};
-
-var arrMove = function ( arr, from, to ) {
-
-  arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
-
-};
 
 var getFilePaths = function ( file ) {
 
@@ -49,23 +38,47 @@ var getFilePaths = function ( file ) {
 
 };
 
-var needsTarget = function ( base, suffix ) {
+var getFilesPaths = function ( files ) {
 
-  return base.suffix === suffix;
+  var paths = {};
+
+  for ( var i = 0, l = files.length; i < l; i++ ) {
+
+    paths[files[i].path] = getFilePaths ( files[i] );
+
+  }
+
+  return paths;
 
 };
 
-var isTarget = function ( base, target ) {
+var partitionFiles = function ( files, paths, prefixes ) {
 
-  return base.dirs === target.dirs && base.ext === target.ext && base.name === target.fullname;
+  return _.partition ( files, function ( file ) {
+
+    return prefixes.indexOf ( paths[file.path].suffix ) === -1;
+
+  });
 
 };
 
-var getTargetIndex = function ( base, targets ) {
+var needsTarget = function ( file, paths, suffix ) {
 
-  for ( var i = 0, l = targets.length; i < l; i++ ) {
+  return paths[file.path].suffix === suffix;
 
-    if ( isTarget ( base, targets[i] ) ) {
+};
+
+var isTarget = function ( base, target, paths ) {
+
+  return paths[base.path].dirs === paths[target.path].dirs && paths[base.path].ext === paths[target.path].ext && paths[base.path].name === paths[target.path].fullname;
+
+};
+
+var getTargetIndex = function ( file, files, paths ) {
+
+  for ( var i = 0, l = files.length; i < l; i++ ) {
+
+    if ( isTarget ( file, files[i], paths ) ) {
 
       return i;
 
@@ -79,142 +92,111 @@ var getTargetIndex = function ( base, targets ) {
 
 /* WORKERS */
 
-var workerBefore = function ( files, paths ) {
+var workerPartial = function ( partition, paths, options ) {
 
-  for ( var i = 0; i < files.length; i++ ) {
+  for ( var i = 0, l = partition[1].length; i < l; i++ ) {
 
-    if ( !paths[i]._done && needsTarget ( paths[i], 'before' ) ) {
+    if ( needsTarget ( partition[1][i], paths, options.suffix ) ) {
 
-      paths[i]._done = true;
+      var ti = getTargetIndex ( partition[1][i], partition[0], paths );
 
-      var ti = getTargetIndex ( paths[i], paths );
+      if ( ti >= 0 ) {
 
-      if ( ti === -1 ) {
+        options.callback ( partition[0][ti], partition[1][i] );
 
-        arrRemove ( files, i );
-        arrRemove ( paths, i );
-
-        i--;
-
-      } else if ( ti === i + 1 ) {
-
-        continue;
-
-      } else if ( ti > i ) {
-
-        arrMove ( files, i, ti - 1 );
-        arrMove ( paths, i, ti - 1 );
-
-        i--;
-
-      } else {
-
-        arrMove ( files, i, ti );
-        arrMove ( paths, i, ti );
+        partition[0].splice ( ti + options.offset, options.remove, partition[1][i] );
+        partition[1][i] = false;
 
       }
 
     }
 
   }
+
+  partition[1] = _.compact ( partition[1] );
 
 };
 
-var workerAfter = function ( files, paths ) {
+var workerBefore = function ( partition, paths, config ) {
 
-  for ( var i = 0; i < files.length; i++ ) {
-
-    if ( !paths[i]._done && needsTarget ( paths[i], 'after' ) ) {
-
-      paths[i]._done = true;
-
-      var ti = getTargetIndex ( paths[i], paths );
-
-      if ( ti === -1 ) {
-
-        arrRemove ( files, i );
-        arrRemove ( paths, i );
-
-        i--;
-
-      } else if ( ti === i - 1 ) {
-
-        continue;
-
-      } else if ( ti > i ) {
-
-        arrMove ( files, i, ti );
-        arrMove ( paths, i, ti );
-
-        i--;
-
-      } else {
-
-        arrMove ( files, i, ti + 1 );
-        arrMove ( paths, i, ti + 1 );
-
+  workerPartial ( partition, paths, {
+    suffix: 'before',
+    offset: 0,
+    remove: 0,
+    callback: function ( base, extender ) {
+      if ( config.log ) {
+        console.log ( '`' + extender.path + '` has been prepended to `' + base.path + '`' );
       }
-
     }
-
-  }
+  });
 
 };
 
-var workerOverride = function ( files, paths ) {
+var workerAfter = function ( partition, paths, config ) {
 
-  for ( var i = 0; i < files.length; i++ ) {
-
-    if ( !paths[i]._done && needsTarget ( paths[i], 'override' ) ) {
-
-      paths[i]._done = true;
-
-      var ti = getTargetIndex ( paths[i], paths );
-
-      if ( ti === -1 ) {
-
-        arrRemove ( files, i );
-        arrRemove ( paths, i );
-
-      } else if ( ti > i ) {
-
-        arrMove ( files, i, ti );
-        arrMove ( paths, i, ti );
-        arrRemove ( files, ti - 1 );
-        arrRemove ( paths, ti - 1 );
-
-      } else if ( ti < i ) {
-
-        arrMove ( files, i, ti + 1 );
-        arrMove ( paths, i, ti + 1 );
-        arrRemove ( files, ti );
-        arrRemove ( paths, ti );
-
+  workerPartial ( partition, paths, {
+    suffix: 'after',
+    offset: 1,
+    remove: 0,
+    callback: function ( base, extender ) {
+      if ( config.log ) {
+        console.log ( '`' + extender.path + '` has been appendend to `' + base.path + '`' );
       }
-
-      i--;
-
     }
+  });
 
-  }
+};
+
+var workerOverride = function ( partition, paths, config ) {
+
+  workerPartial ( partition, paths, {
+    suffix: 'override',
+    offset: 0,
+    remove: 1,
+    callback: function ( base, extender ) {
+      if ( config.log ) {
+        console.log ( '`' + extender.path + '` has overridden `' + base.path + '`' );
+      }
+      extender.path = base.path;
+    }
+  });
 
 };
 
 /* WORKER */
 
-var worker = function ( files ) {
+var worker = function ( files, config ) {
 
-  var paths = files.map ( getFilePaths );
+  var paths = getFilesPaths ( files ),
+      partition = partitionFiles ( files, paths, ['before', 'after', 'override'] );
 
-  workerBefore ( files, paths );
-  workerAfter ( files, paths );
-  workerOverride ( files, paths );
+  workerBefore ( partition, paths, config );
+  workerAfter ( partition, paths, config );
+  workerOverride ( partition, paths, config );
+
+  if ( partition[1].length ) {
+
+    var filepaths = partition[1].map ( function ( file ) { return file.path; } );
+
+    return new gutil.PluginError ( 'Extend', 'Missing target files for: ' + filepaths.join ( ', ' ) );
+
+  } else {
+
+    return partition[0];
+
+  }
 
 };
 
 /* EXTEND */
 
-var extend = function () {
+var extend = function ( config ) {
+
+  /* CONFIG */
+
+  config = _.merge ({
+    log: false
+  }, config );
 
   /* VARIABLES */
 
@@ -230,15 +212,23 @@ var extend = function () {
 
   }, function ( callback ) {
 
-    worker ( files );
+    files = worker ( files, config );
 
-    for ( var i = 0, l = files.length; i < l; i++ ) {
+    if ( files instanceof gutil.PluginError ) {
 
-      this.push ( files[i] );
+      callback ( files );
+
+    } else {
+
+      for ( var i = 0, l = files.length; i < l; i++ ) {
+
+        this.push ( files[i] );
+
+      }
+
+      callback ();
 
     }
-
-    callback ();
 
   });
 

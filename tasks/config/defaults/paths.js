@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Make it easier to add a now folder as input
+//TODO: Make it easier to add a now folder as input (why not, even easier to output to different paths)
 
 /* PATHS */
 
