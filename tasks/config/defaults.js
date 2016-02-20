@@ -15,20 +15,20 @@ var defaults = {
 
   /* GENERAL */
 
-  paths: require ( './defaults/paths' ),
   components: require ( './defaults/components' ),
+  paths: require ( './defaults/paths' ),
   plugins: require ( './defaults/plugins' ),
   isDevelopment: false,
 
   /* ENVIRONMENT */
 
   environments: {
-    production: {},
     development: {
       paths: require ( './defaults/development/paths' ),
       plugins: require ( './defaults/development/plugins' ),
       isDevelopment: true
-    }
+    },
+    production: {}
   },
   environment: 'production'
 

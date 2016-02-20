@@ -15,6 +15,21 @@ var plugins = {
   cssnano: {
     enabled: false
   },
+  dependencies: {
+    options: {
+      log: true
+    }
+  },
+  extend: {
+    options: {
+      log: true
+    }
+  },
+  filter: {
+    options: {
+      log: true
+    }
+  },
   imagemin: {
     enabled: false
   }

@@ -37,8 +37,21 @@ var plugins = {
     }
   },
   dependencies: {
+    enabled: true,
     options: {
       require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
+      log: true //TODO: Change it to `false`
+    }
+  },
+  extend: {
+    enabled: true,
+    options: {
+      log: true //TODO: Change it to `false` //TODO: Implement it
+    }
+  },
+  filter: {
+    enabled: true,
+    options: {
       log: true //TODO: Change it to `false`
     }
   },
@@ -63,6 +76,7 @@ var plugins = {
     }
   },
   sass: {
+    enabled: true,
     options: {
       outputStyle: 'expanded',
       precision: 10

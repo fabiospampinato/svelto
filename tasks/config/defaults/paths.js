@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Make it easier to add a now folder as input
+
 /* PATHS */
 
 var paths = {
@@ -13,11 +15,11 @@ var paths = {
     fonts: 'src/**/*.{eot,ttf,woff,woff2}',
     images: 'src/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
     javascript: {
-      all: 'src/**/*.js', //TODO: Maybe rename it
+      all: 'src/**/*.js',
       temp: '.temp/javascript/**/*.js'
     },
     scss: {
-      all: 'src/**/*.scss', //TODO: Maybe rename it
+      all: 'src/**/*.scss',
       variables: 'src/**/variables.scss',
       functions: 'src/**/functions.scss',
       mixins: 'src/**/mixins.scss',
@@ -35,7 +37,7 @@ var paths = {
       temp: '.temp/javascript'
     },
     scss: {
-      all: 'dist/scss/svelto.scss', //TODO: Maybe rename it
+      all: 'dist/scss/svelto.scss',
       variables: 'dist/scss/svelto.variables.scss',
       functions: 'dist/scss/svelto.functions.scss',
       mixins: 'dist/scss/svelto.mixins.scss',
