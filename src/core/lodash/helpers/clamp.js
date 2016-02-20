@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
  * ========================================================================= */
 
 //TODO: Write it better ($.positionate may rely on a buggy behaviour of this function)
