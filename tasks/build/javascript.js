@@ -24,7 +24,6 @@ var changed      = require ( '../utilities/changed' ),
     gutil        = require ( 'gulp-util' ),
     newer        = require ( 'gulp-newer' ),
     rename       = require ( 'gulp-rename' ),
-    sort         = require ( 'gulp-sort' ),
     uglify       = require ( 'gulp-uglify' );
 
 /* JAVASCRIPT */
@@ -35,8 +34,6 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
 
     return gulp.src ( input.getPath ( 'javascript.temp' ) )
                .pipe ( newer ( output.getPath ( 'javascript.uncompressed' ) ) )
-              //  .pipe ( require ( 'gulp-filelog')() )
-               .pipe ( sort () ) //TODO: Needed?
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
                .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
                .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
