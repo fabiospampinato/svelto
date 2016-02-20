@@ -6,9 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
+ * @require core/browser/browser.js
  * @require core/mouse/mouse.js
  * @require core/widget/widget.js
- * @require lib/browser/browser.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
