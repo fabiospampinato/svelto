@@ -8,23 +8,29 @@
 
 /* REQUIRE */
 
-var plugins = require ( '../config/project' ).plugins,
+var changed = require ( '../utilities/changed' ),
     input   = require ( '../utilities/input' ),
     output  = require ( '../utilities/output' ),
+    plugins = require ( '../config/project' ).plugins,
     filter  = require ( '../plugins/filter' ),
+    extend  = require ( '../plugins/extend' ),
     gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
     gulpif  = require ( 'gulp-if' ),
     flatten = require ( 'gulp-flatten' ),
+    gulpif  = require ( 'gulp-if' ),
     newer   = require ( 'gulp-newer' );
 
 /* FONTS */
 
 gulp.task ( 'build-fonts', 'Build fonts', function () {
 
+  var needUpdate = changed.plugin ( 'extend' );
+
   return gulp.src ( input.getPath ( 'fonts' ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( flatten () )
-             .pipe ( newer ( output.getPath ( 'fonts' ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'fonts' ) ) ) )
              .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) );
 
 });

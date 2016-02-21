@@ -8,11 +8,12 @@
 
 /* REQUIRE */
 
-var plugins  = require ( '../config/project' ).plugins,
-    changed  = require ( '../utilities/changed' ),
+var changed  = require ( '../utilities/changed' ),
     input    = require ( '../utilities/input' ),
     output   = require ( '../utilities/output' ),
+    extend   = require ( '../plugins/extend' ),
     filter   = require ( '../plugins/filter' ),
+    plugins  = require ( '../config/project' ).plugins,
     gulp     = require ( 'gulp-help' )( require ( 'gulp' ) ),
     bytediff = require ( 'gulp-bytediff' ),
     flatten  = require ( 'gulp-flatten' ),
@@ -24,10 +25,11 @@ var plugins  = require ( '../config/project' ).plugins,
 
 gulp.task ( 'build-images', 'Build images', function () {
 
-  var needUpdate = changed.plugin ( 'imagemin' );
+var needUpdate = changed.plugins ( 'extend', 'imagemin' );
 
   return gulp.src ( input.getPath ( 'images' ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.start () ) )
