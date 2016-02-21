@@ -1,0 +1,18 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Tabs - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./top.scss
+ * @require ./right.scss
+ * @require ./bottom.scss
+ * @require ./left.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.tabs:not(.right):not(.bottom):not(.left) {
+  @extend .tabs.top;
+}

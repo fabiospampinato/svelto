@@ -1,0 +1,18 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./top.scss
+ * @require ./right.scss
+ * @require ./bottom.scss
+ * @require ./left.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.panel:not(.top):not(.right):not(.bottom) {
+  @extend .panel.left;
+}

@@ -1,0 +1,55 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Tabs - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../tabs.scss
+ * ========================================================================= */
+
+/* HORIZONTAL */
+
+.tabs.horizontal {
+
+  align-items: stretch;
+  flex-direction: row;
+
+  /* TRIGGERS */
+
+  > .tabs-triggers {
+
+    flex-direction: column;
+
+    /* TRIGGER */
+
+    > :not(:first-child) {
+      @include border-top-radius ( 0 );
+      border-top-width: 0;
+    }
+
+    > :not(:last-child) {
+      @include border-bottom-radius ( 0 );
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  > .tabs-containers {
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1; // IE-10-11 default it to 0 instead
+
+    /* CONTAINER */
+
+    > * {
+      flex-grow: 1;
+      flex-shrink: 1; // IE-10-11 default it to 0 instead
+    }
+
+  }
+
+}

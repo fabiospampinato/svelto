@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./horizontal.scss
+ * @require ./vertical.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.flippable:not(.vertical) {
+  @extend .flippable.horizontal;
+}

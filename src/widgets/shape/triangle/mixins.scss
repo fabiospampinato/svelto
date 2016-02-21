@@ -13,7 +13,7 @@
   $size: $size / 2;
   border: $size solid transparent;
 
-  @if $direction == up {
+  @if $direction == top {
 
     border-top-width: 0;
     border-bottom-color: $color;
@@ -28,7 +28,7 @@
     border-left-width: 0;
     border-right-color: $color;
 
-  } @else { // Defaulting to `down`
+  } @else { // Defaulting to `bottom`
 
     border-bottom-width: 0;
     border-top-color: $color;

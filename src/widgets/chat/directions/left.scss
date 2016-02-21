@@ -1,0 +1,81 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../chat.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.chat-msg.direction-left {
+
+  /* LEVELS */
+
+  &.level-3,
+  &[class*='level-'] {
+    margin-left: $chat-msg-level-3-spacing;
+  }
+
+  &.level-2 {
+    margin-left: $chat-msg-level-2-spacing;
+  }
+
+  &.level-1 {
+    margin-left: $chat-msg-level-1-spacing;
+  }
+
+  /* IMAGE */
+
+  .chat-msg-img {
+    order: 1;
+  }
+
+  /* TIP */
+
+  .chat-msg-content {
+    margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+  }
+
+  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+  _:-ms-lang(x), & .chat-msg-content {
+    margin-left: $gutter;
+  }
+
+  /* CONTENT */
+
+  .chat-msg-content {
+    order: 2;
+  }
+
+  /* HEADER */
+
+  .card-header {
+
+    /* TIP */
+
+    &:before {
+      left: - ( $dropdown-tip-size / 2 );
+      margin-top: - ( $dropdown-tip-size / 2 );
+      clip-path: url(#{$chat-path-images}chat-clips.svg#clip-right); // The polygon is not supported on Firefox
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), &:before {
+      display: none !important;
+    }
+
+    /* TIP (OUTLINED) */
+
+    &.outlined:before {
+      margin-left: - $outline-width;
+    }
+
+  }
+
+}

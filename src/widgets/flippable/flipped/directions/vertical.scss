@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable - Flipped - Directions - Vertical
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../direction/vertical/vertical.scss
+ * ========================================================================= */
+
+/* VERTICAL */
+
+.flippable.flipped.vertical {
+
+  /* FRONT */
+
+  .flippable-front {
+    transform: rotateX(180deg);
+  }
+
+  /* BACK */
+
+  .flippable-back {
+    transform: rotateX(0deg);
+  }
+
+}

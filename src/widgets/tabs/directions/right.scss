@@ -1,0 +1,50 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Tabs - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require .//horizontal.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.tabs.right {
+
+  @extend .tabs.horizontal;
+
+  /* TRIGGERS */
+
+  > .tabs-triggers {
+
+    order: 1;
+
+    /* TRIGGER */
+
+    > :first-child {
+      border-top-left-radius: 0;
+    }
+
+    > :last-child {
+      border-bottom-left-radius: 0;
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  .tabs-containers {
+
+    order: 0;
+
+    /* CONTAINER */
+
+    > * {
+      @include border-right-radius ( 0 );
+      border-right-width: 0;
+    }
+
+  }
+
+}
