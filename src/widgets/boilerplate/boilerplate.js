@@ -66,6 +66,8 @@
 
     /* PRIVATE */
 
+    // Prefixed with `_`
+
     /* API */
 
   }
