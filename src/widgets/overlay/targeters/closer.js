@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown (Toggler)
+ * Svelto - Widgets - Overlay - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./dropdown.js
- * @require widgets/toggler/toggler.js
+ * @require ../overlay.js
+ * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownToggler',
+    name: 'overlayCloser',
     plugin: true,
-    selector: '.dropdown-toggler',
+    selector: '.overlay-closer',
     options: {
-      widget: Widgets.Dropdown
+      widget: Widgets.Overlay
     }
   };
 
-  /* DROPDOWN TOGGLER */
+  /* OVERLAY CLOSER */
 
-  class DropdownToggler extends Widgets.Toggler {}
+  class OverlayCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init ( DropdownToggler, config, Widgets );
+  Factory.init ( OverlayCloser, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

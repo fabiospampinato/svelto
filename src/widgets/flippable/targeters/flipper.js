@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Panel (Opener)
+ * Svelto - Widgets - Flippable - Targeters - Flipper
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./panel.js
- * @require widgets/opener/opener.js
+ * @require ../flippable.js
+ * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,25 @@
   /* CONFIG */
 
   let config = {
-    name: 'panelOpener',
+    name: 'flippableFlipper',
     plugin: true,
-    selector: '.panel-opener',
+    selector: '.flippable-flipper',
     options: {
-      widget: Widgets.Panel
+      widget: Widgets.Flippable,
+      methods: {
+        toggle: 'flip',
+        open: 'front',
+        close: 'back'
+      }
     }
   };
 
-  /* PANEL OPENER */
+  /* FLIPPABLE FLIPPER */
 
-  class PanelOpener extends Widgets.Opener {}
+  class FlippableFlipper extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init ( PanelOpener, config, Widgets );
+  Factory.init ( FlippableFlipper, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

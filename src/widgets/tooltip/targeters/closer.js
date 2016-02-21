@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Overlay (Toggler)
+ * Svelto - Widgets - Tooltip - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./overlay.js
- * @require widgets/toggler/toggler.js
+ * @require ../tooltip.js
+ * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'overlayToggler',
+    name: 'tooltipCloser',
     plugin: true,
-    selector: '.overlay-toggler',
+    selector: '.tooltip-closer',
     options: {
-      widget: Widgets.Overlay
+      widget: Widgets.Tooltip
     }
   };
 
-  /* OVERLAY TOGGLER */
+  /* TOOLTIP CLOSER */
 
-  class OverlayToggler extends Widgets.Toggler {}
+  class TooltipCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init ( OverlayToggler, config, Widgets );
+  Factory.init ( TooltipCloser, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

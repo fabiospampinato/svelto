@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Modal (Opener)
+ * Svelto - Widgets - Panel - Targeters - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./modal.js
- * @require widgets/opener/opener.js
+ * @require ../panel.js
+ * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'modalOpener',
+    name: 'panelOpener',
     plugin: true,
-    selector: '.modal-opener',
+    selector: '.panel-opener',
     options: {
-      widget: Widgets.Modal
+      widget: Widgets.Panel
     }
   };
 
-  /* MODAL OPENER */
+  /* PANEL OPENER */
 
-  class ModalOpener extends Widgets.Opener {}
+  class PanelOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init ( ModalOpener, config, Widgets );
+  Factory.init ( PanelOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Toggler
+ * Svelto - Widgets - Overlay - Targeters - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/opener/opener.js
+ * @require ../overlay.js
+ * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -15,38 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'toggler',
+    name: 'overlayOpener',
+    plugin: true,
+    selector: '.overlay-opener',
     options: {
-      methods: {
-        toggle: 'toggle'
-      }
+      widget: Widgets.Overlay
     }
   };
 
-  /* TOGGLER */
+  /* OVERLAY OPENER */
 
-  class Toggler extends Widgets.Opener {
-
-    /* TAP */
-
-    __tap ( event ) {
-
-      this.toggle ( undefined, event );
-
-    }
-
-    /* API */
-
-    toggle ( force, event ) {
-
-      return this._targetInstance[this.options.methods.toggle]( force, this.element, event );
-
-    }
-
-  }
+  class OverlayOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init ( Toggler, config, Widgets );
+  Factory.init ( OverlayOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

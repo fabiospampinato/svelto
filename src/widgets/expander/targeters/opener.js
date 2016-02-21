@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Tooltip (Opener)
+ * Svelto - Widgets - Expander - Targeters - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./tooltip.js
- * @require widgets/opener/opener.js
+ * @require ../expander.js
+ * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,23 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'tooltipOpener',
+    name: 'expanderOpener',
     plugin: true,
-    selector: '.tooltip-opener',
+    selector: '.expander-opener',
     options: {
-      widget: Widgets.Tooltip,
-      hover: {
-        active: true
-      }
+      widget: Widgets.Expander
     }
   };
 
-  /* TOOLTIP OPENER */
+  /* EXPANDER OPENER */
 
-  class TooltipOpener extends Widgets.Opener {}
+  class ExpanderOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init ( TooltipOpener, config, Widgets );
+  Factory.init ( ExpanderOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Overlay (Opener)
+ * Svelto - Widgets - Modal - Targeters - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./overlay.js
- * @require widgets/opener/opener.js
+ * @require ../modal.js
+ * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'overlayOpener',
+    name: 'modalOpener',
     plugin: true,
-    selector: '.overlay-opener',
+    selector: '.modal-opener',
     options: {
-      widget: Widgets.Overlay
+      widget: Widgets.Modal
     }
   };
 
-  /* OVERLAY OPENER */
+  /* MODAL OPENER */
 
-  class OverlayOpener extends Widgets.Opener {}
+  class ModalOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init ( OverlayOpener, config, Widgets );
+  Factory.init ( ModalOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

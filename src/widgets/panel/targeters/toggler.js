@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Infobar (Closer)
+ * Svelto - Widgets - Panel - Targeters - Toggler
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./infobar.js
- * @require widgets/closer/closer.js
+ * @require ../panel.js
+ * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'infobarCloser',
+    name: 'panelToggler',
     plugin: true,
-    selector: '.infobar-closer',
+    selector: '.panel-toggler',
     options: {
-      widget: Widgets.Infobar
+      widget: Widgets.Panel
     }
   };
 
-  /* INFOBAR CLOSER */
+  /* PANEL TOGGLER */
 
-  class InfobarCloser extends Widgets.Closer {}
+  class PanelToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init ( InfobarCloser, config, Widgets );
+  Factory.init ( PanelToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

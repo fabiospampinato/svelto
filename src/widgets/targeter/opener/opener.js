@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Opener
+ * Svelto - Widgets - Targeter - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ../closer/closer.js
  * @require core/browser/browser.js
- * @require widgets/closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {

@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Expander (Closer)
+ * Svelto - Widgets - Tooltip - Targeters - Toggler
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./expander.js
- * @require widgets/closer/closer.js
+ * @require ../tooltip.js
+ * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,23 @@
   /* CONFIG */
 
   let config = {
-    name: 'expanderCloser',
+    name: 'tooltipToggler',
     plugin: true,
-    selector: '.expander-closer',
+    selector: '.tooltip-toggler',
     options: {
-      widget: Widgets.Expander
+      widget: Widgets.Tooltip,
+      hover: {
+        active: true
+      }
     }
   };
 
-  /* EXPANDER CLOSER */
+  /* TOOLTIP TOGGLER */
 
-  class ExpanderCloser extends Widgets.Closer {}
+  class TooltipToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init ( ExpanderCloser, config, Widgets );
+  Factory.init ( TooltipToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

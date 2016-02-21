@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Panel (Toggler)
+ * Svelto - Widgets - Dropdown - Targeters - Opener
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./panel.js
- * @require widgets/toggler/toggler.js
+ * @require ../dropdown.js
+ * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'panelToggler',
+    name: 'dropdownOpener',
     plugin: true,
-    selector: '.panel-toggler',
+    selector: '.dropdown-opener',
     options: {
-      widget: Widgets.Panel
+      widget: Widgets.Dropdown
     }
   };
 
-  /* PANEL TOGGLER */
+  /* DROPDOWN OPENER */
 
-  class PanelToggler extends Widgets.Toggler {}
+  class DropdownOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init ( PanelToggler, config, Widgets );
+  Factory.init ( DropdownOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

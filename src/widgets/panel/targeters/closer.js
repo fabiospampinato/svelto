@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown (Closer)
+ * Svelto - Widgets - Panel - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./dropdown.js
- * @require widgets/closer/closer.js
+ * @require ../panel.js
+ * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownCloser',
+    name: 'panelCloser',
     plugin: true,
-    selector: '.dropdown-closer',
+    selector: '.panel-closer',
     options: {
-      widget: Widgets.Dropdown
+      widget: Widgets.Panel
     }
   };
 
-  /* DROPDOWN CLOSER */
+  /* PANEL CLOSER */
 
-  class DropdownCloser extends Widgets.Closer {}
+  class PanelCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init ( DropdownCloser, config, Widgets );
+  Factory.init ( PanelCloser, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

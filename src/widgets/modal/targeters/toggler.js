@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Tooltip (Toggler)
+ * Svelto - Widgets - Modal - Targeters - Toggler
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./tooltip.js
- * @require widgets/toggler/toggler.js
+ * @require ../modal.js
+ * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,23 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'tooltipToggler',
+    name: 'modalToggler',
     plugin: true,
-    selector: '.tooltip-toggler',
+    selector: '.modal-toggler',
     options: {
-      widget: Widgets.Tooltip,
-      hover: {
-        active: true
-      }
+      widget: Widgets.Modal
     }
   };
 
-  /* TOOLTIP TOGGLER */
+  /* MODAL TOGGLER */
 
-  class TooltipToggler extends Widgets.Toggler {}
+  class ModalToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init ( TooltipToggler, config, Widgets );
+  Factory.init ( ModalToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

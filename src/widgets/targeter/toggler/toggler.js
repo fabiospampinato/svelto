@@ -1,12 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Flippable (Flipper)
+ * Svelto - Widgets - Targeter - Toggler
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./flippable.js
- * @require widgets/toggler/toggler.js
+ * @require ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,25 +15,38 @@
   /* CONFIG */
 
   let config = {
-    name: 'flippableFlipper',
-    plugin: true,
-    selector: '.flippable-flipper',
+    name: 'toggler',
     options: {
-      widget: Widgets.Flippable,
       methods: {
-        toggle: 'flip',
-        open: 'front',
-        close: 'back'
+        toggle: 'toggle'
       }
     }
   };
 
-  /* FLIPPABLE FLIPPER */
+  /* TOGGLER */
 
-  class FlippableFlipper extends Widgets.Toggler {}
+  class Toggler extends Widgets.Opener {
+
+    /* TAP */
+
+    __tap ( event ) {
+
+      this.toggle ( undefined, event );
+
+    }
+
+    /* API */
+
+    toggle ( force, event ) {
+
+      return this._targetInstance[this.options.methods.toggle]( force, this.element, event );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init ( FlippableFlipper, config, Widgets );
+  Factory.init ( Toggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
