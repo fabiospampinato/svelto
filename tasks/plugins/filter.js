@@ -9,7 +9,6 @@
 /* REQUIRE */
 
 var _       = require ( 'lodash' ),
-    path    = require ( 'path' ),
     through = require ( 'through2' ),
     project = require ( '../config/project' ),
     gutil   = require ( 'gulp-util' );
@@ -50,7 +49,7 @@ var parseComponents = function ( obj, prefix ) {
 
 var needsFiltering = function ( components, file ) {
 
-  var relative = path.dirname ( file.relative ).replace ( /\\\\/g, '/' ).replace ( /\/\//g, '/' ),
+  var relative = file.relative.replace ( /\\\\/g, '/' ).replace ( /\/\//g, '/' ),
       maxPriority = relative.split ( '/' ).length,
       priority = 0,
       needs = false;
