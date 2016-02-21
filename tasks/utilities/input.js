@@ -9,28 +9,20 @@
 /* REQUIRE */
 
 var _       = require ( 'lodash' ),
-    path    = require ( 'path' ),
     project = require ( '../config/project' );
 
 /* INPUT */
 
 var input = {
 
-  getDir: function ( key ) {
-
-    return path.parse ( this.getPath ( key ) ).dir;
-
-  },
-
-  getName: function ( key ) {
-
-    return path.parse ( this.getPath ( key ) ).base;
-
-  },
-
   getPath: function ( key ) {
 
-    return _.get ( project.paths.input, key );
+    var roots = project.paths.input.roots,
+        partial = _.get ( project.paths.input, key );
+
+    roots = _.isString ( roots ) ? [roots] : roots;
+
+    return _.unique ( roots.map ( function ( root ) { return partial.replace ( /<root>/g, root ); } ) );
 
   }
 

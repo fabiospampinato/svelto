@@ -19,7 +19,7 @@ var plugins = {
   babel: {
     enabled: true,
     options: {
-      presets: ['es2015'],
+      presets: ['./node_modules/babel-preset-es2015'], // We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
       babelrc: false,
       compact: false
     }
@@ -40,19 +40,19 @@ var plugins = {
     enabled: true,
     options: {
       require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
-      log: true //TODO: Change it to `false`
+      log: false
     }
   },
   extend: {
     enabled: true,
     options: {
-      log: true //TODO: Change it to `false` //TODO: Implement it
+      log: false
     }
   },
   filter: {
     enabled: true,
     options: {
-      log: true //TODO: Change it to `false`
+      log: false
     }
   },
   github: {

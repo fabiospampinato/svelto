@@ -6,25 +6,28 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Make it easier to add a now folder as input (why not, even easier to output to different paths)
+// `<root>` will be replaced with values defined in `roots`
+// In order to extend Svelto just add another source root
+// Source roots may be either relative: `ext`, `../ext` or absolute `/Users/me/ext`
 
 /* PATHS */
 
 var paths = {
   input: {
-    fonts: 'src/**/*.{eot,ttf,woff,woff2}',
-    images: 'src/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
+    roots: ['src'],
+    fonts: '<root>/**/*.{eot,ttf,woff,woff2}',
+    images: '<root>/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
     javascript: {
-      all: 'src/**/*.js',
+      all: '<root>/**/*.js',
       temp: '.temp/javascript/**/*.js'
     },
     scss: {
-      all: 'src/**/*.scss',
-      variables: 'src/**/variables.scss',
-      functions: 'src/**/functions.scss',
-      mixins: 'src/**/mixins.scss',
-      keyframes: 'src/**/keyframes.scss',
-      style: ['src/**/*.scss', '!src/**/variables.scss', '!src/**/functions.scss', '!src/**/mixins.scss', '!src/**/keyframes.scss'],
+      all: '<root>/**/*.scss',
+      variables: '<root>/**/variables.scss',
+      functions: '<root>/**/functions.scss',
+      mixins: '<root>/**/mixins.scss',
+      keyframes: '<root>/**/keyframes.scss',
+      style: '<root>/**/!(variables.scss|functions.scss|mixins.scss|keyframes.scss)*.scss',
       temp: '.temp/scss/**/*.scss'
     }
   },
