@@ -27,7 +27,7 @@ gulp.task ( 'build-css', 'Build CSS', ['build-scss'], function () {
 
   return gulp.src ( output.getPath ( 'scss.all' ) )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'css.uncompressed' ) ) ) )
-             .pipe ( gulpif ( plugins.sass.enabled ( sass ( plugins.sass.options ).on ( 'error', sass.logError ) ) ) )
+             .pipe ( gulpif ( plugins.sass.enabled, ( sass ( plugins.sass.options ).on ( 'error', sass.logError ) ) ) )
              .pipe ( gulpif ( plugins.autoprefixer.enabled, autoprefixer ( plugins.autoprefixer.options ) ) )
              .pipe ( rename ( output.getName ( 'css.uncompressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'css.uncompressed' ) ) )

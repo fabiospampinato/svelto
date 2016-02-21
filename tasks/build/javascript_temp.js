@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: Make it work in a different way, so that if we add new files we don't need to clean it up before (one may forget to do it)
+//TODO: Saving a list of the files order and using it will greatly improve performance in the case where we are adding a new file, so that we won't need to clean the directory and parse all the files again
 
 /* REQUIRE */
 

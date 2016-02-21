@@ -20,7 +20,7 @@
 
 @mixin position ( $position, $coordinates ) {
 
-  @if $postion != false and $postion != null {
+  @if $position != false and $position != null {
     position: $position;
   }
 

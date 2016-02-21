@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Maybe disable filtering for parts that won't generate any CSS
+//TODO: Maybe disable filtering for parts that won't generate any CSS, so that we can skip the style of a component while still keeping its variables/mixins/functions/keyframes
 
 /* REQUIRE */
 

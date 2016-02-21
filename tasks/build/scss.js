@@ -17,7 +17,7 @@ var output = require ( '../utilities/output' ),
 
 gulp.task ( 'build-scss', 'Build SCSS', ['build-scss-parts'], function () {
 
- return gulp.src ( [output.getPath ( 'scss.variables' ), output.getPath ( 'scss.functions' ), output.getPath ( 'scss.mixins' ), output.getPath ( 'scss.keyframes' ), output.getPath ( 'scss.style' )] )
+ return gulp.src ( [output.getPath ( 'scss.functions' ), output.getPath ( 'scss.mixins' ), output.getPath ( 'scss.variables' ), output.getPath ( 'scss.keyframes' ), output.getPath ( 'scss.style' )] )
             .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
             .pipe ( concat ( output.getName ( 'scss.all' ) ) )
             .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
