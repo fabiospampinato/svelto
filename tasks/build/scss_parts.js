@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Maybe disable filtering for parts that won't generate any CSS
+
 /* REQUIRE */
 
 var merge        = require ( 'merge-stream' ),
@@ -35,7 +37,7 @@ gulp.task ( 'build-scss-parts', false, function () {
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
-               .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
+               .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
                .pipe ( concat ( output.getName ( 'scss.' + part ) ) )
                .pipe ( gulp.dest ( output.getDir ( 'scss.' + part ) ) );
 

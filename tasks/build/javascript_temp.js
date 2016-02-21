@@ -49,7 +49,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
   return gulp.src ( input.getPath ( 'javascript.all' ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
-             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
+             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( foreach ( function ( stream, file ) {
                var basename = path.basename ( file.path );
                file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex++, 3, 0 ) + '-' + basename );

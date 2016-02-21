@@ -47,7 +47,7 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
-               .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.enabled ) ) )
+               .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
                .pipe ( flatten () )
                .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
                .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
