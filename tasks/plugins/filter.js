@@ -101,10 +101,6 @@ var logFiltered = function ( files ) {
 
     console.log ( list );
 
-  } else {
-
-    console.log ( 'No files have been filtered' );
-
   }
 
 };
