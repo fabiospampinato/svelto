@@ -55,10 +55,6 @@ var needsFiltering = function ( components, file ) {
       priority = 0,
       needs = false;
 
-  if ( relative.indexOf ( path.sep ) === - 1 ) { //TODO: Remove it
-    throw new Error ( 'needed check, apparently... at lest for: ' + relative );
-  }
-
   for ( var component in components ) {
 
     if ( components.hasOwnProperty ( component ) ) {

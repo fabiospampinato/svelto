@@ -144,21 +144,25 @@ var resolveGraph = function ( graph ) {
 
 var logFiles = function ( files ) {
 
-  var list = 'Dependencies order:\n';
+  if ( files.length ) {
 
-  for ( var i = 0, l = files.length; i < l; i++ ) {
+    var list = 'Dependencies order:\n';
 
-    list += _.padRight ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
+    for ( var i = 0, l = files.length; i < l; i++ ) {
 
-    if ( i + 1 < l ) {
+      list += _.padRight ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
 
-      list += '\n';
+      if ( i + 1 < l ) {
+
+        list += '\n';
+
+      }
 
     }
 
-  }
+    console.log ( list );
 
-  console.log ( list );
+  }
 
 };
 
