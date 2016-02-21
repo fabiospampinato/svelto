@@ -1,6 +1,36 @@
 
 /* =========================================================================
- * Svelto - Animations (Variables)
+ * Svelto - _ - Math - Constants (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CONSTANTS */
+
+$E: 2.71828182845904523536028747135266249 !default;
+$PI: 3.14159265358979323846264338327950288 !default;
+$PHI: 1.61803398874989484820458683436563811 !default; // Golden ratio
+$SQRT2: 1.41421356237309504880168872420969807 !default;
+$SQRT3: 1.73205080756887729352744634150587236 !default;
+$SQRT5: 2.23606797749978969640917366873127623 !default;
+$TAU: 6.28318530717958647692528676655900576 !default;
+
+
+/* =========================================================================
+ * Svelto - _ - Rotation (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ROTATION */
+
+$rotating-animation-duration: .9s !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Animations (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -14,294 +44,389 @@ $animation-normal: .35s !default;
 $animation-fast: .15s !default;
 $animation-xfast: .075s !default;
 
+/* ANIMATIONS */
+
+$animations: (
+  'xslow': $animation-xslow,
+  'slow': $animation-slow,
+  'normal': $animation-normal,
+  'fast': $animation-fast,
+  'xfast': $animation-xfast
+) !default;
+
 
 /* =========================================================================
- * Svelto - Autogrow - Input (Variables)
+ * Svelto - Core - Widget (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* INPUT AUTOGROW */
+/* ANIMATION */
 
-$input-autogrow-min-width: 1px !default; // So that the cursor icon is displayed if empty
+$widget-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Textarea (Variables)
+ * Svelto - Widgets - Overlay (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/variables.scss
  * ========================================================================= */
 
-/* TEXTAREA */
+/* OVERLAY */
 
-$textarea-lines: 5 !default;
+$overlay-z-index: 100 !default;
+
+$overlay-animation-duration: $widget-animation-duration !default;
+
+/* SIBLINGS */
+
+$overlay-siblings-opacity: .2 !default;
+
+$overlay-siblings-animation-duration: $overlay-animation-duration !default;
 
 
 /* =========================================================================
- * Svelto - Autogrow - Textarea (Variables)
+ * Svelto - Widgets - Overlay - Dimmer (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../textarea/variables.scss
+ * @require ../variables.scss
  * ========================================================================= */
 
-/* INPUT AUTOGROW */
+/* DIMMER */
 
-$textarea-autogrow-min-lines: $textarea-lines !default; // So that the cursor icon is displayed if empty
+$overlay-dimmer-color: 'black' !default;
+
+$overlay-dimmer-bg-transparentize-amount: $overlay-siblings-opacity !default;
 
 
 /* =========================================================================
- * Svelto - Paths (Variables)
+ * Svelto - Decorators - Raisable (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* PATHS */
+/* RAISABLE */
 
-$path-base: '/' !default;
-$path-fonts: $path-base + 'fonts/' !default;
-$path-images: $path-base + 'images/' !default;
+// How many steps the `z-depth` should be raised to
+
+$raisable-raise-amount: 2 !default;
+
+/* ANIMATION */
+
+$raisable-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
- * Svelto - Helpers - Assert (Mixins)
+ * Svelto - Widgets - Carousel - Slide - Horizontal (Vertical)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* ASSERT */
+/* HORIZONTAL */
 
-// Values in a map are in ascending order
-
-@mixin assert-ascending ( $map, $error: "This map's values must be defined in ascending order" ) {
-
-  $previous: null;
-
-  @each $key, $value in $map {
-
-    @if $previous != null and $previous >= $value {
-
-      @error $error;
-
-    }
-
-    $previous: $value;
-
-  }
-
-}
-
-// Values in a map are in descending order
-
-@mixin assert-descending ( $map, $error: "This map's values must be defined in descending order" ) {
-
-  $previous: null;
-
-  @each $key, $value in $map {
-
-    @if $previous != null and $previous <= $value {
-
-      @error $error;
-
-    }
-
-    $previous: $value;
-
-  }
-
-}
+$carousel-slide-horizontal-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
- * Svelto - Helpers - Map (Functions)
+ * Svelto - Widgets - Carousel - Slide - Vertical (Vertical)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* MAP */
+/* VERTICAL */
 
-@function map-previous ( $map, $key ) {
-
-  $all: map-keys( $map );
-  $index: index( $all, $key );
-
-  @return if( $index > 1, nth( $all, $index - 1 ), null );
-
-}
-
-@function map-next ( $map, $key ) {
-
-  $all: map-keys( $map );
-  $index: index( $all, $key );
-
-  @return if( $index < length( $all ), nth( $all, $index + 1 ), null );
-
-}
-
-/* DEEP */
-
-//SOURCE: https://css-tricks.com/snippets/sass/deep-getset-maps
-
-@function map-deep-get($map, $keys...) {
-    @each $key in $keys {
-        $map: map-get($map, $key);
-    }
-    @return $map;
-}
-
-@function map-deep-set($map, $keys, $value) {
-  $maps: ($map,);
-  $result: null;
-
-  // If the last key is a map already
-  // Warn the user we will be overriding it with $value
-  @if type-of(nth($keys, -1)) == "map" {
-    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
-  }
-
-  // If $keys is a single key
-  // Just merge and return
-  @if length($keys) == 1 {
-    @return map-merge($map, ($keys: $value));
-  }
-
-  // Loop from the first to the second to last key from $keys
-  // Store the associated map to this key in the $maps list
-  // If the key doesn't exist, throw an error
-  @for $i from 1 through length($keys) - 1 {
-    $current-key: nth($keys, $i);
-    $current-map: nth($maps, -1);
-    $current-get: map-get($current-map, $current-key);
-    @if $current-get == null {
-      @error "Key `#{$key}` doesn't exist at current level in map.";
-    }
-    $maps: append($maps, $current-get);
-  }
-
-  // Loop from the last map to the first one
-  // Merge it with the previous one
-  @for $i from length($maps) through 1 {
-    $current-map: nth($maps, $i);
-    $current-key: nth($keys, $i);
-    $current-val: if($i == length($maps), $value, $result);
-    $result: map-merge($current-map, ($current-key: $current-val));
-  }
-
-  // Return result
-  @return $result;
-}
+$carousel-slide-vertical-animation-duration: $animation-normal !default;
 
 
 /* =========================================================================
- * Svelto - Helpers - Units (Fuctions)
+ * Svelto - Widgets - Draggable (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* UNITS */
+/* DRAGGING */
 
-@function unit-strip ( $num ) {
+$draggable-dragging-z-index: 1000000 !default;
 
-  @return $num / ( $num * 0 + 1 );
+/* REVERTING */
 
-}
+$draggable-reverting-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Breakpoints (Functions)
+ * Svelto - Widgets - Expander (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../helpers/map/functions.scss
- * @require ../helpers/units/functions.scss
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* ANIMATION */
+
+$expander-animation-duration: $animation-normal !default; //TODO: Implement it
+
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* FLIPPABLE */
+
+$flippable-perspective: 1000px !default;
+
+/* ANIMATION */
+
+$flippable-animation-duration: $animation-slow !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Image (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* IMAGE */
+
+$image-color: 'inherit' !default;
+
+/* ANIMATION */
+
+$image-caption-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* MODAL */
+
+$modal-z-index: 500 !default;
+$modal-z-depth: 6 !default;
+
+$modal-max-width: 90vw !default;
+$modal-max-height: 90vh !default;
+
+/* BEFORE (BACKGROUND) */
+
+$modal-bg-color: rgba( 0, 0, 0, .5 ) !default;
+
+/* CLOSED */
+
+$modal-closed-scale: .7 !default;
+
+/* ANIMATION */
+
+$modal-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* PANEL */
+
+$panel-z-index: 400 !default;
+$panel-z-depth: 5 !default;
+
+/* BACKGROUND */
+
+$panel-bg-color: rgba( 0, 0, 0, .5 ) !default;
+
+$panel-background-animation-opacity-duration: $animation-normal !default;
+
+/* ANIMATION */
+
+$panel-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Pinned (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* PINNED */
+
+$panel-pinned-z-depth: $panel-z-depth !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* PROGRESSBAR */
+
+$progressbar-color: 'gray' !default;
+
+$progressbar-height: 1em !default;
+
+$progressbar-border-radius: $progressbar-height !default;
+
+/* HIGHLIGHT */
+
+$progressbar-highlight-color: 'secondary' !default;
+
+/* ANIMATION */
+
+$progressbar-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Remote Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* REMOTE MODAL */
+
+$remote-modal-width: 9.25rem !default;
+$remote-modal-height: 9.25rem !default;
+
+/* ANIMATION */
+
+$remote-modal-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner - Overlay (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* SPINNER OVERLAY */
+
+$spinner-overlay-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Switch (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/math/constants/variables.scss
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* SWITCH */
+
+$switch-width: 2.2666666667em !default;
+
+/* BAR */
+
+$switch-bar-color: 'gray' !default;
+
+$switch-bar-width: 1.7333333333em !default;
+$switch-bar-height: .9333333333em !default;
+
+/* HANDLER */
+
+$switch-handler-z-depth: 3 !default;
+
+$switch-handler-color: 'gray' !default;
+
+$switch-handler-size: 1.3333333333em !default;
+$switch-handler-half-size: $switch-handler-size / 2;
+
+/* HANDLER:BEFORE */
+
+$switch-handler-before-scale-inactive: 0 !default;
+$switch-handler-before-scale-active: $PHI !default;
+
+$switch-handler-before-active-opacity: .25 !default;
+
+/* HANDLER ICON */
+
+$switch-handler-icon-size: 1.6666666667em !default;
+$switch-handler-icon-font-size: .8em !default;
+
+/* ANIMATION */
+
+$switch-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Link (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* LINK */
+
+$link-underline-height: 1px !default;
+
+/* ANIMATION */
+
+$link-underline-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Breakpoints (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
 /* BREAKPOINTS */
 
-@function breakpoint-previous ( $breakpoint ) {
-
-  @return map-previous( $breakpoints, $breakpoint );
-
-}
-
-@function breakpoint-next ( $breakpoint ) {
-
-  @return map-next( $breakpoints, $breakpoint );
-
-}
-
-@function breakpoint-min ( $breakpoint ) {
-
-  $value: map-get( $breakpoints, $breakpoint );
-
-  @return if( unit-strip( $value ) != 0, $value, null );
-
-}
-
-@function breakpoint-max ( $breakpoint ) {
-
-  $value: breakpoint-next( $breakpoint );
-
-  @return if( $value, breakpoint-min( $value ) - .01px, null );
-
-}
-
-/* CLASSES */
-
-@function breakpoints-get-classes () {
-
-  //TODO: Write in a more general way, using a str-repeat and a map
-
-  $shorthands: (
-    'xxxxsmall': 'xxxxs',
-    'xxxsmall': 'xxxs',
-    'xxsmall': 'xxs',
-    'xsmall': 'xs',
-    'small': 'sm',
-    'medium': 'md',
-    'large': 'lg',
-    'xlarge': 'xl',
-    'xxlarge': 'xxl',
-    'xxxlarge': 'xxxl',
-    'xxxxlarge': 'xxxxl'
-  );
-
-  $classes: ();
-
-  @each $breakpoint, $value in $breakpoints {
-
-    $shorthand: map-get( $shorthands, $breakpoint );
-
-    $classes: append( $classes, if( $shorthand, $shorthand, $breakpoint ) );
-
-  }
-
-  @return $classes;
-
-}
-
-
-/* =========================================================================
- * Svelto - Breakpoints (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../helpers/assert/mixins.scss
- * @require functions.scss
- * ========================================================================= */
-
-/* BREAKPOINTS */
-
-// We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `panel` demo page there's a strange animation at the beginning, like if the media query for auto-attacching the panel is matched on loading, where actually it should not
+// We are using `px` instead of `rem` because if we use `rem` we have a buggy behaviour is Safari. In an old version of the `panel` demo page there was a strange animation at the beginning, caused by a faulty auto-attacch-panel media query (no longer CSS-only), caused probably by the browser changing viewport's width value for apparently no good reason
+// `rem` or any other meaningful unit is supported as well
 
 $breakpoint-xsmall: 0 !default;
 $breakpoint-small: 512px !default;
@@ -325,160 +450,157 @@ $breakpoints: (
 
 $breakpoints-classes: breakpoints-get-classes() !default;
 
+/* EPSILON */
+
+$breakpoint-epsilon: .01 + ( map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 0 ) !default;
+
 
 /* =========================================================================
- * Svelto - Svelto (Variables)
+ * Svelto - Decorators - Limited (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../breakpoints/variables.scss
+ * @require core/breakpoints/variables.scss
  * ========================================================================= */
 
-/* GUTTER */
+/* LIMITED */
 
-$gutter: 10px !default;
-$gutter-half: $gutter / 2;
-
-/* MAX WIDTH */
-
-$max-width-enabled: true !default;
-$max-width-breakpoint: 'xlarge' !default;
-$max-width: map-get( $breakpoints, $max-width-breakpoint ) * 1.05 !default; //TODO: Provide support for it
-
-/* BORDER RADIUS */
-
-$border-radius-small: .125em !default; // 2 / 16
-$border-radius-medium: .25em !default; // 4 / 16
-$border-radius-large: .375em !default; // 6 / 16
+$limited-breakpoint: 'xlarge' !default;
+$limited-width: map-get( $breakpoints, $limited-breakpoint ) * 1.05 !default;
 
 
 /* =========================================================================
- * Svelto - Blurred (Variables)
+ * Svelto - Widgets - Noty - Autoexpand (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../paths/variables.scss
- * @require ../svelto/variables.scss
+ * @require core/breakpoints/variables.scss
  * ========================================================================= */
 
-/* BLURRED */
+/* AUTOEXPAND */
 
-$blurred-blur-amount: 3px !default;
-
-/* PATHS */
-
-$blurred-path-images: $path-images !default;
-
-/* ANIMATION */
-
-$blurred-animation-duration: $animation-fast !default;
+$noty-autoexpand-width-breakpoint: 'small' !default;
+$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint ) - $breakpoint-epsilon !default; //TODO: Rename it
 
 
 /* =========================================================================
- * Svelto - Breadcrumb (Variables)
+ * Svelto - Core - Characters (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BREADCRUMB */
+//SOURCE: http://davidtheclark.github.io/scut/characters.html
 
-$breadcrumb-gutter: .6em !default;
+/* SPACES */
 
-/* AFTER CURRENT */
+$char-space: '\0020' !default; // Space
+$char-nbsp: '\00a0' !default; // Non-breaking space
 
-$breadcrumb-after-current-opacity: .5 !default;
-$breadcrumb-after-current-opacity-hover: .75 !default;
+/* QUOTATION MARKS */
+
+$char-quot: '\0022' !default; // Quotation mark
+$char-lsquo: '\2018' !default; // Left single curly quote
+$char-rsquo: '\2019' !default; // Right single curly quote
+$char-ldquo: '\201C' !default; // Left double curly quote
+$char-rdquo: '\201D' !default; // Right double curly quote
+$char-lsaquo: '\2039' !default; // Left single angle quote (guillemet)
+$char-rsaquo: '\203A' !default; // Right single angle quote (guillemet)
+$char-laquo: '\00ab' !default; // Left double angle quote (guillemet)
+$char-raquo: '\00bb' !default; // Right double angle quote (guillemet)
+
+/* OTHER PUNCTUATION */
+
+$char-mdash: '\2014' !default; // Em dash (mutton)
+$char-ndash: '\2013' !default; // En dash (nut)
+$char-hyphen: '\2010' !default; // Hyphen
+$char-amp: '\0026' !default; // Ampersand
+$char-para: '\00b6' !default; // Paragraph symbol (pilcrow)
+$char-middot: '\00b7' !default; // Middot (interpunct, interpoint)
+$char-bull: '\2022' !default; // Bullet
+$char-whibull: '\25E6' !default; // White bullet
+$char-hellip: '\2026' !default; // Horizontal ellipsis
+$char-vellip: '\22EE' !default; // Vertical ellipsis
+$char-midhellip: '\22EF' !default; // Midline horizontal ellipsis
+
+/* VARIOUS SYMBOLS */
+
+$char-gt: '\003e' !default; // Greater than
+$char-lt: '\003c' !default; // Less than
+$char-times: '\00D7' !default; // Times
+$char-bigtimes: '\2715' !default; // Big times
+$char-checkmark: '\2713' !default; // Checkmark
+$char-sect: '\00a7' !default; // Section sign (double S, hurricane, sectional symbol, the legal doughnut, signum sectionis)
+$char-oslash: '\00f8' !default; // O-slash (slashed o)
+
+/* SHAPES */
+
+$char-utri: '\25b2' !default; // Up-pointing triangle
+$char-dtri: '\25bc' !default; // Down-pointing triangle
+$char-ltri: '\25c0' !default; // Left-pointing triangle
+$char-rtri: '\25b6' !default; // Right-pointing triangle
+$char-ustri: '\25b4' !default; // Up-pointing small triangle
+$char-dstri: '\25be' !default; // Down-pointing small triangle
+$char-lstri: '\25c2' !default; // Left-pointing small triangle
+$char-rstri: '\25b8' !default; // Right-pointing small triangle
+$char-diamond: '\25c6' !default; // Diamond
+$char-fisheye: '\25c9' !default; // Fisheye
+$char-bullseye: '\25ce' !default; // Bullseye
+$char-circle: '\25cf' !default; // Circle
+$char-whitecircle: '\25cb' !default; // White circle
+$char-square: '\25a0' !default; // Square
+$char-whitesquare: '\25a1' !default; // White square
+$char-ssquare: '\25aa' !default; // Small square
+$char-swhitesquare: '\25ab' !default; // Small white square
 
 
 /* =========================================================================
- * Svelto - Container (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../svelto/variables.scss
- * ========================================================================= */
-
-/* CONTAINER */
-
-$container-color: 'white' !default;
-
-$container-border-radius: $border-radius-medium !default;
-
-$container-padding-vertical: $gutter !default;
-$container-padding-horizontal: $gutter !default;
-
-/* CONTAINER COMPACT */
-
-$container-compact-padding-vertical: $gutter-half !default;
-$container-compact-padding-horizontal: $gutter !default;
-
-
-/* =========================================================================
- * Svelto - Card (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../container/variables.scss
- * ========================================================================= */
-
-/* CARD */
-
-$card-color: $container-color !default;
-
-$card-border-radius: $container-border-radius !default;
-
-
-/* =========================================================================
- * Svelto - Colors (Variables)
+ * Svelto - Core - Colors (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//SOURCE: Colors taken from the here: http://zavoloklom.github.io/material-design-color-palette/colors.html
+//SOURCE: http://zavoloklom.github.io/material-design-color-palette/colors.html
 //URL: Constrast ratio calculator: http://leaverou.github.io/contrast-ratio
 
 /* MODIFIERS */
 
 $color-hover-lighten-amount: 2 !default;
 $color-active-darken-amount: $color-hover-lighten-amount !default;
-$color-border-darken-amount: 15 !default;
-$color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
+$color-border-darken-amount: $color-active-darken-amount * 7 !default;
 
-/* BASE */
+/* COLORS */
 
 $color-primary: #1565c0 !default; // Blue-800
 $color-secondary: #ef6c00 !default; // Orange-800
 $color-tertiary: #6a1b9a !default; // Purple-800
 $color-quaternary: #2e7d32 !default; // Green-800
 
-$color-white: #ffffff !default;
-$color-gray: #e0e0e0 !default; // Gray-300
 $color-black: #212121 !default; // Gray-900
-$color-yellow: #fabf40 !default; // Yellow-700
-$color-olive: #cddc39 !default; // Lime-500
-$color-green: #4caf50 !default; // Green-500
 $color-blue: #2196f3 !default; // Blue-500
-$color-violet: #673ab7 !default; // Deep-Purple-500
+$color-brown: #795548 !default; // Brown-500
+$color-gray: #e0e0e0 !default; // Gray-300
+$color-green: #4caf50 !default; // Green-500
+$color-olive: #cddc39 !default; // Lime-500
 $color-orange: #ff9800 !default; // Orange-500
+$color-pink: #e91e63 !default; // Pink-500
 $color-purple: #9c27b0 !default; // Purple-500
 $color-red: #f44336 !default; // Red-500
-$color-pink: #e91e63 !default; // Pink-500
 $color-teal: #009688 !default; // Teal-500
-$color-brown: #795548 !default; // Brown-500
+$color-violet: #673ab7 !default; // Deep-Purple-500
+$color-white: #ffffff !default;
+$color-yellow: #fabf40 !default; // Yellow-700
 
 $color-error: $color-red !default;
-$color-warning: $color-yellow !default;
 $color-success: $color-green !default;
+$color-warning: $color-yellow !default;
 
-$color-transparent: rgba(0, 0, 0, 0) !default;
-$color-inherit: inherit !default;
 $color-base: #eceff1 !default; // Blue-Gray-50
+$color-inherit: inherit !default;
+$color-transparent: transparent !default;
 
 /* PRIMARY */
 
@@ -489,7 +611,7 @@ $color-primary-border: darken( $color-primary-bg, $color-border-darken-amount ) 
 $color-primary-accent: $color-secondary !default;
 $color-primary-text: #ffffff !default; // Contrast ratio: 5.7
 $color-primary-link: $color-primary-accent !default;
-$color-primary-link-hover: lighten( $color-primary-link, $color-link-hover-lighten-amount ) !default;
+$color-primary-link-hover: lighten( $color-primary-link, $color-hover-lighten-amount ) !default;
 
 /* SECONDARY */
 
@@ -500,7 +622,7 @@ $color-secondary-border: darken( $color-secondary-bg, $color-border-darken-amoun
 $color-secondary-accent: $color-primary !default;
 $color-secondary-text: #ffffff !default; // Contrast ratio: 3.1
 $color-secondary-link: $color-secondary-accent !default;
-$color-secondary-link-hover: lighten( $color-secondary-link, $color-link-hover-lighten-amount ) !default;
+$color-secondary-link-hover: lighten( $color-secondary-link, $color-hover-lighten-amount ) !default;
 
 /* TERTIARY */
 
@@ -511,7 +633,7 @@ $color-tertiary-border: darken( $color-tertiary-bg, $color-border-darken-amount 
 $color-tertiary-accent: $color-quaternary !default;
 $color-tertiary-text: #ffffff !default; // Contrast ratio: 9.4
 $color-tertiary-link: $color-tertiary-accent !default;
-$color-tertiary-link-hover: lighten( $color-tertiary-link, $color-link-hover-lighten-amount ) !default;
+$color-tertiary-link-hover: lighten( $color-tertiary-link, $color-hover-lighten-amount ) !default;
 
 /* QUATERNARY */
 
@@ -522,29 +644,7 @@ $color-quaternary-border: darken( $color-quaternary-bg, $color-border-darken-amo
 $color-quaternary-accent: $color-tertiary !default;
 $color-quaternary-text: #ffffff !default; // Contrast ratio: 5.1
 $color-quaternary-link: $color-quaternary-accent !default;
-$color-quaternary-link-hover: lighten( $color-quaternary-link, $color-link-hover-lighten-amount ) !default;
-
-/* WHITE */
-
-$color-white-bg: $color-white !default;
-$color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !default;
-$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
-$color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
-$color-white-accent: $color-secondary !default;
-$color-white-text: #3f3f3f !default; // Contrast ratio: 10.5
-$color-white-link: $color-primary !default;
-$color-white-link-hover: lighten( $color-white-link, $color-link-hover-lighten-amount ) !default;
-
-/* GRAY */
-
-$color-gray-bg: $color-gray !default;
-$color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !default;
-$color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
-$color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
-$color-gray-accent: $color-black !default;
-$color-gray-text: #3f3f3f !default; // Contrast ratio: 8
-$color-gray-link: $color-white !default;
-$color-gray-link-hover: lighten( $color-gray-link, $color-link-hover-lighten-amount ) !default;
+$color-quaternary-link-hover: lighten( $color-quaternary-link, $color-hover-lighten-amount ) !default;
 
 /* BLACK */
 
@@ -555,40 +655,7 @@ $color-black-border: darken( $color-black-bg, $color-border-darken-amount ) !def
 $color-black-accent: $color-white !default;
 $color-black-text: #ffffff !default; // Contrast ratio: 16.1
 $color-black-link: $color-gray !default;
-$color-black-link-hover: lighten( $color-black-link, $color-link-hover-lighten-amount ) !default;
-
-/* YELLOW */
-
-$color-yellow-bg: $color-yellow !default;
-$color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount ) !default;
-$color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
-$color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
-$color-yellow-accent: $color-red !default;
-$color-yellow-text: #ffffff !default; // Contrast ratio 1.7
-$color-yellow-link: $color-yellow-accent !default;
-$color-yellow-link-hover: lighten( $color-yellow-link, $color-link-hover-lighten-amount ) !default;
-
-/* OLIVE */
-
-$color-olive-bg: $color-olive !default;
-$color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !default;
-$color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
-$color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
-$color-olive-accent: $color-orange !default;
-$color-olive-text: #ffffff !default; // Contrast ratio: 1.7
-$color-olive-link: $color-olive-accent !default;
-$color-olive-link-hover: lighten( $color-olive-link, $color-link-hover-lighten-amount ) !default;
-
-/* GREEN */
-
-$color-green-bg: $color-green !default;
-$color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !default;
-$color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
-$color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
-$color-green-accent: $color-violet !default;
-$color-green-text: #ffffff !default; // Contrast ratio: 2.8
-$color-green-link: $color-green-accent !default;
-$color-green-link-hover: lighten( $color-green-link, $color-link-hover-lighten-amount ) !default;
+$color-black-link-hover: lighten( $color-black-link, $color-hover-lighten-amount ) !default;
 
 /* BLUE */
 
@@ -599,73 +666,7 @@ $color-blue-border: darken( $color-blue-bg, $color-border-darken-amount ) !defau
 $color-blue-accent: $color-red !default;
 $color-blue-text: #ffffff !default; // Contrast ratio: 3.1
 $color-blue-link: $color-blue-accent !default;
-$color-blue-link-hover: lighten( $color-blue-link, $color-link-hover-lighten-amount ) !default;
-
-/* VIOLET */
-
-$color-violet-bg: $color-violet !default;
-$color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount ) !default;
-$color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
-$color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
-$color-violet-accent: $color-orange !default;
-$color-violet-text: #ffffff !default; // Contrast ratio: 7.1
-$color-violet-link: $color-violet-accent !default;
-$color-violet-link-hover: lighten( $color-violet-link, $color-link-hover-lighten-amount ) !default;
-
-/* ORANGE */
-
-$color-orange-bg: $color-orange !default;
-$color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount ) !default;
-$color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
-$color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
-$color-orange-accent: $color-blue !default;
-$color-orange-text: #ffffff !default; // Contrast ratio 2.2
-$color-orange-link: $color-orange-accent !default;
-$color-orange-link-hover: lighten( $color-orange-link, $color-link-hover-lighten-amount ) !default;
-
-/* PURPLE */
-
-$color-purple-bg: $color-purple !default;
-$color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount ) !default;
-$color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
-$color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
-$color-purple-accent: $color-yellow !default;
-$color-purple-text: #ffffff !default; // Contrast ratio: 6.3
-$color-purple-link: $color-purple-accent !default;
-$color-purple-link-hover: lighten( $color-purple-link, $color-link-hover-lighten-amount ) !default;
-
-/* RED */
-
-$color-red-bg: $color-red !default;
-$color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !default;
-$color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
-$color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
-$color-red-accent: $color-yellow !default;
-$color-red-text: #ffffff !default; // Contrast ratio: 3.7
-$color-red-link: $color-red-accent !default;
-$color-red-link-hover: lighten( $color-red-link, $color-link-hover-lighten-amount ) !default;
-
-/* PINK */
-
-$color-pink-bg: $color-pink !default;
-$color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !default;
-$color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
-$color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
-$color-pink-accent: $color-teal !default;
-$color-pink-text: #ffffff !default; // Contrast ratio: 4.3
-$color-pink-link: $color-pink-accent !default;
-$color-pink-link-hover: lighten( $color-pink-link, $color-link-hover-lighten-amount ) !default;
-
-/* TEAL */
-
-$color-teal-bg: $color-teal !default;
-$color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !default;
-$color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
-$color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
-$color-teal-accent: $color-pink !default;
-$color-teal-text: #ffffff !default; // Contrast ratio: 3.7
-$color-teal-link: $color-teal-accent !default;
-$color-teal-link-hover: lighten( $color-teal-link, $color-link-hover-lighten-amount ) !default;
+$color-blue-link-hover: lighten( $color-blue-link, $color-hover-lighten-amount ) !default;
 
 /* BROWN */
 
@@ -676,7 +677,128 @@ $color-brown-border: darken( $color-brown-bg, $color-border-darken-amount ) !def
 $color-brown-accent: $color-orange !default;
 $color-brown-text: #ffffff !default; // Contrast ratio: 6.6
 $color-brown-link: $color-brown-accent !default;
-$color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
+$color-brown-link-hover: lighten( $color-brown-link, $color-hover-lighten-amount ) !default;
+
+/* GRAY */
+
+$color-gray-bg: $color-gray !default;
+$color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !default;
+$color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
+$color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
+$color-gray-accent: $color-black !default;
+$color-gray-text: #3f3f3f !default; // Contrast ratio: 8
+$color-gray-link: $color-white !default;
+$color-gray-link-hover: lighten( $color-gray-link, $color-hover-lighten-amount ) !default;
+
+/* GREEN */
+
+$color-green-bg: $color-green !default;
+$color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !default;
+$color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
+$color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
+$color-green-accent: $color-violet !default;
+$color-green-text: #ffffff !default; // Contrast ratio: 2.8
+$color-green-link: $color-green-accent !default;
+$color-green-link-hover: lighten( $color-green-link, $color-hover-lighten-amount ) !default;
+
+/* OLIVE */
+
+$color-olive-bg: $color-olive !default;
+$color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !default;
+$color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
+$color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
+$color-olive-accent: $color-orange !default;
+$color-olive-text: #ffffff !default; // Contrast ratio: 1.7
+$color-olive-link: $color-olive-accent !default;
+$color-olive-link-hover: lighten( $color-olive-link, $color-hover-lighten-amount ) !default;
+
+/* ORANGE */
+
+$color-orange-bg: $color-orange !default;
+$color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount ) !default;
+$color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
+$color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
+$color-orange-accent: $color-blue !default;
+$color-orange-text: #ffffff !default; // Contrast ratio 2.2
+$color-orange-link: $color-orange-accent !default;
+$color-orange-link-hover: lighten( $color-orange-link, $color-hover-lighten-amount ) !default;
+
+/* PINK */
+
+$color-pink-bg: $color-pink !default;
+$color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !default;
+$color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
+$color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
+$color-pink-accent: $color-teal !default;
+$color-pink-text: #ffffff !default; // Contrast ratio: 4.3
+$color-pink-link: $color-pink-accent !default;
+$color-pink-link-hover: lighten( $color-pink-link, $color-hover-lighten-amount ) !default;
+
+/* PURPLE */
+
+$color-purple-bg: $color-purple !default;
+$color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount ) !default;
+$color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
+$color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
+$color-purple-accent: $color-yellow !default;
+$color-purple-text: #ffffff !default; // Contrast ratio: 6.3
+$color-purple-link: $color-purple-accent !default;
+$color-purple-link-hover: lighten( $color-purple-link, $color-hover-lighten-amount ) !default;
+
+/* RED */
+
+$color-red-bg: $color-red !default;
+$color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !default;
+$color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
+$color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
+$color-red-accent: $color-yellow !default;
+$color-red-text: #ffffff !default; // Contrast ratio: 3.7
+$color-red-link: $color-red-accent !default;
+$color-red-link-hover: lighten( $color-red-link, $color-hover-lighten-amount ) !default;
+
+/* TEAL */
+
+$color-teal-bg: $color-teal !default;
+$color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !default;
+$color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
+$color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
+$color-teal-accent: $color-pink !default;
+$color-teal-text: #ffffff !default; // Contrast ratio: 3.7
+$color-teal-link: $color-teal-accent !default;
+$color-teal-link-hover: lighten( $color-teal-link, $color-hover-lighten-amount ) !default;
+
+/* VIOLET */
+
+$color-violet-bg: $color-violet !default;
+$color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount ) !default;
+$color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
+$color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
+$color-violet-accent: $color-orange !default;
+$color-violet-text: #ffffff !default; // Contrast ratio: 7.1
+$color-violet-link: $color-violet-accent !default;
+$color-violet-link-hover: lighten( $color-violet-link, $color-hover-lighten-amount ) !default;
+
+/* WHITE */
+
+$color-white-bg: $color-white !default;
+$color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !default;
+$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
+$color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
+$color-white-accent: $color-secondary !default;
+$color-white-text: #3f3f3f !default; // Contrast ratio: 10.5
+$color-white-link: $color-primary !default;
+$color-white-link-hover: lighten( $color-white-link, $color-hover-lighten-amount ) !default;
+
+/* YELLOW */
+
+$color-yellow-bg: $color-yellow !default;
+$color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount ) !default;
+$color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
+$color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
+$color-yellow-accent: $color-red !default;
+$color-yellow-text: #ffffff !default; // Contrast ratio 1.7
+$color-yellow-link: $color-yellow-accent !default;
+$color-yellow-link-hover: lighten( $color-yellow-link, $color-hover-lighten-amount ) !default;
 
 /* ERROR */
 
@@ -687,18 +809,7 @@ $color-error-border: darken( $color-error-bg, $color-border-darken-amount ) !def
 $color-error-accent: $color-yellow !default;
 $color-error-text: #ffffff !default; // Contrast ratio: 3.7
 $color-error-link: $color-error-accent !default;
-$color-error-link-hover: lighten( $color-error-link, $color-link-hover-lighten-amount ) !default;
-
-/* WARNING */
-
-$color-warning-bg: $color-warning !default;
-$color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount ) !default;
-$color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
-$color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
-$color-warning-accent: $color-red !default;
-$color-warning-text: #ffffff !default; // Contrast ratio 1.7
-$color-warning-link: $color-warning-accent !default;
-$color-warning-link-hover: lighten( $color-warning-link, $color-link-hover-lighten-amount ) !default;
+$color-error-link-hover: lighten( $color-error-link, $color-hover-lighten-amount ) !default;
 
 /* SUCCESS */
 
@@ -709,18 +820,29 @@ $color-success-border: darken( $color-success-bg, $color-border-darken-amount ) 
 $color-success-accent: $color-violet !default;
 $color-success-text: #ffffff !default; // Contrast ratio: 2.8
 $color-success-link: $color-success-accent !default;
-$color-success-link-hover: lighten( $color-success-link, $color-link-hover-lighten-amount ) !default;
+$color-success-link-hover: lighten( $color-success-link, $color-hover-lighten-amount ) !default;
 
-/* TRANSPARENT */
+/* WARNING */
 
-$color-transparent-bg: $color-transparent !default;
-$color-transparent-bg-hover: lighten( $color-transparent-bg, $color-hover-lighten-amount ) !default;
-$color-transparent-bg-active: darken( $color-transparent-bg, $color-active-darken-amount ) !default;
-$color-transparent-border: darken( $color-transparent-bg, $color-border-darken-amount ) !default;
-$color-transparent-accent: $color-secondary !default;
-$color-transparent-text: inherit !default;
-$color-transparent-link: $color-transparent-accent !default;
-$color-transparent-link-hover: lighten( $color-transparent-link, $color-link-hover-lighten-amount ) !default;
+$color-warning-bg: $color-warning !default;
+$color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount ) !default;
+$color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
+$color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
+$color-warning-accent: $color-red !default;
+$color-warning-text: #ffffff !default; // Contrast ratio 1.7
+$color-warning-link: $color-warning-accent !default;
+$color-warning-link-hover: lighten( $color-warning-link, $color-hover-lighten-amount ) !default;
+
+/* BASE */
+
+$color-base-bg: $color-base !default;
+$color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
+$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount * 2 ) !default;
+$color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
+$color-base-accent: $color-secondary !default;
+$color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
+$color-base-link: $color-base-accent !default;
+$color-base-link-hover: lighten( $color-base-link, $color-hover-lighten-amount ) !default;
 
 /* INHERIT */
 
@@ -733,16 +855,16 @@ $color-inherit-text: $color-inherit !default;
 $color-inherit-link: $color-inherit !default;
 $color-inherit-link-hover: $color-inherit !default;
 
-/* BASE */
+/* TRANSPARENT */
 
-$color-base-bg: $color-base !default;
-$color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
-$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount * 2 ) !default;
-$color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
-$color-base-accent: $color-secondary !default;
-$color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
-$color-base-link: $color-base-accent !default;
-$color-base-link-hover: lighten( $color-base-link, $color-link-hover-lighten-amount ) !default;
+$color-transparent-bg: $color-transparent !default;
+$color-transparent-bg-hover: lighten( $color-transparent-bg, $color-hover-lighten-amount ) !default;
+$color-transparent-bg-active: darken( $color-transparent-bg, $color-active-darken-amount ) !default;
+$color-transparent-border: darken( $color-transparent-bg, $color-border-darken-amount ) !default;
+$color-transparent-accent: $color-secondary !default;
+$color-transparent-text: inherit !default;
+$color-transparent-link: $color-transparent-accent !default;
+$color-transparent-link-hover: lighten( $color-transparent-link, $color-hover-lighten-amount ) !default;
 
 /* COLORS */
 
@@ -751,105 +873,81 @@ $colors: (
   'secondary' : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover ),
   'tertiary' : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover ),
   'quaternary' : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover ),
+  //
+  // 'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover ),
+  // 'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover ),
+  // 'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover ),
+  // 'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover ),
+  // 'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover ),
+  // 'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover ),
+  // 'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover ),
+  // 'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover ),
+  // 'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover ),
+  // 'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover ),
+  // 'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover ),
+  // 'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover ),
+  // 'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover ),
+  // 'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover ),
+  //
+  // 'error' : ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text, $color-error-link, $color-error-link-hover ),
+  // 'success' : ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text, $color-success-link, $color-success-link-hover ),
+  // 'warning' : ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text, $color-warning-link, $color-warning-link-hover ),
 
-  'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover ),
-  'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover ),
-  'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover ),
-  'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover ),
-  'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover ),
-  'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover ),
-  'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover ),
-  'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover ),
-  'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover ),
-  'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover ),
-  'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover ),
-  'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover ),
-  'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover ),
-  'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover ),
-
-  'error' : ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text, $color-error-link, $color-error-link-hover ),
-  'warning' : ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text, $color-warning-link, $color-warning-link-hover ),
-  'success' : ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text, $color-success-link, $color-success-link-hover ),
-
-  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover ),
+  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover ),
   'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover ),
-  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover )
+  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover )
 ) !default;
 
+//TODO: Add classes support
+
 
 /* =========================================================================
- * Svelto - Typography (Variables)
+ * Svelto - Core - Reset (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
  * ========================================================================= */
 
-/* FONT FAMILY */
+/* SELECTION */
 
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif !default;
-$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
-$font-family-monospace: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
-$font-family-base: $font-family-sans-serif !default;
+$selection-bg-color: lighten( $color-primary, 50 ) !default;
 
-/* FONT SIZE */
+/* BODY */
 
-$font-size: 16px !default;
-
-/* LINE HEIGHT */
-
-$line-height: 1.4285714286 !default; // 20/14
-$line-height-em: $line-height * 1em !default;
+$body-bg-color: $color-base !default;
 
 
 /* =========================================================================
- * Svelto - Icon (Variables)
+ * Svelto - Widgets - Carousel (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../typography/variables.scss
- * @require ../paths/variables.scss
- * ========================================================================= */
-
-/* ICONS */
-
-$icon-best-size: 24px; // At this size the icons look the best
-$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default `medium` size
-
-/* FONT */
-
-$icon-path-fonts: $path-fonts !default;
-$icon-fonts-local: true !default;
-
-/* PATHS */
-
-$icon-path-fonts: $path-fonts !default;
-
-
-/* =========================================================================
- * Svelto - Carousel (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * @require ../colors/variables.scss
- * @require ../icon/variables.scss
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
  * ========================================================================= */
 
 /* CAROUSEL */
 
-$carousel-height: 12.5em !default;
+$carousel-height: 12.5em !default; //TODO: Should we set it?
 
-$carousel-bg-color: $color-black !default;
+/* ITEMS */
 
-/* INDICATOR */
+$carousel-items-bg-color: $color-black !default;
+
+/* INDICATORS */
 
 $carousel-indicators-z-index: 80 !default;
 
+/* INDICATOR */
+
 $carousel-indicator-color: $color-white !default;
 
-$carousel-indicator-size: .625em !default;
+$carousel-indicator-width: .625em !default;
+$carousel-indicator-height: $carousel-indicator-width !default;
+
 $carousel-indicator-border-width: 2px !default;
 
 $carousel-indicator-opacity: .25 !default;
@@ -858,40 +956,707 @@ $carousel-indicator-hover-opacity: 1 !default;
 
 $carousel-indicator-animation-duration: $animation-normal !default;
 
-/* INSET (PREVIOUS / NEXT) */
-
-$carousel-inset-previous-next-z-index: $carousel-indicators-z-index - 1 !default;
-
-$carousel-inset-previous-next-font-size: 1em * $icon-scale-amount !default;
-
-$carousel-inset-previous-width: 20% !default;
-$carousel-inset-next-width: 100% - $carousel-inset-previous-width !default;
-
-$carousel-inset-previous-next-color: $carousel-indicator-color !default;
-
-$carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
-$carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
-$carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
-
-$carousel-inset-previous-next-animation-opacity-duration: $animation-normal !default;
-
-/* SLIDE */
-
-$carousel-slide-animation-transform-duration: $animation-normal !default;
-
-/* FADE */
-
-$carousel-fade-animation-opacity-duration: $animation-normal !default;
-
 
 /* =========================================================================
- * Svelto - Dropdown (Variables)
+ * Svelto - Widgets - Checkbox (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
- * @require ../paths/variables.scss
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* CHECKBOX */
+
+$checkbox-icon-on: 'check_box' !default;
+$checkbox-icon-on-color: $color-secondary !default;
+
+$checkbox-icon-off: 'check_box_outline_blank' !default;
+
+/* ANIMATION */
+
+$checkbox-icon-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Colorpicker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* COLORPICKER */
+
+$colorpicker-size: 11em !default;
+
+/* WRAPPERS */
+
+$colorpicker-wrp-border-width: 1px !default;
+$colorpicker-wrp-border-style: 'solid' !default;
+$colorpicker-wrp-border-color: $color-black !default;
+
+/* WRAPPER HUE */
+
+$colorpicker-hue-wrp-width: 1.5em !default;
+
+/* HANDLER */
+
+$colorpicker-handler-border-width: 2px !default;
+$colorpicker-handler-border-style: 'solid' !default;
+$colorpicker-handler-border-color: $color-white !default;
+
+$colorpicker-handler-shadow: 0 0 0 1px rgba( 0, 0, 0, .2 ) !default;
+
+/* HANDLER SB */
+
+$colorpicker-handler-sb-width: 1em !default;
+$colorpicker-handler-sb-height: $colorpicker-handler-sb-width !default;
+
+$colorpicker-handler-sb-border-radius: 50% !default;
+
+/* HANDLER HUE */
+
+$colorpicker-handler-hue-width: 100% !default;
+$colorpicker-handler-hue-height: .5em !default;
+
+$colorpicker-handler-hue-border-radius: .125em !default; // 2 / 16
+
+
+/* =========================================================================
+ * Svelto - Widgets - Datepicker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* DAY */
+
+$datepicker-day-width: 100% / 7 !default;
+$datepicker-day-height: 2.5em !default;
+
+$datepicker-day-prev-next-opacity: .25 !default;
+$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
+
+/* DAY NAME */
+
+$datepicker-day-name-font-weight: bold !default;
+
+/* DAY CIRCLE */
+
+$datepicker-day-circle-size: 2.375em !default;
+
+/* DAY HOVER */
+
+$datepicker-day-hover-color: $color-secondary-text !default;
+$datepicker-day-hover-circle-color: transparentize( $color-secondary, .25 ) !default;
+
+/* DAY TODAY */
+
+$datepicker-day-today-color: $color-secondary !default;
+$datepicker-day-today-circle-color: transparent !default;
+
+/* DAY SELECTED */
+
+$datepicker-day-selected-z-depth: 2 !default;
+
+$datepicker-day-selected-color: $color-secondary-text !default;
+$datepicker-day-selected-circle-color: $color-secondary !default;
+
+/* ANIMATION */
+
+$datepicker-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Footer (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* FOOTER */
+
+$footer-bg-color: darken( $color-base, 10 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Rater (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* RATER */
+
+$rater-star-active-color: $color-secondary !default;
+
+/* ICONS */
+
+$star-off-icon: 'star_border' !default;
+$star-on-icon: 'start' !default;
+$star-half-on-icon: 'star_half' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Ripple (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* RIPPLE */
+
+$ripple-color: $color-black !default;
+$ripple-transparentize-amount: .8 !default;
+
+/* CIRCLE */
+
+$ripple-circle-z-index: 50 !default;
+
+/* ANIMATION */
+
+$ripple-animation-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material //TODO: Replace it with one of the standards
+
+$ripple-animation-show-duration: $animation-xslow !default;
+$ripple-animation-hide-duration: $animation-xslow !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* SELECTABLE TABLE ROW */
+
+$selectable-table-row-selected-bg-color: lighten( $color-primary, 50 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner - Multicolor (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* MULTICOLOR */
+
+$spinner-multicolor-stroke-color-first: $color-blue !default;
+$spinner-multicolor-stroke-color-second: $color-red !default;
+$spinner-multicolor-stroke-color-third: $color-yellow !default;
+$spinner-multicolor-stroke-color-fourth: $color-green !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* SPINNER */
+
+$spinner-size: 3.25em !default;
+
+/* STROKE */
+
+$spinner-stroke-width: .25em !default;
+
+$spinner-stroke-color: $color-secondary !default;
+
+/* ANIMATION */
+
+$spinner-animation-rotate-duration: 2s !default;
+
+$spinner-stroke-animation-dash-duration: 1.5s !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Abbr (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* ABBR */
+
+$abbr-border-width: 1px !default;
+$abbr-border-style: 'dotted' !default;
+$abbr-border-color: $color-gray-border !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Easings (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: https://github.com/thoughtbot/bourbon/blob/master/core/bourbon/addons/_timing-functions.scss
+
+/* EASINGS */
+
+$ease-in-quad:      cubic-bezier( 0.550,  0.085, 0.680, 0.530 ) !default;
+$ease-in-cubic:     cubic-bezier( 0.550,  0.055, 0.675, 0.190 ) !default;
+$ease-in-quart:     cubic-bezier( 0.895,  0.030, 0.685, 0.220 ) !default;
+$ease-in-quint:     cubic-bezier( 0.755,  0.050, 0.855, 0.060 ) !default;
+$ease-in-sine:      cubic-bezier( 0.470,  0.000, 0.745, 0.715 ) !default;
+$ease-in-expo:      cubic-bezier( 0.950,  0.050, 0.795, 0.035 ) !default;
+$ease-in-circ:      cubic-bezier( 0.600,  0.040, 0.980, 0.335 ) !default;
+$ease-in-back:      cubic-bezier( 0.600, -0.280, 0.735, 0.045 ) !default;
+
+$ease-out-quad:     cubic-bezier( 0.250,  0.460, 0.450, 0.940 ) !default;
+$ease-out-cubic:    cubic-bezier( 0.215,  0.610, 0.355, 1.000 ) !default;
+$ease-out-quart:    cubic-bezier( 0.165,  0.840, 0.440, 1.000 ) !default;
+$ease-out-quint:    cubic-bezier( 0.230,  1.000, 0.320, 1.000 ) !default;
+$ease-out-sine:     cubic-bezier( 0.390,  0.575, 0.565, 1.000 ) !default;
+$ease-out-expo:     cubic-bezier( 0.190,  1.000, 0.220, 1.000 ) !default;
+$ease-out-circ:     cubic-bezier( 0.075,  0.820, 0.165, 1.000 ) !default;
+$ease-out-back:     cubic-bezier( 0.175,  0.885, 0.320, 1.275 ) !default;
+
+$ease-in-out-quad:  cubic-bezier( 0.455,  0.030, 0.515, 0.955 ) !default;
+$ease-in-out-cubic: cubic-bezier( 0.645,  0.045, 0.355, 1.000 ) !default;
+$ease-in-out-quart: cubic-bezier( 0.770,  0.000, 0.175, 1.000 ) !default;
+$ease-in-out-quint: cubic-bezier( 0.860,  0.000, 0.070, 1.000 ) !default;
+$ease-in-out-sine:  cubic-bezier( 0.445,  0.050, 0.550, 0.950 ) !default;
+$ease-in-out-expo:  cubic-bezier( 1.000,  0.000, 0.000, 1.000 ) !default;
+$ease-in-out-circ:  cubic-bezier( 0.785,  0.135, 0.150, 0.860 ) !default;
+$ease-in-out-back:  cubic-bezier( 0.680, -0.550, 0.265, 1.550 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Grid (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* COLUMNS */
+
+$grid-columns: 12 !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Gutter (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GUTTER */
+
+$gutter: 10px !default; //TODO: Maybe move to a rem version? (so that it won't affect the sizes that are based in em)
+$gutter-half: $gutter / 2;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Container - Compact (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/gutter/variables.scss
+ * ========================================================================= */
+
+/* COMPACT */
+
+$container-compact-padding-x: $gutter !default;
+$container-compact-padding-y: $container-compact-padding-x / 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Container (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/gutter/variables.scss
+ * ========================================================================= */
+
+/* CONTAINER */
+
+$container-color: 'white' !default;
+
+$container-border-radius: .25em !default; // 4 / 16
+
+$container-padding-x: $gutter !default;
+$container-padding-y: $container-padding-x !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Card (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* CARD */
+
+$card-color: $container-color !default;
+
+$card-border-radius: $container-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Fieldset (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* FIELDSET */
+
+$fieldset-bg-color: rgba( 0, 0, 0, .035 ) !default;
+
+$fieldset-border-radius: $container-border-radius !default;
+
+$fieldset-padding-x: $container-padding-x !default;
+$fieldset-padding-y: $container-padding-y !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* LABEL */
+
+$label-color: 'white' !default;
+
+$label-border-radius: $container-border-radius !default;
+
+$label-padding-x: 1em !default;
+$label-padding-y: $label-padding-x / 2 !default;
+
+$label-center-extra-spacing: .75em !default;
+
+/* COMPACT */
+
+$label-compact-padding-x: $label-padding-y !default;
+$label-compact-padding-y: $label-compact-padding-x !default;
+
+$label-compact-center-extra-spacing: .5em !default;
+
+/* LEFT / RIGHT */
+
+$label-sub-bg-color: rgba( 0, 0, 0, .05 ) !default; //TODO: Make it in the form of `.label-sub`
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/label/variables.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+$input-color: $label-color !default;
+
+$input-border-radius: $label-border-radius !default;
+
+$input-padding-x: $label-padding-x !default;
+$input-padding-y: $label-padding-y !default;
+
+/* COMPACT */
+
+$input-compact-padding-x: $label-compact-padding-x !default;
+$input-compact-padding-y: $label-compact-padding-y !default;
+
+/* PLACEHOLDER */
+
+$input-placeholder-opacity: .6 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* CORNER */
+
+$label-corner-z-index: 70 !default;
+
+$label-corner-padding-x: $label-compact-padding-x * 2 !default;
+$label-corner-padding-y: $label-compact-padding-y * 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Floating (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* FLOATING */
+
+$label-floating-z-index: 150 !default;
+$label-floating-z-depth: 4 !default;
+
+$label-floating-padding-x: $label-padding-y * 1.6 !default;
+$label-floating-padding-y: $label-floating-padding-x !default;
+
+$label-floating-spacing: 24px !default; //TODO: Use rem instead (sure?)
+
+/* COMPACT */
+
+$label-floating-compact-padding-x: $label-floating-padding-x / 2 !default;
+$label-floating-compact-padding-y: $label-floating-padding-y / 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner - Label (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../label/variables.scss
+ * ========================================================================= */
+
+/* LABEL */
+
+$spinner-label-z-depth: 1 !default;
+
+$spinner-label-color: 'inherit' !default;
+
+$spinner-label-padding-x: $label-compact-padding-x !default;
+$spinner-label-padding-y: $label-compact-padding-y !default;
+
+$spinner-label-border-radius: 50% !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Noty (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* NOTY */
+
+$noty-z-index: 600 !default;
+$noty-z-depth: 7 !default;
+
+$noty-bg-transparentize-amount: .05 !default; //TODO: Implement it
+
+$noty-border-radius: $container-border-radius !default;
+
+/* IMG */
+
+$noty-img-size: 2.25em !default;
+$noty-img-rounded: false !default;
+
+/* ANIMATION */
+
+$noty-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Code (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* CODE */
+
+$code-bg-color: rgba( 0, 0, 0, .03 ) !default;
+
+$code-border-width: 1px !default;
+$code-border-style: 'solid' !default;
+$code-border-color: rgba(0, 0, 0, .15) !default;
+
+$code-border-radius: $container-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Kbd (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* KBD */
+
+$kbd-color: 'white' !default;
+
+$kbd-border-width: 1px !default;
+$kbd-border-style: solid !default;
+$kdb-border-radius: $container-border-radius !default;
+
+$kbd-font-size: .9em !default;
+$kbd-font-weight: bold !default;
+
+$kbd-padding-x: .3em !default;
+$kbd-padding-y: .2em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Mark (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* MARK */
+
+$mark-color: 'yellow' !default;
+
+$mark-padding-x: .325em !default;
+$mark-padding-y: .3em !default;
+
+$mark-border-radius: $container-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Blockquote (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/gutter/variables.scss
+ * ========================================================================= */
+
+/* BLOCKQUOTE */
+
+$blockquote-bg-color: transparent !default;
+
+/* LINE */
+
+$blockquote-line-width: $gutter-half !default;
+$blockquote-line-bg-color: rgba( 0, 0, 0, .15 ) !default;
+
+/* FOOTER */
+
+$blockquote-footer-font-size: .85em !default;
+
+$blockquote-footer-bg-color: transparent !default;
+
+$blockquote-footer-opacity: .85 !default;
+
+$blockquote-footer-padding-x: 0 !default;
+$blockquote-footer-padding-y: 0 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Lists (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/gutter/variables.scss
+ * ========================================================================= */
+
+/* LISTS */
+
+$list-padding-left: $gutter * 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Layout (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HEADER */
+
+$layout-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
+$layout-header-sticky-z-index: 200 !default;
+
+
+/* =========================================================================
+ * Svelto - Core - Paths (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PATHS */
+
+$path-root: '/' !default;
+$path-fonts: $path-root + 'fonts/' !default;
+$path-images: $path-root + 'images/' !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Blurred (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
+ * ========================================================================= */
+
+/* BLURRED */
+
+$blurred-blur-amount: 3px !default; // Same as in `blurred.svg`
+
+/* PATHS */
+
+$blurred-path-images: $path-images !default;
+
+/* ANIMATION */
+
+$blurred-animation-duration: $animation-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Dropdown (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
  * ========================================================================= */
 
 //FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
@@ -904,20 +1669,22 @@ $dropdown-z-depth: 4 !default;
 $dropdown-max-width: 70vw !default;
 $dropdown-max-height: 60vh !default;
 
-/* PATHS */
-
-$dropdown-path-images: $path-images !default;
-
 /* TIP */
 
 $dropdown-tip-size: .75em !default;
 
 /* TIP BOX SHADOW */
 
-$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .7) !default; // Taken from z-depths
-$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default; // Taken from z-depths
-$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
-$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default; // Taken from z-depths
+//TODO: Make them more genral, may get them from `$z-depths` on the basis of the value of `$dropdown-z-depth`
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, .7) !default;
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1) !default;
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .35) !default;
+
+/* PATHS */
+
+$dropdown-path-images: $path-images !default;
 
 /* ANIMATION */
 
@@ -925,284 +1692,57 @@ $dropdown-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Outline (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* OUTLINE */
-
-$outline-width: 1px !default;
-$outline-style: solid !default;
-
-
-/* =========================================================================
- * Svelto - Chat (Variables)
+ * Svelto - Widgets - Chat (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
- * @require ../colors/variables.scss
- * @require ../dropdown/variables.scss
- * @require ../outline/variables.scss
- * @require ../paths/variables.scss
+ * @require core/animations/variables.scss
+ * @require core/colors/variables.scss
+ * @require core/paths/variables.scss
+ * @require widgets/container/variables.scss
+ * @require widgets/dropdown/variables.scss
  * ========================================================================= */
 
-/* CHAT */
+/* LEVELS */
 
-$chat-path-images: $path-images !default;
+$chat-msg-level-1-spacing: 0 !default;
+$chat-msg-level-2-spacing: 4.5em !default;
+$chat-msg-level-3-spacing: $chat-msg-level-2-spacing * 2 !default;
 
 /* TIP */
 
 $chat-tip-size: $dropdown-tip-size !default;
 
-/* LEVELS */
-
-$chat-msg-level-3-spacing: 9em !default;
-$chat-msg-level-2-spacing: 4.5em !default;
-$chat-msg-level-1-spacing: 0 !default;
-
 /* IMAGE */
 
 $chat-msg-img-size: 3em !default;
-$chat-msg-img-border-width: $outline-width !default;
+$chat-msg-img-rounded: true !default;
+
+$chat-msg-img-border-radius: $container-border-radius !default;
+
+$chat-msg-img-border-width: 1px !default;
+$chat-msg-img-border-style: 'solid' !default;
 $chat-msg-img-border-color: $color-black !default;
+
 $chat-msg-img-opacity-hover: .8 !default;
 
-/* ANIMATION */
+/* PATHS */
 
-$chat-msg-img-animation-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Checkbox (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* CHECKBOX */
-
-$checkbox-icon-off: 'check_box_outline_blank' !default;
-
-$checkbox-icon-on: 'check_box' !default;
-$checkbox-icon-on-color: 'secondary' !default;
+$chat-path-images: $path-images !default;
 
 /* ANIMATION */
 
-$checkbox-icon-animation-opacity-duration: $animation-fast !default;
+$chat-msg-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Colorpicker (Variables)
+ * Svelto - Widgets - Flag (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../outline/variables.scss
- * @require ../svelto/variables.scss
- * ========================================================================= */
-
-/* COLORPICKER */
-
-$colorpicker-height: 11em !default;
-
-/* WRAPPERS */
-
-$colorpicker-wrp-border-width: $outline-width !default;
-$colorpicker-wrp-border-color: black !default;
-
-/* WRAPPER HUE */
-
-$colorpicker-hue-wrp-width: 1.5em !default;
-
-/* HANDLER */
-
-$colorpicker-handler-border-width: 2px !default;
-$colorpicker-handler-border-color: white !default;
-
-$colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, .2) !default;
-
-/* HANDLER SB */
-
-$colorpicker-handler-sb-height: 1em !default;
-$colorpicker-handler-sb-width: 1em !default;
-
-$colorpicker-handler-sb-border-radius: 50% !default;
-
-/* HANDLER HUE */
-
-$colorpicker-handler-hue-height: .5em !default;
-
-$colorpicker-handler-hue-border-radius: $border-radius-small !default;
-
-
-/* =========================================================================
- * Svelto - Constants (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* CONSTANTS */
-
-$GOLDEN-RATIO: 1.6180339887 !default;
-$PI: 3.1415926536 !default;
-$SQRT2: 1.4142135624 !default;
-
-
-/* =========================================================================
- * Svelto - Datepicker (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* DATEPICKER */
-
-$datepicker-block-width: 100% / 7 !default;
-
-/* DAY NAME */
-
-$datepicker-day-name-font-weight: bold !default;
-$datepicker-day-name-height: 2.5em !default;
-
-/* DAY */
-
-$datepicker-day-height: 2.5em !default;
-$datepicker-day-prev-next-opacity: .25 !default;
-$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
-
-/* DAY CIRCLE */
-
-$datepicker-day-circle-size: 2.375em !default;
-
-$datepicker-day-hover-color: $color-secondary-text !default;
-$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, .25) !default;
-
-$datepicker-day-today-color: $color-secondary-bg !default;
-$datepicker-day-today-circle-color: transparent !default;
-
-$datepicker-day-selected-z-depth: 2 !default;
-$datepicker-day-selected-color: $color-secondary-text !default;
-$datepicker-day-selected-circle-color: $color-secondary-bg !default;
-
-/* ANIMATION */
-
-$datepicker-animation-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Divider - Block (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* BLOCK */
-
-$divider-block-color: 'red' !default;
-
-$divider-block-vertical-padding: .3em !default;
-$divider-block-horizontal-padding: .6em !default;
-
-
-/* =========================================================================
- * Svelto - Divider - Hr (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* HR */
-
-$hr-z-index: 40 !default;
-$hr-height: 1px !default;
-$hr-bg-color: rgba(0, 0, 0, .1) !default;
-
-
-/* =========================================================================
- * Svelto - Divider - Linear (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-
-/* =========================================================================
- * Svelto - Divider - Text (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TEXT */
-
-$divider-text-size: 'medium' !default;
-
-$divider-text-font-weight: bold !default;
-
-$divider-text-opacity: .75 !default;
-
-
-/* =========================================================================
- * Svelto - Draggable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* DRAGGING */
-
-$draggable-dragging-z-index: 1000000 !default;
-
-/* REVERTING */
-
-$draggable-reverting-animation-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Embedded (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* EMBEDDED */
-
-$embedded-ratios: ( 21 9 ) ( 16 9 ) ( 4 3 ) ( 1 1 ) !default;
-
-
-/* =========================================================================
- * Svelto - Expander (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* EXPANDER */
-
-$expander-animation-duration: $animation-normal !default; //TODO: Implement it
-
-
-/* =========================================================================
- * Svelto - Flag (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../paths/variables.scss
+ * @require core/paths/variables.scss
  * ========================================================================= */
 
 /* FLAGS */
@@ -2201,861 +2741,58 @@ $flag-height: 11px !default;
 
 
 /* =========================================================================
- * Svelto - Flippable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* FLIPPABLE */
-
-$flippable-perspective: 1000px !default;
-
-/* ANIMATION */
-
-$flippable-animation-flip-duration: $animation-slow !default;
-
-
-/* =========================================================================
- * Svelto - Footer (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* FOOTER */
-
-$footer-bg-color-darken-amount: 10 !default;
-
-$footer-bg-color: darken($color-base-bg, $footer-bg-color-darken-amount) !default;
-
-
-/* =========================================================================
- * Svelto - Label (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../container/variables.scss
- * ========================================================================= */
-
-/* LABEL */
-
-$label-color: 'white' !default;
-$label-color-basic: false !default;
-
-$label-border-radius: $container-border-radius !default;
-
-$label-padding-vertical: .5em !default;
-$label-padding-horizontal: $label-padding-vertical * 2 !default;
-
-/* LABEL COMPACT */
-
-$label-compact-padding-vertical: $label-padding-vertical !default;
-$label-compact-padding-horizontal: $label-padding-vertical !default;
-
-/* LEFT / RIGHT */
-
-$label-sub-bg-color: rgba(0, 0, 0, .05) !default;
-
-/* CENTER EXTRA SPACING */
-
-$label-center-extra-spacing: .75em !default;
-$label-compact-center-extra-spacing: .5em !default;
-
-
-/* =========================================================================
- * Svelto - Input (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label/variables.scss
- * ========================================================================= */
-
-/* INPUT */
-
-$input-color: $label-color !default;
-
-$input-border-radius: $label-border-radius !default;
-
-$input-padding-vertical: $label-padding-vertical !default;
-$input-padding-horizontal: $label-padding-horizontal !default;
-
-/* COMPACT */
-
-$input-compact-padding-vertical: $label-compact-padding-vertical !default;
-$input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
-
-/* PLACEHOLDER */
-
-$input-placeholder-opacity: .6 !default;
-
-
-/* =========================================================================
- * Svelto - Fieldset (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * @require ../../input/variables.scss
- * ========================================================================= */
-
-/* FIELDSET */
-
-$fieldset-bg-color: rgba(0, 0, 0, .035) !default;
-$fieldset-padding: $gutter !default;
-$fieldset-border-radius: $input-border-radius !default;
-
-
-/* =========================================================================
- * Svelto - Grid (Variables)
+ * Svelto - Core - Typography (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* GRID */
+/* FONT FAMILY */
 
-$grid-columns: 12 !default;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-root: $font-family-sans-serif !default;
+
+/* FONT SIZE */
+
+$font-size: 16px !default;
+
+/* LINE HEIGHT */
+
+//TODO: One should be enough
+
+$line-height: 1.4285714286 !default; // 20 / 14
+$line-height-em: $line-height * 1em;
 
 
 /* =========================================================================
- * Svelto - Helpers - Border (Variables)
+ * Svelto - Core - Icon (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../svelto/variables.scss
+ * @require core/typography/variables.scss
  * ========================================================================= */
 
-/* BORDER RADIUS */
+/* ICON */
 
-$rounded-border-radius: 1000000px !default;
-$smooth-border-radius: $border-radius-medium !default;
-$sharp-border-radius: 0 !default;
-
-
-/* =========================================================================
- * Svelto - Helpers - Others (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* OTHERS */
-
-$spacer-flex-grow: 1000000 !default;
+$icon-best-size: 24px !default; // At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default font size
 
 
 /* =========================================================================
- * Svelto - Helpers - Rotation (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* ROTATION */
-
-$rotating-animation-duration: .9s !default;
-
-
-/* =========================================================================
- * Svelto - Highlight (Variables)
+ * Svelto - Core - Sizes (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../outline/variables.scss
- * ========================================================================= */
-
-/* HIGHLIGHT */
-
-$highlight-z-index: 60 !default;
-
-$highlight-size: 2px !default;
-
-
-/* =========================================================================
- * Svelto - Image (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* IMAGE */
-
-$image-color: 'inherit' !default;
-
-/* CAPTION */
-
-$image-caption-color: 'black' !default;
-$image-caption-z-index: 30 !default;
-
-/* ANIMATION */
-
-$image-caption-animation-opacity-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Infobar (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TITLE */
-
-$infobar-title-size: 'large' !default;
-
-
-/* =========================================================================
- * Svelto - Label - Badge (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* BADGE */
-
-$label-badge-spacing: -20% !default;
-
-
-/* =========================================================================
- * Svelto - Label - Corner (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../variables.scss
- * ========================================================================= */
-
-/* CORNER */
-
-$label-corner-z-index: 70 !default;
-
-$label-corner-padding-vertical: $label-compact-padding-vertical * 2 !default;
-$label-corner-padding-horizontal: $label-compact-padding-horizontal * 2 !default;
-
-
-/* =========================================================================
- * Svelto - Label - Floating (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../variables.scss
- * ========================================================================= */
-
-/* FLOATING */
-
-$label-floating-z-index: 150 !default;
-$label-floating-z-depth: 4 !default;
-
-$label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;
-$label-floating-padding-horizontal: $label-padding-vertical * 1.6 !default;
-
-$label-floating-right: 24px !default;
-$label-floating-bottom: 24px !default;
-
-/* COMPACT */
-
-$label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
-$label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
-
-
-/* =========================================================================
- * Svelto - Label - Ribbon (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* RIBBON */
-
-$label-ribbon-size: 8px !default;
-
-
-/* =========================================================================
- * Svelto - Label - Tag (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../variables.scss
- * @require ../../constants/variables.scss
- * @require ../../typography/variables.scss
- * ========================================================================= */
-
-/* TAG */
-
-$label-tag-sharp-size: ( $line-height-em + ( $label-padding-vertical * 2 ) ) / $SQRT2 !default;
-$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-padding-vertical * 2 ) ) / $SQRT2 !default;
-
-$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
-$label-tag-smooth-compact-size: $label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
-
-/* CIRCLE */
-
-$label-tag-circle-scale: .25 !default;
-$label-tab-circle-background-color: $color-base !default;
-$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, .3) !default;
-
-
-/* =========================================================================
- * Svelto - Layout (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* HEADER */
-
-$layout-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
-$layout-header-fixed-z-index: 200 !default;
-
-
-/* =========================================================================
- * Svelto - Modal (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* MODAL */
-
-$modal-z-index: 500 !default;
-$modal-z-depth: 6 !default;
-
-$modal-closed-scale: .7 !default;
-
-/* NOT FULLSCREEN */
-
-$modal-max-width: 90vw !default;
-$modal-max-height: 90vh !default;
-
-/* BEFORE (BACKGROUND) */
-
-$modal-background-color: rgba(0, 0, 0, .5) !default;
-
-/* ANIMATION */
-
-$modal-animation-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Noty - Autoexpand (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../breakpoints/variables.scss
- * ========================================================================= */
-
-/* AUTOEXPAND */
-
-$noty-autoexpand-width-breakpoint: 'small' !default;
-$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint ) - .01px !default; //TODO: Rename it
-
-
-/* =========================================================================
- * Svelto - Noty (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * @require ../container/variables.scss
- * ========================================================================= */
-
-/* NOTY */
-
-$noty-z-index: 600 !default;
-$noty-z-depth: 7 !default;
-
-$noty-transparentize-amount: .05 !default; //TODO: Implement it
-
-$noty-border-radius: $container-border-radius !default;
-
-/* IMG */
-
-$noty-img-size: 38px !default;
-$noty-img-rounded: false !default;
-
-/* ANIMATION */
-
-$noty-animation-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Widget (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* WIDGET */
-
-$widget-disabled-opacity: .5 !default;
-
-/* ANIMATION */
-
-$widget-animation-opacity-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Overlay (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * @require ../widget/variables.scss
- * ========================================================================= */
-
-/* OVERLAY */
-
-$overlay-z-index: 100 !default;
-
-$overlay-transition-opacity-duration: $widget-animation-opacity-duration !default;
-
-/* SIBLINGS */
-
-$overlay-siblings-opacity: .2 !default;
-$overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-duration !default;
-
-/* DIMMER */
-
-$overlay-dimmer-color: 'black' !default;
-
-$overlay-dimmer-background-color: transparentize($color-black, $overlay-siblings-opacity) !default;
-
-
-/* =========================================================================
- * Svelto - Panel - Default
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* DEFAULT */
-
-$panel-default-horizontal-height: 7.5rem !default;
-$panel-default-closed-horizontal-spacing: $panel-default-horizontal-height !default;
-
-$panel-default-vertical-width: $panel-default-horizontal-height * 2 !default;
-$panel-default-closed-vertical-spacing: $panel-default-vertical-width !default;
-
-
-/* =========================================================================
- * Svelto - Panel - Slim
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SLIM */
-
-$panel-slim-horizontal-height: 4.2666666667rem !default;
-$panel-slim-closed-horizontal-spacing: $panel-slim-horizontal-height !default;
-
-$panel-slim-vertical-width: $panel-slim-horizontal-height !default;
-$panel-slim-closed-vertical-spacing: $panel-slim-vertical-width !default;
-
-
-/* =========================================================================
- * Svelto - Panel (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* PANEL */
-
-$panel-z-index: 400 !default;
-$panel-z-depth: 5 !default;
-
-$panel-animation-transform-duration: $animation-normal !default;
-
-/* PINNED */
-
-$panel-pinned-z-depth: $panel-z-depth !default;
-
-/* BACKGROUND */
-
-$panel-background-color: rgba(0, 0, 0, .5) !default;
-
-$panel-background-animation-opacity-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Parallax (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* PARALLAX */
-
-$parallax-height: 50vh !default;
-$parallax-perspective: 20rem !default;
-
-/* DEEP */
-
-$parallax-deep-translate-z: - $parallax-perspective * 2 !default;
-$parallax-deep-scale: 3 !default;
-
-/* BACKGROUND */
-
-$parallax-background-translate-z: - $parallax-perspective !default;
-$parallax-background-scale: 2 !default;
-
-/* FOREGROUND */
-
-$parallax-foreground-translate-z: $parallax-perspective / 3.3333333333 !default;
-$parallax-foreground-scale: .7 !default;
-
-
-/* =========================================================================
- * Svelto - Placeholder (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* PLACEHOLDER */
-
-$placeholder-color: 'gray' !default;
-
-
-/* =========================================================================
- * Svelto - Progressbar - Indeterminate (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* INDETERMIMNATE */
-
-$progressbar-indeterminate-animation-duration: 1.5s !default;
-
-
-/* =========================================================================
- * Svelto - Progressbar - Labeled (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* LABEL */
-
-$progressbar-label-font-size: .75em !default;
-$progressbar-label-padding-vertical: 0 !default;
-$progressbar-label-padding-horizontal: .5em !default;
-
-
-/* =========================================================================
- * Svelto - Progressbar - Striped (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* STRIPE */
-
-$progressbar-stripe-size: 3.3333333333em !default;
-
-$progressbar-stripe-opacity: .05 !default;
-
-$progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
-$progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
-
-/* STRIPES */
-
-$progressbar-stripes-transition-move-duration: .5s !default;
-
-
-/* =========================================================================
- * Svelto - Progressbar (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* PROGRESSBAR */
-
-$progressbar-color: 'gray' !default;
-
-$progressbar-height: 1em !default;
-
-$progressbar-border-radius: $progressbar-height !default;
-
-/* HIGHLIGHT */
-
-$progressbar-highlight-color: 'secondary' !default;
-
-/* COMPACT */
-
-$progressbar-compact-height: .5em !default;
-
-$progressbar-compact-label-font-size: .5em !default;
-
-/* SLIM */
-
-$progressbar-slim-height: .25em !default;
-
-$progressbar-slim-label-font-size: 0 !default;
-
-/* ANIMATION */
-
-$progressbar-animation-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Radio (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* RADIO */
-
-$radio-icon-off: 'radio_button_unchecked' !default;
-$radio-icon-on: 'radio_button_checked' !default;
-
-
-/* =========================================================================
- * Svelto - Raisable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* RAISABLE */
-
-$raisable-raise-amount: 2 !default;
-
-/* ANIMATION */
-
-$raisable-animation-box-shadow-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Rater (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* RATER */
-
-$rater-star-active-color: $color-secondary !default;
-
-
-/* =========================================================================
- * Svelto - Remote Modal (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../animations/variables.scss
- * ========================================================================= */
-
-/* REMOTE MODAL PLACEHOLDER */
-
-$remote-modal-placeholder-size: 9.25rem;
-
-/* ANIMATION */
-
-$remote-modal-animation-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Reset (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* SELECTION */
-
-$selection-bg-color: lighten($color-primary-bg, 50) !default;
-
-/* BODY */
-
-$body-color: 'base' !default;
-
-
-/* =========================================================================
- * Svelto - Ripple (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* RIPPLE */
-
-$ripple-color-default: $color-black !default;
-
-$ripple-transparentize-amount: .8 !default;
-
-/* CIRCLE */
-
-$ripple-circle-z-index: 50 !default;
-
-/* ANIMATION */
-
-$ripple-transition-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material
-$ripple-animation-show-duration: $animation-xslow !default;
-$ripple-animation-hide-duration: $animation-xslow !default;
-
-
-/* =========================================================================
- * Svelto - Select - Dropdown (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* DROPDOWN */
-
-$select-dropdown-z-depth: 1 !default;
-
-
-/* =========================================================================
- * Svelto - Selectable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * ========================================================================= */
-
-/* SELECTABLE */
-
-$table-selectable-row-selected-color: lighten($color-primary-bg, 50) !default;
-
-
-/* =========================================================================
- * Svelto - Shape (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SHAPE */
-
-$shape-size: 1em !default;
-
-
-/* =========================================================================
- * Svelto - Shape - Circle (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../variables.scss
- * ========================================================================= */
-
-/* CIRCLE */
-
-$circle-size: $shape-size !default;
-
-
-/* =========================================================================
- * Svelto - Shape - Square - Sample (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SAMPLE */
-
-$square-sample-size: 4em !default;
-$square-sample-p-size: 'xxsmall' !default;
-
-
-/* =========================================================================
- * Svelto - Shape - Square (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SQUARE */
-
-$square-size: $shape-size !default;
-
-
-/* =========================================================================
- * Svelto - Shape - Triangle (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TRIANGLE */
-
-$triangle-size: $shape-size !default;
-
-
-/* =========================================================================
- * Svelto - Sizes (Functions)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SIZE */
-
-@function size-from-icon-size ( $icon-size ) {
-
-  // Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`
-
-  @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
-
-}
-
-
-/* =========================================================================
- * Svelto - Sizes (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../helpers/assert/mixins.scss
- * @require ../icon/variables.scss
- * @require ../typography/variables.scss
- * @require functions.scss
+ * @require core/icon/variables.scss
  * ========================================================================= */
 
 /* ICON SIZES */
 
-// The wanted icon size for the particular size
+// The wanted icon size for what will be the actual size setted
 // The `RECOMMENDED` sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
@@ -3110,71 +2847,127 @@ $sizes-classes: map-keys( $sizes ) !default;
 
 
 /* =========================================================================
- * Svelto - Switch (Variables)
+ * Svelto - Widgets - Carousel - Inset (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
- * @require ../constants/variables.scss
+ * @require ../variables.scss
+ * @require core/icon/variables.scss
  * ========================================================================= */
 
-/* SWITCH */
+/* PREVIOUS / NEXT */
 
-$switch-width: 2.2666666667em !default;
+$carousel-inset-previous-next-z-index: $carousel-indicators-z-index - 1 !default;
 
-$switch-color: 'gray' !default;
+$carousel-inset-previous-next-font-size: $icon-scale-amount * 1em !default;
 
-/* BAR */
+$carousel-inset-previous-next-color: $carousel-indicator-color !default;
 
-$switch-bar-width: 1.7333333333em !default;
-$switch-bar-height: .9333333333em !default;
+$carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
+$carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
+$carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-/* HANDLER */
+$carousel-inset-previous-next-animation-duration: $animation-normal !default;
 
-$switch-handler-z-depth: 3 !default;
+/* PREVIOUS */
 
-$switch-handler-size: 1.3333333333em !default;
-$switch-handler-half-size: $switch-handler-size / 2 !default;
+$carousel-inset-previous-width: 20% !default;
 
-/* HANDLER ICON */
+$carousel-inset-previous-icon: 'chevron_left' !default;
 
-$switch-handler-icon-size: 1.6666666667em !default;
-$switch-handler-icon-font-size: .8em !default;
+/* NEXT */
 
-/* HANDLER:BEFORE */
+$carousel-inset-next-width: 100% - $carousel-inset-previous-width !default;
 
-$switch-handler-before-scale-inactive: 0 !default;
-$switch-handler-before-scale-active: $GOLDEN-RATIO !default;
-
-$switch-handler-before-active-opacity: .25 !default;
-
-/* ANIMATION */
-
-$switch-animation-duration: $animation-fast !default;
+$carousel-inset-next-icon: 'chevron_right' !default;
 
 
 /* =========================================================================
- * Svelto - Slider (Variables)
+ * Svelto - Widgets - Icon (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../animations/variables.scss
- * @require ../label/variables.scss
- * @require ../switch/variables.scss
- * @require ../typography/variables.scss
+ * @require core/icon/variables.scss
+ * @require core/paths/variables.scss
+ * ========================================================================= */
+
+/* FONT */
+
+$icon-font-local: true !default;
+
+/* PATHS */
+
+$icon-path-fonts: $path-fonts !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Icons - Corner (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/icon/variables.scss
+ * ========================================================================= */
+
+/* CORNER */
+
+$icon-corner-font-size: $icon-scale-amount / 2 * 1em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Tag (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * @require _/math/constants/variables.scss
+ * @require core/typography/variables.scss
+ * ========================================================================= */
+
+/* SHARP */
+
+$label-tag-sharp-size: ( $line-height-em + ( $label-padding-y * 2 ) ) / $SQRT2 !default;
+$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-padding-y * 2 ) ) / $SQRT2 !default;
+
+/* SMOOTH */
+
+$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
+$label-tag-smooth-compact-size: $label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
+
+/* CIRCLE */
+
+$label-tab-circle-bg-color: $color-base !default;
+$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, .3 ) !default;
+$label-tag-circle-scale: .25 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Slider (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/typography/variables.scss
+ * @require widgets/label/variables.scss
+ * @require widgets/switch/variables.scss
  * ========================================================================= */
 
 /* SLIDER */
 
 $slider-color: 'inherit' !default;
 
-$slider-height: $line-height-em + ( $label-padding-vertical * 2 ) !default; // Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
+$slider-height: $line-height-em + ( $label-padding-y * 2 ) !default; // Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
 
 /* MIN / MAX */
 
 $slider-min-max-min-width: $slider-height !default;
+
+$slider-min-icon: 'remove' !default;
+$slider-max-icon: 'add' !default;
 
 /* UNHIGHLIGHT */
 
@@ -3187,15 +2980,17 @@ $slider-unhighlight-border-radius: $slider-unhighlight-height !default;
 /* HIGHLIGHT */
 
 $slider-highlight-color: 'secondary' !default;
+$slider-highlight-color-basic: true !default;
 
 /* HANDLER */
 
 $slider-handler-color: 'secondary' !default;
+$slider-handler-color-basic: true !default;
 
 $slider-handler-z-depth: 3 !default;
 
 $slider-handler-size: 1.55em !default;
-$slider-handler-half-size: $slider-handler-size / 2 !default;
+$slider-handler-half-size: $slider-handler-size / 2;
 
 $slider-handler-border-radius: 50% !default;
 
@@ -3211,464 +3006,7 @@ $slider-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Sortable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SORTABLE TABLE HEADER */
-
-$table-th-sortable-padding-horizontal: 1.75em !default;
-
-$table-th-sortable-hover-bg-color: rgba(255, 255, 255, .1) !default;
-$table-th-sortable-active-bg-color: rgba(0, 0, 0, .025) !default;
-
-/* SORTABLE TABLE HEADER ICON */
-
-$table-th-sortable-icon-inactive-opacity: .35 !default;
-$table-th-sortable-icon-active-opacity: 1 !default;
-
-$table-th-sortable-icon-right: .15em !default;
-
-
-/* =========================================================================
- * Svelto - Spinner Overlay (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../animations/variables.scss
- * ========================================================================= */
-
-/* SPINNER OVERLAY */
-
-$spinner-overlay-animation-transform-duration: $animation-normal !default;
-
-
-/* =========================================================================
- * Svelto - Spinner - Label (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../label/variables.scss
- * ========================================================================= */
-
-/* SPINNER LABEL */
-
-$spinner-label-z-depth: 1 !default;
-
-$spinner-label-color: 'inherit' !default;
-
-$spinner-label-padding-vertical: $label-compact-padding-vertical !default;
-$spinner-label-padding-horizontal: $label-compact-padding-horizontal !default;
-
-$spinner-label-border-radius: 50% !default;
-
-
-/* =========================================================================
- * Svelto - Spinner - Multicolor (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../colors/variables.scss
- * ========================================================================= */
-
-/* MULTICOLOR */
-
-$spinner-multicolor-stroke-color1: $color-blue !default;
-$spinner-multicolor-stroke-color2: $color-red !default;
-$spinner-multicolor-stroke-color3: $color-yellow !default;
-$spinner-multicolor-stroke-color4: $color-green !default;
-
-
-/* =========================================================================
- * Svelto - Spinner (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../colors/variables.scss
- * @require ../label/variables.scss
- * ========================================================================= */
-
-/* SPINNER */
-
-$spinner-size: 3.25em !default;
-
-$spinner-radius: 1.25em !default;
-
-/* STROKE */
-
-$spinner-stroke-width: .25em !default;
-
-$spinner-stroke-color: $color-secondary !default;
-
-/* ANIMATION */
-
-$spinner-animation-rotate-duration: 2s !default;
-
-$spinner-stroke-animation-dash-duration: 1.5s !default;
-
-
-/* =========================================================================
- * Svelto - Statistic (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* PRIMARY */
-
-$statistic-primary-size: 'xlarge' !default;
-
-/* SECONDARY */
-
-$statistic-secondary-size: 'small' !default;
-
-
-/* =========================================================================
- * Svelto - Table - Bordered (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../outline/variables.scss
- * ========================================================================= */
-
-/* BORDERED */
-
-$table-bordered-border-width: $outline-width !default;
-$table-bordered-border-color: inherit !default;
-
-
-/* =========================================================================
- * Svelto - Table - Hoverable (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* HOVERABLE */
-
-$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, .06) !default;
-$table-hoverable-row-even-color-hover: rgba(0, 0, 0, .06) !default;
-
-
-/* =========================================================================
- * Svelto - Table - Striped (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* STRIPED */
-
-$table-striped-row-odd-color: rgba(0, 0, 0, .035) !default;
-$table-striped-row-even-color: rgba(0, 0, 0, 0) !default;
-
-
-/* =========================================================================
- * Svelto - Table (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TABLE */
-
-$table-color: inherit !default;
-
-$table-header-footer-bg-color: rgba(0, 0, 0, .05) !default; // The same used in label sub left and right
-
-/* EMPTY */
-
-$table-row-empty-height: 4.5em !default;
-
-
-/* =========================================================================
- * Svelto - Tagbox (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* PARTIAL */
-
-$tagbox-input-min-width: 6.5em !default;
-
-
-/* =========================================================================
- * Svelto - Toolbar (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TOOLBAR */
-
-$toolbar-padding-vertical: .5em !default;
-$toolbar-padding-horizontal: 1em !default;
-
-/* VERTICAL */
-
-$toolbar-vertical-padding-vertical: $toolbar-padding-horizontal !default;
-$toolbar-vertical-padding-horizontal: $toolbar-padding-vertical !default;
-
-
-/* =========================================================================
- * Svelto - Tooltip (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TOOLTIP */
-
-$tooltip-max-width: 20rem !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Abbr (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../colors/variables.scss
- * ========================================================================= */
-
-/* ABBR */
-
-$abbr-border-width: 1px !default;
-$abbr-border-style: 'dotted' !default;
-$abbr-border-color: $color-gray-border !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Blockquote (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * ========================================================================= */
-
-/* BLOCKQUOTE */
-
-$blockquote-bg-color: transparent !default;
-
-/* LINE */
-
-$blockquote-line-width: $gutter-half !default;
-$blockquote-line-bg-color: rgba(0, 0, 0, .15) !default;
-
-/* FOOTER */
-
-$blockquote-footer-font-size: .85em !default;
-$blockquote-footer-opacity: .85 !default;
-$blockquote-footer-bg-color: transparent !default;
-$blockquote-footer-padding-vertical: 0 !default;
-$blockquote-footer-padding-horizontal: 0 !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Characters (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-//SOURCE: http://davidtheclark.github.io/scut/characters.html
-
-/* SPACES */
-
-$char-space: '\0020'; // Space
-$char-nbsp: '\00a0'; // Non-breaking space
-
-/* QUOTATION MARKS */
-
-$char-quot: '\0022'; // Quotation mark
-$char-lsquo: '\2018'; // Left single curly quote
-$char-rsquo: '\2019'; // Right single curly quote
-$char-ldquo: '\201C'; // Left double curly quote
-$char-rdquo: '\201D'; // Right double curly quote
-$char-lsaquo: '\2039'; // Left single angle quote (guillemet)
-$char-rsaquo: '\203A'; // Right single angle quote (guillemet)
-$char-laquo: '\00ab'; // Left double angle quote (guillemet)
-$char-raquo: '\00bb'; // Right double angle quote (guillemet)
-
-/* OTHER PUNCTUATION */
-
-$char-mdash: '\2014'; // Em dash (mutton)
-$char-ndash: '\2013'; // En dash (nut)
-$char-hyphen: '\2010'; // Hyphen
-$char-amp: '\0026'; // Ampersand
-$char-para: '\00b6'; // Paragraph symbol (pilcrow)
-$char-middot: '\00b7'; // Middot (interpunct, interpoint)
-$char-bull: '\2022'; // Bullet
-$char-whibull: '\25E6'; // White bullet
-$char-hellip: '\2026'; // Horizontal ellipsis
-$char-vellip: '\22EE'; // Vertical ellipsis
-$char-midhellip: '\22EF'; // Midline horizontal ellipsis
-
-/* VARIOUS SYMBOLS */
-
-$char-gt: '\003e'; // Greater than
-$char-lt: '\003c'; // Less than
-$char-times: '\00D7'; // Times
-$char-bigtimes: '\2715'; // Big times
-$char-checkmark: '\2713'; // Checkmark
-$char-sect: '\00a7'; // Section sign (double S, hurricane, sectional symbol, the legal doughnut, signum sectionis)
-$char-oslash: '\00f8'; // O-slash (slashed o)
-
-/* SHAPES */
-
-$char-utri: '\25b2'; // Up-pointing triangle
-$char-dtri: '\25bc'; // Down-pointing triangle
-$char-ltri: '\25c0'; // Left-pointing triangle
-$char-rtri: '\25b6'; // Right-pointing triangle
-$char-ustri: '\25b4'; // Up-pointing small triangle
-$char-dstri: '\25be'; // Down-pointing small triangle
-$char-lstri: '\25c2'; // Left-pointing small triangle
-$char-rstri: '\25b8'; // Right-pointing small triangle
-$char-diamond: '\25c6'; // Diamond
-$char-fisheye: '\25c9'; // Fisheye
-$char-bullseye: '\25ce'; // Bullseye
-$char-circle: '\25cf'; // Circle
-$char-whitecircle: '\25cb'; // White circle
-$char-square: '\25a0'; // Square
-$char-whitesquare: '\25a1'; // White square
-$char-ssquare: '\25aa'; // Small square
-$char-swhitesquare: '\25ab'; // Small white square
-
-
-/* =========================================================================
- * Svelto - Typography - Code (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * ========================================================================= */
-
-/* CODE */
-
-$code-bg-color: rgba(0, 0, 0, .03) !default;
-
-$code-border-radius: $border-radius-medium !default;
-
-$code-border-width: 1px !default;
-$code-border-style: 'solid' !default;
-$code-border-color: rgba(0, 0, 0, .15) !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Headers (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* HEADERS */
-
-$h1-size: 'xxlarge' !default;
-$h2-size: 'xlarge' !default;
-$h3-size: 'large' !default;
-$h4-size: 'medium' !default;
-$h5-size: 'small' !default;
-$h6-size: 'xsmall' !default;
-
-$header-small-opacity: .85 !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Kbd (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * ========================================================================= */
-
-/* KBD */
-
-$kbd-color: 'white' !default;
-
-$kbd-border-width: 1px !default;
-$kbd-border-style: solid !default;
-$kdb-border-radius: $border-radius-medium !default;
-
-$kbd-font-size: .9em !default;
-$kbd-font-weight: bold !important;
-
-$kbd-padding: .2em .3em !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Link (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../animations/variables.scss
- * ========================================================================= */
-
-/* LINK */
-
-$a-underline-height: 1px !default;
-
-/* ANIMATION */
-
-$a-underline-animation-duration: $animation-fast !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Lists (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * ========================================================================= */
-
-/* LISTS */
-
-$list-padding-left: $gutter * 2 !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Mark (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../svelto/variables.scss
- * ========================================================================= */
-
-/* MARK */
-
-$mark-color: 'yellow' !default;
-
-$mark-padding: .3em .325em !default;
-$mark-border-radius: $border-radius-medium !default;
-
-
-/* =========================================================================
- * Svelto - Typography - Small (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* SMALL */
-
-$small-font-size: .65em !default;
-
-
-/* =========================================================================
- * Svelto - Z-Depths (Variables)
+ * Svelto - Core - Z-Depths (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3731,3 +3069,673 @@ $z-depths: (
   23: $z-depth-23,
   24: $z-depth-24
 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Border Radius (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BORDER RADIUS */
+
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: .25em !default; // 4 / 16, same as container's
+$sharp-border-radius: 0 !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Disabled (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DISABLED */
+
+$disabled-opacity: .5 !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Highlighted (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HIGHLIGHTED */
+
+$highlight-z-index: 60 !default;
+
+$highlight-size: 2px !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Outlined (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OUTLINED */
+
+$outline-width: 1px !default;
+$outline-style: solid !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Breadcrumb (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BREADCRUMB */
+
+$breadcrumb-spacing: .6em !default;
+
+/* AFTER CURRENT */
+
+$breadcrumb-after-current-opacity: .5 !default;
+$breadcrumb-after-current-opacity-hover: .75 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Divider - Block (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BLOCK */
+
+$divider-block-color: 'red' !default;
+
+$divider-block-x-padding: .6em !default;
+$divider-block-y-padding: $divider-block-x-padding / 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Divider - Hr (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HR */
+
+$hr-z-index: 40 !default;
+
+$hr-height: 1px !default;
+
+$hr-bg-color: rgba( 0, 0, 0, .1 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Divider - Text (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXT */
+
+$divider-text-size: 'medium' !default;
+
+$divider-text-font-weight: bold !default;
+
+$divider-text-opacity: .75 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Embedded - Ratios (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RATIOS */
+
+$embedded-ratios: ( 21 9 ), ( 16 9 ), ( 4 3 ), ( 1 1 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Image - Caption (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CAPTION */
+
+$image-caption-z-index: 30 !default;
+
+$image-caption-color: 'black' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Infobar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TITLE */
+
+$infobar-title-size: 'large' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Autogrow (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$input-autogrow-min-width: 1px !default; // So that the cursor icon is displayed even if empty
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Badge (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BADGE */
+
+$label-badge-spacing: -20% !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Ribbon (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RIBBON */
+
+$label-ribbon-size: 8px !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HORIZONTAL */
+
+$panel-default-x-height: 7.5rem !default;
+$panel-default-closed-x-spacing: $panel-default-x-height !default; //TODO: Remove it
+
+/* VERTICAL */
+
+$panel-default-y-width: $panel-default-x-height * 2 !default;
+$panel-default-closed-y-spacing: $panel-default-y-width !default; //TODO: Remove it
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HORIZONTAL */
+
+$panel-slim-x-height: 4.2666666667rem !default;
+$panel-slim-closed-x-spacing: $panel-slim-x-height !default; //TODO: Remove it
+
+/* VERTICAL */
+
+$panel-slim-y-width: $panel-slim-x-height !default;
+$panel-slim-closed-y-spacing: $panel-slim-y-width !default; //TODO: Remove it
+
+
+/* =========================================================================
+ * Svelto - Widgets - Parallax (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PARALLAX */
+
+$parallax-height: 50vh !default;
+$parallax-perspective: 20rem !default;
+
+/* DEEP */
+
+$parallax-deep-translate-z: - $parallax-perspective * 2 !default;
+$parallax-deep-scale: 3 !default;
+
+/* BACKGROUND */
+
+$parallax-background-translate-z: - $parallax-perspective !default;
+$parallax-background-scale: 2 !default;
+
+/* FOREGROUND */
+
+$parallax-foreground-translate-z: $parallax-perspective / 3.3333333333 !default;
+$parallax-foreground-scale: .7 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Placeholder (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PLACEHOLDER */
+
+$placeholder-color: 'gray' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Compact - Labeled (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* LABELED */
+
+$progressbar-compact-label-font-size: .5em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Compact (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* COMPACT */
+
+$progressbar-compact-height: .5em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Indeterminate (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ANIMATION */
+
+$progressbar-indeterminate-animation-duration: 1.5s !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Labeled (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* LABEL */
+
+$progressbar-label-font-size: .75em !default;
+
+$progressbar-label-padding-x: .5em !default;
+$progressbar-label-padding-y: 0 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Slim - Labeled (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* LABELED */
+
+$progressbar-slim-label-font-size: 0 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Slim (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SLIM */
+
+$progressbar-slim-height: .25em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Striped (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* STRIPE */
+
+$progressbar-stripe-size: 3.3333333333em !default;
+
+$progressbar-stripe-opacity: .05 !default;
+
+$progressbar-stripe-light-color: rgba( 255, 255, 255, $progressbar-stripe-opacity ) !default;
+$progressbar-stripe-dark-color: rgba( 0, 0, 0, $progressbar-stripe-opacity ) !default;
+
+/* STRIPES */
+
+$progressbar-stripes-animation-move-duration: .5s !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Radio (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RADIO */
+
+$radio-icon-on: 'radio_button_checked' !default;
+$radio-icon-off: 'radio_button_unchecked' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Select - Dropdown (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DROPDOWN */
+
+$select-dropdown-z-depth: 1 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Shape - Square - Sample (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SAMPLE */
+
+$square-sample-size: 4em !default;
+$square-sample-p-size: 'xxsmall' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Shape (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SHAPE */
+
+$shape-size: 1em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Shape - Circle (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* CIRCLE */
+
+$circle-size: $shape-size !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Shape - Square (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* SQUARE */
+
+$square-size: $shape-size !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Shape - Triangle (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* TRIANGLE */
+
+$triangle-size: $shape-size !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Sortable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SORTABLE TABLE HEADER */
+
+$sortable-table-th-padding-x: 1.75em !default;
+
+$sortable-table-th-hover-bg-color: rgba(255, 255, 255, .1) !default;
+$sortable-table-th-active-bg-color: rgba(0, 0, 0, .025) !default;
+
+/* SORTABLE TABLE HEADER ICON */
+
+$sortable-table-th-icon-inactive-opacity: .35 !default;
+$sortable-table-th-icon-active-opacity: 1 !default;
+
+$sortable-table-th-icon-right: .15em !default;
+
+$sortable-desc-icon: 'arrow_drop_down' !default;
+$sortable-asc-icon: 'arrow_drop_down' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Statistic (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PRIMARY */
+
+$statistic-value-size: 'xlarge' !default;
+
+/* SECONDARY */
+
+$statistic-description-size: 'small' !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Table - Bordered (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BORDERED */
+
+$table-bordered-border-width: 1px !default;
+$table-bordered-border-color: inherit !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Table - Hoverable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HOVERABLE*/
+
+$table-hoverable-row-odd-bg-color-hover: rgba(0, 0, 0, .06) !default;
+$table-hoverable-row-even-bg-color-hover: $table-hoverable-row-odd-bg-color-hover !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Table - Striped (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* STRIPED */
+
+$table-striped-row-odd-bg-color: rgba(0, 0, 0, .035) !default;
+$table-striped-row-even-bg-color: rgba(0, 0, 0, 0) !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Table (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TABLE */
+
+$table-color: inherit !default;
+
+/* HEADER */
+
+$table-header-bg-color: rgba(0, 0, 0, .05) !default; // It's equal to the one used in label sub left/right
+
+/* FOOTER */
+
+$table-footer-bg-color: $table-header-bg-color !default;
+
+/* ROW EMPTY */
+
+$table-row-empty-height: 4.5em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Tagbox (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PARTIAL */
+
+$tagbox-partial-min-width: 6.5em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+$textarea-lines: 5 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Autogrow - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* TEXTAREA AUTOGROW */
+
+$textarea-autogrow-lines: $textarea-lines !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toolbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOOLBAR */
+
+$toolbar-padding-x: 1em !default;
+$toolbar-padding-y: $toolbar-padding-x / 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toolbar - Vertical (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* VERTICAL */
+
+$toolbar-vertical-padding-x: $toolbar-padding-y !default; //TODO: Rename to $toolbar-y?
+$toolbar-vertical-padding-y: $toolbar-padding-x !default; //TODO: Rename to $toolbar-y?
+
+
+/* =========================================================================
+ * Svelto - Widgets - Tooltip (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOOLTIP */
+
+$tooltip-max-width: 15rem !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Headings (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SIZES */
+
+$h1-size: 'xxlarge' !default;
+$h2-size: 'xlarge' !default;
+$h3-size: 'large' !default;
+$h4-size: 'medium' !default;
+$h5-size: 'small' !default;
+$h6-size: 'xsmall' !default;
+
+/* SMALL */
+
+$header-small-opacity: .85 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Small (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SMALL */
+
+$small-font-size: .65em !default;

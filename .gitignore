@@ -35,3 +35,6 @@ node_modules
 .temp
 .svelto.json
 .project.previous.json
+demo/public/fonts
+demo/public/images
+demo/svelto
