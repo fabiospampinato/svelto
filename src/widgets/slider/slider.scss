@@ -103,7 +103,7 @@
   /* HIGHLIGHT */
 
   &-highlight {
-    @include color ( $slider-highlight-color, $slider-highlight-color-basic );
+    @include color ( $slider-highlight-color );
     position: absolute;
     right: 100%;
     width: 100%;

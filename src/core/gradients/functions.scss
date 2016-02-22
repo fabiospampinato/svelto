@@ -10,10 +10,10 @@
 
 @function gradient-get-start-end-from-color ( $color ) {
 
-  $colors: map-get( $colors, $color );
+  $datas: map-get( $colors, $color );
 
-  $start: nth( $colors, 2 ); // Hover
-  $end: nth( $colors, 3 ); // Active
+  $start: nth( $datas, 2 ); // Hover
+  $end: nth( $datas, 3 ); // Active
 
   @return ( $start, $end );
 

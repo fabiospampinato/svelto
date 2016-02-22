@@ -23,7 +23,7 @@
 
       $percentage: ( 100% / $grid-columns ) * $nr;
 
-      .#{alias}-#{$nr} {
+      .#{$alias}-#{$nr} {
         width: $percentage;
       }
 

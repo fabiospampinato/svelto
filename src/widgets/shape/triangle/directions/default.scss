@@ -13,6 +13,6 @@
 
 /* DEFAULT */
 
-.triangle:not(.top):not(.left):not(.right) {
+.triangle:not(.top):not(.right):not(.left) {
   @extend .triangle.bottom;
 }
