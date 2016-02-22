@@ -11,8 +11,7 @@
 
 /* MARK */
 
-mark,
-.mark {
+mark {
   @include color ( $mark-color );
   padding: $mark-padding-y $mark-padding-x;
   border-radius: $mark-border-radius;

@@ -14,8 +14,7 @@
 
 /* LINK */
 
-a,
-.link {
+a {
   position: relative;
   text-decoration: none;
   color: inherit;
@@ -23,9 +22,7 @@ a,
 }
 
 p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-p > .link,
-span > a, // Same reason as `p > a`
-span > .link {
+span > a { // Same reason as `p > a`
 
   display: inline-block;
   cursor: pointer;

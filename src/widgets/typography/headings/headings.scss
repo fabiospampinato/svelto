@@ -16,51 +16,38 @@ h2,
 h3,
 h4,
 h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
+h6 {
 
   //TODO: Add font-family, font-weight, line-height
 
   margin: 0 0 $gutter;
 
-  > small,
-  > .small {
+  > small {
     opacity: $header-small-opacity;
   }
 
 }
 
-h1,
-.h1 {
-  @include size ( $h1-size );
+h1 {
+  @include size ( $h1-size, true );
 }
 
-h2,
-.h2 {
-  @include size ( $h2-size );
+h2 {
+  @include size ( $h2-size, true );
 }
 
-h3,
-.h3 {
-  @include size ( $h3-size );
+h3 {
+  @include size ( $h3-size, true );
 }
 
-h4,
-.h4 {
-  @include size ( $h4-size );
+h4 {
+  @include size ( $h4-size, true );
 }
 
-h5,
-.h5 {
-  @include size ( $h5-size );
+h5 {
+  @include size ( $h5-size, true );
 }
 
-h6,
-.h6 {
-  @include size ( $h6-size );
+h6 {
+  @include size ( $h6-size, true );
 }

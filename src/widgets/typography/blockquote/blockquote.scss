@@ -10,8 +10,7 @@
 
 /* BLOCKQUOTE */
 
-blockquote,
-.blockquote {
+blockquote {
 
   @extend .widget;
   @include last-child-no-gutter ();
@@ -34,8 +33,7 @@ blockquote,
 
   /* FOOTER */
 
-  > footer,
-  > .blockquote-footer {
+  > footer {
 
     @extend .widget;
     @include last-child-no-gutter ();
