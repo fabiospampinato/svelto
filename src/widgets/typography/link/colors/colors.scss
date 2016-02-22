@@ -20,6 +20,8 @@
 
   @if $name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
+    //FIXME: This generates too much CSS
+
     .#{$name} p, // We do it just under `p`s, because elsewhere might be an unwanted style
     p.#{$name},
     .#{$name} span, // Same as `p > a`

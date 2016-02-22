@@ -18,8 +18,8 @@
   /* SIBLINGS */
 
   ~ * {
-    transition-property: opacity, filter !important;
-    transition-duration: $overlay-siblings-animation-duration !important;
+    transition-property: opacity, filter;
+    transition-duration: $overlay-siblings-animation-duration;
   }
 
   /* OPEN */
@@ -29,7 +29,7 @@
     /* SIBLINGS */
 
     ~ * {
-      @extend .blurred;
+      @extend %blurred;
     }
 
   }

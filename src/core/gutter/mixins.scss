@@ -6,29 +6,35 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: Can it be removed?
+//FIXME: It generates too much CSS
+//TODO: Maybe these styles can be applied globally?
+
 /* GUTTER */
 
-@mixin last-child-no-gutter () {
+@mixin last-child-no-gutter () {}
 
-  > :last-child {
-
-    margin-bottom: 0 !important;
-
-    &.multiple,
-    &.pager,
-    &.tagbox-tags {
-      margin-bottom: - $gutter !important;
-    }
-
-  }
-
-  > script:last-child { //TODO: Also add `style` support?
-    display: block;
-    font-size: 0;
-    height: 0;
-    visibility: hidden;
-    pointer-events: none;
-    margin-top: - $gutter !important;
-  }
-
-}
+// @mixin last-child-no-gutter () {
+//
+//   > :last-child {
+//
+//     margin-bottom: 0 !important;
+//
+//     &.multiple,
+//     &.pager,
+//     &.tagbox-tags {
+//       margin-bottom: - $gutter !important;
+//     }
+//
+//   }
+//
+//   > script:last-child { //TODO: Also add `style` support?
+//     display: block;
+//     font-size: 0;
+//     height: 0;
+//     visibility: hidden;
+//     pointer-events: none;
+//     margin-top: - $gutter !important;
+//   }
+//
+// }

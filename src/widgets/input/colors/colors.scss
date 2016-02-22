@@ -14,7 +14,7 @@
 
   $text: nth( $datas, 6 );
 
-  input.#{$name}::placeholder {
+  .#{$name}::placeholder {
     color: $text !important;
   }
 

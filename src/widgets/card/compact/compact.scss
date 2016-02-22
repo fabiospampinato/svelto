@@ -18,7 +18,7 @@
   > .card-header,
   > .card-block,
   > .card-footer {
-    @extend .container.compact;
+    padding: $card-compact-padding-y $card-compact-padding-x;
   }
 
 }

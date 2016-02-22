@@ -88,7 +88,7 @@
       }
 
       > input,
-      > textarea {
+      > textarea { //FIXME: Why do we need customize the style for input/textarea ?
         flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 

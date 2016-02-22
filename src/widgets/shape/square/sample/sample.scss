@@ -21,7 +21,7 @@
   /* PARAGRAPH */
 
   > p {
-    @include size ( $square-sample-p-size );
+    @include size ( $square-sample-p-size, true );
   }
 
 }

@@ -1,25 +1,33 @@
 
 /* =========================================================================
- * Svelto - Widgets - Overlay - Open
+ * Svelto - Core - Gutter
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.scss
- * @require ../show/show.scss
  * ========================================================================= */
 
-/* OPEN */
+/* LAST CHILD NO GUTTER */
 
-.overlay.open {
+:last-child {
+  margin-bottom: 0;
+}
 
-  @extend .overlay.show;
-  opacity: 1;
+.multiple,
+.pager,
+.tagbox-tags {
 
-  /* SIBLINGS */
-
-  ~ * {
-    opacity: $overlay-siblings-opacity;
+  &:last-child {
+    margin-bottom: - $gutter;
   }
 
+}
+
+script:last-child,
+style:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: - $gutter;
 }
