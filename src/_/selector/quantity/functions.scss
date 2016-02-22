@@ -24,7 +24,7 @@
 
 }
 
-@function _build-quantity-selector ( $selector-append, $last-selector ) {
+@function _quantity-build-selector ( $selector-append, $last-selector ) {
 
   $quantity-selector: ();
 

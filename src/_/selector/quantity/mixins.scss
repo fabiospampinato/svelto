@@ -23,7 +23,7 @@
   }
 
   $selector-append: ':nth-last-child(n+#{$min})';
-  $selector-up: _build-quantity-selector( $selector-append, $selector );
+  $selector-up: _quantity-build-selector( $selector-append, $selector );
 
   @at-root #{$selector-up} {
     @content;
@@ -44,7 +44,7 @@
   }
 
   $selector-append: ':nth-last-child(-n+#{$max}):first-child';
-  $selector-down: _build-quantity-selector( $selector-append, $selector );
+  $selector-down: _quantity-build-selector( $selector-append, $selector );
 
   @at-root #{$selector-down} {
     @content;
@@ -65,7 +65,7 @@
   }
 
   $selector-append: ':nth-last-child(#{$number}):first-child';
-  $selector-only: _build-quantity-selector( $selector-append, $selector );
+  $selector-only: _quantity-build-selector( $selector-append, $selector );
 
   @at-root #{$selector-only} {
     @content;
@@ -94,7 +94,7 @@
   }
 
   $selector-append: ':nth-last-child(n+#{$min}):nth-last-child(-n+#{$max}):first-child';
-  $selector-range: _build-quantity-selector( $selector-append, $selector );
+  $selector-range: _quantity-build-selector( $selector-append, $selector );
 
   @at-root #{$selector-range} {
     @content;

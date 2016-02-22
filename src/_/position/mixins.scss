@@ -8,7 +8,7 @@
 
 /* PRIVATE */
 
-@mixin _set-coordinate ( $type, $value ) {
+@mixin _position-set-coordinate ( $type, $value ) {
 
   @if $value != false and $value != null {
     #{$type}: $value;
@@ -30,20 +30,20 @@
 
     $value: first( $coordinates );
 
-    @include _set-coordinate( top, $value );
-    @include _set-coordinate( right, $value );
-    @include _set-coordinate( bottom, $value );
-    @include _set-coordinate( left, $value );
+    @include _position-set-coordinate( top, $value );
+    @include _position-set-coordinate( right, $value );
+    @include _position-set-coordinate( bottom, $value );
+    @include _position-set-coordinate( left, $value );
 
   } @else if $nr == 2 {
 
     $value-y: first( $coordinates );
     $value-x: last ( $coordinates );
 
-    @include _set-coordinate( top, $value-y );
-    @include _set-coordinate( right, $value-x );
-    @include _set-coordinate( bottom, $value-y );
-    @include _set-coordinate( left, $value-x );
+    @include _position-set-coordinate( top, $value-y );
+    @include _position-set-coordinate( right, $value-x );
+    @include _position-set-coordinate( bottom, $value-y );
+    @include _position-set-coordinate( left, $value-x );
 
   } @else if ( $nr == 3 ) {
 
@@ -51,10 +51,10 @@
     $value-x: nth( $coordinates, 2 );
     $value-bottom: last( $coordinates );
 
-    @include _set-coordinate( top, $value-top );
-    @include _set-coordinate( right, $value-x );
-    @include _set-coordinate( bottom, $value-bottom );
-    @include _set-coordinate( left, $value-x );
+    @include _position-set-coordinate( top, $value-top );
+    @include _position-set-coordinate( right, $value-x );
+    @include _position-set-coordinate( bottom, $value-bottom );
+    @include _position-set-coordinate( left, $value-x );
 
   } @else if ( $nr == 4 ) {
 
@@ -63,10 +63,10 @@
     $value-bottom: nth( $coordinates, 3 );
     $value-left: last( $coordinates );
 
-    @include _set-coordinate( top, $value-top );
-    @include _set-coordinate( right, $value-right );
-    @include _set-coordinate( bottom, $value-bottom );
-    @include _set-coordinate( left, $value-left );
+    @include _position-set-coordinate( top, $value-top );
+    @include _position-set-coordinate( right, $value-right );
+    @include _position-set-coordinate( bottom, $value-bottom );
+    @include _position-set-coordinate( left, $value-left );
 
   }
 
