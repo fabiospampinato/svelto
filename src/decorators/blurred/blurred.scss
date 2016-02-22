@@ -11,8 +11,12 @@
 
 /* BLURRED */
 
-.blurred {
+%blurred {
   filter: url(#{$blurred-path-images}blurred.svg#blur);
   filter: blur($blurred-blur-amount);
   transition: filter $blurred-animation-duration;
+}
+
+.blurred {
+  @extend %blurred;
 }

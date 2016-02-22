@@ -14,7 +14,7 @@
 
 .carousel {
 
-  @extend .widget;
+  @extend %widget;
   display: flex;
   align-items: stretch;
   position: relative;

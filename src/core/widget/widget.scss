@@ -8,8 +8,12 @@
 
 /* WIDGET */
 
-.widget {
+%widget {
   @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
+}
+
+.widget {
+  @extend %widget;
 }

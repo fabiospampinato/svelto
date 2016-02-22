@@ -14,7 +14,7 @@
 
 .spinner-label {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $spinner-label-color );
   @include z-depth ( $spinner-label-z-depth );
   display: flex;

@@ -16,7 +16,7 @@
 
 .card {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $card-color );
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   &-footer {
 
     &:not(.multiple) {
-      @extend .container;
+      @extend %container;
       border-radius: 0;
     }
 

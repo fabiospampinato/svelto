@@ -15,7 +15,7 @@
 
 .embedded {
 
-  @extend .widget;
+  @extend %widget;
   display: block;
   height: 0;
   padding: 0;

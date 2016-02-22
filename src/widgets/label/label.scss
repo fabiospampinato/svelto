@@ -17,7 +17,7 @@
 /* DEFAULT */
 
 label {
-  @extend .widget;
+  @extend %widget;
   display: block;
 }
 
@@ -25,7 +25,7 @@ label {
 
 .label {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $label-color );
   font-weight: bold;
   display: inline-flex;

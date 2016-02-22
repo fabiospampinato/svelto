@@ -13,7 +13,7 @@
 
 .datepicker {
 
-  @extend .widget;
+  @extend %widget;
   border-radius: $container-border-radius;
 
   /* INPUT */

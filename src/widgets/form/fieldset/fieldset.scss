@@ -14,7 +14,7 @@
 /* FIELDSET */
 
 fieldset {
-  @extend .widget;
+  @extend %widget;
   background-color: $fieldset-bg-color;
   border-radius: $fieldset-border-radius;
   border-color: inherit;

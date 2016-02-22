@@ -16,7 +16,7 @@
 
 .checkbox {
 
-  @extend .widget;
+  @extend %widget;
   display: inline-flex;
 
   /* CHILDREN */
@@ -33,7 +33,7 @@
 
   input {
 
-    @extend .icons;
+    @extend %icons;
     min-height: 0;
     background-color: transparent;
 
@@ -42,9 +42,8 @@
     &:before,
     &:after {
       @extend %icon;
-      @include fill-absolute ();
+      @extend %icons-icon;
       transition: opacity $checkbox-icon-animation-duration;
-      margin-bottom: 0 !important;
     }
 
     /* BEFORE */

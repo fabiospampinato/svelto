@@ -15,7 +15,7 @@
 
 .statistic {
 
-  @extend .widget;
+  @extend %widget;
   text-align: center;
 
   /* VALUE */

@@ -15,7 +15,7 @@
 
 .progressbar {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $progressbar-color );
   display: flex;
   overflow: hidden;

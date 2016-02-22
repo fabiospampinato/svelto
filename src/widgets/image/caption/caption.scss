@@ -15,7 +15,7 @@
 
 .image-caption {
 
-  @extend .container;
+  @extend %container;
   @include color ( $image-caption-color );
   border-radius: 0;
   margin-bottom: 0;

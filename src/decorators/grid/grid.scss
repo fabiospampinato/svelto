@@ -27,14 +27,14 @@
         width: $percentage;
       }
 
-      %without-gutter {
+      %#{$alias}-#{$nr}-without-gutter {
         width: calc(#{$percentage} - #{$gutter});
       }
 
       .multiple > .#{$alias}-#{$nr} {
 
         &:not(.multiple) {
-          @extend %without-gutter;
+          @extend %#{$alias}-#{$nr}-without-gutter;
         }
 
         &.multiple {
@@ -42,7 +42,7 @@
           &.no-wrap,
           &.vertical,
           &.joined {
-            @extend %without-gutter;
+            @extend %#{$alias}-#{$nr}-without-gutter;
           }
 
         }

@@ -12,7 +12,7 @@
 
 .chat-msg {
 
-  @extend .widget;
+  @extend %widget;
   display: flex;
 
   /* IMAGE */

@@ -10,11 +10,15 @@
 
 /* HR */
 
-hr {
+%hr {
   z-index: $hr-z-index;
   height: $hr-height;
   margin-top: - $gutter-half !important;
   margin-bottom: $gutter-half !important;
   border: none;
   background-color: $hr-bg-color;
+}
+
+hr {
+  @extend %hr;
 }

@@ -12,7 +12,7 @@
 /* FOOTER */
 
 footer {
-  @extend .container;
+  @extend %container;
   border-radius: 0;
   background-color: $footer-bg-color;
 }

@@ -21,12 +21,12 @@
     }
 
     &#{$selector} {
-      @extend .#{$color};
+      @extend %#{$color};
     }
 
   } @else {
 
-    @extend .#{$color};
+    @extend %#{$color};
 
   }
 

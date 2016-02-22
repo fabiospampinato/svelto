@@ -14,7 +14,7 @@
 
 .tabs {
 
-  @extend .widget;
+  @extend %widget;
   display: flex;
 
   /* TRIGGERS */

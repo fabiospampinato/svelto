@@ -23,12 +23,12 @@
     }
 
     &#{$selector} {
-      @extend .#{$alias};
+      @extend %#{$alias};
     }
 
   } @else {
 
-    @extend .#{$alias};
+    @extend %#{$alias};
 
   }
 

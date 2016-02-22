@@ -14,8 +14,12 @@
 
   $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
-  .#{$alias} {
+  %#{$size} {
     font-size: $font-size;
+  }
+
+  .#{$alias} {
+    @extend %#{$size};
   }
 
 }

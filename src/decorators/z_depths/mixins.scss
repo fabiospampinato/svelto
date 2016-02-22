@@ -13,12 +13,12 @@
   @if not $force {
 
     &:not([class*='z-depth-']) {
-      @extend .z-depth-#{$depth};
+      @extend %z-depth-#{$depth};
     }
 
   } @else {
 
-    @extend .z-depth-#{$depth};
+    @extend %z-depth-#{$depth};
 
   }
 

@@ -12,7 +12,7 @@
 
 .toolbar {
 
-  @extend .widget;
+  @extend %widget;
   padding: $toolbar-padding-y $toolbar-padding-x;
 
   /* MULTIPLE */

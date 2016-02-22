@@ -16,7 +16,7 @@
 /* DEFAULT */
 
 img {
-  @extend .widget;
+  @extend %widget;
   $colors: map-get($colors, $image-color);
   $border: nth($colors, 4);
   display: flex;
@@ -39,7 +39,7 @@ span > img {
 
 .image-wrp {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $image-color );
   display: flex;
   flex-direction: column;

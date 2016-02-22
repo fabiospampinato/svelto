@@ -11,6 +11,6 @@
 /* SHAPE */
 
 %shape {
-  @extend .widget;
+  @extend %widget;
   flex: 0 1 !important; // IE-10-11 sets flex-shrink to 0
 }

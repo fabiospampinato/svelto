@@ -11,12 +11,14 @@
  * ========================================================================= */
 
 //TODO: Modularize it
+//TODO: The placeholder is ugly
 
 /* INPUT */
 
+%input,
 input {
 
-  @extend .widget;
+  @extend %widget;
   @include color ( $input-color );
   display: flex;
   flex-shrink: 1;
@@ -27,7 +29,7 @@ input {
   /* PLACEHOLDER */
 
   &::placeholder {
-    color: nth(map-get($colors, $input-color), 6);
+    color: nth( map-get( $colors, $input-color ), 6 );
     opacity: $input-placeholder-opacity;
   }
 

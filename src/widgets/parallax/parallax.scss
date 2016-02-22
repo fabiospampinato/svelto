@@ -15,7 +15,7 @@
 
 .parallax {
 
-  @extend .widget;
+  @extend %widget;
   height: $parallax-height;
   overflow-x: hidden;
   overflow-y: auto;

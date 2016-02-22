@@ -12,7 +12,7 @@
 
 blockquote {
 
-  @extend .widget;
+  @extend %widget;
   @include last-child-no-gutter ();
   padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
   border-radius: $blockquote-line-width;
@@ -35,7 +35,7 @@ blockquote {
 
   > footer {
 
-    @extend .widget;
+    @extend %widget;
     @include last-child-no-gutter ();
     background-color: $blockquote-footer-bg-color;
     padding: $blockquote-footer-padding-y $blockquote-footer-padding-x;

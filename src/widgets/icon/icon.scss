@@ -17,7 +17,7 @@
     $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
     &.#{$alias} {
-      font-size: ( $font-size * $icon-scale-amount ) !important;
+      font-size: ( $font-size * $icon-scale-amount );
     }
 
   }
@@ -45,7 +45,6 @@
 /* ICON */
 
 %icon {
-  @extend %scaled-icon-sizes;
   position: relative;
   margin: 0 0 $gutter;
   display: inline-block;
@@ -67,6 +66,11 @@
   font-feature-settings: 'liga';
 }
 
-i.icon {
+%icon-scalable {
   @extend %icon;
+  @extend %scaled-icon-sizes;
+}
+
+i.icon {
+  @extend %icon-scalable;
 }

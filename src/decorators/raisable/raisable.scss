@@ -13,14 +13,14 @@
 
 /* RAISABLE */
 
-.raisable:not(.disabled) {
+%raisable:not(.disabled) {
 
   transition: box-shadow $raisable-animation-duration;
 
   /* BASE */
 
   &:hover {
-    @include z-depth ( raisable-next( 0 ) );
+    @include z-depth ( raisable-next( 0 ), true );
   }
 
   /* STEPS */
@@ -28,9 +28,13 @@
   @each $depth, $shadow in $z-depths {
 
     &.z-depth-#{$depth}:hover {
-      @include z-depth ( raisable-next( $depth ) );
+      @include z-depth ( raisable-next( $depth ), true );
     }
 
   }
 
+}
+
+.raisable {
+  @extend %raisable;
 }

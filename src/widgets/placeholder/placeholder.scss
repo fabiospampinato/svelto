@@ -12,7 +12,7 @@
 /* PLACEHOLDER */
 
 .placeholder {
-  @extend .widget;
+  @extend %widget;
   @include color ( $placeholder-color );
   display: flex;
   align-items: center;

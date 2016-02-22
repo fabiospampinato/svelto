@@ -12,8 +12,12 @@
 
   $z-depth: map-get( $z-depths, $depth );
 
-  .z-depth-#{$depth} {
+  %z-depth-#{$depth} {
     box-shadow: $z-depth;
+  }
+
+  .z-depth-#{$depth} {
+    @extend %z-depth-#{$depth};
   }
 
 }

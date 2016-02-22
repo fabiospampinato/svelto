@@ -13,20 +13,28 @@
 
 /* ICONS */
 
-.icons {
-
-  @extend .widget;
+%icons {
+  @extend %widget;
   @extend %scaled-icon-sizes;
   display: inline-block;
   width: $icon-scale-amount * 1em;
   height: $icon-scale-amount * 1em;
   position: relative;
+}
+
+%icons-icon {
+  @include fill-absolute ();
+  margin-bottom: 0;
+}
+
+.icons {
+
+  @extend %icons;
 
   /* ICON */
 
   > .icon {
-    @include fill-absolute ();
-    margin-bottom: 0;
+    @extend %icons-icon;
   }
 
 }

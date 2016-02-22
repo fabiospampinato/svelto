@@ -9,13 +9,17 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-/* CONTAINER */
-
 //FIXME: It's expanding over the visible viewport on Dolphin Browser
 
-.container {
-  @extend .widget;
+/* CONTAINER */
+
+%container {
+  @extend %widget;
   @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-y $container-padding-x;
+}
+
+.container {
+  @extend %container;
 }
