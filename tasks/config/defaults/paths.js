@@ -27,7 +27,7 @@ var paths = {
       functions: '<root>/**/functions.scss',
       mixins: '<root>/**/mixins.scss',
       keyframes: '<root>/**/keyframes.scss',
-      style: '<root>/**/!(variables.scss|functions.scss|mixins.scss|keyframes.scss)*.scss',
+      style: ['<root>/**/*.scss', '!<root>/**/variables.scss', '!<root>/**/functions.scss', '!<root>/**/mixins.scss', '!<root>/**/keyframes.scss'],
       temp: '.temp/scss/**/*.scss'
     }
   },

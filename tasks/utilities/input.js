@@ -18,11 +18,22 @@ var input = {
   getPath: function ( key ) {
 
     var roots = project.paths.input.roots,
-        partial = _.get ( project.paths.input, key );
+        partials = _.get ( project.paths.input, key );
 
     roots = _.isString ( roots ) ? [roots] : roots;
+    partials = _.isString ( partials ) ? [partials] : partials;
 
-    return _.unique ( roots.map ( function ( root ) { return partial.replace ( /<root>/g, root ); } ) );
+    var globs = roots.map ( function ( root ) {
+
+      return partials.map ( function ( partial ) {
+
+        return partial.replace ( /<root>/g, root );
+
+      });
+
+    });
+
+    return _.unique ( _.flatten ( globs ) );
 
   }
 
