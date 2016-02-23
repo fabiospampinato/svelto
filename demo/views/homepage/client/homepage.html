@@ -3,129 +3,272 @@
 
 <template name="homepage">
 
-  <div class="divider block">
-    <div class="divider-content">Base</div>
-  </div>
+  {{{sw.divider "_"}}}
 
   <div class="multiple">
-    <a href="/grid" class="button outlined green">Grid</a>
-    <a href="/layout" class="button outlined orange">Layout</a>
-    <a href="/multiple" class="button outlined olive">Multiple</a>
-    <a href="/sections" class="button outlined green">Sections</a>
-    <a href="/typography" class="button outlined green">Typography</a>
+    <a href="/_/border" class="button outlined">Border</a>
+    <a href="/_/clearfix" class="button outlined">Clearfix</a>
+    <a href="/_/display" class="button outlined">Display</a>
+    <a href="/_/flexbox" class="button outlined">Flexbox</a>
+    <a href="/_/flip" class="button outlined">Flip</a>
+    <a href="/_/float" class="button outlined">Float</a>
+    <a href="/_/margin" class="button outlined">Margin</a>
+    <a href="/_/overflow" class="button outlined">Overflow</a>
+    <a href="/_/padding" class="button outlined">Padding</a>
+    <a href="/_/rotation" class="button outlined">Rotation</a>
+    <a href="/_/screen_reader" class="button outlined">Screen Reader</a>
+    <a href="/_/text" class="button outlined">Text</a>
+    <a href="/_/visibility" class="button outlined">Visibility</a>
   </div>
 
-  <div class="divider block">
-    <div class="divider-content">Decorators</div>
-  </div>
-
-  <div class="multiple">
-    <a href="/colors" class="button outlined green">Colors</a>
-    <a href="/helpers" class="button outlined orange">Helpers</a>
-    <a href="/helpers-responsive" class="button outlined green">Helpers Responsive</a>
-    <a href="/highlight" class="button outlined green">Highlight</a>
-    <a href="/outline" class="button outlined green">Outline</a>
-    <a href="/raisable" class="button outlined green">Raisable</a>
-    <a href="/ripple" class="button outlined green">Ripple</a>
-    <a href="/sizes" class="button outlined green">Sizes</a>
-    <a href="/z-depths" class="button outlined green">Z-Depths</a>
-  </div>
-
-  <div class="divider block">
-    <div class="divider-content">Components</div>
-  </div>
+  {{{sw.divider "Core"}}}
 
   <div class="multiple">
-    <a href="/breadcrumb" class="button outlined green">Breadcrumb</a>
-    <a href="/button" class="button outlined green">Button</a>
-    <a href="/card" class="button outlined olive">Card</a>
-    <a href="/chat" class="button outlined green">Chat</a>
-    <a href="/container" class="button outlined green">Container</a>
-    <a href="/divider" class="button outlined olive">Divider</a>
-    <a href="/embedded" class="button outlined green">Embedded</a>
-    <a href="/flags" class="button outlined green">Flags</a>
-    <a href="/footer" class="button outlined olive">Footer</a>
-    <a href="/form" class="button outlined green">Form</a>
-    <a href="/header" class="button outlined red">Header</a>
-    <a href="/icons" class="button outlined green">Icons</a>
-    <a href="/image" class="button outlined green">Image</a>
-    <a href="/input" class="button outlined green">Input</a>
-    <a href="/label" class="button outlined green">Label</a>
-    <a href="/pager" class="button outlined green">Pager</a>
-    <a href="/pagination" class="button outlined green">Pagination</a>
-    <a href="/parallax" class="button outlined red">Parallax</a>
-    <a href="/placeholder" class="button outlined green">Placeholder</a>
-    <a href="/shapes" class="button outlined green">Shapes</a>
-    <a href="/spinner" class="button outlined green">Spinner</a>
-    <a href="/statistic" class="button outlined green">Statistic</a>
-    <a href="/table" class="button outlined green">Table</a>
-    <a href="/textarea" class="button outlined green">Textarea</a>
-    <a href="/toolbar" class="button outlined green">Toolbar</a>
+    <a href="/core/browser" class="button outlined">Browser</a>
+    <a href="/core/cookie" class="button outlined">Cookie</a>
+    <a href="/core/grid" class="button outlined">Grid</a>
+    <a href="/core/gutter" class="button outlined">Gutter</a>
+    <a href="/core/layout" class="button outlined">Layout</a>
+    <a href="/core/multiple" class="button outlined">Multiple</a>
   </div>
 
-  <div class="divider block">
-    <div class="divider-content">Widgets</div>
-  </div>
+  {{{sw.divider "Decorators"}}}
 
   <div class="multiple">
-    <a href="/accordion" class="button outlined green">Accordion</a>
-    <a href="/carousel" class="button outlined orange">Carousel</a>
-    <a href="/checkbox" class="button outlined green">Checkbox</a>
-    <a href="/colorpicker" class="button outlined green">Colorpicker</a>
-    <a href="/datepicker" class="button outlined green">Datepicker</a>
-    <a href="/dropdown" class="button outlined green">Dropdown</a>
-    <a href="/expander" class="button outlined green">Expander</a>
-    <a href="/flippable" class="button outlined green">Flippable</a>
-    <a href="/infobar" class="button outlined green">Infobar</a>
-    <a href="/modal" class="button outlined green">Modal</a>
-    <a href="/noty" class="button outlined green">Noty</a>
-    <a href="/overlay" class="button outlined green">Overlay</a>
-    <a href="/panel" class="button outlined green">Panel</a>
-    <a href="/progressbar" class="button outlined green">Progressbar</a>
-    <a href="/radio" class="button outlined green">Radio</a>
-    <a href="/rater" class="button outlined red">Rater</a>
-    <a href="/select" class="button outlined olive">Select</a>
-    <a href="/slider" class="button outlined green">Slider</a>
-    <a href="/spinner-overlay" class="button outlined green">spinnerOverlay</a>
-    <a href="/stepper" class="button outlined green">Stepper</a>
-    <a href="/switch" class="button outlined green">Switch</a>
-    <a href="/syntax" class="button outlined red">Syntax</a>
-    <a href="/tabs" class="button outlined olive">Tabs</a>
-    <a href="/tagbox" class="button outlined green">Tagbox</a>
-    <a href="/tooltip" class="button outlined green">Tooltip</a>
+    <a href="/decorators/actionable" class="button outlined">Actionable</a>
+    <a href="/decorators/attached" class="button outlined">Attached</a>
+    <a href="/decorators/blurred" class="button outlined">Blurred</a>
+    <a href="/decorators/border_radius" class="button outlined">Border Radius</a>
+    <a href="/decorators/centered" class="button outlined">Centered</a>
+    <a href="/decorators/colors" class="button outlined">Colors</a>
+    <a href="/decorators/disabled" class="button outlined">Disabled</a>
+    <a href="/decorators/grid" class="button outlined">Grid</a>
+    <a href="/decorators/hidden" class="button outlined">Hidden</a>
+    <a href="/decorators/highlighted" class="button outlined">Highlighted</a>
+    <a href="/decorators/limited" class="button outlined">Limited</a>
+    <a href="/decorators/order" class="button outlined">Order</a>
+    <a href="/decorators/outlined" class="button outlined">Outlined</a>
+    <a href="/decorators/raisable" class="button outlined">Raisable</a>
+    <a href="/decorators/sizes" class="button outlined">Sizes</a>
+    <a href="/decorators/z_depths" class="button outlined">Z Depths</a>
   </div>
 
-  <div class="divider block">
-    <div class="divider-content">Tools</div>
-  </div>
+  {{{sw.divider "Lib"}}}
 
   <div class="multiple">
-    <a href="/autogrow" class="button outlined green">Autogrow</a>
-    <a href="/blurred" class="button outlined green">Blurred</a>
-    <a href="/browser" class="button outlined green">Browser</a>
-    <a href="/bteach" class="button outlined green">btEach</a>
-    <a href="/color" class="button outlined green">Color</a>
-    <a href="/cookie" class="button outlined green">Cookie</a>
-    <a href="/draggable" class="button outlined green">Draggable</a>
-    <a href="/droppable" class="button outlined green">Droppable</a>
-    <a href="/flickable" class="button outlined green">Flickable</a>
-    <a href="/form-ajax" class="button outlined green">formAjax</a>
-    <a href="/form-sync" class="button outlined green">formSync</a>
-    <a href="/form-validate" class="button outlined green">formValidate</a>
-    <a href="/notification" class="button outlined green">Notification</a>
-    <a href="/n-times-action" class="button outlined green">nTimesAction</a>
-    <a href="/one-time-action" class="button outlined green">oneTimeAction</a>
-    <a href="/pointer" class="button outlined green">Pointer</a>
-    <a href="/positionate" class="button outlined green">Positionate</a>
-    <a href="/remote-action" class="button outlined green">remoteAction</a>
-    <a href="/remote-modal" class="button outlined green">remoteModal</a>
-    <a href="/selectable" class="button outlined green">Selectable</a>
-    <a href="/sortable" class="button outlined olive">Sortable</a>
-    <a href="/table-helper" class="button outlined green">tableHelper</a>
-    <a href="/time-ago" class="button outlined green">timeAgo</a>
-    <a href="/timer" class="button outlined green">Timer</a>
-    <a href="/touching" class="button outlined green">Touching</a>
+    <a href="/lib/bteach" class="button outlined">BT Each</a>
+    <a href="/lib/color" class="button outlined">Color</a>
+    <a href="/lib/fuzzy" class="button outlined">Fuzzy</a>
+    <a href="/lib/n_times_action" class="button outlined">N Times Action</a>
+    <a href="/lib/notification" class="button outlined">Notification</a>
+    <a href="/lib/one_time_action" class="button outlined">One Time Action</a>
+    <a href="/lib/positionate" class="button outlined">Positionate</a>
+    <a href="/lib/regexes" class="button outlined">Regexes</a>
+    <a href="/lib/timer" class="button outlined">Timer</a>
+    <a href="/lib/touching" class="button outlined">Touching</a>
+    <a href="/lib/transform" class="button outlined">Transform</a>
+    <a href="/lib/validator" class="button outlined">Validator</a>
   </div>
+
+  {{{sw.divider "Widgets"}}}
+
+  <div class="multiple">
+    <a href="/widgets/accordion" class="button outlined">Accordion</a>
+    <a href="/widgets/breadcrumb" class="button outlined">Breadcrumb</a>
+    <a href="/widgets/button" class="button outlined">Button</a>
+    <a href="/widgets/card" class="button outlined">Card</a>
+    <a href="/widgets/carousel" class="button outlined">Carousel</a>
+    <a href="/widgets/centerer" class="button outlined">Centerer</a>
+    <a href="/widgets/chat" class="button outlined">Chat</a>
+    <a href="/widgets/checkbox" class="button outlined">Checkbox</a>
+    <a href="/widgets/colorpicker" class="button outlined">Colorpicker</a>
+    <a href="/widgets/container" class="button outlined">Container</a>
+    <a href="/widgets/datepicker" class="button outlined">Datepicker</a>
+    <a href="/widgets/divider" class="button outlined">Divider</a>
+    <a href="/widgets/draggable" class="button outlined">Draggable</a>
+    <a href="/widgets/dropdown" class="button outlined">Dropdown</a>
+    <a href="/widgets/droppable" class="button outlined">Droppable</a>
+    <a href="/widgets/embedded" class="button outlined">Embedded</a>
+    <a href="/widgets/expander" class="button outlined">Expander</a>
+    <a href="/widgets/flag" class="button outlined">Flag</a>
+    <a href="/widgets/flickable" class="button outlined">Flickable</a>
+    <a href="/widgets/flippable" class="button outlined">Flippable</a>
+    <a href="/widgets/footer" class="button outlined">Footer</a>
+    <a href="/widgets/form" class="button outlined">Form</a>
+    <a href="/widgets/fullscreen" class="button outlined">Fullscreen</a>
+    <a href="/widgets/header" class="button outlined">Header</a>
+    <a href="/widgets/icon" class="button outlined">Icon</a>
+    <a href="/widgets/icons" class="button outlined">Icons</a>
+    <a href="/widgets/image" class="button outlined">Image</a>
+    <a href="/widgets/infobar" class="button outlined">Infobar</a>
+    <a href="/widgets/input" class="button outlined">Input</a>
+    <a href="/widgets/label" class="button outlined">Label</a>
+    <a href="/widgets/modal" class="button outlined">Modal</a>
+    <a href="/widgets/noty" class="button outlined">Noty</a>
+    <a href="/widgets/overlay" class="button outlined">Overlay</a>
+    <a href="/widgets/pager" class="button outlined">Pager</a>
+    <a href="/widgets/pagination" class="button outlined">Pagination</a>
+    <a href="/widgets/panel" class="button outlined">Panel</a>
+    <a href="/widgets/parallax" class="button outlined">Parallax</a>
+    <a href="/widgets/placeholder" class="button outlined">Placeholder</a>
+    <a href="/widgets/prism" class="button outlined">Prism</a>
+    <a href="/widgets/progressbar" class="button outlined">Progressbar</a>
+    <a href="/widgets/radio" class="button outlined">Radio</a>
+    <a href="/widgets/rater" class="button outlined">Rater</a>
+    <a href="/widgets/remote_action" class="button outlined">Remote Action</a>
+    <a href="/widgets/remote_modal" class="button outlined">Remote Modal</a>
+    <a href="/widgets/ripple" class="button outlined">Ripple</a>
+    <a href="/widgets/scroll" class="button outlined">Scroll</a>
+    <a href="/widgets/sections" class="button outlined">Sections</a>
+    <a href="/widgets/select" class="button outlined">Select</a>
+    <a href="/widgets/selectable" class="button outlined">Selectable</a>
+    <a href="/widgets/shape" class="button outlined">Shape</a>
+    <a href="/widgets/slider" class="button outlined">Slider</a>
+    <a href="/widgets/sortable" class="button outlined">Sortable</a>
+    <a href="/widgets/spacer" class="button outlined">Spacer</a>
+    <a href="/widgets/spinner" class="button outlined">Spinner</a>
+    <a href="/widgets/statistic" class="button outlined">Statistic</a>
+    <a href="/widgets/stepper" class="button outlined">Stepper</a>
+    <a href="/widgets/switch" class="button outlined">Switch</a>
+    <a href="/widgets/table" class="button outlined">Table</a>
+    <a href="/widgets/tabs" class="button outlined">Tabs</a>
+    <a href="/widgets/tagbox" class="button outlined">Tagbox</a>
+    <a href="/widgets/targeter" class="button outlined">Targeter</a>
+    <a href="/widgets/textarea" class="button outlined">Textarea</a>
+    <a href="/widgets/timeago" class="button outlined">Timeago</a>
+    <a href="/widgets/toolbar" class="button outlined">Toolbar</a>
+    <a href="/widgets/tooltip" class="button outlined">Tooltip</a>
+    <a href="/widgets/typography" class="button outlined">Typography</a>
+  </div>
+
+
+
+
+
+  <div class="card expander">
+    <div class="card-header expander-toggler button secondary">PREVIOUS</div>
+    <div class="card block expander content">
+
+      {{{sw.divider "Base"}}}
+
+      <div class="multiple">
+        <a href="/grid" class="button outlined green">Grid</a>
+        <a href="/layout" class="button outlined orange">Layout</a>
+        <a href="/multiple" class="button outlined olive">Multiple</a>
+        <a href="/sections" class="button outlined green">Sections</a>
+        <a href="/typography" class="button outlined green">Typography</a>
+      </div>
+
+      {{{sw.divider "Decorators"}}}
+
+      <div class="multiple">
+        <a href="/colors" class="button outlined green">Colors</a>
+        <a href="/helpers" class="button outlined orange">Helpers</a>
+        <a href="/helpers-responsive" class="button outlined green">Helpers Responsive</a>
+        <a href="/highlight" class="button outlined green">Highlight</a>
+        <a href="/outline" class="button outlined green">Outline</a>
+        <a href="/raisable" class="button outlined green">Raisable</a>
+        <a href="/ripple" class="button outlined green">Ripple</a>
+        <a href="/sizes" class="button outlined green">Sizes</a>
+        <a href="/z-depths" class="button outlined green">Z-Depths</a>
+      </div>
+
+      {{{sw.divider "Components"}}}
+
+      <div class="multiple">
+        <a href="/breadcrumb" class="button outlined green">Breadcrumb</a>
+        <a href="/button" class="button outlined green">Button</a>
+        <a href="/card" class="button outlined olive">Card</a>
+        <a href="/chat" class="button outlined green">Chat</a>
+        <a href="/container" class="button outlined green">Container</a>
+        <a href="/divider" class="button outlined olive">Divider</a>
+        <a href="/embedded" class="button outlined green">Embedded</a>
+        <a href="/flags" class="button outlined green">Flags</a>
+        <a href="/footer" class="button outlined olive">Footer</a>
+        <a href="/form" class="button outlined green">Form</a>
+        <a href="/header" class="button outlined red">Header</a>
+        <a href="/icons" class="button outlined green">Icons</a>
+        <a href="/image" class="button outlined green">Image</a>
+        <a href="/input" class="button outlined green">Input</a>
+        <a href="/label" class="button outlined green">Label</a>
+        <a href="/pager" class="button outlined green">Pager</a>
+        <a href="/pagination" class="button outlined green">Pagination</a>
+        <a href="/parallax" class="button outlined red">Parallax</a>
+        <a href="/placeholder" class="button outlined green">Placeholder</a>
+        <a href="/shapes" class="button outlined green">Shapes</a>
+        <a href="/spinner" class="button outlined green">Spinner</a>
+        <a href="/statistic" class="button outlined green">Statistic</a>
+        <a href="/table" class="button outlined green">Table</a>
+        <a href="/textarea" class="button outlined green">Textarea</a>
+        <a href="/toolbar" class="button outlined green">Toolbar</a>
+      </div>
+
+      {{{sw.divider "Widgets"}}}
+
+      <div class="multiple">
+        <a href="/accordion" class="button outlined green">Accordion</a>
+        <a href="/carousel" class="button outlined orange">Carousel</a>
+        <a href="/checkbox" class="button outlined green">Checkbox</a>
+        <a href="/colorpicker" class="button outlined green">Colorpicker</a>
+        <a href="/datepicker" class="button outlined green">Datepicker</a>
+        <a href="/dropdown" class="button outlined green">Dropdown</a>
+        <a href="/expander" class="button outlined green">Expander</a>
+        <a href="/flippable" class="button outlined green">Flippable</a>
+        <a href="/infobar" class="button outlined green">Infobar</a>
+        <a href="/modal" class="button outlined green">Modal</a>
+        <a href="/noty" class="button outlined green">Noty</a>
+        <a href="/overlay" class="button outlined green">Overlay</a>
+        <a href="/panel" class="button outlined green">Panel</a>
+        <a href="/progressbar" class="button outlined green">Progressbar</a>
+        <a href="/radio" class="button outlined green">Radio</a>
+        <a href="/rater" class="button outlined red">Rater</a>
+        <a href="/select" class="button outlined olive">Select</a>
+        <a href="/slider" class="button outlined green">Slider</a>
+        <a href="/spinner-overlay" class="button outlined green">spinnerOverlay</a>
+        <a href="/stepper" class="button outlined green">Stepper</a>
+        <a href="/switch" class="button outlined green">Switch</a>
+        <a href="/syntax" class="button outlined red">Syntax</a>
+        <a href="/tabs" class="button outlined olive">Tabs</a>
+        <a href="/tagbox" class="button outlined green">Tagbox</a>
+        <a href="/tooltip" class="button outlined green">Tooltip</a>
+      </div>
+
+      {{{sw.divider "Tools"}}}
+
+      <div class="multiple">
+        <a href="/autogrow" class="button outlined green">Autogrow</a>
+        <a href="/blurred" class="button outlined green">Blurred</a>
+        <a href="/browser" class="button outlined green">Browser</a>
+        <a href="/bteach" class="button outlined green">btEach</a>
+        <a href="/color" class="button outlined green">Color</a>
+        <a href="/cookie" class="button outlined green">Cookie</a>
+        <a href="/draggable" class="button outlined green">Draggable</a>
+        <a href="/droppable" class="button outlined green">Droppable</a>
+        <a href="/flickable" class="button outlined green">Flickable</a>
+        <a href="/form-ajax" class="button outlined green">formAjax</a>
+        <a href="/form-sync" class="button outlined green">formSync</a>
+        <a href="/form-validate" class="button outlined green">formValidate</a>
+        <a href="/notification" class="button outlined green">Notification</a>
+        <a href="/n-times-action" class="button outlined green">nTimesAction</a>
+        <a href="/one-time-action" class="button outlined green">oneTimeAction</a>
+        <a href="/pointer" class="button outlined green">Pointer</a>
+        <a href="/positionate" class="button outlined green">Positionate</a>
+        <a href="/remote-action" class="button outlined green">remoteAction</a>
+        <a href="/remote-modal" class="button outlined green">remoteModal</a>
+        <a href="/selectable" class="button outlined green">Selectable</a>
+        <a href="/sortable" class="button outlined olive">Sortable</a>
+        <a href="/table-helper" class="button outlined green">tableHelper</a>
+        <a href="/time-ago" class="button outlined green">timeAgo</a>
+        <a href="/timer" class="button outlined green">Timer</a>
+        <a href="/touching" class="button outlined green">Touching</a>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
 
   <script>
     $(function() {

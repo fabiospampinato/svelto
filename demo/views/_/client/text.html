@@ -1,0 +1,36 @@
+
+<!-- TEXT -->
+
+<template name="text">
+
+  {{{sw.divider "Alignment"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-left"}}}
+      {{{sample.square "text-center"}}}
+      {{{sample.square "text-right"}}}
+      {{{sample.square "text-justify"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Transformation"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-lowercase"}}}
+      {{{sample.square "text-uppercase"}}}
+      {{{sample.square "text-capitalize"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "Others"}}}
+
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.square "text-nowrap"}}}
+      <p class="truncate">{{sample.text}}</p>
+    </div>
+  </div>
+
+</template>
