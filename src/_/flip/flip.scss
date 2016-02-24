@@ -8,12 +8,14 @@
 
 /* FLIP */
 
-.flip-x,
-.flip {
+.flip-x {
   transform: rotateY(180deg) !important;
 }
 
-.flip-y,
-.flip {
+.flip-y {
   transform: rotateX(180deg) !important;
+}
+
+.flip {
+  transform: rotate(180deg) !important;
 }
