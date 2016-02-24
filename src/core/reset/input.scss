@@ -14,20 +14,26 @@ input {
 
 /* NUMBER */
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+/* UPLOAD */
+
+[type="file"]::-webkit-file-upload-button {
+  display: none;
 }
 
 /* INVALID */
 
-input:-moz-ui-invalid {
+:-moz-ui-invalid {
   box-shadow: none;
 }
 
 /* CLEAR ICON */
 
-input::-ms-clear {
+:-ms-clear {
   display: none;
 }
 
