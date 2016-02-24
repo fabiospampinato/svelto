@@ -6,8 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
+ * @require widgets/container/variables.scss
  * ========================================================================= */
 
 /* FOOTER */
 
 $footer-bg-color: darken( $color-base, 10 ) !default;
+
+$footer-padding-x: $container-padding-x !default;
+$footer-padding-y: $container-padding-y !default;
