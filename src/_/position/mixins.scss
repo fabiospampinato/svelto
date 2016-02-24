@@ -24,7 +24,7 @@
     position: $position;
   }
 
-  $nr: lenth( $coordinates );
+  $nr: length( $coordinates );
 
   @if $nr == 1 {
 
@@ -38,7 +38,7 @@
   } @else if $nr == 2 {
 
     $value-y: first( $coordinates );
-    $value-x: last ( $coordinates );
+    $value-x: last( $coordinates );
 
     @include _position-set-coordinate( top, $value-y );
     @include _position-set-coordinate( right, $value-x );
