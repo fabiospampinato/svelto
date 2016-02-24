@@ -33,3 +33,11 @@
   }
 
 }
+
+@mixin size-inline ( $size ) {
+
+  $font-size: map-get( $sizes, $size );
+
+  font-size: $font-size;
+
+}

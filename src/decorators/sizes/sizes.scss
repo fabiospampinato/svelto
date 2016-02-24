@@ -15,7 +15,7 @@
   $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
   %#{$size} {
-    font-size: $font-size;
+    @include size-inline ( $size );
   }
 
   .#{$alias} {

@@ -10,10 +10,8 @@
 
 @each $depth, $shadow in $z-depths {
 
-  $z-depth: map-get( $z-depths, $depth );
-
   %z-depth-#{$depth} {
-    box-shadow: $z-depth;
+    @include z-depth-inline ( $depth );
   }
 
   .z-depth-#{$depth} {

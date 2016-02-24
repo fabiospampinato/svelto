@@ -23,3 +23,11 @@
   }
 
 }
+
+@mixin z-depth-inline ( $depth ) {
+
+  $z-depth: map-get( $z-depths, $depth );
+
+  box-shadow: $z-depth;
+
+}
