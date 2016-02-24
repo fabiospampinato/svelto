@@ -6,12 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require widgets/header/header.scss
  * ========================================================================= */
 
 /* FOOTER */
 
 footer {
-  background-color: $footer-bg-color;
-  border-radius: 0;
-  padding: $container-padding-y $container-padding-x;
+  @extend header;
 }

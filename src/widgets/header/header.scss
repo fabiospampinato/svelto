@@ -13,4 +13,6 @@
 
 header {
   @extend %widget;
+  background-color: $header-bg-color;
+  padding: $header-padding-y $header-padding-x;
 }

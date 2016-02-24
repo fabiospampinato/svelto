@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Footer (Variables)
+ * Svelto - Widgets - Header (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,9 +9,9 @@
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
-/* FOOTER */
+/* HEADER */
 
-$footer-bg-color: darken( $color-base, 10 ) !default;
+$header-bg-color: darken( $color-base, 10 ) !default;
 
-$footer-padding-x: $container-padding-x !default;
-$footer-padding-y: $container-padding-y !default;
+$header-padding-x: $container-padding-x !default;
+$header-padding-y: $container-padding-y !default;
