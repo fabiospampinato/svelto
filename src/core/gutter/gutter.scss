@@ -10,11 +10,8 @@
 
 script:last-child {
 
+  @include text-hide (); // This fixes a bug in iOS Safari where some space will be counted even while using `font-size: 0`
   display: block;
-  font-size: 0;
-  height: 0;
-  visibility: hidden;
-  pointer-events: none;
   margin-top: - $gutter;
 
   :last-child > & {
