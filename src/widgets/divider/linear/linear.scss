@@ -37,7 +37,7 @@
       @extend %hr;
       content: '';
       margin: 0;
-      flex: 1 1 0%; // IE-10-11 sets flex-shrink to 0 // IE-10-11 misinterpreter a unitless 0 flex-basis
+      flex: 1 1 0%; // IE-10/11 sets flex-shrink to 0 // IE-10/11 misinterpreter a unitless 0 flex-basis
       min-width: $gutter;
     }
 
@@ -63,7 +63,7 @@
       height: auto;
       width: $hr-height;
       align-self: stretch;
-      flex: 0 1; // IE-10-11 sets flex-shrink to 0
+      flex: 0 1; // IE-10/11 sets flex-shrink to 0
       margin: 0 $gutter-half $gutter !important;
     }
 
@@ -72,7 +72,7 @@
     &:not(:empty) {
 
       flex-direction: column;
-      flex: 0 1 !important; // IE-10-11 sets flex-shrink to 0
+      flex: 0 1 !important; // IE-10/11 sets flex-shrink to 0
       align-self: stretch;
       // justify-content: center;
       margin: 0 $gutter-half $gutter;
@@ -84,7 +84,7 @@
         width: $hr-height;
         min-height: $gutter;
         flex-grow: 1;
-        flex-shrink: 1; // IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10/11 default it to 0 instead
       }
 
       &:before {

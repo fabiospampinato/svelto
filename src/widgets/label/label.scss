@@ -46,7 +46,7 @@ label {
 
   > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
     flex-grow: 1;
-    flex-shrink: 1; // IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10/11 default it to 0 instead
   }
 
   /* OUTLINED */

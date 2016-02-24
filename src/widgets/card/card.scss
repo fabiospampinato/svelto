@@ -63,7 +63,7 @@
 
   &-block {
     flex-grow: 1; // Takes the remaining space, if any
-    flex-shrink: 1; // IE-10-11 default it to 0 instead
+    flex-shrink: 1; // IE-10/11 default it to 0 instead
     overflow: auto;
   }
 

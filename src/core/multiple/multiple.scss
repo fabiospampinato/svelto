@@ -93,7 +93,7 @@
 
       > input,
       > textarea { //FIXME: Why do we need customize the style for input/textarea ?
-        flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
+        flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
       }
 
     }
@@ -107,7 +107,7 @@
   /* EQUAL */
 
   &.equal > * {
-    flex-basis: 0%; // IE-10-11 misinterpreter a unitless 0 flex-basis
+    flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
   }
 
   /* JOINED */
@@ -218,7 +218,7 @@
 
       > * {
         flex-grow: 1;
-        flex-shrink: 1; // IE-10-11 default it to 0 instead
+        flex-shrink: 1; // IE-10/11 default it to 0 instead
       }
 
     }
