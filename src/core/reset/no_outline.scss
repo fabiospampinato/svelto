@@ -8,6 +8,6 @@
 
 /* NO OUTLINE ON FOCUS */
 
-*:focus {
-  outline: none !important;
+:focus {
+  outline: 0;
 }

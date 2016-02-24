@@ -6,10 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BORDER */
+/* BORDER / iOS SHADOW */
 
 input {
-  border: none;
+  border: 0;
+  appearance: none;
 }
 
 /* NUMBER */
@@ -35,10 +36,4 @@ input {
 
 :-ms-clear {
   display: none;
-}
-
-/* iOS SHADOW */
-
-input {
-  appearance: none;
 }
