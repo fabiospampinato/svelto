@@ -15,11 +15,11 @@
 
 %container {
   @extend %widget;
-  @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-y $container-padding-x;
 }
 
 .container {
   @extend %container;
+  @include color ( $container-color );
 }
