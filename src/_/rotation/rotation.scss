@@ -16,6 +16,8 @@
   transform: rotate(90deg) !important;
 }
 
+//TODO: Maybe rename it to `.rotate`?
+
 .rotating {
   animation: rotate $rotating-animation-duration linear infinite !important;
 }

@@ -15,7 +15,6 @@
 
 %icons {
   @extend %widget;
-  @extend %scaled-icon-sizes;
   display: inline-block;
   width: $icon-scale-amount * 1em;
   height: $icon-scale-amount * 1em;
@@ -30,6 +29,7 @@
 .icons {
 
   @extend %icons;
+  @extend %scaled-icon-sizes; //FIXME: Sure?
 
   /* ICON */
 

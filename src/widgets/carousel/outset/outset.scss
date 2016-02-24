@@ -16,9 +16,8 @@
 
   .carousel-previous,
   .carousel-next {
-    @include margin-x ( $gutter );
+    margin: 0 $gutter;
     align-self: center;
-    margin-bottom: 0;
   }
 
   /* PREVIOUS */
