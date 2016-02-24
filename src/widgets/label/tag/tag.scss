@@ -18,6 +18,7 @@
 
 .label-tag {
 
+  @include last-child-no-gutter ();
   margin-bottom: $gutter;
   z-index: 1;
 

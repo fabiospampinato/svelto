@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/multiple/multiple.scss
  * @require decorators/colors/colors.scss
  * @require widgets/container/container.scss
  * ========================================================================= */
@@ -14,11 +15,14 @@
 .tagbox {
 
   @extend %container;
+  @include color ( $tagbox-color );
 
   /* TAGS */
 
   &-tags {
 
+    @extend %multiple;
+    @include last-child-no-gutter ( 0, - $gutter );
     display: flex;
     flex-wrap: wrap;
     margin-left: - $gutter-half;

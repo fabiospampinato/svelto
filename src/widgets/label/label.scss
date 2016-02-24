@@ -76,7 +76,6 @@ label {
 
   > .sub {
 
-    @include last-child-no-gutter ();
     display: inline-flex;
     align-self: stretch;
     align-items: center;

@@ -12,6 +12,7 @@
 
 .layout {
 
+  @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
   display: flex;
@@ -23,7 +24,6 @@
   &-header,
   &-content,
   &-footer {
-    @include last-child-no-gutter ();
     margin-bottom: 0;
     border-radius: 0;
   }
@@ -72,7 +72,6 @@ body.layout {
 
   min-height: 100%;
   width: 100%;
-  margin-bottom: 0;
 
   // Sticky footer at bottom fix for IE10+
   // We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height

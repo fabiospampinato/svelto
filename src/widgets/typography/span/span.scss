@@ -11,6 +11,7 @@
 /* SPAN */
 
 span {
+  @include last-child-no-gutter ();
   margin-bottom: $gutter;
 }
 

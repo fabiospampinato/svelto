@@ -11,6 +11,7 @@
 /* TEXT */
 
 .divider.text {
+  @include last-child-no-gutter ();
   @include size ( $divider-text-size );
   font-weight: $divider-text-font-weight;
   margin: 0 $gutter-half $gutter-half;

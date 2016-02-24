@@ -12,6 +12,7 @@
 
 .sections {
 
+  @include last-child-no-gutter ();
   position: relative;
   display: flex;
   flex-wrap: nowrap;

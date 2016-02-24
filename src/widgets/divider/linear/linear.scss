@@ -55,6 +55,8 @@
 
   &.vertical {
 
+    @include last-child-no-gutter ();
+
     /* EMPTY */
 
     &:empty {

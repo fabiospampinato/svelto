@@ -6,28 +6,19 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* LAST CHILD NO GUTTER */
+/* SCRIPT */
 
-:last-child {
-  margin-bottom: 0;
-}
+script:last-child {
 
-.multiple,
-.pager,
-.tagbox-tags {
-
-  &:last-child {
-    margin-bottom: - $gutter;
-  }
-
-}
-
-script:last-child,
-style:last-child {
   display: block;
   font-size: 0;
   height: 0;
   visibility: hidden;
   pointer-events: none;
   margin-top: - $gutter;
+
+  :last-child > & {
+    margin-top: 0;
+  }
+
 }

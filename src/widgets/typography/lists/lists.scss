@@ -12,12 +12,9 @@
 
 ul,
 ol {
+  @include last-child-no-gutter ();
   margin: 0 0 $gutter;
   padding-left: $list-padding-left;
-}
-
-li {
-  @include last-child-no-gutter ();
 }
 
 ul.no-bullet {

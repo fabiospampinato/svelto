@@ -15,6 +15,7 @@
 /* LINK */
 
 a {
+  @include last-child-no-gutter ();
   position: relative;
   text-decoration: none;
   color: inherit;

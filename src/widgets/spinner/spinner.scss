@@ -20,6 +20,7 @@
 
 svg.spinner {
 
+  @include last-child-no-gutter ();
   display: block;
   width: $spinner-size;
   height: $spinner-size;

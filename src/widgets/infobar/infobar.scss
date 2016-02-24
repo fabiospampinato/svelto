@@ -17,6 +17,7 @@
 .infobar {
 
   @extend %container;
+  @include color ( $infobar-color );
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -24,7 +25,6 @@
   /* SECTIONS */
 
   > * {
-    @include last-child-no-gutter ();
     margin-bottom: 0 !important;
   }
 
@@ -69,7 +69,6 @@
 
   &-title,
   &-subtitle {
-    @include last-child-no-gutter ();
     display: flex;
     margin-bottom: 0 !important;
   }

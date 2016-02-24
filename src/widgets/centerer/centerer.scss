@@ -9,14 +9,9 @@
 /* CENTERER */
 
 .centerer {
-
+  @include last-child-no-gutter ();
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: $gutter;
-
-  > :last-child {
-    margin-bottom: 0 !important;
-  }
-
 }

@@ -73,4 +73,5 @@
 
 i.icon {
   @extend %icon-scalable;
+  @include last-child-no-gutter ();
 }

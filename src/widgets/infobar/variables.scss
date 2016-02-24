@@ -4,8 +4,12 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
  * ========================================================================= */
 
 /* TITLE */
+
+$infobar-color: $container-color !default;
 
 $infobar-title-size: 'large' !default;

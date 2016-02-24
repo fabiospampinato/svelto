@@ -11,6 +11,7 @@
 /* HR */
 
 %hr {
+  @include last-child-no-gutter ( $gutter-half );
   z-index: $hr-z-index;
   height: $hr-height;
   margin-top: - $gutter-half !important;

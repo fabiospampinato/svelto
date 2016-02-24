@@ -11,6 +11,7 @@
 /* PARAGRAPH */
 
 p {
+  @include last-child-no-gutter ();
   margin: 0 0 $gutter;
   max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 }

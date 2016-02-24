@@ -11,8 +11,12 @@
 
 /* MULTIPLE */
 
+%multiple {}
+
 .multiple {
 
+  @extend %multiple;
+  @include last-child-no-gutter ( 0, - $gutter );
   border-color: inherit; // So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;

@@ -23,7 +23,6 @@
   &-back {
 
     @include fill ();
-    @include last-child-no-gutter ();
     backface-visibility: hidden;
     transition: transform $flippable-animation-duration;
     border-radius: inherit;

@@ -13,10 +13,5 @@
 /* DEFAULT */
 
 form {
-
-  &:not(.multiple) {
-    @include last-child-no-gutter ();
-    position: relative;
-  }
-
+  position: relative;
 }

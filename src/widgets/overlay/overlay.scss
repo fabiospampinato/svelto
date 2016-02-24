@@ -15,7 +15,6 @@
 .overlay {
 
   @include center-absolute-fill ();
-  @include last-child-no-gutter ();
   z-index: $overlay-z-index;
   display: none;
   opacity: 0;

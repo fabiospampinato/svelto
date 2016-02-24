@@ -39,7 +39,6 @@ table.table { // So that if someone need a plain basic table he can, just by don
   }
 
   tr > * {
-    @include last-child-no-gutter ();
     padding: $gutter;
     text-align: left;
     border-width: 0;

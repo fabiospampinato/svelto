@@ -20,7 +20,16 @@ h6 {
 
   //TODO: Add font-family, font-weight, line-height
 
+  @include last-child-no-gutter ();
   margin: 0 0 $gutter;
+
+  /* LAST CHILD */
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  /* SMALL */
 
   > small {
     opacity: $header-small-opacity;
