@@ -11,6 +11,26 @@
     <footer class="layout-footer">Footer</footer>
   </div>
 
+  {{{sw.divider "Multiple"}}}
+
+  <div class="multiple equal">
+    <div class="layout outlined">
+      <header class="layout-header">Header</header>
+      <div class="layout-content">Content</div>
+      <footer class="layout-footer">Footer</footer>
+    </div>
+    <div class="layout outlined">
+      <header class="layout-header">Header</header>
+      <div class="layout-content">Content</div>
+      <footer class="layout-footer">Footer</footer>
+    </div>
+    <div class="layout outlined">
+      <header class="layout-header">Header</header>
+      <div class="layout-content">Content</div>
+      <footer class="layout-footer">Footer</footer>
+    </div>
+  </div>
+
   {{{sw.divider "Layout - Modal"}}}
 
   <div class="layout outlined">
@@ -26,5 +46,46 @@
     <div class="layout-content">{{> panel}}</div>
     <footer class="layout-footer">Footer</footer>
   </div>
+
+  {{> layout_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="layout_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Sticky header" "toggle_sticky_header ()"}}}
+    <div onclick="remove_element ( '.layout-header' )" class="button outlined">Remove header</div>
+    <div onclick="remove_element ( '.layout-footer' )" class="button outlined">Remove footer</div>
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Smooth" "toggle_class ( 'smooth' )"}}}
+    {{{sw.checkAction "Fixed height " "toggle_fixed_height ()"}}}
+  </div>
+
+  <script>
+    function toggle_sticky_header() {
+      $('.layout .layout .layout-header').toggleClass('sticky');
+    }
+
+    function remove_element(selector) {
+      $('.layout .layout ' + selector).remove();
+    }
+
+    function toggle_class(name) {
+      $('.layout .layout').toggleClass ( name );
+    }
+
+    function toggle_fixed_height () {
+      $('.layout .layout').height ( $('.layout .layout').height () < 200 ? 200 : 'auto' );
+    }
+  </script>
 
 </template>

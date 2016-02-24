@@ -1,0 +1,48 @@
+
+/* =========================================================================
+ * Svelto - Core - Layout - Sticky
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+
+/* FIRST LAYOUT */
+
+.layout {
+
+  /* HEADER */
+
+  .layout-header.sticky {
+
+    @include position ( fixed, 0 0 false 0 );
+    z-index: $layout-sticky-header-z-index;
+
+    + .layout-content { //FIXME: This shouldn't be needed, in no way the value it should be fixed in a setting
+      margin-top: $layout-sticky-header-height;
+    }
+
+  }
+
+  /* NOT FIRST */
+
+  .layout {
+
+    /* HEADER */
+
+    .layout-header.sticky {
+
+      position: relative;
+      position: sticky; //FIXME: Unfortunately not well supported atm
+      z-index: $layout-sticky-header-z-index - 1;
+
+      + .layout-content {
+        margin-top: 0;
+      }
+
+    }
+
+  }
+
+}

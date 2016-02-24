@@ -4,80 +4,60 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/multiple/multiple.scss
  * ========================================================================= */
 
-//TODO: Maybe modularize `sticky`
+//FIXME: Gutter bug when the footer is missing in the `panel` demo for instance
 
 /* LAYOUT */
 
 .layout {
 
-  @include last-child-no-gutter ();
   position: relative;
-  margin: 0 0 $gutter;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  overflow: auto;
 
   /* HEADER / CONTENT / FOOTER */
 
   &-header,
   &-content,
   &-footer {
-    margin-bottom: 0;
+    margin: 0;
     border-radius: 0;
-  }
-
-  /* HEADER / FOOTER */
-
-  &-header,
-  &-footer {
-    flex-shrink: 0; // So that if needed only `.layout-content` shrinks
-  }
-
-  /* HEADER */
-
-  &-header {
-
-    /* STICKY */
-
-    &.sticky {
-
-      position: fixed;
-      z-index: $layout-header-sticky-z-index;
-      top: 0;
-      right: 0;
-      left: 0;
-
-      + .layout-content { //FIXME: This shouldn't be needed, in no way the value it should be fixed in a setting
-        margin-top: $layout-header-height;
-      }
-
-    }
-
+    flex-shrink: 0; // Avoids padding collpasing
   }
 
   /* CONTENT */
 
   &-content {
-    padding: $gutter;
-    flex: 1 1; // IE-10-11 sets flex-shrink to 0
+    padding: $layout-padding-y $layout-padding-x;
+    flex-grow: 1; // Needed for having the `.layout-footer` stick to the bottom
   }
 
 }
 
-/* BODY LAYOUT */
+/* FIRST LAYOUT */
 
-body.layout {
+// It'll almost certanly be the `body`, but just for the sake of writing it in a generic way we don't assume that
 
-  min-height: 100%;
-  width: 100%;
+.layout {
 
-  // Sticky footer at bottom fix for IE10+
-  // We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+  min-height: 100vh;
 
-  _:-ms-input-placeholder, :root & {
-    min-height: 100vh;
+  /* NOT FIRST */
+
+  .layout {
+    min-height: 0;
+  }
+
+  /* GUTTER */
+
+  .layout:not(:last-child),
+  %multiple > .layout:last-child {
+    margin-bottom: $gutter;
   }
 
 }
