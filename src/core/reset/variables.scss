@@ -10,7 +10,7 @@
 
 /* SELECTION */
 
-$selection-bg-color: lighten( $color-primary, 50 ) !default;
+$selection-bg-color: transparentize( $color-primary, .8 ) !default;
 
 /* BODY */
 
