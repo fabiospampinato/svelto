@@ -5,6 +5,7 @@
   {{> masterHeader}}
   <div class="layout-content">{{> yield "content"}}</div>
   {{> masterFooter}}
+  {{> error_notifier}}
 </template>
 
 <!-- HEADER -->
@@ -35,6 +36,11 @@
   <footer class="layout-footer">
     <p class="text-center">Svelto, the framework</p>
   </footer>
+</template>
+
+<!-- ERROR NOTIFIER -->
+
+<template name="error_notifier">
   <script>
     var prevErrorId = '';
     window.onerror = function ( message, file, line ) {

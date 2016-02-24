@@ -1,7 +1,7 @@
 
 /* COMPONENTS */
 
-let components = ['browser', 'cookie', 'gutter', 'layout', 'multiple'];
+let components = ['browser', 'cookie', 'grid', 'gutter', 'layout', 'multiple'];
 
 for ( let component of components ) {
 
