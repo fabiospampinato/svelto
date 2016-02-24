@@ -16,7 +16,6 @@
 
 .noty {
 
-  @include z-depth ( $noty-z-depth );
   border-radius: $noty-border-radius;
   pointer-events: auto;
   transition-property: opacity, font-size, padding, margin;
@@ -26,8 +25,7 @@
   /* INFOBAR */
 
   .infobar {
-    background-color: transparent;
-    color: inherit;
+    @include z-depth ( $noty-z-depth );
     margin-bottom: 0;
     border-radius: inherit;
   }
@@ -46,7 +44,7 @@
     width: $noty-img-size;
 
     @if $noty-img-rounded == true {
-      border-radius: 10000px 10000px;
+      border-radius: 10000px;
     } @else {
       border-radius: $noty-border-radius;
     }

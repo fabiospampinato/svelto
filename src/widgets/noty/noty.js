@@ -28,8 +28,8 @@
     plugin: true,
     selector: '.noty',
     templates: {
-      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
-              '<div class="infobar">' +
+      base: '<div class="noty {%=o.type%} {%=o.css%}">' +
+              '<div class="infobar {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%}">' +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="noty-img infobar-left">' +
                 '{% } %}' +
