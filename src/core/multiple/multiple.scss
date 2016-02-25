@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: If possible in a clean way, fix the `Joined` tricky case group
 //TODO: Add a 'lefted', 'righted' (like 'centered') classes for aligning the content to the left or right
 //TODO: Modularize it (Possible in a clean way?)
 
@@ -23,52 +24,146 @@
   flex-wrap: wrap;
   align-items: flex-start;
 
-  /* HORIZONTAL GUTTER */
+  /* GUTTER NORMAL */
 
-  &:not(.no-wrap):not(.vertical):not(.joined) { // Here the gutter is needed
+  &:not(.no-wrap):not(.vertical):not(.joined) {
 
     @include margin-x ( - $gutter-half );
 
-    > * {
+    > :not(.multiple) {
+      @include margin-x ( $gutter-half );
+    }
+
+    > .multiple:not(.no-wrap):not(.vertical):not(.joined) {
+      @include margin-x ( 0 );
+    }
+
+    > .multiple.no-wrap,
+    > .multiple.vertical,
+    > .multiple.joined {
       @include margin-x ( $gutter-half );
     }
 
   }
 
-  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { // Here we just need the gutter in between
+  /* GUTTER NO-WRAP */
 
-    &:not(:first-child) {
-      margin-left: $gutter-half;
+  &.no-wrap:not(.vertical):not(.joined) {
+
+    > :not(.multiple) {
+
+      &:not(:first-child) {
+        margin-left: $gutter-half;
+      }
+
+      &:not(:last-child) {
+        margin-right: $gutter-half;
+      }
+
     }
 
-    &:not(:last-child) {
-      margin-right: $gutter-half;
+    > .multiple:not(.no-wrap):not(.vertical):not(.joined) {
+
+      &:not(:first-child) {
+        margin-left: 0;
+      }
+
+      &:not(:last-child) {
+        margin-right: 0;
+      }
+
+    }
+
+    > .multiple.no-wrap,
+    > .multiple.vertical,
+    > .multiple.joined {
+
+      &:not(:first-child) {
+        margin-left: $gutter-half;
+      }
+
+      &:not(:last-child) {
+        margin-right: $gutter-half;
+      }
+
     }
 
   }
 
-  &.vertical > .multiple {
+  /* GUTTER VERTICAL */
 
-    @include margin-x ( 0 !important ); //FIXME: We shouldn't use `!important`
+  &.vertical {
 
-    > :first-child {
-      margin-left: 0;
+    > .multiple:not(.no-wrap):not(.vertical):not(.joined) {
+
+      @include margin-x ( 0 );
+
+      > :not(.multiple) {
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+      }
+
+      > .multiple:not(.no-wrap):not(.vertical):not(.joined) {
+
+        &:first-child {
+          margin-left: - $gutter-half;
+        }
+
+        &:last-child {
+          margin-right: - $gutter-half;
+        }
+
+      }
+
+      > .multiple.no-wrap,
+      > .multiple.vertical,
+      > .multiple.joined {
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:not(:last-child) {
+          margin-right: $gutter-half;
+        }
+
+        &:not(:first-child) {
+          margin-left: $gutter-half;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+      }
+
     }
 
-    > :last-child {
-      margin-right: 0;
-    }
+  }
 
+  /* VERTICAL */
+
+  &.vertical {
+    flex-direction: column;
   }
 
   /* CENTERED */
 
-  &.centered-x,
+  &.centered-x:not(.vertical),
+  &.cetered-y.vertical,
   &.centered {
     justify-content: center;
   }
 
-  &.centered-y,
+  &.centered-y:not(.vertical),
+  &.centered-x.vertical,
   &.centered {
     align-items: center;
   }
@@ -84,30 +179,42 @@
   &.fluid,
   &.equal {
 
-    &:not(.vertical) {
-
-      > * {
-        flex-grow: 1;
-        flex-shrink: 0;
-      }
-
-      > input,
-      > textarea { //FIXME: Why do we need customize the style for input/textarea ?
-        flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
-      }
-
-    }
-
     &.vertical > * {
       width: 100%;
     }
 
   }
 
+  /* FLUID */
+
+  &.fluid {
+
+    &:not(.vertical) {
+
+      > * {
+        flex: 1 0 auto;
+      }
+
+      > input {
+        flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
+      }
+
+    }
+
+  }
+
   /* EQUAL */
 
-  &.equal > * {
-    flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
+  &.equal {
+
+    &:not(.vertical) {
+
+      > * {
+        flex: 1 0 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
+      }
+
+    }
+
   }
 
   /* JOINED */
@@ -117,41 +224,48 @@
     flex-wrap: nowrap;
     align-items: stretch;
 
+    > .multiple {
+      @include margin-x ( 0 );
+    }
+
     &:not(.vertical) {
 
-      > :not(:last-child) {
-
-        @include border-right-radius ( 0 !important );
+      > :not(:last-child),
+      > .multiple:not(:last-child) > :last-child {
+        @include border-right-radius ( 0 );
         margin-right: 0;
         border-right-width: 0;
-
-        &.multiple > :last-child {
-          @include border-right-radius ( 0 !important );
-        }
-
       }
 
-      > :not(:first-child) {
-
-        @include border-left-radius ( 0 !important );
+      > :not(:first-child),
+      > .multiple:not(:first-child) > :first-child {
+        @include border-left-radius ( 0 );
         margin-left: 0;
-
-        &.multiple > :not(:last-child) {
-          @include border-left-radius ( 0 !important );
-        }
-
       }
 
       &.no-separators {
 
-        > :not(:first-child) {
-
+        > :not(:first-child),
+        > .multiple:not(:first-child) > :first-child {
           border-left-width: 0;
+        }
 
-          &.multiple > * {
-            border-left-width: 0;
-          }
+        > .multiple:not(:last-child) > :last-child {
+          border-right-width: 0;
+        }
 
+      }
+
+      &.only-separators {
+
+        > :first-child,
+        > .multiple:first-child > :first-child {
+          border-left-width: 0;
+        }
+
+        > :last-child,
+        > .multiple:last-child > :last-child {
+          border-right-width: 0;
         }
 
       }
@@ -160,44 +274,42 @@
 
     &.vertical {
 
-      > :not(:last-child) {
-
-        @include border-bottom-radius ( 0 !important );
+      > :not(:last-child),
+      > .multiple:not(:last-child) > :last-child {
+        @include border-bottom-radius ( 0 );
         margin-bottom: 0;
         border-bottom-width: 0;
+      }
 
-        &.multiple > * {
-          @include border-bottom-radius ( 0 !important );
+      > :not(:first-child),
+      > .multiple:not(:first-child) > :first-child {
+        @include border-top-radius ( 0 );
+        margin-top: 0;
+      }
+
+      &.no-separators {
+
+        > :not(:first-child),
+        > .multiple:not(:first-child) > :first-child {
+          border-top-width: 0;
         }
 
-        &.multiple.no-wrap > *,
-        &.multiple.joined > * {
-          margin-bottom: 0;
+        > .multiple:not(:last-child) > :last-child {
           border-bottom-width: 0;
         }
 
       }
 
-      > :not(:first-child) {
+      &.only-separators {
 
-        @include border-top-radius ( 0 !important );
-
-        &.multiple > * {
-          @include border-top-radius ( 0 !important );
+        > :first-child,
+        > .multiple:first-child > :first-child {
+          border-top-width: 0;
         }
 
-      }
-
-      &.no-separators {
-
-        > :not(:first-child) {
-
-          border-top-width: 0;
-
-          &.multiple > * {
-            border-top-width: 0;
-          }
-
+        > :last-child,
+        > .multiple:last-child > :last-child {
+          border-bottom-width: 0;
         }
 
       }
@@ -209,46 +321,7 @@
   /* STRETCHED */
 
   &.stretched {
-
     align-items: stretch;
-
-    > .multiple.vertical {
-
-      display: flex;
-
-      > * {
-        flex-grow: 1;
-        flex-shrink: 1; // IE-10/11 default it to 0 instead
-      }
-
-    }
-
   }
 
-  /* VERTICAL */
-
-  &.vertical {
-    flex-direction: column;
-  }
-
-  /* HORIZONTAL GUTTER */
-
-  > .multiple.no-wrap {
-
-    &:not(:first-child) {
-      margin-left: $gutter-half;
-    }
-
-    &:not(:last-child) {
-      margin-right: $gutter-half;
-    }
-
-  }
-
-}
-
-/* MULTIPLE IN TABLE CELL */
-
-table > :not(tfoot) td .multiple:only-child { // Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
-  display: inline-flex;
 }
