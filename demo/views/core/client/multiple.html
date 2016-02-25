@@ -91,9 +91,9 @@
     </div>
     <div class="card-block expander-content">
 
-      {{{sw.divider "Multi-row"}}}
+      {{{sw.divider "Multi"}}}
 
-      <div class="multiple joined vertical fluid">
+      <div class="multiple joined vertical fluid jtest">
         <div class="multiple joined equal">
           <div class="container outlined">1</div>
           <div class="container outlined">1</div>
@@ -105,6 +105,26 @@
           <div class="container outlined">2</div>
         </div>
         <div class="multiple joined equal">
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+          <div class="container outlined">3</div>
+        </div>
+      </div>
+
+      {{{sw.divider "Multi vertical"}}}
+
+      <div class="multiple joined fluid jtest">
+        <div class="multiple vertical fluid joined">
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+          <div class="container outlined">1</div>
+        </div>
+        <div class="multiple vertical fluid joined">
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple vertical fluid joined">
           <div class="container outlined">3</div>
           <div class="container outlined">3</div>
           <div class="container outlined">3</div>
@@ -113,7 +133,7 @@
 
       {{{sw.divider "Mixed"}}}
 
-      <div class="multiple fluid joined stretched">
+      <div class="multiple fluid joined stretched jtest">
         <div class="multiple vertical joined">
           <div class="container outlined">1</div>
           <div class="container outlined">1</div>
@@ -128,6 +148,147 @@
           <div class="container outlined">3</div>
         </div>
       </div>
+
+      {{{sw.divider "Actions"}}}
+
+      <div class="multiple actions">
+        {{{sw.checkAction "No separators" "toggle_class_joined ( 'no-separators' )"}}}
+        {{{sw.checkAction "Only separators" "toggle_class_joined ( 'only-separators' )"}}}
+      </div>
+
+      <script>
+        function toggle_class_joined(name) {
+          $('.multiple.jtest').toggleClass ( name );
+        }
+      </script>
+
+    </div>
+  </div>
+
+  <div class="card outlined expander">
+    <div class="card-header outlined actionable red expander-toggler">
+      <div class="multiple centered">
+        <div class="spacer">Joined nested</div>
+        <div class="button xsmall compact">
+          <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+
+      {{{sw.divider "Multi"}}}
+
+      <div class="multiple joined vertical fluid jntest">
+        <div class="multiple joined equal">
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">1</div>
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+        <div class="multiple joined equal">
+          <div class="container outlined">2</div>
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple joined equal">
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">3</div>
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Multi vertical"}}}
+
+      <div class="multiple joined fluid stretched jntest">
+        <div class="multiple vertical fluid joined">
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">1</div>
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+        <div class="multiple vertical fluid joined">
+          <div class="container outlined">2</div>
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">2</div>
+        </div>
+        <div class="multiple vertical fluid joined">
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">3</div>
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Mixed"}}}
+
+      <div class="multiple fluid joined stretched jntest">
+        <div class="multiple vertical joined">
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">1</div>
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+        <div class="container outlined">2</div>
+        <div class="container outlined">2</div>
+        <div class="container outlined">2</div>
+        <div class="multiple vertical joined">
+          <div class="multiple joined vertical fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+          <div class="container outlined">3</div>
+          <div class="multiple joined fluid">
+            <div class="container outlined">X</div>
+            <div class="container outlined">X</div>
+          </div>
+        </div>
+      </div>
+
+      {{{sw.divider "Actions"}}}
+
+      <div class="multiple actions">
+        {{{sw.checkAction "No separators" "toggle_class_njoined ( 'no-separators' )"}}}
+        {{{sw.checkAction "Only separators" "toggle_class_njoined ( 'only-separators' )"}}}
+      </div>
+
+      <script>
+        function toggle_class_njoined(name) {
+          $('.multiple.jntest').toggleClass ( name );
+        }
+      </script>
+
 
     </div>
   </div>

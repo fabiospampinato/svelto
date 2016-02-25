@@ -231,14 +231,18 @@
     &:not(.vertical) {
 
       > :not(:last-child),
-      > .multiple:not(:last-child) > :last-child {
+      > .multiple:not(:last-child) > :last-child,
+      > .multiple.joined.vertical:not(:last-child) > :not(.multiple),
+      > .multiple.joined.vertical:not(:last-child) > .multiple.joined > :not(.multiple) {
         @include border-right-radius ( 0 );
         margin-right: 0;
         border-right-width: 0;
       }
 
       > :not(:first-child),
-      > .multiple:not(:first-child) > :first-child {
+      > .multiple:not(:first-child) > :first-child,
+      > .multiple.joined.vertical:not(:first-child) > :not(.multiple),
+      > .multiple.joined.vertical:not(:first-child) > .multiple.joined > :not(.multiple) {
         @include border-left-radius ( 0 );
         margin-left: 0;
       }
@@ -246,7 +250,8 @@
       &.no-separators {
 
         > :not(:first-child),
-        > .multiple:not(:first-child) > :first-child {
+        > .multiple:not(:first-child) > :first-child,
+        > .multiple.joined.vertical:not(:first-child) > :not(.multiple) {
           border-left-width: 0;
         }
 
@@ -254,18 +259,32 @@
           border-right-width: 0;
         }
 
+        > .multiple.joined.vertical > :not(.multiple):not(:first-child) {
+          border-top-width: 0;
+        }
+
       }
 
       &.only-separators {
 
         > :first-child,
-        > .multiple:first-child > :first-child {
+        > .multiple:first-child > :first-child,
+        > .multiple.joined.vertical:first-child > :not(.multiple) {
           border-left-width: 0;
         }
 
         > :last-child,
-        > .multiple:last-child > :last-child {
+        > .multiple:last-child > :last-child,
+        > .multiple.joined.vertical:last-child > :not(.multiple) {
           border-right-width: 0;
+        }
+
+        > .multiple.joined.vertical > :not(.multiple):first-child {
+          border-top-width: 0;
+        }
+
+        > .multiple.joined.vertical > :not(.multiple):last-child {
+          border-bottom-width: 0;
         }
 
       }
@@ -275,14 +294,18 @@
     &.vertical {
 
       > :not(:last-child),
-      > .multiple:not(:last-child) > :last-child {
+      > .multiple:not(:last-child) > :last-child,
+      > .multiple.joined:not(.vertical):not(:last-child) > :not(.multiple),
+      > .multiple.joined:not(.vertical):not(:last-child) > .multiple.joined > :not(.multiple) {
         @include border-bottom-radius ( 0 );
         margin-bottom: 0;
         border-bottom-width: 0;
       }
 
       > :not(:first-child),
-      > .multiple:not(:first-child) > :first-child {
+      > .multiple:not(:first-child) > :first-child,
+      > .multiple.joined:not(.vertical):not(:first-child) > :not(.multiple),
+      > .multiple.joined:not(.vertical):not(:first-child) > .multiple.joined > :not(.multiple) {
         @include border-top-radius ( 0 );
         margin-top: 0;
       }
@@ -290,7 +313,8 @@
       &.no-separators {
 
         > :not(:first-child),
-        > .multiple:not(:first-child) > :first-child {
+        > .multiple:not(:first-child) > :first-child,
+        > .multiple.joined:not(.vertical):not(:first-child) > :not(.multiple) {
           border-top-width: 0;
         }
 
@@ -298,18 +322,32 @@
           border-bottom-width: 0;
         }
 
+        > .multiple.joined:not(.vertical) > :not(.multiple):not(:first-child) {
+          border-left-width: 0;
+        }
+
       }
 
       &.only-separators {
 
         > :first-child,
-        > .multiple:first-child > :first-child {
+        > .multiple:first-child > :first-child,
+        > .multiple.joined:not(.vertical):first-child > :not(.multiple) {
           border-top-width: 0;
         }
 
         > :last-child,
-        > .multiple:last-child > :last-child {
+        > .multiple:last-child > :last-child,
+        > .multiple.joined:not(.vertical):last-child > :not(.multiple) {
           border-bottom-width: 0;
+        }
+
+        > .multiple.joined:not(.vertical) > :not(.multiple):first-child {
+          border-left-width: 0;
+        }
+
+        > .multiple.joined:not(.vertical) > :not(.multiple):last-child {
+          border-right-width: 0;
         }
 
       }
@@ -321,7 +359,13 @@
   /* STRETCHED */
 
   &.stretched {
+
     align-items: stretch;
+
+    > * {
+      flex-grow: 1;
+    }
+
   }
 
 }
