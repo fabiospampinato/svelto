@@ -68,8 +68,8 @@
 <template name="browser_init">
 
   <script>
-    for ( var prop in $.browser.is ) {
-      $('.' + prop).toggleClass('green', (_.isFunction($.browser.is[prop]) ? $.browser.is[prop]() : $.browser.is[prop]));
+    for ( var prop in Svelto.Browser.is ) {
+      $('.' + prop).toggleClass('green', (_.isFunction(Svelto.Browser.is[prop]) ? Svelto.Browser.is[prop]() : Svelto.Browser.is[prop]));
     }
   </script>
 

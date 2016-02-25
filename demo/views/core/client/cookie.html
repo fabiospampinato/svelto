@@ -38,23 +38,23 @@
     }
 
     function cookie_get() {
-      $.noty('' + $.cookie.get(cookie_input('key')));
+      $.noty('' + Svelto.Cookie.get(cookie_input('key')));
     }
 
     function cookie_set() {
-      $.cookie.set(cookie_input('key'), cookie_input('value'), Number(cookie_input('end')), cookie_input('path'), cookie_input('domain'), cookie_input('secure'));
+      Svelto.Cookie.set(cookie_input('key'), cookie_input('value'), Number(cookie_input('end')), cookie_input('path'), cookie_input('domain'), cookie_input('secure'));
     }
 
     function cookie_remove() {
-      $.cookie.remove(cookie_input('key'), cookie_input('path'), cookie_input('domain'));
+      Svelto.Cookie.remove(cookie_input('key'), cookie_input('path'), cookie_input('domain'));
     }
 
     function cookie_has() {
-      $.noty('' + $.cookie.has(cookie_input('key')));
+      $.noty('' + Svelto.Cookie.has(cookie_input('key')));
     }
 
     function cookie_keys() {
-      $.noty($.cookie.keys().join(' - '));
+      $.noty(Svelto.Cookie.keys().join(' - '));
     }
   </script>
 
