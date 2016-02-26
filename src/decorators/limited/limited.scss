@@ -6,23 +6,29 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: Test it, not sure it will work, particularly when also `.multiple`
 //TODO: Maybe rename it, limited is not very explicative of its purpose (restricting the width of an element to the setted limit)
 
 /* LIMITED */
 
-.limited {
+@include media-width-up ( $limited-width ) {
 
-  /* NOT MULTIPLE */
+  .limited {
 
-  &:not(.multiple) {
-    max-width: $limited-width;
-  }
+    /* BASIC */
 
-  /* MULTIPLE */
+    &:not(.multiple),
+    &.multiple.no-wrap,
+    &.multiple.vertical,
+    &.multiple.joined {
+      max-width: $limited-width;
+    }
 
-  &.multiple {
-    max-width: calc(#{$limited-width} - #{$gutter});
+    /* ADVANCED */
+
+    &.multiple:not(.no-wrap):not(.vertical):not(.joined) {
+      max-width: calc(#{$limited-width} + #{$gutter});
+    }
+
   }
 
 }

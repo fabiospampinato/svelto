@@ -4,10 +4,33 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/limited/limited.scss
  * ========================================================================= */
 
 /* CENTERED */
 
-.centered:not(.multiple) {
-  @include center-margin ();
+.centered {
+
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    @include margin-x ( auto );
+  }
+
+  /* MULTIPLE */
+
+  // If it's not `limited` there's no way it will be centered since as a `display: flex` it will take all the available space
+  //TODO: Add support for advanced `multiple`
+
+  @include media-width-up ( $limited-width ) {
+
+    &.multiple.limited.no-wrap,
+    &.multiple.limited.vertical,
+    &.multiple.limited.joined {
+      @include margin-x ( auto !important );
+    }
+
+  }
+
 }
