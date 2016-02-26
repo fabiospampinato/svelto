@@ -7,6 +7,7 @@
  * =========================================================================
  * @require core/animations/variables.scss
  * @require core/paths/variables.scss
+ * @require decorators/disabled/variables.scss
  * ========================================================================= */
 
 /* BLURRED */
@@ -19,4 +20,4 @@ $blurred-path-images: $path-images !default;
 
 /* ANIMATION */
 
-$blurred-animation-duration: $animation-fast !default;
+$blurred-animation-duration: $disabled-animation-duration !default;

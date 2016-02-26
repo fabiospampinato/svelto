@@ -8,8 +8,11 @@
 
 /* DISABLED */
 
+//FIXME: Sure it is the right way to implement it?
+// In order to always animate the transition
+
 * {
-  transition: opacity $widget-animation-duration; // In order to always animate the transition //FIXME: Sure it is the right way to implement it?
+  transition: opacity $disabled-animation-duration;
 }
 
 /* DISABLED */
