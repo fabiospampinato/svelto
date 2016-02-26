@@ -1,23 +1,31 @@
 
 /* =========================================================================
- * Svelto - Widgets - Ripple - Colors
+ * Svelto - Core - Colors (Functions)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../ripple.scss
+ * @require _/map/functions.scss
  * ========================================================================= */
 
-/* COLORS */
+/* CLASSES */
 
-@each $name, $datas in $colors {
+@function colors-get-classes () {
 
-  $class: color-get-class( $name );
+  $classes: ();
 
-  $bg: nth( $datas, 1 );
+  @each $name, $datas in $colors {
 
-  .ripple-#{$class} > .ripple-circle:before {
-    background-color: $bg;
+    $classes: map-set( $classes, $name, color-get-class( $name ) );
+
   }
+
+  @return $classes;
+
+}
+
+@function color-get-class ( $color ) {
+
+  @return $color;
 
 }

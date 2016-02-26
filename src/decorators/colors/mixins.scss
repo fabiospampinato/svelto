@@ -14,9 +14,9 @@
 
     $selector: '';
 
-    @each $name, $datas in $colors {
+    @each $c in colors-get-classes() {
 
-      $selector: $selector + ':not(.#{$name})';
+      $selector: $selector + ':not(.#{$c})';
 
     }
 

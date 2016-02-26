@@ -12,9 +12,11 @@
 
 @each $name, $datas in $colors {
 
+  $class: color-get-class( $name );
+
   $bg: nth( $datas, 1 );
 
-  .text-#{$name} {
+  .text-#{$class} {
     color: $bg;
   }
 

@@ -114,9 +114,11 @@
 
     @each $name, $datas in $colors {
 
+      $class: color-get-class( $name );
+
       $bg: nth($datas, 1);
 
-      &.tag-circle-#{$name}:after {
+      &.tag-circle-#{$class}:after {
         background-color: $bg;
       }
 

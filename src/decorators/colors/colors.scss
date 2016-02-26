@@ -46,7 +46,9 @@
 
   }
 
-  .#{$name} {
+  $class: color-get-class( $name );
+
+  .#{$class} {
     @extend %#{$name};
   }
 

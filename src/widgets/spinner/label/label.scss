@@ -33,9 +33,11 @@
 
   @each $name, $datas in $colors {
 
+    $class: color-get-class( $name );
+
     $accent: nth($datas, 5);
 
-    &.#{$name} .spinner circle {
+    &.#{$class} .spinner circle {
       stroke: $accent !important;
     }
 

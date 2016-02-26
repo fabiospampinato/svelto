@@ -13,6 +13,8 @@
 
 @each $name, $datas in $colors {
 
+  $class: color-get-class( $name );
+
   $bg: nth( $datas, 1 );
   $bg-hover: nth( $datas, 2 );
   $link: nth( $datas, 7 );
@@ -22,10 +24,10 @@
 
     //FIXME: This generates too much CSS
 
-    .#{$name} p, // We do it just under `p`s, because elsewhere might be an unwanted style
-    p.#{$name},
-    .#{$name} span, // Same as `p > a`
-    span.#{$name} {
+    .#{$class} p, // We do it just under `p`s, because elsewhere might be an unwanted style
+    p.#{$class},
+    .#{$class} span, // Same as `p > a`
+    span.#{$class} {
 
       > a {
 
@@ -45,7 +47,7 @@
 
   }
 
-  .link-#{$name} {
+  .link-#{$class} {
 
     color: $bg !important;
 

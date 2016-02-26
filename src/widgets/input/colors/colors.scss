@@ -12,9 +12,11 @@
 
 @each $name, $datas in $colors {
 
+  $class: color-get-class( $name );
+
   $text: nth( $datas, 6 );
 
-  .#{$name}::placeholder {
+  .#{$class}::placeholder {
     color: $text !important;
   }
 

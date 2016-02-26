@@ -24,9 +24,11 @@
 
 @each $name, $datas in $colors {
 
+  $class: color-get-class( $name );
+
   $bg: nth( $datas, 1 );
 
-  .highlight-#{$name}:after {
+  .highlight-#{$class}:after {
     border-color: $bg !important;
   }
 
