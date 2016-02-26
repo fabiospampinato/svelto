@@ -41,11 +41,25 @@
 
 /* CLASSES */
 
-//TODO: Write in a more general way, using a str-repeat and a map
-
 @function breakpoints-get-classes () {
 
-  $shorthands: (
+  $classes: ();
+
+  @each $breakpoint, $value in $breakpoints {
+
+    $classes: map-set( $classes, $breakpoint, breakpoint-get-class( $breakpoint ) );
+
+  }
+
+  @return $classes;
+
+}
+
+@function breakpoint-get-class ( $breakpoint ) {
+
+  //TODO: Write in a more general way, using a str-repeat and a map
+
+  $classes: (
     'xxxxsmall': 'xxxxs',
     'xxxsmall': 'xxxs',
     'xxsmall': 'xxs',
@@ -59,16 +73,16 @@
     'xxxxlarge': 'xxxxl'
   );
 
-  $classes: ();
+  @if map-has-key( $classes, $breakpoint ) {
 
-  @each $breakpoint, $value in $breakpoints {
+    @return map-get( $classes, $breakpoint );
 
-    $shorthand: map-get( $shorthands, $breakpoint );
+  } @else {
 
-    $classes: append( $classes, if( $shorthand, $shorthand, $breakpoint ) );
+    // Fall back to the bare key
+
+    @return $breakpoint;
 
   }
-
-  @return $classes;
 
 }

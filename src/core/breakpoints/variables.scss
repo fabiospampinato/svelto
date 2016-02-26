@@ -29,10 +29,6 @@ $breakpoints: (
 
 @include assert-ascending( $breakpoints, '`$breakpoints` values must be defined in ascending order' );
 
-/* CLASSES */
-
-$breakpoints-classes: breakpoints-get-classes() !default;
-
 /* EPSILON */
 
 $breakpoint-epsilon: .01 + ( map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 0 ) !default;

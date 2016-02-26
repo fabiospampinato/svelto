@@ -15,7 +15,7 @@
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
+  $class: breakpoint-get-class( $breakpoint );
 
   @include media-breakpoint-up ( $breakpoint ) {
 
@@ -23,18 +23,18 @@
 
       $percentage: ( 100% / $grid-columns ) * $nr;
 
-      .#{$alias}-#{$nr} {
+      .#{$class}-#{$nr} {
         width: $percentage;
       }
 
-      %#{$alias}-#{$nr}-without-gutter {
+      %#{$breakpoint}-#{$nr}-without-gutter {
         width: calc(#{$percentage} - #{$gutter});
       }
 
-      .multiple > .#{$alias}-#{$nr} {
+      .multiple > .#{$class}-#{$nr} {
 
         &:not(.multiple) {
-          @extend %#{$alias}-#{$nr}-without-gutter;
+          @extend %#{$breakpoint}-#{$nr}-without-gutter;
         }
 
         &.multiple {
@@ -42,7 +42,7 @@
           &.no-wrap,
           &.vertical,
           &.joined {
-            @extend %#{$alias}-#{$nr}-without-gutter;
+            @extend %#{$breakpoint}-#{$nr}-without-gutter;
           }
 
         }

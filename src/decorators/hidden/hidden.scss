@@ -10,13 +10,13 @@
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
+  $class: breakpoint-get-class( $breakpoint );
 
   /* UP */
 
   @include media-breakpoint-up ( $breakpoint ) {
 
-    .hidden-#{$alias}-up {
+    .hidden-#{$class}-up {
       display: none !important;
     }
 
@@ -26,7 +26,7 @@
 
   @include media-breakpoint-down ( $breakpoint ) {
 
-    .hidden-#{$alias}-down {
+    .hidden-#{$class}-down {
       display: none !important;
     }
 

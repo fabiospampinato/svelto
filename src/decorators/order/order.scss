@@ -10,15 +10,15 @@
 
 @each $breakpoint, $value in $breakpoints {
 
-  $alias: nth( $breakpoints-classes, index( map-keys( $breakpoints ), $breakpoint ) );
+  $class: breakpoint-get-class( $breakpoint );
 
   @include media-breakpoint-up ( $breakpoint ) {
 
-    .#{$alias}-first {
+    .#{$class}-first {
       order: -1 !important;
     }
 
-    .#{$alias}-last {
+    .#{$class}-last {
       order: 1000000 !important;
     }
   }
