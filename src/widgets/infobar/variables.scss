@@ -8,9 +8,13 @@
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
-/* TITLE */
+/* INFOBAR */
 
 $infobar-color: $container-color !default;
+$infobar-color-force: $container-color-force !default;
+$infobar-color-basic: $container-color-basic !default;
+
+/* TITLE */
 
 $infobar-title-size: 'large' !default;
 $infobar-title-size-force: false !default;

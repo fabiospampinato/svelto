@@ -13,7 +13,7 @@
 
 .placeholder {
   @extend %widget;
-  @include color ( $placeholder-color );
+  @include color ( $placeholder-color, $placeholder-color-force, $placeholder-color-basic );
   display: flex;
   align-items: center;
   justify-content: center;

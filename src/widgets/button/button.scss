@@ -24,4 +24,5 @@ button {
 .button {
   @extend .label;
   @extend .actionable;
+  @include color ( $button-color, $button-color-force, $button-color-basic );
 }

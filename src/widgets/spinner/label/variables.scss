@@ -15,6 +15,8 @@ $spinner-label-z-depth-force: true !default;
 $spinner-label-z-depth-basic: true !default;
 
 $spinner-label-color: 'inherit' !default;
+$spinner-label-color-force: false !default;
+$spinner-label-color-basic: true !default;
 
 $spinner-label-padding-x: $label-compact-padding-x !default;
 $spinner-label-padding-y: $label-compact-padding-y !default;

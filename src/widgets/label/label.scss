@@ -26,7 +26,7 @@ label {
 .label {
 
   @extend %widget;
-  @include color ( $label-color );
+  @include color ( $label-color, $label-color-force, $label-color-basic );
   font-weight: bold;
   display: inline-flex;
   align-items: center;

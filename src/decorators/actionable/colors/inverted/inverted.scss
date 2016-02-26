@@ -13,8 +13,7 @@
 
 @each $name, $datas in $colors {
 
-  %#{$name}.actionable.inverted:not(.disabled),
-  .#{$name}.actionable.inverted:not(.disabled) {
+  %#{$name}.actionable.inverted:not(.disabled) {
 
     &:hover {
       @extend %#{$name}-inverted-hover;

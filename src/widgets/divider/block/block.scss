@@ -19,7 +19,7 @@
   /* CONTENT */
 
   > .divider-content {
-    @include color ( $divider-block-color );
+    @include color ( $divider-block-color, $divider-block-color-force, $divider-block-color-basic );
     display: inline-block;
     padding: $divider-block-y-padding $divider-block-x-padding;
     border-radius: 10000px;

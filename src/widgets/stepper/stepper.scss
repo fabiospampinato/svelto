@@ -17,9 +17,9 @@
 .stepper {
 
   @extend %widget;
-  @include color ( $label-color );
+  @include color ( $stepper-color, $stepper-color-force, $stepper-color-basic );
   display: flex;
-  border-radius: $label-border-radius;
+  border-radius: $stepper-border-radius;
 
   /* SEGMENTS */
 

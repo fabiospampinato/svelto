@@ -17,7 +17,7 @@
 .infobar {
 
   @extend %container;
-  @include color ( $infobar-color );
+  @include color ( $infobar-color, $infobar-color-force, $infobar-color-basic );
   display: flex;
   flex-wrap: wrap;
   align-items: center;

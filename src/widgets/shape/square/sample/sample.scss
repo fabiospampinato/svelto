@@ -15,7 +15,7 @@
 
   @extend %shape;
   @include square ( $square-sample-size );
-  @include color ( $square-sample-color );
+  @include color ( $square-sample-color, $square-sample-color-force, $square-sample-color-basic );
   min-width: $square-sample-size;
   min-height: $square-sample-size;
   border-width: $square-outline-width;

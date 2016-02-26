@@ -12,7 +12,7 @@
 /* MARK */
 
 mark {
-  @include color ( $mark-color );
+  @include color ( $mark-color, $mark-color-force, $mark-color-basic );
   padding: $mark-padding-y $mark-padding-x;
   border-radius: $mark-border-radius;
 }

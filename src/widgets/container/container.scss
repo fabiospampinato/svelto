@@ -21,5 +21,5 @@
 
 .container {
   @extend %container;
-  @include color ( $container-color );
+  @include color ( $container-color, $container-color-force, $container-color-basic );
 }

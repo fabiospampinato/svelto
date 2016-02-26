@@ -8,7 +8,9 @@
 
 /* TABLE */
 
-$table-color: inherit !default;
+$table-color: 'inherit' !default;
+$table-color-force: false !default;
+$table-color-basic: true !default;
 
 /* HEADER */
 

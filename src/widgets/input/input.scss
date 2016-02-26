@@ -19,7 +19,7 @@
 input {
 
   @extend %widget;
-  @include color ( $input-color );
+  @include color ( $input-color, $input-color-force, $input-color-basic );
   display: flex;
   flex-shrink: 1;
   border-radius: $input-border-radius;

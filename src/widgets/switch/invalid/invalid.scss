@@ -17,7 +17,7 @@
 
   .switch-bar,
   .switch-handler {
-    @include color ( 'error', true );
+    @include color ( 'error', true, true );
   }
 
 }

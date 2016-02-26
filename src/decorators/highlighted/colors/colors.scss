@@ -14,8 +14,7 @@
 
   $accent: nth( $datas, 5 );
 
-  %#{$name}.highlighted:after,
-  .#{$name}.highlighted:after {
+  %#{$name}.highlighted:after {
     border-color: $accent;
   }
 

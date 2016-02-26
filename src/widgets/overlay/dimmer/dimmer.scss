@@ -12,6 +12,6 @@
 /* DIMMER */
 
 .overlay.dimmer {
-  @include color ( $overlay-dimmer-color );
+  @include color ( $overlay-dimmer-color, $overlay-dimmer-color-force, $overlay-dimmer-color-basic );
   background-color: transparentize( nth( map-get( $colors, $overlay-dimmer-color ), 1 ), $overlay-dimmer-bg-transparentize-amount );
 }

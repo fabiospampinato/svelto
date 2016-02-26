@@ -1,15 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Caption (Variables)
+ * Svelto - Widgets - Button (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/label/variables.scss
  * ========================================================================= */
 
-/* CAPTION */
+/* BUTTON */
 
-$image-caption-z-index: 30 !default;
-
-$image-caption-color: 'black' !default;
-$image-caption-color-force: false !default;
-$image-caption-color-basic: true !default;
+$button-color: $label-color !default;
+$button-color-force: false !default;
+$button-color-basic: false !default;

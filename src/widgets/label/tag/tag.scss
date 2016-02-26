@@ -38,7 +38,7 @@
     }
 
     &:before {
-      @include color ( 'inherit', true );
+      @include color ( 'inherit', true, true );
       z-index: -1;
     }
 

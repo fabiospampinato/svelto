@@ -1,15 +1,17 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Caption (Variables)
+ * Svelto - Widgets - Stepper (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/label/variables.scss
  * ========================================================================= */
 
-/* CAPTION */
+/* STEPPER */
 
-$image-caption-z-index: 30 !default;
+$stepper-color: $label-color !default;
+$stepper-color-force: false !default;
+$stepper-color-basic: true !default;
 
-$image-caption-color: 'black' !default;
-$image-caption-color-force: false !default;
-$image-caption-color-basic: true !default;
+$stepper-border-radius: $label-border-radius !default;

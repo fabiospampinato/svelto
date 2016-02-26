@@ -11,6 +11,8 @@
 /* PROGRESSBAR */
 
 $progressbar-color: 'gray' !default;
+$progressbar-color-force: false !default;
+$progressbar-color-basic: true !default;
 
 $progressbar-height: 1em !default;
 
@@ -19,6 +21,8 @@ $progressbar-border-radius: $progressbar-height !default;
 /* HIGHLIGHT */
 
 $progressbar-highlight-color: 'secondary' !default;
+$progressbar-highlight-color-force: false !default;
+$progressbar-highlight-color-basic: true !default;
 
 /* ANIMATION */
 

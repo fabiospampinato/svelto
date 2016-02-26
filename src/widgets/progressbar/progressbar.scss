@@ -16,7 +16,7 @@
 .progressbar {
 
   @extend %widget;
-  @include color ( $progressbar-color );
+  @include color ( $progressbar-color, $progressbar-color-force, $progressbar-color-basic );
   display: flex;
   overflow: hidden;
   height: $progressbar-height;
@@ -26,7 +26,7 @@
   /* HIGHLIGHT */
 
   &-highlight {
-    @include color ( $progressbar-highlight-color );
+    @include color ( $progressbar-highlight-color, $progressbar-highlight-color-force, $progressbar-highlight-color-basic );
     @include text-truncate ();
     position: relative;
     display: flex;

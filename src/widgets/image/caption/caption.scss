@@ -16,7 +16,7 @@
 .image-caption {
 
   @extend %container;
-  @include color ( $image-caption-color );
+  @include color ( $image-caption-color, $image-caption-color-force, $image-caption-color-basic );
   border-radius: 0;
   margin-bottom: 0;
   overflow: auto;

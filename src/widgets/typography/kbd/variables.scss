@@ -10,7 +10,9 @@
 
 /* KBD */
 
-$kbd-color: 'white' !default;
+$kbd-color: $container-color !default;
+$kbd-color-force: false !default;
+$kbd-color-basic: true !default;
 
 $kbd-border-width: 1px !default;
 $kbd-border-style: solid !default;

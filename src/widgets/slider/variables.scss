@@ -14,6 +14,8 @@
 /* SLIDER */
 
 $slider-color: 'inherit' !default;
+$slider-color-force: true !default;
+$slider-color-basic: true !default;
 
 $slider-height: $line-height-em + ( $label-padding-y * 2 ) !default; // Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
 
@@ -27,6 +29,8 @@ $slider-max-icon: 'add' !default;
 /* UNHIGHLIGHT */
 
 $slider-unhighlight-color: 'gray' !default;
+$slider-unhighlight-color-force: false !default;
+$slider-unhighlight-color-basic: true !default;
 
 $slider-unhighlight-height: .5em !default;
 
@@ -35,10 +39,14 @@ $slider-unhighlight-border-radius: $slider-unhighlight-height !default;
 /* HIGHLIGHT */
 
 $slider-highlight-color: 'secondary' !default;
+$slider-highlight-color-force: false !default;
+$slider-highlight-color-basic: true !default;
 
 /* HANDLER */
 
 $slider-handler-color: 'secondary' !default;
+$slider-handler-color-force: false !default;
+$slider-handler-color-basic: true !default;
 
 $slider-handler-z-depth: 3 !default;
 $slider-handler-z-depth-force: true !default;

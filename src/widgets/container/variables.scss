@@ -12,6 +12,8 @@
 /* CONTAINER */
 
 $container-color: 'white' !default;
+$container-color-force: false !default;
+$container-color-basic: true !default;
 
 $container-border-radius: $smooth-border-radius !default;
 

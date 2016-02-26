@@ -15,7 +15,7 @@
 .tagbox {
 
   @extend %container;
-  @include color ( $tagbox-color );
+  @include color ( $tagbox-color, $tagbox-color-force, $tagbox-color-basic );
 
   /* TAGS */
 
@@ -40,7 +40,7 @@
   /* PARTIAL */
 
   &-partial {
-    @include color ( 'inherit', true );
+    @include color ( 'inherit', true, true );
     min-width: $tagbox-partial-min-width;
   }
 

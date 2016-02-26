@@ -8,7 +8,7 @@
 
 /* COLOR */
 
-@mixin color ( $color, $force: false ) {
+@mixin color ( $color, $force: false, $basic: false ) {
 
   @if not $force {
 
@@ -21,12 +21,30 @@
     }
 
     &#{$selector} {
-      @extend %#{$color};
+
+      @if not $basic {
+
+        @extend %#{$color};
+
+      } @else {
+
+        @extend %#{$color}-basic;
+
+      }
+
     }
 
   } @else {
 
-    @extend %#{$color};
+    @if not $basic {
+
+      @extend %#{$color};
+
+    } @else {
+
+      @extend %#{$color}-basic;
+
+    }
 
   }
 

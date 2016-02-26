@@ -17,7 +17,7 @@
 
   .slider-highlight,
   .slider-handler {
-    @include color ( 'error', true );
+    @include color ( 'error', true, true );
   }
 
 }
