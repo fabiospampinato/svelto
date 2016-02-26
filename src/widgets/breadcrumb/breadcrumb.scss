@@ -12,7 +12,7 @@
 
 .breadcrumb {
 
-  @extend .widget;
+  @extend %widget;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
