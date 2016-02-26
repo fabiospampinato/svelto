@@ -38,6 +38,8 @@ $datepicker-day-today-circle-color: transparent !default;
 /* DAY SELECTED */
 
 $datepicker-day-selected-z-depth: 2 !default;
+$datepicker-day-selected-z-depth-force: true !default;
+$datepicker-day-selected-z-depth-basic: true !default;
 
 $datepicker-day-selected-color: $color-secondary-text !default;
 $datepicker-day-selected-circle-color: $color-secondary !default;

@@ -13,7 +13,7 @@
 
 .panel.pinned {
 
-  @include z-depth ( $panel-pinned-z-depth );
+  @include z-depth ( $panel-pinned-z-depth, $panel-pinned-z-depth-force, $panel-pinned-z-depth-basic );
 
   /* BEFORE (BACKGROUND) */
 

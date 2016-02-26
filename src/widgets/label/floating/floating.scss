@@ -17,7 +17,7 @@
 
 .label.floating {
 
-  @include z-depth ( $label-floating-z-depth );
+  @include z-depth ( $label-floating-z-depth, $label-floating-z-depth-force, $label-floating-z-depth-basic );
   position: fixed;
   z-index: $label-floating-z-index;
   right: $label-floating-spacing;

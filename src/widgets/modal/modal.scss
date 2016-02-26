@@ -7,7 +7,7 @@
  * =========================================================================
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
- 
+
 //FIXME: How does an overlay inside a modal work? Maybe it's buggy
 //FIXME: Not centered on Dolphin Browser, probably translateX doesn't work, strange
 //FIXME: Not working on iPod's Safari
@@ -18,7 +18,7 @@
 
 .modal {
 
-  @include z-depth ( $modal-z-depth );
+  @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
   transform: translate(-50%, -50%) scale(1);
   top: 50%;
   left: 50%;

@@ -43,7 +43,7 @@
   &-handler {
 
     @include color ( $switch-handler-color );
-    @include z-depth ( $switch-handler-z-depth );
+    @include z-depth ( $switch-handler-z-depth, $switch-handler-z-depth-force, $switch-handler-z-depth-basic );
     position: absolute;
     z-index: 1;
     top: 0;

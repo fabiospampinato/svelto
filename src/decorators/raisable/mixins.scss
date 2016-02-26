@@ -10,14 +10,32 @@
 
 /* RAISABLE */
 
-@mixin raisable ( $depth: false ) {
+@mixin raisable ( $depth: false, $force: false ) {
 
   @if $depth != false {
 
-    @include z-depth ( $depth );
+    @include z-depth ( $depth, $force );
+
+    @if not $force {
+
+      @extend %raisable;
+
+    } @else {
+
+      @extend %raisable%z-depth-#{$depth};
+
+    }
+
+  } @else {
+
+    @extend %raisable;
 
   }
 
-  @extend %raisable;
+}
+
+@mixin raisable-inline ( $depth ) {
+
+  @include z-depth-inline ( raisable-next( $depth ) );
 
 }

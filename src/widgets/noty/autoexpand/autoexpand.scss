@@ -19,7 +19,7 @@
 
   .noty-queues {
 
-    // @include z-depth ( $noty-z-depth ); //FIXME: We should attach the z-depth only if actually there are some noties
+    // @include z-depth ( $noty-z-depth, true, true ); //FIXME: We should attach the z-depth only if actually there are some noties //TODO: Add variables for the other parameters
 
     /* TOP */
 

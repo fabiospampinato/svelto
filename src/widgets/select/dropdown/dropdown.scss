@@ -12,7 +12,7 @@
 
 .select-dropdown {
 
-  @include z-depth ( $select-dropdown-z-depth );
+  @include z-depth ( $select-dropdown-z-depth, $select-dropdown-z-depth-force, $select-dropdown-z-depth-basic );
 
   /* CARD BLOCK */
 

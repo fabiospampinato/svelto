@@ -41,6 +41,8 @@ $slider-highlight-color: 'secondary' !default;
 $slider-handler-color: 'secondary' !default;
 
 $slider-handler-z-depth: 3 !default;
+$slider-handler-z-depth-force: true !default;
+$slider-handler-z-depth-basic: true !default;
 
 $slider-handler-size: 1.55em !default;
 $slider-handler-half-size: $slider-handler-size / 2;

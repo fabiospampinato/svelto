@@ -24,6 +24,10 @@ $colorpicker-hue-wrp-width: 1.5em !default;
 
 /* HANDLER */
 
+$colorpicker-handler-z-depth: 2 !default;
+$colorpicker-handler-z-depth-force: true !default;
+$colorpicker-handler-z-depth-basic: true !default;
+
 $colorpicker-handler-border-width: 2px !default;
 $colorpicker-handler-border-style: 'solid' !default;
 $colorpicker-handler-border-color: $color-white !default;

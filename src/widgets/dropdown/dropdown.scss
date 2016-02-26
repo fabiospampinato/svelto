@@ -12,7 +12,7 @@
 
 .dropdown {
 
-  @include z-depth ( $dropdown-z-depth );
+  @include z-depth ( $dropdown-z-depth, $dropdown-z-depth-force, $dropdown-z-depth-basic );
   display: none;
   z-index: $dropdown-z-index;
   position: fixed;

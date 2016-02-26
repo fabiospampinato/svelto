@@ -8,17 +8,35 @@
 
 /* Z-DEPTH */
 
-@mixin z-depth ( $depth, $force: false ) {
+@mixin z-depth ( $depth, $force: false, $basic: false ) {
 
   @if not $force {
 
     &:not([class*='z-depth-']) {
-      @extend %z-depth-#{$depth};
+
+      @if not $basic {
+
+        @extend %z-depth-#{$depth};
+
+      } @else {
+
+        @extend %z-depth-#{$depth}-basic;
+
+      }
+
     }
 
   } @else {
 
-    @extend %z-depth-#{$depth};
+    @if not $basic {
+
+      @extend %z-depth-#{$depth};
+
+    } @else {
+
+      @extend %z-depth-#{$depth}-basic;
+
+    }
 
   }
 

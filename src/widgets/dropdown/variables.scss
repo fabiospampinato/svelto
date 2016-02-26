@@ -14,7 +14,10 @@
 /* DROPDOWN */
 
 $dropdown-z-index: 300 !default;
+
 $dropdown-z-depth: 4 !default;
+$dropdown-z-depth-force: true !default;
+$dropdown-z-depth-basic: true !default;
 
 $dropdown-max-width: 70vw !default;
 $dropdown-max-height: 60vh !default;

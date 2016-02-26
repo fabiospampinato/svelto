@@ -124,7 +124,7 @@
   &-handler {
 
     @include color ( $slider-handler-color );
-    @include z-depth ( $slider-handler-z-depth );
+    @include z-depth ( $slider-handler-z-depth, $slider-handler-z-depth-force, $slider-handler-z-depth-basic );
     z-index: 1;
     width: $slider-handler-size;
     height: $slider-handler-size;

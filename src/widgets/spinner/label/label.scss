@@ -18,7 +18,7 @@
 
   @extend %widget;
   @include color ( $spinner-label-color );
-  @include z-depth ( $spinner-label-z-depth );
+  @include z-depth ( $spinner-label-z-depth, $spinner-label-z-depth-force, $spinner-label-z-depth-basic );
   display: flex;
   border-radius: $spinner-label-border-radius !important;
   padding: $spinner-label-padding-y $spinner-label-padding-x;

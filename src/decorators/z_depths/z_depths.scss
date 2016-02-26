@@ -10,8 +10,12 @@
 
 @each $depth, $shadow in $z-depths {
 
-  %z-depth-#{$depth} {
+  %z-depth-#{$depth}-basic {
     @include z-depth-inline ( $depth );
+  }
+
+  %z-depth-#{$depth} {
+    @extend %z-depth-#{$depth}-basic;
   }
 
   .z-depth-#{$depth} {

@@ -13,22 +13,28 @@
 
 /* RAISABLE */
 
-%raisable:not(.disabled) {
+%raisable {
 
   transition: box-shadow $raisable-animation-duration;
 
   /* BASE */
 
-  &:hover {
-    @include z-depth ( raisable-next( 0 ), true );
+  &:not(.disabled):hover {
+    @include z-depth ( raisable-next( 0 ), true, true );
   }
 
   /* STEPS */
 
+  $max-z-depth: last( map-keys( $z-depths ) );
+
   @each $depth, $shadow in $z-depths {
 
-    &.z-depth-#{$depth}:hover {
-      @include z-depth ( raisable-next( $depth ), true );
+    @if $depth > 0 and $depth < $max-z-depth {
+
+      &%z-depth-#{$depth}:not(.disabled):hover {
+        @include z-depth ( raisable-next( $depth ), true, true );
+      }
+
     }
 
   }

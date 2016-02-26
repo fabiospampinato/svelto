@@ -27,7 +27,7 @@
   /* HANDLER */
 
   &-handler {
-    @include z-depth ( 2, ',' + $colorpicker-handler-shadow ); //TODO: Not supported now
+    @include z-depth ( $colorpicker-handler-z-depth, $colorpicker-handler-z-depth-force, $colorpicker-handler-z-depth-basic ); //TODO: Not supported now, add back the extra shadow: $colorpicker-handler-shadow
     position: absolute;
     z-index: 2;
     box-sizing: border-box;

@@ -17,7 +17,7 @@
 
 .panel {
 
-  @include z-depth ( $panel-z-depth );
+  @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
   display: none;
   z-index: $panel-z-index;
   margin-bottom: 0;

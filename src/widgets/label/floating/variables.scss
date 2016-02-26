@@ -11,7 +11,10 @@
 /* FLOATING */
 
 $label-floating-z-index: 150 !default;
+
 $label-floating-z-depth: 4 !default;
+$label-floating-z-depth-force: false !default;
+$label-floating-z-depth-basic: false !default;
 
 $label-floating-padding-x: $label-padding-y * 1.6 !default;
 $label-floating-padding-y: $label-floating-padding-x !default;

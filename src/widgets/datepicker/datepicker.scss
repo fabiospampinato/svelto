@@ -125,7 +125,7 @@
           /* BEFORE */
 
           &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
-            @include z-depth ( $datepicker-day-selected-z-depth );
+            @include z-depth ( $datepicker-day-selected-z-depth, $datepicker-day-selected-z-depth-force, $datepicker-day-selected-z-depth-basic );
           }
 
           &:before {
