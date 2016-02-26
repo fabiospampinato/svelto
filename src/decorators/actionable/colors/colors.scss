@@ -13,7 +13,8 @@
 
 @each $name, $datas in $colors {
 
-  .actionable.#{$name}:not(.disabled) {
+  %#{$name}.actionable:not(.disabled),
+  .#{$name}.actionable:not(.disabled) {
 
     &:hover {
       @extend %#{$name}-hover;

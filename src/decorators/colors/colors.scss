@@ -18,12 +18,6 @@
   $border: nth( $datas, 4 );
   $text: nth( $datas, 6 );
 
-  %#{$name} {
-    background: $bg;
-    border-color: $border;
-    color: $text;
-  }
-
   %#{$name}-hover {
     background: $bg-hover;
   }
@@ -32,9 +26,12 @@
     background: $bg-active;
   }
 
+  %#{$name},
   .#{$name} {
 
-    @extend %#{$name};
+    background: $bg;
+    border-color: $border;
+    color: $text;
 
     &.hover {
       @extend %#{$name}-hover;

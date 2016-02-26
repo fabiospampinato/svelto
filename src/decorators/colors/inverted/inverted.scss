@@ -38,6 +38,7 @@
     color: $text;
   }
 
+  %#{$name}.inverted,
   .#{$name}.inverted {
 
     @extend %#{$name}-inverted;
