@@ -8,6 +8,6 @@
 
 /* BORDER RADIUS */
 
-$rounded-border-radius: 1000000px !default;
-$smooth-border-radius: .25em !default; // 4 / 16, same as container's
+$rounded-border-radius: 1000000px !default; // If we use `50%` we may get an oval when instead we'd probably want a rectangle with smooth edges
+$smooth-border-radius: .25em !default;
 $sharp-border-radius: 0 !default;

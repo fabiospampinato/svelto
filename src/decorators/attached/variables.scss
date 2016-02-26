@@ -1,21 +1,11 @@
 
 /* =========================================================================
- * Svelto - Decorators - Border Radius
+ * Svelto - Decorators - Attached (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BORDER RADIUS */
+/* ATTACHED */
 
-.rounded {
-  border-radius: $rounded-border-radius !important;
-}
-
-.smooth {
-  border-radius: $smooth-border-radius !important;
-}
-
-.sharp {
-  border-radius: $sharp-border-radius !important;
-}
+$attached-z-index: 90 !default; //FIXME: Ugly, should be below overlay
