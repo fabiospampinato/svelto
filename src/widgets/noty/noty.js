@@ -52,7 +52,7 @@
                 '{% } %}' +
               '</div>' +
               '{% if ( o.buttons.length > 1 ) { %}' +
-                '<div class="noty-buttons multiple centered">' +
+                '<div class="noty-buttons multiple center-x">' +
                   '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
                     '{% include ( "noty.button", o.buttons[i] ); %}' +
                   '{% } %}' +

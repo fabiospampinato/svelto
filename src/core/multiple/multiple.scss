@@ -154,17 +154,17 @@
     flex-direction: column;
   }
 
-  /* CENTERED */
+  /* CENTER */
 
-  &.centered-x:not(.vertical),
-  &.cetered-y.vertical,
-  &.centered {
+  &.center-x:not(.vertical),
+  &.center-y.vertical,
+  &.center {
     justify-content: center;
   }
 
-  &.centered-y:not(.vertical),
-  &.centered-x.vertical,
-  &.centered {
+  &.center-y:not(.vertical),
+  &.center-x.vertical,
+  &.center {
     align-items: center;
   }
 
