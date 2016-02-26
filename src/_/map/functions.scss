@@ -26,6 +26,14 @@
 
 }
 
+@function map-set ( $map, $key, $value ) {
+
+  $new: ( $key: $value );
+
+  @return map-merge ( $map, $new );
+
+}
+
 /* DEEP */
 
 //SOURCE: https://css-tricks.com/snippets/sass/deep-getset-maps
