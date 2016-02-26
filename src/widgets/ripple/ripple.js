@@ -30,7 +30,7 @@
           show: 'ripple-circle-show',
           hide: 'ripple-circle-hide'
         },
-        centered: 'ripple-centered'
+        center: 'ripple-center'
       },
       animations: {
         show: Animations.xslow,
@@ -78,7 +78,7 @@
 
       if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return;
 
-      if ( this.$ripple.hasClass ( this.options.classes.centered ) ) {
+      if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
         let offset = this.$ripple.offset ();
 
