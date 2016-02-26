@@ -12,7 +12,7 @@
 
   @if not $force {
 
-    &:not([class*='z-depth-']) {
+    &:not([class*='z-depth-']) { //FIXME: Problem, doesn't work good with classes
 
       @if not $basic {
 

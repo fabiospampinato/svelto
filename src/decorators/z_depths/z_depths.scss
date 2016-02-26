@@ -18,7 +18,9 @@
     @extend %z-depth-#{$depth}-basic;
   }
 
-  .z-depth-#{$depth} {
+  $class: z-depth-get-class( $depth );
+
+  .#{$class} {
     @extend %z-depth-#{$depth};
   }
 

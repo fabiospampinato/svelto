@@ -1,0 +1,31 @@
+
+/* =========================================================================
+ * Svelto - Core - Z-Depths (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/map/functions.scss
+ * ========================================================================= */
+
+/* CLASSES */
+
+@function z-depths-get-classes () {
+
+  $classes: ();
+
+  @each $depth, $shadow in $z-depths {
+
+    $classes: map-set( $classes, $depth, z-depth-get-class( $depth ) );
+
+  }
+
+  @return $classes;
+
+}
+
+@function z-depth-get-class ( $depth ) {
+
+  @return 'z-depth-' + $depth;
+
+}
