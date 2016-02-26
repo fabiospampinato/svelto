@@ -76,7 +76,7 @@
   /* TITLE */
 
   &-title {
-    @include size ( $infobar-title-size );
+    @include size ( $infobar-title-size, $infobar-title-size-force, $infobar-title-size-basic );
   }
 
 }

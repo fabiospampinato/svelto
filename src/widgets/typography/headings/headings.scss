@@ -32,31 +32,31 @@ h6 {
   /* SMALL */
 
   > small {
-    opacity: $header-small-opacity;
+    opacity: $heading-small-opacity;
   }
 
 }
 
 h1 {
-  @include size ( $h1-size, true );
+  @include size ( $h1-size, $heading-size-force, $heading-size-basic );
 }
 
 h2 {
-  @include size ( $h2-size, true );
+  @include size ( $h2-size, $heading-size-force, $heading-size-basic );
 }
 
 h3 {
-  @include size ( $h3-size, true );
+  @include size ( $h3-size, $heading-size-force, $heading-size-basic );
 }
 
 h4 {
-  @include size ( $h4-size, true );
+  @include size ( $h4-size, $heading-size-force, $heading-size-basic );
 }
 
 h5 {
-  @include size ( $h5-size, true );
+  @include size ( $h5-size, $heading-size-force, $heading-size-basic );
 }
 
 h6 {
-  @include size ( $h6-size, true );
+  @include size ( $h6-size, $heading-size-force, $heading-size-basic );
 }

@@ -12,7 +12,7 @@
 
 .divider.text {
   @include last-child-no-gutter ();
-  @include size ( $divider-text-size );
+  @include size ( $divider-text-size, $divider-text-size-force, $divider-text-size-basic );
   font-weight: $divider-text-font-weight;
   margin: 0 $gutter-half $gutter-half;
   opacity: $divider-text-opacity;

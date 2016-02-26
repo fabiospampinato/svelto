@@ -8,7 +8,7 @@
 
 /* SIZE */
 
-@mixin size ( $size, $force: false ) {
+@mixin size ( $size, $force: false, $basic: false ) {
 
   $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
 
@@ -23,12 +23,30 @@
     }
 
     &#{$selector} {
-      @extend %#{$alias};
+
+      @if not $basic {
+
+        @extend %#{$alias};
+
+      } @else {
+
+        @extend %#{$alias}-basic;
+
+      }
+
     }
 
   } @else {
 
-    @extend %#{$alias};
+    @if not $basic {
+
+      @extend %#{$alias};
+
+    } @else {
+
+      @extend %#{$alias}-basic;
+
+    }
 
   }
 

@@ -26,7 +26,7 @@
   /* PARAGRAPH */
 
   > p {
-    @include size ( $square-sample-p-size );
+    @include size ( $square-sample-p-size, $square-smaple-p-size-force, $square-smaple-p-size-basic );
   }
 
 }

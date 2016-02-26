@@ -6,10 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* PRIMARY */
+/* VALUE */
 
 $statistic-value-size: 'xlarge' !default;
+$statistic-value-size-force: true !default;
+$statistic-value-size-basic: true !default;
 
-/* SECONDARY */
+/* DESCRIPTION */
 
 $statistic-description-size: 'small' !default;
+$statistic-description-size-force: true !default;
+$statistic-description-size-basic: true !default;
