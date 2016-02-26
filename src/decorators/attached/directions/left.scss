@@ -4,14 +4,23 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../attached.scss
  * ========================================================================= */
-
-// The attached element shouldn't match `:last-child` or it may cause issues with the gutter
 
 /* LEFT */
 
 .attached-left {
+
+  @extend %attached;
   @include absolute ( 0 false 0 0 );
   @include border-right-radius ( 0 !important );
   @include border-left-radius ( inherit !important );
+
+  /* OUTLINED */
+
+  .outlined > &.outlined {
+    @include absolute ( ( - $outline-width ) false ( - $outline-width ) ( - $outline-width ) );
+  }
+
 }
