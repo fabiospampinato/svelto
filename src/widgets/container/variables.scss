@@ -6,13 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/gutter/variables.scss
+ * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
 /* CONTAINER */
 
 $container-color: 'white' !default;
 
-$container-border-radius: .25em !default; // 4 / 16
+$container-border-radius: $smooth-border-radius !default;
 
 $container-padding-x: $gutter !default;
 $container-padding-y: $container-padding-x !default;
