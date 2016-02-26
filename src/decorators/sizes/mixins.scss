@@ -10,15 +10,15 @@
 
 @mixin size ( $size, $force: false, $basic: false ) {
 
-  $alias: nth( $sizes-classes, index( map-keys( $sizes ), $size ) );
+  $class: size-get-class( $size );
 
   @if not $force {
 
     $selector: '';
 
-    @each $class in $sizes-classes {
+    @each $c in sizes-get-classes() {
 
-      $selector: $selector + ':not(.#{$class})';
+      $selector: $selector + ':not(.#{$c})';
 
     }
 
@@ -26,11 +26,11 @@
 
       @if not $basic {
 
-        @extend %#{$alias};
+        @extend %#{$class};
 
       } @else {
 
-        @extend %#{$alias}-basic;
+        @extend %#{$class}-basic;
 
       }
 
@@ -40,11 +40,11 @@
 
     @if not $basic {
 
-      @extend %#{$alias};
+      @extend %#{$class};
 
     } @else {
 
-      @extend %#{$alias}-basic;
+      @extend %#{$class}-basic;
 
     }
 

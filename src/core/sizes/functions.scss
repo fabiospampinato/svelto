@@ -15,3 +15,17 @@
   @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
 
 }
+
+/* CLASSES */
+
+@function sizes-get-classes () {
+
+  @return map-keys( $sizes );
+
+}
+
+@function size-get-class ( $size ) {
+
+  @return $size;
+
+}

@@ -58,7 +58,3 @@ $sizes: (
 ) !default;
 
 @include assert-ascending( $sizes, '`$sizes` values must be defined in ascending order' );
-
-/* CLASSES */
-
-$sizes-classes: map-keys( $sizes ) !default;
