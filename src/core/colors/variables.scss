@@ -11,9 +11,9 @@
 
 /* MODIFIERS */
 
-$color-hover-lighten-amount: 5 !default;
+$color-hover-lighten-amount: 4 !default;
 $color-active-darken-amount: $color-hover-lighten-amount !default;
-$color-border-darken-amount: $color-active-darken-amount * 3 !default;
+$color-border-darken-amount: $color-active-darken-amount * 4 !default;
 
 /* COLORS */
 
@@ -225,7 +225,7 @@ $color-violet-link-hover: lighten( $color-violet-link, $color-hover-lighten-amou
 
 $color-white-bg: $color-white !default;
 $color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !default;
-$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
+$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 1.5 ) !default;
 $color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
 $color-white-accent: $color-secondary !default;
 $color-white-text: #3f3f3f !default; // Contrast ratio: 10.5
@@ -279,8 +279,8 @@ $color-warning-link-hover: lighten( $color-warning-link, $color-hover-lighten-am
 /* BASE */
 
 $color-base-bg: $color-base !default;
-$color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
-$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount * 2 ) !default;
+$color-base-bg-hover: lighten( $color-base-bg, $color-hover-lighten-amount ) !default;
+$color-base-bg-active: darken( $color-base-bg, $color-active-darken-amount ) !default;
 $color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
 $color-base-text: #3f3f3f !default; // Contrast ratio: 9.1
