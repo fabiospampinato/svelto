@@ -1,26 +1,24 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlighted - Directions - Bottom
+ * Svelto - Decorators - Highlighted - Directions - Horizontal
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vertical.scss
+ * @require ../highlighted.scss
  * ========================================================================= */
 
-/* BOTTOM */
+/* HORIZONTAL */
 
-.highlight-bottom {
-
-  @extend %highlight-vertical;
-
-  &:after {
-    border-bottom-width: $highlight-size;
-  }
+%highlight-horizontal {
 
   /* OUTLINED */
 
-  &.outlined:after {
+  &:not(.highlight-top).outlined:after {
+    top: - $outline-width;
+  }
+
+  &:not(.highlight-bottom).outlined:after {
     bottom: - $outline-width;
   }
 
