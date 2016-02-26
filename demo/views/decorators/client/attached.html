@@ -9,10 +9,30 @@
     <div data-value="25" class="progressbar slim attached-top">
       <div class="progressbar-highlight"></div>
     </div>
+    <div class="container compact quaternary attached-right"></div>
     <div data-value="75" class="progressbar slim attached-bottom">
       <div class="progressbar-highlight"></div>
     </div>
+    <div class="container compact tertiary attached-left"></div>
     {{{sample.paragraph}}}
   </div>
+
+  {{> attached_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="attached_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+
+  <script>
+    function toggle_class ( name ) {
+      $('[class*="attached-"]').toggleClass ( name );
+    }
+  </script>
 
 </template>

@@ -3,8 +3,60 @@
 
 <template name="centered">
 
-  {{{sw.divider "Centered"}}}
+  {{{sw.divider "Normal"}}}
 
-  <!-- //TODO -->
+  {{{sample.square "centerable"}}}
+
+  {{{sw.divider "Multiple"}}}
+
+  <div class="container outlined">
+
+    {{{sw.divider "No wrap"}}}
+
+    <div class="multiple limited no-wrap centerable">
+      {{{sample.square}}}
+      {{{sample.square}}}
+    </div>
+
+    {{{sw.divider "Vertical"}}}
+
+    <div class="multiple limited vertical centerable">
+      {{{sample.square}}}
+      {{{sample.square}}}
+    </div>
+
+    {{{sw.divider "Joined"}}}
+
+    <div class="multiple limited joined centerable">
+      {{{sample.square}}}
+      {{{sample.square}}}
+    </div>
+
+    {{{sw.divider "Normal"}}}
+
+    <div class="multiple limited centerable">
+      {{{sample.square}}}
+      {{{sample.square}}}
+    </div>
+
+  </div>
+
+  {{> centered_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="centered_actions">
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Centered" "toggle_class ( 'centered' )"}}}
+
+  <script>
+    function toggle_class ( name ) {
+      $('.centerable').toggleClass ( name );
+    }
+  </script>
 
 </template>

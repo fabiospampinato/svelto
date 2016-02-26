@@ -176,7 +176,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     let parseUrl = ( nr ) => ( options.url.indexOf ( '{page}' ) !== -1 ? options.url.replace ( '{page}', nr ) : options.url + nr );
 
-    let pagination = '<div class="pagination multiple centered joined">';
+    let pagination = '<div class="pagination multiple joined">';
 
     if ( options.total === Infinity || options.total == 'Infinity' ) {
 

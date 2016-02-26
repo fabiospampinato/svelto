@@ -5,4 +5,42 @@
 
   {{{sw.divider "Disabled"}}}
 
+  <div class="multiple">
+    <div class="label outlined">Label</div>
+    <div class="button outlined">Button</div>
+    <div class="button outlined">
+      <i class="icon">settings</i>
+      <span>Button</span>
+    </div>
+    <div class="label outlined compact">
+      <i class="icon">settings</i>
+    </div>
+    <input value="Input" placeholder="Placeholder..." class="outlined">
+    <textarea placeholder="Placeholder..." class="outlined">Textarea</textarea>
+    <div class="multiple joined">
+      <input value="Input" placeholder="Placeholder..." class="outlined">
+      <div class="button outlined compact">
+        <i class="icon">settings</i>
+      </div>
+    </div>
+  </div>
+
+  {{> disabled_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="disabled_actions">
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Disabled" "toggle_class ( 'disabled' )"}}}
+
+  <script>
+    function toggle_class ( name ) {
+      $('.layout-content .multiple').first ().children ().toggleClass ( name );
+    }
+  </script>
+
 </template>

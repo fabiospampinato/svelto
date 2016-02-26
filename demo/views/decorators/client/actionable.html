@@ -3,4 +3,58 @@
 
 <template name="actionable">
 
+  {{{sw.divider "Actionable"}}}
+
+  <div class="label actionable">Actionable</div>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    <div class="label actionable primary">Primary</div>
+    <div class="label actionable secondary">Secondary</div>
+    <div class="label actionable tertiary">Tertiary</div>
+    <div class="label actionable quaternary">Quaternary</div>
+    <div class="label actionable black">Black</div>
+    <div class="label actionable blue">Blue</div>
+    <div class="label actionable brown">Brown</div>
+    <div class="label actionable gray">Gray</div>
+    <div class="label actionable green">Green</div>
+    <div class="label actionable olive">Olive</div>
+    <div class="label actionable orange">Orange</div>
+    <div class="label actionable pink">Pink</div>
+    <div class="label actionable purple">Purple</div>
+    <div class="label actionable red">Red</div>
+    <div class="label actionable teal">Teal</div>
+    <div class="label actionable violet">Violet</div>
+    <div class="label actionable white">White</div>
+    <div class="label actionable yellow">Yellow</div>
+    <div class="label actionable error">Error</div>
+    <div class="label actionable success">Success</div>
+    <div class="label actionable warning">Warning</div>
+    <div class="label actionable base">Base</div>
+    <div class="label actionable inherit">Inherit</div>
+    <div class="label actionable transparent">Transparent</div>
+  </div>
+
+  {{> actionable_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="actionable_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined')" }}}
+    {{{sw.checkAction "Inverted" "toggle_class ( 'inverted')" }}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('.actionable').toggleClass(css_class);
+    }
+  </script>
+
 </template>

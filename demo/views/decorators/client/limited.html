@@ -5,4 +5,55 @@
 
   {{{sw.divider "Limited"}}}
 
+  <div class="container outlined limitable">
+    <p>{{{sample.paragraph}}}</p>
+  </div>
+
+  <div class="container outlined limitable">
+    <p>{{{sample.text 50}}}</p>
+  </div>
+
+  <div class="multiple limitable">
+    <div class="container outlined">
+      <p>{{{sample.text 50}}}</p>
+    </div>
+    <div class="container outlined">
+      <p>{{{sample.text 50}}}</p>
+    </div>
+  </div>
+
+  <div class="multiple equal limitable">
+    <div class="container outlined">1</div>
+    <div class="container outlined">2</div>
+    <div class="container outlined">3</div>
+    <div class="container outlined">4</div>
+    <div class="container outlined">5</div>
+    <div class="container outlined">6</div>
+    <div class="container outlined">7</div>
+    <div class="container outlined">8</div>
+    <div class="container outlined">9</div>
+    <div class="container outlined">10</div>
+  </div>
+
+  {{> limited_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="limited_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Centered" "toggle_class ( 'centered' )"}}}
+    {{{sw.checkAction "Limited" "toggle_class ( 'limited' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( name ) {
+      $('.limitable').toggleClass ( name );
+    }
+  </script>
+
 </template>
