@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/multiple/multiple.scss
  * ========================================================================= */
 
 /* SCRIPT */
@@ -14,7 +16,7 @@ script:last-child {
   display: block;
   margin-top: - $gutter;
 
-  :last-child > & {
+  %multiple > & {
     margin-top: 0;
   }
 

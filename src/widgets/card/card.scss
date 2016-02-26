@@ -22,6 +22,14 @@
   flex-direction: column;
   border-radius: $card-border-radius;
 
+  /* LAST SCRIPT */
+
+  //FIXME: Ugly fix
+
+  > script:last-child {
+    display: none;
+  }
+
   /* HEADER / BLOCK / FOOTER */
 
   &-header,
@@ -31,6 +39,7 @@
     &:not(.multiple) {
       @extend %container;
       border-radius: 0;
+      border-color: inherit; // So that when the children also inherit the border color is actually inherited
     }
 
     &.multiple {
