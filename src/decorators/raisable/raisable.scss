@@ -25,11 +25,9 @@
 
   /* STEPS */
 
-  $max-z-depth: last( map-keys( $z-depths ) );
-
   @each $depth, $shadow in $z-depths {
 
-    @if $depth > 0 and $depth < $max-z-depth {
+    @if $depth > 0 {
 
       &%z-depth-#{$depth}:not(.disabled):hover {
         @include z-depth ( raisable-next( $depth ), true, true );
