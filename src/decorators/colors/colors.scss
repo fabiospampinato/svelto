@@ -12,6 +12,8 @@
 
 @each $name, $datas in $colors {
 
+  $class: color-get-class( $name );
+
   $bg: nth( $datas, 1 );
   $bg-hover: nth( $datas, 2 );
   $bg-active: nth( $datas, 3 );
@@ -45,8 +47,6 @@
     }
 
   }
-
-  $class: color-get-class( $name );
 
   .#{$class} {
     @extend %color-#{$name};

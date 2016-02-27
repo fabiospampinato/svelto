@@ -10,6 +10,8 @@
 
 @each $depth, $shadow in $z-depths {
 
+  $class: z-depth-get-class( $depth );
+
   %z-depth-#{$depth}-basic {
     @include z-depth-inline ( $depth );
   }
@@ -17,8 +19,6 @@
   %z-depth-#{$depth} {
     @extend %z-depth-#{$depth}-basic;
   }
-
-  $class: z-depth-get-class( $depth );
 
   .#{$class} {
     @extend %z-depth-#{$depth};
