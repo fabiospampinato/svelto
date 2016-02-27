@@ -23,5 +23,5 @@ $parallax-background-scale: 2 !default;
 
 /* FOREGROUND */
 
-$parallax-foreground-translate-z: $parallax-perspective / 3.3333333333 !default;
+$parallax-foreground-translate-z: $parallax-perspective / ( 10 / 3 ) !default;
 $parallax-foreground-scale: .7 !default;

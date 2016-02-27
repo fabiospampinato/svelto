@@ -98,7 +98,7 @@
     &:before {
       @include fill-absolute ();
       content: '';
-      background: linear-gradient(to bottom, red 0%, fuchsia 16.6666666666%, blue 33.3333333333%, aqua 50%, lime 66.6666666666%, yellow 83.3333333333%, red 100%);
+      background: linear-gradient(to bottom, red 0%, fuchsia ( 100% / 6 ), blue ( 100% / 6 * 2 ), aqua 50%, lime ( 100% / 6 * 4 ), yellow ( 100% / 6 * 5 ), red 100%);
     }
 
     /* HANDLER */
