@@ -16,9 +16,9 @@
 
   let Fuzzy = {
 
-    match ( str, search, isCaseSensitive ) {
+    match ( str, search, isCaseSensitive = true ) {
 
-      if ( isCaseSensitive !== false ) {
+      if ( !isCaseSensitive ) {
 
         str = str.toLowerCase ();
         search = search.toLowerCase ();
