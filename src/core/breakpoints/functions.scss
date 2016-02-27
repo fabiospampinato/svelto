@@ -47,7 +47,7 @@
 
   @each $breakpoint, $value in $breakpoints {
 
-    $classes: map-set( $classes, $breakpoint, breakpoint-get-class( $breakpoint ) );
+    $classes: append( $classes, breakpoint-get-class( $breakpoint ) );
 
   }
 

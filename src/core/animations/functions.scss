@@ -16,7 +16,7 @@
 
   @each $animation, $duration in $animations {
 
-    $classes: map-set( $classes, $animation, animation-get-class( $animation ) );
+    $classes: append( $classes, animation-get-class( $animation ) );
 
   }
 

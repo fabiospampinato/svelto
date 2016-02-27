@@ -32,7 +32,7 @@
 
   @each $name, $datas in $colors {
 
-    $classes: map-set( $classes, $name, color-get-class( $name ) );
+    $classes: append( $classes, color-get-class( $name ) );
 
   }
 

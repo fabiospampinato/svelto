@@ -24,7 +24,7 @@
 
   @each $depth, $shadow in $z-depths {
 
-    $classes: map-set( $classes, $depth, z-depth-get-class( $depth ) );
+    $classes: append( $classes, z-depth-get-class( $depth ) );
 
   }
 
