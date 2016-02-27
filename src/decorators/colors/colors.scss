@@ -18,30 +18,30 @@
   $border: nth( $datas, 4 );
   $text: nth( $datas, 6 );
 
-  %#{$name}-basic {
+  %color-#{$name}-basic {
     background: $bg;
     border-color: $border;
     color: $text;
   }
 
-  %#{$name}-hover {
+  %color-#{$name}-hover {
     background: $bg-hover;
   }
 
-  %#{$name}-active {
+  %color-#{$name}-active {
     background: $bg-active;
   }
 
-  %#{$name} {
+  %color-#{$name} {
 
-    @extend %#{$name}-basic;
+    @extend %color-#{$name}-basic;
 
     &.hover {
-      @extend %#{$name}-hover;
+      @extend %color-#{$name}-hover;
     }
 
     &.active {
-      @extend %#{$name}-active;
+      @extend %color-#{$name}-active;
     }
 
   }
@@ -49,7 +49,7 @@
   $class: color-get-class( $name );
 
   .#{$class} {
-    @extend %#{$name};
+    @extend %color-#{$name};
   }
 
 }

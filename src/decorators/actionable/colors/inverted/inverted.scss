@@ -13,14 +13,14 @@
 
 @each $name, $datas in $colors {
 
-  %#{$name}.actionable.inverted:not(.disabled) {
+  %color-#{$name}.actionable.inverted:not(.disabled) {
 
     &:hover {
-      @extend %#{$name}-inverted-hover;
+      @extend %color-#{$name}-inverted-hover;
     }
 
     &:not(.ripple):active {
-      @extend %#{$name}-inverted-active;
+      @extend %color-#{$name}-inverted-active;
     }
 
   }

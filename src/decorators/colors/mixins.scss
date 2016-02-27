@@ -18,11 +18,11 @@
 
       @if not $basic {
 
-        @extend %#{$color};
+        @extend %color-#{$color};
 
       } @else {
 
-        @extend %#{$color}-basic;
+        @extend %color-#{$color}-basic;
 
       }
 
@@ -32,11 +32,11 @@
 
     @if not $basic {
 
-      @extend %#{$color};
+      @extend %color-#{$color};
 
     } @else {
 
-      @extend %#{$color}-basic;
+      @extend %color-#{$color}-basic;
 
     }
 

@@ -10,7 +10,7 @@
 
 /* SCALED ICON SIZES */
 
-%scaled-icon-sizes {
+%icon-sizes-scaled {
 
   @each $size, $font-size in $sizes {
 
@@ -68,7 +68,7 @@
 
 %icon-scalable {
   @extend %icon;
-  @extend %scaled-icon-sizes;
+  @extend %icon-sizes-scaled;
 }
 
 i.icon {

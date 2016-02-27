@@ -13,14 +13,14 @@
 
 @each $name, $datas in $colors {
 
-  %#{$name}.actionable:not(.disabled) {
+  %color-#{$name}.actionable:not(.disabled) {
 
     &:hover {
-      @extend %#{$name}-hover;
+      @extend %color-#{$name}-hover;
     }
 
     &:not(.ripple):active {
-      @extend %#{$name}-active;
+      @extend %color-#{$name}-active;
     }
 
   }

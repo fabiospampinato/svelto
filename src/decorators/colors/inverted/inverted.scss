@@ -20,34 +20,34 @@
   $border: nth( $datas, 4 );
   $text: nth( $datas, 6 );
 
-  %#{$name}-inverted {
+  %color-#{$name}-inverted {
     background: inherit;
     border-color: $bg;
     color: $bg;
   }
 
-  %#{$name}-inverted-hover {
+  %color-#{$name}-inverted-hover {
     background: $bg-hover;
     border-color: $bg;
     color: $text;
   }
 
-  %#{$name}-inverted-active {
+  %color-#{$name}-inverted-active {
     background: $bg-active;
     border-color: $bg-active;
     color: $text;
   }
 
-  %#{$name}.inverted {
+  %color-#{$name}.inverted {
 
-    @extend %#{$name}-inverted;
+    @extend %color-#{$name}-inverted;
 
     &.hover {
-      @extend %#{$name}-inverted-hover;
+      @extend %color-#{$name}-inverted-hover;
     }
 
     &.active {
-      @extend %#{$name}-inverted-active;
+      @extend %color-#{$name}-inverted-active;
     }
 
   }

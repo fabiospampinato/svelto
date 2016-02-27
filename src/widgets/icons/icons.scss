@@ -29,7 +29,7 @@
 .icons {
 
   @extend %icons;
-  @extend %scaled-icon-sizes; //FIXME: Sure?
+  @extend %icon-sizes-scaled; //FIXME: Sure?
 
   /* ICON */
 
