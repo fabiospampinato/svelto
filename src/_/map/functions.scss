@@ -30,7 +30,7 @@
 
   $new: ( $key: $value );
 
-  @return map-merge ( $map, $new );
+  @return map-merge( $map, $new );
 
 }
 
