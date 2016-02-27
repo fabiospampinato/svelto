@@ -8,14 +8,12 @@
 
 /* DISABLED */
 
-//FIXME: Sure it is the right way to implement it?
-// In order to always animate the transition
+//FIXME: Are we sure this is the best/cleaner way to implement it?
+// In order to always animate the opacity transition
 
 * {
   transition: opacity $disabled-animation-duration;
 }
-
-/* DISABLED */
 
 .disabled {
 

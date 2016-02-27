@@ -13,18 +13,18 @@
 
 /* BLURRED */
 
-%blurred {
-  filter: url(#{$blurred-path-images}blurred.svg#blur);
-  filter: blur($blurred-blur-amount);
-}
-
-//FIXME: Sure it is the right way to implement it?
-// In order to always animate the transition
+//FIXME: Are we sure this is the best/cleaner way to implement it?
+// In order to always animate the filter transition
 // Transitioning `opacity` in order to support `disabled`
 
 * {
   transition-property: opacity, filter;
-  transition-duration: $blurred-animation-duration;
+  transition-duration: $disabled-animation-duration, $blurred-animation-duration;
+}
+
+%blurred {
+  filter: url(#{$blurred-path-images}blurred.svg#blur);
+  filter: blur($blurred-blur-amount);
 }
 
 .blurred {

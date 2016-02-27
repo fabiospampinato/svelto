@@ -5,6 +5,8 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require decorators/blurred/blurred.scss
+ * @require decorators/disabled/disabled.scss
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
@@ -13,9 +15,17 @@
 
 /* RAISABLE */
 
-%raisable {
+//FIXME: Are we sure this is the best/cleaner way to implement it?
+// In order to always animate the box-shadow transition
+// Transitioning `opacity` in order to support `disabled`
+// Transitioning `filter`  in order to support `blurred`
 
-  transition: box-shadow $raisable-animation-duration;
+* {
+  transition-property: opacity, filter, box-shadow;
+  transition-duration: $disabled-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+}
+
+%raisable {
 
   /* BASE */
 
