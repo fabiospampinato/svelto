@@ -8,6 +8,14 @@
  * @require _/map/functions.scss
  * ========================================================================= */
 
+/* SELECTOR */
+
+@function z-depths-get-undefined-selector () {
+
+  @return ':not([class*="z-depth-"])';
+
+}
+
 /* CLASSES */
 
 @function z-depths-get-classes () {

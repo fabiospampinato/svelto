@@ -14,13 +14,7 @@
 
   @if not $force {
 
-    $selector: '';
-
-    @each $c in sizes-get-classes() {
-
-      $selector: $selector + ':not(.#{$c})';
-
-    }
+    $selector: sizes-get-undefined-selector();
 
     &#{$selector} {
 

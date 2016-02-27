@@ -12,7 +12,9 @@
 
   @if not $force {
 
-    &:not([class*='z-depth-']) { //FIXME: Problem, doesn't work good with classes
+    $selector: z-depths-get-undefined-selector();
+
+    &#{$selector} {
 
       @if not $basic {
 

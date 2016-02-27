@@ -16,6 +16,22 @@
 
 }
 
+/* SELECTOR */
+
+@function sizes-get-undefined-selector () {
+
+  $selector: '';
+
+  @each $class in sizes-get-classes() {
+
+    $selector: $selector + ':not(.#{$class})';
+
+  }
+
+  @return $selector;
+
+}
+
 /* CLASSES */
 
 @function sizes-get-classes () {

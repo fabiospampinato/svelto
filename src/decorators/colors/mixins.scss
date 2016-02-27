@@ -12,13 +12,7 @@
 
   @if not $force {
 
-    $selector: '';
-
-    @each $c in colors-get-classes() {
-
-      $selector: $selector + ':not(.#{$c})';
-
-    }
+    $selector: colors-get-undefined-selector();
 
     &#{$selector} {
 

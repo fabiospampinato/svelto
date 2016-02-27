@@ -8,6 +8,22 @@
  * @require _/map/functions.scss
  * ========================================================================= */
 
+/* SELECTOR */
+
+@function colors-get-undefined-selector () {
+
+  $selector: '';
+
+  @each $class in colors-get-classes() {
+
+    $selector: $selector + ':not(.#{$class})';
+
+  }
+
+  @return $selector;
+
+}
+
 /* CLASSES */
 
 @function colors-get-classes () {
