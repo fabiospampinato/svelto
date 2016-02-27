@@ -1,0 +1,37 @@
+
+<!-- ANIMATIONS -->
+
+<template name="animations">
+
+  {{{sw.divider "Animations"}}}
+
+  <div class="multiple equal">
+    <div class="container outlined xslow">X-Slow</div>
+    <div class="container outlined slow">Slow</div>
+    <div class="container outlined normal">Normal</div>
+    <div class="container outlined fast">Fast</div>
+    <div class="container outlined xfast">X-Fast</div>
+  </div>
+
+  {{> animations_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="animations_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Blurred" "toggle_class ( 'blurred' )" }}}
+    {{{sw.checkAction "Disabled" "toggle_class ( 'disabled' )" }}}
+  </div>
+
+  <script>
+    function toggle_class(css_class) {
+      $('.container').toggleClass(css_class);
+    }
+  </script>
+
+</template>

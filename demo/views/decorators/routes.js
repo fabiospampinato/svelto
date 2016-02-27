@@ -1,7 +1,7 @@
 
 /* COMPONENTS */
 
-let components = ['actionable', 'attached', 'blurred', 'border_radius', 'centered', 'colors', 'disabled', 'grid', 'hidden', 'highlighted', 'limited', 'order', 'outlined', 'raisable', 'sizes', 'z_depths'];
+let components = ['actionable', 'animations', 'attached', 'blurred', 'border_radius', 'centered', 'colors', 'disabled', 'grid', 'hidden', 'highlighted', 'limited', 'order', 'outlined', 'raisable', 'sizes', 'z_depths'];
 
 for ( let component of components ) {
 
