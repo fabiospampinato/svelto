@@ -10,8 +10,6 @@
 
 @mixin size ( $size, $force: false, $basic: false ) {
 
-  $class: size-get-class( $size );
-
   @if not $force {
 
     $selector: sizes-get-undefined-selector();
@@ -20,11 +18,11 @@
 
       @if not $basic {
 
-        @extend %size-#{$class};
+        @extend %size-#{$size};
 
       } @else {
 
-        @extend %size-#{$class}-basic;
+        @extend %size-#{$size}-base;
 
       }
 
@@ -34,11 +32,11 @@
 
     @if not $basic {
 
-      @extend %size-#{$class};
+      @extend %size-#{$size};
 
     } @else {
 
-      @extend %size-#{$class}-basic;
+      @extend %size-#{$size}-base;
 
     }
 

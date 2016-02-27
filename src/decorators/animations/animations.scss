@@ -8,12 +8,12 @@
 
 /* ANIMATIONS */
 
-@each $animation, $time in $animations {
+@each $animation, $duration in $animations {
 
   $class: animation-get-class( $animation );
 
   .#{$class} {
-    transition-duration: $time !important;
+    transition-duration: $duration !important;
   }
 
 }

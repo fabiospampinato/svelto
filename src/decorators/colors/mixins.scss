@@ -22,7 +22,7 @@
 
       } @else {
 
-        @extend %color-#{$color}-basic;
+        @extend %color-#{$color}-base;
 
       }
 
@@ -36,7 +36,7 @@
 
     } @else {
 
-      @extend %color-#{$color}-basic;
+      @extend %color-#{$color}-base;
 
     }
 

@@ -20,7 +20,7 @@
   $border: nth( $datas, 4 );
   $text: nth( $datas, 6 );
 
-  %color-#{$name}-basic {
+  %color-#{$name}-base {
     background: $bg;
     border-color: $border;
     color: $text;
@@ -36,7 +36,7 @@
 
   %color-#{$name} {
 
-    @extend %color-#{$name}-basic;
+    @extend %color-#{$name}-base;
 
     &.hover {
       @extend %color-#{$name}-hover;

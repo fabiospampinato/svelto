@@ -12,12 +12,12 @@
 
   $class: z-depth-get-class( $depth );
 
-  %z-depth-#{$depth}-basic {
+  %z-depth-#{$depth}-base {
     @include z-depth-inline ( $depth );
   }
 
   %z-depth-#{$depth} {
-    @extend %z-depth-#{$depth}-basic;
+    @extend %z-depth-#{$depth}-base;
   }
 
   .#{$class} {

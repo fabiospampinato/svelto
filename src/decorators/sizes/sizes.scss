@@ -14,12 +14,12 @@
 
   $class: size-get-class( $size );
 
-  %size-#{$size}-basic {
+  %size-#{$size}-base {
     @include size-inline ( $size );
   }
 
   %size-#{$size} {
-    @extend %size-#{$size}-basic;
+    @extend %size-#{$size}-base;
   }
 
   .#{$class} {

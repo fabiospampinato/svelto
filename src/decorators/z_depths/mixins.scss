@@ -22,7 +22,7 @@
 
       } @else {
 
-        @extend %z-depth-#{$depth}-basic;
+        @extend %z-depth-#{$depth}-base;
 
       }
 
@@ -36,7 +36,7 @@
 
     } @else {
 
-      @extend %z-depth-#{$depth}-basic;
+      @extend %z-depth-#{$depth}-base;
 
     }
 

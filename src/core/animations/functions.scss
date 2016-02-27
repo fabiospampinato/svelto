@@ -14,7 +14,7 @@
 
   $classes: ();
 
-  @each $animation, $time in $animations {
+  @each $animation, $duration in $animations {
 
     $classes: map-set( $classes, $animation, animation-get-class( $animation ) );
 
