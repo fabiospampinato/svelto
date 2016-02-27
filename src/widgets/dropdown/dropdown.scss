@@ -31,7 +31,8 @@
   /* TIP */
 
   &:before {
-    @include square ( $dropdown-tip-size, inherit );
+    @include square ( $dropdown-tip-size );
+    @include color ( 'inherit', true, true );
     transform: rotate(45deg);
     position: absolute;
     content: '';

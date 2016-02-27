@@ -13,4 +13,5 @@
 .square {
   @extend %shape;
   @include square ( $square-size );
+  @include color ( $circle-color, $circle-color-force, $circle-color-basic );
 }

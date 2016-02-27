@@ -12,4 +12,5 @@
 
 .triangle {
   @extend %shape;
+  @include color ( $circle-color, $circle-color-force, $circle-color-basic );
 }

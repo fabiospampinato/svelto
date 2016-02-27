@@ -8,8 +8,7 @@
 
 /* SQUARE */
 
-@mixin square ( $size: 1em, $color: $color-gray ) {
+@mixin square ( $size: 1em ) {
   width: $size;
   height: $size;
-  background-color: $color;
 }

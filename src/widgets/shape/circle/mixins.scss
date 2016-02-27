@@ -8,9 +8,8 @@
 
 /* CIRCLE */
 
-@mixin circle ( $size: 1em, $color: $color-gray ) {
+@mixin circle ( $size: 1em ) {
   width: $size;
   height: $size;
-  background-color: $color;
   border-radius: 50%;
 }

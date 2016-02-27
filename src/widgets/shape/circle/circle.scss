@@ -13,4 +13,5 @@
 .circle {
   @extend %shape;
   @include circle ( $circle-size );
+  @include color ( $circle-color, $circle-color-force, $circle-color-basic );
 }

@@ -8,7 +8,7 @@
 
 /* TRIANGLE */
 
-@mixin triangle ( $size: 1em, $direction: up, $color: $color-gray ) {
+@mixin triangle ( $size: 1em, $direction: up ) {
 
   $size: $size / 2;
   border: $size solid transparent;
@@ -16,22 +16,18 @@
   @if $direction == top {
 
     border-top-width: 0;
-    border-bottom-color: $color;
 
   } @else if $direction == right {
 
     border-right-width: 0;
-    border-left-color: $color;
 
   } @else if $direction == left {
 
     border-left-width: 0;
-    border-right-color: $color;
 
   } @else { // Defaulting to `bottom`
 
     border-bottom-width: 0;
-    border-top-color: $color;
 
   }
 

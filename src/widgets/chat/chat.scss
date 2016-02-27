@@ -69,7 +69,8 @@
       /* TIP */
 
       &:before {
-        @include square ( $chat-tip-size, inherit );
+        @include square ( $chat-tip-size );
+        @include color ( 'inherit', true, true );
         display: block;
         transform: rotate(45deg);
         position: absolute;
