@@ -5,4 +5,32 @@
 
   {{{sw.divider "Embedded CSS"}}}
 
+  <div class="multiple equal no-wrap">
+    <input class="outlined" name="selector" placeholder="Selector...">
+    <input class="outlined" name="property" placeholder="Property...">
+    <input class="outlined" name="value" placeholder="Value...">
+  </div>
+
+  <div class="multiple actions">
+    <div class="button outlined" onclick="api ( 'get' )">Get</div>
+    <div class="button outlined" onclick="api ( 'set' )">Set</div>
+    <div class="button outlined" onclick="api ( 'remove' )">Remove</div>
+    <div class="button outlined" onclick="api ( 'clear' )">Clear</div>
+    <div class="button outlined" onclick="api ( 'attach' )">Attach</div>
+    <div class="button outlined" onclick="api ( 'detach' )">detach</div>
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api ( name ) {
+      var result = Svelto.EmbeddedCSS[name] ( getValue ( 'selector' ), getValue ( 'property' ), getValue ( 'value' ) );
+      if ( result ) {
+        $.noty ( JSON.stringify ( result ) );
+      }
+    }
+  </script>
+
 </template>

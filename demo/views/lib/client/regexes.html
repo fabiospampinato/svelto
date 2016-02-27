@@ -5,4 +5,40 @@
 
   {{{sw.divider "Regexes"}}}
 
+  <div class="card outlined centered sm-12 md-10 lg-8 xl-6">
+    <div class="card-header primary outlined">Regexes</div>
+    <div class="card-block">
+      {{{sw.divider "Type"}}}
+      <input class="outlined fluid" name="alpha" placeholder="Alpha...">
+      <input class="outlined fluid" name="alphanumeric" placeholder="Alphanumeric...">
+      <input class="outlined fluid" name="hexadecimal" placeholder="Hexadecimal...">
+      <input class="outlined fluid" name="integer" placeholder="Integer...">
+      <input class="outlined fluid" name="float" placeholder="Float...">
+      {{{sw.divider "Things"}}}
+      <input class="outlined fluid" name="email" placeholder="Email...">
+      <input class="outlined fluid" name="cc" placeholder="Cc...">
+      <input class="outlined fluid" name="ssn" placeholder="Ssn...">
+      <input class="outlined fluid" name="ipv4" placeholder="Ipv4...">
+      <input class="outlined fluid" name="url" placeholder="Url...">
+    </div>
+  </div>
+
+  {{> regexes_init}}
+
+</template>
+
+<!-- INIT -->
+
+<template name="regexes_init">
+
+  {{{sw.noty body="<span class=\"text-green\">Match</span> or <span class=\"text-red\">not</span>" ttl="forever"}}}
+
+  <script>
+    $('input').on ( 'input change', function () {
+      var $input = $(this),
+          match = !!$input.val ().match ( Svelto.Regexes[$input.attr ( 'name' )] );
+      $input.toggleClass ( 'red', !match ).toggleClass ( 'green', match );
+    });
+  </script>
+
 </template>

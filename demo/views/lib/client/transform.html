@@ -3,6 +3,75 @@
 
 <template name="transform">
 
-  {{{sw.divider "Transform"}}}
+  {{{sw.divider "Sample"}}}
+
+  {{{sample.square}}}
+
+  {{> transform_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="transform_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple actions joined">
+    <input name="matrix" class="outlined" placeholder="Values...">
+    <div onclick="matrix ()" class="button outlined">matrix</div>
+  </div>
+
+  <div class="multiple actions joined">
+    <input name="transformation" class="outlined" placeholder="Value...">
+    <div onclick="transformation ( 'scaleX' )" class="button outlined">scaleX</div>
+    <div onclick="transformation ( 'skewY' )" class="button outlined">skewY</div>
+    <div onclick="transformation ( 'skewX' )" class="button outlined">skewX</div>
+    <div onclick="transformation ( 'scaleY' )" class="button outlined">scaleY</div>
+    <div onclick="transformation ( 'translateX' )" class="button outlined">translateX</div>
+    <div onclick="transformation ( 'translateY' )" class="button outlined">translateY</div>
+  </div>
+
+  <div class="multiple actions joined">
+    <input name="translate_x" class="outlined" placeholder="X...">
+    <input name="translate_y" class="outlined" placeholder="Y...">
+    <div onclick="translation ()" class="button outlined">translate</div>
+  </div>
+
+  <script>
+    var $sample = $('.square-sample');
+
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function matrix () {
+      var val = getValue ( 'matrix' );
+      if ( val ) {
+        $sample.matrix ( val.split ( ',' ) );
+      } else {
+        $.noty ( String($sample.matrix ()) );
+      }
+    }
+
+    function transformation ( type ) {
+      var val = getValue ( 'transformation' );
+      if ( val ) {
+        $sample[type] ( val );
+      } else {
+        $.noty ( String($sample[type]()) );
+      }
+    }
+
+    function translation () {
+      var x = getValue ( 'translate_x' ),
+          y = getValue ( 'translate_y' );
+      if ( x && y ) {
+        $sample.translate ( x, y );
+      } else {
+        $.noty ( String($sample.translate ()) );
+      }
+    }
+  </script>
 
 </template>
