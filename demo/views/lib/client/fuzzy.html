@@ -5,4 +5,33 @@
 
   {{{sw.divider "Fuzzy"}}}
 
+  <div class="multiple">
+    <div class="multiple equal fluid">
+      <input class="outlined" name="string" placeholder="String...">
+      <input class="outlined" name="search" placeholder="Search...">
+    </div>
+    {{{sw.checkbox "Case sensitive" "case_sensitive" "1"}}}
+  </div>
+
+  {{> fuzzy_init}}
+
+</template>
+
+<!-- INIT -->
+
+<template name="fuzzy_init">
+
+  {{{sw.noty body="<span class=\"text-green\">Match</span> or <span class=\"text-red\">not</span>" ttl="forever"}}}
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    $('input').on ( 'input change', function () {
+      var match = Svelto.Fuzzy.match ( getValue ( 'string' ), getValue ( 'search' ), $('input[name="case_sensitive"]').prop ( 'checked' ) );
+      $('input[name="search"]').toggleClass ( 'red', !match ).toggleClass ( 'green', match );
+    });
+  </script>
+
 </template>

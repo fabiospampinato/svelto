@@ -3,7 +3,7 @@
 
 <template name="notification">
 
-  {{{sw.divider "Notifications"}}}
+  {{{sw.divider "Notification"}}}
 
   {{> notification_actions}}
 
@@ -21,9 +21,9 @@
   <script>
     function notification_trigger() {
       $.notification({
-        title: "Test title",
-        body: "Test description",
-        img: "/sample.png"
+        title: 'Test title',
+        body: 'Test description',
+        img: '/sample/sample.png'
       });
     }
 

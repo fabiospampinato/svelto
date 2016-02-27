@@ -10,7 +10,9 @@
     <input name="hex_r" placeholder="Red..." class="outlined">
     <input name="hex_g" placeholder="Green..." class="outlined">
     <input name="hex_b" placeholder="Blue..." class="outlined">
-    <div class="label compact gray">To</div>
+    <div class="label compact outlined">
+      <i class="icon">arrow_forward</i>
+    </div>
     <div class="button outlined" onclick="hex2rgb ()">RGB</div>
     <div class="button outlined" onclick="hex2hsv ()">HSV</div>
     <div class="button outlined" onclick="hex2hsl ()">HSL</div>
@@ -23,7 +25,9 @@
     <input name="rgb_r" placeholder="Red..." class="outlined">
     <input name="rgb_g" placeholder="Green..." class="outlined">
     <input name="rgb_b" placeholder="Blue..." class="outlined">
-    <div class="label compact gray">To</div>
+    <div class="label compact outlined">
+      <i class="icon">arrow_forward</i>
+    </div>
     <div class="button outlined" onclick="rgb2hex ()">HEX</div>
     <div class="button outlined" onclick="rgb2hsv ()">HSV</div>
     <div class="button outlined" onclick="rgb2hsl ()">HSL</div>
@@ -38,7 +42,9 @@
     <input name="hsv_h" placeholder="Hue..." class="outlined">
     <input name="hsv_s" placeholder="Saturation..." class="outlined">
     <input name="hsv_v" placeholder="Value..." class="outlined">
-    <div class="label compact gray">To</div>
+    <div class="label compact outlined">
+      <i class="icon">arrow_forward</i>
+    </div>
     <div class="button outlined" onclick="hsv2hex ()">HEX</div>
     <div class="button outlined" onclick="hsv2rgb ()">RGB</div>
     <div class="button outlined" onclick="hsv2hsl ()">HSL</div>
@@ -51,7 +57,9 @@
     <input name="hsl_h" placeholder="Hue..." class="outlined">
     <input name="hsl_s" placeholder="Saturation..." class="outlined">
     <input name="hsl_l" placeholder="Lightness..." class="outlined">
-    <div class="label compact gray">To</div>
+    <div class="label compact outlined">
+      <i class="icon">arrow_forward</i>
+    </div>
     <div class="button outlined" onclick="hsl2hex ()">HEX</div>
     <div class="button outlined" onclick="hsl2rgb ()">RGB</div>
     <div class="button outlined" onclick="hsl2hsv ()">HSV</div>
@@ -150,51 +158,51 @@
     });
 
     function hex2rgb () {
-      setRgb ( Color.hex2rgb ( getHex () ) );
+      setRgb ( Svelto.Color.hex2rgb ( getHex () ) );
     }
 
     function hex2hsv () {
-      setHsv ( Color.hex2hsv ( getHex () ) );
+      setHsv ( Svelto.Color.hex2hsv ( getHex () ) );
     }
 
     function hex2hsl () {
-      setHsl ( Color.hex2hsl ( getHex () ) );
+      setHsl ( Svelto.Color.hex2hsl ( getHex () ) );
     }
 
     function rgb2hex () {
-      setHex ( Color.rgb2hex ( getRgb () ) );
+      setHex ( Svelto.Color.rgb2hex ( getRgb () ) );
     }
 
     function rgb2hsv () {
-      setHsv ( Color.rgb2hsv ( getRgb () ) );
+      setHsv ( Svelto.Color.rgb2hsv ( getRgb () ) );
     }
 
     function rgb2hsl () {
-      setHsl ( Color.rgb2hsl ( getRgb () ) );
+      setHsl ( Svelto.Color.rgb2hsl ( getRgb () ) );
     }
 
     function hsv2hex () {
-      setHex ( Color.hsv2hex ( getHsv () ) );
+      setHex ( Svelto.Color.hsv2hex ( getHsv () ) );
     }
 
     function hsv2rgb () {
-      setRgb ( Color.hsv2rgb ( getHsv () ) );
+      setRgb ( Svelto.Color.hsv2rgb ( getHsv () ) );
     }
 
     function hsv2hsl () {
-      setHsl ( Color.hsv2hsl ( getHsv () ) );
+      setHsl ( Svelto.Color.hsv2hsl ( getHsv () ) );
     }
 
     function hsl2hex () {
-      setHex ( Color.hsl2hex ( getHsl () ) );
+      setHex ( Svelto.Color.hsl2hex ( getHsl () ) );
     }
 
     function hsl2rgb () {
-      setRgb ( Color.hsl2rgb ( getHsl () ) );
+      setRgb ( Svelto.Color.hsl2rgb ( getHsl () ) );
     }
 
     function hsl2hsv () {
-      setHsv ( Color.hsl2hsv ( getHsl () ) );
+      setHsv ( Svelto.Color.hsl2hsv ( getHsl () ) );
     }
   </script>
 

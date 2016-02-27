@@ -37,7 +37,7 @@
     function timer_set() {
       var milliseconds = Number($('input[name="milliseconds"]').val()),
         autostart = $('input[name="autostart"]').prop('checked');
-      timer = new Timer(timer_callback, milliseconds, autostart);
+      timer = new Svelto.Timer(timer_callback, milliseconds, autostart);
     }
 
     function timer_once() {

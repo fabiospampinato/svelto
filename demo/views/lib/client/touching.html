@@ -66,7 +66,7 @@
 
 <template name="touching_init">
 
-  {{sw.noty body="Drag the squares, the green ones are the returned ones" ttl="forever"}}
+  {{sw.noty body="Drag the squares, the green ones are those returned" ttl="forever"}}
 
   <script>
     /* POPULATE */
@@ -113,10 +113,10 @@
       $squares.draggable({
         revert: true,
         callbacks: {
-          move: function(data) {
+          move: function(event, data) {
             $squares.removeClass('green');
             if (select === 'punctual') {
-              var pointXY = $.eventXY(data.event);
+              var pointXY = $.eventXY(data.moveEvent);
               $squares.touching({
                 point: {
                   X: pointXY.X - $(window).scrollLeft(),
