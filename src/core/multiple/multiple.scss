@@ -156,6 +156,9 @@
 
   /* CENTER */
 
+  //TODO: Add center-x-left/center/right
+  //TODO: Add center-y-top/middle/bottom
+
   &.center-x:not(.vertical),
   &.center-y.vertical,
   &.center {
@@ -188,6 +191,8 @@
   /* FLUID */
 
   &.fluid {
+
+    flex-grow: 1;
 
     &:not(.vertical) {
 
