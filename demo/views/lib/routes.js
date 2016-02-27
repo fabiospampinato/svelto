@@ -1,7 +1,7 @@
 
 /* COMPONENTS */
 
-let components = ['bteach', 'color', 'fuzzy', 'n_times_action', 'notification', 'one_time_action', 'positionate', 'regexes', 'timer', 'touching', 'transform', 'validator'];
+let components = ['bteach', 'color', 'embedded_css', 'fuzzy', 'n_times_action', 'notification', 'one_time_action', 'positionate', 'regexes', 'timer', 'touching', 'transform', 'validator'];
 
 for ( let component of components ) {
 
