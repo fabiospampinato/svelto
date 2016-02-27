@@ -99,7 +99,7 @@
 
         } else {
 
-          return this.set ( selector, { property, value } );
+          return this.set ( selector, { [property]: value } );
 
         }
 
