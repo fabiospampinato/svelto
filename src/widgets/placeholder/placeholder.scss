@@ -5,16 +5,15 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
+ * @require widgets/centerer/centerer.scss
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* PLACEHOLDER */
 
 .placeholder {
-  @extend %widget;
+  @extend %centerer;
   @include color ( $placeholder-color, $placeholder-color-force, $placeholder-color-basic );
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding: $placeholder-padding-x $placeholder-padding-y;
 }

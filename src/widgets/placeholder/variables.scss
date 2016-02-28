@@ -11,3 +11,6 @@
 $placeholder-color: 'gray' !default;
 $placeholder-color-force: false !default;
 $placeholder-color-basic: true !default;
+
+$placeholder-padding-x: $gutter !default;
+$placeholder-padding-y: $placeholder-padding-x !default;
