@@ -20,7 +20,7 @@
     selector: '.flippable',
     options: {
       classes: {
-        flip: 'flipped' 
+        flip: 'flipped'
       },
       callbacks: {
         front: _.noop,

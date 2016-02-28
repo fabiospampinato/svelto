@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/disabled/disabled.scss
  * ========================================================================= */
 
 /* FLIPPABLE */
@@ -15,23 +16,15 @@
   @extend %widget;
   perspective: $flippable-perspective;
   transform-style: preserve-3d;
-  transform-origin: 50% 50%;
+  transform-origin: 50%;
 
   /* FRONT / BACK */
 
   &-front,
   &-back {
-
     @include fill ();
     backface-visibility: hidden;
-    transition: transform $flippable-animation-duration;
-    border-radius: inherit;
-
-    > :only-child {
-      @include fill ();
-      border-radius: inherit;
-    }
-
+    transition: opacity $disabled-animation-duration, transform $flippable-animation-duration;
   }
 
   /* FRONT */
