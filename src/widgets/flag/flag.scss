@@ -10,12 +10,16 @@
 
 /* FLAG */
 
-i[class^="flag-"] {
+%flag {
   display: inline-block;
   vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
   background-image: url(#{$flags-path-images}flags.png);
+}
+
+i[class*="flag-"] {
+  @extend %flag;
 }
 
 /* FLAGS */

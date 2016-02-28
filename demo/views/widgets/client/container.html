@@ -23,12 +23,7 @@
   <div class="multiple">
     {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
-    {{{sw.checkAction "Scrollable" "toggle_class ( 'scrollable' )"}}}
   </div>
-
-  {{{sw.divider "Others"}}}
-
-  {{{sw.checkAction "Height limited" "toggle_height_limit ()"}}}
 
   {{{sw.divider "State"}}}
 
@@ -48,10 +43,6 @@
 
     function disable () {
       $('.container').addClass ( 'disabled' );
-    }
-
-    function toggle_height_limit () {
-      $('.container').height ( $('.container').height () > 125 ? 125 : 'auto' );
     }
   </script>
 
