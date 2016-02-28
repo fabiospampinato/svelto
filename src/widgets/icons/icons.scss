@@ -9,16 +9,13 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-//FIXME: Scaling to large size for example doesn't work
-
 /* ICONS */
 
 %icons {
-  @extend %widget;
+  position: relative;
   display: inline-block;
   width: $icon-scale-amount * 1em;
   height: $icon-scale-amount * 1em;
-  position: relative;
 }
 
 %icons-icon {
@@ -28,12 +25,12 @@
 
 .icons {
 
+  @extend %widget;
   @extend %icons;
-  @extend %icon-sizes-scaled; //FIXME: Sure?
 
   /* ICON */
 
-  > .icon {
+  > %icon {
     @extend %icons-icon;
   }
 

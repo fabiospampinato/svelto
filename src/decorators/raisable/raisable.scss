@@ -21,8 +21,7 @@
 // Transitioning `filter`  in order to support `blurred`
 
 * {
-  transition-property: opacity, filter, box-shadow;
-  transition-duration: $disabled-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+  transition: opacity $disabled-animation-duration, filter $blurred-animation-duration, box-shadow $raisable-animation-duration;
 }
 
 %raisable {

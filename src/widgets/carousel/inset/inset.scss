@@ -37,8 +37,7 @@
     /* AFTER (ICON) */
 
     &:after {
-      @extend %icon;
-      margin-bottom: 0;
+      @extend %icon-basic;
       color: $carousel-inset-previous-next-color;
       opacity: $carousel-inset-previous-next-opacity;
       transition: opacity $carousel-inset-previous-next-animation-duration;

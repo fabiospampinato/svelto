@@ -41,7 +41,7 @@
 
     &:before,
     &:after {
-      @extend %icon;
+      @extend %icon-basic;
       @extend %icons-icon;
       transition: opacity $checkbox-icon-animation-duration;
     }

@@ -8,45 +8,9 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-/* SCALED ICON SIZES */
-
-%icon-sizes-scaled {
-
-  @each $size, $font-size in $sizes {
-
-    $class: size-get-class( $size );
-
-    &.#{$class} {
-      font-size: ( $font-size * $icon-scale-amount );
-    }
-
-  }
-
-}
-
-/* FONTS */
-
-@if $icon-font-local {
-
-  @font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(#{$icon-path-fonts}MaterialIcons-Regular.eot); /* For IE6-8 */
-    src: local('Material Icons'),
-         local('MaterialIcons-Regular'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2) format('woff2'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff) format('woff'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.ttf) format('truetype');
-  }
-
-}
-
 /* ICON */
 
-%icon {
-  position: relative;
-  margin: 0 0 $gutter;
+%icon-basic {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -61,19 +25,33 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-  overflow: hidden; // So that in case the font doesn't get loaded the text won't overflow the icon box
+  overflow: hidden; // So the text won't exceed the icon box even when the font is not loaded
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
 }
 
-%icon-scalable {
-  @extend %icon;
-  @extend %icon-sizes-scaled;
+%icon {
+  @extend %icon-basic;
+}
+
+%icon-sizes-scaled {
+
+  @each $size, $font-size in $sizes {
+
+    $class: size-get-class( $size );
+
+    &.#{$class} {
+      font-size: $font-size * $icon-scale-amount;
+    }
+
+  }
+
 }
 
 i.icon {
-  @extend %icon-scalable;
-  @include last-child-no-gutter ();
+  @extend %widget;
+  @extend %icon;
+  @extend %icon-sizes-scaled;
 }

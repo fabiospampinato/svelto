@@ -10,6 +10,6 @@
 
 /* BOTTOM LEFT */
 
-.icons > i.icon.corner.bottom-left {
+.icons > %icon.corner.bottom-left {
   @include absolute ( initial initial 0 0 );
 }

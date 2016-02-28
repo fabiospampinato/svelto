@@ -71,7 +71,7 @@
     /* AFTER */
 
     &:after {
-      @extend %icon;
+      @extend %icon-basic;
       position: absolute;
       font-size: $switch-handler-icon-font-size;
       width: $switch-handler-icon-size;

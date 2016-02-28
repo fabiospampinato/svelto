@@ -25,7 +25,7 @@
     /* BEFORE (ICON) */
 
     &:before {
-      @extend %icon;
+      @extend %icon-basic;
       content: $star-off-icon;
       margin-bottom: 0;
     }

@@ -13,6 +13,6 @@
 
 /* DEFAULT */
 
-.icons > i.icon.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
-  @extend i.icon.corner.top-right;
+.icons > %icon.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
+  @extend %icon.corner.top-right;
 }
