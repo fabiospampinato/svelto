@@ -1,0 +1,48 @@
+
+<!-- SCROLLABLE -->
+
+<template name="scrollable">
+
+  {{{sw.divider "Container"}}}
+
+  <div class="container">
+    {{{sample.paragraph}}}
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> scrollable_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="scrollable_actions">
+
+  {{{sw.divider "Scroll"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Default" "state" "set_scroll ()" true}}}
+    {{{sw.radioAction "X" "state" "set_scroll ( 'scrollable-x' )"}}}
+    {{{sw.radioAction "Y" "state" "set_scroll ( 'scrollable-y' )"}}}
+    {{{sw.radioAction "All" "state" "set_scroll ( 'scrollable' )"}}}
+  </div>
+
+  {{{sw.divider "Others"}}}
+
+  {{{sw.checkAction "Height limited" "toggle_height_limit ()"}}}
+
+  <script>
+    function toggle_height_limit () {
+      $('.container').height ( $('.container').height () > 125 ? 125 : 'auto' );
+    }
+
+    function set_scroll ( scroll ) {
+      var scrolls = ['scrollable-x', 'scrollable-y', 'scrollable'];
+      for ( var i = 0, l = scrolls.length; i < l; i++ ) {
+        $('.container').removeClass ( scrolls[i] );
+      }
+      $('.container').addClass ( scroll );
+    }
+  </script>
+
+</template>
