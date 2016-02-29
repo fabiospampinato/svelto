@@ -1,0 +1,51 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Divider - Linear - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../hr/directions/horizontal.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+//FIXME: It doesn't work in IE10
+
+/* HORIZONTAL */
+
+.divider.linear.horizontal {
+
+  /* EMPTY */
+
+  &:empty {
+    @extend %hr-horizontal;
+  }
+
+  /* NOT EMPTY */
+
+  &:not(:empty) {
+
+    @extend %widget;
+    display: flex;
+
+    &:before,
+    &:after {
+      @extend %hr-horizontal-basic;
+      content: '';
+      flex: 1 1 0%; // IE-10/11 sets flex-shrink to 0 // IE-10/11 misinterpreter a unitless 0 flex-basis
+      min-width: $gutter;
+      align-self: center;
+    }
+
+    &:before {
+      margin-right: $gutter;
+    }
+
+    &:after {
+      margin-left: $gutter;
+    }
+
+  }
+
+}

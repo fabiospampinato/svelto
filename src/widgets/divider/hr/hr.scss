@@ -10,16 +10,17 @@
 
 /* HR */
 
-%hr {
-  @include last-child-no-gutter ( $gutter-half );
+%hr-basic {
+  display: flex;
   z-index: $hr-z-index;
-  height: $hr-height;
-  margin-top: - $gutter-half !important;
-  margin-bottom: $gutter-half !important;
-  border: none;
   background-color: $hr-bg-color;
+}
+
+%hr {
+  @extend %hr-basic;
 }
 
 hr {
   @extend %hr;
+  border: 0;
 }

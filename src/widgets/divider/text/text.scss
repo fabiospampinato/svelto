@@ -5,15 +5,23 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/widget/widget.scss
  * @require decorators/sizes/sizes.scss
  * ========================================================================= */
 
 /* TEXT */
 
 .divider.text {
-  @include last-child-no-gutter ();
+
+  @extend %widget;
   @include size ( $divider-text-size, $divider-text-size-force, $divider-text-size-basic );
   font-weight: $divider-text-font-weight;
   margin: 0 $gutter-half $gutter-half;
-  opacity: $divider-text-opacity;
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    opacity: $divider-text-opacity;
+  }
+
 }

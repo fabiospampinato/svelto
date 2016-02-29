@@ -1,17 +1,27 @@
 
 /* =========================================================================
- * Svelto - Widgets - Divider - Default
+ * Svelto - Widgets - Divider - Hr - Directions - Vertical
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../block/block.scss
- * @require ../linear/directions/default.scss
- * @require ../text/text.scss
+ * @require ../hr.scss
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
-/* DEFAULT */
+/* VERTICAL */
 
-.divider:not(.block):not(.text) {
-  @extend .divider.linear;
+%hr-vertical-basic {
+  @extend %hr-basic;
+  width: $hr-size;
+}
+
+%hr-vertical {
+  @extend %hr-vertical-basic;
+  @extend %widget;
+  @include margin-x ( $gutter-half );
+}
+
+hr.vertical {
+  @extend %hr-vertical;
 }

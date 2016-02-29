@@ -1,0 +1,55 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Divider - Linear - Directions - Vertical
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../hr/directions/horizontal.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* VERTICAL */
+
+.divider.linear.vertical {
+
+  @extend %widget;
+  display: flex;
+
+  /* EMPTY */
+
+  &:empty {
+    @extend %hr-vertical;
+    align-self: stretch;
+    flex: 0 1 auto; // IE-10/11 sets flex-shrink to 0
+  }
+
+  /* NOT EMPTY */
+
+  &:not(:empty) {
+
+    flex-direction: column;
+    flex: 0 1 auto; // IE-10/11 sets flex-shrink to 0
+    align-self: stretch;
+
+    &:before,
+    &:after {
+      @extend %hr-vertical-basic;
+      @include margin-x ( $gutter-half );
+      content: '';
+      align-self: center;
+      min-height: $gutter;
+      flex: 1 1 auto;
+    }
+
+    &:before {
+      margin-bottom: $gutter-half;
+    }
+
+    &:after {
+      margin-top: $gutter-half;
+    }
+
+  }
+
+}
