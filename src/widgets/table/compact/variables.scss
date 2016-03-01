@@ -1,23 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Table - Equal
+ * Svelto - Widgets - Table - Compact (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../table.scss
+ * @require ../variables.scss
  * ========================================================================= */
 
-/* EQUAL */
+/* CELL */
 
-.table.equal {
-
-  table-layout: fixed;
-
-  /* CELLS */
-
-  tr > * {
-    width: 100%;
-  }
-
-}
+$table-compact-cell-padding-x: $table-cell-padding-x / 2 !default;
+$table-compact-cell-padding-y: $table-compact-cell-padding-x !default;

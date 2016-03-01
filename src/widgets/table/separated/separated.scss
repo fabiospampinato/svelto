@@ -8,20 +8,38 @@
  * @require ../table.scss
  * ========================================================================= */
 
+// We are separating the border property since the color may be `inherit`
+
 /* SEPARATED */
 
-table.table.separated {
+.table.separated {
+
+  /* RESETTING */
+
+  thead th,
+  tbody td,
+  tfoot td {
+    border-width: 0;
+    border-style: $table-separated-border-style;
+    border-color: $table-separated-border-color;
+  }
+
+  /* THEAD */
 
   thead th {
-    border-bottom-width: $table-bordered-border-width;
+    border-bottom-width: $table-separated-border-width;
   }
+
+  /* TBODY */
 
   tbody tr:not(:last-child) td {
-    border-bottom-width: $table-bordered-border-width;
+    border-bottom-width: $table-separated-border-width;
   }
 
+  /* TFOOT */
+
   tfoot td {
-    border-top-width: $table-bordered-border-width;
+    border-top-width: $table-separated-border-width;
   }
 
 }

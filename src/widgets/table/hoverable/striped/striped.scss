@@ -1,0 +1,47 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Table - Hoverable - Striped
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../hoverable.scss
+ * ========================================================================= */
+
+/* STRIPED */
+
+.table:not(.disabled).hoverable.striped tbody tr {
+
+  &:first-child.table-row-empty ~ tr {
+
+    &:nth-child(even):hover {
+      background-color: $table-hoverable-row-even-bg-color-hover;
+    }
+
+    &:nth-child(odd):hover {
+      background-color: $table-hoverable-row-odd-bg-color-hover;
+    }
+
+  }
+
+  &:first-child:not(.table-row-empty) {
+
+    &:hover {
+      background-color: $table-hoverable-row-even-bg-color-hover;
+    }
+
+    ~ tr {
+
+      &:nth-child(odd):hover {
+        background-color: $table-hoverable-row-even-bg-color-hover;
+      }
+
+      &:nth-child(even):hover {
+        background-color: $table-hoverable-row-odd-bg-color-hover;
+      }
+
+    }
+
+  }
+
+}

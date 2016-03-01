@@ -10,11 +10,15 @@
 
 /* BORDERED */
 
-table.table.bordered {
+.table.bordered {
 
-  @extend table.table.separated;
+  @extend .table.separated;
 
-  tr > * {
+  /* CELLS */
+
+  thead th,
+  tbody td,
+  tfoot td {
 
     border-left-width: $table-bordered-border-width;
 
@@ -23,6 +27,8 @@ table.table.bordered {
     }
 
   }
+
+  /* ROWS */
 
   tbody tr {
 
@@ -37,6 +43,8 @@ table.table.bordered {
 
   }
 
+  /* THEAD */
+
   thead {
 
     th {
@@ -50,13 +58,15 @@ table.table.bordered {
 
   }
 
+  /* TFOOT */
+
   tfoot {
 
     td {
       border-bottom-width: $table-bordered-border-width;
     }
 
-    + tbody tr:last-child td {
+    ~ tbody tr:last-child td {
       border-bottom-width: 0;
     }
 

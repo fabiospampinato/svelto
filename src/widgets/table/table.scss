@@ -10,13 +10,13 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-/* TABLE */
-
-//TODO: Add support for the case when there's no `thead` tag for example, so that the border radius and everything else will work just fine as well
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
+// We are using the `table` class so that if someone need a plain basic table he/she can
 
-table.table { // So that if someone need a plain basic table he can, just by don't using the `table` class
+/* TABLE */
+
+.table {
 
   @extend %widget;
   @include color ( $table-color, $table-color-force, $table-color-basic );
@@ -24,26 +24,17 @@ table.table { // So that if someone need a plain basic table he can, just by don
   border-collapse: separate;
   border-radius: inherit;
 
-  /* SECTIONS */
-
-  thead,
-  tbody,
-  tfoot {
-    border-color: inherit; // So that when the children also inherit the border color is actually inherited
-  }
-
-  /* CELLS */
+  /* ROWS */
 
   tr {
-    border-color: inherit; // So that when the children also inherit the border color is actually inherited
-  }
 
-  tr > * {
-    padding: $gutter;
-    text-align: left;
-    border-width: 0;
-    border-style: solid;
-    border-color: $table-bordered-border-color;
+    /* CELLS */
+
+    > * {
+      padding: $table-cell-padding-y $table-cell-padding-x;
+      text-align: left;
+    }
+
   }
 
   /* THEAD */
@@ -53,11 +44,11 @@ table.table { // So that if someone need a plain basic table he can, just by don
     @include border-top-radius ( inherit );
     background-color: $table-header-bg-color;
 
-    tr {
+    tr:first-child {
 
       @include border-top-radius ( inherit );
 
-      &:first-child th {
+      th {
 
         &:first-child {
           border-top-left-radius: inherit;
@@ -140,7 +131,7 @@ table.table { // So that if someone need a plain basic table he can, just by don
 
   }
 
-  tfoot + tbody tr:last-child td {
+  tfoot ~ tbody tr:last-child td {
 
     &:first-child {
       border-bottom-left-radius: 0;
@@ -159,11 +150,11 @@ table.table { // So that if someone need a plain basic table he can, just by don
     @include border-bottom-radius ( inherit );
     background-color: $table-footer-bg-color;
 
-    tr {
+    tr:last-child {
 
       @include border-bottom-radius ( inherit );
 
-      &:last-child td {
+      td {
 
         &:first-child {
           border-bottom-left-radius: inherit;

@@ -1,23 +1,13 @@
 
 /* =========================================================================
- * Svelto - Widgets - Table - Equal
+ * Svelto - Widgets - Table - Separated (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../table.scss
  * ========================================================================= */
 
-/* EQUAL */
+/* SEPARATED */
 
-.table.equal {
-
-  table-layout: fixed;
-
-  /* CELLS */
-
-  tr > * {
-    width: 100%;
-  }
-
-}
+$table-separated-border-width: 1px !default;
+$table-separated-border-style: solid !default;
+$table-separated-border-color: inherit !default;

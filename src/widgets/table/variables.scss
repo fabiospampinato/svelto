@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/gutter/variables.scss
  * ========================================================================= */
 
 /* TABLE */
@@ -23,3 +25,8 @@ $table-footer-bg-color: $table-header-bg-color !default;
 /* ROW EMPTY */
 
 $table-row-empty-height: 4.5em !default;
+
+/* CELL */
+
+$table-cell-padding-x: $gutter !default;
+$table-cell-padding-y: $table-cell-padding-x !default;

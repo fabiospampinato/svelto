@@ -10,6 +10,6 @@
 
 /* COMPACT */
 
-table.table.compact tr > * {
-  padding: $gutter-half;
+.table.compact tr > * {
+  padding: $table-compact-cell-padding-y $table-compact-cell-padding-x;
 }
