@@ -15,7 +15,7 @@ $colorpicker-size: 11em !default;
 /* WRAPPERS */
 
 $colorpicker-wrp-border-width: 1px !default;
-$colorpicker-wrp-border-style: 'solid' !default;
+$colorpicker-wrp-border-style: solid !default;
 $colorpicker-wrp-border-color: $color-black !default;
 
 /* WRAPPER HUE */
@@ -29,7 +29,7 @@ $colorpicker-handler-z-depth-force: true !default;
 $colorpicker-handler-z-depth-basic: true !default;
 
 $colorpicker-handler-border-width: 2px !default;
-$colorpicker-handler-border-style: 'solid' !default;
+$colorpicker-handler-border-style: solid !default;
 $colorpicker-handler-border-color: $color-white !default;
 
 $colorpicker-handler-shadow: 0 0 0 1px rgba( 0, 0, 0, .2 ) !default;
