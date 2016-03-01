@@ -1,0 +1,37 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Attached - On hover
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../attached.scss
+ * @require decorators/blurred/blurred.scss
+ * @require decorators/raisable/raisable.scss
+ * ========================================================================= */
+
+/* ON HOVER */
+
+%attached.on-hover {
+
+  opacity: 0;
+
+  // In order to always animate the box-shadow transition
+  // Transitioning `opacity` in order to support `disabled`
+  // Transitioning `filter`  in order to support `blurred`
+
+  transition: opacity $attached-on-hover-animation-duration, filter $blurred-animation-duration, box-shadow $raisable-animation-duration;
+
+  /* HOVER */
+
+  :hover > & {
+    opacity: 1;
+  }
+
+  /* DISABLED */
+
+  .disabled & {
+    display: none;
+  }
+
+}
