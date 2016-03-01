@@ -17,18 +17,11 @@
 .card {
 
   @extend %widget;
+  @include children-no-gutter ();
   @include color ( $card-color, $card-color-force, $card-color-basic );
   display: flex;
   flex-direction: column;
   border-radius: $card-border-radius;
-
-  /* LAST SCRIPT */
-
-  //FIXME: Ugly fix
-
-  > script:last-child {
-    display: none;
-  }
 
   /* HEADER / BLOCK / FOOTER */
 
@@ -39,7 +32,6 @@
     &:not(.multiple) {
       @extend %container;
       border-radius: 0;
-      border-color: inherit; // So that when the children also inherit the border color is actually inherited
     }
 
     &.multiple {
@@ -74,12 +66,6 @@
     flex-grow: 1; // Takes the remaining space, if any
     flex-shrink: 1; // IE-10/11 default it to 0 instead
     overflow: auto;
-  }
-
-  /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
-
-  > :not(.overlay):not(.ripple-circle) {
-    margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
   }
 
   /* BORDER RADIUS INHERITANCE */

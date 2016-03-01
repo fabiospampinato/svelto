@@ -21,3 +21,15 @@
   }
 
 }
+
+@mixin children-no-gutter () {
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > script:last-child {
+    display: none !important;
+  }
+
+}

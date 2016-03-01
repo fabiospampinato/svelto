@@ -14,36 +14,39 @@
 
 .layout {
 
+  @include children-no-gutter ();
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   overflow: auto;
 
-  /* LAST SCRIPT */
-
-  //FIXME: Ugly fix
-
-  > script:last-child {
-    display: none;
-  }
-
   /* HEADER / CONTENT / FOOTER */
 
   &-header,
   &-content,
   &-footer {
-    margin: 0;
     border-radius: 0;
-    border-color: inherit; // So that when the children also inherit the border color is actually inherited
     flex-shrink: 0; // Avoids padding collpasing
+  }
+
+  /* HEADER */
+
+  &-header {
+    background-color: $layout-header-bg-color;
   }
 
   /* CONTENT */
 
   &-content {
-    padding: $layout-padding-y $layout-padding-x;
+    padding: $layout-content-padding-y $layout-content-padding-x;
     flex-grow: 1; // Needed for having the `.layout-footer` stick to the bottom
+  }
+
+  /* FOOTER */
+
+  &-footer {
+    background-color: $layout-header-bg-color;
   }
 
 }
