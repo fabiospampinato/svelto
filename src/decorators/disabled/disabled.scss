@@ -15,7 +15,8 @@
   transition: opacity $disabled-animation-duration;
 }
 
-.disabled {
+.disabled,
+[disabled] {
 
   pointer-events: none;
   opacity: $disabled-opacity;
