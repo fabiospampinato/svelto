@@ -20,16 +20,14 @@
 
   /* VALUE */
 
-  > .statistic-value {
+  &-value {
     @include size ( $statistic-value-size, $statistic-value-size-force, $statistic-value-size-basic );
-    justify-content: center;
   }
 
   /* DESCRIPTION */
 
-  > .statistic-description {
+  &-description {
     @include size ( $statistic-description-size, $statistic-description-size-force, $statistic-description-size-basic );
-    justify-content: center;
   }
 
 }
