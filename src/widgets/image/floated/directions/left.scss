@@ -1,15 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Caption (Variables)
+ * Svelto - Widgets - Image - Floated - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../image.scss
  * ========================================================================= */
 
-/* CAPTION */
+/* LEFT */
 
-$image-caption-z-index: 30 !default;
-
-$image-caption-color: 'black' !default;
-$image-caption-color-force: false !default;
-$image-caption-color-basic: true !default;
+img.floated.left {
+  float: left;
+  margin: 0 $image-floated-spacing $image-floated-spacing 0;
+}

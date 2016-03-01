@@ -1,15 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image (Variables)
+ * Svelto - Widgets - Image - Floated - Directions - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/container/variables.scss
+ * @require ./left.scss
+ * @require ./right.scss
  * ========================================================================= */
 
-/* IMAGE */
+/* DEFAULT */
 
-$image-color: $container-color !default;
-$image-color-force: false !default;
-$image-color-basic: true !default;
+img.floated:not(.right) {
+  @extend img.floated.left;
+}

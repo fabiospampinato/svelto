@@ -8,55 +8,27 @@
  * @require core/reset/reset.scss
  * @require core/widget/widget.scss
  * @require decorators/colors/colors.scss
- * @require widgets/container/container.scss
  * ========================================================================= */
 
-//TODO: Add `figure` support
-
-/* DEFAULT */
-
-img {
-  @extend %widget;
-  $colors: map-get($colors, $image-color);
-  $border: nth($colors, 4);
-  display: flex;
-  border-color: $border;
-  width: 100%;
-  height: auto;
-  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
-}
-
-p > img,
-span > img {
-  display: inline-flex;
-  vertical-align: middle;
-  max-width: 100%;
-  width: auto;
-  margin-bottom: 0 !important;
-}
+//FIXME: `.multiple.no-wrap > img * 3` doesn't work
 
 /* IMAGE */
 
-.image-wrp {
+img {
 
   @extend %widget;
   @include color ( $image-color, $image-color-force, $image-color-basic );
-  display: flex;
-  flex-direction: column;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  font-size: 1rem !important; //FIXME: Ugly fix for implementing sizes
   min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 
-  /* LINK */
+  /* INLINE */
 
-  > a {
-    margin-bottom: 0 !important;
-  }
-
-  /* IMAGE */
-
-  img {
-    order: 2;
-    border-radius: inherit;
-    margin-bottom: 0 !important;
+  p &,
+  span & {
+    display: inline-block;
   }
 
 }
