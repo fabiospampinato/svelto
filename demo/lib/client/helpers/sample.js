@@ -13,7 +13,7 @@ SampleHelpers.define ( 'image', function ( classes ) {
 
 SampleHelpers.define ( 'imageWide', function () {
 
-  return '<img src="/sample/sample-wide.jpg"';
+  return '<img src="/sample/sample-wide.png"/>';
 
 });
 

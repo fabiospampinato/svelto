@@ -27,11 +27,19 @@
 
   {{{sw.divider "Actions"}}}
 
-  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+  <div class="multiple actions">
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "On hover" "toggle_class ( 'on-hover' )"}}}
+    {{{sw.checkAction "Disable parent" "disable_parent ()"}}}
+  </div>
 
   <script>
     function toggle_class ( name ) {
       $('[class*="attached-"]').toggleClass ( name );
+    }
+
+    function disable_parent () {
+      $('.container').not('.container .container').toggleClass ( 'disabled' );
     }
   </script>
 

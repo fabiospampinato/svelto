@@ -1,50 +1,65 @@
 
-<!-- IMAGES -->
+<!-- IMAGE -->
 
 <template name="image">
 
   {{{sw.divider "Image"}}}
 
-  <div class="centerer">
-    {{{sample.image "xs-8 md-4"}}}
-  </div>
+  {{{sample.image "centered"}}}
 
-  {{{sw.divider "With captions"}}}
+  {{{sw.divider "Sizes"}}}
 
-  <div class="multiple">
-    <div class="image-wrp xs-6 md-3 outlined">
-      {{{sample.image}}}
-    </div>
-    <div class="image-wrp xs-6 md-3">
-      {{{sample.image}}}
-      <div class="image-caption top">Top caption</div>
-      <div class="image-caption">Bottom caption</div>
-    </div>
-    <div class="image-wrp xs-6 md-3 smooth">
-      {{{sample.image}}}
-      <div class="image-caption on-hover top">[Hover] Top caption</div>
-      <div class="image-caption on-hover">[Hover] Bottom caption</div>
-    </div>
-    <div class="image-wrp xs-6 md-3">
-      {{{sample.image}}}
-      <div class="image-caption attached top">[Attached] Top caption</div>
-      <div class="image-caption attached">[Attached] Bottom caption</div>
+  <div class="container outlined">
+    <div class="multiple">
+      {{{sample.image "xxxxsmall"}}}
+      {{{sample.image "xxxsmall"}}}
+      {{{sample.image "xxsmall"}}}
+      {{{sample.image "xsmall"}}}
+      {{{sample.image "small"}}}
+      {{{sample.image "medium"}}}
+      {{{sample.image "large"}}}
+      {{{sample.image "xlarge"}}}
+      {{{sample.image "xxlarge"}}}
+      {{{sample.image "xxxlarge"}}}
+      {{{sample.image "xxxxlarge"}}}
     </div>
   </div>
 
-  {{{sw.divider "Advanced"}}}
+  {{{sw.divider "Fluid"}}}
 
-  <div class="centerer">
-    <div class="image-wrp xs-8 md-4">
-      {{{sample.imageWide}}}
-      <div class="image-caption top transparent">
-        <div class="section-right">
-          <div class="button compact xsmall black">
-            <i class="icon">more_vert</i>
-          </div>
-        </div>
-      </div>
-    </div>
+  {{{sample.image "fluid"}}}
+
+  {{{sw.divider "Border radius variants"}}}
+
+  <div class="multiple no-wrap center-x">
+    {{{sample.image "xs-4 sharp"}}}
+    {{{sample.image "xs-4 smooth"}}}
+    {{{sample.image "xs-4 rounded"}}}
+  </div>
+
+  {{{sw.divider "Spaced"}}}
+
+  <div class="container outlined">
+    <p>
+      {{{sample.image "xxxxsmall spaced right"}}}
+      {{{sample.text 35}}}
+      {{{sample.image "xxxxsmall spaced"}}}
+      {{{sample.text 35}}}
+      {{{sample.image "xxxxsmall spaced left"}}}
+    </p>
+  </div>
+
+  {{{sw.divider "Floated"}}}
+
+  <div class="container outlined clearfix">
+    <p>
+      {{{sample.image "small floated"}}}
+      {{{sample.text 75}}}
+    </p>
+    <p>
+      {{{sample.image "small floated right"}}}
+      {{{sample.text 75}}}
+    </p>
   </div>
 
   {{> image_actions}}
@@ -55,6 +70,10 @@
 
 <template name="image_actions">
 
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+
   {{{sw.divider "State"}}}
 
   <div class="multiple joined actions">
@@ -63,12 +82,16 @@
   </div>
 
   <script>
+    function toggle_class ( name ) {
+      $('img').toggleClass ( name );
+    }
+
     function enable () {
-      $('img, .image-wrp').not('.image-wrp img').removeClass ( 'disabled' );
+      $('img').removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('img, .image-wrp').not('.image-wrp img').addClass ( 'disabled' );
+      $('img').addClass ( 'disabled' );
     }
   </script>
 

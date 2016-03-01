@@ -47,9 +47,9 @@
       $('.checkbox input').prop('checked', false);
     }
 
-    for (var prop in Pointer) {
+    for (var prop in Svelto.Pointer) {
       if (prop !== 'options') {
-        $('.target').on(Pointer[prop], {
+        $('.target').on(Svelto.Pointer[prop], {
           name: prop
         }, pointer_handler);
       }
