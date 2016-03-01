@@ -12,6 +12,4 @@
 
 $triangle-size: $shape-size !default;
 
-$triangle-color: 'gray' !default;
-$triangle-color-force: false !default;
-$triangle-color-basic: true !default;
+$triangle-color: $color-gray !default;

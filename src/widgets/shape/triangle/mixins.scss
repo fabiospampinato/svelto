@@ -11,23 +11,32 @@
 @mixin triangle ( $size: 1em, $direction: up ) {
 
   $size: $size / 2;
-  border: $size solid transparent;
+  border-width: $size;
+  border-style: solid;
 
-  @if $direction == top {
+  @if $direction == bottom {
 
-    border-top-width: 0;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
 
   } @else if $direction == right {
 
-    border-right-width: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
 
   } @else if $direction == left {
 
-    border-left-width: 0;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
 
-  } @else { // Defaulting to `bottom`
+  } @else { // Defaulting to `top`
 
-    border-bottom-width: 0;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
 
   }
 
