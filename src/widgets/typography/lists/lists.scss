@@ -6,32 +6,19 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
 /* LISTS */
 
 ul,
-ol {
-  @include last-child-no-gutter ();
-  margin: 0 0 $gutter;
+ol,
+dl {
+  @extend %widget;
   padding-left: $list-padding-left;
 }
 
-ul.no-bullet {
-
-  padding-left: 0;
-  list-style-type: none;
-
-  li > ul {
-    list-style-type: none;
-  }
-
-}
-
-dl {
-  margin: 0;
-}
-
 dd {
-  margin-left: $gutter * 2;
+  margin: 0;
+  padding-left: $list-padding-left;
 }

@@ -13,17 +13,14 @@
 blockquote {
 
   @extend %widget;
-  padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
+  padding: $blockquote-padding-y $blockquote-padding-x $blockquote-padding-y ( $blockquote-padding-x + $blockquote-line-width );
   border-radius: $blockquote-line-width;
   background-color: $blockquote-bg-color;
 
   /* LINE */
 
   &:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    @include absolute ( 0 false 0 0 );
     width: $blockquote-line-width;
     content: '';
     border-radius: $blockquote-line-width;
@@ -35,14 +32,12 @@ blockquote {
   > footer {
 
     @extend %widget;
-    background-color: $blockquote-footer-bg-color;
     padding: $blockquote-footer-padding-y $blockquote-footer-padding-x;
     font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;
 
     &:before {
-      content: $char-mdash + $char-nbsp;
-      opacity: $blockquote-footer-opacity;
+      content: $blockquote-footer-prefix;
     }
 
   }

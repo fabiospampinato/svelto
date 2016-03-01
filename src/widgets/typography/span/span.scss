@@ -10,11 +10,7 @@
 
 /* SPAN */
 
-span {
-  @include last-child-no-gutter ();
-  margin-bottom: $gutter;
-}
-
-p > span {
-  margin-bottom: 0;
+span > * {
+  vertical-align: middle;
+  margin-bottom: 0 !important;
 }

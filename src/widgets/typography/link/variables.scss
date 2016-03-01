@@ -4,14 +4,10 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/variables.scss
  * ========================================================================= */
 
 /* LINK */
 
-$link-underline-height: 1px !default;
-
-/* ANIMATION */
-
-$link-underline-animation-duration: $animation-fast !default;
+$link-color: 'primary' !default;
+$link-color-force: true !default;
+$link-color-basic: true !default;

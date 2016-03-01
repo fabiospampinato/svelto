@@ -1,0 +1,45 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Link - Colors (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* COLOR */
+
+@mixin color-link ( $color, $force: false, $basic: false ) {
+
+  @if not $force {
+
+    $selector: colors-link-get-undefined-selector();
+
+    &#{$selector} {
+
+      @if not $basic {
+
+        @extend %color-#{$color}-link;
+
+      } @else {
+
+        @extend %color-#{$color}-link-base;
+
+      }
+
+    }
+
+  } @else {
+
+    @if not $basic {
+
+      @extend %color-#{$color}-link;
+
+    } @else {
+
+      @extend %color-#{$color}-link-base;
+
+    }
+
+  }
+
+}

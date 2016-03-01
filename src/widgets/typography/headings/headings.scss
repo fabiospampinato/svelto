@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
  * @require decorators/sizes/sizes.scss
  * ========================================================================= */
 
@@ -18,16 +19,9 @@ h4,
 h5,
 h6 {
 
-  //TODO: Add font-family, font-weight, line-height
-
-  @include last-child-no-gutter ();
-  margin: 0 0 $gutter;
-
-  /* LAST CHILD */
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  @extend %widget;
+  font-family: $heading-font-family;
+  font-weight: $heading-fond-weight;
 
   /* SMALL */
 

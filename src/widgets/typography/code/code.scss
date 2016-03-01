@@ -9,18 +9,21 @@
  * ========================================================================= */
 
 //TODO: Add support for `samp`
+// We are separating the border property since the color may be `inherit`
 
 /* CODE */
 
-code,
-section,
-pre {
-  font-family: $font-family-monospace;
-  display: block;
-  overflow-x: auto;
-  margin: 0;
-  padding: $gutter;
-  border: $code-border-width $code-border-style $code-border-color;
+%code {
+  display: inline-flex;
+  font-family: $code-font-family;
+  padding: $code-padding-y $code-padding-x;
+  border-width: $code-border-width;
+  border-style: $code-border-style;
+  border-color: $code-border-color;
   border-radius: $code-border-radius;
   background-color: $code-bg-color;
+}
+
+code {
+  @extend %code;
 }

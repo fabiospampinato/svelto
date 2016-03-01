@@ -13,52 +13,32 @@
 
 @each $name, $datas in $colors {
 
-  $class: color-get-class( $name );
+  $class: color-link-get-class( $name );
 
   $bg: nth( $datas, 1 );
   $bg-hover: nth( $datas, 2 );
-  $link: nth( $datas, 7 );
-  $link-hover: nth( $datas, 8 );
+  $bg-active: nth( $datas, 3 );
 
-  @if $name != inherit { // Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  %color-#{$name}-link-base {
 
-    //FIXME: This generates too much CSS
+    color: $bg;
 
-    .#{$class} p, // We do it just under `p`s, because elsewhere might be an unwanted style
-    p.#{$class},
-    .#{$class} span, // Same as `p > a`
-    span.#{$class} {
+    &:hover {
+      color: $bg-hover;
+    }
 
-      > a {
-
-        color: $link;
-
-        &:after {
-          border-color: $link-hover;
-        }
-
-        &:hover {
-          color: $link-hover;
-        }
-
-      }
-
+    &:active {
+      color: $bg-active;
     }
 
   }
 
-  .link-#{$class} {
+  %color-#{$name}-link {
+    @extend %color-#{$name}-link-base;
+  }
 
-    color: $bg !important;
-
-    &:after {
-      border-color: $bg-hover !important;
-    }
-
-    &:hover {
-      color: $bg-hover !important;
-    }
-
+  .#{$class} {
+    @extend %color-#{$name}-link;
   }
 
 }

@@ -8,11 +8,15 @@
  * @require core/reset/reset.scss
  * ========================================================================= */
 
+//FIXME: There's a double border on Firefox Mobile
+//TODO: Add a more advanced abbr, that triggers a tooltip, maybe even a pure CSS one
+// We are separating the border property since the color may be `inherit`
+
 /* ABBR */
 
-//FIXME: There's a double border on Firefox Mobile
-
-abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
+abbr[title] {
   cursor: help;
-  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
+  border-width: 0 0 $abbr-border-width;
+  border-style: $abbr-border-style;
+  border-color: $abbr-border-color;
 }

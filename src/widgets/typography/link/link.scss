@@ -6,54 +6,29 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
- * @require decorators/highlighted/highlighted.scss
  * ========================================================================= */
 
-//FIXME: We use an ugly fix for making it widget-like when it's not in a paragraph
 //TODO: Add `address` support (not the right place for this comment, but creating a file just for it seems overkilling)
+//TODO: Make it more visually appealing
+//TODO: Add support for automatic color selection
 
 /* LINK */
 
 a {
-  @include last-child-no-gutter ();
-  position: relative;
-  text-decoration: none;
+
   color: inherit;
-  margin-bottom: $gutter;
-}
+  text-decoration: none;
 
-p > a, // We do it just under `p`s, because elsewhere might be an unwanted style
-span > a { // Same reason as `p > a`
+  // Elsewhere this might be an unwanted style
 
-  display: inline-block;
-  cursor: pointer;
-  margin-bottom: 0;
+  p & {
 
-  &:after {
-    @extend %highlight-after;
-    border-bottom-width: $link-underline-height;
-    transition-property: opacity, transform;
-    transition-duration: $link-underline-animation-duration;
+    @include color-link ( $link-color, $link-color-force, $link-color-basic );
+
+    &:hover {
+      text-decoration: underline;
+    }
+
   }
 
-  &:not(:hover):after { //FIXME: Does it work?
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  // &:hover:after {
-  //   opacity: 1;
-  //   transform: scaleX(1);
-  // }
-
-}
-
-// Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
-
-_:-ms-input-placeholder, :root a {
-  display: block;
-}
-
-_:-ms-input-placeholder, :root p > a {
-  display: initial;
 }

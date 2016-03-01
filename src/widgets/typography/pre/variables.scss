@@ -1,15 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Typography - Abbr (Variables)
+ * Svelto - Widgets - Typography - Pre (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/colors/variables.scss
+ * @require widgets/container/variables.scss
  * ========================================================================= */
 
-/* ABBR */
+/* PRE */
 
-$abbr-border-width: 1px !default;
-$abbr-border-style: dashed !default;
-$abbr-border-color: inherit !default;
+$pre-padding-x: $container-padding-x !default;
+$pre-padding-y: $container-padding-y !default;
