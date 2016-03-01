@@ -4,13 +4,13 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
 /* SPACER */
 
 .spacer {
-  @include last-child-no-gutter ();
-  flex-grow: 1000000 !important;
-  flex-shrink: 1; // IE-10/11 default it to 0 instead
-  margin-bottom: $gutter;
+  @extend %widget;
+  flex: 1000000 1 auto !important; // IE-10/11 sets flex-shrink to 0
 }
