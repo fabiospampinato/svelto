@@ -11,20 +11,17 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
- //FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
- //FIXME: Not working on Dolphin Browser
-
+//FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
+//FIXME: Not working on Dolphin Browser
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
 /* SPINNER */
 
 svg.spinner {
 
-  @include last-child-no-gutter ();
+  @extend %widget;
+  @include dimension ( $spinner-size );
   display: block;
-  width: $spinner-size;
-  height: $spinner-size;
-  margin-bottom: $gutter;
   background-color: transparent !important;
   animation: rotate $spinner-animation-rotate-duration linear infinite;
 

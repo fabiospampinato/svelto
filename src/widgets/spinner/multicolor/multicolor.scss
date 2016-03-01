@@ -15,7 +15,7 @@
   /* CIRCLE */
 
   circle {
-    animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
+    animation: spinner-dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
                spinner-multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
   }
 

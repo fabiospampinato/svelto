@@ -10,37 +10,13 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Modularize it
-
 /* LABEL */
 
 .spinner-label {
-
   @extend %widget;
   @include color ( $spinner-label-color, $spinner-label-color-force, $spinner-label-color-basic );
   @include z-depth ( $spinner-label-z-depth, $spinner-label-z-depth-force, $spinner-label-z-depth-basic );
   display: flex;
-  border-radius: $spinner-label-border-radius !important;
+  border-radius: $spinner-label-border-radius;
   padding: $spinner-label-padding-y $spinner-label-padding-x;
-
-  /* SPINNER */
-
-  .spinner {
-    margin-bottom: 0;
-  }
-
-  /* COLORS */
-
-  @each $name, $datas in $colors {
-
-    $class: color-get-class( $name );
-
-    $accent: nth($datas, 5);
-
-    &.#{$class} .spinner circle {
-      stroke: $accent !important;
-    }
-
-  }
-
 }

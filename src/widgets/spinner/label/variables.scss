@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../label/variables.scss
+ * @require widgets/label/variables.scss
  * ========================================================================= */
 
 /* LABEL */
@@ -19,6 +19,6 @@ $spinner-label-color-force: false !default;
 $spinner-label-color-basic: true !default;
 
 $spinner-label-padding-x: $label-compact-padding-x !default;
-$spinner-label-padding-y: $label-compact-padding-y !default;
+$spinner-label-padding-y: $spinner-label-padding-x !default; // Not a typo, it's better if we mantain the 1:1 ratio since the spinner is a circle
 
 $spinner-label-border-radius: 50% !default;

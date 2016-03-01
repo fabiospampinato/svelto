@@ -1,11 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Spinner - Colors
+ * Svelto - Widgets - Spinner - Label - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../spinner.scss
+ * @require ../label.scss
  * ========================================================================= */
 
 /* COLORS */
@@ -14,10 +14,10 @@
 
   $class: color-get-class( $name );
 
-  $bg: nth( $datas, 1 );
+  $accent: nth( $datas, 5 );
 
-  svg.spinner.#{$class} circle {
-    stroke: $bg;
+  .spinner-label.#{$class} circle {
+    stroke: $accent;
   }
 
 }
