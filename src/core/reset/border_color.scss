@@ -1,0 +1,15 @@
+
+/* =========================================================================
+ * Svelto - Core - Reset (Border color)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+// Inheriting border color, it is useful to get access to parent's border color
+
+/* BORDER COLOR */
+
+* {
+  border-color: inherit;
+}
