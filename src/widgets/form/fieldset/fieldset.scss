@@ -17,6 +17,5 @@ fieldset {
   @extend %widget;
   background-color: $fieldset-bg-color;
   border-radius: $fieldset-border-radius;
-  border-color: inherit;
   padding: $fieldset-padding-y $fieldset-padding-x;
 }

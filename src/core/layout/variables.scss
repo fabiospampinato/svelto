@@ -4,9 +4,21 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * @require core/gutter/variables.scss
+ * @require core/reset/variables.scss
  * ========================================================================= */
+
+/* HEADER */
+
+$layout-header-bg-color: darken( nth( map-get( $colors, $body-color ), 1 ), 10 ) !default;
 
 /* CONTENT */
 
-$layout-padding-x: $gutter !default;
-$layout-padding-y: $gutter !default;
+$layout-content-padding-x: $gutter !default;
+$layout-content-padding-y: $layout-content-padding-x !default;
+
+/* FOOTER */
+
+$layout-header-bg-color: $layout-header-bg-color !default;

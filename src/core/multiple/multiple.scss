@@ -18,11 +18,18 @@
 
   @extend %multiple;
   @include last-child-no-gutter ( 0, - $gutter );
-  border-color: inherit; // So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+
+  /* GUTTER */
+
+  // In order to support inline elements that don't have a `margin-bottom` setted
+
+  > :not(.multiple) {
+    margin-bottom: $gutter;
+  }
 
   /* GUTTER NORMAL */
 
@@ -197,7 +204,7 @@
     &:not(.vertical) {
 
       > * {
-        flex: 1 0 auto;
+        flex: 1 1 auto;
       }
 
       > input {

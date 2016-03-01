@@ -12,5 +12,5 @@
 /* FOOTER */
 
 footer {
-  @extend header;
+  @extend %header;
 }

@@ -112,13 +112,15 @@ label {
   &.outlined > .sub {
 
     &.left {
-      border-right: 1px solid;
-      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: inherit;
     }
 
     &.right {
-      border-left: 1px solid;
-      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+      border-left-width: 1px;
+      border-left-style: solid;
+      border-left-color: inherit;
     }
 
   }

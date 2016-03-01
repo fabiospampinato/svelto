@@ -1,20 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Header - Background
+ * Svelto - Widgets - Image - Fluid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../image.scss
  * ========================================================================= */
 
-//FIXME: Object-fit is not cross-browser
+/* FLUID */
 
-/* BAKGROUND */
-
-.header-background { //TODO: Scale it, make the image fill the space
-  @include fill-absolute ();
-  margin: auto;
+img.fluid {
   width: 100%;
-  height: 100%;
-  object-fit: cover; //FIXME: Not supported by IE, not even Edge
-  z-index: -1;
 }
