@@ -12,8 +12,13 @@
 /* PLACEHOLDER */
 
 .placeholder {
+
   @extend %centerer;
   @include color ( $placeholder-color, $placeholder-color-force, $placeholder-color-basic );
   text-align: center;
-  padding: $placeholder-padding-x $placeholder-padding-y;
+
+  &:not(:empty) {
+    padding: $placeholder-padding-x $placeholder-padding-y;
+  }
+
 }
