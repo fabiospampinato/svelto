@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Figure - Figcaption
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../figure.scss
+ * @require decorators/colors/colors.scss
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* FIGCAPTION */
+
+%figcaption {
+  @extend %container;
+  @include color ( $figcaption-color, $figcaption-color-force, $figcaption-color-basic );
+  overflow: auto;
+  border-radius: inherit;
+}
+
+figcaption,
+.figcaption {
+  @extend %figcaption;
+}

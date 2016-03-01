@@ -1,0 +1,24 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Figure (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* FIGURE */
+
+$figure-color: $container-color !default;
+$figure-color-force: false !default;
+$figure-color-basic: true !default;
+
+$figure-border-radius: 0 !default;
+
+$figure-padding-y: 0 !default;
+$figure-padding-x: 0 !default;
+
+/* IMAGE */
+
+$figure-image-border-radius: inherit !default;

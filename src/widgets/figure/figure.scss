@@ -1,0 +1,51 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Figure
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * @require decorators/colors/colors.scss
+ * ========================================================================= */
+
+/* FIGURE */
+
+%figure {
+
+  @extend %widget;
+  @include children-no-gutter ();
+  @include color ( $figure-color, $figure-color-force, $figure-color-basic );
+  display: block;
+  min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
+  padding: $figure-padding-y $figure-padding-x;
+  border-radius: $figure-border-radius;
+
+  /* IMAGE */
+
+  > img {
+    border-radius: $figure-image-border-radius;
+  }
+
+  /* INLINE */
+
+  p &,
+  span & {
+
+    display: inline-block;
+
+    /* IMAGE */
+
+    img {
+      display: block;
+    }
+
+  }
+
+}
+
+figure,
+.figure {
+  @extend %figure;
+}

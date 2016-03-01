@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Figure - Floated - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../figure.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+%figure.floated.right {
+  float: right;
+  margin: 0 0 $figure-floated-spacing $figure-floated-spacing;
+}
