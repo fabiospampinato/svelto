@@ -17,6 +17,7 @@
   @extend %multiple;
   @include last-child-no-gutter ( 0, - $gutter );
   display: flex;
+  position: relative;
 
   /* NEXT */
 
