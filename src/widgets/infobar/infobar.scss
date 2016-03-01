@@ -12,7 +12,6 @@
 /* INFOBAR */
 
 //FIXME: It doesn't work really good on mobile
-//TODO: Add support for .infobar-title and .infobar-subtitle also outside of the .infobar-center, in order to simplify the markup
 
 .infobar {
 
@@ -24,7 +23,9 @@
 
   /* SECTIONS */
 
-  > * {
+  > *,
+  &-title,
+  &-subtitle {
     margin-bottom: 0 !important;
   }
 
@@ -34,43 +35,26 @@
     margin-left: $gutter;
   }
 
-  /* LEFT */
+  /* LEFT / RIGHT */
 
-  &-left {
+  &-left,
+  &-right {
     flex-shrink: 0;
-    order: 0;
   }
 
   /* CENTER */
 
   &-center {
-    flex-grow: 1;
-    flex-shrink: 1; // IE-10/11 default it to 0 instead
-    flex-basis: 0;
-    order: 1;
-  }
-
-  /* RIGHT */
-
-  &-right {
-    flex-shrink: 0;
-    order: 2;
+    flex: 1 1 0%; // IE-10/11 sets flex-shrink to 0 // IE-10/11 misinterpreter a unitless 0 flex-basis
   }
 
   /* BOTTOM */
 
-  &-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
-    order: 3;
+  //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
+
+  &-bottom {
     width: 100%;
     margin-top: $gutter;
-  }
-
-  /* TITLE / SUBTITLE */
-
-  &-title,
-  &-subtitle {
-    display: flex;
-    margin-bottom: 0 !important;
   }
 
   /* TITLE */
