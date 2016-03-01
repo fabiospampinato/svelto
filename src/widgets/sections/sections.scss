@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
 //TODO: Add support for vertical sections
@@ -12,11 +14,9 @@
 
 .sections {
 
-  @include last-child-no-gutter ();
-  position: relative;
+  @extend %widget;
   display: flex;
   flex-wrap: nowrap;
-  margin-bottom: $gutter;
 
   /* SEGMENTS */
 
@@ -24,14 +24,33 @@
     margin-bottom: 0 !important;
   }
 
-  /* CENTER */
+  /* SECTION CENTER */
 
   // Centering the center segment, if the left one xor the right one is missing
   // An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
 
-  > .section-center:first-child,
-  > .section-center:last-child {
-    @include center-absolute-transform ();
+  > .section-center:not(:only-child) {
+
+    &:first-child,
+    &:last-child,
+    &.forced {
+      @include center-absolute-transform ();
+    }
+
+  }
+
+  /* CENTER */
+
+  //TODO: Maybe join them with multiple's and make a decorator for them
+
+  &.center-x,
+  &.center {
+    justify-content: center;
+  }
+
+  &.center-y,
+  &.center {
+    align-items: center;
   }
 
 }
@@ -41,13 +60,9 @@
 .section-left,
 .section-center,
 .section-right {
-  @include last-child-no-gutter ();
+  @extend %widget;
   display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-items: center;
-  margin-bottom: $gutter;
+  flex: 1 1 auto;  // IE-10/11 sets flex-shrink to 0
 }
 
 /* LEFT */
@@ -59,13 +74,7 @@
 /* CENTER */
 
 .section-center {
-
   justify-content: center;
-
-  &:not(:only-child).forced {
-    @include center-absolute-transform ();
-  }
-
 }
 
 /* RIGHT */
