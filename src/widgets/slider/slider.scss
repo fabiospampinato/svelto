@@ -21,8 +21,14 @@
   @include color ( $slider-color, $slider-color-force, $slider-color-basic );
   display: flex;
   align-items: stretch;
-  height: $slider-height;
+  min-height: $slider-min-height;
   border-radius: $container-border-radius;
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
 
   /* OUTLINED */
 
@@ -36,12 +42,6 @@
       padding-right: $gutter;
     }
 
-  }
-
-  /* INPUT */
-
-  input {
-    display: none;
   }
 
   /* MIN / MAX */
@@ -58,7 +58,7 @@
 
   &-min {
 
-    margin-right: $slider-handler-half-size;
+    margin-right: $slider-handler-width / 2;
 
     &:after {
       content: attr(data-min);
@@ -70,7 +70,7 @@
 
   &-max {
 
-    margin-left: $slider-handler-half-size;
+    margin-left: $slider-handler-width / 2;
 
     &:after {
       content: attr(data-max);
@@ -84,8 +84,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    flex-grow: 1;
-    flex-shrink: 1; // IE-10/11 default it to 0 instead
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
   }
 
   /* UNHIGHLIGHT */
@@ -104,19 +103,18 @@
 
   &-highlight {
     @include color ( $slider-highlight-color, $slider-highlight-color-force, $slider-highlight-color-basic );
+    @include fill ();
     position: absolute;
     right: 100%;
-    width: 100%;
-    height: 100%;
     transition: background-color $slider-animation-duration;
   }
 
   /* HANDLER WRAPPER */
 
   &-handler-wrp {
-    @include center-absolute ( false, $slider-handler-size );
+    @include center-absolute ( false, $slider-handler-height );
     left: 0;
-    margin-left: - $slider-handler-half-size;
+    margin-left: - $slider-handler-width / 2;
   }
 
   /* HANDLER */
@@ -126,8 +124,8 @@
     @include color ( $slider-handler-color, $slider-handler-color-force, $slider-handler-color-basic );
     @include z-depth ( $slider-handler-z-depth, $slider-handler-z-depth-force, $slider-handler-z-depth-basic );
     z-index: 1;
-    width: $slider-handler-size;
-    height: $slider-handler-size;
+    width: $slider-handler-width;
+    height: $slider-handler-height;
     transition-property: transform, background-color;
     transition-duration: $slider-animation-duration;
     border-radius: $slider-handler-border-radius;
@@ -147,10 +145,9 @@
 
   }
 
+  //FIXME: It's not perfectly centered on Nexus 4 using Chrome
+
   &-label {
-
-    //FIXME: It's not perfectly centered on Nexus 4 using Chrome
-
     display: inline-block;
     vertical-align: middle;
     font-size: $slider-handler-label-font-size;
@@ -184,10 +181,18 @@
       content: $slider-min-icon;
     }
 
+    .slider-min[data-icon]:hover:after {
+      content: attr(data-icon);
+    }
+
     /* MAX */
 
     .slider-max:hover:after {
       content: $slider-max-icon;
+    }
+
+    .slider-max[data-icon]:hover:after {
+      content: attr(data-icon);
     }
 
     /* BAR */
