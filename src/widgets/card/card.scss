@@ -31,6 +31,7 @@
 
     &:not(.multiple) {
       @extend %container;
+      @include color ( $card-section-color, $card-section-color-force, $card-section-color-basic );
       border-radius: 0;
     }
 

@@ -15,3 +15,9 @@ $card-color-force: $container-color-force !default;
 $card-color-basic: $container-color-basic !default;
 
 $card-border-radius: $container-border-radius !default;
+
+/* SECTION */
+
+$card-section-color: 'inherit' !default;
+$card-section-color-force: false !default;
+$card-section-color-basic: true !default;
