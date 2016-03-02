@@ -13,42 +13,34 @@
 .chat-msg {
 
   @extend %widget;
+  @include children-no-gutter ();
   display: flex;
 
   /* IMAGE */
 
-  .chat-msg-img {
-
-    box-sizing: content-box;
-    width: $chat-msg-img-size;
-    height: $chat-msg-img-size;
-    border: $chat-msg-img-border-width $chat-msg-img-border-style $chat-msg-img-border-color;
+  .chat-msg-img,
+  .chat-msg-img img {
+    @include dimension ( $chat-msg-img-size );
+    border-radius: if( $chat-msg-img-rounded, 1000000px, $chat-msg-img-border-radius );
     overflow: hidden;
-
-    @if $chat-msg-img-rounded == true {
-      border-radius: 10000px;
-    } @else {
-      border-radius: $chat-msg-img-border-radius;
-    }
-
-    img {
-      transition: opacity $chat-msg-animation-duration;
-      width: $chat-msg-img-size;
-      height: $chat-msg-img-size;
-      border-radius: 100%;
-      overflow: hidden;
-    }
-
   }
 
-  a.chat-msg-img:hover {
+  img.chat-msg-img,
+  .chat-msg-img img {
+    transition: opacity $chat-msg-animation-duration;
+    border-width: $chat-msg-img-border-width;
+    border-style: $chat-msg-img-border-style;
+    border-color: $chat-msg-img-border-color;
+  }
+
+  a.chat-msg-img:hover,
+  .chat-msg-img a:hover {
 
     img {
       opacity: $chat-msg-img-opacity-hover;
     }
 
-    .overlay + img,
-    .overlay + * > img {
+    .overlay + img {
       opacity: 1;
     }
 
@@ -58,9 +50,7 @@
 
   .chat-msg-content {
 
-    flex-grow: 1;
-    flex-shrink: 1; // IE-10/11 default it to 0 instead
-    margin-bottom: 0;
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
 
     /* HEADER */
 
@@ -84,7 +74,7 @@
 
       &.outlined:before {
         border-width: $outline-width;
-        border-style: solid;
+        border-style: inherit;
       }
 
     }

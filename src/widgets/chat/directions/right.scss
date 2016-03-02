@@ -31,25 +31,19 @@
 
   .chat-msg-img {
     order: 2;
-    // margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
-  }
-
-  /* TIP */
-
-  .chat-msg-content {
-    margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
-  }
-
-  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
-
-  _:-ms-lang(x), & .chat-msg-content {
-    margin-right: $gutter;
   }
 
   /* CONTENT */
 
   .chat-msg-content {
     order: 1;
+    margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+  }
+
+  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proof, use feature detection instead
+
+  _:-ms-lang(x), & .chat-msg-content {
+    margin-right: $gutter;
   }
 
   /* HEADER */
@@ -65,16 +59,16 @@
       clip-path: polygon(0 0, 100% 100%, 100% 0);
     }
 
-    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
-
-    _:-ms-lang(x), &:before {
-      display: none !important;
-    }
-
     /* TIP (OUTLINED) */
 
     &.outlined:before {
       margin-right: - $outline-width;
+    }
+
+    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
+
+    _:-ms-lang(x), &:before {
+      display: none !important;
     }
 
   }

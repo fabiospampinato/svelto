@@ -10,32 +10,6 @@
 
 /* NO TIP */
 
-.chat-msg.no-tip {
-
-  /* TIP */
-
-  .chat-msg-content .card-header:before {
-    display: none;
-  }
-
-  /* LEFT */
-
-  &.direction-left {
-
-    .chat-msg-content {
-      margin-left: $gutter;
-    }
-
-  }
-
-  /* RIGHT */
-
-  &.direction-right {
-
-    .chat-msg-content {
-      margin-right: $gutter;
-    }
-
-  }
-
+.chat-msg.no-tip .chat-msg-content .card-header:before {
+  display: none;
 }
