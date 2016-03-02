@@ -5,105 +5,94 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
  * @require widgets/icon/icon.scss
  * @require widgets/icons/icons.scss
  * ========================================================================= */
 
-//TODO: Add support for input.checkbox
+//TODO: Create a mixin for `cursor: pointer` if not disabled
 
 /* CHECKBOX */
 
-.checkbox {
+input[type="checkbox"] {
 
-  @extend %widget;
-  display: inline-flex;
+  @extend %icons;
+  cursor: pointer;
 
-  /* CHILDREN */
+  /* BEFORE / AFTER */
 
-  > * {
-    margin-bottom: 0 !important;
+  &:before,
+  &:after {
+    @extend %icon-basic;
+    @extend %icons-icon;
+    transition: opacity $checkbox-icon-animation-duration;
   }
 
-  > :not(:first-child) {
-    margin-left: $label-compact-center-extra-spacing;
+  /* BEFORE */
+
+  &:before {
+    content: $checkbox-icon-off;
+    color: $checkbox-icon-off-color;
+    opacity: 1;
   }
 
-  /* INPUT */
+  /* AFTER */
 
-  input {
+  &:after {
+    content: $checkbox-icon-on;
+    color: $checkbox-icon-on-color;
+    opacity: 0;
+    z-index: 1;
+  }
 
-    @extend %icons;
-    min-height: 0;
-    background-color: transparent;
+  /* CUSTOM BEFORE / AFTER */ //TODO: Implement this logic also everywhere else we use a pseudo element icon
 
-    /* BEFORE / AFTER */
+  &[data-icon-off]:before {
+    content: attr(data-icon-off);
+  }
 
-    &:before,
-    &:after {
-      @extend %icon-basic;
-      @extend %icons-icon;
-      transition: opacity $checkbox-icon-animation-duration;
-    }
+  &[data-icon-on]:after {
+    content: attr(data-icon-on);
+  }
+
+  /* CHECKED */
+
+  &:checked {
 
     /* BEFORE */
 
     &:before {
-      content: $checkbox-icon-off;
-      opacity: 1;
+      opacity: 0;
     }
 
     /* AFTER */
 
     &:after {
-      content: $checkbox-icon-on;
-      color: $checkbox-icon-on-color;
-      opacity: 0;
-      z-index: 1;
-    }
-
-    /* CUSTOM BEFORE / AFTER */ //TODO: Implement this logic also everywhere else we use a pseudo element icon
-
-    &[data-icon-off]:before {
-      content: attr(data-icon-off);
-    }
-
-    &[data-icon-on]:after {
-      content: attr(data-icon-on);
-    }
-
-    /* CHECKED */
-
-    &:checked {
-
-      /* BEFORE */
-
-      &:before {
-        opacity: 0;
-      }
-
-      /* AFTER */
-
-      &:after {
-        opacity: 1;
-      }
-
+      opacity: 1;
     }
 
   }
 
-  /* ENABLED */
+  /* DISABLED */
 
-  &:not(.disabled) {
+  .disabled &,
+  &.disabled,
+  &[disabled] {
+    cursor: default;
+  }
 
-    cursor: pointer;
+}
 
-    /* INPUT */
+/* WRAPPER */
 
-    input {
-      cursor: pointer;
-    }
+.checkbox {
 
+  cursor: pointer;
+
+  /* DISABLED */
+
+  .disabled &,
+  &.disabled {
+    cursor: default;
   }
 
 }
