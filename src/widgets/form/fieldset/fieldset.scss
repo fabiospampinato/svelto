@@ -6,16 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
- * @require core/widget/widget.scss
+ * @require widgets/container/container.scss
  * ========================================================================= */
-
-//TODO: Maybe just extend `.container` and change the background (?)
 
 /* FIELDSET */
 
 fieldset {
-  @extend %widget;
+  @extend %container;
   background-color: $fieldset-bg-color;
-  border-radius: $fieldset-border-radius;
-  padding: $fieldset-padding-y $fieldset-padding-x;
+  border-color: $fieldset-border-color;
 }
