@@ -8,31 +8,30 @@
  * @require widgets/checkbox/checkbox.scss
  * ========================================================================= */
 
-//TODO: Add support for input.radio
-//TODO: Add cooler radio animation, closer to material design
+//TODO: Add cooler radio animation, closer to material design, without breaking custom icons support
 
 /* RADIO */
 
-.radio {
+input[type=radio] {
 
-  @extend .checkbox;
+  @extend input[type="checkbox"];
 
-  /* INPUT */
+  /* BEFORE */
 
-  input {
-
-    /* BEFORE */
-
-    &:before {
-      content: $radio-icon-off;
-    }
-
-    /* AFTER */
-
-    &:after {
-      content: $radio-icon-on;
-    }
-
+  &:before {
+    content: $radio-icon-off;
   }
 
+  /* AFTER */
+
+  &:after {
+    content: $radio-icon-on;
+  }
+
+}
+
+/* WRAPPER */
+
+.radio {
+  @extend .checkbox;
 }
