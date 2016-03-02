@@ -17,4 +17,4 @@ $progressbar-stripe-dark-color: rgba( 0, 0, 0, $progressbar-stripe-opacity ) !de
 
 /* STRIPES */
 
-$progressbar-stripes-animation-move-duration: .5s !default;
+$progressbar-stripes-animation-move-duration: $animation-slow !default;

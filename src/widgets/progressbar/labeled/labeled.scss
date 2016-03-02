@@ -15,9 +15,9 @@
   /* AFTER (LABEL) */
 
   .progressbar-highlight:after {
+    @include padding-x ( $gutter-half );
     content: attr(data-value);
     font-size: $progressbar-label-font-size;
-    padding: 0 $gutter-half;
   }
 
 }

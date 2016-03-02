@@ -15,14 +15,10 @@
   /* STRIPES */
 
   .progressbar-highlight:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: - $progressbar-stripe-size;
-    right: 0;
+    @include absolute ( 0 0 0 ( - $progressbar-stripe-size ) );
     background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
-    content: '';
     background-size: $progressbar-stripe-size $progressbar-stripe-size;
+    content: '';
     animation: progressbar-stripes-move $progressbar-stripes-animation-move-duration linear infinite;
   }
 
