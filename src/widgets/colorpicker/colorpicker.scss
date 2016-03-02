@@ -27,12 +27,13 @@
   /* HANDLER */
 
   &-handler {
-    @include z-depth ( $colorpicker-handler-z-depth, $colorpicker-handler-z-depth-force, $colorpicker-handler-z-depth-basic ); //TODO: Not supported now, add back the extra shadow: $colorpicker-handler-shadow
+    box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow; //FIXME: We are not using the `z-depth`, ugly
     position: absolute;
     z-index: 2;
-    box-sizing: border-box;
-    border: $colorpicker-handler-border-width $colorpicker-handler-border-style $colorpicker-handler-border-color;
-    background-color: $colorpicker-handler-border-color;
+    border-width: $colorpicker-handler-border-width;
+    border-style: $colorpicker-handler-border-style;
+    border-color: $colorpicker-handler-border-color;
+    background-color: $colorpicker-handler-bg-color;
   }
 
   /* SATURATION & BRIGHTNESS / HUE */
@@ -40,17 +41,17 @@
   &-sb,
   &-hue {
     position: relative;
-    box-sizing: content-box;
-    height: $colorpicker-size;
     cursor: pointer;
-    border: $colorpicker-wrp-border-width $colorpicker-wrp-border-style $colorpicker-wrp-border-color;
+    border-width: $colorpicker-wrp-border-width;
+    border-style: $colorpicker-wrp-border-style;
+    border-color: $colorpicker-wrp-border-color;
   }
 
   /* SATURATION & BRIGHTNESS */
 
   &-sb {
 
-    width: $colorpicker-size;
+    @include dimension ( $colorpicker-sb-wrp-size );
     background-color: red;
 
     /* BEFORE / AFTER */
@@ -91,6 +92,7 @@
   &-hue {
 
     width: $colorpicker-hue-wrp-width;
+    height: $colorpicker-hue-wrp-height;
     margin-left: $gutter;
 
     /* BEFORE */
