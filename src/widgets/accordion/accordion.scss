@@ -17,22 +17,12 @@
 
   /* EXPANDER */
 
-  .expander {
+  > .expander {
 
     margin-bottom: 0;
 
-    &.card.outlined > .card-header {
-      margin-bottom: 0 !important;
-    }
-
     &:not(:first-child) {
-
-      /* IS CARD */
-
-      &.card > .card-header {
-        @include border-top-radius ( 0 );
-      }
-
+      @include border-top-radius ( 0 );
     }
 
     &:not(:last-child) {
@@ -43,26 +33,6 @@
 
       &.outlined {
         border-bottom-width: 0;
-      }
-
-      /* IS CARD */
-
-      &.card {
-
-        > .card-header {
-          @include border-bottom-radius ( 0 );
-        }
-
-        /* CLOSED */
-
-        &:not(.open) {
-
-          > .card-header {
-            border-bottom: 0;
-          }
-
-        }
-
       }
 
     }
