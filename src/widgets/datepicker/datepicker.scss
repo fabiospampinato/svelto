@@ -14,7 +14,7 @@
 .datepicker {
 
   @extend %widget;
-  border-radius: $container-border-radius;
+  border-radius: $datepicker-border-radius;
 
   /* INPUT */
 
@@ -29,20 +29,25 @@
     display: flex;
     align-items: center;
 
-    /* BUTTON / PREVIOUS / NEXT */
+    /* CHILDREN */
 
-    .button,
+    > * {
+      margin-bottom: 0 !important;
+    }
+
+    /* LABEL / PREVIOUS / NEXT */
+
+    > .label,
     .previous,
     .next {
       width: $datepicker-day-width;
-      margin-bottom: 0;
       flex-grow: 0;
     }
 
     /* TITLE */
 
     .datepicker-title {
-      margin: 0 $gutter;
+      @include margin-x ( $gutter );
       text-align: center;
       flex-grow: 1;
     }
@@ -151,12 +156,6 @@
         opacity: $datepicker-day-clamped-opacity;
       }
 
-      /* DAY */
-
-      :not(.previous):not(.next):not(.datepicker-day-clamped) {
-        cursor: pointer;
-      }
-
     }
 
   }
@@ -168,6 +167,8 @@
     /* DAY */
 
     .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
+
+      cursor: pointer;
 
       /* HOVER */
 

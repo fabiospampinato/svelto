@@ -7,15 +7,17 @@
  * =========================================================================
  * @require core/animations/variables.scss
  * @require core/colors/variables.scss
+ * @require widgets/container/variables.scss
  * ========================================================================= */
+
+/* DATEPICKER */
+
+$datepicker-border-radius: $container-border-radius !default;
 
 /* DAY */
 
 $datepicker-day-width: 100% / 7 !default;
 $datepicker-day-height: 2.5em !default;
-
-$datepicker-day-prev-next-opacity: .25 !default;
-$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 
 /* DAY NAME */
 
@@ -23,7 +25,7 @@ $datepicker-day-name-font-weight: bold !default;
 
 /* DAY CIRCLE */
 
-$datepicker-day-circle-size: 2.375em !default;
+$datepicker-day-circle-size: $datepicker-day-height * .95 !default;
 
 /* DAY HOVER */
 
@@ -43,6 +45,14 @@ $datepicker-day-selected-z-depth-basic: true !default;
 
 $datepicker-day-selected-color: $color-secondary-text !default;
 $datepicker-day-selected-circle-color: $color-secondary !default;
+
+/* DAY PREV/NEXT */
+
+$datepicker-day-prev-next-opacity: .25 !default;
+
+/* DAY CLAMPED */
+
+$datepicker-day-clamped-opacity: $datepicker-day-prev-next-opacity !default;
 
 /* ANIMATION */
 
