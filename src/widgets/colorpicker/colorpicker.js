@@ -189,7 +189,7 @@
       this.hsv.s =  _.clamp ( XY.X, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
       this.hsv.v =  100 - ( _.clamp ( XY.Y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
-      this._updateSb ();
+      this._updateSb ( false );
 
       if ( update ) {
 
@@ -269,7 +269,7 @@
 
       this.hsv.h = 359 - ( _.clamp ( XY.Y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
-      this._updateHue ();
+      this._updateHue ( false );
 
       if ( update ) {
 
@@ -293,24 +293,46 @@
 
     /* UPDATE */
 
-    _updateSb () {
+    _updateSb ( _translate = true ) {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
-          translateX = this.sbWrpSize / 100 * this.hsv.s,
-          translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
+      /* HSL */
 
-      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
+      let hsl = Color.hsv2hsl ( this.hsv );
+
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
+
+      /* TRANSLATE */
+
+      if ( _translate ) {
+
+        let translateX = this.sbWrpSize / 100 * this.hsv.s,
+            translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
+
+        this.$sbHandler.translate ( translateX, translateY );
+
+      }
 
     }
 
-    _updateHue () {
+    _updateHue ( _translate = true ) {
 
-      let hsl = Color.hsv2hsl ( this.hsv ),
-          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
+      /* HSL */
 
-      this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
+      let hsl = Color.hsv2hsl ( this.hsv );
+
+      this.$hueHandler.hsl ( this.hsv.h, 100, 50 );
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
       this.$sbWrp.hsl ( this.hsv.h, 100, 50 );
+
+      /* TRANSLATE */
+
+      if ( _translate ) {
+
+        let translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
+
+        this.$hueHandler.translateY ( translateY );
+
+      }
 
     }
 
