@@ -16,11 +16,13 @@
 
   &.card {
 
-    > .card-header {
+    //FIXME: We are taking for granted that there will be only the toggler visible
+
+    > :not(.expander-content) {
       @include border-bottom-radius ( inherit );
     }
 
-    &.outlined > .card-header {
+    &.outlined > :not(.expander-content) {
       margin-bottom: -1px !important;
     }
 
