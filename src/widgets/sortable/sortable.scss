@@ -19,8 +19,7 @@ table.sortable {
 
     position: relative;
     cursor: pointer;
-    padding-left: $sortable-table-th-padding-x;
-    padding-right: $sortable-table-th-padding-x;
+    padding-right: $sortable-table-th-padding-right;
 
     /* HOVER */
 
@@ -39,10 +38,7 @@ table.sortable {
     &:before,
     &:after {
       @extend %icon-basic;
-      position: absolute;
-      right: $sortable-table-th-icon-right;
-      top: 0;
-      bottom: 0;
+      @include absolute ( 0 $sortable-table-th-icon-right 0 false );
       margin: auto;
       opacity: 0;
     }
@@ -51,29 +47,29 @@ table.sortable {
 
     &:before {
       content: $sortable-desc-icon;
-      top: .35em;
+      top: $soratable-table-th-icon-spacing;
     }
 
     /* AFTER */
 
     &:after {
       content: $sortable-asc-icon;
-      bottom: .35em;
+      bottom: $soratable-table-th-icon-spacing;
     }
 
     /* INACTIVE OPACITY */
 
     &:hover:before,
     &:hover:after,
-    &.sort-desc:before,
-    &.sort-asc:after {
+    &.sort-desc:after,
+    &.sort-asc:before {
       opacity: $sortable-table-th-icon-inactive-opacity;
     }
 
     /* ACTIVE OPACITY */
 
-    &.sort-desc:after,
-    &.sort-asc:before {
+    &.sort-desc:before,
+    &.sort-asc:after {
       opacity: $sortable-table-th-icon-active-opacity;
     }
 
