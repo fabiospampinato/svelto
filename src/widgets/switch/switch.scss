@@ -19,8 +19,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: $switch-handler-size;
-  width: $switch-bar-width + $switch-handler-size;
+  height: $switch-handler-height;
+  width: $switch-bar-width + $switch-handler-width;
 
   /* INPUT */
 
@@ -34,7 +34,7 @@
     @include color ( $switch-bar-color, $switch-bar-color-force, $switch-bar-color-basic );
     width: $switch-bar-width;
     height: $switch-bar-height;
-    border-radius: $switch-bar-height;
+    border-radius: $switch-bar-border-radius;
     transition: background-color $switch-animation-duration;
   }
 
@@ -42,15 +42,13 @@
 
   &-handler {
 
+    @include absolute ( 0 false false 0 );
     @include color ( $switch-handler-color, $switch-handler-color-force, $switch-handler-color-basic );
     @include z-depth ( $switch-handler-z-depth, $switch-handler-z-depth-force, $switch-handler-z-depth-basic );
-    position: absolute;
     z-index: 1;
-    top: 0;
-    left: 0;
-    width: $switch-handler-size;
-    height: $switch-handler-size;
-    border-radius: $switch-handler-size;
+    width: $switch-handler-width;
+    height: $switch-handler-height;
+    border-radius: $switch-handler-border-radius;
     transition-property: background-color, transform;
     transition-duration: $switch-animation-duration;
 
@@ -60,7 +58,7 @@
       @include fill-absolute ();
       background-color: inherit;
       content: '';
-      border-radius: $switch-handler-size;
+      border-radius: $switch-handler-border-radius;
       z-index: -1;
       opacity: 0;
       transform: scale($switch-handler-before-scale-inactive);
@@ -72,10 +70,9 @@
 
     &:after {
       @extend %icon-basic;
+      @include dimension ( $switch-handler-icon-size );
       position: absolute;
       font-size: $switch-handler-icon-font-size;
-      width: $switch-handler-icon-size;
-      height: $switch-handler-icon-size;
       line-height: $switch-handler-icon-size;
       text-align: center;
       transition-property: color;
@@ -104,6 +101,8 @@
 
       &:active,
       &.draggable-dragging {
+
+        /* BEFORE */
 
         &:before {
           opacity: $switch-handler-before-active-opacity;

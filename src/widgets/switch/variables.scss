@@ -22,6 +22,8 @@ $switch-bar-color-basic: true !default;
 $switch-bar-width: 26em / 15 !default;
 $switch-bar-height: 14em / 15 !default;
 
+$switch-bar-border-radius: $switch-bar-height !default;
+
 /* HANDLER */
 
 $switch-handler-z-depth: 3 !default;
@@ -32,8 +34,10 @@ $switch-handler-color: 'gray' !default;
 $switch-handler-color-force: false !default;
 $switch-handler-color-basic: true !default;
 
-$switch-handler-size: 4em / 3 !default;
-$switch-handler-half-size: $switch-handler-size / 2;
+$switch-handler-width: 4em / 3 !default;
+$switch-handler-height: $switch-handler-width !default;
+
+$switch-handler-border-radius: $switch-handler-height !default;
 
 /* HANDLER:BEFORE */
 
