@@ -31,17 +31,9 @@
 
   }
 
-  /* INSET OUTLINED */
-
   > :first-child.overlay + .outlined,
   > :first-child.ripple-circle + .outlined {
     margin-top: - $outline-width;
-  }
-
-  /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
-
-  > img.outlined {
-    width: calc(100% + #{$outline-width * 2}) !important;
   }
 
 }

@@ -14,7 +14,7 @@
   {{{sw.divider "Button header/footer"}}}
 
   <div class="card">
-    <div class="card-header button primary">Something</div>
+    <div class="card-header button primary">Header</div>
     <div class="card-block">Block</div>
     <div class="card-footer button secondary">Footer</div>
   </div>
@@ -44,8 +44,8 @@
           <i class="icon xxxlarge">settings</i>
         </div>
         <div class="infobar-center">
-          <div class="infobar-title">Lorem</div>
-          <div class="infobar-subtitle">Lorem ipsum</div>
+          <div class="infobar-title">{{{sample.text 1}}}</div>
+          <div class="infobar-subtitle">{{{sample.text 2}}}</div>
         </div>
         <div class="infobar-right">
           <div class="button outlined compact">
@@ -53,35 +53,35 @@
           </div>
         </div>
       </div>
-      <img src="/sample-wide.png">
+      {{{sample.imageWide}}}
       <div class="card-block">Block</div>
       <div class="card-footer">Footer</div>
     </div>
     <div class="card xs-12 sm-6 md-3">
-      <div class="image-wrp">
+      <figure>
         {{{sample.imageWide}}}
-        <div class="image-caption top on-hover">Caption</div>
-      </div>
+        <figcaption class="attached-top on-hover">Caption</figcaption>
+      </figure>
       <div class="card-block">Block</div>
       <div class="card-block">And another block</div>
       <div class="card-block">And so on...</div>
     </div>
     <div class="card xs-12 sm-6 md-3">
-      <div class="image-wrp">
+      <figure>
         {{{sample.imageWide}}}
-        <div class="image-caption top transparent">
+        <figcaption class="attached-top transparent">
           <div class="section-right">
             <div class="button compact xsmall black">
               <i class="icon">more_vert</i>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card-footer">Footer </div>
+        </figcaption>
+      </figure>
+      <div class="card-footer">Footer</div>
     </div>
     <div class="card xs-12 sm-6 md-3">
       <div class="card-header">Header</div>
-      <img src="/sample-wide.png">
+      {{{sample.imageWide}}}
       <div class="card-block">Block</div>
     </div>
   </div>
@@ -93,10 +93,10 @@
       <div class="sections center-y">
         <div class="section-left">
           <div class="multiple">
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">thumb_up</i>
             </div>
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">thumb_down</i>
             </div>
           </div>
@@ -104,16 +104,16 @@
         <div class="section-center">Header</div>
         <div class="section-right">
           <div class="multiple">
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">menu</i>
             </div>
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">apps</i>
             </div>
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">refresh</i>
             </div>
-            <div class="button xsmall compact outlined">
+            <div class="button xsmall compact">
               <i class="icon">more_vert</i>
             </div>
           </div>
@@ -124,7 +124,7 @@
       {{{sample.paragraph}}}
       {{{sample.paragraph}}}
     </div>
-    <div class="card-footer pink">Footer</div>
+    <div class="card-footer red">Footer</div>
   </div>
 
   {{> card_actions}}
@@ -138,7 +138,7 @@
   {{{sw.divider "Remove"}}}
 
   <div class="multiple actions">
-    <div class="button outlined" onclick="remove_element ( '.card .image-wrp, .card > img' )">Image</div>
+    <div class="button outlined" onclick="remove_element ( '.card figure, .card > img' )">Image/Figure</div>
     <div class="button outlined" onclick="remove_element ( '.card-header' )">Header</div>
     <div class="button outlined" onclick="remove_element ( '.card-block' )">Block</div>
     <div class="button outlined" onclick="remove_element ( '.card-footer' )">Footer</div>
@@ -148,7 +148,7 @@
 
   <div class="multiple actions">
     {{{sw.checkAction "Card" "toggle_class ( '.card', 'outlined' )"}}}
-    {{{sw.checkAction "Image" "toggle_class ( '.card .image-wrp, .card > img', 'outlined' )"}}}
+    {{{sw.checkAction "Image/Figure" "toggle_class ( '.card figure, .card > img', 'outlined' )"}}}
     {{{sw.checkAction "Header" "toggle_class ( '.card-header', 'outlined' )"}}}
     {{{sw.checkAction "Block" "toggle_class ( '.card-block', 'outlined' )"}}}
     {{{sw.checkAction "Footer" "toggle_class ( '.card-footer', 'outlined' )"}}}

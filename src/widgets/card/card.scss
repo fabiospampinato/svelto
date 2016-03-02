@@ -54,17 +54,10 @@
     flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
   }
 
-  /* FOOTER */
-
-  div.card-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
-    margin-bottom: 0 !important;
-  }
-
   /* BLOCK */
 
   &-block {
-    flex-grow: 1; // Takes the remaining space, if any
-    flex-shrink: 1; // IE-10/11 default it to 0 instead
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
     overflow: auto;
   }
 
@@ -106,8 +99,16 @@
 
   /* NEXT CHILDREN OUTLINED */
 
-  > .outlined + .outlined:not(img) {
-    border-top-width: 0;
+  > .outlined + .outlined {
+
+    &:not(.card-footer) {
+      border-top-width: 0;
+    }
+
+    &.card-footer {
+      margin-top: - $outline-width;
+    }
+
   }
 
 }

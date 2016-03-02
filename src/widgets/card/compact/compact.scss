@@ -9,15 +9,14 @@
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-/* COMPACT */
+/* HEADER / BLOCK / FOOTER */
 
-.card.compact {
+.card-header,
+.card-block,
+.card-footer {
 
-  /* HEADER / BLOCK / FOOTER */
-
-  > .card-header,
-  > .card-block,
-  > .card-footer {
+  &.compact:not(.multiple),
+  .card.compact > &:not(.multiple) {
     padding: $card-compact-padding-y $card-compact-padding-x;
   }
 
