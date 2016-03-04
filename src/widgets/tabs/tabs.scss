@@ -8,7 +8,7 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Update the highlight dynamically when we add top, bottom, left or right
+//TODO: Update the highlight dynamically when we switch direction between top, bottom, left or right
 
 /* TABS */
 
@@ -21,17 +21,16 @@
 
   &-triggers {
 
+    @include children-no-gutter ();
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
-    flex-direction: row;
 
     /* TRIGGER */
 
     > * {
-      margin-bottom: 0;
-      flex-grow: 1;
-      flex-shrink: 1; // IE-10/11 default it to 0 instead
+      flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
     }
 
   }
@@ -40,6 +39,7 @@
 
   &-containers {
 
+    @include children-no-gutter ();
     position: relative;
 
     /* CONTAINER */
@@ -47,7 +47,8 @@
     > * {
 
       display: none;
-      margin-bottom: 0;
+
+      /* ACTIVE */
 
       &.active {
         display: block;
