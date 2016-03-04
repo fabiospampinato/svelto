@@ -41,15 +41,8 @@
   /* IMG */
 
   &-img {
-
     width: $noty-img-size;
-
-    @if $noty-img-rounded == true {
-      border-radius: 10000px;
-    } @else {
-      border-radius: $noty-border-radius;
-    }
-
+    border-radius: if( $noty-img-rounded, 1000000px, $noty-border-radius );
   }
 
 }

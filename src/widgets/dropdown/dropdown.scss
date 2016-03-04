@@ -40,7 +40,7 @@
     box-sizing: content-box;
   }
 
-  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
 
   _:-ms-lang(x), &:before {
     display: none;
@@ -50,7 +50,7 @@
 
   &.outlined:before {
     border-width: $outline-width;
-    border-style: solid;
+    border-style: inherit;
   }
 
 }

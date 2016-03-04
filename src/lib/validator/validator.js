@@ -9,6 +9,8 @@
  * @require lib/regexes/regexes.js
  * ========================================================================= */
 
+//TODO: Most of them will return false for empty strings, is this the wanted behaviour?
+
 // `value` is supposed to be a string
 // Strings will be trimmed inside some validators
 
