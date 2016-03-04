@@ -22,6 +22,7 @@
 
     position: absolute;
     pointer-events: none;
+    margin: 0 !important;
     z-index: $ripple-circle-z-index;
 
     &:before {

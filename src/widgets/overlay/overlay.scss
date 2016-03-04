@@ -17,6 +17,7 @@
   @include center-absolute-fill ();
   z-index: $overlay-z-index;
   display: none;
+  margin: 0 !important;
   opacity: 0;
   transition: opacity $overlay-animation-duration;
   background-color: transparent;

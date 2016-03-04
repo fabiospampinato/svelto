@@ -12,5 +12,5 @@
 
 %shape {
   @extend %widget;
-  flex: 0 0 auto !important; //FIXME: If not there's an issue caused by the label in the `droppable` demo
+  flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
 }
