@@ -10,7 +10,7 @@
 
 /* ICON */
 
-%icon-basic {
+%icon-base {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -26,6 +26,7 @@
   white-space: nowrap;
   direction: ltr;
   overflow: hidden; // So the text won't exceed the icon box even when the font is not loaded
+  flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -33,7 +34,7 @@
 }
 
 %icon {
-  @extend %icon-basic;
+  @extend %icon-base;
 }
 
 %icon-sizes-scaled {

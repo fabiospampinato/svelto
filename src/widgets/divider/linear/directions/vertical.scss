@@ -34,7 +34,7 @@
 
     &:before,
     &:after {
-      @extend %hr-vertical-basic;
+      @extend %hr-vertical-base;
       @include margin-x ( $gutter-half );
       content: '';
       align-self: center;

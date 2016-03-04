@@ -169,7 +169,7 @@
       cursor: pointer;
 
       &:hover:after {
-        @extend %icon-basic;
+        @extend %icon-base;
         margin-bottom: 0;
       }
 

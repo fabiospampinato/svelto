@@ -10,14 +10,14 @@
 
 /* HR */
 
-%hr-basic {
+%hr-base {
   display: flex;
   z-index: $hr-z-index;
   background-color: $hr-bg-color;
 }
 
 %hr {
-  @extend %hr-basic;
+  @extend %hr-base;
 }
 
 hr {

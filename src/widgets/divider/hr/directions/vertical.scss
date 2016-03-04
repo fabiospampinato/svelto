@@ -11,13 +11,13 @@
 
 /* VERTICAL */
 
-%hr-vertical-basic {
-  @extend %hr-basic;
+%hr-vertical-base {
+  @extend %hr-base;
   width: $hr-size;
 }
 
 %hr-vertical {
-  @extend %hr-vertical-basic;
+  @extend %hr-vertical-base;
   @extend %widget;
   @include margin-x ( $gutter-half );
 }

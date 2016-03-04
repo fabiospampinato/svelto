@@ -37,7 +37,7 @@ table.sortable {
 
     &:before,
     &:after {
-      @extend %icon-basic;
+      @extend %icon-base;
       @include absolute ( 0 $sortable-table-th-icon-right 0 false );
       margin: auto;
       opacity: 0;

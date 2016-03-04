@@ -69,7 +69,7 @@
     /* AFTER */
 
     &:after {
-      @extend %icon-basic;
+      @extend %icon-base;
       @include dimension ( $switch-handler-icon-size );
       position: absolute;
       font-size: $switch-handler-icon-font-size;

@@ -22,7 +22,7 @@ input[type="checkbox"] {
 
   &:before,
   &:after {
-    @extend %icon-basic;
+    @extend %icon-base;
     @extend %icons-icon;
     transition: opacity $checkbox-icon-animation-duration;
   }
