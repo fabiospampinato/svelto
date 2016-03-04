@@ -21,6 +21,7 @@
     plugin: true,
     selector: 'input.autogrow',
     options: {
+      minWidth: 1, // So that the cursor will get displayed even when empty
       callbacks: {
         change: _.noop
       }
@@ -59,7 +60,7 @@
 
       this.ctx.font = this.$input.css ( 'font' );
 
-      return this.ctx.measureText ( this.$input.val () ).width;
+      return Math.max ( this.ctx.measureText ( this.$input.val () ).width, this.options.minWidth );
 
     }
 
