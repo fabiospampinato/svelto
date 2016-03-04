@@ -21,19 +21,19 @@
   $text: nth( $datas, 6 );
 
   %color-#{$name}-inverted {
-    background: inherit;
+    background-color: inherit;
     border-color: $bg;
     color: $bg;
   }
 
   %color-#{$name}-inverted-hover {
-    background: $bg-hover;
+    background-color: $bg-hover;
     border-color: $bg;
     color: $text;
   }
 
   %color-#{$name}-inverted-active {
-    background: $bg-active;
+    background-color: $bg-active;
     border-color: $bg-active;
     color: $text;
   }

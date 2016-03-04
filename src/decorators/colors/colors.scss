@@ -21,17 +21,17 @@
   $text: nth( $datas, 6 );
 
   %color-#{$name}-base {
-    background: $bg;
+    background-color: $bg;
     border-color: $border;
     color: $text;
   }
 
   %color-#{$name}-hover {
-    background: $bg-hover;
+    background-color: $bg-hover;
   }
 
   %color-#{$name}-active {
-    background: $bg-active;
+    background-color: $bg-active;
   }
 
   %color-#{$name} {
