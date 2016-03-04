@@ -1,15 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Input - Valid
+ * Svelto - Widgets - Input - Placeholder (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
  * ========================================================================= */
 
-/* VALID */
+/* PLACEHOLDER */
 
-%input.valid {
-  border-color: $color-success !important;
-}
+$input-placeholder-opacity: .6 !default;

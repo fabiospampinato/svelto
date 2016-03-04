@@ -10,7 +10,7 @@
 
 /* FLUID */
 
-%input.fluid,
-input.fluid {
+%input.fluid {
   width: 100%;
+  flex-grow: 1;
 }

@@ -11,16 +11,32 @@
 /* FILE */
 
 input[type="file"] {
+
+  @include fill ();
   @include fill-absolute ();
-  width: 100%; // Or it will not stretch on mobile Chrome
-  border: none;
   appearance: none;
-  border-radius: inherit;
   cursor: pointer;
+  margin: 0 !important;
   font-size: 0;
   opacity: 0;
-  margin-top: 0 !important;
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-  z-index: 99;
+  border: 0;
+  border-radius: inherit;
+  z-index: $input-file-z-index;
+
+  /* OUTLINED */
+
+  //FIXME: Not stretching properly, at maximum it reached 100% width and height
+
+  // .outlined > & {
+  //   @include absolute ( - $outline-width );
+  // }
+
+  /* DISABLED */
+
+  &.disabled,
+  &[disabled],
+  .disabled & {
+    cursor: default;
+  }
+
 }

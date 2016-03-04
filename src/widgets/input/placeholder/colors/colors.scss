@@ -1,11 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Input - Colors
+ * Svelto - Widgets - Input - Placeholder - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../input.scss
+ * @require ../placeholder.scss
  * ========================================================================= */
 
 /* COLORS */
@@ -17,7 +17,7 @@
   $text: nth( $datas, 6 );
 
   .#{$class}::placeholder {
-    color: $text !important;
+    color: $text;
   }
 
 }

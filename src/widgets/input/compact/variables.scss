@@ -1,15 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Input - Valid
+ * Svelto - Widgets - Input - Compact (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../input.scss
+ * @require widgets/label/compact/variables.scss
  * ========================================================================= */
 
-/* VALID */
+/* COMPACT */
 
-%input.valid {
-  border-color: $color-success !important;
-}
+$input-compact-padding-x: $label-compact-padding-x !default;
+$input-compact-padding-y: $label-compact-padding-y !default;
