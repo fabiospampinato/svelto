@@ -12,20 +12,15 @@
 
 /* STEPPER */
 
-//TODO: Add valid/invalid classes
-
 .stepper {
 
   @extend %widget;
+  @include children-no-gutter ();
   @include color ( $stepper-color, $stepper-color-force, $stepper-color-basic );
   display: flex;
   border-radius: $stepper-border-radius;
 
   /* SEGMENTS */
-
-  > * {
-    margin-bottom: 0 !important;
-  }
 
   > :not(:first-child) {
     @include border-left-radius ( 0 );
@@ -41,9 +36,6 @@
 
   input {
     text-align: center;
-    // display: flex;
-    // flex-grow: 1;
-
   }
 
 }
