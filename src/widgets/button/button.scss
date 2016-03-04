@@ -5,19 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/reset/reset.scss
  * @require decorators/actionable/actionable.scss
  * @require widgets/label/label.scss
  * ========================================================================= */
-
-//TODO: Should `button` also extend `.label`? What about the default `label`? Its purpose is very different from the one of `.label`
-
-/* DEFAULT BUTTON */
-
-button {
-  border: none;
-  padding: 0;
-}
 
 /* BUTTON */
 
