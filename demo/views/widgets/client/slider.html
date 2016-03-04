@@ -39,6 +39,10 @@
     <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
   </div>
 
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+
   {{{sw.divider "State"}}}
 
   <div class="multiple actions">
@@ -56,6 +60,10 @@
   <script>
     function getValue ( name ) {
       return $('[name="' + name + '"]').val ();
+    }
+
+    function toggle_class ( name ) {
+      return $('.slider').toggleClass ( name );
     }
 
     function api_get() {

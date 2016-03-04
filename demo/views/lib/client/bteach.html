@@ -63,7 +63,7 @@
       var $node = $(this),
           found_nr = Number($node.children().html());
       iterations += 1;
-      $node.append('<div class="label badge top-right compact xxxxsmall rounded inherit">' + iterations + '</div>');
+      $node.append('<div class="badge top-right compact xxxxsmall rounded inherit">' + iterations + '</div>');
       if (found_nr < searchNr) {
         $node.addClass('red');
         return 1;

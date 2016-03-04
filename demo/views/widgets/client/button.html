@@ -7,10 +7,6 @@
 
   <div class="button">Button</div>
 
-  {{{sw.divider "Fluid"}}}
-
-  <div class="button fluid">Fluid</div>
-
   {{{sw.divider "Colors"}}}
 
   <div class="multiple">
@@ -40,15 +36,27 @@
     <div class="button base">Base</div>
   </div>
 
+  {{{sw.divider "Fluid"}}}
+
+  <div class="button fluid">Fluid</div>
+  <div class="button fluid">
+    <span>Fluid</span>
+    <i class="icon">settings</i>
+  </div>
+
   {{{sw.divider "Advanced"}}}
 
   <div class="multiple">
+    <div class="button">Normal</div>
     <div class="button">
       <i class="icon">settings</i>
     </div>
     <div class="button rounded">
       <i class="icon">settings</i>
     </div>
+    <div class="button sharp">
+      <i class="icon">settings</i>
+    </div>
     <div class="button">
       <i class="icon">settings</i>
       <span>Settings</span>
@@ -58,60 +66,21 @@
       <i class="icon">settings</i>
     </div>
     <div class="button">
-      <div class="sub left">
-        <i class="icon">settings</i>
-      </div>
-      <span>Settings</span>
-    </div>
-    <div class="button">
-      <span>Settings</span>
-      <div class="sub right">
-        <i class="icon">settings</i>
+      <span>Multi</span>
+      <div class="icons">
+        <i class="icon">access_alarm</i>
+        <i class="icon corner text-white">add_circle_outline</i>
+        <i class="icon corner">add_circle</i>
       </div>
     </div>
-  </div>
-
-  {{{sw.divider "Rounded"}}}
-
-  <div class="multiple">
-    <div class="button rounded primary">1</div>
-    <div class="button rounded secondary">2</div>
-    <div class="button rounded tertiary">3</div>
-    <div class="button rounded quaternary">4</div>
-    <div class="button rounded white">5</div>
-    <div class="button rounded gray">6</div>
-    <div class="button rounded black">7</div>
-    <div class="button rounded yellow">8</div>
-    <div class="button rounded olive">9</div>
-    <div class="button rounded green">10</div>
-    <div class="button rounded blue">11</div>
-    <div class="button rounded violet">12</div>
-    <div class="button rounded orange">13</div>
-    <div class="button rounded purple">14</div>
-    <div class="button rounded red">15</div>
-    <div class="button rounded pink">16</div>
-    <div class="button rounded teal">17</div>
-    <div class="button rounded brown">18</div>
-    <div class="button rounded error">19</div>
-    <div class="button rounded warning">20</div>
-    <div class="button rounded success">21</div>
-    <div class="button rounded transparent">22</div>
-    <div class="button rounded inherit">23</div>
-    <div class="button rounded base">24</div>
   </div>
 
   {{{sw.divider "Tag"}}}
 
   <div class="multiple">
-    <div class="button-tag">
-      <div class="button">Normal</div>
-    </div>
-    <div class="button-tag">
-      <div class="button sharp">Sharp</div>
-    </div>
-    <div class="button-tag">
-      <div class="button primary tag-circle-white">Colored</div>
-    </div>
+    <div class="button tag">Normal</div>
+    <div class="button tag circle-base">Circle</div>
+    <div class="button tag primary circle-secondary">Colored</div>
   </div>
 
   {{{sw.divider "Ribbon"}}}
@@ -128,37 +97,19 @@
   {{{sw.divider "Corner"}}}
 
   <div class="container outlined">
-    <div class="button-corner top-left primary">
-      <div class="button compact">S</div>
+    <div class="button corner top-left primary">
+      <span>S</span>
     </div>
-    <div class="button-corner top-right secondary">
-      <div class="button compact">
-        <i class="icon small">file_download</i>
-      </div>
+    <div class="button corner top-right secondary">
+      <i class="icon">file_download</i>
     </div>
-    <div class="button-corner bottom-right quaternary">
-      <div class="button compact">
-        <i class="icon small">thumb_up</i>
-      </div>
+    <div class="button corner bottom-right tertiary">
+      <i class="icon">thumb_up</i>
     </div>
-    <div class="button-corner bottom-left tertiary">
-      <div class="button compact">
-        <i class="icon small">favorite</i>
-      </div>
+    <div class="button corner bottom-left quaternary">
+      <i class="icon">favorite</i>
     </div>
     {{{sample.paragraph}}}
-  </div>
-
-  {{{sw.divider "Badge"}}}
-
-  <div class="multiple">
-    <div class="label compact">
-      <i class="icon">settings</i>
-      <div class="button rounded badge xxsmall quaternary top-left">1</div>
-      <div class="button rounded badge xxsmall primary top-right">2</div>
-      <div class="button rounded badge xxsmall tertiary bottom-left">3</div>
-      <div class="button rounded badge xxsmall secondary bottom-right">4</div>
-    </div>
   </div>
 
   {{{sw.divider "Floating"}}}
@@ -198,21 +149,21 @@
 
   <script>
     function toggle_class ( css_class ) {
-      $('.button').not ( '.actions .button' ).toggleClass(css_class);
+      $('.layout-content .button').not ( '.actions .button' ).toggleClass(css_class);
     }
 
     function enable () {
-      $('.button').not ( '.actions .button' ).removeClass ( 'disabled' );
+      $('.layout-content .button').not ( '.actions .button' ).removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.button').not ( '.actions .button' ).addClass ( 'disabled' );
+      $('.layout-content .button').not ( '.actions .button' ).addClass ( 'disabled' );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('.button').not ( '.actions .button' ).removeClass ( validities[i] ).addClass ( validity );
+        $('.layout-content .button').not ( '.actions .button' ).removeClass ( validities[i] ).addClass ( validity );
       }
     }
   </script>
