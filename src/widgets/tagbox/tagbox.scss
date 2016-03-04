@@ -23,16 +23,15 @@
 
     @extend %multiple;
     @include last-child-no-gutter ( 0, - $gutter );
+    @include margin-x ( - $gutter-half );
     display: flex;
     flex-wrap: wrap;
-    margin-left: - $gutter-half;
-    margin-right: - $gutter-half;
 
-    /* TAG */
+    /* CHILDREN */
 
-    > .tagbox-tag {
-      margin-left: $gutter-half;
-      margin-right: $gutter-half;
+    > .tagbox-tag,
+    > .tagbox-partial {
+      @include margin-x ( $gutter-half );
     }
 
   }
@@ -41,6 +40,7 @@
 
   &-partial {
     @include color ( 'inherit', true, true );
+    margin-bottom: $gutter;
     min-width: $tagbox-partial-min-width;
   }
 

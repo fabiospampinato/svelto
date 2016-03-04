@@ -8,10 +8,12 @@
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
-/* PARTIAL */
+/* TAGBOX */
 
 $tagbox-color: $container-color !default;
-$tagbox-color-force: $container-color-force !default;
-$tagbox-color-basic: $container-color-basic !default;
+$tagbox-color-force: false !default;
+$tagbox-color-basic: true !default;
+
+/* PARTIAL */
 
 $tagbox-partial-min-width: 6.5em !default;
