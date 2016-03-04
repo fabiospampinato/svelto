@@ -6,112 +6,38 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../label.scss
+ * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Modularize directions
-//TODO: If we could write it as `.label.corner` we would save a lot of CSS, since .button-corner extends this and .actionable, which also extends every single color
+/* CORNER */
 
-/* LABEL CORNER */
+.label.corner {
 
-.label-corner {
-
-  position: absolute;
+  @include dimension ( $label-corner-size );
+  @include z-depth ( $label-corner-z-depth, $label-corner-z-depth-force, $label-corner-z-depth-basic );
   z-index: $label-corner-z-index;
-  visibility: hidden;
+  margin: 0 !important;
+  border-width: 0 !important;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  pointer-events: none;
+  visibility: hidden;
 
-  &.top-left {
-
-    top: 0;
-    left: 0;
-    border-top-left-radius: inherit;
-
-    > * { // Both `.label` and `.button`
-      transform: translateX(-($label-corner-padding-x * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-y * 2 / 4 + $line-height-em / 8 ));
-    }
-
-    &:before {
-      top: 0;
-      left: 0;
-      transform: translateX(-( $line-height-em + ( $label-corner-padding-x * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-y * 2 ) ) / $SQRT2) rotate(45deg);
-    }
-
-  }
-
-  &.top-right {
-
-    top: 0;
-    right: 0;
-    border-top-right-radius: inherit;
-
-    > * { // Both `.label` and `.button`
-      transform: translateX($label-corner-padding-x * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-y * 2 / 4 + $line-height-em / 8));
-    }
-
-    &:before {
-      top: 0;
-      right: 0;
-      transform: translateX(( $line-height-em + ( $label-corner-padding-x * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-y * 2 ) ) / $SQRT2) rotate(45deg);
-    }
-
-  }
-
-  &.bottom-left {
-
-    bottom: 0;
-    left: 0;
-    border-bottom-left-radius: inherit;
-
-    > * { // Both `.label` and `.button`
-      transform: translateX(-($label-corner-padding-x * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-y * 2 / 4 + $line-height-em / 8);
-    }
-
-    &:before {
-      bottom: 0;
-      left: 0;
-      transform: translateX(-( $line-height-em + ( $label-corner-padding-x * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-y * 2 ) ) / $SQRT2) rotate(45deg);
-    }
-
-  }
-
-  &.bottom-right {
-
-    bottom: 0;
-    right: 0;
-    border-bottom-right-radius: inherit;
-
-    > * { // Both `.label` and `.button`
-      transform: translateX($label-corner-padding-x * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-y * 2 / 4 + $line-height-em / 8);
-    }
-
-    &:before {
-      bottom: 0;
-      right: 0;
-      transform: translateX(( $line-height-em + ( $label-corner-padding-x * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-y * 2 ) ) / $SQRT2) rotate(45deg);
-    }
-
-  }
+  /* BEFORE */
 
   &:before {
-    pointer-events: auto;
-    position: absolute;
+    @include dimension ( $label-corner-size * $SQRT2 );
     content: '';
-    height: ( $line-height-em + ( $label-corner-padding-y * 2 ) ) * $SQRT2;
-    width: ( $line-height-em + ( $label-corner-padding-x * 2 ) ) * $SQRT2;
     background-color: inherit;
     visibility: visible;
+    box-shadow: inherit;
   }
 
-  > * { // Both `.label` and `.button`
-    padding: $label-corner-padding-y $label-corner-padding-x;
-    height: $line-height-em + ( $label-corner-padding-y * 2 );
-    width: $line-height-em + ( $label-corner-padding-x * 2 );
-    margin: 0;
-    border-radius: 0;
-    background-color: transparent !important;
-    color: inherit;
-    margin: 0;
+  /* CHILDREN */
+
+  > * {
     visibility: visible;
   }
 

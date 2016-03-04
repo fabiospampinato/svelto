@@ -1,15 +1,23 @@
 
 /* =========================================================================
- * Svelto - Widgets - Label - Badge - Directions - Top Left
+ * Svelto - Widgets - Form - Label
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../badge.scss
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
-/* TOP LEFT */
+/* LABEL */
 
-.label.badge.top-left {
-  @include absolute ( $label-badge-spacing false false $label-badge-spacing );
+label {
+
+  @extend %widget;
+  display: block;
+
+  > * {
+    vertical-align: middle;
+  }
+
 }

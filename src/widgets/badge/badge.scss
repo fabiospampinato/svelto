@@ -1,0 +1,39 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Badge
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/colors/colors.scss
+ * @require decorators/sizes/sizes.scss
+ * @require decorators/z_depths/z_depths.scss
+ * ========================================================================= */
+
+/* BADGE */
+
+.badge {
+
+  @include color ( $badge-color, $badge-color-force, $badge-color-basic );
+  @include size ( $badge-size, $badge-size-force, $badge-size-basic );
+  @include z-depth ( $badge-z-depth, $badge-z-depth-force, $badge-z-depth-basic );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+  z-index: $badge-z-index;
+  font-weight: $badge-font-weight;
+  border-radius: $badge-border-radius;
+  padding: $badge-padding-y $badge-padding-x;
+  min-width: $badge-min-width;
+  min-height: $badge-min-height;
+  margin: 0 !important;
+
+  /* OUTLINED */
+
+  &.outlined {
+    min-width: calc(#{$badge-min-width} + #{$outline-width * 2});
+    min-height: calc(#{$badge-min-height} + #{$outline-width * 2});    
+  }
+
+}

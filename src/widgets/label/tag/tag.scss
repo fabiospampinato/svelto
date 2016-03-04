@@ -6,124 +6,29 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../label.scss
- * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 //FIXME: Missing pointer outline in IE10
-//FIXME: The pointer is not clickable
-//TODO: Export default sharpness
-//TODO: If we could write it as `.label.tag` we would save quite a bit of CSS (maybe use css clips)
 
 /* TAG */
 
-.label-tag {
+.label.tag {
 
-  @include last-child-no-gutter ();
-  margin-bottom: $gutter;
-  z-index: 1;
+  @include border-left-radius ( $label-tag-tip-border-radius !important );
+  padding-left: $label-tag-padding-left !important;
 
-  > * { // Both `.label` and `.button` //FIXME: Aren't we extending .label anyway?
+  /* CIRCLE */
 
-    margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
-    margin-bottom: 0;
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      height: $label-tag-smooth-size;
-      width: $label-tag-smooth-size;
-      transform: translateX(50%) translateY(-50%) rotate(45deg);
-    }
-
-    &:before {
-      @include color ( 'inherit', true, true );
-      z-index: -1;
-    }
-
-    &:after {
-      background-color: $label-tab-circle-bg-color;
-      border-radius: 50%;
-      box-shadow: $label-tag-circle-box-shadow;
-      transform: translateX(50%) translateY(-50%) rotate(45deg) scale($label-tag-circle-scale);
-    }
-
-    &.compact {
-
-      margin-left: ( $label-tag-smooth-compact-size * $SQRT2 ) / 2 - $label-border-radius;
-
-      &:before,
-      &:after {
-        height: $label-tag-smooth-compact-size;
-        width: $label-tag-smooth-compact-size;
-      }
-
-    }
-
-    &.outlined {
-
-      border-left-width: 0;
-
-      &:before {
-        border-width: $outline-width;
-        border-style: solid;
-      }
-
-    }
-
-    &:not(.sharp) {
-
-      &:before,
-      &:after {
-        right: calc(100% - #{$label-border-radius / 2});
-      }
-
-      &:before {
-        border-radius: $label-border-radius;
-      }
-
-    }
-
-    &.sharp {
-
-      margin-left: ( $label-tag-sharp-size * $SQRT2 ) / 2;
-
-      &:before,
-      &:after {
-        height: $label-tag-sharp-size;
-        width: $label-tag-sharp-size;
-        right: 100%;
-      }
-
-      &.compact {
-
-        margin-left: ( $label-tag-sharp-compact-size * $SQRT2 ) / 2;
-
-        &:before,
-        &:after {
-          height: $label-tag-sharp-compact-size;
-          width: $label-tag-sharp-compact-size;
-        }
-
-      }
-
-    }
-
-    /* COLORS */
-
-    @each $name, $datas in $colors {
-
-      $class: color-get-class( $name );
-
-      $bg: nth($datas, 1);
-
-      &.tag-circle-#{$class}:after {
-        background-color: $bg;
-      }
-
-    }
-
+  &:before {
+    @include absolute ( 0 false 0 ( $label-tag-padding-left - $label-tag-circle-size * 2 ) );
+    @include dimension ( $label-tag-circle-size );
+    content: '';
+    margin: auto;
+    background-color: $label-tab-circle-bg-color;
+    border-radius: 50%;
+    box-shadow: $label-tag-circle-box-shadow;
+    box-sizing: padding-box;
+    border: inherit;
   }
 
 }

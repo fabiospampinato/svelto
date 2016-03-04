@@ -8,4 +8,8 @@
 
 /* RIBBON */
 
-$label-ribbon-size: 8px !default;
+$label-ribbon-z-depth: 1 !default;
+$label-ribbon-z-depth-force: false !default;
+$label-ribbon-z-depth-basic: true !default;
+
+$label-ribbon-size: 16px !default;

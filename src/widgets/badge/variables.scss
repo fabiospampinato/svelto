@@ -1,0 +1,35 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Badge (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BADGE */
+
+$badge-color: 'red' !default;
+$badge-color-force: false !default;
+$badge-color-basic: false !default;
+
+$badge-size: 'xxsmall' !default; //FIXME: A little too small, but there's a huge step between `xsmall` and `xxsmall`
+$badge-size-force: false !default;
+$badge-size-basic: true !default;
+
+$badge-z-depth: 2 !default;
+$badge-z-depth-force: false !default;
+$badge-z-depth-basic: true !default;
+
+$badge-z-index: 20 !default;
+
+$badge-font-weight: 600 !default;
+
+$badge-border-radius: 1000000px !default;
+
+$badge-padding-x: .5em !default;
+$badge-padding-y: $badge-padding-x !default;
+
+$badge-min-width: 1em + ( $badge-padding-x * 2 ) !default;
+$badge-min-height: 1em + ( $badge-padding-y * 2 ) !default;
+
+$badge-spacing: - ( $badge-min-width / 2 * .75 ) !default;

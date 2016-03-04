@@ -14,20 +14,11 @@ $label-color: 'white' !default;
 $label-color-force: false !default;
 $label-color-basic: false !default;
 
+$label-font-weight: 600 !default;
+
 $label-border-radius: $container-border-radius !default;
 
-$label-padding-x: 1em !default;
-$label-padding-y: $label-padding-x / 2 !default;
+$label-padding-x: .85em !default;
+$label-padding-y: .5em !default;
 
-$label-center-extra-spacing: .75em !default;
-
-/* COMPACT */
-
-$label-compact-padding-x: $label-padding-y !default;
-$label-compact-padding-y: $label-compact-padding-x !default;
-
-$label-compact-center-extra-spacing: .5em !default;
-
-/* LEFT / RIGHT */
-
-$label-sub-bg-color: rgba( 0, 0, 0, .05 ) !default; //TODO: Make it in the form of `.label-sub`
+$label-extra-spacing: $label-padding-x / 3 * 2 !default;

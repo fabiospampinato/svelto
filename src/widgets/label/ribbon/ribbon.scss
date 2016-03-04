@@ -8,13 +8,16 @@
  * @require ../label.scss
  * ========================================================================= */
 
+//TODO: Write it better
+//TODO: Modularize it
+//TODO: Maybe move it to it's own component
+//TODO: Add corners support
+
 /* RIBBON */
 
-//TODO: Maybe move it to it's own component
-//TODO: Modularize it
-
-
 .label.ribbon {
+
+  @include z-depth ( $label-ribbon-z-depth, $label-ribbon-z-depth-force, $label-ribbon-z-depth-basic );
 
   /* BEFORE / AFTER */
 
@@ -23,9 +26,9 @@
     position: absolute;
     z-index: -1;
     content: '';
-    border: $label-ribbon-size solid transparent;
+    border: ( $label-ribbon-size / 2 ) solid transparent;
     border-top-color: inherit;
-    bottom: - $label-ribbon-size * 2;
+    bottom: - $label-ribbon-size;
   }
 
   /* LEFT */
@@ -33,7 +36,7 @@
   &.ribbon-left {
 
     @include border-left-radius ( 0 );
-    left: - ( $gutter + ( $label-ribbon-size * 2 ) );
+    left: - ( $gutter + $label-ribbon-size );
     padding-left: calc(#{$label-padding-x} + #{$gutter});
 
     &:before {
@@ -46,7 +49,7 @@
   /* LEFT & RIGHT */
 
   &.ribbon-left.ribbon-right {
-    width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 4)});
+    width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 2 )});
   }
 
   /* RIGHT */
@@ -65,10 +68,10 @@
 
   /* ONLY RIGHT */
 
-  //FIXME: It is a pixel too far
+  //FIXME: It is a pixel off
 
   &.ribbon-right:not(.ribbon-left) {
-    left: calc(100% + #{( $gutter * 2 ) + $label-ribbon-size});
+    left: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size / 2 )});
     transform: translateX(-100%);
   }
 
@@ -80,7 +83,7 @@
 
     &.ribbon-left:before,
     &.ribbon-right:after {
-      bottom: - ( $label-ribbon-size * 2 + $outline-width );
+      bottom: - ( $label-ribbon-size + $outline-width );
     }
 
     /* BEFORE */

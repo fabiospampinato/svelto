@@ -1,15 +1,34 @@
 
 /* =========================================================================
- * Svelto - Widgets - Label - Badge - Directions - Bottom Right
+ * Svelto - Widgets - Label - Compact
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../badge.scss
+ * @require ../label.scss
  * ========================================================================= */
 
-/* BOTTOM RIGHT */
+/* COMPACT */
 
-.label.badge.bottom-right {
-  @include absolute ( false $label-badge-spacing $label-badge-spacing false );
+.label.compact {
+
+  padding: $label-compact-padding-y $label-compact-padding-x;
+
+  /* CHILDREN */
+
+  > * {
+
+    /* HORIZONTAL GUTTER */
+
+    + * {
+      margin-left: $label-compact-extra-spacing;
+    }
+
+    + %icon,
+    + %icons {
+      margin-left: $label-compact-extra-spacing / $icon-scale-amount;
+    }
+
+  }
+
 }

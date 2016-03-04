@@ -23,7 +23,7 @@
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
+      tag: '<div class="label tag tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
              '<span>' +
                '{%=o.value%}' +
              '</span>' +
@@ -39,7 +39,7 @@
         minLength: 3,
         color: '',
         size: '',
-        css: 'compact outlined'
+        css: 'outlined'
       },
       characters: {
         forbid: true, // Forbid or not

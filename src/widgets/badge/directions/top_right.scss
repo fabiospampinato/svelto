@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Label - Badge - Directions - Bottom Left
+ * Svelto - Widgets - Badge - Directions - Top Right
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,8 +8,8 @@
  * @require ../badge.scss
  * ========================================================================= */
 
-/* BOTTOM LEFT */
+/* TOP RIGHT */
 
-.label.badge.bottom-left {
-  @include absolute ( false false $label-badge-spacing $label-badge-spacing );
+.badge.top-right {
+  @include absolute ( $badge-spacing $badge-spacing false false );
 }

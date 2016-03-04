@@ -1,0 +1,38 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Bottom left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../corner.scss
+ * ========================================================================= */
+
+/* BOTTOM LEFT */
+
+.label.corner.bottom-left {
+
+  @include absolute ( false false 0 0 );
+  border-bottom-left-radius: inherit;
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( 100% 100% false false );
+    transform: translate(50%, -50%) rotate(-45deg);
+  }
+
+  /* CHILDREN */
+
+  > * {
+    @include absolute ( false false 35% 35% );
+    transform: translate(-63%, 63%);
+  }
+
+  /* OUTLINED */
+
+  .outlined > & {
+    @include absolute ( false false ( - $outline-width ) ( - $outline-width ) );
+  }
+
+}

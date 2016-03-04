@@ -9,14 +9,13 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Modularize
+//TODO: Make it a component of its own
 //TODO: Add it while scrolling to bottom, show him when scrolling to top
 //TODO: Add sub floating actions
 
 /* FLOATING */
 
 .label.floating {
-
   @include z-depth ( $label-floating-z-depth, $label-floating-z-depth-force, $label-floating-z-depth-basic );
   position: fixed;
   z-index: $label-floating-z-index;
@@ -26,13 +25,4 @@
   padding: $label-floating-padding-y $label-floating-padding-x;
   min-height: $line-height-em + ( $label-floating-padding-y * 2 );
   min-width: $line-height-em + ( $label-floating-padding-x * 2 );
-
-  /* COMPACT */
-
-  &.compact {
-    padding: $label-floating-compact-padding-y $label-floating-compact-padding-x;
-    min-height: $line-height-em + ( $label-floating-compact-padding-y * 2 );
-    min-width: $line-height-em + ( $label-floating-compact-padding-x * 2 );
-  }
-
 }

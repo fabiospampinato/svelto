@@ -6,11 +6,17 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
+ * @require core/typography/variables.scss
  * ========================================================================= */
 
 /* CORNER */
 
 $label-corner-z-index: 70 !default;
 
-$label-corner-padding-x: $label-compact-padding-x * 2 !default;
-$label-corner-padding-y: $label-compact-padding-y * 2 !default;
+$label-corner-z-depth: 1 !default;
+$label-corner-z-depth-force: false !default;
+$label-corner-z-depth-basic: true !default;
+
+$label-corner-padding: 1em !default;
+
+$label-corner-size: $line-height-em + ( $label-corner-padding * 2 ) !default;

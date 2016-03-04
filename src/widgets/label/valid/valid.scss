@@ -14,9 +14,10 @@
 
   border: $outline-width solid $color-success !important;
 
-  /* ICON */
+  /* ICON / ICONS */
 
-  .icon {
+  > %icon,
+  > %icons {
     color: $color-success !important;
   }
 

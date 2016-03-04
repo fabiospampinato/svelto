@@ -1,17 +1,18 @@
 
 /* =========================================================================
- * Svelto - Widgets - Label - Badge
+ * Svelto - Widgets - Label - Corner - Directions - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../label.scss
+ * @require ./top_left.scss
+ * @require ./top_right.scss
+ * @require ./bottom_right.scss
+ * @require ./bottom_left.scss
  * ========================================================================= */
 
- //TODO: Maybe move to it's own component
+/* TOP LEFT */
 
-/* BADGE */
-
-.label.badge {
-  margin: 0;
+.label.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
+  @extend .label.corner.top-right;
 }
