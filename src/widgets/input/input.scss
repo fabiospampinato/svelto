@@ -16,7 +16,11 @@
 /* INPUT */
 
 %input,
-input {
+input:not([type]),
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="search"] {
 
   @extend %widget;
   @include color ( $input-color, $input-color-force, $input-color-basic );
