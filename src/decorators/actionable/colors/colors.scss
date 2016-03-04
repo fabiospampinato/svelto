@@ -15,7 +15,7 @@
 
   %color-#{$name}.actionable:not(.disabled) {
 
-    &:hover {
+    &:not(.active):hover {
       @extend %color-#{$name}-hover;
     }
 

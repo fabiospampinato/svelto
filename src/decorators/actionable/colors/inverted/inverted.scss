@@ -15,7 +15,7 @@
 
   %color-#{$name}.actionable.inverted:not(.disabled) {
 
-    &:hover {
+    &:not(.active):hover {
       @extend %color-#{$name}-inverted-hover;
     }
 
