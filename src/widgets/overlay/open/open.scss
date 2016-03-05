@@ -12,14 +12,11 @@
 /* OPEN */
 
 .overlay.open {
-
-  @extend .overlay.show;
   opacity: 1;
+}
 
-  /* SIBLINGS */
+/* PARENT OPEN */
 
-  ~ * {
-    opacity: $overlay-siblings-opacity;
-  }
-
+.overlay-parent-open > :not(.overlay) {
+  opacity: $overlay-siblings-opacity;
 }

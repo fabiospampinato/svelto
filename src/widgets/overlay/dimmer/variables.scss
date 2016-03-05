@@ -11,7 +11,7 @@
 /* DIMMER */
 
 $overlay-dimmer-color: 'black' !default;
-$overlay-dimmer-color-force: false !default;
+$overlay-dimmer-color-force: true !default;
 $overlay-dimmer-color-basic: true !default;
 
 $overlay-dimmer-bg-transparentize-amount: $overlay-siblings-opacity !default;

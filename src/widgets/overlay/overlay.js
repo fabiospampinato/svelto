@@ -22,7 +22,11 @@
     options: {
       classes: {
         show: 'show',
-        open: 'open'
+        open: 'open',
+        parent: {
+          show: 'overlay-parent-show',
+          open: 'overlay-parent-open'
+        }
       },
       animations: {
         open: Animations.fast,
@@ -47,6 +51,7 @@
     _variables () {
 
       this.$overlay = this.$element;
+      this.$parent = this.$overlay.parent ();
 
       this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
 
@@ -98,10 +103,12 @@
       this._frame ( function () {
 
         this.$overlay.addClass ( this.options.classes.show );
+        this.$parent.addClass ( this.options.classes.parent.show );
 
         this._frame ( function () {
 
           this.$overlay.addClass ( this.options.classes.open );
+          this.$parent.addClass ( this.options.classes.parent.open );
 
           this._lock = false;
 
@@ -125,10 +132,12 @@
       this._frame ( function () {
 
         this.$overlay.removeClass ( this.options.classes.open );
+        this.$parent.removeClass ( this.options.classes.parent.open );
 
         this._delay ( function () {
 
           this.$overlay.removeClass ( this.options.classes.show );
+          this.$parent.removeClass ( this.options.classes.parent.show );
 
           this._lock = false;
 

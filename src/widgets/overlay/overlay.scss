@@ -6,42 +6,28 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
-
-// An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+//TODO: Add back again the `blurrer` variant
 
 /* OVERLAY */
 
 .overlay {
 
-  @include center-absolute-fill ();
+  @include absolute ( 0 );
   z-index: $overlay-z-index;
-  display: none;
   margin: 0 !important;
-  opacity: 0;
   transition: opacity $overlay-animation-duration;
-  background-color: transparent;
   border-radius: inherit;
+  
+  /* SCROLLABLE */
+
+  &:not(.card):not(.layout) {
+    overflow: auto;
+  }
 
   /* OUTLINED PARENT */
 
   .outlined > & {
-    top: - $outline-width;
-    right: - $outline-width;
-    bottom: - $outline-width;
-    left: - $outline-width;
-  }
-
-  /* CONTAINER */
-
-  &.container {
-    overflow: auto;
-  }
-
-  /* SIBLINGS */
-
-  ~ * {
-    transition: opacity $overlay-siblings-animation-duration; // It interferes with other widgets probably //FIXME
+    @include absolute ( - $outline-width );
   }
 
 }

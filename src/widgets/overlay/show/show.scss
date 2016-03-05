@@ -8,8 +8,8 @@
  * @require ../overlay.scss
  * ========================================================================= */
 
-/* SHOW */
+/* PARENT SHOW */
 
-.overlay.show {
-  display: flex !important;
+.overlay-parent-show > :not(.overlay) {
+  transition: opacity $overlay-siblings-animation-duration;
 }

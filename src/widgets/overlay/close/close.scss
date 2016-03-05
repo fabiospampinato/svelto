@@ -1,37 +1,19 @@
 
 /* =========================================================================
- * Svelto - Widgets - Overlay - Blurrer
+ * Svelto - Widgets - Overlay - Close
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../overlay.scss
- * @require decorators/blurred/blurred.scss
  * ========================================================================= */
 
-//TODO: Move `open` to its own file?
+/* CLOSE */
 
-/* BLURRER */
+.overlay:not(.show) {
+  display: none;
+}
 
-.overlay.blurrer {
-
-  /* SIBLINGS */
-
-  ~ * {
-    transition-property: opacity, filter;
-    transition-duration: $overlay-siblings-animation-duration;
-  }
-
-  /* OPEN */
-
-  &.open {
-
-    /* SIBLINGS */
-
-    ~ * {
-      @extend %blurred;
-    }
-
-  }
-
+.overlay:not(.open) {
+  opacity: 0;
 }
