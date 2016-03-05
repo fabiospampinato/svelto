@@ -116,7 +116,7 @@
 
     __down ( event ) {
 
-      if ( !_.isUndefined ( event.button ) && event.button !== Mouse.buttons.LEFT ) return; // Only the left click is allowed
+      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
       event.preventDefault ();
 
