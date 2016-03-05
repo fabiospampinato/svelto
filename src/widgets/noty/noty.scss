@@ -10,39 +10,41 @@
  * ========================================================================= */
 
 //TODO: Make noty scrollables, maybe, so that in no case they will fill up the entire screen
-//TODO: Add transparentize back, in a wise, space-efficient way
-//TODO: Add the color to `noty`, not to the `infobar`
+//TODO: Add transparentize back, in a wise, CSS-efficient way
+//TODO: Maybe switch to an equally good but faster to compute animation
+//FIXME: Don't close on right click
 
 /* NOTY */
 
 .noty {
 
+  @include z-depth ( $noty-z-depth, $noty-z-depth-force, $noty-z-depth-basic );
+  display: block;
   border-radius: $noty-border-radius;
   pointer-events: auto;
-  transition-property: opacity, font-size, padding, margin;
+  transition-property: border-radius, border-width, opacity, filter, box-shadow, font-size, padding, margin;
   transition-duration: $noty-animation-duration;
   transform: translateZ(0);
-
-  /* INFOBAR */
-
-  .infobar {
-    @include z-depth ( $noty-z-depth, $noty-z-depth-force, $noty-z-depth-basic );
-    margin-bottom: 0;
-    border-radius: inherit;
-  }
-
-  /* BUTTONS */
-
-  &-buttons {
-    padding-left: $gutter;
-    padding-right: $gutter;
-  }
 
   /* IMG */
 
   &-img {
     width: $noty-img-size;
     border-radius: if( $noty-img-rounded, 1000000px, $noty-border-radius );
+  }
+
+  /* BUTTONS */
+
+  &-buttons {
+    @include padding-x ( $gutter );
+    margin-bottom: 0 !important;
+  }
+
+  /* INFOBAR */
+
+  > .infobar {
+    margin-bottom: 0;
+    transition: padding $noty-animation-duration;
   }
 
 }

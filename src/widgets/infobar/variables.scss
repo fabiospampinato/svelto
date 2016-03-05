@@ -11,8 +11,8 @@
 /* INFOBAR */
 
 $infobar-color: $container-color !default;
-$infobar-color-force: $container-color-force !default;
-$infobar-color-basic: $container-color-basic !default;
+$infobar-color-force: false !default;
+$infobar-color-basic: true !default;
 
 /* TITLE */
 

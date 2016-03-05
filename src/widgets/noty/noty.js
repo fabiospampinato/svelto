@@ -6,14 +6,16 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
+ * @require core/mouse/mouse.js
  * @require core/sizes/sizes.js
  * @require core/widget/widget.js
  * @require lib/timer/timer.js
  * ========================================================================= */
 
+//TODO: Add support for dismissing a noty that contains only one button
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Sizes ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Sizes ) {
 
   'use strict';
 
@@ -28,8 +30,8 @@
     plugin: true,
     selector: '.noty',
     templates: {
-      base: '<div class="noty {%=o.type%} {%=o.css%}">' +
-              '<div class="infobar {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%}">' +
+      base: '<div class="noty {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
+              '<div class="infobar transparent">' +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="noty-img infobar-left">' +
                 '{% } %}' +
@@ -215,6 +217,8 @@
     }
 
     __tap ( event ) {
+
+      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
       event.preventDefault (); // Otherwise the click goes through the noty in Chrome for iOS
 
@@ -412,4 +416,4 @@
 
   Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Timer, Svelto.Animations, Svelto.Sizes ));

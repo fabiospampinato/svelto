@@ -11,8 +11,17 @@
 /* CLOSED */
 
 .noty:not(.open) {
+
+  border-width: 0 !important;
   opacity: 0;
   font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
   padding: 0;
   margin: 0;
+
+  /* INFOBAR */
+
+  > .infobar {
+    padding: 0;
+  }
+
 }

@@ -13,11 +13,9 @@
 
 .noty-queues {
 
-  position: fixed;
+  @include fixed ( false 0 false 0 );
   z-index: $noty-queues-z-index;
   display: flex;
-  left: 0;
-  right: 0;
   flex-wrap: wrap;
   width: 100%;
   pointer-events: none;

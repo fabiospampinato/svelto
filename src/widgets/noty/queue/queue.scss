@@ -15,6 +15,7 @@
 .noty-queue {
 
   display: flex;
+  transition: margin $noty-animation-duration;
 
   /* LEFT */
 
@@ -32,13 +33,11 @@
 
   &.center {
 
+    @include margin-x ( $gutter );
     align-items: center;
-    margin-right: $gutter;
-    margin-left: $gutter;
 
     &:empty {
-      margin-right: $gutter-half;
-      margin-left: $gutter-half;
+      @include margin-x ( $gutter-half );
     }
 
   }

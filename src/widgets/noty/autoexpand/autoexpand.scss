@@ -11,6 +11,8 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
+//TODO: Attach the shadow to `.noty-queues`, but only if there are some noties
+
 /* AUTOEXPAND */
 
 @include media-width-down ( $noty-autoexpand-width ) {
@@ -18,8 +20,6 @@
   /* QUEUES */
 
   .noty-queues {
-
-    // @include z-depth ( $noty-z-depth, true, true ); //FIXME: We should attach the z-depth only if actually there are some noties //TODO: Add variables for the other parameters
 
     /* TOP */
 
