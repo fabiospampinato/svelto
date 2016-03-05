@@ -44,4 +44,17 @@
 
   }
 
+  // /* SAME HEIGHT IF CONTAINING ICON/ICONS */ //FIXME: Ugly fix, not really needed actually, we are enforcing something that might not be wanted
+  //
+  // @if $icon-scale-amount > $line-height {
+  //
+  //   $delta: $icon-scale-amount - $line-height;
+  //
+  //   > %icon,
+  //   > %icons {
+  //     @include margin-y ( - ( $delta / 2 * 1em ) );
+  //   }
+  //
+  // }
+
 }
