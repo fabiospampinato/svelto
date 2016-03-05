@@ -40,14 +40,14 @@
 
     /* SHOW */
 
-    &.ripple-circle-show:before {
+    &.show:before {
       opacity: 1 - $ripple-transparentize-amount;
       transform: scale(1);
     }
 
     /* HIDE */
 
-    &.ripple-circle-hide:before {
+    &.hide:before {
       opacity: 0;
     }
 

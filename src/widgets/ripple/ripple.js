@@ -27,8 +27,8 @@
     options: {
       classes: {
         circle: {
-          show: 'ripple-circle-show',
-          hide: 'ripple-circle-hide'
+          show: 'show',
+          hide: 'hide'
         },
         center: 'ripple-center'
       },
