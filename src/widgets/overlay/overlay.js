@@ -51,7 +51,6 @@
     _variables () {
 
       this.$overlay = this.$element;
-      this.$parent = this.$overlay.parent ();
 
       this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
 
@@ -64,6 +63,20 @@
         this.___keydown ();
 
       }
+
+    }
+
+    /* PARENT */
+
+    _getParent () {
+
+      if ( !this.$parent ) {
+
+        this.$parent = this.$overlay.parent ();
+
+      }
+
+      return this.$parent;
 
     }
 
@@ -103,12 +116,12 @@
       this._frame ( function () {
 
         this.$overlay.addClass ( this.options.classes.show );
-        this.$parent.addClass ( this.options.classes.parent.show );
+        this._getParent ().addClass ( this.options.classes.parent.show );
 
         this._frame ( function () {
 
           this.$overlay.addClass ( this.options.classes.open );
-          this.$parent.addClass ( this.options.classes.parent.open );
+          this._getParent ().addClass ( this.options.classes.parent.open );
 
           this._lock = false;
 
@@ -132,12 +145,12 @@
       this._frame ( function () {
 
         this.$overlay.removeClass ( this.options.classes.open );
-        this.$parent.removeClass ( this.options.classes.parent.open );
+        this._getParent ().removeClass ( this.options.classes.parent.open );
 
         this._delay ( function () {
 
           this.$overlay.removeClass ( this.options.classes.show );
-          this.$parent.removeClass ( this.options.classes.parent.show );
+          this._getParent ().removeClass ( this.options.classes.parent.show );
 
           this._lock = false;
 
