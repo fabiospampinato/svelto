@@ -8,8 +8,8 @@
 
 /* DISPLAY */
 
-.show {
-  display: block !important;
+.shown {
+  display: flex !important;
 }
 
 // Every element with a `hidden` attribute will be considered as hidden as well (SOURCE: PureCSS)
