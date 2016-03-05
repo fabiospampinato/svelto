@@ -12,6 +12,13 @@
 
 .spinner-overlay:not(.open) {
 
+  /* CHILDREN */
+
+  > * {
+    opacity: 0;
+    transform: scale(0);
+  }
+
   /* SPINNER */
 
   .spinner {

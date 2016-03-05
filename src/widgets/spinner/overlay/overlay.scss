@@ -10,15 +10,17 @@
 
 .spinner-overlay {
 
+  display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity $spinner-overlay-animation-duration;
 
-  /* SPINNER LABEL */
+  /* CHILDREN */
 
-  .spinner-label {
+  > * {
     margin-bottom: 0;
-    transform: scale(0);
-    transition: transform $spinner-overlay-animation-duration;
+    transition-property: opacity, transform;
+    transition-duration: $spinner-overlay-animation-duration;
   }
 
 }
