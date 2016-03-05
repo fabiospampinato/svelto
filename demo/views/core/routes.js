@@ -1,27 +1,6 @@
 
-/* COMPONENTS */
+/* CORE */
 
-let components = ['browser', 'cookie', 'grid', 'gutter', 'layout', 'multiple', 'pointer'];
+let templates = ['browser', 'cookie', 'grid', 'gutter', 'layout', 'multiple', 'pointer'];
 
-for ( let component of components ) {
-
-  Router.route ( '/core/' + component, {
-    layoutTemplate: 'master',
-    yieldRegions: {
-      [component]: { to: 'content' }
-    }
-  });
-
-  /* WIDGETIZE */
-
-  if ( Meteor.isClient ) {
-
-    Template[component].onRendered ( function () {
-
-      $(document.body).widgetize ();
-
-    });
-
-  }
-
-}
+SWRouter.pages ( templates, '/core/' );
