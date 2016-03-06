@@ -1,17 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Attached - Directions - Top
+ * Svelto - Widgets - Dropdown - Affixed - Directions - Bottom
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../attached.scss
+ * @require ../affixed.scss
  * ========================================================================= */
 
-/* TOP */
+/* BOTTOM */
 
-.dropdown.attached.position-top {
-  margin-bottom: - $outline-width;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.dropdown.affixed.position-bottom {
+  @include border-top-radius ( 0 );
+  margin-top: - $outline-width;
 }

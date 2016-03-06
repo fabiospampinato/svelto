@@ -1,15 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Attached - Directions - Right
+ * Svelto - Widgets - Dropdown - Affixed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../attached.scss
+ * @require ../dropdown.scss
+ * @require ../no_tip/no_tip.scss
  * ========================================================================= */
 
-/* RIGHT */
+/* DROPDOWN */
 
-.dropdown.attached.position-right {
-  margin-left: - $outline-width;
+.dropdown.affixed {
+  @extend .dropdown.no-tip;
 }

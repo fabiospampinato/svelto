@@ -10,14 +10,7 @@
 
 /* MOVING */
 
-.dropdown.moving {
-
+.dropdown.moving,
+.dropdown.moving:before {
   transition: transform $dropdown-animation-duration;
-
-  /* TIP */
-
-  &:before {
-    transition: transform $dropdown-animation-duration;
-  }
-
 }

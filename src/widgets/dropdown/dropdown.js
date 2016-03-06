@@ -24,14 +24,14 @@
     options: {
       positionate: {}, // Extending `$.positionate` options
       spacing: {
-        attached: 0,
+        affixed: 0,
         noTip: 7,
         normal: 14
       },
       classes: {
         anchorDirection: 'dropdown-anchor-$2',
         noTip: 'no-tip',
-        attached: 'attached',
+        affixed: 'affixed',
         moving: 'moving',
         show: 'show',
         open: 'open'
@@ -61,7 +61,7 @@
       this.$dropdown.addClass ( this.guc );
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
-      this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
+      this.isAffixed = this.$dropdown.hasClass ( this.options.classes.affixed );
 
       this._isOpen = false;
 
@@ -125,8 +125,8 @@
 
       /* VARIABLES */
 
-      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAttached,
-          spacing = this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
+      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed,
+          spacing = this.isAffixed ? this.options.spacing.affixed : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
 
       this.$mockTip = noTip ? false : $('<div>');
 

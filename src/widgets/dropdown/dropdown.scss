@@ -12,12 +12,9 @@
 
 .dropdown {
 
+  @include fixed ( 0 false false 0 );
   @include z-depth ( $dropdown-z-depth, $dropdown-z-depth-force, $dropdown-z-depth-basic );
-  display: none;
   z-index: $dropdown-z-index;
-  position: fixed;
-  top: 0;
-  left: 0;
   max-width: $dropdown-max-width;
   margin-bottom: 0;
   transition: opacity $dropdown-animation-duration;
@@ -38,19 +35,13 @@
     content: '';
     z-index: 1;
     box-sizing: content-box;
+    border: inherit;
   }
 
   // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
 
   _:-ms-lang(x), &:before {
     display: none;
-  }
-
-  /* TIP (OUTLINED) */
-
-  &.outlined:before {
-    border-width: $outline-width;
-    border-style: inherit;
   }
 
 }
@@ -61,7 +52,7 @@ _:-ms-input-placeholder, :root .dropdown.card {
 
   max-height: none;
 
-  .card-block {
+  > .card-block {
     max-height: $dropdown-max-height / 100 * 90;
   }
 

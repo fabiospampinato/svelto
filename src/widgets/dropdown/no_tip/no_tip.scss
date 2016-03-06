@@ -10,12 +10,6 @@
 
 /* NO TIP */
 
-.dropdown.no-tip {
-
-  /* TIP */
-
-  &:before {
-    display: none !important;
-  }
-
+.dropdown.no-tip:before {
+  display: none !important;
 }
