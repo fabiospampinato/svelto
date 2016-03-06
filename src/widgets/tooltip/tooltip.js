@@ -16,6 +16,7 @@
 
   let config = {
     name: 'tooltip',
+    plugin: true,
     selector: '.tooltip'
   };
 
