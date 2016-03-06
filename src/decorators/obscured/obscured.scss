@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Obscured
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OBSCURED */
+
+.obscured {
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( 0 );
+    content: '';
+    z-index: 1;
+    border-radius: inherit;
+    background-color: transparentize( $obscured-bg-color, $obscured-transparentize-amount );
+  }
+
+  /* OUTLINED */
+
+  &.outlined:before {
+    @include absolute ( - $outline-width );
+  }
+
+}

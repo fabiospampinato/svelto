@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Obscured - Show
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SHOW */
+
+.obscured-show:before {
+  transition: opacity $obscured-animation-duration;
+}
+
+.obscured-show:not(.obscured-open):before {
+  opacity: 0;
+}

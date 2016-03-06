@@ -1,16 +1,23 @@
 
 /* =========================================================================
- * Svelto - Widgets - Modal - Open
+ * Svelto - Decorators - Obscured
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../modal.scss
- * @require ../show/show.scss
+ * @require core/svelto/svelto.js
  * ========================================================================= */
 
-/* OPEN */
+(function ( $, _, Svelto ) {
 
-.modal.open {
-  @extend .modal.show;
-}
+  'use strict';
+
+  /* OBSCURED */
+
+  $.fn.obscured = function ( force ) {
+
+    return this.toggleClass ( 'obscured', force );
+
+  };
+
+}( Svelto.$, Svelto._, Svelto ));
