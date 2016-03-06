@@ -29,7 +29,7 @@
         normal: 14
       },
       classes: {
-        anchorDirection: 'dropdown-anchor-$2',
+        anchorDirection: 'dropdown-anchor-$1',
         noTip: 'no-tip',
         affixed: 'affixed',
         moving: 'moving',

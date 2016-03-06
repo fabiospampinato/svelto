@@ -24,7 +24,7 @@
     selector: '.select-toggler',
     templates: {
       base: '<div class="dropdown select-dropdown card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
-              '<div class="card-block inherit">' +
+              '<div class="card-block">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
                   '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
                 '{% } %}' +
@@ -41,11 +41,11 @@
       dropdown: {
         size: '',
         color: 'white',
-        css: 'attached outlined'
+        css: Widgets.Dropdown.config.options.classes.affixed + ' outlined'
       },
       classes: {
-        selected: 'active',
-        attached: 'attached'
+        selected: 'active highlighted highlight-left',
+        affixed: Widgets.Dropdown.config.options.classes.affixed
       },
       datas: {
         value: 'value'
@@ -53,8 +53,7 @@
       selectors: {
         select: 'select',
         option: 'option',
-        label: '.select-label',
-        valueholder: '.valueholder',
+        valueholder: '.select-value',
         button: '.button'
       },
       callbacks: {
@@ -76,14 +75,7 @@
       this.$toggler = this.$element;
       this.$select = this.$toggler.find ( this.options.selectors.select );
       this.$options = this.$select.find ( this.options.selectors.option );
-      this.$label = this.$toggler.find ( this.options.selectors.label );
       this.$valueholder = this.$toggler.find ( this.options.selectors.valueholder );
-
-      if ( !this.$valueholder.length ) {
-
-        this.$valueholder = this.$label;
-
-      }
 
       this.selectOptions = [];
 
@@ -215,7 +207,7 @@
 
     __setDropdownWidth () {
 
-      if ( this.$dropdown.is ( '.' + this.options.classes.attached ) ) {
+      if ( this.$dropdown.is ( '.' + this.options.classes.affixed ) ) {
 
         this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
 

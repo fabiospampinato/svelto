@@ -1,13 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Toggler
+ * Svelto - Widgets - Select - Toggler - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../select.scss
+ * @require ../toggler.scss
  * ========================================================================= */
 
-/* TOGGLER */
+/* LEFT */
 
-.select-toggler {}
+.select-toggler.dropdown-anchor-left {
+  @include border-left-radius ( 0 );
+}

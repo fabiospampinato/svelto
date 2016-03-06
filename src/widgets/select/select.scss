@@ -1,13 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Toggler
+ * Svelto - Widgets - Select
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../select.scss
+ * @require core/reset/reset.scss
+ * @require widgets/input/file/file.scss
  * ========================================================================= */
 
-/* TOGGLER */
+/* SELECT */
 
-.select-toggler {}
+select {
+  @extend input[type="file"];
+}
