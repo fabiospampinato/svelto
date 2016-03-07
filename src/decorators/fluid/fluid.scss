@@ -1,15 +1,36 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Fluid
+ * Svelto - Decorators - Fluid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../image.scss
  * ========================================================================= */
 
 /* FLUID */
 
-img.fluid {
-  width: 100%;
+.fluid {
+
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  /* MULTIPLE */
+
+  &.multiple {
+
+    flex-grow: 1;
+
+    &:not(.vertical) > * {
+      flex: 1 1 auto;
+    }
+
+    &.vertical > * {
+      width: 100%;
+    }
+
+  }
+
 }

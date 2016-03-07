@@ -184,48 +184,16 @@
     flex-wrap: nowrap;
   }
 
-  /* FLUID / EQUAL */
-
-  &.fluid,
-  &.equal {
-
-    &.vertical > * {
-      width: 100%;
-    }
-
-  }
-
-  /* FLUID */
-
-  &.fluid {
-
-    flex-grow: 1;
-
-    &:not(.vertical) {
-
-      > * {
-        flex: 1 1 auto;
-      }
-
-      > input,
-      > textarea {
-        flex-basis: 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
-      }
-
-    }
-
-  }
-
   /* EQUAL */
 
   &.equal {
 
-    &:not(.vertical) {
+    &:not(.vertical) > * {
+      flex: 1 0 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
+    }
 
-      > * {
-        flex: 1 0 0%; // IE-10/11 misinterpreter a unitless 0 flex-basis
-      }
-
+    &.vertical > * {
+      width: 100%;
     }
 
   }
