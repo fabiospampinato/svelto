@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
+ * @require core/colors/colors.js
  * @require core/mouse/mouse.js
  * @require core/sizes/sizes.js
  * @require core/widget/widget.js
@@ -15,7 +16,7 @@
 //TODO: Add support for dismissing a noty that contains only one button
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Sizes ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Colors, Sizes ) {
 
   'use strict';
 
@@ -31,7 +32,7 @@
     selector: '.noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
-              '<div class="infobar transparent">' +
+              '<div class="infobar ' + Colors.transparent + '">' +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="noty-img infobar-left">' +
                 '{% } %}' +
@@ -61,7 +62,7 @@
                 '</div>' +
               '{% } %}' +
             '</div>',
-      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "' + Sizes.small + '")%} {%=(o.css || "")%}">' +
+      button: '<div class="button {%=(o.color || "' + Colors.white + '")%} {%=(o.size || "' + Sizes.small + '")%} {%=(o.css || "")%}">' +
                 '{%#(o.text || "")%}' +
               '</div>'
     },
@@ -76,7 +77,7 @@
       buttons: [],
       /*
              : [{
-                color: 'white',
+                color: Colors.white,
                 size: Sizes.small,
                 css: '',
                 text: '',
@@ -84,7 +85,7 @@
              }],
       */
       type: 'alert',
-      color: 'black',
+      color: Colors.black,
       css: '',
       persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
@@ -416,4 +417,4 @@
 
   Factory.init ( Noty, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Timer, Svelto.Animations, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));

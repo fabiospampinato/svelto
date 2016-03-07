@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require core/colors/colors.js
  * @require core/sizes/sizes.js
  * @require widgets/noty/noty.js
  * ========================================================================= */
@@ -15,7 +16,7 @@
 //FIXME: Not well written
 //FIXME: Clicking an error/success noty doesn't close it
 
-(function ( $, _, Svelto, Widgets, Factory, Sizes ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
 
   'use strict';
 
@@ -35,7 +36,7 @@
           text: 'Cancel'
         }, {
           text: 'Execute',
-          color: 'secondary',
+          color: Colors.secondary,
           isConfirmative: true
         }]
       },
@@ -45,7 +46,7 @@
       },
       classes: {
         spinner: {
-          color: 'white',
+          color: Colors.white,
           size: Sizes.small,
           css: '',
         }
@@ -207,4 +208,4 @@
 
   Factory.init ( RemoteAction, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes ));

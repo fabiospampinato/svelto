@@ -12,7 +12,7 @@
 //FIXME: Auto focus on the partial input doesn't work good on mobile
 //FIXME: Destroy, reinit and add something like `aaaaaa`, it gets added at the beginning even if `options.sort` is setted to false
 
-(function ( $, _, Svelto, Widgets, Factory, Sizes, Pointer, Keyboard ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard ) {
 
   'use strict';
 
@@ -27,7 +27,7 @@
              '<span>' +
                '{%=o.value%}' +
              '</span>' +
-             '<i class="icon xsmall tagbox-tag-remover">close</i>' +
+             '<i class="icon ' + Sizes.xsmall + ' tagbox-tag-remover">close</i>' +
            '</div>'
     },
     options: {
@@ -35,7 +35,7 @@
       tags: [],
       tag: {
         minLength: 3,
-        color: 'gray',
+        color: Colors.gray,
         size: '',
         css: 'rounded'
       },
@@ -505,4 +505,4 @@
 
   Factory.init ( Tagbox, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));

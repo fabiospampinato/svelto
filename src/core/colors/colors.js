@@ -15,32 +15,33 @@
   /* COLORS */
 
   let Colors = {
-    primary: '#1565c0',
-    secondary: '#ef6c00',
-    tertiary: '#6a1b9a',
-    quaternary: '#2e7d32',
+    primary: 'primary',
+    secondary: 'secondary',
+    tertiary: 'tertiary',
+    quaternary: 'quaternary',
 
-    white: '#ffffff',
-    gray: '#e0e0e0',
-    black: '#212121',
-    yellow: '#fabf40',
-    olive: '#cddc39',
-    green: '#4caf50',
-    blue: '#2196f3',
-    violet: '#673ab7',
-    orange: '#ff9800',
-    purple: '#9c27b0',
-    red: '#f44336',
-    pink: '#e91e63',
-    teal: '#009688',
-    brown: '#795548',
+    black: 'black',
+    blue: 'blue',
+    brown: 'brown',
+    gray: 'gray',
+    green: 'green',
+    olive: 'olive',
+    orange: 'orange',
+    pink: 'pink',
+    purple: 'purple',
+    red: 'red',
+    teal: 'teal',
+    violet: 'violet',
+    white: 'white',
+    yellow: 'yellow',
 
-    error: '#f44336',
-    warning: '#fabf40',
-    success: '#4caf50',
+    error: 'error',
+    success: 'success',
+    warning: 'warning',
 
-    transparent: 'rgba(0, 0, 0, 0)',
-    base: '#eceff1'
+    base: 'base',
+    inherit: 'inherit',
+    transparent: 'transparent'
   };
 
   /* EXPORT */

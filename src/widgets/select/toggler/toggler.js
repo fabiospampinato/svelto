@@ -12,7 +12,7 @@
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Colors ) {
 
   'use strict';
 
@@ -40,7 +40,7 @@
     options: {
       dropdown: {
         size: '',
-        color: 'white',
+        color: Colors.white,
         css: Widgets.Dropdown.config.options.classes.affixed + ' outlined'
       },
       classes: {
@@ -294,4 +294,4 @@
 
   Factory.init ( SelectToggler, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors ));
