@@ -156,6 +156,12 @@
         opacity: $datepicker-day-clamped-opacity;
       }
 
+      /* SELECTABLE */
+
+      :not(.previous):not(.next):not(.datepicker-day-clamped) {
+        cursor: pointer;
+      }
+
     }
 
   }
@@ -167,8 +173,6 @@
     /* DAY */
 
     .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
-
-      cursor: pointer;
 
       /* HOVER */
 

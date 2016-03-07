@@ -22,6 +22,8 @@
 
   &-star {
 
+    cursor: pointer;
+
     /* BEFORE (ICON) */
 
     &:before {
@@ -94,12 +96,6 @@
 
       }
 
-    }
-
-    /* STAR */
-
-    .rater-star {
-      cursor: pointer;
     }
 
   }

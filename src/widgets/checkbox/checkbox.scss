@@ -72,27 +72,10 @@ input[type="checkbox"] {
 
   }
 
-  /* DISABLED */
-
-  .disabled &,
-  &.disabled,
-  &[disabled] {
-    cursor: default;
-  }
-
 }
 
 /* WRAPPER */
 
 .checkbox {
-
   cursor: pointer;
-
-  /* DISABLED */
-
-  .disabled &,
-  &.disabled {
-    cursor: default;
-  }
-
 }

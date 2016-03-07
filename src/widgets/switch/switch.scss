@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   height: $switch-handler-height;
   width: $switch-bar-width + $switch-handler-width;
 
@@ -46,6 +47,7 @@
     @include color ( $switch-handler-color, $switch-handler-color-force, $switch-handler-color-basic );
     @include z-depth ( $switch-handler-z-depth, $switch-handler-z-depth-force, $switch-handler-z-depth-basic );
     z-index: 1;
+    cursor: ew-resize;
     width: $switch-handler-width;
     height: $switch-handler-height;
     border-radius: $switch-handler-border-radius;
@@ -91,13 +93,9 @@
 
   &:not(.disabled) {
 
-    cursor: pointer;
-
     /* HANDLER */
 
     .switch-handler {
-
-      cursor: ew-resize;
 
       &:active,
       &.draggable-dragging {

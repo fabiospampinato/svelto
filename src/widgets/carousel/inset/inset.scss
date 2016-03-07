@@ -25,12 +25,7 @@
     display: flex;
     align-items: center;
     font-size: $carousel-inset-previous-next-font-size;
-
-    /* ENABLED */
-
-    &:not(.disabled) {
-      cursor: pointer;
-    }
+    cursor: pointer;
 
     /* AFTER (ICON) */
 

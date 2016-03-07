@@ -51,6 +51,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     min-width: $slider-min-max-min-width;
   }
 
@@ -84,6 +85,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    cursor: pointer;
     flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
   }
 
@@ -130,6 +132,7 @@
     transition-duration: $slider-animation-duration;
     border-radius: $slider-handler-border-radius;
     text-align: center;
+    cursor: move;
 
     &:before {
       @include fill-absolute ();
@@ -166,8 +169,6 @@
     .slider-min,
     .slider-max {
 
-      cursor: pointer;
-
       &:hover:after {
         @extend %icon-base;
         margin-bottom: 0;
@@ -199,8 +200,6 @@
 
     .slider-bar {
 
-      cursor: pointer;
-
       &:active,
       .slider-handler-wrp.draggable-dragging {
 
@@ -217,12 +216,6 @@
 
       }
 
-    }
-
-    /* HANDLER */
-
-    .slider-handler {
-      cursor: move;
     }
 
   }

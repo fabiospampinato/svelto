@@ -12,16 +12,9 @@
 /* TEXT */
 
 .divider.text {
-
   @extend %widget;
   @include size ( $divider-text-size, $divider-text-size-force, $divider-text-size-basic );
   font-weight: $divider-text-font-weight;
   margin: 0 $gutter-half $gutter-half;
-
-  /* ENABLED */
-
-  &:not(.disabled) {
-    opacity: $divider-text-opacity;
-  }
-
+  opacity: $divider-text-opacity;
 }

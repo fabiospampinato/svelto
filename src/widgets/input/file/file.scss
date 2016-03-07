@@ -31,12 +31,4 @@ input[type="file"] {
   //   @include absolute ( - $outline-width );
   // }
 
-  /* DISABLED */
-
-  &.disabled,
-  &[disabled],
-  .disabled & {
-    cursor: default;
-  }
-
 }

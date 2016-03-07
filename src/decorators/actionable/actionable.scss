@@ -8,6 +8,6 @@
 
 /* ACTIONABLE */
 
-.actionable:not(.disabled):not(.draggable-dragging) {
+.actionable {
   cursor: pointer;
 }

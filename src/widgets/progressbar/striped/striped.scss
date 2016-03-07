@@ -34,10 +34,4 @@
     background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
   }
 
-  /* DISABLED */
-
-  &.disabled .progressbar-highlight:before {
-    animation-play-state: paused;
-  }
-
 }

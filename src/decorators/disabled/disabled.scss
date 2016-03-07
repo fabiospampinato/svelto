@@ -18,12 +18,17 @@
 .disabled,
 [disabled] {
 
-  pointer-events: none;
-  opacity: $disabled-opacity;
+  pointer-events: none !important;
+  opacity: $disabled-opacity !important;
 
   &,
-  * {
-    cursor: default;
+  &:before,
+  &:after,
+  *,
+  :before,
+  :after {
+    cursor: default !important;
+    animation-play-state: paused !important;
   }
 
 }
