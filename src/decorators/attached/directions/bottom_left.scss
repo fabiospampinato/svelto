@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Attached - Directions - Bottom left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../attached.scss
+ * ========================================================================= */
+
+/* BOTTOM LEFT */
+
+.attached-bottom-left {
+
+  @extend %attached;
+  @include absolute ( false false 0 0 );
+  border-bottom-left-radius: inherit;
+
+  /* OUTLINED */
+
+  .outlined > &.outlined {
+    @include absolute ( false false ( - $outline-width ) ( - $outline-width ) );
+  }
+
+}

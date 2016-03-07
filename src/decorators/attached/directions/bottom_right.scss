@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Attached - Directions - Bottom right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../attached.scss
+ * ========================================================================= */
+
+/* BOTTOM RIGHT */
+
+.attached-bottom-right {
+
+  @extend %attached;
+  @include absolute ( false 0 0 false );
+  border-bottom-right-radius: inherit;
+
+  /* OUTLINED */
+
+  .outlined > &.outlined {
+    @include absolute ( false ( - $outline-width ) ( - $outline-width ) false );
+  }
+
+}
