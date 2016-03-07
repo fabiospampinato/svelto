@@ -42,7 +42,7 @@
     /* SHOW */
 
     &.show:before {
-      opacity: 1 - $ripple-transparentize-amount;
+      opacity: $ripple-opacity;
       transform: scale(1);
     }
 

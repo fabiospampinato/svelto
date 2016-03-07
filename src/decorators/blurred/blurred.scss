@@ -22,8 +22,8 @@
 }
 
 %blurred {
-  filter: url(#{$blurred-path-images}blurred.svg#blur);
-  filter: blur($blurred-blur-amount);
+  filter: url(#{$blurred-path-images}blurred.svg#blur) !important;
+  filter: blur($blurred-blur-amount) !important;
 }
 
 .blurred {

@@ -17,7 +17,7 @@
     content: '';
     z-index: 1;
     border-radius: inherit;
-    background-color: transparentize( $obscured-bg-color, $obscured-transparentize-amount );
+    background-color: rgba( $obscured-bg-color, $obscured-bg-opacity );
   }
 
   /* OUTLINED */

@@ -6,29 +6,45 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TRANSPARENTIZE */
+/* OPACIFY */
 
 @each $name, $datas in $colors {
 
-  $bg: nth( $datas, 1 );
-  $bg-hover: nth( $datas, 2 );
-  $bg-active: nth( $datas, 3 );
-
   @if $name != inherit {
 
-    .noty%color-#{$name} {
-      background-color: transparentize( $bg, $noty-bg-transparentize-amount );
+    $bg: nth( $datas, 1 );
+    $bg-hover: nth( $datas, 2 );
+    $bg-active: nth( $datas, 3 );
+
+    $bg-opacified: rgba( $bg, $noty-bg-opacity );
+    $bg-opacified-hover: rgba( $bg-hover, $noty-bg-opacity );
+    $bg-opacified-active: rgba( $bg-active, $noty-bg-opacity );
+
+    @if opacity( $bg ) != opacity( $bg-opacified ) {
+
+      .noty%color-#{$name} {
+        background-color: $bg-opacified;
+      }
+
     }
 
-    // .noty%color-#{$name}.hover,
-    // .noty%color-#{$name}.actionable:not(.active):hover {
-    //   background-color: transparentize( $bg-hover, $noty-bg-transparentize-amount );
-    // }
-    //
-    // .noty%color-#{$name}.active,
-    // .noty%color-#{$name}.actionable:not(.ripple-circle):active {
-    //   background-color: transparentize( $bg-hover, $noty-bg-transparentize-amount );
-    // }
+    @if opacity( $bg-hover ) != opacity( $bg-opacified-hover ) {
+
+      .noty%color-#{$name}.hover,
+      .noty%color-#{$name}.actionable:not(.active):hover {
+        background-color: $bg-opacified-hover;
+      }
+
+    }
+
+    @if opacity( $bg-active ) != opacity( $bg-opacified-active ) {
+
+      .noty%color-#{$name}.active,
+      .noty%color-#{$name}.actionable:not(.ripple-circle):active {
+        background-color: $bg-opacified-active;
+      }
+
+    }
 
   }
 
