@@ -1,23 +1,19 @@
 
 <!-- AUTOGROW -->
 
-<template name="autogrow">
+<template name="textarea_autogrow">
 
-  {{{sw.divider "Input"}}}
-
-  <input value="Value" placeholder="Placeholder..." class="autogrow outlined">
-
-  {{{sw.divider "Textarea"}}}
+  {{{sw.divider "Textarea autogrow"}}}
 
   <textarea placeholder="Placeholder..." class="autogrow outlined">Value</textarea>
 
-  {{> autogrow_actions}}
+  {{> textarea_autogrow_actions}}
 
 </template>
 
 <!-- ACTIONS -->
 
-<template name="autogrow_actions">
+<template name="textarea_autogrow_actions">
 
   {{{sw.divider "API"}}}
 
@@ -30,7 +26,7 @@
 
   <div class="multiple actions">
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )" true}}}
   </div>
 
   <script>
@@ -39,7 +35,6 @@
     }
 
     function api ( action ) {
-      $('input.autogrow').autogrowInput ( action );
       $('textarea.autogrow').autogrowTextarea ( action );
     }
   </script>

@@ -1,0 +1,38 @@
+
+<!-- OBSCURED -->
+
+<template name="obscured">
+
+  {{{sw.divider "Paragraph"}}}
+
+  <div class="container outlined">
+    {{{sample.paragraph}}}
+  </div>
+
+  {{> obscured_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="obscured_actions">
+
+  {{{sw.divider "Actions"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Obscured" "toggle_obscured ()"}}}
+    {{{sw.checkAction "Obscured (Show)" "toggle_class ( 'obscured-show' )"}}}
+    {{{sw.checkAction "Obscured (Open)" "toggle_class ( 'obscured-open' )"}}}
+  </div>
+
+  <script>
+    function toggle_obscured() {
+      $('.container').obscured();
+    }
+
+    function toggle_class ( name ) {
+      $('.container').toggleClass ( name );
+    }
+  </script>
+
+</template>

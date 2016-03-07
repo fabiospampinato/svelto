@@ -41,7 +41,7 @@
   {{{sw.divider "Fluid"}}}
 
   <div class="container outlined">
-    <input placeholder="Fluid" class="fluid">
+    <input placeholder="Fluid" class="primary fluid">
   </div>
 
   {{{sw.divider "File"}}}
@@ -109,7 +109,6 @@
   <div class="multiple actions">
     {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
-    {{{sw.checkAction "Rounded" "toggle_class ( 'rounded' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -129,32 +128,32 @@
 
   <script>
     function toggle_class(css_class) {
-      $('input').toggleClass(css_class);
+      $('input').not('.actions input').toggleClass(css_class);
       if ( css_class === 'outlined' ) {
-        $('.label, .button').not ( '.actions .button' ).toggleClass ( css_class );
+        $('.layout-content .label,.layout-content .button').not ( '.actions .button' ).toggleClass ( css_class );
       }
     }
 
     function toggle_attr ( attr ) {
       if ( _.isUndefined ( $('input').attr ( attr ) ) ) {
-        $('input').attr ( attr, attr );
+        $('input').not('.actions input').attr ( attr, attr );
       } else {
-        $('input').removeAttr ( attr );
+        $('input').not('.actions input').removeAttr ( attr );
       }
     }
 
     function enable () {
-      $('input').removeClass ( 'disabled' ).removeAttr ( 'disabled' );
+      $('input').not('.actions input').removeClass ( 'disabled' ).removeAttr ( 'disabled' );
     }
 
     function disable () {
-      $('input').addClass ( 'disabled' ).attr ( 'disabled', 'disabled' );
+      $('input').not('.actions input').addClass ( 'disabled' ).attr ( 'disabled', 'disabled' );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('input' ).removeClass ( validities[i] ).addClass ( validity );
+        $('input').not('.actions input').removeClass ( validities[i] ).addClass ( validity );
       }
     }
   </script>

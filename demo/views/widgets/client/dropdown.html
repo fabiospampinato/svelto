@@ -10,8 +10,8 @@
       <span>Base</span>
       <i class="icon">expand_more</i>
     </div>
-    <div class="button dropdown-toggler outlined" data-target="#attached">
-      <span>Attached</span>
+    <div class="button dropdown-toggler outlined" data-target="#affixed">
+      <span>Affixed</span>
       <i class="icon">expand_more</i>
     </div>
     <div class="button dropdown-toggler outlined" data-target="#no-tip">
@@ -67,8 +67,8 @@
     </div>
   </div>
 
-  <div id="attached" class="dropdown attached container">
-    <p>Attached</p>
+  <div id="affixed" class="dropdown affixed container">
+    <p>Affixed</p>
   </div>
 
   <div id="no-tip" class="dropdown no-tip container">
@@ -134,6 +134,10 @@
 
 <template name="dropdown_actions">
 
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+
   {{{sw.divider "State"}}}
 
   <div class="multiple joined actions">
@@ -142,6 +146,10 @@
   </div>
 
   <script>
+    function toggle_class ( name ) {
+      $('.dropdown').toggleClass ( name );
+    }
+
     function api (action) {
       $('.dropdown-toggler').dropdownToggler ( action );
     }

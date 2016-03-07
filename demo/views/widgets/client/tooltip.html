@@ -22,8 +22,8 @@
       <span>Image</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#image2">
-      <span>Image2</span>
+    <div class="button tooltip-toggler outlined" data-target="#figure">
+      <span>Figure</span>
       <i class="icon">info_outline</i>
     </div>
     <div class="button tooltip-toggler outlined" data-target="#advanced">
@@ -47,17 +47,17 @@
   <div id="tipless" class="tooltip container no-tip">Tipless!</div>
 
   <div id="text" class="tooltip container">
-    <p>{{sample.text}}</p>
+    <p>{{sample.text 50}}</p>
   </div>
 
   <div id="image" class="tooltip container outlined">
-    <img src="/sample.png">
+    {{{sample.image}}}
   </div>
 
-  <div id="image2" class="tooltip container">
-    <div class="image-wrp">
+  <div id="figure" class="tooltip container">
+    <figure>
       {{{sample.image}}}
-    </div>
+    </figure>
   </div>
 
   <div id="advanced" class="tooltip card">
@@ -72,6 +72,10 @@
 
 <template name="tooltip_actions">
 
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+
   {{{sw.divider "State"}}}
 
   <div class="multiple joined actions">
@@ -80,6 +84,10 @@
   </div>
 
   <script>
+    function toggle_class ( name ) {
+      $('.tooltip').toggleClass ( name );
+    }
+
     function api (action) {
       $('.tooltip-toggler').tooltipToggler ( action );
     }

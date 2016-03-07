@@ -48,9 +48,16 @@
 
   {{{sw.divider "State"}}}
 
-  <div class="multiple joined actions">
-    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
-    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  <div class="multiple actions">
+    <div class="multiple joined">
+      {{{sw.radioAction "Base" "validity" "set_validity ()" true}}}
+      {{{sw.radioAction "Valid" "validity" "set_validity ( 'valid' )"}}}
+      {{{sw.radioAction "Invalid" "validity" "set_validity ( 'invalid' )"}}}
+    </div>
+    <div class="multiple joined">
+      {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+      {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+    </div>
   </div>
 
   <script>
@@ -80,6 +87,13 @@
     function api_set() {
       var value = Number ( getValue ( 'value' ) );
       $('.stepper').stepper('set', value);
+    }
+
+    function set_validity ( validity ) {
+      var validities = ['valid', 'invalid'];
+      for ( var i = 0, l = validities.length; i < l; i++ ) {
+        $('.stepper').removeClass ( validities[i] ).addClass ( validity );
+      }
     }
   </script>
 
