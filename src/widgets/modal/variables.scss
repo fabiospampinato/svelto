@@ -16,16 +16,8 @@ $modal-z-depth: 6 !default;
 $modal-z-depth-force: true !default;
 $modal-z-depth-basic: true !default;
 
-$modal-max-width: 90vw !default;
-$modal-max-height: 90vh !default;
-
-/* BEFORE (BACKGROUND) */
-
-$modal-bg-color: rgba( 0, 0, 0, .5 ) !default;
-
-/* CLOSED */
-
-$modal-closed-scale: .7 !default;
+$modal-max-width: 80% !default;
+$modal-max-height: 80% !default;
 
 /* ANIMATION */
 

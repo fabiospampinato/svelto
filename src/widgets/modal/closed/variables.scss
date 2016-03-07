@@ -1,20 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Modal - Fullscreen
+ * Svelto - Widgets - Modal - Closed (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
  * ========================================================================= */
 
-/* FULLSCREEN */
+/* CLOSED */
 
-.modal.fullscreen {
-  border-width: 0;
-  border-radius: 0;
-  max-width: none;
-  width: 100%;
-  max-height: none;
-  height: 100%;
-}
+$modal-closed-scale: .8 !default;

@@ -6,12 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
+ * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
-// Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
-
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {
 
   'use strict';
 
@@ -24,7 +23,11 @@
     options: {
       classes: {
         show: 'show',
-        open: 'open'
+        open: 'open',
+        html: {
+          show: 'modal-backdrop obscured-show obscured',
+          open: 'obscured-open'
+        }
       },
       animations: {
         open: Animations.normal,
@@ -71,17 +74,15 @@
 
     ___tap () {
 
-      this._on ( true, Pointer.tap, this.__tap );
+      this._on ( true, this.$html, Pointer.tap, this.__tap );
 
     }
 
     __tap ( event ) {
 
-      if ( event.target === this.modal ) {
+      if ( this._lock || $(event.target).closest ( this.$modal ).length || !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
-        this.close ();
-
-      }
+      this.close ();
 
     }
 
@@ -127,10 +128,12 @@
       this._frame ( function () {
 
         this.$modal.addClass ( this.options.classes.show );
+        this.$html.addClass ( this.options.classes.html.show );
 
         this._frame ( function () {
 
           this.$modal.addClass ( this.options.classes.open );
+          this.$html.addClass ( this.options.classes.html.open );
 
           this._lock = false;
 
@@ -156,10 +159,12 @@
       this._frame ( function () {
 
         this.$modal.removeClass ( this.options.classes.open );
+        this.$html.removeClass ( this.options.classes.html.open );
 
         this._delay ( function () {
 
           this.$modal.removeClass ( this.options.classes.show );
+          this.$html.removeClass ( this.options.classes.html.show );
 
           this.$layout.enableScroll ();
 
@@ -181,4 +186,4 @@
 
   Factory.init ( Modal, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));
