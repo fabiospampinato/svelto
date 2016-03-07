@@ -23,13 +23,11 @@
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label tag tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
+      tag: '<div class="label tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
              '<span>' +
                '{%=o.value%}' +
              '</span>' +
-             '<div class="button gray compact rounded ' + Sizes.xxsmall + ' tagbox-tag-remover">' +
-               '<i class="icon">close</i>' +
-             '</div>' +
+             '<i class="icon xsmall tagbox-tag-remover">close</i>' +
            '</div>'
     },
     options: {
@@ -37,9 +35,9 @@
       tags: [],
       tag: {
         minLength: 3,
-        color: '',
+        color: 'gray',
         size: '',
-        css: 'outlined'
+        css: 'rounded'
       },
       characters: {
         forbid: true, // Forbid or not
