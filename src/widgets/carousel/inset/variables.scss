@@ -15,13 +15,13 @@ $carousel-inset-previous-next-z-index: $carousel-indicators-z-index - 1 !default
 
 $carousel-inset-previous-next-font-size: $icon-scale-amount * 1em !default;
 
-$carousel-inset-previous-next-color: $carousel-indicator-color !default;
+$carousel-inset-previous-next-color: $carousel-indicator-current-bg-color !default;
 
 $carousel-inset-previous-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-previous-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-previous-next-animation-duration: $animation-normal !default;
+$carousel-inset-previous-next-animation-duration: $carousel-indicator-animation-duration !default;
 
 /* PREVIOUS */
 

@@ -8,7 +8,8 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Add better support for img tags, .image-wrp, container and card
+//FIXME: Improve support for layout, image and figure items
+//TODO: If posible add indicators without the need to add extra markup
 
 /* CAROUSEL */
 
@@ -17,7 +18,6 @@
   @extend %widget;
   display: flex;
   align-items: stretch;
-  position: relative;
   height: $carousel-height;
 
   /* INDICATORS */
@@ -25,14 +25,10 @@
   &-indicators {
     z-index: $carousel-indicators-z-index;
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
-    bottom: 0;
+    bottom: $gutter;
     left: 50%;
     transform: translateX(-50%);
-    justify-self: center;
-    padding: $gutter;
   }
 
   /* INDICATOR */
@@ -41,9 +37,11 @@
 
     width: $carousel-indicator-width;
     height: $carousel-indicator-height;
-    border: $carousel-indicator-border-width solid $carousel-indicator-color;
-    border-radius: 50%;
-    background-color: transparent;
+    border-width: $carousel-indicator-border-width;
+    border-style: $carousel-indicator-border-style;
+    border-color: $carousel-indicator-border-color;
+    border-radius: $carousel-indicator-border-radius;
+    background-color: $carousel-indicator-bg-color;
     cursor: pointer;
     opacity: $carousel-indicator-opacity;
     transition-property: background-color, opacity;
@@ -52,7 +50,7 @@
     /* HOVER */
 
     &:hover {
-      opacity: $carousel-indicator-hover-opacity !important;
+      opacity: $carousel-indicator-hover-opacity !important; //FIXME: Why is it needed?
     }
 
     /* NOT FIRST */
@@ -70,7 +68,7 @@
     /* CURRENT */
 
     &.current {
-      background-color: $carousel-indicator-color;
+      background-color: $carousel-indicator-current-bg-color;
     }
 
   }
@@ -81,17 +79,30 @@
 
     position: relative;
     overflow: hidden;
-    flex-grow: 1;
-    flex-shrink: 1; // IE-10/11 default it to 0 instead
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
     background-color: $carousel-items-bg-color;
 
     /* ITEM */
 
     > * {
       @include fill-absolute ();
-      margin-bottom: 0 !important;
-      border-radius: inherit;
+      border-radius: inherit !important;
+      margin: 0 !important;
     }
+
+    /* SCROLLABLE ITEM */
+
+    > :not(.card):not(.layout) {
+      overflow: auto;
+    }
+
+    /* IMAGE */
+
+    > img {
+      @include center-transform ( y );
+    }
+
+    //TODO: Add Figure
 
   }
 

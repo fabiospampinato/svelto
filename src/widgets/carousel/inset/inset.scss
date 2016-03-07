@@ -20,12 +20,10 @@
   .carousel-previous,
   .carousel-next {
 
-    position: absolute;
+    @include absolute ( 0 false 0 false );
     z-index: $carousel-inset-previous-next-z-index;
     display: flex;
     align-items: center;
-    top: 0;
-    bottom: 0;
     font-size: $carousel-inset-previous-next-font-size;
 
     /* ENABLED */

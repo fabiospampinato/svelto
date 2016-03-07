@@ -23,12 +23,17 @@ $carousel-indicators-z-index: 80 !default;
 
 /* INDICATOR */
 
-$carousel-indicator-color: $color-white !default;
+$carousel-indicator-bg-color: transparent !default;
+$carousel-indicator-current-bg-color: $color-white !default;
 
 $carousel-indicator-width: .625em !default;
 $carousel-indicator-height: $carousel-indicator-width !default;
 
 $carousel-indicator-border-width: 2px !default;
+$carousel-indicator-border-style: solid !default;
+$carousel-indicator-border-color: $carousel-indicator-current-bg-color !default;
+
+$carousel-indicator-border-radius: 50% !default;
 
 $carousel-indicator-opacity: .25 !default;
 $carousel-hover-indicator-opacity: .5 !default;
