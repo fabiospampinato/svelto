@@ -109,6 +109,16 @@
       this.$document = $(document);
       this.document = this.$document[0];
 
+      /* HTML */
+
+      this.$html = $(document.documentElement);
+      this.html = this.$html[0];
+
+      /* BODY */
+
+      this.$body = $(document.body);
+      this.body = this.$body[0];
+
       /* BINDINGS */
 
       this.$bindings = $();
@@ -124,7 +134,7 @@
       /* SET GUID / GUC */
 
       this.guid = $.guid++;
-      this.guc = this.name + this.guid;
+      this.guc = this.name + '-' + this.guid;
 
       /* EVENT NAMESPACE */
 
