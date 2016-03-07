@@ -7,9 +7,10 @@
  * =========================================================================
  * @require ../closer/closer.js
  * @require core/browser/browser.js
+ * @require core/mouse/mouse.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
 
   'use strict';
 
@@ -53,6 +54,8 @@
     }
 
     __tap ( event ) {
+
+      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
       this.open ( event );
 
@@ -190,4 +193,4 @@
 
   Factory.init ( Opener, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
