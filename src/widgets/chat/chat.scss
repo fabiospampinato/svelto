@@ -66,15 +66,9 @@
         position: absolute;
         content: '';
         z-index: 1;
+        border: inherit;
         box-sizing: content-box;
         top: 50%;
-      }
-
-      /* TIP (OUTLINED) */
-
-      &.outlined:before {
-        border-width: $outline-width;
-        border-style: inherit;
       }
 
     }
