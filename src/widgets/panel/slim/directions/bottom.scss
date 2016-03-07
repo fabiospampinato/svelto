@@ -1,15 +1,21 @@
 
 /* =========================================================================
- * Svelto - Widgets - Panel - Show
+ * Svelto - Widgets - Panel - Slim - Directions - Bottom
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../panel.scss
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
  * ========================================================================= */
 
-/* SHOW */
+/* BOTTOM */
 
-.panel.show {
-  display: flex !important;
+.panel.slim.bottom {
+  height: $panel-slim-x-height;
+  transform: translateY($panel-slim-x-height);
+}
+
+.layout.panel-slim-pinned-bottom {
+  padding-bottom: $panel-slim-x-height;
 }

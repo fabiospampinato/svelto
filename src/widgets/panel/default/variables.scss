@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Panel - Default
+ * Svelto - Widgets - Panel - Default (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,9 +9,7 @@
 /* HORIZONTAL */
 
 $panel-default-x-height: 7.5rem !default;
-$panel-default-closed-x-spacing: $panel-default-x-height !default; //TODO: Remove it
 
 /* VERTICAL */
 
 $panel-default-y-width: $panel-default-x-height * 2 !default;
-$panel-default-closed-y-spacing: $panel-default-y-width !default; //TODO: Remove it

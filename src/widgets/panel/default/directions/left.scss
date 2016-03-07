@@ -1,15 +1,29 @@
 
 /* =========================================================================
- * Svelto - Widgets - Panel - Directions - Bottom
+ * Svelto - Widgets - Panel - Default - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../panel.scss
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
  * ========================================================================= */
 
-/* BOTTOM */
+/* LEFT */
 
-.panel.bottom {
-  @include fixed ( false 0 0 0 );
+.panel.left {
+  width: $panel-default-y-width;
+  transform: translateX(- $panel-default-y-width);
+}
+
+/* LAYOUT */
+
+.layout.panel-default-pinned-left {
+
+  padding-left: $panel-default-y-width;
+
+  > .layout-header.sticky {
+    left: $panel-default-y-width;
+  }
+
 }

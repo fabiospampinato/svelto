@@ -16,29 +16,25 @@
 /* PANEL */
 
 .panel {
-
   @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
-  display: none;
+  position: fixed;
   z-index: $panel-z-index;
-  margin-bottom: 0;
+  margin: 0;
   border-radius: 0;
   transition: transform $panel-animation-duration;
-  overflow: visible !important; // Since we need the pseudo element to be showed
+}
 
-  /* BEFORE (BACKGROUND) */
+/* BACKDROP */
+
+.panel-backdrop {
+
+  /* OBSCURED */
 
   &:before {
-    content: '';
-    position: absolute;
-    opacity: 0;
-    width: 400vw;
-    height: 400vh;
-    top: -200vh;
-    left: -200vw;
-    z-index: -1;
+    position: fixed;
     cursor: pointer;
-    background-color: $panel-bg-color;
-    transition: opacity $panel-background-animation-opacity-duration;
+    z-index: $panel-z-index - 1;
+    transition-duration: $panel-animation-duration;
   }
 
 }
@@ -51,7 +47,7 @@
 
   transition: padding $panel-animation-duration;
 
-  > .layout-header.fixed {
+  > .layout-header.sticky {
     transition-property: top, right, bottom, left;
     transition-duration: $panel-animation-duration;
   }

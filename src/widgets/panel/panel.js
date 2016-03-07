@@ -6,14 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
+ * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
-// Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.panel`
-
+//FIXME: Multiple open panels (read it multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {
 
   'use strict';
 
@@ -36,7 +36,12 @@
         show: 'show',
         open: 'open',
         pinned: 'pinned',
-        flickable: 'flickable' // As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+        flickable: 'flickable', // As a side effect it will gain a `Svelto.Flickable` instance, therefor it will also trigger `flickable:flick` events, that are what we want
+        backdrop: {
+          show: 'panel-backdrop obscured-show obscured',
+          open: 'obscured-open',
+          pinned: 'panel-backdrop-pinned'
+        }
       },
       datas: {
         type: 'type'
@@ -65,6 +70,8 @@
 
       this.$panel = this.$element;
       this.panel = this.element;
+
+      this.$backdrop = this.$html;
 
       this.options.direction = _.getDirections ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
       this.options.flick.open = this.options.flick.open || this.$panel.hasClass ( this.options.classes.flickable );
@@ -114,17 +121,15 @@
 
     ___tap () {
 
-      this._on ( true, Pointer.tap, this.__tap );
+      this._on ( true, this.$html, Pointer.tap, this.__tap );
 
     }
 
     __tap ( event ) {
 
-      if ( event.target === this.panel && !this._isPinned ) {
+      if ( this._lock || this._isPinned || $(event.target).closest ( this.$panel ).length || !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
-        this.close ();
-
-      }
+      this.close ();
 
     }
 
@@ -284,10 +289,12 @@
       this._frame ( function () {
 
         this.$panel.addClass ( this.options.classes.show );
+        this.$backdrop.addClass ( this.options.classes.backdrop.show );
 
         this._frame ( function () {
 
           this.$panel.addClass ( this.options.classes.open );
+          this.$backdrop.addClass ( this.options.classes.backdrop.open );
 
           this._lock = false;
 
@@ -319,10 +326,12 @@
       this._frame ( function () {
 
         this.$panel.removeClass ( this.options.classes.open );
+        this.$backdrop.removeClass ( this.options.classes.backdrop.open );
 
         this._delay ( function () {
 
           this.$panel.removeClass ( this.options.classes.show );
+          this.$backdrop.removeClass ( this.options.classes.backdrop.show );
 
           this.$layout.enableScroll ();
 
@@ -369,6 +378,8 @@
 
       this.$layout.addClass ( this.layoutPinnedClass );
 
+      this.$backdrop.addClass ( this.options.classes.backdrop.pinned );
+
       if ( this._isOpen ) {
 
         this.$layout.enableScroll ();
@@ -389,6 +400,8 @@
 
       this.$layout.removeClass ( this.layoutPinnedClass ).disableScroll ();
 
+      this.$backdrop.removeClass ( this.options.classes.backdrop.pinned );
+
       this._delay ( function () {
 
         this.$panel.removeClass ( this.options.classes.pinned );
@@ -403,4 +416,4 @@
 
   Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));

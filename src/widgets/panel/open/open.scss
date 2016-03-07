@@ -6,20 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../panel.scss
- * @require ../show/show.scss
  * ========================================================================= */
 
 /* OPEN */
 
 .panel.open {
-
-  @extend .panel.show;
-  transform: translateX(0) translateY(0) !important;
-
-  /* BEFORE (BACKGROUND) */
-
-  &:before {
-    opacity: 1;
-  }
-
+  transform: translate(0, 0) !important;
 }

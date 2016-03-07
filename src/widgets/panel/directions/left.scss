@@ -11,5 +11,5 @@
 /* LEFT */
 
 .panel.left {
-  @include fixed ( 0 initial 0 0 );
+  @include fixed ( 0 false 0 0 );
 }
