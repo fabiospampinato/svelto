@@ -1,13 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Figure - Spaced (Variables)
+ * Svelto - Decorators - Floated (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/image/spaced/variables.scss
  * ========================================================================= */
 
-/* SPACED */
+/* FLOATED */
 
-$figure-spaced-spacing: $image-spaced-spacing !default;
+$floated-spacing: $gutter !default;

@@ -1,16 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Figure - Floated - Directions - Left
+ * Svelto - Decorators - Spaced - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../../figure.scss
+ * @require ../spaced.scss
  * ========================================================================= */
 
 /* LEFT */
 
-%figure.floated.left {
-  float: left;
-  margin: 0 $figure-floated-spacing $figure-floated-spacing 0;
+.spaced.left {
+  margin-left: $spaced-spacing;
 }

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Floated - Directions - Default
+ * Svelto - Decorators - Spaced - Directions - Default
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,6 +11,7 @@
 
 /* DEFAULT */
 
-img.floated:not(.right) {
-  @extend img.floated.left;
+.spaced:not(.left):not(.right) {
+  @extend .spaced.left;
+  @extend .spaced.right;
 }

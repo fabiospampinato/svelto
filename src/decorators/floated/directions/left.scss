@@ -1,11 +1,14 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Floated (Variables)
+ * Svelto - Decorators - Floated - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* FLOATED */
+/* LEFT */
 
-$image-floated-spacing: $gutter !default;
+.floated.left {
+  float: left;
+  margin: 0 $floated-spacing $floated-spacing 0;
+}

@@ -1,16 +1,13 @@
 
 /* =========================================================================
- * Svelto - Widgets - Image - Floated - Directions - Left
+ * Svelto - Decorators - Spaced
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../image.scss
  * ========================================================================= */
 
-/* LEFT */
+/* SPACED */
 
-img.floated.left {
-  float: left;
-  margin: 0 $image-floated-spacing $image-floated-spacing 0;
+.spaced {
+  margin-bottom: 0;
 }
