@@ -10,6 +10,8 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
+//FIXME: Multiple open modals (read it multiple backdrops) are not well supported
+
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {
 
   'use strict';
@@ -24,7 +26,7 @@
       classes: {
         show: 'show',
         open: 'open',
-        html: {
+        backdrop: {
           show: 'modal-backdrop obscured-show obscured',
           open: 'obscured-open'
         }
@@ -51,8 +53,10 @@
 
     _variables () {
 
-      this.modal = this.element;
       this.$modal = this.$element;
+      this.modal = this.element;
+
+      this.$backdrop = this.$html;
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -128,12 +132,12 @@
       this._frame ( function () {
 
         this.$modal.addClass ( this.options.classes.show );
-        this.$html.addClass ( this.options.classes.html.show );
+        this.$backdrop.addClass ( this.options.classes.backdrop.show );
 
         this._frame ( function () {
 
           this.$modal.addClass ( this.options.classes.open );
-          this.$html.addClass ( this.options.classes.html.open );
+          this.$backdrop.addClass ( this.options.classes.backdrop.open );
 
           this._lock = false;
 
@@ -159,12 +163,12 @@
       this._frame ( function () {
 
         this.$modal.removeClass ( this.options.classes.open );
-        this.$html.removeClass ( this.options.classes.html.open );
+        this.$backdrop.removeClass ( this.options.classes.backdrop.open );
 
         this._delay ( function () {
 
           this.$modal.removeClass ( this.options.classes.show );
-          this.$html.removeClass ( this.options.classes.html.show );
+          this.$backdrop.removeClass ( this.options.classes.backdrop.show );
 
           this.$layout.enableScroll ();
 
