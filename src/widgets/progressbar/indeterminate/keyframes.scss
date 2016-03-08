@@ -10,14 +10,15 @@
 
 @keyframes progressbar-indeterminate-highlight {
   0% {
-    width: 100%;
-    transform: translateX(-60%) scaleX(.15);
+    width: 0%;
+    margin-left: 0;
   }
   35% {
-    transform: translateX(-15%) scaleX(.5);
+    width: 75%;
+    margin-left: 25%;
   }
-  100% {
-    width: 100%;
-    transform: translateX(51%) scaleX(.05);
+  80% {
+    width: 0%;
+    margin-left: 100%;
   }
 }
