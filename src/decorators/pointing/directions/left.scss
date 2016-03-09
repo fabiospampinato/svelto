@@ -1,0 +1,32 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Pointing - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./horizontal.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.pointing-left {
+
+  @extend %pointing-horizontal;
+  margin-left: $pointing-tip-half-diagonal;
+
+  /* TIP */
+
+  &:after {
+    left: - $pointing-tip-half-size;
+    clip-path: url(#{$pointing-path-images}pointing-clips.svg#clip-left); // The polygon is not supported on Firefox
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  /* OUTLINED */
+
+  &.outlined:after {
+    margin-left: - $outline-width;
+  }
+
+}

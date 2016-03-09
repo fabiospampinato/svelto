@@ -1,0 +1,32 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Pointing - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./vertical.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.pointing-top {
+
+  @extend %pointing-vertical;
+  margin-top: $pointing-tip-half-diagonal;
+
+  /* TIP */
+
+  &:after {
+    top: - $pointing-tip-half-size;
+    clip-path: url(#{$pointing-path-images}pointing-clips.svg#clip-top); // The polygon is not supported on Firefox
+    clip-path: polygon(100% 0, 0 0, 0 100%);
+  }
+
+  /* OUTLINED */
+
+  &.outlined:after {
+    margin-top: - $outline-width;
+  }
+
+}

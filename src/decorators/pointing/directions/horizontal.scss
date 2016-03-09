@@ -1,0 +1,24 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Pointing - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../pointing.scss
+ * ========================================================================= */
+
+/* HORIZONTAL */
+
+%pointing-horizontal {
+
+  @extend %pointing;
+
+  /* TIP */
+
+  &:after {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+}

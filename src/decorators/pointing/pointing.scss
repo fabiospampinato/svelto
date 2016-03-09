@@ -1,0 +1,24 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Pointing
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* POINTING */
+
+%pointing-tip {
+  @include dimension ( $pointing-tip-size );
+  @include color ( $pointing-tip-color, $pointing-tip-color-force, $pointing-tip-color-basic );
+  transform: rotate(45deg);
+  position: absolute;
+  content: '';
+  z-index: 1;
+  box-sizing: content-box;
+  border: inherit;
+}
+
+%pointing:after {
+  @extend %pointing-tip;
+}

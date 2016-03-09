@@ -1,0 +1,42 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Pointing - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/multiple/multiple.scss
+ * @require ./vertical.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.pointing-bottom {
+
+  @extend %pointing-vertical;
+  @include last-child-no-gutter ( calc(#{$gutter} + #{$pointing-tip-half-diagonal}), $pointing-tip-half-diagonal );
+  margin-bottom: calc(#{$gutter} + #{$pointing-tip-half-diagonal});
+
+  /* MULTIPLE */
+
+  //FIXME: Ugly fix, maybe a more general gutter-related mixin that also takes care of this case would be the best
+
+  %multiple > & {
+    margin-bottom: calc(#{$gutter} + #{$pointing-tip-half-diagonal});
+  }
+
+  /* TIP */
+
+  &:after {
+    bottom: - $pointing-tip-half-size;
+    clip-path: url(#{$pointing-path-images}pointing-clips.svg#clip-bottom); // The polygon is not supported on Firefox
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  }
+
+  /* OUTLINED */
+
+  &.outlined:after {
+    margin-bottom: - $outline-width;
+  }
+
+}
