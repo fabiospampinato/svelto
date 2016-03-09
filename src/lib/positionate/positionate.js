@@ -6,10 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require lib/embedded_css/embedded_css.js
  * @require lib/transform/transform.js
  * ========================================================================= */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, EmbeddedCSS ) {
 
   'use strict';
 
@@ -37,8 +38,8 @@
     axis: false, // Set a preferred axis
     strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, // Positionate next to an $anchor element
-    $pointer: false, // The element who is ging to the anchor
     point: false, // Positionate at coordinates, ex: { x: number, y: number }
+    pointer: false, // The element pointing to the anchor, can be: false -> no pointer, 'auto' -> pointer using the `pointing` decorator, $element -> element used as pointer
     spacing: 0, // Extra space to leave around the positionable element
     constrainer: { // Constrain the $positionable inside the $element
       $element: false, // If we want to keep the $positionable inside this $element
@@ -83,6 +84,13 @@
         windowHeight = $window.height (),
         directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
         anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
+
+    /* ID */
+
+    positionable._positionateGuid = positionable._positionateGuid || $.guid++;
+    positionable._positionateGuc = 'positionate-' + positionable._positionateGuid;
+
+    $positionable.addClass ( positionable._positionateGuc );
 
     /* SPACES */
 
@@ -247,30 +255,58 @@
 
     /* CSS CLASS */
 
-    let prevDirection = positionable._prevDirection;
+    let prevDirection = positionable._positionatePrevDirection;
+
+    positionable._positionatePrevDirection = bestDirection;
 
     if ( prevDirection !== bestDirection ) {
 
       $positionable.removeClass ( 'position-' + prevDirection ).addClass ( 'position-' + bestDirection );
 
-      positionable._prevDirection = bestDirection;
-
     }
 
     /* POINTER */
 
-    if ( options.$anchor && options.$pointer ) {
+    let prevPointer = positionable._positionatePrevPointer;
+
+    positionable._positionatePrevPointer = options.pointer;
+
+    if ( prevPointer === 'auto' && ( options.pointer !== 'auto' || bestDirection !== prevDirection ) ) {
+
+      $positionable.removeClass ( 'pointing-' + _.getOppositeDirection ( prevDirection ) );
+
+    }
+
+    if ( options.pointer ) {
+
+      if ( options.pointer === 'auto' ) {
+
+        $positionable.addClass ( 'pointing-' + _.getOppositeDirection ( bestDirection ) );
+
+      }
+
+      /* MOVING */
 
       switch ( bestDirection ) {
 
         case 'top':
         case 'bottom':
-          options.$pointer.translateX ( anchorRect.left - coordinates.left + ( anchorRect.width / 2 ) );
+          let deltaX = _.clamp ( anchorRect.left - coordinates.left + ( anchorRect.width / 2 ), 0, positionableRect.width );
+          if ( options.pointer instanceof $ ) {
+            options.pointer.translate ( deltaX, 0 );
+          } else if ( options.pointer === 'auto' ) {
+            EmbeddedCSS.set ( '.' + positionable._positionateGuc + ':after', 'left:' + deltaX + 'px;' ); //TODO: Maybe use `transform` instead, since it may get animated
+          }
           break;
 
         case 'left':
         case 'right':
-          options.$pointer.translateY ( anchorRect.top - coordinates.top + ( anchorRect.height / 2 ) );
+          let deltaY = _.clamp ( positionableRect.height, anchorRect.top - coordinates.top + ( anchorRect.height / 2 ), 0, positionableRect.height );
+          if ( options.pointer instanceof $ ) {
+            options.pointer.translate ( 0, deltaY );
+          } else if ( options.pointer === 'auto' ) {
+            EmbeddedCSS.set ( '.' + positionable._positionateGuc + ':after', 'top:' + deltaY + 'px;' ); //TODO: Maybe use `transform` instead, since it may get animated
+          }
           break;
 
       }
@@ -291,4 +327,4 @@
 
   $.fn.positionate.defaults = defaults;
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.EmbeddedCSS ));
