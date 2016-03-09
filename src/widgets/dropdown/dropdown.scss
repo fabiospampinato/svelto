@@ -18,32 +18,13 @@
   @include z-depth ( $dropdown-z-depth, $dropdown-z-depth-force, $dropdown-z-depth-basic );
   z-index: $dropdown-z-index;
   max-width: $dropdown-max-width;
-  margin-bottom: 0;
+  margin: 0 !important;
   transition: opacity $dropdown-animation-duration;
 
   /* NOT CONTAINER */
 
   &:not(.container) {
     max-height: $dropdown-max-height;
-  }
-
-  /* TIP */
-
-  &:before {
-    @include square ( $dropdown-tip-size );
-    @include color ( 'inherit', true, true );
-    transform: rotate(45deg);
-    position: absolute;
-    content: '';
-    z-index: 1;
-    box-sizing: content-box;
-    border: inherit;
-  }
-
-  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
-
-  _:-ms-lang(x), &:before {
-    display: none;
   }
 
 }

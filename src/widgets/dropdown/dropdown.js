@@ -25,8 +25,8 @@
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
-        noTip: 7,
-        normal: 14
+        noTip: 5,
+        normal: 12
       },
       classes: {
         anchorDirection: 'dropdown-anchor-$1',
@@ -128,13 +128,11 @@
       let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed,
           spacing = this.isAffixed ? this.options.spacing.affixed : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
 
-      this.$mockTip = noTip ? false : $('<div>');
-
       /* POSITIONATE */
 
       this.$dropdown.positionate ( _.extend ({
         $anchor: this.$anchor,
-        $pointer: this.$mockTip,
+        pointer: noTip ? false : 'auto',
         spacing: spacing,
         callbacks: {
           change: this.__positionChange.bind ( this )
@@ -143,7 +141,7 @@
 
     }
 
-    _toggleAnchorDirectonClass ( direction, force ) {
+    _toggleAnchorDirectionClass ( direction, force ) {
 
       if ( !this.$anchor ) return;
 
@@ -159,21 +157,13 @@
 
         if ( this._prevDirection ) {
 
-          this._toggleAnchorDirectonClass ( this._prevDirection, false );
+          this._toggleAnchorDirectionClass ( this._prevDirection, false );
 
         }
 
-        this._toggleAnchorDirectonClass ( data.direction, true );
+        this._toggleAnchorDirectionClass ( data.direction, true );
 
         this._prevDirection = data.direction;
-
-      }
-
-      /* PSEUDO ELEMENT TIP */
-
-      if ( this.$mockTip ) {
-
-        EmbeddedCSS.set ( '.' + this.guc + ':before', this.$mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -225,7 +215,7 @@
 
       if ( this.$anchor ) {
 
-        this._toggleAnchorDirectonClass ( this._prevDirection, false );
+        this._toggleAnchorDirectionClass ( this._prevDirection, false );
         this._prevDirection = false;
 
         this.$prevAnchor = this.$anchor;
@@ -289,7 +279,7 @@
 
       /* ANCHOR */
 
-      this._toggleAnchorDirectonClass ( this._prevDirection, false );
+      this._toggleAnchorDirectionClass ( this._prevDirection, false );
       this._prevDirection = false;
 
       this.$prevAnchor = this.$anchor;
