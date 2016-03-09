@@ -10,26 +10,34 @@
 
 /* AUTO */
 
-@each $name, $datas in $colors {
+@each $direction in ( 'top', 'right', 'bottom', 'left' ) {
 
-  $accent: nth( $datas, 5 );
+  @each $name, $datas in $colors {
 
-  %color-#{$name}.highlighted:after {
-    border-color: $accent;
+    $accent: nth( $datas, 5 );
+
+    %color-#{$name}.highlight-#{$direction}.highlighted {
+      border-#{$direction}-color: $accent;
+    }
+
   }
 
 }
 
 /* SPECIFIC */
 
-@each $name, $datas in $colors {
+@each $direction in ( 'top', 'right', 'bottom', 'left' ) {
 
-  $class: color-get-class( $name );
+  @each $name, $datas in $colors {
 
-  $bg: nth( $datas, 1 );
+    $class: color-get-class( $name );
 
-  .highlight-#{$class}:after {
-    border-color: $bg !important;
+    $bg: nth( $datas, 1 );
+
+    .highlight-#{$direction}.highlight-#{$class} {
+      border-#{$direction}-color: $bg !important;
+    }
+
   }
 
 }

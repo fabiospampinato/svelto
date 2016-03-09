@@ -5,23 +5,12 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vertical.scss
+ * @require ../highlighted.scss
  * ========================================================================= */
 
 /* TOP */
 
 .highlight-top {
-
-  @extend %highlight-vertical;
-
-  &:after {
-    border-top-width: $highlight-size;
-  }
-
-  /* OUTLINED */
-
-  &.outlined:after {
-    top: - $outline-width;
-  }
-
+  border-top-width: $highlight-width;
+  border-top-style: $highlight-style;
 }

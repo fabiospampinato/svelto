@@ -13,6 +13,6 @@
 
 /* DEFAULT */
 
-.highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left):not(.highlight-all) {
+.highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left) {
   @extend .highlight-bottom;
 }
