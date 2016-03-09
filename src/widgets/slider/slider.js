@@ -10,9 +10,8 @@
  * ========================================================================= */
 
 //TODO: Add vertical slider
-//TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
@@ -37,13 +36,10 @@
       },
       selectors: {
         input: 'input',
-        min: '.slider-min',
-        max: '.slider-max',
         bar: '.slider-bar',
-        unhighlight: '.slider-unhighlight',
         highlight: '.slider-highlight',
-        handlerWrp: '.slider-handler-wrp',
-        label: '.slider-handler-wrp .slider-label'
+        handler: '.slider-handler',
+        label: '.slider-handler .slider-label'
       },
       keystrokes: {
         'left, down': 'decrease',
@@ -65,12 +61,9 @@
 
       this.$slider = this.$element;
       this.$input = this.$slider.find ( this.options.selectors.input );
-      this.$min = this.$slider.find ( this.options.selectors.min );
-      this.$max = this.$slider.find ( this.options.selectors.max );
       this.$bar = this.$slider.find ( this.options.selectors.bar );
-      this.$unhighlight = this.$slider.find ( this.options.selectors.unhighlight );
       this.$highlight = this.$slider.find ( this.options.selectors.highlight );
-      this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
+      this.$handler = this.$slider.find ( this.options.selectors.handler );
       this.$label = this.$slider.find ( this.options.selectors.label );
 
     }
@@ -83,8 +76,8 @@
 
       /* OPTIONS */
 
-      this.options.min = Number ( this.$min.data ( this.options.datas.min ) || this.options.min );
-      this.options.max = Number ( this.$max.data ( this.options.datas.max ) || this.options.max );
+      this.options.min = Number ( this.$slider.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$slider.data ( this.options.datas.max ) || this.options.max );
       this.options.value = this._sanitizeValue ( value || this.options.value );
       this.options.step = Number ( this.$slider.data ( this.options.datas.step ) || this.options.step );
       this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) || this.options.decimals );
@@ -94,8 +87,6 @@
       this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
 
       /* UPDATE */
-
-      this._updateVariables ();
 
       if ( Number ( value ) !== this.options.value ) {
 
@@ -113,10 +104,7 @@
     _events () {
 
       this.___change ();
-      this.___resize ();
       this.___keydown ();
-      this.___minTap ();
-      this.___maxTap ();
       this.___drag ();
 
     }
@@ -133,20 +121,18 @@
 
     _updateVariables () {
 
-      this.unhighlightWidth = this.$unhighlight.width ();
+      this.barWidth = this.$bar.width ();
 
-      this.stepWidth = this.unhighlightWidth / this.stepsNr;
+      this.stepWidth = this.barWidth / this.stepsNr;
 
     }
 
-    _updatePositions () {
+    _updatePositions ( value = this.options.value ) {
 
-      let percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
-          translateX = this.unhighlightWidth / 100 * percentage;
+      let percentage = ( value - this.options.min ) / this.options.step * 100 / this.stepsNr;
 
-      this.$handlerWrp.translateX ( translateX );
-
-      this.$highlight.translateX ( translateX );
+      this.$handler.css ( 'left', percentage + '%' );
+      this.$highlight.css ( 'right', ( 100 - percentage ) + '%' );
 
     }
 
@@ -184,21 +170,6 @@
 
     }
 
-    /* RESIZE */
-
-    ___resize () {
-
-      this._on ( true, this.$window, 'resize', this._debounce ( this.__resize, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
-
-    }
-
-    __resize () {
-
-      this._updateVariables ();
-      this._updatePositions ();
-
-    }
-
     /* KEYDOWN */
 
     ___keydown () {
@@ -207,40 +178,22 @@
 
     }
 
-    /* MIN TAP */
-
-    ___minTap () {
-
-      this._on ( this.$min, Pointer.tap, this.decrease );
-
-    }
-
-    /* MAX TAP */
-
-    ___maxTap () {
-
-      this._on ( this.$max, Pointer.tap, this.increase );
-
-    }
-
     /* DRAG */
 
     ___drag () {
 
-      this.$handlerWrp.draggable ({
+      this.$handler.draggable ({
         draggable: this.isEnabled.bind ( this ),
         axis: 'x',
         proxy: {
-          $element: this.$bar
-        },
-        constrainer: {
-          $element: this.$bar,
-          center: true
+          $element: this.$slider,
+          noMotion: this.__dragNoMotion.bind ( this )
         },
         modifiers: {
-          x: this._dragModifierX.bind ( this )
+          x: this.__dragModifierX.bind ( this )
         },
         callbacks: {
+          start: this.__dragStart.bind ( this ),
           move: this.__dragMove.bind ( this ),
           end: this.__dragEnd.bind ( this )
         }
@@ -248,31 +201,62 @@
 
     }
 
-    _dragModifierX ( distance ) {
+    __dragNoMotion () {
 
-      return _.roundCloser ( distance, this.stepWidth );
+      return !this._dragDistance;
 
     }
 
-    __dragMove ( event, data ) {
+    _dragValue () {
+
+      return this._sanitizeValue ( this.options.value + ( this._dragDistance / this.stepWidth * this.options.step ) );
+
+    }
+
+    __dragModifierX ( distance ) {
+
+      this._dragDistance = this._dragProxyDistance + _.roundCloser ( distance, this.stepWidth );
+
+      if ( this._dragIsProxyed && !this._dragProxyDistance ) {
+
+        this._dragProxyDistance = this._dragDistance;
+
+      }
+
+      return false;
+
+    }
+
+    __dragStart ( event, data ) {
+
+      this._dragIsProxyed = data.isProxyed;
+      this._dragProxyDistance = 0;
+      this._dragDistance = 0;
+
+      this._updateVariables ();
+
+    }
+
+    __dragMove () {
+
+      let value = this._dragValue ();
 
       if ( this.options.live ) {
 
-        this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
+        this.set ( value );
 
       } else {
 
-        this.$highlight.translateX ( data.dragXY.X );
-
-        this._updateLabel ( this._sanitizeValue ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) ) );
+        this._updateLabel ( value );
+        this._updatePositions ( value );
 
       }
 
     }
 
-    __dragEnd ( event, data ) {
+    __dragEnd () {
 
-      this.set ( this.options.min + ( data.dragXY.X / this.stepWidth * this.options.step ) );
+      this.set ( this._dragValue () );
 
     }
 
@@ -316,4 +300,4 @@
 
   Factory.init ( Slider, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

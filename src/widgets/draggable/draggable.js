@@ -42,7 +42,7 @@
           y: 0
         }
       },
-      modifiers: { // It can modify the setted X and Y transforms values
+      modifiers: { // It can modify the setted X and Y translation values
         x: _.true,
         y: _.true
       },
@@ -210,34 +210,35 @@
       /* MODIFYING */
 
       let modifiedXY = {
-            X: this.options.modifiers.x ( translateX ),
-            Y: this.options.modifiers.y ( translateY )
+            X: this.options.axis !== 'y' ? this.options.modifiers.x ( translateX ) : false,
+            Y: this.options.axis !== 'x' ? this.options.modifiers.y ( translateY ) : false
           };
 
-      if ( modifiedXY.X === false && modifiedXY.Y === false ) { // Aborted
+      /* ABORTION */
 
-        return baseXY;
+      if ( modifiedXY.X === false && modifiedXY.Y === false ) return baseXY;
 
-      } else {
+      /* SETTING */
 
-        /* SETTING */
+      let endXY = {
+        X: _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X,
+        Y: _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y
+      };
 
-        let endXY = {
-          X: _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X,
-          Y: _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y
-        };
+      this.$movable.translate ( endXY.X, endXY.Y );
 
-        this.$movable.translate ( endXY.X, endXY.Y );
+      /* MOTION */
 
-        /* MOTION */
+      this.motion = true;
 
-        this.motion = true;
+      /* RETURNING */
 
-        /* RETURNING */
+      return endXY;
 
-        return endXY;
+    }
 
-      }
+    _actionSet ( XY ) {
+
 
     }
 
@@ -440,7 +441,7 @@
 
       this.proxyXY = false;
 
-      this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
+      this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
 
       this._on ( true, this.$document, Pointer.move, this.__move );
       this._one ( true, this.$document, Pointer.up, this.__up );
@@ -465,11 +466,9 @@
 
       if ( !this.inited && this.isProxyed ) {
 
-        this._centerToPoint ( moveXY );
+        dragXY = this._centerToPoint ( moveXY );
 
-        this.proxyXY = this.$movable.translate ();
-
-        dragXY = this.proxyXY;
+        this.proxyXY = dragXY;
 
       } else {
 
@@ -484,7 +483,7 @@
 
       this._autoscroll ( moveXY );
 
-      this._trigger ( 'move', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY } );
+      this._trigger ( 'move', { draggable: this.draggable, helper: this.helper,isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY } );
 
     }
 
@@ -519,7 +518,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxy.noMotion && ( _.isUndefined ( event.button ) || event.button === Mouse.buttons.LEFT ) ) {
+        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && ( _.isUndefined ( event.button ) || event.button === Mouse.buttons.LEFT ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 
@@ -530,7 +529,7 @@
       this._off ( this.$document, Pointer.move, this.__move );
       this._off ( this.$document, Pointer.cancel, this.__cancel );
 
-      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
+      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
 
     }
 

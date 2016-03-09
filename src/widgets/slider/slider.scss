@@ -8,21 +8,19 @@
  * @require core/widget/widget.scss
  * @require decorators/colors/colors.scss
  * @require decorators/z_depths/z_depths.scss
- * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* SLIDER */
+//TODO: The shadow gets rotated on `:active`
 
-//TODO: Maybe use a tooltip with the number inside instead of the handler we are using right now
+/* SLIDER */
 
 .slider {
 
   @extend %widget;
-  @include color ( $slider-color, $slider-color-force, $slider-color-basic );
   display: flex;
-  align-items: stretch;
-  min-height: $slider-min-height;
-  border-radius: $container-border-radius;
+  align-items: center;
+  height: $slider-handler-height;
+  cursor: pointer;
 
   /* INPUT */
 
@@ -30,73 +28,15 @@
     display: none;
   }
 
-  /* OUTLINED */
-
-  &.outlined {
-
-    .slider-min {
-      padding-left: $gutter;
-    }
-
-    .slider-max {
-      padding-right: $gutter;
-    }
-
-  }
-
-  /* MIN / MAX */
-
-  &-min,
-  &-max {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    min-width: $slider-min-max-min-width;
-  }
-
-  /* MIN */
-
-  &-min {
-
-    margin-right: $slider-handler-width / 2;
-
-    &:after {
-      content: attr(data-min);
-    }
-
-  }
-
-  /* MAX */
-
-  &-max {
-
-    margin-left: $slider-handler-width / 2;
-
-    &:after {
-      content: attr(data-max);
-    }
-
-  }
-
   /* BAR */
 
   &-bar {
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
-  }
-
-  /* UNHIGHLIGHT */
-
-  &-unhighlight {
-    @include color ( $slider-unhighlight-color, $slider-unhighlight-color-force, $slider-unhighlight-color-basic );
+    @include color ( $slider-bar-color, $slider-bar-color-force, $slider-bar-color-basic );
+    // @include margin-x ( $slider-handler-width / 2 );
     position: relative;
     overflow: hidden;
-    height: $slider-unhighlight-height;
-    border-radius: $slider-unhighlight-border-radius;
+    height: $slider-bar-height;
+    border-radius: $slider-bar-border-radius;
     width: 100%;
     transform: translateZ(0); // Otherwise the border radius is not always respected
   }
@@ -111,126 +51,54 @@
     transition: background-color $slider-animation-duration;
   }
 
-  /* HANDLER WRAPPER */
-
-  &-handler-wrp {
-    @include center-absolute ( false, $slider-handler-height );
-    left: 0;
-    margin-left: - $slider-handler-width / 2;
-  }
-
   /* HANDLER */
 
   &-handler {
-
+    @include center-absolute ( false, $slider-handler-height );
     @include color ( $slider-handler-color, $slider-handler-color-force, $slider-handler-color-basic );
     @include z-depth ( $slider-handler-z-depth, $slider-handler-z-depth-force, $slider-handler-z-depth-basic );
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    margin-left: - $slider-handler-width / 2;
     width: $slider-handler-width;
     height: $slider-handler-height;
-    transition-property: transform, background-color;
-    transition-duration: $slider-animation-duration;
     border-radius: $slider-handler-border-radius;
-    text-align: center;
     cursor: move;
-
-    &:before {
-      @include fill-absolute ();
-      z-index: -1;
-      content: '';
-      transition-property: opacity, transform;
-      transform: scale($switch-handler-before-scale-inactive);
-      transition-duration: $slider-animation-duration;
-      opacity: 0;
-      border-radius: $slider-handler-border-radius;
-      background-color: inherit;
-    }
-
+    transition-property: transform, border-radius, box-shadow;
+    transition-duration: $slider-animation-duration;
   }
 
-  //FIXME: It's not perfectly centered on Nexus 4 using Chrome
+  /* LABEL */
 
   &-label {
-    display: inline-block;
     vertical-align: middle;
-    font-size: $slider-handler-label-font-size;
-    transition-property: opacity, transform;
-    transition-duration: $slider-animation-duration;
-    transform: scale(0);
+    font-size: $slider-label-font-size;
     opacity: 0;
+    transition: opacity $slider-animation-duration;
+    transform: rotate(-45deg);
   }
 
-  /* ENABLED */
+  /* ACTIVE */
 
-  &:not(.disabled) {
+  &:not(.disabled):active {
 
-    /* MIN / MAX */
+    /* HANDLER */
 
-    .slider-min,
-    .slider-max {
+    .slider-handler {
 
-      &:hover:after {
-        @extend %icon-base;
-        margin-bottom: 0;
-      }
-
-    }
-
-    /* MIN */
-
-    .slider-min:hover:after {
-      content: $slider-min-icon;
-    }
-
-    .slider-min[data-icon]:hover:after {
-      content: attr(data-icon);
-    }
-
-    /* MAX */
-
-    .slider-max:hover:after {
-      content: $slider-max-icon;
-    }
-
-    .slider-max[data-icon]:hover:after {
-      content: attr(data-icon);
-    }
-
-    /* BAR */
-
-    .slider-bar {
-
-      &:active,
-      .slider-handler-wrp.draggable-dragging {
-
-        .slider-handler {
-
-          transform: scale($slider-handler-active-transform-scale);
-
-          &:before {
-            transform: scale($switch-handler-before-scale-active);
-            opacity: $switch-handler-before-active-opacity;
-          }
-
-        }
-
-      }
-
-    }
-
-  }
-
-  /* HOVER / ACTIVE */
-
-  &:hover,
-  &:active,
-  .slider-handler-wrp.draggable-dragging {
-
-    /* LABEL */
-
-    .slider-label {
-      transform: scale(1);
+      border-bottom-right-radius: 0;
       opacity: 1;
+      transform: translateY(-100% * $SQRT2) rotate(45deg) scale($slider-active-handler-scale-amount);
+      box-shadow: $slider-active-handler-box-shadow;
+
+      /* LABEL */
+
+      .slider-label {
+        opacity: 1;
+      }
+
     }
 
   }
