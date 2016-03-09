@@ -8,8 +8,6 @@
  * @require ../colors.scss
  * ========================================================================= */
 
-//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
-
 /* INVERTED */
 
 @each $name, $datas in $colors {
@@ -21,20 +19,17 @@
   $text: nth( $datas, 6 );
 
   %color-#{$name}-inverted {
-    background-color: inherit;
-    border-color: $bg;
+    background-color: $text;
     color: $bg;
   }
 
   %color-#{$name}-inverted-hover {
     background-color: $bg-hover;
-    border-color: $bg;
     color: $text;
   }
 
   %color-#{$name}-inverted-active {
     background-color: $bg-active;
-    border-color: $bg-active;
     color: $text;
   }
 
