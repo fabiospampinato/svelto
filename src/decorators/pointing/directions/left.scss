@@ -10,10 +10,9 @@
 
 /* LEFT */
 
-.pointing-left {
+%pointing-left-base {
 
   @extend %pointing-horizontal;
-  margin-left: $pointing-tip-half-diagonal;
 
   /* TIP */
 
@@ -29,4 +28,13 @@
     margin-left: - $outline-width;
   }
 
+}
+
+%pointing-left-spaced {
+  margin-left: $pointing-tip-half-diagonal;
+}
+
+.pointing-left {
+  @extend %pointing-left-base;
+  @extend %pointing-left-spaced;
 }

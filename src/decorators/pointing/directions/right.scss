@@ -10,10 +10,9 @@
 
 /* RIGHT */
 
-.pointing-right {
+%pointing-right-base {
 
   @extend %pointing-horizontal;
-  margin-right: $pointing-tip-half-diagonal;
 
   /* TIP */
 
@@ -29,4 +28,13 @@
     margin-right: - $outline-width;
   }
 
+}
+
+%pointing-right-spaced {
+  margin-right: $pointing-tip-half-diagonal;
+}
+
+.pointing-right {
+  @extend %pointing-right-base;
+  @extend %pointing-right-spaced;
 }

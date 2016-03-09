@@ -10,10 +10,9 @@
 
 /* TOP */
 
-.pointing-top {
+%pointing-top-base {
 
   @extend %pointing-vertical;
-  margin-top: $pointing-tip-half-diagonal;
 
   /* TIP */
 
@@ -29,4 +28,13 @@
     margin-top: - $outline-width;
   }
 
+}
+
+%pointing-top-spaced {
+  margin-top: $pointing-tip-half-diagonal;
+}
+
+.pointing-top {
+  @extend %pointing-top-base;
+  @extend %pointing-top-spaced;
 }
