@@ -1,0 +1,28 @@
+
+/* =========================================================================
+ * Svelto - _ - Alignment
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ALIGNMENT */
+
+%alignment {
+  display: inline-block;
+}
+
+.align-top {
+  @extend %alignment;
+  vertical-align: top !important;
+}
+
+.align-middle {
+  @extend %alignment;
+  vertical-align: middle !important;
+}
+
+.align-bottom {
+  @extend %alignment;
+  vertical-align: bottom !important;
+}
