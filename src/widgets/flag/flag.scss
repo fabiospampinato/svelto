@@ -18,7 +18,7 @@
   background-image: url(#{$flags-path-images}flags.png);
 }
 
-i[class*="flag-"] {
+i.flag {
   @extend %flag;
 }
 
@@ -28,7 +28,7 @@ i[class*="flag-"] {
 
   $background-position: nth( $datas, 2 );
 
-  .flag-#{$country} {
+  .flag.#{$country} {
     background-position: $background-position;
   }
 
