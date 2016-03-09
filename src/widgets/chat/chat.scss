@@ -49,30 +49,7 @@
   /* CONTENT */
 
   .chat-msg-content {
-
     flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
-
-    /* HEADER */
-
-    .card-header {
-
-      /* TIP */
-
-      &:before {
-        @include square ( $chat-tip-size );
-        @include color ( 'inherit', true, true );
-        display: block;
-        transform: rotate(45deg);
-        position: absolute;
-        content: '';
-        z-index: 1;
-        border: inherit;
-        box-sizing: content-box;
-        top: 50%;
-      }
-
-    }
-
   }
 
 }

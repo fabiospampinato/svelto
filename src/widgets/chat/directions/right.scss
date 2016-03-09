@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../chat.scss
+ * @require decorators/pointing/directions/right.scss
  * ========================================================================= */
 
 /* RIGHT */
@@ -37,7 +38,7 @@
 
   .chat-msg-content {
     order: 1;
-    margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+    margin-right: calc(#{$gutter-half} + #{$pointing-tip-half-diagonal});
   }
 
   // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proof, use feature detection instead
@@ -49,28 +50,7 @@
   /* HEADER */
 
   .card-header {
-
-    /* TIP */
-
-    &:before {
-      right: - ( $dropdown-tip-size / 2 );
-      margin-top: - ( $dropdown-tip-size / 2 );
-      clip-path: url(#{$chat-path-images}chat-clips.svg#clip-left); // The polygon is not supported on Firefox
-      clip-path: polygon(0 0, 100% 100%, 100% 0);
-    }
-
-    /* TIP (OUTLINED) */
-
-    &.outlined:before {
-      margin-right: - $outline-width;
-    }
-
-    // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
-
-    _:-ms-lang(x), &:before {
-      display: none !important;
-    }
-
+    @extend %pointing-right-base;
   }
 
 }
