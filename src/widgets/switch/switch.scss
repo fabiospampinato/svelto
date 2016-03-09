@@ -47,7 +47,7 @@
     @include color ( $switch-handler-color, $switch-handler-color-force, $switch-handler-color-basic );
     @include z-depth ( $switch-handler-z-depth, $switch-handler-z-depth-force, $switch-handler-z-depth-basic );
     z-index: 1;
-    cursor: ew-resize;
+    cursor: move;
     width: $switch-handler-width;
     height: $switch-handler-height;
     border-radius: $switch-handler-border-radius;

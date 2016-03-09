@@ -30,6 +30,7 @@
     box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow; //FIXME: We are not using the `z-depth`, ugly
     position: absolute;
     z-index: 2;
+    cursor: move;
     border-width: $colorpicker-handler-border-width;
     border-style: $colorpicker-handler-border-style;
     border-color: $colorpicker-handler-border-color;
@@ -81,7 +82,6 @@
       width: $colorpicker-handler-sb-height;
       height: $colorpicker-handler-sb-width;
       margin: ( - $colorpicker-handler-sb-height / 2 ) 0 0 ( - $colorpicker-handler-sb-width / 2 );
-      cursor: move;
       border-radius: $colorpicker-handler-sb-border-radius;
     }
 
@@ -109,7 +109,6 @@
       width: $colorpicker-handler-hue-width;
       height: $colorpicker-handler-hue-height;
       margin-top: - ( $colorpicker-handler-hue-height / 2 );
-      cursor: ns-resize;
       border-radius: $colorpicker-handler-hue-border-radius;
     }
 
