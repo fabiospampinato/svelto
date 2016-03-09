@@ -46,6 +46,9 @@
         },
         checked () {
           return this.element.$element.prop ( 'checked' );
+        },
+        regex ( value, regex ) {
+          return !!value.match ( new RegExp ( regex ) );
         }
       },
       messages: {
