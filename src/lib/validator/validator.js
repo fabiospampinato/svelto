@@ -77,8 +77,8 @@
     email ( value ) {
       return !!value.match ( Regexes.email );
     },
-    cc ( value ) {
-      return !!value.match ( Regexes.cc );
+    creditCard ( value ) {
+      return !!value.match ( Regexes.creditCard );
     },
     ssn ( value ) {
       return !!value.match ( Regexes.ssn );

@@ -72,7 +72,7 @@
             rangeLength: 'The length must be between $2 and $3',
             exactLength: 'The length must be exactly $2',
             email: 'Enter a valid email address',
-            cc: 'Enter a valid credit card number',
+            creditCard: 'Enter a valid credit card number',
             ssn: 'Enter a valid Social Security Number',
             ipv4: 'Enter a valid IPv4 address',
             url: 'Enter a valid URL',
