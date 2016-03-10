@@ -10,11 +10,10 @@
 
 /* INVALID */
 
-.checkbox.invalid {
+input[type="checkbox"] {
 
-  /* INPUT */
-
-  input {
+  &.invalid,
+  .checkbox.invalid & {
 
     /* BEFORE / AFTER */
 

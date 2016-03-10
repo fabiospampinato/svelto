@@ -10,11 +10,10 @@
 
 /* VALID */
 
-.checkbox.valid {
+input[type="checkbox"] {
 
-  /* INPUT */
-
-  input {
+  &.valid,
+  .checkbox.valid & {
 
     /* BEFORE / AFTER */
 
