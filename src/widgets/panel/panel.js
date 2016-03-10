@@ -41,6 +41,9 @@
           show: 'panel-backdrop obscured-show obscured',
           open: 'obscured-open',
           pinned: 'panel-backdrop-pinned'
+        },
+        layout: {
+          show: 'panel-layout'
         }
       },
       datas: {
@@ -290,6 +293,7 @@
 
         this.$panel.addClass ( this.options.classes.show );
         this.$backdrop.addClass ( this.options.classes.backdrop.show );
+        this.$layout.addClass ( this.options.classes.layout.show );
 
         this._frame ( function () {
 
@@ -332,6 +336,7 @@
 
           this.$panel.removeClass ( this.options.classes.show );
           this.$backdrop.removeClass ( this.options.classes.backdrop.show );
+          this.$layout.removeClass ( this.options.classes.layout.show );
 
           this.$layout.enableScroll ();
 
