@@ -10,6 +10,8 @@
  * @require lib/transform/transform.js
  * ========================================================================= */
 
+//TODO: Test if the auto pointer is positionated in the middle even when outlined 
+
 (function ( $, _, Svelto, EmbeddedCSS ) {
 
   'use strict';

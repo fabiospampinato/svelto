@@ -96,14 +96,6 @@
       overflow: auto;
     }
 
-    /* IMAGE */
-
-    > img {
-      @include center-transform ( y );
-    }
-
-    //TODO: Add Figure
-
   }
 
   /* HOVER */

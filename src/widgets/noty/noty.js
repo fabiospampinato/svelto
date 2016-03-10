@@ -15,6 +15,7 @@
 
 //TODO: Add support for dismissing a noty that contains only one button
 //TODO: Add better support for swipe to dismiss
+//FIXME: Widgetize the noty, we may add some widgets inside of it
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Colors, Sizes ) {
 

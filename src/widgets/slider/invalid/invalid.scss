@@ -9,6 +9,8 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
+//FIXME: The `:not(.primary):not(...)` has higher precedence
+
 /* INVALID */
 
 .slider.invalid {

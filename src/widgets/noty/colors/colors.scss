@@ -40,7 +40,7 @@
     @if opacity( $bg-active ) != opacity( $bg-opacified-active ) {
 
       .noty%color-#{$name}.active,
-      .noty%color-#{$name}.actionable:not(.ripple-circle):active {
+      .noty%color-#{$name}.actionable:not(.ripple):active {
         background-color: $bg-opacified-active;
       }
 
