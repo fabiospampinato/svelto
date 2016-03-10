@@ -14,6 +14,7 @@ var merge        = require ( 'merge-stream' ),
     plugins      = require ( '../config/project' ).plugins,
     changed      = require ( '../utilities/changed' ),
     input        = require ( '../utilities/input' ),
+    log          = require ( '../utilities/log' ),
     output       = require ( '../utilities/output' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
@@ -21,7 +22,8 @@ var merge        = require ( 'merge-stream' ),
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     gulpif       = require ( 'gulp-if' ),
     concat       = require ( 'gulp-concat' ),
-    newer        = require ( 'gulp-newer' );
+    newer        = require ( 'gulp-newer' ),
+    plumber      = require ( 'gulp-plumber' );
 
 /* SCSS PARTS */
 
@@ -29,11 +31,12 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'dependencies', 'extend' );
 
-  var parts = ['variables', 'functions', 'mixins', 'keyframes', 'style'];
+  var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
 
   var streams = parts.map ( function ( part ) {
 
     return gulp.src ( input.getPath ( 'scss.' + part ) )
+               .pipe ( plumber ( log.error ) )
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )

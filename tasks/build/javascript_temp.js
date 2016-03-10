@@ -17,6 +17,7 @@ var _            = require ( 'lodash' ),
     plugins      = project.plugins,
     changed      = require ( '../utilities/changed' ),
     input        = require ( '../utilities/input' ),
+    log          = require ( '../utilities/log' ),
     output       = require ( '../utilities/output' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
@@ -26,8 +27,8 @@ var _            = require ( 'lodash' ),
     flatten      = require ( 'gulp-flatten' ),
     foreach      = require ( 'gulp-foreach' ),
     gulpif       = require ( 'gulp-if' ),
-    gutil        = require ( 'gulp-util' ),
-    newer        = require ( 'gulp-newer' );
+    newer        = require ( 'gulp-newer' ),
+    plumber      = require ( 'gulp-plumber' );
 
 /* JAVASCRIPT TEMP */
 
@@ -47,6 +48,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
   var dependencyIndex = 1;
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
+             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
@@ -58,7 +60,6 @@ gulp.task ( 'build-javascript-temp', false, function () {
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.temp' ) ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-             .on ( 'error', function ( err ) { gutil.log ( err.message ); })
              .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) );
 
 });

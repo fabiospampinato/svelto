@@ -12,7 +12,7 @@ var _      = require ( 'lodash' ),
     argv   = require ( 'yargs' ).argv,
     path   = require ( 'path' ),
     spawn  = require ( 'child_process' ).spawn,
-    buffer = require ( './utilities/buffer' ),
+    log    = require ( './utilities/log' ),
     gulp   = require ( 'gulp-help' )( require ( 'gulp' ) );
 
 /* DEMO */
@@ -26,13 +26,13 @@ gulp.task ( 'demo', 'Serve the demos', ['watch'], function () {
 
   var meteor = spawn ( 'meteor', ['run', '--port', port], { cwd: demoPath } );
 
-  meteor.stdout.on ( 'data', buffer.log );
-  meteor.stderr.on ( 'data', buffer.log );
+  meteor.stdout.on ( 'data', log.buffer );
+  meteor.stderr.on ( 'data', log.buffer );
 
   var bs = spawn ( 'browser-sync', ['start', '--port', bsport, '--ui-port', uiport, '--proxy', 'localhost:' + port, '--no-open', '--files', '**/*.html, **/*.js, **/*.css'], { cwd: demoPath } );
 
-  bs.stdout.on ( 'data', buffer.log );
-  bs.stderr.on ( 'data', buffer.log );
+  bs.stdout.on ( 'data', log.buffer );
+  bs.stderr.on ( 'data', log.buffer );
 
 }, {
 

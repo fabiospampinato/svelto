@@ -8,18 +8,23 @@
 
 /* REQUIRE */
 
-var output = require ( '../utilities/output' ),
-    gulp   = require ( 'gulp-help' )( require ( 'gulp' ) ),
-    concat = require ( 'gulp-concat' ),
-    newer  = require ( 'gulp-newer' );
+var log     = require ( '../utilities/log' ),
+    output  = require ( '../utilities/output' ),
+    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
+    concat  = require ( 'gulp-concat' ),
+    newer   = require ( 'gulp-newer' ),
+    plumber = require ( 'gulp-plumber' );
 
 /* SCSS */
 
 gulp.task ( 'build-scss', 'Build SCSS', ['build-scss-parts'], function () {
 
- return gulp.src ( [output.getPath ( 'scss.functions' ), output.getPath ( 'scss.mixins' ), output.getPath ( 'scss.variables' ), output.getPath ( 'scss.keyframes' ), output.getPath ( 'scss.style' )] )
-            .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
-            .pipe ( concat ( output.getName ( 'scss.all' ) ) )
-            .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
+  var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
+
+  return gulp.src ( parts.map ( function ( part ) { return output.getPath ( 'scss.' + part ); } ) )
+             .pipe ( plumber ( log.error ) )
+             .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
+             .pipe ( concat ( output.getName ( 'scss.all' ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
 
 });

@@ -25,6 +25,8 @@ var environment    = argv.environment || argv.env || dot.environment || custom.e
 
 var project = _.merge ( {}, defaults, _.get ( defaults, environmentKey ), custom, _.get ( custom, environmentKey ), dot, _.get ( dot, environmentKey ) );
 
+project.environment = environment;
+
 /* EXPORT */
 
 module.exports = project;

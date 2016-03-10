@@ -10,6 +10,7 @@
 
 var changed  = require ( '../utilities/changed' ),
     input    = require ( '../utilities/input' ),
+    log      = require ( '../utilities/log' ),
     output   = require ( '../utilities/output' ),
     extend   = require ( '../plugins/extend' ),
     filter   = require ( '../plugins/filter' ),
@@ -19,7 +20,8 @@ var changed  = require ( '../utilities/changed' ),
     flatten  = require ( 'gulp-flatten' ),
     gulpif   = require ( 'gulp-if' ),
     imagemin = require ( 'gulp-imagemin' ),
-    newer    = require ( 'gulp-newer' );
+    newer    = require ( 'gulp-newer' ),
+    plumber  = require ( 'gulp-plumber' );
 
 /* IMAGES */
 
@@ -28,6 +30,7 @@ gulp.task ( 'build-images', 'Build images', function () {
 var needUpdate = changed.plugins ( 'extend', 'imagemin' );
 
   return gulp.src ( input.getPath ( 'images' ) )
+             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( flatten () )

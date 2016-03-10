@@ -35,9 +35,9 @@ gulp.task ( 'bump', 'Bump Svelto version', ['bump-package'], function () {
 
   var version = JSON.parse ( fs.readFileSync ( './package.json', 'utf8' ) ).version; // Instead of `require` in order to avoid to get a cached value
 
-  var svelto = gulp.src ( './src/svelto/svelto.js' )
+  var svelto = gulp.src ( './src/core/svelto/svelto.js' )
                    .pipe ( replace ( /VERSION: '(.*)'/, 'VERSION: \'' + version + '\'' ) )
-                   .pipe ( gulp.dest ( './src/svelto' ) );
+                   .pipe ( gulp.dest ( './src/core/svelto' ) );
 
   var meteor = gulp.src ( './package.js' )
                    .pipe ( replace ( /version: '(.*)'/, 'version: \'' + version + '\'' ) )
