@@ -9,4 +9,4 @@
 /* STICKY */
 
 $layout-sticky-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm
-$layout-sticky-header-z-index: 200 !default;
+$layout-sticky-header-z-index: 1100 !default;
