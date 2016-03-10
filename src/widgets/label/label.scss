@@ -27,7 +27,7 @@
 
   /* CHILDREN */
 
-  > * {
+  > :not(.overlay):not(.ripple-circle) {
 
     flex: 1 1 auto;
 
