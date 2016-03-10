@@ -22,7 +22,6 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-  font-size: 1rem !important; //FIXME: Ugly fix for implementing sizes
   min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
 
   /* INLINE */

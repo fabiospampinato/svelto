@@ -12,8 +12,15 @@
 /* BOTTOM */
 
 .panel.bottom {
+
   height: $panel-default-x-height;
-  transform: translateY($panel-default-x-height);
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-default-x-height);
+  }
+  
 }
 
 /* LAYOUT */

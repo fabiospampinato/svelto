@@ -53,8 +53,10 @@
       },
       classes: {
         dragging: 'draggable-dragging',
-        layoutDragging: 'draggable-layout-dragging',
-        reverting: 'draggable-reverting'
+        reverting: 'draggable-reverting',
+        layout: {
+          dragging: 'draggable-layout-dragging'
+        }
       },
       selectors: {
         handler: '.draggable-handler'
@@ -246,7 +248,7 @@
 
     _toggleClasses ( force ) {
 
-      this.$layout.toggleClass ( this.options.classes.layoutDragging, force );
+      this.$layout.toggleClass ( this.options.classes.layout.dragging, force );
       this.$movable.toggleClass ( this.options.classes.dragging, force );
 
     }

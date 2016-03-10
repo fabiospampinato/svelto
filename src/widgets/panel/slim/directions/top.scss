@@ -12,8 +12,15 @@
 /* TOP */
 
 .panel.slim.top {
+
   height: $panel-slim-x-height;
-  transform: translateY(- $panel-slim-x-height);
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(- $panel-slim-x-height);
+  }
+
 }
 
 /* LAYOUT */

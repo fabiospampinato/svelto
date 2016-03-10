@@ -47,12 +47,6 @@
     transition-property: background-color, opacity;
     transition-duration: $carousel-indicator-animation-duration;
 
-    /* HOVER */
-
-    &:hover {
-      opacity: $carousel-indicator-hover-opacity !important; //FIXME: Why is it needed?
-    }
-
     /* NOT FIRST */
 
     &:not(:first-child) {
@@ -102,14 +96,14 @@
 
   &:hover {
 
-    /* INDICATORS */
+    /* INDICATOR */
 
-    .carousel-indicators {
+    .carousel-indicator {
 
-      /* INDICATOR */
+      opacity: $carousel-hover-indicator-opacity;
 
-      .carousel-indicator {
-        opacity: $carousel-hover-indicator-opacity;
+      &:hover {
+        opacity: $carousel-indicator-hover-opacity;
       }
 
     }

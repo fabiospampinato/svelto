@@ -15,14 +15,9 @@
 .sections {
 
   @extend %widget;
+  @include children-no-gutter ();
   display: flex;
   flex-wrap: nowrap;
-
-  /* SEGMENTS */
-
-  > * {
-    margin-bottom: 0 !important;
-  }
 
   /* SECTION CENTER */
 

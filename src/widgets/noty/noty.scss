@@ -19,6 +19,7 @@
 
 .noty {
 
+  @include children-no-gutter ();
   @include z-depth ( $noty-z-depth, $noty-z-depth-force, $noty-z-depth-basic );
   display: block;
   border-radius: $noty-border-radius;
@@ -38,13 +39,11 @@
 
   &-buttons {
     @include padding-x ( $gutter );
-    margin-bottom: 0 !important;
   }
 
   /* INFOBAR */
 
   > .infobar {
-    margin-bottom: 0;
     transition: padding $noty-animation-duration;
   }
 

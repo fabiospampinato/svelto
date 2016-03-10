@@ -12,8 +12,15 @@
 /* BOTTOM */
 
 .panel.slim.bottom {
+
   height: $panel-slim-x-height;
-  transform: translateY($panel-slim-x-height);
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-slim-x-height);
+  }
+
 }
 
 .panel-layout.panel-slim-pinned-bottom {

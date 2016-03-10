@@ -26,14 +26,9 @@
 
   &-navigation {
 
+    @include children-no-gutter ();
     display: flex;
     align-items: center;
-
-    /* CHILDREN */
-
-    > * {
-      margin-bottom: 0 !important;
-    }
 
     /* LABEL / PREVIOUS / NEXT */
 

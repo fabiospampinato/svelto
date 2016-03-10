@@ -15,7 +15,7 @@
   $class: size-get-class( $size );
 
   img.#{$class} {
-    width: $font-size * $image-sizes-scaling-factor;
+    width: unit-strip( $font-size * $image-sizes-scaling-factor ) * 1rem;
   }
 
 }

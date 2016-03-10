@@ -14,10 +14,7 @@
 }
 
 .text-truncate {
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  max-width: 100% !important; // Fixes a bug in IE 10
+  @include text-truncate ();
 }
 
 .text-hide {

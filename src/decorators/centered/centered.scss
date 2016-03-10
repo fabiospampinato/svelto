@@ -28,7 +28,7 @@
     &.multiple.limited.no-wrap,
     &.multiple.limited.vertical,
     &.multiple.limited.joined {
-      @include margin-x ( auto !important );
+      @include margin-x ( auto );
     }
 
   }

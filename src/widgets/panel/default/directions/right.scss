@@ -12,8 +12,15 @@
 /* RIGHT */
 
 .panel.right {
+
   width: $panel-default-y-width;
-  transform: translateX($panel-default-y-width);
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX($panel-default-y-width);
+  }
+
 }
 
 /* LAYOUT */

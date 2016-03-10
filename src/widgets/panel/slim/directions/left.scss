@@ -12,8 +12,15 @@
 /* LEFT */
 
 .panel.slim.left {
+
   width: $panel-slim-y-width;
-  transform: translateX(- $panel-slim-y-width);
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(- $panel-slim-y-width);
+  }
+  
 }
 
 /* LAYOUT */

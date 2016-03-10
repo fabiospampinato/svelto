@@ -13,15 +13,10 @@
 .breadcrumb {
 
   @extend %widget;
+  @include children-no-gutter ();
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-
-  /* CHILDREN */
-
-  > * {
-    margin-bottom: 0 !important;
-  }
 
   /* SEGMENTS */
 

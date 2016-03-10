@@ -35,15 +35,9 @@
       border-radius: 0;
     }
 
-    &.multiple {
-
+    &.multiple > * {
+      border-radius: 0;
       margin-bottom: 0 !important;
-
-      > * {
-        border-radius: 0;
-        margin-bottom: 0 !important;
-      }
-
     }
 
   }

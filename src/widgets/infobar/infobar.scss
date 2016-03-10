@@ -9,25 +9,18 @@
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-/* INFOBAR */
-
 //FIXME: It doesn't work really good on mobile
+
+/* INFOBAR */
 
 .infobar {
 
   @extend %container;
+  @include children-no-gutter ();
   @include color ( $infobar-color, $infobar-color-force, $infobar-color-basic );
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
-  /* SECTIONS */
-
-  > *,
-  &-title,
-  &-subtitle {
-    margin-bottom: 0 !important;
-  }
 
   /* SECTIONS GUTTER */
 
@@ -55,6 +48,13 @@
   &-bottom {
     width: 100%;
     margin-top: $gutter;
+  }
+
+  /* TITLE / SUBTITLE */
+
+  &-title,
+  &-subtitle {
+    margin-bottom: 0 !important;
   }
 
   /* TITLE */
