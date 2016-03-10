@@ -1,0 +1,41 @@
+
+/* =========================================================================
+ * Svelto - Core - Unit (Functions)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* UNIT */
+
+@function em ( $number ) {
+
+  $unit: unit( $number );
+
+  @if $unit == 'px' {
+
+    @return $number / $font-size * 1em;
+
+  } @else {
+
+    @error 'Unit `#{$unit}` is not supported. Supported units: px';
+
+  }
+
+}
+
+@function rem ( $number ) {
+
+  $unit: unit( $number );
+
+  @if $unit == 'px' {
+
+    @return $number / $font-size * 1rem;
+
+  } @else {
+
+    @error 'Unit `#{$unit}` is not supported. Supported units: px';
+
+  }
+
+}
