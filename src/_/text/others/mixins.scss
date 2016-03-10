@@ -12,6 +12,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 100%; // Fixes a bug in IE 10
 }
 
 //SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
