@@ -1,20 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Modal - Closed
+ * Svelto - Widgets - Dropdown - Closed (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
  * ========================================================================= */
 
 /* CLOSED */
 
-.modal:not(.show) {
-  display: none;
-}
-
-.modal:not(.open) {
-  opacity: 0;
-  transform: translate(-50%, calc(-50% + #{$modal-closed-offset-amount}));
-}
+$dropdown-closed-offset-amount: - 1rem !default;

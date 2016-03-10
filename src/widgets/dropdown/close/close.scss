@@ -14,4 +14,5 @@
 
 .dropdown:not(.open) {
   opacity: 0;
+  margin-top: $dropdown-closed-offset-amount !important;
 }

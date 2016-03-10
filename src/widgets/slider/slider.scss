@@ -66,7 +66,7 @@
     height: $slider-handler-height;
     border-radius: $slider-handler-border-radius;
     cursor: move;
-    transition-property: transform, border-radius, box-shadow;
+    transition-property: transform, border-radius, box-shadow, background-color;
     transition-duration: $slider-animation-duration;
   }
 

@@ -19,7 +19,8 @@
   z-index: $dropdown-z-index;
   max-width: $dropdown-max-width;
   margin: 0 !important;
-  transition: opacity $dropdown-animation-duration;
+  transition-property: opacity, margin;
+  transition-duration: $dropdown-animation-duration;
 
   /* NOT CONTAINER */
 

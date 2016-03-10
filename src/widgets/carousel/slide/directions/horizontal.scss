@@ -19,8 +19,8 @@
     /* ITEM */
 
     > * {
-      transition: transform $carousel-slide-animation-duration;
       transform: translateX(-100%);
+      transition: transform $carousel-slide-animation-duration;
     }
 
     /* PREVIOUS */

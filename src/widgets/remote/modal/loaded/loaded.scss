@@ -15,15 +15,7 @@
   /* CHILDREN */
 
   > * {
-
-    transition: color $remote-modal-animation-duration;
-
-    /* CHILDREN */
-
-    > * {
-      transition: opacity $remote-modal-animation-duration;
-    }
-
+    transition: opacity $remote-modal-animation-duration !important;
   }
 
 }

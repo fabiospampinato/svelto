@@ -32,18 +32,17 @@
       content: '';
       border-radius: 50%;
       background-color: $ripple-color;
-      opacity: 0;
-      transform: scale(0);
+      opacity: $ripple-opacity;
       transition-property: opacity, transform;
       transition-duration: $ripple-animation-duration;
       transition-timing-function: $ripple-animation-timing-function;
     }
 
-    /* SHOW */
+    /* CLOSED */
 
-    &.show:before {
-      opacity: $ripple-opacity;
-      transform: scale(1);
+    &:not(.show):before {
+      opacity: 0;
+      transform: scale(0);
     }
 
     /* HIDE */

@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/blurred/blurred.scss
+ * @require decorators/raisable/raisable.scss
  * ========================================================================= */
 
 /* CHAT */
@@ -27,10 +29,13 @@
 
   img.chat-msg-img,
   .chat-msg-img img {
-    transition: opacity $chat-msg-animation-duration;
     border-width: $chat-msg-img-border-width;
     border-style: $chat-msg-img-border-style;
     border-color: $chat-msg-img-border-color;
+    // Transitioning `filter`  in order to support `blurred`
+    // Transitioning `box-shadow`  in order to support `raisable`
+    transition-property: opacity, filter, box-shadow;
+    transition-duration: $chat-msg-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
   }
 
   a.chat-msg-img:hover,

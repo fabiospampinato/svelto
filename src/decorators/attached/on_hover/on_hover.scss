@@ -16,11 +16,11 @@
 
   opacity: 0;
 
-  // In order to always animate the box-shadow transition
-  // Transitioning `opacity` in order to support `disabled`
   // Transitioning `filter`  in order to support `blurred`
+  // Transitioning `box-shadow`  in order to support `raisable`
 
-  transition: opacity $attached-on-hover-animation-duration, filter $blurred-animation-duration, box-shadow $raisable-animation-duration;
+  transition-property: opacity, filter, box-shadow;
+  transition-duration: $attached-on-hover-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
 
   /* HOVER */
 
