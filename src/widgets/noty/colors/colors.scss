@@ -10,7 +10,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != inherit {
+  @if $name != 'inherit' and $name != 'transparent' {
 
     $bg: nth( $datas, 1 );
     $bg-hover: nth( $datas, 2 );

@@ -12,12 +12,16 @@
 
 @each $name, $datas in $colors {
 
-  $class: color-get-class( $name );
+  @if $name != 'inherit' and $name != 'transparent' {
 
-  $accent: nth( $datas, 5 );
+    $class: color-get-class( $name );
 
-  .spinner-label.#{$class} circle {
-    stroke: $accent;
+    $accent: nth( $datas, 5 );
+
+    .spinner-label.#{$class} circle {
+      stroke: $accent;
+    }
+
   }
 
 }

@@ -13,32 +13,36 @@
 
 @each $name, $datas in $colors {
 
-  $class: color-link-get-class( $name );
+  @if $name != 'transparent' {
 
-  $bg: nth( $datas, 1 );
-  $bg-hover: nth( $datas, 2 );
-  $bg-active: nth( $datas, 3 );
+    $class: color-link-get-class( $name );
 
-  %color-#{$name}-link-base {
+    $bg: nth( $datas, 1 );
+    $bg-hover: nth( $datas, 2 );
+    $bg-active: nth( $datas, 3 );
 
-    color: $bg;
+    %color-#{$name}-link-base {
 
-    &:hover {
-      color: $bg-hover;
+      color: $bg;
+
+      &:hover {
+        color: $bg-hover;
+      }
+
+      &:active {
+        color: $bg-active;
+      }
+
     }
 
-    &:active {
-      color: $bg-active;
+    %color-#{$name}-link {
+      @extend %color-#{$name}-link-base;
     }
 
-  }
+    .#{$class} {
+      @extend %color-#{$name}-link;
+    }
 
-  %color-#{$name}-link {
-    @extend %color-#{$name}-link-base;
-  }
-
-  .#{$class} {
-    @extend %color-#{$name}-link;
   }
 
 }

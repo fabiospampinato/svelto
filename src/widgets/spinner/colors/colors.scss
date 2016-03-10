@@ -12,12 +12,16 @@
 
 @each $name, $datas in $colors {
 
-  $class: color-get-class( $name );
+  @if $name != 'inherit' and $name != 'transparent' {
 
-  $bg: nth( $datas, 1 );
+    $class: color-get-class( $name );
 
-  svg.spinner.#{$class} circle {
-    stroke: $bg;
+    $bg: nth( $datas, 1 );
+
+    svg.spinner.#{$class} circle {
+      stroke: $bg;
+    }
+
   }
 
 }

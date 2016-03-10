@@ -12,37 +12,41 @@
 
 @each $name, $datas in $colors {
 
-  $bg: nth( $datas, 1 );
-  $bg-hover: nth( $datas, 2 );
-  $bg-active: nth( $datas, 3 );
-  $border: nth( $datas, 4 );
-  $text: nth( $datas, 6 );
+  @if $name != 'inherit' and $name != 'transparent' {
 
-  %color-#{$name}-inverted {
-    background-color: $text;
-    color: $bg;
-  }
+    $bg: nth( $datas, 1 );
+    $bg-hover: nth( $datas, 2 );
+    $bg-active: nth( $datas, 3 );
+    $border: nth( $datas, 4 );
+    $text: nth( $datas, 6 );
 
-  %color-#{$name}-inverted-hover {
-    background-color: $bg-hover;
-    color: $text;
-  }
-
-  %color-#{$name}-inverted-active {
-    background-color: $bg-active;
-    color: $text;
-  }
-
-  %color-#{$name}.inverted {
-
-    @extend %color-#{$name}-inverted;
-
-    &.hover {
-      @extend %color-#{$name}-inverted-hover;
+    %color-#{$name}-inverted {
+      background-color: $text;
+      color: $bg;
     }
 
-    &.active {
-      @extend %color-#{$name}-inverted-active;
+    %color-#{$name}-inverted-hover {
+      background-color: $bg-hover;
+      color: $text;
+    }
+
+    %color-#{$name}-inverted-active {
+      background-color: $bg-active;
+      color: $text;
+    }
+
+    %color-#{$name}.inverted {
+
+      @extend %color-#{$name}-inverted;
+
+      &.hover {
+        @extend %color-#{$name}-inverted-hover;
+      }
+
+      &.active {
+        @extend %color-#{$name}-inverted-active;
+      }
+
     }
 
   }

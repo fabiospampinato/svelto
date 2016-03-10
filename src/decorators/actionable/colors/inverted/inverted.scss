@@ -13,14 +13,18 @@
 
 @each $name, $datas in $colors {
 
-  %color-#{$name}.actionable.inverted:not(.disabled) {
+  @if $name != 'inherit' and $name != 'transparent' {
 
-    &:not(.active):hover {
-      @extend %color-#{$name}-inverted-hover;
-    }
+    %color-#{$name}.actionable.inverted:not(.disabled) {
 
-    &:not(.ripple):active {
-      @extend %color-#{$name}-inverted-active;
+      &:not(.active):hover {
+        @extend %color-#{$name}-inverted-hover;
+      }
+
+      &:not(.ripple):active {
+        @extend %color-#{$name}-inverted-active;
+      }
+
     }
 
   }
