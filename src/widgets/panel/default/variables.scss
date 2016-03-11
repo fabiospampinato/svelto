@@ -6,10 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* HORIZONTAL */
+/* DEFAULT */
 
-$panel-default-x-height: 7.5rem !default;
-
-/* VERTICAL */
-
-$panel-default-y-width: $panel-default-x-height * 2 !default;
+$panel-default-y-height: 7.5rem !default;
+$panel-default-x-width: $panel-default-y-height * 2 !default;

@@ -10,6 +10,7 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
+//TODO: Add horizontal gutter gain
 //TODO: The shadow gets rotated on `:active`
 
 /* SLIDER */
@@ -90,7 +91,7 @@
 
       border-bottom-right-radius: 0;
       opacity: 1;
-      transform: translateY(-100% * $SQRT2) rotate(45deg) scale($slider-active-handler-scale-amount);
+      transform: translateY(-100% * $SQRT2) rotate(45deg) scale($slider-active-handler-scale);
       box-shadow: $slider-active-handler-box-shadow;
 
       /* LABEL */

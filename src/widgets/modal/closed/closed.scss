@@ -16,5 +16,5 @@
 
 .modal:not(.open) {
   opacity: 0;
-  transform: translate(-50%, calc(-50% + #{$modal-closed-offset-amount}));
+  transform: translate(-50%, calc(-50% + #{$modal-closed-offset}));
 }

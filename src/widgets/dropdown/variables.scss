@@ -20,7 +20,7 @@ $dropdown-z-depth-force: true !default;
 $dropdown-z-depth-basic: true !default;
 
 $dropdown-max-width: 70vw !default;
-$dropdown-max-height: $dropdown-max-width / 100 * 85 !default;
+$dropdown-max-height: $dropdown-max-width * .85 !default;
 
 /* ANIMATION */
 

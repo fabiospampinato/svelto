@@ -42,7 +42,7 @@ $slider-handler-border-radius: 50% !default;
 
 /* HANDLER ACTIVE */
 
-$slider-active-handler-scale-amount: $PHI !default;
+$slider-active-handler-scale: $PHI !default;
 
 $slider-active-handler-box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.14), 1px 1px 8px 0 rgba(0, 0, 0, 0.12), 3px 3px 3px -2px rgba(0, 0, 0, 0.4) !default; //FIXME: Shouldn't be hard coded, we are basically rotating the shadow (z-depth: 3)
 

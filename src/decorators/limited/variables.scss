@@ -10,5 +10,4 @@
 
 /* LIMITED */
 
-$limited-breakpoint: 'xlarge' !default;
-$limited-width: map-get( $breakpoints, $limited-breakpoint ) * 1.05 !default;
+$limited-width: map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 1.05 !default;

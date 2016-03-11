@@ -14,9 +14,11 @@ $square-sample-color: 'gray' !default;
 $square-sample-color-force: false !default;
 $square-sample-color-basic: true !default;
 
-$square-outline-width: 1px !default;
-$square-outline-style: solid !default;
+$square-border-width: 1px !default;
+$square-border-style: solid !default;
 
-$square-sample-p-size: 'xxsmall' !default;
+/* PARAGRAPH */
+
+$square-sample-p-size: 'xxxsmall' !default;
 $square-smaple-p-size-force: true !default;
 $square-smaple-p-size-basic: true !default;

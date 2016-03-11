@@ -13,12 +13,12 @@
 
 .panel.slim.top {
 
-  height: $panel-slim-x-height;
+  height: $panel-slim-y-height;
 
   /* CLOSED */
 
   &:not(.open) {
-    transform: translateY(- $panel-slim-x-height);
+    transform: translateY(- $panel-slim-y-height);
   }
 
 }
@@ -27,10 +27,10 @@
 
 .panel-layout.panel-slim-pinned-top {
 
-  padding-top: $panel-slim-x-height;
+  padding-top: $panel-slim-y-height;
 
   > .layout-header.sticky {
-    top: $panel-slim-x-height;
+    top: $panel-slim-y-height;
   }
 
 }

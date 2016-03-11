@@ -17,15 +17,15 @@
 
   &.level-3,
   &[class*='level-'] {
-    margin-right: $chat-msg-level-3-spacing;
+    margin-right: $chat-msg-level-3-offset;
   }
 
   &.level-2 {
-    margin-right: $chat-msg-level-2-spacing;
+    margin-right: $chat-msg-level-2-offset;
   }
 
   &.level-1 {
-    margin-right: $chat-msg-level-1-spacing;
+    margin-right: $chat-msg-level-1-offset;
   }
 
   /* IMAGE */
@@ -38,7 +38,7 @@
 
   .chat-msg-content {
     order: 1;
-    margin-right: calc(#{$gutter-half} + #{$pointing-tip-half-diagonal});
+    margin-right: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
   }
 
   // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proof, use feature detection instead

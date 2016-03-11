@@ -11,5 +11,5 @@
 /* TOP LEFT */
 
 .badge.top-left {
-  @include absolute ( $badge-spacing false false $badge-spacing );
+  @include absolute ( $badge-offset false false $badge-offset );
 }

@@ -10,5 +10,5 @@
 
 /* AUTOEXPAND */
 
-$noty-autoexpand-width-breakpoint: 'small' !default;
-$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-width-breakpoint ) - $breakpoint-epsilon !default; //TODO: Rename it
+$noty-autoexpand-breakpoint: 'small' !default;
+$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-breakpoint ) - $breakpoint-epsilon !default;

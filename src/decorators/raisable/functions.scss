@@ -11,7 +11,7 @@
 @function raisable-next ( $depth: 0 ) {
 
   $z-depth-max: length( map-keys( $z-depths ) ) - 1; // `-1` since we start from `0`
-  $z-depth-raised: min( $z-depth-max, $depth + $raisable-raise-amount );
+  $z-depth-raised: min( $z-depth-max, $depth + $raisable-raise-depths );
 
   @return $z-depth-raised;
 

@@ -63,7 +63,7 @@
       border-radius: $switch-handler-border-radius;
       z-index: -1;
       opacity: 0;
-      transform: scale($switch-handler-before-scale-inactive);
+      transform: scale($switch-handler-before-scale);
       transition-property: opacity, transform, background-color;
       transition-duration: $switch-animation-duration;
     }
@@ -103,8 +103,8 @@
         /* BEFORE */
 
         &:before {
-          opacity: $switch-handler-before-active-opacity;
-          transform: scale($switch-handler-before-scale-active);
+          opacity: $switch-active-handler-before-opacity;
+          transform: scale($switch-active-handler-before-scale);
         }
 
       }

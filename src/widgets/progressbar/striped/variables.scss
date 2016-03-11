@@ -12,8 +12,8 @@ $progressbar-stripe-size: 10em / 3 !default;
 
 $progressbar-stripe-opacity: .05 !default;
 
-$progressbar-stripe-light-color: rgba( 255, 255, 255, $progressbar-stripe-opacity ) !default;
-$progressbar-stripe-dark-color: rgba( 0, 0, 0, $progressbar-stripe-opacity ) !default;
+$progressbar-stripe-color-light: rgba( 255, 255, 255, $progressbar-stripe-opacity ) !default;
+$progressbar-stripe-color-dark: rgba( 0, 0, 0, $progressbar-stripe-opacity ) !default;
 
 /* STRIPES */
 

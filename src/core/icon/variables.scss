@@ -10,5 +10,5 @@
 
 /* ICON */
 
-$icon-best-size: 24px !default; // At this size the icons look the best
-$icon-scale-amount: $icon-best-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default font size
+$icon-size: 24px !default; // This is the closest size at which icons look the best at the default font size
+$icon-scale-factor: $icon-size / $font-size !default; // This is the scale factor at which the icons are at their best dimensions at the default font size

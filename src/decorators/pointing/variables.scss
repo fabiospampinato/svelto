@@ -9,13 +9,13 @@
  * @require core/paths/variables.scss
  * ========================================================================= */
 
-/* TOP */
+/* TIP */
 
 $pointing-tip-size: .625em !default;
-$pointing-tip-half-size: $pointing-tip-size / 2;
+$pointing-tip-size-half: $pointing-tip-size / 2;
 
 $pointing-tip-diagonal: $pointing-tip-size * $SQRT2;
-$pointing-tip-half-diagonal: $pointing-tip-diagonal / 2;
+$pointing-tip-diagonal-half: $pointing-tip-diagonal / 2;
 
 $pointing-tip-color: 'inherit' !default;
 $pointing-tip-color-force: true !default;

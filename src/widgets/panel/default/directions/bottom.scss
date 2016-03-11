@@ -13,12 +13,12 @@
 
 .panel.bottom {
 
-  height: $panel-default-x-height;
+  height: $panel-default-y-height;
 
   /* CLOSED */
 
   &:not(.open) {
-    transform: translateY($panel-default-x-height);
+    transform: translateY($panel-default-y-height);
   }
   
 }
@@ -26,5 +26,5 @@
 /* LAYOUT */
 
 .panel-layout.panel-default-pinned-bottom {
-  padding-bottom: $panel-default-x-height;
+  padding-bottom: $panel-default-y-height;
 }

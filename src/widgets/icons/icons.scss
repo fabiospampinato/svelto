@@ -18,8 +18,8 @@
   position: relative;
   display: inline-block;
   flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
-  width: $icon-scale-amount * 1em;
-  height: $icon-scale-amount * 1em;
+  width: $icon-scale-factor * 1em;
+  height: $icon-scale-factor * 1em;
 }
 
 %icons {

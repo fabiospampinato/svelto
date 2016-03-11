@@ -12,7 +12,7 @@
 
 @function size-from-icon-size ( $icon-size ) {
 
-  @return ( $icon-size / $font-size / $icon-scale-amount ) * 1em;
+  @return ( $icon-size / $font-size / $icon-scale-factor ) * 1em;
 
 }
 

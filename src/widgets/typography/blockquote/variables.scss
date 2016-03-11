@@ -11,7 +11,9 @@
 
 /* BLOCKQUOTE */
 
-$blockquote-bg-color: transparent !default;
+$blockquote-color: 'transparent' !default;
+$blockquote-color-force: false !default;
+$blockquote-color-basic: true !default;
 
 $blockquote-padding-x: $gutter !default;
 $blockquote-padding-y: $blockquote-padding-x / 2 !default;
@@ -19,7 +21,10 @@ $blockquote-padding-y: $blockquote-padding-x / 2 !default;
 /* LINE */
 
 $blockquote-line-width: $gutter-half !default;
+
 $blockquote-line-bg-color: rgba( 0, 0, 0, .15 ) !default;
+
+$blockquote-line-border-radius: 50% !default;
 
 /* FOOTER */
 

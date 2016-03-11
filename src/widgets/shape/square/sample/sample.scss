@@ -18,8 +18,8 @@
   @include color ( $square-sample-color, $square-sample-color-force, $square-sample-color-basic );
   min-width: $square-sample-size;
   min-height: $square-sample-size;
-  border-width: $square-outline-width;
-  border-style: $square-outline-style;
+  border-width: $square-border-width;
+  border-style: $square-border-style;
   padding: $gutter-half;
 
   /* PARAGRAPH */

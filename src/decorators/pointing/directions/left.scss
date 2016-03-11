@@ -17,7 +17,7 @@
   /* TIP */
 
   &:after {
-    left: - $pointing-tip-half-size;
+    left: - $pointing-tip-size-half;
     clip-path: url(#{$pointing-path-images}pointing-clips.svg#clip-left); // The polygon is not supported on Firefox
     clip-path: polygon(0 0, 100% 100%, 0 100%);
   }
@@ -31,7 +31,7 @@
 }
 
 %pointing-left-spaced {
-  margin-left: $pointing-tip-half-diagonal;
+  margin-left: $pointing-tip-diagonal-half;
 }
 
 .pointing-left {

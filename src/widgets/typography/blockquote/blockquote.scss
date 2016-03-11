@@ -13,9 +13,9 @@
 blockquote {
 
   @extend %widget;
+  @include color ( $blockquote-color, $blockquote-color-force, $blockquote-color-basic );
   padding: $blockquote-padding-y $blockquote-padding-x $blockquote-padding-y ( $blockquote-padding-x + $blockquote-line-width );
   border-radius: $blockquote-line-width;
-  background-color: $blockquote-bg-color;
 
   /* LINE */
 
@@ -23,7 +23,7 @@ blockquote {
     @include absolute ( 0 false 0 0 );
     width: $blockquote-line-width;
     content: '';
-    border-radius: $blockquote-line-width;
+    border-radius: $blockquote-line-border-radius;
     background-color: $blockquote-line-bg-color;
   }
 

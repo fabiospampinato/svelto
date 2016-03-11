@@ -13,16 +13,16 @@
 
 .panel.slim.bottom {
 
-  height: $panel-slim-x-height;
+  height: $panel-slim-y-height;
 
   /* CLOSED */
 
   &:not(.open) {
-    transform: translateY($panel-slim-x-height);
+    transform: translateY($panel-slim-y-height);
   }
 
 }
 
 .panel-layout.panel-slim-pinned-bottom {
-  padding-bottom: $panel-slim-x-height;
+  padding-bottom: $panel-slim-y-height;
 }

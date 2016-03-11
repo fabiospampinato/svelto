@@ -16,7 +16,7 @@
 
   .progressbar-highlight:before {
     @include absolute ( 0 0 0 ( - $progressbar-stripe-size ) );
-    background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
+    background: linear-gradient(-45deg, $progressbar-stripe-color-light 25%, $progressbar-stripe-color-dark 25%, $progressbar-stripe-color-dark 50%, $progressbar-stripe-color-light 50%, $progressbar-stripe-color-light 75%, $progressbar-stripe-color-dark 75%, $progressbar-stripe-color-dark);
     background-size: $progressbar-stripe-size $progressbar-stripe-size;
     content: '';
     animation: progressbar-stripes-move $progressbar-stripes-animation-move-duration linear infinite;

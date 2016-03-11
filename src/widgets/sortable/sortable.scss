@@ -47,14 +47,14 @@ table.sortable {
 
     &:before {
       content: $sortable-desc-icon;
-      top: $soratable-table-th-icon-spacing;
+      top: $soratable-table-th-icon-gutter;
     }
 
     /* AFTER */
 
     &:after {
       content: $sortable-asc-icon;
-      bottom: $soratable-table-th-icon-spacing;
+      bottom: $soratable-table-th-icon-gutter;
     }
 
     /* INACTIVE OPACITY */
@@ -63,7 +63,7 @@ table.sortable {
     &:hover:after,
     &.sort-desc:after,
     &.sort-asc:before {
-      opacity: $sortable-table-th-icon-inactive-opacity;
+      opacity: $sortable-table-th-icon-opacity;
     }
 
     /* ACTIVE OPACITY */

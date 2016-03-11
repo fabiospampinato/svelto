@@ -8,7 +8,7 @@
 
 /* BADGE */
 
-$badge-color: 'red' !default;
+$badge-color: 'secondary' !default;
 $badge-color-force: false !default;
 $badge-color-basic: false !default;
 
@@ -32,4 +32,4 @@ $badge-padding-y: $badge-padding-x !default;
 $badge-min-width: 1em + ( $badge-padding-x * 2 ) !default;
 $badge-min-height: 1em + ( $badge-padding-y * 2 ) !default;
 
-$badge-spacing: - ( $badge-min-width / 2 * .75 ) !default;
+$badge-offset: - ( $badge-min-width / 2 * .75 ) !default;

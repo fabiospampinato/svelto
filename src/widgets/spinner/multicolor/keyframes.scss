@@ -10,15 +10,15 @@
 
 @keyframes spinner-multicolor {
   0%, 24% {
-    stroke: $spinner-multicolor-stroke-color-first;
+    stroke: $spinner-multicolor-color-first;
   }
   25%, 49% {
-    stroke: $spinner-multicolor-stroke-color-second;
+    stroke: $spinner-multicolor-color-second;
   }
   50%, 74% {
-    stroke: $spinner-multicolor-stroke-color-third;
+    stroke: $spinner-multicolor-color-third;
   }
   75%, 99% {
-    stroke: $spinner-multicolor-stroke-color-fourth;
+    stroke: $spinner-multicolor-color-fourth;
   }
 }

@@ -13,12 +13,12 @@
 
 .panel.left {
 
-  width: $panel-default-y-width;
+  width: $panel-default-x-width;
 
   /* CLOSED */
 
   &:not(.open) {
-    transform: translateX(- $panel-default-y-width);
+    transform: translateX(- $panel-default-x-width);
   }
 
 }
@@ -27,10 +27,10 @@
 
 .panel-layout.panel-default-pinned-left {
 
-  padding-left: $panel-default-y-width;
+  padding-left: $panel-default-x-width;
 
   > .layout-header.sticky {
-    left: $panel-default-y-width;
+    left: $panel-default-x-width;
   }
 
 }

@@ -23,11 +23,11 @@
   > :nth-child(even) {
 
     &:not(:first-child) {
-      margin-left: $breadcrumb-spacing;
+      margin-left: $breadcrumb-inner-gutter;
     }
 
     &:not(:last-child) {
-      margin-right: $breadcrumb-spacing;
+      margin-right: $breadcrumb-inner-gutter;
     }
 
   }
@@ -45,7 +45,7 @@
     /* AFTER CURRENT */
 
     > .current ~ :not(:nth-child(even)):hover {
-      opacity: $breadcrumb-after-current-opacity-hover;
+      opacity: $breadcrumb-after-current-hover-opacity;
     }
 
   }

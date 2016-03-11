@@ -16,7 +16,7 @@
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 1em * $icon-scale-amount;
+  font-size: 1em * $icon-scale-factor;
   width: 1em;
   height: 1em;
   line-height: 1;
@@ -44,7 +44,7 @@
     $class: size-get-class( $size );
 
     &.#{$class} {
-      font-size: $font-size * $icon-scale-amount;
+      font-size: $font-size * $icon-scale-factor;
     }
 
   }

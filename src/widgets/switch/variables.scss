@@ -41,10 +41,12 @@ $switch-handler-border-radius: $switch-handler-height !default;
 
 /* HANDLER:BEFORE */
 
-$switch-handler-before-scale-inactive: 0 !default;
-$switch-handler-before-scale-active: $PHI !default;
+$switch-handler-before-scale: 0 !default;
 
-$switch-handler-before-active-opacity: .25 !default;
+/* HANDLER:BEFORE ACTIVE */
+
+$switch-active-handler-before-scale: $PHI !default;
+$switch-active-handler-before-opacity: .25 !default;
 
 /* HANDLER ICON */
 

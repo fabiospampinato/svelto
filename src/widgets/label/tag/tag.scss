@@ -14,7 +14,7 @@
 
 .label.tag {
 
-  @include border-left-radius ( $label-tag-tip-border-radius );
+  @include border-left-radius ( $label-tag-border-left-radius );
   padding-left: $label-tag-padding-left !important;
 
   /* CIRCLE */

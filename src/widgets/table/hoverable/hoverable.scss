@@ -11,5 +11,5 @@
 /* HOVERABLE */
 
 .table:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
-  background-color: $table-hoverable-row-even-bg-color-hover;
+  background-color: $table-hoverable-row-even-hover-bg-color;
 }

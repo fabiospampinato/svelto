@@ -10,9 +10,7 @@
 
 /* RAISABLE */
 
-// How many steps the `z-depth` should be raised to
-
-$raisable-raise-amount: 2 !default;
+$raisable-raise-depths: 2 !default; // Distance between the normal and raised depth
 
 /* ANIMATION */
 

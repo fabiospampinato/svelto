@@ -31,7 +31,7 @@
       @include dimension ( 100% );
       content: '';
       border-radius: 50%;
-      background-color: $ripple-color;
+      background-color: $ripple-bg-color;
       opacity: $ripple-opacity;
       transition-property: opacity, transform;
       transition-duration: $ripple-animation-duration;

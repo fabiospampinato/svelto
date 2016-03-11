@@ -34,21 +34,21 @@
     /* HORIZONTAL GUTTER */
 
     + * {
-      margin-left: $label-extra-spacing;
+      margin-left: $label-inner-gutter;
     }
 
     + %icon,
     + %icons {
-      margin-left: $label-extra-spacing / $icon-scale-amount;
+      margin-left: $label-inner-gutter / $icon-scale-factor;
     }
 
   }
 
   // /* SAME HEIGHT IF CONTAINING ICON/ICONS */ //FIXME: Ugly fix, not really needed actually, we are enforcing something that might not be wanted
   //
-  // @if $icon-scale-amount > $line-height {
+  // @if $icon-scale-factor > $line-height {
   //
-  //   $delta: $icon-scale-amount - $line-height;
+  //   $delta: $icon-scale-factor - $line-height;
   //
   //   > %icon,
   //   > %icons {

@@ -21,12 +21,12 @@
     /* HORIZONTAL GUTTER */
 
     + * {
-      margin-left: $label-compact-extra-spacing;
+      margin-left: $label-compact-inner-gutter;
     }
 
     + %icon,
     + %icons {
-      margin-left: $label-compact-extra-spacing / $icon-scale-amount;
+      margin-left: $label-compact-inner-gutter / $icon-scale-factor;
     }
 
   }

@@ -15,11 +15,11 @@
   &:first-child.table-row-empty ~ tr {
 
     &:nth-child(even):hover {
-      background-color: $table-hoverable-row-even-bg-color-hover;
+      background-color: $table-hoverable-row-even-hover-bg-color;
     }
 
     &:nth-child(odd):hover {
-      background-color: $table-hoverable-row-odd-bg-color-hover;
+      background-color: $table-hoverable-row-odd-hover-bg-color;
     }
 
   }
@@ -27,17 +27,17 @@
   &:first-child:not(.table-row-empty) {
 
     &:hover {
-      background-color: $table-hoverable-row-even-bg-color-hover;
+      background-color: $table-hoverable-row-even-hover-bg-color;
     }
 
     ~ tr {
 
       &:nth-child(odd):hover {
-        background-color: $table-hoverable-row-even-bg-color-hover;
+        background-color: $table-hoverable-row-even-hover-bg-color;
       }
 
       &:nth-child(even):hover {
-        background-color: $table-hoverable-row-odd-bg-color-hover;
+        background-color: $table-hoverable-row-odd-hover-bg-color;
       }
 
     }

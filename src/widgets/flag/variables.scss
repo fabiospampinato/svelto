@@ -8,7 +8,18 @@
  * @require core/paths/variables.scss
  * ========================================================================= */
 
+/* FLAG */
+
+$flag-width: 16px !default;
+$flag-height: 11px !default;
+
+/* PATHS */
+
+$flags-path-images: $path-images !default;
+
 /* FLAGS */
+
+//TODO: Maybe switch the key with the long version of the name
 
 $flags: (
   'ad': (
@@ -992,12 +1003,3 @@ $flags: (
     ( -208px -165px )
   )
 ) !default;
-
-/* PATHS */
-
-$flags-path-images: $path-images !default;
-
-/* SIZE */
-
-$flag-width: 16px !default;
-$flag-height: 11px !default;

@@ -42,7 +42,7 @@
   .chat-msg-img a:hover {
 
     img {
-      opacity: $chat-msg-img-opacity-hover;
+      opacity: $chat-msg-img-hover-opacity;
     }
 
     .overlay + img {
