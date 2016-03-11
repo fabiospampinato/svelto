@@ -8,7 +8,7 @@
  * @require decorators/disabled/disabled.scss
  * ========================================================================= */
 
-//FIXME: Not working on Edge and IE
+// Not supported by IE, Edge and Firefox < 35
 //TODO: If mobile remove the transition, it greatly improves performance
 
 /* BLURRED */
@@ -23,7 +23,6 @@
 }
 
 %blurred {
-  filter: url(#{$blurred-path-images}blurred.svg#blur) !important;
   filter: blur($blurred-blur-radius) !important;
 }
 
