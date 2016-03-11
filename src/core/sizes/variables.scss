@@ -11,19 +11,22 @@
 /* ICON SIZES */
 
 // The wanted icon size for what will be the actual size setted
+// The values are scaled with a factor of `1.1892`
+// Some roundings occurred for the `RECOMMENDED` sizes
+// The factor has been chosen in order to minimize rounding errors
 // The `RECOMMENDED` sizes are those where the icons look better
 
-$size-xxxxsmall-icon: 6px !default;
-$size-xxxsmall-icon: 9px !default;
-$size-xxsmall-icon: 12px !default;
+$size-xxxxsmall-icon: 10.09105885246312px !default;
+$size-xxxsmall-icon: 12.000287187349144px !default;
+$size-xxsmall-icon: 14.270741523195602px !default;
 $size-xsmall-icon: 18px !default; // RECOMMENDED
-$size-small-icon: 21px !default;
+$size-small-icon: 20.181634712411704px !default;
 $size-medium-icon: 24px !default; // RECOMMENDED
-$size-large-icon: 30px !default;
+$size-large-icon: 28.5408px !default;
 $size-xlarge-icon: 36px !default; // RECOMMENDED
-$size-xxlarge-icon: 42px !default;
+$size-xxlarge-icon: 40.36230346291201px !default;
 $size-xxxlarge-icon: 48px !default; // RECOMMENDED
-$size-xxxxlarge-icon: 60px !default;
+$size-xxxxlarge-icon: 57.08023393991053px !default;
 
 /* SIZES */
 
