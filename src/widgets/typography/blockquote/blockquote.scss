@@ -32,8 +32,8 @@ blockquote {
   > footer {
 
     @extend %widget;
+    @include size ( $blockquote-footer-size, $blockquote-footer-size-force, $blockquote-footer-size-basic );
     padding: $blockquote-footer-padding-y $blockquote-footer-padding-x;
-    font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;
 
     &:before {

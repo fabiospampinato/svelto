@@ -9,18 +9,14 @@
  * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* SWITCH */
-
-$switch-width: 34em / 15 !default;
-
 /* BAR */
 
 $switch-bar-color: 'gray' !default;
 $switch-bar-color-force: false !default;
 $switch-bar-color-basic: true !default;
 
-$switch-bar-width: 26em / 15 !default;
-$switch-bar-height: 14em / 15 !default;
+$switch-bar-width: 1.625em !default;
+$switch-bar-height: .9375em !default;
 
 $switch-bar-border-radius: $switch-bar-height !default;
 
@@ -34,7 +30,7 @@ $switch-handler-color: 'gray' !default;
 $switch-handler-color-force: false !default;
 $switch-handler-color-basic: true !default;
 
-$switch-handler-width: 4em / 3 !default;
+$switch-handler-width: 1.3125em !default;
 $switch-handler-height: $switch-handler-width !default;
 
 $switch-handler-border-radius: $switch-handler-height !default;

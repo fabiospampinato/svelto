@@ -71,7 +71,7 @@
   //FIXME: It is a pixel off
 
   &.ribbon-right:not(.ribbon-left) {
-    left: calc(100% + #{($gutter * 2)} + #{($label-ribbon-fold-size / 2)});
+    left: calc(100% + #{$gutter} + #{$label-ribbon-fold-size});
     transform: translateX(-100%);
   }
 
@@ -83,7 +83,7 @@
 
     &.ribbon-left:before,
     &.ribbon-right:after {
-      bottom: - ( $label-ribbon-fold-size + $outline-width );
+      bottom: calc( (#{$outline-width} + #{$label-ribbon-fold-size}) * -1 );
     }
 
     /* BEFORE */

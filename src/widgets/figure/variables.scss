@@ -16,8 +16,8 @@ $figure-color-basic: true !default;
 
 $figure-border-radius: 0 !default;
 
-$figure-padding-y: 0 !default;
 $figure-padding-x: 0 !default;
+$figure-padding-y: $figure-padding-x !default;
 
 /* IMAGE */
 

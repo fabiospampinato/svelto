@@ -10,5 +10,5 @@
 
 /* COMPACT */
 
-$label-floating-compact-padding-x: $label-floating-padding-x / 3 * 2 !default;
-$label-floating-compact-padding-y: $label-floating-padding-y / 3 * 2 !default;
+$label-floating-compact-padding-x: $label-floating-padding-x * .75 !default;
+$label-floating-compact-padding-y: $label-floating-padding-y * .75 !default;

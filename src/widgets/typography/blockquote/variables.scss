@@ -24,11 +24,13 @@ $blockquote-line-width: $gutter-half !default;
 
 $blockquote-line-bg-color: rgba( 0, 0, 0, .15 ) !default;
 
-$blockquote-line-border-radius: 50% !default;
+$blockquote-line-border-radius: $blockquote-line-width !default;
 
 /* FOOTER */
 
-$blockquote-footer-font-size: .85em !default;
+$blockquote-footer-size: 'small' !default;
+$blockquote-footer-size-force: false !default;
+$blockquote-footer-size-basic: true !default;
 
 $blockquote-footer-opacity: .85 !default;
 

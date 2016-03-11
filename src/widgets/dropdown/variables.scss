@@ -9,8 +9,6 @@
  * @require core/paths/variables.scss
  * ========================================================================= */
 
-//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
-
 /* DROPDOWN */
 
 $dropdown-z-index: 1500 !default;
@@ -20,7 +18,7 @@ $dropdown-z-depth-force: true !default;
 $dropdown-z-depth-basic: true !default;
 
 $dropdown-max-width: 70vw !default;
-$dropdown-max-height: $dropdown-max-width * .85 !default;
+$dropdown-max-height: 65vh !default;
 
 /* ANIMATION */
 
