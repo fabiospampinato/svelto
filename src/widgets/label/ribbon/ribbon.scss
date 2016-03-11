@@ -36,7 +36,7 @@
   &.ribbon-left {
 
     @include border-left-radius ( 0 );
-    left: - ( $gutter + $label-ribbon-size );
+    left: calc( (#{$gutter} + #{$label-ribbon-size}) * -1 );
     padding-left: calc(#{$label-padding-x} + #{$gutter});
 
     &:before {
@@ -49,7 +49,7 @@
   /* LEFT & RIGHT */
 
   &.ribbon-left.ribbon-right {
-    width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 2 )});
+    width: calc(100% + #{($gutter * 2)} + #{($label-ribbon-size * 2)});
   }
 
   /* RIGHT */
@@ -71,7 +71,7 @@
   //FIXME: It is a pixel off
 
   &.ribbon-right:not(.ribbon-left) {
-    left: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size / 2 )});
+    left: calc(100% + #{($gutter * 2)} + #{($label-ribbon-size / 2)});
     transform: translateX(-100%);
   }
 
