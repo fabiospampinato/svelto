@@ -8,33 +8,61 @@
 
 /* UNIT */
 
-@function em ( $number ) {
+@function px ( $length ) {
 
-  $unit: unit( $number );
+  $unit: unit( $length );
 
   @if $unit == 'px' {
 
-    @return $number / $font-size * 1em;
+    @return $length;
+
+  } @elseif $unit == 'rem' {
+
+    @return $font-size;
 
   } @else {
 
-    @error 'Unit `#{$unit}` is not supported. Supported units: px';
+    @error 'Unit `#{$unit}` is not supported. Supported units: px, rem';
 
   }
 
 }
 
-@function rem ( $number ) {
+@function em ( $length ) {
 
-  $unit: unit( $number );
+  $unit: unit( $length );
 
-  @if $unit == 'px' {
+  @if $unit == 'em' {
 
-    @return $number / $font-size * 1rem;
+    @return $length;
+
+  } @elseif $unit == 'px' {
+
+    @return $length / $font-size * 1em;
 
   } @else {
 
-    @error 'Unit `#{$unit}` is not supported. Supported units: px';
+    @error 'Unit `#{$unit}` is not supported. Supported units: em, px';
+
+  }
+
+}
+
+@function rem ( $length ) {
+
+  $unit: unit( $length );
+
+  @if $unit == 'rem' {
+
+    @return $length;
+
+  } @elseif $unit == 'px' {
+
+    @return $length / $font-size * 1rem;
+
+  } @else {
+
+    @error 'Unit `#{$unit}` is not supported. Supported units: rem, px';
 
   }
 
