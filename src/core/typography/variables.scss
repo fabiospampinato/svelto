@@ -19,7 +19,5 @@ $font-size: 16px !default;
 
 /* LINE HEIGHT */
 
-//TODO: One should be enough
-
-$line-height: 20 / 14 !default;
+$line-height: ( $font-size + round( $font-size / 2.6666666666 ) ) / $font-size !default;
 $line-height-em: $line-height * 1em;
