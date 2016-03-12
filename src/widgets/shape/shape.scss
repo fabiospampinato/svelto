@@ -11,6 +11,15 @@
 /* SHAPE */
 
 %shape {
+
   @extend %widget;
   flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
+
+  /* INLINE */
+
+  p &,
+  span & {
+    display: inline-block;
+  }
+
 }
