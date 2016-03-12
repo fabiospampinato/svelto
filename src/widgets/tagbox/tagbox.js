@@ -37,7 +37,7 @@
         minLength: 3,
         color: Colors.gray,
         size: '',
-        css: 'rounded'
+        css: 'circular'
       },
       characters: {
         forbid: true, // Forbid or not

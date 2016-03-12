@@ -32,7 +32,7 @@
 
   &-img {
     width: $noty-img-size;
-    border-radius: if( $noty-img-rounded, 1000000px, $noty-border-radius );
+    border-radius: if( $noty-img-rounded, $circular-border-radius, $noty-border-radius );
   }
 
   /* BUTTONS */

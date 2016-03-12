@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
+ * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
 /* WRAPPER */
@@ -40,7 +41,7 @@ $colorpicker-handler-bg-color: $colorpicker-handler-border-color !default;
 $colorpicker-handler-sb-width: 1em !default;
 $colorpicker-handler-sb-height: $colorpicker-handler-sb-width !default;
 
-$colorpicker-handler-sb-border-radius: 1000000px !default;
+$colorpicker-handler-sb-border-radius: $circular-border-radius !default;
 
 /* HANDLER HUE */
 

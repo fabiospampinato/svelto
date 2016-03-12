@@ -8,14 +8,14 @@
 
 /* BORDER RADIUS */
 
+.sharp {
+  border-radius: $sharp-border-radius !important;
+}
+
 .rounded {
   border-radius: $rounded-border-radius !important;
 }
 
-.smooth {
-  border-radius: $smooth-border-radius !important;
-}
-
-.sharp {
-  border-radius: $sharp-border-radius !important;
+.circular {
+  border-radius: $circular-border-radius !important;
 }

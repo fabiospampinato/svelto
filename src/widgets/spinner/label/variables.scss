@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require decorators/border_radius/variables.scss
  * @require widgets/label/compact/variables.scss
  * ========================================================================= */
 
@@ -21,4 +22,4 @@ $spinner-label-color-basic: true !default;
 $spinner-label-padding-x: $label-compact-padding-x !default;
 $spinner-label-padding-y: $spinner-label-padding-x !default;
 
-$spinner-label-border-radius: 1000000px !default;
+$spinner-label-border-radius: $circular-border-radius !default;

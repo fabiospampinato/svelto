@@ -7,6 +7,7 @@
  * =========================================================================
  * @require core/animations/variables.scss
  * @require core/colors/variables.scss
+ * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
 /* CAROUSEL */
@@ -33,7 +34,7 @@ $carousel-indicator-border-width: 2px !default;
 $carousel-indicator-border-style: solid !default;
 $carousel-indicator-border-color: $carousel-indicator-current-bg-color !default;
 
-$carousel-indicator-border-radius: 1000000px !default;
+$carousel-indicator-border-radius: $circular-border-radius !default;
 
 $carousel-indicator-opacity: .25 !default;
 $carousel-hover-indicator-opacity: .5 !default;
