@@ -54,7 +54,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( foreach ( function ( stream, file ) {
                var basename = path.basename ( file.path );
-               file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex++, 3, 0 ) + '-' + basename );
+               file.path = file.path.replace ( basename, _.padStart ( dependencyIndex++, 3, 0 ) + '-' + basename );
                return stream;
              }))
              .pipe ( flatten () )

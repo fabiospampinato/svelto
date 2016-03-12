@@ -26,7 +26,7 @@
     options: {
       exporters: {
         YYYYMMDD ( date, data ) {
-          return [_.padLeft ( date.getUTCFullYear (), 4, 0 ), _.padLeft ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padLeft ( date.getUTCDate (), 2, 0 )].join ( data.separator );
+          return [_.padStart ( date.getUTCFullYear (), 4, 0 ), _.padStart ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padStart ( date.getUTCDate (), 2, 0 )].join ( data.separator );
         },
         UNIXTIMESTAMP ( date ) {
           return Math.floor ( date.getTime () / 1000 );

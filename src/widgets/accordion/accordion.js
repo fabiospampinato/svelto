@@ -100,13 +100,13 @@
 
       super.enable ();
 
-      _.invoke ( this.instances, 'enable' );
+      _.invokeMap ( this.instances, 'enable' );
 
     }
 
     disable () {
 
-      _.invoke ( this.instances, 'disable' );
+      _.invokeMap ( this.instances, 'disable' );
 
     }
 

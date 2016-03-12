@@ -389,7 +389,7 @@
 
     static dec2hex ( dec ) {
 
-      return _.padLeft ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
+      return _.padStart ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
 
     }
 

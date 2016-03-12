@@ -33,7 +33,7 @@ var input = {
 
     });
 
-    return _.unique ( _.flatten ( globs ) );
+    return _.uniq ( _.flatten ( globs ) );
 
   }
 

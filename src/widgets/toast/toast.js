@@ -259,11 +259,11 @@
 
       this.$toast.hover ( function () {
 
-        _.forIn ( openNotiesData, data => data[0].pause () );
+        _.forOwn ( openNotiesData, data => data[0].pause () );
 
       }, function () {
 
-        _.forIn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+        _.forOwn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
 
       });
 

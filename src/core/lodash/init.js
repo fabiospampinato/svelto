@@ -12,13 +12,13 @@
 
   /* LODASH */
 
-  let _ = ( lodash && Number ( lodash.VERSION[0] ) === 3 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 3 ) ? _ : false ); // Checking the version also in order to distinguish it from `underscore`
+  let _ = ( lodash && Number ( lodash.VERSION[0] ) === 4 ) ? lodash : ( ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) === 4 ) ? _ : false ); // Checking the version also in order to distinguish it from `underscore`
 
   /* CHECKING */
 
   if ( !_ ) {
 
-    throw new Error ( 'Svelto depends upon lodash v3, dependency not found' );
+    throw new Error ( 'Svelto depends upon lodash v4, dependency not found' );
 
   }
 

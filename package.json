@@ -54,7 +54,7 @@
     "gulp-util": "^3.0.7",
     "imagemin-pngquant": "^4.2.2",
     "imagemin-svgo": "^4.2.1",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "merge-stream": "^1.0.0",
     "node-notifier": "^4.5.0",
     "path": "^0.12.7",
