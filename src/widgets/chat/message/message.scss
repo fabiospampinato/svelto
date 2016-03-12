@@ -1,0 +1,61 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../chat.scss
+ * @require core/widget/widget.scss
+ * @require decorators/blurred/blurred.scss
+ * @require decorators/raisable/raisable.scss
+ * ========================================================================= */
+
+/* CHAT */
+
+.chat-message {
+
+  @extend %widget;
+  @include children-no-gutter ();
+  display: flex;
+
+  /* IMAGE */
+
+  .chat-message-img,
+  .chat-message-img img {
+    @include dimension ( $chat-message-img-size );
+    border-radius: if( $chat-message-img-rounded, $circular-border-radius, $chat-message-img-border-radius );
+    overflow: hidden;
+  }
+
+  img.chat-message-img,
+  .chat-message-img img {
+    border-width: $chat-message-img-border-width;
+    border-style: $chat-message-img-border-style;
+    border-color: $chat-message-img-border-color;
+    // Transitioning `filter`  in order to support `blurred`
+    // Transitioning `box-shadow`  in order to support `raisable`
+    transition-property: opacity, filter, box-shadow;
+    transition-duration: $chat-message-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+  }
+
+  a.chat-message-img:hover,
+  .chat-message-img a:hover {
+
+    img {
+      opacity: $chat-message-img-hover-opacity;
+    }
+
+    .overlay + img {
+      opacity: 1;
+    }
+
+  }
+
+  /* CONTENT */
+
+  .chat-message-content {
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
+  }
+
+}

@@ -1,49 +1,49 @@
 
 /* =========================================================================
- * Svelto - Widgets - Chat - Directions - Left
+ * Svelto - Widgets - Chat - Message - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../chat.scss
+ * @require ../message.scss
  * @require decorators/pointing/directions/left.scss
  * ========================================================================= */
 
 /* LEFT */
 
-.chat-msg.direction-left {
+.chat-message.direction-left {
 
   /* LEVELS */
 
   &.level-3,
   &[class*='level-'] {
-    margin-left: $chat-msg-level-3-offset;
+    margin-left: $chat-message-level-3-offset;
   }
 
   &.level-2 {
-    margin-left: $chat-msg-level-2-offset;
+    margin-left: $chat-message-level-2-offset;
   }
 
   &.level-1 {
-    margin-left: $chat-msg-level-1-offset;
+    margin-left: $chat-message-level-1-offset;
   }
 
   /* IMAGE */
 
-  .chat-msg-img {
+  .chat-message-img {
     order: 1;
   }
 
   /* CONTENT */
 
-  .chat-msg-content {
+  .chat-message-content {
     order: 2;
     margin-left: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
   }
 
   // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proof, use feature detection instead
 
-  _:-ms-lang(x), & .chat-msg-content {
+  _:-ms-lang(x), & .chat-message-content {
     margin-left: $gutter;
   }
 

@@ -5,31 +5,11 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
- * @require core/paths/variables.scss
  * @require widgets/container/variables.scss
- * @require widgets/popover/variables.scss
  * ========================================================================= */
 
-/* LEVELS */
+/* CHAT */
 
-$chat-msg-level-1-offset: 0 !default;
-$chat-msg-level-2-offset: 4.5em !default;
-$chat-msg-level-3-offset: $chat-msg-level-2-offset * 2 !default;
-
-/* IMAGE */
-
-$chat-msg-img-size: 3em !default;
-$chat-msg-img-rounded: true !default;
-
-$chat-msg-img-border-radius: $container-border-radius !default;
-
-$chat-msg-img-border-width: 1px !default;
-$chat-msg-img-border-style: solid !default;
-$chat-msg-img-border-color: inherit !default;
-
-$chat-msg-img-hover-opacity: .8 !default;
-
-/* ANIMATION */
-
-$chat-msg-animation-duration: $animation-fast !default;
+$chat-color: $container-color !default;
+$chat-color-force: false !default;
+$chat-color-basic: true !default;

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Chat - No tip - Directions - Right
+ * Svelto - Widgets - Chat - Message - No tip - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,12 +8,12 @@
  * @require ../no_tip.scss
  * ========================================================================= */
 
-/* RIGHT */
+/* LEFT */
 
-.chat-msg.no-tip.direction-right {
+.chat-message.no-tip.direction-left {
 
-  .chat-msg-content {
-    margin-right: $gutter;
+  .chat-message-content {
+    margin-left: $gutter;
   }
 
 }

@@ -5,56 +5,15 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.scss
- * @require decorators/blurred/blurred.scss
- * @require decorators/raisable/raisable.scss
+ * @require decorators/colors/colors.scss
+ * @require widgets/container/container.scss
  * ========================================================================= */
+
+//TODO: Add support for bidirectional chat
 
 /* CHAT */
 
-.chat-msg {
-
-  @extend %widget;
-  @include children-no-gutter ();
-  display: flex;
-
-  /* IMAGE */
-
-  .chat-msg-img,
-  .chat-msg-img img {
-    @include dimension ( $chat-msg-img-size );
-    border-radius: if( $chat-msg-img-rounded, $circular-border-radius, $chat-msg-img-border-radius );
-    overflow: hidden;
-  }
-
-  img.chat-msg-img,
-  .chat-msg-img img {
-    border-width: $chat-msg-img-border-width;
-    border-style: $chat-msg-img-border-style;
-    border-color: $chat-msg-img-border-color;
-    // Transitioning `filter`  in order to support `blurred`
-    // Transitioning `box-shadow`  in order to support `raisable`
-    transition-property: opacity, filter, box-shadow;
-    transition-duration: $chat-msg-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
-  }
-
-  a.chat-msg-img:hover,
-  .chat-msg-img a:hover {
-
-    img {
-      opacity: $chat-msg-img-hover-opacity;
-    }
-
-    .overlay + img {
-      opacity: 1;
-    }
-
-  }
-
-  /* CONTENT */
-
-  .chat-msg-content {
-    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
-  }
-
+.chat {
+  @extend %container;
+  @include color ( $chat-color, $chat-color-force, $chat-color-basic );
 }

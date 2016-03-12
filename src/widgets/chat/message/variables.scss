@@ -1,0 +1,35 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
+ * @require widgets/container/variables.scss
+ * @require widgets/popover/variables.scss
+ * ========================================================================= */
+
+/* LEVELS */
+
+$chat-message-level-1-offset: 0 !default;
+$chat-message-level-2-offset: 4.5em !default;
+$chat-message-level-3-offset: $chat-message-level-2-offset * 2 !default;
+
+/* IMAGE */
+
+$chat-message-img-size: 3em !default;
+$chat-message-img-rounded: true !default;
+
+$chat-message-img-border-radius: $container-border-radius !default;
+
+$chat-message-img-border-width: 1px !default;
+$chat-message-img-border-style: solid !default;
+$chat-message-img-border-color: inherit !default;
+
+$chat-message-img-hover-opacity: .8 !default;
+
+/* ANIMATION */
+
+$chat-message-animation-duration: $animation-fast !default;
