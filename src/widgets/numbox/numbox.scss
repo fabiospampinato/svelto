@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Stepper
+ * Svelto - Widgets - Numbox
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,15 +10,15 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-/* STEPPER */
+/* NUMBOX */
 
-.stepper {
+.numbox {
 
   @extend %widget;
   @include children-no-gutter ();
-  @include color ( $stepper-color, $stepper-color-force, $stepper-color-basic );
+  @include color ( $numbox-color, $numbox-color-force, $numbox-color-basic );
   display: flex;
-  border-radius: $stepper-border-radius;
+  border-radius: $numbox-border-radius;
 
   /* SEGMENTS */
 

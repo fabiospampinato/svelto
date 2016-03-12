@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Stepper
+ * Svelto - Widgets - Numbox
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -15,9 +15,9 @@
   /* CONFIG */
 
   let config = {
-    name: 'stepper',
+    name: 'numbox',
     plugin: true,
-    selector: '.stepper',
+    selector: '.numbox',
     options: {
       min: 0,
       max: 100,
@@ -29,8 +29,8 @@
         step: 'step'
       },
       selectors: {
-        decreaser: '.stepper-decreaser',
-        increaser: '.stepper-increaser',
+        decreaser: '.numbox-decreaser',
+        increaser: '.numbox-increaser',
         input: 'input'
       },
       keystrokes: {
@@ -43,18 +43,18 @@
     }
   };
 
-  /* STEPPER */
+  /* NUMBOX */
 
-  class Stepper extends Widgets.Widget {
+  class Numbox extends Widgets.Widget {
 
     /* SPECIAL */
 
     _variables () {
 
-      this.$stepper = this.$element;
-      this.$input = this.$stepper.find ( this.options.selectors.input );
-      this.$decreaser = this.$stepper.find ( this.options.selectors.decreaser );
-      this.$increaser = this.$stepper.find ( this.options.selectors.increaser );
+      this.$numbox = this.$element;
+      this.$input = this.$numbox.find ( this.options.selectors.input );
+      this.$decreaser = this.$numbox.find ( this.options.selectors.decreaser );
+      this.$increaser = this.$numbox.find ( this.options.selectors.increaser );
 
       this._prevValue = false;
 
@@ -68,9 +68,9 @@
 
       /* OPTIONS */
 
-      this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
-      this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );
-      this.options.step = Number ( this.$stepper.data ( this.options.datas.step ) || this.options.step );
+      this.options.min = Number ( this.$numbox.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$numbox.data ( this.options.datas.max ) || this.options.max );
+      this.options.step = Number ( this.$numbox.data ( this.options.datas.step ) || this.options.step );
       this.options.value = this._sanitizeValue ( value || this.options.value );
 
       /* UPDATE */
@@ -238,6 +238,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Stepper, config, Widgets );
+  Factory.init ( Numbox, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

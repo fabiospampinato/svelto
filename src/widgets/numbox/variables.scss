@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Stepper (Variables)
+ * Svelto - Widgets - Numbox (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,10 +8,10 @@
  * @require widgets/label/variables.scss
  * ========================================================================= */
 
-/* STEPPER */
+/* NUMBOX */
 
-$stepper-color: $label-color !default;
-$stepper-color-force: false !default;
-$stepper-color-basic: true !default;
+$numbox-color: $label-color !default;
+$numbox-color-force: false !default;
+$numbox-color-basic: true !default;
 
-$stepper-border-radius: $label-border-radius !default;
+$numbox-border-radius: $label-border-radius !default;
