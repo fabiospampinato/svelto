@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
- * @require lib/bteach/bteach.js
  * ========================================================================= */
 
 (function ( $, _, Svelto ) {
@@ -27,9 +26,7 @@
   /* DEFAULTS */
 
   let defaults = {
-    startIndex : false, // Useful for speeding up the searching process if we may already guess the initial position...
     point: false, // Used for the punctual search
-    binarySearch: true, // toggle the binary search when performing a punctual search
     $comparer: false, // Used for the overlapping search
     $not: false,
     onlyBest: false
@@ -69,7 +66,11 @@
 
       }
 
-      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ]) : $(nodes);
+      return nodes.length
+               ? options.onlyBest
+                 ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ])
+                 : $(nodes)
+               : false;
 
     }
 
@@ -77,77 +78,23 @@
 
     if ( options.point ) {
 
-      let $touched;
+      for ( let searchable of $searchable ) {
 
-      if ( options.binarySearch ) {
+        let rect = $.getRect ( searchable );
 
-        $searchable.btEach ( function () {
+        if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
 
-          let rect = $.getRect ( this );
-
-          if ( options.point.Y >= rect.top ) {
-
-            if ( options.point.Y <= rect.bottom ) {
-
-              if ( options.point.X >= rect.left ) {
-
-                if ( options.point.X <= rect.right ) {
-
-                  $touched = $(this);
-
-                  return false;
-
-                } else {
-
-                  return 1;
-
-                }
-
-              } else {
-
-                return -1;
-
-              }
-
-            } else {
-
-              return 1;
-
-            }
-
-
-          } else {
-
-            return -1;
-
-          }
-
-
-        }, options.startIndex );
-
-        return $touched || $();
-
-      } else {
-
-        for ( let searchable of $searchable ) {
-
-          let rect = $.getRect ( searchable );
-
-          if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
-
-            $touched = $(searchable);
-
-            break;
-
-          }
+          return $(searchable);
 
         }
-
-        return $touched || $();
 
       }
 
     }
+
+    /* DEFAULT */
+
+    return false;
 
   };
 
