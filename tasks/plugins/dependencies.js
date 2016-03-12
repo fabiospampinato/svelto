@@ -150,7 +150,7 @@ var logFiles = function ( files ) {
 
     for ( var i = 0, l = files.length; i < l; i++ ) {
 
-      list += _.padRight ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
+      list += _.padEnd ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
 
       if ( i + 1 < l ) {
 
