@@ -29,11 +29,11 @@
   min-height: $badge-min-height;
   margin: 0 !important;
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  &.outlined {
-    min-width: calc(#{$badge-min-width} + #{$outline-width * 2});
-    min-height: calc(#{$badge-min-height} + #{$outline-width * 2});    
+  &.bordered {
+    min-width: calc(#{$badge-min-width} + #{$border-width * 2});
+    min-height: calc(#{$badge-min-height} + #{$border-width * 2});    
   }
 
 }

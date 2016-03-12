@@ -22,7 +22,7 @@
       @include border-bottom-radius ( inherit );
     }
 
-    &.outlined > :not(.expander-content) {
+    &.bordered > :not(.expander-content) {
       margin-bottom: -1px !important;
     }
 

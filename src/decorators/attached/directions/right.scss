@@ -17,10 +17,10 @@
   @include border-right-radius ( inherit !important );
   @include border-left-radius ( 0 !important );
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  .outlined > &.outlined {
-    @include absolute ( ( - $outline-width ) ( - $outline-width ) ( - $outline-width ) false );
+  .bordered > &.bordered {
+    @include absolute ( ( - $border-width ) ( - $border-width ) ( - $border-width ) false );
   }
 
 }

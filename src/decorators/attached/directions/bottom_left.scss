@@ -16,10 +16,10 @@
   @include absolute ( false false 0 0 );
   border-bottom-left-radius: inherit;
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  .outlined > &.outlined {
-    @include absolute ( false false ( - $outline-width ) ( - $outline-width ) );
+  .bordered > &.bordered {
+    @include absolute ( false false ( - $border-width ) ( - $border-width ) );
   }
 
 }

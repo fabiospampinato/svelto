@@ -75,27 +75,27 @@
     transform: translateX(-100%);
   }
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  &.outlined {
+  &.bordered {
 
     /* BEFORE / AFTER */
 
     &.ribbon-left:before,
     &.ribbon-right:after {
-      bottom: calc( (#{$outline-width} + #{$label-ribbon-fold-size}) * -1 );
+      bottom: calc( (#{$border-width} + #{$label-ribbon-fold-size}) * -1 );
     }
 
     /* BEFORE */
 
     &.ribbon-left:before {
-      left: - $outline-width;
+      left: - $border-width;
     }
 
     /* AFTER */
 
     &.ribbon-right:after {
-      right: - $outline-width;
+      right: - $border-width;
     }
 
   }

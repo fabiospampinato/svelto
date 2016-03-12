@@ -29,10 +29,10 @@
     transform: translate(63%, 63%);
   }
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  .outlined > & {
-    @include absolute ( false ( - $outline-width ) ( - $outline-width ) false );
+  .bordered > & {
+    @include absolute ( false ( - $border-width ) ( - $border-width ) false );
   }
 
 }

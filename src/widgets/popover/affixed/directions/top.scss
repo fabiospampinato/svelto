@@ -12,5 +12,5 @@
 
 .popover.affixed.position-top {
   @include border-bottom-radius ( 0 );
-  margin-bottom: - $outline-width;
+  margin-bottom: - $border-width;
 }

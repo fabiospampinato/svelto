@@ -22,10 +22,10 @@
     background-color: $obscured-bg-color;
   }
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  &.outlined:before {
-    @include absolute ( - $outline-width );
+  &.bordered:before {
+    @include absolute ( - $border-width );
   }
 
 }

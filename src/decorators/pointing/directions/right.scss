@@ -22,10 +22,10 @@
     clip-path: polygon(0 0, 100% 100%, 100% 0);
   }
 
-  /* OUTLINED */
+  /* BORDERED */
 
-  &.outlined:after {
-    margin-right: - $outline-width;
+  &.bordered:after {
+    margin-right: - $border-width;
   }
 
 }

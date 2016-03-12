@@ -23,12 +23,12 @@ input[type="file"] {
   border-radius: inherit;
   z-index: $input-file-z-index;
 
-  /* OUTLINED */
+  /* BORDERED */
 
   //FIXME: Not stretching properly, at maximum it reached 100% width and height
 
-  // .outlined > & {
-  //   @include absolute ( - $outline-width );
+  // .bordered > & {
+  //   @include absolute ( - $border-width );
   // }
 
 }

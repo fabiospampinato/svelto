@@ -92,16 +92,16 @@
 
   }
 
-  /* NEXT CHILDREN OUTLINED */
+  /* NEXT CHILDREN BORDERED */
 
-  > .outlined + .outlined {
+  > .bordered + .bordered {
 
     &:not(.card-footer) {
       border-top-width: 0;
     }
 
     &.card-footer {
-      margin-top: - $outline-width;
+      margin-top: - $border-width;
     }
 
   }

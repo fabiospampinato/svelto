@@ -1,23 +1,12 @@
 
 /* =========================================================================
- * Svelto - Decorators - Outlined - Color
+ * Svelto - Decorators - Bordered (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../outlined.scss
  * ========================================================================= */
 
-/* COLORS */
+/* BORDERED */
 
-@each $name, $datas in $colors {
-
-  $class: color-get-class( $name );
-
-  $bg: nth( $datas, 1 );
-
-  .outline-#{$class} {
-    border-color: $bg !important;
-  }
-
-}
+$border-width: 1px !default;
+$border-style: solid !default;

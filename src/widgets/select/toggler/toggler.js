@@ -41,7 +41,7 @@
       popover: {
         size: '',
         color: Colors.white,
-        css: Widgets.Popover.config.options.classes.affixed + ' outlined'
+        css: Widgets.Popover.config.options.classes.affixed + ' bordered'
       },
       classes: {
         selected: 'active highlighted highlight-left',

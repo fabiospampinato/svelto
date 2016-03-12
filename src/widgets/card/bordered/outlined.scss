@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Card - Outlined
+ * Svelto - Widgets - Card - Bordered
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,32 +8,32 @@
  * @require ../card.scss
  * ========================================================================= */
 
-/* OUTLINED */
+/* BORDERED */
 
-.card.outlined {
+.card.bordered {
 
-  /* INSET OUTLINED */
+  /* INSET BORDERED */
 
-  > .outlined {
+  > .bordered {
 
-    margin-left: - $outline-width;
-    margin-right: - $outline-width;
+    margin-left: - $border-width;
+    margin-right: - $border-width;
 
     /* FIRST / LAST */
 
     &:first-child:not(.overlay):not(.ripple-circle) {
-      margin-top: - $outline-width;
+      margin-top: - $border-width;
     }
 
     &:last-child {
-      margin-bottom: - $outline-width !important;
+      margin-bottom: - $border-width !important;
     }
 
   }
 
-  > :first-child.overlay + .outlined,
-  > :first-child.ripple-circle + .outlined {
-    margin-top: - $outline-width;
+  > :first-child.overlay + .bordered,
+  > :first-child.ripple-circle + .bordered {
+    margin-top: - $border-width;
   }
 
 }

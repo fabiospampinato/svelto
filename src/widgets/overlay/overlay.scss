@@ -17,17 +17,17 @@
   margin: 0 !important;
   transition: opacity $overlay-animation-duration;
   border-radius: inherit;
-  
+
   /* SCROLLABLE */
 
   &:not(.card):not(.layout) {
     overflow: auto;
   }
 
-  /* OUTLINED PARENT */
+  /* BORDERED PARENT */
 
-  .outlined > & {
-    @include absolute ( - $outline-width );
+  .bordered > & {
+    @include absolute ( - $border-width );
   }
 
 }

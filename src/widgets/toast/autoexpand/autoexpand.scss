@@ -35,7 +35,7 @@
 
       .toast {
         border-top-width: 0;
-        border-bottom-width: $outline-width;
+        border-bottom-width: $border-width;
         border-bottom-style: solid;
       }
 
@@ -55,7 +55,7 @@
 
       .toast {
         border-bottom-width: 0;
-        border-top-width: $outline-width;
+        border-top-width: $border-width;
         border-top-style: solid;
       }
 

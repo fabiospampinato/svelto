@@ -29,9 +29,9 @@
 
       @include border-bottom-radius ( 0 );
 
-      /* OUTLINED */
+      /* BORDERED */
 
-      &.outlined {
+      &.bordered {
         border-bottom-width: 0;
       }
 
