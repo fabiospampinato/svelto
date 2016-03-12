@@ -1,11 +1,22 @@
 
 /* =========================================================================
- * Svelto - Widgets - Embedded - Ratios (Variables)
+ * Svelto - Widgets - Embed - Ratios
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../embed.scss
  * ========================================================================= */
 
 /* RATIOS */
 
-$embedded-ratios: ( 21 9 ), ( 16 9 ), ( 4 3 ), ( 1 1 ) !default;
+@each $ratio in $embed-ratios {
+
+  $width: nth($ratio, 1);
+  $height: nth($ratio, 2);
+
+  .embed.ratio-#{$width}-#{$height} {
+    padding-bottom: ( $height * 100 / $width ) * 1%;
+  }
+
+}
