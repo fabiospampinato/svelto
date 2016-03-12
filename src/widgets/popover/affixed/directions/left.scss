@@ -1,25 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown (Variables)
+ * Svelto - Widgets - Popover - Affixed - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
- * @require core/paths/variables.scss
+ * @require ../affixed.scss
  * ========================================================================= */
 
-/* DROPDOWN */
+/* LEFT */
 
-$dropdown-z-index: 1500 !default;
-
-$dropdown-z-depth: 4 !default;
-$dropdown-z-depth-force: true !default;
-$dropdown-z-depth-basic: true !default;
-
-$dropdown-max-width: 70vw !default;
-$dropdown-max-height: 65vh !default;
-
-/* ANIMATION */
-
-$dropdown-animation-duration: $animation-fast !default;
+.popover.affixed.position-left {
+  margin-right: - $outline-width;
+}

@@ -1,24 +1,25 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Moving
+ * Svelto - Widgets - Popover (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../dropdown.scss
+ * @require core/animations/variables.scss
+ * @require core/paths/variables.scss
  * ========================================================================= */
 
-/* MOVING */
+/* POPOVER */
 
-.dropdown.moving {
+$popover-z-index: 1500 !default;
 
-  transition: transform $dropdown-animation-duration;
+$popover-z-depth: 4 !default;
+$popover-z-depth-force: true !default;
+$popover-z-depth-basic: true !default;
 
-  /* TIP */
+$popover-max-width: 70vw !default;
+$popover-max-height: 65vh !default;
 
-  &:after {
-    transition-property: left, top; //TODO: Animate `transform` instead
-    transition-duration: $dropdown-animation-duration;
-  }
+/* ANIMATION */
 
-}
+$popover-animation-duration: $animation-fast !default;

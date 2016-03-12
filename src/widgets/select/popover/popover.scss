@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Dropdown
+ * Svelto - Widgets - Select - Popover
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,11 +9,11 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-/* DROPDOWN */
+/* POPOVER */
 
-.select-dropdown {
+.select-popover {
 
-  @include z-depth ( $select-dropdown-z-depth, $select-dropdown-z-depth-force, $select-dropdown-z-depth-basic );
+  @include z-depth ( $select-popover-z-depth, $select-popover-z-depth-force, $select-popover-z-depth-basic );
 
   /* CARD BLOCK */
 

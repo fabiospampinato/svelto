@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
- * @require widgets/dropdown/dropdown.js
+ * @require widgets/popover/popover.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -23,7 +23,7 @@
     plugin: true,
     selector: '.select-toggler',
     templates: {
-      base: '<div class="dropdown select-dropdown card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
+      base: '<div class="popover select-popover card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
               '<div class="card-block">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
                   '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
@@ -38,14 +38,14 @@
               '</div>'
     },
     options: {
-      dropdown: {
+      popover: {
         size: '',
         color: Colors.white,
-        css: Widgets.Dropdown.config.options.classes.affixed + ' outlined'
+        css: Widgets.Popover.config.options.classes.affixed + ' outlined'
       },
       classes: {
         selected: 'active highlighted highlight-left',
-        affixed: Widgets.Dropdown.config.options.classes.affixed
+        affixed: Widgets.Popover.config.options.classes.affixed
       },
       datas: {
         value: 'value'
@@ -79,7 +79,7 @@
 
       this.selectOptions = [];
 
-      this.$dropdown = false;
+      this.$popover = false;
 
     }
 
@@ -92,7 +92,7 @@
         this.$select.addClass ( this.options.classes.hidden );
 
         this.___selectOptions ();
-        this.___dropdown ();
+        this.___popover ();
 
       }
 
@@ -128,7 +128,7 @@
 
         /* BUTTON TAP */
 
-        this._on ( this.$dropdown, Pointer.tap, this.options.selectors.button, this.__buttonTap );
+        this._on ( this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap );
 
       }
 
@@ -136,7 +136,7 @@
 
     __buttonTap ( event ) {
 
-      this.$dropdown.dropdown ( 'close' );
+      this.$popover.popover ( 'close' );
 
       this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
 
@@ -178,44 +178,44 @@
 
     }
 
-    /* DROPDOWN */
+    /* POPOVER */
 
-    ___dropdown () {
+    ___popover () {
 
-      let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.dropdown ) );
+      let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.popover ) );
 
-      this.$dropdown = $(html).appendTo ( this.$layout );
-      this.$buttons = this.$dropdown.find ( this.options.selectors.button );
+      this.$popover = $(html).appendTo ( this.$layout );
+      this.$buttons = this.$popover.find ( this.options.selectors.button );
 
-      this.$dropdown.dropdown ({
+      this.$popover.popover ({
         positionate: {
           axis: 'y',
           strict: true
         },
         callbacks: {
-          beforeopen: this.__setDropdownWidth.bind ( this ),
-          open: this.__dropdownOpen.bind ( this ),
-          close: this.__dropdownClose.bind ( this )
+          beforeopen: this.__setPopoverWidth.bind ( this ),
+          open: this.__popoverOpen.bind ( this ),
+          close: this.__popoverClose.bind ( this )
         }
       });
 
-      this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).dropdownToggler ();
+      this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).popoverToggler ();
 
-      this._updateDropdown ();
+      this._updatePopover ();
 
     }
 
-    __setDropdownWidth () {
+    __setPopoverWidth () {
 
-      if ( this.$dropdown.is ( '.' + this.options.classes.affixed ) ) {
+      if ( this.$popover.is ( '.' + this.options.classes.affixed ) ) {
 
-        this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
+        this.$popover.css ( 'min-width', this.$toggler.outerWidth () );
 
       }
 
     }
 
-    __dropdownOpen () {
+    __popoverOpen () {
 
       this.___buttonTap ();
 
@@ -223,7 +223,7 @@
 
     }
 
-    __dropdownClose () {
+    __popoverClose () {
 
       this._reset ();
 
@@ -249,7 +249,7 @@
 
     }
 
-    _updateDropdown () {
+    _updatePopover () {
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
@@ -264,7 +264,7 @@
 
       if ( !Browser.is.touchDevice ) {
 
-        this._updateDropdown ();
+        this._updatePopover ();
 
       }
 

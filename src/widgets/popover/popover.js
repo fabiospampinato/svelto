@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown
+ * Svelto - Widgets - Popover
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -18,9 +18,9 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdown',
+    name: 'popover',
     plugin: true,
-    selector: '.dropdown',
+    selector: '.popover',
     options: {
       positionate: {}, // Extending `$.positionate` options
       spacing: {
@@ -29,7 +29,7 @@
         normal: 12
       },
       classes: {
-        anchorDirection: 'dropdown-anchor-$1',
+        anchorDirection: 'popover-anchor-$1',
         noTip: 'no-tip',
         affixed: 'affixed',
         moving: 'moving',
@@ -48,20 +48,20 @@
     }
   };
 
-  /* DROPDOWN */
+  /* POPOVER */
 
-  class Dropdown extends Widgets.Widget {
+  class Popover extends Widgets.Widget {
 
     /* SPECIAL */
 
     _variables () {
 
-      this.$dropdown = this.$element;
+      this.$popover = this.$element;
 
-      this.$dropdown.addClass ( this.guc );
+      this.$popover.addClass ( this.guc );
 
-      this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
-      this.isAffixed = this.$dropdown.hasClass ( this.options.classes.affixed );
+      this.hasTip = !this.$popover.hasClass ( this.options.classes.noTip );
+      this.isAffixed = this.$popover.hasClass ( this.options.classes.affixed );
 
       this._isOpen = false;
 
@@ -89,7 +89,7 @@
 
     ___parentsScroll () {
 
-      let $parents = this.$dropdown.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
+      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
 
       this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
@@ -113,7 +113,7 @@
 
     __layoutTap ( event ) {
 
-      if ( event === this._openEvent || this.$dropdown.touching ({ point: $.eventXY ( event )} ).length ) return;
+      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event )} ).length ) return;
 
       this.close ();
 
@@ -130,7 +130,7 @@
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ( _.extend ({
+      this.$popover.positionate ( _.extend ({
         $anchor: this.$anchor,
         pointer: noTip ? false : 'auto',
         spacing: spacing,
@@ -224,7 +224,7 @@
 
           this._wasMoving = true;
 
-          this.$dropdown.addClass ( this.options.classes.moving );
+          this.$popover.addClass ( this.options.classes.moving );
 
         }
 
@@ -242,13 +242,13 @@
 
       this._frame ( function () {
 
-        this.$dropdown.addClass ( 'show' );
+        this.$popover.addClass ( 'show' );
 
         this._positionate ();
 
         this._frame ( function () {
 
-          this.$dropdown.addClass ( this.options.classes.open );
+          this.$popover.addClass ( this.options.classes.open );
 
           this._lock = false;
 
@@ -289,17 +289,17 @@
 
       this._frame ( function () {
 
-        this.$dropdown.removeClass ( this.options.classes.open  );
+        this.$popover.removeClass ( this.options.classes.open  );
 
         if ( this._wasMoving ) {
 
-          this.$dropdown.removeClass ( this.options.classes.moving );
+          this.$popover.removeClass ( this.options.classes.moving );
 
         }
 
         this._delay ( function () {
 
-          this.$dropdown.removeClass ( this.options.classes.show );
+          this.$popover.removeClass ( this.options.classes.show );
 
           this._lock = false;
 
@@ -319,6 +319,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Dropdown, config, Widgets );
+  Factory.init ( Popover, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations ));

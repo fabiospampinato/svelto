@@ -1,11 +1,13 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Closed (Variables)
+ * Svelto - Widgets - Select - Popover (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* CLOSED */
+/* POPOVER */
 
-$dropdown-closed-offset: - 1rem !default;
+$select-popover-z-depth: 1 !default;
+$select-popover-z-depth-force: true !default;
+$select-popover-z-depth-basic: true !default;

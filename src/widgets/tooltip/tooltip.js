@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/dropdown/dropdown.js
+ * @require widgets/popover/popover.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -22,7 +22,7 @@
 
   /* TOOLTIP */
 
-  class Tooltip extends Widgets.Dropdown {}
+  class Tooltip extends Widgets.Popover {}
 
   /* FACTORY */
 

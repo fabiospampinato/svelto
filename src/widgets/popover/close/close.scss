@@ -1,15 +1,18 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Affixed - Directions - Right
+ * Svelto - Widgets - Popover - Close
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../affixed.scss
  * ========================================================================= */
 
-/* RIGHT */
+/* CLOSE */
 
-.dropdown.affixed.position-right {
-  margin-left: - $outline-width;
+.popover:not(.show) {
+  display: none;
+}
+
+.popover:not(.open) {
+  opacity: 0;
+  margin-top: $popover-closed-offset !important;
 }

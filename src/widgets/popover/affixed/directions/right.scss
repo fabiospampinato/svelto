@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Affixed - Directions - Bottom
+ * Svelto - Widgets - Popover - Affixed - Directions - Right
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,9 +8,8 @@
  * @require ../affixed.scss
  * ========================================================================= */
 
-/* BOTTOM */
+/* RIGHT */
 
-.dropdown.affixed.position-bottom {
-  @include border-top-radius ( 0 );
-  margin-top: - $outline-width;
+.popover.affixed.position-right {
+  margin-left: - $outline-width;
 }

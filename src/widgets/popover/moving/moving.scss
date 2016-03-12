@@ -1,16 +1,24 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Affixed
+ * Svelto - Widgets - Popover - Moving
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../dropdown.scss
- * @require ../no_tip/no_tip.scss
+ * @require ../popover.scss
  * ========================================================================= */
 
-/* DROPDOWN */
+/* MOVING */
 
-.dropdown.affixed {
-  @extend .dropdown.no-tip;
+.popover.moving {
+
+  transition: transform $popover-animation-duration;
+
+  /* TIP */
+
+  &:after {
+    transition-property: left, top; //TODO: Animate `transform` instead
+    transition-duration: $popover-animation-duration;
+  }
+
 }

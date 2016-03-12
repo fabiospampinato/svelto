@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown
+ * Svelto - Widgets - Popover
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,36 +8,36 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Test a multi-level dropdown menu
+//TODO: Test a multi-level popover menu
 
-/* DROPDOWN */
+/* POPOVER */
 
-.dropdown {
+.popover {
 
   @include fixed ( 0 false false 0 );
-  @include z-depth ( $dropdown-z-depth, $dropdown-z-depth-force, $dropdown-z-depth-basic );
-  z-index: $dropdown-z-index;
-  max-width: $dropdown-max-width;
+  @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
+  z-index: $popover-z-index;
+  max-width: $popover-max-width;
   margin: 0 !important;
   transition-property: opacity, margin-top;
-  transition-duration: $dropdown-animation-duration;
+  transition-duration: $popover-animation-duration;
 
   /* NOT CONTAINER */
 
   &:not(.container) {
-    max-height: $dropdown-max-height;
+    max-height: $popover-max-height;
   }
 
 }
 
-// Card dropdown max height fix for IE10+
+// Card popover max height fix for IE10+
 
-_:-ms-input-placeholder, :root .dropdown.card {
+_:-ms-input-placeholder, :root .popover.card {
 
   max-height: none;
 
   > .card-block {
-    max-height: $dropdown-max-height * .9;
+    max-height: $popover-max-height * .9;
   }
 
 }

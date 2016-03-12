@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Widgets - Dropdown - Targeters - Opener
+ * Svelto - Widgets - Popover - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../dropdown.js
- * @require widgets/targeter/opener/opener.js
+ * @require ../popover.js
+ * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {
@@ -16,20 +16,20 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownOpener',
+    name: 'popoverCloser',
     plugin: true,
-    selector: '.dropdown-opener',
+    selector: '.popover-closer',
     options: {
-      widget: Widgets.Dropdown
+      widget: Widgets.Popover
     }
   };
 
-  /* DROPDOWN OPENER */
+  /* POPOVER CLOSER */
 
-  class DropdownOpener extends Widgets.Opener {}
+  class PopoverCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init ( DropdownOpener, config, Widgets );
+  Factory.init ( PopoverCloser, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
