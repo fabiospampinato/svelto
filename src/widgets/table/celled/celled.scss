@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Table - Bordered
+ * Svelto - Widgets - Table - Celled
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,9 +8,9 @@
  * @require ../separated/separated.scss
  * ========================================================================= */
 
-/* BORDERED */
+/* CELLED */
 
-.table.bordered {
+.table.celled {
 
   @extend .table.separated;
 
@@ -20,10 +20,10 @@
   tbody td,
   tfoot td {
 
-    border-left-width: $table-bordered-border-width;
+    border-left-width: $table-celled-border-width;
 
     &:last-child {
-      border-right-width: $table-bordered-border-width;
+      border-right-width: $table-celled-border-width;
     }
 
   }
@@ -34,11 +34,11 @@
 
     &:first-child td,
     &.table-row-empty + tr td {
-      border-top-width: $table-bordered-border-width;
+      border-top-width: $table-celled-border-width;
     }
 
     &:last-child td {
-      border-bottom-width: $table-bordered-border-width;
+      border-bottom-width: $table-celled-border-width;
     }
 
   }
@@ -48,7 +48,7 @@
   thead {
 
     th {
-      border-top-width: $table-bordered-border-width;
+      border-top-width: $table-celled-border-width;
     }
 
     ~ tbody tr:first-child td,
@@ -63,7 +63,7 @@
   tfoot {
 
     td {
-      border-bottom-width: $table-bordered-border-width;
+      border-bottom-width: $table-celled-border-width;
     }
 
     ~ tbody tr:last-child td {
