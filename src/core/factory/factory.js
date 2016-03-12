@@ -59,7 +59,7 @@
 
       if ( _.isObject ( namespace ) ) {
 
-        let name = _.capitalize ( Widget.config.name );
+        let name = _.upperFirst ( Widget.config.name );
 
         namespace[name] = Widget;
 

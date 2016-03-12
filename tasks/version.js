@@ -16,6 +16,6 @@ var _       = require ( 'lodash' ),
 
 gulp.task ( 'version', 'Display Svelto\'s version', function () {
 
-  console.log ( _.capitalize ( release.name ) + ' version: ' + release.version );
+  console.log ( _.upperFirst ( release.name ) + ' version: ' + release.version );
 
 });
