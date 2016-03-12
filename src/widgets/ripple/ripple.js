@@ -83,8 +83,8 @@
         let offset = this.$ripple.offset ();
 
         this._show ({
-          X: offset.left + ( this.$ripple.outerWidth () / 2 ),
-          Y: offset.top + ( this.$ripple.outerHeight () / 2 )
+          x: offset.left + ( this.$ripple.outerWidth () / 2 ),
+          y: offset.top + ( this.$ripple.outerHeight () / 2 )
         });
 
       } else {
@@ -113,15 +113,15 @@
 
     /* SHOW */
 
-    _show ( point ) {
+    _show ( XY ) {
 
       let $circle = $(this._tmpl ( 'circle' ));
 
       /* SIZE */
 
       let offset = this.$ripple.offset (),
-          insetX = point.X - offset.left,
-          insetY = point.Y - offset.top,
+          insetX = XY.x - offset.left,
+          insetY = XY.y - offset.top,
           sideX = Math.max ( insetX, this.$ripple.outerWidth () - insetX ),
           sideY = Math.max ( insetY, this.$ripple.outerHeight () - insetY ),
           radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), // Basically the max the distances from the point to the corners

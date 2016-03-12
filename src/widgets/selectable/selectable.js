@@ -138,15 +138,15 @@
       let startXY = $.eventXY ( this.startEvent ),
           endXY = $.eventXY ( event ),
           deltaXY = {
-            X: endXY.X - startXY.X,
-            Y: endXY.Y - startXY.Y
+            x: endXY.x - startXY.x,
+            y: endXY.y - startXY.y
           },
           absDeltaXY = {
-            X: Math.abs ( deltaXY.X ),
-            Y: Math.abs ( deltaXY.Y )
+            x: Math.abs ( deltaXY.x ),
+            y: Math.abs ( deltaXY.y )
           };
 
-      if ( absDeltaXY.X >= this.options.moveThreshold || absDeltaXY.Y >= this.options.moveThreshold ) {
+      if ( absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold ) {
 
         this._off ( this.$document, Pointer.move, this.__move );
 

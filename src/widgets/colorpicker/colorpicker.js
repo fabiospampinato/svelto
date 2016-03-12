@@ -186,8 +186,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.hsv.s =  _.clamp ( XY.X, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.hsv.v =  100 - ( _.clamp ( XY.Y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( XY.x, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( XY.y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ( false );
 
@@ -267,7 +267,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.hsv.h = 359 - ( _.clamp ( XY.Y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( XY.y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ( false );
 

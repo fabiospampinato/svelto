@@ -90,28 +90,28 @@
 
         let endXY = $.eventXY ( event ),
             deltaXY = {
-              X: endXY.X - this._startXY.X,
-              Y: endXY.Y - this._startXY.Y
+              x: endXY.x - this._startXY.x,
+              y: endXY.y - this._startXY.y
             },
             absDeltaXY = {
-              X: Math.abs ( deltaXY.X ),
-              Y: Math.abs ( deltaXY.Y )
+              x: Math.abs ( deltaXY.x ),
+              y: Math.abs ( deltaXY.y )
             };
 
-        if ( absDeltaXY.X >= this.options.threshold || absDeltaXY.Y >= this.options.threshold ) {
+        if ( absDeltaXY.x >= this.options.threshold || absDeltaXY.y >= this.options.threshold ) {
 
           let orientation,
               direction;
 
-          if ( absDeltaXY.X > absDeltaXY.Y ) {
+          if ( absDeltaXY.x > absDeltaXY.y ) {
 
             orientation = 'horizontal';
-            direction = ( deltaXY.X > 0 ) ? 'right' : 'left';
+            direction = ( deltaXY.x > 0 ) ? 'right' : 'left';
 
           } else {
 
             orientation = 'vertical';
-            direction = ( deltaXY.Y > 0 ) ? 'bottom' : 'top';
+            direction = ( deltaXY.y > 0 ) ? 'bottom' : 'top';
 
           }
 

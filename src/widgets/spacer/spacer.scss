@@ -12,5 +12,5 @@
 
 .spacer {
   @extend %widget;
-  flex: 1000000 1 auto !important; // IE-10/11 sets flex-shrink to 0
+  flex: 1 1 auto !important; // IE-10/11 sets flex-shrink to 0
 }

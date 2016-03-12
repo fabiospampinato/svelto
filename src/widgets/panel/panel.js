@@ -177,19 +177,19 @@
       switch ( this.options.direction ) {
 
         case 'left':
-          if ( data.startXY.X - layoutOffset.left > this.options.flick.treshold ) return;
+          if ( data.startXY.x - layoutOffset.left > this.options.flick.treshold ) return;
           break;
 
         case 'right':
-          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.X > this.options.flick.treshold ) return;
+          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.x > this.options.flick.treshold ) return;
           break;
 
         case 'top':
-          if ( data.startXY.Y - layoutOffset.top > this.options.flick.treshold ) return;
+          if ( data.startXY.y - layoutOffset.top > this.options.flick.treshold ) return;
           break;
 
         case 'bottom':
-          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.Y > this.options.flick.treshold ) return;
+          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.y > this.options.flick.treshold ) return;
           break;
 
       }

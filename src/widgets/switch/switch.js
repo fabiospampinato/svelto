@@ -152,7 +152,7 @@
 
       if ( data.motion ) {
 
-        let isChecked = ( data.dragXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        let isChecked = ( data.dragXY.x + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
 
         this.toggle ( isChecked, true );
 

@@ -82,8 +82,8 @@
     } else {
 
       return {
-        X: matrix[4],
-        Y: matrix[5]
+        x: matrix[4],
+        y: matrix[5]
       };
 
     }

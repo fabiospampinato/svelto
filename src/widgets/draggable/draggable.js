@@ -116,12 +116,12 @@
 
     /* ACTIONS */
 
-    _centerToPoint ( point, suppressClasses ) {
+    _centerToPoint ( XY, suppressClasses ) {
 
       let movableOffset = this.$movable.offset (),
           deltaXY = {
-            X: point.X - ( movableOffset.left + ( this.$movable.outerWidth () / 2 ) ),
-            Y: point.Y - ( movableOffset.top + ( this.$movable.outerHeight () / 2 ) )
+            x: XY.x - ( movableOffset.left + ( this.$movable.outerWidth () / 2 ) ),
+            y: XY.y - ( movableOffset.top + ( this.$movable.outerHeight () / 2 ) )
           };
 
       return this._actionMove ( deltaXY, suppressClasses );
@@ -133,8 +133,8 @@
       /* BASE */
 
       let baseXY = {
-        X: this.proxyXY ? this.proxyXY.X : this.initialXY.X,
-        Y: this.proxyXY ? this.proxyXY.Y : this.initialXY.Y
+        x: this.proxyXY ? this.proxyXY.x : this.initialXY.x,
+        y: this.proxyXY ? this.proxyXY.y : this.initialXY.y
       };
 
       /* INIT */
@@ -154,8 +154,8 @@
 
             let halfWidth = this.options.constrainer.center ? this.$movable.outerWidth () / 2 : 0;
 
-            this.translateX_min = constrainerOffset.left - ( movableOffset.left - baseXY.X ) - halfWidth;
-            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( movableOffset.left - baseXY.X ) + this.$movable.outerWidth () ) + halfWidth;
+            this.translateX_min = constrainerOffset.left - ( movableOffset.left - baseXY.x ) - halfWidth;
+            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( movableOffset.left - baseXY.x ) + this.$movable.outerWidth () ) + halfWidth;
 
           }
 
@@ -163,8 +163,8 @@
 
             let halfHeight = this.options.constrainer.center ? this.$movable.outerHeight () / 2 : 0;
 
-            this.translateY_min = constrainerOffset.top - ( movableOffset.top - baseXY.Y ) - halfHeight;
-            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( movableOffset.top - baseXY.Y ) + this.$movable.outerHeight () ) + halfHeight;
+            this.translateY_min = constrainerOffset.top - ( movableOffset.top - baseXY.y ) - halfHeight;
+            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( movableOffset.top - baseXY.y ) + this.$movable.outerHeight () ) + halfHeight;
 
           }
 
@@ -182,12 +182,12 @@
 
       /* CLAMPING */
 
-      let translateX = baseXY.X,
-          translateY = baseXY.Y;
+      let translateX = baseXY.x,
+          translateY = baseXY.y;
 
       if ( this.options.axis !== 'y' ) {
 
-        translateX += deltaXY.X;
+        translateX += deltaXY.x;
 
         if ( this.options.constrainer.$element ) {
 
@@ -199,7 +199,7 @@
 
       if ( this.options.axis !== 'x' ) {
 
-        translateY += deltaXY.Y;
+        translateY += deltaXY.y;
 
         if ( this.options.constrainer.$element ) {
 
@@ -212,22 +212,22 @@
       /* MODIFYING */
 
       let modifiedXY = {
-            X: this.options.axis !== 'y' ? this.options.modifiers.x ( translateX ) : false,
-            Y: this.options.axis !== 'x' ? this.options.modifiers.y ( translateY ) : false
+            x: this.options.axis !== 'y' ? this.options.modifiers.x ( translateX ) : false,
+            y: this.options.axis !== 'x' ? this.options.modifiers.y ( translateY ) : false
           };
 
       /* ABORTION */
 
-      if ( modifiedXY.X === false && modifiedXY.Y === false ) return baseXY;
+      if ( modifiedXY.x === false && modifiedXY.y === false ) return baseXY;
 
       /* SETTING */
 
       let endXY = {
-        X: _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X,
-        Y: _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y
+        x: _.isBoolean ( modifiedXY.x ) ? ( modifiedXY.x ? translateX : baseXY.x ) : modifiedXY.x,
+        y: _.isBoolean ( modifiedXY.y ) ? ( modifiedXY.y ? translateY : baseXY.y ) : modifiedXY.y
       };
 
-      this.$movable.translate ( endXY.X, endXY.Y );
+      this.$movable.translate ( endXY.x, endXY.y );
 
       /* MOTION */
 
@@ -314,11 +314,11 @@
 
           let scrollTop = this.$document.scrollTop ();
 
-  				if ( pointXY.Y - scrollTop <= this.options.scroll.sensitivity ) {
+  				if ( pointXY.y - scrollTop <= this.options.scroll.sensitivity ) {
 
           	this.$document.scrollTop ( scrollTop - this.options.scroll.speed );
 
-          } else if ( this.$window.height () - ( pointXY.Y - scrollTop ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.height () - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
           	this.$document.scrollTop ( scrollTop + this.options.scroll.speed );
 
@@ -330,11 +330,11 @@
 
           let scrollLeft = this.$document.scrollLeft ();
 
-  				if ( pointXY.X - scrollLeft <= this.options.scroll.sensitivity ) {
+  				if ( pointXY.x - scrollLeft <= this.options.scroll.sensitivity ) {
 
           	this.$document.scrollLeft ( scrollLeft - this.options.scroll.speed );
 
-          } else if ( this.$window.width () - ( pointXY.X - scrollLeft ) <= this.options.scroll.sensitivity ) {
+          } else if ( this.$window.width () - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
           	this.$document.scrollLeft ( scrollLeft + this.options.scroll.speed );
 
@@ -348,11 +348,11 @@
 
   			if ( this.options.axis !== 'x' ) {
 
-  				if ( ( parentOffset.top + this.scrollParent.offsetHeight ) - pointXY.Y <= this.options.scroll.sensitivity ) {
+  				if ( ( parentOffset.top + this.scrollParent.offsetHeight ) - pointXY.y <= this.options.scroll.sensitivity ) {
 
   					this.scrollParent.scrollTop += this.options.scroll.speed;
 
-  				} else if ( pointXY.Y - parentOffset.top <= this.options.scroll.sensitivity ) {
+  				} else if ( pointXY.y - parentOffset.top <= this.options.scroll.sensitivity ) {
 
   					this.scrollParent.scrollTop -= this.options.scroll.speed;
 
@@ -362,11 +362,11 @@
 
   			if ( this.options.axis !== 'y' ) {
 
-  				if ( ( parentOffset.left + this.scrollParent.offsetWidth ) - pointXY.X <= this.options.scroll.sensitivity ) {
+  				if ( ( parentOffset.left + this.scrollParent.offsetWidth ) - pointXY.x <= this.options.scroll.sensitivity ) {
 
   					this.scrollParent.scrollLeft += this.options.scroll.speed;
 
-  				} else if ( pointXY.X - parentOffset.left <= this.options.scroll.sensitivity ) {
+  				} else if ( pointXY.x - parentOffset.left <= this.options.scroll.sensitivity ) {
 
   					this.scrollParent.scrollLeft -= this.options.scroll.speed;
 
@@ -390,7 +390,7 @@
 
         this._frame ( function () {
 
-          this.$movable.translate ( this.initialXY.X, this.initialXY.Y );
+          this.$movable.translate ( this.initialXY.x, this.initialXY.y );
 
           this._delay ( function () {
 
@@ -455,16 +455,16 @@
 
       let moveXY = $.eventXY ( event ),
           deltaXY = {
-            X: moveXY.X - this.startXY.X,
-            Y: moveXY.Y - this.startXY.Y
+            x: moveXY.x - this.startXY.x,
+            y: moveXY.y - this.startXY.y
           },
           absDeltaXY = {
-            X: Math.abs ( deltaXY.X ),
-            Y: Math.abs ( deltaXY.Y )
+            x: Math.abs ( deltaXY.x ),
+            y: Math.abs ( deltaXY.y )
           },
           dragXY;
 
-      if ( absDeltaXY.X < this.options.threshold && absDeltaXY.Y < this.options.threshold ) return;
+      if ( absDeltaXY.x < this.options.threshold && absDeltaXY.y < this.options.threshold ) return;
 
       if ( !this.inited && this.isProxyed ) {
 
@@ -475,8 +475,8 @@
       } else {
 
         let deltaXY = {
-              X: moveXY.X - this.startXY.X,
-              Y: moveXY.Y - this.startXY.Y
+              x: moveXY.x - this.startXY.x,
+              y: moveXY.y - this.startXY.y
             };
 
         dragXY = this._actionMove ( deltaXY );

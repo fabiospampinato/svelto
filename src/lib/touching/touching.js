@@ -82,7 +82,7 @@
 
         let rect = $.getRect ( searchable );
 
-        if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
+        if ( options.point.y >= rect.top && options.point.y <= rect.bottom && options.point.x >= rect.left && options.point.x <= rect.right ) {
 
           return $(searchable);
 

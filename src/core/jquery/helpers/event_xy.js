@@ -23,22 +23,22 @@
     } else if ( 'changedTouches' in event && event.changedTouches.length ) {
 
       return {
-        X: event.changedTouches[0][X],
-        Y: event.changedTouches[0][Y]
+        x: event.changedTouches[0][X],
+        y: event.changedTouches[0][Y]
       };
 
     } else if ( 'touches' in event && event.touches.length ) {
 
       return {
-        X: event.touches[0][X],
-        Y: event.touches[0][Y]
+        x: event.touches[0][X],
+        y: event.touches[0][Y]
       };
 
     } else if ( X in event ) {
 
       return {
-        X: event[X],
-        Y: event[Y]
+        x: event[X],
+        y: event[Y]
       };
 
     }
