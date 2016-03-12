@@ -1,18 +1,18 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty - Queue
+ * Svelto - Widgets - Toast - Queue
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../noty.scss
+ * @require ../toast.scss
  * ========================================================================= */
 
 //FIXME: The columns doesn't shrink when necessary in IE-10/11
 
 /* QUEUE */
 
-.noty-queue {
+.toast-queue {
 
   display: flex;
 
@@ -56,7 +56,7 @@
   /* EXPANDED */
 
   &.expanded {
-    @include noty-queue-expand ();
+    @include toast-queue-expand ();
   }
 
 }

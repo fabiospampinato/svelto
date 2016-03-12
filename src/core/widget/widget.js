@@ -34,7 +34,7 @@
       characters: {}, // Used to store some characters needed by the widget
       regexes: {}, // Contains the used regexes
       errors: {}, // It contains all the errors that a widget can trigger
-      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
+      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.toast`, maybe just logs it
       attributes: {}, // Attributes used by the widget
       datas: {}, // CSS data-* names
       classes: { // CSS classes to attach inside the widget
@@ -248,7 +248,7 @@
 
     /* SPECIAL */
 
-    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Noty` do for instance
+    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Toast` do for instance
 
     _variables () {} // Init your variables inside this function
     _init () {} // Perform the init stuff inside this function

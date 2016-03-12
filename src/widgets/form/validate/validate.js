@@ -7,7 +7,7 @@
  * =========================================================================
  * @require core/widget/widget.js
  * @require lib/validator/validator.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
@@ -305,7 +305,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-        $.noty ( this.options.messages.form.invalid );
+        $.toast ( this.options.messages.form.invalid );
 
       }
 

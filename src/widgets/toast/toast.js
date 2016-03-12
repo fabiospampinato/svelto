@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty
+ * Svelto - Widgets - Toast
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -13,9 +13,10 @@
  * @require lib/timer/timer.js
  * ========================================================================= */
 
-//TODO: Add support for dismissing a noty that contains only one button
+//TODO: Add support for icon other than image
+//TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
-//FIXME: Widgetize the noty, we may add some widgets inside of it
+//FIXME: Widgetize the toast, we may add some widgets inside of it
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Colors, Sizes ) {
 
@@ -28,14 +29,14 @@
   /* CONFIG */
 
   let config = {
-    name: 'noty',
+    name: 'toast',
     plugin: true,
-    selector: '.noty',
+    selector: '.toast',
     templates: {
-      base: '<div class="noty {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
+      base: '<div class="toast {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
               '<div class="infobar ' + Colors.transparent + '">' +
                 '{% if ( o.img ) { %}' +
-                  '<img src="{%=o.img%}" class="noty-img infobar-left">' +
+                  '<img src="{%=o.img%}" class="toast-img infobar-left">' +
                 '{% } %}' +
                 '{% if ( o.title || o.body ) { %}' +
                   '<div class="infobar-center">' +
@@ -51,14 +52,14 @@
                 '{% } %}' +
                 '{% if ( o.buttons.length === 1 ) { %}' +
                   '<div class="infobar-right">' +
-                    '{% include ( "noty.button", o.buttons[0] ); %}' +
+                    '{% include ( "toast.button", o.buttons[0] ); %}' +
                   '</div>' +
                 '{% } %}' +
               '</div>' +
               '{% if ( o.buttons.length > 1 ) { %}' +
-                '<div class="noty-buttons multiple center-x">' +
+                '<div class="toast-buttons multiple center-x">' +
                   '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
-                    '{% include ( "noty.button", o.buttons[i] ); %}' +
+                    '{% include ( "toast.button", o.buttons[i] ); %}' +
                   '{% } %}' +
                 '</div>' +
               '{% } %}' +
@@ -68,7 +69,7 @@
               '</div>'
     },
     options: {
-      anchor: { // Used for selecting the proper queue where this Noty should be attached
+      anchor: { // Used for selecting the proper queue where this Toast should be attached
         x: 'left',
         y: 'bottom'
       },
@@ -82,7 +83,7 @@
                 size: Sizes.small,
                 css: '',
                 text: '',
-                onClick: _.noop // If it returns `false` the Noty won't be closed
+                onClick: _.noop // If it returns `false` the Toast won't be closed
              }],
       */
       type: 'alert',
@@ -96,9 +97,9 @@
         open: 'open'
       },
       selectors: {
-        queues: '.noty-queues',
-        queue: '.noty-queue',
-        button: '.noty-buttons .button, .infobar-right .button'
+        queues: '.toast-queues',
+        queue: '.toast-queue',
+        button: '.toast-buttons .button, .infobar-right .button'
       },
       animations: {
         open: Animations.normal,
@@ -114,30 +115,30 @@
     }
   };
 
-  /* NOTY */
+  /* TOAST */
 
-  class Noty extends Widgets.Widget {
+  class Toast extends Widgets.Widget {
 
     /* SPECIAL */
 
     static ready () {
 
       $('.layout, body').first ().append ( // `body` is used as a fallback
-        '<div class="noty-queues top">' +
-          '<div class="noty-queue expanded"></div>' +
-          '<div class="noty-queues-row">' +
-            '<div class="noty-queue left"></div>' +
-            '<div class="noty-queue center"></div>' +
-            '<div class="noty-queue right"></div>' +
+        '<div class="toast-queues top">' +
+          '<div class="toast-queue expanded"></div>' +
+          '<div class="toast-queues-row">' +
+            '<div class="toast-queue left"></div>' +
+            '<div class="toast-queue center"></div>' +
+            '<div class="toast-queue right"></div>' +
           '</div>' +
         '</div>' +
-        '<div class="noty-queues bottom">' +
-          '<div class="noty-queues-row">' +
-            '<div class="noty-queue left"></div>' +
-            '<div class="noty-queue center"></div>' +
-            '<div class="noty-queue right"></div>' +
+        '<div class="toast-queues bottom">' +
+          '<div class="toast-queues-row">' +
+            '<div class="toast-queue left"></div>' +
+            '<div class="toast-queue center"></div>' +
+            '<div class="toast-queue right"></div>' +
           '</div>' +
-          '<div class="noty-queue expanded"></div>' +
+          '<div class="toast-queue expanded"></div>' +
         '</div>'
       );
 
@@ -145,13 +146,13 @@
 
     _variables () {
 
-      this.$noty = this.$element;
-      this.$buttons = this.$noty.find ( this.options.selectors.button );
+      this.$toast = this.$element;
+      this.$buttons = this.$toast.find ( this.options.selectors.button );
 
       this.timer = false;
       this._openUrl = false;
 
-      this._isOpen = this.$noty.hasClass ( this.options.classes.open );
+      this._isOpen = this.$toast.hasClass ( this.options.classes.open );
 
     }
 
@@ -222,7 +223,7 @@
 
       if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
 
-      event.preventDefault (); // Otherwise the click goes through the noty in Chrome for iOS
+      event.preventDefault (); // Otherwise the click goes through the toast in Chrome for iOS
 
       this.close ();
 
@@ -256,7 +257,7 @@
 
     ___hover () {
 
-      this.$noty.hover ( function () {
+      this.$toast.hover ( function () {
 
         _.forIn ( openNotiesData, data => data[0].pause () );
 
@@ -274,7 +275,7 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this.$noty.flickable ({
+        this.$toast.flickable ({
           callbacks: {
             flick: this.__flick.bind ( this )
           }
@@ -328,7 +329,7 @@
 
       /* FLICK */
 
-      this.$noty.flickable ( 'destroy' );
+      this.$toast.flickable ( 'destroy' );
 
       /* SUPER */
 
@@ -353,11 +354,11 @@
 
       this._frame ( function () {
 
-        $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$noty );
+        $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$toast );
 
         this._frame ( function () {
 
-          this.$noty.addClass ( this.options.classes.open );
+          this.$toast.addClass ( this.options.classes.open );
 
           this._lock = false;
 
@@ -394,11 +395,11 @@
 
       this._frame ( function () {
 
-        this.$noty.removeClass ( this.options.classes.open );
+        this.$toast.removeClass ( this.options.classes.open );
 
         this._delay ( function () {
 
-          this.$noty.remove ();
+          this.$toast.remove ();
 
           this._lock = false;
 
@@ -416,6 +417,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Noty, config, Widgets );
+  Factory.init ( Toast, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));

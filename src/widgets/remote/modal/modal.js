@@ -7,7 +7,7 @@
  * =========================================================================
  * @require ../remote.js
  * @require widgets/modal/modal.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
@@ -108,7 +108,7 @@
 
       let resj = _.attempt ( JSON.parse, res );
 
-      $.noty ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+      $.toast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
       this._destroyModal ();
 

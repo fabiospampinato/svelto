@@ -1,20 +1,20 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty - Queues
+ * Svelto - Widgets - Toast - Queues
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../noty.scss
+ * @require ../toast.scss
  * @require ../queue/queue.scss
  * ========================================================================= */
 
 /* QUEUES */
 
-.noty-queues {
+.toast-queues {
 
   @include fixed ( false 0 false 0 );
-  z-index: $noty-queues-z-index;
+  z-index: $toast-queues-z-index;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -28,25 +28,25 @@
 
     /* ROW */
 
-    .noty-queues-row {
+    .toast-queues-row {
       align-items: flex-start;
     }
 
     /* QUEUE */
 
-    .noty-queue {
+    .toast-queue {
 
       flex-direction: column;
 
-      /* NOTY */
+      /* TOAST */
 
-      .noty {
+      .toast {
         margin-top: $gutter;
       }
 
       /* EXPANDED */
 
-      &.expanded .noty {
+      &.expanded .toast {
         border-top-width: 0;
         border-bottom-width: $outline-width;
         border-bottom-style: solid;
@@ -64,25 +64,25 @@
 
     /* ROW */
 
-    .noty-queues-row {
+    .toast-queues-row {
       align-items: flex-end;
     }
 
     /* QUEUE */
 
-    .noty-queue {
+    .toast-queue {
 
       flex-direction: column-reverse;
 
-      /* NOTY */
+      /* TOAST */
 
-      .noty {
+      .toast {
         margin-bottom: $gutter;
       }
 
       /* EXPANDED */
 
-      &.expanded .noty {
+      &.expanded .toast {
         border-bottom-width: 0;
         border-top-width: $outline-width;
         border-top-style: solid;
@@ -104,7 +104,7 @@
 
 // IE-10/11 Fix so that noties won't expand over the viewport
 
-_:-ms-input-placeholder, :root .noty-queues  {
+_:-ms-input-placeholder, :root .toast-queues  {
 
   /* TOP */
 
@@ -112,7 +112,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
     /* ROW */
 
-    .noty-queues-row {
+    .toast-queues-row {
       flex-direction: column;
     }
 
@@ -124,7 +124,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
     /* ROW */
 
-    .noty-queues-row {
+    .toast-queues-row {
       flex-direction: column;
     }
 
@@ -132,20 +132,20 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
   /* QUEUES ROW */
 
-  .noty-queues-row {
+  .toast-queues-row {
     align-items: flex-start;
   }
 
   /* QUEUE */
 
-  .noty-queue:not(.expanded) {
+  .toast-queue:not(.expanded) {
 
     width: calc(100% - #{$gutter * 2});
     margin-right: $gutter;
 
-    /* NOTY */
+    /* TOAST */
 
-    .noty {
+    .toast {
       max-width: 100%;
     }
 

@@ -1,25 +1,25 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty - Autoexpand
+ * Svelto - Widgets - Toast - Autoexpand
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../noty.scss
+ * @require ../toast.scss
  * @require ../queue/queue.scss
  * @require ../queues/queues.scss
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Attach the shadow to `.noty-queues`, but only if there are some noties
+//TODO: Attach the shadow to `.toast-queues`, but only if there are some noties
 
 /* AUTOEXPAND */
 
-@include media-width-down ( $noty-autoexpand-width ) {
+@include media-width-down ( $toast-autoexpand-width ) {
 
   /* QUEUES */
 
-  .noty-queues {
+  .toast-queues {
 
     /* TOP */
 
@@ -27,13 +27,13 @@
 
       /* ROW */
 
-      .noty-queues-row {
+      .toast-queues-row {
         flex-direction: column;
       }
 
-      /* NOTY */
+      /* TOAST */
 
-      .noty {
+      .toast {
         border-top-width: 0;
         border-bottom-width: $outline-width;
         border-bottom-style: solid;
@@ -47,13 +47,13 @@
 
       /* ROW */
 
-      .noty-queues-row {
+      .toast-queues-row {
         flex-direction: column-reverse;
       }
 
-      /* NOTY */
+      /* TOAST */
 
-      .noty {
+      .toast {
         border-bottom-width: 0;
         border-top-width: $outline-width;
         border-top-style: solid;
@@ -65,8 +65,8 @@
 
   /* QUEUE */
 
-  .noty-queue {
-    @include noty-queue-expand ();
+  .toast-queue {
+    @include toast-queue-expand ();
   }
 
 }

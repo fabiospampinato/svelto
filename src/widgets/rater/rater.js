@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //FIXME: Crappy, not working atm, maybe should get removed
@@ -119,7 +119,7 @@
 
             let resj = _.attempt ( JSON.parse, res );
 
-            $.noty ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
+            $.toast ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
 
           },
 

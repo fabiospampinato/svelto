@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty
+ * Svelto - Widgets - Toast
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,30 +9,31 @@
  * @require widgets/infobar/infobar.scss
  * ========================================================================= */
 
-//TODO: Make noty scrollables, maybe, so that in no case they will fill up the entire screen
+//TODO: Push up `FAB` if needed
+//TODO: Make toast scrollables, maybe, so that in no case they will fill up the entire screen
 //TODO: Add transparentize back, in a wise, CSS-efficient way
 //TODO: Maybe switch to an equally good but faster to compute animation
 //TODO: Change animation to a more Material Design inspired one, also more performant
 //FIXME: Don't close on right click
 
-/* NOTY */
+/* TOAST */
 
-.noty {
+.toast {
 
   @include children-no-gutter ();
-  @include z-depth ( $noty-z-depth, $noty-z-depth-force, $noty-z-depth-basic );
+  @include z-depth ( $toast-z-depth, $toast-z-depth-force, $toast-z-depth-basic );
   display: block;
-  border-radius: $noty-border-radius;
+  border-radius: $toast-border-radius;
   pointer-events: auto;
   transition-property: border-radius, border-width, opacity, filter, box-shadow, font-size, padding, margin;
-  transition-duration: $noty-animation-duration;
+  transition-duration: $toast-animation-duration;
   transform: translateZ(0);
 
   /* IMG */
 
   &-img {
-    width: $noty-img-size;
-    border-radius: if( $noty-img-rounded, $circular-border-radius, $noty-border-radius );
+    width: $toast-img-size;
+    border-radius: if( $toast-img-rounded, $circular-border-radius, $toast-border-radius );
   }
 
   /* BUTTONS */
@@ -44,7 +45,7 @@
   /* INFOBAR */
 
   > .infobar {
-    transition: padding $noty-animation-duration;
+    transition: padding $toast-animation-duration;
   }
 
 }

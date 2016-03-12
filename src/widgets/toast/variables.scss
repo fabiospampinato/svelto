@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty (Variables)
+ * Svelto - Widgets - Toast (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,21 +9,21 @@
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
-/* NOTY */
+/* TOAST */
 
-$noty-z-depth: 7 !default;
-$noty-z-depth-force: true !default;
-$noty-z-depth-basic: true !default;
+$toast-z-depth: 7 !default;
+$toast-z-depth-force: true !default;
+$toast-z-depth-basic: true !default;
 
-$noty-bg-opacity: 1 !default;
+$toast-bg-opacity: 1 !default;
 
-$noty-border-radius: $container-border-radius !default;
+$toast-border-radius: $container-border-radius !default;
 
 /* IMG */
 
-$noty-img-size: 2.25em !default;
-$noty-img-rounded: false !default;
+$toast-img-size: 2.25em !default;
+$toast-img-rounded: false !default;
 
 /* ANIMATION */
 
-$noty-animation-duration: $animation-normal !default;
+$toast-animation-duration: $animation-normal !default;

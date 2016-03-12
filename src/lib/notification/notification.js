@@ -6,10 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
-// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 
 (function ( $, _, Svelto, Widgets ) {
 
@@ -21,7 +21,7 @@
     title: false,
     body: false,
     img: false,
-    ttl: Widgets.Noty.config.options.ttl
+    ttl: Widgets.Toast.config.options.ttl
   };
 
   /* NOTIFICATION */
@@ -54,7 +54,7 @@
 
         } else {
 
-          $.noty ( options );
+          $.toast ( options );
 
         }
 
@@ -62,7 +62,7 @@
 
     } else {
 
-      $.noty ( options );
+      $.toast ( options );
 
     }
 

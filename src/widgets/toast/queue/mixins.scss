@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty - Queue (Mixins)
+ * Svelto - Widgets - Toast - Queue (Mixins)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,16 +10,16 @@
 
 /* QUEUE */
 
-@mixin noty-queue-expand {
+@mixin toast-queue-expand {
 
   width: 100%;
   margin: 0 !important;
 
   &:not(:empty) {
-    @include z-depth-inline ( $noty-z-depth );
+    @include z-depth-inline ( $toast-z-depth );
   }
 
-  .noty {
+  .toast {
     @include z-depth-inline ( 0 );
     width: 100%;
     margin: 0 !important;

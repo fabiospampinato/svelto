@@ -8,13 +8,13 @@
  * @require ../remote.js
  * @require core/colors/colors.js
  * @require core/sizes/sizes.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
 
 //FIXME: Not well written
-//FIXME: Clicking an error/success noty doesn't close it
+//FIXME: Clicking an error/success toast doesn't close it
 
 (function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
 
@@ -25,12 +25,12 @@
   let config = {
     name: 'remoteAction',
     options: {
-      closingDelay: Widgets.Noty.config.options.ttl / 2,
+      closingDelay: Widgets.Toast.config.options.ttl / 2,
       ajax: {
         cache: false,
         method: 'POST'
       },
-      confirmation: { // Options to pass to a confirmation noty, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
+      confirmation: { // Options to pass to a confirmation toast, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
         body: 'Execute action?',
         buttons: [{
           text: 'Cancel'
@@ -58,11 +58,11 @@
 
   class RemoteAction extends Widgets.Remote {
 
-    /* NOTY */
+    /* TOAST */
 
-    ___confirmationNoty () {
+    ___confirmationToast () {
 
-      if ( this.$noty ) return;
+      if ( this.$toast ) return;
 
       /* VARIABLES */
 
@@ -79,53 +79,53 @@
 
       /* OPENING */
 
-      this._replaceNoty ( options );
+      this._replaceToast ( options );
 
     }
 
-    ___loadingNoty () {
+    ___loadingToast () {
 
-      this._replaceNoty ( '<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>' );
+      this._replaceToast ( '<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>' );
 
     }
 
-    _replaceNoty ( options ) {
+    _replaceToast ( options ) {
 
-      let instance = $.noty ( _.isString ( options ) ? { body: options, autoplay: false } : _.extend ( {}, options, { autoplay: false } ) );
+      let instance = $.toast ( _.isString ( options ) ? { body: options, autoplay: false } : _.extend ( {}, options, { autoplay: false } ) );
 
       instance.close ();
 
-      let $noty = instance.$element;
+      let $toast = instance.$element;
 
-      if ( this.$noty ) {
+      if ( this.$toast ) {
 
-        this.$noty.html ( $noty.html () ).widgetize ();
+        this.$toast.html ( $toast.html () ).widgetize ();
 
       } else {
 
-        this.$noty = $noty;
+        this.$toast = $toast;
 
-        this.$noty.noty ( 'open' );
+        this.$toast.toast ( 'open' );
 
       }
 
     }
 
-    _destroyNoty ( delay ) {
+    _destroyToast ( delay ) {
 
-      if ( !this.$noty ) return;
+      if ( !this.$toast ) return;
 
       this._delay ( function () {
 
-        this.$noty.noty ( 'close' );
+        this.$toast.toast ( 'close' );
 
         this._delay ( function () {
 
-          this.$noty.remove ();
+          this.$toast.remove ();
 
-          this.$noty = false;
+          this.$toast = false;
 
-        }, Widgets.Noty.config.options.animations.close );
+        }, Widgets.Toast.config.options.animations.close );
 
       }, delay ? this.options.closingDelay : 0 );
 
@@ -137,7 +137,7 @@
 
       if ( this.isAborted () ) return;
 
-      this.___loadingNoty ();
+      this.___loadingToast ();
 
       super.__beforesend ( res );
 
@@ -149,9 +149,9 @@
 
       let resj = _.attempt ( JSON.parse, res );
 
-      this._replaceNoty ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+      this._replaceToast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
-      this._destroyNoty ( true );
+      this._destroyToast ( true );
 
       super.__error ( res );
 
@@ -169,8 +169,8 @@
 
       } else {
 
-        this._replaceNoty ( 'msg' in resj ? resj.msg : this.options.messages.success );
-        this._destroyNoty ( true );
+        this._replaceToast ( 'msg' in resj ? resj.msg : this.options.messages.success );
+        this._destroyToast ( true );
 
         super.__success ( res );
 
@@ -184,7 +184,7 @@
 
       if ( !_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length ) {
 
-        this.___confirmationNoty ();
+        this.___confirmationToast ();
 
       } else {
 
@@ -196,7 +196,7 @@
 
     abort () {
 
-      this._destroyNoty ();
+      this._destroyToast ();
 
       super.abort ();
 

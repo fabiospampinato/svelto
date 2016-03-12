@@ -7,7 +7,7 @@
  * =========================================================================
  * @require ../validate/validate.js
  * @require core/svelto/svelto.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
@@ -104,11 +104,11 @@
 
           if ( !_.isError ( resj ) ) {
 
-            $.noty ( resj.msg || this.options.messages.error );
+            $.toast ( resj.msg || this.options.messages.error );
 
           } else {
 
-            $.noty ( this.options.messages.error );
+            $.toast ( this.options.messages.error );
 
           }
 
@@ -124,7 +124,7 @@
 
             if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-              $.noty ( resj.msg || this.options.messages.refreshing );
+              $.toast ( resj.msg || this.options.messages.refreshing );
 
               location.reload ();
 
@@ -132,19 +132,19 @@
 
               // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              $.noty ( resj.msg || this.options.messages.redirecting );
+              $.toast ( resj.msg || this.options.messages.redirecting );
 
               location.assign ( resj.url );
 
             } else {
 
-              $.noty ( resj.msg || this.options.messages.success );
+              $.toast ( resj.msg || this.options.messages.success );
 
             }
 
           } else {
 
-            $.noty ( this.options.messages.success );
+            $.toast ( this.options.messages.success );
 
           }
 

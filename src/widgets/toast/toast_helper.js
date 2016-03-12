@@ -1,11 +1,11 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty (Helper)
+ * Svelto - Widgets - Toast (Helper)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./noty.js
+ * @require ./toast.js
  * ========================================================================= */
 
 //FIXME: Better handling of types, for instance numbers, booleans, null and undefined should print their string representation
@@ -16,7 +16,7 @@
 
   /* HELPER */
 
-  $.noty = function ( options = {} ) {
+  $.toast = function ( options = {} ) {
 
     /* OPTIONS */
 
@@ -30,9 +30,9 @@
 
     }
 
-    /* NOTY */
+    /* TOAST */
 
-    return new Widgets.Noty ( options );
+    return new Widgets.Toast ( options );
 
   };
 

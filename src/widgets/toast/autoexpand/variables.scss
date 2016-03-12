@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Noty - Autoexpand (Variables)
+ * Svelto - Widgets - Toast - Autoexpand (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,5 +10,5 @@
 
 /* AUTOEXPAND */
 
-$noty-autoexpand-breakpoint: 'small' !default;
-$noty-autoexpand-width: map-get( $breakpoints, $noty-autoexpand-breakpoint ) - $breakpoint-epsilon !default;
+$toast-autoexpand-breakpoint: 'small' !default;
+$toast-autoexpand-width: map-get( $breakpoints, $toast-autoexpand-breakpoint ) - $breakpoint-epsilon !default;
