@@ -17,7 +17,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'autogrowInput',
+    name: 'inputAutogrow',
     plugin: true,
     selector: 'input.autogrow',
     options: {
@@ -28,9 +28,9 @@
     }
   };
 
-  /* AUTOGROW INPUT */
+  /* INPUT AUTOGROW */
 
-  class AutogrowInput extends Widgets.Widget {
+  class InputAutogrow extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -92,6 +92,6 @@
 
   /* FACTORY */
 
-  Factory.init ( AutogrowInput, config, Widgets );
+  Factory.init ( InputAutogrow, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -19,7 +19,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'autogrowTextarea',
+    name: 'textareaAutogrow',
     plugin: true,
     selector: 'textarea.autogrow',
     options: {
