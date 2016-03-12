@@ -43,7 +43,6 @@
       ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
       opera:  /^Opera\//i.test ( userAgent ) || /\x20OPR\//i.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
       safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
-      yandex: /(yabrowser)\/([\w\.]+)/i.test ( userAgent ),
       iphone: isIphone,
       ipad: isIpad,
       ipod: isIpod,
