@@ -12,13 +12,17 @@
 
   /* JQUERY */
 
-  let $ = ( jQuery && 'jquery' in jQuery() ) ? jQuery : ( ( $ && 'jquery' in $() ) ? $ : false ); // Checking the presence of the `jquery` property in order to distinguish it from `Zepto` and other `jQuery`-like libraries
+  let $ = jQuery || $;
 
   /* CHECKING */
 
-  if ( !$ ) {
+  let version = $ ? $().jquery : false,
+      parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
+      supported = parts && Number ( parts[0] ) >= 1 && Number ( parts[1] ) >= 11 && Number ( parts[2] ) >= 2;
 
-    throw new Error ( 'Svelto depends upon jQuery, dependency not found' );
+  if ( !$ || !supported ) {
+
+    throw new Error ( 'Svelto depends upon jQuery v1.11.2 or higher, dependency not found' );
 
   }
 
