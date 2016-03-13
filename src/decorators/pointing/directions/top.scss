@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./vertical.scss
+ * @require core/multiple/multiple.scss
  * ========================================================================= */
 
 /* TOP */
@@ -31,7 +32,13 @@
 }
 
 %pointing-top-spaced {
+
   margin-top: $pointing-tip-diagonal-half;
+
+  %multiple > & {
+    margin-top: 0;
+  }
+
 }
 
 .pointing-top {

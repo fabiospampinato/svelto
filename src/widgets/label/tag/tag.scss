@@ -31,4 +31,10 @@
     border: inherit;
   }
 
+  /* BORDERED */
+
+  &.bordered:before {
+    border-width: $border-width;
+  }
+
 }

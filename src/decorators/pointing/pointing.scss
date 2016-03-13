@@ -6,9 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: A pointing inside a `multiple` doesn't really work, expecially when `.joined`
+
 /* POINTING */
 
 %pointing-tip {
+
   @include dimension ( $pointing-tip-size );
   @include color ( $pointing-tip-color, $pointing-tip-color-force, $pointing-tip-color-basic );
   transform: rotate(45deg);
@@ -17,6 +20,13 @@
   z-index: 1;
   box-sizing: content-box;
   border: inherit;
+
+  /* BORDERED */
+
+  &.bordered {
+    border-width: $border-width;
+  }
+
 }
 
 %pointing:after {
