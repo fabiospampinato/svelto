@@ -222,8 +222,6 @@
 
     __dayTap ( event ) {
 
-      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
-
       let $day = $(event.currentTarget);
 
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;

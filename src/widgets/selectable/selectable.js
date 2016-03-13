@@ -116,8 +116,6 @@
 
     __down ( event ) {
 
-      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
-
       event.preventDefault ();
 
       this.startEvent = event;

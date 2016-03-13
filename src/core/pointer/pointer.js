@@ -6,12 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
+ * @require core/mouse/mouse.js
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
-(function ( $, _, Svelto, Browser ) {
+(function ( $, _, Svelto, Browser, Mouse ) {
 
   'use strict';
 
@@ -111,7 +112,7 @@
 
   function upHandler ( event ) {
 
-    if ( !Browser.is.touchDevice || !motion ) {
+    if ( Mouse.hasButton ( event, Mouse.buttons.LEFT ) && ( !Browser.is.touchDevice || !motion ) ) {
 
       let tapTimestamp = event.timeStamp || Date.now ();
 
@@ -157,4 +158,4 @@
 
   Svelto.Pointer = Pointer;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Browser ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Mouse ));

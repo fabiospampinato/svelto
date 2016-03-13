@@ -47,8 +47,6 @@
 
     __tap ( event ) {
 
-      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
-
       this.close ( event );
 
     }

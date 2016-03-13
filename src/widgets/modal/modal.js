@@ -84,7 +84,7 @@
 
     __tap ( event ) {
 
-      if ( this._lock || $(event.target).closest ( this.$modal ).length || !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
+      if ( this._lock || $(event.target).closest ( this.$modal ).length ) return;
 
       this.close ();
 

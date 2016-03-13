@@ -76,8 +76,6 @@
 
     __downTap ( event ) {
 
-      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
-
       if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
         let offset = this.$ripple.offset ();

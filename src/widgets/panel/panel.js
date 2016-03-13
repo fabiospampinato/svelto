@@ -130,7 +130,7 @@
 
     __tap ( event ) {
 
-      if ( this._lock || this._isPinned || $(event.target).closest ( this.$panel ).length || !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
+      if ( this._lock || this._isPinned || $(event.target).closest ( this.$panel ).length ) return;
 
       this.close ();
 

@@ -221,8 +221,6 @@
 
     __tap ( event ) {
 
-      if ( !Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) return;
-
       event.preventDefault (); // Otherwise the click goes through the toast in Chrome for iOS
 
       this.close ();
