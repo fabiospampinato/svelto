@@ -24,6 +24,7 @@
   justify-content: center;
   border-radius: $label-border-radius;
   padding: $label-padding-y $label-padding-x;
+  min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
 
   /* CHILDREN */
 

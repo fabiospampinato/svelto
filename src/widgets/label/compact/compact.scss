@@ -13,6 +13,7 @@
 .label.compact {
 
   padding: $label-compact-padding-y $label-compact-padding-x;
+  min-width: $line-height-em + ( $label-compact-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
 
   /* CHILDREN */
 
