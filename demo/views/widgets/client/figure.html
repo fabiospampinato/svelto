@@ -22,7 +22,7 @@
       {{{sample.image}}}
       <div class="figcaption attached-bottom">[Attached] Bottom caption</div>
     </figure>
-    <figure class="xs-6 md-3 smooth">
+    <figure class="xs-6 md-3 rounded">
       <div class="figcaption attached-top on-hover">[Hover] Top caption</div>
       {{{sample.image}}}
       <div class="figcaption attached-bottom on-hover">[Hover] Bottom caption</div>
@@ -49,43 +49,6 @@
     </figure>
   </div>
 
-  {{{sw.divider "Spaced"}}}
-
-  <div class="container outlined">
-    <p>
-      <figure class="spaced right">
-        {{{sample.image "xxxxsmall"}}}
-      </figure>
-      {{{sample.text 35}}}
-      <figure class="spaced">
-        {{{sample.image "xxxxsmall"}}}
-      </figure>
-      {{{sample.text 35}}}
-      <figure class="spaced left">
-        {{{sample.image "xxxxsmall"}}}
-      </figure>
-    </p>
-  </div>
-
-  {{{sw.divider "Floated"}}}
-
-  <div class="container outlined clearfix">
-    <p>
-      <figure class="floated">
-        {{{sample.image "small"}}}
-        <figcaption>Caption...</figcaption>
-      </figure>
-      {{{sample.text 75}}}
-    </p>
-    <p>
-      <figure class="floated right">
-        {{{sample.image "small"}}}
-        <figcaption>Caption...</figcaption>
-      </figure>
-      {{{sample.text 75}}}
-    </p>
-  </div>
-
   {{> figure_actions}}
 
 </template>
@@ -97,9 +60,9 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Figure outlined" "toggle_class_selector ( 'figure, .figure', 'outlined' )"}}}
-    {{{sw.checkAction "Figcaption outlined" "toggle_class_selector ( 'figcaption, .figcaption', 'outlined' )"}}}
-    {{{sw.checkAction "Image outlined" "toggle_class_selector ( 'img', 'outlined' )"}}}
+    {{{sw.checkAction "Figure bordered" "toggle_class_selector ( 'figure, .figure', 'bordered' )"}}}
+    {{{sw.checkAction "Figcaption bordered" "toggle_class_selector ( 'figcaption, .figcaption', 'bordered' )"}}}
+    {{{sw.checkAction "Image bordered" "toggle_class_selector ( 'img', 'bordered' )"}}}
   </div>
 
   {{{sw.divider "State"}}}

@@ -75,28 +75,20 @@
 
   {{{sw.divider "Style"}}}
 
-  <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
-    <div class="multiple joined">
-      {{{sw.radioAction "Solid" "style" "set_style ( 'solid' )" true}}}
-      {{{sw.radioAction "Dotted" "style" "set_style ( 'dotted' )"}}}
-      {{{sw.radioAction "Dashed" "style" "set_style ( 'dashed' )"}}}
-    </div>
-  </div>
+  {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
 
   {{{sw.divider "Direction"}}}
 
   <div class="multiple joined actions">
     {{{sw.checkAction "Top" "toggle_class ( 'highlight-top' )"}}}
     {{{sw.checkAction "Right" "toggle_class ( 'highlight-right' )"}}}
-    {{{sw.checkAction "Left" "toggle_class ( 'highlight-left' )"}}}
     {{{sw.checkAction "Bottom" "toggle_class ( 'highlight-bottom' )"}}}
-    {{{sw.checkAction "All" "toggle_class ( 'highlight-all' )"}}}
+    {{{sw.checkAction "Left" "toggle_class ( 'highlight-left' )"}}}
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('.highlighted').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.highlighted').toggleClass ( name );
     }
 
     function set_style ( style ) {

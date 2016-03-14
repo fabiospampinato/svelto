@@ -1,0 +1,217 @@
+
+<!-- TOAST -->
+
+<template name="toast">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    {{{sw.action "Create" "toast_api_create ()"}}}
+    {{{sw.action "Open" "toast_api_open ()"}}}
+    {{{sw.action "Close" "toast_api_close ()"}}}
+    {{{sw.action "isOpen" "toast_api_isOpen ()"}}}
+  </div>
+
+  {{{sw.divider "Text"}}}
+
+  <div class="multiple">
+    {{{sw.action "Short" "toast_short ()"}}}
+    {{{sw.action "Medium" "toast_medium ()"}}}
+    {{{sw.action "Long" "toast_long ()"}}}
+  </div>
+
+  {{{sw.divider "Anchors"}}}
+
+  <div class="multiple">
+    {{{sw.action "Top-Left" "toast_anchor ({ y: 'top', x: 'left' })"}}}
+    {{{sw.action "Top-Center" "toast_anchor ({ y: 'top', x: 'center' })"}}}
+    {{{sw.action "Top-Expanded" "toast_anchor ({ y: 'top', x: 'expanded' })"}}}
+    {{{sw.action "Top-Right" "toast_anchor ({ y: 'top', x: 'right' })"}}}
+    {{{sw.action "Bottom-Left" "toast_anchor ({ y: 'bottom', x: 'left' })"}}}
+    {{{sw.action "Bottom-Center" "toast_anchor ({ y: 'bottom', x: 'center' })"}}}
+    {{{sw.action "Bottom-Expanded" "toast_anchor ({ y: 'bottom', x: 'expanded' })"}}}
+    {{{sw.action "Bottom-Right" "toast_anchor ({ y: 'bottom', x: 'right' })"}}}
+  </div>
+
+  {{{sw.divider "Buttons"}}}
+
+  <div class="multiple">
+    {{{sw.action "One" "toast_btns_one ()"}}}
+    {{{sw.action "Two" "toast_btns_two ()"}}}
+    {{{sw.action "Three" "toast_btns_three ()"}}}
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="multiple">
+    {{{sw.action "Title + Body" "toast_adv_one ()"}}}
+    {{{sw.action "Title + Body + Image" "toast_adv_two ()"}}}
+    {{{sw.action "Title + Body + Image + Buttons" "toast_adv_three ()"}}}
+    {{{sw.action "Title + Custom body + Image + Buttons" "toast_adv_four ()"}}}
+  </div>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    {{{sw.action "Primary" "toast_colored ( 'primary' )" "primary"}}}
+    {{{sw.action "Secondary" "toast_colored ( 'secondary' )" "secondary"}}}
+    {{{sw.action "Tertiary" "toast_colored ( 'tertiary' )" "tertiary"}}}
+    {{{sw.action "Quaternary" "toast_colored ( 'quaternary' )" "quaternary"}}}
+    {{{sw.action "Black" "toast_colored ( 'black' )" "black"}}}
+    {{{sw.action "Blue" "toast_colored ( 'blue' )" "blue"}}}
+    {{{sw.action "Brown" "toast_colored ( 'brown' )" "brown"}}}
+    {{{sw.action "Gray" "toast_colored ( 'gray' )" "gray"}}}
+    {{{sw.action "Green" "toast_colored ( 'green' )" "green"}}}
+    {{{sw.action "Olive" "toast_colored ( 'olive' )" "olive"}}}
+    {{{sw.action "Orange" "toast_colored ( 'orange' )" "orange"}}}
+    {{{sw.action "Pink" "toast_colored ( 'pink' )" "pink"}}}
+    {{{sw.action "Purple" "toast_colored ( 'purple' )" "purple"}}}
+    {{{sw.action "Red" "toast_colored ( 'red' )" "red"}}}
+    {{{sw.action "Teal" "toast_colored ( 'teal' )" "teal"}}}
+    {{{sw.action "Violet" "toast_colored ( 'violet' )" "violet"}}}
+    {{{sw.action "White" "toast_colored ( 'white' )" "white"}}}
+    {{{sw.action "Yellow" "toast_colored ( 'yellow' )" "yellow"}}}
+    {{{sw.action "Error" "toast_colored ( 'error' )" "error"}}}
+    {{{sw.action "Success" "toast_colored ( 'success' )" "success"}}}
+    {{{sw.action "Warning" "toast_colored ( 'warning' )" "warning"}}}
+    {{{sw.action "Base" "toast_colored ( 'base' )" "base"}}}
+    {{{sw.action "Inherit" "toast_colored ( 'inherit' )" "inherit"}}}
+    {{{sw.action "Transparent" "toast_colored ( 'transparent' )" "transparent"}}}
+  </div>
+
+  <script>
+    function toast_short () {
+      $.toast ( 'Short toast' );
+    }
+
+    function toast_medium () {
+      $.toast ( 'A medium toast, maybe some useful infos here' );
+    }
+
+    function toast_long () {
+      $.toast ( 'A very looooooooooong toast, maybe some tips here or whatever takes a long space, how does it fit?' );
+    }
+
+    function toast_btns_one () {
+      $.toast ({
+        body: 'Toast with one button',
+        buttons: [{
+          text: 'Foo'
+        }]
+      });
+    }
+
+    function toast_btns_two () {
+      $.toast ({
+        body: 'Toast with two buttons',
+        buttons: [{
+          text: 'Foo'
+        }, {
+          text: 'Bar'
+        }]
+      });
+    }
+
+    function toast_btns_three () {
+      $.toast ({
+        body: 'Toast with three buttons',
+        buttons: [{
+          text: 'Foo'
+        }, {
+          text: 'Bar'
+        }, {
+          text: 'Baz'
+        }]
+      });
+    }
+
+    function toast_adv_one () {
+      $.toast ({
+        title: 'Test title',
+        body: 'This is just an example body'
+      });
+    }
+
+    function toast_adv_two () {
+      $.toast ({
+        title: 'Test title',
+        body: 'This is just an example body',
+        img: '/sample/sample.png'
+      });
+    }
+
+    function toast_adv_three () {
+      $.toast ({
+        title: 'Test title',
+        body: 'This is just an example body',
+        img: '/sample/sample.png',
+        buttons: [{
+          text: 'Foo'
+        }, {
+          text: 'Bar'
+        }]
+      });
+    }
+
+    function toast_adv_four () {
+      $.toast ({
+        title: 'Test title',
+        body: '<sub>sub</sub>Something<sup>sup</sup>',
+        img: '/sample/sample.png',
+        buttons: [{
+          text: 'Foo'
+        }, {
+          text: 'Bar'
+        }]
+      });
+    }
+
+    function toast_colored ( color ) {
+      $.toast ({
+        body: 'Toast with custom color',
+        color: color
+      });
+    }
+    var anchor_id = 0;
+
+    function toast_anchor ( anchor ) {
+      $.toast ({
+        body: 'Toast[' + (anchor_id += 1) + '] in anchor: { y: `' + anchor.y + '`, x: `' + anchor.x + '` }',
+        anchor: anchor
+      });
+    }
+    var created_toast;
+
+    function toast_api_create () {
+      created_toast = $.toast ({
+        body: 'API toast',
+        autoplay: false
+      });
+    }
+
+    function toast_api_open () {
+      if ( created_toast ) {
+        created_toast.open ();
+      } else {
+        $.toast ( 'You should `Create` it before...' );
+      }
+    }
+
+    function toast_api_close () {
+      if ( created_toast ) {
+        created_toast.close();
+      } else {
+        $.toast ( 'You should `Create` it before...' );
+      }
+    }
+
+    function toast_api_isOpen () {
+      if ( created_toast ) {
+        $.toast ( created_toast.isOpen () );
+      } else {
+        $.toast ( 'You should `Create` it before...' );
+      }
+    }
+  </script>
+
+</template>

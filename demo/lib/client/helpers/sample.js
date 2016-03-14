@@ -11,9 +11,9 @@ SampleHelpers.define ( 'image', function ( classes ) {
 
 });
 
-SampleHelpers.define ( 'imageWide', function () {
+SampleHelpers.define ( 'imageWide', function ( classes ) {
 
-  return '<img src="/sample/sample-wide.png"/>';
+  return '<img src="/sample/sample-wide.png" class="' + ( classes || '' ) + '"/>';
 
 });
 
@@ -49,7 +49,7 @@ SampleHelpers.define ( 'select', function ( name ) {
 SampleHelpers.define ( 'square', function ( classes ) {
 
   return '<div class="square-sample ' + ( classes || '' ) + '">' +
-           '<p>' + SampleHelpers.text ( 10 ) + '</p>' +
+           '<p>' + SampleHelpers.text ( 9 ) + '</p>' +
          '</div>';
 
 });

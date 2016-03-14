@@ -17,8 +17,8 @@
 
 <template name="expander_base">
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Header toggler</div>
         <div class="button xsmall compact">
@@ -37,8 +37,8 @@
 
 <template name="expander_button">
 
-  <div class="card outlined expander">
-    <div class="card-header outlined primary">
+  <div class="card bordered expander">
+    <div class="card-header bordered primary">
       <div class="multiple center-y">
         <div class="spacer">Button toggler</div>
         <div class="button xsmall compact expander-toggler">
@@ -57,8 +57,8 @@
 
 <template name="expander_open">
 
-  <div class="card outlined expander open">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander open">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Open</div>
         <div class="button xsmall compact">
@@ -80,12 +80,12 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
-    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
-    <div onclick="api ( 'open' )" class="button outlined">Open</div>
-    <div onclick="api ( 'close' )" class="button outlined">Close</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
+    {{{sw.action "Toggle" "api ( 'toggle' )"}}}
+    {{{sw.action "Open" "api ( 'open' )"}}}
+    {{{sw.action "Close" "api ( 'close' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -97,10 +97,10 @@
 
   <script>
     function api_get () {
-      var gets = _.map($('.expander'), function(expander) {
-        return $(expander).expander('isOpen');
+      var gets = lodash.map ( $('.expander'), function ( expander ) {
+        return $(expander).expander ( 'isOpen' );
       });
-      $.noty(gets.join(' - '));
+      $.toast ( gets.join (' - ') );
     }
 
     function api ( action ) {

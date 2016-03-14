@@ -5,31 +5,31 @@
 
   {{{sw.divider "Time ago"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <span class="timeago" data-timestamp="{{sw.nowSecs}}">{{sw.timeAgo sw.nowSecs}}</span>
   </div>
 
   {{{sw.divider "Time ago -90"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <span class="timeago" data-timestamp="{{sw.nowSecs -90}}">{{sw.timeAgo sw.nowSecs -90}}</span>
   </div>
 
   {{{sw.divider "Time ago -120"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <span class="timeago" data-timestamp="{{sw.nowSecs -120}}">{{sw.timeAgo sw.nowSecs -120}}</span>
   </div>
 
   {{{sw.divider "Time ago -3600"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <span class="timeago" data-timestamp="{{sw.nowSecs -3600}}">{{sw.timeAgo sw.nowSecs -3600}}</span>
   </div>
 
   {{{sw.divider "Time ago title -7200"}}}
 
-  <div class="label outlined compact timeago" data-timestamp="{{sw.nowSecs -7200}}" data-options='{"title":true}' title="{{sw.timeAgo sw.nowSecs -7200}}">
+  <div class="label bordered compact timeago" data-timestamp="{{sw.nowSecs -7200}}" data-options='{"title":true}' title="{{sw.timeAgo sw.nowSecs -7200}}">
     <i class="icon">access_time</i>
   </div>
 
@@ -44,8 +44,8 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   <script>

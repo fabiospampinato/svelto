@@ -6,11 +6,11 @@
   {{{sw.divider "Animations"}}}
 
   <div class="multiple equal">
-    <div class="container outlined xslow">X-Slow</div>
-    <div class="container outlined slow">Slow</div>
-    <div class="container outlined normal">Normal</div>
-    <div class="container outlined fast">Fast</div>
-    <div class="container outlined xfast">X-Fast</div>
+    <div class="container bordered xslow">X-Slow</div>
+    <div class="container bordered slow">Slow</div>
+    <div class="container bordered normal">Normal</div>
+    <div class="container bordered fast">Fast</div>
+    <div class="container bordered xfast">X-Fast</div>
   </div>
 
   {{> animations_actions}}
@@ -29,8 +29,8 @@
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('.container').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.container').toggleClass ( name );
     }
   </script>
 

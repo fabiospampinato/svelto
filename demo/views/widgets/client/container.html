@@ -20,7 +20,7 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
   </div>
 
@@ -32,8 +32,8 @@
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('.container').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.container').toggleClass ( name );
     }
 
     function enable () {

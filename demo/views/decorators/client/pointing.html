@@ -1,0 +1,120 @@
+
+<!-- POINTING -->
+
+<template name="pointing">
+
+  {{{sw.divider "Pointing"}}}
+
+  <div class="label bordered pointing">Pointing</div>
+
+  {{{sw.divider "Colors"}}}
+
+  <div class="multiple">
+    <div class="label bordered pointing primary">Primary</div>
+    <div class="label bordered pointing secondary">Secondary</div>
+    <div class="label bordered pointing tertiary">Tertiary</div>
+    <div class="label bordered pointing quaternary">Quaternary</div>
+    <div class="label bordered pointing black">Black</div>
+    <div class="label bordered pointing blue">Blue</div>
+    <div class="label bordered pointing brown">Brown</div>
+    <div class="label bordered pointing gray">Gray</div>
+    <div class="label bordered pointing green">Green</div>
+    <div class="label bordered pointing olive">Olive</div>
+    <div class="label bordered pointing orange">Orange</div>
+    <div class="label bordered pointing pink">Pink</div>
+    <div class="label bordered pointing purple">Purple</div>
+    <div class="label bordered pointing red">Red</div>
+    <div class="label bordered pointing teal">Teal</div>
+    <div class="label bordered pointing violet">Violet</div>
+    <div class="label bordered pointing white">White</div>
+    <div class="label bordered pointing yellow">Yellow</div>
+    <div class="label bordered pointing error">Error</div>
+    <div class="label bordered pointing success">Success</div>
+    <div class="label bordered pointing warning">Warning</div>
+    <div class="label bordered pointing base">Base</div>
+    <div class="label bordered pointing inherit">Inherit</div>
+    <div class="label bordered pointing transparent">Transparent</div>
+  </div>
+
+  {{{sw.divider "Sizes"}}}
+
+  <div class="multiple">
+    <div class="label bordered pointing xxxxsmall">XXXX-Small</div>
+    <div class="label bordered pointing xxxsmall">XXX-Small</div>
+    <div class="label bordered pointing xxsmall">XX-Small</div>
+    <div class="label bordered pointing xsmall">X-Small</div>
+    <div class="label bordered pointing small">Small</div>
+    <div class="label bordered pointing medium">Medium</div>
+    <div class="label bordered pointing large">Large</div>
+    <div class="label bordered pointing xlarge">X-Large</div>
+    <div class="label bordered pointing xxlarge">XX-Large</div>
+    <div class="label bordered pointing xxxlarge">XXX-Large</div>
+    <div class="label bordered pointing xxxxlarge">XXXX-Large</div>
+  </div>
+
+  {{{sw.divider "Advanced"}}}
+
+  <div class="multiple">
+    <div class="multiple joined">
+      <div class="button bordered">Stars</div>
+      <div class="label bordered compact pointing-left">123</div>
+    </div>
+    <div class="multiple joined">
+      <div class="button bordered secondary">Forks</div>
+      <div class="label bordered compact pointing-left secondary inverted">12</div>
+    </div>
+    <div class="multiple">
+      <div class="label bordered">Left</div>
+      <div class="button bordered pointing">Pointing</div>
+      <div class="label bordered">Right</div>
+    </div>
+    <div class="multiple joined">
+      <div class="label bordered">Left</div>
+      <div class="button bordered pointing">Pointing</div>
+      <div class="label bordered">Right</div>
+    </div>
+  </div>
+
+  {{> pointing_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="pointing_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Actionable" "toggle_class ( 'actionable' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )" true}}}
+    {{{sw.checkAction "Inverted" "toggle_class ( 'inverted' )"}}}
+  </div>
+
+  {{{sw.divider "Direction"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Default" "direction" "set_direction ()" true}}}
+    {{{sw.radioAction "Top" "direction" "set_direction ( 'top' )"}}}
+    {{{sw.radioAction "Right" "direction" "set_direction ( 'right' )"}}}
+    {{{sw.radioAction "Bottom" "direction" "set_direction ( 'bottom' )"}}}
+    {{{sw.radioAction "Left" "direction" "set_direction ( 'left' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( name ) {
+      $('.pointing').toggleClass ( name );
+    }
+
+    function set_direction ( direction ) {
+      var directions = ['top', 'right', 'bottom', 'left'];
+      for ( var i = 0, l = directions.length; i < l; i++ ) {
+        $('.pointing').removeClass ( 'pointing-' + directions[i] );
+      }
+      if ( direction ) {
+        $('.pointing').addClass ( 'pointing-' + direction );
+      }
+    }
+  </script>
+
+</template>

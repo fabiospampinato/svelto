@@ -3,109 +3,101 @@
 
 <template name="form_sync">
 
-  <div class="centerer">
-    <div class="xs-12 lg-10">
-      <div class="multiple">
-        <div class="xs-12 md-6">
-          {{{sw.divider "Form 1 (Synced)"}}}
-          <form data-sync-group="test" class="centered">
-            <div class="card outlined">
-              <div class="card-header primary outlined">Form</div>
-              <div class="card-block">
-                {{{sample.image "centered xxxlarge"}}}
-                <label>Input:</label>
-                <input name="input_1" placeholder="Input..." class="fluid outlined">
-                <label>Textarea:</label>
-                <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
-                <label>Checkboxes:</label>
-                <div class="multiple fluid">
-                  {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
-                  {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
-                </div>
-                <label>Radios:</label>
-                <div class="multiple fluid">
-                  {{{sw.radio "Radio 1" "radio_name" "true"}}}
-                  {{{sw.radio "Radio 2" "radio_name" "false"}}}
-                </div>
-                <label>Select:</label>
-                <div class="button select-toggler outlined fluid">
-                  <div class="select-label">Select</div>
-                  <i class="icon">reorder</i>
-                  {{{sample.select "select1"}}}
-                </div>
-                <label>Slider:</label>
-                {{{sw.slider min=0 value=75 max=100 step=1}}}
-                <div class="multiple">
-                  <label class="spacer">Switch:</label>
-                  {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
-                </div>
-                <label>Datepicker:</label>
-                {{{sw.datepicker}}}
-                <label>Colorpicker:</label>
-                <div class="centerer">
-                  {{{sw.colorpicker}}}
-                </div>
-              </div>
-              <div class="card-footer outlined">
-                <div class="multiple">
-                  <button type="submit" class="button gray outlined">Normal</button>
-                  <button type="submit" class="button primary outlined">Primary</button>
-                  <button type="submit" class="button secondary outlined">Secondary</button>
-                </div>
-              </div>
-            </div>
-          </form>
+  <div class="multiple center-x">
+    <div class="xs-12 md-6 xl-5">
+      {{{sw.divider "Form 1 (Synced)"}}}
+      <form class="card bordered centered" data-sync-group="test">
+        <div class="card-header primary bordered">Form</div>
+        <div class="card-block">
+          {{{sample.image "centered xxxlarge"}}}
+          <label>Input:</label>
+          <input name="input_1" placeholder="Input..." class="fluid bordered">
+          <label>Textarea:</label>
+          <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow bordered"></textarea>
+          <label>Checkboxes:</label>
+          <div class="multiple fluid">
+            {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+            {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
+          </div>
+          <label>Radios:</label>
+          <div class="multiple fluid">
+            {{{sw.radio "Radio 1" "radio_name" "true"}}}
+            {{{sw.radio "Radio 2" "radio_name" "false"}}}
+          </div>
+          <label>Select:</label>
+          <div class="button select-toggler bordered fluid">
+            <div class="select-label">Select</div>
+            <i class="icon">reorder</i>
+            {{{sample.select "select1"}}}
+          </div>
+          <label>Slider:</label>
+          {{{sw.slider min=0 value=75 max=100 step=1}}}
+          <div class="multiple">
+            <label class="spacer">Switch:</label>
+            {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
+          </div>
+          <label>Datepicker:</label>
+          {{{sw.datepicker}}}
+          <label>Colorpicker:</label>
+          <div class="centerer">
+            {{{sw.colorpicker}}}
+          </div>
         </div>
-        <div class="xs-12 md-6">
-          {{{sw.divider "Form 2 (Synced)"}}}
-          <form data-sync-group="test" class="centered">
-            <div class="card outlined">
-              <div class="card-header primary outlined">Form</div>
-              <div class="card-block">
-                {{{sample.image "centered xxxlarge"}}}
-                <label>Input:</label>
-                <input name="input_1" placeholder="Input..." class="fluid outlined">
-                <label>Textarea:</label>
-                <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
-                <label>Checkboxes:</label>
-                <div class="multiple fluid">
-                  {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
-                  {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
-                </div>
-                <label>Radios:</label>
-                <div class="multiple fluid">
-                  {{{sw.radio "Radio 1" "radio_name" "true"}}}
-                  {{{sw.radio "Radio 2" "radio_name" "false"}}}                </div>
-                <label>Select:</label>
-                <div class="button select-toggler outlined fluid">
-                  <div class="select-label">Select</div>
-                  <i class="icon">reorder</i>
-                  {{{sample.select "select1"}}}
-                </div>
-                <label>Slider:</label>
-                {{{sw.slider min=0 value=75 max=100 step=1}}}
-                <div class="multiple">
-                  <label class="spacer">Switch:</label>
-                  {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
-                </div>
-                <label>Datepicker:</label>
-                {{{sw.datepicker}}}
-                <label>Colorpicker:</label>
-                <div class="centerer">
-                  {{{sw.colorpicker}}}
-                </div>
-              </div>
-              <div class="card-footer outlined">
-                <div class="multiple">
-                  <button type="submit" class="button gray outlined">Normal</button>
-                  <button type="submit" class="button primary outlined">Primary</button>
-                  <button type="submit" class="button secondary outlined">Secondary</button>
-                </div>
-              </div>
-            </div>
-          </form>
+        <div class="card-footer bordered">
+          <div class="multiple">
+            <button type="submit" class="button bordered">Normal</button>
+            <button type="submit" class="button primary bordered">Primary</button>
+            <button type="submit" class="button secondary bordered">Secondary</button>
+          </div>
         </div>
-      </div>
+      </form>
+    </div>
+    <div class="xs-12 md-6 xl-5">
+      {{{sw.divider "Form 2 (Synced)"}}}
+      <form data-sync-group="test" class="card bordered centered">
+        <div class="card-header primary bordered">Form</div>
+        <div class="card-block">
+          {{{sample.image "centered xxxlarge"}}}
+          <label>Input:</label>
+          <input name="input_1" placeholder="Input..." class="fluid bordered">
+          <label>Textarea:</label>
+          <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow bordered"></textarea>
+          <label>Checkboxes:</label>
+          <div class="multiple fluid">
+            {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+            {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
+          </div>
+          <label>Radios:</label>
+          <div class="multiple fluid">
+            {{{sw.radio "Radio 1" "radio_name" "true"}}}
+            {{{sw.radio "Radio 2" "radio_name" "false"}}}                </div>
+          <label>Select:</label>
+          <div class="button select-toggler bordered fluid">
+            <div class="select-label">Select</div>
+            <i class="icon">reorder</i>
+            {{{sample.select "select1"}}}
+          </div>
+          <label>Slider:</label>
+          {{{sw.slider min=0 value=75 max=100 step=1}}}
+          <div class="multiple">
+            <label class="spacer">Switch:</label>
+            {{{sw.switch name="switch_name_1" color-on="secondary" colors-off="gray"}}}
+          </div>
+          <label>Datepicker:</label>
+          {{{sw.datepicker}}}
+          <label>Colorpicker:</label>
+          <div class="centerer">
+            {{{sw.colorpicker}}}
+          </div>
+        </div>
+        <div class="card-footer bordered">
+          <div class="multiple">
+            <button type="submit" class="button bordered">Normal</button>
+            <button type="submit" class="button primary bordered">Primary</button>
+            <button type="submit" class="button secondary bordered">Secondary</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -120,8 +112,8 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   <script>

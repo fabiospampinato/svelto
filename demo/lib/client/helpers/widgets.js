@@ -5,18 +5,24 @@ SWHelpers.registerAs ( 'sw' );
 
 /* WIDGETS */
 
+SWHelpers.define ( 'action', function ( label, action, css = '' ) {
+
+  return '<div class="button bordered ' + css + '" onclick="' + action + '">' + label + '</div>';
+
+});
+
 SWHelpers.define ( 'checkbox', function ( label, name, value ) {
 
-  return '<label class="button checkbox outlined">' +
+  return '<label class="button checkbox bordered">' +
            '<span>' + label + '</span>' +
            '<input type="checkbox" name="' + ( name || '' ) + '" value="' + ( value || '' ) + '">' +
          '</label>';
 
 });
 
-SWHelpers.define ( 'checkAction', function ( label, action, checked ) {
+SWHelpers.define ( 'checkAction', function ( label, action, checked, css = '' ) {
 
-  return '<label class="button checkbox outlined">' +
+  return '<label class="button checkbox bordered ' + css + '">' +
            '<span>' + label + '</span>' +
            '<input type="checkbox" ' + ( checked === true ? 'checked' : '' ) + ' onclick="' + action + '">' +
          '</label>';
@@ -124,6 +130,30 @@ SWHelpers.define ( 'divider', function ( title ) {
 
 });
 
+SWHelpers.define ( 'iconAction', function ( icon, action, css = '' ) {
+
+  return '<div class="button bordered compact ' + css + '" onclick="' + action + '">' +
+           '<i class="icon">' + icon + '</i>' +
+         '</div>';
+
+});
+
+SWHelpers.define ( 'numbox', function ( options ) {
+
+  options = options.hash;
+
+  return '<div class="numbox" data-min="' + options.min + '" data-max="' + options.max + '" data-step="' + options.step + '">' +
+           '<div class="button compact numbox-decreaser">' +
+             '<i class="icon">remove</i>' +
+           '</div>' +
+           '<input value="' + options.value + '" name="' + options.name + '" class="autogrow compact">' +
+           '<div class="button compact numbox-increaser">' +
+             '<i class="icon">add</i>' +
+           '</div>' +
+         '</div>';
+
+});
+
 SWHelpers.define ( 'pager', function ( options ) {
 
   options = options.hash;
@@ -140,7 +170,7 @@ SWHelpers.define ( 'pager', function ( options ) {
 
       let nr = options.current - 1;
 
-      pager += '<a href="' + parseUrl ( nr ) + '" class="button outlined previous" title="Previous page">' +
+      pager += '<a href="' + parseUrl ( nr ) + '" class="button bordered previous" title="Previous page">' +
                  '<i class="icon">chevron_left</i>' +
                  '<span>Previous</span>' +
                '</a>';
@@ -151,7 +181,7 @@ SWHelpers.define ( 'pager', function ( options ) {
 
       let nr = options.current + 1;
 
-      pager += '<a href="' + parseUrl ( nr ) + '" class="button outlined next" title="Next page">' +
+      pager += '<a href="' + parseUrl ( nr ) + '" class="button bordered next" title="Next page">' +
                  '<span>Next</span>' +
                  '<i class="icon">chevron_right</i>' +
                '</a>';
@@ -180,7 +210,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     if ( options.total === Infinity || options.total == 'Infinity' ) {
 
-      pagination += '<a href="' + options.url + '" class="button outlined">Load more</a>';
+      pagination += '<a href="' + options.url + '" class="button bordered compact">Load more</a>';
 
     } else {
 
@@ -190,7 +220,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
         let nr = options.current - 1;
 
-        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact outlined previous" title="Previous page">' +
+        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered previous" title="Previous page">' +
                         '<i class="icon">chevron_left</i>' +
                       '</a>';
 
@@ -253,7 +283,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
         let nr = options.current - outputed_left_blocks;
 
-        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact outlined" title="Page ' + nr + '">' + nr + '</a>';
+        pagination += '<a href="' + parseUrl ( nr ) + '" class="button bordered compact" title="Page ' + nr + '">' + nr + '</a>';
 
         outputed_left_blocks -= 1;
 
@@ -261,7 +291,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
       if ( need_current ) {
 
-        pagination += '<div class="label compact outlined active highlighted" title="Current page">' + options.current + '</div>';
+        pagination += '<div class="label compact bordered active highlighted" title="Current page">' + options.current + '</div>';
 
       }
 
@@ -271,7 +301,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
         let nr = options.current + counter;
 
-        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact outlined" title="Page ' + nr + '">' + nr + '</a>';
+        pagination += '<a href="' + parseUrl ( nr ) + '" class="button bordered compact" title="Page ' + nr + '">' + nr + '</a>';
 
         counter += 1;
 
@@ -281,7 +311,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
         let nr = options.current + 1;
 
-        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact outlined next" title="Next page">' +
+        pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered next" title="Next page">' +
                         '<i class="icon">chevron_right</i>' +
                       '</a>';
 
@@ -317,16 +347,16 @@ SWHelpers.define ( 'progressbar', function ( value, decimals ) {
 
 SWHelpers.define ( 'radio', function ( label, name, value ) {
 
-  return '<label class="button radio outlined">' +
+  return '<label class="button radio bordered">' +
            '<span>' + label + '</span>' +
            '<input type="radio" name="' + ( name || '' ) + '" value="' + ( value || '' ) + '">' +
          '</label>';
 
 });
 
-SWHelpers.define ( 'radioAction', function ( label, name, action, checked ) {
+SWHelpers.define ( 'radioAction', function ( label, name, action, checked, css = '' ) {
 
-  return '<label class="button radio outlined">' +
+  return '<label class="button radio bordered ' + css + '">' +
            '<span>' + label + '</span>' +
            '<input type="radio" name="' + ( name || '' ) + '" ' + ( checked === true ? 'checked' : '' ) + ' onclick="' + action + '">' +
          '</label>';
@@ -353,20 +383,14 @@ SWHelpers.define ( 'slider', function ( options ) {
 
   options = options.hash;
 
-  return '<div data-step="' + options.step + '" class="slider">' +
+  return '<div data-min="' + options.min + '" data-max="' + options.max + '" data-step="' + options.step + '" class="slider">' +
            '<input type="number" name="' + options.name + '" value="' + options.value + '">' +
-           '<div title="Decrease" data-min="' + options.min + '" class="slider-min"></div>' +
            '<div class="slider-bar">' +
-             '<div class="slider-unhighlight">' +
-               '<div class="slider-highlight"></div>' +
-             '</div>' +
-             '<div class="slider-handler-wrp">' +
-               '<div class="slider-handler">' +
-                 '<div class="slider-label"></div>' +
-               '</div>' +
-             '</div>' +
+             '<div class="slider-highlight"></div>' +
            '</div>' +
-           '<div title="Increase" data-max="' + options.max + '" class="slider-max"></div>' +
+           '<div class="slider-handler">' +
+             '<div class="slider-label"></div>' +
+           '</div>' +
          '</div>';
 
 });
@@ -382,22 +406,6 @@ SWHelpers.define ( 'spinner', function ( classes ) {
 SWHelpers.define ( 'spinnerLabel', function ( classes ) {
 
   return '<div class="spinner-label ' + ( classes || '' ) + '">' + SWHelpers.spinner () + '</div>';
-
-});
-
-SWHelpers.define ( 'stepper', function ( options ) {
-
-  options = options.hash;
-
-  return '<div class="stepper" data-min="' + options.min + '" data-max="' + options.max + '" data-step="' + options.step + '">' +
-           '<div class="button compact stepper-decreaser">' +
-             '<i class="icon">remove</i>' +
-           '</div>' +
-           '<input value="' + options.value + '" name="' + options.name + '" class="autogrow compact">' +
-           '<div class="button compact stepper-increaser">' +
-             '<i class="icon">add</i>' +
-           '</div>' +
-         '</div>';
 
 });
 
@@ -421,15 +429,15 @@ SWHelpers.define ( 'notification', function ( options ) {
 
 });
 
-SWHelpers.define ( 'noty', function ( options ) {
-
-  $.noty ( ( options instanceof Spacebars.kw ) ? options.hash : ( options || '' ) );
-
-});
-
 SWHelpers.define ( 'timeAgo', function ( timestamp ) {
 
   return lodash.timeAgo ( timestamp ).str;
+
+});
+
+SWHelpers.define ( 'toast', function ( options ) {
+
+  $.toast ( ( options instanceof Spacebars.kw ) ? options.hash : ( options || '' ) );
 
 });
 

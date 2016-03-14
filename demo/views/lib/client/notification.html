@@ -14,23 +14,23 @@
 <template name="notification_actions">
 
   <div class="multiple actions">
-    <div onclick="notification_trigger ()" class="button outlined">Trigger</div>
-    <div onclick="notification_trigger_delayed ( 2000 )" class="button outlined">Trigger delayed (2s)</div>
+    {{{sw.action "Trigger" "notification_trigger ()"}}}
+    {{{sw.action "Trigger delayed (2s)" "notification_trigger_delayed ( 2000 )"}}}
   </div>
 
   <script>
-    function notification_trigger() {
-      $.notification({
+    function notification_trigger () {
+      $.notification ({
         title: 'Test title',
         body: 'Test description',
         img: '/sample/sample.png'
       });
     }
 
-    function notification_trigger_delayed(delay) {
-      setTimeout(function() {
-        notification_trigger();
-      }, delay);
+    function notification_trigger_delayed ( delay ) {
+      setTimeout ( function () {
+        notification_trigger ();
+      }, delay );
     }
   </script>
 

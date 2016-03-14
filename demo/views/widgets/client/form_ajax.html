@@ -5,32 +5,30 @@
 
   {{{sw.divider "Form Ajax"}}}
 
-  <form action="/form-ajax-test" class="validate ajax centered sm-12 md-10 lg-8 xl-6">
-    <div class="card outlined">
-      <div class="card-header primary outlined">Form</div>
-      <div class="card-block">
-        {{{sample.image "centered xxxlarge"}}}
-        <label>Input:</label>
-        <input name="input_1" placeholder="Input..." class="fluid outlined" data-validations="required">
-        <label>Textarea:</label>
-        <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow outlined"></textarea>
-        <label>Checkboxes:</label>
-        <div class="multiple fluid">
-          {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
-          {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
-        </div>
-        <label>Radios:</label>
-        <div class="multiple fluid">
-          {{{sw.radio "Radio 1" "radio_name" "true"}}}
-          {{{sw.radio "Radio 2" "radio_name" "false"}}}
-        </div>
+  <form action="/form-ajax-test" class="card bordered validate ajax centered sm-12 md-10 lg-8 xl-6">
+    <div class="card-header primary bordered">Form</div>
+    <div class="card-block">
+      {{{sample.image "centered xxxlarge"}}}
+      <label>Input:</label>
+      <input name="input_1" placeholder="Input..." class="fluid bordered" data-validations="required">
+      <label>Textarea:</label>
+      <textarea name="textarea_1" placeholder="Textarea..." class="fluid autogrow bordered"></textarea>
+      <label>Checkboxes:</label>
+      <div class="multiple fluid">
+        {{{sw.checkbox "Checkbox 1" "checkbox_name_1"}}}
+        {{{sw.checkbox "Checkbox 2" "checkbox_name_2"}}}
       </div>
-      <div class="card-footer outlined">
-        <div class="multiple">
-          <button type="submit" class="button gray outlined">Normal</button>
-          <button type="submit" class="button primary outlined">Primary</button>
-          <button type="submit" class="button secondary outlined">Secondary</button>
-        </div>
+      <label>Radios:</label>
+      <div class="multiple fluid">
+        {{{sw.radio "Radio 1" "radio_name" "true"}}}
+        {{{sw.radio "Radio 2" "radio_name" "false"}}}
+      </div>
+    </div>
+    <div class="card-footer bordered">
+      <div class="multiple">
+        <button type="submit" class="button bordered">Normal</button>
+        <button type="submit" class="button primary bordered">Primary</button>
+        <button type="submit" class="button secondary bordered">Secondary</button>
       </div>
     </div>
   </form>
@@ -46,8 +44,8 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   <script>

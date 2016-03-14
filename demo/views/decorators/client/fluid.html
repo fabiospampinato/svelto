@@ -1,0 +1,59 @@
+
+<!-- FLUID -->
+
+<template name="fluid">
+
+  {{{sw.divider "Label"}}}
+
+  <div class="label fluid">Label</div>
+  <div class="label fluid">
+    <span>Label</span>
+    <i class="icon">settings</i>
+  </div>
+
+  {{{sw.divider "Input"}}}
+
+  <input placeholder="Input..." class="fluid">
+
+  {{{sw.divider "Textarea"}}}
+
+  <textarea placeholder="Textarea..." class="fluid"></textarea>
+
+  {{{sw.divider "Image"}}}
+
+  {{{sample.imageWide "fluid"}}}
+
+  {{{sw.divider "Multiple"}}}
+
+  <div class="multiple fluid">
+    <div class="label">Label</div>
+    <div class="label">Quite a little longer label</div>
+    <input placeholder="Input...">
+  </div>
+
+  {{> fluid_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="fluid_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
+    {{{sw.checkAction "Vertical (Multiple)" "multiple_toggle_class ( 'vertical' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( name ) {
+      $('.fluid:not(.multiple), .multiple.fluid > *').toggleClass ( name );
+    }
+
+    function multiple_toggle_class ( name ) {
+      $('.multiple.fluid').toggleClass ( name );
+    }
+  </script>
+
+</template>

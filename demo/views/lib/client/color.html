@@ -6,63 +6,63 @@
   {{{sw.divider "HEX"}}}
 
   <div class="multiple joined">
-    <div class="label compact outlined hex"></div>
-    <input name="hex_r" placeholder="Red..." class="outlined">
-    <input name="hex_g" placeholder="Green..." class="outlined">
-    <input name="hex_b" placeholder="Blue..." class="outlined">
-    <div class="label compact outlined">
+    <div class="label compact bordered pointing-right hex"></div>
+    <input name="hex_r" placeholder="Red..." class="bordered">
+    <input name="hex_g" placeholder="Green..." class="bordered">
+    <input name="hex_b" placeholder="Blue..." class="bordered">
+    <div class="label compact bordered">
       <i class="icon">arrow_forward</i>
     </div>
-    <div class="button outlined" onclick="hex2rgb ()">RGB</div>
-    <div class="button outlined" onclick="hex2hsv ()">HSV</div>
-    <div class="button outlined" onclick="hex2hsl ()">HSL</div>
+    {{{sw.action "RGB" "hex2rgb ()"}}}
+    {{{sw.action "HSV" "hex2hsv ()"}}}
+    {{{sw.action "HSL" "hex2hsl ()"}}}
   </div>
 
   {{{sw.divider "RGB"}}}
 
   <div class="multiple joined">
-    <div class="label compact outlined rgb"></div>
-    <input name="rgb_r" placeholder="Red..." class="outlined">
-    <input name="rgb_g" placeholder="Green..." class="outlined">
-    <input name="rgb_b" placeholder="Blue..." class="outlined">
-    <div class="label compact outlined">
+    <div class="label compact bordered pointing-right rgb"></div>
+    <input name="rgb_r" placeholder="Red..." class="bordered">
+    <input name="rgb_g" placeholder="Green..." class="bordered">
+    <input name="rgb_b" placeholder="Blue..." class="bordered">
+    <div class="label compact bordered">
       <i class="icon">arrow_forward</i>
     </div>
-    <div class="button outlined" onclick="rgb2hex ()">HEX</div>
-    <div class="button outlined" onclick="rgb2hsv ()">HSV</div>
-    <div class="button outlined" onclick="rgb2hsl ()">HSL</div>
+    {{{sw.action "HEX" "rgb2hex ()"}}}
+    {{{sw.action "HSV" "rgb2hsv ()"}}}
+    {{{sw.action "HSL" "rgb2hsl ()"}}}
   </div>
 
   {{{sw.divider "HSV"}}}
 
   <div class="multiple joined">
-    <div class="label compact outlined hsv">
+    <div class="label compact bordered pointing-right hsv">
       <i class="icon">block</i>
     </div>
-    <input name="hsv_h" placeholder="Hue..." class="outlined">
-    <input name="hsv_s" placeholder="Saturation..." class="outlined">
-    <input name="hsv_v" placeholder="Value..." class="outlined">
-    <div class="label compact outlined">
+    <input name="hsv_h" placeholder="Hue..." class="bordered">
+    <input name="hsv_s" placeholder="Saturation..." class="bordered">
+    <input name="hsv_v" placeholder="Value..." class="bordered">
+    <div class="label compact bordered">
       <i class="icon">arrow_forward</i>
     </div>
-    <div class="button outlined" onclick="hsv2hex ()">HEX</div>
-    <div class="button outlined" onclick="hsv2rgb ()">RGB</div>
-    <div class="button outlined" onclick="hsv2hsl ()">HSL</div>
+    {{{sw.action "HEX" "hsv2hex ()"}}}
+    {{{sw.action "RGB" "hsv2rgb ()"}}}
+    {{{sw.action "HSL" "hsv2hsl ()"}}}
   </div>
 
   {{{sw.divider "HSL"}}}
 
   <div class="multiple joined">
-    <div class="label compact outlined hsl"></div>
-    <input name="hsl_h" placeholder="Hue..." class="outlined">
-    <input name="hsl_s" placeholder="Saturation..." class="outlined">
-    <input name="hsl_l" placeholder="Lightness..." class="outlined">
-    <div class="label compact outlined">
+    <div class="label compact bordered pointing-right hsl"></div>
+    <input name="hsl_h" placeholder="Hue..." class="bordered">
+    <input name="hsl_s" placeholder="Saturation..." class="bordered">
+    <input name="hsl_l" placeholder="Lightness..." class="bordered">
+    <div class="label compact bordered">
       <i class="icon">arrow_forward</i>
     </div>
-    <div class="button outlined" onclick="hsl2hex ()">HEX</div>
-    <div class="button outlined" onclick="hsl2rgb ()">RGB</div>
-    <div class="button outlined" onclick="hsl2hsv ()">HSV</div>
+    {{{sw.action "HEX" "hsl2hex ()"}}}
+    {{{sw.action "RGB" "hsl2rgb ()"}}}
+    {{{sw.action "HSV" "hsl2hsv ()"}}}
   </div>
 
   <script>

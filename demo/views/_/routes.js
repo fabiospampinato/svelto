@@ -1,6 +1,6 @@
 
 /* _ */
 
-let templates = ['border', 'clearfix', 'display', 'flexbox', 'flip', 'float', 'margin', 'overflow', 'padding', 'rotation', 'screen_reader', 'text', 'visibility'];
+let templates = ['alignment', 'border', 'clearfix', 'display', 'flexbox', 'flip', 'float', 'margin', 'overflow', 'padding', 'position', 'rotation', 'screen_reader', 'text', 'visibility'];
 
-SWRouter.pages ( templates, '/_/' );
+SRouter.pages ( templates, '/_/' );

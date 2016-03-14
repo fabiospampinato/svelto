@@ -5,7 +5,7 @@
 
   {{{sw.divider "Switch"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     {{{sw.switch color-on="secondary" color-off="gray"}}}
     {{{sw.switch color-on="secondary" color-off="gray" icon-on="add"}}}
     {{{sw.switch color-on="green" color-off="red"}}}
@@ -23,12 +23,12 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
-    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
-    <div onclick="api ( 'check' )" class="button outlined">Check</div>
-    <div onclick="api ( 'uncheck' )" class="button outlined">Uncheck</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
+    {{{sw.action "Toggle" "api ( 'toggle' )"}}}
+    {{{sw.action "Check" "api ( 'check' )"}}}
+    {{{sw.action "Uncheck" "api ( 'uncheck' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -50,15 +50,15 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function api_get() {
-      var gets = _.map($('.switch'), function(switchEle) {
-        return $(switchEle).switch('get');
+    function api_get () {
+      var gets = lodash.map ( $('.switch'), function ( switchEle ) {
+        return $(switchEle).switch ( 'get' );
       });
-      $.noty(gets.join(' - '));
+      $.toast ( gets.join ( ' - ' ) );
     }
 
-    function api(action) {
-      $('.switch').switch(action);
+    function api ( action ) {
+      $('.switch').switch ( action );
     }
 
     function set_validity ( validity ) {

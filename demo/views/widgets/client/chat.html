@@ -5,134 +5,138 @@
 
   {{{sw.divider "Chat"}}}
 
-  <div class="chat-msg level-1">
-    {{{sample.image "chat-msg-img"}}}
-    <div class="chat-msg-content card outlined">
-      <div class="card-header outlined compact">
-        <div class="sections center-y">
-          <div class="section-left">
-            <a href="#" title="Fabio">Fabio</a>
-          </div>
-          <div class="section-right">
-            <div class="multiple">
-              <div class="button xsmall outlined compact" title="You are the owner">
-                <i class="icon">account_circle</i>
-              </div>
-              <div class="button xsmall outlined compact" title="Edit">
-                <i class="icon">mode_edit</i>
-              </div>
-              <div class="button xsmall outlined compact" title="Delete">
-                <i class="icon">delete</i>
+  <div class="chat bordered">
+
+    <div class="chat-message level-1">
+      {{{sample.image "chat-message-img"}}}
+      <div class="chat-message-content card bordered">
+        <div class="card-header bordered compact">
+          <div class="sections center-y">
+            <div class="section-left">
+              <a href="#" title="Fabio">Fabio</a>
+            </div>
+            <div class="section-right">
+              <div class="multiple">
+                <div class="button xsmall bordered compact" title="You are the owner">
+                  <i class="icon">account_circle</i>
+                </div>
+                <div class="button xsmall bordered compact" title="Edit">
+                  <i class="icon">mode_edit</i>
+                </div>
+                <div class="button xsmall bordered compact" title="Delete">
+                  <i class="icon">delete</i>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-block">
-        <p>This is the message, do you like it?</p>
+        <div class="card-block">
+          <p>This is the message, do you like it?</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="chat-msg level-2">
-    <a href="#" class="chat-msg-img" title="Francesca">
-      {{{sample.image}}}
-    </a>
-    <div class="chat-msg-content card outlined">
-      <div class="card-header outlined compact">
-        <div class="sections center-y">
-          <div class="section-left">
-            <a href="#" title="Francesca">Francesca</a>
+    <div class="chat-message level-2">
+      <a href="#" class="chat-message-img" title="Francesca">
+        {{{sample.image}}}
+      </a>
+      <div class="chat-message-content card bordered">
+        <div class="card-header bordered compact">
+          <div class="sections center-y">
+            <div class="section-left">
+              <a href="#" title="Francesca">Francesca</a>
+            </div>
+            <div class="section-right">
+              <div class="multiple">
+                <div class="button xsmall bordered compact" title="Reply">
+                  <i class="icon">reply</i>
+                </div>
+                <div class="button xsmall bordered compact" title="Edit">
+                  <i class="icon">mode_edit</i>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="section-right">
-            <div class="multiple">
-              <div class="button xsmall outlined compact" title="Reply">
+        </div>
+        <div class="card-block">
+          <p>Not really...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-message level-2">
+      <div class="chat-message-content card bordered">
+        <div class="card-header bordered compact">
+          <div class="sections center-y">
+            <div class="section-left">
+              <a href="#" title="Valeria">Valeria</a>
+            </div>
+            <div class="section-right">
+              <div class="button xsmall bordered compact" title="Reply">
                 <i class="icon">reply</i>
               </div>
-              <div class="button xsmall outlined compact" title="Edit">
-                <i class="icon">mode_edit</i>
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+          <p>Where's my avatar?!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- //FIXME: Fix the overlay -->
+
+    <div class="chat-message level-3">
+      <a href="#" class="chat-message-img overlay-toggler" title="Valeria" data-target="#chat-overlay" data-options='{"hover":{"triggerable":true,"delays":{"open":50,"close":50}}}'>
+        <div id="chat-overlay" class="overlay dimmer centerer">
+          <i class="icon xlarge">person</i>
+        </div>
+        {{{sample.image}}}
+      </a>
+      <div class="chat-message-content card bordered">
+        <div class="card-header bordered compact">
+          <div class="sections center-y">
+            <div class="section-left">
+              <a href="#" title="Valeria">Valeria</a>
+            </div>
+            <div class="section-right">
+              <div class="button xsmall bordered compact" title="Reply">
+                <i class="icon">reply</i>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-block">
-        <p>Not really...</p>
+        <div class="card-block">
+          <p>Whoa I can reply to myself</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="chat-msg level-2">
-    <div class="chat-msg-content card outlined">
-      <div class="card-header outlined compact">
-        <div class="sections center-y">
-          <div class="section-left">
-            <a href="#" title="Valeria">Valeria</a>
-          </div>
-          <div class="section-right">
-            <div class="button xsmall outlined compact" title="Reply">
-              <i class="icon">reply</i>
+    <div class="chat-message level-4">
+      <a href="#" class="chat-message-img" title="Valeria">
+        <figure title="Valeria">
+          {{{sample.image}}}
+        </figure>
+      </a>
+      <div class="chat-message-content card bordered">
+        <div class="card-header bordered compact">
+          <div class="sections center-y">
+            <div class="section-left">
+              <a href="#" title="Valeria">Valeria</a>
+            </div>
+            <div class="section-right">
+              <div class="button xsmall bordered compact" title="Reply">
+                <i class="icon">reply</i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-block">
-        <p>Where's my avatar?!</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- //FIXME: Fix the overlay -->
-
-  <div class="chat-msg level-3">
-    <a href="#" class="chat-msg-img overlay-toggler" title="Valeria" data-target="#chat-overlay" data-options='{"hover":{"triggerable":true,"delays":{"open":50,"close":50}}}'>
-      <div id="chat-overlay" class="overlay dimmer centerer">
-        <i class="icon xlarge">person</i>
-      </div>
-      {{{sample.image}}}
-    </a>
-    <div class="chat-msg-content card outlined">
-      <div class="card-header outlined compact">
-        <div class="sections center-y">
-          <div class="section-left">
-            <a href="#" title="Valeria">Valeria</a>
-          </div>
-          <div class="section-right">
-            <div class="button xsmall outlined compact" title="Reply">
-              <i class="icon">reply</i>
-            </div>
-          </div>
+        <div class="card-block">
+          <p>And again (Found my avatar btw)</p>
         </div>
       </div>
-      <div class="card-block">
-        <p>Whoa I can reply to myself</p>
-      </div>
     </div>
-  </div>
 
-  <div class="chat-msg level-4">
-    <a href="#" class="chat-msg-img" title="Valeria">
-      <figure title="Valeria">
-        {{{sample.image}}}
-      </figure>
-    </a>
-    <div class="chat-msg-content card outlined">
-      <div class="card-header outlined compact">
-        <div class="sections center-y">
-          <div class="section-left">
-            <a href="#" title="Valeria">Valeria</a>
-          </div>
-          <div class="section-right">
-            <div class="button xsmall outlined compact" title="Reply">
-              <i class="icon">reply</i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-block">
-        <p>And again (Found my avatar btw)</p>
-      </div>
-    </div>
   </div>
 
   {{> chat_actions}}
@@ -161,21 +165,21 @@
 
   <script>
     function toggle_class (  class_name ) {
-      $('.chat-msg').toggleClass ( class_name );
+      $('.chat-message').toggleClass ( class_name );
     }
 
     function enable () {
-      $('.chat-msg').removeClass ( 'disabled' );
+      $('.chat-message').removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.chat-msg').addClass ( 'disabled' );
+      $('.chat-message').addClass ( 'disabled' );
     }
 
     function set_direction ( direction ) {
       var directions = ['left', 'right'];
       for ( var i = 0, l = directions.length; i < l; i++ ) {
-        $('.chat-msg').removeClass ( 'direction-' + directions[i] ).addClass ( 'direction-' + direction );
+        $('.chat-message').removeClass ( 'direction-' + directions[i] ).addClass ( 'direction-' + direction );
       }
     }
   </script>

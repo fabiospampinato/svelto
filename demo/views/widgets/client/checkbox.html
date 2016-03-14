@@ -5,7 +5,8 @@
 
   {{{sw.divider "Checkbox"}}}
 
-  <div class="multiple">
+  <div class="multiple checkboxes">
+    <input type="checkbox">
     <label class="checkbox">
       <input type="checkbox">
     </label>
@@ -50,23 +51,25 @@
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.checkbox').slice ( 0, 4 ).toggleClass ( css_class );
+    var $checkboxes = $('.checkboxes').find ( '.checkbox, input[type="checkbox"]' ).not ( '.checkbox input' );
+
+    function toggle_class ( name ) {
+      $checkboxes.toggleClass ( name );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('.checkbox').slice ( 0, 4 ).removeClass ( validities[i] ).addClass ( validity );
+        $checkboxes.removeClass ( validities[i] ).addClass ( validity );
       }
     }
 
     function enable () {
-      $('.checkbox').slice ( 0, 4 ).removeClass ( 'disabled' );
+      $checkboxes.removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.checkbox').slice ( 0, 4 ).addClass ( 'disabled' );
+      $checkboxes.addClass ( 'disabled' );
     }
   </script>
 

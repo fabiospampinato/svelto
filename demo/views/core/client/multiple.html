@@ -6,38 +6,38 @@
   {{{sw.divider "Multiple"}}}
 
   <div class="multiple">
-    <div class="container outlined">1</div>
-    <div class="container outlined">2</div>
-    <div class="container outlined">3</div>
-    <div class="container outlined">4</div>
-    <div class="container outlined">5</div>
-    <div class="container outlined">6</div>
-    <div class="container outlined">7</div>
-    <div class="container outlined">8</div>
-    <div class="container outlined">9</div>
-    <div class="container outlined">10</div>
+    <div class="container bordered">1</div>
+    <div class="container bordered">2</div>
+    <div class="container bordered">3</div>
+    <div class="container bordered">4</div>
+    <div class="container bordered">5</div>
+    <div class="container bordered">6</div>
+    <div class="container bordered">7</div>
+    <div class="container bordered">8</div>
+    <div class="container bordered">9</div>
+    <div class="container bordered">10</div>
   </div>
 
   <div class="multiple">
-    <div class="container outlined">Left</div>
-    <div class="container outlined">Center</div>
-    <div class="container outlined">Right</div>
+    <div class="container bordered">Left</div>
+    <div class="container bordered">Center</div>
+    <div class="container bordered">Right</div>
   </div>
 
   <div class="multiple">
-    <div class="button outlined">Left</div>
-    <div class="button outlined">Center</div>
-    <div class="button outlined">Right</div>
+    <div class="button bordered">Left</div>
+    <div class="button bordered">Center</div>
+    <div class="button bordered">Right</div>
   </div>
 
   <div class="multiple">
-    <div class="container outlined">
+    <div class="container bordered">
       <p class="truncate">{{sample.text 100}}</p>
     </div>
-    <div class="container outlined">
+    <div class="container bordered">
       {{{sample.paragraph}}}
     </div>
-    <div class="container outlined">Right</div>
+    <div class="container bordered">Right</div>
   </div>
 
   {{> multiple_actions}}
@@ -53,22 +53,25 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Center" "toggle_class ( 'center' )"}}}
-    {{{sw.checkAction "Center X" "toggle_class ( 'center-x' )"}}}
-    {{{sw.checkAction "Center Y" "toggle_class ( 'center-y' )"}}}
-    {{{sw.checkAction "No wrap" "toggle_class ( 'no-wrap' )"}}}
-    {{{sw.checkAction "Fluid" "toggle_class ( 'fluid' )"}}}
+    <div class="multiple actions joined">
+      <div class="label bordered gray pointing-right">Center</div>
+      {{{sw.checkAction "All" "toggle_class ( 'center' )"}}}
+      {{{sw.checkAction "X" "toggle_class ( 'center-x' )"}}}
+      {{{sw.checkAction "Y" "toggle_class ( 'center-y' )"}}}
+    </div>
     {{{sw.checkAction "Equal" "toggle_class ( 'equal' )"}}}
+    {{{sw.checkAction "Fluid" "toggle_class ( 'fluid' )"}}}
     {{{sw.checkAction "Joined" "toggle_class ( 'joined' )"}}}
     {{{sw.checkAction "No separators" "toggle_class ( 'no-separators' )"}}}
+    {{{sw.checkAction "No wrap" "toggle_class ( 'no-wrap' )"}}}
     {{{sw.checkAction "Only separators" "toggle_class ( 'only-separators' )"}}}
     {{{sw.checkAction "Stretched" "toggle_class ( 'stretched' )"}}}
     {{{sw.checkAction "Vertical" "toggle_class ( 'vertical' )"}}}
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.layout-content .multiple').not ( '.actions' ).not('.expander .multiple').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.layout-content .multiple').not ( '.actions' ).not('.expander .multiple').toggleClass ( name );
     }
   </script>
 
@@ -80,8 +83,8 @@
 
   {{{sw.divider "Tricky cases"}}}
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander jtest">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Joined</div>
         <div class="button xsmall compact">
@@ -93,59 +96,59 @@
 
       {{{sw.divider "Multi"}}}
 
-      <div class="multiple joined vertical fluid jtest">
+      <div class="multiple joined vertical fluid">
         <div class="multiple joined equal">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple joined equal">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple joined equal">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
       {{{sw.divider "Multi vertical"}}}
 
-      <div class="multiple joined fluid jtest">
+      <div class="multiple joined fluid">
         <div class="multiple vertical fluid joined">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple vertical fluid joined">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple vertical fluid joined">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
       {{{sw.divider "Mixed"}}}
 
-      <div class="multiple fluid joined stretched jtest">
+      <div class="multiple fluid joined stretched">
         <div class="multiple vertical joined">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
-        <div class="container outlined">2</div>
-        <div class="container outlined">2</div>
-        <div class="container outlined">2</div>
+        <div class="container bordered">2</div>
+        <div class="container bordered">2</div>
+        <div class="container bordered">2</div>
         <div class="multiple vertical joined">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -157,16 +160,16 @@
       </div>
 
       <script>
-        function toggle_class_joined(name) {
-          $('.multiple.jtest').toggleClass ( name );
+        function toggle_class_joined ( name ) {
+          $('.jtest .multiple').toggleClass ( name );
         }
       </script>
 
     </div>
   </div>
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable red expander-toggler">
+  <div class="card bordered expander jntest">
+    <div class="card-header bordered actionable red expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Joined nested</div>
         <div class="button xsmall compact">
@@ -178,100 +181,100 @@
 
       {{{sw.divider "Multi"}}}
 
-      <div class="multiple joined vertical fluid jntest">
+      <div class="multiple joined vertical fluid">
         <div class="multiple joined equal">
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
         <div class="multiple joined equal">
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple joined equal">
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
       </div>
 
       {{{sw.divider "Multi vertical"}}}
 
-      <div class="multiple joined fluid stretched jntest">
+      <div class="multiple joined fluid stretched">
         <div class="multiple vertical fluid joined">
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
         <div class="multiple vertical fluid stretched joined">
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple vertical fluid joined">
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
       </div>
 
       {{{sw.divider "Mixed"}}}
 
-      <div class="multiple fluid joined stretched jntest">
+      <div class="multiple fluid joined stretched">
         <div class="multiple vertical joined">
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
-        <div class="container outlined">2</div>
-        <div class="container outlined">2</div>
-        <div class="container outlined">2</div>
+        <div class="container bordered">2</div>
+        <div class="container bordered">2</div>
+        <div class="container bordered">2</div>
         <div class="multiple vertical joined">
           <div class="multiple joined vertical fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
           <div class="multiple joined fluid">
-            <div class="container outlined">X</div>
-            <div class="container outlined">X</div>
+            <div class="container bordered">X</div>
+            <div class="container bordered">X</div>
           </div>
         </div>
       </div>
@@ -284,17 +287,16 @@
       </div>
 
       <script>
-        function toggle_class_njoined(name) {
-          $('.multiple.jntest').toggleClass ( name );
+        function toggle_class_njoined ( name ) {
+          $('.jntest .multiple').toggleClass ( name );
         }
       </script>
-
 
     </div>
   </div>
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Concat</div>
         <div class="button xsmall compact">
@@ -308,19 +310,19 @@
 
       <div class="multiple">
         <div class="multiple">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -328,19 +330,19 @@
 
       <div class="multiple">
         <div class="multiple no-wrap">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple no-wrap">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple no-wrap">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -348,19 +350,19 @@
 
       <div class="multiple">
         <div class="multiple vertical fluid">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple vertical fluid">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple vertical fluid">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -368,26 +370,26 @@
 
       <div class="multiple">
         <div class="multiple joined">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple joined">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple joined">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Concat fixed</div>
         <div class="button xsmall compact">
@@ -401,19 +403,19 @@
 
       <div class="multiple fluid">
         <div class="multiple xs-4">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple xs-4">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple xs-4">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -421,19 +423,19 @@
 
       <div class="multiple fluid">
         <div class="multiple no-wrap xs-4">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple no-wrap xs-4">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple no-wrap xs-4">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -441,19 +443,19 @@
 
       <div class="multiple fluid">
         <div class="multiple vertical fluid xs-4">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple vertical fluid xs-4">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple vertical fluid xs-4">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
 
@@ -461,26 +463,26 @@
 
       <div class="multiple fluid">
         <div class="multiple joined xs-4">
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
-          <div class="container outlined">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
+          <div class="container bordered">1</div>
         </div>
         <div class="multiple joined xs-4">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
         </div>
         <div class="multiple joined xs-4">
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
-          <div class="container outlined">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
+          <div class="container bordered">3</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Nested</div>
         <div class="button xsmall compact">
@@ -493,17 +495,17 @@
       {{{sw.divider "Normal"}}}
 
       <div class="multiple fluid">
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
         <div class="multiple fluid">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple fluid">
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
           </div>
         </div>
       </div>
@@ -511,17 +513,17 @@
       {{{sw.divider "No wrap"}}}
 
       <div class="multiple no-wrap fluid">
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
         <div class="multiple no-wrap fluid">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple no-wrap fluid">
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
           </div>
         </div>
       </div>
@@ -529,17 +531,17 @@
       {{{sw.divider "Vertical"}}}
 
       <div class="multiple vertical fluid">
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
         <div class="multiple vertical fluid">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple vertical fluid">
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
           </div>
         </div>
       </div>
@@ -547,25 +549,25 @@
       {{{sw.divider "Joined"}}}
 
       <div class="multiple joined">
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
-        <div class="container outlined">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
+        <div class="container bordered">1</div>
         <div class="multiple joined">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple joined">
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card outlined expander">
-    <div class="card-header outlined actionable primary expander-toggler">
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
       <div class="multiple center-y">
         <div class="spacer">Nested fixed</div>
         <div class="button xsmall compact">
@@ -578,17 +580,17 @@
       {{{sw.divider "Nested"}}}
 
       <div class="multiple fluid">
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
         <div class="multiple fluid xs-9">
-          <div class="container outlined xs-1">2</div>
-          <div class="container outlined xs-1">2</div>
-          <div class="container outlined xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
           <div class="multiple fluid xs-9">
-            <div class="container outlined xs-3">3</div>
-            <div class="container outlined xs-3">3</div>
-            <div class="container outlined xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
           </div>
         </div>
       </div>
@@ -596,17 +598,17 @@
       {{{sw.divider "Nested no wrap"}}}
 
       <div class="multiple no-wrap fluid">
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
         <div class="multiple no-wrap fluid xs-9">
-          <div class="container outlined xs-1">2</div>
-          <div class="container outlined xs-1">2</div>
-          <div class="container outlined xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
+          <div class="container bordered xs-1">2</div>
           <div class="multiple no-wrap fluid xs-9">
-            <div class="container outlined xs-3">3</div>
-            <div class="container outlined xs-3">3</div>
-            <div class="container outlined xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
+            <div class="container bordered xs-3">3</div>
           </div>
         </div>
       </div>
@@ -614,26 +616,26 @@
       {{{sw.divider "Nested vertical"}}}
 
       <div class="multiple fluid">
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
-        <div class="container outlined xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
+        <div class="container bordered xs-1">1</div>
         <div class="multiple vertical fluid xs-9">
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
-          <div class="container outlined">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
+          <div class="container bordered">2</div>
           <div class="multiple fluid">
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
-            <div class="container outlined">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
+            <div class="container bordered">3</div>
           </div>
           <div class="multiple fluid xs-9">
-            <div class="container outlined xs-1">4</div>
-            <div class="container outlined xs-1">4</div>
-            <div class="container outlined xs-1">4</div>
+            <div class="container bordered xs-1">4</div>
+            <div class="container bordered xs-1">4</div>
+            <div class="container bordered xs-1">4</div>
             <div class="multiple vertical fluid xs-9">
-              <div class="container outlined">5</div>
-              <div class="container outlined">5</div>
-              <div class="container outlined">5</div>
+              <div class="container bordered">5</div>
+              <div class="container bordered">5</div>
+              <div class="container bordered">5</div>
             </div>
           </div>
         </div>
@@ -642,17 +644,17 @@
       {{{sw.divider "Nested joined"}}}
 
       <div class="multiple joined fluid">
-        <div class="container outlined xs-3">1</div>
-        <div class="container outlined xs-3">1</div>
-        <div class="container outlined xs-3">1</div>
+        <div class="container bordered xs-3">1</div>
+        <div class="container bordered xs-3">1</div>
+        <div class="container bordered xs-3">1</div>
         <div class="multiple joined fluid xs-3">
-          <div class="container outlined xs-3">2</div>
-          <div class="container outlined xs-3">2</div>
-          <div class="container outlined xs-3">2</div>
+          <div class="container bordered xs-3">2</div>
+          <div class="container bordered xs-3">2</div>
+          <div class="container bordered xs-3">2</div>
           <div class="multiple joined fluid xs-3">
-            <div class="container outlined xs-4">3</div>
-            <div class="container outlined xs-4">3</div>
-            <div class="container outlined xs-4">3</div>
+            <div class="container bordered xs-4">3</div>
+            <div class="container bordered xs-4">3</div>
+            <div class="container bordered xs-4">3</div>
           </div>
         </div>
       </div>

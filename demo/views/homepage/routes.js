@@ -1,4 +1,4 @@
 
 /* HOME */
 
-SWRouter.page ( 'homepage', '/' );
+SRouter.page ( 'homepage', '/' );

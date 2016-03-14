@@ -5,7 +5,7 @@
 
   {{{sw.divider "Attached"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div data-value="25" class="progressbar slim attached-top">
       <div class="progressbar-highlight"></div>
     </div>
@@ -14,6 +14,16 @@
       <div class="progressbar-highlight"></div>
     </div>
     <div class="container compact tertiary attached-left"></div>
+    {{{sample.paragraph}}}
+  </div>
+
+  {{{sw.divider "Corners"}}}
+
+  <div class="container bordered">
+    <div class="label primary attached-top-left">Top left</div>
+    <div class="label secondary attached-top-right">Top right</div>
+    <div class="label tertiary attached-bottom-right">Bottom right</div>
+    <div class="label quaternary attached-bottom-left">Bottom left</div>
     {{{sample.paragraph}}}
   </div>
 
@@ -28,7 +38,7 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
     {{{sw.checkAction "On hover" "toggle_class ( 'on-hover' )"}}}
     {{{sw.checkAction "Disable parent" "disable_parent ()"}}}
   </div>

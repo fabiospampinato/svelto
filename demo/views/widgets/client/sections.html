@@ -5,7 +5,7 @@
 
   {{{sw.divider "All"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="sections">
       <div class="section-left">Left</div>
       <div class="section-center">Center</div>
@@ -15,7 +15,7 @@
 
   {{{sw.divider "No left"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="sections">
       <div class="section-center">Center</div>
       <div class="section-right">Right</div>
@@ -24,7 +24,7 @@
 
   {{{sw.divider "No center"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="sections">
       <div class="section-left">Left</div>
       <div class="section-right">Right</div>
@@ -33,7 +33,7 @@
 
   {{{sw.divider "No right"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="sections">
       <div class="section-left">Left</div>
       <div class="section-center">Center</div>
@@ -42,32 +42,32 @@
 
   {{{sw.divider "Only left"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="section-left">Left</div>
   </div>
 
   {{{sw.divider "Only center"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="section-center">Center</div>
   </div>
 
   {{{sw.divider "Only right"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="section-right">Right</div>
   </div>
 
   {{{sw.divider "Advanced"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="sections center-y">
       <div class="section-left">
         <div class="multiple">
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">thumb_up</i>
           </div>
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">thumb_down</i>
           </div>
         </div>
@@ -77,16 +77,16 @@
       </div>
       <div class="section-right">
         <div class="multiple">
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">menu</i>
           </div>
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">apps</i>
           </div>
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">refresh</i>
           </div>
-          <div class="button xsmall compact outlined">
+          <div class="button xsmall compact bordered">
             <i class="icon">more_vert</i>
           </div>
         </div>
@@ -107,8 +107,8 @@
   {{{sw.checkAction "Forced center" "toggle_class ( 'forced' )"}}}
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.section-center').toggleClass ( css_class );
+    function toggle_class ( name ) {
+      $('.section-center').toggleClass ( name );
     }
   </script>
 

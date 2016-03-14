@@ -5,7 +5,7 @@
 
   {{{sw.divider "Closable"}}}
 
-  <div class="infobar outlined">
+  <div class="infobar bordered">
     <div class="infobar-left">
       <i class="icon xxxlarge">settings</i>
     </div>
@@ -14,7 +14,7 @@
       <div class="infobar-subtitle">{{sample.text 8}}</div>
     </div>
     <div class="infobar-right">
-      <div class="button red outlined infobar-closer compact">
+      <div class="button red bordered infobar-closer compact">
         <i class="icon">clear</i>
       </div>
     </div>
@@ -22,14 +22,14 @@
 
   {{{sw.divider "Outside"}}}
 
-  <div class="infobar outlined limited">
+  <div class="infobar bordered limited">
     <div class="infobar-title">{{sample.text 8}}</div>
   </div>
-  <div class="infobar outlined">
+  <div class="infobar bordered">
     <div class="infobar-title">{{sample.text 8}}</div>
     <div class="infobar-subtitle">{{sample.text 8}}</div>
   </div>
-  <div class="infobar outlined">
+  <div class="infobar bordered">
     <div class="infobar-left">
       <i class="icon xxxlarge">settings</i>
     </div>
@@ -45,7 +45,7 @@
       </ul>
     </div>
   </div>
-  <div class="infobar outlined">
+  <div class="infobar bordered">
     <div class="infobar-left">
       <i class="icon xxxlarge">settings</i>
     </div>
@@ -54,12 +54,12 @@
       <div class="infobar-subtitle">{{sample.text 8}}</div>
     </div>
     <div class="infobar-right">
-      <div class="button outlined compact">
+      <div class="button bordered compact">
         <i class="icon">more_vert</i>
       </div>
     </div>
   </div>
-  <div class="infobar outlined">
+  <div class="infobar bordered">
     <div class="infobar-left">
       <i class="icon xxxlarge">settings</i>
     </div>
@@ -68,7 +68,7 @@
       <div class="infobar-subtitle">{{sample.text 8}}</div>
     </div>
     <div class="infobar-right">
-      <div class="button outlined compact">
+      <div class="button bordered compact">
         <i class="icon">more_vert</i>
       </div>
     </div>
@@ -79,7 +79,7 @@
 
   {{{sw.divider "Inside"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="infobar teal">
       <div class="infobar-title">{{sample.text 8}}</div>
       <div class="infobar-subtitle">{{sample.text 8}}</div>
@@ -102,9 +102,9 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'close' )" class="button outlined">Close</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Close" "api ( 'close' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -115,8 +115,8 @@
   </div>
 
   <script>
-    function api (action) {
-      $('.infobar').infobar(action);
+    function api ( action ) {
+      $('.infobar').infobar ( action );
     }
   </script>
 

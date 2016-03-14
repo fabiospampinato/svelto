@@ -6,11 +6,22 @@
   {{{sw.divider "Carousel"}}}
 
   <div class="carousel">
-    <div class="button compact rounded white z-depth-2 carousel-previous">
+    <div class="button compact circular white z-depth-2 carousel-previous">
       <i class="icon">chevron_left</i>
     </div>
-    <div class="button compact rounded white z-depth-2 carousel-next">
-      <i class="icon">chevron_right</i>
+    <div class="carousel-items">
+      <div class="container black centerer">Hello Carousel!</div>
+      <div class="container brown">{{{sample.text}}}</div>
+      <div class="card black">
+        <div class="card-header">Header</div>
+        <div class="card-block">{{{sample.text}}}</div>
+        <div class="card-footer">Footer</div>
+      </div>
+      {{{sample.imageWide}}}
+      <figure>
+        {{{sample.image}}}
+        <figcaption class="attached-bottom on-hover">Figcaption</figcaption>
+      </figure>
     </div>
     <div class="carousel-indicators">
       <div class="carousel-indicator"></div>
@@ -19,12 +30,8 @@
       <div class="carousel-indicator"></div>
       <div class="carousel-indicator"></div>
     </div>
-    <div class="carousel-items">
-      <div class="container black centerer">Hello world!</div>
-      <div class="container primary centerer">1</div>
-      <div class="container secondary centerer">2</div>
-      <div class="container tertiary centerer">3</div>
-      <div class="container quaternary centerer">4</div>
+    <div class="button compact circular white z-depth-2 carousel-next">
+      <i class="icon">chevron_right</i>
     </div>
   </div>
 
@@ -39,33 +46,23 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
     <div class="multiple joined">
-      <div onclick="api ( 'previous' )" class="button outlined compact">
-        <i class="icon">chevron_left</i>
-      </div>
-      <div class="label outlined">Slide</div>
-      <div onclick="api ( 'next' )" class="button outlined compact">
-        <i class="icon">chevron_right</i>
-      </div>
+      {{{sw.iconAction "chevron_left" "api ( 'previous' )"}}}
+      <div class="label bordered">Slide</div>
+      {{{sw.iconAction "chevron_right" "api ( 'next' )"}}}
     </div>
     <div class="multiple joined">
-      <div onclick="api ( 'play' )" class="button outlined compact">
-        <i class="icon">play_arrow</i>
-      </div>
-      <div onclick="api ( 'pause' )" class="button outlined compact">
-        <i class="icon">pause</i>
-      </div>
-      <div onclick="api ( 'stop' )" class="button outlined compact">
-        <i class="icon">stop</i>
-      </div>
+      {{{sw.iconAction "play_arrow" "api ( 'play' )"}}}
+      {{{sw.iconAction "pause" "api ( 'pause' )"}}}
+      {{{sw.iconAction "stop" "api ( 'stop' )"}}}
     </div>
     <div class="multiple joined">
-      <input name="index" placeholder="Page index..." class="outlined">
-      <div onclick="api_set ()" class="button outlined secondary">Set</div>
+      <input name="index" placeholder="Page index..." class="bordered">
+      {{{sw.action "Set" "api_set ()"}}}
     </div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Style"}}}
@@ -92,15 +89,15 @@
     }
 
     function api_get () {
-      $.noty(String($('.carousel').carousel('get')));
+      $.toast ( $('.carousel').carousel ( 'get' ) );
     }
 
     function api_set () {
-      $('.carousel').carousel('set', Number(getValue('index')));
+      $('.carousel').carousel ( 'set', getValue ( 'index' ) );
     }
 
     function api ( action ) {
-      $('.carousel').carousel(action);
+      $('.carousel').carousel ( action );
     }
 
     function set_effect ( effect ) {
@@ -114,7 +111,7 @@
     function toggle_inset () {
       var isInset = $('.carousel').hasClass ( 'inset' );
       $('.carousel').toggleClass ( 'inset', !isInset );
-      $('.carousel > .carousel-previous, .carousel > .carousel-next').toggleClass ( 'button compact rounded white z-depth-2', isInset );
+      $('.carousel > .carousel-previous, .carousel > .carousel-next').toggleClass ( 'button compact circular white z-depth-2', isInset );
       $('.carousel > .carousel-previous > i.icon, .carousel > .carousel-next > i.icon').toggleClass ( 'hidden', !isInset );
     }
   </script>

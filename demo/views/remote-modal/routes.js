@@ -44,7 +44,7 @@ Router.route ( '/remote-modal-2', function () {
                  '<div class="placeholder" style="width:97%; height:10px;"></div>' +
                '</div>' +
                '<div class="card-footer centerer">' +
-                '<div class="button outlined ' + this.request.body.color + '">' + this.request.body.color.toUpperCase () + '</div>' +
+                '<div class="button bordered ' + this.request.body.color + '">' + this.request.body.color.toUpperCase () + '</div>' +
                '</div>' +
              '</div>'
     }));

@@ -6,12 +6,12 @@
   {{{sw.divider "Cookie"}}}
 
   <div class="multiple equal joined">
-    <input name="cookie_key" placeholder="Key..." class="outlined">
-    <input name="cookie_value" placeholder="Value..." class="outlined">
-    <input name="cookie_end" placeholder="End..." class="outlined">
-    <input name="cookie_path" placeholder="Path..." class="outlined">
-    <input name="cookie_domain" placeholder="Domain..." class="outlined">
-    <input name="cookie_secure" placeholder="Secure..." class="outlined">
+    <input name="cookie_key" placeholder="Key..." class="bordered">
+    <input name="cookie_value" placeholder="Value..." class="bordered">
+    <input name="cookie_end" placeholder="End..." class="bordered">
+    <input name="cookie_path" placeholder="Path..." class="bordered">
+    <input name="cookie_domain" placeholder="Domain..." class="bordered">
+    <input name="cookie_secure" placeholder="Secure..." class="bordered">
   </div>
 
   {{> cookie_actions}}
@@ -25,36 +25,36 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple">
-    <div onclick="cookie_get ()" class="button outlined">Get</div>
-    <div onclick="cookie_set ()" class="button outlined">Set</div>
-    <div onclick="cookie_remove ()" class="button outlined">Remove</div>
-    <div onclick="cookie_has ()" class="button outlined">Has</div>
-    <div onclick="cookie_keys ()" class="button outlined">Keys</div>
+    {{{sw.action "Get" "cookie_get ()"}}}
+    {{{sw.action "Set" "cookie_set ()"}}}
+    {{{sw.action "Remove" "cookie_remove ()"}}}
+    {{{sw.action "Has" "cookie_has ()"}}}
+    {{{sw.action "Keys" "cookie_keys ()"}}}
   </div>
 
   <script>
-    function cookie_input(name) {
-      return $('input[name="cookie_' + name + '"]').val();
+    function getValue ( name ) {
+      return $('input[name="cookie_' + name + '"]').val ();
     }
 
-    function cookie_get() {
-      $.noty('' + Svelto.Cookie.get(cookie_input('key')));
+    function cookie_get () {
+      $.toast ( Svelto.Cookie.get ( getValue ( 'key' ) ) );
     }
 
-    function cookie_set() {
-      Svelto.Cookie.set(cookie_input('key'), cookie_input('value'), Number(cookie_input('end')), cookie_input('path'), cookie_input('domain'), cookie_input('secure'));
+    function cookie_set () {
+      Svelto.Cookie.set ( getValue ( 'key' ), getValue ( 'value' ), Number ( getValue ( 'end' ) ), getValue ( 'path' ), getValue ( 'domain' ), getValue ( 'secure' ) );
     }
 
-    function cookie_remove() {
-      Svelto.Cookie.remove(cookie_input('key'), cookie_input('path'), cookie_input('domain'));
+    function cookie_remove () {
+      Svelto.Cookie.remove ( getValue ( 'key' ), getValue ( 'path' ), getValue ( 'domain' ) );
     }
 
-    function cookie_has() {
-      $.noty('' + Svelto.Cookie.has(cookie_input('key')));
+    function cookie_has () {
+      $.toast ( Svelto.Cookie.has ( getValue ( 'key' ) ) );
     }
 
-    function cookie_keys() {
-      $.noty(Svelto.Cookie.keys().join(' - '));
+    function cookie_keys () {
+      $.toast ( Svelto.Cookie.keys ().join ( ' - ' ) );
     }
   </script>
 

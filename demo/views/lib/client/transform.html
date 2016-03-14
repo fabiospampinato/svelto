@@ -15,27 +15,27 @@
 
 <template name="transform_actions">
 
-  {{{sw.divider "Actions"}}}
+  {{{sw.divider "API"}}}
 
   <div class="multiple actions joined">
-    <input name="matrix" class="outlined" placeholder="Values...">
-    <div onclick="matrix ()" class="button outlined">matrix</div>
+    <input name="matrix" class="bordered" placeholder="Values...">
+    {{{sw.action "matrix" "matrix ()"}}}
   </div>
 
   <div class="multiple actions joined">
-    <input name="transformation" class="outlined" placeholder="Value...">
-    <div onclick="transformation ( 'scaleX' )" class="button outlined">scaleX</div>
-    <div onclick="transformation ( 'skewY' )" class="button outlined">skewY</div>
-    <div onclick="transformation ( 'skewX' )" class="button outlined">skewX</div>
-    <div onclick="transformation ( 'scaleY' )" class="button outlined">scaleY</div>
-    <div onclick="transformation ( 'translateX' )" class="button outlined">translateX</div>
-    <div onclick="transformation ( 'translateY' )" class="button outlined">translateY</div>
+    <input name="transformation" class="bordered" placeholder="Value...">
+    {{{sw.action "scaleX" "transformation ( 'scaleX' )"}}}
+    {{{sw.action "skewY" "transformation ( 'skewY' )"}}}
+    {{{sw.action "skewX" "transformation ( 'skewX' )"}}}
+    {{{sw.action "scaleY" "transformation ( 'scaleY' )"}}}
+    {{{sw.action "translateX" "transformation ( 'translateX' )"}}}
+    {{{sw.action "translateY" "transformation ( 'translateY' )"}}}
   </div>
 
   <div class="multiple actions joined">
-    <input name="translate_x" class="outlined" placeholder="X...">
-    <input name="translate_y" class="outlined" placeholder="Y...">
-    <div onclick="translation ()" class="button outlined">translate</div>
+    <input name="translate_x" class="bordered" placeholder="X...">
+    <input name="translate_y" class="bordered" placeholder="Y...">
+    {{{sw.action "translate" "translation ()"}}}
   </div>
 
   <script>
@@ -50,7 +50,7 @@
       if ( val ) {
         $sample.matrix ( val.split ( ',' ) );
       } else {
-        $.noty ( String($sample.matrix ()) );
+        $.toast ( $sample.matrix () );
       }
     }
 
@@ -59,7 +59,7 @@
       if ( val ) {
         $sample[type] ( val );
       } else {
-        $.noty ( String($sample[type]()) );
+        $.toast ( $sample[type]() );
       }
     }
 
@@ -69,7 +69,7 @@
       if ( x && y ) {
         $sample.translate ( x, y );
       } else {
-        $.noty ( String($sample.translate ()) );
+        $.toast ( $sample.translate () );
       }
     }
   </script>

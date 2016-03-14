@@ -6,28 +6,10 @@
   {{{sw.divider "Target"}}}
 
   <div class="centerer">
-    <div class="square outlined target" style="height: 300px; width: 75%;"></div>
+    <div class="square bordered target" style="height: 300px; width: 75%;"></div>
   </div>
 
-  {{> flickable_init}}
-
   {{> flickable_actions}}
-
-</template>
-
-<!-- INIT -->
-
-<template name="flickable_init">
-
-  <script>
-    $('.target').flickable ({
-      callbacks: {
-        flick: function ( event, data ) {
-          $.noty ( 'Orientation: ' + data.orientation + ', direction: ' + data.direction );
-        }
-      }
-    });
-  </script>
 
 </template>
 
@@ -37,12 +19,21 @@
 
   {{{sw.divider "API"}}}
 
-  <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  <div class="multiple actions">
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
+  </div>
 
   <script>
     function api ( action ) {
       $('.target').flickable ( action );
     }
+
+    api ();
+
+    $('.target').on ( 'flickable:flick', function ( event, data ) {
+      $.toast ( 'Orientation: ' + data.orientation + ', direction: ' + data.direction );
+    });
   </script>
 
 </template>

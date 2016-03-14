@@ -1,23 +1,23 @@
 
-<!-- EMBEDDED -->
+<!-- EMBED -->
 
-<template name="embedded">
+<template name="embed">
 
-  {{{sw.divider "Embedded"}}}
+  {{{sw.divider "Embed"}}}
 
-  <div class="container outlined limited sm-12 md-9 lg-7 xl-6">
-    <div class="embedded ratio-16-9">
+  <div class="container bordered limited sm-12 md-9 lg-7 xl-6">
+    <div class="embed ratio-16-9">
       <iframe src="//www.youtube.com/embed/df-eLzao63I?rel=0" allowfullscreen="allowfullscreen"></iframe>
     </div>
   </div>
 
-  {{> embedded_actions}}
+  {{> embed_actions}}
 
 </template>
 
 <!-- ACTIONS -->
 
-<template name="embedded_actions">
+<template name="embed_actions">
 
   {{{sw.divider "Ratio"}}}
 
@@ -37,19 +37,19 @@
 
   <script>
     function enable () {
-      $('.embedded').removeClass ( 'disabled' );
+      $('.embed').removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.embedded').addClass ( 'disabled' );
+      $('.embed').addClass ( 'disabled' );
     }
 
     function set_ratio ( w, h ) {
       var ratios = [[21,9], [16,9], [4,3], [1,1]];
       for ( var i = 0, l = ratios.length; i < l; i++ ){
-        $('.embedded').removeClass ( 'ratio-' + ratios[i].join ( '-' ) );
+        $('.embed').removeClass ( 'ratio-' + ratios[i].join ( '-' ) );
       }
-      $('.embedded').addClass ( 'ratio-' + w + '-' + h );
+      $('.embed').addClass ( 'ratio-' + w + '-' + h );
     }
   </script>
 

@@ -1,5 +1,5 @@
 
-SWRouter = {
+SRouter = {
 
   page ( template, uri ) {
 

@@ -10,45 +10,43 @@
     <div class="button ripple ripple-secondary">Secondary</div>
     <div class="button ripple ripple-tertiary">Tertiary</div>
     <div class="button ripple ripple-quaternary">Quaternary</div>
-    <div class="button ripple ripple-white">White</div>
-    <div class="button ripple ripple-gray">Gray</div>
     <div class="button ripple ripple-black">Black</div>
-    <div class="button ripple ripple-yellow">Yellow</div>
-    <div class="button ripple ripple-olive">Olive</div>
-    <div class="button ripple ripple-green">Green</div>
     <div class="button ripple ripple-blue">Blue</div>
-    <div class="button ripple ripple-violet">Violet</div>
-    <div class="button ripple ripple-orange">Orange</div>
-    <div class="button ripple ripple-purple">Purple</div>
-    <div class="button ripple ripple-red">Red</div>
-    <div class="button ripple ripple-pink">Pink</div>
-    <div class="button ripple ripple-teal">Teal</div>
     <div class="button ripple ripple-brown">Brown</div>
     <div class="button ripple ripple-error">Error</div>
-    <div class="button ripple ripple-warning">Warning</div>
+    <div class="button ripple ripple-gray">Gray</div>
+    <div class="button ripple ripple-green">Green</div>
+    <div class="button ripple ripple-olive">Olive</div>
+    <div class="button ripple ripple-orange">Orange</div>
+    <div class="button ripple ripple-pink">Pink</div>
+    <div class="button ripple ripple-purple">Purple</div>
+    <div class="button ripple ripple-red">Red</div>
+    <div class="button ripple ripple-teal">Teal</div>
+    <div class="button ripple ripple-violet">Violet</div>
+    <div class="button ripple ripple-white">White</div>
+    <div class="button ripple ripple-yellow">Yellow</div>
     <div class="button ripple ripple-success">Success</div>
-    <div class="button ripple ripple-transparent">Transparent</div>
-    <div class="button ripple ripple-inherit">Inherit</div>
+    <div class="button ripple ripple-warning">Warning</div>
     <div class="button ripple ripple-base">Base</div>
   </div>
 
   {{{sw.divider "Other shapes"}}}
 
   <div class="multiple">
-    <div class="button rounded ripple ripple-primary">Test</div>
+    <div class="button circular ripple ripple-primary">Test</div>
     <div class="button ripple ripple-secondary">
       <i class="icon">settings</i>
     </div>
-    <div class="button rounded ripple ripple-tertiary">
+    <div class="button circular ripple ripple-tertiary">
       <i class="icon">settings</i>
     </div>
-    <div class="button transparent rounded ripple ripple-tertiary">
+    <div class="button transparent circular ripple ripple-tertiary">
       <i class="icon">settings</i>
     </div>
-    <div class="button rounded compact ripple ripple-tertiary">
+    <div class="button circular compact ripple ripple-tertiary">
       <i class="icon">settings</i>
     </div>
-    <div class="button transparent rounded compact ripple ripple-tertiary">
+    <div class="button transparent circular compact ripple ripple-tertiary">
       <i class="icon">settings</i>
     </div>
     <div class="button sharp ripple ripple-quaternary">Test</div>
@@ -56,7 +54,7 @@
 
   {{{sw.divider "Paragraph"}}}
 
-  <div class="container ripple ripple-black outlined">
+  <div class="container ripple ripple-black bordered">
     {{{sample.paragraph}}}
   </div>
 
@@ -71,8 +69,8 @@
   {{{sw.divider "Ripple"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Style"}}}
@@ -87,8 +85,8 @@
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.ripple').toggleClass ( css_class );
+    function toggle_class ( name ) {
+      $('.ripple').toggleClass ( name );
     }
 
     function api ( action ) {

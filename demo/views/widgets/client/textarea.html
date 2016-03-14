@@ -9,7 +9,7 @@
 
   {{{sw.divider "Colors"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="multiple">
       <textarea placeholder="Primary" class="primary">Primary</textarea>
       <textarea placeholder="Secondary" class="secondary">Secondary</textarea>
@@ -38,15 +38,9 @@
     </div>
   </div>
 
-  {{{sw.divider "Fluid"}}}
-
-  <div class="container outlined">
-    <textarea placeholder="Fluid" class="primary fluid"></textarea>
-  </div>
-
   {{{sw.divider "Unresizable"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <textarea placeholder="Unresizable" class="unresizable"></textarea>
   </div>
 
@@ -61,7 +55,7 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
   </div>
 
@@ -81,12 +75,12 @@
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('textarea').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('textarea').toggleClass ( name );
     }
 
     function toggle_attr ( attr ) {
-      if ( _.isUndefined ( $('textarea').attr ( attr ) ) ) {
+      if ( lodash.isUndefined ( $('textarea').attr ( attr ) ) ) {
         $('textarea').attr ( attr, attr );
       } else {
         $('textarea').removeAttr ( attr );

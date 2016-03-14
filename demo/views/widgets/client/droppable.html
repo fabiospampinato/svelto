@@ -5,27 +5,27 @@
 
   {{{sw.divider "Draggables"}}}
 
-  <div class="container outlined">
-    <div class="multiple equal inherit">
-      <div class="label outlined compact drag-red red inverted">
+  <div class="container bordered">
+    <div class="multiple equal">
+      <div class="label bordered compact drag-red red inverted">
         <div class="circle red"></div>
       </div>
-      <div class="label outlined compact drag-yellow yellow inverted">
+      <div class="label bordered compact drag-yellow yellow inverted">
         <div class="circle yellow"></div>
       </div>
-      <div class="label outlined compact drag-green green inverted">
+      <div class="label bordered compact drag-green green inverted">
         <div class="circle green"></div>
       </div>
-      <div class="label outlined compact drag-blue blue inverted">
+      <div class="label bordered compact drag-blue blue inverted">
         <div class="circle blue"></div>
       </div>
-      <div class="label outlined compact drag-violet violet inverted">
+      <div class="label bordered compact drag-violet violet inverted">
         <div class="circle violet"></div>
       </div>
-      <div class="label outlined compact drag-teal teal inverted">
+      <div class="label bordered compact drag-teal teal inverted">
         <div class="circle teal"></div>
       </div>
-      <div class="label outlined compact drag-orange orange inverted">
+      <div class="label bordered compact drag-orange orange inverted">
         <div class="circle orange"></div>
       </div>
     </div>
@@ -33,15 +33,15 @@
 
   {{{sw.divider "Droppables"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="multiple equal">
-      <div class="container outlined compact text-center drop-red red inverted">0</div>
-      <div class="container outlined compact text-center drop-yellow yellow inverted">0</div>
-      <div class="container outlined compact text-center drop-green green inverted">0</div>
-      <div class="container outlined compact text-center drop-blue blue inverted">0</div>
-      <div class="container outlined compact text-center drop-violet violet inverted">0</div>
-      <div class="container outlined compact text-center drop-teal teal inverted">0</div>
-      <div class="container outlined compact text-center drop-orange orange inverted">0</div>
+      <div class="container bordered compact text-center drop-red red inverted">0</div>
+      <div class="container bordered compact text-center drop-yellow yellow inverted">0</div>
+      <div class="container bordered compact text-center drop-green green inverted">0</div>
+      <div class="container bordered compact text-center drop-blue blue inverted">0</div>
+      <div class="container bordered compact text-center drop-violet violet inverted">0</div>
+      <div class="container bordered compact text-center drop-teal teal inverted">0</div>
+      <div class="container bordered compact text-center drop-orange orange inverted">0</div>
     </div>
   </div>
 
@@ -55,17 +55,17 @@
 
 <template name="droppable_init">
 
-  {{sw.noty body="Drag the draggables to the respective droppables" ttl="forever"}}
+  {{sw.toast body="Drag the draggables to the respective droppables" ttl="forever"}}
 
   <script>
-    $(function() {
+    $(function () {
       var colors = ['red', 'yellow', 'green', 'blue', 'violet', 'teal', 'orange'];
       for (var i = 0, l = colors.length; i < l; i++) {
         $('.drag-' + colors[i]).draggable ({
           revert: true,
           $helper: (function ( color ) {
             return function () {
-              return useHelpers ? $('<div class="container ' + color + '" style="position: fixed;"><p>' + lodash.capitalize ( color ) + '</p></div>') : false;
+              return useHelpers ? $('<div class="container ' + color + ' absolute">' + lodash.capitalize ( color ) + '</div>') : false;
             }
           })( colors[i] )
         });
@@ -79,7 +79,7 @@
             drop: function(event, data) {
               var $droppable = $(data.droppable);
               var nr = Number ( $droppable.html () );
-              $droppable.html(nr + 1);
+              $droppable.html ( nr + 1 );
             }
           }
         });
@@ -95,7 +95,7 @@
 
   {{{sw.divider "API"}}}
 
-  <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+  {{{sw.action "Destroy" "api ( 'destroy' )"}}}
 
   {{{sw.divider "State"}}}
 

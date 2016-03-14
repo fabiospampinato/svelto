@@ -47,13 +47,13 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )" }}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )" }}}
     {{{sw.checkAction "Inverted" "toggle_class ( 'inverted' )" }}}
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('.actionable').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.actionable').toggleClass ( name );
     }
   </script>
 

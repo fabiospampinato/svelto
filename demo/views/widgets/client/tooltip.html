@@ -6,27 +6,27 @@
   {{{sw.divider "Tooltip"}}}
 
   <div class="multiple">
-    <div class="button tooltip-toggler outlined" data-target="#basic">
+    <div class="button tooltip-toggler bordered" data-target="#basic">
       <span>Basic</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#tipless">
+    <div class="button tooltip-toggler bordered" data-target="#tipless">
       <span>Tipless</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#text">
+    <div class="button tooltip-toggler bordered" data-target="#text">
       <span>Text</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#image">
+    <div class="button tooltip-toggler bordered" data-target="#image">
       <span>Image</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#figure">
+    <div class="button tooltip-toggler bordered" data-target="#figure">
       <span>Figure</span>
       <i class="icon">info_outline</i>
     </div>
-    <div class="button tooltip-toggler outlined" data-target="#advanced">
+    <div class="button tooltip-toggler bordered" data-target="#advanced">
       <span>Advanced</span>
       <i class="icon">info_outline</i>
     </div>
@@ -50,7 +50,7 @@
     <p>{{sample.text 50}}</p>
   </div>
 
-  <div id="image" class="tooltip container outlined">
+  <div id="image" class="tooltip container bordered">
     {{{sample.image}}}
   </div>
 
@@ -74,7 +74,7 @@
 
   {{{sw.divider "Style"}}}
 
-  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+  {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
 
   {{{sw.divider "State"}}}
 
@@ -88,7 +88,7 @@
       $('.tooltip').toggleClass ( name );
     }
 
-    function api (action) {
+    function api ( action ) {
       $('.tooltip-toggler').tooltipToggler ( action );
     }
   </script>

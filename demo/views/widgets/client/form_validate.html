@@ -5,65 +5,66 @@
 
   {{{sw.divider "Validations"}}}
 
-  <form class="card outlined validate centered sm-12 md-10 lg-8 xl-6">
-    <div class="card-header primary outlined">Validations</div>
+  <form class="card bordered validate centered sm-12 md-10 lg-8 xl-6">
+    <div class="card-header primary bordered">Validations</div>
     <div class="card-block">
       {{{sw.divider "No validations"}}}
-      <input name="novalidations" placeholder="No validations..." class="outlined fluid">
+      <input name="novalidations" placeholder="No validations..." class="bordered fluid">
       {{{sw.divider "Type"}}}
-      <input name="alpha" placeholder="Alpha..." class="outlined fluid" data-validations="alpha">
-      <input name="alphanumeric" placeholder="Alphanumeric..." class="outlined fluid" data-validations="alphanumeric">
-      <input name="hexadecimal" placeholder="Hexadecimal..." class="outlined fluid" data-validations="hexadecimal">
-      <input name="number" placeholder="Number..." class="outlined fluid" data-validations="number">
-      <input name="integer" placeholder="Integer..." class="outlined fluid" data-validations="integer">
-      <input name="float" placeholder="Float..." class="outlined fluid" data-validations="float">
+      <input name="alpha" placeholder="Alpha..." class="bordered fluid" data-validations="alpha">
+      <input name="alphanumeric" placeholder="Alphanumeric..." class="bordered fluid" data-validations="alphanumeric">
+      <input name="hexadecimal" placeholder="Hexadecimal..." class="bordered fluid" data-validations="hexadecimal">
+      <input name="number" placeholder="Number..." class="bordered fluid" data-validations="number">
+      <input name="integer" placeholder="Integer..." class="bordered fluid" data-validations="integer">
+      <input name="float" placeholder="Float..." class="bordered fluid" data-validations="float">
       {{{sw.divider "Number"}}}
-      <input name="min" placeholder="Min..." class="outlined fluid" data-validations="min[3]">
-      <input name="max" placeholder="Max..." class="outlined fluid" data-validations="max[10]">
-      <input name="range" placeholder="Range..." class="outlined fluid" data-validations="range[3,10]">
+      <input name="min" placeholder="Min..." class="bordered fluid" data-validations="min[3]">
+      <input name="max" placeholder="Max..." class="bordered fluid" data-validations="max[10]">
+      <input name="range" placeholder="Range..." class="bordered fluid" data-validations="range[3,10]">
       {{{sw.divider "String"}}}
-      <input name="minLength" placeholder="Min length..." class="outlined fluid" data-validations="minLength[3]">
-      <input name="maxLength" placeholder="Max length..." class="outlined fluid" data-validations="maxLength[10]">
-      <input name="rangeLength" placeholder="Range length..." class="outlined fluid" data-validations="rangeLength[3,10]">
-      <input name="exactLength" placeholder="Exact length..." class="outlined fluid" data-validations="exactLength[5]">
+      <input name="minLength" placeholder="Min length..." class="bordered fluid" data-validations="minLength[3]">
+      <input name="maxLength" placeholder="Max length..." class="bordered fluid" data-validations="maxLength[10]">
+      <input name="rangeLength" placeholder="Range length..." class="bordered fluid" data-validations="rangeLength[3,10]">
+      <input name="exactLength" placeholder="Exact length..." class="bordered fluid" data-validations="exactLength[5]">
       {{{sw.divider "Things"}}}
-      <input name="email" placeholder="Email..." class="outlined fluid" data-validations="email">
-      <input name="cc" placeholder="Credit card..." class="outlined fluid" data-validations="cc">
-      <input name="ssn" placeholder="Social security number..." class="outlined fluid" data-validations="ssn">
-      <input name="ipv4" placeholder="Ipv4..." class="outlined fluid" data-validations="ipv4">
-      <input name="url" placeholder="Url..." class="outlined fluid" data-validations="url">
+      <input name="email" placeholder="Email..." class="bordered fluid" data-validations="email">
+      <input name="creditCard" placeholder="Credit card..." class="bordered fluid" data-validations="creditCard">
+      <input name="ssn" placeholder="Social security number..." class="bordered fluid" data-validations="ssn">
+      <input name="ipv4" placeholder="Ipv4..." class="bordered fluid" data-validations="ipv4">
+      <input name="url" placeholder="Url..." class="bordered fluid" data-validations="url">
       {{{sw.divider "Others"}}}
-      <input name="required" placeholder="Required..." class="outlined fluid" data-validations="required">
-      <input name="values" placeholder="Values..." class="outlined fluid" data-validations="values[true,yes,okay]">
-      <input name="field" placeholder="Field..." class="outlined fluid" data-validations="field[required]">
+      <input name="required" placeholder="Required..." class="bordered fluid" data-validations="required">
+      <input name="values" placeholder="Values..." class="bordered fluid" data-validations="values[true,yes,okay]">
+      <input name="field" placeholder="Field..." class="bordered fluid" data-validations="field[required]">
+      <input name="regex" placeholder="Regex (hex color)..." class="bordered fluid" data-validations="regex[^[a-fA-F0-9]{6}$]">
       {{{sw.divider "Multiple"}}}
-      <input name="multiple" placeholder="Multiple..." class="outlined fluid" data-validations="required|alphanumeric|minLength[3]">
+      <input name="multiple" placeholder="Multiple..." class="bordered fluid" data-validations="required|alphanumeric|minLength[3]">
       {{{sw.divider "Unnamed"}}}
-      <input placeholder="Unnamed 1..." class="outlined fluid">
-      <input placeholder="Unnamed 2..." class="outlined fluid">
+      <input placeholder="Unnamed 1..." class="bordered fluid">
+      <input placeholder="Unnamed 2..." class="bordered fluid">
       {{{sw.divider "Custom messages"}}}
-      <input placeholder="Custom messages..." class="outlined fluid" data-validations="required" data-invalid="Hey dude, this field is required!" data-valid="Thank you!">
+      <input placeholder="Custom messages..." class="bordered fluid" data-validations="required" data-invalid="Hey dude, this field is required!" data-valid="Thank you!">
       {{{sw.divider "Textarea"}}}
-      <textarea name="txt_multiple" placeholder="Multiple..." class="outlined fluid" data-validations="required|alphanumeric|minLength[3]"></textarea>
+      <textarea name="txt_multiple" placeholder="Multiple..." class="bordered fluid" data-validations="required|alphanumeric|minLength[3]"></textarea>
       {{{sw.divider "Checkbox"}}}
-      <label class="button checkbox outlined fluid">
+      <label class="button checkbox bordered fluid">
         <span>Needed to be checked</span>
         <input type="checkbox" name="checkbox_name_1" value="true" data-validations="checked">
       </label>
       {{{sw.divider "Radios"}}}
       <div class="multiple fluid">
-        <label class="button radio outlined">
+        <label class="button radio bordered">
           <span>Radio 1</span>
           <input type="radio" name="radio_name" value="true">
         </label>
-        <label class="button radio outlined">
+        <label class="button radio bordered">
           <span>Radio 2</span>
           <input type="radio" name="radio_name" value="false">
         </label>
       </div>
     </div>
-    <div class="card-footer outlined text-center">
-      <button type="submit" class="button secondary outlined">Submit</button>
+    <div class="card-footer bordered text-center">
+      <button type="submit" class="button secondary bordered">Submit</button>
     </div>
   </form>
 
@@ -78,8 +79,8 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   <script>

@@ -5,9 +5,7 @@
 
   {{{sw.divider "Target"}}}
 
-  <div class="centerer">
-    <div class="square outlined target" style="height: 300px; width: 75%;"></div>
-  </div>
+  <div class="square bordered centered target" style="height: 300px; width: 75%;"></div>
 
   {{{sw.divider "Triggered"}}}
 
@@ -35,23 +33,21 @@
 <template name="pointer_init">
 
   <script>
-    function pointer_handler(event, data) {
+    function pointer_handler ( event, data ) {
       var name = event.data.name;
-      if (name === 'down') {
-        pointer_uncheck_all();
+      if ( name === 'down' ) {
+        pointer_uncheck_all ();
       }
-      $('.checkbox input[name="' + name + '"]').prop ( 'checked', true );
+      $('input[type="checkbox"][name="' + name + '"]').prop ( 'checked', true );
     }
 
-    function pointer_uncheck_all() {
-      $('.checkbox input').prop('checked', false);
+    function pointer_uncheck_all () {
+      $('input[type="checkbox"]').prop ( 'checked', false );
     }
 
-    for (var prop in Svelto.Pointer) {
-      if (prop !== 'options') {
-        $('.target').on(Svelto.Pointer[prop], {
-          name: prop
-        }, pointer_handler);
+    for ( var prop in Svelto.Pointer ) {
+      if ( prop !== 'options' ) {
+        $('.target').on ( Svelto.Pointer[prop], { name: prop }, pointer_handler );
       }
     }
   </script>
@@ -64,6 +60,6 @@
 
   {{{sw.divider "Actions"}}}
 
-  <div onclick="pointer_uncheck_all ()" class="button outlined">Reset</div>
+  {{{sw.action "Reset" "pointer_uncheck_all ()"}}}
 
 </template>

@@ -5,21 +5,22 @@
 
   {{{sw.divider "Radio"}}}
 
-  <div class="multiple">
+  <div class="multiple radios">
+    <input type="radio" name="name">
     <label class="radio">
-      <input type="radio" name="example">
+      <input type="radio" name="name">
     </label>
     <label class="radio">
       <span>Base</span>
-      <input type="radio" name="example">
+      <input type="radio" name="name">
     </label>
     <label class="radio">
-      <input type="radio" name="example">
+      <input type="radio" name="name">
       <span>Inverse</span>
     </label>
     <label class="radio">
       <span>Custom icons</span>
-      <input type="radio" name="example" data-icon-on="thumb_up">
+      <input type="radio" name="name" data-icon-on="thumb_up" data-icon-off="thumb_down">
     </label>
   </div>
 
@@ -50,24 +51,25 @@
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      console.log("TOGGLING CLASS!");
-      $('.radio').not ( '.actions .radio' ).toggleClass ( css_class );
+    var $radios = $('.radios').find ( '.radio, input[type="radio"]' ).not ( '.radio input' );
+
+    function toggle_class ( name ) {
+      $radios.toggleClass ( name );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('.radio').not('.actions .radio').removeClass ( validities[i] ).addClass ( validity );
+        $radios.removeClass ( validities[i] ).addClass ( validity );
       }
     }
 
     function enable () {
-      $('.radio').slice ( 0, 4 ).removeClass ( 'disabled' );
+      $radios.removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.radio').slice ( 0, 4 ).addClass ( 'disabled' );
+      $radios.addClass ( 'disabled' );
     }
   </script>
 

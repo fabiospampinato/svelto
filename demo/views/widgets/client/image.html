@@ -9,7 +9,7 @@
 
   {{{sw.divider "Sizes"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="multiple">
       {{{sample.image "xxxxsmall"}}}
       {{{sample.image "xxxsmall"}}}
@@ -25,43 +25,6 @@
     </div>
   </div>
 
-  {{{sw.divider "Fluid"}}}
-
-  {{{sample.image "fluid"}}}
-
-  {{{sw.divider "Border radius variants"}}}
-
-  <div class="multiple no-wrap center-x">
-    {{{sample.image "xs-4 sharp"}}}
-    {{{sample.image "xs-4 smooth"}}}
-    {{{sample.image "xs-4 rounded"}}}
-  </div>
-
-  {{{sw.divider "Spaced"}}}
-
-  <div class="container outlined">
-    <p>
-      {{{sample.image "xxxxsmall spaced right"}}}
-      {{{sample.text 35}}}
-      {{{sample.image "xxxxsmall spaced"}}}
-      {{{sample.text 35}}}
-      {{{sample.image "xxxxsmall spaced left"}}}
-    </p>
-  </div>
-
-  {{{sw.divider "Floated"}}}
-
-  <div class="container outlined clearfix">
-    <p>
-      {{{sample.image "small floated"}}}
-      {{{sample.text 75}}}
-    </p>
-    <p>
-      {{{sample.image "small floated right"}}}
-      {{{sample.text 75}}}
-    </p>
-  </div>
-
   {{> image_actions}}
 
 </template>
@@ -72,7 +35,7 @@
 
   {{{sw.divider "Style"}}}
 
-  {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+  {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
 
   {{{sw.divider "State"}}}
 

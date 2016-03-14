@@ -5,12 +5,12 @@
 
   {{{sw.divider "Spinner overlay"}}}
 
-  <div class="container outlined overlayerable">
+  <div class="container bordered overlayerable">
     {{{sample.paragraph}}}
   </div>
 
-  <div class="card advanced outlined overlayerable">
-    <div class="card-header outlined teal">
+  <div class="card advanced bordered overlayerable">
+    <div class="card-header bordered teal">
       <div class="sections center-y">
         <div class="section-left">
           <div class="multiple">
@@ -46,7 +46,7 @@
     <div class="card-block">
       {{{sample.paragraph}}}
     </div>
-    <div class="card-footer outlined pink">Footer</div>
+    <div class="card-footer bordered pink">Footer</div>
   </div>
 
   {{> spinner_overlay_actions}}
@@ -60,12 +60,12 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
-    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
-    <div onclick="api ( 'open' )" class="button outlined">Open</div>
-    <div onclick="api ( 'close' )" class="button outlined">Close</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
+    {{{sw.action "Toggle" "api ( 'toggle' )"}}}
+    {{{sw.action "Open" "api ( 'open' )"}}}
+    {{{sw.action "Close" "api ( 'close' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   <script>
@@ -73,15 +73,15 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function api_get() {
-      var gets = _.map($('.overlayerable'), function(overlayerable) {
-        return $(overlayerable).spinnerOverlay('isOpen');
+    function api_get () {
+      var gets = lodash.map ( $('.overlayerable'), function ( overlayerable ) {
+        return $(overlayerable).spinnerOverlay ( 'isOpen' );
       });
-      $.noty(gets.join(' - '));
+      $.toast ( gets.join ( ' - ' ) );
     }
 
-    function api(action) {
-      $('.overlayerable').spinnerOverlay(action);
+    function api ( action ) {
+      $('.overlayerable').spinnerOverlay ( action );
     }
   </script>
 

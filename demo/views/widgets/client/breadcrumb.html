@@ -5,7 +5,7 @@
 
   {{{sw.divider "Breadcrumb"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="breadcrumb">
       <a href="#" title="Link 1">Link 1</a>
       <i class="icon xsmall">chevron_right</i>
@@ -31,8 +31,8 @@
 
   <div class="multiple actions">
     <div class="multiple joined">
-      <input placeholder="Current index..." name="current" class="outlined" type="number">
-      <div onclick="set_current ()" class="button outlined">Set current</div>
+      <input placeholder="Current index..." name="current" class="bordered" type="number">
+      {{{sw.action "Set current" "set_current ()"}}}
     </div>
   </div>
 
@@ -40,9 +40,9 @@
 
   <div class="multiple actions">
     <div class="multiple joined">
-      <input placeholder="Divider content..." name="divider" class="outlined">
-      <div onclick="set_icon ()" class="button outlined">Set icon</div>
-      <div onclick="set_text ()" class="button outlined">Set text</div>
+      <input placeholder="Divider content..." name="divider" class="bordered">
+      {{{sw.action "Set icon" "set_icon ()"}}}
+      {{{sw.action "Set text" "set_text ()"}}}
     </div>
   </div>
 
@@ -69,7 +69,7 @@
     }
 
     function set_current () {
-      var index = Number ( getValue ( 'current' ) );
+      var index = getValue ( 'current' );
       $('.breadcrumb > :nth-child(odd)').removeClass ( 'current' ).eq ( index ).addClass ( 'current' );
     }
 

@@ -5,8 +5,8 @@
 
   {{{sw.divider "Table"}}}
 
-  <div class="container outlined">
-    <table class="table bordered">
+  <div class="container bordered">
+    <table class="table celled">
       <thead>
         <tr>
           <th class="text-center xs-1">Int</th>
@@ -41,7 +41,7 @@
           <td>Bar</td>
           <td>16/11/1993</td>
           <td class="text-center">
-            <div class="button outlined small disabled compact">
+            <div class="button bordered small disabled compact">
               <i class="icon">settings</i>
             </div>
           </td>
@@ -51,7 +51,7 @@
           <td>Baz</td>
           <td>16 Nov 1993</td>
           <td class="text-center">
-            <div class="button outlined small compact">
+            <div class="button bordered small compact">
               <i class="icon">settings</i>
             </div>
           </td>
@@ -62,8 +62,8 @@
           <td>November 16th, 1993</td>
           <td class="text-center">
             <div class="multiple joined center-x">
-              <div class="button outlined small">Button</div>
-              <div class="button outlined small compact">
+              <div class="button bordered small">Button</div>
+              <div class="button bordered small compact">
                 <i class="icon">more_vert</i>
               </div>
             </div>
@@ -84,23 +84,24 @@
   {{{sw.divider "Remove"}}}
 
   <div class="multiple">
-    <div onclick="remove_element ( 'table.table thead' )" class="button outlined">Header</div>
-    <div onclick="remove_element ( 'table.table tbody' )" class="button outlined">Body</div>
-    <div onclick="remove_element ( 'table.table tfoot' )" class="button outlined">Footer</div>
-    <div onclick="clear_table ()" class="button outlined">Rows</div>
+    {{{sw.action "Header" "remove_element ( 'table.table thead' )"}}}
+    {{{sw.action "Body" "remove_element ( 'table.table tbody' )"}}}
+    {{{sw.action "Footer" "remove_element ( 'table.table tfoot' )"}}}
+    {{{sw.action "Rows" "clear_table ()"}}}
   </div>
 
   {{{sw.divider "Style"}}}
 
   <div class="multiple">
-    {{{sw.checkAction "Outlined" "toggle_class( 'outlined' )"}}}
-    {{{sw.checkAction "Compact" "toggle_class( 'compact' )"}}}
-    {{{sw.checkAction "Collapsed" "toggle_class( 'collapsed' )"}}}
-    {{{sw.checkAction "Equal" "toggle_class( 'equal' )"}}}
-    {{{sw.checkAction "Separated" "toggle_class( 'separated' )"}}}
-    {{{sw.checkAction "Bordered" "toggle_class( 'bordered' )" true}}}
-    {{{sw.checkAction "Striped" "toggle_class( 'striped' )"}}}
-    {{{sw.checkAction "Hoverable" "toggle_class( 'hoverable' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
+    {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
+    {{{sw.checkAction "Collapsed" "toggle_class ( 'collapsed' )"}}}
+    {{{sw.checkAction "Equal" "toggle_class ( 'equal' )"}}}
+    {{{sw.checkAction "Separated" "toggle_class ( 'separated' )"}}}
+    {{{sw.checkAction "Celled" "toggle_class ( 'celled' )" true}}}
+    {{{sw.checkAction "Striped" "toggle_class ( 'striped' )"}}}
+    {{{sw.checkAction "Hoverable" "toggle_class ( 'hoverable' )"}}}
+    {{{sw.checkAction "Truncated" "toggle_class ( 'truncated' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -111,8 +112,8 @@
   </div>
 
   <script>
-    function toggle_class(css_class) {
-      $('table.table').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('table.table').toggleClass ( name );
     }
 
     function enable () {
@@ -128,7 +129,7 @@
     }
 
     function remove_element ( selector ) {
-      $(selector).remove();
+      $(selector).remove ();
     }
   </script>
 

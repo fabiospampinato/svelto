@@ -5,31 +5,31 @@
 
   {{{sw.divider "Validator"}}}
 
-  <div class="card outlined centered sm-12 md-10 lg-8 xl-6">
-    <div class="card-header primary outlined">Validator</div>
+  <div class="card bordered centered sm-12 md-10 lg-8 xl-6">
+    <div class="card-header primary bordered">Validator</div>
     <div class="card-block">
       {{{sw.divider "Type"}}}
-      <input class="outlined fluid" name="alpha" placeholder="Alpha...">
-      <input class="outlined fluid" name="alphanumeric" placeholder="Alphanumeric...">
-      <input class="outlined fluid" name="hexadecimal" placeholder="Hexadecimal...">
-      <input class="outlined fluid" name="number" placeholder="Number...">
-      <input class="outlined fluid" name="integer" placeholder="Integer...">
-      <input class="outlined fluid" name="float" placeholder="Float...">
+      <input class="bordered fluid" name="alpha" placeholder="Alpha...">
+      <input class="bordered fluid" name="alphanumeric" placeholder="Alphanumeric...">
+      <input class="bordered fluid" name="hexadecimal" placeholder="Hexadecimal...">
+      <input class="bordered fluid" name="number" placeholder="Number...">
+      <input class="bordered fluid" name="integer" placeholder="Integer...">
+      <input class="bordered fluid" name="float" placeholder="Float...">
       {{{sw.divider "Number"}}}
-      <input class="outlined fluid" name="min" data-args='[3]' placeholder="Min...">
-      <input class="outlined fluid" name="max" data-args='[10]' placeholder="Max...">
-      <input class="outlined fluid" name="range" data-args='[3,10]' placeholder="Range...">
+      <input class="bordered fluid" name="min" data-args='[3]' placeholder="Min...">
+      <input class="bordered fluid" name="max" data-args='[10]' placeholder="Max...">
+      <input class="bordered fluid" name="range" data-args='[3,10]' placeholder="Range...">
       {{{sw.divider "Length"}}}
-      <input class="outlined fluid" name="minLength" data-args='[3]' placeholder="Min length...">
-      <input class="outlined fluid" name="maxLength" data-args='[10]' placeholder="Max length...">
-      <input class="outlined fluid" name="rangeLength" data-args='[3,10]' placeholder="Range length...">
-      <input class="outlined fluid" name="exactLength" data-args='[5]' placeholder="Exact length...">
+      <input class="bordered fluid" name="minLength" data-args='[3]' placeholder="Min length...">
+      <input class="bordered fluid" name="maxLength" data-args='[10]' placeholder="Max length...">
+      <input class="bordered fluid" name="rangeLength" data-args='[3,10]' placeholder="Range length...">
+      <input class="bordered fluid" name="exactLength" data-args='[5]' placeholder="Exact length...">
       {{{sw.divider "Things"}}}
-      <input class="outlined fluid" name="email" placeholder="Email...">
-      <input class="outlined fluid" name="cc" placeholder="Cc...">
-      <input class="outlined fluid" name="ssn" placeholder="Ssn...">
-      <input class="outlined fluid" name="ipv4" placeholder="Ipv4...">
-      <input class="outlined fluid" name="url" placeholder="Url...">
+      <input class="bordered fluid" name="email" placeholder="Email...">
+      <input class="bordered fluid" name="creditCard" placeholder="Credit card...">
+      <input class="bordered fluid" name="ssn" placeholder="Ssn...">
+      <input class="bordered fluid" name="ipv4" placeholder="Ipv4...">
+      <input class="bordered fluid" name="url" placeholder="Url...">
     </div>
   </div>
 
@@ -41,14 +41,14 @@
 
 <template name="validator_init">
 
-  {{{sw.noty body="<span class=\"text-green\">Match</span> or <span class=\"text-red\">not</span>" ttl="forever"}}}
+  {{{sw.toast body="<span class=\"text-green\">Match</span> or <span class=\"text-red\">not</span>" ttl="forever"}}}
 
   <script>
     $('input').on ( 'input change', function () {
       var $input = $(this),
           args = $input.data ( 'args' ),
           match = Svelto.Validator[$input.attr ( 'name' )].apply ( false, [$input.val ()].concat ( args ? args : [] ) );
-      $input.toggleClass ( 'red', !match ).toggleClass ( 'green', match );
+      $input.toggleClass ( Svelto.Colors.red, !match ).toggleClass ( Svelto.Colors.green, match );
     });
   </script>
 

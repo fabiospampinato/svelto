@@ -5,7 +5,7 @@
 
   {{{sw.divider "Textarea autogrow"}}}
 
-  <textarea placeholder="Placeholder..." class="autogrow outlined">Value</textarea>
+  <textarea placeholder="Placeholder..." class="autogrow bordered">Value</textarea>
 
   {{> textarea_autogrow_actions}}
 
@@ -18,20 +18,20 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )" true}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )" true}}}
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.autogrow').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.autogrow').toggleClass ( name );
     }
 
     function api ( action ) {

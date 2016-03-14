@@ -5,26 +5,26 @@
 
   {{{sw.divider "Draggables"}}}
 
-  <div class="container constrainer outlined">
+  <div class="container constrainer bordered">
     <div class="multiple">
-      <div class="label outlined draggable">Draggable</div>
-      <div class="label outlined scroll">Scroll</div>
-      <div class="label outlined helper">Helper</div>
+      <div class="label bordered draggable">Draggable</div>
+      <div class="label bordered scroll">Scroll</div>
+      <div class="label bordered helper">Helper</div>
       {{{sw.checkbox "Toggable draggable"}}}
       <div class="multiple joined only-handler">
-        <div class="label outlined">Only handler</div>
-        <div class="label outlined compact draggable-handler">
+        <div class="label bordered pointing-right">Only handler</div>
+        <div class="label bordered compact draggable-handler">
           <i class="icon">menu</i>
         </div>
       </div>
-      <div class="label outlined revert">Revert</div>
-      <div class="label outlined x-axis">X-Axis</div>
-      <div class="label outlined y-axis">Y-Axis</div>
-      <div class="label outlined constrained">Constrained</div>
-      <div class="label outlined constrained-center">Constrained center</div>
-      <div class="label outlined constrained-tolerance">Constrained 100-50 tolerance</div>
-      <div class="label outlined constrained-coordinates-modifier">Modifier 2x</div>
-      <div class="label outlined proxyed">Proxy</div>
+      <div class="label bordered revert">Revert</div>
+      <div class="label bordered x-axis">X-Axis</div>
+      <div class="label bordered y-axis">Y-Axis</div>
+      <div class="label bordered constrained">Constrained</div>
+      <div class="label bordered constrained-center">Constrained center</div>
+      <div class="label bordered constrained-tolerance">Constrained 100-50 tolerance</div>
+      <div class="label bordered constrained-coordinates-modifier">Modifier 2x</div>
+      <div class="label bordered proxyed">Proxy</div>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
 
 <template name="draggables_init">
 
-  {{sw.noty body="Drag the labels around" ttl="forever"}}
+  {{sw.toast body="Drag the labels around" ttl="forever"}}
 
   <script>
     $('.scroll').draggable ({
@@ -46,38 +46,38 @@
       }
     });
     $('.helper').draggable ({
-      $helper: $('<div class="container red" style="position: fixed;"><p>Hello darling!</p></div>')
+      $helper: $('<div class="container red absolute">Helper!</div>')
     });
-    $('.only-handler').draggable({
+    $('.only-handler').draggable ({
       onlyHandlers: true
     });
     $('.no-handler').draggable();
-    $('.checkbox').draggable({
-      draggable: function() {
-        return !!$('.checkbox input').prop('checked');
+    $('.checkbox').draggable ({
+      draggable: function () {
+        return !!$('.checkbox input').prop ( 'checked' );
       }
     });
-    $('.revert').draggable({
+    $('.revert').draggable ({
       revert: true
     });
-    $('.x-axis').draggable({
+    $('.x-axis').draggable ({
       axis: 'x'
     });
-    $('.y-axis').draggable({
+    $('.y-axis').draggable ({
       axis: 'y'
     });
-    $('.constrained').draggable({
+    $('.constrained').draggable ({
       constrainer: {
         $element: $('.constrainer')
       }
     });
-    $('.constrained-center').draggable({
+    $('.constrained-center').draggable ({
       constrainer: {
         $element: $('.constrainer'),
         center: true
       }
     });
-    $('.constrained-tolerance').draggable({
+    $('.constrained-tolerance').draggable ({
       constrainer: {
         $element: $('.constrainer'),
         tolerance: {
@@ -86,17 +86,17 @@
         }
       }
     });
-    $('.constrained-coordinates-modifier').draggable({
+    $('.constrained-coordinates-modifier').draggable ({
       modifiers: {
-        x: function(x) {
+        x: function ( x ) {
           return 2 * x;
         },
-        y: function(y) {
+        y: function ( y ) {
           return 2 * y;
         }
       }
     });
-    $('.proxyed').draggable({
+    $('.proxyed').draggable ({
       proxy: {
         $element: $('.constrainer')
       }
@@ -112,8 +112,8 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple actions">
-    <div onclick="remove_proxy ()" class="button outlined black">Remove proxy</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Remove proxy" "remove_proxy ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Scrollability"}}}
@@ -132,12 +132,12 @@
   </div>
 
   <script>
-    function remove_proxy() {
-      $('.proxyed').remove();
+    function remove_proxy () {
+      $('.proxyed').remove ();
     }
 
-    function api(action) {
-      $('.label, .checkbox').draggable (action);
+    function api ( action ) {
+      $('.label, .checkbox').draggable ( action );
     }
 
     function no_scrollability () {

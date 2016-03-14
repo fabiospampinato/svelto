@@ -36,14 +36,6 @@
     <div class="button base">Base</div>
   </div>
 
-  {{{sw.divider "Fluid"}}}
-
-  <div class="button fluid">Fluid</div>
-  <div class="button fluid">
-    <span>Fluid</span>
-    <i class="icon">settings</i>
-  </div>
-
   {{{sw.divider "Advanced"}}}
 
   <div class="multiple">
@@ -51,10 +43,10 @@
     <div class="button">
       <i class="icon">settings</i>
     </div>
-    <div class="button rounded">
+    <div class="button sharp">
       <i class="icon">settings</i>
     </div>
-    <div class="button sharp">
+    <div class="button circular">
       <i class="icon">settings</i>
     </div>
     <div class="button">
@@ -85,7 +77,7 @@
 
   {{{sw.divider "Ribbon"}}}
 
-  <div class="container centered xs-10 outlined z-depth-1">
+  <div class="container centered xs-10 bordered z-depth-1">
     <div class="button ribbon ribbon-left ribbon-right primary">Left & Right</div>
     {{{sample.paragraph}}}
     <div class="button ribbon ribbon-left secondary">Left</div>
@@ -96,7 +88,7 @@
 
   {{{sw.divider "Corner"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="button corner top-left primary">
       <span>S</span>
     </div>
@@ -114,7 +106,7 @@
 
   {{{sw.divider "Floating"}}}
 
-  <div class="button floating rounded secondary large">
+  <div class="button floating circular secondary large">
     <i class="icon">settings</i>
   </div>
 
@@ -129,7 +121,7 @@
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
     {{{sw.checkAction "Compact" "toggle_class ( 'compact' )"}}}
   </div>
 
@@ -148,22 +140,24 @@
   </div>
 
   <script>
-    function toggle_class ( css_class ) {
-      $('.layout-content .button').not ( '.actions .button' ).toggleClass(css_class);
+    var $buttons = $('.layout-content .button').not ( '.actions .button' );
+
+    function toggle_class ( name ) {
+      $buttons.toggleClass ( name );
     }
 
     function enable () {
-      $('.layout-content .button').not ( '.actions .button' ).removeClass ( 'disabled' );
+      $buttons.removeClass ( 'disabled' );
     }
 
     function disable () {
-      $('.layout-content .button').not ( '.actions .button' ).addClass ( 'disabled' );
+      $buttons.addClass ( 'disabled' );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('.layout-content .button').not ( '.actions .button' ).removeClass ( validities[i] ).addClass ( validity );
+        $buttons.removeClass ( validities[i] ).addClass ( validity );
       }
     }
   </script>

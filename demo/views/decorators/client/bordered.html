@@ -1,0 +1,87 @@
+
+<!-- BORDERED -->
+
+<template name="bordered">
+
+  {{{sw.divider "Bordered"}}}
+
+  <div class="container bordered">
+    <div class="multiple">
+      <div class="label bordered">Label</div>
+      <div class="button bordered">Button</div>
+      <div class="button bordered">
+        <i class="icon">settings</i>
+        <span>Button</span>
+      </div>
+      <div class="label bordered compact">
+        <i class="icon">settings</i>
+      </div>
+      <input value="Input" placeholder="Placeholder..." class="bordered">
+      <textarea placeholder="Placeholder..." class="bordered">Textarea</textarea>
+      <div class="multiple joined">
+        <input value="Input" placeholder="Placeholder..." class="bordered">
+        <div class="button bordered compact">
+          <i class="icon">settings</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{{sw.divider "Border colors"}}}
+
+  <div class="multiple">
+    <div class="label bordered border-primary">Primary</div>
+    <div class="label bordered border-secondary">Secondary</div>
+    <div class="label bordered border-tertiary">Tertiary</div>
+    <div class="label bordered border-quaternary">Quaternary</div>
+    <div class="label bordered border-black">Black</div>
+    <div class="label bordered border-blue">Blue</div>
+    <div class="label bordered border-brown">Brown</div>
+    <div class="label bordered border-gray">Gray</div>
+    <div class="label bordered border-green">Green</div>
+    <div class="label bordered border-olive">Olive</div>
+    <div class="label bordered border-orange">Orange</div>
+    <div class="label bordered border-pink">Pink</div>
+    <div class="label bordered border-purple">Purple</div>
+    <div class="label bordered border-red">Red</div>
+    <div class="label bordered border-teal">Teal</div>
+    <div class="label bordered border-violet">Violet</div>
+    <div class="label bordered border-white">White</div>
+    <div class="label bordered border-yellow">Yellow</div>
+    <div class="label bordered border-error">Error</div>
+    <div class="label bordered border-success">Success</div>
+    <div class="label bordered border-warning">Warning</div>
+    <div class="label bordered border-base">Base</div>
+    <div class="label bordered border-inherit">Inherit</div>
+    <div class="label bordered border-transparent">Transparent</div>
+  </div>
+
+  {{> border_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="border_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Solid" "style" "set_style ( 'solid' )" true}}}
+    {{{sw.radioAction "Dotted" "style" "set_style ( 'dotted' )"}}}
+    {{{sw.radioAction "Dashed" "style" "set_style ( 'dashed' )"}}}
+  </div>
+
+  <script>
+    var $bordereds = $('.bordered').not ( '.actions .bordered' );
+
+    function set_style ( style ) {
+      var styles = ['solid', 'dotted', 'dashed'];
+      for ( var i = 0, l = styles.length; i < l; i++ ) {
+        $bordereds.removeClass ( 'border-' + styles[i] );
+      }
+      $bordereds.addClass ( 'border-' + style );
+    }
+  </script>
+
+</template>

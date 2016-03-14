@@ -1,6 +1,6 @@
 
 /* DECORATORS */
 
-let templates = ['actionable', 'animations', 'attached', 'blurred', 'border_radius', 'centered', 'colors', 'disabled', 'grid', 'hidden', 'highlighted', 'limited', 'obscured', 'order', 'outlined', 'raisable', 'scrollable', 'sizes', 'z_depths'];
+let templates = ['actionable', 'animations', 'attached', 'blurred', 'border_radius', 'bordered', 'centered', 'colors', 'disabled', 'floated', 'fluid', 'grid', 'hidden', 'highlighted', 'limited', 'obscured', 'order', 'pointing', 'raisable', 'scrollable', 'sizes', 'spaced', 'z_depths'];
 
-SWRouter.pages ( templates, '/decorators/' );
+SRouter.pages ( templates, '/decorators/' );

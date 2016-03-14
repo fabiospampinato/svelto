@@ -22,15 +22,15 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
+    {{{sw.action "Init" "api ()"}}}
     <div class="multiple joined">
-      <input placeholder="Expander index..." name="index" type="number" class="outlined">
-      <div onclick="api_get ()" class="button outlined">isOpen</div>
-      <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
-      <div onclick="api ( 'open' )" class="button outlined">Open</div>
-      <div onclick="api ( 'close' )" class="button outlined">Close</div>
+      <input placeholder="Expander index..." name="index" type="number" class="bordered">
+      {{{sw.action "isOpen" "api_get ()"}}}
+      {{{sw.action "Toggle" "api ( 'toggle' )"}}}
+      {{{sw.action "Open" "api ( 'open' )"}}}
+      {{{sw.action "Close" "api ( 'close' )"}}}
     </div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Actions"}}}
@@ -50,11 +50,11 @@
     }
 
     function api_get () {
-      $.noty(String ( $('.accordion').accordion ( 'isOpen', Number ( getValue ( 'index' ) ) ) ));
+      $.toast ( $('.accordion').accordion ( 'isOpen', getValue ( 'index' ) ) );
     }
 
     function api ( action ) {
-      $('.accordion').accordion ( action, Number ( getValue ( 'index' ) ) );
+      $('.accordion').accordion ( action, getValue ( 'index' ) );
     }
 
     function toggle_multiple () {

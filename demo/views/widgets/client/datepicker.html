@@ -5,7 +5,7 @@
 
   {{{sw.divider "Datepicker"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     {{{sw.datepicker}}}
   </div>
 
@@ -20,29 +20,25 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple">
-    <div onclick="api ()" class="button outlined">Init</div>
+    {{{sw.action "Init" "api ()"}}}
     <div class="multiple joined">
       {{{sw.checkbox "Formatted" "formatted"}}}
-      <div onclick="api_get ()" class="button primary outlined">Get</div>
+      {{{sw.action "Get" "api_get ()"}}}
     </div>
     <div class="multiple joined">
-      <input name="set" placeholder="Set..." class="outlined">
-      <div onclick="api_set ()" class="button primary outlined">Set</div>
+      <input name="set" placeholder="Set..." class="bordered">
+      {{{sw.action "Set" "api_set ()"}}}
     </div>
     <div class="multiple joined">
-      <input name="delta_months" placeholder="Delta months..." class="outlined">
-      <div onclick="api_navigate ()" class="button secondary outlined">Navigate</div>
+      <input name="delta_months" placeholder="Delta months..." class="bordered">
+      {{{sw.action "Navigate" "api_navigate ()"}}}
     </div>
     <div class="multiple joined">
-      <div onclick="api ( 'previousMonth' )" class="button compact outlined">
-        <i class="icon">chevron_left</i>
-      </div>
-      <div class="label outlined">Month</div>
-      <div onclick="api ( 'nextMonth' )" class="button compact outlined">
-        <i class="icon">chevron_right</i>
-      </div>
+      {{{sw.iconAction "chevron_left" "api ( 'previousMonth' )"}}}
+      <div class="label bordered">Month</div>
+      {{{sw.iconAction "chevron_right" "api ( 'nextMonth' )"}}}
     </div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -64,23 +60,23 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function api_get() {
-      var formatted = $("input[name='formatted']").prop('checked');
-      var date = $('.datepicker').datepicker('get', formatted);
-      $.noty(date ? (formatted ? date : date.toLocaleString()) : 'Null');
+    function api_get () {
+      var formatted = $("input[name='formatted']").prop ( 'checked' );
+      var date = $('.datepicker').datepicker ( 'get', formatted );
+      $.toast ( date ? ( formatted ? date : date.toLocaleString () ) : date );
     }
 
     function api_set () {
       $('.datepicker').datepicker ( 'set', getValue ( 'set' ) );
     }
 
-    function api_navigate() {
+    function api_navigate () {
       var delta_months = Number ( getValue ( 'delta_months' ) );
-      $('.datepicker').datepicker('navigateMonth', delta_months);
+      $('.datepicker').datepicker ( 'navigateMonth', delta_months );
     }
 
-    function api(action) {
-      $('.datepicker').datepicker(action);
+    function api ( action ) {
+      $('.datepicker').datepicker ( action );
     }
 
     function set_validity ( validity ) {

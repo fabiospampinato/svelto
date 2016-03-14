@@ -6,47 +6,47 @@
   {{{sw.divider "One Time Actions"}}}
 
   <div class="multiple">
-    <div onclick="ota_test1 ()" class="button outlined">Test1</div>
-    <div onclick="ota_test2 ()" class="button outlined">Test2</div>
-    <div onclick="ota_test3 ()" class="button outlined">Test3 (Advanced)</div>
+    <div onclick="ota_test1 ()" class="button bordered">Test1</div>
+    <div onclick="ota_test2 ()" class="button bordered">Test2</div>
+    <div onclick="ota_test3 ()" class="button bordered">Test3 (Advanced)</div>
   </div>
 
   {{> one_time_action_actions}}
 
   <script>
-    function ota_test1() {
-      $.oneTimeAction({
+    function ota_test1 () {
+      $.oneTimeAction ({
         action: 'test1',
-        fn: function() {
-          $.noty("One time action (test1) executed and setted");
+        fn: function () {
+          $.toast ( "One time action (test1) executed and setted" );
         }
       });
     }
 
-    function ota_test2() {
-      $.oneTimeAction({
+    function ota_test2 () {
+      $.oneTimeAction ({
         action: 'test2',
-        fn: function() {
-          $.noty("One time action (test2) executed and setted");
+        fn: function () {
+          $.toast ( "One time action (test2) executed and setted" );
         }
       });
     }
 
-    function ota_test3() {
-      $.oneTimeAction({
+    function ota_test3 () {
+      $.oneTimeAction ({
         action: 'test3',
-        fn: function() {
-          $.noty({
+        fn: function () {
+          $.toast ({
             body: "One time action (test3) executed",
             buttons: [{
               text: 'Close'
             }, {
               text: 'Set',
-              onClick: function() {
-                $.oneTimeAction({
+              onClick: function () {
+                $.oneTimeAction ({
                   action: 'test3'
                 }).set(1);
-                $.noty("One time action (test3) setted");
+                $.toast ( "One time action (test3) setted" );
               }
             }]
           });
@@ -65,26 +65,26 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple actions">
-    <div onclick="ota_remove_test1 ()" class="button outlined">Remove test1</div>
-    <div onclick="ota_remove_actions ()" class="button outlined">Remove all</div>
-    <div onclick="ota_get_string ()" class="button outlined">Get cookie string</div>
+    <div onclick="ota_remove_test1 ()" class="button bordered">Remove test1</div>
+    <div onclick="ota_remove_actions ()" class="button bordered">Remove all</div>
+    <div onclick="ota_get_string ()" class="button bordered">Get cookie string</div>
   </div>
 
   <script>
-    function ota_remove_test1() {
-      $.oneTimeAction({
+    function ota_remove_test1 () {
+      $.oneTimeAction ({
         action: 'test1'
-      }).remove();
-      $.noty('(test1) action has been removed');
+      }).remove ();
+      $.toast ( '(test1) action has been removed' );
     }
 
-    function ota_remove_actions() {
-      $.oneTimeAction().remove();
-      $.noty('oneTimeAction-related cookies has been removed');
+    function ota_remove_actions () {
+      $.oneTimeAction().remove ();
+      $.toast ( 'oneTimeAction-related cookies has been removed' );
     }
 
-    function ota_get_string() {
-      $.noty(String(Svelto.Cookie.get('ota')));
+    function ota_get_string () {
+      $.toast (String(Svelto.Cookie.get('ota') ) );
     }
   </script>
 

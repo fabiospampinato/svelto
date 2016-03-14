@@ -5,20 +5,20 @@
 
   {{{sw.divider "Overlay"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     <div class="overlay container">
       <p>{{sample.text}}</p>
     </div>
     {{{sample.paragraph}}}
   </div>
 
-  <div class="card outlined">
+  <div class="card bordered">
     <div class="overlay centerer">
       <div class="xxlarge">
         <i class="icon xxxxlarge">thumb_up</i>
       </div>
     </div>
-    <div class="card-header outlined teal">
+    <div class="card-header bordered teal">
       <div class="sections center-y">
         <div class="section-left">
           <div class="multiple">
@@ -54,12 +54,12 @@
     <div class="card-block">
       {{{sample.paragraph}}}
     </div>
-    <div class="card-footer outlined pink">Footer</div>
+    <div class="card-footer bordered pink">Footer</div>
   </div>
 
-  <div class="container outlined">
-    <div class="overlay card outlined">
-      <div class="card-header outlined teal">
+  <div class="container bordered">
+    <div class="overlay card bordered">
+      <div class="card-header bordered teal">
         <div class="sections center-y">
           <div class="section-left">
             <div class="multiple">
@@ -95,21 +95,21 @@
       <div class="card-block">
         {{{sample.paragraph}}}
       </div>
-      <div class="card-footer outlined pink">Footer</div>
+      <div class="card-footer bordered pink">Footer</div>
     </div>
     {{{sample.paragraph}}}
   </div>
 
   {{{sw.divider "Advanced"}}}
 
-  <div class="card outlined">
+  <div class="card bordered">
     <div id="overlay-togglerable" class="overlay centerer">
       <div class="button secondary overlay-closer">Closer</div>
     </div>
     <div class="card-block">
       {{{sample.paragraph}}}
     </div>
-    <div class="card-footer outlined centerer">
+    <div class="card-footer bordered centerer">
       <div class="button primary overlay-toggler" data-target="#overlay-togglerable">Trigger</div>
     </div>
   </div>
@@ -125,12 +125,12 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
-    <div onclick="api ( 'toggle' )" class="button outlined">Toggle</div>
-    <div onclick="api ( 'open' )" class="button outlined">Open</div>
-    <div onclick="api ( 'close' )" class="button outlined">Close</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
+    {{{sw.action "Toggle" "api ( 'toggle' )"}}}
+    {{{sw.action "Open" "api ( 'open' )"}}}
+    {{{sw.action "Close" "api ( 'close' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Style"}}}
@@ -138,19 +138,19 @@
   {{{sw.checkAction "Dimmer" "toggle_class ( 'dimmer' )"}}}
 
   <script>
-    function toggle_class(css_class) {
-      $('.overlay').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.overlay').toggleClass ( name );
     }
 
-    function api_get() {
-      var gets = _.map($('.overlay'), function(overlay) {
-        return $(overlay).overlay('isOpen');
+    function api_get () {
+      var gets = lodash.map ( $('.overlay'), function ( overlay ) {
+        return $(overlay).overlay ( 'isOpen' );
       });
-      $.noty(gets.join(' - '));
+      $.toast ( gets.join ( ' - ' ) );
     }
 
-    function api(action) {
-      $('.overlay').overlay(action);
+    function api ( action ) {
+      $('.overlay').overlay ( action );
     }
   </script>
 

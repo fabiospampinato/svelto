@@ -5,7 +5,7 @@
 
   {{{sw.divider "Tagbox"}}}
 
-  <div class="tagbox outlined">
+  <div class="tagbox bordered">
     <input name="name" value="these,are,some,tags,ain't,cool?" class="hidden">
     <div class="tagbox-tags">
       <input name="partial_name" placeholder="Add tag..." class="tagbox-partial autogrow compact">
@@ -23,19 +23,19 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
     <div class="multiple joined">
-      <input placeholder="Tags..." name="add" class="outlined">
-      <div onclick="api_add ()" class="button primary outlined">Add</div>
+      <input placeholder="Tags..." name="add" class="bordered">
+      {{{sw.action "Add" "api_add ()"}}}
     </div>
     <div class="multiple joined">
-      <input placeholder="Tags..." name="remove" class="outlined">
-      <div onclick="api_remove ()" class="button secondary outlined">Remove</div>
+      <input placeholder="Tags..." name="remove" class="bordered">
+      {{{sw.action "Remove" "api_remove ()"}}}
     </div>
-    <div onclick="api ( 'clear' )" class="button black outlined">Clear</div>
-    <div onclick="api ( 'reset' )" class="button outlined">Reset</div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Clear" "api ( 'clear' )"}}}
+    {{{sw.action "Reset" "api ( 'reset' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -50,20 +50,20 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function api_get() {
-      $.noty($('.tagbox').tagbox('get').join(' - '));
+    function api_get () {
+      $.toast ( $('.tagbox').tagbox ( 'get' ).join ( ' - ' ) );
     }
 
-    function api_add() {
-      $('.tagbox').tagbox('add', getValue ( 'add' ));
+    function api_add () {
+      $('.tagbox').tagbox ( 'add', getValue ( 'add' ) );
     }
 
-    function api_remove() {
-      $('.tagbox').tagbox('remove', getValue ( 'remove' ));
+    function api_remove () {
+      $('.tagbox').tagbox ( 'remove', getValue ( 'remove' ) );
     }
 
-    function api(action) {
-      $('.tagbox').tagbox(action);
+    function api ( action ) {
+      $('.tagbox').tagbox ( action );
     }
   </script>
 

@@ -6,24 +6,24 @@
   {{{sw.divider "Badge"}}}
 
   <div class="multiple vertical">
-    <div class="label outlined compact">
+    <div class="label bordered compact">
       <span>Default</span>
       <div class="badge">0</div>
     </div>
-    <div class="label outlined compact">
-      <i class="icon">settings</i>
+    <div class="label bordered compact">
+      <i class="icon">menu</i>
       <div class="badge top-left primary">1</div>
     </div>
-    <div class="label outlined compact">
-      <i class="icon">settings</i>
+    <div class="label bordered compact">
+      <i class="icon">menu</i>
       <div class="badge top-right secondary">2</div>
     </div>
-    <div class="label outlined compact">
-      <i class="icon">settings</i>
+    <div class="label bordered compact">
+      <i class="icon">menu</i>
       <div class="badge bottom-right tertiary">3</div>
     </div>
-    <div class="label outlined compact">
-      <i class="icon">settings</i>
+    <div class="label bordered compact">
+      <i class="icon">menu</i>
       <div class="badge bottom-left quaternary">4</div>
     </div>
   </div>
@@ -40,16 +40,16 @@
 
   <div class="multiple actions">
     {{{sw.checkAction "Actionable" "toggle_class ( 'actionable' )"}}}
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
   </div>
 
   {{{sw.divider "Content"}}}
 
   <div class="multiple actions">
     <div class="multiple joined">
-      <input placeholder="Badge content..." name="content" class="outlined">
-      <div onclick="set_icon ()" class="button outlined">Set icon</div>
-      <div onclick="set_text ()" class="button outlined">Set text</div>
+      <input placeholder="Badge content..." name="content" class="bordered">
+      {{{sw.action "Set icon" "set_icon ()"}}}
+      {{{sw.action "Set text" "set_text ()"}}}
     </div>
   </div>
 
@@ -65,8 +65,8 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function toggle_class ( css_class ) {
-      $('.badge').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.badge').toggleClass ( name );
     }
 
     function set_icon () {

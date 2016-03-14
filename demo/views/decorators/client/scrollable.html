@@ -22,17 +22,17 @@
 
   <div class="multiple joined actions">
     {{{sw.radioAction "Default" "state" "set_scroll ()" true}}}
+    {{{sw.radioAction "All" "state" "set_scroll ( 'scrollable' )"}}}
     {{{sw.radioAction "X" "state" "set_scroll ( 'scrollable-x' )"}}}
     {{{sw.radioAction "Y" "state" "set_scroll ( 'scrollable-y' )"}}}
-    {{{sw.radioAction "All" "state" "set_scroll ( 'scrollable' )"}}}
   </div>
 
   {{{sw.divider "Others"}}}
 
-  {{{sw.checkAction "Height limited" "toggle_height_limit ()"}}}
+  {{{sw.checkAction "Fixed height" "toggle_height_fixed ()"}}}
 
   <script>
-    function toggle_height_limit () {
+    function toggle_height_fixed () {
       $('.container').height ( $('.container').height () > 125 ? 125 : 'auto' );
     }
 

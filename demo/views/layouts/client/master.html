@@ -3,7 +3,7 @@
 
 <template name="master">
   {{> masterHeader}}
-  <div class="layout-content">{{> yield "content"}}</div>
+  <main class="layout-content">{{> yield "content"}}</main>
   {{> masterFooter}}
   {{> error_notifier}}
 </template>
@@ -11,7 +11,7 @@
 <!-- HEADER -->
 
 <template name="masterHeader">
-  <div class="layout-header sticky toolbar primary z-depth-4">
+  <header class="layout-header sticky toolbar primary z-depth-4">
     <div class="multiple center-y">
       <div class="button compact transparent">
         <i class="icon">menu</i>
@@ -25,7 +25,7 @@
         <i class="icon">more_vert</i>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <!-- FOOTER -->
@@ -46,10 +46,10 @@
       if ( errorId !== prevErrorId ) {
         prevErrorId = errorId;
         try {
-          $.noty ({
+          $.toast ({
             body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message,
-            ttl: 'forever',
-            color: 'red'
+            ttl: Infinity,
+            color: Svelto.Colors.red
           });
         } catch ( e ) {
           alert ( file + ':' + line + '\n\n' + message );

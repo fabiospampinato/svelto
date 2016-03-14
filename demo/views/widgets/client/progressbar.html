@@ -5,7 +5,7 @@
 
   {{{sw.divider "Base"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     {{{sw.progressbar}}}
     {{{sw.progressbar 33}}}
     {{{sw.progressbar 45.12}}}
@@ -23,19 +23,19 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple actions">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
     <div class="multiple joined">
-      <input name="value" placeholder="Value..." class="outlined">
-      <div onclick="api_set ()" class="button outlined secondary">Set</div>
+      <input name="value" placeholder="Value..." class="bordered">
+      {{{sw.action "Set" "api_set ()"}}}
     </div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "Style"}}}
 
   <div class="multiple actions">
-    {{{sw.checkAction "Outlined" "toggle_class ( 'outlined' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
     <div class="multiple joined">
       {{{sw.radioAction "Normal" "size" "set_size ()" true}}}
       {{{sw.radioAction "Compact" "size" "set_size ( 'compact' )"}}}
@@ -65,26 +65,26 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function toggle_class(css_class) {
-      $('.progressbar').toggleClass(css_class);
+    function toggle_class ( name ) {
+      $('.progressbar').toggleClass ( name );
     }
 
-    function api_get() {
-      _.each($('.container'), function(container) {
+    function api_get () {
+      lodash.each ( $('.container'), function ( container ) {
         var gets = [];
-        _.each($(container).find('.progressbar'), function(progressbar) {
-          gets.push($(progressbar).progressbar('get'));
+        lodash.each ( $(container).find ( '.progressbar' ), function ( progressbar ) {
+          gets.push ( $(progressbar).progressbar ( 'get' ) );
         });
-        if (gets.length > 0) {
-          $.noty(gets.join(' - '));
+        if ( gets.length ) {
+          $.toast ( gets.join ( ' - ' ) );
         }
       });
     }
 
-    function api_set() {
-      var value = Number ( getValue ( 'value') );
-      $(".progressbar").each(function() {
-        $(this).progressbar('set', value);
+    function api_set () {
+      var value = getValue ( 'value' );
+      $(".progressbar").each ( function () {
+        $(this).progressbar ( 'set', value );
       });
     }
 

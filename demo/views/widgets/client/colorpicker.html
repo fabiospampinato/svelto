@@ -5,7 +5,7 @@
 
   {{{sw.divider "Colorpicker"}}}
 
-  <div class="container outlined">
+  <div class="container bordered">
     {{{sw.colorpicker}}}
   </div>
 
@@ -20,13 +20,13 @@
   {{{sw.divider "API"}}}
 
   <div class="multiple">
-    <div onclick="api ()" class="button outlined">Init</div>
-    <div onclick="api_get ()" class="button outlined">Get</div>
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
     <div class="multiple joined">
-      <input name="color" placeholder="Color..." class="outlined">
-      <div onclick="api_set ()" class="button secondary outlined">Set</div>
+      <input name="color" placeholder="Color..." class="bordered">
+      {{{sw.action "Set" "api_set ()"}}}
     </div>
-    <div onclick="api ( 'destroy' )" class="button outlined">Destroy</div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
   {{{sw.divider "State"}}}
@@ -48,18 +48,18 @@
       return $('[name="' + name + '"]').val ();
     }
 
-    function api_get() {
-      var color = $('.colorpicker').colorpicker('get');
-      $.noty( '<div class="square smooth" style="background-color:' + color + '"></div>' );
-      $.noty(color);
+    function api_get () {
+      var color = $('.colorpicker').colorpicker ( 'get' );
+      $.toast ( '<div class="square rounded" style="background-color:' + color + '"></div>' );
+      $.toast ( color );
     }
 
-    function api_set() {
+    function api_set () {
       var color = getValue ( 'color' );
-      $('.colorpicker').colorpicker('set', color);
+      $('.colorpicker').colorpicker ( 'set', color );
     }
 
-    function api (action) {
+    function api ( action ) {
       $('.colorpicker').colorpicker(action);
     }
 

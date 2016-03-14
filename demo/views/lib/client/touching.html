@@ -3,13 +3,13 @@
 
 <template name="touching">
 
-  {{{sw.divider "Squares - All matches"}}}
+  {{{sw.divider "All matches"}}}
 
-  <div class="container squares_all outlined">
+  <div class="container squares_all bordered">
     <div class="multiple">
       {{#each sw.times 32}}
         <div class="square xxxxlarge centerer">
-          <div class="xxxsmall">{{this}}</div>
+          <div class="xxxxsmall">{{this}}</div>
         </div>
       {{/each}}
     </div>
@@ -18,17 +18,17 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple joined">
-    <input name="input_populate_all" placeholder="Squares number..." class="outlined">
-    <div onclick="populate_all ()" class="button secondary outlined">Populate</div>
+    <input name="populate_all" placeholder="Squares number..." class="bordered">
+    {{{sw.action "Populate" "populate_all ()"}}}
   </div>
 
-  {{{sw.divider "Squares - Most significant match"}}}
+  {{{sw.divider "Most significant match"}}}
 
-  <div class="container squares_most outlined">
+  <div class="container squares_most bordered">
     <div class="multiple">
       {{#each sw.times 32}}
         <div class="square xxxxlarge centerer">
-          <div class="xxxsmall">{{this}}</div>
+          <div class="xxxxsmall">{{this}}</div>
         </div>
       {{/each}}
     </div>
@@ -37,17 +37,17 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple joined">
-    <input name="input_populate_most" placeholder="Squares number..." class="outlined">
-    <div onclick="populate_most ()" class="button secondary outlined">Populate</div>
+    <input name="populate_most" placeholder="Squares number..." class="bordered">
+    {{{sw.action "Populate" "populate_most ()"}}}
   </div>
 
-  {{{sw.divider "Squares - Punctual"}}}
+  {{{sw.divider "Punctual"}}}
 
-  <div class="container squares_punctual outlined">
+  <div class="container squares_punctual bordered">
     <div class="multiple">
       {{#each sw.times 32}}
         <div class="square xxxxlarge centerer">
-          <div class="xxxsmall">{{this}}</div>
+          <div class="xxxxsmall">{{this}}</div>
         </div>
       {{/each}}
     </div>
@@ -56,8 +56,8 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple joined">
-    <input name="input_populate_punctual" placeholder="Squares number..." class="outlined">
-    <div onclick="populate_punctual ()" class="button secondary outlined">Populate</div>
+    <input name="populate_punctual" placeholder="Squares number..." class="bordered">
+    {{{sw.action "Populate" "populate_punctual ()"}}}
   </div>
 
   {{> touching_init}}
@@ -66,74 +66,85 @@
 
 <template name="touching_init">
 
-  {{sw.noty body="Drag the squares, the green ones are those returned" ttl="forever"}}
+  {{sw.toast body="Drag the squares, the green ones are those returned" ttl="forever"}}
 
   <script>
+
+    function getValue ( name ) {
+      return $('input[name="' + name + '"]').val ();
+    }
+
     /* POPULATE */
 
-    function get_squares_html(nr) {
+    function get_squares_html ( nr ) {
       var html = '';
-      for (var i = 0; i < Number(nr); i++) {
-        html += '<div class="square xxxxlarge centerer" style=""><div class="xxxsmall">' + (i + 1) + '</div></div>';
+      for ( var i = 0; i < Number ( nr ); i++ ) {
+        html += '<div class="square xxxxlarge centerer" style=""><div class="xxxxsmall">' + (i + 1) + '</div></div>';
       }
       return html;
     }
 
-    function populate_all() {
-      $('.squares_all .multiple').empty().append(get_squares_html($('input[name="input_populate_all"]').val()));
+    function populate_all () {
+      $('.squares_all .multiple').empty ().append ( get_squares_html ( getValue ( 'populate_all' ) ) );
       init_drag_all();
     }
 
-    function populate_most() {
-      $('.squares_most .multiple').empty().append(get_squares_html($('input[name="input_populate_most"]').val()));
+    function populate_most () {
+      $('.squares_most .multiple').empty ().append ( get_squares_html ( getValue ( 'populate_most' ) ) );
       init_drag_most();
     }
 
-    function populate_punctual() {
-      $('.squares_punctual .multiple').empty().append(get_squares_html($('input[name="input_populate_punctual"]').val()));
+    function populate_punctual () {
+      $('.squares_punctual .multiple').empty ().append ( get_squares_html ( getValue ( 'populate_punctual' ) ) );
       init_drag_punctual();
     }
 
     /* DRAGGING */
 
-    function init_drag_all() {
-      dragging('.squares_all .square', 'all');
+    function init_drag_all () {
+      dragging ('.squares_all .square', 'all');
     }
 
-    function init_drag_most() {
-      dragging('.squares_most .square', 'most');
+    function init_drag_most () {
+      dragging ('.squares_most .square', 'most');
     }
 
-    function init_drag_punctual() {
-      dragging('.squares_punctual .square', 'punctual');
+    function init_drag_punctual () {
+      dragging ('.squares_punctual .square', 'punctual');
     }
 
-    function dragging(selector, select) {
+    function dragging ( selector, select ) {
       var $squares = $(selector);
-      $squares.draggable({
+      $squares.draggable ({
         revert: true,
         callbacks: {
-          move: function(event, data) {
-            $squares.removeClass('green');
-            if (select === 'punctual') {
-              var pointXY = $.eventXY(data.moveEvent);
-              $squares.touching({
+          move: function ( event, data) {
+            $squares.removeClass ( Svelto.Colors.green );
+            if ( select === 'punctual' ) {
+              var point = $.eventXY ( data.moveEvent );
+              var $touching = $squares.touching ({
                 point: {
-                  X: pointXY.X - $(window).scrollLeft(),
-                  Y: pointXY.Y - $(window).scrollTop()
+                  x: point.x - $(window).scrollLeft (),
+                  y: point.y - $(window).scrollTop ()
                 },
                 $not: $(this)
-              }).addClass('green');
+              });
+              if ( $touching ) {
+                $touching.addClass ( Svelto.Colors.green );
+              }
             } else {
-              $squares.touching({
+              var $touching = $squares.touching ({
                 $comparer: $(this),
                 $not: $(this),
                 onlyBest: select === 'most'
-              }).addClass('green');
+              });
+              if ( $touching ) {
+                $touching.addClass ( Svelto.Colors.green );
+              }
             }
           },
-          end: function() {
-            $squares.removeClass('green');
+          end: function () {
+            $squares.removeClass ( Svelto.Colors.green );
           }
         }
       });
@@ -141,11 +152,12 @@
 
     /* READY */
 
-    $(function() {
-      init_drag_all();
-      init_drag_most();
-      init_drag_punctual();
+    $(function () {
+      init_drag_all ();
+      init_drag_most ();
+      init_drag_punctual ();
     });
+
   </script>
 
 </template>
