@@ -136,7 +136,7 @@
       $.toast ({
         title: 'Test title',
         body: 'This is just an example body',
-        img: '/sample/sample.png'
+        img: {{{sample.imageUrl}}}
       });
     }
 
@@ -144,7 +144,7 @@
       $.toast ({
         title: 'Test title',
         body: 'This is just an example body',
-        img: '/sample/sample.png',
+        img: {{{sample.imageUrl}}},
         buttons: [{
           text: 'Foo'
         }, {
@@ -157,7 +157,7 @@
       $.toast ({
         title: 'Test title',
         body: '<sub>sub</sub>Something<sup>sup</sup>',
-        img: '/sample/sample.png',
+        img: {{{sample.imageUrl}}},
         buttons: [{
           text: 'Foo'
         }, {

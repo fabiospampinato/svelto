@@ -7,13 +7,25 @@ SampleHelpers.registerAs ( 'sample' );
 
 SampleHelpers.define ( 'image', function ( classes ) {
 
-  return '<img src="/sample/sample.png" class="' + ( classes || '' ) + '"/>';
+  return '<img src="' + SampleHelpers.imageUrl () + '" class="' + ( classes || '' ) + '"/>';
+
+});
+
+SampleHelpers.define ( 'imageUrl', function ( classes ) {
+
+  return '/sample/sample.png';
 
 });
 
 SampleHelpers.define ( 'imageWide', function ( classes ) {
 
-  return '<img src="/sample/sample-wide.png" class="' + ( classes || '' ) + '"/>';
+  return '<img src="' + SampleHelpers.imageWideUrl () + '" class="' + ( classes || '' ) + '"/>';
+
+});
+
+SampleHelpers.define ( 'imageWideUrl', function ( classes ) {
+
+  return '/sample/sample-wide.png';
 
 });
 
