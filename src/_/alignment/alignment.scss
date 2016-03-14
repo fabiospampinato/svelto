@@ -8,21 +8,17 @@
 
 /* ALIGNMENT */
 
-%alignment {
-  display: inline-block;
-}
-
 .align-top {
-  @extend %alignment;
   vertical-align: top !important;
+  align-self: flex-start !important;
 }
 
 .align-middle {
-  @extend %alignment;
   vertical-align: middle !important;
+  align-self: center !important;
 }
 
 .align-bottom {
-  @extend %alignment;
   vertical-align: bottom !important;
+  align-self: flex-end !important;
 }
