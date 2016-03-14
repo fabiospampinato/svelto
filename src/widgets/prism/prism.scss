@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require widgets/typography/code/code.scss
  * ========================================================================= */
 
 //SOURCE: http://prismjs.com/download.html?themes=prism&languages=markup+css+css-extras+clike+javascript
@@ -23,6 +24,8 @@ code[class*='language-'] {
   line-height: 1.5;
   tab-size: 4;
   hyphens: none;
+  flex: 1 1 auto;
+  width: 100%;
 
   .token {
 
@@ -30,11 +33,11 @@ code[class*='language-'] {
     &.prolog,
     &.doctype,
     &.cdata {
-      color: darken($color-teal, 15);
+      color: darken( $color-teal, 15 );
     }
 
     &.punctuation {
-      color: darken($color-gray, 15);
+      color: darken( $color-gray, 15 );
     }
 
     &.property,
@@ -44,7 +47,7 @@ code[class*='language-'] {
     &.constant,
     &.symbol,
     &.deleted {
-      color: darken($color-pink, 15);
+      color: darken( $color-pink, 15 );
     }
 
     &.selector,
@@ -53,23 +56,23 @@ code[class*='language-'] {
     &.char,
     &.builtin,
     &.inserted {
-      color: darken($color-green, 15);
+      color: darken( $color-green, 15 );
     }
 
     &.atrule,
     &.attr-value,
     &.keyword {
-      color: darken($color-blue, 15);
+      color: darken( $color-blue, 15 );
     }
 
     &.function {
-      color: darken($color-red, 15);
+      color: darken( $color-red, 15 );
     }
 
     &.regex,
     &.important,
     &.variable {
-      color: darken($color-orange, 15);
+      color: darken( $color-orange, 15 );
     }
 
     &.important {
@@ -83,7 +86,7 @@ code[class*='language-'] {
     &.operator,
     &.entity,
     &.url {
-      color: darken($color-teal, 15);
+      color: darken( $color-teal, 15 );
       background: hsla(0, 0%, 100%, .5);
     }
 

@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/keyboard/keyboard.js
- * @require widgets/noty/noty.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile
@@ -27,7 +27,7 @@
              '<span>' +
                '{%=o.value%}' +
              '</span>' +
-             '<i class="icon ' + Sizes.xsmall + ' tagbox-tag-remover">close</i>' +
+             '<i class="icon ' + Sizes.xsmall + ' actionable tagbox-tag-remover">close</i>' +
            '</div>'
     },
     options: {
@@ -163,13 +163,13 @@
 
         if ( valueTrimmed.length ) { // So it won't be triggered when the user presses enter and the $partial is empty
 
-          $.noty ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
+          $.toast ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
 
         }
 
-      } else if ( _.contains ( this.options.tags, value ) ) {
+      } else if ( _.includes ( this.options.tags, value ) ) {
 
-        $.noty ( _.format ( this.options.messages.duplicate, value ) );
+        $.toast ( _.format ( this.options.messages.duplicate, value ) );
 
       } else {
 
@@ -239,7 +239,7 @@
 
       let value = this.$partial.val ();
 
-      if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+      if ( _.includes ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
         let added = this.add ( value );
 
@@ -266,9 +266,9 @@
 
         }
 
-      } else if ( this.options.characters.forbid && _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+      } else if ( this.options.characters.forbid && _.includes ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
 
-        $.noty ( this.options.messages.forbidden );
+        $.toast ( this.options.messages.forbidden );
 
         event.preventDefault ();
         event.stopImmediatePropagation ();
@@ -339,7 +339,7 @@
       }
 
       let tags = tag.split ( this.options.characters.separator ),
-          adds = _.map ( tags, this._add, this );
+          adds = _.map ( tags, this._add.bind ( this ) );
 
       let added = !!_.compact ( adds ).length;
 

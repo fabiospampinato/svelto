@@ -8,8 +8,6 @@
  * @require ./toast.js
  * ========================================================================= */
 
-//FIXME: Better handling of types, for instance numbers, booleans, null and undefined should print their string representation
-
 (function ( $, _, Svelto, Widgets ) {
 
   'use strict';
@@ -20,7 +18,7 @@
 
     /* OPTIONS */
 
-    options = _.isString ( options ) ? { body: options } : options;
+    options = _.isPlainObject ( options ) ? options : { body: String ( options ) };
 
     /* TYPE */
 

@@ -16,13 +16,17 @@
 
     @return $length;
 
+  } @elseif $unit == 'em' {
+
+    @return $font-size;
+
   } @elseif $unit == 'rem' {
 
     @return $font-size;
 
   } @else {
 
-    @error 'Unit `#{$unit}` is not supported. Supported units: px, rem';
+    @error 'Unit `#{$unit}` is not supported. Supported units: px, em, rem';
 
   }
 
@@ -36,13 +40,17 @@
 
     @return $length;
 
+  } @elseif $unit == 'rem' {
+
+    @return $length / 1rem * 1em;
+
   } @elseif $unit == 'px' {
 
     @return $length / $font-size * 1em;
 
   } @else {
 
-    @error 'Unit `#{$unit}` is not supported. Supported units: em, px';
+    @error 'Unit `#{$unit}` is not supported. Supported units: em, rem, px';
 
   }
 
@@ -56,13 +64,17 @@
 
     @return $length;
 
+  } @elseif $unit == 'em' {
+
+    @return $length / 1em * 1rem;
+
   } @elseif $unit == 'px' {
 
     @return $length / $font-size * 1rem;
 
   } @else {
 
-    @error 'Unit `#{$unit}` is not supported. Supported units: rem, px';
+    @error 'Unit `#{$unit}` is not supported. Supported units: rem, em, px';
 
   }
 
