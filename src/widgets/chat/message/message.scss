@@ -35,8 +35,9 @@
     border-color: $chat-message-img-border-color;
     // Transitioning `filter`  in order to support `blurred`
     // Transitioning `box-shadow`  in order to support `raisable`
-    transition-property: opacity, filter, box-shadow;
-    transition-duration: $chat-message-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+    transition: opacity $chat-message-animation-duration,
+                filter $blurred-animation-duration,
+                box-shadow $raisable-animation-duration;
   }
 
   a.chat-message-img:hover,

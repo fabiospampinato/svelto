@@ -31,8 +31,10 @@
     // Transitioning `filter` in order to support `blurred`
     // Transitioning `box-shadow` in order to support `raisable`
 
-    transition-property: transform, opacity, filter, box-shadow;
-    transition-duration: $flippable-animation-duration, $disabled-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+    transition: transform $flippable-animation-duration, 
+                opacity $disabled-animation-duration, 
+                filter $blurred-animation-duration, 
+                box-shadow $raisable-animation-duration;
   }
 
   /* FRONT */

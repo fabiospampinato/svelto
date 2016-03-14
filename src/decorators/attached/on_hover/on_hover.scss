@@ -19,8 +19,9 @@
   // Transitioning `filter`  in order to support `blurred`
   // Transitioning `box-shadow`  in order to support `raisable`
 
-  transition-property: opacity, filter, box-shadow;
-  transition-duration: $attached-on-hover-animation-duration, $blurred-animation-duration, $raisable-animation-duration;
+  transition: opacity $attached-on-hover-animation-duration,
+              filter $blurred-animation-duration,
+              box-shadow $raisable-animation-duration;
 
   /* HOVER */
 

@@ -18,8 +18,8 @@
 // Transitioning `opacity` in order to support `disabled`
 
 * {
-  transition-property: opacity, filter;
-  transition-duration: $disabled-animation-duration, $blurred-animation-duration;
+  transition: opacity $disabled-animation-duration,
+              filter $blurred-animation-duration;
 }
 
 %blurred {
