@@ -49,114 +49,108 @@
 
   }
 
-  /* CALENDAR */
+  /* DAY NAMES */
 
-  &-calendar {
+  &-days-names {
 
-    /* DAY NAMES */
+    display: flex;
+    height: $datepicker-day-height;
+    align-items: center;
 
-    .datepicker-days-names {
+    /* DAY NAME */
 
-      display: flex;
-      height: $datepicker-day-height;
-      align-items: center;
-
-      /* DAY NAME */
-
-      > * {
-        font-weight: $datepicker-day-name-font-weight;
-        width: $datepicker-day-width;
-        text-align: center;
-      }
-
+    > * {
+      font-weight: $datepicker-day-name-font-weight;
+      width: $datepicker-day-width;
+      text-align: center;
     }
 
-    /* DAYS */
+  }
 
-    .datepicker-days {
+  /* DAYS */
 
-      display: flex;
-      flex-wrap: wrap;
+  &-days {
 
-      /* DAY */
+    display: flex;
+    flex-wrap: wrap;
 
-      > * {
+    /* DAY */
 
-        line-height: $datepicker-day-height;
-        position: relative;
-        z-index: 1;
-        width: $datepicker-day-width;
-        height: $datepicker-day-height;
-        text-align: center;
+    > * {
+
+      line-height: $datepicker-day-height;
+      position: relative;
+      z-index: 1;
+      width: $datepicker-day-width;
+      height: $datepicker-day-height;
+      text-align: center;
+
+      /* BEFORE */
+
+      &:before {
+        @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
+        z-index: -1;
+        width: $datepicker-day-circle-size;
+        height: $datepicker-day-circle-size;
+        content: '';
+        border-radius: 50%;
+        background-color: transparent;
+      }
+
+      /* TODAY */
+
+      &.datepicker-day-today {
+
+        color: $datepicker-day-today-color;
 
         /* BEFORE */
 
         &:before {
-          @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
-          z-index: -1;
-          width: $datepicker-day-circle-size;
-          height: $datepicker-day-circle-size;
-          content: '';
-          border-radius: 50%;
-          background-color: transparent;
-        }
-
-        /* TODAY */
-
-        &.datepicker-day-today {
-
-          color: $datepicker-day-today-color;
-
-          /* BEFORE */
-
-          &:before {
-            background-color: $datepicker-day-today-circle-color;
-          }
-
-        }
-
-        /* SELECTED */
-
-        &.datepicker-day-selected {
-
-          color: $datepicker-day-selected-color;
-          transition: color $datepicker-animation-duration;
-
-          /* BEFORE */
-
-          &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
-            @include z-depth ( $datepicker-day-selected-z-depth, $datepicker-day-selected-z-depth-force, $datepicker-day-selected-z-depth-basic );
-          }
-
-          &:before {
-            background-color: $datepicker-day-selected-circle-color;
-            transition-property: box-shadow, background-color;
-            transition-duration: $datepicker-animation-duration;
-          }
-
+          background-color: $datepicker-day-today-circle-color;
         }
 
       }
 
-      /* PREVIOUS / NEXT */
+      /* SELECTED */
 
-      .previous,
-      .next {
-        opacity: $datepicker-day-prev-next-opacity;
+      &.datepicker-day-selected {
+
+        color: $datepicker-day-selected-color;
+        transition: color $datepicker-animation-duration;
+
+        /* BEFORE */
+
+        &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
+          @include z-depth ( $datepicker-day-selected-z-depth, $datepicker-day-selected-z-depth-force, $datepicker-day-selected-z-depth-basic );
+        }
+
+        &:before {
+          background-color: $datepicker-day-selected-circle-color;
+          transition-property: box-shadow, background-color;
+          transition-duration: $datepicker-animation-duration;
+        }
+
       }
 
-      /* CLAMPED */
+    }
 
-      .datepicker-day-clamped {
-        opacity: $datepicker-day-clamped-opacity;
-      }
+    /* PREVIOUS / NEXT */
 
-      /* SELECTABLE */
+    .previous,
+    .next {
+      opacity: $datepicker-day-prev-next-opacity;
+    }
 
-      :not(.previous):not(.next):not(.datepicker-day-clamped) {
-        cursor: pointer;
-      }
+    /* CLAMPED */
 
+    .datepicker-day-clamped {
+      opacity: $datepicker-day-clamped-opacity;
+    }
+
+    /* SELECTABLE */
+
+    :not(.previous):not(.next):not(.datepicker-day-clamped) {
+      cursor: pointer;
     }
 
   }
@@ -167,7 +161,7 @@
 
     /* DAY */
 
-    .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
+    .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
 
       /* HOVER */
 
