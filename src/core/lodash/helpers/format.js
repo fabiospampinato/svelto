@@ -20,7 +20,7 @@
 
       for ( let i = 1, l = args.length; i <= l; i++ ) {
 
-        msg = msg.replace ( `$${i}`, args[i] );
+        msg = msg.replace ( `$${i}`, args[i - 1] );
 
       }
 
