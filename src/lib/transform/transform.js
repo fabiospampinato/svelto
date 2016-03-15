@@ -22,7 +22,9 @@
 
     if ( values ) {
 
-      this.css ( property, 'matrix(' + values.join ( ',' ) + ')' );
+      values = values.join ( ',' );
+
+      this.css ( property, `matrix(${values})` );
 
       return this;
 

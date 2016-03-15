@@ -127,7 +127,7 @@
 
       if ( this.element ) {
 
-        $.data ( this.element, 'instance.' + this.name, this );
+        $.data ( this.element, `instance.${this.name}`, this );
 
       }
 
@@ -138,7 +138,7 @@
 
       /* EVENT NAMESPACE */
 
-      this.eventNamespace = '.swns' + this.guid;
+      this.eventNamespace = `.swns-${this.guid}`;
 
       /* CALLBACKS */
 
@@ -238,7 +238,7 @@
 
       if ( this.element ) {
 
-        this.$element.removeData ( 'instance.' + this.name );
+        this.$element.removeData ( `instance.${this.name}` );
 
       }
 

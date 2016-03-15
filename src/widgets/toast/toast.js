@@ -34,7 +34,7 @@
     selector: '.toast',
     templates: {
       base: '<div class="toast {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
-              '<div class="infobar ' + Colors.transparent + '">' +
+              `<div class="infobar ${Colors.transparent}">` +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="toast-img infobar-left">' +
                 '{% } %}' +
@@ -64,7 +64,7 @@
                 '</div>' +
               '{% } %}' +
             '</div>',
-      button: '<div class="button {%=(o.color || "' + Colors.white + '")%} {%=(o.size || "' + Sizes.small + '")%} {%=(o.css || "")%}">' +
+      button: `<div class="button {%=(o.color || "${Colors.white}")%} {%=(o.size || "${Sizes.small}")%} {%=(o.css || "")%}">` +
                 '{%#(o.text || "")%}' +
               '</div>'
     },

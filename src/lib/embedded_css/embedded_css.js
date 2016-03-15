@@ -20,7 +20,7 @@
 
     constructor () {
 
-      this.$stylesheet = $('<style class="svelto-embedded svelto-embedded-' + ( $.guid++ ) + '">');
+      this.$stylesheet = $(`<style class="svelto-embedded svelto-embedded-${$.guid++}">`);
       this.tree = {};
 
     }

@@ -27,7 +27,7 @@
              '<span>' +
                '{%=o.value%}' +
              '</span>' +
-             '<i class="icon ' + Sizes.xsmall + ' actionable tagbox-tag-remover">close</i>' +
+             `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">close</i>` +
            '</div>'
     },
     options: {

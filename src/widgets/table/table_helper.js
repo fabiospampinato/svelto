@@ -86,7 +86,7 @@
 
     _getRowId ( id ) {
 
-      return this.options.rowIdPrefix + '_' + this.guid + '_' + id;
+      return this.options.rowIdPrefix + '-' + this.guid + '-' + id;
 
     }
 

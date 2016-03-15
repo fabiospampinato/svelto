@@ -37,7 +37,7 @@
 
       let name = Widget.config.name;
 
-      return $.data ( element, 'instance.' + name ) || new Widget ( options, element );
+      return $.data ( element, `instance.${name}` ) || new Widget ( options, element );
 
     },
 

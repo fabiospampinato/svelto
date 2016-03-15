@@ -199,7 +199,7 @@
         }
       });
 
-      this.$toggler.attr ( 'data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc ).popoverToggler ();
+      this.$toggler.attr ( `data-${Widgets.Targeter.config.options.datas.target}`, '.' + this.guc ).popoverToggler ();
 
       this._updatePopover ();
 
@@ -237,11 +237,11 @@
 
     _updateValueholder () {
 
-      let $value = this.$select.val ();
+      let value = this.$select.val ();
 
-      if ( $value.length ) {
+      if ( value.length ) {
 
-        let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
+        let $selectedOption = this.$options.filter ( `[value="${value}"]` );
 
         this.$valueholder.text ( $selectedOption.text () );
 

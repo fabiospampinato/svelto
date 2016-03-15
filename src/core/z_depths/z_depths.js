@@ -18,7 +18,7 @@
 
   for ( let i = 0, l = 24; i <= l; i++ ) {
 
-    ZDepths[i] = 'z-depth-' + i;
+    ZDepths[i] = `z-depth-${i}`;
 
   }
 

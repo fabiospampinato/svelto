@@ -102,7 +102,7 @@
 
     _updateLabel () {
 
-      this.$highlight.attr ( 'data-' + this.options.datas.value, this._roundValue ( this.options.value ) + '%' );
+      this.$highlight.attr ( `data-${this.options.datas.value}`, this._roundValue ( this.options.value ) + '%' );
 
     }
 

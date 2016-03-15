@@ -90,7 +90,7 @@
     /* ID */
 
     positionable._positionateGuid = positionable._positionateGuid || $.guid++;
-    positionable._positionateGuc = 'positionate-' + positionable._positionateGuid;
+    positionable._positionateGuc = `positionate-${positionable._positionateGuid}`;
 
     $positionable.addClass ( positionable._positionateGuc );
 
@@ -263,7 +263,7 @@
 
     if ( prevDirection !== bestDirection ) {
 
-      $positionable.removeClass ( 'position-' + prevDirection ).addClass ( 'position-' + bestDirection );
+      $positionable.removeClass ( `position-${prevDirection}` ).addClass ( `position-${bestDirection}` );
 
     }
 
@@ -275,7 +275,9 @@
 
     if ( prevPointer === 'auto' && ( options.pointer !== 'auto' || bestDirection !== prevDirection ) ) {
 
-      $positionable.removeClass ( 'pointing-' + _.getOppositeDirection ( prevDirection ) );
+      let oppositeDirection = _.getOppositeDirection ( prevDirection );
+
+      $positionable.removeClass ( `pointing-${oppositeDirection}` );
 
     }
 
@@ -283,7 +285,9 @@
 
       if ( options.pointer === 'auto' ) {
 
-        $positionable.addClass ( 'pointing-' + _.getOppositeDirection ( bestDirection ) );
+        let oppositeDirection = _.getOppositeDirection ( bestDirection );
+
+        $positionable.addClass ( `pointing-${oppositeDirection}` );
 
       }
 
@@ -297,7 +301,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( deltaX, 0 );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( '.' + positionable._positionateGuc + ':after', 'left:' + deltaX + 'px;' ); //TODO: Maybe use `transform` instead, since it may get animated
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px;` ); //TODO: Maybe use `transform` instead, since it may get animated
           }
           break;
 
@@ -307,7 +311,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( 0, deltaY );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( '.' + positionable._positionateGuc + ':after', 'top:' + deltaY + 'px;' ); //TODO: Maybe use `transform` instead, since it may get animated
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px;` ); //TODO: Maybe use `transform` instead, since it may get animated
           }
           break;
 

@@ -50,7 +50,7 @@
     ___loadingModal () {
 
       /*
-        <div class="modal ' + this.options.classes.placeholder + ' card">
+        <div class="modal ${this.options.classes.placeholder} card">
           <div class="card-block">
             <svg class="spinner">
               <circle cx="1.625em" cy="1.625em" r="1.25em">
@@ -59,7 +59,7 @@
         </div>
       */
 
-      this.$modal = $('<div class="modal ' + this.options.classes.placeholder + ' card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( this.$layout );
+      this.$modal = $(`<div class="modal ${this.options.classes.placeholder} card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>`).appendTo ( this.$layout );
 
     }
 

@@ -46,11 +46,11 @@
         switch ( end.constructor ) {
 
           case Number:
-            expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
+            expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : `; max-age=${end}`;
             break;
 
           case String:
-            expires = '; expires=' + end;
+            expires = `; expires=${end}`;
             break;
 
           case Date:
@@ -61,7 +61,7 @@
 
       }
 
-      document.cookie = this.encoder ( key ) + '=' + this.encoder ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
+      document.cookie = this.encoder ( key ) + '=' + this.encoder ( value ) + expires + ( domain ? `; domain=${domain}` : '' ) + ( path ? `; path=${path}` : '' ) + ( secure ? '; secure' : '' );
 
       return true;
 
@@ -71,7 +71,7 @@
 
       if ( !this.has ( key ) ) return false;
 
-      document.cookie = this.encoder ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+      document.cookie = this.encoder ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? `; domain=${domain}` : '' ) + ( path ? `; path=${path}` : '' );
 
       return true;
 

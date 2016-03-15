@@ -87,7 +87,7 @@
 
     _init () {
 
-      let $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
+      let $initial = this.$headers.filter ( `.${this.options.classes.sort.asc}, .${this.options.classes.sort.desc}` ).first ();
 
       if ( $initial.length === 1 ) {
 

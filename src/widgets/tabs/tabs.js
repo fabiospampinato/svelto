@@ -110,7 +110,9 @@
 
       if ( this.options.highlight ) {
 
-        $trigger.toggleClass ( 'highlighted highlight-' + _.getOppositeDirection ( this.options.direction ), force );
+        let oppositeDirection = _.getOppositeDirection ( this.options.direction );
+
+        $trigger.toggleClass ( `highlighted highlight-${oppositeDirection}`, force );
 
       }
 

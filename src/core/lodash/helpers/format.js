@@ -18,9 +18,9 @@
 
     format ( msg, ...args ) {
 
-      for ( let i = 0, l = args.length; i < l; i++ ) {
+      for ( let i = 1, l = args.length; i <= l; i++ ) {
 
-        msg = msg.replace ( '$' + ( i + 1 ), args[i] );
+        msg = msg.replace ( `$${i}`, args[i] );
 
       }
 
