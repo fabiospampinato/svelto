@@ -46,7 +46,7 @@ SampleHelpers.define ( 'paragraph', function () {
   let widths = ['95%', '92%', '100%', '87%', '97%', '93%', '97%'],
       height = 10;
 
-  return widths.map ( width => SWHelpers.placeholder ( width, height ) ).join ( '' );
+  return widths.map ( width => SWHelpers.placeholder ( width, height, false ) ).join ( '' );
 
 });
 

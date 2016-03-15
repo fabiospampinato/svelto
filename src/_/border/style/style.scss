@@ -1,23 +1,23 @@
 
 /* =========================================================================
- * Svelto - Decorators - Bordered - Style
+ * Svelto - _ - Border - Style
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../bordered.scss
+ * @require ../border.scss
  * ========================================================================= */
 
 /* STYLE */
 
 .border-solid {
-  border-style: solid;
+  border-style: solid !important;
 }
 
 .border-dotted {
-  border-style: dotted;
+  border-style: dotted !important;
 }
 
 .border-dashed {
-  border-style: dashed;
+  border-style: dashed !important;
 }
