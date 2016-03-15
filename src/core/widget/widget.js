@@ -15,8 +15,6 @@
  * @require core/tmpl/tmpl.js
  * ========================================================================= */
 
-//TODO: Add support for destroying on remove, right now it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no clean way of doing it... //TODO: Test if by removing a modal its class is still in memory (take heap snapshots)
-
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
   'use strict';
@@ -151,6 +149,11 @@
       this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
       this.__breakpoint ();
 
+      /* REMOVE */
+
+      this.___remove ();
+      this.__remove ();
+
     }
 
     _getConfig ( options, element ) {
@@ -228,7 +231,7 @@
 
     _createOptions () {} // Used to pass extra options
 
-    /* DESTRUCTION */
+    /* DESTROY */
 
     destroy () {
 
@@ -350,9 +353,9 @@
 
     /* EVENTS */
 
-    _on ( suppressDisabledCheck, $element, events, selector, handler, _onlyOne ) {
+    //TODO: Add support for custom data
 
-      //TODO: Add support for custom data
+    _on ( suppressDisabledCheck, $element, events, selector, handler, _onlyOne ) {
 
       /* NORMALIZATION */
 
@@ -620,6 +623,28 @@
           }
 
         }
+
+      }
+
+    }
+
+    /* REMOVE */
+
+    ___remove () {
+
+      if ( this.element ) {
+
+        this._on ( true, 'remove', this.__remove );
+
+      }
+
+    }
+
+    __remove ( event ) {
+
+      if ( event && event.target === this.element ) {
+
+        this.destroy ();
 
       }
 
