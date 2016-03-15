@@ -340,7 +340,7 @@ SWHelpers.define ( 'placeholder', function ( width = 0, height = 0, content = fa
 SWHelpers.define ( 'progressbar', function ( value = 0, decimals = 0 ) {
 
   return `<div data-value="${value}" data-decimals="${decimals}" class="progressbar">` +
-           `<div data-value="${value}%" style="min-width:${value}%" class="progressbar-highlight"></div>` +
+           `<div data-value="${value}%" style="min-width:${value}%;" class="progressbar-highlight"></div>` +
          '</div>';
 
 });
@@ -369,7 +369,9 @@ SWHelpers.define ( 'rater', function ( rating, maximum ) {
 
   for ( let i = 1; i <= maximum; i++ ) {
 
-    rater += '<div class="rater-star ' + ( rating >= i ? 'active' : ( rating >= i - 0.5 ? 'half-active' : '' ) ) + '"></div>';
+    let state = ( rating >= i ? 'active' : ( rating >= i - 0.5 ? 'half-active' : '' ) );
+
+    rater += `<div class="rater-star ${state}"></div>`;
 
   }
 
@@ -383,8 +385,8 @@ SWHelpers.define ( 'slider', function ( options ) {
 
   options = options.hash;
 
-  return '<div data-min="' + options.min + '" data-max="' + options.max + '" data-step="' + options.step + '" class="slider">' +
-           '<input type="number" name="' + options.name + '" value="' + options.value + '">' +
+  return `<div data-min="${options.min}" data-max="${options.max}" data-step="${options.step}" class="slider">` +
+           `<input type="number" name="${options.name}" value="${options.value}">` +
            '<div class="slider-bar">' +
              '<div class="slider-highlight"></div>' +
            '</div>' +
@@ -397,7 +399,7 @@ SWHelpers.define ( 'slider', function ( options ) {
 
 SWHelpers.define ( 'spinner', function ( classes = '' ) {
 
-  return '<svg class="spinner ' + classes + '">' +
+  return `<svg class="spinner ${classes}">` +
            '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' +
          '</svg>';
 
@@ -405,7 +407,9 @@ SWHelpers.define ( 'spinner', function ( classes = '' ) {
 
 SWHelpers.define ( 'spinnerLabel', function ( classes = '' ) {
 
-  return '<div class="spinner-label ' + classes + '">' + SWHelpers.spinner () + '</div>';
+  let spinner = SWHelpers.spinner ();
+
+  return `<div class="spinner-label ${classes}">${spinner}</div>`;
 
 });
 
@@ -418,8 +422,8 @@ SWHelpers.define ( 'switch', function ( options ) {
   options.name = options.name || '';
   options.value = options.value || 0;
 
-  return '<div data-color-on="' + options['color-on'] + '" data-color-off="' + options['color-off'] + '" class="switch">' +
-           '<input type="checkbox" name="' + options.name + '" value="' + options.value + '">' +
+  return `<div data-color-on="${options['color-on']}" data-color-off="${options['color-off']}" class="switch">` +
+           `<input type="checkbox" name="${options.name}" value="${options.value}">` +
            '<div class="switch-bar"></div>' +
            '<div class="switch-handler"></div>' +
          '</div>';
