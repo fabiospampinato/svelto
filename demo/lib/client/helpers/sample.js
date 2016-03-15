@@ -3,68 +3,11 @@ SampleHelpers = new AntiHelpers ();
 
 SampleHelpers.registerAs ( 'sample' );
 
-/* WIDGETS */
+/* STRINGS */
 
-SampleHelpers.define ( 'image', function ( classes ) {
+SampleHelpers.define ( 'imageUrl', () => '/sample/sample.png' );
 
-  return '<img src="' + SampleHelpers.imageUrl () + '" class="' + ( classes || '' ) + '"/>';
-
-});
-
-SampleHelpers.define ( 'imageUrl', function ( classes ) {
-
-  return '/sample/sample.png';
-
-});
-
-SampleHelpers.define ( 'imageWide', function ( classes ) {
-
-  return '<img src="' + SampleHelpers.imageWideUrl () + '" class="' + ( classes || '' ) + '"/>';
-
-});
-
-SampleHelpers.define ( 'imageWideUrl', function ( classes ) {
-
-  return '/sample/sample-wide.png';
-
-});
-
-SampleHelpers.define ( 'paragraph', function () {
-
-  let widths = ['95%', '92%', '100%', '87%', '97%', '93%', '97%'];
-
-  return widths.map ( width => SWHelpers.placeholder ( width, 10, false ) ).join ( '' );
-
-});
-
-SampleHelpers.define ( 'select', function ( name ) {
-
-  return '<select name="' + ( name || '' ) + '" id="' + ( name || '' ) + '" placeholder="Select a value...">' +
-           '<option value="public" selected="selected">Public</option>' +
-           '<option value="private">Private</option>' +
-           '<optgroup label="Elo">' +
-             '<option value="1200">1200+</option>' +
-             '<option value="1300">1300+</option>' +
-             '<option value="1400">1400+</option>' +
-             '<option value="1500">1500+</option>' +
-             '<option value="1600">1600+</option>' +
-             '<option value="1700">1700+</option>' +
-             '<option value="1800">1800+</option>' +
-             '<option value="1900">1900+</option>' +
-             '<option value="2000">2000+</option>' +
-             '<option value="2100">2100+</option>' +
-           '</optgroup>' +
-         '</select>';
-
-});
-
-SampleHelpers.define ( 'square', function ( classes ) {
-
-  return '<div class="square-sample ' + ( classes || '' ) + '">' +
-           '<p>' + SampleHelpers.text ( 9 ) + '</p>' +
-         '</div>';
-
-});
+SampleHelpers.define ( 'imageWideUrl', () => '/sample/sample-wide.png' );
 
 SampleHelpers.define ( 'text', function ( wordsNr ) {
 
@@ -74,11 +17,53 @@ SampleHelpers.define ( 'text', function ( wordsNr ) {
 
     return loremIpsum.toLowerCase ().split ( '.' ).join ( '' ).split ( ',' ).join ( '' ).split ( ' ' ).slice ( 0, wordsNr ).join ( ' ' );
 
-  } else {
-
-    return loremIpsum;
-
   }
+
+  return loremIpsum;
+
+});
+
+/* WIDGETS */
+
+SampleHelpers.define ( 'image', function ( classes = '' ) {
+
+  return '<img src="' + SampleHelpers.imageUrl () + '" class="' + classes + '"/>';
+
+});
+
+SampleHelpers.define ( 'imageWide', function ( classes = '' ) {
+
+  return '<img src="' + SampleHelpers.imageWideUrl () + '" class="' + classes + '"/>';
+
+});
+
+SampleHelpers.define ( 'paragraph', function () {
+
+  let widths = ['95%', '92%', '100%', '87%', '97%', '93%', '97%'];
+
+  return widths.map ( width => SWHelpers.placeholder ( width, 10 ) ).join ( '' );
+
+});
+
+SampleHelpers.define ( 'select', function ( name = '' ) {
+
+  return '<select name="' + name + '" placeholder="Select a color...">' +
+           '<option value="red" selected="selected">Red</option>' +
+           '<option value="green">Green</option>' +
+           '<option value="blue">Blue</option>' +
+           '<optgroup label="Special">' +
+             '<option value="inherit">Inherit</option>' +
+             '<option value="transparent">Transparent</option>' +
+           '</optgroup>' +
+         '</select>';
+
+});
+
+SampleHelpers.define ( 'square', function ( classes = '' ) {
+
+  return '<div class="square-sample ' + classes + '">' +
+           '<p>' + SampleHelpers.text ( 9 ) + '</p>' +
+         '</div>';
 
 });
 
@@ -86,24 +71,21 @@ SampleHelpers.define ( 'text', function ( wordsNr ) {
 
 SampleHelpers.define ( 'css', function () {
 
-  return `.widget {
+  return `%widget {
   @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
+}
 
-  &.disabled {
-    cursor: default !important;
-    opacity: $widget-disabled-opacity !important;
-  }
+.widget {
+  @extend %widget;
 }`;
 
 });
 
 SampleHelpers.define ( 'html', function () {
 
-  return `<div class="divider">
-  <b>HTML</b>
-</div>
+  return `<div class="divider">HTML</div>
 <div class="multiple">
   <div class="label">Label</div>
   <div class="button">Button</div>
@@ -114,17 +96,23 @@ SampleHelpers.define ( 'html', function () {
 
 SampleHelpers.define ( 'js', function () {
 
-  return `(function ( $, _, window, document, undefined ) {
+  return `(function () {
+
   'use strict';
 
-  /* ANIMATION */
+  /* SVELTO */
 
-  UI.animation = {
-    slow: 500,
-    normal: 350,
-    fast: 150 };
-  }
+  let Svelto = {
+    VERSION: '0.4.0-beta2',
+    $: jQuery,
+    _: lodash,
+    Widgets: {} // Widgets' classes namespace
+  };
 
-( jQuery, _, window, document ));`;
+  /* EXPORT */
+
+  window.Svelto = Svelto;
+
+}());`;
 
 });
