@@ -9,7 +9,7 @@ SampleHelpers.define ( 'imageUrl', () => '/sample/sample.png' );
 
 SampleHelpers.define ( 'imageWideUrl', () => '/sample/sample-wide.png' );
 
-SampleHelpers.define ( 'text', function ( wordsNr ) {
+SampleHelpers.define ( 'text', function ( wordsNr = false ) {
 
   let loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.';
 
@@ -27,27 +27,32 @@ SampleHelpers.define ( 'text', function ( wordsNr ) {
 
 SampleHelpers.define ( 'image', function ( classes = '' ) {
 
-  return '<img src="' + SampleHelpers.imageUrl () + '" class="' + classes + '"/>';
+  let url = SampleHelpers.imageUrl ();
+
+  return `<img src="${url}" class="${classes}"/>`;
 
 });
 
 SampleHelpers.define ( 'imageWide', function ( classes = '' ) {
 
-  return '<img src="' + SampleHelpers.imageWideUrl () + '" class="' + classes + '"/>';
+  let url = SampleHelpers.imageWideUrl ();
+
+  return `<img src="${url}" class="${classes}"/>`;
 
 });
 
 SampleHelpers.define ( 'paragraph', function () {
 
-  let widths = ['95%', '92%', '100%', '87%', '97%', '93%', '97%'];
+  let widths = ['95%', '92%', '100%', '87%', '97%', '93%', '97%'],
+      height = 10;
 
-  return widths.map ( width => SWHelpers.placeholder ( width, 10 ) ).join ( '' );
+  return widths.map ( width => SWHelpers.placeholder ( width, height ) ).join ( '' );
 
 });
 
 SampleHelpers.define ( 'select', function ( name = '' ) {
 
-  return '<select name="' + name + '" placeholder="Select a color...">' +
+  return `<select name="${name}" placeholder="Select a color...">` +
            '<option value="red" selected="selected">Red</option>' +
            '<option value="green">Green</option>' +
            '<option value="blue">Blue</option>' +
@@ -61,8 +66,10 @@ SampleHelpers.define ( 'select', function ( name = '' ) {
 
 SampleHelpers.define ( 'square', function ( classes = '' ) {
 
-  return '<div class="square-sample ' + classes + '">' +
-           '<p>' + SampleHelpers.text ( 9 ) + '</p>' +
+  let text = SampleHelpers.text ( 9 );
+
+  return `<div class="square-sample ${classes}">` +
+           `<p>${text}</p>` +
          '</div>';
 
 });

@@ -7,15 +7,15 @@ SWHelpers.registerAs ( 'sw' );
 
 SWHelpers.define ( 'action', function ( label, action ) {
 
-  return '<div class="button bordered" onclick="' + action + '">' + label + '</div>';
+  return `<div class="button bordered" onclick="${action}">${label}</div>`;
 
 });
 
 SWHelpers.define ( 'checkbox', function ( label, name = '', value = '' ) {
 
   return '<label class="button checkbox bordered">' +
-           '<span>' + label + '</span>' +
-           '<input type="checkbox" name="' + name + '" value="' + value + '">' +
+           `<span>${label}</span>` +
+           `<input type="checkbox" name="${name}" value="${value}">` +
          '</label>';
 
 });
@@ -23,8 +23,8 @@ SWHelpers.define ( 'checkbox', function ( label, name = '', value = '' ) {
 SWHelpers.define ( 'checkAction', function ( label, action, checked = false ) {
 
   return '<label class="button checkbox bordered">' +
-           '<span>' + label + '</span>' +
-           '<input type="checkbox" ' + ( checked ? 'checked' : '' ) + ' onclick="' + action + '">' +
+           `<span>${label}</span>` +
+           `<input type="checkbox" ${checked ? 'checked' : ''} onclick="${action}">` +
          '</label>';
 
 });
@@ -32,7 +32,7 @@ SWHelpers.define ( 'checkAction', function ( label, action, checked = false ) {
 SWHelpers.define ( 'colorpicker', function ( color = '' ) {
 
   return '<div class="colorpicker">' +
-           '<input name="colorpicker" value="' + color + '">' +
+           `<input name="colorpicker" value="${color}">` +
            '<div class="colorpicker-sb">' +
              '<div class="colorpicker-handler"></div>' +
            '</div>' +
@@ -46,7 +46,7 @@ SWHelpers.define ( 'colorpicker', function ( color = '' ) {
 SWHelpers.define ( 'datepicker', function ( date = '' ) {
 
   return '<div class="datepicker">' +
-           '<input name="datepicker" value="' + date + '">' +
+           `<input name="datepicker" value="${date}">` +
            '<div class="datepicker-navigation">' +
              '<div class="button previous" title="Previous month">' +
                '<i class="icon">chevron_left</i>' +
@@ -123,15 +123,15 @@ SWHelpers.define ( 'datepicker', function ( date = '' ) {
 SWHelpers.define ( 'divider', function ( title = '' ) {
 
   return '<div class="divider block">' +
-           '<div class="divider-content">' + title + '</div>' +
+           `<div class="divider-content">${title}</div>` +
          '</div>';
 
 });
 
 SWHelpers.define ( 'iconAction', function ( icon, action ) {
 
-  return '<div class="button bordered compact" onclick="' + action + '">' +
-           '<i class="icon">' + icon + '</i>' +
+  return '<div class="button bordered compact" onclick="${action}">' +
+           `<i class="icon">${icon}</i>` +
          '</div>';
 
 });
@@ -140,11 +140,11 @@ SWHelpers.define ( 'numbox', function ( options ) {
 
   options = options.hash;
 
-  return '<div class="numbox" data-min="' + options.min + '" data-max="' + options.max + '" data-step="' + options.step + '">' +
+  return `<div class="numbox" data-min="${options.min}" data-max="${options.max}" data-step="${options.step}">` +
            '<div class="button compact numbox-decreaser">' +
              '<i class="icon">remove</i>' +
            '</div>' +
-           '<input value="' + options.value + '" name="' + options.name + '" class="autogrow compact">' +
+           `<input value="${options.value}" name="${options.name}" class="autogrow compact">` +
            '<div class="button compact numbox-increaser">' +
              '<i class="icon">add</i>' +
            '</div>' +
@@ -160,15 +160,16 @@ SWHelpers.define ( 'pager', function ( options ) {
 
   options.url = ( options.url || '#' );
 
-  let parseUrl = ( nr ) => ( options.url.indexOf ( '{page}' ) !== -1 ? options.url.replace ( '{page}', nr ) : options.url + nr );
+  let getUrl = ( nr ) => ( options.url.indexOf ( '{page}' ) !== -1 ? options.url.replace ( '{page}', nr ) : options.url + nr );
 
   let pager = '<div class="pager">';
 
   if ( options.current > 1 ) {
 
-    let nr = options.current - 1;
+    let nr = options.current - 1,
+        url = getUrl ( nr );
 
-    pager += '<a href="' + parseUrl ( nr ) + '" class="button bordered previous" title="Previous page">' +
+    pager += `<a href="${url}" class="button bordered previous" title="Previous page">` +
                '<i class="icon">chevron_left</i>' +
                '<span>Previous</span>' +
              '</a>';
@@ -177,9 +178,10 @@ SWHelpers.define ( 'pager', function ( options ) {
 
   if ( options.current < options.total || options.total === Infinity || options.total === 'Infinity' ) {
 
-    let nr = options.current + 1;
+    let nr = options.current + 1,
+        url = getUrl ( nr );
 
-    pager += '<a href="' + parseUrl ( nr ) + '" class="button bordered next" title="Next page">' +
+    pager += `<a href="${url}" class="button bordered next" title="Next page">` +
                '<span>Next</span>' +
                '<i class="icon">chevron_right</i>' +
              '</a>';
@@ -200,13 +202,13 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
   options.url = ( options.url || '#' );
 
-  let parseUrl = ( nr ) => ( options.url.indexOf ( '{page}' ) !== -1 ? options.url.replace ( '{page}', nr ) : options.url + nr );
+  let getUrl = ( nr ) => ( options.url.indexOf ( '{page}' ) !== -1 ? options.url.replace ( '{page}', nr ) : options.url + nr );
 
   let pagination = '<div class="pagination multiple joined center-x">';
 
   if ( options.total === Infinity || options.total == 'Infinity' ) {
 
-    pagination += '<a href="' + options.url + '" class="button bordered compact">Load more</a>';
+    pagination += `<a href="${options.url}" class="button bordered compact">Load more</a>`;
 
   } else {
 
@@ -214,9 +216,10 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     if ( options.current > 1 ) {
 
-      let nr = options.current - 1;
+      let nr = options.current - 1,
+          url = getUrl ( nr );
 
-      pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered previous" title="Previous page">' +
+      pagination += `<a href="${url}" class="button compact bordered previous" title="Previous page">` +
                       '<i class="icon">chevron_left</i>' +
                     '</a>';
 
@@ -277,9 +280,10 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     while ( outputedLeftBlocks > 0 ) {
 
-      let nr = options.current - outputedLeftBlocks;
+      let nr = options.current - outputedLeftBlocks,
+          url = getUrl ( nr );
 
-      pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered" title="Page ' + nr + '">' + nr + '</a>';
+      pagination += `<a href="${url}" class="button compact bordered" title="Page ${nr}">${nr}</a>`;
 
       outputedLeftBlocks -= 1;
 
@@ -287,7 +291,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     if ( needCurrent ) {
 
-      pagination += '<div class="label compact bordered active highlighted" title="Current page">' + options.current + '</div>';
+      pagination += `<div class="label compact bordered active highlighted" title="Current page">${options.current}</div>`;
 
     }
 
@@ -295,9 +299,10 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     while ( counter <= outputedRightBlocks ) {
 
-      let nr = options.current + counter;
+      let nr = options.current + counter,
+          url = getUrl ( nr );
 
-      pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered" title="Page ' + nr + '">' + nr + '</a>';
+      pagination += `<a href="${url}" class="button compact bordered" title="Page ${nr}">${nr}</a>`;
 
       counter += 1;
 
@@ -305,9 +310,10 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
     if ( needNext ) {
 
-      let nr = options.current + 1;
+      let nr = options.current + 1,
+          url = getUrl ( nr );
 
-      pagination += '<a href="' + parseUrl ( nr ) + '" class="button compact bordered next" title="Next page">' +
+      pagination += `<a href="${nr}" class="button compact bordered next" title="Next page">` +
                       '<i class="icon">chevron_right</i>' +
                     '</a>';
 
@@ -327,14 +333,14 @@ SWHelpers.define ( 'placeholder', function ( width = 0, height = 0, content = fa
   height = lodash.isNumber ( height ) ? height + 'px' : height;
   content = lodash.isString ( content ) ? content : width + ' - ' + height;
 
-  return '<div class="placeholder" style="width:' + width + '; height:' + height + ';">' + content + '</div>';
+  return `<div class="placeholder" style="width:${width}; height:${height};">${content}</div>`;
 
 });
 
 SWHelpers.define ( 'progressbar', function ( value = 0, decimals = 0 ) {
 
-  return '<div data-value="' + value + '" data-decimals="' + decimals + '" class="progressbar">' +
-           '<div data-value="' + value + '%" style="min-width: ' + value + '%" class="progressbar-highlight"></div>' +
+  return `<div data-value="${value}" data-decimals="${decimals}" class="progressbar">` +
+           `<div data-value="${value}%" style="min-width:${value}%" class="progressbar-highlight"></div>` +
          '</div>';
 
 });
@@ -342,8 +348,8 @@ SWHelpers.define ( 'progressbar', function ( value = 0, decimals = 0 ) {
 SWHelpers.define ( 'radio', function ( label, name = '', value = '' ) {
 
   return '<label class="button radio bordered">' +
-           '<span>' + label + '</span>' +
-           '<input type="radio" name="' + name + '" value="' + value + '">' +
+           `<span>${label}</span>` +
+           `<input type="radio" name="${name}" value="${value}">` +
          '</label>';
 
 });
@@ -351,8 +357,8 @@ SWHelpers.define ( 'radio', function ( label, name = '', value = '' ) {
 SWHelpers.define ( 'radioAction', function ( label, name, action, checked = false ) {
 
   return '<label class="button radio bordered">' +
-           '<span>' + label + '</span>' +
-           '<input type="radio" name="' + name + '" ' + ( checked ? 'checked' : '' ) + ' onclick="' + action + '">' +
+           `<span>${label}</span>` +
+           `<input type="radio" name="${name}" ${checked ? 'checked' : ''} onclick="${action}">` +
          '</label>';
 
 });
