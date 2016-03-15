@@ -10,6 +10,8 @@
 
 /* PUSHSTATE */
 
+// Monkey patching `history.pushState` so that it will trigger an event that we can use to properly trigger `route` event
+
 (function ( $, _, Svelto, history ) {
 
   'use strict';

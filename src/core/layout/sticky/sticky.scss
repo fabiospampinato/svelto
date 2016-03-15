@@ -19,7 +19,7 @@
     @include position ( fixed, 0 0 false 0 );
     z-index: $layout-sticky-header-z-index;
 
-    + .layout-content { //FIXME: This shouldn't be needed, in no way the value it should be fixed in a setting
+    + .layout-content {
       margin-top: $layout-sticky-header-height;
     }
 
@@ -34,7 +34,7 @@
     .layout-header.sticky {
 
       position: relative;
-      position: sticky; //FIXME: Unfortunately not well supported atm
+      position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)
       z-index: $layout-sticky-header-z-index - 1;
 
       + .layout-content {

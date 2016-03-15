@@ -6,8 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: If possible in a clean way, fix the `Joined` tricky case group
-//TODO: Add a 'lefted', 'righted' (like 'centered') classes for aligning the content to the left or right
+//TODO: Add a 'center-x-left', 'center-x-right', `center-y-top`, `center-y-bottom`
 //TODO: Modularize it (Possible in a clean way?)
 
 /* MULTIPLE */
@@ -162,9 +161,6 @@
   }
 
   /* CENTER */
-
-  //TODO: Add center-x-left/center/right
-  //TODO: Add center-y-top/middle/bottom
 
   &.center-x:not(.vertical),
   &.center-y.vertical,
