@@ -9,8 +9,6 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//FIXME: Not working on Dolphin Browser
-
 /* COLORPICKER */
 
 .colorpicker {
@@ -27,7 +25,7 @@
   /* HANDLER */
 
   &-handler {
-    box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow; //FIXME: We are not using the `z-depth`, ugly
+    box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow;
     position: absolute;
     z-index: 2;
     cursor: move;

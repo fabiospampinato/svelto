@@ -10,7 +10,7 @@
  * @require lib/transform/transform.js
  * ========================================================================= */
 
-//TODO: Test if the auto pointer is positionated in the middle even when `.bordered`
+//FIXME: If the positionable element is let than half of the anchor, and it must be pointed than the pointer may be not well positionated (expecially if we are not aligning to the center)
 
 (function ( $, _, Svelto, EmbeddedCSS ) {
 
@@ -301,7 +301,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( deltaX, 0 );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px;` ); //TODO: Maybe use `transform` instead, since it may get animated
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 
@@ -311,7 +311,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( 0, deltaY );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px;` ); //TODO: Maybe use `transform` instead, since it may get animated
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 

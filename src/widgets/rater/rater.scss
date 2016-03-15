@@ -9,11 +9,10 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
+//FIXME: Only do the rating stuff if .ratable
 //TODO: Add support for setting custom icons (rename `star`, use a more generic name)
 
 /* RATER */
-
-//FIXME: Only do the rating stuff if .ratable
 
 .rater {
 

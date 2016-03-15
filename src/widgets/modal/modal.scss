@@ -8,9 +8,7 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//FIXME: How does an overlay inside a modal work? Maybe it's buggy
-//FIXME: Not centered on Dolphin Browser, probably translateX doesn't work, strange
-//FIXME: Not working on iPod's Safari
+//FIXME: The demo modal: `Long content` is not working good on iPod's Safari
 
 /* MODAL */
 
@@ -21,7 +19,6 @@
   z-index: $modal-z-index;
   margin: 0;
   max-width: $modal-max-width;
-  max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
   transition-property: transform, opacity;
   transition-duration: $modal-animation-duration;
 }

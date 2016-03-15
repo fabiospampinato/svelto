@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
-
 /* COLORS */
 
 @each $name, $datas in $colors {

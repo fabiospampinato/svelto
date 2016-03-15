@@ -13,7 +13,7 @@
  * @require lib/timer/timer.js
  * ========================================================================= */
 
-//TODO: Add support for icon other than image
+//TODO: Add support for icon also instead of just image
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
 //FIXME: Widgetize the toast, we may add some widgets inside of it

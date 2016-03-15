@@ -38,7 +38,7 @@
 
   /* PARTIAL */
 
-  &-partial {
+  input.tagbox-partial {
     @include color ( 'inherit', true, true );
     margin-bottom: $gutter;
     min-width: $tagbox-partial-min-width;

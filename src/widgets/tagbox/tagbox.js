@@ -9,8 +9,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//FIXME: Auto focus on the partial input doesn't work good on mobile
-//FIXME: Destroy, reinit and add something like `aaaaaa`, it gets added at the beginning even if `options.sort` is setted to false
+//FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 
 (function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard ) {
 
@@ -89,6 +88,10 @@
     }
 
     _init ( suppressTriggers ) {
+
+      /* REMOVE PREVIOUS */
+
+      this.$tagbox.find ( this.options.selectors.tag ).remove ();
 
       /* OPTIONS */
 

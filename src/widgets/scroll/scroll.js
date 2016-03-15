@@ -10,7 +10,7 @@
  * @require core/widgetize/widgetize.js
  * ========================================================================= */
 
-//FIXME: It doesn't work if the layout is body, it also need html in some browsers
+//FIXME: It doesn't work if the layout is body, it also need html in some browsers (Which browsers?)
 //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
 (function ( $, _, Svelto, Widgetize, Pointer, Animations ) {

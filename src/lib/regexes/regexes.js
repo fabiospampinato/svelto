@@ -21,7 +21,7 @@
     alpha: /^[a-zA-Z]+$/,
     alphanumeric: /^[a-zA-Z0-9]+$/,
     hexadecimal: /^[a-fA-F0-9]+$/,
-    integer: /^(?:-?(?:0|[1-9][0-9]*))$/, //FIXME: It breaks if multiple 0 are added at the beginning
+    integer: /^(?:-?(?:0|[1-9][0-9]*))$/, //FIXME: It breaks if multiple 0 are added at the beginning (should this case be supported?)
     float: /^-?(?:(?:\d+)(?:\.\d*)?|(?:\.\d+)+)$/,
 
     /* THINGS */

@@ -61,7 +61,7 @@
 
   /* SAMPLE CONTENT */
 
-  &-content-sample { //FIXME: Remove this component, it shouldn't be needed
+  &-content-sample { //FIXME: Remove this class, it shouldn't be needed
     @include center-absolute-transform ();
   }
 

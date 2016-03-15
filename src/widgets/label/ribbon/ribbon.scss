@@ -68,7 +68,7 @@
 
   /* ONLY RIGHT */
 
-  //FIXME: It is a pixel off
+  //FIXME: It is a bit off
 
   &.ribbon-right:not(.ribbon-left) {
     left: calc(100% + #{$gutter} + #{$label-ribbon-fold-size});

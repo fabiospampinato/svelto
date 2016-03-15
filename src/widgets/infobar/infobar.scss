@@ -9,8 +9,6 @@
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-//FIXME: It doesn't work really good on mobile
-
 /* INFOBAR */
 
 .infobar {
@@ -43,7 +41,7 @@
 
   /* BOTTOM */
 
-  //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `toast`)
+  //FIXME: Cannot be used for not 100% or fixed width elements, or the .infobar will be bigger than needed (for instance take a look at `toast`)
 
   &-bottom {
     width: 100%;

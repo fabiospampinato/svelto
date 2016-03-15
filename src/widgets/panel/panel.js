@@ -10,7 +10,7 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//FIXME: Multiple open panels (read it multiple backdrops) are not well supported
+//FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {

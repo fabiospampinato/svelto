@@ -9,7 +9,7 @@
 // This generates `breakpoint-1/12` classes that are used for lining up the content in a grid
 
 //FIXME: `.multiple`-related code is too ugly, and it generates too much CSS. Isn't any other way to implement it?
-//TODO: Add a mixin for it, like we did with the colors
+//TODO: Add a mixin for it, like we did with the colors ($grid-inline ( $columns ))
 
 /* GRID */
 

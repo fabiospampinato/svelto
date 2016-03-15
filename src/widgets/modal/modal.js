@@ -10,7 +10,7 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//FIXME: Multiple open modals (read it multiple backdrops) are not well supported
+//FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {
 

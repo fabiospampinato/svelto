@@ -8,10 +8,8 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//FIXME: We probably switched the two icons (maybe a CSS problem)
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
-//TODO: Add support for sorting other things other than tables' rows
-//TODO: Maybe rename it, `sortable` has a different purpose in `jQuery UI`
+//TODO: Maybe rename it, `sortable` has a different purpose in `jQuery UI` (Sorter? Orderable?)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
