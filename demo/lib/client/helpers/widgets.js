@@ -20,7 +20,9 @@ SWHelpers.define ( 'checkbox', function ( label, name = '', value = '' ) {
 
 });
 
-SWHelpers.define ( 'checkAction', function ( label, action, checked = false ) {
+SWHelpers.define ( 'checkAction', function ( label, action, checked ) {
+
+  checked = lodash.isBoolean ( checked ) ? checked : false;
 
   return '<label class="button checkbox bordered">' +
            `<span>${label}</span>` +
@@ -354,7 +356,9 @@ SWHelpers.define ( 'radio', function ( label, name = '', value = '' ) {
 
 });
 
-SWHelpers.define ( 'radioAction', function ( label, name, action, checked = false ) {
+SWHelpers.define ( 'radioAction', function ( label, name, action, checked ) {
+
+  checked = lodash.isBoolean ( checked ) ? checked : false;
 
   return '<label class="button radio bordered">' +
            `<span>${label}</span>` +
@@ -418,7 +422,7 @@ SWHelpers.define ( 'switch', function ( options ) {
   options = options.hash;
 
   options['color-on'] = options['color-on'] || '';
-  options['color-off'] = optioffs['color-off'] || '';
+  options['color-off'] = options['color-off'] || '';
   options.name = options.name || '';
   options.value = options.value || 0;
 

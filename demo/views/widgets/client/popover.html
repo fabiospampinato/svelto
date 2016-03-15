@@ -98,7 +98,7 @@
   </div>
 
   <div id="long_text" class="popover card bordered">
-    <div class="card-header bordered">Lorem Ipsum</div>
+    <div class="card-header bordered">Header</div>
     <div class="card-block">
       <p>{{sample.text}}</p>
       <p>{{sample.text}}</p>
@@ -121,8 +121,8 @@
       if ( !lodash.isUndefined ( event.button ) && event.button === Svelto.Mouse.buttons.RIGHT ) {
         event.preventDefault ();
         event.stopImmediatePropagation ();
-        var point = $.eventpoint ( event );
-        instance.option ( 'positionate', lodash.extend ( {}, Svelto.Widgets.Popover.config.options.positionate, { constrainer: { $element: $(document.body) }, point: { x: point.X, y: point.Y }, alignment: { x: 'left' } } ) );
+        var point = $.eventXY ( event );
+        instance.option ( 'positionate', lodash.extend ( {}, Svelto.Widgets.Popover.config.options.positionate, { constrainer: { $element: $(document.body) }, point: { x: point.x, y: point.y }, alignment: { x: 'left' } } ) );
         instance.open ();
       }
     });
