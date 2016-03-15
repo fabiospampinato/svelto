@@ -40,6 +40,7 @@
 
     _events () {
 
+      this.___targetRemove ();
       this.___tap ();
       this.___hover ();
 

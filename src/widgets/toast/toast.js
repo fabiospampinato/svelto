@@ -299,7 +299,7 @@
 
       if ( !this.options.persistent ) {
 
-        super.___route ();
+        this.___route ();
 
       }
 

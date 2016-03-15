@@ -33,6 +33,7 @@
 
     _events () {
 
+      this.___targetRemove ();
       this.___tap ();
 
     }

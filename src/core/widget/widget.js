@@ -152,7 +152,6 @@
       /* REMOVE */
 
       this.___remove ();
-      this.__remove ();
 
     }
 
@@ -642,7 +641,7 @@
 
     __remove ( event ) {
 
-      if ( event && event.target === this.element ) {
+      if ( !event || event.target === this.element ) {
 
         this.destroy ();
 

@@ -41,6 +41,26 @@
 
     }
 
+    _events () {
+
+      this.___targetRemove ();
+
+    }
+
+    /* TARGET REMOVE */
+
+    ___targetRemove () {
+
+      this._on ( true, this.$target, 'remove', this.__targetRemove );
+
+    }
+
+    __targetRemove () {
+
+      this.__remove ();
+
+    }
+
   }
 
   /* FACTORY */
