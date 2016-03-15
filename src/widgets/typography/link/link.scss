@@ -24,6 +24,7 @@ a {
   p & {
 
     @include color-link ( $link-color, $link-color-force, $link-color-basic );
+    vertical-align: baseline;
 
     &:hover {
       text-decoration: underline;
