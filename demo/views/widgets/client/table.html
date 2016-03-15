@@ -5,73 +5,71 @@
 
   {{{sw.divider "Table"}}}
 
-  <div class="container bordered">
-    <table class="table celled">
-      <thead>
-        <tr>
-          <th class="text-center xs-1">Int</th>
-          <th>String</th>
-          <th>Date</th>
-          <th class="text-center">Options</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td colspan="100%">
-            <div class="multiple center-y">
-              <div class="centerer">20 Rows - Page 3 of 5</div>
-              <div class="spacer"></div>
-              {{{sw.pagination current=2 total=5}}}
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-      <tbody>
-        <tr class="table-row-empty hidden">
-          <td colspan="100%">Empty</td>
-        </tr>
-        <tr>
-          <td class="text-center">1</td>
-          <td>Foo</td>
-          <td>753462000</td>
-          <td class="text-center">-</td>
-        </tr>
-        <tr>
-          <td class="text-center">2</td>
-          <td>Bar</td>
-          <td>16/11/1993</td>
-          <td class="text-center">
-            <div class="button bordered small disabled compact">
-              <i class="icon">settings</i>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-center">3</td>
-          <td>Baz</td>
-          <td>16 Nov 1993</td>
-          <td class="text-center">
+  <table class="table white celled">
+    <thead>
+      <tr>
+        <th class="text-center xs-1">Int</th>
+        <th>String</th>
+        <th>Date</th>
+        <th class="text-center">Options</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="100%">
+          <div class="multiple center-y">
+            <div class="centerer">20 Rows - Page 3 of 5</div>
+            <div class="spacer"></div>
+            {{{sw.pagination current=2 total=5}}}
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr class="table-row-empty hidden">
+        <td colspan="100%">Empty</td>
+      </tr>
+      <tr>
+        <td class="text-center">1</td>
+        <td>Foo</td>
+        <td>753462000</td>
+        <td class="text-center">-</td>
+      </tr>
+      <tr>
+        <td class="text-center">2</td>
+        <td>Bar</td>
+        <td>16/11/1993</td>
+        <td class="text-center">
+          <div class="button bordered small disabled compact">
+            <i class="icon">settings</i>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">3</td>
+        <td>Baz</td>
+        <td>16 Nov 1993</td>
+        <td class="text-center">
+          <div class="button bordered small compact">
+            <i class="icon">settings</i>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">4</td>
+        <td>Qux</td>
+        <td>November 16th, 1993</td>
+        <td class="text-center">
+          <div class="multiple joined center-x">
+            <div class="button bordered small">Button</div>
             <div class="button bordered small compact">
-              <i class="icon">settings</i>
+              <i class="icon">more_vert</i>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-center">4</td>
-          <td>Qux</td>
-          <td>November 16th, 1993</td>
-          <td class="text-center">
-            <div class="multiple joined center-x">
-              <div class="button bordered small">Button</div>
-              <div class="button bordered small compact">
-                <i class="icon">more_vert</i>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   {{> table_actions}}
 
