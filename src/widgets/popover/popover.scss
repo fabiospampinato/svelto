@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require decorators/pointing/pointing.scss
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
@@ -18,7 +19,7 @@
   @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
   z-index: $popover-z-index;
   max-width: $popover-max-width;
-  margin: 0 !important;
+  margin: 0;
   transition-property: opacity, margin-top;
   transition-duration: $popover-animation-duration;
 

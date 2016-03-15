@@ -11,6 +11,8 @@
  * @require lib/touching/touching.js
  * ========================================================================= */
 
+//FIXME: Close it if after a `route` event the trigger element is no longer visible
+
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
