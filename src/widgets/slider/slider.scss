@@ -10,7 +10,6 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: Add horizontal gutter again
 //TODO: The shadow gets rotated on `:active`
 
 /* SLIDER */
@@ -18,6 +17,7 @@
 .slider {
 
   @extend %widget;
+  @include margin-x ( $slider-handler-width / 2 ); //FIXME: This makes `.multiple > .slider * n` ugly
   display: flex;
   align-items: center;
   height: $slider-handler-height;
