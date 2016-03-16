@@ -45,17 +45,23 @@
 
   }
 
-  // /* SAME HEIGHT IF CONTAINING ICON/ICONS */ //TODO: Add a variable for it
-  //
-  // @if $icon-scale-factor > $line-height {
-  //
-  //   $delta: $icon-scale-factor - $line-height;
-  //
-  //   > %icon,
-  //   > %icons {
-  //     @include margin-y ( - ( $delta / 2 * 1em ) );
-  //   }
-  //
-  // }
+  /* FORCE ICON LINE HEIGHT */
+
+  // Basically enforcing an icon to occupy the same amount of vertical space that some text would occupy
+
+  @if $label-icon-force-line-height {
+
+    @if $icon-scale-factor != $line-height {
+
+      $delta: ( $line-height - $icon-scale-factor ) / $icon-scale-factor;
+
+      > %icon,
+      > %icons {
+        @include margin-y ( ( $delta / 2 * 1em ) !important );
+      }
+
+    }
+
+  }
 
 }
