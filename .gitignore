@@ -30,7 +30,6 @@ Thumbs.db
 # Other paths to ignore
 bower_components
 node_modules
-.meteor
 
 # Project specific paths ignore
 .temp
