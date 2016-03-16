@@ -14,7 +14,6 @@
 /* CODE */
 
 %code {
-  display: inline-flex;
   font-family: $code-font-family;
   padding: $code-padding-y $code-padding-x;
   border-width: $code-border-width;
