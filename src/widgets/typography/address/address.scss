@@ -1,35 +1,17 @@
 
 /* =========================================================================
- * Svelto - Widgets - Typography - Link
+ * Svelto - Widgets - Typography - Address
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Make it more visually appealing
-//TODO: Add support for automatic color selection
+/* ADDRESS */
 
-/* LINK */
-
-a {
-
-  color: inherit;
-  text-decoration: none;
-
-  // Elsewhere this might be an unwanted style
-
-  p &,
-  address & {
-
-    @include color-link ( $link-color, $link-color-force, $link-color-basic );
-    vertical-align: baseline;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-  }
-
+address {
+  @extend %widget;
+  font-style: $address-font-style;
 }
