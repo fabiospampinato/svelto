@@ -9,13 +9,12 @@
  * @require decorators/sizes/sizes.scss
  * ========================================================================= */
 
-//TODO: Add better support for icon + text
-
 /* STATISTIC */
 
 .statistic {
 
   @extend %widget;
+  @include children-no-gutter ();
   text-align: center;
 
   /* VALUE */
