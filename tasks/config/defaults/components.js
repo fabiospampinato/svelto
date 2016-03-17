@@ -108,7 +108,6 @@ var components = {
     selectable: true,
     shape: true,
     slider: true,
-    sortable: true,
     spacer: true,
     spinner: true,
     statistic: true,

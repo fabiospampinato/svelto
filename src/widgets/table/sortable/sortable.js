@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Sortable
+ * Svelto - Widgets - Table - Sortable
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,7 +9,6 @@
  * ========================================================================= */
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
-//TODO: Maybe rename it, `sortable` has a different purpose in `jQuery UI` (Sorter? Orderable?)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
@@ -18,7 +17,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'sortable',
+    name: 'tableSortable',
     plugin: true,
     selector: 'table.sortable',
     options: {
@@ -58,9 +57,9 @@
     }
   };
 
-  /* SORTABLE */
+  /* TABLE SORTABLE */
 
-  class Sortable extends Widgets.Widget {
+  class TableSortable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -270,6 +269,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Sortable, config, Widgets );
+  Factory.init ( TableSortable, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

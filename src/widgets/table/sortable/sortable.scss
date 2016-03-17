@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Sortable
+ * Svelto - Widgets - Table - Sortable
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,7 +9,7 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* SORTABLE TABLE */
+/* SORTABLE */
 
 table.sortable {
 
@@ -19,18 +19,18 @@ table.sortable {
 
     position: relative;
     cursor: pointer;
-    padding-right: $sortable-table-th-padding-right;
+    padding-right: $table-sortable-th-padding-right;
 
     /* HOVER */
 
     &:hover {
-      background-color: $sortable-table-th-hover-bg-color;
+      background-color: $table-sortable-th-hover-bg-color;
     }
 
     /* ACTIVE */
 
     &:active {
-      background-color: $sortable-table-th-active-bg-color;
+      background-color: $table-sortable-th-active-bg-color;
     }
 
     /* BEFORE / AFTER */
@@ -38,7 +38,7 @@ table.sortable {
     &:before,
     &:after {
       @extend %icon-base;
-      @include absolute ( 0 $sortable-table-th-icon-right 0 false );
+      @include absolute ( 0 $table-sortable-th-icon-right 0 false );
       margin: auto;
       opacity: 0;
     }
@@ -63,14 +63,14 @@ table.sortable {
     &:hover:after,
     &.sort-desc:after,
     &.sort-asc:before {
-      opacity: $sortable-table-th-icon-opacity;
+      opacity: $table-sortable-th-icon-opacity;
     }
 
     /* ACTIVE OPACITY */
 
     &.sort-desc:before,
     &.sort-asc:after {
-      opacity: $sortable-table-th-icon-active-opacity;
+      opacity: $table-sortable-th-icon-active-opacity;
     }
 
   }
