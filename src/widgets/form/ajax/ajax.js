@@ -11,10 +11,8 @@
  * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
-//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
-//TODO: Test it with `input[type="file"]`
-
 //FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
+//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

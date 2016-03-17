@@ -15,7 +15,6 @@
 
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
-//FIXME: Widgetize the toast, we may add some widgets inside of it
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Colors, Sizes ) {
 

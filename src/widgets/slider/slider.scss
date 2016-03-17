@@ -10,8 +10,6 @@
  * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
 
-//TODO: The shadow gets rotated on `:active`
-
 /* SLIDER */
 
 .slider {
@@ -49,7 +47,6 @@
     @include fill ();
     position: absolute;
     right: 100%;
-    transition: background-color $slider-animation-duration;
   }
 
   /* HANDLER */
@@ -67,7 +64,7 @@
     height: $slider-handler-height;
     border-radius: $slider-handler-border-radius;
     cursor: move;
-    transition-property: transform, border-radius, box-shadow, background-color;
+    transition-property: transform, border-radius, box-shadow;
     transition-duration: $slider-animation-duration;
   }
 

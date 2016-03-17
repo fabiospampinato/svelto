@@ -31,7 +31,8 @@
   @extend %pointing-tip;
 }
 
-// No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proof, use feature detection instead
+// No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip
+//FIXME: Not future proof, use feature detection instead
 //TODO: remove the margin also
 
 _:-ms-lang(x), %pointing:after {

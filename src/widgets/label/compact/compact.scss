@@ -17,7 +17,7 @@
 
   /* CHILDREN */
 
-  > :not(.overlay):not(.ripple-circle) {
+  > :not(.overlay):not(.ripple-circle):not([type="file"]) {
 
     /* HORIZONTAL GUTTER */
 
