@@ -456,13 +456,17 @@ SWHelpers.define ( 'toast', function ( options ) {
 
 /* UTILITIES */
 
-SWHelpers.define ( 'times', function ( times, start = 1 ) {
+SWHelpers.define ( 'times', function ( times, start ) {
+
+  start = lodash.isNumber ( start ) ? start : 1;
 
   return lodash.range ( start, times + start );
 
 });
 
-SWHelpers.define ( 'nowSecs', function ( offset = 0 ) {
+SWHelpers.define ( 'nowSecs', function ( offset ) {
+
+  offset = lodash.isNumber ( offset ) ? offset : 0;
 
   return lodash.nowSecs () + offset;
 
