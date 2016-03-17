@@ -1,0 +1,34 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Select
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * ========================================================================= */
+
+/* SELECT */
+
+select {
+
+  @include fill ();
+  @include fill-absolute ();
+  appearance: none;
+  cursor: pointer;
+  margin: 0 !important;
+  font-size: 0;
+  opacity: 0;
+  border: 0;
+  border-radius: inherit;
+  z-index: $select-z-index;
+
+  /* BORDERED */
+
+  //FIXME: Not stretching properly, at maximum it reached 100% width and height
+
+  // .bordered > & {
+  //   @include absolute ( - $border-width );
+  // }
+
+}
