@@ -41,6 +41,14 @@
     {{{sw.action "Three" "toast_btns_three ()"}}}
   </div>
 
+  {{{sw.divider "Icon"}}}
+
+  <div class="multiple">
+    {{{sw.action "Icon + Body" "toast_icon ()"}}}
+    {{{sw.action "Icon + Title + Body" "toast_icon_title ()"}}}
+    {{{sw.action "Icon + Title + Body + Buttons" "toast_icon_adv ()"}}}
+  </div>
+
   {{{sw.divider "Advanced"}}}
 
   <div class="multiple">
@@ -158,6 +166,34 @@
         title: 'Test title',
         body: '<sub>sub</sub>Something<sup>sup</sup>',
         img: '{{{sample.imageUrl}}}',
+        buttons: [{
+          text: 'Foo'
+        }, {
+          text: 'Bar'
+        }]
+      });
+    }
+
+    function toast_icon () {
+      $.toast ({
+        body: 'This is just an example body',
+        icon: 'person'
+      });
+    }
+
+    function toast_icon_title () {
+      $.toast ({
+        title: 'Test title',
+        body: 'This is just an example body',
+        icon: 'person'
+      });
+    }
+
+    function toast_icon_adv () {
+      $.toast ({
+        title: 'Test title',
+        body: 'This is just an example body',
+        icon: 'person',
         buttons: [{
           text: 'Foo'
         }, {

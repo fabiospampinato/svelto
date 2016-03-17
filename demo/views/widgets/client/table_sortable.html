@@ -1,9 +1,9 @@
 
-<!-- SORTABLE -->
+<!-- TABLE SORTABLE -->
 
-<template name="sortable">
+<template name="table_sortable">
 
-  {{{sw.divider "Sortable"}}}
+  {{{sw.divider "Table Sortable"}}}
 
   <table class="table white sortable celled">
     <thead>
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="table-row-empty hidden">
+      <tr class="table-row-empty">
         <td colspan="100%">Empty</td>
       </tr>
       <tr>
@@ -155,7 +155,7 @@
 
   <script>
     function api ( action ) {
-      $('table.sortable').sortable ( action );
+      $('table.sortable').tableSortable ( action );
     }
   </script>
 

@@ -30,6 +30,9 @@
     <div class="button modal-toggler bordered" data-target="#modal-8">
       <span>Fullscreen</span>
     </div>
+    <div class="button modal-toggler bordered" data-target="#modal-9">
+      <span>With overlay</span>
+    </div>
   </div>
 
   {{> modal_modals}}
@@ -126,6 +129,18 @@
       {{{sample.paragraph}}}
     </div>
     <div class="card-footer">Footer</div>
+  </div>
+
+  <div class="card modal xs-8" id="modal-9">
+    <div id="overlay-togglerable" class="overlay centerer">
+      <div class="button secondary overlay-closer">Closer</div>
+    </div>
+    <div class="card-block">
+      {{{sample.paragraph}}}
+    </div>
+    <div class="card-footer bordered centerer">
+      <div class="button primary overlay-toggler" data-target="#overlay-togglerable">Trigger</div>
+    </div>
   </div>
 
 </template>

@@ -41,6 +41,13 @@
     {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
+    {{{sw.checkAction "Inset" "toggle_class ( 'inset' )"}}}
+  </div>
+
   {{{sw.divider "State"}}}
 
   <div class="multiple actions">
@@ -84,6 +91,10 @@
       for ( var i = 0, l = validities.length; i < l; i++ ) {
         $('.datepicker').removeClass ( validities[i] ).addClass ( validity );
       }
+    }
+
+    function toggle_class ( name ) {
+      $('.datepicker').toggleClass ( name );
     }
   </script>
 

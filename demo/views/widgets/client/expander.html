@@ -7,6 +7,7 @@
 
   {{> expander_base}}
   {{> expander_button}}
+  {{> expander_rotating_icon}}
   {{> expander_open}}
 
   {{> expander_actions}}
@@ -43,6 +44,26 @@
         <div class="spacer">Button toggler</div>
         <div class="button xsmall compact expander-toggler">
           <i class="icon">keyboard_arrow_down</i>
+        </div>
+      </div>
+    </div>
+    <div class="card-block expander-content">
+      {{{sample.paragraph}}}
+    </div>
+  </div>
+
+</template>
+
+<!-- ROTATING ICON -->
+
+<template name="expander_rotating_icon">
+
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable primary expander-toggler">
+      <div class="multiple center-y">
+        <div class="spacer">Rotating icon</div>
+        <div class="button xsmall compact">
+          <i class="icon expander-icon">keyboard_arrow_down</i>
         </div>
       </div>
     </div>

@@ -41,19 +41,27 @@
   {{{sw.divider "File"}}}
 
   <div class="multiple">
-    <div class="multiple joined">
-      <div class="label bordered">Choose a file...</div>
+    <label class="button">
+      <input type="file" multiple>
+      <span class="input-file-names"></span>
+    </label>
+    <label class="button">
       <input type="file">
-      <div class="button bordered secondary">Choose</div>
-    </div>
-    <div class="button bordered compact">
       <i class="icon">file_upload</i>
+    </label>
+    <label class="button">
       <input type="file">
-    </div>
-    <div class="button bordered">
-      <span>Pick a file...</span>
+      <span class="input-file-names">Pick a file...</span>
+    </label>
+    <label class="button">
+      <input type="file" multiple>
+      <span class="input-file-names">Multiple files...</span>
+    </label>
+    <label class="multiple joined">
+      <div class="label input-file-names">Choose a file...</div>
       <input type="file">
-    </div>
+      <div class="button secondary">Choose</div>
+    </label>
   </div>
 
   {{{sw.divider "Multiple"}}}
@@ -125,9 +133,7 @@
 
     function toggle_class ( name ) {
       $inputs.toggleClass ( name );
-      if ( name === 'bordered' ) {
-        $('.layout-content .label, .layout-content .button').not ( '.actions .button' ).toggleClass ( name );
-      }
+      $('.layout-content .label, .layout-content .button').not ( '.actions .button' ).toggleClass ( name );
     }
 
     function toggle_attr ( attr ) {
