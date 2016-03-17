@@ -47,13 +47,13 @@
         let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        if ( ( keys.includes ( 'ctrl' ) || keys.includes ( 'cmd' ) || keys.includes ( 'meta') ) !== Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
-        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
-        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
+        if ( ( _.includes ( keys, 'ctrl' ) || _.includes ( keys, 'cmd' ) || _.includes ( keys, 'meta') ) !== Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
+        if ( _.includes ( keys, 'alt' ) !== event.altKey ) return false;
+        if ( _.includes ( keys, 'shift' ) !== event.shiftKey ) return false;
 
         for ( let key of keys ) {
 
-          if ( !specialKeys.includes ( key ) ) {
+          if ( !_.includes ( specialKeys, key ) ) {
 
             if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
 

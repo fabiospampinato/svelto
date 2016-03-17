@@ -92,7 +92,7 @@
 
     isRequesting () {
 
-      return !!this.xhr && ![0, 4].includes ( this.xhr.readyState ); // 0: UNSENT, 4: DONE
+      return !!this.xhr && !_.includes ( [0, 4], this.xhr.readyState ); // 0: UNSENT, 4: DONE
 
     }
 
