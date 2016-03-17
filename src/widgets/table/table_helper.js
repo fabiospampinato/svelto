@@ -68,21 +68,7 @@
 
     }
 
-    _init () {
-
-      this._checkEmpty ();
-
-    }
-
     /* PRIVATE */
-
-    _checkEmpty () {
-
-      let hasNonEmptyRows = !!this.$body.find ( this.options.selectors.notEmptyRow ).length;
-
-      this.$emptyRow.toggleClass ( this.options.classes.hidden, hasNonEmptyRows );
-
-    }
 
     _getRowId ( id ) {
 
@@ -112,8 +98,6 @@
         }
 
         this.$body.append ( $rows );
-
-        this._checkEmpty ();
 
         this._trigger ( 'change' );
 
@@ -161,8 +145,6 @@
 
         $row.remove ();
 
-        this._checkEmpty ();
-
         this._trigger ( 'change' );
 
         this._trigger ( 'remove', {
@@ -180,8 +162,6 @@
       if ( $rows.length ) {
 
         $rows.remove ();
-
-        this._checkEmpty ();
 
         this._trigger ( 'change' );
 

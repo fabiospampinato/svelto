@@ -10,8 +10,7 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-//TODO: Test multi header rows and multiple rows in a single row (like 1 cell stretching 3 rows and the others just one each)
-//TODO: Add responsive tables
+//TODO: Add horizontally scrollable tables support
 //TODO: Add .reflow (see bootstrap v4)
 // We are using the `table` class so that if someone need a plain basic table he/she can
 
@@ -36,6 +35,12 @@
       text-align: left;
     }
 
+  }
+
+  /* ROW EMPTY */ //TODO: Maybe move it to its own module
+
+  .table-row-empty:not(:only-child) {
+    display: none;
   }
 
   /* THEAD */
