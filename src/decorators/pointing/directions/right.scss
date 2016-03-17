@@ -31,7 +31,13 @@
 }
 
 %pointing-right-spaced {
+
   margin-right: $pointing-tip-diagonal-half;
+
+  _:-ms-lang(x), & { // IE doesn't support the `chip-path` property
+    margin-right: 0;
+  }
+
 }
 
 .pointing-right {

@@ -31,7 +31,13 @@
 }
 
 %pointing-bottom-spaced {
+
   margin-bottom: calc(#{$gutter} + #{$pointing-tip-diagonal-half});
+
+  _:-ms-lang(x), & { // IE doesn't support the `chip-path` property
+    margin-bottom: 0;
+  }
+
 }
 
 .pointing-bottom {
