@@ -20,7 +20,8 @@
 
   /* CHECKS */
 
-  let isIpod          = /ipod/i.test ( userAgent ),
+  let isOpera         = /^Opera\//i.test ( userAgent ) || /\x20OPR\//i.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
+      isIpod          = /ipod/i.test ( userAgent ),
       isIphone        = !isIpod && /iphone/i.test ( userAgent ),
       isIpad          = /ipad/i.test ( userAgent ),
       isAndroid       = /android/i.test ( userAgent ),
@@ -37,11 +38,11 @@
 
   let Browser = {
     is: {
-      chrome: /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
+      chrome: !isOpera && /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
       firefox: /firefox/i.test ( userAgent ),
       edge: /(edge)\/((\d+)?[\w\.]+)/i.test ( userAgent ),
       ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
-      opera:  /^Opera\//i.test ( userAgent ) || /\x20OPR\//i.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
+      opera: isOpera,
       safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
       iphone: isIphone,
       ipad: isIpad,
