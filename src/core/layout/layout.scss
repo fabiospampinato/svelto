@@ -57,12 +57,12 @@
 
 .layout {
 
-  min-height: 100vh;
+  height: 100%; // Setting `min-height` won't work on IE 10/11
 
   /* NOT FIRST */
 
   .layout {
-    min-height: 0;
+    height: auto;
   }
 
   /* GUTTER */
