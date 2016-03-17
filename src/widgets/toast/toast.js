@@ -13,7 +13,6 @@
  * @require lib/timer/timer.js
  * ========================================================================= */
 
-//TODO: Add support for icon also instead of just image
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
 //FIXME: Widgetize the toast, we may add some widgets inside of it
@@ -37,6 +36,9 @@
               `<div class="infobar ${Colors.transparent}">` +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="toast-img infobar-left">' +
+                '{% } %}' +
+                '{% if ( o.icon ) { %}' +
+                  '<i class="icon {%=(o.title && o.body ? "xlarge" : "")%} infobar-left">{%=o.icon%}</i>' +
                 '{% } %}' +
                 '{% if ( o.title || o.body ) { %}' +
                   '<div class="infobar-center">' +
@@ -76,6 +78,7 @@
       title: false,
       body: false,
       img: false,
+      icon: false,
       buttons: [],
       /*
              : [{
