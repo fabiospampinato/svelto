@@ -161,6 +161,8 @@
 
     _init () {
 
+      this.$toast.widgetize ();
+
       if ( this._isOpen ) {
 
         this.___timer ();
