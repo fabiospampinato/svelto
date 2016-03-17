@@ -18,7 +18,7 @@
 //SOURCE: https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_screenreaders.scss
 
 @mixin text-hide () {
-  font: 0/0 _;
+  font: 0/0 svelto; // Setting `_` as the font name is not supported in IE/Edge
   color: transparent;
   text-shadow: none;
   background-color: transparent;
