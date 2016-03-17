@@ -16,7 +16,7 @@
 
   .colorpicker-sb,
   .colorpicker-hue {
-    border: $border-width solid $color-error !important;
+    border-color: $color-error !important;
   }
 
 }

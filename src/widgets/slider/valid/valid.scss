@@ -9,8 +9,6 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
-//FIXME: The `:not(.primary):not(...)` has higher precedence
-
 /* VALID */
 
 .slider.valid {
@@ -19,7 +17,8 @@
 
   .slider-highlight,
   .slider-handler {
-    @include color ( 'success', true, true );
+    background-color: $color-success !important;
+    color: $color-success-text !important;
   }
 
 }

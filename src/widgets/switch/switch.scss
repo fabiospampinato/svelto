@@ -36,7 +36,6 @@
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-border-radius;
-    transition: background-color $switch-animation-duration;
   }
 
   /* HANDLER */
@@ -51,8 +50,7 @@
     width: $switch-handler-width;
     height: $switch-handler-height;
     border-radius: $switch-handler-border-radius;
-    transition-property: background-color, transform;
-    transition-duration: $switch-animation-duration;
+    transition: transform $switch-animation-duration;
 
     /* BEFORE */
 
@@ -64,7 +62,7 @@
       z-index: -1;
       opacity: 0;
       transform: scale($switch-handler-before-scale);
-      transition-property: opacity, transform, background-color;
+      transition-property: opacity, transform;
       transition-duration: $switch-animation-duration;
     }
 
@@ -84,7 +82,7 @@
     /* DRAGGING */
 
     &.draggable-dragging {
-      transition-property: background-color;
+      transition-property: none;
     }
 
   }

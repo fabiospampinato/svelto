@@ -17,7 +17,8 @@
 
   .switch-bar,
   .switch-handler {
-    @include color ( 'success', true, true );
+    background-color: $color-success !important;
+    color: $color-success-text !important;
   }
 
 }
