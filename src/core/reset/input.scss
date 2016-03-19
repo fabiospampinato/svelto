@@ -15,9 +15,15 @@ input {
 
 /* NUMBER */
 
-[type=number]::-webkit-inner-spin-button,
-[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+[type="number"] {
+
+  -moz-appearance: textfield;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+
 }
 
 /* UPLOAD */
@@ -28,12 +34,12 @@ input {
 
 /* INVALID */
 
-:-moz-ui-invalid {
+::-moz-ui-invalid {
   box-shadow: none;
 }
 
 /* CLEAR ICON */
 
-:-ms-clear {
+::-ms-clear {
   display: none;
 }
