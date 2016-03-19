@@ -1,31 +1,19 @@
 
 /* =========================================================================
- * Svelto - Core - Svelto
+ * Svelto - Core - Modernizr - Tests (Clip Path Polygon)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ../init.js
  * ========================================================================= */
 
-(function () {
+(function ( Modernizr ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* CLIP PATH POLYGON */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Modernizr: Modernizr,
-    Widgets: {} // Widgets' classes namespace
-  };
+  Modernizr.addTest ( 'clip-path-polygon', Modernizr.testAllProps ( 'clip-path', 'polygon( 0 0 )' ) );
 
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( Modernizr ));

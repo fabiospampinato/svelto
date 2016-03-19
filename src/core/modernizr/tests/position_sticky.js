@@ -1,31 +1,19 @@
 
 /* =========================================================================
- * Svelto - Core - Svelto
+ * Svelto - Core - Modernizr - Tests (Position Sticky)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ../init.js
  * ========================================================================= */
 
-(function () {
+(function ( Modernizr ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* POSITION STICKY */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Modernizr: Modernizr,
-    Widgets: {} // Widgets' classes namespace
-  };
+  Modernizr.addTest ( 'css-position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );
 
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( Modernizr ));

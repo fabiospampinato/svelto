@@ -1,31 +1,19 @@
 
 /* =========================================================================
- * Svelto - Core - Svelto
+ * Svelto - Core - Modernizr - Tests (Flexbox Tweener)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ../init.js
  * ========================================================================= */
 
-(function () {
+(function ( Modernizr ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* FLEXBOX TWEENER */
 
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Modernizr: Modernizr,
-    Widgets: {} // Widgets' classes namespace
-  };
+  Modernizr.addTest ( 'flexbox-tweener', Modernizr.testAllProps ( 'flexAlign', 'end' ) );
 
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( Modernizr ));

@@ -1,31 +1,15 @@
 
 /* =========================================================================
- * Svelto - Core - Svelto
+ * Svelto - Core - Modernizr - Tests
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ./clip_path_polygon.js
+ * @require ./clip_path_url.js
+ * @require ./flexbox.js
+ * @require ./flexbox_legacy.js
+ * @require ./flexbox_tweener.js
+ * @require ./overlay_scrollbars.js
+ * @require ./position_sticky.js
  * ========================================================================= */
-
-(function () {
-
-  'use strict';
-
-  /* SVELTO */
-
-  let Svelto = {
-    VERSION: '0.4.0-beta2',
-    $: jQuery,
-    _: lodash,
-    Modernizr: Modernizr,
-    Widgets: {} // Widgets' classes namespace
-  };
-
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
