@@ -14,31 +14,29 @@
 /* POPOVER */
 
 .popover {
-
   @include fixed ( 0 false false 0 );
   @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
   z-index: $popover-z-index;
+  overflow: auto;
   max-width: $popover-max-width;
+  max-height: $popover-max-height;
   margin: 0;
   transition-property: opacity, margin-top;
   transition-duration: $popover-animation-duration;
-
-  /* NOT CONTAINER */
-
-  &:not(.container) {
-    max-height: $popover-max-height;
-  }
-
 }
 
-// Card popover max height fix for IE10+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
 
-_:-ms-input-placeholder, :root .popover.card {
+html.no-flexbox.flexbox-tweener {
 
-  max-height: none;
+  .popover.card {
 
-  > .card-block {
-    max-height: $popover-max-height * .9;
+    max-height: none;
+
+    > .card-block {
+      max-height: $popover-max-height * .8;
+    }
+
   }
 
 }
