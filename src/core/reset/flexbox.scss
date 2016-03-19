@@ -13,5 +13,5 @@
 *,
 :before,
 :after {
-  flex: 0 1 auto;
+  flex-shrink: 1;
 }
