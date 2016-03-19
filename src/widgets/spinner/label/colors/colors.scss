@@ -18,7 +18,7 @@
 
     $accent: nth( $datas, 5 );
 
-    .spinner-label.#{$class} circle {
+    %color-#{$name}.spinner-label circle {
       stroke: $accent;
     }
 
