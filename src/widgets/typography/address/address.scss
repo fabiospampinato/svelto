@@ -12,6 +12,13 @@
 /* ADDRESS */
 
 address {
+
   @extend %widget;
   font-style: $address-font-style;
+
+  > * {
+    vertical-align: middle;
+    margin-bottom: 0 !important;
+  }
+
 }
