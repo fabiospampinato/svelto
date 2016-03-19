@@ -346,3 +346,23 @@
   }
 
 }
+
+/* INLINE CHILDREN FIX (IE10) */
+
+html.no-flexbox.flexbox-tweener {
+
+  /* MULTIPLE */
+
+  .multiple {
+
+    /* INLINE CHILDREN */
+
+    > a,
+    > button,
+    > span {
+      display: inline-block;
+    }
+
+  }
+
+}
