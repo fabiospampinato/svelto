@@ -102,51 +102,57 @@
 
 }
 
-// IE-10/11 Fix so that noties won't expand over the viewport
+/* HORIZONTAL EXPANSION FIX (IE-10/11)*/
 
-_:-ms-input-placeholder, :root .toast-queues  {
+html.flexbox-tweener {
 
-  /* TOP */
+  /* QUEUES */
 
-  &.top {
+  .toast-queues  {
 
-    /* ROW */
+    /* TOP */
 
-    .toast-queues-row {
-      flex-direction: column;
+    &.top {
+
+      /* ROW */
+
+      .toast-queues-row {
+        flex-direction: column;
+      }
+
     }
 
-  }
+    /* BOTTOM */
 
-  /* BOTTOM */
+    &.bottom {
 
-  &.bottom {
+      /* ROW */
 
-    /* ROW */
+      .toast-queues-row {
+        flex-direction: column;
+      }
 
-    .toast-queues-row {
-      flex-direction: column;
     }
 
-  }
+    /* QUEUES ROW */
 
-  /* QUEUES ROW */
+    .toast-queues-row {
+      align-items: flex-start;
+    }
 
-  .toast-queues-row {
-    align-items: flex-start;
-  }
+    /* QUEUE */
 
-  /* QUEUE */
+    .toast-queue:not(.expanded) {
 
-  .toast-queue:not(.expanded) {
+      width: calc(100% - #{$gutter * 2});
+      margin-right: $gutter;
 
-    width: calc(100% - #{$gutter * 2});
-    margin-right: $gutter;
+      /* TOAST */
 
-    /* TOAST */
+      .toast {
+        max-width: 100%;
+      }
 
-    .toast {
-      max-width: 100%;
     }
 
   }
