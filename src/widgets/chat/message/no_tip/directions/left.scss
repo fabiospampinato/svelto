@@ -8,11 +8,14 @@
  * @require ../no_tip.scss
  * ========================================================================= */
 
-/* LEFT */
+/* CLIP-PATH SUPPORTED */
 
-.chat-message.no-tip.direction-left {
+html.clip-path-polygon,
+html.clip-path-url {
 
-  .chat-message-content {
+  /* LEFT */
+
+  .chat-message.no-tip.direction-left .chat-message-content {
     margin-left: $gutter;
   }
 
