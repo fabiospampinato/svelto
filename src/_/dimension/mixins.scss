@@ -12,3 +12,12 @@
   width: $width;
   height: $height;
 }
+
+@mixin dimension-force ( $width, $height: $width ) {
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+  height: $height;
+  min-height: $height;
+  max-height: $height;
+}

@@ -23,7 +23,7 @@
 
   .chat-message-img,
   .chat-message-img img {
-    @include dimension ( $chat-message-img-size );
+    @include dimension-force ( $chat-message-img-size );
     border-radius: if( $chat-message-img-rounded, $circular-border-radius, $chat-message-img-border-radius );
     overflow: hidden;
   }
