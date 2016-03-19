@@ -78,23 +78,28 @@
     transform: rotate(-45deg);
   }
 
-  /* ACTIVE */
+  /* ENABLED */
 
-  &:not(.disabled):active {
+  &:not(.disabled) {
 
     /* HANDLER */
 
     .slider-handler {
 
-      border-bottom-right-radius: 0;
-      opacity: 1;
-      transform: translateY(-100% * $SQRT2) rotate(45deg) scale($slider-active-handler-scale);
-      box-shadow: $slider-active-handler-box-shadow;
+      &:active,
+      &.draggable-dragging {
 
-      /* LABEL */
-
-      .slider-label {
+        border-bottom-right-radius: 0;
         opacity: 1;
+        transform: translateY(-100% * $SQRT2) rotate(45deg) scale($slider-active-handler-scale);
+        box-shadow: $slider-active-handler-box-shadow;
+
+        /* LABEL */
+
+        .slider-label {
+          opacity: 1;
+        }
+
       }
 
     }
