@@ -11,6 +11,8 @@
  * @require widgets/icons/icons.scss
  * ========================================================================= */
 
+//TODO: Add a way to force labels icons to have the same height as labels with just text
+
 /* LABEL */
 
 .label {
@@ -19,18 +21,17 @@
   @include children-no-gutter ();
   @include color ( $label-color, $label-color-force, $label-color-basic );
   font-weight: $label-font-weight;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  text-align: center;
   border-radius: $label-border-radius;
   padding: $label-padding-y $label-padding-x;
   min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
 
   /* CHILDREN */
 
-  > :not(.overlay):not(.ripple-circle):not([type="file"]) {
+  > :not(.overlay):not(.ripple-circle) {
 
-    flex: 1 1 auto;
+    vertical-align: middle;
 
     /* HORIZONTAL GUTTER */
 
@@ -41,25 +42,6 @@
     + %icon,
     + %icons {
       margin-left: $label-inner-gutter / $icon-scale-factor;
-    }
-
-  }
-
-  /* FORCE ICON LINE HEIGHT */
-
-  // Basically enforcing an icon to occupy the same amount of vertical space that some text would occupy
-
-  @if $label-icon-force-line-height {
-
-    @if $icon-scale-factor != $line-height {
-
-      $delta: ( $line-height - $icon-scale-factor ) / $icon-scale-factor;
-
-      > %icon,
-      > %icons {
-        @include margin-y ( ( $delta / 2 * 1em ) !important );
-      }
-
     }
 
   }
