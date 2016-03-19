@@ -11,6 +11,8 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
+//TODO: Add again icon support
+
 /* SWITCH */
 
 .switch {
@@ -63,19 +65,6 @@
       opacity: 0;
       transform: scale($switch-handler-before-scale);
       transition-property: opacity, transform;
-      transition-duration: $switch-animation-duration;
-    }
-
-    /* AFTER */
-
-    &:after {
-      @extend %icon-base;
-      @include dimension ( $switch-handler-icon-size );
-      position: absolute;
-      font-size: $switch-handler-icon-font-size;
-      line-height: $switch-handler-icon-size;
-      text-align: center;
-      transition-property: color;
       transition-duration: $switch-animation-duration;
     }
 

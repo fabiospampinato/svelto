@@ -67,7 +67,7 @@
       this.$bar = this.$switch.find ( this.options.selectors.bar );
       this.$handler = this.$switch.find ( this.options.selectors.handler );
 
-      this.isChecked = false;
+      this.isChecked = this.$input.prop ( 'checked' );
 
       this.switchWidth = this.$switch.width ();
       this.handlerWidth = this.$handler.width ();
@@ -81,13 +81,10 @@
       this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
       this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;
 
-      /* CHECKED */
+      /* INITIAL SETTING */
 
-      if ( this.$input.prop ( 'checked' ) ) {
-
-        this.check ();
-
-      }
+      this._updateColors ();
+      this._updatePosition ();
 
     }
 
