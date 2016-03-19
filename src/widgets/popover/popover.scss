@@ -17,7 +17,7 @@
   @include fixed ( 0 false false 0 );
   @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
   z-index: $popover-z-index;
-  overflow: auto;
+  overflow: visible;
   max-width: $popover-max-width;
   max-height: $popover-max-height;
   margin: 0;
@@ -27,7 +27,7 @@
 
 /* VERTICAL SHRINKING FIX (IE-10/11) */
 
-html.no-flexbox.flexbox-tweener {
+html.flexbox-tweener {
 
   .popover.card {
 
