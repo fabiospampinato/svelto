@@ -38,19 +38,27 @@
 
   .chat-message-content {
     order: 1;
+  }
+
+}
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  /* CONTENT */
+
+  .chat-message.direction-right .chat-message-content {
+
     margin-right: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
-  }
 
-  // No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proof, use feature detection instead
+    /* HEADER */
 
-  _:-ms-lang(x), & .chat-message-content {
-    margin-right: $gutter;
-  }
+    > .card-header {
+      @extend %pointing-right-base;
+    }
 
-  /* HEADER */
-
-  .card-header {
-    @extend %pointing-right-base;
   }
 
 }
