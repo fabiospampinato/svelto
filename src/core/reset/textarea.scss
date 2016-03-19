@@ -6,8 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BORDER */
+/* BORDER / iOS SHADOW */
 
 textarea {
   border: 0;
+  appearance: none;
 }
