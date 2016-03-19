@@ -120,6 +120,12 @@
 
     }
 
+    _destroy () {
+
+      this.close ();
+
+    }
+
     /* TAP */
 
     ___tap () {
@@ -230,9 +236,9 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.layout, this.$panel[0] ) ) {
+      if ( this._isOpen && !this.$panel.isAttached () ) {
 
-        this.$layout.enableScroll ();
+        this.close ();
 
       }
 

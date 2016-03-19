@@ -66,6 +66,12 @@
 
     }
 
+    _destroy () {
+
+      this.close ();
+
+    }
+
     /* PARENT */
 
     _getParent () {

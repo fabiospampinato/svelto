@@ -74,6 +74,12 @@
 
     }
 
+    _destroy () {
+
+      this.close ();
+
+    }
+
     /* TAP */
 
     ___tap () {
@@ -94,7 +100,7 @@
 
     __route () {
 
-      if ( this._isOpen && !$.contains ( this.layout, this.$modal[0] ) ) {
+      if ( this._isOpen && !this.$modal.isAttached () ) {
 
         this.close ();
 
