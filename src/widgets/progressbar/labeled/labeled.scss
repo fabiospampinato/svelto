@@ -15,6 +15,7 @@
   /* AFTER (LABEL) */
 
   .progressbar-highlight:after {
+    display: block; //IE: Fixes a missing vertical alignment in IE 10
     padding: $progressbar-label-padding-y $progressbar-label-padding-x;
     content: attr(data-value);
     font-size: $progressbar-label-font-size;
