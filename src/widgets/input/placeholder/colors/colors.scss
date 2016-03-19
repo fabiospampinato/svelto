@@ -6,18 +6,23 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../placeholder.scss
+ * @require decorators/colors/colors.scss
  * ========================================================================= */
 
 /* COLORS */
 
 @each $name, $datas in $colors {
 
-  $class: color-get-class( $name );
+  @if $name != 'inherit' and $name != 'transparent' {
 
-  $text: nth( $datas, 6 );
+    $class: color-get-class( $name );
 
-  .#{$class}::placeholder {
-    color: $text;
+    $text: nth( $datas, 6 );
+
+    %color-#{$class}::placeholder {
+      color: rgba( $text, $input-placeholder-opacity );
+    }
+
   }
 
 }

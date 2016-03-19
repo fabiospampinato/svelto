@@ -11,6 +11,5 @@
 /* PLACEHOLDER */
 
 ::placeholder {
-  color: nth( map-get( $colors, $input-color ), 6 );
-  opacity: $input-placeholder-opacity;
+  color: rgba( nth( map-get( $colors, $input-color ), 6 ), $input-placeholder-opacity );
 }
