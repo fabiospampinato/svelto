@@ -35,14 +35,24 @@
 
   margin-top: $pointing-tip-diagonal-half;
 
-  _:-ms-lang(x), &, // IE doesn't support the `chip-path` property
   %multiple > & {
     margin-top: 0;
   }
 
 }
 
-.pointing-top {
+%pointing-top {
   @extend %pointing-top-base;
   @extend %pointing-top-spaced;
+}
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  .pointing-top {
+    @extend %pointing-top;
+  }
+
 }

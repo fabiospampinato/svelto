@@ -31,16 +31,21 @@
 }
 
 %pointing-left-spaced {
-
   margin-left: $pointing-tip-diagonal-half;
-
-  _:-ms-lang(x), & { // IE doesn't support the `chip-path` property
-    margin-left: 0;
-  }
-
 }
 
-.pointing-left {
+%pointing-left {
   @extend %pointing-left-base;
   @extend %pointing-left-spaced;
+}
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  .pointing-left {
+    @extend %pointing-left;
+  }
+
 }

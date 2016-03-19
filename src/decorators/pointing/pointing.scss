@@ -10,8 +10,8 @@
 
 %pointing-tip {
 
-  @include dimension ( $pointing-tip-size );
   @include color ( $pointing-tip-color, $pointing-tip-color-force, $pointing-tip-color-basic );
+  @include dimension ( $pointing-tip-size );
   transform: rotate(45deg);
   position: absolute;
   content: '';
@@ -29,12 +29,4 @@
 
 %pointing:after {
   @extend %pointing-tip;
-}
-
-// No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip
-//FIXME: Not future proof, use feature detection instead
-//TODO: remove the margin also
-
-_:-ms-lang(x), %pointing:after {
-  display: none;
 }
