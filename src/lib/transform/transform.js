@@ -10,19 +10,19 @@
 
 /* TRANSFORM UTILITIES */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Modernizr, Svelto ) {
 
   'use strict';
 
   /* MATRIX */
 
-  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform';
+  let property = Modernizr.prefixedCSS ( 'transform' );
 
   $.fn.matrix = function ( values ) {
 
     if ( values ) {
 
-      values = values.join ( ',' );
+      values = values.map ( val => Number ( val ).toFixed ( 20 ) ).join ( ',' );
 
       this.css ( property, `matrix(${values})` );
 
@@ -92,4 +92,4 @@
 
   };
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto.Modernizr, Svelto ));
