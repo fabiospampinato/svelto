@@ -11,7 +11,6 @@
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
-
 //FIXME: Not well written
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -23,6 +22,7 @@
   let config = {
     name: 'remoteModal',
     options: {
+      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
       ajax: {
         cache: false,
         method: 'POST'
@@ -44,6 +44,38 @@
   /* REMOTE MODAL */
 
   class RemoteModal extends Widgets.Remote {
+
+    /* PRIVATE */
+
+    _getUrl () {
+
+      return window.location.href.split ( '#' )[0];
+
+    }
+
+    /* PERSISTENT */
+
+    ___persistent () {
+
+      if ( !this.options.persistent ) {
+
+        this.___route ();
+
+      }
+
+    }
+
+    __route () {
+
+      let currentUrl = this._getUrl ();
+
+      if ( this._openUrl && this._openUrl !== currentUrl ) {
+
+        this.abort ();
+
+      }
+
+    }
 
     /* MODAL */
 
@@ -93,6 +125,13 @@
 
       if ( this.isAborted () ) return;
 
+      this._defer ( function () {
+
+        this._openUrl = this._getUrl ();
+
+      });
+
+      this.___persistent ();
       this.___loadingModal ();
       this.___abort ();
 
