@@ -86,7 +86,7 @@
 
     .slider-handler {
 
-      &:active,
+      &:active, //FIXME: Not working on Firefox
       &.draggable-dragging {
 
         border-bottom-right-radius: 0;

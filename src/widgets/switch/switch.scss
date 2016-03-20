@@ -84,7 +84,7 @@
 
     .switch-handler {
 
-      &:active,
+      &:active, //FIXME: Not working on Firefox
       &.draggable-dragging {
 
         /* BEFORE */
