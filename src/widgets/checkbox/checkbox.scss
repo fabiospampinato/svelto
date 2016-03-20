@@ -5,56 +5,63 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/widget/widget.scss
  * @require widgets/icon/icon.scss
- * @require widgets/icons/icons.scss
  * ========================================================================= */
 
 /* CHECKBOX */
 
 input[type="checkbox"] {
 
-  @extend %icons;
-  cursor: pointer;
+  display: none;
 
-  /* BEFORE / AFTER */
+  /* LABEL */
 
-  &:before,
-  &:after {
-    @extend %icon-base;
-    @extend %icons-icon;
-    transition: opacity $checkbox-icon-animation-duration;
+  + label {
+
+    cursor: pointer;
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend %icon-base;
+      position: absolute;
+      transition: opacity $checkbox-icon-animation-duration;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: $checkbox-icon-off;
+      color: $checkbox-icon-off-color;
+      opacity: 1;
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: $checkbox-icon-on;
+      color: $checkbox-icon-on-color;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* CUSTOM BEFORE / AFTER */
+
+    &[data-icon-off]:before {
+      content: attr(data-icon-off);
+    }
+
+    &[data-icon-on]:after {
+      content: attr(data-icon-on);
+    }
+
   }
 
-  /* BEFORE */
+  /* CHECKED LABEL */
 
-  &:before {
-    content: $checkbox-icon-off;
-    color: $checkbox-icon-off-color;
-    opacity: 1;
-  }
-
-  /* AFTER */
-
-  &:after {
-    content: $checkbox-icon-on;
-    color: $checkbox-icon-on-color;
-    opacity: 0;
-    z-index: 1;
-  }
-
-  /* CUSTOM BEFORE / AFTER */ //TODO: Implement this logic also everywhere else we use a pseudo element icon
-
-  &[data-icon-off]:before {
-    content: attr(data-icon-off);
-  }
-
-  &[data-icon-on]:after {
-    content: attr(data-icon-on);
-  }
-
-  /* CHECKED */
-
-  &:checked {
+  &:checked + label {
 
     /* BEFORE */
 
@@ -75,5 +82,7 @@ input[type="checkbox"] {
 /* WRAPPER */
 
 .checkbox {
+  @extend %widget;
   cursor: pointer;
+  position: relative;
 }

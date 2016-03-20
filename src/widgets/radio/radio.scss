@@ -16,16 +16,22 @@ input[type=radio] {
 
   @extend input[type="checkbox"];
 
-  /* BEFORE */
+  /* LABEL */
 
-  &:before {
-    content: $radio-icon-off;
-  }
+  + label {
 
-  /* AFTER */
+    /* BEFORE */
 
-  &:after {
-    content: $radio-icon-on;
+    &:before {
+      content: $radio-icon-off;
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: $radio-icon-on;
+    }
+
   }
 
 }

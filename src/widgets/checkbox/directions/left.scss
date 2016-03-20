@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Checkbox - Valid
+ * Svelto - Widgets - Checkbox - Directions - Left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,17 +8,27 @@
  * @require ../checkbox.scss
  * ========================================================================= */
 
-/* VALID */
+/* LEFT */
 
-.checkbox.valid > label,
-input[type="checkbox"].valid + label,
-input[type="checkbox"] + label.valid {
+.checkbox.left > label,
+input[type="checkbox"].left + label,
+input[type="checkbox"] + label.left {
+
+  padding-left: ( 1em * $icon-scale-factor ) + $checkbox-label-inner-gutter;
+  padding-right: 0;
 
   /* BEFORE / AFTER */
 
   &:before,
   &:after {
-    color: $color-success !important;
+    left: 0;
+    right: auto;
   }
 
+}
+
+/* LABEL */
+
+.checkbox.label.left {
+  text-align: right;
 }

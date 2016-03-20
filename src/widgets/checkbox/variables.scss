@@ -7,6 +7,7 @@
  * =========================================================================
  * @require core/animations/variables.scss
  * @require core/colors/variables.scss
+ * @require widgets/label/variables.scss
  * ========================================================================= */
 
 /* CHECKBOX */
@@ -16,6 +17,10 @@ $checkbox-icon-on-color: $color-secondary !default;
 
 $checkbox-icon-off: 'check_box_outline_blank' !default;
 $checkbox-icon-off-color: inherit !default;
+
+/* LABEL */
+
+$checkbox-label-inner-gutter: $label-inner-gutter !default;
 
 /* ANIMATION */
 

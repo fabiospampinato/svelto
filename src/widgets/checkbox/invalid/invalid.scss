@@ -10,18 +10,15 @@
 
 /* INVALID */
 
-input[type="checkbox"] {
+.checkbox.invalid > label,
+input[type="checkbox"].invalid + label,
+input[type="checkbox"] + label.invalid {
 
-  &.invalid,
-  .checkbox.invalid & {
+  /* BEFORE / AFTER */
 
-    /* BEFORE / AFTER */
-
-    &:before,
-    &:after {
-      color: $color-error !important;
-    }
-
+  &:before,
+  &:after {
+    color: $color-error !important;
   }
 
 }
