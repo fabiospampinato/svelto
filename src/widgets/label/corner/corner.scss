@@ -6,41 +6,27 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../label.scss
- * @require decorators/z_depths/z_depths.scss
  * ========================================================================= */
-
-//FIXME: Doesn't work on IE
 
 /* CORNER */
 
 .label.corner {
 
   @include dimension ( $label-corner-size );
-  @include z-depth ( $label-corner-z-depth, $label-corner-z-depth-force, $label-corner-z-depth-basic );
   z-index: $label-corner-z-index;
   margin: 0 !important;
   border-width: 0 !important;
+  background-color: transparent !important;
   border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   overflow: hidden;
-  visibility: hidden;
 
   /* BEFORE */
 
   &:before {
-    @include dimension ( $label-corner-size * $SQRT2 );
     content: '';
-    background-color: inherit;
-    visibility: visible;
-    box-shadow: inherit;
-  }
-
-  /* CHILDREN */
-
-  > * {
-    visibility: visible;
+    position: absolute;
+    border-color: inherit;
   }
 
 }

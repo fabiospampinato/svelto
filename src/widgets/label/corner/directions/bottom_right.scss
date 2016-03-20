@@ -18,8 +18,8 @@
   /* BEFORE */
 
   &:before {
-    @include absolute ( 100% false false 100% );
-    transform: translate(-50%, -50%) rotate(45deg);
+    @include absolute ( false 0 0 false );
+    @include triangle ( $label-corner-size, bottom-right );
   }
 
   /* CHILDREN */
