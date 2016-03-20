@@ -10,19 +10,27 @@
  * ========================================================================= */
 
 //TODO: Test a multi-level popover menu
+//TODO: Safari is wrongly animating `transform`, for some reasons
 
 /* POPOVER */
 
 .popover {
+
   @include fixed ( 0 false false 0 );
   @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
   z-index: $popover-z-index;
   overflow: visible;
   max-width: $popover-max-width;
-  max-height: $popover-max-height;
   margin: 0;
   transition-property: opacity, margin-top;
   transition-duration: $popover-animation-duration;
+
+  /* CARD */
+
+  &.card {
+    max-height: $popover-max-height;
+  }
+
 }
 
 /* VERTICAL SHRINKING FIX (IE-10/11) */
