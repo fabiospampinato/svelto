@@ -17,7 +17,7 @@ var plugins = {
   },
   dependencies: {
     options: {
-      log: true
+      log: false
     }
   },
   extend: {
