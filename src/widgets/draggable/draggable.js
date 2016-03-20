@@ -520,7 +520,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && ( _.isUndefined ( event.button ) || event.button === Mouse.buttons.LEFT ) ) {
+        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 
