@@ -17,8 +17,11 @@ p {
   max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 
   > * {
-    vertical-align: middle;
     margin-bottom: 0 !important;
+  }
+
+  > :not(address):not(span):not(p) {
+    vertical-align: middle;
   }
 
 }

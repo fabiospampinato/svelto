@@ -10,7 +10,14 @@
 
 /* SPAN */
 
-span > * {
-  vertical-align: middle;
-  margin-bottom: 0 !important;
+span {
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(address):not(span):not(p) {
+    vertical-align: middle;
+  }
+
 }
