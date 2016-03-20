@@ -10,15 +10,15 @@
 
 @keyframes progressbar-indeterminate-highlight {
   0% {
-    width: 0%;
+    min-width: 0%;
     margin-left: 0;
   }
   35% {
-    width: 75%;
+    min-width: 75%;
     margin-left: 25%;
   }
-  80% {
-    width: 0%;
+  80%, 100% {
+    min-width: 0%;
     margin-left: 100%;
   }
 }
