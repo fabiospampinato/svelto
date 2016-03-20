@@ -29,7 +29,7 @@
 
   /* CHILDREN */
 
-  > :not(.overlay):not(.ripple-circle) {
+  > :not(.overlay):not(.ripple-circle):not(input) {
 
     vertical-align: middle;
 
