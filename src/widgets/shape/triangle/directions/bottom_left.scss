@@ -1,22 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Shape - Triangle - Directions - Default
+ * Svelto - Widgets - Shape - Triangle - Directions - Bottom left
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./top.scss
- * @require ./top_left.scss
- * @require ./top_right.scss
- * @require ./right.scss
- * @require ./bottom.scss
- * @require ./bottom_left.scss
- * @require ./bottom_right.scss
- * @require ./left.scss
+ * @require ../triangle.scss
  * ========================================================================= */
 
-/* DEFAULT */
+/* BOTTOM LEFT */
 
-.triangle:not(.right):not(.bottom):not(.left):not(.top-left):not(.top-right):not(.bottom-right):not(.bottom-left) {
-  @extend .triangle.top;
+.triangle.bottom-left {
+  @include triangle ( $triangle-size, bottom-left );
 }

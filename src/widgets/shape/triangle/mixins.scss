@@ -8,34 +8,54 @@
 
 /* TRIANGLE */
 
-@mixin triangle ( $size: 1em, $direction: up ) {
+@mixin triangle ( $size: 1em, $direction: top ) {
 
   $size: $size / 2;
   border-width: $size;
   border-style: solid;
 
-  @if $direction == bottom {
+  @if $direction == top-left {
+
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+
+  } @else if $direction == top-right {
+
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+
+  } @else if $direction == bottom-right {
+
+    border-top-color: transparent;
+    border-left-color: transparent;
+
+  } @else if $direction == bottom-left {
 
     border-top-color: transparent;
     border-right-color: transparent;
+
+  } @else if $direction == bottom {
+
+    border-right-color: transparent;
+    border-bottom-color: transparent;
     border-left-color: transparent;
 
   } @else if $direction == right {
 
     border-top-color: transparent;
+    border-right-color: transparent;
     border-bottom-color: transparent;
-    border-left-color: transparent;
 
   } @else if $direction == left {
 
     border-top-color: transparent;
-    border-right-color: transparent;
     border-bottom-color: transparent;
+    border-left-color: transparent;
 
   } @else { // Defaulting to `top`
 
+    border-top-color: transparent;
     border-right-color: transparent;
-    border-bottom-color: transparent;
     border-left-color: transparent;
 
   }
