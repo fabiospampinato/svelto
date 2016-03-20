@@ -13,7 +13,7 @@
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -523,4 +523,4 @@
 
   Factory.init ( Datepicker, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

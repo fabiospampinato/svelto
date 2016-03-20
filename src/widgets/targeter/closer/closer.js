@@ -6,10 +6,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../targeter.js
- * @require core/mouse/mouse.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
@@ -72,4 +71,4 @@
 
   Factory.init ( Closer, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

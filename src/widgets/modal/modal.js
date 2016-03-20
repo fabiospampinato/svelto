@@ -6,13 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
 //FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
@@ -196,4 +195,4 @@
 
   Factory.init ( Modal, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

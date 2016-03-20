@@ -7,10 +7,9 @@
  * =========================================================================
  * @require ../closer/closer.js
  * @require core/browser/browser.js
- * @require core/mouse/mouse.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
 
   'use strict';
 
@@ -192,4 +191,4 @@
 
   Factory.init ( Opener, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));

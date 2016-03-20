@@ -6,11 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
- * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard ) {
 
   'use strict';
 
@@ -336,4 +335,4 @@
 
   Factory.init ( Selectable, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard ));

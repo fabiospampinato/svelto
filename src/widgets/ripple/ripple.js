@@ -7,11 +7,10 @@
  * =========================================================================
  * @require core/animations/animations.js
  * @require core/browser/browser.js
- * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Mouse, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Animations ) {
 
   'use strict';
 
@@ -184,4 +183,4 @@
 
   Factory.init ( Ripple, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Mouse, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations ));

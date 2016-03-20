@@ -7,7 +7,6 @@
  * =========================================================================
  * @require core/animations/animations.js
  * @require core/colors/colors.js
- * @require core/mouse/mouse.js
  * @require core/sizes/sizes.js
  * @require core/widget/widget.js
  * @require lib/timer/timer.js
@@ -16,7 +15,7 @@
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Mouse, Timer, Animations, Colors, Sizes ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes ) {
 
   'use strict';
 
@@ -421,4 +420,4 @@
 
   Factory.init ( Toast, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Mouse, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));
