@@ -5,12 +5,13 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/browser/browser.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
 // It supports only `box-sizing: border-box` inputs
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser ) {
 
   'use strict';
 
@@ -34,11 +35,31 @@
 
     /* SPECIAL */
 
+    static widgetize ( $input ) {
+
+      /* SKIP IE/EDGE */
+
+      //FIXME: input.scrollWidth is not supported by them, find another reliable way of implementing it
+
+      if ( Browser.is.ie || Browser.is.edge ) return;
+
+      /* WIDGETIZE */
+
+      $input.inputAutogrow ();
+
+    }
+
     _variables () {
 
       this.$input = this.$element;
 
-      this.ctx = document.createElement ( 'canvas' ).getContext ( '2d' );
+      this.$tempInput = $('<input>').css ({
+                          'position': 'fixed',
+                          'visibility': 'hidden',
+                          'padding': 0,
+                          'min-width': 0,
+                          'width': 0
+                        });
 
     }
 
@@ -58,9 +79,13 @@
 
     _getNeededWidth () {
 
-      this.ctx.font = this.$input.css ( 'font' );
+      this.$tempInput.css ( 'font', this.$input.css ( 'font' ) ).val ( this.$input.val () ).appendTo ( this.$layout );
 
-      return Math.max ( this.ctx.measureText ( this.$input.val () ).width, this.options.minWidth );
+      let width = this.$tempInput[0].scrollWidth;
+
+      this.$tempInput.detach ();
+
+      return Math.max ( this.options.minWidth, width );
 
     }
 
@@ -94,4 +119,4 @@
 
   Factory.init ( InputAutogrow, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser ));
