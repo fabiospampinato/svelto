@@ -10,8 +10,6 @@
 
 // It supports only `box-sizing: border-box` textareas
 
-//TODO: Measure the needed height using canvas, if possible, it would make it super fast
-
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
@@ -65,7 +63,7 @@
 
     _getNeededHeight () {
 
-      this.$tempTextarea.css ( 'font', this.$textarea.css ( 'font' ) ).val ( this.$textarea.val () ).appendTo ( this.$layout );
+      this.$tempTextarea.css ( 'font', this.$textarea.css ( 'font' ) ).val ( this.$textarea.val () || ' ' ).appendTo ( this.$layout ); // Ensuring that there's at least a space character inside of it fixed a bug in IE/Edge where the textarea gets shrinked
 
       let height = this.$tempTextarea[0].scrollHeight;
 
