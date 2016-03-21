@@ -46,3 +46,23 @@
   }
 
 }
+
+/* HORIZONTAL GROW FIX (IE-10/11)*/
+
+html.flexbox-tweener {
+
+  .toast {
+
+    > .infobar {
+
+      flex-wrap: nowrap;
+
+      .infobar-center {
+        flex-basis: auto;
+      }
+
+    }
+
+  }
+
+}

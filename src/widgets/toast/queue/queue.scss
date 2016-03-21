@@ -8,8 +8,6 @@
  * @require ../toast.scss
  * ========================================================================= */
 
-//FIXME: The columns doesn't shrink when necessary in IE-10/11
-
 /* QUEUE */
 
 .toast-queue {
@@ -57,6 +55,26 @@
 
   &.expanded {
     @include toast-queue-expand ();
+  }
+
+}
+
+/* COLUMNS SHRINKING FIX (IE-10/11)*/
+
+html.flexbox-tweener {
+
+  /* QUEUE */
+
+  .toast-queue:not(.expanded):not(:empty) {
+
+    flex: 1 1 0%;
+
+    /* TOAST */
+
+    .toast {
+      max-width: 100%;
+    }
+
   }
 
 }
