@@ -48,6 +48,10 @@
 
     }
 
+    static ready () {
+      
+    }
+
     _variables () {
 
     }
