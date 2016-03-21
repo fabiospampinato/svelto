@@ -41,12 +41,6 @@
 
     },
 
-    widgetizer ( $widget, name ) {
-
-      $widget[name]();
-
-    },
-
     /* WORKERS */
 
     configure ( Widget, config = {} ) {
@@ -77,7 +71,7 @@
 
       if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
 
-        Widgetize.add ( Widget.config.selector, this.widgetizer, Widget.config.name );
+        Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config );
 
       }
 

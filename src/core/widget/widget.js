@@ -250,6 +250,12 @@
 
     /* SPECIAL */
 
+    static widgetize ( $ele, config ) { // Called for widgetizing an element
+
+      $ele[config.name]();
+
+    }
+
     static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Toast` do for instance
 
     _variables () {} // Init your variables inside this function
