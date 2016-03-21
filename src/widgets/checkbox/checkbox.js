@@ -60,10 +60,6 @@
 
       if ( event.target === this.input || $(event.target).is ( `label[for="${this.inputId}"]` ) ) return;
 
-      console.log(event.target);
-      console.log(this.inputId);
-      console.log($(event.target).is ( `label[for="${this.inputId}"]` ));
-
       this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
 
     }
