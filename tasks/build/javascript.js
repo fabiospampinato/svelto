@@ -15,6 +15,7 @@ var changed      = require ( '../utilities/changed' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
     filter       = require ( '../plugins/filter' ),
+    override     = require ( '../plugins/override' ),
     project      = require ( '../config/project' ),
     plugins      = project.plugins,
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
@@ -43,12 +44,13 @@ gulp.task ( 'build-javascript', 'Build javascript', ['build-javascript-temp'], f
 
   } else {
 
-    var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'dependencies', 'extend', 'babel', 'uglify' );
+    var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend', 'babel', 'uglify' );
 
     return gulp.src ( input.getPath ( 'javascript.all' ) )
                .pipe ( plumber ( log.error ) )
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.uncompressed' ) ) ) )
+               .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
                .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
                .pipe ( flatten () )

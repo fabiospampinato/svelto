@@ -12,8 +12,8 @@ var changed  = require ( '../utilities/changed' ),
     input    = require ( '../utilities/input' ),
     log      = require ( '../utilities/log' ),
     output   = require ( '../utilities/output' ),
-    extend   = require ( '../plugins/extend' ),
     filter   = require ( '../plugins/filter' ),
+    override = require ( '../plugins/override' ),
     plugins  = require ( '../config/project' ).plugins,
     gulp     = require ( 'gulp-help' )( require ( 'gulp' ) ),
     bytediff = require ( 'gulp-bytediff' ),
@@ -27,12 +27,12 @@ var changed  = require ( '../utilities/changed' ),
 
 gulp.task ( 'build-images', 'Build images', function () {
 
-var needUpdate = changed.plugins ( 'extend', 'imagemin' );
+var needUpdate = changed.plugins ( 'override', 'imagemin' );
 
   return gulp.src ( input.getPath ( 'images' ) )
              .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
-             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
+             .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.start () ) )

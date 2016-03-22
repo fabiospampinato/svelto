@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Tasks - Plugins - Extend
+ * Svelto - Tasks - Plugins - Override
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Export functions so that they can be used by `override` too
+//TODO: Export functions so that they can be used by `extend` too
 
 /* REQUIRE */
 
@@ -119,31 +119,17 @@ var workerPartial = function ( partition, paths, options ) {
 
 };
 
-var workerBefore = function ( partition, paths, config ) {
+var workerOverride = function ( partition, paths, config ) {
 
   workerPartial ( partition, paths, {
-    suffix: 'before',
+    suffix: 'override',
     offset: 0,
-    remove: 0,
-    callback: function ( base, extender ) {
+    remove: 1,
+    callback: function ( base, overrider ) {
       if ( config.log ) {
-        console.log ( '`' + extender.path + '` has been prepended to `' + base.path + '`' );
+        console.log ( '`' + overrider.path + '` has overridden `' + base.path + '`' );
       }
-    }
-  });
-
-};
-
-var workerAfter = function ( partition, paths, config ) {
-
-  workerPartial ( partition, paths, {
-    suffix: 'after',
-    offset: 1,
-    remove: 0,
-    callback: function ( base, extender ) {
-      if ( config.log ) {
-        console.log ( '`' + extender.path + '` has been appendend to `' + base.path + '`' );
-      }
+      overrider.path = base.path;
     }
   });
 
@@ -154,16 +140,15 @@ var workerAfter = function ( partition, paths, config ) {
 var worker = function ( files, config ) {
 
   var paths = getFilesPaths ( files ),
-      partition = partitionFiles ( files, paths, ['before', 'after'] );
+      partition = partitionFiles ( files, paths, ['override'] );
 
-  workerBefore ( partition, paths, config );
-  workerAfter ( partition, paths, config );
+  workerOverride ( partition, paths, config );
 
   if ( partition[1].length ) {
 
     var filepaths = partition[1].map ( function ( file ) { return file.path; } );
 
-    return new gutil.PluginError ( 'Extend', 'Missing target files for: ' + filepaths.join ( ', ' ) );
+    return new gutil.PluginError ( 'Override', 'Missing target files for: ' + filepaths.join ( ', ' ) );
 
   } else {
 
@@ -173,9 +158,9 @@ var worker = function ( files, config ) {
 
 };
 
-/* EXTEND */
+/* OVERRIDE */
 
-var extend = function ( config ) {
+var override = function ( config ) {
 
   /* CONFIG */
 
@@ -187,7 +172,7 @@ var extend = function ( config ) {
 
   var files = [];
 
-  /* EXTEND */
+  /* OVERRIDE */
 
   return through.obj ( function ( file, encoding, callback ) {
 
@@ -219,6 +204,6 @@ var extend = function ( config ) {
 
 };
 
-/* EXPORT */
+/* OVERRIDE */
 
-module.exports = extend;
+module.exports = override;

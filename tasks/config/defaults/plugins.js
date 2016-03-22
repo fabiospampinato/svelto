@@ -79,6 +79,12 @@ var plugins = {
       }]
     }
   },
+  override: {
+    enabled: true,
+    options: {
+      log: false
+    }
+  },
   sass: {
     enabled: true,
     options: {

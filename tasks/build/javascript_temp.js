@@ -22,6 +22,7 @@ var _            = require ( 'lodash' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
     filter       = require ( '../plugins/filter' ),
+    override     = require ( '../plugins/override' ),
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     babel        = require ( 'gulp-babel' ),
     flatten      = require ( 'gulp-flatten' ),
@@ -36,7 +37,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
 
   if ( !project.isDevelopment ) return;
 
-  var needCleaning = changed.project ( 'components' ) || changed.project ( 'output.javascript' ) || changed.plugins ( 'filter', 'dependencies', 'extend' ),
+  var needCleaning = changed.project ( 'components' ) || changed.project ( 'output.javascript' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend' ),
       needUpdate   = needCleaning || changed.plugin ( 'babel' );
 
   if ( needCleaning ) {
@@ -50,6 +51,7 @@ gulp.task ( 'build-javascript-temp', false, function () {
   return gulp.src ( input.getPath ( 'javascript.all' ) )
              .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+             .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( foreach ( function ( stream, file ) {

@@ -19,6 +19,7 @@ var merge        = require ( 'merge-stream' ),
     dependencies = require ( '../plugins/dependencies' ),
     extend       = require ( '../plugins/extend' ),
     filter       = require ( '../plugins/filter' ),
+    override     = require ( '../plugins/override' ),
     gulp         = require ( 'gulp-help' )( require ( 'gulp' ) ),
     gulpif       = require ( 'gulp-if' ),
     concat       = require ( 'gulp-concat' ),
@@ -29,7 +30,7 @@ var merge        = require ( 'merge-stream' ),
 
 gulp.task ( 'build-scss-parts', false, function () {
 
-  var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'dependencies', 'extend' );
+  var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend' );
 
   var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
 
@@ -39,6 +40,7 @@ gulp.task ( 'build-scss-parts', false, function () {
                .pipe ( plumber ( log.error ) )
                .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
+               .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
                .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
                .pipe ( concat ( output.getName ( 'scss.' + part ) ) )

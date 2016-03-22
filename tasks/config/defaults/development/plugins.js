@@ -17,7 +17,7 @@ var plugins = {
   },
   dependencies: {
     options: {
-      log: false
+      log: true //FIXME: Set it back to `false`, anzi rimuovi completamente visto che è false di default
     }
   },
   extend: {
@@ -32,7 +32,12 @@ var plugins = {
   },
   imagemin: {
     enabled: false
-  }
+  },
+  override: {
+    options: {
+      log: true
+    }
+  },
 };
 
 /* EXPORT */
