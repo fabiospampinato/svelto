@@ -6,6 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+/* REQUIRE */
+
+var path = require ( 'path' );
+
 /* PLUGINS */
 
 var plugins = {
@@ -19,7 +23,7 @@ var plugins = {
   babel: {
     enabled: true,
     options: {
-      presets: ['./node_modules/babel-preset-es2015'], // We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
+      presets: [path.join ( process.cwd (), './node_modules/babel-preset-es2015' )], // We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
       babelrc: false,
       compact: false
     }
