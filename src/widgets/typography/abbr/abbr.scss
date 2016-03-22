@@ -16,6 +16,7 @@
 
 abbr[title] {
   cursor: help;
+  text-decoration: none;
   border-width: 0 0 $abbr-border-width;
   border-style: $abbr-border-style;
   border-color: $abbr-border-color;
