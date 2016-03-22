@@ -19,6 +19,8 @@ input[type="checkbox"] {
 
   + label {
 
+    min-height: 1em * $icon-scale-factor;
+    min-width: 1em * $icon-scale-factor;
     cursor: pointer;
 
     /* BEFORE / AFTER */

@@ -12,8 +12,14 @@
 
 input[type="checkbox"] + label {
 
-  padding-left: ( 1em * $icon-scale-factor ) + $checkbox-label-inner-gutter;
+  padding-left: ( 1em * $icon-scale-factor ) + $checkbox-inner-gutter;
 
+  /* EMPTY */
+
+  &:empty {
+    padding-left: 1em * $icon-scale-factor;
+  }
+  
   /* BEFORE / AFTER */
 
   &:before,
