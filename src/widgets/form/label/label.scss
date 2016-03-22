@@ -12,12 +12,6 @@
 /* LABEL */
 
 label {
-
   @extend %widget;
   display: block;
-
-  > * {
-    vertical-align: middle;
-  }
-
 }

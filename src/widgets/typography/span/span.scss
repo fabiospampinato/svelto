@@ -11,13 +11,5 @@
 /* SPAN */
 
 span {
-
-  > * {
-    margin-bottom: 0 !important;
-  }
-
-  > :not(address):not(span):not(p) {
-    vertical-align: middle;
-  }
-
+  @include children-no-gutter ();
 }

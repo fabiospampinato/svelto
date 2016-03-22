@@ -12,16 +12,7 @@
 /* ADDRESS */
 
 address {
-
   @extend %widget;
+  @include children-no-gutter ();
   font-style: $address-font-style;
-
-  > * {
-    margin-bottom: 0 !important;
-  }
-
-  > :not(address):not(span):not(p) {
-    vertical-align: middle;
-  }
-
 }
