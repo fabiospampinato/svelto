@@ -38,6 +38,7 @@
               '</div>'
     },
     options: {
+      native: Browser.is.touchDevice, // Don't show the popover and use the native select, by default on touch devices
       popover: {
         size: '',
         color: Colors.white,
@@ -87,7 +88,7 @@
 
       this._updateValueholder ();
 
-      if ( !Browser.is.touchDevice ) {
+      if ( !this.options.native ) {
 
         this.$select.addClass ( this.options.classes.hidden );
 
