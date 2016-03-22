@@ -65,7 +65,7 @@
           revert: true,
           $helper: (function ( color ) {
             return function () {
-              return useHelpers ? $('<div class="container ' + color + ' absolute">' + lodash.capitalize ( color ) + '</div>') : false;
+              return useHelpers ? $('<div class="container ' + color + ' fixed">' + lodash.capitalize ( color ) + '</div>') : false;
             }
           })( colors[i] )
         });

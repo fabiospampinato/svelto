@@ -13,10 +13,10 @@ SWHelpers.define ( 'action', function ( label, action ) {
 
 SWHelpers.define ( 'checkbox', function ( label, name = '', value = '' ) {
 
-  return '<label class="button checkbox bordered">' +
-           `<span>${label}</span>` +
+  return '<div class="button checkbox right bordered">' +
            `<input type="checkbox" name="${name}" value="${value}">` +
-         '</label>';
+           `<label>${label}</label>` +
+         '</div>';
 
 });
 
@@ -24,10 +24,10 @@ SWHelpers.define ( 'checkAction', function ( label, action, checked ) {
 
   checked = lodash.isBoolean ( checked ) ? checked : false;
 
-  return '<label class="button checkbox bordered">' +
-           `<span>${label}</span>` +
-           `<input type="checkbox" ${checked ? 'checked' : ''} onclick="${action}">` +
-         '</label>';
+  return `<div class="button checkbox right bordered" onclick="${action}">` +
+           `<input type="checkbox" ${checked ? 'checked' : ''}>` +
+           `<label>${label}</label>` +
+         '</div>';
 
 });
 
@@ -132,7 +132,7 @@ SWHelpers.define ( 'divider', function ( title = '' ) {
 
 SWHelpers.define ( 'iconAction', function ( icon, action ) {
 
-  return '<div class="button bordered compact" onclick="${action}">' +
+  return `<div class="button bordered compact" onclick="${action}">` +
            `<i class="icon">${icon}</i>` +
          '</div>';
 
@@ -349,10 +349,10 @@ SWHelpers.define ( 'progressbar', function ( value = 0, decimals = 0 ) {
 
 SWHelpers.define ( 'radio', function ( label, name = '', value = '' ) {
 
-  return '<label class="button radio bordered">' +
-           `<span>${label}</span>` +
+  return '<div class="button radio right bordered">' +
            `<input type="radio" name="${name}" value="${value}">` +
-         '</label>';
+           `<label>${label}</label>` +
+         '</div>';
 
 });
 
@@ -360,10 +360,10 @@ SWHelpers.define ( 'radioAction', function ( label, name, action, checked ) {
 
   checked = lodash.isBoolean ( checked ) ? checked : false;
 
-  return '<label class="button radio bordered">' +
-           `<span>${label}</span>` +
-           `<input type="radio" name="${name}" ${checked ? 'checked' : ''} onclick="${action}">` +
-         '</label>';
+  return `<div class="button radio right bordered" onclick="${action}">` +
+           `<input type="radio" name="${name}" ${checked ? 'checked' : ''}>` +
+           `<label>${label}</label>` +
+         '</div>';
 
 });
 
@@ -425,9 +425,10 @@ SWHelpers.define ( 'switch', function ( options ) {
   options['color-off'] = options['color-off'] || '';
   options.name = options.name || '';
   options.value = options.value || 0;
+  options.checked = lodash.isBoolean ( options.checked ) ? options.checked : false;
 
   return `<div data-color-on="${options['color-on']}" data-color-off="${options['color-off']}" class="switch">` +
-           `<input type="checkbox" name="${options.name}" value="${options.value}">` +
+           `<input type="checkbox" ${options.checked ? 'checked' : ''} name="${options.name}" value="${options.value}">` +
            '<div class="switch-bar"></div>' +
            '<div class="switch-handler"></div>' +
          '</div>';

@@ -11,6 +11,41 @@
     <i class="icon">settings</i>
   </div>
 
+  {{{sw.divider "Checkbox"}}}
+
+  <div class="checkbox-target checkbox fluid">
+    <input type="checkbox">
+    <label>Checkbox</label>
+  </div>
+
+  <div class="checkbox-target checkbox right fluid">
+    <input type="checkbox">
+    <label>Checkbox</label>
+  </div>
+
+  {{{sw.checkAction "Button" "$('.checkbox-target').toggleClass ( 'button bordered' )"}}}
+
+  {{{sw.divider "Radio"}}}
+
+  <div class="radio-target radio fluid">
+    <input type="radio" name="demo">
+    <label>Radio</label>
+  </div>
+
+  <div class="radio-target radio right fluid">
+    <input type="radio" name="demo">
+    <label>Radio</label>
+  </div>
+
+  {{{sw.checkAction "Button" "$('.radio-target').toggleClass ( 'button bordered' )"}}}
+
+  {{{sw.divider "Select"}}}
+
+  <div class="button bordered select fluid">
+    {{{sample.select}}}
+    <label>Value: "<span class="select-value"></span>"</label>
+  </div>
+
   {{{sw.divider "Input"}}}
 
   <input placeholder="Input..." class="fluid">

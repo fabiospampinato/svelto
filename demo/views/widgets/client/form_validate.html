@@ -47,20 +47,20 @@
       {{{sw.divider "Textarea"}}}
       <textarea name="txt_multiple" placeholder="Multiple..." class="bordered fluid" data-validations="required|alphanumeric|minLength[3]"></textarea>
       {{{sw.divider "Checkbox"}}}
-      <label class="button checkbox bordered fluid">
-        <span>Needed to be checked</span>
+      <div class="button checkbox right bordered fluid">
         <input type="checkbox" name="checkbox_name_1" value="true" data-validations="checked">
-      </label>
+        <label>Needed to be checked</label>
+      </div>
       {{{sw.divider "Radios"}}}
       <div class="multiple fluid">
-        <label class="button radio bordered">
-          <span>Radio 1</span>
+        <div class="button radio right bordered">
           <input type="radio" name="radio_name" value="true">
-        </label>
-        <label class="button radio bordered">
-          <span>Radio 2</span>
+          <label>Radio 1</label>
+        </div>
+        <div class="button radio right bordered">
           <input type="radio" name="radio_name" value="false">
-        </label>
+          <label>Radio 2</label>
+        </div>
       </div>
     </div>
     <div class="card-footer bordered">

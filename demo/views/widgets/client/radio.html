@@ -5,23 +5,27 @@
 
   {{{sw.divider "Radio"}}}
 
-  <div class="multiple radios">
-    <input type="radio" name="name">
-    <label class="radio">
-      <input type="radio" name="name">
-    </label>
-    <label class="radio">
-      <span>Base</span>
-      <input type="radio" name="name">
-    </label>
-    <label class="radio">
-      <input type="radio" name="name">
-      <span>Inverse</span>
-    </label>
-    <label class="radio">
-      <span>Custom icons</span>
-      <input type="radio" name="name" data-icon-on="thumb_up" data-icon-off="thumb_down">
-    </label>
+  <div class="multiple vertical radios">
+    <div class="radio">
+      <input type="radio" name="demo">
+      <label></label>
+    </div>
+    <p>
+      <input type="radio" name="demo" id="paragraph">
+      <label for="paragraph">Paragraph</label>
+    </p>
+    <div class="radio">
+      <input type="radio" name="demo" id="multi">
+      <label for="multi">Wrapped and for</label>
+    </div>
+    <div class="radio">
+      <input type="radio" name="demo">
+      <label>Checkbox</label>
+    </div>
+    <div class="radio">
+      <input type="radio" name="demo">
+      <label data-icon-on="favorite" data-icon-off="favorite_border">Custom icons</label>
+    </div>
   </div>
 
   {{> radio_actions}}
@@ -34,7 +38,18 @@
 
   {{{sw.divider "Style"}}}
 
-  {{{sw.checkAction "Button" "toggle_class ( 'button' )"}}}
+  <div class="multiple actions">
+    {{{sw.checkAction "Button" "toggle_class ( 'button' )"}}}
+    {{{sw.checkAction "Bordered" "toggle_class ( 'bordered' )"}}}
+  </div>
+
+  {{{sw.divider "Direction"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Default" "direction" "set_direction ()" true}}}
+    {{{sw.radioAction "Left" "direction" "set_direction ( 'left' )"}}}
+    {{{sw.radioAction "Right" "direction" "set_direction ( 'right' )"}}}
+  </div>
 
   {{{sw.divider "State"}}}
 
@@ -51,25 +66,37 @@
   </div>
 
   <script>
-    var $radios = $('.radios').find ( '.radio, input[type="radio"]' ).not ( '.radio input' );
+    var $wrappers = $('.radios > *'),
+        $labels = $('.radios label');
 
     function toggle_class ( name ) {
-      $radios.toggleClass ( name );
+      $wrappers.toggleClass ( name );
     }
 
     function set_validity ( validity ) {
+      var $targets = $('.radios > .radio, .radios > :not(.radio) > input');
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $radios.removeClass ( validities[i] ).addClass ( validity );
+        $targets.removeClass ( validities[i] ).addClass ( validity );
+      }
+    }
+
+    function set_direction ( direction ) {
+      var directions = ['left', 'right'];
+      for ( var i = 0, l = directions.length; i < l; i++ ) {
+        $labels.removeClass ( directions[i] );
+      }
+      if ( direction ) {
+        $labels.addClass ( direction );
       }
     }
 
     function enable () {
-      $radios.removeClass ( 'disabled' );
+      $wrappers.removeClass ( 'disabled' );
     }
 
     function disable () {
-      $radios.addClass ( 'disabled' );
+      $wrappers.addClass ( 'disabled' );
     }
   </script>
 

@@ -6,22 +6,25 @@
   {{{sw.divider "Select"}}}
 
   <div class="multiple">
-    <div class="button bordered select-toggler">
-      <span>Value: "<span class="select-value"></span>"</span>
-      <i class="icon">reorder</i>
+    <div class="button bordered select">
       {{{sample.select}}}
+      <label>Select</label>
     </div>
-    <div class="button bordered compact select-toggler">
-      <i class="icon">reorder</i>
+    <div class="button bordered select">
       {{{sample.select}}}
+      <label class="select-value">Value</label>
     </div>
-    <div class="button bordered compact select-toggler">
-      <i class="icon">settings</i>
+    <div class="button bordered select">
       {{{sample.select}}}
+      <label>Nested: "<span class="select-value">Value</span>"</label>
     </div>
-    <div class="button bordered compact circular select-toggler">
-      <i class="icon">settings</i>
+    <div class="button bordered compact select">
       {{{sample.select}}}
+      <label></label>
+    </div>
+    <div class="button bordered compact circular select">
+      {{{sample.select}}}
+      <label data-icon="settings"></label>
     </div>
   </div>
 
@@ -49,13 +52,13 @@
 
   <script>
     function api ( action ) {
-      $('.select-toggler').selectToggler ( action );
+      $('.select').select ( action );
     }
 
     function set_validity ( validity ) {
       var validities = ['valid', 'invalid'];
       for ( var i = 0, l = validities.length; i < l; i++ ) {
-        $('.select-toggler').removeClass ( validities[i] ).addClass ( validity );
+        $('.select').removeClass ( validities[i] ).addClass ( validity );
       }
     }
   </script>

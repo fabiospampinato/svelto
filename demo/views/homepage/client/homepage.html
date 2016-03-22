@@ -139,7 +139,6 @@
     <a href="/widgets/selectable" class="button bordered green">Selectable</a>
     <a href="/widgets/shape" class="button bordered green">Shape</a>
     <a href="/widgets/slider" class="button bordered green">Slider</a>
-    <a href="/widgets/sortable" class="button bordered green">Sortable</a>
     <a href="/widgets/spacer" class="button bordered green">Spacer</a>
     <a href="/widgets/spinner" class="button bordered green">Spinner</a>
     <a href="/widgets/spinner_overlay" class="button bordered green">Spinner Overlay</a>
@@ -147,6 +146,7 @@
     <a href="/widgets/switch" class="button bordered green">Switch</a>
     <a href="/widgets/table" class="button bordered green">Table</a>
     <a href="/widgets/table_helper" class="button bordered green">Table Helper</a>
+    <a href="/widgets/table_sortable" class="button bordered green">Table Sortable</a>
     <a href="/widgets/tabs" class="button bordered green">Tabs</a>
     <a href="/widgets/tagbox" class="button bordered green">Tagbox</a>
     <a href="/widgets/textarea" class="button bordered green">Textarea</a>
@@ -167,12 +167,14 @@
 <template name="homepage_status">
   <script>
     $(function () {
-      var $buttons = $('.layout-content .button').not('.expander .button'),
-          green_nr = $buttons.filter('.green').length,
-          olive_nr = $buttons.filter('.olive').length,
-          orange_nr = $buttons.filter('.orange').length,
-          red_nr = $buttons.filter('.red').length,
+
+      var $buttons = $('.layout-content .button'),
+          green_nr = $buttons.filter ( '.green' ).length,
+          olive_nr = $buttons.filter ( '.olive' ).length,
+          orange_nr = $buttons.filter ( '.orange' ).length,
+          red_nr = $buttons.filter ( '.red' ).length,
           others_nr = $buttons.length - green_nr - olive_nr - orange_nr - red_nr;
+
       $.toast ({
         body: '<p>' +
                 '<span class="text-green">Ready (' + green_nr + ')</span><br/>' +
@@ -181,8 +183,9 @@
                 '<span class="text-red">Problematic (' + red_nr + ')</span><br/>' +
                 '<span class="text-white">Others (' + others_nr + ')</span>' +
               '</p>',
-        ttl: 'forever'
+        ttl: Infinity
       });
+
     });
   </script>
 </template>
