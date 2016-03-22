@@ -49,3 +49,27 @@
   }
 
 }
+
+/* INFOBAR PARTIAL FIX (IE-10/11) */
+
+// It is "partial" because it will break if we add `.infobar-bottom`, but using it without it, expecially when inside a divider, is a much more common case
+
+html.flexbox-tweener {
+
+  .divider.linear.horizontal {
+
+    /* INFOBAR */
+
+    > .infobar {
+
+      flex-wrap: nowrap;
+
+      > .infobar-center {
+        flex-basis: auto;
+      }
+
+    }
+
+  }
+
+}
