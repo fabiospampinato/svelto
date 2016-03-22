@@ -15,12 +15,10 @@
   width: $remote-modal-width;
   height: $remote-modal-height;
 
-  /* CARD BLOCK */
+  /* SPINNER */
 
-  > .card-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  svg.spinner {
+    @include center-absolute-fill ();
   }
 
 }

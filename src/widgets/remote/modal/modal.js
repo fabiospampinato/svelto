@@ -33,7 +33,8 @@
       classes: {
         placeholder: 'remote-modal-placeholder',
         loaded: 'remote-modal-loaded',
-        animating: 'remote-modal-animating'
+        resizing: 'remote-modal-resizing',
+        showing: 'remote-modal-showing'
       },
       animations: {
         resize: Animations.normal
@@ -193,7 +194,9 @@
 
         this._frame ( function () {
 
-          this.$modal.addClass ( this.options.classes.loaded ).html ( $remoteModal.html () ).widgetize ();
+          this.$modal.html ( $remoteModal.html () ).widgetize ();
+
+          this.$modal.addClass ( this.options.classes.loaded );
 
           let newRect = this.$modal.getRect ();
 
@@ -202,19 +205,21 @@
             height: prevRect.height
           });
 
+          this.$modal.addClass ( this.options.classes.resizing );
+
           this._frame ( function () {
 
-            this.$modal.addClass ( this.options.classes.animating );
+            this.$modal.addClass ( this.options.classes.showing );
 
             this.$modal.animate ({
               width: newRect.width,
               height: newRect.height
-            }, this.options.animations.resize, function () {
+            }, this.options.animations.resize, () => {
               this.$modal.css ({
                 width: '',
                 height: ''
-              }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.animating );
-            }.bind ( this ));
+              }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.resizing + ' ' + this.options.classes.showing );
+            });
 
           });
 
