@@ -5,39 +5,9 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/push_state/push_state.js
  * @require core/svelto/svelto.js
  * ========================================================================= */
-
-/* PUSHSTATE */
-
-// Monkey patching `history.pushState` so that it will trigger an event that we can use to properly trigger `route` event
-
-(function ( $, _, Svelto, history ) {
-
-  'use strict';
-
-  $(function () {
-
-    let $window = $(window),
-        pushState = history.pushState;
-
-    history.pushState = function ( state ) {
-
-      if ( _.isFunction ( history.onpushstate ) ) {
-
-        history.onpushstate ( { state: state } );
-
-      }
-
-      $window.trigger ( 'pushstate' );
-
-      return pushState.apply ( history, arguments );
-
-    };
-
-  });
-
-})( Svelto.$, Svelto._, Svelto, window.history );
 
 /* ROUTE */
 
@@ -70,4 +40,4 @@
 
   });
 
-})( Svelto.$, Svelto._, Svelto, window.history );
+})( Svelto.$, Svelto._, Svelto );
