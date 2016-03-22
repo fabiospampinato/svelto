@@ -12,6 +12,7 @@
  * ========================================================================= */
 
 //TODO: Add a way to force labels icons to have the same height as labels with just text
+//TODO: Add support for img inside it (It should probably behave like Angular Material's chip)
 
 /* LABEL */
 
@@ -27,11 +28,9 @@
   padding: $label-padding-y $label-padding-x;
   min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
 
-  /* CHILDREN */
+  /* HORIZONTAL GUTTER */
 
-  > :not(.overlay):not(.ripple-circle):not(input) {
-
-    vertical-align: middle;
+  > :not(.overlay):not(.ripple-circle):not(input):not(select) {
 
     /* HORIZONTAL GUTTER */
 
@@ -44,6 +43,17 @@
       margin-left: $label-inner-gutter / $icon-scale-factor;
     }
 
+  }
+
+  /* ALIGNMENT */
+
+  > %icon,
+  > %icons,
+  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child),
+  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child) ~ *,
+  > .overlay + :not(:last-child),
+  > .ripple-circle + :not(:last-child) {
+    vertical-align: middle;
   }
 
 }
