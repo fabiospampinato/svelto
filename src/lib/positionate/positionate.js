@@ -301,7 +301,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( deltaX, 0 );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px !important;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 
@@ -311,7 +311,7 @@
           if ( options.pointer instanceof $ ) {
             options.pointer.translate ( 0, deltaY );
           } else if ( options.pointer === 'auto' ) {
-            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px !important;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 
