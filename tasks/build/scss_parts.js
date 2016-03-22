@@ -32,13 +32,14 @@ gulp.task ( 'build-scss-parts', false, function () {
 
   var needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend' );
 
-  var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
+  var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'],
+      filterable = [false, false, false, true, true];
 
-  var streams = parts.map ( function ( part ) {
+  var streams = parts.map ( function ( part, index ) {
 
     return gulp.src ( input.getPath ( 'scss.' + part ) )
                .pipe ( plumber ( log.error ) )
-               .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+               .pipe ( gulpif ( filterable[index] && plugins.filter.enabled, filter ( plugins.filter.options ) ) )
                .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'scss.' + part ) ) ) )
                .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
                .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
