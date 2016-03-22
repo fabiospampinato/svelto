@@ -33,17 +33,21 @@ gulp.task ( 'bump-package', false, function () {
 
 gulp.task ( 'bump', 'Bump Svelto version', ['bump-package'], function () {
 
-  var version = JSON.parse ( fs.readFileSync ( './package.json', 'utf8' ) ).version; // Instead of `require` in order to avoid to get a cached value
+  var version = JSON.parse ( fs.readFileSync ( './package.json', 'utf8' ) ).version; // We are not using `require` in order to avoid to get a cached value
 
-  var svelto = gulp.src ( './src/core/svelto/svelto.js' )
-                   .pipe ( replace ( /VERSION: '(.*)'/, 'VERSION: \'' + version + '\'' ) )
-                   .pipe ( gulp.dest ( './src/core/svelto' ) );
+  var sveltoJS = gulp.src ( './src/core/svelto/svelto.js' )
+                     .pipe ( replace ( /VERSION: '(.*)'/, 'VERSION: \'' + version + '\'' ) )
+                     .pipe ( gulp.dest ( './src/core/svelto' ) );
+
+  var sveltoSCSS = gulp.src ( './src/core/svelto/variables.scss' )
+                       .pipe ( replace ( /\$svelto-version: '(.*)'/, '$svelto-version: \'' + version + '\'' ) )
+                       .pipe ( gulp.dest ( './src/core/svelto' ) );
 
   var meteor = gulp.src ( './package.js' )
                    .pipe ( replace ( /version: '(.*)'/, 'version: \'' + version + '\'' ) )
                    .pipe ( gulp.dest ( './' ) );
 
-  return merge ( svelto, meteor );
+  return merge ( sveltoJS, sveltoSCSS, meteor );
 
 }, {
 
