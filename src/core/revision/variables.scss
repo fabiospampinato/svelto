@@ -1,0 +1,15 @@
+
+/* =========================================================================
+ * Svelto - Core - Revision (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/variables.scss
+ * ========================================================================= */
+
+/* REVISION */
+
+// Appended to urls, in order to load the new version instead of the cached one
+
+$revision: '?v=' + $svelto-version !default;

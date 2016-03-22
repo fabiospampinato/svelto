@@ -15,7 +15,7 @@
   vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
-  background-image: url(#{$flags-path-images}flags.png);
+  background-image: url(#{$flags-path-images}flags.png#{$revision});
 }
 
 i.flag {

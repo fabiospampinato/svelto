@@ -16,8 +16,8 @@
     font-weight: 400;
     src: local('Material Icons'),
          local('MaterialIcons-Regular'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2) format('woff2'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff) format('woff');
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2#{$revision}) format('woff2'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff#{$revision}) format('woff');
   }
 
 }
