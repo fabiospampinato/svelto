@@ -31,9 +31,9 @@
     // Transitioning `filter` in order to support `blurred`
     // Transitioning `box-shadow` in order to support `raisable`
 
-    transition: transform $flippable-animation-duration, 
-                opacity $disabled-animation-duration, 
-                filter $blurred-animation-duration, 
+    transition: transform $flippable-animation-duration,
+                opacity $disabled-animation-duration,
+                filter $blurred-animation-duration,
                 box-shadow $raisable-animation-duration;
   }
 
@@ -48,6 +48,19 @@
   &-back {
     position: absolute;
     top: 0;
+  }
+
+}
+
+/* DISAPPEARING FIX (IE-10/11) */
+
+// Their implementation of `backface-visibility: hidden` is buggy, but `.flippable-front` and `.flippable-back` for some reasons don't disappear if we put `.flippable-front` in its own layer
+// The resulting animation isn't perfect though
+
+html.flexbox-tweener {
+
+  .flippable {
+    transform: translateZ(0);
   }
 
 }
