@@ -6,9 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
- * @require decorators/colors/colors.scss
- * @require widgets/icon/icon.scss
- * @require widgets/icons/icons.scss
+ * @before widgets/icon/icon.scss
+ * @before widgets/icons/icons.scss
  * ========================================================================= */
 
 //TODO: Add a way to force labels icons to have the same height as labels with just text
