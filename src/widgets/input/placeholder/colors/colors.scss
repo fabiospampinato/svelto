@@ -9,6 +9,8 @@
  * @require decorators/colors/colors.scss
  * ========================================================================= */
 
+//TODO: Add support for inverted colors
+
 /* COLORS */
 
 @each $name, $datas in $colors {

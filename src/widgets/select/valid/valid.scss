@@ -1,21 +1,23 @@
 
 /* =========================================================================
- * Svelto - Widgets - Remote Modal - Loaded - Unanimating
+ * Svelto - Widgets - Select - Valid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../loaded.scss
+ * @require ../select.scss
  * ========================================================================= */
 
-/* UNANIMATING */
+/* VALID */
 
-.remote-modal-placeholder.remote-modal-loaded:not(.remote-modal-animating) {
+.select.valid > label,
+select.valid + label,
+select + label.valid {
 
-  /* CHILDREN */
+  /* AFTER */
 
-  > * {
-    opacity: 0;
+  &:after {
+    color: $color-success !important;
   }
 
 }

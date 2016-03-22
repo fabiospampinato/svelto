@@ -13,6 +13,8 @@
 
 /* LEVELS */
 
+//TODO: Decrease level offset when there's no img
+
 $chat-message-level-1-offset: 0 !default;
 $chat-message-level-2-offset: 4.5em !default;
 $chat-message-level-3-offset: $chat-message-level-2-offset * 2 !default;

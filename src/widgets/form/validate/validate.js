@@ -10,6 +10,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
+//TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 
 (function ( $, _, Svelto, Widgets, Factory, Validator ) {
@@ -107,7 +108,7 @@
       selectors: {
         element: 'input:not([type="button"]), textarea, select',
         textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
-        wrapper: '.checkbox, .colorpicker, .datepicker, .radio, .select-toggler, .slider, .switch'
+        wrapper: '.checkbox, .colorpicker, .datepicker, .radio, .select, .slider, .switch'
       }
     }
   };

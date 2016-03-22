@@ -23,4 +23,10 @@
     transition-duration: $spinner-overlay-animation-duration;
   }
 
+  /* SPINNER */
+
+  > svg.spinner {
+    @include center-absolute-fill ();
+  }
+
 }
