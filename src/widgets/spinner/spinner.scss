@@ -35,4 +35,12 @@ svg.spinner {
     animation: spinner-dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
+  /* ONLY CHILD */
+
+  &:only-child,
+  .overlay + &:last-child,
+  .ripple-cirlce + &:last-child {
+    margin: auto;
+  }
+
 }
