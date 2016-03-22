@@ -14,6 +14,6 @@
 
   /* POSITION STICKY */
 
-  Modernizr.addTest ( 'css-position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );
+  Modernizr.addTest ( 'position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );
 
 }( Modernizr ));
