@@ -1,15 +1,15 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Toggler - Directions - Right
+ * Svelto - Widgets - Select - Directions - Right
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../toggler.scss
+ * @require ../select.scss
  * ========================================================================= */
 
 /* RIGHT */
 
-.select-toggler.popover-anchor-right {
+.select.popover-anchor-right {
   @include border-right-radius ( 0 );
 }

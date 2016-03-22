@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Toggler
+ * Svelto - Widgets - Select
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -19,14 +19,14 @@
   /* CONFIG */
 
   let config = {
-    name: 'selectToggler',
+    name: 'select',
     plugin: true,
-    selector: '.select-toggler',
+    selector: '.select',
     templates: {
       base: '<div class="popover select-popover card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
               '<div class="card-block">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
+                  '{% include ( "select." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
                 '{% } %}' +
               '</div>' +
             '</div>',
@@ -64,18 +64,18 @@
     }
   };
 
-  /* SELECT TOGGLER */
+  /* SELECT */
 
-  class SelectToggler extends Widgets.Widget {
+  class Select extends Widgets.Widget {
 
     /* SPECIAL */
 
     _variables () {
 
-      this.$toggler = this.$element;
-      this.$select = this.$toggler.find ( this.options.selectors.select );
+      this.$wrp = this.$element;
+      this.$select = this.$wrp.find ( this.options.selectors.select );
       this.$options = this.$select.find ( this.options.selectors.option );
-      this.$valueholder = this.$toggler.find ( this.options.selectors.valueholder );
+      this.$valueholder = this.$wrp.find ( this.options.selectors.valueholder );
 
       this.selectOptions = [];
 
@@ -199,7 +199,7 @@
         }
       });
 
-      this.$toggler.attr ( `data-${Widgets.Targeter.config.options.datas.target}`, '.' + this.guc ).popoverToggler ();
+      this.$wrp.attr ( `data-${Widgets.Targeter.config.options.datas.target}`, '.' + this.guc ).popoverToggler ();
 
       this._updatePopover ();
 
@@ -209,7 +209,7 @@
 
       if ( this.$popover.is ( '.' + this.options.classes.affixed ) ) {
 
-        this.$popover.css ( 'min-width', this.$toggler.outerWidth () );
+        this.$popover.css ( 'min-width', this.$wrp.outerWidth () );
 
       }
 
@@ -239,7 +239,7 @@
 
       let value = this.$select.val ();
 
-      if ( value.length ) {
+      if ( _.isString ( value ) && value.length ) {
 
         let $selectedOption = this.$options.filter ( `[value="${value}"]` );
 
@@ -256,7 +256,6 @@
       this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
 
     }
-
 
     _update () {
 
@@ -292,6 +291,6 @@
 
   /* FACTORY */
 
-  Factory.init ( SelectToggler, config, Widgets );
+  Factory.init ( Select, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors ));

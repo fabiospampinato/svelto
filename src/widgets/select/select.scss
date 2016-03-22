@@ -6,7 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
  * ========================================================================= */
+
+//TODO: Add support for non-affixed select's popover
 
 /* SELECT */
 
@@ -30,5 +34,53 @@ select {
   // .bordered > & {
   //   @include absolute ( - $border-width );
   // }
+
+  /* LABEL */
+
+  + label {
+
+    padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
+    min-height: 1em * $icon-scale-factor;
+    min-width: 1em * $icon-scale-factor;
+    cursor: pointer;
+
+    /* EMPTY */
+
+    &:empty {
+      padding-right: 0;
+    }
+
+    /* AFTER */
+
+    &:after {
+      @extend %icon-base;
+      position: absolute;
+      right: 0;
+      content: $select-icon;
+    }
+
+    /* CUSTOM AFTER */
+
+    &[data-icon]:after {
+      content: attr(data-icon);
+    }
+
+  }
+
+}
+
+/* WRAPPER */
+
+.select {
+
+  @extend %widget;
+  cursor: pointer;
+  position: relative;
+
+  /* LABEL */
+
+  &.label {
+    text-align: left;
+  }
 
 }

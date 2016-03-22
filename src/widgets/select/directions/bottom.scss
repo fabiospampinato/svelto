@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widgets - Select - Toggler
+ * Svelto - Widgets - Select - Directions - Bottom
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,6 +8,8 @@
  * @require ../select.scss
  * ========================================================================= */
 
-/* TOGGLER */
+/* BOTTOM */
 
-.select-toggler {}
+.select.popover-anchor-bottom {
+  @include border-bottom-radius ( 0 );
+}
