@@ -32,6 +32,7 @@
     > .tagbox-tag,
     > .tagbox-partial {
       @include margin-x ( $gutter-half );
+      white-space: nowrap;
     }
 
   }
