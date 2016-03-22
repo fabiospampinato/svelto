@@ -22,16 +22,19 @@
 
     %color-#{$name}-inverted {
       background-color: $text;
+      border-color: $bg;
       color: $bg;
     }
 
     %color-#{$name}-inverted-hover {
       background-color: $bg-hover;
+      border-color: $bg;
       color: $text;
     }
 
     %color-#{$name}-inverted-active {
       background-color: $bg-active;
+      border-color: $bg;
       color: $text;
     }
 
