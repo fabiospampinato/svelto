@@ -6,13 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
+ * @require lib/directions/directions.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
 //TODO: Not well written, make it better
 //TODO: Doesn't handle properly a change of the direction
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Directions ) {
 
   'use strict';
 
@@ -53,7 +54,7 @@
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
       this.$containers = this.$tabs.find ( this.options.selectors.containers );
 
-      this.options.direction = _.getDirections ().find ( direction => this.$tabs.hasClass ( direction ) ) || this.options.direction;
+      this.options.direction = Directions.get ().find ( direction => this.$tabs.hasClass ( direction ) ) || this.options.direction;
 
       this.index = false;
 
@@ -110,7 +111,7 @@
 
       if ( this.options.highlight ) {
 
-        let oppositeDirection = _.getOppositeDirection ( this.options.direction );
+        let oppositeDirection = Directions.getOpposite ( this.options.direction );
 
         $trigger.toggleClass ( `highlighted highlight-${oppositeDirection}`, force );
 
@@ -170,4 +171,4 @@
 
   Factory.init ( Tabs, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions ));

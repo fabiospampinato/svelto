@@ -6,13 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require lib/directions/directions.js
  * @require lib/embedded_css/embedded_css.js
  * @require lib/transform/transform.js
  * ========================================================================= */
 
 //FIXME: If the positionable element is let than half of the anchor, and it must be pointed than the pointer may be not well positionated (expecially if we are not aligning to the center)
 
-(function ( $, _, Svelto, EmbeddedCSS ) {
+(function ( $, _, Svelto, Directions, EmbeddedCSS ) {
 
   'use strict';
 
@@ -122,7 +123,7 @@
 
       if ( space < 0 ) {
 
-        let opposite = _.getOppositeDirection ( directions[index] ),
+        let opposite = Directions.getOpposite ( directions[index] ),
             oppositeIndex = directions.indexOf ( opposite );
 
         if ( oppositeIndex !== -1 ) {
@@ -275,7 +276,7 @@
 
     if ( prevPointer === 'auto' && ( options.pointer !== 'auto' || bestDirection !== prevDirection ) ) {
 
-      let oppositeDirection = _.getOppositeDirection ( prevDirection );
+      let oppositeDirection = Directions.getOpposite ( prevDirection );
 
       $positionable.removeClass ( `pointing-${oppositeDirection}` );
 
@@ -285,7 +286,7 @@
 
       if ( options.pointer === 'auto' ) {
 
-        let oppositeDirection = _.getOppositeDirection ( bestDirection );
+        let oppositeDirection = Directions.getOpposite ( bestDirection );
 
         $positionable.addClass ( `pointing-${oppositeDirection}` );
 
@@ -333,4 +334,4 @@
 
   $.fn.positionate.defaults = defaults;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.EmbeddedCSS ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Directions, Svelto.EmbeddedCSS ));

@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./constants.js
- * @require ./direction.js
  * @require ./format.js
  * @require ./mkize.js
  * @require ./move.js

@@ -1,40 +1,42 @@
 
 /* =========================================================================
- * Svelto - Core - lodash - Helpers (Direction)
+ * Svelto - Lib - Directions
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../init.js
+ * @require core/svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Maybe move to lib
-
-(function ( _ ) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
-  /* DIRECTION */
+  /* DIRECTIONS */
 
-  _.mixin ({
+  let Directions = {
 
-    getDirections () {
+    get () {
 
       return ['top', 'bottom', 'left', 'right'];
 
     },
 
-    getOppositeDirection ( direction ) {
+    getOpposite ( direction ) {
 
       return {
-        'top'   : 'bottom',
+        'top': 'bottom',
         'bottom': 'top',
-        'left'  : 'right',
-        'right' : 'left'
+        'left': 'right',
+        'right': 'left'
       }[direction];
 
     }
 
-  });
+  };
 
-}( lodash ));
+  /* EXPORT */
+
+  Svelto.Directions = Directions;
+
+}( Svelto.$, Svelto._, Svelto ));

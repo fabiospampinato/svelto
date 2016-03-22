@@ -7,12 +7,13 @@
  * =========================================================================
  * @require core/animations/animations.js
  * @require core/widget/widget.js
+ * @require lib/directions/directions.js
  * ========================================================================= */
 
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations, Directions ) {
 
   'use strict';
 
@@ -75,7 +76,7 @@
 
       this.$backdrop = this.$html;
 
-      this.options.direction = _.getDirections ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
+      this.options.direction = Directions.get ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
       this.options.flick.open = this.options.flick.open || this.$panel.hasClass ( this.options.classes.flickable );
 
       if ( this.options.pin ) {
@@ -175,7 +176,7 @@
 
       if ( this._isOpen ) return;
 
-      if ( data.direction !== _.getOppositeDirection ( this.options.direction ) ) return;
+      if ( data.direction !== Directions.getOpposite ( this.options.direction ) ) return;
 
       let layoutOffset = this.$layout.offset ();
 
@@ -426,4 +427,4 @@
 
   Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations, Svelto.Directions ));
