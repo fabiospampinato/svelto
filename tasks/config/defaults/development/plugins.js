@@ -15,11 +15,6 @@ var plugins = {
   cssnano: {
     enabled: false
   },
-  dependencies: {
-    options: {
-      log: true //FIXME: Set it back to `false`, anzi rimuovi completamente visto che è false di default
-    }
-  },
   extend: {
     options: {
       log: true
