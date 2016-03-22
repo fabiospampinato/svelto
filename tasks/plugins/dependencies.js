@@ -32,15 +32,15 @@ var getMatches = function ( string, regex ) {
 
 };
 
-var getFileDependencies = function ( file, config ) {
+var getFileTargets = function ( file, regex ) {
 
   var dirname = path.dirname ( file.relative ),
       content = file.contents.toString ( 'utf8' ),
-      dependencies = getMatches ( content, config.require );
+      targets = getMatches ( content, regex );
 
-  return dependencies.map ( function ( dependency ) {
+  return targets.map ( function ( target ) {
 
-    return ( dependency[0] === '.' ) ? path.join ( dirname, dependency ) : dependency;
+    return ( target[0] === '.' ) ? path.join ( dirname, target ) : target;
 
   });
 
@@ -50,6 +50,8 @@ var getGraph = function ( files, config ) {
 
   var graph = {};
 
+  /* POPULATING */
+
   for ( var i = 0, l = files.length; i < l; i++ ) {
 
     var file = files[i];
@@ -58,8 +60,32 @@ var getGraph = function ( files, config ) {
       file: file,
       path: file.path,
       module: file.relative,
-      dependencies: getFileDependencies ( file, config )
+      befores: getFileTargets ( file, config.before ),
+      requires: getFileTargets ( file, config.require )
     };
+
+  }
+
+  /* PARSING */
+
+  for ( var i = 0, l = files.length; i < l; i++ ) {
+
+    var file = files[i];
+
+    for ( var bi = 0, bl = graph[file.path].befores.length; bi < bl; bi++ ) {
+
+      var found = _.find ( graph, function ( n ) { return n.module === graph[file.path].befores[bi]; } );
+
+      if ( !found ) {
+
+        graph[file.path].befores[bi] = false;
+
+      }
+
+    }
+
+    graph[file.path].befores = _.compact ( graph[file.path].befores );
+    graph[file.path].dependencies = graph[file.path].befores.concat ( graph[file.path].requires );
 
   }
 
@@ -181,6 +207,7 @@ var dependencies = function ( config ) {
   /* CONFIG */
 
   config = _.merge ({
+    before: /@before[\s]+([\S]+\.[\S]+)[\s]*/g,
     require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
     log: false
   }, config );
@@ -189,7 +216,7 @@ var dependencies = function ( config ) {
 
   var files = [];
 
-  /* EXTEND */
+  /* DEPENDENCIES */
 
   return through.obj ( function ( file, encoding, callback ) {
 

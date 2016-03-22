@@ -43,6 +43,7 @@ var plugins = {
   dependencies: {
     enabled: true,
     options: {
+      before: /@before[\s]+([\S]+\.[\S]+)[\s]*/g,
       require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
       log: false
     }
