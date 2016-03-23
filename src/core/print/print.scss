@@ -1,0 +1,44 @@
+
+/* =========================================================================
+ * Svelto - Core - Print
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PRINT */
+
+@media print {
+
+  /* GENERAL */
+
+  *,
+  :before,
+  :after {
+    background: #ffffff !important;
+    border-color: rgba( 0, 0, 0, .5 ) !important;
+    color: #000000 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ABBR */
+
+  abbr[title]:after {
+    content: ' (' attr(title) ')' !important;
+  }
+
+  /* LINK */
+
+  p a,
+  address a {
+
+    text-decoration: underline !important;
+
+    &[href]:after {
+      content: ' (' attr(href) ')' !important;
+    }
+
+  }
+
+}
