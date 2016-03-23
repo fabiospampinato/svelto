@@ -19,8 +19,8 @@
     plugin: true,
     selector: '.progressbar',
     templates: {
-      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.indeterminate ? "indeterminate" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-              '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
+      base: '<div class="progressbar <%= o.striped ? "striped" : "" %> <%= o.indeterminate ? "indeterminate" : "" %> <%= o.labeled ? "labeled" : "" %> <%= o.colors.off %> <%= o.size %> <%= o.css %>">' +
+              '<div class="progressbar-highlight <%= o.colors.on %>"></div>' +
             '</div>'
     },
     options: {

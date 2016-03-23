@@ -19,15 +19,15 @@
     plugin: true,
     selector: 'table.table',
     templates: {
-      row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
-             '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' +
+      row: '<tr <%= o.id ? "class=" + o.id : "" %> >' +
+             '<% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %>' +
                '<td>' +
-                 '{%=o.datas[i]%}' +
+                 '<%= o.datas[i] %>' +
                '</td>' +
-             '{% } %}' +
-             '{% for ( var i = 0, l = o.missing; i < l; i++ ) { %}' +
+             '<% } %>' +
+             '<% for ( var i = 0, l = o.missing; i < l; i++ ) { %>' +
                '<td></td>' +
-             '{% } %}' +
+             '<% } %>' +
            '</tr>'
     },
     options: {
@@ -91,7 +91,7 @@
 
         for ( let chunk of chunks ) {
 
-          let rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
+          let rowHtml = this._template ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
 
           $rows = $rows.add ( rowHtml );
 

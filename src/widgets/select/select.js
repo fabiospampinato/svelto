@@ -23,18 +23,18 @@
     plugin: true,
     selector: '.select',
     templates: {
-      base: '<div class="popover select-popover card {%=o.size%} {%=o.color%} {%=o.css%} {%=o.guc%}">' +
+      base: '<div class="popover select-popover card <%= o.size %> <%= o.color %> <%= o.css %> <%= o.guc %>">' +
               '<div class="card-block">' +
-                '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "select." + ( o.options[i].value ? "option" : "optgroup" ), { opt: o.options[i], color: o.color } ); %}' +
-                '{% } %}' +
+                '<% for ( var i = 0, l = o.options.length; i < l; i++ ) { %>' +
+                  '<% print ( self[ o.options[i].value ? "option" : "optgroup" ] ( { opt: o.options[i], color: o.color } ) ) %>' +
+                '<% } %>' +
               '</div>' +
             '</div>',
       optgroup: '<div class="divider">' +
-                  '{%=o.opt.prop%}' +
+                  '<%= o.opt.prop %>' +
                 '</div>',
-      option: '<div class="button {%=o.color%}" data-value="{%=o.opt.prop%}">' +
-                '{%=o.opt.value%}' +
+      option: '<div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">' +
+                '<%= o.opt.value %>' +
               '</div>'
     },
     options: {
@@ -183,7 +183,7 @@
 
     ___popover () {
 
-      let html = this._tmpl ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.popover ) );
+      let html = this._template ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.popover ) );
 
       this.$popover = $(html).appendTo ( this.$layout );
       this.$buttons = this.$popover.find ( this.options.selectors.button );

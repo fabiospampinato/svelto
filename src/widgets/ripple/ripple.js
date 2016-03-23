@@ -112,7 +112,7 @@
 
     _show ( XY ) {
 
-      let $circle = $(this._tmpl ( 'circle' ));
+      let $circle = $(this._template ( 'circle' ));
 
       /* SIZE */
 

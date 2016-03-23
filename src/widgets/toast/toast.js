@@ -30,42 +30,42 @@
     plugin: true,
     selector: '.toast',
     templates: {
-      base: '<div class="toast {%=o.type%} {%=o.color%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.css%}">' +
+      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' +
               `<div class="infobar ${Colors.transparent}">` +
-                '{% if ( o.img ) { %}' +
-                  '<img src="{%=o.img%}" class="toast-img infobar-left">' +
-                '{% } %}' +
-                '{% if ( o.icon ) { %}' +
-                  '<i class="icon {%=(o.title && o.body ? "xlarge" : "")%} infobar-left">{%=o.icon%}</i>' +
-                '{% } %}' +
-                '{% if ( o.title || o.body ) { %}' +
+                '<% if ( o.img ) { %>' +
+                  '<img src="<%= o.img %>" class="toast-img infobar-left">' +
+                '<% } %>' +
+                '<% if ( o.icon ) { %>' +
+                  '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' +
+                '<% } %>' +
+                '<% if ( o.title || o.body ) { %>' +
                   '<div class="infobar-center">' +
-                    '{% if ( o.title ) { %}' +
+                    '<% if ( o.title ) { %>' +
                       '<p class="infobar-title">' +
-                         '{%#o.title%}' +
+                         '<%= o.title %>' +
                        '</p>' +
-                    '{% } %}' +
-                    '{% if ( o.body ) { %}' +
-                      '{%#o.body%}' +
-                    '{% } %}' +
+                    '<% } %>' +
+                    '<% if ( o.body ) { %>' +
+                      '<%= o.body %>' +
+                    '<% } %>' +
                   '</div>' +
-                '{% } %}' +
-                '{% if ( o.buttons.length === 1 ) { %}' +
+                '<% } %>' +
+                '<% if ( o.buttons.length === 1 ) { %>' +
                   '<div class="infobar-right">' +
-                    '{% include ( "toast.button", o.buttons[0] ); %}' +
+                    '<% print ( self.button ( o.buttons[0] ) ) %>' +
                   '</div>' +
-                '{% } %}' +
+                '<% } %>' +
               '</div>' +
-              '{% if ( o.buttons.length > 1 ) { %}' +
+              '<% if ( o.buttons.length > 1 ) { %>' +
                 '<div class="toast-buttons multiple center-x">' +
-                  '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
-                    '{% include ( "toast.button", o.buttons[i] ); %}' +
-                  '{% } %}' +
+                  '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' +
+                    '<% print ( self.button ( o.buttons[i] ) ) %>' +
+                  '<% } %>' +
                 '</div>' +
-              '{% } %}' +
+              '<% } %>' +
             '</div>',
-      button: `<div class="button {%=(o.color || "${Colors.white}")%} {%=(o.size || "${Sizes.small}")%} {%=(o.css || "")%}">` +
-                '{%#(o.text || "")%}' +
+      button: `<div class="button <%= o.color || "${Colors.white}" %> <%= o.size || "${Sizes.small}" %> <%= o.css || "" %>">` +
+                '<%= o.text || "" %>' +
               '</div>'
     },
     options: {

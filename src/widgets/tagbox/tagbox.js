@@ -22,9 +22,9 @@
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label tagbox-tag {%=o.color%} {%=o.size%} {%=o.css%}" data-tag-value="{%=o.value%}">' +
+      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' +
              '<span>' +
-               '{%=o.value%}' +
+               '<%= o.value %>' +
              '</span>' +
              `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">close</i>` +
            '</div>'
@@ -136,7 +136,7 @@
 
     _getTagHtml ( value ) {
 
-      return this._tmpl ( 'tag', _.extend ( { value: value }, this.options.tag ) );
+      return this._template ( 'tag', _.extend ( { value: value }, this.options.tag ) );
 
     }
 

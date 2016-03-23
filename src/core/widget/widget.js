@@ -12,10 +12,9 @@
  * @require core/pointer/pointer.js
  * @require core/route/route.js
  * @require core/svelto/svelto.js
- * @require core/tmpl/tmpl.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
+(function ( $, _, Svelto, Widgets, Templates, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
   'use strict';
 
@@ -25,7 +24,7 @@
     name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
     selector: false, // The selector used to select the website in the DOM, used for `Svelto.Widgetize`
-    templates: {
+    templates: { // Object containing lodash template strings
       base: false // It will be used as the constructor if no element is provided
     },
     options: {
@@ -64,31 +63,35 @@
 
       /* CACHE TEMPLATES */
 
-      if ( !$.tmpl.cached[this.name] ) {
+      this.templatesNamespace = _.upperFirst ( this.name );
 
-        for ( let tmpl in this.templates ) {
+      if ( !( this.templatesNamespace in Templates ) ) {
 
-          if ( this.templates.hasOwnProperty ( tmpl ) && this.templates[tmpl] ) {
+        Templates[this.templatesNamespace] = {};
 
-            let tmplName = this.name + '.' + tmpl;
+        let options = { //TODO: Maybe export them
+          imports: {
+            Templates: Templates,
+            self: Templates[this.templatesNamespace]
+          },
+          variable: 'o'
+        };
 
-            if ( !(tmplName in $.tmpl.cache) ) {
+        for ( let template in this.templates ) {
 
-              $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+          if ( this.templates.hasOwnProperty ( template ) && this.templates[template] ) {
 
-            }
+            Templates[this.templatesNamespace][template] = _.template ( this.templates[template], options );
 
           }
 
         }
 
-        $.tmpl.cached[this.name] = true;
-
       }
 
       /* ELEMENT */
 
-      this.$element = $( element ||  ( this.templates.base ? this._tmpl ( 'base', this.options ) : undefined ) );
+      this.$element = $( element ||  ( this.templates.base ? this._template ( 'base', this.options ) : undefined ) );
       this.element = this.$element[0];
 
       /* LAYOUT */
@@ -713,11 +716,9 @@
 
     /* TEMPLATE */
 
-    _tmpl ( name, options = {} ) {
+    _template ( name, options = {} ) {
 
-      let tmplName = this.name + '.' + name;
-
-      return $.tmpl ( tmplName, options );
+      return Templates[this.templatesNamespace][name] ( options );
 
     }
 
@@ -765,4 +766,4 @@
 
   Factory.init ( Widget, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));

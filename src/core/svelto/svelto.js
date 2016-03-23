@@ -21,7 +21,8 @@
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
-    Widgets: {} // Widgets' classes namespace
+    Widgets: {}, // Widgets' classes namespace
+    Templates: {} // Widgets' templates namespace
   };
 
   /* EXPORT */

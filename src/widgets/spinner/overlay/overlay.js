@@ -19,16 +19,16 @@
     name: 'spinnerOverlay',
     plugin: true,
     templates: {
-      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%}">' +
-                 '{% if ( o.labeled ) { %}' +
-                   '<div class="spinner-label {%=o.colors.labeled%}">' +
-                 '{% } %}' +
-                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ))%}">' +
+      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' +
+                 '<% if ( o.labeled ) { %>' +
+                   '<div class="spinner-label <%= o.colors.labeled %>">' +
+                 '<% } %>' +
+                   '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' +
                      '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
                    '</svg>' +
-                 '{% if ( o.labeled ) { %}' +
+                 '<% if ( o.labeled ) { %>' +
                    '</div>' +
-                 '{% } %}' +
+                 '<% } %>' +
                '</div>'
     },
     options: {
@@ -55,7 +55,7 @@
     _variables () {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
+      this.$overlay = $(this._template ( 'overlay', this.options ));
 
       this.instance = this.$overlay.overlay ( 'instance' );
 

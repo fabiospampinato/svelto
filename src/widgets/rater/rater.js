@@ -23,11 +23,11 @@
     selector: '.rater',
     templates: {
       base: '<div class="rater">' +
-              '{% include ( "rater.stars", o ); %}' +
+              '<% print ( self.stars ( o ) ) %>' +
             '</div>',
-      stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' +
-               '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' +
-             '{% } %}'
+      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' +
+               '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' +
+             '<% } %>'
     },
     options: {
       value: 0,
@@ -133,7 +133,7 @@
 
               _.merge ( this.options, resj );
 
-              this.$rater.html ( this._tmpl ( 'stars', this.options ) );
+              this.$rater.html ( this._template ( 'stars', this.options ) );
 
               this.options.rated = true;
 

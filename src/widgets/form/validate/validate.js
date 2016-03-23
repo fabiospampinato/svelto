@@ -24,13 +24,13 @@
     plugin: true,
     selector: 'form.validate',
     templates: {
-      message: '<p class="form-validate-message {%=o.validity%}">' +
-                 '{%=o.message%}' +
+      message: '<p class="form-validate-message <%= o.validity %>">' +
+                 '<%= o.message %>' +
                '</p>',
-      messages: '<ul class="form-validate-message {%=o.validity%}">' +
-                  '{% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %}' +
-                    '<li>{%=o.messages[i]%}</li>' +
-                  '{% } %}' +
+      messages: '<ul class="form-validate-message <%= o.validity %>">' +
+                  '<% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %>' +
+                    '<li><%= o.messages[i] %></li>' +
+                  '<% } %>' +
                 '</ul>'
     },
     options: {
@@ -417,10 +417,10 @@
 
         let validity = elementObj.isValid ? this.options.classes.valid : this.options.classes.invalid,
             msgHtml = _.isString ( message )
-                        ? this._tmpl ( 'message', { message: message, validity: validity } )
+                        ? this._template ( 'message', { message: message, validity: validity } )
                         : message.length === 1
-                          ? this._tmpl ( 'message', { message: message[0], validity: validity } )
-                          : this._tmpl ( 'messages', { messages: message, validity: validity } );
+                          ? this._template ( 'message', { message: message[0], validity: validity } )
+                          : this._template ( 'messages', { messages: message, validity: validity } );
 
         elementObj.$message = $(msgHtml);
 
