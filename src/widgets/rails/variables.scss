@@ -1,0 +1,12 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Rails (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RAILS */
+
+$rails-extra-padding: 30px !default; // Ensuring that even if are using overlay scrollbars we have an extra margin to be confident enough that they won't be visible
+$rails-scrollbar-sizes: 0, 12px, 15px, 16px, 17px !default; // Possible scrollbars' sizes that we are supporting

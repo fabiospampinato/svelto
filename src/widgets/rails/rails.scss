@@ -1,0 +1,120 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Rails
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before core/multiple/multiple.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* RAILS */
+
+.rails {
+
+  @extend %widget;
+  overflow: hidden;
+  display: flex;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0;
+  }
+
+  /* JOINED - BORDER RADIUS */
+
+  > :not(:last-child),
+  > .multiple:not(:last-child) > :last-child {
+    @include border-right-radius ( 0 );
+  }
+
+  > :not(:first-child),
+  > .multiple:not(:first-child) > :first-child {
+    @include border-left-radius ( 0 );
+  }
+
+  /* JOINED - BORDER WIDTH */
+
+  > :not(:last-child):not(.rails-start):not(.rails-left),
+  > .multiple:not(:last-child) > :last-child {
+    border-right-width: 0;
+  }
+
+  .rails-start,
+  .rails-left {
+
+    + *,
+    + .multiple > :first-child {
+      border-left-width: 0;
+    }
+
+  }
+
+  /* NAVIGATION */
+
+  > .rails-start,
+  > .rails-left,
+  > .rails-right,
+  > .rails-end {
+    flex-shrink: 0;
+  }
+
+  /* CONTENT */
+
+  $max-scrollbar-size: last( $rails-scrollbar-sizes );
+
+  &-content {
+
+    flex: 1 1 auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-bottom: $rails-extra-padding;
+    margin-bottom: calc( ( #{$rails-extra-padding} + #{$max-scrollbar-size} ) * -1 );
+
+    /* CHILDREN */
+
+    > * {
+      flex: 1 0 auto;
+    }
+
+    /* MULTIPLE */
+
+    &.multiple {
+      margin-bottom: calc( ( #{$rails-extra-padding} + #{$max-scrollbar-size} + #{$gutter} ) * -1 );
+    }
+
+  }
+
+}
+
+/* SCROLLBAR */
+
+@each $size in $rails-scrollbar-sizes {
+
+  @if unitless( $size ) {
+
+    $size: $size * 1px;
+
+  }
+
+  html.scrollbar-size-#{unit-strip( $size )} {
+
+    .rails {
+
+      .rails-content {
+
+        margin-bottom: calc( ( #{$rails-extra-padding} + #{$size} ) * -1 );
+
+        &.multiple {
+          margin-bottom: calc( ( #{$rails-extra-padding} + #{$size} + #{$gutter} ) * -1 );
+        }
+
+      }
+
+    }
+
+  }
+
+}
