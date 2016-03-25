@@ -9,13 +9,13 @@
  * @require core/jquery/jquery.js
  * ========================================================================= */
 
-(function ( Modernizr, jQuery ) {
+(function ( Modernizr, $ ) {
 
   'use strict';
 
   /* CLIP PATH URL */
 
-  jQuery ( function () {
+  $( function () {
 
     /* SVG */
 

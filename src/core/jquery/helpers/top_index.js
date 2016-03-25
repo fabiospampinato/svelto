@@ -9,7 +9,6 @@
  * @require ./z_index.js
  * ========================================================================= */
 
-//TODO: [MAYBE] Rename it
 //TODO: Use it
 //TODO: Write it in a more dynamic way, detecting what the highest `z-index` actually is
 

@@ -12,7 +12,7 @@
 /* BUTTON */
 
 .button {
-  @extend .label;
   @extend .actionable;
+  @extend .label;
   @include color ( $button-color, $button-color-force, $button-color-basic );
 }

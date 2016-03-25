@@ -138,7 +138,7 @@ var filter = function ( config ) {
   var files = [],
       components = parseComponents ( project.components, '' );
 
-  /* EXTEND */
+  /* FILTER */
 
   return through.obj ( function ( file, encoding, callback ) {
 

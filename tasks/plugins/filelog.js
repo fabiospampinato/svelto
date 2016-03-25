@@ -49,7 +49,7 @@ var filelog = function () {
 
   var files = [];
 
-  /* EXTEND */
+  /* FILE LOG */
 
   return through.obj ( function ( file, encoding, callback ) {
 
