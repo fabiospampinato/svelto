@@ -547,7 +547,7 @@
 
     __breakpoint () {
 
-      let current = Breakpoints[Breakpoint.current];
+      let width = Breakpoints.widths[Breakpoint.current];
 
       /* UP */
 
@@ -555,7 +555,7 @@
 
         if ( this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current >= Breakpoints[breakpoint] ) {
+          if ( width >= Breakpoints.widths[breakpoint] ) {
 
             this[this.options.breakpoints.up[breakpoint]]();
 
@@ -571,7 +571,7 @@
 
         if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current < Breakpoints[breakpoint] ) {
+          if ( width < Breakpoints.widths[breakpoint] ) {
 
             this[this.options.breakpoints.down[breakpoint]]();
 
@@ -587,7 +587,7 @@
 
         if ( this.options.breakpoints.range.hasOwnProperty ( breakpoint ) ) {
 
-          if ( current === Breakpoints[breakpoint] ) {
+          if ( width === Breakpoints.widths[breakpoint] ) {
 
             this[this.options.breakpoints.range[breakpoint]]();
 

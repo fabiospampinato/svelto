@@ -9,6 +9,7 @@
 /* BREAKPOINTS */
 
 // We are using `px` instead of `rem` because if we use `rem` we have a buggy behaviour is Safari. In an old version of the `panel` demo page there was a strange animation at the beginning, caused by a faulty auto-attacch-panel media query (no longer CSS-only), caused probably by the browser changing viewport's width value for apparently no good reason
+// Also Javascript doens't really understand other units
 // `rem` or any other meaningful unit is supported as well
 
 $breakpoint-xsmall: 0 !default;

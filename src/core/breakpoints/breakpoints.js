@@ -15,11 +15,18 @@
   /* BREAKPOINTS */
 
   let Breakpoints = {
-    xsmall: 0,
-    small: 512,
-    medium: 768,
-    large: 1024,
-    xlarge: 1216
+    xsmall: 'xs',
+    small: 'sm',
+    medium: 'md',
+    large: 'lg',
+    xlarge: 'xl',
+    widths: {
+      xsmall: 0,
+      small: 512,
+      medium: 768,
+      large: 1024,
+      xlarge: 1216
+    }
   };
 
   /* EXPORT */

@@ -48,14 +48,14 @@
 
     get () {
 
-      let intervals = _.sortBy ( _.values ( Breakpoints ) ),
+      let widths = _.sortBy ( _.values ( Breakpoints.widths ) ),
           width = $window.width ();
 
-      for ( let i = 0, l = intervals.length; i < l; i++ ) {
+      for ( let i = 0, l = widths.length; i < l; i++ ) {
 
-        if ( width >= intervals[i] && ( i === l - 1 || width < intervals[i+1] ) ) {
+        if ( width >= widths[i] && ( i === l - 1 || width < widths[i+1] ) ) {
 
-          return _.findKey ( Breakpoints, interval => interval === intervals[i] );
+          return _.findKey ( Breakpoints.widths, width => width === widths[i] );
 
         }
 
