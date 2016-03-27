@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Helpers - Rotation (Keyframes)
+ * Svelto - _ - Rotation (Keyframes)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -19,7 +19,34 @@
 
 
 /* =========================================================================
- * Svelto - Progressbar - Indeterminate (Keyframes)
+ * Svelto - Widgets - Spinner (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require _/rotation/keyframes.scss
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dasharray: 0%, 240%;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: - 60%;
+  }
+  100% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: - 240%;
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Progressbar - Indeterminate (Keyframes)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -29,21 +56,22 @@
 
 @keyframes progressbar-indeterminate-highlight {
   0% {
-    width: 100%;
-    transform: translateX(-60%) scaleX(.15);
+    min-width: 0%;
+    margin-left: 0;
   }
   35% {
-    transform: translateX(-15%) scaleX(.5);
+    min-width: 75%;
+    margin-left: 25%;
   }
-  100% {
-    width: 100%;
-    transform: translateX(51%) scaleX(.05);
+  80%, 100% {
+    min-width: 0%;
+    margin-left: 100%;
   }
 }
 
 
 /* =========================================================================
- * Svelto - Progressbar - Striped (Keyframes)
+ * Svelto - Widgets - Progressbar - Striped (Keyframes)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -62,34 +90,7 @@
 
 
 /* =========================================================================
- * Svelto - Spinner (Keyframes)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../helpers/rotation/keyframes.scss
- * ========================================================================= */
-
-/* KEYFRAMES */
-
-@keyframes spinner-dash {
-  0% {
-    stroke-dasharray: 0%, 240%;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -60%;
-  }
-  100% {
-    stroke-dasharray: 181%, 240%;
-    stroke-dashoffset: -240%;
-  }
-}
-
-
-/* =========================================================================
- * Svelto - Spinner - Multicolor (Keyframes)
+ * Svelto - Widgets - Spinner - Multicolor (Keyframes)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -99,15 +100,15 @@
 
 @keyframes spinner-multicolor {
   0%, 24% {
-    stroke: $spinner-multicolor-stroke-color1;
+    stroke: $spinner-multicolor-color-first;
   }
   25%, 49% {
-    stroke: $spinner-multicolor-stroke-color2;
+    stroke: $spinner-multicolor-color-second;
   }
   50%, 74% {
-    stroke: $spinner-multicolor-stroke-color3;
+    stroke: $spinner-multicolor-color-third;
   }
   75%, 99% {
-    stroke: $spinner-multicolor-stroke-color4;
+    stroke: $spinner-multicolor-color-fourth;
   }
 }
