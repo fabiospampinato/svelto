@@ -1,0 +1,58 @@
+
+<!-- CLASS SWITCH -->
+
+<template name="class_switch">
+
+  {{{sw.divider "Class Switch"}}}
+
+  <div class="container bordered" data-xs="xsmall" data-sm="small" data-md="medium" data-lg="large" data-xl="xlarge">{{{sample.text 35}}}</div>
+
+  {{{sw.divider "Up"}}}
+
+  <div class="multiple">
+    <div class="label bordered" data-xs-up="green">X-Small</div>
+    <div class="label bordered" data-sm-up="green">Small</div>
+    <div class="label bordered" data-md-up="green">Medium</div>
+    <div class="label bordered" data-lg-up="green">Large</div>
+    <div class="label bordered" data-xl-up="green">X-Large</div>
+  </div>
+
+  {{{sw.divider "Down"}}}
+
+  <div class="multiple">
+    <div class="label bordered" data-xs-down="green">X-Small</div>
+    <div class="label bordered" data-sm-down="green">Small</div>
+    <div class="label bordered" data-md-down="green">Medium</div>
+    <div class="label bordered" data-lg-down="green">Large</div>
+    <div class="label bordered" data-xl-down="green">X-Large</div>
+  </div>
+
+  {{{sw.divider "Only"}}}
+
+  <div class="multiple">
+    <div class="label bordered" data-xs-only="green">X-Small</div>
+    <div class="label bordered" data-sm-only="green">Small</div>
+    <div class="label bordered" data-md-only="green">Medium</div>
+    <div class="label bordered" data-lg-only="green">Large</div>
+    <div class="label bordered" data-xl-only="green">X-Large</div>
+  </div>
+
+  <div class="multiple">
+    <div class="label bordered" data-xs="green">X-Small</div>
+    <div class="label bordered" data-sm="green">Small</div>
+    <div class="label bordered" data-md="green">Medium</div>
+    <div class="label bordered" data-lg="green">Large</div>
+    <div class="label bordered" data-xl="green">X-Large</div>
+  </div>
+
+  {{{sw.divider "Mixed 1"}}}
+
+  <div class="multiple" data-sm-down="vertical fluid" data-md-up="equal">
+    <div class="label bordered">Left</div>
+    <div class="label bordered">Center</div>
+    <div class="label bordered">Right</div>
+  </div>
+
+  {{{sw.toast body="<span class=\"hidden-sm-up\">X-Small</span><span class=\"hidden-xs-down hidden-md-up\">Small</span><span class=\"hidden-sm-down hidden-lg-up\">Medium</span><span class=\"hidden-md-down hidden-xl-up\">Large</span><span class=\"hidden-lg-down\">X-Large</span>" ttl="forever"}}}
+
+</template>

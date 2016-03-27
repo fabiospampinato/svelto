@@ -42,7 +42,11 @@
         layout: '.layout, body' // `body` is used as a fallback
       },
       animations: {}, // Object storing all the milliseconds required for each animation to occur
-      breakpoints: {}, // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is defined under `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `range`, mimicking the respective SCSS mixins
+      breakpoints: { // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is a key of `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `only`, mimicking the respective SCSS mixins
+        up: {},
+        down: {},
+        only: {}
+      },
       keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
       keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
       callbacks: {} // Callbacks to trigger on specific events
@@ -541,7 +545,7 @@
 
     ___breakpoint () {
 
-      this._on ( this.$window, 'breakpoint:change', this.__breakpoint );
+      this._on ( true, this.$window, 'breakpoint:change', this.__breakpoint );
 
     }
 
@@ -571,7 +575,7 @@
 
         if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
 
-          if ( width < Breakpoints.widths[breakpoint] ) {
+          if ( width <= Breakpoints.widths[breakpoint] ) {
 
             this[this.options.breakpoints.down[breakpoint]]();
 
@@ -581,15 +585,15 @@
 
       }
 
-      /* RANGE */
+      /* ONLY */
 
-      for ( let breakpoint in this.options.breakpoints.range ) {
+      for ( let breakpoint in this.options.breakpoints.only ) {
 
-        if ( this.options.breakpoints.range.hasOwnProperty ( breakpoint ) ) {
+        if ( this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) {
 
           if ( width === Breakpoints.widths[breakpoint] ) {
 
-            this[this.options.breakpoints.range[breakpoint]]();
+            this[this.options.breakpoints.only[breakpoint]]();
 
           }
 
