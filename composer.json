@@ -1,7 +1,7 @@
 {
   "name": "svelto/svelto",
   "type": "library",
-  "description": "Modular front end framework for modern browsers, with battery included: 50+ components & 20+ tools.",
+  "description": "Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.",
   "keywords": [
     "css",
     "sass",
