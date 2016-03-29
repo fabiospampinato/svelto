@@ -20,7 +20,8 @@
 
   let version = _ ? _.VERSION : false,
       parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
-      supported = parts && Number ( parts[0] ) >= 4 && Number ( parts[1] ) >= 6 && Number ( parts[2] ) >= 1;
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 4 || nums[0] === 4 && ( nums[1] > 6 || nums[1] === 6 && nums[2] >= 1 );
 
   if ( !_ || !supported ) {
 

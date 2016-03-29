@@ -16,7 +16,8 @@
 
   let version = Modernizr ? Modernizr._version : false,
       parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
-      supported = parts && Number ( parts[0] ) >= 3 && Number ( parts[1] ) >= 3 && Number ( parts[2] ) >= 1;
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 3 || nums[0] === 3 && ( nums[1] > 3 || nums[1] === 3 && nums[2] >= 1 );
 
   if ( !Modernizr || !supported ) {
 

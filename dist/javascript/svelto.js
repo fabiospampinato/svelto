@@ -39,7 +39,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var version = $ ? $().jquery : false,
       parts = version ? version.split('-')[0].split('.') : false,
-      supported = parts && Number(parts[0]) >= 1 && Number(parts[1]) >= 11 && Number(parts[2]) >= 2;
+      nums = parts ? parts.map(Number) : false,
+      supported = nums && nums[0] > 1 || nums[0] === 1 && (nums[1] > 11 || nums[1] === 11 && nums[2] >= 2);
 
   if (!$ || !supported) {
 
@@ -423,7 +424,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var version = _ ? _.VERSION : false,
       parts = version ? version.split('-')[0].split('.') : false,
-      supported = parts && Number(parts[0]) >= 4 && Number(parts[1]) >= 6 && Number(parts[2]) >= 1;
+      nums = parts ? parts.map(Number) : false,
+      supported = nums && nums[0] > 4 || nums[0] === 4 && (nums[1] > 6 || nums[1] === 6 && nums[2] >= 1);
 
   if (!_ || !supported) {
 
@@ -2311,7 +2313,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var version = Modernizr ? Modernizr._version : false,
       parts = version ? version.split('-')[0].split('.') : false,
-      supported = parts && Number(parts[0]) >= 3 && Number(parts[1]) >= 3 && Number(parts[2]) >= 1;
+      nums = parts ? parts.map(Number) : false,
+      supported = nums && nums[0] > 3 || nums[0] === 3 && (nums[1] > 3 || nums[1] === 3 && nums[2] >= 1);
 
   if (!Modernizr || !supported) {
 
@@ -2558,7 +2561,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* SVELTO */
 
   var Svelto = {
-    VERSION: '0.5.0',
+    VERSION: '0.5.1',
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,

@@ -20,7 +20,8 @@
 
   let version = $ ? $().jquery : false,
       parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
-      supported = parts && Number ( parts[0] ) >= 1 && Number ( parts[1] ) >= 11 && Number ( parts[2] ) >= 2;
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 1 || nums[0] === 1 && ( nums[1] > 11 || nums[1] === 11 && nums[2] >= 2 );
 
   if ( !$ || !supported ) {
 
