@@ -14,7 +14,7 @@
 
   /* JQUERY */
 
-  let $ = jQuery || $;
+  let $ = window.jQuery || window.$;
 
   /* CHECKING */
 

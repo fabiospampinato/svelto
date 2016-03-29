@@ -8,9 +8,13 @@
  * @require ./vendor/modernizr.js
  * ========================================================================= */
 
-(function ( Modernizr ) {
+(function () {
 
   'use strict';
+
+  /* MODERNIZR */
+
+  let Modernizr = window.Modernizr;
 
   /* CHECKING */
 
@@ -25,4 +29,4 @@
 
   }
 
-}( window.Modernizr ));
+}());

@@ -14,7 +14,7 @@
 
   /* LODASH */
 
-  let _ = lodash || _;
+  let _ = window.lodash || window._;
 
   /* CHECKING */
 
