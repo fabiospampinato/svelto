@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//TODO: Renamed `development` to `demo` maybe
+
 /* PATHS */
 
 var paths = {

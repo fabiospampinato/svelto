@@ -10,6 +10,8 @@
 // In order to extend Svelto just add another source root
 // Source roots may be either relative: `ext`, `../ext` or absolute `/Users/me/ext`
 
+//TODO: Add `root` key also for output
+
 /* PATHS */
 
 var paths = {
@@ -23,11 +25,11 @@ var paths = {
     },
     scss: {
       all: '<root>/**/*.scss',
-      variables: '<root>/**/variables.scss',
-      functions: '<root>/**/functions.scss',
-      mixins: '<root>/**/mixins.scss',
-      keyframes: '<root>/**/keyframes.scss',
-      style: ['<root>/**/*.scss', '!<root>/**/variables.scss', '!<root>/**/functions.scss', '!<root>/**/mixins.scss', '!<root>/**/keyframes.scss'],
+      variables: '<root>/**/variables*.scss',
+      functions: '<root>/**/functions*.scss',
+      mixins: '<root>/**/mixins*.scss',
+      keyframes: '<root>/**/keyframes*.scss',
+      style: ['<root>/**/*.scss', '!<root>/**/variables*.scss', '!<root>/**/functions*.scss', '!<root>/**/mixins*.scss', '!<root>/**/keyframes*.scss'],
       temp: '.temp/scss/**/*.scss'
     }
   },
