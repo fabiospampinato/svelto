@@ -13,6 +13,7 @@
 .flippable {
 
   @extend %widget;
+  @include children-no-gutter ();
   perspective: $flippable-perspective;
   transform-style: preserve-3d;
   transform-origin: 50%;
