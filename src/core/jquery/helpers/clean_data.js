@@ -21,7 +21,7 @@
 
   $.cleanData = function ( eles ) {
 
-    for ( let ele of eles ) {
+    for ( let i = 0, ele; ( ele = eles[i] ) !== undefined; i++ ) {
 
 			let events = $._data ( ele, 'events' );
 
