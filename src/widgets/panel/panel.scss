@@ -17,7 +17,7 @@
   position: fixed;
   z-index: $panel-z-index;
   margin: 0;
-  border-radius: 0;
+  border-radius: 0 !important;
   transition: transform $panel-animation-duration;
 }
 
