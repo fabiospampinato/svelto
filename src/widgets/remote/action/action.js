@@ -147,7 +147,7 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.attempt ( JSON.parse, res );
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
       this._replaceToast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
@@ -161,7 +161,7 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.attempt ( JSON.parse, res );
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
       if ( _.isError ( resj ) ) {
 

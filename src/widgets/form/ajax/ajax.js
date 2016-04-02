@@ -97,7 +97,7 @@
 
         error: ( res ) => {
 
-          let resj = _.attempt ( JSON.parse, res );
+          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
           if ( !_.isError ( resj ) ) {
 
@@ -115,7 +115,7 @@
 
         success: ( res ) => {
 
-          let resj = _.attempt ( JSON.parse, res );
+          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
           if ( !_.isError ( resj ) ) {
 

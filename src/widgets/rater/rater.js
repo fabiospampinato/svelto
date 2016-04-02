@@ -117,7 +117,7 @@
 
           error: ( res ) => {
 
-            let resj = _.attempt ( JSON.parse, res );
+            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
             $.toast ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
 
@@ -127,7 +127,7 @@
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            let resj = _.attempt ( JSON.parse, res );
+            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
             if ( !_.isError ( resj ) ) {
 
