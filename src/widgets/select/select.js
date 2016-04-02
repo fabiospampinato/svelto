@@ -170,10 +170,16 @@
 
         }
 
-        this.selectOptions.push ({
-          value: $option.text (),
-          prop: $option.attr ( 'value' )
-        });
+        let prop = $option.attr ( 'value' );
+
+        if ( prop ) {
+
+          this.selectOptions.push ({
+            value: $option.text (),
+            prop: prop
+          });
+
+        }
 
       }
 
