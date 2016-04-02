@@ -54,7 +54,7 @@
       selectors: {
         select: 'select',
         option: 'option',
-        valueholder: '.select-value',
+        valueholder: '.select-value, label',
         button: '.button'
       },
       callbacks: {
@@ -76,7 +76,7 @@
       this.$wrp = this.$element;
       this.$select = this.$wrp.find ( this.options.selectors.select );
       this.$options = this.$select.find ( this.options.selectors.option );
-      this.$valueholder = this.$wrp.find ( this.options.selectors.valueholder );
+      this.$valueholder = this.$wrp.find ( this.options.selectors.valueholder ).first ();
 
       this.selectOptions = [];
 
