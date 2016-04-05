@@ -41,13 +41,14 @@
 
       match ( event, keystroke ) {
 
-        // It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //TODO: Improve it
-        // ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
+        // `meta` is treated as `cmd` on Mac, and as `ctrl` elsewhere
 
         let specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        if ( ( _.includes ( keys, 'ctrl' ) || _.includes ( keys, 'cmd' ) || _.includes ( keys, 'meta') ) !== Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
+        if ( _.includes ( keys, 'ctrl' ) !== event.ctrlKey ) return false;
+        if ( _.includes ( keys, 'cmd' ) !== event.metaKey ) return false;
+        if ( _.includes ( keys, 'meta' ) !== Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
         if ( _.includes ( keys, 'alt' ) !== event.altKey ) return false;
         if ( _.includes ( keys, 'shift' ) !== event.shiftKey ) return false;
 

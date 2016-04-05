@@ -28,9 +28,9 @@
         element: 'tbody tr:not(.empty)'
       },
       keystrokes: {
-        'ctrl + a': 'all',
-        'ctrl + shift + a': 'clear',
-        'ctrl + i': 'invert'
+        'meta + a': 'all',
+        'meta + shift + a': 'clear',
+        'meta + i': 'invert'
       },
       callbacks: {
         change: _.noop
@@ -111,7 +111,7 @@
 
     }
 
-    /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
+    /* CLICK / META + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
     __down ( event ) {
 

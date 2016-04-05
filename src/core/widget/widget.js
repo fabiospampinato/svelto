@@ -48,7 +48,7 @@
         only: {}
       },
       keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
+      keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'meta + o': 'open', Keyaboard.keys.UP: 'up' }`
       callbacks: {} // Callbacks to trigger on specific events
     }
   };
