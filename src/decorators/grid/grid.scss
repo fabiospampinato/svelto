@@ -39,7 +39,7 @@
           @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
         }
 
-        &.multiple {
+        &.multiple:not(.no-wrap):not(.vertical):not(.joined) {
 
           &.no-wrap,
           &.vertical,
