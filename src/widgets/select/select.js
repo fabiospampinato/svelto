@@ -170,13 +170,13 @@
 
         }
 
-        let prop = $option.attr ( 'value' );
+        let value = $option.text ();
 
-        if ( prop ) {
+        if ( value ) {
 
           this.selectOptions.push ({
             value: $option.text (),
-            prop: prop
+            prop: $option.attr ( 'value' )
           });
 
         }
@@ -248,7 +248,7 @@
 
       if ( _.isString ( value ) && value.length ) {
 
-        let $selectedOption = this.$options.filter ( `[value="${value}"]` );
+        let $selectedOption = this.$options.filter ( `[value="${value}"]` ).first ();
 
         this.$valueholder.text ( $selectedOption.text () );
 
@@ -260,7 +260,7 @@
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
-      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
+      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).first ().addClass ( this.options.classes.selected );
 
     }
 
@@ -286,7 +286,7 @@
 
     set ( value ) {
 
-      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
+      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' ).first ();
 
       if ( !$button.length ) return;
 
