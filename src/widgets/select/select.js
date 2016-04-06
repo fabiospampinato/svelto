@@ -137,6 +137,8 @@
 
     __buttonTap ( event ) {
 
+      event.stopImmediatePropagation ();
+
       this.$popover.popover ( 'close' );
 
       this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
