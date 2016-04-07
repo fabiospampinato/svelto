@@ -24,6 +24,7 @@
     plugin: true,
     selector: '.popover',
     options: {
+      contentChangeEvents: 'inputAutogrow:change tabs:change tagbox:change textareaAutogrow:change', // When one of these events are triggered update the position because the content probably changed
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
@@ -73,6 +74,7 @@
 
       if ( this._isOpen ) {
 
+        this.___contentChange ();
         this.___resize ();
         this.___parentsScroll ();
         this.___layoutTap ();
@@ -87,13 +89,11 @@
 
     }
 
-    /* PARENTS SCROLL */
+    /* CONTENT CHANGE */
 
-    ___parentsScroll () {
+    ___contentChange () {
 
-      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
-
-      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
+      this._on ( true, this.options.contentChangeEvents, this._positionate );
 
     }
 
@@ -102,6 +102,16 @@
     ___resize () {
 
       this._on ( true, this.$window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
+
+    }
+
+    /* PARENTS SCROLL */
+
+    ___parentsScroll () {
+
+      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
+
+      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
 
     }
 
@@ -265,6 +275,7 @@
       this._reset ();
 
       this.___layoutTap ();
+      this.___contentChange ();
       this.___resize ();
       this.___parentsScroll ();
 
