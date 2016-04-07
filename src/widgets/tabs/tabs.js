@@ -93,6 +93,8 @@
 
     __tap ( event ) {
 
+      event.stopImmediatePropagation ();
+
       let index = this.$triggers.index ( $(event.currentTarget) );
 
       this.set ( index );
