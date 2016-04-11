@@ -33,20 +33,13 @@
         width: calc(#{$percentage} - #{$gutter});
       }
 
-      .multiple > .#{$class}-#{$nr} {
+      .multiple:not(.no-wrap):not(.vertical):not(.joined) > .#{$class}-#{$nr} {
 
-        &:not(.multiple) {
+        &:not(.multiple),
+        &.multiple.no-wrap,
+        &.multiple.vertical,
+        &.multiple.joined {
           @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
-        }
-
-        &.multiple:not(.no-wrap):not(.vertical):not(.joined) {
-
-          &.no-wrap,
-          &.vertical,
-          &.joined {
-            @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
-          }
-
         }
 
       }
