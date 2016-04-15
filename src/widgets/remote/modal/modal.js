@@ -116,7 +116,7 @@
 
     ___abort () {
 
-      this._on ( true, this.$modal, 'modal:close', this.abort );
+      this._on ( true, this.$modal, 'modal:beforeclose', this.abort );
 
     }
 
@@ -171,32 +171,22 @@
         /* VARIABLES */
 
         let prevRect = this.$modal.getRect (),
-            $remoteModal = $(resj.modal),
-            attributes = Array.from ( $remoteModal.prop ( 'attributes' ) );
+            $remoteModal = $(resj.modal);
 
-        /* CLONING ATTRIBUTES */
+        $remoteModal.addClass ( Widgets.Modal.config.options.classes.show ).addClass ( Widgets.Modal.config.options.classes.open );
 
-        for ( let attribute of attributes ) {
+        /* AVOIDING MODAL CLOSE */
 
-          if ( attribute.name !== 'class' ) {
-
-            this.$modal.attr ( attribute.name, attribute.value );
-
-          } else {
-
-            this.$modal.addClass ( attribute.value );
-
-          }
-
-        }
+        let instance = this.$modal.modal ( 'instance' );
+        instance.close = instance._reset;
 
         /* RESIZING */
 
         this._frame ( function () {
 
-          this.$modal.html ( $remoteModal.html () ).widgetize ();
-
-          this.$modal.addClass ( this.options.classes.loaded );
+          this.$modal.replaceWith ( $remoteModal );
+          this.$modal = $remoteModal;
+          this.$modal.widgetize ();
 
           let newRect = this.$modal.getRect ();
 
@@ -205,7 +195,7 @@
             height: prevRect.height
           });
 
-          this.$modal.addClass ( this.options.classes.resizing );
+          this.$modal.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
 
           this._frame ( function () {
 
