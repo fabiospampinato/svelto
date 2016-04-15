@@ -17,7 +17,7 @@
   $bg: nth( $datas, 1 );
 
   .text-#{$class} {
-    color: $bg;
+    color: $bg !important;
   }
 
 }
