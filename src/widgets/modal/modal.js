@@ -38,7 +38,9 @@
         'esc': 'close'
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -132,6 +134,8 @@
       this._lock = true;
       this._isOpen = true;
 
+      this._trigger ( 'beforeopen' );
+
       this.$layout.disableScroll ();
 
       this._frame ( function () {
@@ -164,6 +168,8 @@
 
       this._lock = true;
       this._isOpen = false;
+
+      this._trigger ( 'beforeclose' );
 
       this._frame ( function () {
 
