@@ -301,6 +301,8 @@
 
     __tapOnTagRemover ( event ) {
 
+      event.stopImmediatePropagation ();
+
       let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
 
       this.remove ( $tag );
