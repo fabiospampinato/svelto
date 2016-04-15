@@ -136,7 +136,7 @@
 
     __tap ( event ) {
 
-      if ( this._lock || this._isPinned || $(event.target).closest ( this.$panel ).length ) return;
+      if ( this._lock || this._isPinned || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
 
       this.close ();
 
