@@ -13,7 +13,6 @@
   @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
   position: fixed;
   z-index: $modal-z-index;
-  overflow: auto;
   max-width: $modal-max-width;
   max-height: $modal-max-height;
   margin: 0;
@@ -32,6 +31,22 @@
     cursor: pointer;
     z-index: $modal-z-index - 1;
     transition-duration: $modal-animation-duration;
+  }
+
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.card {
+
+    max-height: none;
+
+    > .card-block {
+      max-height: $modal-max-height * .8;
+    }
+
   }
 
 }
