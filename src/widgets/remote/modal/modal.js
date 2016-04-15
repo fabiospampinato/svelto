@@ -104,6 +104,8 @@
 
       this._delay ( function () {
 
+        if ( !this.$modal ) return;
+
         this.$modal.remove ();
 
         this.$modal = false;
