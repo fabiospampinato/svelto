@@ -48,7 +48,7 @@
         only: {}
       },
       keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {},  // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'meta + o': 'open', Keyaboard.keys.UP: 'up' }`
+      keystrokes: {}, // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`. You can also pass variables to the method. For example: `{ 'ctrl + o': ['open', true], Keyaboard.keys.UP: ['open', array ( 1, 2 )] }`
       callbacks: {} // Callbacks to trigger on specific events
     }
   };
@@ -623,7 +623,11 @@
 
             if ( Keyboard.keystroke.match ( event, keystroke ) ) {
 
-              this[this.options.keystrokes[keystrokes]]();
+              let toCall = this.options.keystrokes[keystrokes],
+                  method = _.isArray ( toCall ) ? toCall[0] : toCall,
+                  args   = _.isArray ( toCall ) ? _.castArray ( toCall[1] ) : [];
+
+              this[method].apply ( this, args );
 
               event.preventDefault ();
               event.stopImmediatePropagation ();
