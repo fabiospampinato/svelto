@@ -1,0 +1,15 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Editor - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+.editor.fullscreen {
+  @include fill-fixed ();
+  z-index: $editor-fullscreen-z-index;
+  border-radius: 0;
+}

@@ -130,6 +130,73 @@ SWHelpers.define ( 'divider', function ( title = '' ) {
 
 });
 
+SWHelpers.define ( 'editor', function () {
+
+  return '<div class="editor card bordered">' +
+           '<div class="card-header bordered">' +
+             '<div class="multiple">' +
+               '<div class="multiple joined">' +
+                 '<div class="button compact small bordered" title="Bold" data-action="bold">' +
+                   '<i class="icon">format_bold</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Italic" data-action="italic">' +
+                   '<i class="icon">format_italic</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Strikethrough" data-action="strikethrough">' +
+                   '<i class="icon">strikethrough_s</i>' +
+                 '</div>' +
+               '</div>' +
+               '<div class="multiple joined">' +
+                 '<div class="button compact small bordered" title="Unordered list" data-action="list_unordered">' +
+                   '<i class="icon">format_list_bulleted</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Ordered list" data-action="list_ordered">' +
+                   '<i class="icon">format_list_numbered</i>' +
+                 '</div>' +
+               '</div>' +
+               '<div class="multiple joined">' +
+                 '<div class="button compact small bordered" title="Link" data-action="link">' +
+                   '<i class="icon">link</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Image" data-action="image">' +
+                   '<i class="icon">image</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Code" data-action="code">' +
+                   '<i class="icon">code</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Quote" data-action="quote">' +
+                   '<i class="icon">format_quote</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Divider" data-action="divider">' +
+                   '<i class="icon">remove</i>' +
+                 '</div>' +
+               '</div>' +
+               '<div class="multiple joined">' +
+                 '<div class="button compact small bordered" title="Undo" data-action="undo">' +
+                   '<i class="icon">undo</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Redo" data-action="redo">' +
+                   '<i class="icon">redo</i>' +
+                 '</div>' +
+               '</div>' +
+               '<div class="spacer"></div>' +
+               '<div class="button compact small bordered" title="Preview" data-action="preview">' +
+                 '<i class="icon">visibility</i>' +
+               '</div>' +
+               '<div class="button compact small bordered" title="Fullscreen" data-action="fullscreen">' +
+                 '<i class="icon">fullscreen</i>' +
+               '</div>' +
+             '</div>' +
+           '</div>' +
+           '<textarea class="card-block" rows="6"></textarea>' +
+           '<div class="card-block editor-preview"></div>' +
+           '<div class="card-footer bordered text-center">' +
+             '<div class="button secondary">Action</div>' +
+           '</div>' +
+         '</div>';
+
+});
+
 SWHelpers.define ( 'iconAction', function ( icon, action ) {
 
   return `<div class="button bordered compact" onclick="${action}">` +
