@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add support for `samp`
+
 // We are separating the border property since the color may be `inherit`
 
 /* CODE */
@@ -25,4 +26,12 @@
 
 code {
   @extend %code;
+}
+
+/* INSIDE PRE */
+
+pre > code {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
