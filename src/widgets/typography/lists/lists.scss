@@ -24,3 +24,9 @@ dd {
   margin: 0;
   padding-left: $list-padding-left;
 }
+
+/* NESTED OL */
+
+ol ol {
+  list-style-type: upper-roman;
+}
