@@ -8,6 +8,8 @@
 
 // The attached element shouldn't match `:last-child` or it may cause issues with the gutter
 
+//TODO: Improve support for attaching `.multiple` (set `:first-child` and `:last-child` `border-radius`)
+
 /* ATTACHED */
 
 %attached {

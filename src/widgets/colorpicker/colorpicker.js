@@ -9,6 +9,7 @@
  * @require lib/color/color.js
  * ========================================================================= */
 
+//TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
 (function ( $, _, Svelto, Widgets, Factory, Color, Keyboard ) {

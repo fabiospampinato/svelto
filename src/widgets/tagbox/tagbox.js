@@ -319,7 +319,7 @@
 
     __tapOnEmpty ( event ) {
 
-      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( this.options.selectors.partial + ',' + this.options.selectors.tagLabel ) ) {
+      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( this.options.selectors.partial + ',' + this.options.selectors.tagLabel ) ) { //TODO: Add an helper for checking if is focused
 
         this.$partial.focus ();
 

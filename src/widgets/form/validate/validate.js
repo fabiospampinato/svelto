@@ -10,6 +10,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
+//FIXME: If a form gets autofilled with `SafeInCloud` the value doesn't get updated (it probably doesn't trigger 'change') -> force a value refresh when submitting
 //TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 
