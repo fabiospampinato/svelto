@@ -18,3 +18,13 @@
   max-height: none;
   height: 100%;
 }
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.fullscreen.card > .card-block {
+    max-height: none;
+  }
+
+}
