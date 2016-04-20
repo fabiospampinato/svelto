@@ -16,7 +16,9 @@
 
   $.fn.isAttached = function () {
 
-    return $.contains ( document.documentElement, this[0] );
+    let html = document.documentElement;
+
+    return ( this[0] === html ) || $.contains ( html, this[0] );
 
   };
 
