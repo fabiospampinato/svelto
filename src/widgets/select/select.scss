@@ -14,63 +14,6 @@
 
 /* SELECT */
 
-select {
-
-  @include fill ();
-  @include fill-absolute ();
-  appearance: none;
-  cursor: pointer;
-  margin: 0 !important;
-  font-size: 0;
-  opacity: 0;
-  border: 0;
-  border-radius: inherit;
-  z-index: $select-z-index;
-
-  /* BORDERED */
-
-  //FIXME: Not stretching properly, at maximum it reached 100% width and height
-
-  // .bordered > & {
-  //   @include absolute ( - $border-width );
-  // }
-
-  /* LABEL */
-
-  + label {
-
-    padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
-    min-height: 1em * $icon-scale-factor;
-    min-width: 1em * $icon-scale-factor;
-    cursor: pointer;
-
-    /* EMPTY */
-
-    &:empty {
-      padding-right: 0;
-    }
-
-    /* AFTER */
-
-    &:after {
-      @extend %icon-base;
-      position: absolute;
-      right: 0;
-      content: $select-icon;
-    }
-
-    /* CUSTOM AFTER */
-
-    &[data-icon]:after {
-      content: attr(data-icon);
-    }
-
-  }
-
-}
-
-/* WRAPPER */
-
 .select {
 
   @extend %widget;
@@ -81,6 +24,63 @@ select {
 
   &.label {
     text-align: left;
+  }
+
+  /* SELECT */
+
+  select {
+
+    @include fill ();
+    @include fill-absolute ();
+    appearance: none;
+    cursor: pointer;
+    margin: 0 !important;
+    font-size: 0;
+    opacity: 0;
+    border: 0;
+    border-radius: inherit;
+    z-index: $select-z-index;
+
+    /* BORDERED */
+
+    //FIXME: Not stretching properly, at maximum it reached 100% width and height
+
+    // .bordered > & {
+    //   @include absolute ( - $border-width );
+    // }
+
+    /* LABEL */
+
+    + label {
+
+      padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
+      min-height: 1em * $icon-scale-factor;
+      min-width: 1em * $icon-scale-factor;
+      cursor: pointer;
+
+      /* EMPTY */
+
+      &:empty {
+        padding-right: 0;
+      }
+
+      /* AFTER */
+
+      &:after {
+        @extend %icon-base;
+        position: absolute;
+        right: 0;
+        content: $select-icon;
+      }
+
+      /* CUSTOM AFTER */
+
+      &[data-icon]:after {
+        content: attr(data-icon);
+      }
+
+    }
+
   }
 
 }
