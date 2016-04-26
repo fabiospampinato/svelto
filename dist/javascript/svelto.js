@@ -1,22 +1,3 @@
-'use strict';
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* =========================================================================
  * Svelto - Core - jQuery (Init)
@@ -33,24 +14,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* JQUERY */
 
-  var $ = jQuery || $;
+  let $ = window.jQuery || window.$;
 
   /* CHECKING */
 
-  var version = $ ? $().jquery : false,
-      parts = version ? version.split('-')[0].split('.') : false,
-      nums = parts ? parts.map(Number) : false,
-      supported = nums && nums[0] > 1 || nums[0] === 1 && (nums[1] > 11 || nums[1] === 11 && nums[2] >= 2);
+  let version = $ ? $().jquery : false,
+      parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 1 || nums[0] === 1 && ( nums[1] > 11 || nums[1] === 11 && nums[2] >= 2 );
 
-  if (!$ || !supported) {
+  if ( !$ || !supported ) {
 
-    throw new Error('Svelto depends upon jQuery v1.11.2 or higher, dependency not found');
+    throw new Error ( 'Svelto depends upon jQuery v1.11.2 or higher, dependency not found' );
+
   }
 
   /* EXPORT */
 
   window.jQuery = $;
-})();
+
+}());
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Clean data)
@@ -64,50 +48,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Monkey patching the internal `$.cleanData` method so that we can properly destroy widgets instances when their relative elements are removed
 //SOURCE: jQuery UI's Widget
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* CLEAN DATA */
 
-  var _cleanData = $.cleanData;
+  const _cleanData = $.cleanData;
 
-  $.cleanData = function (eles) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+  $.cleanData = function ( eles ) {
 
-    try {
+    for ( let i = 0, ele; ( ele = eles[i] ) !== undefined; i++ ) {
 
-      for (var _iterator = eles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var ele = _step.value;
+			let events = $._data ( ele, 'events' );
 
+			if ( events && events.remove ) {
 
-        var events = $._data(ele, 'events');
+				$(ele).triggerHandler ( 'remove' );
 
-        if (events && events.remove) {
+			}
 
-          $(ele).triggerHandler('remove');
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
     }
 
-    _cleanData(eles);
-  };
-})(jQuery);
+    _cleanData ( eles );
+
+	};
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Event XY)
@@ -118,41 +86,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* EVENT XY */
 
-  $.eventXY = function (event) {
-    var X = arguments.length <= 1 || arguments[1] === undefined ? 'pageX' : arguments[1];
-    var Y = arguments.length <= 2 || arguments[2] === undefined ? 'pageY' : arguments[2];
+  $.eventXY = function ( event, X = 'pageX', Y = 'pageY' ) {
 
+    if ( 'originalEvent' in event ) {
 
-    if ('originalEvent' in event) {
+      return $.eventXY ( event.originalEvent );
 
-      return $.eventXY(event.originalEvent);
-    } else if ('changedTouches' in event && event.changedTouches.length) {
+    } else if ( 'changedTouches' in event && event.changedTouches.length ) {
 
       return {
         x: event.changedTouches[0][X],
         y: event.changedTouches[0][Y]
       };
-    } else if ('touches' in event && event.touches.length) {
+
+    } else if ( 'touches' in event && event.touches.length ) {
 
       return {
         x: event.touches[0][X],
         y: event.touches[0][Y]
       };
-    } else if (X in event) {
+
+    } else if ( X in event ) {
 
       return {
         x: event[X],
         y: event[Y]
       };
+
     }
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Frame)
@@ -163,17 +135,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* FRAME */
 
-  $.frame = function (callback) {
+  $.frame = function ( callback ) {
 
-    return requestAnimationFrame(callback);
+    return requestAnimationFrame ( callback );
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Get rect)
@@ -184,22 +159,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* RECT */
 
-  $.getRect = function (node) {
+  $.getRect = function ( node ) {
 
-    return node.getBoundingClientRect();
+    return node.getBoundingClientRect ();
+
   };
 
   $.fn.getRect = function () {
 
-    return this.length ? this[0].getBoundingClientRect() : undefined;
+    return this.length ? this[0].getBoundingClientRect () : undefined;
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (HSL)
@@ -214,17 +193,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // It only works for setting
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* HSL */
 
-  $.fn.hsl = function (h, s, l) {
+  $.fn.hsl = function ( h, s, l ) {
 
-    return this.css('background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)');
+    return this.css ( 'background-color', `hsl(${h},${s}%,${l}%)` );
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Is attached)
@@ -235,7 +217,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
@@ -243,9 +225,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $.fn.isAttached = function () {
 
-    return $.contains(document.documentElement, this[0]);
+    let html = document.documentElement;
+
+    return ( this[0] === html ) || $.contains ( html, this[0] );
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Iterator)
@@ -256,14 +243,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* ITERATOR */
 
   $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Scroll)
@@ -275,7 +264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./iterator.js
  * ========================================================================= */
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
@@ -304,69 +293,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   //
   // };
 
-  $.fn.scrollParent = function (includeHidden) {
-    // Take from jQuery UI, optimized for performance
+  $.fn.scrollParent = function ( includeHidden ) { // Take from jQuery UI, optimized for performance
 
-    var position = this.css('position');
+    let position = this.css ( 'position' );
 
-    if (position === 'fixed') return $(document);
+    if ( position === 'fixed' ) return $(document);
 
-    var excludeStaticParent = position === 'absolute',
+    let excludeStaticParent = ( position === 'absolute' ),
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
 
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+    for ( let parent of this.parents () ) {
 
-    try {
-      for (var _iterator2 = this.parents()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var parent = _step2.value;
+      let $parent = $(parent);
 
+      if ( excludeStaticParent && $parent.css ( 'position' ) === 'static' ) continue;
 
-        var $parent = $(parent);
+      if ( overflowRegex.test ( $parent.css ( 'overflow' ) + $parent.css ( 'overflow-y' ) + $parent.css ( 'overflow-x' ) ) ) {
 
-        if (excludeStaticParent && $parent.css('position') === 'static') continue;
+        return $parent;
 
-        if (overflowRegex.test($parent.css('overflow') + $parent.css('overflow-y') + $parent.css('overflow-x'))) {
-
-          return $parent;
-        }
       }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
+
     }
 
     return $(document);
+
   };
 
   //TODO: Preserve the scrollbars if possible, when disabling
 
-  $.fn.toggleScroll = function (force) {
+  $.fn.toggleScroll = function ( force ) {
 
-    return this.toggleClass('overflow-hidden', !force);
+    return this.toggleClass ( 'overflow-hidden', !force );
+
   };
 
   $.fn.disableScroll = function () {
 
-    return this.toggleScroll(false);
+    return this.toggleScroll ( false );
+
   };
 
   $.fn.enableScroll = function () {
 
-    return this.toggleScroll(true);
+    return this.toggleScroll ( true );
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Selection)
@@ -379,29 +354,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //SOURCE: jQuery UI
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
   /* SELECTION */
 
-  $.fn.disableSelection = function () {
+  $.fn.disableSelection = (function () {
 
-    var event = 'onselectstart' in document.createElement('div') ? 'selectstart' : 'mousedown';
+    let event = ( 'onselectstart' in document.createElement ( 'div' ) ) ? 'selectstart' : 'mousedown';
 
     return function () {
 
-      return this.on(event + '.svelto-disable-selection', function (event) {
-        return event.preventDefault();
-      });
+      return this.on ( event + '.svelto-disable-selection', event => event.preventDefault () );
+
     };
-  }();
+
+  })();
 
   $.fn.enableSelection = function () {
 
-    return this.off('.svelto-disable-selection');
+    return this.off ( '.svelto-disable-selection' );
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash (Init)
@@ -418,24 +396,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* LODASH */
 
-  var _ = lodash || _;
+  let _ = window.lodash || window._;
 
   /* CHECKING */
 
-  var version = _ ? _.VERSION : false,
-      parts = version ? version.split('-')[0].split('.') : false,
-      nums = parts ? parts.map(Number) : false,
-      supported = nums && nums[0] > 4 || nums[0] === 4 && (nums[1] > 6 || nums[1] === 6 && nums[2] >= 1);
+  let version = _ ? _.VERSION : false,
+      parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 4 || nums[0] === 4 && ( nums[1] > 6 || nums[1] === 6 && nums[2] >= 1 );
 
-  if (!_ || !supported) {
+  if ( !_ || !supported ) {
 
-    throw new Error('Svelto depends upon lodash v4.6.1 or higher, dependency not found');
+    throw new Error ( 'Svelto depends upon lodash v4.6.1 or higher, dependency not found' );
+
   }
 
   /* EXPORT */
 
   window.lodash = _;
-})();
+
+}());
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Constants)
@@ -446,20 +427,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* CONSTANTS */
 
-  _.mixin({
+  _.mixin ({
 
-    true: _.constant(true),
+    true: _.constant ( true ),
 
-    false: _.constant(false)
+    false: _.constant ( false )
+
 
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Format)
@@ -470,24 +454,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* FORMAT */
 
-  _.mixin({
-    format: function format(msg) {
+  _.mixin ({
 
-      for (var i = 1, l = arguments.length - 1; i <= l; i++) {
+    format ( msg, ...args ) {
 
-        msg = msg.replace('$' + i, arguments.length <= i - 1 + 1 ? undefined : arguments[i - 1 + 1]);
+      for ( let i = 1, l = args.length; i <= l; i++ ) {
+
+        msg = msg.replace ( `$${i}`, args[i - 1] );
+
       }
 
       return msg;
+
     }
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (MKize)
@@ -498,32 +488,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* MKIZE */
 
-  _.mixin({
-    mkize: function mkize(number) {
-      var decimals = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+  _.mixin ({
 
+     mkize ( number, decimals = 0 ) {
 
-      var bases = [1000000000, 1000000, 1000],
+      let bases = [1000000000, 1000000, 1000],
           suffixes = ['B', 'M', 'K'];
 
-      for (var i = 0, l = bases.length; i < l; i++) {
+      for ( let i = 0, l = bases.length; i < l; i++ ) {
 
-        if (number >= bases[i]) {
+        if ( number >= bases[i] ) {
 
-          return Number((number / bases[i]).toFixed(decimals)) + suffixes[i];
+          return Number ( ( number / bases[i] ).toFixed ( decimals ) ) + suffixes[i];
+
         }
+
       }
 
       return number;
+
     }
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Move)
@@ -534,19 +529,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* MOVE */
 
-  _.mixin({
-    move: function move(arr, from, to) {
+  _.mixin ({
 
-      arr.splice(to, 0, arr.splice(from, 1)[0]);
-    }
+     move ( arr, from, to ) {
+
+       arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
+
+     }
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Now secs)
@@ -557,19 +557,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* NOW SECS */
 
-  _.mixin({
-    nowSecs: function nowSecs() {
+  _.mixin ({
 
-      return Math.floor(_.now() / 1000);
+    nowSecs () {
+
+      return Math.floor ( _.now () / 1000 );
+
     }
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Round closer)
@@ -580,27 +585,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* DIRECTION */
 
-  _.mixin({
-    roundCloser: function roundCloser(number, step) {
+  _.mixin ({
 
-      if (_.isUndefined(step)) {
+    roundCloser ( number, step ) {
+
+      if ( _.isUndefined ( step ) ) {
 
         step = 1;
+
       }
 
-      var left = number % step,
+      let left = ( number % step ),
           halfStep = step / 2;
 
-      return number - left + (left >= halfStep ? step : 0);
+      return number - left + ( left >= halfStep ? step : 0 );
+
     }
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Time ago)
@@ -612,48 +623,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./now_secs.js
  * ========================================================================= */
 
-(function (_) {
+(function ( _ ) {
 
   'use strict';
 
   /* TIME AGO */
 
-  _.mixin({
-    timeAgo: function timeAgo(timestamp) {
-      // Timestamp is required in seconds
+  _.mixin ({
 
-      var elapsed = _.nowSecs() - timestamp,
+    timeAgo ( timestamp ) { // Timestamp is required in seconds
+
+      let elapsed = _.nowSecs () - timestamp,
           justNow = 5;
 
-      var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+      let names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
           times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
-      if (elapsed < justNow) {
+      if ( elapsed < justNow ) {
 
         return {
           str: 'Just now',
           next: justNow - elapsed
         };
+
       } else {
 
-        for (var i = 0, l = times.length; i < l; i++) {
+        for ( let i = 0, l = times.length; i < l; i++ ) {
 
-          var name = names[i],
+          let name = names[i],
               secs = times[i],
-              number = Math.floor(elapsed / secs);
+              number = Math.floor ( elapsed / secs );
 
-          if (number >= 1) {
+          if ( number >= 1 ) {
 
             return {
-              str: number + ' ' + name + (number > 1 ? 's' : '') + ' ago',
-              next: secs - (elapsed - number * secs)
+              str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
+              next: secs - ( elapsed - ( number * secs ) )
             };
+
           }
+
         }
+
       }
+
     }
+
+
   });
-})(lodash);
+
+}( lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - lodash - Helpers
@@ -670,6 +690,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./time_ago.js
  * ========================================================================= */
 
+
 /* =========================================================================
  * Svelto - Core - lodash
  * =========================================================================
@@ -679,6 +700,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./init.js
  * @require ./helpers/helpers.js
  * ========================================================================= */
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Z Index)
@@ -692,54 +714,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //SOURCE: jQuery UI
 
-(function ($, _) {
+(function ( $, _ ) {
 
   'use strict';
 
   /* Z INDEX */
 
-  $.fn.zIndex = function (val) {
+	$.fn.zIndex = function ( val ) {
 
-    if (!_.isUndefined(val)) {
+    if ( !_.isUndefined ( val ) ) {
 
-      return this.css('zIndex', val);
+      return this.css ( 'zIndex', val );
+
     }
 
-    if (!this.length) return 0;
+		if ( !this.length ) return 0;
 
-    var $elem = this.eq(0),
-        position = void 0,
-        value = void 0;
+		let $elem = this.eq ( 0 ),
+        position,
+        value;
 
-    while ($elem.length && $elem[0] !== document) {
+		while ( $elem.length && $elem[0] !== document ) {
 
-      // Ignore z-index if position is set to a value where z-index is ignored by the browser
-      // This makes behavior of this function consistent across browsers
-      // WebKit always returns auto if the element is positioned
+			// Ignore z-index if position is set to a value where z-index is ignored by the browser
+			// This makes behavior of this function consistent across browsers
+			// WebKit always returns auto if the element is positioned
 
-      position = $elem.css('position');
+      position = $elem.css ( 'position' );
 
-      if (_.includes(['absolute', 'relative', 'fixed'], position)) {
+      if ( _.includes ( ['absolute', 'relative', 'fixed'], position ) ) {
 
-        // IE returns 0 when zIndex is not specified
-        // other browsers return a string
-        // we ignore the case of nested elements with an explicit value of 0
-        // <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+				// IE returns 0 when zIndex is not specified
+				// other browsers return a string
+				// we ignore the case of nested elements with an explicit value of 0
+				// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
 
-        value = parseInt($elem.css('zIndex'), 10);
+				value = parseInt ( $elem.css ( 'zIndex' ), 10 );
 
-        if (!_.isNaN(value) && value !== 0) {
+				if ( !_.isNaN ( value ) && value !== 0 ) {
 
-          return value;
-        }
-      }
+					return value;
 
-      $elem = $elem.parent();
-    }
+				}
+
+			}
+
+			$elem = $elem.parent ();
+
+		}
 
     return 0;
-  };
-})(jQuery, lodash);
+
+	};
+
+}( jQuery, lodash ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Top index)
@@ -754,7 +783,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Use it
 //TODO: Write it in a more dynamic way, detecting what the highest `z-index` actually is
 
-(function ($) {
+(function ( $ ) {
 
   'use strict';
 
@@ -762,14 +791,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $.fn.topIndex = function () {
 
-    var topIndex = 1000000000;
+    let topIndex = 1000000000;
 
     return function () {
 
-      return this.zIndex(++topIndex);
+      return this.zIndex ( ++topIndex );
+
     };
+
   };
-})(jQuery);
+
+}( jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers
@@ -789,6 +822,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./top_index.js
  * @require ./z_index.js
  * ========================================================================= */
+
 
 /* =========================================================================
  * Svelto - Core - jQuery
@@ -824,10 +858,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * of control over the experience.
 */
 
-;(function (window, document, undefined) {
+;(function(window, document, undefined){
   var classes = [];
 
+
   var tests = [];
+
 
   /**
    *
@@ -854,7 +890,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _q: [],
 
     // Stub these for people who are listening
-    on: function on(test, cb) {
+    on: function(test, cb) {
       // I don't really think people should do this, but we can
       // safe guard it a bit.
       // -- NOTE:: this gets WAY overridden in src/addTest for actual async tests.
@@ -862,27 +898,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       // but the code to *disallow* sync tests in the real version of this
       // function is actually larger than this.
       var self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         cb(self[test]);
       }, 0);
     },
 
-    addTest: function addTest(name, fn, options) {
-      tests.push({ name: name, fn: fn, options: options });
+    addTest: function(name, fn, options) {
+      tests.push({name: name, fn: fn, options: options});
     },
 
-    addAsyncTest: function addAsyncTest(fn) {
-      tests.push({ name: null, fn: fn });
+    addAsyncTest: function(fn) {
+      tests.push({name: null, fn: fn});
     }
   };
 
+
+
   // Fake some of Object.create so we can force non test results to be non "own" properties.
-  var Modernizr = function Modernizr() {};
+  var Modernizr = function() {};
   Modernizr.prototype = ModernizrProto;
 
   // Leak modernizr globally when you `require` it rather than force it here.
   // Overwrite name so constructor name is nicer :D
   Modernizr = new Modernizr();
+
+
 
   /**
    * List of property values to set for css tests. See ticket #21
@@ -918,10 +958,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   // we use ['',''] rather than an empty array in order to allow a pattern of .`join()`ing prefixes to test
   // values in feature detects to continue to work
-  var prefixes = ModernizrProto._config.usePrefixes ? ' -webkit- -moz- -o- -ms- '.split(' ') : ['', ''];
+  var prefixes = (ModernizrProto._config.usePrefixes ? ' -webkit- -moz- -o- -ms- '.split(' ') : ['','']);
 
   // expose these for the plugin API. Look in the source for how to join() them against your input
   ModernizrProto._prefixes = prefixes;
+
+
 
   /**
    * is returns a boolean if the typeof an obj is exactly type.
@@ -934,7 +976,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   function is(obj, type) {
-    return (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === type;
+    return typeof obj === type;
   }
   ;
 
@@ -978,6 +1020,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Run the test, or use the raw value if it's not a function
         result = is(feature.fn, 'function') ? feature.fn() : feature.fn;
 
+
         // Set each of the names on the Modernizr object
         for (nameIdx = 0; nameIdx < featureNames.length; nameIdx++) {
           featureName = featureNames[nameIdx];
@@ -1017,6 +1060,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var docElement = document.documentElement;
 
+
   /**
    * A convenience helper to check if the document we are running in is an SVG document
    *
@@ -1025,6 +1069,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   var isSVG = docElement.nodeName.toLowerCase() === 'svg';
+
 
   /**
    * setClasses takes an array of class names and adds them to the root element
@@ -1056,6 +1101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       className += ' ' + classPrefix + classes.join(' ' + classPrefix);
       isSVG ? docElement.className.baseVal = className : docElement.className = className;
     }
+
   }
 
   ;
@@ -1065,16 +1111,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    *   elem.style.WebkitBorderRadius
    * instead of something like the following, which would be technically incorrect:
    *   elem.style.webkitBorderRadius
-    * Webkit ghosts their properties in lowercase but Opera & Moz do not.
+
+   * Webkit ghosts their properties in lowercase but Opera & Moz do not.
    * Microsoft uses a lowercase `ms` instead of the correct `Ms` in IE8+
    *   erik.eae.net/archives/2008/03/10/21.48.10/
-    * More here: github.com/Modernizr/Modernizr/issues/issue/21
+
+   * More here: github.com/Modernizr/Modernizr/issues/issue/21
    *
    * @access private
    * @returns {string} The string representing the vendor-specific style properties
    */
 
   var omPrefixes = 'Moz O ms Webkit';
+
 
   /**
    * List of JavaScript DOM values used for tests
@@ -1094,8 +1143,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * ```
    */
 
-  var domPrefixes = ModernizrProto._config.usePrefixes ? omPrefixes.toLowerCase().split(' ') : [];
+  var domPrefixes = (ModernizrProto._config.usePrefixes ? omPrefixes.toLowerCase().split(' ') : []);
   ModernizrProto._domPrefixes = domPrefixes;
+
 
   /**
    * hasOwnProp is a shim for hasOwnProperty that is needed for Safari 2.0 support
@@ -1111,24 +1161,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   // hasOwnProperty shim by kangax needed for Safari 2.0 support
   var hasOwnProp;
 
-  (function () {
-    var _hasOwnProperty = {}.hasOwnProperty;
+  (function() {
+    var _hasOwnProperty = ({}).hasOwnProperty;
     /* istanbul ignore else */
     /* we have no way of testing IE 5.5 or safari 2,
      * so just assume the else gets hit */
     if (!is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined')) {
-      hasOwnProp = function hasOwnProp(object, property) {
+      hasOwnProp = function(object, property) {
         return _hasOwnProperty.call(object, property);
       };
-    } else {
-      hasOwnProp = function hasOwnProp(object, property) {
-        /* yes, this can give false positives/negatives, but most of the time we don't care about those */
-        return property in object && is(object.constructor.prototype[property], 'undefined');
+    }
+    else {
+      hasOwnProp = function(object, property) { /* yes, this can give false positives/negatives, but most of the time we don't care about those */
+        return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
       };
     }
   })();
 
-  // _l tracks listeners for async tests, as well as tests that execute after the initial run
+
+
+
+   // _l tracks listeners for async tests, as well as tests that execute after the initial run
   ModernizrProto._l = {};
 
   /**
@@ -1155,7 +1208,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * ```
    */
 
-  ModernizrProto.on = function (feature, cb) {
+  ModernizrProto.on = function(feature, cb) {
     // Create the list of listeners if it doesn't exist
     if (!this._l[feature]) {
       this._l[feature] = [];
@@ -1167,7 +1220,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     // If it's already been resolved, trigger it on next tick
     if (Modernizr.hasOwnProperty(feature)) {
       // Next Tick
-      setTimeout(function () {
+      setTimeout(function() {
         Modernizr._trigger(feature, Modernizr[feature]);
       }, 0);
     }
@@ -1186,7 +1239,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * result of a feature detection function
    */
 
-  ModernizrProto._trigger = function (feature, res) {
+  ModernizrProto._trigger = function(feature, res) {
     if (!this._l[feature]) {
       return;
     }
@@ -1194,7 +1247,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var cbs = this._l[feature];
 
     // Force async
-    setTimeout(function () {
+    setTimeout(function() {
       var i, cb;
       for (i = 0; i < cbs.length; i++) {
         cb = cbs[i];
@@ -1277,10 +1330,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   function addTest(feature, test) {
 
-    if ((typeof feature === 'undefined' ? 'undefined' : _typeof(feature)) == 'object') {
+    if (typeof feature == 'object') {
       for (var key in feature) {
         if (hasOwnProp(feature, key)) {
-          addTest(key, feature[key]);
+          addTest(key, feature[ key ]);
         }
       }
     } else {
@@ -1331,12 +1384,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
 
   // After all the tests are run, add self to the Modernizr prototype
-  Modernizr._q.push(function () {
+  Modernizr._q.push(function() {
     ModernizrProto.addTest = addTest;
   });
 
-  var cssomPrefixes = ModernizrProto._config.usePrefixes ? omPrefixes.split(' ') : [];
+
+
+
+  var cssomPrefixes = (ModernizrProto._config.usePrefixes ? omPrefixes.split(' ') : []);
   ModernizrProto._cssomPrefixes = cssomPrefixes;
+
 
   /**
    * atRule returns a given CSS property at-rule (eg @keyframes), possibly in
@@ -1365,7 +1422,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    *
    */
 
-  var atRule = function atRule(prop) {
+  var atRule = function(prop) {
     var length = prefixes.length;
     var cssrule = window.CSSRule;
     var rule;
@@ -1402,6 +1459,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   };
 
   ModernizrProto.atRule = atRule;
+
+
 
   /**
    * createElement is a convenience wrapper around document.createElement. Since we
@@ -1457,7 +1516,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    *
    */
 
-  var hasEvent = function () {
+  var hasEvent = (function() {
 
     // Detect whether event support can be detected via `in`. Test on a DOM element
     // using the "blur" event b/c it should always exist. bit.ly/event-detection
@@ -1466,9 +1525,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function inner(eventName, element) {
 
       var isSupported;
-      if (!eventName) {
-        return false;
-      }
+      if (!eventName) { return false; }
       if (!element || typeof element === 'string') {
         element = createElement(element || 'div');
       }
@@ -1500,9 +1557,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return isSupported;
     }
     return inner;
-  }();
+  })();
+
 
   ModernizrProto.hasEvent = hasEvent;
+
 
   /**
    * prefixedCSSValue is a way test for prefixed css properties (e.g. display: -webkit-flex)
@@ -1527,7 +1586,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    *
    */
 
-  var prefixedCSSValue = function prefixedCSSValue(prop, value) {
+  var prefixedCSSValue = function(prop, value) {
     var result = false;
     var elem = createElement('div');
     var style = elem.style;
@@ -1553,6 +1612,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   ModernizrProto.prefixedCSSValue = prefixedCSSValue;
 
+
   /**
    * cssToDOM takes a kebab-case string and converts it to camelCase
    * e.g. box-sizing -> boxSizing
@@ -1564,7 +1624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   function cssToDOM(name) {
-    return name.replace(/([a-z])-([a-z])/g, function (str, m1, m2) {
+    return name.replace(/([a-z])-([a-z])/g, function(str, m1, m2) {
       return m1 + m2.toUpperCase();
     }).replace(/^-/, '');
   }
@@ -1581,7 +1641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   function domToCSS(name) {
-    return name.replace(/([A-Z])/g, function (str, m1) {
+    return name.replace(/([A-Z])/g, function(str, m1) {
       return '-' + m1.toLowerCase();
     }).replace(/^ms-/, '-ms-');
   }
@@ -1681,6 +1741,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     return !!ret;
+
   }
 
   ;
@@ -1732,27 +1793,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * always return false.
    */
 
-  var mq = function () {
+  var mq = (function() {
     var matchMedia = window.matchMedia || window.msMatchMedia;
     if (matchMedia) {
-      return function (mq) {
+      return function(mq) {
         var mql = matchMedia(mq);
         return mql && mql.matches || false;
       };
     }
 
-    return function (mq) {
+    return function(mq) {
       var bool = false;
 
-      injectElementWithStyles('@media ' + mq + ' { #modernizr { position: absolute; } }', function (node) {
-        bool = (window.getComputedStyle ? window.getComputedStyle(node, null) : node.currentStyle).position == 'absolute';
+      injectElementWithStyles('@media ' + mq + ' { #modernizr { position: absolute; } }', function(node) {
+        bool = (window.getComputedStyle ?
+                window.getComputedStyle(node, null) :
+                node.currentStyle).position == 'absolute';
       });
 
       return bool;
     };
-  }();
+  })();
+
 
   ModernizrProto.mq = mq;
+
+
 
   /**
    * testStyles injects an element with style element and some CSS rules
@@ -1813,6 +1879,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var testStyles = ModernizrProto.testStyles = injectElementWithStyles;
 
+
+
   /**
    * contains checks to see if a string contains another string
    *
@@ -1824,7 +1892,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   function contains(str, substr) {
-    return !! ~('' + str).indexOf(substr);
+    return !!~('' + str).indexOf(substr);
   }
 
   ;
@@ -1856,16 +1924,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
     // Otherwise fall back to at-rule (for Opera 12.x)
     else if ('CSSSupportsRule' in window) {
-        // Build a condition string for every prefixed variant
-        var conditionText = [];
-        while (i--) {
-          conditionText.push('(' + domToCSS(props[i]) + ':' + value + ')');
-        }
-        conditionText = conditionText.join(' or ');
-        return injectElementWithStyles('@supports (' + conditionText + ') { #modernizr { position: absolute; } }', function (node) {
-          return getComputedStyle(node, null).position == 'absolute';
-        });
+      // Build a condition string for every prefixed variant
+      var conditionText = [];
+      while (i--) {
+        conditionText.push('(' + domToCSS(props[i]) + ':' + value + ')');
       }
+      conditionText = conditionText.join(' or ');
+      return injectElementWithStyles('@supports (' + conditionText + ') { #modernizr { position: absolute; } }', function(node) {
+        return getComputedStyle(node, null).position == 'absolute';
+      });
+    }
     return undefined;
   }
   ;
@@ -1881,7 +1949,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
 
   function fnBind(fn, that) {
-    return function () {
+    return function() {
       return fn.apply(that, arguments);
     };
   }
@@ -1937,9 +2005,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   };
 
   // Clean up this element
-  Modernizr._q.push(function () {
+  Modernizr._q.push(function() {
     delete modElem.elem;
   });
+
+
 
   var mStyle = {
     style: modElem.elem.style
@@ -1947,9 +2017,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   // kill ref for gc, must happen before mod.elem is removed, so we unshift on to
   // the front of the queue.
-  Modernizr._q.unshift(function () {
+  Modernizr._q.unshift(function() {
     delete mStyle.style;
   });
+
+
 
   // testProps is a generic CSS / DOM property test.
 
@@ -2033,9 +2105,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Otherwise just return true, or the property name if this is a
         // `prefixed()` call
         else {
-            cleanElems();
-            return prefixed == 'pfx' ? prop : true;
-          }
+          cleanElems();
+          return prefixed == 'pfx' ? prop : true;
+        }
       }
     }
     cleanElems();
@@ -2078,9 +2150,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * ```
    */
 
-  var testProp = ModernizrProto.testProp = function (prop, value, useValue) {
+  var testProp = ModernizrProto.testProp = function(prop, value, useValue) {
     return testProps([prop], undefined, value, useValue);
   };
+
 
   /**
    * testPropsAll tests a list of DOM properties we want to check against.
@@ -2099,7 +2172,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   function testPropsAll(prop, prefixed, elem, value, skipValueTest) {
 
     var ucProp = prop.charAt(0).toUpperCase() + prop.slice(1),
-        props = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
+    props = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
 
     // did they call .prefixed('boxSizing') or are we just testing a prop?
     if (is(prefixed, 'string') || is(prefixed, 'undefined')) {
@@ -2107,9 +2180,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       // otherwise, they called .prefixed('requestAnimationFrame', window[, elem])
     } else {
-        props = (prop + ' ' + domPrefixes.join(ucProp + ' ') + ucProp).split(' ');
-        return testDOMProps(props, prefixed, elem);
-      }
+      props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
+      return testDOMProps(props, prefixed, elem);
+    }
   }
 
   // Modernizr.testAllProps() investigates whether a given style property,
@@ -2118,6 +2191,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   // Note that the property names must be provided in the camelCase variant.
   // Modernizr.testAllProps('boxSizing')
   ModernizrProto.testAllProps = testPropsAll;
+
+
 
   /**
    * prefixed returns the prefixed or nonprefixed property name variant of your input
@@ -2184,7 +2259,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * If you want a similar lookup, but in kebab-case, you can use [prefixedCSS](#modernizr-prefixedcss).
    */
 
-  var prefixed = ModernizrProto.prefixed = function (prop, obj, elem) {
+  var prefixed = ModernizrProto.prefixed = function(prop, obj, elem) {
     if (prop.indexOf('@') === 0) {
       return atRule(prop);
     }
@@ -2200,6 +2275,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return testPropsAll(prop, obj, elem);
     }
   };
+
+
 
   /**
    * prefixedCSS is just like [prefixed](#modernizr-prefixed), but the returned values are in
@@ -2229,10 +2306,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * Properties can be passed as both the DOM style camelCase or CSS style kebab-case.
    */
 
-  var prefixedCSS = ModernizrProto.prefixedCSS = function (prop) {
+  var prefixedCSS = ModernizrProto.prefixedCSS = function(prop) {
     var prefixedProp = prefixed(prop);
     return prefixedProp && domToCSS(prefixedProp);
   };
+
 
   /**
    * testAllProps determines whether a given CSS property is supported in the browser
@@ -2276,6 +2354,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
   ModernizrProto.testAllProps = testAllProps;
 
+
   // Run each test
   testRunner();
 
@@ -2293,8 +2372,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   // Leak Modernizr namespace
   window.Modernizr = Modernizr;
 
-  ;
+
+;
+
 })(window, document);
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr (Init)
@@ -2305,22 +2387,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./vendor/modernizr.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function () {
 
   'use strict';
 
+  /* MODERNIZR */
+
+  let Modernizr = window.Modernizr;
+
   /* CHECKING */
 
-  var version = Modernizr ? Modernizr._version : false,
-      parts = version ? version.split('-')[0].split('.') : false,
-      nums = parts ? parts.map(Number) : false,
-      supported = nums && nums[0] > 3 || nums[0] === 3 && (nums[1] > 3 || nums[1] === 3 && nums[2] >= 1);
+  let version = Modernizr ? Modernizr._version : false,
+      parts = version ? version.split ( '-' )[0].split ( '.' ) : false,
+      nums = parts ? parts.map ( Number ) : false,
+      supported = nums && nums[0] > 3 || nums[0] === 3 && ( nums[1] > 3 || nums[1] === 3 && nums[2] >= 1 );
 
-  if (!Modernizr || !supported) {
+  if ( !Modernizr || !supported ) {
 
-    throw new Error('Svelto depends upon Modernizr v3.3.1 or higher, dependency not found');
+    throw new Error ( 'Svelto depends upon Modernizr v3.3.1 or higher, dependency not found' );
+
   }
-})(window.Modernizr);
+
+}());
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Clip Path Polygon)
@@ -2331,14 +2420,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* CLIP PATH POLYGON */
 
-  Modernizr.addTest('clip-path-polygon', Modernizr.testAllProps('clip-path', 'polygon( 0 0 )'));
-})(Modernizr);
+  Modernizr.addTest ( 'clip-path-polygon', Modernizr.testAllProps ( 'clip-path', 'polygon( 0 0 )' ) );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Clip Path Url)
@@ -2350,54 +2441,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/jquery/jquery.js
  * ========================================================================= */
 
-(function (Modernizr, $) {
+(function ( Modernizr, $ ) {
 
   'use strict';
 
   /* CLIP PATH URL */
 
-  $(function () {
+  $( function () {
 
     /* SVG */
 
-    var ns = 'http://www.w3.org/2000/svg',
-        svg = document.createElementNS(ns, 'svg'),
-        clip = document.createElementNS(ns, 'clipPath'),
-        rect = document.createElementNS(ns, 'rect');
+    let ns = 'http://www.w3.org/2000/svg',
+        svg = document.createElementNS ( ns, 'svg' ),
+        clip = document.createElementNS ( ns, 'clipPath' ),
+        rect = document.createElementNS ( ns, 'rect' );
 
-    clip.setAttribute('id', 'ModernizrClipPath');
-    rect.setAttribute('width', '0');
+    clip.setAttribute ( 'id', 'ModernizrClipPath' );
+    rect.setAttribute ( 'width', '0' );
 
-    clip.appendChild(rect);
-    svg.appendChild(clip);
+    clip.appendChild ( rect );
+    svg.appendChild ( clip );
 
     /* ELEMENT */
 
-    var ele = document.createElement('div');
+    let ele = document.createElement ( 'div' );
 
     ele.style.cssText = 'width:2px;height:2px;position:fixed;top:0;left:0;z-index:1000000000;opacity:0;';
-    ele.style[Modernizr.prefixed('clip-path')] = 'url(#ModernizrClipPath)';
+    ele.style[Modernizr.prefixed ( 'clip-path' )] = 'url(#ModernizrClipPath)';
 
     /* APPENDING */
 
-    document.body.appendChild(svg);
-    document.body.appendChild(ele);
+    document.body.appendChild ( svg );
+    document.body.appendChild ( ele );
 
     /* CHECKING */
 
-    var offset = ele.getBoundingClientRect(),
-        supported = document.elementFromPoint(offset.left + 1, offset.top + 1) !== ele;
+    let offset = ele.getBoundingClientRect (),
+        supported = document.elementFromPoint ( offset.left + 1, offset.top + 1 ) !== ele;
 
     /* CLEANING */
 
-    document.body.removeChild(ele);
-    document.body.removeChild(svg);
+    document.body.removeChild ( ele );
+    document.body.removeChild ( svg );
 
     /* EXPORTING */
 
-    Modernizr.addTest('clip-path-url', supported);
+    Modernizr.addTest ( 'clip-path-url', supported );
+
   });
-})(Modernizr, jQuery);
+
+}( Modernizr, jQuery ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox)
@@ -2408,14 +2502,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* FLEXBOX */
 
-  Modernizr.addTest('flexbox', Modernizr.testAllProps('flexBasis', '1px'));
-})(Modernizr);
+  Modernizr.addTest ( 'flexbox', Modernizr.testAllProps ( 'flexBasis', '1px' ) );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox Legacy)
@@ -2426,14 +2522,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* FLEXBOX LEGACY */
 
-  Modernizr.addTest('flexbox-legacy', Modernizr.testAllProps('boxDirection', 'reverse'));
-})(Modernizr);
+  Modernizr.addTest ( 'flexbox-legacy', Modernizr.testAllProps ( 'boxDirection', 'reverse' ) );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox Tweener)
@@ -2444,14 +2542,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* FLEXBOX TWEENER */
 
-  Modernizr.addTest('flexbox-tweener', Modernizr.testAllProps('flexAlign', 'end'));
-})(Modernizr);
+  Modernizr.addTest ( 'flexbox-tweener', Modernizr.testAllProps ( 'flexAlign', 'end' ) );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Overlay Scrollbars)
@@ -2462,18 +2562,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* OVERLAY SCROLLBARS */
 
-  var overlay = Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll}', function (ele) {
-    return ele.offsetWidth === ele.clientWidth;
-  });
+  let overlay = Modernizr.testStyles ( '#modernizr {width:100px;height:100px;overflow:scroll}', ele => ele.offsetWidth === ele.clientWidth );
 
-  Modernizr.addTest('overlay-scrollbars', overlay);
-})(Modernizr);
+  Modernizr.addTest ( 'overlay-scrollbars', overlay );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Position Sticky)
@@ -2484,14 +2584,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* POSITION STICKY */
 
-  Modernizr.addTest('position-sticky', Modernizr.testAllProps('position', 'sticky'));
-})(Modernizr);
+  Modernizr.addTest ( 'position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Scrollbar size)
@@ -2502,20 +2604,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-(function (Modernizr) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* SCROLLBAR SIZE */
 
-  var size = void 0;
+  let size;
 
-  Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll}', function (ele) {
-    return size = ele.offsetWidth - ele.clientWidth;
-  });
+  Modernizr.testStyles ( '#modernizr {width:100px;height:100px;overflow:scroll}', ele => size = ele.offsetWidth - ele.clientWidth );
 
-  Modernizr.addTest('scrollbar-size-' + size, true);
-})(Modernizr);
+  Modernizr.addTest ( 'scrollbar-size-' + size, true );
+
+}( Modernizr ));
+
 
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests
@@ -2533,6 +2635,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./scrollbar_size.js
  * ========================================================================= */
 
+
 /* =========================================================================
  * Svelto - Core - Modernizr
  * =========================================================================
@@ -2542,6 +2645,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./init.js
  * @require ./tests/tests.js
  * ========================================================================= */
+
 
 /* =========================================================================
  * Svelto - Core - Svelto
@@ -2560,8 +2664,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SVELTO */
 
-  var Svelto = {
-    VERSION: '0.5.1',
+  let Svelto = {
+    VERSION: '0.5.3',
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
@@ -2572,7 +2676,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   window.Svelto = Svelto;
-})();
+
+}());
+
 
 /* =========================================================================
  * Svelto - Core - Animations
@@ -2583,13 +2689,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* ANIMATIONS */
 
-  var Animations = {
+  let Animations = {
     xslow: 900,
     slow: 500,
     normal: 350,
@@ -2600,7 +2706,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Animations = Animations;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Breakpoints
@@ -2611,13 +2719,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* BREAKPOINTS */
 
-  var Breakpoints = {
+  let Breakpoints = {
     xsmall: 'xs',
     small: 'sm',
     medium: 'md',
@@ -2635,7 +2743,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Breakpoints = Breakpoints;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Breakpoint
@@ -2647,17 +2757,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Breakpoints) {
+(function ( $, _, Svelto, Breakpoints ) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var $window = $(window);
+  let $window = $(window);
 
   /* BREAKPOINT */
 
-  var Breakpoint = {
+  let Breakpoint = {
 
     /* VARIABLES */
 
@@ -2667,60 +2777,58 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* RESIZE */
 
-    __resize: function __resize() {
+    __resize () {
 
-      var current = this.get();
+      let current = this.get ();
 
-      if (current !== this.current) {
+      if ( current !== this.current ) {
 
         this.previous = this.current;
         this.current = current;
 
-        $window.trigger('breakpoint:change');
-      }
-    },
+        $window.trigger ( 'breakpoint:change' );
 
+      }
+
+    },
 
     /* API */
 
-    get: function get() {
+    get () {
 
-      var widths = _.sortBy(_.values(Breakpoints.widths)),
-          width = $window.width();
+      let widths = _.sortBy ( _.values ( Breakpoints.widths ) ),
+          width = $window.width ();
 
-      var _loop = function _loop(i, l) {
+      for ( let i = 0, l = widths.length; i < l; i++ ) {
 
-        if (width >= widths[i] && (i === l - 1 || width < widths[i + 1])) {
+        if ( width >= widths[i] && ( i === l - 1 || width < widths[i+1] ) ) {
 
-          return {
-            v: _.findKey(Breakpoints.widths, function (width) {
-              return width === widths[i];
-            })
-          };
+          return _.findKey ( Breakpoints.widths, width => width === widths[i] );
+
         }
-      };
 
-      for (var i = 0, l = widths.length; i < l; i++) {
-        var _ret = _loop(i, l);
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
       }
+
     }
+
   };
 
   /* READY */
 
   $(function () {
 
-    Breakpoint.current = Breakpoint.get();
+    Breakpoint.current = Breakpoint.get ();
 
-    $window.on('resize', _.throttle(Breakpoint.__resize.bind(Breakpoint), Breakpoint.throttle));
+    $window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
+
   });
 
   /* EXPORT */
 
   Svelto.Breakpoint = Breakpoint;
-})(Svelto.$, Svelto._, Svelto, Svelto.Breakpoints);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Breakpoints ));
+
 
 /* =========================================================================
  * Svelto - Core - Browser
@@ -2731,44 +2839,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var userAgent = navigator.userAgent ? navigator.userAgent.toLowerCase() : '',
-      vendor = navigator.vendor ? navigator.vendor.toLowerCase() : '',
-      // Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
-  appVersion = navigator.appVersion ? navigator.appVersion.toLowerCase() : '';
+  let userAgent  = navigator.userAgent ? navigator.userAgent.toLowerCase () : '',
+      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', // Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
+      appVersion = navigator.appVersion ? navigator.appVersion.toLowerCase () : '';
 
   /* CHECKS */
 
-  var isOpera = /^Opera\//i.test(userAgent) || /\x20OPR\//i.test(userAgent),
-      /* Opera <= 12 || Opera >= 15 */
-  isIpod = /ipod/i.test(userAgent),
-      isIphone = !isIpod && /iphone/i.test(userAgent),
-      isIpad = /ipad/i.test(userAgent),
-      isAndroid = /android/i.test(userAgent),
-      isAndroidPhone = isAndroid && /mobile/i.test(userAgent),
+  let isOpera         = /^Opera\//i.test ( userAgent ) || /\x20OPR\//i.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
+      isIpod          = /ipod/i.test ( userAgent ),
+      isIphone        = !isIpod && /iphone/i.test ( userAgent ),
+      isIpad          = /ipad/i.test ( userAgent ),
+      isAndroid       = /android/i.test ( userAgent ),
+      isAndroidPhone  = isAndroid && /mobile/i.test ( userAgent ),
       isAndroidTablet = isAndroid && !isAndroidPhone,
-      isBlackberry = /blackberry/i.test(userAgent) || /BB10/i.test(userAgent),
-      isWindows = /win/i.test(appVersion),
-      isWindowsPhone = isWindows && /phone/i.test(userAgent),
-      isWindowsTablet = isWindows && !isWindowsPhone && /touch/i.test(userAgent),
-      isMobile = isIphone || isIpod || isAndroidPhone || isBlackberry || isWindowsPhone,
-      isTablet = isIpad || isAndroidTablet || isWindowsTablet;
+      isBlackberry    = /blackberry/i.test ( userAgent ) || /BB10/i.test ( userAgent ),
+      isWindows       = /win/i.test ( appVersion ),
+      isWindowsPhone  = isWindows && /phone/i.test ( userAgent ),
+      isWindowsTablet = isWindows && !isWindowsPhone && /touch/i.test ( userAgent ),
+      isMobile        = isIphone || isIpod || isAndroidPhone || isBlackberry || isWindowsPhone,
+      isTablet        = isIpad || isAndroidTablet || isWindowsTablet;
 
   /* BROWSER */
 
-  var Browser = {
+  let Browser = {
     is: {
-      chrome: !isOpera && /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor),
-      firefox: /firefox/i.test(userAgent),
-      edge: /(edge)\/((\d+)?[\w\.]+)/i.test(userAgent),
-      ie: /msie/i.test(userAgent) || 'ActiveXObject' in window, /* IE || EDGE */
+      chrome: !isOpera && /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
+      firefox: /firefox/i.test ( userAgent ),
+      edge: /(edge)\/((\d+)?[\w\.]+)/i.test ( userAgent ),
+      ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
       opera: isOpera,
-      safari: /safari/i.test(userAgent) && /apple computer/i.test(vendor),
+      safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
       iphone: isIphone,
       ipad: isIpad,
       ipod: isIpod,
@@ -2777,28 +2883,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       androidPhone: isAndroidPhone,
       androidTablet: isAndroidTablet,
       blackberry: isBlackberry,
-      linux: /linux/i.test(appVersion),
-      mac: !(isIphone || isIpad || isIpod) && /mac/i.test(appVersion),
+      linux: /linux/i.test ( appVersion ),
+      mac: !( isIphone || isIpad || isIpod ) && /mac/i.test ( appVersion ),
       windows: isWindows,
       windowsPhone: isWindowsPhone,
       windowsTablet: isWindowsTablet,
       mobile: isMobile,
       tablet: isTablet,
       desktop: !isMobile && !isTablet,
-      online: function online() {
-        return navigator.onLine;
-      },
-      offline: function offline() {
-        return !navigator.onLine;
-      },
-      touchDevice: 'ontouchstart' in window || 'DocumentTouch' in window && document instanceof window.DocumentTouch
+      online: () => navigator.onLine,
+      offline: () => !navigator.onLine,
+      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof window.DocumentTouch )
     }
   };
 
   /* EXPORT */
 
   Svelto.Browser = Browser;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Colors
@@ -2809,13 +2913,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* COLORS */
 
-  var Colors = {
+  let Colors = {
     primary: 'primary',
     secondary: 'secondary',
     tertiary: 'tertiary',
@@ -2848,7 +2952,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Colors = Colors;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Cookie
@@ -2863,13 +2969,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* COOKIE */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* COOKIE */
 
-  var Cookie = {
+  let Cookie = {
 
     /* VARIABLES */
 
@@ -2878,67 +2984,80 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* API */
 
-    get: function get(key) {
+    get ( key ) {
 
-      if (!key) return null;
+      if ( !key ) return null;
 
-      return this.decoder(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + this.encoder(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+      return this.decoder ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + this.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
+
     },
-    set: function set(key, value, end, path, domain, secure) {
 
-      if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) return false;
+    set ( key, value, end, path, domain, secure ) {
 
-      var expires = '';
+      if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
 
-      if (end) {
+      let expires = '';
 
-        switch (end.constructor) {
+      if ( end ) {
+
+        switch ( end.constructor ) {
 
           case Number:
-            expires = end === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
+            expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : `; max-age=${end}`;
             break;
 
           case String:
-            expires = '; expires=' + end;
+            expires = `; expires=${end}`;
             break;
 
           case Date:
-            expires = '; expires=' + end.toUTCString();
+            expires = '; expires=' + end.toUTCString ();
             break;
 
         }
+
       }
 
-      document.cookie = this.encoder(key) + '=' + this.encoder(value) + expires + (domain ? '; domain=' + domain : '') + (path ? '; path=' + path : '') + (secure ? '; secure' : '');
+      document.cookie = this.encoder ( key ) + '=' + this.encoder ( value ) + expires + ( domain ? `; domain=${domain}` : '' ) + ( path ? `; path=${path}` : '' ) + ( secure ? '; secure' : '' );
 
       return true;
+
     },
-    remove: function remove(key, path, domain) {
 
-      if (!this.has(key)) return false;
+    remove ( key, path, domain ) {
 
-      document.cookie = this.encoder(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (domain ? '; domain=' + domain : '') + (path ? '; path=' + path : '');
+      if ( !this.has ( key ) ) return false;
+
+      document.cookie = this.encoder ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? `; domain=${domain}` : '' ) + ( path ? `; path=${path}` : '' );
 
       return true;
+
     },
-    has: function has(key) {
 
-      if (!key) return false;
+    has ( key ) {
 
-      return new RegExp('(?:^|;\\s*)' + this.encoder(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
+      if ( !key ) return false;
+
+      return ( new RegExp ( '(?:^|;\\s*)' + this.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
+
     },
-    keys: function keys() {
 
-      var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
+    keys () {
 
-      return _.map(keys, this.decoder);
+      let keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
+
+      return _.map ( keys, this.decoder );
+
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Cookie = Cookie;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Keyboard
@@ -2950,13 +3069,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Browser) {
+(function ( $, _, Svelto, Browser ) {
 
   'use strict';
 
   /* KEYBOARD */
 
-  var Keyboard = {
+  let Keyboard = {
     keys: {
       BACKSPACE: 8,
       COMMA: 188,
@@ -2979,55 +3098,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       UP: 38
     },
     keystroke: {
-      match: function match(event, keystroke) {
 
-        // It only supports ctrl/cmd/meta/alt/shift/char/Keyboard.keys[charName] //TODO: Improve it
-        // ctrl/cmd/meta are treated as the same key, they are intended as `ctrl` if we are not using a Mac, or as `cmd` if we are instead using it
+      match ( event, keystroke ) {
 
-        var specialKeys = ['ctrl', 'cmd', 'meta', 'alt', 'shift'],
-            keys = keystroke.split('+').map(function (key) {
-          return key.trim().toLowerCase();
-        });
+        // `ctmd` is treated as `cmd` on Mac, and as `ctrl` elsewhere
 
-        if ((_.includes(keys, 'ctrl') || _.includes(keys, 'cmd') || _.includes(keys, 'meta')) !== Keyboard.keystroke.hasCtrlOrCmd(event)) return false;
-        if (_.includes(keys, 'alt') !== event.altKey) return false;
-        if (_.includes(keys, 'shift') !== event.shiftKey) return false;
+        let specialKeys = ['ctrl', 'cmd', 'ctmd', 'alt', 'shift'],
+            keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        if ( _.includes ( keys, 'ctmd' ) ) {
 
-        try {
-          for (var _iterator3 = keys[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var key = _step3.value;
+          if ( !Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
 
+        } else {
 
-            if (!_.includes(specialKeys, key)) {
+          if ( _.includes ( keys, 'ctrl' ) !== event.ctrlKey ) return false;
+          if ( _.includes ( keys, 'cmd' ) !== event.metaKey ) return false;
 
-              if (!(event.keyCode === Keyboard.keys[key.toUpperCase()] || String.fromCharCode(event.keyCode).toLowerCase() === key)) return false;
-            }
+        }
+
+        if ( _.includes ( keys, 'alt' ) !== event.altKey ) return false;
+        if ( _.includes ( keys, 'shift' ) !== event.shiftKey ) return false;
+
+        for ( let key of keys ) {
+
+          if ( !_.includes ( specialKeys, key ) ) {
+
+            if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+
           }
-        } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
+
         }
 
         return true;
-      },
-      hasCtrlOrCmd: function hasCtrlOrCmd(event) {
 
-        return !Browser.is.mac && event.ctrlKey || Browser.is.mac && event.metaKey;
+      },
+
+      hasCtrlOrCmd ( event ) {
+
+        return ( !Browser.is.mac && event.ctrlKey ) || ( Browser.is.mac && event.metaKey );
+
       }
+
     }
 
   };
@@ -3035,7 +3147,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Keyboard = Keyboard;
-})(Svelto.$, Svelto._, Svelto, Svelto.Browser);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser ));
+
 
 /* =========================================================================
  * Svelto - Core - Mouse
@@ -3046,35 +3160,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* MOUSE */
 
-  var Mouse = {
+  let Mouse = {
     buttons: {
       LEFT: 0,
       MIDDLE: 1,
       RIGHT: 2
     },
-    hasButton: function hasButton(event, button) {
-      var orNone = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+    hasButton ( event, button, orNone = true ) {
 
+      if ( 'originalEvent' in event ) {
 
-      if ('originalEvent' in event) {
+        return Mouse.hasButton ( event.originalEvent, button, orNone );
 
-        return Mouse.hasButton(event.originalEvent, button, orNone);
       }
 
-      return orNone && !('button' in event) || event.button === button;
+      return ( orNone && !('button' in event) ) || event.button === button;
+
     }
   };
 
   /* EXPORT */
 
   Svelto.Mouse = Mouse;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Pointer
@@ -3089,26 +3205,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
-(function ($, _, Svelto, Browser, Mouse) {
+(function ( $, _, Svelto, Browser, Mouse ) {
 
   'use strict';
 
   /* POINTER */
 
-  var Pointer = {
+  let Pointer = {
     options: {
       events: {
         prefix: 'spointer'
       },
       dbltap: {
         interval: 300 // 2 taps within this interval will trigger a dbltap event
-      }
+      },
     }
   };
 
   /* EVENTS */
 
-  var events = {
+  let events = {
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
     click: 'click',
@@ -3125,107 +3241,118 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EVENTS METHODS */
 
-  var _loop2 = function _loop2(name) {
+  for ( let name in events ) {
 
-    if (events.hasOwnProperty(name)) {
+    if ( events.hasOwnProperty ( name ) ) {
 
       Pointer[name] = events[name];
 
-      if (!(name in $.fn)) {
+      if ( !( name in $.fn ) ) {
 
-        $.fn[name] = function (fn) {
+        $.fn[name] = function ( fn ) {
 
-          return fn ? this.on(Pointer[name], fn) : this.trigger(Pointer[name]);
+          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
+
         };
-      }
-    }
-  };
 
-  for (var name in events) {
-    _loop2(name);
+      }
+
+    }
+
   }
 
   /* ----- POINTER LOGIC ----- */
 
   /* VARIABLES */
 
-  var target = void 0,
-      $target = void 0,
+  let target,
+      $target,
       prevTapTimestamp = 0,
-      motion = void 0;
+      motion;
 
   /* EVENT CREATOR */
 
-  function createEvent(name, originalEvent) {
+  function createEvent ( name, originalEvent ) {
 
-    var event = $.Event(name);
+    let event = $.Event ( name );
 
     event.originalEvent = originalEvent;
 
     return event;
+
   }
 
   /* HANDLERS */
 
-  function downHandler(event) {
+  function downHandler ( event ) {
 
     target = event.target;
     $target = $(target);
 
     motion = false;
 
-    $target.one(Pointer.move, moveHandler);
-    $target.one(Pointer.up, upHandler);
-    $target.one(Pointer.cancel, cancelHandler);
+    $target.one ( Pointer.move, moveHandler );
+    $target.one ( Pointer.up, upHandler );
+    $target.one ( Pointer.cancel, cancelHandler );
+
   }
 
-  function moveHandler() {
+  function moveHandler () {
 
     motion = true;
+
   }
 
-  function upHandler(event) {
+  function upHandler ( event ) {
 
-    if (Mouse.hasButton(event, Mouse.buttons.LEFT) && (!Browser.is.touchDevice || !motion)) {
+    if ( Mouse.hasButton ( event, Mouse.buttons.LEFT ) && ( !Browser.is.touchDevice || !motion ) ) {
 
-      var tapTimestamp = event.timeStamp || Date.now();
+      let tapTimestamp = event.timeStamp || Date.now ();
 
-      $target.trigger(createEvent(Pointer.tap, event));
+      $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-      if (tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval) {
+      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
-        $target.trigger(createEvent(Pointer.dbltap, event));
+        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+
       }
 
       prevTapTimestamp = tapTimestamp;
+
     }
 
-    if (!motion) {
+    if ( !motion ) {
 
-      $target.off(Pointer.move, moveHandler);
+      $target.off ( Pointer.move, moveHandler );
+
     }
 
-    $target.off(Pointer.cancel, cancelHandler);
+    $target.off ( Pointer.cancel, cancelHandler );
+
   }
 
-  function cancelHandler() {
+  function cancelHandler () {
 
-    if (!motion) {
+    if ( !motion ) {
 
-      $target.off(Pointer.move, moveHandler);
+      $target.off ( Pointer.move, moveHandler );
+
     }
 
-    $target.off(Pointer.up, upHandler);
+    $target.off ( Pointer.up, upHandler );
+
   }
 
   /* BIND */
 
-  $(document).on(Pointer.down, downHandler);
+  $(document).on ( Pointer.down, downHandler );
 
   /* EXPORT */
 
   Svelto.Pointer = Pointer;
-})(Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Mouse);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Mouse ));
+
 
 /* =========================================================================
  * Svelto - Core - Push state
@@ -3238,7 +3365,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // Monkey patching `history.pushState` so that it will trigger an event that we can then use to properly trigger a `route` event
 
-(function ($, _, Svelto, history) {
+(function ( $, _, Svelto, history ) {
 
   'use strict';
 
@@ -3246,22 +3373,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $(function () {
 
-    var $window = $(window),
+    let $window = $(window),
         pushState = history.pushState;
 
-    history.pushState = function (state) {
+    history.pushState = function ( state ) {
 
-      if (_.isFunction(history.onpushstate)) {
+      if ( _.isFunction ( history.onpushstate ) ) {
 
-        history.onpushstate({ state: state });
+        history.onpushstate ( { state: state } );
+
       }
 
-      $window.trigger('pushstate');
+      $window.trigger ( 'pushstate' );
 
-      return pushState.apply(history, arguments);
+      return pushState.apply ( history, arguments );
+
     };
+
   });
-})(Svelto.$, Svelto._, Svelto, window.history);
+
+})( Svelto.$, Svelto._, Svelto, window.history );
+
 
 /* =========================================================================
  * Svelto - Core - Route
@@ -3275,32 +3407,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* ROUTE */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   $(function () {
 
-    var $window = $(window),
-        previous = window.location.href.split('#')[0];
+    let $window = $(window),
+        previous = window.location.href.split ( '#' )[0];
 
-    $window.on('popstate pushstate', function () {
+    $window.on ( 'popstate pushstate', function () {
 
-      _.defer(function () {
-        // We need the `window.location.href` to get updated before
+      _.defer ( function () { // We need the `window.location.href` to get updated before
 
-        var current = window.location.href.split('#')[0];
+        let current = window.location.href.split ( '#' )[0];
 
-        if (current !== previous) {
+        if ( current !== previous ) {
 
           previous = current;
 
-          $window.trigger('route');
+          $window.trigger ( 'route' );
+
         }
+
       });
+
     });
+
   });
-})(Svelto.$, Svelto._, Svelto);
+
+})( Svelto.$, Svelto._, Svelto );
+
 
 /* =========================================================================
  * Svelto - Core - Sizes
@@ -3311,13 +3448,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* SIZES */
 
-  var Sizes = {
+  let Sizes = {
     xxxxsmall: 'xxxxsmall',
     xxxsmall: 'xxxsmall',
     xxsmall: 'xxsmall',
@@ -3334,7 +3471,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Sizes = Sizes;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Widgetize
@@ -3345,152 +3484,119 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* WIDGETIZE */
 
-  var Widgetize = function () {
-    function Widgetize() {
-      _classCallCheck(this, Widgetize);
+  class Widgetize {
+
+    constructor () {
 
       this.widgetizers = {};
+
     }
 
-    _createClass(Widgetize, [{
-      key: 'add',
-      value: function add(selector, widgetizer, data) {
+    add ( selector, widgetizer, data ) {
 
-        if (!(selector in this.widgetizers)) {
+      if ( !(selector in this.widgetizers) ) {
 
-          this.widgetizers[selector] = [];
+        this.widgetizers[selector] = [];
+
+      }
+
+      this.widgetizers[selector].push ( [widgetizer, data] );
+
+    }
+
+    get () {
+
+      return this.widgetizers;
+
+    }
+
+    remove ( selector, widgetizer ) {
+
+      if ( selector in this.widgetizers ) {
+
+        for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
+
+          if ( this.widgetizers[selector][i][0] === widgetizer ) {
+
+            this.widgetizers[selector].splice ( i, 1 );
+
+          }
+
         }
 
-        this.widgetizers[selector].push([widgetizer, data]);
-      }
-    }, {
-      key: 'get',
-      value: function get() {
+        if ( !this.widgetizers[selector].length ) {
 
-        return this.widgetizers;
-      }
-    }, {
-      key: 'remove',
-      value: function remove(selector, widgetizer) {
+          delete this.widgetizers[selector];
 
-        if (selector in this.widgetizers) {
-
-          for (var i = 0, l = this.widgetizers[selector].length; i < l; i++) {
-
-            if (this.widgetizers[selector][i][0] === widgetizer) {
-
-              this.widgetizers[selector].splice(i, 1);
-            }
-          }
-
-          if (!this.widgetizers[selector].length) {
-
-            delete this.widgetizers[selector];
-          }
         }
+
       }
-    }, {
-      key: 'on',
-      value: function on($roots) {
 
-        for (var selector in this.widgetizers) {
+    }
 
-          if (this.widgetizers.hasOwnProperty(selector)) {
+    on ( $roots ) {
 
-            var widgetizers = this.widgetizers[selector];
+      for ( let selector in this.widgetizers ) {
 
-            this.worker(widgetizers, $roots.filter(selector));
-            this.worker(widgetizers, $roots.find(selector));
-          }
+        if ( this.widgetizers.hasOwnProperty ( selector ) ) {
+
+          let widgetizers = this.widgetizers[selector];
+
+          this.worker ( widgetizers, $roots.filter ( selector ) );
+          this.worker ( widgetizers, $roots.find ( selector ) );
+
         }
+
       }
-    }, {
-      key: 'worker',
-      value: function worker(widgetizers, $widgets) {
-        var _iteratorNormalCompletion4 = true;
-        var _didIteratorError4 = false;
-        var _iteratorError4 = undefined;
 
-        try {
+    }
 
-          for (var _iterator4 = $widgets[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-            var widget = _step4.value;
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
+    worker ( widgetizers, $widgets ) {
 
-            try {
+      for ( let widget of $widgets ) {
 
-              for (var _iterator5 = widgetizers[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                var _step5$value = _slicedToArray(_step5.value, 2);
+        for ( let [widgetizer, data] of widgetizers ) {
 
-                var widgetizer = _step5$value[0];
-                var data = _step5$value[1];
+          widgetizer ( $(widget), data );
 
-
-                widgetizer($(widget), data);
-              }
-            } catch (err) {
-              _didIteratorError5 = true;
-              _iteratorError5 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                  _iterator5.return();
-                }
-              } finally {
-                if (_didIteratorError5) {
-                  throw _iteratorError5;
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _didIteratorError4 = true;
-          _iteratorError4 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion4 && _iterator4.return) {
-              _iterator4.return();
-            }
-          } finally {
-            if (_didIteratorError4) {
-              throw _iteratorError4;
-            }
-          }
         }
-      }
-    }]);
 
-    return Widgetize;
-  }();
+      }
+
+    }
+
+  }
 
   /* EXPORT */
 
-  Svelto.Widgetize = new Widgetize();
+  Svelto.Widgetize = new Widgetize ();
 
   /* JQUERY PLUGIN */
 
   $.fn.widgetize = function () {
 
-    Svelto.Widgetize.on(this);
+    Svelto.Widgetize.on ( this );
 
     return this;
+
   };
 
   /* READY */
 
   $(function () {
 
-    $(document.body).widgetize();
+    $(document.body).widgetize ();
+
   });
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Core - Factory
@@ -3502,13 +3608,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ($, _, Svelto, Widgetize) {
+(function ( $, _, Svelto, Widgetize ) {
 
   'use strict';
 
   /* FACTORY */
 
-  var Factory = {
+  let Factory = {
 
     /* VARIABLES */
 
@@ -3516,133 +3622,106 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* METHODS */
 
-    init: function init(Widget, config, namespace) {
-      var _iteratorNormalCompletion6 = true;
-      var _didIteratorError6 = false;
-      var _iteratorError6 = undefined;
+    init ( Widget, config, namespace ) {
 
-      try {
+      for ( let initializer of this.initializers ) {
 
-        for (var _iterator6 = this.initializers[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-          var initializer = _step6.value;
+        this[initializer]( Widget, config, namespace );
 
-
-          this[initializer](Widget, config, namespace);
-        }
-      } catch (err) {
-        _didIteratorError6 = true;
-        _iteratorError6 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion6 && _iterator6.return) {
-            _iterator6.return();
-          }
-        } finally {
-          if (_didIteratorError6) {
-            throw _iteratorError6;
-          }
-        }
       }
-    },
-    instance: function instance(Widget, options, element) {
 
-      var name = Widget.config.name;
-
-      return $.data(element, 'instance.' + name) || new Widget(options, element);
     },
 
+    instance ( Widget, options, element ) {
+
+      let name = Widget.config.name;
+
+      return $.data ( element, `instance.${name}` ) || new Widget ( options, element );
+
+    },
 
     /* WORKERS */
 
-    configure: function configure(Widget) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
+    configure ( Widget, config = {} ) {
 
       Widget.config = config;
+
     },
-    namespace: function namespace(Widget, config, _namespace) {
 
-      if (_.isObject(_namespace)) {
+    namespace ( Widget, config, namespace ) {
 
-        var name = _.upperFirst(Widget.config.name);
+      if ( _.isObject ( namespace ) ) {
 
-        _namespace[name] = Widget;
+        let name = _.upperFirst ( Widget.config.name );
+
+        namespace[name] = Widget;
+
       }
+
     },
-    ready: function ready(Widget) {
+
+    ready ( Widget ) {
 
       $(Widget.ready);
+
     },
-    widgetize: function widgetize(Widget) {
 
-      if (Widget.config.plugin && _.isString(Widget.config.selector)) {
+    widgetize ( Widget ) {
 
-        Widgetize.add(Widget.config.selector, Widget.widgetize, Widget.config);
+      if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
+
+        Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config );
+
       }
-    },
-    plugin: function plugin(Widget) {
 
-      if (!Widget.config.plugin) return;
+    },
+
+    plugin ( Widget ) {
+
+      if ( !Widget.config.plugin ) return;
 
       /* NAME */
 
-      var name = Widget.config.name;
+      let name = Widget.config.name;
 
       /* JQUERY PLUGIN */
 
-      $.fn[name] = function (options) {
+      $.fn[name] = function ( options, ...args ) {
 
-        var isMethodCall = _.isString(options) && options.charAt(0) !== '_'; // Methods starting with '_' are private
+        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
 
-        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
+        for ( let element of this ) {
 
-        var _iteratorNormalCompletion7 = true;
-        var _didIteratorError7 = false;
-        var _iteratorError7 = undefined;
+          let instance = Factory.instance ( Widget, options, element );
 
-        try {
-          for (var _iterator7 = this[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-            var element = _step7.value;
+          if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 
+            let returnValue = instance[options]( ...args );
 
-            var instance = Factory.instance(Widget, options, element);
+            if ( !_.isUndefined ( returnValue ) ) {
 
-            if (isMethodCall && _.isFunction(instance[options])) {
+              return returnValue;
 
-              var returnValue = instance[options].apply(instance, args);
-
-              if (!_.isUndefined(returnValue)) {
-
-                return returnValue;
-              }
             }
+
           }
-        } catch (err) {
-          _didIteratorError7 = true;
-          _iteratorError7 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion7 && _iterator7.return) {
-              _iterator7.return();
-            }
-          } finally {
-            if (_didIteratorError7) {
-              throw _iteratorError7;
-            }
-          }
+
         }
 
         return this;
+
       };
+
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Factory = Factory;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize ));
+
 
 /* =========================================================================
  * Svelto - Core - Widget
@@ -3659,13 +3738,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Templates, Factory, Pointer, Keyboard, Breakpoints, Breakpoint) {
+(function ( $, _, Svelto, Widgets, Templates, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
     selector: false, // The selector used to select the website in the DOM, used for `Svelto.Widgetize`
@@ -3693,33 +3772,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         only: {}
       },
       keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
-      keystrokes: {}, // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`
+      keystrokes: {}, // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`. You can also pass variables to the method. For example: `{ 'ctrl + o': ['open', true], Keyaboard.keys.UP: ['open', array ( 1, 2 )] }`
       callbacks: {} // Callbacks to trigger on specific events
     }
   };
 
   /* WIDGET */
 
-  var Widget = function () {
+  class Widget {
 
     /* CONSTRUCTION */
 
-    function Widget(options, element) {
-      _classCallCheck(this, Widget);
+    constructor ( options, element ) {
 
       /* ATTACH CONFIG */
 
-      _.extend(this, this._getConfig(options, element));
+      _.extend ( this, this._getConfig ( options, element ) );
 
       /* CACHE TEMPLATES */
 
-      this.templatesNamespace = _.upperFirst(this.name);
+      this.templatesNamespace = _.upperFirst ( this.name );
 
-      if (!(this.templatesNamespace in Templates)) {
+      if ( !( this.templatesNamespace in Templates ) ) {
 
         Templates[this.templatesNamespace] = {};
 
-        var _options = { //TODO: Maybe export them
+        let options = { //TODO: Maybe export them
           imports: {
             Templates: Templates,
             self: Templates[this.templatesNamespace]
@@ -3727,24 +3805,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           variable: 'o'
         };
 
-        for (var template in this.templates) {
+        for ( let template in this.templates ) {
 
-          if (this.templates.hasOwnProperty(template) && this.templates[template]) {
+          if ( this.templates.hasOwnProperty ( template ) && this.templates[template] ) {
 
-            Templates[this.templatesNamespace][template] = _.template(this.templates[template], _options);
+            Templates[this.templatesNamespace][template] = _.template ( this.templates[template], options );
+
           }
+
         }
+
       }
 
       /* ELEMENT */
 
-      this.$element = $(element || (this.templates.base ? this._template('base', this.options) : undefined));
+      this.$element = $( element ||  ( this.templates.base ? this._template ( 'base', this.options ) : undefined ) );
       this.element = this.$element[0];
 
       /* LAYOUT */
 
-      this.$layout = this.$element.length ? this.$element.parent().closest(this.options.selectors.layout) : $(this.options.selectors.layout).first();
-      this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first();
+      this.$layout = this.$element.length ? this.$element.parent ().closest ( this.options.selectors.layout ) : $(this.options.selectors.layout).first ();
+      this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first ();
       this.layout = this.$layout[0];
 
       /* WINDOW */
@@ -3773,9 +3854,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /* ATTACH INSTANCE */
 
-      if (this.element) {
+      if ( this.element ) {
 
-        $.data(this.element, 'instance.' + this.name, this);
+        $.data ( this.element, `instance.${this.name}`, this );
+
       }
 
       /* SET GUID / GUC */
@@ -3785,673 +3867,639 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /* EVENT NAMESPACE */
 
-      this.eventNamespace = '.swns-' + this.guid;
+      this.eventNamespace = `.swns-${this.guid}`;
 
       /* CALLBACKS */
 
-      this._variables();
-      this._init();
-      this._events();
+      this._variables ();
+      this._init ();
+      this._events ();
 
       /* BREAKPOINT */
 
-      this.___breakpoint(); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
-      this.__breakpoint();
+      this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+      this.__breakpoint ();
 
       /* REMOVE */
 
-      this.___remove();
+      this.___remove ();
+
     }
 
-    _createClass(Widget, [{
-      key: '_getConfig',
-      value: function _getConfig(options, element) {
+    _getConfig ( options, element ) {
 
-        /* VARIABLES */
+      /* VARIABLES */
 
-        var configs = [];
+      let configs = [];
 
-        /* PROTOTYPE CHAIN */
+      /* PROTOTYPE CHAIN */
 
-        var prototype = Object.getPrototypeOf(this);
+      let prototype = Object.getPrototypeOf ( this );
 
-        while (prototype) {
+      while ( prototype ) {
 
-          if (prototype.constructor.config) {
+        if ( prototype.constructor.config ) {
 
-            configs.push(prototype.constructor.config);
-          }
+          configs.push ( prototype.constructor.config );
 
-          prototype = Object.getPrototypeOf(prototype);
         }
 
-        configs.push({}); // So that we merge them to a new object
+        prototype = Object.getPrototypeOf ( prototype );
 
-        configs.reverse();
-
-        /* DATA OPTIONS */
-
-        if (element) {
-
-          var $element = $(element),
-              name = _.last(configs).name.toLowerCase(),
-              dataOptions = $element.data('options'),
-              dataNameOptions = $element.data(name + '-options');
-
-          if (dataOptions) {
-
-            configs.push({ options: dataOptions });
-          }
-
-          if (dataNameOptions) {
-
-            configs.push({ options: dataNameOptions });
-          }
-        }
-
-        /* OPTIONS */
-
-        if (_.isPlainObject(options)) {
-
-          configs.push({ options: options });
-        }
-
-        /* CREATE OPTIONS */
-
-        var createOptions = this._createOptions();
-
-        if (_.isPlainObject(createOptions)) {
-
-          configs.push({ options: createOptions });
-        }
-
-        /* RETURN */
-
-        return _.merge.apply(_, configs);
-      }
-    }, {
-      key: '_createOptions',
-      value: function _createOptions() {} // Used to pass extra options
-
-      /* DESTROY */
-
-    }, {
-      key: 'destroy',
-      value: function destroy() {
-
-        this._reset();
-
-        this._destroy();
-
-        if (this.element) {
-
-          this.$element.removeData('instance.' + this.name);
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {} // Clean the stuff, remove possible memory leaks
-
-      /* SPECIAL */
-
-    }, {
-      key: '_variables',
-      // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Toast` do for instance
-
-      value: function _variables() {} // Init your variables inside this function
-
-    }, {
-      key: '_init',
-      value: function _init() {} // Perform the init stuff inside this function
-
-    }, {
-      key: '_events',
-      value: function _events() {} // Bind the event handlers inside this function
-
-    }, {
-      key: '_reset',
-      value: function _reset() {
-        //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
-
-        this.$bindings.off(this.eventNamespace);
       }
 
-      /* WIDGET */
+      configs.push ( {} ); // So that we merge them to a new object
 
-    }, {
-      key: 'widget',
-      value: function widget() {
+      configs.reverse ();
 
-        return this.$element;
-      }
+      /* DATA OPTIONS */
 
-      /* INSTANCE */
+      if ( element ) {
 
-    }, {
-      key: 'instance',
-      value: function instance() {
+        let $element = $(element),
+            name = _.last ( configs ).name.toLowerCase (),
+            dataOptions = $element.data ( 'options' ),
+            dataNameOptions = $element.data ( name + '-options' );
 
-        return this;
+        if ( dataOptions ) {
+
+          configs.push ({ options: dataOptions });
+
+        }
+
+        if ( dataNameOptions ) {
+
+          configs.push ({ options: dataNameOptions });
+
+        }
+
       }
 
       /* OPTIONS */
 
-      // We cannot have a `options` alias to `option`, since `options` is already defined in the config
+      if ( _.isPlainObject ( options ) ) {
 
-    }, {
-      key: 'option',
-      value: function option(key, value) {
+        configs.push ({ options: options });
 
-        if (!key) {
+      }
 
-          return _.cloneDeep(this.options);
-        } else if (_.isString(key)) {
+      /* CREATE OPTIONS */
 
-          if (_.isUndefined(value)) {
+      let createOptions = this._createOptions ();
 
-            return _.cloneDeep(_.get(this.options, key));
-          } else {
+      if ( _.isPlainObject ( createOptions ) ) {
 
-            this._setOption(key, value);
+        configs.push ({ options: createOptions });
+
+      }
+
+      /* RETURN */
+
+      return _.merge ( ...configs );
+
+    }
+
+    _createOptions () {} // Used to pass extra options
+
+    /* DESTROY */
+
+    destroy () {
+
+      this._reset ();
+
+      this._destroy ();
+
+      if ( this.element ) {
+
+        this.$element.removeData ( `instance.${this.name}` );
+
+      }
+
+    }
+
+    _destroy () {} // Clean the stuff, remove possible memory leaks
+
+    /* SPECIAL */
+
+    static widgetize ( $ele, config ) { // Called for widgetizing an element
+
+      $ele[config.name]();
+
+    }
+
+    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Toast` do for instance
+
+    _variables () {} // Init your variables inside this function
+    _init () {} // Perform the init stuff inside this function
+    _events () {} // Bind the event handlers inside this function
+
+    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
+
+      this.$bindings.off ( this.eventNamespace );
+
+    }
+
+    /* WIDGET */
+
+    widget () {
+
+      return this.$element;
+
+    }
+
+    /* INSTANCE */
+
+    instance () {
+
+      return this;
+
+    }
+
+    /* OPTIONS */
+
+    // We cannot have a `options` alias to `option`, since `options` is already defined in the config
+
+    option ( key, value ) {
+
+      if ( !key ) {
+
+        return _.cloneDeep ( this.options );
+
+      } else if ( _.isString ( key ) ) {
+
+        if ( _.isUndefined ( value ) ) {
+
+          return _.cloneDeep ( _.get ( this.options, key ) );
+
+        } else {
+
+          this._setOption ( key, value );
+
+        }
+
+      } else if ( _.isPlainObject ( key ) ) {
+
+        for ( let prop in key ) {
+
+          if ( key.hasOwnProperty ( prop ) ) {
+
+            this._setOption ( key, value );
+
           }
-        } else if (_.isPlainObject(key)) {
 
-          for (var prop in key) {
+        }
 
-            if (key.hasOwnProperty(prop)) {
+      }
 
-              this._setOption(key, value);
+    }
+
+    _setOption ( key, value ) {
+
+      _.set ( this.options, key, value );
+
+    }
+
+    /* ENABLED */
+
+    enable () {
+
+      this.$element.removeClass ( this.options.classes.disabled );
+
+    }
+
+    isEnabled () {
+
+      return !this.isDisabled ();
+
+    }
+
+    /* DISABLED */
+
+    disable () {
+
+      this.$element.addClass ( this.options.classes.disabled );
+
+    }
+
+    isDisabled () {
+
+      return this.$element.hasClass ( this.options.classes.disabled );
+
+    }
+
+    /* EVENTS */
+
+    //TODO: Add support for custom data
+
+    _on ( suppressDisabledCheck, $element, events, selector, handler, _onlyOne ) {
+
+      /* NORMALIZATION */
+
+      if ( !_.isBoolean ( suppressDisabledCheck ) ) {
+
+        _onlyOne = handler;
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = suppressDisabledCheck;
+        suppressDisabledCheck = false;
+
+      }
+
+      if ( !( $element instanceof $ ) ) {
+
+        _onlyOne = handler;
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      if ( !_.isString ( selector ) ) {
+
+        _onlyOne = handler;
+        handler = selector;
+        selector = false;
+
+      }
+
+      /* BINDINGS */
+
+      this.$bindings = this.$bindings.add ( $element );
+
+      /* PROXY */
+
+      let handlerProxy = ( ...args ) => {
+
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
+
+        return handler.apply ( this, args );
+
+      };
+
+      /* PROXY GUID */
+
+      handlerProxy.guid = handler.guid = ( handler.guid || $.guid++ );
+
+      /* EVENTS NAMESPACING */
+
+      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
+
+      /* TRIGGERING */
+
+      $element[_onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
+
+    }
+
+    _one ( ...args ) {
+
+      return this._on ( ...args, true );
+
+    }
+
+    _onHover ( $element, args ) {
+
+      /* NORMALIZATION */
+
+      if ( !args ) {
+
+        args = $element;
+        $element = this.$element;
+
+      }
+
+      /* BINDINGS */
+
+      this.$bindings = this.$bindings.add ( $element );
+
+      /* BINDING */
+
+      this._on ( $element, Pointer.enter, () => this._on ( ...args ) );
+      this._on ( $element, Pointer.leave, () => this._off ( ...args ) );
+
+    }
+
+    //TODO: Maybe add a _offHover, is it needed?
+
+    _off ( $element, events, handler ) {
+
+      /* NORMALIZATION */
+
+      if ( !handler && !($element instanceof $) ) {
+
+        handler = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      /* EVENTS NAMESPACING */
+
+      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
+
+      /* REMOVING HANDLER */
+
+      $element.off ( events, handler );
+
+    }
+
+    _trigger ( type, event, data ) {
+
+      /* NORMALIZATION */
+
+      if ( !data ) {
+
+        if ( event instanceof $.Event ) {
+
+          data = {};
+
+        } else {
+
+          data = event || {};
+          event = undefined;
+
+        }
+
+      }
+
+      /* EVENT */
+
+      event = $.Event ( event );
+      event.type = ( this.name + ':' + type ).toLowerCase ();
+      event.target = this.element;
+
+      let originalEvent = event.originalEvent;
+
+      if ( originalEvent ) {
+
+        for ( let prop in originalEvent ) {
+
+          if ( originalEvent.hasOwnProperty ( prop ) ) {
+
+            if ( !(prop in event) ) {
+
+              event[prop] = originalEvent[prop];
+
             }
-          }
-        }
-      }
-    }, {
-      key: '_setOption',
-      value: function _setOption(key, value) {
 
-        _.set(this.options, key, value);
-      }
-
-      /* ENABLED */
-
-    }, {
-      key: 'enable',
-      value: function enable() {
-
-        this.$element.removeClass(this.options.classes.disabled);
-      }
-    }, {
-      key: 'isEnabled',
-      value: function isEnabled() {
-
-        return !this.isDisabled();
-      }
-
-      /* DISABLED */
-
-    }, {
-      key: 'disable',
-      value: function disable() {
-
-        this.$element.addClass(this.options.classes.disabled);
-      }
-    }, {
-      key: 'isDisabled',
-      value: function isDisabled() {
-
-        return this.$element.hasClass(this.options.classes.disabled);
-      }
-
-      /* EVENTS */
-
-      //TODO: Add support for custom data
-
-    }, {
-      key: '_on',
-      value: function _on(suppressDisabledCheck, $element, events, selector, handler, _onlyOne) {
-        var _this = this;
-
-        /* NORMALIZATION */
-
-        if (!_.isBoolean(suppressDisabledCheck)) {
-
-          _onlyOne = handler;
-          handler = selector;
-          selector = events;
-          events = $element;
-          $element = suppressDisabledCheck;
-          suppressDisabledCheck = false;
-        }
-
-        if (!($element instanceof $)) {
-
-          _onlyOne = handler;
-          handler = selector;
-          selector = events;
-          events = $element;
-          $element = this.$element;
-        }
-
-        if (!_.isString(selector)) {
-
-          _onlyOne = handler;
-          handler = selector;
-          selector = false;
-        }
-
-        /* BINDINGS */
-
-        this.$bindings = this.$bindings.add($element);
-
-        /* PROXY */
-
-        var handlerProxy = function handlerProxy() {
-          for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
           }
 
-          if (!suppressDisabledCheck && _this.$element.hasClass(_this.options.classes.disabled)) return;
-
-          return handler.apply(_this, args);
-        };
-
-        /* PROXY GUID */
-
-        handlerProxy.guid = handler.guid = handler.guid || $.guid++;
-
-        /* EVENTS NAMESPACING */
-
-        events = events.split(/\s+/).map(function (event) {
-          return event + _this.eventNamespace;
-        }).join(' ');
-
-        /* TRIGGERING */
-
-        $element[_onlyOne ? 'one' : 'on'](events, selector, handlerProxy);
-      }
-    }, {
-      key: '_one',
-      value: function _one() {
-        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-          args[_key3] = arguments[_key3];
         }
 
-        return this._on.apply(this, args.concat([true]));
-      }
-    }, {
-      key: '_onHover',
-      value: function _onHover($element, args) {
-        var _this2 = this;
-
-        /* NORMALIZATION */
-
-        if (!args) {
-
-          args = $element;
-          $element = this.$element;
-        }
-
-        /* BINDINGS */
-
-        this.$bindings = this.$bindings.add($element);
-
-        /* BINDING */
-
-        this._on($element, Pointer.enter, function () {
-          return _this2._on.apply(_this2, _toConsumableArray(args));
-        });
-        this._on($element, Pointer.leave, function () {
-          return _this2._off.apply(_this2, _toConsumableArray(args));
-        });
       }
 
-      //TODO: Maybe add a _offHover, is it needed?
+      /* TRIGGERING */
 
-    }, {
-      key: '_off',
-      value: function _off($element, events, handler) {
-        var _this3 = this;
+      this.$element.trigger ( event, data );
 
-        /* NORMALIZATION */
+      return !( this.options.callbacks[type].apply ( this.element, [event].concat ( data ) ) === false || event.isDefaultPrevented () );
 
-        if (!handler && !($element instanceof $)) {
+    }
 
-          handler = events;
-          events = $element;
-          $element = this.$element;
-        }
+    /* ROUTE */
 
-        /* EVENTS NAMESPACING */
+    ___route () {
 
-        events = events.split(/\s+/).map(function (event) {
-          return event + _this3.eventNamespace;
-        }).join(' ');
+      this._on ( true, this.$window, 'route', this.__route );
 
-        /* REMOVING HANDLER */
+    }
 
-        $element.off(events, handler);
-      }
-    }, {
-      key: '_trigger',
-      value: function _trigger(type, event, data) {
+    /* BREAKPOINT */
 
-        /* NORMALIZATION */
+    ___breakpoint () {
 
-        if (!data) {
+      this._on ( true, this.$window, 'breakpoint:change', this.__breakpoint );
 
-          if (event instanceof $.Event) {
+    }
 
-            data = {};
-          } else {
+    __breakpoint () {
 
-            data = event || {};
-            event = undefined;
+      let width = Breakpoints.widths[Breakpoint.current];
+
+      /* UP */
+
+      for ( let breakpoint in this.options.breakpoints.up ) {
+
+        if ( this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) {
+
+          if ( width >= Breakpoints.widths[breakpoint] ) {
+
+            this[this.options.breakpoints.up[breakpoint]]();
+
           }
+
         }
 
-        /* EVENT */
+      }
 
-        event = $.Event(event);
-        event.type = (this.name + ':' + type).toLowerCase();
-        event.target = this.element;
+      /* DOWN */
 
-        var originalEvent = event.originalEvent;
+      for ( let breakpoint in this.options.breakpoints.down ) {
 
-        if (originalEvent) {
+        if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
 
-          for (var prop in originalEvent) {
+          if ( width <= Breakpoints.widths[breakpoint] ) {
 
-            if (originalEvent.hasOwnProperty(prop)) {
+            this[this.options.breakpoints.down[breakpoint]]();
 
-              if (!(prop in event)) {
+          }
 
-                event[prop] = originalEvent[prop];
-              }
+        }
+
+      }
+
+      /* ONLY */
+
+      for ( let breakpoint in this.options.breakpoints.only ) {
+
+        if ( this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) {
+
+          if ( width === Breakpoints.widths[breakpoint] ) {
+
+            this[this.options.breakpoints.only[breakpoint]]();
+
+          }
+
+        }
+
+      }
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._on ( this.$document, 'keydown', this.__keydown );
+
+    }
+
+    __keydown ( event ) {
+
+      if ( !this.options.keyboard ) return;
+
+      for ( let keystrokes in this.options.keystrokes ) {
+
+        if ( this.options.keystrokes.hasOwnProperty ( keystrokes ) ) {
+
+          for ( let keystroke of keystrokes.split ( ',' ) ) {
+
+            if ( Keyboard.keystroke.match ( event, keystroke ) ) {
+
+              let toCall = this.options.keystrokes[keystrokes],
+                  method = _.isArray ( toCall ) ? toCall[0] : toCall,
+                  args   = _.isArray ( toCall ) ? _.castArray ( toCall[1] ) : [];
+
+              this[method].apply ( this, args );
+
+              event.preventDefault ();
+              event.stopImmediatePropagation ();
+
+              return;
+
             }
+
           }
+
         }
 
-        /* TRIGGERING */
-
-        this.$element.trigger(event, data);
-
-        return !(this.options.callbacks[type].apply(this.element, [event].concat(data)) === false || event.isDefaultPrevented());
       }
 
-      /* ROUTE */
+    }
 
-    }, {
-      key: '___route',
-      value: function ___route() {
+    /* REMOVE */
 
-        this._on(true, this.$window, 'route', this.__route);
+    ___remove () {
+
+      if ( this.element ) {
+
+        this._on ( true, 'remove', this.__remove );
+
       }
 
-      /* BREAKPOINT */
+    }
 
-    }, {
-      key: '___breakpoint',
-      value: function ___breakpoint() {
+    __remove ( event ) {
 
-        this._on(true, this.$window, 'breakpoint:change', this.__breakpoint);
-      }
-    }, {
-      key: '__breakpoint',
-      value: function __breakpoint() {
+      if ( !event || event.target === this.element ) {
 
-        var width = Breakpoints.widths[Breakpoint.current];
+        this.destroy ();
 
-        /* UP */
-
-        for (var breakpoint in this.options.breakpoints.up) {
-
-          if (this.options.breakpoints.up.hasOwnProperty(breakpoint)) {
-
-            if (width >= Breakpoints.widths[breakpoint]) {
-
-              this[this.options.breakpoints.up[breakpoint]]();
-            }
-          }
-        }
-
-        /* DOWN */
-
-        for (var _breakpoint in this.options.breakpoints.down) {
-
-          if (this.options.breakpoints.down.hasOwnProperty(_breakpoint)) {
-
-            if (width <= Breakpoints.widths[_breakpoint]) {
-
-              this[this.options.breakpoints.down[_breakpoint]]();
-            }
-          }
-        }
-
-        /* ONLY */
-
-        for (var _breakpoint2 in this.options.breakpoints.only) {
-
-          if (this.options.breakpoints.only.hasOwnProperty(_breakpoint2)) {
-
-            if (width === Breakpoints.widths[_breakpoint2]) {
-
-              this[this.options.breakpoints.only[_breakpoint2]]();
-            }
-          }
-        }
       }
 
-      /* KEYDOWN */
+    }
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    /* DELAYING */
 
-        this._on(this.$document, 'keydown', this.__keydown);
-      }
-    }, {
-      key: '__keydown',
-      value: function __keydown(event) {
+    _delay ( fn, delay ) {
 
-        if (!this.options.keyboard) return;
+      return setTimeout ( () => fn.apply ( this ), delay || 0 );
 
-        for (var keystrokes in this.options.keystrokes) {
+    }
 
-          if (this.options.keystrokes.hasOwnProperty(keystrokes)) {
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
+    /* DEFER */
 
-            try {
+    _defer ( fn ) {
 
-              for (var _iterator8 = keystrokes.split(',')[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                var keystroke = _step8.value;
+      return this._delay ( fn );
 
+    }
 
-                if (Keyboard.keystroke.match(event, keystroke)) {
+    /* FRAME */
 
-                  this[this.options.keystrokes[keystrokes]]();
+    _frame ( fn ) {
 
-                  event.preventDefault();
-                  event.stopImmediatePropagation();
+      return requestAnimationFrame ( fn.bind ( this ) );
 
-                  return;
-                }
-              }
-            } catch (err) {
-              _didIteratorError8 = true;
-              _iteratorError8 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                  _iterator8.return();
-                }
-              } finally {
-                if (_didIteratorError8) {
-                  throw _iteratorError8;
-                }
-              }
-            }
-          }
-        }
-      }
+    }
 
-      /* REMOVE */
+    /* THROW */
 
-    }, {
-      key: '___remove',
-      value: function ___remove() {
+    _throw ( msg ) {
 
-        if (this.element) {
+      throw new Error ( msg );
 
-          this._on(true, 'remove', this.__remove);
-        }
-      }
-    }, {
-      key: '__remove',
-      value: function __remove(event) {
+    }
 
-        if (!event || event.target === this.element) {
+    /* THROTTLING */
 
-          this.destroy();
-        }
-      }
+    _throttle ( fn, wait, options ) {
 
-      /* DELAYING */
+      let throttled = _.throttle ( fn, wait, options );
 
-    }, {
-      key: '_delay',
-      value: function _delay(fn, delay) {
-        var _this4 = this;
+      throttled.guid = fn.guid = ( fn.guid || $.guid++ );
 
-        return setTimeout(function () {
-          return fn.apply(_this4);
-        }, delay || 0);
-      }
+      return throttled;
 
-      /* DEFER */
+    }
 
-    }, {
-      key: '_defer',
-      value: function _defer(fn) {
+    /* DEBOUNCING */
 
-        return this._delay(fn);
-      }
+    _debounce ( fn, wait, options ) {
 
-      /* FRAME */
+      let debounced = _.debounce ( fn, wait, options );
 
-    }, {
-      key: '_frame',
-      value: function _frame(fn) {
+      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
 
-        return requestAnimationFrame(fn.bind(this));
-      }
+      return debounced;
 
-      /* THROW */
+    }
 
-    }, {
-      key: '_throw',
-      value: function _throw(msg) {
+    /* TEMPLATE */
 
-        throw new Error(msg);
-      }
+    _template ( name, options = {} ) {
 
-      /* THROTTLING */
+      return Templates[this.templatesNamespace][name] ( options );
 
-    }, {
-      key: '_throttle',
-      value: function _throttle(fn, wait, options) {
+    }
 
-        var throttled = _.throttle(fn, wait, options);
+    /* INSERTION */
 
-        throttled.guid = fn.guid = fn.guid || $.guid++;
+    before ( ...content ) {
 
-        return throttled;
-      }
+      this.$element.before ( ...content );
 
-      /* DEBOUNCING */
+    }
 
-    }, {
-      key: '_debounce',
-      value: function _debounce(fn, wait, options) {
+    insertBefore ( target ) {
 
-        var debounced = _.debounce(fn, wait, options);
+      this.$element.insertBefore ( target );
 
-        debounced.guid = fn.guid = fn.guid || $.guid++;
+    }
 
-        return debounced;
-      }
+    after ( ...content ) {
 
-      /* TEMPLATE */
+      this.$element.after ( ...content );
 
-    }, {
-      key: '_template',
-      value: function _template(name) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    }
 
+    insertAfter ( target ) {
 
-        return Templates[this.templatesNamespace][name](options);
-      }
+      this.$element.insertAfter ( target );
 
-      /* INSERTION */
+    }
 
-    }, {
-      key: 'before',
-      value: function before() {
-        var _$element;
+    prependTo ( target ) {
 
-        (_$element = this.$element).before.apply(_$element, arguments);
-      }
-    }, {
-      key: 'insertBefore',
-      value: function insertBefore(target) {
+      this.$element.prependTo ( target );
 
-        this.$element.insertBefore(target);
-      }
-    }, {
-      key: 'after',
-      value: function after() {
-        var _$element2;
+    }
 
-        (_$element2 = this.$element).after.apply(_$element2, arguments);
-      }
-    }, {
-      key: 'insertAfter',
-      value: function insertAfter(target) {
+    appendTo ( target ) {
 
-        this.$element.insertAfter(target);
-      }
-    }, {
-      key: 'prependTo',
-      value: function prependTo(target) {
+      this.$element.appendTo ( target );
 
-        this.$element.prependTo(target);
-      }
-    }, {
-      key: 'appendTo',
-      value: function appendTo(target) {
+    }
 
-        this.$element.appendTo(target);
-      }
-    }], [{
-      key: 'widgetize',
-      value: function widgetize($ele, config) {
-        // Called for widgetizing an element
-
-        $ele[config.name]();
-      }
-    }, {
-      key: 'ready',
-      value: function ready() {}
-    }]);
-
-    return Widget;
-  }();
+  }
 
   /* FACTORY */
 
-  Factory.init(Widget, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint);
+  Factory.init ( Widget, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Checkbox
@@ -4462,13 +4510,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'checkbox',
     plugin: true,
     selector: '.checkbox',
@@ -4481,62 +4529,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CHECKBOX */
 
-  var Checkbox = function (_Widgets$Widget) {
-    _inherits(Checkbox, _Widgets$Widget);
+  class Checkbox extends Widgets.Widget {
 
-    function Checkbox() {
-      _classCallCheck(this, Checkbox);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Checkbox).apply(this, arguments));
+    _variables () {
+
+      this.$checkbox = this.$element;
+
+      this.$input = this.$checkbox.find ( this.options.selectors.input );
+      this.input = this.$input[0];
+
+      this.inputId = this.$input.attr ( 'id' );
+
     }
 
-    _createClass(Checkbox, [{
-      key: '_variables',
+    _events () {
 
+      this.___tap ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* TAP */
 
-        this.$checkbox = this.$element;
+    ___tap () {
 
-        this.$input = this.$checkbox.find(this.options.selectors.input);
-        this.input = this.$input[0];
+      this._on ( true, Pointer.tap, this.__tap );
 
-        this.inputId = this.$input.attr('id');
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    }
 
-        this.___tap();
-      }
+    __tap ( event ) {
 
-      /* TAP */
+      if ( event.target === this.input || $(event.target).is ( `label[for="${this.inputId}"]` ) ) return;
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+      this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
 
-        this._on(true, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
+    }
 
-        if (event.target === this.input || $(event.target).is('label[for="' + this.inputId + '"]')) return;
-
-        this.$input.prop('checked', !this.$input.prop('checked')).trigger('change');
-      }
-    }]);
-
-    return Checkbox;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Checkbox, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Checkbox, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Radio
@@ -4547,13 +4584,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/checkbox/checkbox.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'radio',
     plugin: true,
     selector: '.radio',
@@ -4566,38 +4603,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RADIO */
 
-  var Radio = function (_Widgets$Checkbox) {
-    _inherits(Radio, _Widgets$Checkbox);
+  class Radio extends Widgets.Checkbox {
 
-    function Radio() {
-      _classCallCheck(this, Radio);
+    /* TAP */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Radio).apply(this, arguments));
+    __tap ( event ) {
+
+      if ( event.target === this.input || $(event.target).is ( `label[for="${this.inputId}"]` ) ) return;
+
+      if ( this.$input.prop ( 'checked' ) ) return;
+
+      this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
     }
 
-    _createClass(Radio, [{
-      key: '__tap',
-
-
-      /* TAP */
-
-      value: function __tap(event) {
-
-        if (event.target === this.input || $(event.target).is('label[for="' + this.inputId + '"]')) return;
-
-        if (this.$input.prop('checked')) return;
-
-        this.$input.prop('checked', true).trigger('change');
-      }
-    }]);
-
-    return Radio;
-  }(Widgets.Checkbox);
+  }
 
   /* FACTORY */
 
-  Factory.init(Radio, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Radio, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - ClassSwitch
@@ -4610,51 +4637,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Maybe rename it
 
-(function ($, _, Svelto, Widgets, Factory, Breakpoints, Breakpoint) {
+(function ( $, _, Svelto, Widgets, Factory, Breakpoints, Breakpoint ) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var names = _.filter(_.values(Breakpoints), _.isString),
+  let names = _.filter ( _.values ( Breakpoints ), _.isString ),
       datas = [];
 
-  var _iteratorNormalCompletion9 = true;
-  var _didIteratorError9 = false;
-  var _iteratorError9 = undefined;
+  for ( let name of names ) {
 
-  try {
-    for (var _iterator9 = names[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-      var name = _step9.value;
+    datas.push ( `${name}-up` );
+    datas.push ( `${name}-down` );
+    datas.push ( `${name}-only` );
+    datas.push ( name );
 
-
-      datas.push(name + '-up');
-      datas.push(name + '-down');
-      datas.push(name + '-only');
-      datas.push(name);
-    }
-  } catch (err) {
-    _didIteratorError9 = true;
-    _iteratorError9 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion9 && _iterator9.return) {
-        _iterator9.return();
-      }
-    } finally {
-      if (_didIteratorError9) {
-        throw _iteratorError9;
-      }
-    }
   }
 
-  var selector = datas.map(function (name) {
-    return '[data-' + name + ']';
-  }).join(',');
+  let selector = datas.map ( name => `[data-${name}]` ).join ( ',' );
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'classSwitch',
     plugin: true,
     selector: selector,
@@ -4669,202 +4674,210 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CLASS SWITCH */
 
-  var ClassSwitch = function (_Widgets$Widget2) {
-    _inherits(ClassSwitch, _Widgets$Widget2);
+  class ClassSwitch extends Widgets.Widget {
 
-    function ClassSwitch() {
-      _classCallCheck(this, ClassSwitch);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ClassSwitch).apply(this, arguments));
+    _init () {
+
+      this.status = { up: {}, down: {}, only: {} };
+
+      this._populate ();
+
+      this.__classSwitch ();
+
     }
 
-    _createClass(ClassSwitch, [{
-      key: '_init',
+    _events () {
 
+      this.___classSwitch ();
 
-      /* SPECIAL */
+    }
 
-      value: function _init() {
+    /* POPULATE */
 
-        this.status = { up: {}, down: {}, only: {} };
+    _populateBreakpoint ( breakpoint ) {
 
-        this._populate();
+      let name = Breakpoints[breakpoint];
 
-        this.__classSwitch();
+      /* UP */
+
+      let up = this.$element.data ( `${name}-up` );
+
+      if ( _.isString ( up ) ) {
+
+        this.options.switch.up[breakpoint] = up;
+
       }
-    }, {
-      key: '_events',
-      value: function _events() {
 
-        this.___classSwitch();
+      /* DOWN */
+
+      let down = this.$element.data ( `${name}-down` );
+
+      if ( _.isString ( down ) ) {
+
+        this.options.switch.down[breakpoint] = down;
+
       }
 
-      /* POPULATE */
+      /* ONLY */
 
-    }, {
-      key: '_populateBreakpoint',
-      value: function _populateBreakpoint(breakpoint) {
+      let specific = this.$element.data ( `${name}-only` ),
+          general = this.$element.data ( name ),
+          only = _.isString ( specific ) ? specific : ( _.isString ( general ) ? general : undefined );
 
-        var name = Breakpoints[breakpoint];
+      if ( _.isString ( only ) ) {
 
-        /* UP */
+        this.options.switch.only[breakpoint] = only;
 
-        var up = this.$element.data(name + '-up');
-
-        if (_.isString(up)) {
-
-          this.options.switch.up[breakpoint] = up;
-        }
-
-        /* DOWN */
-
-        var down = this.$element.data(name + '-down');
-
-        if (_.isString(down)) {
-
-          this.options.switch.down[breakpoint] = down;
-        }
-
-        /* ONLY */
-
-        var specific = this.$element.data(name + '-only'),
-            general = this.$element.data(name),
-            only = _.isString(specific) ? specific : _.isString(general) ? general : undefined;
-
-        if (_.isString(only)) {
-
-          this.options.switch.only[breakpoint] = only;
-        }
       }
-    }, {
-      key: '_populate',
-      value: function _populate() {
 
-        for (var key in Breakpoints) {
+    }
 
-          if (Breakpoints.hasOwnProperty(key)) {
+    _populate () {
 
-            if (_.isString(Breakpoints[key])) {
+      for ( let key in Breakpoints ) {
 
-              this._populateBreakpoint(key);
-            }
+        if ( Breakpoints.hasOwnProperty ( key ) ) {
+
+          if ( _.isString ( Breakpoints[key] ) ) {
+
+            this._populateBreakpoint ( key );
+
           }
+
         }
+
       }
 
-      /* STATUS */
+    }
 
-    }, {
-      key: '_getStatus',
-      value: function _getStatus() {
+    /* STATUS */
 
-        var status = { up: {}, down: {}, only: {} },
-            width = Breakpoints.widths[Breakpoint.current];
+    _getStatus () {
 
-        /* UP */
+      let status = { up: {}, down: {}, only: {} },
+          width = Breakpoints.widths[Breakpoint.current];
 
-        for (var breakpoint in this.options.switch.up) {
+      /* UP */
 
-          if (this.options.switch.up.hasOwnProperty(breakpoint)) {
+      for ( let breakpoint in this.options.switch.up ) {
 
-            var active = width >= Breakpoints.widths[breakpoint];
+        if ( this.options.switch.up.hasOwnProperty ( breakpoint ) ) {
 
-            status.up[breakpoint] = active;
-          }
+          let active = ( width >= Breakpoints.widths[breakpoint] );
+
+          status.up[breakpoint] = active;
+
         }
 
-        /* DOWN */
-
-        for (var _breakpoint3 in this.options.switch.down) {
-
-          if (this.options.switch.down.hasOwnProperty(_breakpoint3)) {
-
-            var _active = width <= Breakpoints.widths[_breakpoint3];
-
-            status.down[_breakpoint3] = _active;
-          }
-        }
-
-        /* ONLY */
-
-        for (var _breakpoint4 in this.options.switch.only) {
-
-          if (this.options.switch.only.hasOwnProperty(_breakpoint4)) {
-
-            var _active2 = width === Breakpoints.widths[_breakpoint4];
-
-            status.only[_breakpoint4] = _active2;
-          }
-        }
-
-        return status;
       }
-    }, {
-      key: '_getDeltaStatus',
-      value: function _getDeltaStatus(previous, current) {
 
-        var delta = { up: {}, down: {}, only: {} };
+      /* DOWN */
 
-        for (var type in current) {
+      for ( let breakpoint in this.options.switch.down ) {
 
-          if (current.hasOwnProperty(type)) {
+        if ( this.options.switch.down.hasOwnProperty ( breakpoint ) ) {
 
-            for (var breakpoint in current[type]) {
+          let active = ( width <= Breakpoints.widths[breakpoint] );
 
-              if (current[type].hasOwnProperty(breakpoint)) {
+          status.down[breakpoint] = active;
 
-                if (!!previous[type][breakpoint] !== !!current[type][breakpoint]) {
+        }
 
-                  delta[type][breakpoint] = !!current[type][breakpoint];
-                }
+      }
+
+      /* ONLY */
+
+      for ( let breakpoint in this.options.switch.only ) {
+
+        if ( this.options.switch.only.hasOwnProperty ( breakpoint ) ) {
+
+          let active = ( width === Breakpoints.widths[breakpoint] );
+
+          status.only[breakpoint] = active;
+
+        }
+
+      }
+
+      return status;
+
+    }
+
+    _getDeltaStatus ( previous, current ) {
+
+      let delta = { up: {}, down: {}, only: {} };
+
+      for ( let type in current ) {
+
+        if ( current.hasOwnProperty ( type ) ) {
+
+          for ( let breakpoint in current[type] ) {
+
+            if ( current[type].hasOwnProperty ( breakpoint ) ) {
+
+              if ( !!previous[type][breakpoint] !== !!current[type][breakpoint] ) {
+
+                delta[type][breakpoint] = !!current[type][breakpoint];
+
               }
+
             }
+
           }
+
         }
 
-        return delta;
       }
 
-      /* CLASS SWITCH */
+      return delta;
 
-    }, {
-      key: '___classSwitch',
-      value: function ___classSwitch() {
+    }
 
-        this._on(true, this.$window, 'breakpoint:change', this.__classSwitch);
-      }
-    }, {
-      key: '__classSwitch',
-      value: function __classSwitch() {
+    /* CLASS SWITCH */
 
-        var status = this._getStatus(),
-            delta = this._getDeltaStatus(this.status, status);
+    ___classSwitch () {
 
-        for (var type in delta) {
+      this._on ( true, this.$window, 'breakpoint:change', this.__classSwitch );
 
-          if (delta.hasOwnProperty(type)) {
+    }
 
-            for (var breakpoint in delta[type]) {
+    __classSwitch () {
 
-              if (delta[type].hasOwnProperty(breakpoint)) {
+      let status = this._getStatus (),
+          delta = this._getDeltaStatus ( this.status, status );
 
-                this.$element.toggleClass(this.options.switch[type][breakpoint], delta[type][breakpoint]);
-              }
+      for ( let type in delta ) {
+
+        if ( delta.hasOwnProperty ( type ) ) {
+
+          for ( let breakpoint in delta[type] ) {
+
+            if ( delta[type].hasOwnProperty ( breakpoint ) ) {
+
+              this.$element.toggleClass ( this.options.switch[type][breakpoint], delta[type][breakpoint] );
+
             }
+
           }
+
         }
 
-        this.status = status;
       }
-    }]);
 
-    return ClassSwitch;
-  }(Widgets.Widget);
+      this.status = status;
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(ClassSwitch, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint);
+  Factory.init ( ClassSwitch, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Datepicker
@@ -4878,46 +4891,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
 // Accordion to ISO-8601 the first day of the week is Monday
 
+//FIXME: If 21/4/2013 is selected we get "30" selected on 5/2015's page
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'datepicker',
     plugin: true,
     selector: '.datepicker',
     options: {
       exporters: {
-        YYYYMMDD: function YYYYMMDD(date, data) {
-          return [_.padStart(date.getUTCFullYear(), 4, 0), _.padStart(parseInt(date.getUTCMonth(), 10) + 1, 2, 0), _.padStart(date.getUTCDate(), 2, 0)].join(data.separator);
+        YYYYMMDD ( date, data ) {
+          return [_.padStart ( date.getUTCFullYear (), 4, 0 ), _.padStart ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padStart ( date.getUTCDate (), 2, 0 )].join ( data.separator );
         },
-        UNIXTIMESTAMP: function UNIXTIMESTAMP(date) {
-          return Math.floor(date.getTime() / 1000);
+        UNIXTIMESTAMP ( date ) {
+          return Math.floor ( date.getTime () / 1000 );
         },
-        ISO: function ISO(date) {
-          return date.toISOString();
+        ISO ( date ) {
+          return date.toISOString ();
         },
-        UTC: function UTC(date) {
-          return date.toUTCString();
+        UTC ( date ) {
+          return date.toUTCString ();
         }
       },
       importers: {
-        YYYYMMDD: function YYYYMMDD(date, data) {
-          var segments = date.split(data.separator);
-          return new Date(Date.UTC(parseInt(segments[0], 10), parseInt(segments[1], 10) - 1, parseInt(segments[2], 10)));
+        YYYYMMDD ( date, data ) {
+          let segments = date.split ( data.separator );
+          return new Date ( Date.UTC ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2], 10 ) ) );
         },
-        UNIXTIMESTAMP: function UNIXTIMESTAMP(date) {
-          return new Date(_.isString(date) && date.length ? date * 1000 : NaN);
+        UNIXTIMESTAMP ( date ) {
+          return new Date ( ( _.isString ( date ) && date.length ) ? date * 1000 : NaN );
         },
-        ISO: function ISO(date) {
-          return new Date(date);
+        ISO ( date ) {
+          return new Date ( date );
         },
-        UTC: function UTC(date) {
-          return new Date(date);
+        UTC ( date ) {
+          return new Date ( date );
         }
       },
       months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -4969,435 +4983,429 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATEPICKER */
 
-  var Datepicker = function (_Widgets$Widget3) {
-    _inherits(Datepicker, _Widgets$Widget3);
+  class Datepicker extends Widgets.Widget {
 
-    function Datepicker() {
-      _classCallCheck(this, Datepicker);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Datepicker).apply(this, arguments));
+    _variables () {
+
+      this.$datepicker = this.$element;
+      this.$input = this.$datepicker.find ( this.options.selectors.input );
+
+      this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.previous );
+      this.$navigationNext = this.$datepicker.find ( this.options.selectors.navigation.next );
+      this.$navigationToday = this.$datepicker.find ( this.options.selectors.navigation.today );
+      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.title );
+
+      this.$daysPrev = this.$datepicker.find ( this.options.selectors.day.previous );
+      this.$daysCurrent = this.$datepicker.find ( this.options.selectors.day.current );
+      this.$daysNext = this.$datepicker.find ( this.options.selectors.day.next );
+      this.$daysAll = this.$daysPrev.add ( this.$daysCurrent ).add ( this.$daysNext );
+
+      this.$daySelected = this.$daysAll.filter ( this.options.selectors.day.selected );
+      this.$dayToday = this.$daysAll.filter ( this.options.selectors.day.today );
+
     }
 
-    _createClass(Datepicker, [{
-      key: '_variables',
+    _init () {
 
+      /* RESETTING HIGHLIGHT */
 
-      /* SPECIAL */
+      this._unhighlightSelected ();
+      this._unhighlightToday ();
 
-      value: function _variables() {
+      /* TODAY */
 
-        this.$datepicker = this.$element;
-        this.$input = this.$datepicker.find(this.options.selectors.input);
+      if ( !(this.options.date.today instanceof Date) ) {
 
-        this.$navigationPrev = this.$datepicker.find(this.options.selectors.navigation.previous);
-        this.$navigationNext = this.$datepicker.find(this.options.selectors.navigation.next);
-        this.$navigationToday = this.$datepicker.find(this.options.selectors.navigation.today);
-        this.$navigationTitle = this.$datepicker.find(this.options.selectors.title);
+        this.options.date.today = new Date ();
 
-        this.$daysPrev = this.$datepicker.find(this.options.selectors.day.previous);
-        this.$daysCurrent = this.$datepicker.find(this.options.selectors.day.current);
-        this.$daysNext = this.$datepicker.find(this.options.selectors.day.next);
-        this.$daysAll = this.$daysPrev.add(this.$daysCurrent).add(this.$daysNext);
-
-        this.$daySelected = this.$daysAll.filter(this.options.selectors.day.selected);
-        this.$dayToday = this.$daysAll.filter(this.options.selectors.day.today);
       }
-    }, {
-      key: '_init',
-      value: function _init() {
 
-        /* RESETTING HIGHLIGHT */
+      /* INITIAL VALUE */
 
-        this._unhighlightSelected();
-        this._unhighlightToday();
+      this.set ( this.$input.val () );
 
-        /* TODAY */
+      /* CURRENT */
 
-        if (!(this.options.date.today instanceof Date)) {
+      this.options.date.current = this._clampDate ( this.options.date.current || this.options.date.selected || this.options.date.today );
 
-          this.options.date.today = new Date();
+      /* REFRESH */
+
+      this._refresh ();
+
+    }
+
+    _events () {
+
+      this.___change ();
+      this.___keydown ();
+      this.___navigation ();
+      this.___dayTap ();
+
+    }
+
+    /* PRIVATE */
+
+    _cloneDate ( date ) {
+
+      return new Date ( date.getTime () );
+
+    }
+
+    _clampDate ( date ) {
+
+      return new Date ( _.clamp ( date.getTime (), this.options.date.min ? this.options.date.min.getTime () : undefined, this.options.date.max ? this.options.date.max.getTime () : undefined ) );
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
+    __change ( event, data ) {
+
+      if ( data && data._datepickerId === this.guid ) return;
+
+      this.set ( this.$input.val () );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* NAVIGATION */
+
+    ___navigation () {
+
+      this._on ( this.$navigationPrev, Pointer.tap, this.previousMonth );
+      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
+      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
+
+    }
+
+    /* DAY TAP */
+
+    ___dayTap () {
+
+      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
+
+    }
+
+    __dayTap ( event ) {
+
+      let $day = $(event.currentTarget);
+
+      if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
+
+      let day = parseInt ( $day.text (), 10 ),
+          date = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day, 12 );
+
+      this.set ( date );
+
+    }
+
+    /* BUILD */
+
+    _buildCalendar () {
+
+      /* NUMBERS */
+
+      let prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
+          currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
+          initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
+
+      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; // Normalizing to 0 -> Monday
+      initialDayOfWeek -= ( this.options.firstDayOfWeek % 7 ); // Offsetting according to the provided setting
+      initialDayOfWeek = ( initialDayOfWeek < 0 ) ? 7 + initialDayOfWeek : initialDayOfWeek; // Moving to the other side in case of negative offsetting
+
+      /* PREV */
+
+      let exceedingDays = 31 - prevMonthDays,
+          neededDays = initialDayOfWeek,
+          leftDays = 9 - exceedingDays - neededDays;
+
+      this.$daysPrev.slice ( 0, leftDays ).addClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays, leftDays + neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysPrev.slice ( leftDays + neededDays ).addClass ( this.options.classes.hidden );
+
+      /* CURRENT */
+
+      this.$daysCurrent.slice ( 28, currentMonthDays ).removeClass ( this.options.classes.hidden );
+      this.$daysCurrent.slice ( currentMonthDays ).addClass ( this.options.classes.hidden );
+
+      /* CURRENT CLAMPED */
+
+      this.$daysCurrent.removeClass ( this.options.classes.clamped );
+
+      if ( this.options.date.min && this.options.date.current.getFullYear () === this.options.date.min.getFullYear () && this.options.date.current.getMonth () === this.options.date.min.getMonth () ) {
+
+        this.$daysCurrent.slice ( 0, this.options.date.min.getDate () - 1 ).addClass ( this.options.classes.clamped );
+
+      }
+
+      if ( this.options.date.max && this.options.date.current.getFullYear () === this.options.date.max.getFullYear () && this.options.date.current.getMonth () === this.options.date.max.getMonth () ) {
+
+        this.$daysCurrent.slice ( this.options.date.max.getDate () ).addClass ( this.options.classes.clamped );
+
+      }
+
+      /* NEXT */
+
+      neededDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
+      neededDays = ( neededDays === 0 ) ? 0 : 7 - neededDays;
+
+      this.$daysNext.slice ( 0, neededDays ).removeClass ( this.options.classes.hidden );
+      this.$daysNext.slice ( neededDays ).addClass ( this.options.classes.hidden );
+
+    }
+
+    /* HIGHLIGHT */
+
+    _highlightDay ( day, cssClass ) {
+
+      if ( day instanceof Date ) {
+
+        let deltaMonths = ( day.getFullYear () * 12 + day.getMonth () ) - ( this.options.date.current.getFullYear () * 12 + this.options.date.current.getMonth () );
+
+        switch ( deltaMonths ) {
+
+          case -1:
+            return this.$daysPrev.eq ( day.getDate () - 23 ).addClass ( cssClass );
+
+          case 0:
+            return this.$daysCurrent.eq ( day.getDate () - 1 ).addClass ( cssClass );
+
+          case 1:
+            return this.$daysNext.eq ( day.getDate () - 1 ).addClass ( cssClass );
+
         }
 
-        /* INITIAL VALUE */
-
-        this.set(this.$input.val());
-
-        /* CURRENT */
-
-        this.options.date.current = this._clampDate(this.options.date.current || this.options.date.selected || this.options.date.today);
-
-        /* REFRESH */
-
-        this._refresh();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___change();
-        this.___keydown();
-        this.___navigation();
-        this.___dayTap();
       }
 
-      /* PRIVATE */
+      return false;
 
-    }, {
-      key: '_cloneDate',
-      value: function _cloneDate(date) {
+    }
 
-        return new Date(date.getTime());
-      }
-    }, {
-      key: '_clampDate',
-      value: function _clampDate(date) {
+    _unhighlightSelected () {
 
-        return new Date(_.clamp(date.getTime(), this.options.date.min ? this.options.date.min.getTime() : undefined, this.options.date.max ? this.options.date.max.getTime() : undefined));
-      }
+      if ( !this.$daySelected.length ) return;
 
-      /* CHANGE */
+      this.$daySelected.removeClass ( this.options.classes.selected );
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    }
 
-        this._on(true, this.$input, 'change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change(event, data) {
+    _highlightSelected () {
 
-        if (data && data._datepickerId === this.guid) return;
+      if ( this.options.date.selected ) {
 
-        this.set(this.$input.val());
+        this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
+
       }
 
-      /* KEYDOWN */
+    }
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    _unhighlightToday () {
 
-        this._onHover([this.$document, 'keydown', this.__keydown]);
+      if ( !this.$dayToday.length ) return;
+
+      this.$dayToday.removeClass ( this.options.classes.today );
+
+    }
+
+    _highlightToday () {
+
+      if ( this.options.date.today ) {
+
+        this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
+
       }
 
-      /* NAVIGATION */
+    }
 
-    }, {
-      key: '___navigation',
-      value: function ___navigation() {
+    /* UPDATE */
 
-        this._on(this.$navigationPrev, Pointer.tap, this.previousMonth);
-        this._on(this.$navigationNext, Pointer.tap, this.nextMonth);
-        this._on(this.$navigationToday, Pointer.tap, this.navigateToToday);
+    _updateNavigation () {
+
+      /* PREVIOUS */
+
+      if ( this.options.date.min && this.$navigationPrev.length ) {
+
+        let lastDayPrevMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 );
+
+        this.$navigationPrev.toggleClass ( this.options.classes.disabled, lastDayPrevMonth.getTime () < this.options.date.min.getTime () );
+
       }
 
-      /* DAY TAP */
+      /* NEXT */
 
-    }, {
-      key: '___dayTap',
-      value: function ___dayTap() {
+      if ( this.options.date.max && this.$navigationNext.length ) {
 
-        this._on(Pointer.tap, this.options.selectors.day.current, this.__dayTap);
-      }
-    }, {
-      key: '__dayTap',
-      value: function __dayTap(event) {
+        let firstDayNextMonth = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 1 );
 
-        var $day = $(event.currentTarget);
+        this.$navigationNext.toggleClass ( this.options.classes.disabled, firstDayNextMonth.getTime () > this.options.date.max.getTime () );
 
-        if ($day.is(this.options.selectors.day.selected) || $day.is(this.options.selectors.day.clamped)) return;
-
-        var day = parseInt($day.text(), 10),
-            date = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), day, 12);
-
-        this.set(date);
       }
 
-      /* BUILD */
+      /* TODAY */
 
-    }, {
-      key: '_buildCalendar',
-      value: function _buildCalendar() {
+      if ( this.$navigationToday.length ) {
 
-        /* NUMBERS */
+        this.$navigationToday.toggleClass ( this.options.classes.disabled, this.options.date.current.getFullYear () === this.options.date.today.getFullYear () && this.options.date.current.getMonth () === this.options.date.today.getMonth () );
 
-        var prevMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 0).getDate(),
-            currentMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth() + 1, 0).getDate(),
-            initialDayOfWeek = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 1).getDay();
+      }
 
-        initialDayOfWeek = initialDayOfWeek === 0 ? 6 : initialDayOfWeek - 1; // Normalizing to 0 -> Monday
-        initialDayOfWeek -= this.options.firstDayOfWeek % 7; // Offsetting according to the provided setting
-        initialDayOfWeek = initialDayOfWeek < 0 ? 7 + initialDayOfWeek : initialDayOfWeek; // Moving to the other side in case of negative offsetting
+    }
 
-        /* PREV */
+    _updateTitle () {
 
-        var exceedingDays = 31 - prevMonthDays,
-            neededDays = initialDayOfWeek,
-            leftDays = 9 - exceedingDays - neededDays;
+      this.$navigationTitle.text ( this.options.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
-        this.$daysPrev.slice(0, leftDays).addClass(this.options.classes.hidden);
-        this.$daysPrev.slice(leftDays, leftDays + neededDays).removeClass(this.options.classes.hidden);
-        this.$daysPrev.slice(leftDays + neededDays).addClass(this.options.classes.hidden);
+    }
 
-        /* CURRENT */
+    _updateInput () {
 
-        this.$daysCurrent.slice(28, currentMonthDays).removeClass(this.options.classes.hidden);
-        this.$daysCurrent.slice(currentMonthDays).addClass(this.options.classes.hidden);
+      if ( this.options.date.selected ) {
 
-        /* CURRENT CLAMPED */
+        this.$input.val ( this._export ( this.options.date.selected ) ).trigger ( 'change', { _datepickerId: this.guid } );
 
-        this.$daysCurrent.removeClass(this.options.classes.clamped);
+      }
 
-        if (this.options.date.min && this.options.date.current.getFullYear() === this.options.date.min.getFullYear() && this.options.date.current.getMonth() === this.options.date.min.getMonth()) {
+    }
 
-          this.$daysCurrent.slice(0, this.options.date.min.getDate() - 1).addClass(this.options.classes.clamped);
+    /* EXPORT */
+
+    _export ( date )  {
+
+      return this.options.exporters[this.options.format.type] ( date, this.options.format.data );
+
+    }
+
+    /* IMPORT */
+
+    _import ( date )  {
+
+      return this.options.importers[this.options.format.type] ( date, this.options.format.data );
+
+    }
+
+    _refresh () {
+
+      this._unhighlightSelected ();
+      this._unhighlightToday ();
+
+      this._buildCalendar ();
+
+      this._updateNavigation ();
+
+      this._highlightSelected ();
+      this._highlightToday ();
+
+      this._updateTitle ();
+
+    }
+
+    /* API */
+
+    get ( formatted ) {
+
+      return this.options.date.selected ? ( formatted ? this._export ( this.options.date.selected ) : this._cloneDate ( this.options.date.selected ) ) : false;
+
+    }
+
+    set ( date ) {
+
+      date = ( date instanceof Date ) ? date : this._import ( date );
+
+      if ( _.isNaN ( date.valueOf () ) ) return;
+
+      date = this._clampDate ( date );
+
+      if ( this.options.date.selected && date.getTime () === this.options.date.selected.getTime () ) return;
+
+      if ( this.options.date.selected ) {
+
+        this._unhighlightSelected ();
+
+      }
+
+      this.options.date.selected = date;
+
+      if ( this.options.date.current ) {
+
+        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+
+          this._highlightSelected ();
+
+        } else {
+
+          this.options.date.current = this._cloneDate ( this.options.date.selected );
+
+          this._refresh ();
+
         }
 
-        if (this.options.date.max && this.options.date.current.getFullYear() === this.options.date.max.getFullYear() && this.options.date.current.getMonth() === this.options.date.max.getMonth()) {
-
-          this.$daysCurrent.slice(this.options.date.max.getDate()).addClass(this.options.classes.clamped);
-        }
-
-        /* NEXT */
-
-        neededDays = (currentMonthDays + initialDayOfWeek) % 7;
-        neededDays = neededDays === 0 ? 0 : 7 - neededDays;
-
-        this.$daysNext.slice(0, neededDays).removeClass(this.options.classes.hidden);
-        this.$daysNext.slice(neededDays).addClass(this.options.classes.hidden);
       }
 
-      /* HIGHLIGHT */
+      this._updateInput ();
 
-    }, {
-      key: '_highlightDay',
-      value: function _highlightDay(day, cssClass) {
+      this._trigger ( 'change' );
 
-        if (day instanceof Date) {
+    }
 
-          var deltaMonths = day.getFullYear() * 12 + day.getMonth() - (this.options.date.current.getFullYear() * 12 + this.options.date.current.getMonth());
+    navigateToToday () {
 
-          switch (deltaMonths) {
+      if ( this.options.date.current.getFullYear () !== this.options.date.today.getFullYear () || this.options.date.current.getMonth () !== this.options.date.today.getMonth () ) {
 
-            case -1:
-              return this.$daysPrev.eq(day.getDate() - 23).addClass(cssClass);
+        this.options.date.current = this._clampDate ( this.options.date.today );
 
-            case 0:
-              return this.$daysCurrent.eq(day.getDate() - 1).addClass(cssClass);
+        this._refresh ();
 
-            case 1:
-              return this.$daysNext.eq(day.getDate() - 1).addClass(cssClass);
-
-          }
-        }
-
-        return false;
-      }
-    }, {
-      key: '_unhighlightSelected',
-      value: function _unhighlightSelected() {
-
-        if (!this.$daySelected.length) return;
-
-        this.$daySelected.removeClass(this.options.classes.selected);
-      }
-    }, {
-      key: '_highlightSelected',
-      value: function _highlightSelected() {
-
-        if (this.options.date.selected) {
-
-          this.$daySelected = this._highlightDay(this.options.date.selected, this.options.classes.selected);
-        }
-      }
-    }, {
-      key: '_unhighlightToday',
-      value: function _unhighlightToday() {
-
-        if (!this.$dayToday.length) return;
-
-        this.$dayToday.removeClass(this.options.classes.today);
-      }
-    }, {
-      key: '_highlightToday',
-      value: function _highlightToday() {
-
-        if (this.options.date.today) {
-
-          this.$dayToday = this._highlightDay(this.options.date.today, this.options.classes.today);
-        }
       }
 
-      /* UPDATE */
+    }
 
-    }, {
-      key: '_updateNavigation',
-      value: function _updateNavigation() {
+    navigateMonth ( modifier ) {
 
-        /* PREVIOUS */
+      if ( _.isNaN ( modifier ) ) return;
 
-        if (this.options.date.min && this.$navigationPrev.length) {
+      this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
 
-          var lastDayPrevMonth = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 0);
+      this.options.date.current = this._clampDate ( this.options.date.current );
 
-          this.$navigationPrev.toggleClass(this.options.classes.disabled, lastDayPrevMonth.getTime() < this.options.date.min.getTime());
-        }
+      this._refresh ();
 
-        /* NEXT */
+    }
 
-        if (this.options.date.max && this.$navigationNext.length) {
+    previousMonth () {
 
-          var firstDayNextMonth = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth() + 1, 1);
+      this.navigateMonth ( -1 );
 
-          this.$navigationNext.toggleClass(this.options.classes.disabled, firstDayNextMonth.getTime() > this.options.date.max.getTime());
-        }
+    }
 
-        /* TODAY */
+    nextMonth () {
 
-        if (this.$navigationToday.length) {
+      this.navigateMonth ( 1 );
 
-          this.$navigationToday.toggleClass(this.options.classes.disabled, this.options.date.current.getFullYear() === this.options.date.today.getFullYear() && this.options.date.current.getMonth() === this.options.date.today.getMonth());
-        }
-      }
-    }, {
-      key: '_updateTitle',
-      value: function _updateTitle() {
+    }
 
-        this.$navigationTitle.text(this.options.months[this.options.date.current.getMonth()] + ' ' + this.options.date.current.getFullYear());
-      }
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
-
-        if (this.options.date.selected) {
-
-          this.$input.val(this._export(this.options.date.selected)).trigger('change', { _datepickerId: this.guid });
-        }
-      }
-
-      /* EXPORT */
-
-    }, {
-      key: '_export',
-      value: function _export(date) {
-
-        return this.options.exporters[this.options.format.type](date, this.options.format.data);
-      }
-
-      /* IMPORT */
-
-    }, {
-      key: '_import',
-      value: function _import(date) {
-
-        return this.options.importers[this.options.format.type](date, this.options.format.data);
-      }
-    }, {
-      key: '_refresh',
-      value: function _refresh() {
-
-        this._unhighlightSelected();
-        this._unhighlightToday();
-
-        this._buildCalendar();
-
-        this._updateNavigation();
-
-        this._highlightSelected();
-        this._highlightToday();
-
-        this._updateTitle();
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get(formatted) {
-
-        return this.options.date.selected ? formatted ? this._export(this.options.date.selected) : this._cloneDate(this.options.date.selected) : false;
-      }
-    }, {
-      key: 'set',
-      value: function set(date) {
-
-        date = date instanceof Date ? date : this._import(date);
-
-        if (_.isNaN(date.valueOf())) return;
-
-        date = this._clampDate(date);
-
-        if (this.options.date.selected && date.getTime() === this.options.date.selected.getTime()) return;
-
-        if (this.options.date.selected) {
-
-          this._unhighlightSelected();
-        }
-
-        this.options.date.selected = date;
-
-        if (this.options.date.current) {
-
-          if (this.options.date.selected.getFullYear() === this.options.date.current.getFullYear() && this.options.date.selected.getMonth() === this.options.date.current.getMonth()) {
-
-            this._highlightSelected();
-          } else {
-
-            this.options.date.current = this._cloneDate(this.options.date.selected);
-
-            this._refresh();
-          }
-        }
-
-        this._updateInput();
-
-        this._trigger('change');
-      }
-    }, {
-      key: 'navigateToToday',
-      value: function navigateToToday() {
-
-        if (this.options.date.current.getFullYear() !== this.options.date.today.getFullYear() || this.options.date.current.getMonth() !== this.options.date.today.getMonth()) {
-
-          this.options.date.current = this._clampDate(this.options.date.today);
-
-          this._refresh();
-        }
-      }
-    }, {
-      key: 'navigateMonth',
-      value: function navigateMonth(modifier) {
-
-        if (_.isNaN(modifier)) return;
-
-        this.options.date.current.setMonth(this.options.date.current.getMonth() + modifier);
-
-        this.options.date.current = this._clampDate(this.options.date.current);
-
-        this._refresh();
-      }
-    }, {
-      key: 'previousMonth',
-      value: function previousMonth() {
-
-        this.navigateMonth(-1);
-      }
-    }, {
-      key: 'nextMonth',
-      value: function nextMonth() {
-
-        this.navigateMonth(1);
-      }
-    }]);
-
-    return Datepicker;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Datepicker, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Datepicker, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Draggable
@@ -5413,13 +5421,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
-(function ($, _, Svelto, Widgets, Factory, Animations, Browser, Pointer, Mouse) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, Browser, Pointer, Mouse ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'draggable',
     plugin: true,
     selector: '.draggable',
@@ -5474,480 +5482,511 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DRAGGABLE */
 
-  var Draggable = function (_Widgets$Widget4) {
-    _inherits(Draggable, _Widgets$Widget4);
+  class Draggable extends Widgets.Widget {
 
-    function Draggable() {
-      _classCallCheck(this, Draggable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Draggable).apply(this, arguments));
+    _variables () {
+
+      this.draggable = this.element;
+      this.$draggable = this.$element;
+
+      this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
+
     }
 
-    _createClass(Draggable, [{
-      key: '_variables',
+    _events () {
 
+      this.___down ();
+      this.___proxy ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* DOWN */
 
-        this.draggable = this.element;
-        this.$draggable = this.$element;
+    ___down () {
 
-        this.$handlers = this.options.onlyHandlers ? this.$draggable.find(this.options.selectors.handler) : this.$draggable;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this._on ( this.$handlers, Pointer.down, this.__down );
 
-        this.___down();
-        this.___proxy();
-      }
+    }
 
-      /* DOWN */
+    /* PROXY */
 
-    }, {
-      key: '___down',
-      value: function ___down() {
+    ___proxy () {
 
-        this._on(this.$handlers, Pointer.down, this.__down);
+      if ( this.options.proxy.$element ) {
+
+        this._on ( this.options.proxy.$element, Pointer.down, this.__down );
+
       }
 
-      /* PROXY */
+    }
 
-    }, {
-      key: '___proxy',
-      value: function ___proxy() {
+    /* ACTIONS */
 
-        if (this.options.proxy.$element) {
+    _centerToPoint ( XY, suppressClasses ) {
 
-          this._on(this.options.proxy.$element, Pointer.down, this.__down);
-        }
-      }
-
-      /* ACTIONS */
-
-    }, {
-      key: '_centerToPoint',
-      value: function _centerToPoint(XY, suppressClasses) {
-
-        var movableOffset = this.$movable.offset(),
-            deltaXY = {
-          x: XY.x - (movableOffset.left + this.$movable.outerWidth() / 2),
-          y: XY.y - (movableOffset.top + this.$movable.outerHeight() / 2)
-        };
-
-        return this._actionMove(deltaXY, suppressClasses);
-      }
-    }, {
-      key: '_actionMove',
-      value: function _actionMove(deltaXY, suppressClasses) {
-
-        /* BASE */
-
-        var baseXY = {
-          x: this.proxyXY ? this.proxyXY.x : this.initialXY.x,
-          y: this.proxyXY ? this.proxyXY.y : this.initialXY.y
-        };
-
-        /* INIT */
-
-        if (!this.inited) {
-
-          this.inited = true;
-
-          /* CLAMPING VALUES */
-
-          if (this.options.constrainer.$element) {
-
-            var constrainerOffset = this.options.constrainer.$element.offset(),
-                movableOffset = this.$movable.offset();
-
-            if (this.options.axis !== 'y') {
-
-              var halfWidth = this.options.constrainer.center ? this.$movable.outerWidth() / 2 : 0;
-
-              this.translateX_min = constrainerOffset.left - (movableOffset.left - baseXY.x) - halfWidth;
-              this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth() - (movableOffset.left - baseXY.x + this.$movable.outerWidth()) + halfWidth;
-            }
-
-            if (this.options.axis !== 'x') {
-
-              var halfHeight = this.options.constrainer.center ? this.$movable.outerHeight() / 2 : 0;
-
-              this.translateY_min = constrainerOffset.top - (movableOffset.top - baseXY.y) - halfHeight;
-              this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight() - (movableOffset.top - baseXY.y + this.$movable.outerHeight()) + halfHeight;
-            }
-          }
-
-          /* CLASSES */
-
-          if (!suppressClasses) {
-
-            this._addClasses();
-          }
-        }
-
-        /* CLAMPING */
-
-        var translateX = baseXY.x,
-            translateY = baseXY.y;
-
-        if (this.options.axis !== 'y') {
-
-          translateX += deltaXY.x;
-
-          if (this.options.constrainer.$element) {
-
-            translateX = _.clamp(translateX, this.translateX_min - this.options.constrainer.tolerance.x, this.translateX_max + this.options.constrainer.tolerance.x);
-          }
-        }
-
-        if (this.options.axis !== 'x') {
-
-          translateY += deltaXY.y;
-
-          if (this.options.constrainer.$element) {
-
-            translateY = _.clamp(translateY, this.translateY_min - this.options.constrainer.tolerance.y, this.translateY_max + this.options.constrainer.tolerance.y);
-          }
-        }
-
-        /* MODIFYING */
-
-        var modifiedXY = {
-          x: this.options.axis !== 'y' ? this.options.modifiers.x(translateX) : false,
-          y: this.options.axis !== 'x' ? this.options.modifiers.y(translateY) : false
-        };
-
-        /* ABORTION */
-
-        if (modifiedXY.x === false && modifiedXY.y === false) return baseXY;
-
-        /* SETTING */
-
-        var endXY = {
-          x: _.isBoolean(modifiedXY.x) ? modifiedXY.x ? translateX : baseXY.x : modifiedXY.x,
-          y: _.isBoolean(modifiedXY.y) ? modifiedXY.y ? translateY : baseXY.y : modifiedXY.y
-        };
-
-        this.$movable.translate(endXY.x, endXY.y);
-
-        /* MOTION */
-
-        this.motion = true;
-
-        /* RETURNING */
-
-        return endXY;
-      }
-    }, {
-      key: '_actionSet',
-      value: function _actionSet(XY) {}
-
-      /* CLASSES */
-
-    }, {
-      key: '_toggleClasses',
-      value: function _toggleClasses(force) {
-
-        this.$layout.toggleClass(this.options.classes.layout.dragging, force);
-        this.$movable.toggleClass(this.options.classes.dragging, force);
-      }
-    }, {
-      key: '_addClasses',
-      value: function _addClasses() {
-
-        this._toggleClasses(true);
-      }
-    }, {
-      key: '_removeClasses',
-      value: function _removeClasses() {
-
-        this._toggleClasses(false);
-      }
-
-      /* HELPER */
-
-    }, {
-      key: '_getHelper',
-      value: function _getHelper() {
-
-        return _.isFunction(this.options.$helper) ? this.options.$helper() : this.options.$helper instanceof $ && this.options.$helper.length ? this.options.$helper : false;
-      }
-    }, {
-      key: '_initHelper',
-      value: function _initHelper() {
-
-        this.$helper.appendTo(this.$layout);
-      }
-    }, {
-      key: '_destroyHelper',
-      value: function _destroyHelper() {
-
-        this.$helper.remove();
-      }
-
-      /* AUTOSCROLL */
-
-    }, {
-      key: '_autoscroll',
-      value: function _autoscroll(pointXY) {
-
-        if (!this.options.scroll.active) return;
-
-        if (!this.scrollInited) {
-
-          this.$scrollParent = this.$movable.scrollParent();
-          this.scrollParent = this.$scrollParent[0];
-
-          this.scrollParentIsDocument = this.scrollParent === document || this.scrollParent.tagName === 'HTML';
-
-          this.scrollInited = true;
-        }
-
-        // Logic taken from jQuery UI
-
-        if (this.scrollParentIsDocument) {
-
-          if (this.options.axis !== 'x') {
-
-            var scrollTop = this.$document.scrollTop();
-
-            if (pointXY.y - scrollTop <= this.options.scroll.sensitivity) {
-
-              this.$document.scrollTop(scrollTop - this.options.scroll.speed);
-            } else if (this.$window.height() - (pointXY.y - scrollTop) <= this.options.scroll.sensitivity) {
-
-              this.$document.scrollTop(scrollTop + this.options.scroll.speed);
-            }
-          }
-
-          if (this.options.axis !== 'y') {
-
-            var scrollLeft = this.$document.scrollLeft();
-
-            if (pointXY.x - scrollLeft <= this.options.scroll.sensitivity) {
-
-              this.$document.scrollLeft(scrollLeft - this.options.scroll.speed);
-            } else if (this.$window.width() - (pointXY.x - scrollLeft) <= this.options.scroll.sensitivity) {
-
-              this.$document.scrollLeft(scrollLeft + this.options.scroll.speed);
-            }
-          }
-        } else {
-
-          var parentOffset = this.$scrollParent.offset();
-
-          if (this.options.axis !== 'x') {
-
-            if (parentOffset.top + this.scrollParent.offsetHeight - pointXY.y <= this.options.scroll.sensitivity) {
-
-              this.scrollParent.scrollTop += this.options.scroll.speed;
-            } else if (pointXY.y - parentOffset.top <= this.options.scroll.sensitivity) {
-
-              this.scrollParent.scrollTop -= this.options.scroll.speed;
-            }
-          }
-
-          if (this.options.axis !== 'y') {
-
-            if (parentOffset.left + this.scrollParent.offsetWidth - pointXY.x <= this.options.scroll.sensitivity) {
-
-              this.scrollParent.scrollLeft += this.options.scroll.speed;
-            } else if (pointXY.x - parentOffset.left <= this.options.scroll.sensitivity) {
-
-              this.scrollParent.scrollLeft -= this.options.scroll.speed;
-            }
-          }
-        }
-      }
-
-      /* REVERT */
-
-    }, {
-      key: '_revert',
-      value: function _revert() {
-
-        this._lock = true;
-
-        this._frame(function () {
-
-          this.$movable.addClass(this.options.classes.reverting);
-
-          this._frame(function () {
-
-            this.$movable.translate(this.initialXY.x, this.initialXY.y);
-
-            this._delay(function () {
-
-              this.$movable.removeClass(this.options.classes.reverting);
-
-              this._lock = false;
-            }, this.options.animations.revert);
-          });
-        });
-      }
-
-      /* HANDLERS */
-
-    }, {
-      key: '__down',
-      value: function __down(event) {
-
-        if (this._lock || !this.options.draggable()) return;
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        this.inited = false;
-        this.motion = false;
-        this.scrollInited = false;
-
-        this.$helper = this._getHelper();
-        this.helper = this.$helper ? this.$helper[0] : false;
-
-        this.$movable = this.$helper || this.$draggable;
-
-        this.startEvent = event;
-        this.startXY = $.eventXY(event);
-
-        if (this.$helper) {
-
-          this._initHelper();
-          this.initialXY = this.$movable.translate();
-          this.initialXY = this._centerToPoint(this.startXY);
-        } else {
-
-          this.initialXY = this.$movable.translate();
-        }
-
-        this.isProxyed = this.options.proxy.$element && event.currentTarget === this.options.proxy.$element[0];
-
-        this.proxyXY = false;
-
-        this._trigger('start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY });
-
-        this._on(true, this.$document, Pointer.move, this.__move);
-        this._one(true, this.$document, Pointer.up, this.__up);
-        this._one(true, this.$document, Pointer.cancel, this.__cancel);
-      }
-    }, {
-      key: '__move',
-      value: function __move(event) {
-
-        var moveXY = $.eventXY(event),
-            deltaXY = {
-          x: moveXY.x - this.startXY.x,
-          y: moveXY.y - this.startXY.y
-        },
-            absDeltaXY = {
-          x: Math.abs(deltaXY.x),
-          y: Math.abs(deltaXY.y)
-        },
-            dragXY = void 0;
-
-        if (absDeltaXY.x < this.options.threshold && absDeltaXY.y < this.options.threshold) return;
-
-        if (!this.inited && this.isProxyed) {
-
-          dragXY = this._centerToPoint(moveXY);
-
-          this.proxyXY = dragXY;
-        } else {
-
-          var _deltaXY = {
-            x: moveXY.x - this.startXY.x,
-            y: moveXY.y - this.startXY.y
+      let movableOffset = this.$movable.offset (),
+          deltaXY = {
+            x: XY.x - ( movableOffset.left + ( this.$movable.outerWidth () / 2 ) ),
+            y: XY.y - ( movableOffset.top + ( this.$movable.outerHeight () / 2 ) )
           };
 
-          dragXY = this._actionMove(_deltaXY);
-        }
+      return this._actionMove ( deltaXY, suppressClasses );
 
-        this._autoscroll(moveXY);
+    }
 
-        this._trigger('move', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY });
-      }
-    }, {
-      key: '__up',
-      value: function __up(event) {
+    _actionMove ( deltaXY, suppressClasses ) {
 
-        var endXY = $.eventXY(event),
-            dragXY = this.initialXY;
+      /* BASE */
 
-        if (this.inited) {
+      let baseXY = {
+        x: this.proxyXY ? this.proxyXY.x : this.initialXY.x,
+        y: this.proxyXY ? this.proxyXY.y : this.initialXY.y
+      };
 
-          this._removeClasses();
-        }
+      /* INIT */
 
-        if (this.$helper) {
+      if ( !this.inited ) {
 
-          this._destroyHelper();
-        }
+        this.inited = true;
 
-        if (this.motion) {
+        /* CLAMPING VALUES */
 
-          if (this.options.revert) {
+        if ( this.options.constrainer.$element ) {
 
-            this._revert();
-          } else {
+          let constrainerOffset = this.options.constrainer.$element.offset (),
+              movableOffset = this.$movable.offset ();
 
-            dragXY = this.$movable.translate();
+          if ( this.options.axis !== 'y' ) {
+
+            let halfWidth = this.options.constrainer.center ? this.$movable.outerWidth () / 2 : 0;
+
+            this.translateX_min = constrainerOffset.left - ( movableOffset.left - baseXY.x ) - halfWidth;
+            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( movableOffset.left - baseXY.x ) + this.$movable.outerWidth () ) + halfWidth;
+
           }
-        } else if (this.isProxyed) {
 
-          if ((_.isFunction(this.options.proxy.noMotion) ? this.options.proxy.noMotion() : this.options.proxy.noMotion) && Mouse.hasButton(event, Mouse.buttons.LEFT)) {
+          if ( this.options.axis !== 'x' ) {
 
-            dragXY = this._centerToPoint(endXY, true);
+            let halfHeight = this.options.constrainer.center ? this.$movable.outerHeight () / 2 : 0;
+
+            this.translateY_min = constrainerOffset.top - ( movableOffset.top - baseXY.y ) - halfHeight;
+            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( movableOffset.top - baseXY.y ) + this.$movable.outerHeight () ) + halfHeight;
+
           }
+
         }
 
-        this._off(this.$document, Pointer.move, this.__move);
-        this._off(this.$document, Pointer.cancel, this.__cancel);
+        /* CLASSES */
 
-        this._trigger('end', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion });
+        if ( !suppressClasses ) {
+
+          this._addClasses ();
+
+        }
+
       }
-    }, {
-      key: '__cancel',
-      value: function __cancel(event) {
 
-        var endXY = $.eventXY(event),
-            dragXY = this.$movable.translate();
+      /* CLAMPING */
 
-        if (this.inited) {
+      let translateX = baseXY.x,
+          translateY = baseXY.y;
 
-          this._removeClasses();
+      if ( this.options.axis !== 'y' ) {
+
+        translateX += deltaXY.x;
+
+        if ( this.options.constrainer.$element ) {
+
+          translateX = _.clamp ( translateX, this.translateX_min - this.options.constrainer.tolerance.x, this.translateX_max + this.options.constrainer.tolerance.x );
+
         }
 
-        if (this.$helper) {
+      }
 
-          this._destroyHelper();
+      if ( this.options.axis !== 'x' ) {
+
+        translateY += deltaXY.y;
+
+        if ( this.options.constrainer.$element ) {
+
+          translateY = _.clamp ( translateY, this.translateY_min - this.options.constrainer.tolerance.y, this.translateY_max + this.options.constrainer.tolerance.y );
+
         }
 
-        if (this.motion) {
+      }
 
-          if (this.options.revert) {
+      /* MODIFYING */
 
-            this._revert();
+      let modifiedXY = {
+            x: this.options.axis !== 'y' ? this.options.modifiers.x ( translateX ) : false,
+            y: this.options.axis !== 'x' ? this.options.modifiers.y ( translateY ) : false
+          };
 
-            dragXY = this.initialXY;
+      /* ABORTION */
+
+      if ( modifiedXY.x === false && modifiedXY.y === false ) return baseXY;
+
+      /* SETTING */
+
+      let endXY = {
+        x: _.isBoolean ( modifiedXY.x ) ? ( modifiedXY.x ? translateX : baseXY.x ) : modifiedXY.x,
+        y: _.isBoolean ( modifiedXY.y ) ? ( modifiedXY.y ? translateY : baseXY.y ) : modifiedXY.y
+      };
+
+      this.$movable.translate ( endXY.x, endXY.y );
+
+      /* MOTION */
+
+      this.motion = true;
+
+      /* RETURNING */
+
+      return endXY;
+
+    }
+
+    _actionSet ( XY ) {
+
+
+    }
+
+    /* CLASSES */
+
+    _toggleClasses ( force ) {
+
+      this.$layout.toggleClass ( this.options.classes.layout.dragging, force );
+      this.$movable.toggleClass ( this.options.classes.dragging, force );
+
+    }
+
+    _addClasses () {
+
+      this._toggleClasses ( true );
+
+    }
+
+    _removeClasses () {
+
+      this._toggleClasses ( false );
+
+    }
+
+    /* HELPER */
+
+    _getHelper () {
+
+      return _.isFunction ( this.options.$helper )
+               ? this.options.$helper ()
+               : this.options.$helper instanceof $ && this.options.$helper.length
+                 ? this.options.$helper
+                 : false;
+
+    }
+
+    _initHelper () {
+
+      this.$helper.appendTo ( this.$layout );
+
+    }
+
+    _destroyHelper () {
+
+      this.$helper.remove ();
+
+    }
+
+    /* AUTOSCROLL */
+
+    _autoscroll ( pointXY ) {
+
+      if ( !this.options.scroll.active ) return;
+
+      if ( !this.scrollInited ) {
+
+        this.$scrollParent = this.$movable.scrollParent ();
+        this.scrollParent = this.$scrollParent[0];
+
+        this.scrollParentIsDocument = ( this.scrollParent === document || this.scrollParent.tagName === 'HTML' );
+
+        this.scrollInited = true;
+
+      }
+
+      // Logic taken from jQuery UI
+
+  		if ( this.scrollParentIsDocument ) {
+
+  			if ( this.options.axis !== 'x' ) {
+
+          let scrollTop = this.$document.scrollTop ();
+
+  				if ( pointXY.y - scrollTop <= this.options.scroll.sensitivity ) {
+
+          	this.$document.scrollTop ( scrollTop - this.options.scroll.speed );
+
+          } else if ( this.$window.height () - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
+
+          	this.$document.scrollTop ( scrollTop + this.options.scroll.speed );
+
           }
+
+  			}
+
+  			if ( this.options.axis !== 'y' ) {
+
+          let scrollLeft = this.$document.scrollLeft ();
+
+  				if ( pointXY.x - scrollLeft <= this.options.scroll.sensitivity ) {
+
+          	this.$document.scrollLeft ( scrollLeft - this.options.scroll.speed );
+
+          } else if ( this.$window.width () - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
+
+          	this.$document.scrollLeft ( scrollLeft + this.options.scroll.speed );
+
+          }
+
+  			}
+
+  		} else {
+
+        let parentOffset = this.$scrollParent.offset ();
+
+  			if ( this.options.axis !== 'x' ) {
+
+  				if ( ( parentOffset.top + this.scrollParent.offsetHeight ) - pointXY.y <= this.options.scroll.sensitivity ) {
+
+  					this.scrollParent.scrollTop += this.options.scroll.speed;
+
+  				} else if ( pointXY.y - parentOffset.top <= this.options.scroll.sensitivity ) {
+
+  					this.scrollParent.scrollTop -= this.options.scroll.speed;
+
+  				}
+
+  			}
+
+  			if ( this.options.axis !== 'y' ) {
+
+  				if ( ( parentOffset.left + this.scrollParent.offsetWidth ) - pointXY.x <= this.options.scroll.sensitivity ) {
+
+  					this.scrollParent.scrollLeft += this.options.scroll.speed;
+
+  				} else if ( pointXY.x - parentOffset.left <= this.options.scroll.sensitivity ) {
+
+  					this.scrollParent.scrollLeft -= this.options.scroll.speed;
+
+  				}
+
+  			}
+
+  		}
+
+    }
+
+    /* REVERT */
+
+    _revert () {
+
+      this._lock = true;
+
+      this._frame ( function () {
+
+        this.$movable.addClass ( this.options.classes.reverting );
+
+        this._frame ( function () {
+
+          this.$movable.translate ( this.initialXY.x, this.initialXY.y );
+
+          this._delay ( function () {
+
+            this.$movable.removeClass ( this.options.classes.reverting );
+
+            this._lock = false;
+
+          }, this.options.animations.revert );
+
+        });
+
+      });
+
+    }
+
+    /* HANDLERS */
+
+    __down ( event ) {
+
+      if ( this._lock || !this.options.draggable () ) return;
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+      this.inited = false;
+      this.motion = false;
+      this.scrollInited = false;
+
+      this.$helper = this._getHelper ();
+      this.helper = this.$helper ? this.$helper[0] : false;
+
+      this.$movable = ( this.$helper || this.$draggable );
+
+      this.startEvent = event;
+      this.startXY = $.eventXY ( event );
+
+      if ( this.$helper ) {
+
+        this._initHelper ();
+        this.initialXY = this.$movable.translate ();
+        this.initialXY = this._centerToPoint ( this.startXY );
+
+      } else {
+
+        this.initialXY = this.$movable.translate ();
+
+      }
+
+      this.isProxyed = ( this.options.proxy.$element && event.currentTarget === this.options.proxy.$element[0] );
+
+      this.proxyXY = false;
+
+      this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY } );
+
+      this._on ( true, this.$document, Pointer.move, this.__move );
+      this._one ( true, this.$document, Pointer.up, this.__up );
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+
+    }
+
+    __move ( event ) {
+
+      let moveXY = $.eventXY ( event ),
+          deltaXY = {
+            x: moveXY.x - this.startXY.x,
+            y: moveXY.y - this.startXY.y
+          },
+          absDeltaXY = {
+            x: Math.abs ( deltaXY.x ),
+            y: Math.abs ( deltaXY.y )
+          },
+          dragXY;
+
+      if ( absDeltaXY.x < this.options.threshold && absDeltaXY.y < this.options.threshold ) return;
+
+      if ( !this.inited && this.isProxyed ) {
+
+        dragXY = this._centerToPoint ( moveXY );
+
+        this.proxyXY = dragXY;
+
+      } else {
+
+        let deltaXY = {
+              x: moveXY.x - this.startXY.x,
+              y: moveXY.y - this.startXY.y
+            };
+
+        dragXY = this._actionMove ( deltaXY );
+
+      }
+
+      this._autoscroll ( moveXY );
+
+      this._trigger ( 'move', { draggable: this.draggable, helper: this.helper,isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY } );
+
+    }
+
+    __up ( event ) {
+
+      let endXY = $.eventXY ( event ),
+          dragXY = this.initialXY;
+
+      if ( this.inited ) {
+
+        this._removeClasses ();
+
+      }
+
+      if ( this.$helper ) {
+
+        this._destroyHelper ();
+
+      }
+
+      if ( this.motion ) {
+
+        if ( this.options.revert ) {
+
+          this._revert ();
+
+        } else {
+
+          dragXY = this.$movable.translate ();
+
         }
 
-        this._off(this.$document, Pointer.move, this.__move);
-        this._off(this.$document, Pointer.up, this.__up);
+      } else if ( this.isProxyed ) {
 
-        this._trigger('end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion });
+        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) {
+
+          dragXY = this._centerToPoint ( endXY, true );
+
+        }
+
       }
-    }]);
 
-    return Draggable;
-  }(Widgets.Widget);
+      this._off ( this.$document, Pointer.move, this.__move );
+      this._off ( this.$document, Pointer.cancel, this.__cancel );
+
+      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
+
+    }
+
+    __cancel ( event ) {
+
+      let endXY = $.eventXY ( event ),
+          dragXY = this.$movable.translate ();
+
+      if ( this.inited ) {
+
+        this._removeClasses ();
+
+      }
+
+      if ( this.$helper ) {
+
+        this._destroyHelper ();
+
+      }
+
+      if ( this.motion ) {
+
+        if ( this.options.revert ) {
+
+          this._revert ();
+
+          dragXY = this.initialXY;
+
+        }
+
+      }
+
+      this._off ( this.$document, Pointer.move, this.__move );
+      this._off ( this.$document, Pointer.up, this.__up );
+
+      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Draggable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse);
+  Factory.init ( Draggable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Expander
@@ -5959,13 +5998,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'expander',
     plugin: true,
     selector: '.expander',
@@ -5989,73 +6028,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER */
 
-  var Expander = function (_Widgets$Widget5) {
-    _inherits(Expander, _Widgets$Widget5);
+  class Expander extends Widgets.Widget {
 
-    function Expander() {
-      _classCallCheck(this, Expander);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Expander).apply(this, arguments));
+    _variables () {
+
+      this.$expander = this.$element;
+      this.$content = this.$expander.find ( this.options.selectors.content );
+
+      this._isOpen = this.$expander.hasClass ( this.options.classes.open );
+
     }
 
-    _createClass(Expander, [{
-      key: '_variables',
+    /* API */
 
+    isOpen () {
 
-      /* SPECIAL */
+      return this._isOpen;
 
-      value: function _variables() {
+    }
 
-        this.$expander = this.$element;
-        this.$content = this.$expander.find(this.options.selectors.content);
+    toggle ( force = !this._isOpen ) {
 
-        this._isOpen = this.$expander.hasClass(this.options.classes.open);
+      if ( !!force !== this._isOpen ) {
+
+        this._isOpen = !!force;
+
+        this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
+
+        this._trigger ( this._isOpen ? 'open' : 'close' );
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+    open () {
 
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+      this.toggle ( true );
 
+    }
 
-        if (!!force !== this._isOpen) {
+    close () {
 
-          this._isOpen = !!force;
+      this.toggle ( false );
 
-          this.$expander.toggleClass(this.options.classes.open, this._isOpen);
+    }
 
-          this._trigger(this._isOpen ? 'open' : 'close');
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        this.toggle(true);
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        this.toggle(false);
-      }
-    }]);
-
-    return Expander;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Expander, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+  Factory.init ( Expander, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Accordion
@@ -6068,13 +6095,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'accordion',
     plugin: true,
     selector: '.accordion',
@@ -6092,135 +6119,116 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ACCORDION */
 
-  var Accordion = function (_Widgets$Widget6) {
-    _inherits(Accordion, _Widgets$Widget6);
+  class Accordion extends Widgets.Widget {
 
-    function Accordion() {
-      _classCallCheck(this, Accordion);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Accordion).apply(this, arguments));
+    _variables () {
+
+      this.$accordion = this.$element;
+      this.$expanders = this.$accordion.children ( this.options.selectors.expander );
+
+      this.instances = this.$expanders.get ().map ( expander => $(expander).expander ( 'instance' ) );
+
     }
 
-    _createClass(Accordion, [{
-      key: '_variables',
+    _events () {
 
+      this.___open ();
+      this.___close ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* EXPANDER OPEN */
 
-        this.$accordion = this.$element;
-        this.$expanders = this.$accordion.children(this.options.selectors.expander);
+    ___open () {
 
-        this.instances = this.$expanders.get().map(function (expander) {
-          return $(expander).expander('instance');
-        });
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this._on ( true, this.$expanders, 'expander:open', this.__open );
 
-        this.___open();
-        this.___close();
-      }
+    }
 
-      /* EXPANDER OPEN */
+    __open ( event ) {
 
-    }, {
-      key: '___open',
-      value: function ___open() {
+      this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
 
-        this._on(true, this.$expanders, 'expander:open', this.__open);
-      }
-    }, {
-      key: '__open',
-      value: function __open(event) {
+      this.__multiple ( event.target );
 
-        this._trigger('open', { index: this.$expanders.index(event.target) });
+    }
 
-        this.__multiple(event.target);
-      }
+    /* EXPANDER CLOSE */
 
-      /* EXPANDER CLOSE */
+    ___close () {
 
-    }, {
-      key: '___close',
-      value: function ___close() {
+      this._on ( true, this.$expanders, 'expander:close', this.__close );
 
-        this._on(true, this.$expanders, 'expander:close', this.__close);
-      }
-    }, {
-      key: '__close',
-      value: function __close(event) {
+    }
 
-        this._trigger('close', { index: this.$expanders.index(event.target) });
-      }
+    __close ( event ) {
 
-      /* MULTIPLE */
+      this._trigger ( 'close', { index: this.$expanders.index ( event.target) } );
 
-    }, {
-      key: '__multiple',
-      value: function __multiple(expander) {
+    }
 
-        if (this.options.multiple) return;
+    /* MULTIPLE */
 
-        this.instances.forEach(function (instance) {
-          return instance.element !== expander ? instance.close() : false;
-        });
-      }
+    __multiple ( expander ) {
 
-      /* API OVERRIDES */
+      if ( this.options.multiple ) return;
 
-    }, {
-      key: 'enable',
-      value: function enable() {
+      this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
 
-        _get(Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
+    }
 
-        _.invokeMap(this.instances, 'enable');
-      }
-    }, {
-      key: 'disable',
-      value: function disable() {
+    /* API OVERRIDES */
 
-        _.invokeMap(this.instances, 'disable');
-      }
+    enable () {
 
-      /* API */
+      super.enable ();
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen(index) {
+      _.invokeMap ( this.instances, 'enable' );
 
-        return this.instances[index].isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(index, force) {
+    }
 
-        this.instances[index].toggle(force);
-      }
-    }, {
-      key: 'open',
-      value: function open(index) {
+    disable () {
 
-        this.toggle(index, true);
-      }
-    }, {
-      key: 'close',
-      value: function close(index) {
+      _.invokeMap ( this.instances, 'disable' );
 
-        this.toggle(index, false);
-      }
-    }]);
+    }
 
-    return Accordion;
-  }(Widgets.Widget);
+    /* API */
+
+    isOpen ( index ) {
+
+      return this.instances[index].isOpen ();
+
+    }
+
+    toggle ( index, force ) {
+
+      this.instances[index].toggle ( force );
+
+    }
+
+    open ( index ) {
+
+      this.toggle ( index, true );
+
+    }
+
+    close ( index ) {
+
+      this.toggle ( index, false );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Accordion, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Accordion, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Flickable
@@ -6231,13 +6239,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'flickable',
     plugin: true,
     selector: '.flickable',
@@ -6252,151 +6260,143 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLICKABLE */
 
-  var Flickable = function (_Widgets$Widget7) {
-    _inherits(Flickable, _Widgets$Widget7);
+  class Flickable extends Widgets.Widget {
 
-    function Flickable() {
-      _classCallCheck(this, Flickable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Flickable).apply(this, arguments));
+    _events () {
+
+      this.___down ();
+
     }
 
-    _createClass(Flickable, [{
-      key: '_events',
+    /* DOWN */
 
+    ___down () {
 
-      /* SPECIAL */
+      this._on ( Pointer.down, this.__down );
 
-      value: function _events() {
+    }
 
-        this.___down();
-      }
+    __down ( event ) {
 
-      /* DOWN */
+      this._startXY = $.eventXY ( event );
+      this._startTimestamp = event.timeStamp || Date.now ();
 
-    }, {
-      key: '___down',
-      value: function ___down() {
+      this._motion = false;
 
-        this._on(Pointer.down, this.__down);
-      }
-    }, {
-      key: '__down',
-      value: function __down(event) {
+      this.___move ();
+      this.___up ();
+      this.___cancel ();
 
-        this._startXY = $.eventXY(event);
-        this._startTimestamp = event.timeStamp || Date.now();
+    }
 
-        this._motion = false;
+    /* MOVE */
 
-        this.___move();
-        this.___up();
-        this.___cancel();
-      }
+    ___move () {
 
-      /* MOVE */
+      this._one ( true, this.$document, Pointer.move, this.__move );
 
-    }, {
-      key: '___move',
-      value: function ___move() {
+    }
 
-        this._one(true, this.$document, Pointer.move, this.__move);
-      }
-    }, {
-      key: '__move',
-      value: function __move() {
+    __move () {
 
-        this._motion = true;
-      }
+      this._motion = true;
 
-      /* UP */
+    }
 
-    }, {
-      key: '___up',
-      value: function ___up() {
+    /* UP */
 
-        this._one(true, this.$document, Pointer.up, this.__up);
-      }
-    }, {
-      key: '__up',
-      value: function __up(event) {
+    ___up () {
 
-        this._endTimestamp = event.timeStamp || Date.now();
+      this._one ( true, this.$document, Pointer.up, this.__up );
 
-        if (this._motion && this._endTimestamp - this._startTimestamp <= this.options.duration) {
+    }
 
-          var endXY = $.eventXY(event),
-              deltaXY = {
-            x: endXY.x - this._startXY.x,
-            y: endXY.y - this._startXY.y
-          },
-              absDeltaXY = {
-            x: Math.abs(deltaXY.x),
-            y: Math.abs(deltaXY.y)
-          };
+    __up ( event ) {
 
-          if (absDeltaXY.x >= this.options.threshold || absDeltaXY.y >= this.options.threshold) {
+      this._endTimestamp = event.timeStamp || Date.now ();
 
-            var orientation = void 0,
-                direction = void 0;
+      if ( this._motion && ( this._endTimestamp - this._startTimestamp <= this.options.duration ) ) {
 
-            if (absDeltaXY.x > absDeltaXY.y) {
+        let endXY = $.eventXY ( event ),
+            deltaXY = {
+              x: endXY.x - this._startXY.x,
+              y: endXY.y - this._startXY.y
+            },
+            absDeltaXY = {
+              x: Math.abs ( deltaXY.x ),
+              y: Math.abs ( deltaXY.y )
+            };
 
-              orientation = 'horizontal';
-              direction = deltaXY.x > 0 ? 'right' : 'left';
-            } else {
+        if ( absDeltaXY.x >= this.options.threshold || absDeltaXY.y >= this.options.threshold ) {
 
-              orientation = 'vertical';
-              direction = deltaXY.y > 0 ? 'bottom' : 'top';
-            }
+          let orientation,
+              direction;
 
-            this._trigger('flick', {
-              orientation: orientation,
-              direction: direction,
-              startEvent: this._startEvent,
-              startXY: this._startXY,
-              endEvent: event,
-              endXY: endXY
-            });
+          if ( absDeltaXY.x > absDeltaXY.y ) {
+
+            orientation = 'horizontal';
+            direction = ( deltaXY.x > 0 ) ? 'right' : 'left';
+
+          } else {
+
+            orientation = 'vertical';
+            direction = ( deltaXY.y > 0 ) ? 'bottom' : 'top';
+
           }
+
+          this._trigger ( 'flick', {
+            orientation: orientation,
+            direction: direction,
+            startEvent: this._startEvent,
+            startXY: this._startXY,
+            endEvent: event,
+            endXY: endXY
+          });
+
         }
 
-        if (!this._motion) {
-
-          this._off(this.$document, Pointer.move, this.__move);
-        }
-
-        this._off(this.$document, Pointer.cancel, this.__cancel);
       }
 
-      /* CANCEL */
+      if ( !this._motion ) {
 
-    }, {
-      key: '___cancel',
-      value: function ___cancel() {
+        this._off ( this.$document, Pointer.move, this.__move );
 
-        this._one(true, this.$document, Pointer.cancel, this.__cancel);
       }
-    }, {
-      key: '__cancel',
-      value: function __cancel() {
 
-        if (!this._motion) {
+      this._off ( this.$document, Pointer.cancel, this.__cancel );
 
-          this._off(this.$document, Pointer.move, this.__move);
-        }
+    }
 
-        this._off(this.$document, Pointer.up, this.__up);
+    /* CANCEL */
+
+    ___cancel () {
+
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+
+    }
+
+    __cancel () {
+
+      if ( !this._motion ) {
+
+        this._off ( this.$document, Pointer.move, this.__move );
+
       }
-    }]);
 
-    return Flickable;
-  }(Widgets.Widget);
+      this._off ( this.$document, Pointer.up, this.__up );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Flickable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Flickable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Flippable
@@ -6407,13 +6407,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'flippable',
     plugin: true,
     selector: '.flippable',
@@ -6430,72 +6430,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLIPPABLE */
 
-  var Flippable = function (_Widgets$Widget8) {
-    _inherits(Flippable, _Widgets$Widget8);
+  class Flippable extends Widgets.Widget {
 
-    function Flippable() {
-      _classCallCheck(this, Flippable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Flippable).apply(this, arguments));
+    _variables () {
+
+      this.$flippable = this.$element;
+
+      this._isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
+
     }
 
-    _createClass(Flippable, [{
-      key: '_variables',
+    /* API */
 
+    isFlipped () {
 
-      /* SPECIAL */
+      return this._isFlipped;
 
-      value: function _variables() {
+    }
 
-        this.$flippable = this.$element;
+    flip ( force = !this._isFlipped ) {
 
-        this._isFlipped = this.$flippable.hasClass(this.options.classes.flip);
+      if ( !!force !== this._isFlipped ) {
+
+        this._isFlipped = force;
+
+        this.$flippable.toggleClass ( this.options.classes.flip, this._isFlipped );
+
+        this._trigger ( this._isFlipped ? 'back' : 'front' );
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'isFlipped',
-      value: function isFlipped() {
+    front () {
 
-        return this._isFlipped;
-      }
-    }, {
-      key: 'flip',
-      value: function flip() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isFlipped : arguments[0];
+      this.flip ( false );
 
+    }
 
-        if (!!force !== this._isFlipped) {
+    back () {
 
-          this._isFlipped = force;
+      this.flip ( true );
 
-          this.$flippable.toggleClass(this.options.classes.flip, this._isFlipped);
+    }
 
-          this._trigger(this._isFlipped ? 'back' : 'front');
-        }
-      }
-    }, {
-      key: 'front',
-      value: function front() {
-
-        this.flip(false);
-      }
-    }, {
-      key: 'back',
-      value: function back() {
-
-        this.flip(true);
-      }
-    }]);
-
-    return Flippable;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Flippable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Flippable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Form Sync
@@ -6508,13 +6496,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'formSync',
     plugin: true,
     selector: 'form[data-sync-group]',
@@ -6539,125 +6527,95 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM SYNC */
 
-  var FormSync = function (_Widgets$Widget9) {
-    _inherits(FormSync, _Widgets$Widget9);
+  class FormSync extends Widgets.Widget {
 
-    function FormSync() {
-      _classCallCheck(this, FormSync);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(FormSync).apply(this, arguments));
+    _variables () {
+
+      this.$form = this.$element;
+      this.$elements = this.$form.find ( this.options.selectors.elements );
+
+      this.group = this.$form.data ( this.options.datas.group );
+
     }
 
-    _createClass(FormSync, [{
-      key: '_variables',
+    _events () {
 
+      this.___change ();
+      this.___input ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* CHANGE */
 
-        this.$form = this.$element;
-        this.$elements = this.$form.find(this.options.selectors.elements);
+    ___change () {
 
-        this.group = this.$form.data(this.options.datas.group);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this._on ( true, this.$elements, 'change', this._debounce ( this.__sync, 100 ) );
 
-        this.___change();
-        this.___input();
-      }
+    }
 
-      /* CHANGE */
+    /* INPUT */
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    ___input () {
 
-        this._on(true, this.$elements, 'change', this._debounce(this.__sync, 100));
+      if ( this.options.live ) {
+
+        let $textfields = this.$elements.filter ( this.options.selectors.textfield );
+
+        this._on ( true, $textfields, 'input', this._debounce ( this.__sync, 100 ) );
+
       }
 
-      /* INPUT */
+    }
 
-    }, {
-      key: '___input',
-      value: function ___input() {
+    /* SYNC */
 
-        if (this.options.live) {
+    __sync ( event, data ) {
 
-          var $textfields = this.$elements.filter(this.options.selectors.textfield);
+      if ( data && data._formSynced === this.group ) return;
 
-          this._on(true, $textfields, 'input', this._debounce(this.__sync, 100));
+      let $element = $(event.target),
+          name = $element.attr ( this.options.attributes.name ),
+          $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
+
+      if ( !$otherElements.length ) return;
+
+      let value = $element.val (),
+          checked = !!$element.prop ( 'checked' );
+
+      for ( let otherElement of $otherElements ) {
+
+        let $otherElement = $(otherElement),
+            otherValue = $otherElement.val (),
+            otherChecked = !!$otherElement.prop ( 'checked' );
+
+        if ( value === otherValue && checked === otherChecked ) continue;
+
+        if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
+
+        if ( $element.is ( this.options.selectors.checkable ) ) {
+
+          $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _formSynced: this.group } );
+
+        } else {
+
+          $otherElement.val ( value ).trigger ( 'change', { _formSynced: this.group } );
+
         }
+
       }
 
-      /* SYNC */
+    }
 
-    }, {
-      key: '__sync',
-      value: function __sync(event, data) {
-
-        if (data && data._formSynced === this.group) return;
-
-        var $element = $(event.target),
-            name = $element.attr(this.options.attributes.name),
-            $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not(this.$form).find('[' + this.options.attributes.name + '="' + name + '"]').not($element);
-
-        if (!$otherElements.length) return;
-
-        var value = $element.val(),
-            checked = !!$element.prop('checked');
-
-        var _iteratorNormalCompletion10 = true;
-        var _didIteratorError10 = false;
-        var _iteratorError10 = undefined;
-
-        try {
-          for (var _iterator10 = $otherElements[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-            var otherElement = _step10.value;
-
-
-            var $otherElement = $(otherElement),
-                otherValue = $otherElement.val(),
-                otherChecked = !!$otherElement.prop('checked');
-
-            if (value === otherValue && checked === otherChecked) continue;
-
-            if ($element.is(this.options.selectors.radio) && (value !== otherValue || checked === otherChecked)) continue;
-
-            if ($element.is(this.options.selectors.checkable)) {
-
-              $otherElement.prop('checked', checked).trigger('change', { _formSynced: this.group });
-            } else {
-
-              $otherElement.val(value).trigger('change', { _formSynced: this.group });
-            }
-          }
-        } catch (err) {
-          _didIteratorError10 = true;
-          _iteratorError10 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion10 && _iterator10.return) {
-              _iterator10.return();
-            }
-          } finally {
-            if (_didIteratorError10) {
-              throw _iteratorError10;
-            }
-          }
-        }
-      }
-    }]);
-
-    return FormSync;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(FormSync, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( FormSync, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Infobar
@@ -6668,13 +6626,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'infobar',
     plugin: true,
     selector: '.infobar',
@@ -6687,45 +6645,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR */
 
-  var Infobar = function (_Widgets$Widget10) {
-    _inherits(Infobar, _Widgets$Widget10);
+  class Infobar extends Widgets.Widget {
 
-    function Infobar() {
-      _classCallCheck(this, Infobar);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Infobar).apply(this, arguments));
+    _variables () {
+
+      this.$infobar = this.$element;
+
     }
 
-    _createClass(Infobar, [{
-      key: '_variables',
+    /* API */
 
+    close () {
 
-      /* SPECIAL */
+      this.$infobar.detach ();
 
-      value: function _variables() {
+      this._trigger ( 'close' );
 
-        this.$infobar = this.$element;
-      }
+    }
 
-      /* API */
-
-    }, {
-      key: 'close',
-      value: function close() {
-
-        this.$infobar.detach();
-
-        this._trigger('close');
-      }
-    }]);
-
-    return Infobar;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Infobar, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Infobar, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Input - Autogrow
@@ -6739,13 +6686,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // It supports only `box-sizing: border-box` inputs
 
-(function ($, _, Svelto, Widgets, Factory, Browser) {
+(function ( $, _, Svelto, Widgets, Factory, Browser ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'inputAutogrow',
     plugin: true,
     selector: 'input.autogrow',
@@ -6759,109 +6706,96 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT AUTOGROW */
 
-  var InputAutogrow = function (_Widgets$Widget11) {
-    _inherits(InputAutogrow, _Widgets$Widget11);
+  class InputAutogrow extends Widgets.Widget {
 
-    function InputAutogrow() {
-      _classCallCheck(this, InputAutogrow);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(InputAutogrow).apply(this, arguments));
+    static widgetize ( $input ) {
+
+      /* SKIP IE/EDGE */
+
+      //FIXME: input.scrollWidth is not supported by them, find another reliable way of implementing it
+
+      if ( Browser.is.ie || Browser.is.edge ) return;
+
+      /* WIDGETIZE */
+
+      $input.inputAutogrow ();
+
     }
 
-    _createClass(InputAutogrow, [{
-      key: '_variables',
-      value: function _variables() {
+    _variables () {
 
-        this.$input = this.$element;
+      this.$input = this.$element;
 
-        this.$tempInput = $('<input>').css({
-          'position': 'fixed',
-          'visibility': 'hidden',
-          'padding': 0,
-          'min-width': 0,
-          'width': 0
-        });
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+      this.$tempInput = $('<input>').css ({
+                          'position': 'fixed',
+                          'visibility': 'hidden',
+                          'padding': 0,
+                          'min-width': 0,
+                          'width': 0
+                        });
 
-        this._update();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    }
 
-        this.___inputChange();
-      }
+    _init () {
 
-      /* PRIVATE */
+      this._update ();
 
-    }, {
-      key: '_getNeededWidth',
-      value: function _getNeededWidth() {
+    }
 
-        this.$tempInput.css('font', this.$input.css('font')).val(this.$input.val()).appendTo(this.$layout);
+    _events () {
 
-        var width = this.$tempInput[0].scrollWidth;
+      this.___inputChange ();
 
-        this.$tempInput.detach();
+    }
 
-        return Math.max(this.options.minWidth, width);
-      }
+    /* PRIVATE */
 
-      /* INPUT / CHANGE */
+    _getNeededWidth () {
 
-    }, {
-      key: '___inputChange',
-      value: function ___inputChange() {
+      this.$tempInput.css ( 'font', this.$input.css ( 'font' ) ).val ( this.$input.val () ).appendTo ( this.$layout );
 
-        this._on(true, 'input change', this._update);
-      }
+      let width = this.$tempInput[0].scrollWidth;
 
-      /* UPDATE */
+      this.$tempInput.detach ();
 
-    }, {
-      key: '_update',
-      value: function _update() {
+      return Math.max ( this.options.minWidth, width );
 
-        var width = this._getNeededWidth();
+    }
 
-        if (width === this._prevWidth) return;
+    /* INPUT / CHANGE */
 
-        this._prevWidth = width;
+    ___inputChange () {
 
-        this.$input.width(width);
+      this._on ( true, 'input change', this._update );
 
-        this._trigger('change');
-      }
-    }], [{
-      key: 'widgetize',
+    }
 
+    /* UPDATE */
 
-      /* SPECIAL */
+    _update () {
 
-      value: function widgetize($input) {
+      let width = this._getNeededWidth ();
 
-        /* SKIP IE/EDGE */
+      if ( width === this._prevWidth ) return;
 
-        //FIXME: input.scrollWidth is not supported by them, find another reliable way of implementing it
+      this._prevWidth = width;
 
-        if (Browser.is.ie || Browser.is.edge) return;
+      this.$input.width ( width );
 
-        /* WIDGETIZE */
+      this._trigger ( 'change' );
 
-        $input.inputAutogrow();
-      }
-    }]);
+    }
 
-    return InputAutogrow;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(InputAutogrow, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser);
+  Factory.init ( InputAutogrow, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Input - File - Names
@@ -6872,13 +6806,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'inputFileNames',
     plugin: true,
     selector: '.input-file-names',
@@ -6892,100 +6826,88 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT FILE NAMES */
 
-  var InputFileNames = function (_Widgets$Widget12) {
-    _inherits(InputFileNames, _Widgets$Widget12);
+  class InputFileNames extends Widgets.Widget {
 
-    function InputFileNames() {
-      _classCallCheck(this, InputFileNames);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(InputFileNames).apply(this, arguments));
+    _variables () {
+
+      this.$names = this.$element;
+
+      this.$input = this.$names.closest ( 'label' ).find ( 'input[type="file"]' );
+      this.input = this.$input[0];
+
     }
 
-    _createClass(InputFileNames, [{
-      key: '_variables',
+    _init () {
 
+      this.options.placeholder = this.$names.text () || this.options.placeholder;
 
-      /* SPECIAL */
+      this._update ();
 
-      value: function _variables() {
+    }
 
-        this.$names = this.$element;
+    _events () {
 
-        this.$input = this.$names.closest('label').find('input[type="file"]');
-        this.input = this.$input[0];
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+      this.___change ();
 
-        this.options.placeholder = this.$names.text() || this.options.placeholder;
+    }
 
-        this._update();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    /* PRIVATE */
 
-        this.___change();
+    _getNames () {
+
+      let names = [];
+
+      for ( let i = 0, l = this.input.files.length; i < l; i++ ) {
+
+        names.push ( this.input.files[i].name );
+
       }
 
-      /* PRIVATE */
+      return names;
 
-    }, {
-      key: '_getNames',
-      value: function _getNames() {
+    }
 
-        var names = [];
+    _getText () {
 
-        for (var i = 0, l = this.input.files.length; i < l; i++) {
+      let names = this._getNames ();
 
-          names.push(this.input.files[i].name);
-        }
+      return names.length ? names.join ( ', ' ) : this.options.placeholder;
 
-        return names;
-      }
-    }, {
-      key: '_getText',
-      value: function _getText() {
+    }
 
-        var names = this._getNames();
+    /* CHANGE */
 
-        return names.length ? names.join(', ') : this.options.placeholder;
-      }
+    ___change () {
 
-      /* CHANGE */
+      this._on ( true, this.$input, 'change', this._update );
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    }
 
-        this._on(true, this.$input, 'change', this._update);
-      }
+    /* UPDATE */
 
-      /* UPDATE */
+    _update () {
 
-    }, {
-      key: '_update',
-      value: function _update() {
+      let previous = this.$names.text (),
+          current = this._getText ();
 
-        var previous = this.$names.text(),
-            current = this._getText();
+      if ( previous === current ) return;
 
-        if (previous === current) return;
+      this.$names.text ( current );
 
-        this.$names.text(current);
+      this._trigger ( 'change' );
 
-        this._trigger('change');
-      }
-    }]);
+    }
 
-    return InputFileNames;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(InputFileNames, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( InputFileNames, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Modal
@@ -6999,13 +6921,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'modal',
     plugin: true,
     selector: '.modal',
@@ -7026,7 +6948,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         'esc': 'close'
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -7034,165 +6958,161 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL */
 
-  var Modal = function (_Widgets$Widget13) {
-    _inherits(Modal, _Widgets$Widget13);
+  class Modal extends Widgets.Widget {
 
-    function Modal() {
-      _classCallCheck(this, Modal);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Modal).apply(this, arguments));
+    _variables () {
+
+      this.$modal = this.$element;
+      this.modal = this.element;
+
+      this.$backdrop = this.$html;
+
+      this._isOpen = this.$modal.hasClass ( this.options.classes.open );
+
     }
 
-    _createClass(Modal, [{
-      key: '_variables',
+    _events () {
 
+      if ( this._isOpen ) {
 
-      /* SPECIAL */
+        this.___keydown ();
+        this.___tap ();
+        this.___route ();
 
-      value: function _variables() {
-
-        this.$modal = this.$element;
-        this.modal = this.element;
-
-        this.$backdrop = this.$html;
-
-        this._isOpen = this.$modal.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-          this.___tap();
-          this.___route();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
       }
 
-      /* TAP */
+    }
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+    _destroy () {
 
-        this._on(true, this.$html, Pointer.tap, this.__tap);
+      this.close ();
+
+    }
+
+    /* TAP */
+
+    ___tap () {
+
+      this._on ( true, this.$html, Pointer.tap, this.__tap );
+
+    }
+
+    __tap ( event ) {
+
+      if ( this._lock || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
+
+      this.close ();
+
+    }
+
+    /* ROUTE */
+
+    __route () {
+
+      if ( this._isOpen && !this.$modal.isAttached () ) {
+
+        this.close ();
+
       }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
 
-        if (this._lock || $(event.target).closest(this.$modal).length) return;
+    }
 
-        this.close();
+    /* API */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force = !this._isOpen ) {
+
+      if ( !!force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
       }
 
-      /* ROUTE */
+    }
 
-    }, {
-      key: '__route',
-      value: function __route() {
+    open () {
 
-        if (this._isOpen && !this.$modal.isAttached()) {
+      if ( this._lock || this._isOpen ) return;
 
-          this.close();
-        }
-      }
+      this._lock = true;
+      this._isOpen = true;
 
-      /* API */
+      this._trigger ( 'beforeopen' );
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+      this.$layout.disableScroll ();
 
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+      this._frame ( function () {
 
+        this.$modal.addClass ( this.options.classes.show );
+        this.$backdrop.addClass ( this.options.classes.backdrop.show );
 
-        if (!!force !== this._isOpen) {
+        this._frame ( function () {
 
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
+          this.$modal.addClass ( this.options.classes.open );
+          this.$backdrop.addClass ( this.options.classes.backdrop.open );
 
-        if (this._lock || this._isOpen) return;
+          this._lock = false;
 
-        this._lock = true;
-        this._isOpen = true;
+          this._trigger ( 'open' );
 
-        this.$layout.disableScroll();
-
-        this._frame(function () {
-
-          this.$modal.addClass(this.options.classes.show);
-          this.$backdrop.addClass(this.options.classes.backdrop.show);
-
-          this._frame(function () {
-
-            this.$modal.addClass(this.options.classes.open);
-            this.$backdrop.addClass(this.options.classes.backdrop.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
         });
 
-        this.___keydown();
-        this.___tap();
-        this.___route();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
+      });
 
-        if (this.lock || !this._isOpen) return;
+      this.___keydown ();
+      this.___tap ();
+      this.___route ();
 
-        this._lock = true;
-        this._isOpen = false;
+    }
 
-        this._frame(function () {
+    close () {
 
-          this.$modal.removeClass(this.options.classes.open);
-          this.$backdrop.removeClass(this.options.classes.backdrop.open);
+      if ( this.lock || !this._isOpen ) return;
 
-          this._delay(function () {
+      this._lock = true;
+      this._isOpen = false;
 
-            this.$modal.removeClass(this.options.classes.show);
-            this.$backdrop.removeClass(this.options.classes.backdrop.show);
+      this._trigger ( 'beforeclose' );
 
-            this.$layout.enableScroll();
+      this._frame ( function () {
 
-            this._lock = false;
+        this.$modal.removeClass ( this.options.classes.open );
+        this.$backdrop.removeClass ( this.options.classes.backdrop.open );
 
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
+        this._delay ( function () {
 
-        this._reset();
-      }
-    }]);
+          this.$modal.removeClass ( this.options.classes.show );
+          this.$backdrop.removeClass ( this.options.classes.backdrop.show );
 
-    return Modal;
-  }(Widgets.Widget);
+          this.$layout.enableScroll ();
+
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
+        }, this.options.animations.close );
+
+      });
+
+      this._reset ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Modal, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
+  Factory.init ( Modal, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Numbox
@@ -7203,13 +7123,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'numbox',
     plugin: true,
     selector: '.numbox',
@@ -7240,208 +7160,196 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NUMBOX */
 
-  var Numbox = function (_Widgets$Widget14) {
-    _inherits(Numbox, _Widgets$Widget14);
+  class Numbox extends Widgets.Widget {
 
-    function Numbox() {
-      _classCallCheck(this, Numbox);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Numbox).apply(this, arguments));
+    _variables () {
+
+      this.$numbox = this.$element;
+      this.$input = this.$numbox.find ( this.options.selectors.input );
+      this.$decreaser = this.$numbox.find ( this.options.selectors.decreaser );
+      this.$increaser = this.$numbox.find ( this.options.selectors.increaser );
+
+      this._prevValue = false;
+
     }
 
-    _createClass(Numbox, [{
-      key: '_variables',
+    _init () {
 
+      /* VARIABLES */
 
-      /* SPECIAL */
+      let value = this.$input.val ();
 
-      value: function _variables() {
+      /* OPTIONS */
 
-        this.$numbox = this.$element;
-        this.$input = this.$numbox.find(this.options.selectors.input);
-        this.$decreaser = this.$numbox.find(this.options.selectors.decreaser);
-        this.$increaser = this.$numbox.find(this.options.selectors.increaser);
-
-        this._prevValue = false;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        /* VARIABLES */
-
-        var value = this.$input.val();
-
-        /* OPTIONS */
-
-        this.options.min = Number(this.$numbox.data(this.options.datas.min) || this.options.min);
-        this.options.max = Number(this.$numbox.data(this.options.datas.max) || this.options.max);
-        this.options.step = Number(this.$numbox.data(this.options.datas.step) || this.options.step);
-        this.options.value = this._sanitizeValue(value || this.options.value);
-
-        /* UPDATE */
-
-        if (Number(value) !== this.options.value) {
-
-          this._update();
-        } else {
-
-          this._updateButtons();
-        }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___inputChange();
-
-        this.___keydown();
-
-        this.___increaser();
-        this.___decreaser();
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_sanitizeValue',
-      value: function _sanitizeValue(value) {
-
-        value = Number(value);
-
-        value = _.isNaN(value) ? 0 : _.roundCloser(value, this.options.step);
-
-        return _.clamp(value, this.options.min, this.options.max);
-      }
-
-      /* INPUT / CHANGE */
-
-    }, {
-      key: '___inputChange',
-      value: function ___inputChange() {
-
-        this._on(true, this.$input, 'input change', this.__inputChange);
-      }
-    }, {
-      key: '__inputChange',
-      value: function __inputChange() {
-
-        this.set(this.$input.val());
-      }
-
-      /* KEYDOWN */
-
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
-
-        this._onHover([this.$document, 'keydown', this.__keydown]);
-      }
-
-      /* INCREASER */
-
-    }, {
-      key: '___increaser',
-      value: function ___increaser() {
-
-        this._on(this.$decreaser, Pointer.tap, this.decrease);
-      }
-
-      /* DECREASER */
-
-    }, {
-      key: '___decreaser',
-      value: function ___decreaser() {
-
-        this._on(this.$increaser, Pointer.tap, this.increase);
-      }
+      this.options.min = Number ( this.$numbox.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$numbox.data ( this.options.datas.max ) || this.options.max );
+      this.options.step = Number ( this.$numbox.data ( this.options.datas.step ) || this.options.step );
+      this.options.value = this._sanitizeValue ( value || this.options.value );
 
       /* UPDATE */
 
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
+      if ( Number ( value ) !== this.options.value ) {
 
-        this.$input.val(this.options.value).trigger('change');
-      }
-    }, {
-      key: '_updateButtons',
-      value: function _updateButtons() {
+        this._update ();
 
-        var isMin = this.options.value === this.options.min,
-            isMax = this.options.value === this.options.max;
+      } else {
 
-        this.$decreaser.toggleClass(this.options.classes.disabled, isMin);
-        this.$increaser.toggleClass(this.options.classes.disabled, isMax);
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
+        this._updateButtons ();
 
-        this._updateInput();
-        this._updateButtons();
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'get',
-      value: function get() {
+    _events () {
 
-        return this.options.value;
-      }
-    }, {
-      key: 'set',
-      value: function set(value) {
+      this.___inputChange ();
 
-        value = Number(value);
+      this.___keydown ();
 
-        if (!_.isNaN(value)) {
+      this.___increaser ();
+      this.___decreaser ();
 
-          value = this._sanitizeValue(value);
+    }
 
-          if (value !== this.options.value) {
+    /* PRIVATE */
 
-            this._prevValue = this.options.value;
+    _sanitizeValue ( value ) {
 
-            this.options.value = value;
+      value = Number ( value );
 
-            this._update();
+      value = _.isNaN ( value ) ? 0 : _.roundCloser ( value, this.options.step );
 
-            this._trigger('change');
+      return _.clamp ( value, this.options.min, this.options.max );
 
-            return;
-          }
+    }
+
+    /* INPUT / CHANGE */
+
+    ___inputChange () {
+
+      this._on ( true, this.$input, 'input change', this.__inputChange );
+
+    }
+
+    __inputChange () {
+
+      this.set ( this.$input.val () );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* INCREASER */
+
+    ___increaser () {
+
+      this._on ( this.$decreaser, Pointer.tap, this.decrease );
+
+    }
+
+    /* DECREASER */
+
+    ___decreaser () {
+
+      this._on ( this.$increaser, Pointer.tap, this.increase );
+
+    }
+
+    /* UPDATE */
+
+    _updateInput () {
+
+      this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _updateButtons () {
+
+      let isMin = ( this.options.value === this.options.min ),
+          isMax = ( this.options.value === this.options.max );
+
+      this.$decreaser.toggleClass ( this.options.classes.disabled, isMin );
+      this.$increaser.toggleClass ( this.options.classes.disabled, isMax );
+
+    }
+
+    _update () {
+
+      this._updateInput ();
+      this._updateButtons ();
+
+    }
+
+    /* API */
+
+    get () {
+
+      return this.options.value;
+
+    }
+
+    set ( value ) {
+
+      value = Number ( value );
+
+      if ( !_.isNaN ( value ) ) {
+
+        value = this._sanitizeValue ( value );
+
+        if ( value !== this.options.value ) {
+
+          this._prevValue = this.options.value;
+
+          this.options.value = value;
+
+          this._update ();
+
+          this._trigger ( 'change' );
+
+          return;
+
         }
 
-        /* RESETTING IF WE ALTERED THE INPUT VALUE */
-
-        if (this.$input.val() !== String(this.options.value)) {
-
-          this._updateInput();
-        }
       }
-    }, {
-      key: 'increase',
-      value: function increase() {
 
-        this.set(this.options.value + this.options.step);
+      /* RESETTING IF WE ALTERED THE INPUT VALUE */
+
+      if ( this.$input.val () !== String ( this.options.value ) ) {
+
+        this._updateInput ();
+
       }
-    }, {
-      key: 'decrease',
-      value: function decrease() {
 
-        this.set(this.options.value - this.options.step);
-      }
-    }]);
+    }
 
-    return Numbox;
-  }(Widgets.Widget);
+    increase () {
+
+      this.set ( this.options.value + this.options.step );
+
+    }
+
+    decrease () {
+
+      this.set ( this.options.value - this.options.step );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Numbox, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Numbox, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Overlay
@@ -7453,13 +7361,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'overlay',
     plugin: true,
     selector: '.overlay',
@@ -7488,148 +7396,140 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY */
 
-  var Overlay = function (_Widgets$Widget15) {
-    _inherits(Overlay, _Widgets$Widget15);
+  class Overlay extends Widgets.Widget {
 
-    function Overlay() {
-      _classCallCheck(this, Overlay);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Overlay).apply(this, arguments));
+    _variables () {
+
+      this.$overlay = this.$element;
+
+      this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
+
     }
 
-    _createClass(Overlay, [{
-      key: '_variables',
+    _events () {
 
+      if ( this._isOpen ) {
 
-      /* SPECIAL */
+        this.___keydown ();
 
-      value: function _variables() {
-
-        this.$overlay = this.$element;
-
-        this._isOpen = this.$overlay.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
       }
 
-      /* PARENT */
+    }
 
-    }, {
-      key: '_getParent',
-      value: function _getParent() {
+    _destroy () {
 
-        if (!this.$parent) {
+      this.close ();
 
-          this.$parent = this.$overlay.parent();
-        }
+    }
 
-        return this.$parent;
+    /* PARENT */
+
+    _getParent () {
+
+      if ( !this.$parent ) {
+
+        this.$parent = this.$overlay.parent ();
+
       }
 
-      /* KEYDOWN */
+      return this.$parent;
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    }
 
-        this._onHover(true, [this.$document, 'keydown', this.__keydown]); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( true, [this.$document, 'keydown', this.__keydown] ); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+
+    }
+
+    /* API */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force = !this._isOpen ) {
+
+      if ( !!force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+    open () {
 
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+      if ( this._lock || this._isOpen ) return;
 
+      this._lock = true;
+      this._isOpen = true;
 
-        if (!!force !== this._isOpen) {
+      this._frame ( function () {
 
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
+        this.$overlay.addClass ( this.options.classes.show );
+        this._getParent ().addClass ( this.options.classes.parent.show );
 
-        if (this._lock || this._isOpen) return;
+        this._frame ( function () {
 
-        this._lock = true;
-        this._isOpen = true;
+          this.$overlay.addClass ( this.options.classes.open );
+          this._getParent ().addClass ( this.options.classes.parent.open );
 
-        this._frame(function () {
+          this._lock = false;
 
-          this.$overlay.addClass(this.options.classes.show);
-          this._getParent().addClass(this.options.classes.parent.show);
+          this._trigger ( 'open' );
 
-          this._frame(function () {
-
-            this.$overlay.addClass(this.options.classes.open);
-            this._getParent().addClass(this.options.classes.parent.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
         });
 
-        this.___keydown();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
+      });
 
-        if (this._lock || !this._isOpen) return;
+      this.___keydown ();
 
-        this._lock = true;
-        this._isOpen = false;
+    }
 
-        this._frame(function () {
+    close () {
 
-          this.$overlay.removeClass(this.options.classes.open);
-          this._getParent().removeClass(this.options.classes.parent.open);
+      if ( this._lock || !this._isOpen ) return;
 
-          this._delay(function () {
+      this._lock = true;
+      this._isOpen = false;
 
-            this.$overlay.removeClass(this.options.classes.show);
-            this._getParent().removeClass(this.options.classes.parent.show);
+      this._frame ( function () {
 
-            this._lock = false;
+        this.$overlay.removeClass ( this.options.classes.open );
+        this._getParent ().removeClass ( this.options.classes.parent.open );
 
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
+        this._delay ( function () {
 
-        this._reset();
-      }
-    }]);
+          this.$overlay.removeClass ( this.options.classes.show );
+          this._getParent ().removeClass ( this.options.classes.parent.show );
 
-    return Overlay;
-  }(Widgets.Widget);
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
+        }, this.options.animations.close );
+
+      });
+
+      this._reset ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Overlay, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+  Factory.init ( Overlay, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Spinner - Overlay
@@ -7641,17 +7541,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/overlay/overlay.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Colors) {
+(function ( $, _, Svelto, Widgets, Factory, Colors ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'spinnerOverlay',
     plugin: true,
     templates: {
-      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' + '<% if ( o.labeled ) { %>' + '<div class="spinner-label <%= o.colors.labeled %>">' + '<% } %>' + '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '<% if ( o.labeled ) { %>' + '</div>' + '<% } %>' + '</div>'
+      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' +
+                 '<% if ( o.labeled ) { %>' +
+                   '<div class="spinner-label <%= o.colors.labeled %>">' +
+                 '<% } %>' +
+                   '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' +
+                     '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
+                   '</svg>' +
+                 '<% if ( o.labeled ) { %>' +
+                   '</div>' +
+                 '<% } %>' +
+               '</div>'
     },
     options: {
       labeled: true,
@@ -7670,88 +7580,77 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SPINNER OVERLAY */
 
-  var SpinnerOverlay = function (_Widgets$Widget16) {
-    _inherits(SpinnerOverlay, _Widgets$Widget16);
+  class SpinnerOverlay extends Widgets.Widget {
 
-    function SpinnerOverlay() {
-      _classCallCheck(this, SpinnerOverlay);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(SpinnerOverlay).apply(this, arguments));
+    _variables () {
+
+      this.$overlayed = this.$element;
+      this.$overlay = $(this._template ( 'overlay', this.options ));
+
+      this.instance = this.$overlay.overlay ( 'instance' );
+
     }
 
-    _createClass(SpinnerOverlay, [{
-      key: '_variables',
+    /* API */
 
+    isOpen () {
 
-      /* SPECIAL */
+      return this.instance.isOpen ();
 
-      value: function _variables() {
+    }
 
-        this.$overlayed = this.$element;
-        this.$overlay = $(this._template('overlay', this.options));
+    toggle ( force = !this.isOpen () ) {
 
-        this.instance = this.$overlay.overlay('instance');
+      if ( !!force !== this.isOpen () ) {
+
+        this[force ? 'open' : 'close']();
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+    open () {
 
-        return this.instance.isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this.isOpen() : arguments[0];
+      if ( this._lock || this.isOpen () ) return;
 
+      this.$overlay.prependTo ( this.$overlayed );
 
-        if (!!force !== this.isOpen()) {
+      this.instance.open ();
 
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
+      this._trigger ( 'open' );
 
-        if (this._lock || this.isOpen()) return;
+    }
 
-        this.$overlay.prependTo(this.$overlayed);
+    close () {
 
-        this.instance.open();
+      if ( this._lock || !this.isOpen () ) return;
 
-        this._trigger('open');
-      }
-    }, {
-      key: 'close',
-      value: function close() {
+      this._lock = true;
 
-        if (this._lock || !this.isOpen()) return;
+      this.instance.close ();
 
-        this._lock = true;
+      this._delay ( function () {
 
-        this.instance.close();
+        this.$overlay.detach ();
 
-        this._delay(function () {
+        this._lock = false;
 
-          this.$overlay.detach();
+        this._trigger ( 'close' );
 
-          this._lock = false;
+      }, Widgets.Overlay.config.options.animations.close );
 
-          this._trigger('close');
-        }, Widgets.Overlay.config.options.animations.close);
-      }
-    }]);
+    }
 
-    return SpinnerOverlay;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(SpinnerOverlay, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
+  Factory.init ( SpinnerOverlay, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));
+
 
 /* =========================================================================
 * Svelto - Widgets - Progressbar
@@ -7762,18 +7661,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 * @require core/widget/widget.js
 * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'progressbar',
     plugin: true,
     selector: '.progressbar',
     templates: {
-      base: '<div class="progressbar <%= o.striped ? "striped" : "" %> <%= o.indeterminate ? "indeterminate" : "" %> <%= o.labeled ? "labeled" : "" %> <%= o.colors.off %> <%= o.size %> <%= o.css %>">' + '<div class="progressbar-highlight <%= o.colors.on %>"></div>' + '</div>'
+      base: '<div class="progressbar <%= o.striped ? "striped" : "" %> <%= o.indeterminate ? "indeterminate" : "" %> <%= o.labeled ? "labeled" : "" %> <%= o.colors.off %> <%= o.size %> <%= o.css %>">' +
+              '<div class="progressbar-highlight <%= o.colors.on %>"></div>' +
+            '</div>'
     },
     options: {
       value: 0, // Percentage
@@ -7804,118 +7705,107 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PROGRESSBAR */
 
-  var Progressbar = function (_Widgets$Widget17) {
-    _inherits(Progressbar, _Widgets$Widget17);
+  class Progressbar extends Widgets.Widget {
 
-    function Progressbar() {
-      _classCallCheck(this, Progressbar);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Progressbar).apply(this, arguments));
+    _variables () {
+
+      this.$progressbar = this.$element;
+      this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
+
     }
 
-    _createClass(Progressbar, [{
-      key: '_variables',
+    _init () {
 
+      /* OPTIONS */
 
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$progressbar = this.$element;
-        this.$highlight = this.$progressbar.find(this.options.selectors.highlight);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        /* OPTIONS */
-
-        this.options.value = this._sanitizeValue(this.$progressbar.data(this.options.datas.value) || this.options.value);
-        this.options.decimals = Number(this.$progressbar.data(this.options.datas.decimals) || this.options.decimals);
-
-        /* UPDATE */
-
-        this._update();
-      }
-
-      /* VALUE */
-
-    }, {
-      key: '_sanitizeValue',
-      value: function _sanitizeValue(value) {
-
-        var nr = Number(value);
-
-        return _.clamp(_.isNaN(nr) ? 0 : nr, 0, 100);
-      }
-    }, {
-      key: '_roundValue',
-      value: function _roundValue(value) {
-
-        return Number(value.toFixed(this.options.decimals));
-      }
+      this.options.value = this._sanitizeValue ( this.$progressbar.data ( this.options.datas.value ) || this.options.value );
+      this.options.decimals = Number ( this.$progressbar.data ( this.options.datas.decimals ) || this.options.decimals );
 
       /* UPDATE */
 
-    }, {
-      key: '_updateWidth',
-      value: function _updateWidth() {
+      this._update ();
 
-        this.$highlight.css('min-width', this.options.value + '%');
+    }
+
+    /* VALUE */
+
+    _sanitizeValue ( value ) {
+
+      let nr = Number ( value );
+
+      return _.clamp ( _.isNaN ( nr ) ? 0 : nr, 0, 100 );
+
+    }
+
+    _roundValue ( value ) {
+
+      return Number ( value.toFixed ( this.options.decimals ) );
+
+    }
+
+    /* UPDATE */
+
+    _updateWidth () {
+
+      this.$highlight.css ( 'min-width', this.options.value + '%' );
+
+    }
+
+    _updateLabel () {
+
+      this.$highlight.attr ( `data-${this.options.datas.value}`, this._roundValue ( this.options.value ) + '%' );
+
+    }
+
+    _update () {
+
+      this._updateWidth ();
+      this._updateLabel ();
+
+    }
+
+    /* API */
+
+    get () {
+
+      return this.options.value;
+
+    }
+
+    set ( value ) {
+
+      value = this._sanitizeValue ( value );
+
+      if ( value === this.options.value ) return;
+
+      this.options.value = value;
+
+      this._update ();
+
+      this._trigger ( 'change' );
+
+      if ( this.options.value === 0 ) {
+
+        this._trigger ( 'empty' );
+
+      } else if ( this.options.value === 100 ) {
+
+        this._trigger ( 'full' );
+
       }
-    }, {
-      key: '_updateLabel',
-      value: function _updateLabel() {
 
-        this.$highlight.attr('data-' + this.options.datas.value, this._roundValue(this.options.value) + '%');
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
+    }
 
-        this._updateWidth();
-        this._updateLabel();
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return this.options.value;
-      }
-    }, {
-      key: 'set',
-      value: function set(value) {
-
-        value = this._sanitizeValue(value);
-
-        if (value === this.options.value) return;
-
-        this.options.value = value;
-
-        this._update();
-
-        this._trigger('change');
-
-        if (this.options.value === 0) {
-
-          this._trigger('empty');
-        } else if (this.options.value === 100) {
-
-          this._trigger('full');
-        }
-      }
-    }]);
-
-    return Progressbar;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Progressbar, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Progressbar, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Progressbar (Helper)
@@ -7926,19 +7816,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./progressbar.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
   /* HELPER */
 
-  $.progressbar = function (options) {
+  $.progressbar = function ( options ) {
 
-    options = _.isNumber(options) ? { value: options } : options;
+    options = _.isNumber ( options ) ? { value: options } : options;
 
-    return new Widgets.Progressbar(options);
+    return new Widgets.Progressbar ( options );
+
   };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Rails
@@ -7950,13 +7843,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Animations, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'rails',
     plugin: true,
     selector: '.rails',
@@ -7986,190 +7879,175 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RAILS */
 
-  var Rails = function (_Widgets$Widget18) {
-    _inherits(Rails, _Widgets$Widget18);
+  class Rails extends Widgets.Widget {
 
-    function Rails() {
-      _classCallCheck(this, Rails);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Rails).apply(this, arguments));
+    _variables () {
+
+      this.$rails = this.$element;
+
+      this.$start = this.$rails.find ( this.options.selectors.start );
+      this.$left = this.$rails.find ( this.options.selectors.left );
+      this.$right = this.$rails.find ( this.options.selectors.right );
+      this.$end = this.$rails.find ( this.options.selectors.end );
+      this.$content = this.$rails.find ( this.options.selectors.content );
+      this.$active = this.$content.find ( this.options.selectors.active );
+
     }
 
-    _createClass(Rails, [{
-      key: '_variables',
+    _init () {
 
+      this._scrollToElement ( this.$active );
+      this._updateButtons ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    _events () {
 
-        this.$rails = this.$element;
+      this.___keydown ();
+      this.___scroll ();
+      this.___startTap ();
+      this.___leftTap ();
+      this.___rightTap ();
+      this.___endTap ();
 
-        this.$start = this.$rails.find(this.options.selectors.start);
-        this.$left = this.$rails.find(this.options.selectors.left);
-        this.$right = this.$rails.find(this.options.selectors.right);
-        this.$end = this.$rails.find(this.options.selectors.end);
-        this.$content = this.$rails.find(this.options.selectors.content);
-        this.$active = this.$content.find(this.options.selectors.active);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+    }
 
-        this._scrollToElement(this.$active);
-        this._updateButtons();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    /* KEYDOWN */
 
-        this.___keydown();
-        this.___scroll();
-        this.___startTap();
-        this.___leftTap();
-        this.___rightTap();
-        this.___endTap();
-      }
+    ___keydown () {
 
-      /* KEYDOWN */
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    }
 
-        this._onHover([this.$document, 'keydown', this.__keydown]);
-      }
+    /* START TAP */
 
-      /* START TAP */
+    ___startTap () {
 
-    }, {
-      key: '___startTap',
-      value: function ___startTap() {
+      this._on ( this.$start, Pointer.tap, this.start );
 
-        this._on(this.$start, Pointer.tap, this.start);
-      }
+    }
 
-      /* LEFT TAP */
+    /* LEFT TAP */
 
-    }, {
-      key: '___leftTap',
-      value: function ___leftTap() {
+    ___leftTap () {
 
-        this._on(this.$left, Pointer.tap, this.left);
-      }
+      this._on ( this.$left, Pointer.tap, this.left );
 
-      /* RIGHT TAP */
+    }
 
-    }, {
-      key: '___rightTap',
-      value: function ___rightTap() {
+    /* RIGHT TAP */
 
-        this._on(this.$right, Pointer.tap, this.right);
+    ___rightTap () {
+
+      this._on ( this.$right, Pointer.tap, this.right );
+
+    }
+
+    /* END TAP */
+
+    ___endTap () {
+
+      this._on ( this.$end, Pointer.tap, this.end );
+
+    }
+
+    /* UPDATE */
+
+    _updateButtons () {
+
+      let scrollLeft;
+
+      if ( this.$start.length || this.$left.length || this.$right.length || this.$end.length ) {
+
+        scrollLeft = this.$content.scrollLeft ();
+
       }
 
-      /* END TAP */
+      if ( this.$start.length || this.$left.length ) {
 
-    }, {
-      key: '___endTap',
-      value: function ___endTap() {
+        let isStart = ( scrollLeft === 0 );
 
-        this._on(this.$end, Pointer.tap, this.end);
+        this.$start.add ( this.$left ).toggleClass ( this.options.classes.disabled, isStart );
+
       }
 
-      /* UPDATE */
+      if ( this.$end.length || this.$right.length ) {
 
-    }, {
-      key: '_updateButtons',
-      value: function _updateButtons() {
+        let isEnd = ( this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth () <= 1 );
 
-        var scrollLeft = void 0;
+        this.$end.add ( this.$right ).toggleClass ( this.options.classes.disabled, isEnd );
 
-        if (this.$start.length || this.$left.length || this.$right.length || this.$end.length) {
-
-          scrollLeft = this.$content.scrollLeft();
-        }
-
-        if (this.$start.length || this.$left.length) {
-
-          var isStart = scrollLeft === 0;
-
-          this.$start.add(this.$left).toggleClass(this.options.classes.disabled, isStart);
-        }
-
-        if (this.$end.length || this.$right.length) {
-
-          var isEnd = this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth() <= 1;
-
-          this.$end.add(this.$right).toggleClass(this.options.classes.disabled, isEnd);
-        }
       }
 
-      /* SCROLL */
+    }
 
-    }, {
-      key: '___scroll',
-      value: function ___scroll() {
+    /* SCROLL */
 
-        this._on(true, this.$content, 'scroll', this._throttle(this._updateButtons, Math.max(this.options.animations.scroll || 100)));
-      }
-    }, {
-      key: '_scroll',
-      value: function _scroll(left) {
+    ___scroll () {
 
-        this.$content.animate({ scrollLeft: left }, this.options.animations.scroll);
-      }
-    }, {
-      key: '_deltaScroll',
-      value: function _deltaScroll(delta) {
+      this._on ( true, this.$content, 'scroll', this._throttle ( this._updateButtons, Math.max ( this.options.animations.scroll || 100 ) ) );
 
-        this._scroll(this.$content.scrollLeft() + delta);
-      }
-    }, {
-      key: '_scrollToElement',
-      value: function _scrollToElement($element) {
+    }
 
-        if (!$element.length) return;
+    _scroll ( left ) {
 
-        var left = $element.position().left + this.$content.scrollLeft() + $element.outerWidth() / 2 - this.$content.outerWidth() / 2;
+      this.$content.animate ( { scrollLeft: left }, this.options.animations.scroll );
 
-        this._scroll(left);
-      }
+    }
 
-      /* API */
+    _deltaScroll ( delta )  {
 
-    }, {
-      key: 'start',
-      value: function start() {
+      this._scroll ( this.$content.scrollLeft () + delta );
 
-        this._scroll(0);
-      }
-    }, {
-      key: 'left',
-      value: function left() {
+    }
 
-        this._deltaScroll(-this.options.scroll.speed);
-      }
-    }, {
-      key: 'right',
-      value: function right() {
+    _scrollToElement ( $element ) {
 
-        this._deltaScroll(this.options.scroll.speed);
-      }
-    }, {
-      key: 'end',
-      value: function end() {
+      if ( !$element.length ) return;
 
-        this._scroll(this.$content[0].scrollWidth);
-      }
-    }]);
+      let left = $element.position ().left + this.$content.scrollLeft () + ( $element.outerWidth () / 2 ) - ( this.$content.outerWidth () / 2 );
 
-    return Rails;
-  }(Widgets.Widget);
+      this._scroll ( left );
+
+    }
+
+    /* API */
+
+    start () {
+
+      this._scroll ( 0 );
+
+    }
+
+    left () {
+
+      this._deltaScroll ( - this.options.scroll.speed );
+
+    }
+
+    right () {
+
+      this._deltaScroll ( this.options.scroll.speed );
+
+    }
+
+    end () {
+
+      this._scroll ( this.$content[0].scrollWidth );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Rails, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer);
+  Factory.init ( Rails, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote
@@ -8182,13 +8060,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add locking capabilities
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remote',
     options: {
       ajax: { // Options to pass to `$.ajax`
@@ -8208,117 +8086,105 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE */
 
-  var Remote = function (_Widgets$Widget19) {
-    _inherits(Remote, _Widgets$Widget19);
+  class Remote extends Widgets.Widget {
 
-    function Remote() {
-      _classCallCheck(this, Remote);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Remote).apply(this, arguments));
+    _reset () {
+
+      this.abort ();
+
+      super._reset ();
+
     }
 
-    _createClass(Remote, [{
-      key: '_reset',
+    /* REQUEST HANDLERS */
 
+    __beforesend ( res ) {
 
-      /* SPECIAL */
+      if ( this.isAborted () ) return;
 
-      value: function _reset() {
+      this._trigger ( 'beforesend', res );
 
-        this.abort();
+    }
 
-        _get(Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
-      }
+    __complete ( res ) {
 
-      /* REQUEST HANDLERS */
+      if ( this.isAborted () ) return;
 
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
+      this._trigger ( 'complete', res );
 
-        if (this.isAborted()) return;
+    }
 
-        this._trigger('beforesend', res);
-      }
-    }, {
-      key: '__complete',
-      value: function __complete(res) {
+    __error ( res ) {
 
-        if (this.isAborted()) return;
+      if ( this.isAborted () ) return;
 
-        this._trigger('complete', res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
+      this._trigger ( 'error', res );
 
-        if (this.isAborted()) return;
+    }
 
-        this._trigger('error', res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
+    __success ( res ) {
 
-        if (this.isAborted()) return;
+      if ( this.isAborted () ) return;
 
-        this._trigger('success', res);
-      }
-    }, {
-      key: '__abort',
-      value: function __abort() {
+      this._trigger ( 'success', res );
 
-        this._trigger('abort');
-      }
+    }
 
-      /* API */
+    __abort () {
 
-    }, {
-      key: 'isRequesting',
-      value: function isRequesting() {
+      this._trigger ( 'abort' );
 
-        return !!this.xhr && !_.includes([0, 4], this.xhr.readyState); // 0: UNSENT, 4: DONE
-      }
-    }, {
-      key: 'request',
-      value: function request() {
+    }
 
-        this._isAborted = false;
+    /* API */
 
-        this.xhr = $.ajax(_.extend({}, this.options.ajax, {
-          beforeSend: this.__beforesend.bind(this),
-          complete: this.__complete.bind(this),
-          error: this.__error.bind(this),
-          success: this.__success.bind(this)
-        }));
-      }
-    }, {
-      key: 'isAborted',
-      value: function isAborted() {
+    isRequesting () {
 
-        return !!this._isAborted;
-      }
-    }, {
-      key: 'abort',
-      value: function abort() {
+      return !!this.xhr && !_.includes ( [0, 4], this.xhr.readyState ); // 0: UNSENT, 4: DONE
 
-        if (!this.xhr || !this.isRequesting()) return;
+    }
 
-        this._isAborted = true;
+    request () {
 
-        this.xhr.abort();
+      this._isAborted = false;
 
-        this.__abort();
-      }
-    }]);
+      this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, {
+        beforeSend: this.__beforesend.bind ( this ),
+        complete: this.__complete.bind ( this ),
+        error: this.__error.bind ( this ),
+        success: this.__success.bind ( this )
+      }));
 
-    return Remote;
-  }(Widgets.Widget);
+    }
+
+    isAborted () {
+
+      return !!this._isAborted;
+
+    }
+
+    abort () {
+
+      if ( !this.xhr || !this.isRequesting () ) return;
+
+      this._isAborted = true;
+
+      this.xhr.abort ();
+
+      this.__abort ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Remote, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Remote, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote (Trigger)
@@ -8329,13 +8195,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remoteTrigger',
     options: {
       widget: false, // The `Remote` widget class to call
@@ -8353,64 +8219,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE TRIGGER */
 
-  var RemoteTrigger = function (_Widgets$Widget20) {
-    _inherits(RemoteTrigger, _Widgets$Widget20);
+  class RemoteTrigger extends Widgets.Widget {
 
-    function RemoteTrigger() {
-      _classCallCheck(this, RemoteTrigger);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteTrigger).apply(this, arguments));
+    _variables () {
+
+      this.$trigger = this.$element;
+
+      /* OPTIONS */
+
+      this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
+      this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;
+      this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
+
     }
 
-    _createClass(RemoteTrigger, [{
-      key: '_variables',
+    _events () {
 
+      this.___tap ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* TAP */
 
-        this.$trigger = this.$element;
+    ___tap () {
 
-        /* OPTIONS */
+      this._on ( Pointer.tap, this.trigger );
 
-        this.options.ajax.url = this.$trigger.data(this.options.datas.url) || this.$trigger.attr(this.options.attributes.href) || this.options.ajax.url;
-        this.options.ajax.data = this.$trigger.data(this.options.datas.data) || this.options.ajax.data;
-        this.options.ajax.method = this.$trigger.data(this.options.datas.method) || this.options.ajax.method;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    }
 
-        this.___tap();
-      }
+    /* API */
 
-      /* TAP */
+    trigger () {
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+      new this.options.widget ( { ajax: this.options.ajax } ).request ();
 
-        this._on(Pointer.tap, this.trigger);
-      }
+    }
 
-      /* API */
-
-    }, {
-      key: 'trigger',
-      value: function trigger() {
-
-        new this.options.widget({ ajax: this.options.ajax }).request();
-      }
-    }]);
-
-    return RemoteTrigger;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(RemoteTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( RemoteTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Ripple
@@ -8423,13 +8277,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Browser, Pointer, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'ripple',
     plugin: true,
     selector: '.ripple',
@@ -8458,178 +8312,146 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RIPPLE */
 
-  var Ripple = function (_Widgets$Widget21) {
-    _inherits(Ripple, _Widgets$Widget21);
+  class Ripple extends Widgets.Widget {
 
-    function Ripple() {
-      _classCallCheck(this, Ripple);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Ripple).apply(this, arguments));
+    _variables () {
+
+      this.$ripple = this.$element;
+
+      this.circles = [];
+
     }
 
-    _createClass(Ripple, [{
-      key: '_variables',
+    _events () {
 
+      this.___downTap ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* DOWN / TAP */
 
-        this.$ripple = this.$element;
+    ___downTap () {
 
-        this.circles = [];
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      // Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
 
-        this.___downTap();
-      }
+      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
 
-      /* DOWN / TAP */
+    }
 
-    }, {
-      key: '___downTap',
-      value: function ___downTap() {
+    __downTap ( event ) {
 
-        // Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
+      if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
-        this._on(Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap);
-      }
-    }, {
-      key: '__downTap',
-      value: function __downTap(event) {
+        let offset = this.$ripple.offset ();
 
-        if (this.$ripple.hasClass(this.options.classes.center)) {
+        this._show ({
+          x: offset.left + ( this.$ripple.outerWidth () / 2 ),
+          y: offset.top + ( this.$ripple.outerHeight () / 2 )
+        });
 
-          var offset = this.$ripple.offset();
+      } else {
 
-          this._show({
-            x: offset.left + this.$ripple.outerWidth() / 2,
-            y: offset.top + this.$ripple.outerHeight() / 2
-          });
-        } else {
+        this._show ( $.eventXY ( event ) );
 
-          this._show($.eventXY(event));
-        }
-
-        this._one(true, this.$document, Pointer.up, this.__up);
       }
 
-      /* UP */
+      this._one ( true, this.$document, Pointer.up, this.__up );
 
-    }, {
-      key: '__up',
-      value: function __up() {
-        var _iteratorNormalCompletion11 = true;
-        var _didIteratorError11 = false;
-        var _iteratorError11 = undefined;
+    }
 
-        try {
+    /* UP */
 
-          for (var _iterator11 = this.circles[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-            var _step11$value = _slicedToArray(_step11.value, 2);
+    __up () {
 
-            var $circle = _step11$value[0];
-            var timestamp = _step11$value[1];
+      for ( let [$circle, timestamp] of this.circles ) {
 
+        this._hide ( $circle, timestamp );
 
-            this._hide($circle, timestamp);
-          }
-        } catch (err) {
-          _didIteratorError11 = true;
-          _iteratorError11 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion11 && _iterator11.return) {
-              _iterator11.return();
-            }
-          } finally {
-            if (_didIteratorError11) {
-              throw _iteratorError11;
-            }
-          }
-        }
-
-        this.circles = [];
       }
+
+      this.circles = [];
+
+    }
+
+    /* SHOW */
+
+    _show ( XY ) {
+
+      let $circle = $(this._template ( 'circle' ));
+
+      /* SIZE */
+
+      let offset = this.$ripple.offset (),
+          insetX = XY.x - offset.left,
+          insetY = XY.y - offset.top,
+          sideX = Math.max ( insetX, this.$ripple.outerWidth () - insetX ),
+          sideY = Math.max ( insetY, this.$ripple.outerHeight () - insetY ),
+          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), // Basically the max the distances from the point to the corners
+          diameter = radius * 2;
+
+      /* ADDING */
+
+      this.circles.push ( [$circle, _.now ()] );
 
       /* SHOW */
 
-    }, {
-      key: '_show',
-      value: function _show(XY) {
+      this._frame ( function () {
 
-        var $circle = $(this._template('circle'));
+        /* PREPEND */
 
-        /* SIZE */
-
-        var offset = this.$ripple.offset(),
-            insetX = XY.x - offset.left,
-            insetY = XY.y - offset.top,
-            sideX = Math.max(insetX, this.$ripple.outerWidth() - insetX),
-            sideY = Math.max(insetY, this.$ripple.outerHeight() - insetY),
-            radius = Math.sqrt(Math.pow(sideX, 2) + Math.pow(sideY, 2)),
-            // Basically the max the distances from the point to the corners
-        diameter = radius * 2;
-
-        /* ADDING */
-
-        this.circles.push([$circle, _.now()]);
+        $circle.css ({
+          width: diameter,
+          height: diameter,
+          top: insetY,
+          left: insetX,
+        }).prependTo ( this.$ripple );
 
         /* SHOW */
 
-        this._frame(function () {
+        this._frame ( function () {
 
-          /* PREPEND */
+          $circle.addClass ( this.options.classes.circle.show );
 
-          $circle.css({
-            width: diameter,
-            height: diameter,
-            top: insetY,
-            left: insetX
-          }).prependTo(this.$ripple);
+          this._trigger ( 'show' );
 
-          /* SHOW */
-
-          this._frame(function () {
-
-            $circle.addClass(this.options.classes.circle.show);
-
-            this._trigger('show');
-          });
         });
-      }
 
-      /* HIDE */
+      });
 
-    }, {
-      key: '_hide',
-      value: function _hide($circle, timestamp) {
+    }
 
-        var remaining = Math.max(0, this.options.animations.show - this.options.animations.overlap + timestamp - _.now());
+    /* HIDE */
 
-        this._delay(function () {
+    _hide ( $circle, timestamp ) {
 
-          $circle.addClass(this.options.classes.circle.hide);
+      let remaining = Math.max ( 0, this.options.animations.show - this.options.animations.overlap + timestamp - _.now () );
 
-          this._delay(function () {
+      this._delay ( function () {
 
-            $circle.remove();
+        $circle.addClass ( this.options.classes.circle.hide );
 
-            this._trigger('hide');
-          }, this.options.animations.hide);
-        }, remaining);
-      }
-    }]);
+        this._delay ( function () {
 
-    return Ripple;
-  }(Widgets.Widget);
+          $circle.remove ();
+
+          this._trigger ( 'hide' );
+
+        }, this.options.animations.hide );
+
+      }, remaining );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Ripple, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations);
+  Factory.init ( Ripple, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Selectable
@@ -8641,13 +8463,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'selectable',
     plugin: true,
     selector: 'table.selectable',
@@ -8660,9 +8482,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         element: 'tbody tr:not(.empty)'
       },
       keystrokes: {
-        'ctrl + a': 'all',
-        'ctrl + shift + a': 'clear',
-        'ctrl + i': 'invert'
+        'ctmd + a': 'all',
+        'ctmd + shift + a': 'clear',
+        'ctmd + i': 'invert'
       },
       callbacks: {
         change: _.noop
@@ -8672,312 +8494,303 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECTABLE */
 
-  var Selectable = function (_Widgets$Widget22) {
-    _inherits(Selectable, _Widgets$Widget22);
+  class Selectable extends Widgets.Widget {
 
-    function Selectable() {
-      _classCallCheck(this, Selectable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Selectable).apply(this, arguments));
+    _variables () {
+
+      this.$selectable = this.$element;
+      this.$elements = this._getElements ();
+
     }
 
-    _createClass(Selectable, [{
-      key: '_variables',
+    _events () {
 
+      this.___change ();
+      this.___keydown ();
+      this.___downTap ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    _destroy () {
 
-        this.$selectable = this.$element;
-        this.$elements = this._getElements();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this.clear ();
 
-        this.___change();
-        this.___keydown();
-        this.___downTap();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
+    }
 
-        this.clear();
-      }
+    /* CHANGE */
 
-      /* CHANGE */
+    ___change () {
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+      this._on ( true, 'change tablehelper:change sortable:sort', this.__change );
 
-        this._on(true, 'change tablehelper:change sortable:sort', this.__change);
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
       }
 
-      /* KEYDOWN */
+    }
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    /* DOWN / TAP */
 
-        if (!Browser.is.touchDevice) {
+    ___downTap () {
 
-          this._onHover([this.$document, 'keydown', this.__keydown]);
+      if ( Browser.is.touchDevice ) {
+
+        this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
+
+      } else {
+
+        this._on ( Pointer.down, this.options.selectors.element, this.__down );
+
+      }
+
+    }
+
+    /* TAP */ // Just for touch devices
+
+    __tapTouch ( event ) {
+
+      event.preventDefault ();
+
+      $(event.currentTarget).toggleClass ( this.options.classes.selected );
+
+    }
+
+    /* CLICK / CTMD + CLICK / SHIFT + CLICK / CLICK -> DRAG */
+
+    __down ( event ) {
+
+      event.preventDefault ();
+
+      this.startEvent = event;
+      this.$startElement = $(event.currentTarget);
+
+      this._on ( true, this.$document, Pointer.move, this.__move );
+
+      this._one ( true, this.$document, Pointer.up, this.__up );
+
+      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+
+    }
+
+    __move ( event ) {
+
+      event.preventDefault ();
+
+      let startXY = $.eventXY ( this.startEvent ),
+          endXY = $.eventXY ( event ),
+          deltaXY = {
+            x: endXY.x - startXY.x,
+            y: endXY.y - startXY.y
+          },
+          absDeltaXY = {
+            x: Math.abs ( deltaXY.x ),
+            y: Math.abs ( deltaXY.y )
+          };
+
+      if ( absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold ) {
+
+        this._off ( this.$document, Pointer.move, this.__move );
+
+        this._off ( this.$document, Pointer.up, this.__up );
+
+        this._off ( this.$document, Pointer.cancel, this.__cancel );
+
+        this._resetPrev ();
+
+        if ( !Keyboard.keystroke.hasCtrlOrCmd ( event ) ) {
+
+          this.$elements.removeClass ( this.options.classes.selected );
+
         }
+
+        this.$startElement.toggleClass ( this.options.classes.selected );
+
+        this._on ( true, Pointer.enter, this.options.selectors.element, this.__dragEnter );
+
+        this._one ( true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
+
+        this._trigger ( 'change' );
+
       }
 
-      /* DOWN / TAP */
+    }
 
-    }, {
-      key: '___downTap',
-      value: function ___downTap() {
+    __dragEnter ( event ) {
 
-        if (Browser.is.touchDevice) {
+      this._toggleGroup ( this.$startElement, $(event.currentTarget) );
 
-          this._on(Pointer.tap, this.options.selectors.element, this.__tapTouch);
+      this._trigger ( 'change' );
+
+    }
+
+    __dragEnd () {
+
+      this._off ( Pointer.enter, this.__dragEnter );
+
+    }
+
+    __up ( event ) {
+
+      this._off ( this.$document, Pointer.move, this.__move );
+
+      this._off ( this.$document, Pointer.cancel, this.__cancel );
+
+      if ( event.shiftKey ) {
+
+        this._toggleGroup ( this.$prevElement, this.$startElement );
+
+      } else if ( Keyboard.keystroke.hasCtrlOrCmd ( event ) ) {
+
+        this.$startElement.toggleClass ( this.options.classes.selected );
+
+        this._resetPrev ( this.$startElement );
+
+      } else {
+
+        let $selected = this.get (),
+            $others = $selected.not ( this.$startElement );
+
+        if ( $others.length  ) {
+
+          $others.removeClass ( this.options.classes.selected );
+
+          this.$startElement.addClass ( this.options.classes.selected );
+
         } else {
 
-          this._on(Pointer.down, this.options.selectors.element, this.__down);
-        }
-      }
+          this.$startElement.toggleClass ( this.options.classes.selected );
 
-      /* TAP */ // Just for touch devices
-
-    }, {
-      key: '__tapTouch',
-      value: function __tapTouch(event) {
-
-        event.preventDefault();
-
-        $(event.currentTarget).toggleClass(this.options.classes.selected);
-      }
-
-      /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
-
-    }, {
-      key: '__down',
-      value: function __down(event) {
-
-        event.preventDefault();
-
-        this.startEvent = event;
-        this.$startElement = $(event.currentTarget);
-
-        this._on(true, this.$document, Pointer.move, this.__move);
-
-        this._one(true, this.$document, Pointer.up, this.__up);
-
-        this._one(true, this.$document, Pointer.cancel, this.__cancel);
-      }
-    }, {
-      key: '__move',
-      value: function __move(event) {
-
-        event.preventDefault();
-
-        var startXY = $.eventXY(this.startEvent),
-            endXY = $.eventXY(event),
-            deltaXY = {
-          x: endXY.x - startXY.x,
-          y: endXY.y - startXY.y
-        },
-            absDeltaXY = {
-          x: Math.abs(deltaXY.x),
-          y: Math.abs(deltaXY.y)
-        };
-
-        if (absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold) {
-
-          this._off(this.$document, Pointer.move, this.__move);
-
-          this._off(this.$document, Pointer.up, this.__up);
-
-          this._off(this.$document, Pointer.cancel, this.__cancel);
-
-          this._resetPrev();
-
-          if (!Keyboard.keystroke.hasCtrlOrCmd(event)) {
-
-            this.$elements.removeClass(this.options.classes.selected);
-          }
-
-          this.$startElement.toggleClass(this.options.classes.selected);
-
-          this._on(true, Pointer.enter, this.options.selectors.element, this.__dragEnter);
-
-          this._one(true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd);
-
-          this._trigger('change');
-        }
-      }
-    }, {
-      key: '__dragEnter',
-      value: function __dragEnter(event) {
-
-        this._toggleGroup(this.$startElement, $(event.currentTarget));
-
-        this._trigger('change');
-      }
-    }, {
-      key: '__dragEnd',
-      value: function __dragEnd() {
-
-        this._off(Pointer.enter, this.__dragEnter);
-      }
-    }, {
-      key: '__up',
-      value: function __up(event) {
-
-        this._off(this.$document, Pointer.move, this.__move);
-
-        this._off(this.$document, Pointer.cancel, this.__cancel);
-
-        if (event.shiftKey) {
-
-          this._toggleGroup(this.$prevElement, this.$startElement);
-        } else if (Keyboard.keystroke.hasCtrlOrCmd(event)) {
-
-          this.$startElement.toggleClass(this.options.classes.selected);
-
-          this._resetPrev(this.$startElement);
-        } else {
-
-          var $selected = this.get(),
-              $others = $selected.not(this.$startElement);
-
-          if ($others.length) {
-
-            $others.removeClass(this.options.classes.selected);
-
-            this.$startElement.addClass(this.options.classes.selected);
-          } else {
-
-            this.$startElement.toggleClass(this.options.classes.selected);
-          }
-
-          this._resetPrev(this.$startElement);
         }
 
-        this._trigger('change');
-      }
-    }, {
-      key: '__cancel',
-      value: function __cancel() {
+        this._resetPrev ( this.$startElement );
 
-        this._off(this.$document, Pointer.move, this.__move);
-
-        this._off(this.$document, Pointer.up, this.__up);
       }
 
-      /* OTHER EVENTS */
+      this._trigger ( 'change' );
 
-    }, {
-      key: '__change',
-      value: function __change() {
+    }
 
-        this.$elements = this._getElements();
+    __cancel () {
 
-        this._resetPrev();
+      this._off ( this.$document, Pointer.move, this.__move );
+
+      this._off ( this.$document, Pointer.up, this.__up );
+
+    }
+
+    /* OTHER EVENTS */
+
+    __change () {
+
+      this.$elements = this._getElements ();
+
+      this._resetPrev ();
+
+    }
+
+    /* PRIVATE */
+
+    _toggleGroup ( $start, $end ) {
+
+      let startIndex = $start ? this.$elements.index ( $start ) : 0,
+          endIndex = this.$elements.index ( $end ),
+          minIndex = Math.min ( startIndex, endIndex ),
+          maxIndex = Math.max ( startIndex, endIndex );
+
+      if ( minIndex === startIndex ) { // Direction: down
+
+        minIndex += 1;
+        maxIndex += 1;
+
       }
 
-      /* PRIVATE */
+      let $newGroup = this.$elements.slice ( minIndex, maxIndex );
 
-    }, {
-      key: '_toggleGroup',
-      value: function _toggleGroup($start, $end) {
+      if ( this.$prevGroup ) {
 
-        var startIndex = $start ? this.$elements.index($start) : 0,
-            endIndex = this.$elements.index($end),
-            minIndex = Math.min(startIndex, endIndex),
-            maxIndex = Math.max(startIndex, endIndex);
+        $newGroup.not ( this.$prevGroup ).toggleClass ( this.options.classes.selected );
 
-        if (minIndex === startIndex) {
-          // Direction: down
+        this.$prevGroup.not ( $newGroup ).toggleClass ( this.options.classes.selected );
 
-          minIndex += 1;
-          maxIndex += 1;
-        }
+      } else {
 
-        var $newGroup = this.$elements.slice(minIndex, maxIndex);
+        $newGroup.toggleClass ( this.options.classes.selected );
 
-        if (this.$prevGroup) {
-
-          $newGroup.not(this.$prevGroup).toggleClass(this.options.classes.selected);
-
-          this.$prevGroup.not($newGroup).toggleClass(this.options.classes.selected);
-        } else {
-
-          $newGroup.toggleClass(this.options.classes.selected);
-        }
-
-        this.$prevGroup = $newGroup;
-      }
-    }, {
-      key: '_getElements',
-      value: function _getElements() {
-
-        return this.$element.find(this.options.selectors.element);
-      }
-    }, {
-      key: '_resetPrev',
-      value: function _resetPrev() {
-        var $element = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-        var $group = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-
-
-        this.$prevElement = $element;
-        this.$prevGroup = $group;
       }
 
-      /* API */
+      this.$prevGroup = $newGroup;
 
-    }, {
-      key: 'get',
-      value: function get() {
+    }
 
-        return this.$elements.filter('.' + this.options.classes.selected);
-      }
-    }, {
-      key: 'all',
-      value: function all() {
+    _getElements () {
 
-        this.$elements.addClass(this.options.classes.selected);
+      return this.$element.find ( this.options.selectors.element );
 
-        this._resetPrev();
+    }
 
-        this._trigger('change');
-      }
-    }, {
-      key: 'clear',
-      value: function clear() {
+    _resetPrev ( $element = false, $group = false ) {
 
-        this.$elements.removeClass(this.options.classes.selected);
+      this.$prevElement = $element;
+      this.$prevGroup = $group;
 
-        this._resetPrev();
+    }
 
-        this._trigger('change');
-      }
-    }, {
-      key: 'invert',
-      value: function invert() {
+    /* API */
 
-        this.$elements.toggleClass(this.options.classes.selected);
+    get () {
 
-        this._resetPrev();
+      return this.$elements.filter ( '.' + this.options.classes.selected );
 
-        this._trigger('change');
-      }
-    }]);
+    }
 
-    return Selectable;
-  }(Widgets.Widget);
+    all () {
+
+      this.$elements.addClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    clear () {
+
+      this.$elements.removeClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    invert () {
+
+      this.$elements.toggleClass ( this.options.classes.selected );
+
+      this._resetPrev ();
+
+      this._trigger ( 'change' );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Selectable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard);
+  Factory.init ( Selectable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Table - Sortable
@@ -8990,28 +8803,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tableSortable',
     plugin: true,
     selector: 'table.sortable',
     options: {
       sorters: {
-        int: function int(a, b) {
-          return parseInt(a, 10) - parseInt(b, 10);
+        int: function ( a, b ) {
+          return parseInt ( a, 10 ) - parseInt ( b, 10 );
         },
-        float: function float(a, b) {
-          return parseFloat(a) - parseFloat(b);
+        float: function ( a, b ) {
+          return parseFloat ( a ) - parseFloat ( b );
         },
-        string: function string(a, b) {
-          a = a.toLocaleLowerCase();
-          b = b.toLocaleLowerCase();
-          return a.localeCompare(b);
+        string: function ( a, b ) {
+          a = a.toLocaleLowerCase ();
+          b = b.toLocaleLowerCase ();
+          return a.localeCompare ( b );
         }
       },
       datas: {
@@ -9039,216 +8852,220 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABLE SORTABLE */
 
-  var TableSortable = function (_Widgets$Widget23) {
-    _inherits(TableSortable, _Widgets$Widget23);
+  class TableSortable extends Widgets.Widget {
 
-    function TableSortable() {
-      _classCallCheck(this, TableSortable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TableSortable).apply(this, arguments));
+    _variables () {
+
+      this.$table = this.$element;
+      this.$headers = this.$table.find ( this.options.selectors.header );
+      this.$sortables = this.$headers.filter ( this.options.selectors.sortable );
+      this.$tbody = this.$table.find ( this.options.selectors.body );
+
+      this.table = this.element;
+      this.tbody = this.$tbody[0];
+
+      this.sortData = {}; // Caching object for datas and references to rows
+      this.isDirty = true;
+
+      this.$currentSortable = false;
+      this.currentIndex = false; // `$headers` index, not `$sortables` index
+      this.currentDirection = false;
+
     }
 
-    _createClass(TableSortable, [{
-      key: '_variables',
+    _init () {
 
+      let $initial = this.$headers.filter ( `.${this.options.classes.sort.asc}, .${this.options.classes.sort.desc}` ).first ();
 
-      /* SPECIAL */
+      if ( $initial.length === 1 ) {
 
-      value: function _variables() {
+        this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( this.options.classes.sort.asc ) ? 'asc' : 'desc' ) );
 
-        this.$table = this.$element;
-        this.$headers = this.$table.find(this.options.selectors.header);
-        this.$sortables = this.$headers.filter(this.options.selectors.sortable);
-        this.$tbody = this.$table.find(this.options.selectors.body);
+      }
 
-        this.table = this.element;
-        this.tbody = this.$tbody[0];
+    }
 
-        this.sortData = {}; // Caching object for datas and references to rows
+    _events () {
+
+      this.___change ();
+      this.___tap ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change tablehelper:change', this.__change );
+
+    }
+
+    __change () {
+
+      if ( this.currentIndex !== false ) {
+
+        this.sortData = {};
         this.isDirty = true;
 
-        this.$currentSortable = false;
-        this.currentIndex = false; // `$headers` index, not `$sortables` index
-        this.currentDirection = false;
+        this.sort ( this.currentIndex, this.currentDirection );
+
       }
-    }, {
-      key: '_init',
-      value: function _init() {
 
-        var $initial = this.$headers.filter('.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc).first();
+    }
 
-        if ($initial.length === 1) {
+    /* TAP */
 
-          this.sort(this.$headers.index($initial), $initial.hasClass(this.options.classes.sort.asc) ? 'asc' : 'desc');
+    ___tap () {
+
+      this._on ( this.$sortables, Pointer.tap, this.__tap );
+
+    }
+
+    __tap ( event ) {
+
+      let newIndex = this.$headers.index ( event.target ),
+          newDirection = this.currentIndex === newIndex
+                           ? this.currentDirection === 'asc'
+                             ? 'desc'
+                             : 'asc'
+                           : 'asc';
+
+      this.sort ( newIndex, newDirection );
+
+    }
+
+    /* SORT */
+
+    sort ( index, direction ) {
+
+      /* VALIDATE */
+
+      let $sortable = this.$headers.eq ( index );
+
+      if ( !$sortable.length ) return; // Bad index
+
+      let sorterName = $sortable.data ( this.options.datas.sorter );
+
+      if ( !sorterName ) return; // Unsortable column
+
+      let sorter = this.options.sorters[sorterName];
+
+      if ( !sorter ) return; // Unsupported sorter
+
+      direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
+
+      /* CHECKING CACHED DATAS */
+
+      if ( _.isUndefined ( this.sortData[index] ) || this.isDirty ) {
+
+        /* VARIABLES */
+
+        let $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
+
+        this.sortData[index] = new Array ( $trs.length );
+
+        /* POPULATE */
+
+        for ( let i = 0, l = $trs.length; i < l; i++ ) {
+
+          let $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
+              value = $td.data ( this.options.datas.value ) || $td.text ();
+
+          this.sortData[index][i] = [$trs[i], value];
+
         }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
 
-        this.___change();
-        this.___tap();
-      }
-
-      /* CHANGE */
-
-    }, {
-      key: '___change',
-      value: function ___change() {
-
-        this._on(true, 'change tablehelper:change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change() {
-
-        if (this.currentIndex !== false) {
-
-          this.sortData = {};
-          this.isDirty = true;
-
-          this.sort(this.currentIndex, this.currentDirection);
-        }
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        this._on(this.$sortables, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        var newIndex = this.$headers.index(event.target),
-            newDirection = this.currentIndex === newIndex ? this.currentDirection === 'asc' ? 'desc' : 'asc' : 'asc';
-
-        this.sort(newIndex, newDirection);
       }
 
       /* SORT */
 
-    }, {
-      key: 'sort',
-      value: function sort(index, direction) {
+      if ( index !== this.currentIndex || this.isDirty ) {
 
-        /* VALIDATE */
+        this.sortData[index].sort ( function ( a, b ) {
 
-        var $sortable = this.$headers.eq(index);
+          return sorter ( a[1], b[1] );
 
-        if (!$sortable.length) return; // Bad index
-
-        var sorterName = $sortable.data(this.options.datas.sorter);
-
-        if (!sorterName) return; // Unsortable column
-
-        var sorter = this.options.sorters[sorterName];
-
-        if (!sorter) return; // Unsupported sorter
-
-        direction = direction && direction.toLowerCase() === 'desc' ? 'desc' : 'asc';
-
-        /* CHECKING CACHED DATAS */
-
-        if (_.isUndefined(this.sortData[index]) || this.isDirty) {
-
-          /* VARIABLES */
-
-          var $trs = this.$tbody.find(this.options.selectors.notEmptyRow);
-
-          this.sortData[index] = new Array($trs.length);
-
-          /* POPULATE */
-
-          for (var i = 0, l = $trs.length; i < l; i++) {
-
-            var $td = $trs.eq(i).find(this.options.selectors.rowCell).eq(index),
-                value = $td.data(this.options.datas.value) || $td.text();
-
-            this.sortData[index][i] = [$trs[i], value];
-          }
-        }
-
-        /* SORT */
-
-        if (index !== this.currentIndex || this.isDirty) {
-
-          this.sortData[index].sort(function (a, b) {
-
-            return sorter(a[1], b[1]);
-          });
-        }
-
-        /* REVERSING */
-
-        var needReversing = false;
-
-        if (!this.isDirty && index === this.currentIndex && this.currentDirection !== false) {
-
-          needReversing = direction !== this.currentDirection;
-        } else {
-
-          needReversing = direction === 'desc';
-        }
-
-        if (needReversing) {
-
-          this.sortData[index].reverse();
-        }
-
-        /* REORDER */
-
-        if (index !== this.currentIndex || direction !== this.currentDirection || this.isDirty) {
-
-          this.table.removeChild(this.tbody); // Detach
-
-          for (var _i = 0, _l = this.sortData[index].length; _i < _l; _i++) {
-
-            this.tbody.appendChild(this.sortData[index][_i][0]); // Reorder
-          }
-
-          this.table.appendChild(this.tbody); // Attach
-        }
-
-        /* STYLE */
-
-        if (index !== this.currentIndex || direction !== this.currentDirection) {
-
-          if (this.$currentSortable) {
-
-            this.$currentSortable.removeClass(this.options.classes.sort[this.currentDirection]);
-          }
-
-          $sortable.addClass(this.options.classes.sort[direction]);
-        }
-
-        /* UPDATE */
-
-        this.isDirty = false;
-
-        this.$currentSortable = $sortable;
-        this.currentIndex = index;
-        this.currentDirection = direction;
-
-        /* TRIGGER */
-
-        this._trigger('sort', {
-          index: this.currentIndex,
-          direction: this.currentDirection
         });
-      }
-    }]);
 
-    return TableSortable;
-  }(Widgets.Widget);
+      }
+
+      /* REVERSING */
+
+      let needReversing = false;
+
+      if ( !this.isDirty && index === this.currentIndex && this.currentDirection !== false  ) {
+
+        needReversing = ( direction !== this.currentDirection );
+
+      } else {
+
+        needReversing = ( direction === 'desc' );
+
+      }
+
+      if ( needReversing ) {
+
+        this.sortData[index].reverse ();
+
+      }
+
+      /* REORDER */
+
+      if ( index !== this.currentIndex || direction !== this.currentDirection || this.isDirty ) {
+
+        this.table.removeChild ( this.tbody ); // Detach
+
+        for ( let i = 0, l = this.sortData[index].length; i < l; i++ ) {
+
+          this.tbody.appendChild ( this.sortData[index][i][0] ); // Reorder
+
+        }
+
+        this.table.appendChild ( this.tbody ); // Attach
+
+      }
+
+      /* STYLE */
+
+      if ( index !== this.currentIndex || direction !== this.currentDirection ) {
+
+        if ( this.$currentSortable ) {
+
+          this.$currentSortable.removeClass ( this.options.classes.sort[this.currentDirection] );
+
+        }
+
+        $sortable.addClass ( this.options.classes.sort[direction] );
+
+      }
+
+      /* UPDATE */
+
+      this.isDirty = false;
+
+      this.$currentSortable = $sortable;
+      this.currentIndex = index;
+      this.currentDirection = direction;
+
+      /* TRIGGER */
+
+      this._trigger ( 'sort', {
+        index: this.currentIndex,
+        direction: this.currentDirection
+      });
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(TableSortable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( TableSortable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Table Helper
@@ -9259,18 +9076,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tableHelper',
     plugin: true,
     selector: 'table.table',
     templates: {
-      row: '<tr <%= o.id ? "class=" + o.id : "" %> >' + '<% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %>' + '<td>' + '<%= o.datas[i] %>' + '</td>' + '<% } %>' + '<% for ( var i = 0, l = o.missing; i < l; i++ ) { %>' + '<td></td>' + '<% } %>' + '</tr>'
+      row: '<tr <%= o.id ? "class=" + o.id : "" %> >' +
+             '<% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %>' +
+               '<td>' +
+                 '<%= o.datas[i] %>' +
+               '</td>' +
+             '<% } %>' +
+             '<% for ( var i = 0, l = o.missing; i < l; i++ ) { %>' +
+               '<td></td>' +
+             '<% } %>' +
+           '</tr>'
     },
     options: {
       rowIdPrefix: 'srid',
@@ -9289,174 +9115,140 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         remove: _.noop,
         clear: _.noop
       }
-    }
+    },
   };
 
   /* TABLE HELPER */
 
-  var TableHelper = function (_Widgets$Widget24) {
-    _inherits(TableHelper, _Widgets$Widget24);
+  class TableHelper extends Widgets.Widget {
 
-    function TableHelper() {
-      _classCallCheck(this, TableHelper);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TableHelper).apply(this, arguments));
+    _variables () {
+
+      this.$table = this.$element;
+      this.$header = this.$table.find ( this.options.selectors.header );
+      this.$body = this.$table.find ( this.options.selectors.body );
+      this.$headerCells = this.$header.find ( this.options.selectors.headerCell );
+      this.$emptyRow = this.$body.find ( this.options.selectors.emptyRow );
+
+      this.columnsNr = this.$headerCells.length;
+
     }
 
-    _createClass(TableHelper, [{
-      key: '_variables',
+    /* PRIVATE */
 
+    _getRowId ( id ) {
 
-      /* SPECIAL */
+      return this.options.rowIdPrefix + '-' + this.guid + '-' + id;
 
-      value: function _variables() {
+    }
 
-        this.$table = this.$element;
-        this.$header = this.$table.find(this.options.selectors.header);
-        this.$body = this.$table.find(this.options.selectors.body);
-        this.$headerCells = this.$header.find(this.options.selectors.headerCell);
-        this.$emptyRow = this.$body.find(this.options.selectors.emptyRow);
+    /* API */
 
-        this.columnsNr = this.$headerCells.length;
-      }
+    add ( id, ...datas ) {
 
-      /* PRIVATE */
+      let rowId = id ? this._getRowId ( id ) : false;
 
-    }, {
-      key: '_getRowId',
-      value: function _getRowId(id) {
+      if ( datas.length ) {
 
-        return this.options.rowIdPrefix + '-' + this.guid + '-' + id;
-      }
+        if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
-      /* API */
+        let chunks = _.chunk ( datas, this.columnsNr ),
+            $rows = $();
 
-    }, {
-      key: 'add',
-      value: function add(id) {
+        for ( let chunk of chunks ) {
 
-        var rowId = id ? this._getRowId(id) : false;
+          let rowHtml = this._template ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
 
-        for (var _len4 = arguments.length, datas = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-          datas[_key4 - 1] = arguments[_key4];
+          $rows = $rows.add ( rowHtml );
+
         }
 
-        if (datas.length) {
+        this.$body.append ( $rows );
 
-          if (rowId && $('.' + rowId).length === 1) return this;
+        this._trigger ( 'change' );
 
-          var chunks = _.chunk(datas, this.columnsNr),
-              $rows = $();
+        this._trigger ( 'add', {
+          $rows: $rows
+        });
 
-          var _iteratorNormalCompletion12 = true;
-          var _didIteratorError12 = false;
-          var _iteratorError12 = undefined;
+      }
 
-          try {
-            for (var _iterator12 = chunks[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-              var chunk = _step12.value;
+    }
 
+    update ( id, ...datas ) {
 
-              var rowHtml = this._template('row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length });
+      let $row = $( '.' + this._getRowId ( id ) );
 
-              $rows = $rows.add(rowHtml);
-            }
-          } catch (err) {
-            _didIteratorError12 = true;
-            _iteratorError12 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion12 && _iterator12.return) {
-                _iterator12.return();
-              }
-            } finally {
-              if (_didIteratorError12) {
-                throw _iteratorError12;
-              }
-            }
+      if ( datas.length && $row.length === 1 ) {
+
+        let $rowCells = $row.find ( this.options.selectors.rowCell );
+
+        for ( let i = 0, l = datas.length; i < l; i++ ) {
+
+          if ( _.isString ( datas[i] ) ) {
+
+            $rowCells.eq ( i ).html ( datas[i] );
+
           }
 
-          this.$body.append($rows);
-
-          this._trigger('change');
-
-          this._trigger('add', {
-            $rows: $rows
-          });
         }
+
+        this._trigger ( 'change' );
+
+        this._trigger ( 'update', {
+          $row: $row
+        });
+
       }
-    }, {
-      key: 'update',
-      value: function update(id) {
 
-        var $row = $('.' + this._getRowId(id));
+    }
 
-        for (var _len5 = arguments.length, datas = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-          datas[_key5 - 1] = arguments[_key5];
-        }
+    remove ( id ) {
 
-        if (datas.length && $row.length === 1) {
+      let $row = $( '.' + this._getRowId ( id ) );
 
-          var $rowCells = $row.find(this.options.selectors.rowCell);
+      if ( $row.length === 1 ) {
 
-          for (var i = 0, l = datas.length; i < l; i++) {
+        $row.remove ();
 
-            if (_.isString(datas[i])) {
+        this._trigger ( 'change' );
 
-              $rowCells.eq(i).html(datas[i]);
-            }
-          }
+        this._trigger ( 'remove', {
+          $row: $row
+        });
 
-          this._trigger('change');
-
-          this._trigger('update', {
-            $row: $row
-          });
-        }
       }
-    }, {
-      key: 'remove',
-      value: function remove(id) {
 
-        var $row = $('.' + this._getRowId(id));
+    }
 
-        if ($row.length === 1) {
+    clear () {
 
-          $row.remove();
+      let $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 
-          this._trigger('change');
+      if ( $rows.length ) {
 
-          this._trigger('remove', {
-            $row: $row
-          });
-        }
+        $rows.remove ();
+
+        this._trigger ( 'change' );
+
+        this._trigger ( 'clear', {
+          $rows: $rows
+        });
+
       }
-    }, {
-      key: 'clear',
-      value: function clear() {
 
-        var $rows = this.$body.find(this.options.selectors.notEmptyRow);
+    }
 
-        if ($rows.length) {
-
-          $rows.remove();
-
-          this._trigger('change');
-
-          this._trigger('clear', {
-            $rows: $rows
-          });
-        }
-      }
-    }]);
-
-    return TableHelper;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(TableHelper, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( TableHelper, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Targeter
@@ -9467,13 +9259,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'targeter',
     options: {
       widget: false, // The target's widget class
@@ -9486,59 +9278,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TARGETER */
 
-  var Targeter = function (_Widgets$Widget25) {
-    _inherits(Targeter, _Widgets$Widget25);
+  class Targeter extends Widgets.Widget {
 
-    function Targeter() {
-      _classCallCheck(this, Targeter);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Targeter).apply(this, arguments));
+    _variables () {
+
+      this._targetSelector = this.options.target || this.$element.data ( this.options.datas.target );
+
+      this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
+
+      this._targetInstance = this.$target[this.options.widget.config.name]( 'instance' );
+
     }
 
-    _createClass(Targeter, [{
-      key: '_variables',
+    _events () {
 
+      this.___targetRemove ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* TARGET REMOVE */
 
-        this._targetSelector = this.options.target || this.$element.data(this.options.datas.target);
+    ___targetRemove () {
 
-        this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest(this.options.widget.config.selector);
+      this._on ( true, this.$target, 'remove', this.__targetRemove );
 
-        this._targetInstance = this.$target[this.options.widget.config.name]('instance');
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    }
 
-        this.___targetRemove();
-      }
+    __targetRemove () {
 
-      /* TARGET REMOVE */
+      this.__remove ();
 
-    }, {
-      key: '___targetRemove',
-      value: function ___targetRemove() {
+    }
 
-        this._on(true, this.$target, 'remove', this.__targetRemove);
-      }
-    }, {
-      key: '__targetRemove',
-      value: function __targetRemove() {
-
-        this.__remove();
-      }
-    }]);
-
-    return Targeter;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Targeter, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Targeter, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Targeter - Closer
@@ -9549,13 +9330,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../targeter.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'closer',
     options: {
       methods: {
@@ -9567,65 +9348,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CLOSER */
 
-  var Closer = function (_Widgets$Targeter) {
-    _inherits(Closer, _Widgets$Targeter);
+  class Closer extends Widgets.Targeter {
 
-    function Closer() {
-      _classCallCheck(this, Closer);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Closer).apply(this, arguments));
+    _events () {
+
+      this.___targetRemove ();
+      this.___tap ();
+
     }
 
-    _createClass(Closer, [{
-      key: '_events',
+    /* TAP */
 
+    ___tap () {
 
-      /* SPECIAL */
+      this._on ( Pointer.tap, this.__tap );
 
-      value: function _events() {
+    }
 
-        this.___targetRemove();
-        this.___tap();
-      }
+    __tap ( event ) {
 
-      /* TAP */
+      this.close ( event );
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+    }
 
-        this._on(Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
+    /* API */
 
-        this.close(event);
-      }
+    isOpen () {
 
-      /* API */
+      return this._targetInstance[this.options.methods.isOpen]();
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+    }
 
-        return this._targetInstance[this.options.methods.isOpen]();
-      }
-    }, {
-      key: 'close',
-      value: function close(event) {
+    close ( event ) {
 
-        return this._targetInstance[this.options.methods.close](this.element, event);
-      }
-    }]);
+      return this._targetInstance[this.options.methods.close]( this.element, event );
 
-    return Closer;
-  }(Widgets.Targeter);
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Closer, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Closer, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Closer
@@ -9637,13 +9406,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'expanderCloser',
     plugin: true,
     selector: '.expander-closer',
@@ -9654,22 +9423,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER CLOSER */
 
-  var ExpanderCloser = function (_Widgets$Closer) {
-    _inherits(ExpanderCloser, _Widgets$Closer);
-
-    function ExpanderCloser() {
-      _classCallCheck(this, ExpanderCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderCloser).apply(this, arguments));
-    }
-
-    return ExpanderCloser;
-  }(Widgets.Closer);
+  class ExpanderCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(ExpanderCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ExpanderCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Infobar - Targeters - Closer
@@ -9681,13 +9442,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'infobarCloser',
     plugin: true,
     selector: '.infobar-closer',
@@ -9698,22 +9459,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR CLOSER */
 
-  var InfobarCloser = function (_Widgets$Closer2) {
-    _inherits(InfobarCloser, _Widgets$Closer2);
-
-    function InfobarCloser() {
-      _classCallCheck(this, InfobarCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(InfobarCloser).apply(this, arguments));
-    }
-
-    return InfobarCloser;
-  }(Widgets.Closer);
+  class InfobarCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(InfobarCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( InfobarCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Closer
@@ -9725,13 +9478,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'modalCloser',
     plugin: true,
     selector: '.modal-closer',
@@ -9742,22 +9495,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL CLOSER */
 
-  var ModalCloser = function (_Widgets$Closer3) {
-    _inherits(ModalCloser, _Widgets$Closer3);
-
-    function ModalCloser() {
-      _classCallCheck(this, ModalCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalCloser).apply(this, arguments));
-    }
-
-    return ModalCloser;
-  }(Widgets.Closer);
+  class ModalCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(ModalCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ModalCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Closer
@@ -9769,13 +9514,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'overlayCloser',
     plugin: true,
     selector: '.overlay-closer',
@@ -9786,22 +9531,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY CLOSER */
 
-  var OverlayCloser = function (_Widgets$Closer4) {
-    _inherits(OverlayCloser, _Widgets$Closer4);
-
-    function OverlayCloser() {
-      _classCallCheck(this, OverlayCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayCloser).apply(this, arguments));
-    }
-
-    return OverlayCloser;
-  }(Widgets.Closer);
+  class OverlayCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(OverlayCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( OverlayCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Targeter - Opener
@@ -9813,13 +9550,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/browser/browser.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory, Browser, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'opener',
     options: {
       hover: {
@@ -9837,168 +9574,166 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OPENER */
 
-  var Opener = function (_Widgets$Closer5) {
-    _inherits(Opener, _Widgets$Closer5);
+  class Opener extends Widgets.Closer {
 
-    function Opener() {
-      _classCallCheck(this, Opener);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Opener).apply(this, arguments));
+    _events () {
+
+      this.___targetRemove ();
+      this.___tap ();
+      this.___hover ();
+
     }
 
-    _createClass(Opener, [{
-      key: '_events',
+    /* TAP */
 
+    ___tap () {
 
-      /* SPECIAL */
+      this._on ( Pointer.tap, this.__tap );
 
-      value: function _events() {
+    }
 
-        this.___targetRemove();
-        this.___tap();
-        this.___hover();
+    __tap ( event ) {
+
+      this.open ( event );
+
+    }
+
+    /* HOVER */
+
+    ___hover () {
+
+      if ( this.options.hover.active && !Browser.is.touchDevice ) {
+
+        this._on ( Pointer.enter, this.__hoverEnter );
+
       }
 
-      /* TAP */
+    }
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+    __hoverEnter () {
 
-        this._on(Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        this.open(event);
-      }
-
-      /* HOVER */
-
-    }, {
-      key: '___hover',
-      value: function ___hover() {
-
-        if (this.options.hover.active && !Browser.is.touchDevice) {
-
-          this._on(Pointer.enter, this.__hoverEnter);
-        }
-      }
-    }, {
-      key: '__hoverEnter',
-      value: function __hoverEnter() {
-
-        if (!this.isOpen()) {
-
-          this._isHoverOpen = false;
-
-          this._hoverOpenTimeout = this._delay(this.__hoverOpen, this.options.hover.delays.open);
-
-          this._one(true, Pointer.leave, this.__hoverLeave);
-        } else if (this._isHoverOpen) {
-
-          if (this._hoverCloseTimeout) {
-
-            clearTimeout(this._hoverCloseTimeout);
-
-            this._hoverCloseTimeout = false;
-          }
-
-          this._one(true, Pointer.leave, this.__hoverLeave);
-        }
-      }
-    }, {
-      key: '__hoverOpen',
-      value: function __hoverOpen() {
-
-        if (!this.isOpen()) {
-
-          this.open();
-
-          this._isHoverOpen = true;
-        }
-
-        this._hoverOpenTimeout = false;
-      }
-    }, {
-      key: '__hoverLeave',
-      value: function __hoverLeave() {
-
-        if (this._hoverOpenTimeout) {
-
-          clearTimeout(this._hoverOpenTimeout);
-
-          this._hoverOpenTimeout = false;
-        }
-
-        if (this.isOpen() && this._isHoverOpen) {
-
-          this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
-
-          this._one(true, this.$target, Pointer.enter, this.__hoverTargetEnter);
-        }
-      }
-    }, {
-      key: '__hoverClose',
-      value: function __hoverClose() {
-
-        if (this.isOpen() && this._isHoverOpen) {
-
-          this.close();
-        }
+      if ( !this.isOpen () ) {
 
         this._isHoverOpen = false;
 
-        this._hoverCloseTimeout = false;
+        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
 
-        this._off(this.$target, Pointer.enter, this.__hoverTargetEnter);
-      }
-    }, {
-      key: '__hoverTargetEnter',
-      value: function __hoverTargetEnter() {
+        this._one ( true, Pointer.leave, this.__hoverLeave );
 
-        if (this._hoverCloseTimeout) {
+      } else if ( this._isHoverOpen ) {
 
-          clearTimeout(this._hoverCloseTimeout);
+        if ( this._hoverCloseTimeout ) {
+
+          clearTimeout ( this._hoverCloseTimeout );
 
           this._hoverCloseTimeout = false;
+
         }
 
-        if (this.isOpen() && this._isHoverOpen) {
+        this._one ( true, Pointer.leave, this.__hoverLeave );
 
-          this._one(true, this.$target, Pointer.leave, this.__hoverTargetLeave);
-        }
-      }
-    }, {
-      key: '__hoverTargetLeave',
-      value: function __hoverTargetLeave() {
-
-        if (this.isOpen() && this._isHoverOpen) {
-
-          this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
-
-          this._one(true, this.$target, Pointer.enter, this.__hoverTargetEnter);
-        }
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'open',
-      value: function open(event) {
+    __hoverOpen () {
 
-        return this._targetInstance[this.options.methods.open](this.element, event);
+      if ( !this.isOpen () ) {
+
+        this.open ();
+
+        this._isHoverOpen = true;
+
       }
-    }]);
 
-    return Opener;
-  }(Widgets.Closer);
+      this._hoverOpenTimeout = false;
+
+    }
+
+    __hoverLeave  () {
+
+      if ( this._hoverOpenTimeout ) {
+
+        clearTimeout ( this._hoverOpenTimeout );
+
+        this._hoverOpenTimeout = false;
+
+      }
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+        this._one ( true, this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+      }
+
+    }
+
+    __hoverClose () {
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this.close ();
+
+      }
+
+      this._isHoverOpen = false;
+
+      this._hoverCloseTimeout = false;
+
+      this._off ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+    }
+
+    __hoverTargetEnter () {
+
+      if ( this._hoverCloseTimeout ) {
+
+        clearTimeout ( this._hoverCloseTimeout );
+
+        this._hoverCloseTimeout = false;
+
+      }
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._one ( true, this.$target, Pointer.leave, this.__hoverTargetLeave );
+
+      }
+
+    }
+
+    __hoverTargetLeave () {
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+        this._one ( true, this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+      }
+
+    }
+
+    /* API */
+
+    open ( event ) {
+
+      return this._targetInstance[this.options.methods.open]( this.element, event );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Opener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer);
+  Factory.init ( Opener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Opener
@@ -10010,13 +9745,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'expanderOpener',
     plugin: true,
     selector: '.expander-opener',
@@ -10027,22 +9762,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER OPENER */
 
-  var ExpanderOpener = function (_Widgets$Opener) {
-    _inherits(ExpanderOpener, _Widgets$Opener);
-
-    function ExpanderOpener() {
-      _classCallCheck(this, ExpanderOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderOpener).apply(this, arguments));
-    }
-
-    return ExpanderOpener;
-  }(Widgets.Opener);
+  class ExpanderOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(ExpanderOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ExpanderOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Opener
@@ -10054,13 +9781,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'modalOpener',
     plugin: true,
     selector: '.modal-opener',
@@ -10071,22 +9798,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL OPENER */
 
-  var ModalOpener = function (_Widgets$Opener2) {
-    _inherits(ModalOpener, _Widgets$Opener2);
-
-    function ModalOpener() {
-      _classCallCheck(this, ModalOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalOpener).apply(this, arguments));
-    }
-
-    return ModalOpener;
-  }(Widgets.Opener);
+  class ModalOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(ModalOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ModalOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Opener
@@ -10098,13 +9817,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'overlayOpener',
     plugin: true,
     selector: '.overlay-opener',
@@ -10115,22 +9834,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY OPENER */
 
-  var OverlayOpener = function (_Widgets$Opener3) {
-    _inherits(OverlayOpener, _Widgets$Opener3);
-
-    function OverlayOpener() {
-      _classCallCheck(this, OverlayOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayOpener).apply(this, arguments));
-    }
-
-    return OverlayOpener;
-  }(Widgets.Opener);
+  class OverlayOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(OverlayOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( OverlayOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Targeter - Toggler
@@ -10141,13 +9852,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'toggler',
     options: {
       methods: {
@@ -10158,43 +9869,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOGGLER */
 
-  var Toggler = function (_Widgets$Opener4) {
-    _inherits(Toggler, _Widgets$Opener4);
+  class Toggler extends Widgets.Opener {
 
-    function Toggler() {
-      _classCallCheck(this, Toggler);
+    /* TAP */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Toggler).apply(this, arguments));
+    __tap ( event ) {
+
+      this.toggle ( undefined, event );
+
     }
 
-    _createClass(Toggler, [{
-      key: '__tap',
+    /* API */
 
+    toggle ( force, event ) {
 
-      /* TAP */
+      return this._targetInstance[this.options.methods.toggle]( force, this.element, event );
 
-      value: function __tap(event) {
+    }
 
-        this.toggle(undefined, event);
-      }
-
-      /* API */
-
-    }, {
-      key: 'toggle',
-      value: function toggle(force, event) {
-
-        return this._targetInstance[this.options.methods.toggle](force, this.element, event);
-      }
-    }]);
-
-    return Toggler;
-  }(Widgets.Opener);
+  }
 
   /* FACTORY */
 
-  Factory.init(Toggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Toggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Toggler
@@ -10206,13 +9906,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'expanderToggler',
     plugin: true,
     selector: '.expander-toggler',
@@ -10223,22 +9923,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EXPANDER TOGGLER */
 
-  var ExpanderToggler = function (_Widgets$Toggler) {
-    _inherits(ExpanderToggler, _Widgets$Toggler);
-
-    function ExpanderToggler() {
-      _classCallCheck(this, ExpanderToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderToggler).apply(this, arguments));
-    }
-
-    return ExpanderToggler;
-  }(Widgets.Toggler);
+  class ExpanderToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(ExpanderToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ExpanderToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Flippable - Targeters - Flipper
@@ -10250,13 +9942,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'flippableFlipper',
     plugin: true,
     selector: '.flippable-flipper',
@@ -10272,22 +9964,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLIPPABLE FLIPPER */
 
-  var FlippableFlipper = function (_Widgets$Toggler2) {
-    _inherits(FlippableFlipper, _Widgets$Toggler2);
-
-    function FlippableFlipper() {
-      _classCallCheck(this, FlippableFlipper);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(FlippableFlipper).apply(this, arguments));
-    }
-
-    return FlippableFlipper;
-  }(Widgets.Toggler);
+  class FlippableFlipper extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(FlippableFlipper, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( FlippableFlipper, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Toggler
@@ -10299,13 +9983,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'modalToggler',
     plugin: true,
     selector: '.modal-toggler',
@@ -10316,22 +10000,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MODAL TOGGLER */
 
-  var ModalToggler = function (_Widgets$Toggler3) {
-    _inherits(ModalToggler, _Widgets$Toggler3);
-
-    function ModalToggler() {
-      _classCallCheck(this, ModalToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalToggler).apply(this, arguments));
-    }
-
-    return ModalToggler;
-  }(Widgets.Toggler);
+  class ModalToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(ModalToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( ModalToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Toggler
@@ -10343,13 +10019,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'overlayToggler',
     plugin: true,
     selector: '.overlay-toggler',
@@ -10360,22 +10036,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OVERLAY TOGGLER */
 
-  var OverlayToggler = function (_Widgets$Toggler4) {
-    _inherits(OverlayToggler, _Widgets$Toggler4);
-
-    function OverlayToggler() {
-      _classCallCheck(this, OverlayToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayToggler).apply(this, arguments));
-    }
-
-    return OverlayToggler;
-  }(Widgets.Toggler);
+  class OverlayToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(OverlayToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( OverlayToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Textarea - Autogrow
@@ -10388,13 +10056,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // It supports only `box-sizing: border-box` textareas
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'textareaAutogrow',
     plugin: true,
     selector: 'textarea.autogrow',
@@ -10407,95 +10075,82 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* AUTOGROW TEXTAREA */
 
-  var AutogrowTextarea = function (_Widgets$Widget26) {
-    _inherits(AutogrowTextarea, _Widgets$Widget26);
+  class AutogrowTextarea extends Widgets.Widget {
 
-    function AutogrowTextarea() {
-      _classCallCheck(this, AutogrowTextarea);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(AutogrowTextarea).apply(this, arguments));
+    _variables () {
+
+      this.$textarea = this.$element;
+
+      this.$tempTextarea = $('<textarea>').css ({
+                              'position': 'fixed',
+                              'visibility': 'hidden',
+                              'padding': 0,
+                              'min-height': 0,
+                              'height': 0
+                            });
+
     }
 
-    _createClass(AutogrowTextarea, [{
-      key: '_variables',
+    _init () {
 
+      this._update ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    _events () {
 
-        this.$textarea = this.$element;
+      this.___inputChange ();
 
-        this.$tempTextarea = $('<textarea>').css({
-          'position': 'fixed',
-          'visibility': 'hidden',
-          'padding': 0,
-          'min-height': 0,
-          'height': 0
-        });
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+    }
 
-        this._update();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    /* PRIVATE */
 
-        this.___inputChange();
-      }
+    _getNeededHeight () {
 
-      /* PRIVATE */
+      this.$tempTextarea.css ( 'font', this.$textarea.css ( 'font' ) ).val ( this.$textarea.val () || ' ' ).appendTo ( this.$layout ); // Ensuring that there's at least a space character inside of it fixed a bug in IE/Edge where the textarea gets shrinked
 
-    }, {
-      key: '_getNeededHeight',
-      value: function _getNeededHeight() {
+      let height = this.$tempTextarea[0].scrollHeight;
 
-        this.$tempTextarea.css('font', this.$textarea.css('font')).val(this.$textarea.val() || ' ').appendTo(this.$layout); // Ensuring that there's at least a space character inside of it fixed a bug in IE/Edge where the textarea gets shrinked
+      this.$tempTextarea.detach ();
 
-        var height = this.$tempTextarea[0].scrollHeight;
+      return height;
 
-        this.$tempTextarea.detach();
+    }
 
-        return height;
-      }
+    /* INPUT / CHANGE */
 
-      /* INPUT / CHANGE */
+    ___inputChange () {
 
-    }, {
-      key: '___inputChange',
-      value: function ___inputChange() {
+      this._on ( true, 'input change', this._update );
 
-        this._on(true, 'input change', this._update);
-      }
+    }
 
-      /* UPDATE */
+    /* UPDATE */
 
-    }, {
-      key: '_update',
-      value: function _update() {
+    _update () {
 
-        var height = this._getNeededHeight();
+      let height = this._getNeededHeight ();
 
-        if (height === this._prevHeight) return;
+      if ( height === this._prevHeight ) return;
 
-        this.$textarea.height(height);
+      this.$textarea.height ( height );
 
-        this._prevHeight = height;
+      this._prevHeight = height;
 
-        this._trigger('change');
-      }
-    }]);
+      this._trigger ( 'change' );
 
-    return AutogrowTextarea;
-  }(Widgets.Widget);
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(AutogrowTextarea, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( AutogrowTextarea, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Time Ago
@@ -10506,13 +10161,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'timeAgo',
     plugin: true,
     selector: '.timeago, .time-ago',
@@ -10530,108 +10185,98 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TIME AGO */
 
-  var TimeAgo = function (_Widgets$Widget27) {
-    _inherits(TimeAgo, _Widgets$Widget27);
+  class TimeAgo extends Widgets.Widget {
 
-    function TimeAgo() {
-      _classCallCheck(this, TimeAgo);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TimeAgo).apply(this, arguments));
+    _variables () {
+
+      this.$timeAgoElement = this.$element;
+
     }
 
-    _createClass(TimeAgo, [{
-      key: '_variables',
+    _init () {
 
+      if ( !this.options.timestamp ) {
 
-      /* SPECIAL */
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.datas.timestamp );
 
-      value: function _variables() {
-
-        this.$timeAgoElement = this.$element;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        if (!this.options.timestamp) {
-
-          this.options.timestamp = this.$timeAgoElement.data(this.options.datas.timestamp);
-        }
-
-        if (this.isEnabled()) {
-
-          this._loop();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        clearTimeout(this.loopId);
       }
 
-      /* LOOP */
+      if ( this.isEnabled () ) {
 
-    }, {
-      key: '_loop',
-      value: function _loop() {
-        var seconds = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+        this._loop ();
 
-
-        this.loopId = this._delay(function () {
-
-          this._loop(this._update().next);
-        }, seconds * 1000);
       }
 
-      /* UPDATE */
+    }
 
-    }, {
-      key: '_update',
-      value: function _update() {
+    _destroy () {
 
-        var timeAgo = _.timeAgo(this.options.timestamp);
+      clearTimeout ( this.loopId );
 
-        if (this.options.title) {
+    }
 
-          this.$timeAgoElement.attr('title', timeAgo.str);
-        } else {
+    /* LOOP */
 
-          this.$timeAgoElement.text(timeAgo.str);
-        }
+    _loop ( seconds = 0 ) {
 
-        this._trigger('change');
+      this.loopId = this._delay ( function () {
 
-        return timeAgo;
+        this._loop ( this._update ().next );
+
+      }, seconds * 1000 );
+
+    }
+
+    /* UPDATE */
+
+    _update () {
+
+      let timeAgo = _.timeAgo ( this.options.timestamp );
+
+      if ( this.options.title ) {
+
+        this.$timeAgoElement.attr ( 'title', timeAgo.str );
+
+      } else {
+
+        this.$timeAgoElement.text ( timeAgo.str );
+
       }
 
-      /* API OVERRIDES */
+      this._trigger ( 'change' );
 
-    }, {
-      key: 'enable',
-      value: function enable() {
+      return timeAgo;
 
-        _get(Object.getPrototypeOf(TimeAgo.prototype), 'enable', this).call(this);
+    }
 
-        this._loop();
-      }
-    }, {
-      key: 'disable',
-      value: function disable() {
+    /* API OVERRIDES */
 
-        _get(Object.getPrototypeOf(TimeAgo.prototype), 'disable', this).call(this);
+    enable () {
 
-        clearTimeout(this.loopId);
-      }
-    }]);
+      super.enable ();
 
-    return TimeAgo;
-  }(Widgets.Widget);
+      this._loop ();
+
+    }
+
+    disable () {
+
+      super.disable ();
+
+      clearTimeout ( this.loopId );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(TimeAgo, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer);
+  Factory.init ( TimeAgo, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer ));
+
 
 /* =========================================================================
  * Svelto - Core - Z-Depths
@@ -10642,23 +10287,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* Z-DEPTHS */
 
-  var ZDepths = {};
+  let ZDepths = {};
 
-  for (var i = 0, l = 24; i <= l; i++) {
+  for ( let i = 0, l = 24; i <= l; i++ ) {
 
-    ZDepths[i] = 'z-depth-' + i;
+    ZDepths[i] = `z-depth-${i}`;
+
   }
 
   /* EXPORT */
 
   Svelto.ZDepths = ZDepths;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Decorators - Blurred
@@ -10669,17 +10317,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* BLURRED */
 
-  $.fn.blurred = function (force) {
+  $.fn.blurred = function ( force ) {
 
-    return this.toggleClass('blurred', force);
+    return this.toggleClass ( 'blurred', force );
+
   };
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Decorators - Obscured
@@ -10690,17 +10341,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* OBSCURED */
 
-  $.fn.obscured = function (force) {
+  $.fn.obscured = function ( force ) {
 
-    return this.toggleClass('obscured', force);
+    return this.toggleClass ( 'obscured', force );
+
   };
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - Color
@@ -10714,395 +10368,402 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add support for the alpha channel
 //TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* COLOR */
 
-  var Color = function () {
-    function Color(color, colorspace) {
-      _classCallCheck(this, Color);
+  let Color = class {
 
-      this.set(color, colorspace);
+    constructor ( color, colorspace ) {
+
+      this.set ( color, colorspace );
+
     }
 
     /* ----- API ----- */
 
     /* SET */
 
-    _createClass(Color, [{
-      key: 'set',
-      value: function set(color, colorspace) {
+    set ( color, colorspace ) {
 
-        if (colorspace) {
+      if ( colorspace ) {
 
-          switch (colorspace.toLowerCase()) {
+        switch ( colorspace.toLowerCase () ) {
 
-            case 'hex':
-              return this.setHex(color);
+          case 'hex':
+            return this.setHex ( color );
 
-            case 'rgb':
-              return this.setRgb(color);
+          case 'rgb':
+            return this.setRgb ( color );
 
-            case 'hsv':
-              return this.setHsv(color);
+          case 'hsv':
+            return this.setHsv ( color );
 
-            case 'hsl':
-              return this.setHsl(color);
+          case 'hsl':
+            return this.setHsl ( color );
 
-          }
         }
 
-        if (_.isPlainObject(color)) {
+      }
 
-          if ('r' in color && 'g' in color && 'b' in color) {
+      if ( _.isPlainObject ( color ) ) {
 
-            if (Number(color.r) > 99 || Number(color.g) > 99 || Number(color.b) > 99) {
+        if ( 'r' in color && 'g' in color && 'b' in color ) {
 
-              return this.setRgb(color);
-            } else {
+          if ( Number ( color.r ) > 99 || Number ( color.g ) > 99 || Number ( color.b ) > 99 ) {
 
-              return this.setHex(color);
-            }
-          } else if ('h' in color && 's' in color) {
+            return this.setRgb ( color );
 
-            if ('l' in color) {
+          } else {
 
-              return this.setHsl(color);
-            } else if ('v' in color) {
+            return this.setHex ( color );
 
-              return this.setHsv(color);
-            }
           }
-        } else if (_.isString(color)) {
 
-          color = _.trim(color, '#');
+        } else if ( 'h' in color && 's' in color ) {
 
-          if (/^[0-9a-f]{6}$/i.test(color)) {
-            // Full 6-chars hex color notation
+          if ( 'l' in color ) {
 
-            return this.setHex({
-              r: color[0] + color[1],
-              g: color[2] + color[3],
-              b: color[4] + color[5]
-            });
-          } else if (/^[0-9a-f]{3}$/i.test(color)) {
-            // Shorthand 3-chars hex color notation
+            return this.setHsl ( color );
 
-            return this.setHex({
-              r: color[0].repeat(2),
-              g: color[1].repeat(2),
-              b: color[2].repeat(2)
-            });
+          } else if ( 'v' in color ) {
+
+            return this.setHsv ( color );
+
           }
+
         }
 
-        throw new Error('Invalid color');
-      }
-    }, {
-      key: 'setHex',
-      value: function setHex(color) {
+      } else if ( _.isString ( color ) ) {
 
-        this.hex = _.cloneDeep(color);
-      }
-    }, {
-      key: 'setRgb',
-      value: function setRgb(color) {
+        color = _.trim ( color, '#' );
 
-        this.hex = Color.rgb2hex(color);
-      }
-    }, {
-      key: 'setHsv',
-      value: function setHsv(color) {
+        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { // Full 6-chars hex color notation
 
-        this.hex = Color.hsv2hex(color);
-      }
-    }, {
-      key: 'setHsl',
-      value: function setHsl(color) {
+          return this.setHex ({
+            r: color[0] + color[1],
+            g: color[2] + color[3],
+            b: color[4] + color[5]
+          });
 
-        this.hex = Color.hsl2hex(color);
-      }
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { // Shorthand 3-chars hex color notation
 
-      /* GET */
+          return this.setHex ({
+            r: color[0].repeat ( 2 ),
+            g: color[1].repeat ( 2 ),
+            b: color[2].repeat ( 2 )
+          });
 
-    }, {
-      key: 'getHex',
-      value: function getHex() {
-
-        return this.hex;
-      }
-    }, {
-      key: 'getRgb',
-      value: function getRgb() {
-
-        return Color.hex2rgb(this.hex);
-      }
-    }, {
-      key: 'getHsv',
-      value: function getHsv() {
-
-        return Color.hex2hsv(this.hex);
-      }
-    }, {
-      key: 'getHsl',
-      value: function getHsl() {
-
-        return Color.hex2hsl(this.hex);
-      }
-
-      /* ----- STATICS ----- */
-
-      /* HEX */
-
-    }], [{
-      key: 'hex2rgb',
-      value: function hex2rgb(hex) {
-
-        return {
-          r: Color.hex2dec(hex.r),
-          g: Color.hex2dec(hex.g),
-          b: Color.hex2dec(hex.b)
-        };
-      }
-    }, {
-      key: 'hex2hsv',
-      value: function hex2hsv(hex) {
-
-        return Color.rgb2hsv(Color.hex2rgb(hex));
-      }
-    }, {
-      key: 'hex2hsl',
-      value: function hex2hsl(hex) {
-
-        return Color.hsv2hsl(Color.hex2hsv(hex));
-      }
-
-      /* RGB */
-
-    }, {
-      key: 'rgb2hex',
-      value: function rgb2hex(rgb) {
-
-        return {
-          r: Color.dec2hex(rgb.r),
-          g: Color.dec2hex(rgb.g),
-          b: Color.dec2hex(rgb.b)
-        };
-      }
-    }, {
-      key: 'rgb2hsv',
-      value: function rgb2hsv(rgb) {
-
-        var r = rgb.r / 255,
-            g = rgb.g / 255,
-            b = rgb.b / 255,
-            h = void 0,
-            s = void 0,
-            v = Math.max(r, g, b),
-            diff = v - Math.min(r, g, b),
-            diffc = function diffc(c) {
-          return (v - c) / 6 / diff + 1 / 2;
-        };
-
-        if (diff === 0) {
-
-          h = s = 0;
-        } else {
-
-          s = diff / v;
-
-          var rr = diffc(r),
-              gg = diffc(g),
-              bb = diffc(b);
-
-          if (r === v) {
-
-            h = bb - gg;
-          } else if (g === v) {
-
-            h = 1 / 3 + rr - bb;
-          } else if (b === v) {
-
-            h = 2 / 3 + gg - rr;
-          }
-
-          if (h < 0) {
-
-            h += 1;
-          } else if (h > 1) {
-
-            h -= 1;
-          }
         }
 
-        return {
-          h: h * 360,
-          s: s * 100,
-          v: v * 100
-        };
-      }
-    }, {
-      key: 'rgb2hsl',
-      value: function rgb2hsl(rgb) {
-
-        return Color.hsv2hsl(Color.rgb2hsv(rgb));
       }
 
-      /* HSV */
+      throw new Error ( 'Invalid color' );
 
-    }, {
-      key: 'hsv2hex',
-      value: function hsv2hex(hsv) {
+    }
 
-        return Color.rgb2hex(Color.hsv2rgb(hsv));
-      }
-    }, {
-      key: 'hsv2rgb',
-      value: function hsv2rgb(hsv) {
+    setHex ( color ) {
 
-        var r = void 0,
-            g = void 0,
-            b = void 0,
-            h = hsv.h,
-            s = hsv.s,
-            v = hsv.v;
+      this.hex = _.cloneDeep ( color );
 
-        s /= 100;
-        v /= 100;
+    }
 
-        if (s === 0) {
+    setRgb ( color ) {
 
-          r = g = b = v;
-        } else {
+      this.hex = Color.rgb2hex ( color );
 
-          var i = void 0,
-              f = void 0,
-              p = void 0,
-              q = void 0,
-              t = void 0;
+    }
 
-          h /= 60;
-          i = Math.floor(h);
-          f = h - i;
-          p = v * (1 - s);
-          q = v * (1 - s * f);
-          t = v * (1 - s * (1 - f));
+    setHsv ( color ) {
 
-          switch (i) {
+      this.hex = Color.hsv2hex ( color );
 
-            case 0:
-              r = v;
-              g = t;
-              b = p;
-              break;
+    }
 
-            case 1:
-              r = q;
-              g = v;
-              b = p;
-              break;
+    setHsl ( color ) {
 
-            case 2:
-              r = p;
-              g = v;
-              b = t;
-              break;
+      this.hex = Color.hsl2hex ( color );
 
-            case 3:
-              r = p;
-              g = q;
-              b = v;
-              break;
+    }
 
-            case 4:
-              r = t;
-              g = p;
-              b = v;
-              break;
+    /* GET */
 
-            default:
-              r = v;
-              g = p;
-              b = q;
+    getHex () {
 
-          }
+      return this.hex;
+
+    }
+
+    getRgb () {
+
+      return Color.hex2rgb ( this.hex );
+
+    }
+
+    getHsv () {
+
+      return Color.hex2hsv ( this.hex );
+
+    }
+
+    getHsl () {
+
+      return Color.hex2hsl ( this.hex );
+
+    }
+
+    /* ----- STATICS ----- */
+
+    /* HEX */
+
+    static hex2rgb ( hex ) {
+
+      return {
+        r: Color.hex2dec ( hex.r ),
+        g: Color.hex2dec ( hex.g ),
+        b: Color.hex2dec ( hex.b )
+      };
+
+    }
+
+    static hex2hsv ( hex ) {
+
+      return Color.rgb2hsv ( Color.hex2rgb ( hex ) );
+
+    }
+
+    static hex2hsl ( hex ) {
+
+      return Color.hsv2hsl ( Color.hex2hsv ( hex ) );
+
+    }
+
+    /* RGB */
+
+    static rgb2hex ( rgb ) {
+
+      return {
+        r: Color.dec2hex ( rgb.r ),
+        g: Color.dec2hex ( rgb.g ),
+        b: Color.dec2hex ( rgb.b )
+      };
+
+    }
+
+    static rgb2hsv ( rgb ) {
+
+      let r = rgb.r / 255,
+          g = rgb.g / 255,
+          b = rgb.b / 255,
+          h,
+          s,
+          v = Math.max ( r, g, b ),
+          diff = v - Math.min ( r, g, b ),
+          diffc = function ( c ) {
+            return ( v - c ) / 6 / diff + 1 / 2;
+          };
+
+      if ( diff === 0 ) {
+
+        h = s = 0;
+
+      } else {
+
+        s = diff / v;
+
+        let rr = diffc ( r ),
+            gg = diffc ( g ),
+            bb = diffc ( b );
+
+        if ( r === v ) {
+
+          h = bb - gg;
+
+        } else if ( g === v ) {
+
+          h = ( 1 / 3 ) + rr - bb;
+
+        } else if ( b === v ) {
+
+          h = ( 2 / 3 ) + gg - rr;
+
         }
 
-        return {
-          r: Math.round(r * 255),
-          g: Math.round(g * 255),
-          b: Math.round(b * 255)
-        };
-      }
-    }, {
-      key: 'hsv2hsl',
-      value: function hsv2hsl(hsv) {
+        if ( h < 0 ) {
 
-        var s = hsv.s / 100,
-            v = hsv.v / 100,
-            tempL = (2 - s) * v,
-            tempS = s * v;
+          h += 1;
 
-        return {
-          h: hsv.h,
-          s: tempS !== 0 ? tempS / (tempL <= 1 ? tempL : 2 - tempL) * 100 : 0,
-          l: tempL / 2 * 100
-        };
+        } else if ( h > 1 ) {
+
+          h -= 1;
+        }
+
       }
 
-      /* HSL */
+      return {
+        h: h * 360,
+        s: s * 100,
+        v: v * 100
+      };
 
-    }, {
-      key: 'hsl2hex',
-      value: function hsl2hex(hsl) {
+    }
 
-        return Color.hsv2hex(Color.hsl2hsv(hsl));
+    static rgb2hsl ( rgb ) {
+
+      return Color.hsv2hsl ( Color.rgb2hsv ( rgb ) );
+
+    }
+
+    /* HSV */
+
+    static hsv2hex ( hsv ) {
+
+      return Color.rgb2hex ( Color.hsv2rgb ( hsv ) );
+
+    }
+
+    static hsv2rgb ( hsv ) {
+
+      let r,
+          g,
+          b,
+          h = hsv.h,
+          s = hsv.s,
+          v = hsv.v;
+
+      s /= 100;
+      v /= 100;
+
+      if ( s === 0 ) {
+
+        r = g = b = v;
+
+      } else {
+
+        let i, f, p, q, t;
+
+        h /= 60;
+        i = Math.floor ( h );
+        f = h - i;
+        p = v * ( 1 - s );
+        q = v * ( 1 - s * f );
+        t = v * ( 1 - s * ( 1 - f ) );
+
+        switch ( i ) {
+
+          case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+
+          case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+
+          case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+
+          case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+
+          case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+
+          default:
+            r = v;
+            g = p;
+            b = q;
+
+        }
+
       }
-    }, {
-      key: 'hsl2rgb',
-      value: function hsl2rgb(hsl) {
 
-        return Color.hsv2rgb(Color.hsl2hsv(hsl));
-      }
-    }, {
-      key: 'hsl2hsv',
-      value: function hsl2hsv(hsl) {
+      return {
+        r: Math.round ( r * 255 ),
+        g: Math.round ( g * 255 ),
+        b: Math.round ( b * 255 )
+      };
 
-        var l = hsl.l / 100 * 2,
-            s = hsl.s / 100 * (l <= 1 ? l : 2 - l);
+    }
 
-        return {
-          h: hsl.h,
-          s: l + s !== 0 ? 2 * s / (l + s) * 100 : 0,
-          v: (l + s) / 2 * 100
-        };
-      }
+    static hsv2hsl ( hsv ) {
 
-      /* DECIMAL / HEX */
+      let s = hsv.s / 100,
+          v = hsv.v / 100,
+          tempL = ( 2 - s ) * v,
+          tempS = s * v;
 
-    }, {
-      key: 'dec2hex',
-      value: function dec2hex(dec) {
+      return {
+        h: hsv.h,
+        s: ( tempS !== 0 ) ? ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100 : 0,
+        l: ( tempL / 2 ) * 100
+      };
 
-        return _.padStart(parseInt(dec, 10).toString(16), 2, '0');
-      }
-    }, {
-      key: 'hex2dec',
-      value: function hex2dec(hex) {
+    }
 
-        return parseInt(hex, 16);
-      }
-    }]);
+    /* HSL */
 
-    return Color;
-  }();
+    static hsl2hex ( hsl ) {
+
+      return Color.hsv2hex ( Color.hsl2hsv ( hsl ) );
+
+    }
+
+    static hsl2rgb ( hsl ) {
+
+      return Color.hsv2rgb ( Color.hsl2hsv ( hsl ) );
+
+    }
+
+    static hsl2hsv ( hsl ) {
+
+      let l = hsl.l / 100 * 2,
+          s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
+
+      return {
+        h: hsl.h,
+        s: ( l + s !== 0 ) ? ( 2 * s ) / ( l + s ) * 100 : 0,
+        v: ( l + s ) / 2 * 100
+      };
+
+    }
+
+    /* DECIMAL / HEX */
+
+    static dec2hex ( dec ) {
+
+      return _.padStart ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
+
+    }
+
+    static hex2dec ( hex ) {
+
+      return parseInt ( hex, 16 );
+
+    }
+
+  };
 
   /* EXPORT */
 
   Svelto.Color = Color;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Colorpicker
@@ -11114,22 +10775,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require lib/color/color.js
  * ========================================================================= */
 
+//TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
-(function ($, _, Svelto, Widgets, Factory, Color, Keyboard) {
+(function ( $, _, Svelto, Widgets, Factory, Color, Keyboard ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'colorpicker',
     plugin: true,
     selector: '.colorpicker',
     options: {
       exporters: {
-        hex: function hex(color) {
-          var hex = color.getHex();
+        hex ( color ) {
+          let hex = color.getHex ();
           return '#' + hex.r + hex.g + hex.b;
         }
       },
@@ -11158,362 +10820,345 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* COLORPICKER */
 
-  var Colorpicker = function (_Widgets$Widget28) {
-    _inherits(Colorpicker, _Widgets$Widget28);
+  class Colorpicker extends Widgets.Widget {
 
-    function Colorpicker() {
-      _classCallCheck(this, Colorpicker);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Colorpicker).apply(this, arguments));
+    _variables () {
+
+      this.$colorpicker = this.$element;
+      this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
+      this.$sbHandler = this.$colorpicker.find ( this.options.selectors.sb.handler );
+      this.$hueWrp = this.$colorpicker.find ( this.options.selectors.hue.wrp );
+      this.$hueHandler = this.$colorpicker.find ( this.options.selectors.hue.handler );
+
+      this.$input = this.$colorpicker.find ( this.options.selectors.input );
+
+      this.sbWrpSize = this.$sbWrp.width ();
+
+      this.hueWrpHeight = this.sbWrpSize;
+
+      this.hsv = false;
+
     }
 
-    _createClass(Colorpicker, [{
-      key: '_variables',
+    _init () {
 
+      this.set ( this.$input.val () );
 
-      /* SPECIAL */
+      if ( !this.hsv ) {
 
-      value: function _variables() {
+        this.set ( this.options.startColor );
 
-        this.$colorpicker = this.$element;
-        this.$sbWrp = this.$colorpicker.find(this.options.selectors.sb.wrp);
-        this.$sbHandler = this.$colorpicker.find(this.options.selectors.sb.handler);
-        this.$hueWrp = this.$colorpicker.find(this.options.selectors.hue.wrp);
-        this.$hueHandler = this.$colorpicker.find(this.options.selectors.hue.handler);
-
-        this.$input = this.$colorpicker.find(this.options.selectors.input);
-
-        this.sbWrpSize = this.$sbWrp.width();
-
-        this.hueWrpHeight = this.sbWrpSize;
-
-        this.hsv = false;
       }
-    }, {
-      key: '_init',
-      value: function _init() {
 
-        this.set(this.$input.val());
+    }
 
-        if (!this.hsv) {
+    _events () {
 
-          this.set(this.options.startColor);
+      this.___change ();
+
+      this.___sbKeydown ();
+      this.___sbDrag ();
+
+      this.___hueKeydown ();
+      this.___hueDrag ();
+
+    }
+
+    _destroy () {
+
+      /* DRAG */
+
+      this.$sbHandler.draggable ( 'destroy' );
+      this.$hueHandler.draggable ( 'destroy' );
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
+    __change () {
+
+      this.set ( this.$input.val () );
+
+    }
+
+    /* SB ARROWS */
+
+    ___sbKeydown () {
+
+      this._onHover ( this.$sbWrp, [this.$document, 'keydown', this.__sbKeydown] );
+
+    }
+
+    __sbKeydown ( event ) {
+
+      switch ( event.keyCode ) {
+
+        case Keyboard.keys.UP:
+          this.hsv.v = Math.min ( 100, this.hsv.v + 1 );
+          break;
+
+        case Keyboard.keys.RIGHT:
+          this.hsv.s = Math.min ( 100, this.hsv.s + 1 );
+          break;
+
+        case Keyboard.keys.DOWN:
+          this.hsv.v = Math.max ( 0, this.hsv.v - 1 );
+          break;
+
+        case Keyboard.keys.LEFT:
+          this.hsv.s = Math.max ( 0, this.hsv.s - 1 );
+          break;
+
+        default:
+          return;
+
+      }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+      this._updateSb ();
+      this._updateInput ();
+
+    }
+
+    /* SB DRAG */
+
+    ___sbDrag () {
+
+      this.$sbHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        proxy: {
+          $element: this.$sbWrp
+        },
+        constrainer: {
+          $element: this.$sbWrp,
+          center: true
+        },
+        callbacks: {
+          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
+          end: this.__sbDragEnd.bind ( this )
         }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      });
 
-        this.___change();
+    }
 
-        this.___sbKeydown();
-        this.___sbDrag();
+    _sbDragSet ( XY, update ) {
 
-        this.___hueKeydown();
-        this.___hueDrag();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
+      this.hsv.s =  _.clamp ( XY.x, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( XY.y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
-        /* DRAG */
+      this._updateSb ( false );
 
-        this.$sbHandler.draggable('destroy');
-        this.$hueHandler.draggable('destroy');
+      if ( update ) {
+
+        this._updateInput ();
+
       }
 
-      /* CHANGE */
+    }
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    __sbDragMove ( event, data ) {
 
-        this._on(true, this.$input, 'change', this.__change);
+      this._sbDragSet ( data.dragXY, this.options.live );
+
+    }
+
+    __sbDragEnd ( event, data ) {
+
+      this._sbDragSet ( data.dragXY, true );
+
+    }
+
+    /* HUE ARROWS */
+
+    ___hueKeydown () {
+
+      this._onHover ( this.$hueWrp, [this.$document, 'keydown', this.__hueKeydown] );
+
+    }
+
+    __hueKeydown ( event ) {
+
+      switch ( event.keyCode ) {
+
+        case Keyboard.keys.UP:
+          this.hsv.h = Math.min ( 359, this.hsv.h + 1 );
+          break;
+
+        case Keyboard.keys.DOWN:
+          this.hsv.h = Math.max ( 0, this.hsv.h - 1 );
+          break;
+
+        default:
+          return;
+
       }
-    }, {
-      key: '__change',
-      value: function __change() {
 
-        this.set(this.$input.val());
-      }
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
-      /* SB ARROWS */
+      this._updateHue ();
+      this._updateInput ();
 
-    }, {
-      key: '___sbKeydown',
-      value: function ___sbKeydown() {
+    }
 
-        this._onHover(this.$sbWrp, [this.$document, 'keydown', this.__sbKeydown]);
-      }
-    }, {
-      key: '__sbKeydown',
-      value: function __sbKeydown(event) {
+    /* HUE DRAG */
 
-        switch (event.keyCode) {
+    ___hueDrag () {
 
-          case Keyboard.keys.UP:
-            this.hsv.v = Math.min(100, this.hsv.v + 1);
-            break;
-
-          case Keyboard.keys.RIGHT:
-            this.hsv.s = Math.min(100, this.hsv.s + 1);
-            break;
-
-          case Keyboard.keys.DOWN:
-            this.hsv.v = Math.max(0, this.hsv.v - 1);
-            break;
-
-          case Keyboard.keys.LEFT:
-            this.hsv.s = Math.max(0, this.hsv.s - 1);
-            break;
-
-          default:
-            return;
-
+      this.$hueHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'y',
+        proxy: {
+          $element: this.$hueWrp
+        },
+        constrainer: {
+          $element: this.$hueWrp
+        },
+        callbacks: {
+          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
+          end: this.__hueDragEnd.bind ( this )
         }
+      });
 
-        event.preventDefault();
-        event.stopImmediatePropagation();
+    }
 
-        this._updateSb();
-        this._updateInput();
+    _hueDragSet ( XY, update ) {
+
+      this.hsv.h = 359 - ( _.clamp ( XY.y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+
+      this._updateHue ( false );
+
+      if ( update ) {
+
+        this._updateInput ();
+
       }
 
-      /* SB DRAG */
+    }
 
-    }, {
-      key: '___sbDrag',
-      value: function ___sbDrag() {
+    __hueDragMove ( event, data ) {
 
-        this.$sbHandler.draggable({
-          draggable: this.isEnabled.bind(this),
-          proxy: {
-            $element: this.$sbWrp
-          },
-          constrainer: {
-            $element: this.$sbWrp,
-            center: true
-          },
-          callbacks: {
-            move: this._throttle(this.__sbDragMove.bind(this), 100),
-            end: this.__sbDragEnd.bind(this)
-          }
-        });
-      }
-    }, {
-      key: '_sbDragSet',
-      value: function _sbDragSet(XY, update) {
+      this._hueDragSet ( data.dragXY, this.options.live );
 
-        this.hsv.s = _.clamp(XY.x, 0, this.sbWrpSize) * 100 / this.sbWrpSize;
-        this.hsv.v = 100 - _.clamp(XY.y, 0, this.sbWrpSize) * 100 / this.sbWrpSize;
+    }
 
-        this._updateSb(false);
+    __hueDragEnd ( event, data ) {
 
-        if (update) {
+      this._hueDragSet ( data.dragXY, true );
 
-          this._updateInput();
-        }
-      }
-    }, {
-      key: '__sbDragMove',
-      value: function __sbDragMove(event, data) {
+    }
 
-        this._sbDragSet(data.dragXY, this.options.live);
-      }
-    }, {
-      key: '__sbDragEnd',
-      value: function __sbDragEnd(event, data) {
+    /* UPDATE */
 
-        this._sbDragSet(data.dragXY, true);
+    _updateSb ( _translate = true ) {
+
+      /* HSL */
+
+      let hsl = Color.hsv2hsl ( this.hsv );
+
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
+
+      /* TRANSLATE */
+
+      if ( _translate ) {
+
+        let translateX = this.sbWrpSize / 100 * this.hsv.s,
+            translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
+
+        this.$sbHandler.translate ( translateX, translateY );
+
       }
 
-      /* HUE ARROWS */
+    }
 
-    }, {
-      key: '___hueKeydown',
-      value: function ___hueKeydown() {
+    _updateHue ( _translate = true ) {
 
-        this._onHover(this.$hueWrp, [this.$document, 'keydown', this.__hueKeydown]);
-      }
-    }, {
-      key: '__hueKeydown',
-      value: function __hueKeydown(event) {
+      /* HSL */
 
-        switch (event.keyCode) {
+      let hsl = Color.hsv2hsl ( this.hsv );
 
-          case Keyboard.keys.UP:
-            this.hsv.h = Math.min(359, this.hsv.h + 1);
-            break;
+      this.$hueHandler.hsl ( this.hsv.h, 100, 50 );
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
+      this.$sbWrp.hsl ( this.hsv.h, 100, 50 );
 
-          case Keyboard.keys.DOWN:
-            this.hsv.h = Math.max(0, this.hsv.h - 1);
-            break;
+      /* TRANSLATE */
 
-          default:
-            return;
+      if ( _translate ) {
 
-        }
+        let translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
-        event.preventDefault();
-        event.stopImmediatePropagation();
+        this.$hueHandler.translateY ( translateY );
 
-        this._updateHue();
-        this._updateInput();
       }
 
-      /* HUE DRAG */
+    }
 
-    }, {
-      key: '___hueDrag',
-      value: function ___hueDrag() {
+    _updateInput () {
 
-        this.$hueHandler.draggable({
-          draggable: this.isEnabled.bind(this),
-          axis: 'y',
-          proxy: {
-            $element: this.$hueWrp
-          },
-          constrainer: {
-            $element: this.$hueWrp
-          },
-          callbacks: {
-            move: this._throttle(this.__hueDragMove.bind(this), 50),
-            end: this.__hueDragEnd.bind(this)
-          }
-        });
-      }
-    }, {
-      key: '_hueDragSet',
-      value: function _hueDragSet(XY, update) {
+      this.$input.val ( this._export () ).trigger ( 'change' );
 
-        this.hsv.h = 359 - _.clamp(XY.y, 0, this.hueWrpHeight) * 359 / this.hueWrpHeight;
+      this._trigger ( 'change' );
 
-        this._updateHue(false);
+    }
 
-        if (update) {
+    _update () {
 
-          this._updateInput();
-        }
-      }
-    }, {
-      key: '__hueDragMove',
-      value: function __hueDragMove(event, data) {
+      this._updateSb ();
+      this._updateHue ();
+      this._updateInput ();
 
-        this._hueDragSet(data.dragXY, this.options.live);
-      }
-    }, {
-      key: '__hueDragEnd',
-      value: function __hueDragEnd(event, data) {
+    }
 
-        this._hueDragSet(data.dragXY, true);
-      }
+    /* EXPORT */
 
-      /* UPDATE */
+    _export () {
 
-    }, {
-      key: '_updateSb',
-      value: function _updateSb() {
-        var _translate = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+      return this.options.exporters[this.options.format.type] ( new Color ( this.hsv, 'hsv' ), this.options.format.data );
 
-        /* HSL */
+    }
 
-        var hsl = Color.hsv2hsl(this.hsv);
+    /* API */
 
-        this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l);
+    get () {
 
-        /* TRANSLATE */
+      return this._export ();
 
-        if (_translate) {
+    }
 
-          var translateX = this.sbWrpSize / 100 * this.hsv.s,
-              translateY = this.sbWrpSize / 100 * (100 - this.hsv.v);
+    set ( color ) {
 
-          this.$sbHandler.translate(translateX, translateY);
-        }
-      }
-    }, {
-      key: '_updateHue',
-      value: function _updateHue() {
-        var _translate = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+      color = _.attempt ( () => new Color ( color ) );
 
-        /* HSL */
+      if ( _.isError ( color ) ) return;
 
-        var hsl = Color.hsv2hsl(this.hsv);
+      let hsv = color.getHsv ();
 
-        this.$hueHandler.hsl(this.hsv.h, 100, 50);
-        this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l);
-        this.$sbWrp.hsl(this.hsv.h, 100, 50);
+      if ( _.isEqual ( this.hsv, hsv ) ) return;
 
-        /* TRANSLATE */
+      this.hsv = hsv;
 
-        if (_translate) {
+      this._update ();
 
-          var translateY = this.hueWrpHeight / 100 * (100 - this.hsv.h / 360 * 100);
+    }
 
-          this.$hueHandler.translateY(translateY);
-        }
-      }
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
-
-        this.$input.val(this._export()).trigger('change');
-
-        this._trigger('change');
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
-
-        this._updateSb();
-        this._updateHue();
-        this._updateInput();
-      }
-
-      /* EXPORT */
-
-    }, {
-      key: '_export',
-      value: function _export() {
-
-        return this.options.exporters[this.options.format.type](new Color(this.hsv, 'hsv'), this.options.format.data);
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return this._export();
-      }
-    }, {
-      key: 'set',
-      value: function set(color) {
-
-        color = _.attempt(function () {
-          return new Color(color);
-        });
-
-        if (_.isError(color)) return;
-
-        var hsv = color.getHsv();
-
-        if (_.isEqual(this.hsv, hsv)) return;
-
-        this.hsv = hsv;
-
-        this._update();
-      }
-    }]);
-
-    return Colorpicker;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Colorpicker, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard);
+  Factory.init ( Colorpicker, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard ));
+
 
 /* =========================================================================
  * Svelto - Lib - Directions
@@ -11524,18 +11169,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* DIRECTIONS */
 
-  var Directions = {
-    get: function get() {
+  let Directions = {
+
+    get () {
 
       return ['top', 'bottom', 'left', 'right'];
+
     },
-    getOpposite: function getOpposite(direction) {
+
+    getOpposite ( direction ) {
 
       return {
         'top': 'bottom',
@@ -11543,13 +11191,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         'left': 'right',
         'right': 'left'
       }[direction];
+
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Directions = Directions;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Panel
@@ -11565,13 +11217,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Animations, Directions) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations, Directions ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'panel',
     plugin: true,
     selector: '.panel',
@@ -11603,7 +11255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       animations: {
         open: Animations.normal,
-        close: Animations.normal
+        close: Animations.normal,
       },
       keystrokes: {
         'esc': '__esc'
@@ -11617,377 +11269,370 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL */
 
-  var Panel = function (_Widgets$Widget29) {
-    _inherits(Panel, _Widgets$Widget29);
+  class Panel extends Widgets.Widget {
 
-    function Panel() {
-      _classCallCheck(this, Panel);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Panel).apply(this, arguments));
+    _variables () {
+
+      this.$panel = this.$element;
+      this.panel = this.element;
+
+      this.$backdrop = this.$html;
+
+      this.options.direction = Directions.get ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
+      this.options.flick.open = this.options.flick.open || this.$panel.hasClass ( this.options.classes.flickable );
+
+      if ( this.options.pin ) {
+
+        _.merge ( this.options.breakpoints, {
+          up: {
+            [this.options.pin]: '_autopin',
+          },
+          down: {
+            [this.options.pin]: '_autounpin'
+          }
+        });
+
+      }
+
+      this._isOpen = this.$panel.hasClass ( this.options.classes.open );
+      this._isPinned = this.$panel.hasClass ( this.options.classes.pinned );
+
+      this.options.type = this.$panel.data ( this.options.datas.type ) || this.options.type;
+
+      this.layoutPinnedClass = Widgets.Panel.config.name + '-' + this.options.type + '-' + this.options.classes.pinned + '-' + this.options.direction;
+
     }
 
-    _createClass(Panel, [{
-      key: '_variables',
+    _events () {
 
+      if ( this._isOpen ) {
 
-      /* SPECIAL */
+        this.___breakpoint ();
+        this.___tap ();
+        this.___keydown ();
+        this.___panelFlick ();
+        this.___route ();
 
-      value: function _variables() {
-        var _this49 = this;
+      } else {
 
-        this.$panel = this.$element;
-        this.panel = this.element;
+        this.___layoutFlick ();
+        this.___panelFlick ();
 
-        this.$backdrop = this.$html;
-
-        this.options.direction = Directions.get().find(function (direction) {
-          return _this49.$panel.hasClass(direction);
-        }) || this.options.direction;
-        this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
-
-        if (this.options.pin) {
-
-          _.merge(this.options.breakpoints, {
-            up: _defineProperty({}, this.options.pin, '_autopin'),
-            down: _defineProperty({}, this.options.pin, '_autounpin')
-          });
-        }
-
-        this._isOpen = this.$panel.hasClass(this.options.classes.open);
-        this._isPinned = this.$panel.hasClass(this.options.classes.pinned);
-
-        this.options.type = this.$panel.data(this.options.datas.type) || this.options.type;
-
-        this.layoutPinnedClass = Widgets.Panel.config.name + '-' + this.options.type + '-' + this.options.classes.pinned + '-' + this.options.direction;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___breakpoint();
-          this.___tap();
-          this.___keydown();
-          this.___panelFlick();
-          this.___route();
-        } else {
-
-          this.___layoutFlick();
-          this.___panelFlick();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
       }
 
-      /* TAP */
+    }
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+    _destroy () {
 
-        this._on(true, this.$html, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
+      this.close ();
 
-        if (this._lock || this._isPinned || $(event.target).closest(this.$panel).length) return;
+    }
 
-        this.close();
-      }
+    /* TAP */
 
-      /* ESC */
+    ___tap () {
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
-        //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
+      this._on ( true, this.$html, Pointer.tap, this.__tap );
 
-        this._on(true, this.$document, 'keydown', this.__keydown);
-      }
-    }, {
-      key: '__esc',
-      value: function __esc() {
+    }
 
-        if (!this._isPinned) {
+    __tap ( event ) {
 
-          this.close();
-        }
-      }
+      if ( this._lock || this._isPinned || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
 
-      /* LAYOUT FLICK */
+      this.close ();
 
-    }, {
-      key: '___layoutFlick',
-      value: function ___layoutFlick() {
+    }
 
-        if (!this.options.flick.open) return;
+    /* ESC */
 
-        this.$layout.flickable();
+    ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-        this._on(this.$layout, 'flickable:flick', this.__layoutFlick);
-      }
-    }, {
-      key: '__layoutFlick',
-      value: function __layoutFlick(event, data) {
+      this._on ( true, this.$document, 'keydown', this.__keydown );
 
-        if (this._isOpen) return;
+    }
 
-        if (data.direction !== Directions.getOpposite(this.options.direction)) return;
+    __esc () {
 
-        var layoutOffset = this.$layout.offset();
+      if ( !this._isPinned ) {
 
-        switch (this.options.direction) {
+        this.close ();
 
-          case 'left':
-            if (data.startXY.x - layoutOffset.left > this.options.flick.treshold) return;
-            break;
-
-          case 'right':
-            if (this.$layout.outerWidth() + layoutOffset.left - data.startXY.x > this.options.flick.treshold) return;
-            break;
-
-          case 'top':
-            if (data.startXY.y - layoutOffset.top > this.options.flick.treshold) return;
-            break;
-
-          case 'bottom':
-            if (this.$layout.outerHeight() + layoutOffset.top - data.startXY.y > this.options.flick.treshold) return;
-            break;
-
-        }
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        this.open();
       }
 
-      /* PANEL FLICK */
+    }
 
-    }, {
-      key: '___panelFlick',
-      value: function ___panelFlick() {
+    /* LAYOUT FLICK */
 
-        if (!this.options.flick.close) return;
+    ___layoutFlick () {
 
-        this.$panel.flickable();
+      if ( !this.options.flick.open ) return;
 
-        this._on(true, 'flickable:flick', this.__panelFlick);
-      }
-    }, {
-      key: '__panelFlick',
-      value: function __panelFlick(event, data) {
+      this.$layout.flickable ();
 
-        if (!this._isOpen) return;
+      this._on ( this.$layout, 'flickable:flick', this.__layoutFlick );
 
-        if (data.direction !== this.options.direction) return;
+    }
 
-        event.preventDefault();
-        event.stopImmediatePropagation();
+    __layoutFlick ( event, data ) {
 
-        this.close();
-      }
+      if ( this._isOpen ) return;
 
-      /* ROUTE */
+      if ( data.direction !== Directions.getOpposite ( this.options.direction ) ) return;
 
-    }, {
-      key: '__route',
-      value: function __route() {
+      let layoutOffset = this.$layout.offset ();
 
-        if (this._isOpen && !this.$panel.isAttached()) {
+      switch ( this.options.direction ) {
 
-          this.close();
-        }
-      }
+        case 'left':
+          if ( data.startXY.x - layoutOffset.left > this.options.flick.treshold ) return;
+          break;
 
-      /* AUTO PINNING */
+        case 'right':
+          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.x > this.options.flick.treshold ) return;
+          break;
 
-    }, {
-      key: '_autopin',
-      value: function _autopin() {
+        case 'top':
+          if ( data.startXY.y - layoutOffset.top > this.options.flick.treshold ) return;
+          break;
 
-        if (this._isPinned) return;
+        case 'bottom':
+          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.y > this.options.flick.treshold ) return;
+          break;
 
-        this._wasAutoOpened = !this._isOpen;
-
-        this.pin();
-      }
-    }, {
-      key: '_autounpin',
-      value: function _autounpin() {
-
-        if (!this._isPinned) return;
-
-        this[this._wasAutoOpened ? 'close' : 'unpin']();
       }
 
-      /* API */
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+      this.open ();
 
-        return this._isOpen;
+    }
+
+    /* PANEL FLICK */
+
+    ___panelFlick () {
+
+      if ( !this.options.flick.close ) return;
+
+      this.$panel.flickable ();
+
+      this._on ( true, 'flickable:flick', this.__panelFlick );
+
+    }
+
+    __panelFlick ( event, data ) {
+
+      if ( !this._isOpen ) return;
+
+      if ( data.direction !== this.options.direction ) return;
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+      this.close ();
+
+    }
+
+    /* ROUTE */
+
+    __route () {
+
+      if ( this._isOpen && !this.$panel.isAttached () ) {
+
+        this.close ();
+
       }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
 
+    }
 
-        if (!!force !== this._isOpen) {
+    /* AUTO PINNING */
 
-          this[force ? 'open' : 'close']();
-        }
+    _autopin () {
+
+      if ( this._isPinned ) return;
+
+      this._wasAutoOpened = !this._isOpen;
+
+      this.pin ();
+
+    }
+
+    _autounpin () {
+
+      if ( !this._isPinned ) return;
+
+      this[this._wasAutoOpened ? 'close' : 'unpin']();
+
+    }
+
+    /* API */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force = !this._isOpen ) {
+
+      if ( !!force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
       }
-    }, {
-      key: 'open',
-      value: function open() {
 
-        if (this._lock || this._isOpen) return;
+    }
 
-        this._lock = true;
-        this._isOpen = true;
+    open () {
 
-        if (!this._isPinned) {
+      if ( this._lock || this._isOpen ) return;
 
-          this.$layout.disableScroll();
-        }
+      this._lock = true;
+      this._isOpen = true;
 
-        this._frame(function () {
+      if ( !this._isPinned ) {
 
-          this.$panel.addClass(this.options.classes.show);
-          this.$backdrop.addClass(this.options.classes.backdrop.show);
-          this.$layout.addClass(this.options.classes.layout.show);
+        this.$layout.disableScroll ();
 
-          this._frame(function () {
+      }
 
-            this.$panel.addClass(this.options.classes.open);
-            this.$backdrop.addClass(this.options.classes.backdrop.open);
+      this._frame ( function () {
 
-            this._lock = false;
+        this.$panel.addClass ( this.options.classes.show );
+        this.$backdrop.addClass ( this.options.classes.backdrop.show );
+        this.$layout.addClass ( this.options.classes.layout.show );
 
-            this._trigger('open');
-          });
+        this._frame ( function () {
+
+          this.$panel.addClass ( this.options.classes.open );
+          this.$backdrop.addClass ( this.options.classes.backdrop.open );
+
+          this._lock = false;
+
+          this._trigger ( 'open' );
+
         });
 
-        this._reset();
+      });
 
-        this.___breakpoint();
-        this.___tap();
-        this.___keydown();
-        this.___panelFlick();
-        this.___route();
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___tap ();
+      this.___keydown ();
+      this.___panelFlick ();
+      this.___route ();
+
+    }
+
+    close () {
+
+      if ( this._lock || !this._isOpen ) return;
+
+      this.unpin ( true );
+
+      this._lock = true;
+      this._isOpen = false;
+
+      this._frame ( function () {
+
+        this.$panel.removeClass ( this.options.classes.open );
+        this.$backdrop.removeClass ( this.options.classes.backdrop.open );
+
+        this._delay ( function () {
+
+          this.$panel.removeClass ( this.options.classes.show );
+          this.$backdrop.removeClass ( this.options.classes.backdrop.show );
+          this.$layout.removeClass ( this.options.classes.layout.show );
+
+          this.$layout.enableScroll ();
+
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
+        }, this.options.animations.close );
+
+      });
+
+      this._reset ();
+
+      this.___breakpoint ();
+      this.___layoutFlick ();
+
+    }
+
+    /* PINNING */
+
+    isPinned () {
+
+      return this._isPinned;
+
+    }
+
+    togglePin ( force = !this._isPinned ) {
+
+      if ( !!force !== this._isPinned ) {
+
+        this[force ? 'pin' : 'unpin']();
+
       }
-    }, {
-      key: 'close',
-      value: function close() {
 
-        if (this._lock || !this._isOpen) return;
+    }
 
-        this.unpin(true);
+    pin () {
 
-        this._lock = true;
-        this._isOpen = false;
+      if ( this._isPinned ) return;
 
-        this._frame(function () {
+      this._isPinned = true;
 
-          this.$panel.removeClass(this.options.classes.open);
-          this.$backdrop.removeClass(this.options.classes.backdrop.open);
+      this.$panel.addClass ( this.options.classes.pinned );
 
-          this._delay(function () {
+      this.$layout.addClass ( this.layoutPinnedClass );
 
-            this.$panel.removeClass(this.options.classes.show);
-            this.$backdrop.removeClass(this.options.classes.backdrop.show);
-            this.$layout.removeClass(this.options.classes.layout.show);
+      this.$backdrop.addClass ( this.options.classes.backdrop.pinned );
 
-            this.$layout.enableScroll();
+      if ( this._isOpen ) {
 
-            this._lock = false;
+        this.$layout.enableScroll ();
 
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
+      } else {
 
-        this._reset();
+        this.open ();
 
-        this.___breakpoint();
-        this.___layoutFlick();
       }
 
-      /* PINNING */
+    }
 
-    }, {
-      key: 'isPinned',
-      value: function isPinned() {
+    unpin ( _closing ) {
 
-        return this._isPinned;
-      }
-    }, {
-      key: 'togglePin',
-      value: function togglePin() {
-        var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isPinned : arguments[0];
+      if ( !this._isOpen || !this._isPinned ) return;
 
+      this._isPinned = false;
 
-        if (!!force !== this._isPinned) {
+      this.$layout.removeClass ( this.layoutPinnedClass ).disableScroll ();
 
-          this[force ? 'pin' : 'unpin']();
-        }
-      }
-    }, {
-      key: 'pin',
-      value: function pin() {
+      this.$backdrop.removeClass ( this.options.classes.backdrop.pinned );
 
-        if (this._isPinned) return;
+      this._delay ( function () {
 
-        this._isPinned = true;
+        this.$panel.removeClass ( this.options.classes.pinned );
 
-        this.$panel.addClass(this.options.classes.pinned);
+      }, _closing ? this.options.animations.close : 0 );
 
-        this.$layout.addClass(this.layoutPinnedClass);
+    }
 
-        this.$backdrop.addClass(this.options.classes.backdrop.pinned);
-
-        if (this._isOpen) {
-
-          this.$layout.enableScroll();
-        } else {
-
-          this.open();
-        }
-      }
-    }, {
-      key: 'unpin',
-      value: function unpin(_closing) {
-
-        if (!this._isOpen || !this._isPinned) return;
-
-        this._isPinned = false;
-
-        this.$layout.removeClass(this.layoutPinnedClass).disableScroll();
-
-        this.$backdrop.removeClass(this.options.classes.backdrop.pinned);
-
-        this._delay(function () {
-
-          this.$panel.removeClass(this.options.classes.pinned);
-        }, _closing ? this.options.animations.close : 0);
-      }
-    }]);
-
-    return Panel;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Panel, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations, Svelto.Directions);
+  Factory.init ( Panel, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations, Svelto.Directions ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Closer
@@ -11999,13 +11644,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'panelCloser',
     plugin: true,
     selector: '.panel-closer',
@@ -12016,22 +11661,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL CLOSER */
 
-  var PanelCloser = function (_Widgets$Closer6) {
-    _inherits(PanelCloser, _Widgets$Closer6);
-
-    function PanelCloser() {
-      _classCallCheck(this, PanelCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelCloser).apply(this, arguments));
-    }
-
-    return PanelCloser;
-  }(Widgets.Closer);
+  class PanelCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(PanelCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PanelCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Opener
@@ -12043,13 +11680,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'panelOpener',
     plugin: true,
     selector: '.panel-opener',
@@ -12060,22 +11697,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL OPENER */
 
-  var PanelOpener = function (_Widgets$Opener5) {
-    _inherits(PanelOpener, _Widgets$Opener5);
-
-    function PanelOpener() {
-      _classCallCheck(this, PanelOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelOpener).apply(this, arguments));
-    }
-
-    return PanelOpener;
-  }(Widgets.Opener);
+  class PanelOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(PanelOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PanelOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Toggler
@@ -12087,13 +11716,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'panelToggler',
     plugin: true,
     selector: '.panel-toggler',
@@ -12104,22 +11733,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL TOGGLER */
 
-  var PanelToggler = function (_Widgets$Toggler5) {
-    _inherits(PanelToggler, _Widgets$Toggler5);
-
-    function PanelToggler() {
-      _classCallCheck(this, PanelToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelToggler).apply(this, arguments));
-    }
-
-    return PanelToggler;
-  }(Widgets.Toggler);
+  class PanelToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(PanelToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PanelToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tabs
@@ -12135,13 +11756,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Not well written, make it better
 //TODO: Doesn't handle properly a change of the direction
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Directions) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Directions ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tabs',
     plugin: true,
     selector: '.tabs',
@@ -12166,150 +11787,137 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABS */
 
-  var Tabs = function (_Widgets$Widget30) {
-    _inherits(Tabs, _Widgets$Widget30);
+  class Tabs extends Widgets.Widget {
 
-    function Tabs() {
-      _classCallCheck(this, Tabs);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).apply(this, arguments));
+    _variables () {
+
+      this.$tabs = this.$element;
+      this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
+      this.$containers = this.$tabs.find ( this.options.selectors.containers );
+
+      this.options.direction = Directions.get ().find ( direction => this.$tabs.hasClass ( direction ) ) || this.options.direction;
+
+      this.index = false;
+
     }
 
-    _createClass(Tabs, [{
-      key: '_variables',
+    _init () {
 
+      let $active = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first (),
+          index = this.$triggers.index ( $active );
 
-      /* SPECIAL */
+      this.set ( index );
 
-      value: function _variables() {
-        var _this54 = this;
+    }
 
-        this.$tabs = this.$element;
-        this.$triggers = this.$tabs.find(this.options.selectors.triggers);
-        this.$containers = this.$tabs.find(this.options.selectors.containers);
+    _events () {
 
-        this.options.direction = Directions.get().find(function (direction) {
-          return _this54.$tabs.hasClass(direction);
-        }) || this.options.direction;
+      this.___tap ();
 
-        this.index = false;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+    }
 
-        var $active = this.$triggers.filter('.' + this.options.classes.active.trigger).first(),
-            index = this.$triggers.index($active);
+    /* PRIVATE */
 
-        this.set(index);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    _sanitizeIndex ( index ) {
 
-        this.___tap();
-      }
+      return _.clamp ( index, 0, this.$triggers.length );
 
-      /* PRIVATE */
+    }
 
-    }, {
-      key: '_sanitizeIndex',
-      value: function _sanitizeIndex(index) {
+    /* TAP */
 
-        return _.clamp(index, 0, this.$triggers.length);
-      }
+    ___tap () {
 
-      /* TAP */
+      this._on ( this.$triggers, Pointer.tap, this.__tap );
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+    }
 
-        this._on(this.$triggers, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
+    __tap ( event ) {
 
-        var index = this.$triggers.index($(event.currentTarget));
+      event.stopImmediatePropagation ();
 
-        this.set(index);
+      let index = this.$triggers.index ( $(event.currentTarget) );
+
+      this.set ( index );
+
+    }
+
+    /* SELECTION */
+
+    _toggleSelection ( index, force ) {
+
+      let $trigger = this.$triggers.eq ( index ),
+          $container = this.$containers.eq ( index );
+
+      $trigger.toggleClass ( this.options.classes.active.trigger, force );
+      $container.toggleClass ( this.options.classes.active.container, force );
+
+      if ( this.options.highlight ) {
+
+        let oppositeDirection = Directions.getOpposite ( this.options.direction );
+
+        $trigger.toggleClass ( `highlighted highlight-${oppositeDirection}`, force );
+
       }
 
-      /* SELECTION */
+    }
 
-    }, {
-      key: '_toggleSelection',
-      value: function _toggleSelection(index, force) {
+    _select ( index ) {
 
-        var $trigger = this.$triggers.eq(index),
-            $container = this.$containers.eq(index);
+      this._toggleSelection ( index, true );
 
-        $trigger.toggleClass(this.options.classes.active.trigger, force);
-        $container.toggleClass(this.options.classes.active.container, force);
+    }
 
-        if (this.options.highlight) {
+    _unselect ( index ) {
 
-          var oppositeDirection = Directions.getOpposite(this.options.direction);
+      this._toggleSelection ( index, false );
 
-          $trigger.toggleClass('highlighted highlight-' + oppositeDirection, force);
-        }
+    }
+
+    /* API */
+
+    get () {
+
+      return this.index;
+
+    }
+
+    set ( index ) {
+
+      index = this._sanitizeIndex ( index );
+
+      if ( index === this.index ) return;
+
+      /* PREVIOUS */
+
+      if ( _.isNumber ( this.index ) ) {
+
+        this._unselect ( this.index );
+
       }
-    }, {
-      key: '_select',
-      value: function _select(index) {
 
-        this._toggleSelection(index, true);
-      }
-    }, {
-      key: '_unselect',
-      value: function _unselect(index) {
+      /* NEW */
 
-        this._toggleSelection(index, false);
-      }
+      this.index = index;
 
-      /* API */
+      this._select ( this.index );
 
-    }, {
-      key: 'get',
-      value: function get() {
+      /* CALLBACKS */
 
-        return this.index;
-      }
-    }, {
-      key: 'set',
-      value: function set(index) {
+      this._trigger ( 'change' );
 
-        index = this._sanitizeIndex(index);
+    }
 
-        if (index === this.index) return;
-
-        /* PREVIOUS */
-
-        if (_.isNumber(this.index)) {
-
-          this._unselect(this.index);
-        }
-
-        /* NEW */
-
-        this.index = index;
-
-        this._select(this.index);
-
-        /* CALLBACKS */
-
-        this._trigger('change');
-      }
-    }]);
-
-    return Tabs;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Tabs, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions);
+  Factory.init ( Tabs, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions ));
+
 
 /* =========================================================================
  * Svelto - Lib - Embedded CSS
@@ -12322,144 +11930,157 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* EMBEDDED CSS */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* EMBEDDED CSS */
 
-  var EmbeddedCSS = function () {
-    function EmbeddedCSS() {
-      _classCallCheck(this, EmbeddedCSS);
+  class EmbeddedCSS {
 
-      this.$stylesheet = $('<style class="svelto-embedded svelto-embedded-' + $.guid++ + '">');
+    constructor () {
+
+      this.$stylesheet = $(`<style class="svelto-embedded svelto-embedded-${$.guid++}">`);
       this.tree = {};
+
     }
 
     /* PRIVATE */
 
-    _createClass(EmbeddedCSS, [{
-      key: '_cssfy',
-      value: function _cssfy() {
+    _cssfy () {
 
-        var css = '';
+      let css = '';
 
-        for (var selector in this.tree) {
+      for ( let selector in this.tree ) {
 
-          if (this.tree.hasOwnProperty(selector)) {
+        if ( this.tree.hasOwnProperty ( selector ) ) {
 
-            css += selector + '{';
+          css += selector + '{';
 
-            if (_.isPlainObject(this.tree[selector])) {
+          if ( _.isPlainObject ( this.tree[selector] ) ) {
 
-              for (var property in this.tree[selector]) {
+            for ( let property in this.tree[selector] ) {
 
-                if (this.tree[selector].hasOwnProperty(property)) {
+              if ( this.tree[selector].hasOwnProperty ( property ) ) {
 
-                  css += property + ':' + this.tree[selector][property] + ';';
-                }
+                css += property + ':' + this.tree[selector][property] + ';';
+
               }
-            } else if (_.isString(this.tree[selector])) {
 
-              css += this.tree[selector] + ';';
             }
 
-            css += '}';
+          } else if ( _.isString ( this.tree[selector] ) ) {
+
+            css += this.tree[selector] + ';';
+
           }
+
+          css += '}';
+
         }
 
-        return css;
-      }
-    }, {
-      key: '_refresh',
-      value: function _refresh() {
-
-        this.$stylesheet.text(this._cssfy());
       }
 
-      /* API */
+      return css;
 
-    }, {
-      key: 'get',
-      value: function get(selector) {
+    }
 
-        return this.tree[selector];
+    _refresh () {
+
+      this.$stylesheet.text ( this._cssfy () );
+
+    }
+
+    /* API */
+
+    get ( selector ) {
+
+      return this.tree[selector];
+
+    }
+
+    set ( selector, property, value ) {
+
+      if ( property === false ) {
+
+        return this.remove ( selector );
+
       }
-    }, {
-      key: 'set',
-      value: function set(selector, property, value) {
 
-        if (property === false) {
+      if ( _.isPlainObject ( property ) ) {
 
-          return this.remove(selector);
+        this.tree[selector] = _.extend ( _.isPlainObject ( this.tree[selector] ) ? this.tree[selector] : {}, property );
+
+      } else if ( _.isString ( property ) ) {
+
+        if ( !value ) {
+
+          this.tree[selector] = property;
+
+        } else {
+
+          return this.set ( selector, { [property]: value } );
+
         }
 
-        if (_.isPlainObject(property)) {
-
-          this.tree[selector] = _.extend(_.isPlainObject(this.tree[selector]) ? this.tree[selector] : {}, property);
-        } else if (_.isString(property)) {
-
-          if (!value) {
-
-            this.tree[selector] = property;
-          } else {
-
-            return this.set(selector, _defineProperty({}, property, value));
-          }
-        }
-
-        this._refresh();
       }
-    }, {
-      key: 'remove',
-      value: function remove(selector) {
 
-        if (selector in this.tree) {
+      this._refresh ();
 
-          delete this.tree[selector];
+    }
 
-          this._refresh();
-        }
+    remove ( selector ) {
+
+      if ( selector in this.tree ) {
+
+        delete this.tree[selector];
+
+        this._refresh ();
+
       }
-    }, {
-      key: 'clear',
-      value: function clear() {
 
-        if (_.size(this.tree)) {
+    }
 
-          this.tree = {};
+    clear () {
 
-          this._refresh();
-        }
+      if ( _.size ( this.tree ) ) {
+
+        this.tree = {};
+
+        this._refresh ();
+
       }
-    }, {
-      key: 'attach',
-      value: function attach() {
 
-        this.$stylesheet.appendTo($(document.head));
-      }
-    }, {
-      key: 'detach',
-      value: function detach() {
+    }
 
-        this.$stylesheet.remove();
-      }
-    }]);
+    attach () {
 
-    return EmbeddedCSS;
-  }();
+      this.$stylesheet.appendTo ( $(document.head) );
+
+    }
+
+    detach () {
+
+      this.$stylesheet.remove ();
+
+    }
+
+  }
 
   /* EXPORT */
 
-  Svelto.EmbeddedCSS = new EmbeddedCSS();
+  Svelto.EmbeddedCSS = new EmbeddedCSS ();
 
   /* READY */
 
   $(function () {
 
-    Svelto.EmbeddedCSS.attach();
+    Svelto.EmbeddedCSS.attach ();
+
   });
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - Fuzzy
@@ -12470,52 +12091,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* FUZZY */
 
-  var Fuzzy = {
-    match: function match(str, search) {
-      var isCaseSensitive = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  let Fuzzy = {
 
+    match ( str, search, isCaseSensitive = true ) {
 
-      if (!isCaseSensitive) {
+      if ( !isCaseSensitive ) {
 
-        str = str.toLowerCase();
-        search = search.toLowerCase();
+        str = str.toLowerCase ();
+        search = search.toLowerCase ();
+
       }
 
-      var currentIndex = -1,
-          str_i = void 0,
+      let currentIndex = -1,
+          str_i,
           str_l = str.length;
 
-      for (var search_i = 0, search_l = search.length; search_i < search_l; search_i++) {
+      for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-        for (str_i = currentIndex + 1; str_i < str_l; str_i++) {
+        for ( str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
 
-          if (str[str_i] === search[search_i]) {
+          if ( str[str_i] === search[search_i] ) {
 
             currentIndex = str_i;
             str_i = str_l + 1;
+
           }
+
         }
 
-        if (str_i === str_l) {
+        if ( str_i === str_l ) {
 
           return false;
+
         }
+
       }
 
       return true;
+
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Fuzzy = Fuzzy;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - N Times Action (Group)
@@ -12527,141 +12156,155 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Cookie, NTA) {
+(function ( $, _, Svelto, Cookie, NTA ) {
 
   'use strict';
 
   /* UTILITIES */
 
-  var getExpiry = function getExpiry(expiry) {
+  let getExpiry = function ( expiry ) {
 
-    if (expiry) {
+    if ( expiry ) {
 
-      switch (expiry.constructor) {
+      switch ( expiry.constructor ) {
 
         case Number:
-          return expiry === Infinity ? false : _.nowSecs() + expiry;
+          return ( expiry === Infinity ) ? false : _.nowSecs () + expiry;
 
         case String:
-          return getExpiry(new Date(expiry));
+          return getExpiry ( new Date ( expiry ) );
 
         case Date:
-          var timestamp = expiry.getTime();
-          return _.isNaN(timestamp) ? false : Math.floor(timestamp / 1000);
+          let timestamp = expiry.getTime ();
+          return _.isNaN ( timestamp ) ? false : Math.floor ( timestamp / 1000 );
 
       }
+
     }
 
     return false;
+
   };
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     encoder: JSON.stringify,
     decoder: JSON.parse
   };
 
   /* GROUP */
 
-  var Group = function () {
-    function Group(options) {
-      _classCallCheck(this, Group);
+  class Group {
+
+    constructor ( options ) {
 
       this.name = options.name;
       this.cookie = options.cookie;
 
-      this.actions = NTA.Group.config.decoder(Cookie.get(this.name) || '{}');
+      this.actions = NTA.Group.config.decoder ( Cookie.get ( this.name ) || '{}' );
+
     }
 
-    _createClass(Group, [{
-      key: 'get',
-      value: function get(action) {
+    get ( action ) {
 
-        var actionj = this.actions[action];
+      let actionj = this.actions[action];
 
-        if (actionj) {
+      if ( actionj ) {
 
-          if (actionj.x && actionj.x < _.nowSecs()) {
+        if ( actionj.x && actionj.x < _.nowSecs () ) {
 
-            this.remove(action);
-          } else {
+          this.remove ( action );
 
-            return actionj.t;
-          }
-        }
-
-        return 0;
-      }
-    }, {
-      key: 'set',
-      value: function set(action, times, expiry) {
-
-        times = Number(times);
-
-        if (_.isNaN(times)) return;
-
-        if (action in this.actions) {
-
-          if (times === 0 && !this.actions[action].x) {
-
-            return this.remove(action);
-          } else {
-
-            this.actions[action].t = times;
-          }
         } else {
 
-          this.actions[action] = { t: times };
+          return actionj.t;
 
-          expiry = getExpiry(expiry);
-
-          if (expiry) {
-
-            this.actions[action].x = expiry;
-          }
         }
 
-        this.update();
       }
-    }, {
-      key: 'update',
-      value: function update() {
 
-        Cookie.set(this.name, NTA.Group.config.encoder(this.actions), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure);
-      }
-    }, {
-      key: 'remove',
-      value: function remove(action) {
+      return 0;
 
-        if (action) {
+    }
 
-          if (_.size(this.actions) > 1) {
+    set ( action, times, expiry ) {
 
-            delete this.actions[action];
+      times = Number ( times );
 
-            this.update();
-          } else {
+      if ( _.isNaN ( times ) ) return;
 
-            this.remove();
-          }
+      if ( action in this.actions ) {
+
+        if ( times === 0 && !this.actions[action].x ) {
+
+          return this.remove ( action );
+
         } else {
 
-          this.actions = {};
+          this.actions[action].t = times;
 
-          Cookie.remove(this.name, this.cookie.path, this.cookie.domain);
         }
-      }
-    }]);
 
-    return Group;
-  }();
+      } else {
+
+        this.actions[action] = { t: times };
+
+        expiry = getExpiry ( expiry );
+
+        if ( expiry ) {
+
+          this.actions[action].x = expiry;
+
+        }
+
+      }
+
+      this.update ();
+
+    }
+
+    update () {
+
+      Cookie.set ( this.name, NTA.Group.config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
+
+    }
+
+    remove ( action ) {
+
+      if ( action ) {
+
+        if ( _.size ( this.actions ) > 1 ) {
+
+          delete this.actions[action];
+
+          this.update ();
+
+        } else {
+
+          this.remove ();
+
+        }
+
+      } else {
+
+        this.actions = {};
+
+        Cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
+
+      }
+
+    }
+
+  }
 
   /* BINDING */
 
   NTA.Group = Group;
   NTA.Group.config = config;
-})(Svelto.$, Svelto._, Svelto, Svelto.Cookie, Svelto.NTA = {});
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Cookie, Svelto.NTA = {} ));
+
 
 /* =========================================================================
  * Svelto - Lib - N Times Action (Action)
@@ -12673,48 +12316,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, NTA) {
+(function ( $, _, Svelto, NTA ) {
 
   'use strict';
 
   /* ACTION */
 
-  var Action = function () {
-    function Action(options) {
-      _classCallCheck(this, Action);
+  class Action {
 
-      this.group = new NTA.Group({ name: options.group, cookie: options.cookie });
+    constructor ( options ) {
+
+      this.group = new NTA.Group ({ name: options.group, cookie: options.cookie });
       this.name = options.name;
       this.expiry = options.expiry;
+
     }
 
-    _createClass(Action, [{
-      key: 'get',
-      value: function get() {
+    get () {
 
-        return this.group.get(this.name);
-      }
-    }, {
-      key: 'set',
-      value: function set(times, expiry) {
+      return this.group.get ( this.name );
 
-        this.group.set(this.name, times, expiry || this.expiry);
-      }
-    }, {
-      key: 'remove',
-      value: function remove() {
+    }
 
-        this.group.remove(this.name);
-      }
-    }]);
+    set ( times, expiry ) {
 
-    return Action;
-  }();
+      this.group.set ( this.name, times, expiry || this.expiry );
+
+    }
+
+    remove () {
+
+      this.group.remove ( this.name );
+
+    }
+
+  }
 
   /* BINDING */
 
   NTA.Action = Action;
-})(Svelto.$, Svelto._, Svelto, Svelto.NTA);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.NTA ));
+
 
 /* =========================================================================
  * Svelto - Lib - N Times Action
@@ -12727,13 +12370,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto, NTA) {
+(function ( $, _, Svelto, NTA ) {
 
   'use strict';
 
   /* DEFAULTS */
 
-  var defaults = {
+  let defaults = {
     group: 'nta', // The cookie name that holds the actions, a namespace for related actions basically
     action: false, // The action name
     times: Infinity, // The times an action can be executed
@@ -12749,44 +12392,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* N TIMES ACTION */
 
-  $.nTimesAction = function (options) {
+  $.nTimesAction = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.merge({}, $.nTimesAction.defaults, options);
+    options = _.merge ( {}, $.nTimesAction.defaults, options );
 
     /* N TIMES ACTION */
 
-    if (options.action) {
+    if ( options.action ) {
 
-      var action = new NTA.Action({ group: options.group, name: options.action, expiry: options.expiry, cookie: options.cookie }),
-          actionTimes = action.get();
+      let action = new NTA.Action ({ group: options.group, name: options.action, expiry: options.expiry, cookie: options.cookie }),
+          actionTimes = action.get ();
 
       /* EXECUTE */
 
-      if (options.fn && actionTimes < options.times) {
+      if ( options.fn && actionTimes < options.times ) {
 
-        var returnValue = options.fn(options.group, options.action, actionTimes + 1);
+        let returnValue = options.fn ( options.group, options.action, actionTimes + 1 );
 
         /* INCREMENT */
 
-        if (returnValue !== false) {
+        if ( returnValue !== false ) {
 
-          action.set(actionTimes + 1);
+          action.set ( actionTimes + 1 );
+
         }
+
       }
 
       return action;
-    } else if (options.group) {
 
-      return new NTA.Group({ name: options.group, cookie: options.cookie });
+    } else if ( options.group ) {
+
+      return new NTA.Group ({ name: options.group, cookie: options.cookie });
+
     }
+
   };
 
   /* BINDING */
 
   $.nTimesAction.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto, Svelto.NTA);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.NTA ));
+
 
 /* =========================================================================
  * Svelto - Lib - One Time Action
@@ -12798,17 +12448,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require lib/n_times_action/n_times_action.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* ONE TIME ACTION */
 
-  $.oneTimeAction = function (options) {
+  $.oneTimeAction = function ( options ) {
 
-    return $.nTimesAction(_.extend({ group: 'ota' }, options, { times: 1 }));
+    return $.nTimesAction ( _.extend ( { group: 'ota' }, options, { times: 1 } ) );
+
   };
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - Regexes
@@ -12819,13 +12472,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* REGEXES */
 
-  var Regexes = {
+  let Regexes = {
 
     /* TYPE */
 
@@ -12848,7 +12501,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* EXPORT */
 
   Svelto.Regexes = Regexes;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - Timer
@@ -12861,180 +12516,187 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* TIMER */
 
-  var Timer = function () {
-    function Timer() {
-      _classCallCheck(this, Timer);
+  let Timer = class {
 
-      this.set.apply(this, arguments);
+    constructor ( ...args ) {
+
+      this.set ( ...args );
+
     }
 
-    _createClass(Timer, [{
-      key: 'set',
-      value: function set(callback, time, autostart) {
+    set ( callback, time, autostart ) {
 
-        this.init = true;
-        this.action = callback;
+      this.init = true;
+      this.action = callback;
 
-        if (!isNaN(time)) {
+      if ( !isNaN ( time ) ) {
 
-          this.intervalTime = time;
-        }
+        this.intervalTime = time;
 
-        if (autostart && !this.isActive) {
-
-          this.isActive = true;
-          this.setTimer();
-        }
-
-        return this;
       }
-    }, {
-      key: 'once',
-      value: function once(time) {
-        var _this55 = this;
 
-        if (isNaN(time)) {
+      if ( autostart && !this.isActive ) {
 
-          time = 0;
-        }
+        this.isActive = true;
+        this.setTimer ();
 
-        setTimeout(function () {
-          return _this55.action();
-        }, time);
-
-        return this;
       }
-    }, {
-      key: 'play',
-      value: function play(reset) {
 
-        if (!this.isActive) {
+      return this;
 
-          if (reset) {
+    }
 
-            this.setTimer();
-          } else {
+    once ( time ) {
 
-            this.setTimer(this.remainingTime);
-          }
+      if ( isNaN ( time ) ) {
 
-          this.isActive = true;
-        }
+        time = 0;
 
-        return this;
       }
-    }, {
-      key: 'pause',
-      value: function pause() {
 
-        if (this.isActive) {
+      setTimeout ( () => this.action (), time );
 
-          this.isActive = false;
-          this.remainingTime -= Date.now() - this.last;
-          this.clearTimer();
-        }
+      return this;
 
-        return this;
-      }
-    }, {
-      key: 'stop',
-      value: function stop() {
+    }
 
-        this.isActive = false;
-        this.remainingTime = this.intervalTime;
-        this.clearTimer();
+    play ( reset ) {
 
-        return this;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(reset) {
+      if ( !this.isActive ) {
 
-        if (this.isActive) {
+        if ( reset ) {
 
-          this.pause();
-        } else if (reset) {
+          this.setTimer ();
 
-          this.play(true);
         } else {
 
-          this.play();
+          this.setTimer ( this.remainingTime );
+
         }
 
-        return this;
+        this.isActive = true;
+
       }
-    }, {
-      key: 'reset',
-      value: function reset() {
+
+      return this;
+
+    }
+
+    pause () {
+
+      if ( this.isActive ) {
 
         this.isActive = false;
+        this.remainingTime -= Date.now () - this.last;
+        this.clearTimer ();
 
-        this.play(true);
-
-        return this;
       }
-    }, {
-      key: 'clearTimer',
-      value: function clearTimer() {
 
-        clearTimeout(this.timeoutObject);
+      return this;
+
+    }
+
+    stop () {
+
+      this.isActive = false;
+      this.remainingTime = this.intervalTime;
+      this.clearTimer ();
+
+      return this;
+
+    }
+
+    toggle ( reset ) {
+
+      if ( this.isActive ) {
+
+        this.pause ();
+
+      } else if ( reset ) {
+
+        this.play ( true );
+
+      } else {
+
+        this.play ();
+
       }
-    }, {
-      key: 'setTimer',
-      value: function setTimer(time) {
-        var _this56 = this;
 
-        if (isNaN(time)) {
+      return this;
 
-          time = this.intervalTime;
-        }
+    }
 
-        this.remainingTime = time;
-        this.last = Date.now();
-        this.clearTimer();
+    reset () {
 
-        this.timeoutObject = setTimeout(function () {
-          return _this56.go();
-        }, time);
+      this.isActive = false;
+
+      this.play ( true );
+
+      return this;
+
+    }
+
+    clearTimer () {
+
+      clearTimeout ( this.timeoutObject );
+
+    }
+
+    setTimer ( time ) {
+
+      if ( isNaN ( time ) ) {
+
+        time = this.intervalTime;
+
       }
-    }, {
-      key: 'go',
-      value: function go() {
 
-        if (this.isActive) {
+      this.remainingTime = time;
+      this.last = Date.now ();
+      this.clearTimer ();
 
-          this.action();
-          this.setTimer();
-        }
+      this.timeoutObject = setTimeout ( () => this.go (), time );
+
+    }
+
+    go () {
+
+      if ( this.isActive ) {
+
+        this.action ();
+        this.setTimer ();
+
       }
-    }, {
-      key: 'remaining',
-      value: function remaining(value) {
 
-        if (_.isUndefined(value)) {
+    }
 
-          return this.remainingTime;
-        }
+    remaining ( value ) {
 
-        this.remainingTime = value;
+      if ( _.isUndefined ( value ) ) {
 
-        return this;
+        return this.remainingTime;
+
       }
-    }]);
 
-    return Timer;
-  }();
+      this.remainingTime = value;
+
+      return this;
+
+    }
+
+  };
 
   /* EXPORT */
 
   Svelto.Timer = Timer;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Carousel
@@ -13049,13 +12711,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add slides drag support
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'carousel',
     plugin: true,
     selector: '.carousel',
@@ -13086,329 +12748,318 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       callbacks: {
         change: _.noop
       }
-    }
+    },
   };
 
   /* CAROUSEL */
 
-  var Carousel = function (_Widgets$Widget31) {
-    _inherits(Carousel, _Widgets$Widget31);
+  class Carousel extends Widgets.Widget {
 
-    function Carousel() {
-      _classCallCheck(this, Carousel);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).apply(this, arguments));
+    _variables () {
+
+      this.$carousel = this.$element;
+      this.$previous = this.$carousel.find ( this.options.selectors.previous );
+      this.$next = this.$carousel.find ( this.options.selectors.next );
+      this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
+      this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
+      this.$items = this.$carousel.find ( this.options.selectors.item );
+
+      this.maxIndex = this.$items.length - 1;
+
+      this._previous = false;
+      this._current = false;
+
+      this.timer = new Timer ( this.next.bind ( this ), this.options.interval, false );
+
     }
 
-    _createClass(Carousel, [{
-      key: '_variables',
+    _init () {
 
+      let $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
 
-      /* SPECIAL */
+      if ( $current.length ) {
 
-      value: function _variables() {
+        this._current = this._getItemObj ( this.$items.index ( $current ) );
 
-        this.$carousel = this.$element;
-        this.$previous = this.$carousel.find(this.options.selectors.previous);
-        this.$next = this.$carousel.find(this.options.selectors.next);
-        this.$indicators = this.$carousel.find(this.options.selectors.indicator);
-        this.$itemsWrp = this.$carousel.find(this.options.selectors.itemsWrp);
-        this.$items = this.$carousel.find(this.options.selectors.item);
+      } else {
 
-        this.maxIndex = this.$items.length - 1;
+        this.set ( this.options.startIndex );
 
-        this._previous = false;
-        this._current = false;
-
-        this.timer = new Timer(this.next.bind(this), this.options.interval, false);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        var $current = this.$items.filter('.' + this.options.classes.current).first();
-
-        if ($current.length) {
-
-          this._current = this._getItemObj(this.$items.index($current));
-        } else {
-
-          this.set(this.options.startIndex);
-        }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___previousTap();
-        this.___nextTap();
-        this.___indicatorTap();
-
-        this.___keydown();
-        this.___cycle();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.timer.stop();
       }
 
-      /* PRIVATE */
+    }
 
-    }, {
-      key: '_sanitizeIndex',
-      value: function _sanitizeIndex(index) {
+    _events () {
 
-        index = Number(index);
+      this.___previousTap ();
+      this.___nextTap ();
+      this.___indicatorTap ();
 
-        return _.isNaN(index) ? NaN : _.clamp(index, 0, this.maxIndex);
+      this.___keydown ();
+      this.___cycle ();
+
+    }
+
+    _destroy () {
+
+      this.timer.stop ();
+
+    }
+
+    /* PRIVATE */
+
+    _sanitizeIndex ( index ) {
+
+      index = Number ( index );
+
+      return _.isNaN ( index ) ? NaN : _.clamp ( index, 0, this.maxIndex );
+
+    }
+
+    /* PREVIOUS TAP */
+
+    ___previousTap () {
+
+      this._on ( this.$previous, Pointer.tap, this.previous );
+
+    }
+
+    /* NEXT TAP */
+
+    ___nextTap () {
+
+      this._on ( this.$next, Pointer.tap, this.next );
+
+    }
+
+    /* INDICATOR TAP */
+
+    ___indicatorTap () {
+
+      this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
+
+    }
+
+    __indicatorTap ( event ) {
+
+      this.set ( this.$indicators.index ( event.currentTarget ) );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* CYCLE */
+
+    ___cycle () {
+
+      this._on ( true, this.$itemsWrp, Pointer.enter, this.__cycleEnter );
+      this._on ( true, this.$itemsWrp, Pointer.leave, this.__cycleLeave );
+
+    }
+
+    __cycleEnter () {
+
+      if ( this.options.cycle ) {
+
+        this.timer.pause ();
+
       }
 
-      /* PREVIOUS TAP */
+    }
 
-    }, {
-      key: '___previousTap',
-      value: function ___previousTap() {
+    __cycleLeave () {
 
-        this._on(this.$previous, Pointer.tap, this.previous);
+      if ( this.options.cycle ) {
+
+        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
+
+        this.timer.play ();
+
       }
 
-      /* NEXT TAP */
+    }
 
-    }, {
-      key: '___nextTap',
-      value: function ___nextTap() {
+    /* ITEM OBJ */
 
-        this._on(this.$next, Pointer.tap, this.next);
+    _getItemObj ( index ) {
+
+      return {
+        index: index,
+        $item: this.$items.eq ( index ),
+        $indicator: this.$indicators.eq ( index )
+      };
+
+    }
+
+    /* INDEX */
+
+    _getPrevIndex ( index ) {
+
+      return ( index > 0 ) ? index - 1 : ( this.options.wrap ? this.maxIndex : 0 );
+
+    }
+
+    _getNextIndex ( index ) {
+
+      return ( index < this.maxIndex ) ? index + 1 : ( this.options.wrap ? 0 : this.maxIndex );
+
+    }
+
+    /* UPDATE */
+
+    _updatePreviousNext () {
+
+      this.$previous.toggleClass ( this.options.classes.disabled, ( this._current.index === 0 && !this.options.wrap ) );
+      this.$next.toggleClass ( this.options.classes.disabled, ( this._current.index === this.maxIndex && !this.options.wrap ) );
+
+    }
+
+    /* API OVERRIDES */
+
+    enable () {
+
+      super.enable ();
+
+      if ( this.options.cycle || this._wasCycling ) {
+
+        this.play ();
+
       }
 
-      /* INDICATOR TAP */
+    }
 
-    }, {
-      key: '___indicatorTap',
-      value: function ___indicatorTap() {
+    disable () {
 
-        this._on(this.$indicators, Pointer.tap, this.__indicatorTap);
-      }
-    }, {
-      key: '__indicatorTap',
-      value: function __indicatorTap(event) {
+      super.disable ();
 
-        this.set(this.$indicators.index(event.currentTarget));
-      }
+      this._wasCycling = this.options.cycle;
 
-      /* KEYDOWN */
+      if ( this.options.cycle ) {
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+        this.stop ();
 
-        this._onHover([this.$document, 'keydown', this.__keydown]);
       }
 
-      /* CYCLE */
+    }
 
-    }, {
-      key: '___cycle',
-      value: function ___cycle() {
+    /* API */
 
-        this._on(true, this.$itemsWrp, Pointer.enter, this.__cycleEnter);
-        this._on(true, this.$itemsWrp, Pointer.leave, this.__cycleLeave);
-      }
-    }, {
-      key: '__cycleEnter',
-      value: function __cycleEnter() {
+    get () {
 
-        if (this.options.cycle) {
+      return this._current.index;
 
-          this.timer.pause();
-        }
-      }
-    }, {
-      key: '__cycleLeave',
-      value: function __cycleLeave() {
+    }
 
-        if (this.options.cycle) {
+    set ( index ) {
 
-          this.timer.remaining(Math.max(this.options.intervalMinimumRemaining, this.timer.remaining()));
+      index = this._sanitizeIndex ( index );
 
-          this.timer.play();
-        }
+      if ( this._lock || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
+
+      this._lock = true;
+
+      if ( this._current ) {
+
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.previous );
+        this._current.$indicator.removeClass ( this.options.classes.current );
+
+        this._previous = this._current;
+
       }
 
-      /* ITEM OBJ */
+      this._current = this._getItemObj ( index );
+      this._current.$item.addClass ( this.options.classes.current );
+      this._current.$indicator.addClass ( this.options.classes.current );
 
-    }, {
-      key: '_getItemObj',
-      value: function _getItemObj(index) {
+      this._updatePreviousNext ();
 
-        return {
-          index: index,
-          $item: this.$items.eq(index),
-          $indicator: this.$indicators.eq(index)
-        };
+      if ( this.options.cycle ) {
+
+        this.timer.stop ();
+
       }
 
-      /* INDEX */
+      this._delay ( function () {
 
-    }, {
-      key: '_getPrevIndex',
-      value: function _getPrevIndex(index) {
+        if ( this._previous ) {
 
-        return index > 0 ? index - 1 : this.options.wrap ? this.maxIndex : 0;
-      }
-    }, {
-      key: '_getNextIndex',
-      value: function _getNextIndex(index) {
+          this._previous.$item.removeClass ( this.options.classes.previous );
 
-        return index < this.maxIndex ? index + 1 : this.options.wrap ? 0 : this.maxIndex;
-      }
-
-      /* UPDATE */
-
-    }, {
-      key: '_updatePreviousNext',
-      value: function _updatePreviousNext() {
-
-        this.$previous.toggleClass(this.options.classes.disabled, this._current.index === 0 && !this.options.wrap);
-        this.$next.toggleClass(this.options.classes.disabled, this._current.index === this.maxIndex && !this.options.wrap);
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'enable',
-      value: function enable() {
-
-        _get(Object.getPrototypeOf(Carousel.prototype), 'enable', this).call(this);
-
-        if (this.options.cycle || this._wasCycling) {
-
-          this.play();
-        }
-      }
-    }, {
-      key: 'disable',
-      value: function disable() {
-
-        _get(Object.getPrototypeOf(Carousel.prototype), 'disable', this).call(this);
-
-        this._wasCycling = this.options.cycle;
-
-        if (this.options.cycle) {
-
-          this.stop();
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return this._current.index;
-      }
-    }, {
-      key: 'set',
-      value: function set(index) {
-
-        index = this._sanitizeIndex(index);
-
-        if (this._lock || _.isNaN(index) || this._current && index === this._current.index) return;
-
-        this._lock = true;
-
-        if (this._current) {
-
-          this._current.$item.removeClass(this.options.classes.current).addClass(this.options.classes.previous);
-          this._current.$indicator.removeClass(this.options.classes.current);
-
-          this._previous = this._current;
         }
 
-        this._current = this._getItemObj(index);
-        this._current.$item.addClass(this.options.classes.current);
-        this._current.$indicator.addClass(this.options.classes.current);
+        if ( this.options.cycle ) {
 
-        this._updatePreviousNext();
+          this.timer.play ();
 
-        if (this.options.cycle) {
-
-          this.timer.stop();
         }
 
-        this._delay(function () {
+        this._lock = false;
 
-          if (this._previous) {
+        this._trigger ( 'change' );
 
-            this._previous.$item.removeClass(this.options.classes.previous);
-          }
+      }, this.options.animations.cycle );
 
-          if (this.options.cycle) {
+    }
 
-            this.timer.play();
-          }
+    previous () {
 
-          this._lock = false;
+      this.set ( this._getPrevIndex ( this._current.index ) );
 
-          this._trigger('change');
-        }, this.options.animations.cycle);
-      }
-    }, {
-      key: 'previous',
-      value: function previous() {
+    }
 
-        this.set(this._getPrevIndex(this._current.index));
-      }
-    }, {
-      key: 'next',
-      value: function next() {
+    next () {
 
-        this.set(this._getNextIndex(this._current.index));
-      }
+      this.set ( this._getNextIndex ( this._current.index ) );
 
-      /* API TIMER */
+    }
 
-    }, {
-      key: 'play',
-      value: function play() {
+    /* API TIMER */
 
-        this.options.cycle = true;
-        this.timer.remaining(Math.max(this.options.intervalMinimumRemaining, this.timer.remaining()));
-        this.timer.play();
-      }
-    }, {
-      key: 'pause',
-      value: function pause() {
+    play () {
 
-        this.options.cycle = false;
-        this.timer.pause();
-      }
-    }, {
-      key: 'stop',
-      value: function stop() {
+      this.options.cycle = true;
+      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () ) );
+      this.timer.play ();
 
-        this.options.cycle = false;
-        this.timer.stop();
-      }
-    }, {
-      key: 'reset',
-      value: function reset() {
+    }
 
-        this.options.cycle = true;
-        this.timer.reset();
-      }
-    }]);
+    pause () {
 
-    return Carousel;
-  }(Widgets.Widget);
+      this.options.cycle = false;
+      this.timer.pause ();
+
+    }
+
+    stop () {
+
+      this.options.cycle = false;
+      this.timer.stop ();
+
+    }
+
+    reset () {
+
+      this.options.cycle = true;
+      this.timer.reset ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Carousel, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations);
+  Factory.init ( Carousel, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Toast
@@ -13426,23 +13077,58 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes ) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var openNotiesData = {};
+  let openNotiesData = {};
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'toast',
     plugin: true,
     selector: '.toast',
     templates: {
-      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' + ('<div class="infobar ' + Colors.transparent + '">') + '<% if ( o.img ) { %>' + '<img src="<%= o.img %>" class="toast-img infobar-left">' + '<% } %>' + '<% if ( o.icon ) { %>' + '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' + '<% } %>' + '<% if ( o.title || o.body ) { %>' + '<div class="infobar-center">' + '<% if ( o.title ) { %>' + '<p class="infobar-title">' + '<%= o.title %>' + '</p>' + '<% } %>' + '<% if ( o.body ) { %>' + '<%= o.body %>' + '<% } %>' + '</div>' + '<% } %>' + '<% if ( o.buttons.length === 1 ) { %>' + '<div class="infobar-right">' + '<% print ( self.button ( o.buttons[0] ) ) %>' + '</div>' + '<% } %>' + '</div>' + '<% if ( o.buttons.length > 1 ) { %>' + '<div class="toast-buttons multiple center-x">' + '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' + '<% print ( self.button ( o.buttons[i] ) ) %>' + '<% } %>' + '</div>' + '<% } %>' + '</div>',
-      button: '<div class="button <%= o.color || "' + Colors.white + '" %> <%= o.size || "' + Sizes.small + '" %> <%= o.css || "" %>">' + '<%= o.text || "" %>' + '</div>'
+      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' +
+              `<div class="infobar ${Colors.transparent}">` +
+                '<% if ( o.img ) { %>' +
+                  '<img src="<%= o.img %>" class="toast-img infobar-left">' +
+                '<% } %>' +
+                '<% if ( o.icon ) { %>' +
+                  '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' +
+                '<% } %>' +
+                '<% if ( o.title || o.body ) { %>' +
+                  '<div class="infobar-center">' +
+                    '<% if ( o.title ) { %>' +
+                      '<p class="infobar-title">' +
+                         '<%= o.title %>' +
+                       '</p>' +
+                    '<% } %>' +
+                    '<% if ( o.body ) { %>' +
+                      '<%= o.body %>' +
+                    '<% } %>' +
+                  '</div>' +
+                '<% } %>' +
+                '<% if ( o.buttons.length === 1 ) { %>' +
+                  '<div class="infobar-right">' +
+                    '<% print ( self.button ( o.buttons[0] ) ) %>' +
+                  '</div>' +
+                '<% } %>' +
+              '</div>' +
+              '<% if ( o.buttons.length > 1 ) { %>' +
+                '<div class="toast-buttons multiple center-x">' +
+                  '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' +
+                    '<% print ( self.button ( o.buttons[i] ) ) %>' +
+                  '<% } %>' +
+                '</div>' +
+              '<% } %>' +
+            '</div>',
+      button: `<div class="button <%= o.color || "${Colors.white}" %> <%= o.size || "${Sizes.small}" %> <%= o.css || "" %>">` +
+                '<%= o.text || "" %>' +
+              '</div>'
     },
     options: {
       anchor: { // Used for selecting the proper queue where this Toast should be attached
@@ -13494,299 +13180,310 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOAST */
 
-  var Toast = function (_Widgets$Widget32) {
-    _inherits(Toast, _Widgets$Widget32);
+  class Toast extends Widgets.Widget {
 
-    function Toast() {
-      _classCallCheck(this, Toast);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Toast).apply(this, arguments));
+    static ready () {
+
+      $('.layout, body').first ().append ( // `body` is used as a fallback
+        '<div class="toast-queues top">' +
+          '<div class="toast-queue expanded"></div>' +
+          '<div class="toast-queues-row">' +
+            '<div class="toast-queue left"></div>' +
+            '<div class="toast-queue center"></div>' +
+            '<div class="toast-queue right"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="toast-queues bottom">' +
+          '<div class="toast-queues-row">' +
+            '<div class="toast-queue left"></div>' +
+            '<div class="toast-queue center"></div>' +
+            '<div class="toast-queue right"></div>' +
+          '</div>' +
+          '<div class="toast-queue expanded"></div>' +
+        '</div>'
+      );
+
     }
 
-    _createClass(Toast, [{
-      key: '_variables',
-      value: function _variables() {
+    _variables () {
 
-        this.$toast = this.$element;
-        this.$buttons = this.$toast.find(this.options.selectors.button);
+      this.$toast = this.$element;
+      this.$buttons = this.$toast.find ( this.options.selectors.button );
 
-        this.timer = false;
-        this._openUrl = false;
+      this.timer = false;
+      this._openUrl = false;
 
-        this._isOpen = this.$toast.hasClass(this.options.classes.open);
+      this._isOpen = this.$toast.hasClass ( this.options.classes.open );
+
+    }
+
+    _init () {
+
+      this.$toast.widgetize ();
+
+      if ( this._isOpen ) {
+
+        this.___timer ();
+        this.___tap ();
+        this.___flick ();
+        this.___buttonTap ();
+        this.___hover ();
+        this.___persistent ();
+        this.___keydown ();
+        this.___breakpoint ();
+
+      } else if ( this.options.autoplay ) {
+
+        this.open ();
+
       }
-    }, {
-      key: '_init',
-      value: function _init() {
 
-        this.$toast.widgetize();
+    }
 
-        if (this._isOpen) {
+    /* PRIVATE */
 
-          this.___timer();
-          this.___tap();
-          this.___flick();
-          this.___buttonTap();
-          this.___hover();
-          this.___persistent();
-          this.___keydown();
-          this.___breakpoint();
-        } else if (this.options.autoplay) {
+    _getUrl () {
 
-          this.open();
+      return window.location.href.split ( '#' )[0];
+
+    }
+
+    /* TIMER */
+
+    ___timer () {
+
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+
+        if ( !this.timer ) {
+
+          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+
+        } else {
+
+          this.timer.reset ();
+
         }
+
+        openNotiesData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
+
       }
 
-      /* PRIVATE */
+    }
 
-    }, {
-      key: '_getUrl',
-      value: function _getUrl() {
+    /* TAP */
 
-        return window.location.href.split('#')[0];
+    ___tap () {
+
+      if ( this.options.type !== 'action' ) {
+
+        this._on ( Pointer.tap, this.__tap );
+
       }
+
+    }
+
+    __tap ( event ) {
+
+      event.preventDefault (); // Otherwise the click goes through the toast in Chrome for iOS
+
+      this.close ();
+
+    }
+
+    /* BUTTON TAP */
+
+    ___buttonTap () {
+
+      this._on ( this.$buttons, Pointer.tap, this.__buttonTap );
+
+    }
+
+    __buttonTap ( event, data ) {
+
+      let $button = $(event.target),
+          index = this.$buttons.index ( $button ),
+          buttonObj = this.options.buttons[index];
+
+      if ( buttonObj.onClick ) {
+
+        if ( buttonObj.onClick.apply ( $button[0], [event, data] ) === false ) return;
+
+      }
+
+      this.close ();
+
+    }
+
+    /* HOVER */
+
+    ___hover () {
+
+      this.$toast.hover ( function () {
+
+        _.forOwn ( openNotiesData, data => data[0].pause () );
+
+      }, function () {
+
+        _.forOwn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+
+      });
+
+    }
+
+    /* FLICK */
+
+    ___flick () {
+
+      if ( this.options.type !== 'action' ) {
+
+        this.$toast.flickable ({
+          callbacks: {
+            flick: this.__flick.bind ( this )
+          }
+        });
+
+      }
+
+    }
+
+    __flick ( event, data ) {
+
+      if ( data.orientation === 'horizontal' ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* PERSISTENT */
+
+    ___persistent () {
+
+      if ( !this.options.persistent ) {
+
+        this.___route ();
+
+      }
+
+    }
+
+    __route () {
+
+      let currentUrl = this._getUrl ();
+
+      if ( this._openUrl && this._openUrl !== currentUrl ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* RESET */
+
+    _reset () {
 
       /* TIMER */
 
-    }, {
-      key: '___timer',
-      value: function ___timer() {
-
-        if (this.options.type !== 'action' && _.isNumber(this.options.ttl) && !_.isNaN(this.options.ttl) && this.options.ttl !== Infinity) {
-
-          if (!this.timer) {
-
-            this.timer = new Timer(this.close.bind(this), this.options.ttl, true);
-          } else {
-
-            this.timer.reset();
-          }
-
-          openNotiesData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
-        }
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        if (this.options.type !== 'action') {
-
-          this._on(Pointer.tap, this.__tap);
-        }
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        event.preventDefault(); // Otherwise the click goes through the toast in Chrome for iOS
-
-        this.close();
-      }
-
-      /* BUTTON TAP */
-
-    }, {
-      key: '___buttonTap',
-      value: function ___buttonTap() {
-
-        this._on(this.$buttons, Pointer.tap, this.__buttonTap);
-      }
-    }, {
-      key: '__buttonTap',
-      value: function __buttonTap(event, data) {
-
-        var $button = $(event.target),
-            index = this.$buttons.index($button),
-            buttonObj = this.options.buttons[index];
-
-        if (buttonObj.onClick) {
-
-          if (buttonObj.onClick.apply($button[0], [event, data]) === false) return;
-        }
-
-        this.close();
-      }
-
-      /* HOVER */
-
-    }, {
-      key: '___hover',
-      value: function ___hover() {
-
-        this.$toast.hover(function () {
-
-          _.forOwn(openNotiesData, function (data) {
-            return data[0].pause();
-          });
-        }, function () {
-
-          _.forOwn(openNotiesData, function (data) {
-            return data[0].remaining(Math.max(data[1], data[0].remaining())).play();
-          });
-        });
-      }
+      delete openNotiesData[this.guid];
 
       /* FLICK */
 
-    }, {
-      key: '___flick',
-      value: function ___flick() {
+      this.$toast.flickable ( 'destroy' );
 
-        if (this.options.type !== 'action') {
+      /* SUPER */
 
-          this.$toast.flickable({
-            callbacks: {
-              flick: this.__flick.bind(this)
-            }
-          });
-        }
-      }
-    }, {
-      key: '__flick',
-      value: function __flick(event, data) {
+      super._reset ();
 
-        if (data.orientation === 'horizontal') {
+    }
 
-          this.close();
-        }
-      }
+    /* API */
 
-      /* PERSISTENT */
+    isOpen () {
 
-    }, {
-      key: '___persistent',
-      value: function ___persistent() {
+      return this._isOpen;
 
-        if (!this.options.persistent) {
+    }
 
-          this.___route();
-        }
-      }
-    }, {
-      key: '__route',
-      value: function __route() {
+    open () {
 
-        var currentUrl = this._getUrl();
+      if ( this._lock || this._isOpen ) return;
 
-        if (this._openUrl && this._openUrl !== currentUrl) {
+      this._lock = true;
+      this._isOpen = true;
 
-          this.close();
-        }
-      }
+      this._frame ( function () {
 
-      /* RESET */
+        $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$toast );
 
-    }, {
-      key: '_reset',
-      value: function _reset() {
+        this._frame ( function () {
 
-        /* TIMER */
+          this.$toast.addClass ( this.options.classes.open );
 
-        delete openNotiesData[this.guid];
+          this._lock = false;
 
-        /* FLICK */
+          this._trigger ( 'open' );
 
-        this.$toast.flickable('destroy');
-
-        /* SUPER */
-
-        _get(Object.getPrototypeOf(Toast.prototype), '_reset', this).call(this);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._frame(function () {
-
-          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append(this.$toast);
-
-          this._frame(function () {
-
-            this.$toast.addClass(this.options.classes.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
         });
 
-        this.___timer();
-        this.___tap();
-        this.___flick();
-        this.___buttonTap();
-        this.___hover();
-        this.___persistent();
-        this.___keydown();
-        this.___breakpoint();
+      });
 
-        this._defer(function () {
+      this.___timer ();
+      this.___tap ();
+      this.___flick ();
+      this.___buttonTap ();
+      this.___hover ();
+      this.___persistent ();
+      this.___keydown ();
+      this.___breakpoint ();
 
-          this._openUrl = this._getUrl();
-        });
-      }
-    }, {
-      key: 'close',
-      value: function close() {
+      this._defer ( function () {
 
-        if (this._lock || !this._isOpen) return;
+        this._openUrl = this._getUrl ();
 
-        this._lock = true;
-        this._isOpen = false;
-        this._openUrl = false;
+      });
 
-        this._frame(function () {
+    }
 
-          this.$toast.removeClass(this.options.classes.open);
+    close () {
 
-          this._delay(function () {
+      if ( this._lock || !this._isOpen ) return;
 
-            this.$toast.remove();
+      this._lock = true;
+      this._isOpen = false;
+      this._openUrl = false;
 
-            this._lock = false;
+      this._frame ( function () {
 
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
+        this.$toast.removeClass ( this.options.classes.open );
 
-        this._reset();
-      }
-    }], [{
-      key: 'ready',
+        this._delay ( function () {
 
+          this.$toast.remove ();
 
-      /* SPECIAL */
+          this._lock = false;
 
-      value: function ready() {
+          this._trigger ( 'close' );
 
-        $('.layout, body').first().append( // `body` is used as a fallback
-        '<div class="toast-queues top">' + '<div class="toast-queue expanded"></div>' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '</div>' + '<div class="toast-queues bottom">' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '<div class="toast-queue expanded"></div>' + '</div>');
-      }
-    }]);
+        }, this.options.animations.close );
 
-    return Toast;
-  }(Widgets.Widget);
+      });
+
+      this._reset ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Toast, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes);
+  Factory.init ( Toast, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));
+
 
 /* =========================================================================
  * Svelto - Lib - Notification
@@ -13800,13 +13497,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 
-(function ($, _, Svelto, Widgets) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
   /* DEFAULTS */
 
-  var defaults = {
+  let defaults = {
     title: false,
     body: false,
     img: false,
@@ -13815,46 +13512,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NOTIFICATION */
 
-  $.notification = function (options) {
+  $.notification = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend({}, $.notification.defaults, options);
+    options = _.extend ( {}, $.notification.defaults, options );
 
     /* NOTIFICATIONS */
 
-    if (!document.hasFocus() && window.Notification && Notification.permission !== 'denied') {
+    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-      Notification.requestPermission(function (status) {
+      Notification.requestPermission ( function ( status ) {
 
-        if (status === 'granted') {
-          (function () {
+        if ( status === 'granted' ) {
 
-            var notification = new Notification(options.title, { body: options.body, icon: options.img });
+          let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
-            if (_.isNumber(options.ttl) && !_.isNaN(options.ttl) && options.ttl !== Infinity) {
+          if ( _.isNumber ( options.ttl ) && !_.isNaN ( options.ttl ) && options.ttl !== Infinity ) {
 
-              setTimeout(function () {
+            setTimeout ( function () {
 
-                notification.close();
-              }, options.ttl);
-            }
-          })();
+              notification.close ();
+
+            }, options.ttl );
+
+          }
+
         } else {
 
-          $.toast(options);
+          $.toast ( options );
+
         }
+
       });
+
     } else {
 
-      $.toast(options);
+      $.toast ( options );
+
     }
+
   };
 
   /* BINDING */
 
   $.notification.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Rater
@@ -13868,19 +13573,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Crappy, not working atm, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'rater',
     plugin: true,
     selector: '.rater',
     templates: {
-      base: '<div class="rater">' + '<% print ( self.stars ( o ) ) %>' + '</div>',
-      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' + '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' + '<% } %>'
+      base: '<div class="rater">' +
+              '<% print ( self.stars ( o ) ) %>' +
+            '</div>',
+      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' +
+               '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' +
+             '<% } %>'
     },
     options: {
       value: 0,
@@ -13904,135 +13613,129 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       callbacks: {
         change: _.noop
       }
-    }
+    },
   };
 
   /* SELECT */
 
-  var Rater = function (_Widgets$Widget33) {
-    _inherits(Rater, _Widgets$Widget33);
+  class Rater extends Widgets.Widget {
 
-    function Rater() {
-      _classCallCheck(this, Rater);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Rater).apply(this, arguments));
+    _variables () {
+
+      this.$rater = this.$element;
+
+      this.doingAjax = false;
+
     }
 
-    _createClass(Rater, [{
-      key: '_variables',
+    _init () {
 
+      this.options.value = Number ( this.$rater.data ( this.options.datas.value ) ) || this.options.value;
+      this.options.amount = Number ( this.$rater.data ( this.options.datas.amount ) ) || this.options.amount;
+      this.options.url = Number ( this.$rater.data ( this.options.datas.url ) ) || this.options.url;
+      this.options.rated = this.$rater.hasClass ( this.options.classes.rated );
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    _events () {
 
-        this.$rater = this.$element;
+      this.___tap ();
 
-        this.doingAjax = false;
+    }
+
+    /* TAP */
+
+    ___tap () {
+
+      if ( !this.options.rated ) {
+
+        /* TAP */
+
+        this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
+
       }
-    }, {
-      key: '_init',
-      value: function _init() {
 
-        this.options.value = Number(this.$rater.data(this.options.datas.value)) || this.options.value;
-        this.options.amount = Number(this.$rater.data(this.options.datas.amount)) || this.options.amount;
-        this.options.url = Number(this.$rater.data(this.options.datas.url)) || this.options.url;
-        this.options.rated = this.$rater.hasClass(this.options.classes.rated);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    }
 
-        this.___tap();
-      }
+    __tap ( event ) {
 
-      /* TAP */
+      if ( !this.options.rated && !this.doingAjax && this.options.url ) {
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
+        let rating = this.$stars.index ( event.currentTarget ) + 1;
 
-        if (!this.options.rated) {
+        $.ajax ({
 
-          /* TAP */
+          data: { rating: rating },
+          type: 'POST',
+          url: this.options.url,
 
-          this._on(Pointer.tap, this.options.selectors.star, this.__tap);
-        }
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-        var _this60 = this;
+          beforeSend: () => {
 
-        if (!this.options.rated && !this.doingAjax && this.options.url) {
+            this.doingAjax = true;
 
-          var rating = this.$stars.index(event.currentTarget) + 1;
+          },
 
-          $.ajax({
+          error: ( res ) => {
 
-            data: { rating: rating },
-            type: 'POST',
-            url: this.options.url,
+            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-            beforeSend: function beforeSend() {
+            $.toast ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
 
-              _this60.doingAjax = true;
-            },
+          },
 
-            error: function error(res) {
+          success: ( res ) => {
 
-              var resj = _.attempt(JSON.parse, res);
+            //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-              $.toast(_.isError(resj) || !('msg' in resj) ? _this60.options.messages.error : resj.msg);
-            },
+            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-            success: function success(res) {
+            if ( !_.isError ( resj ) ) {
 
-              //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
+              _.merge ( this.options, resj );
 
-              var resj = _.attempt(JSON.parse, res);
+              this.$rater.html ( this._template ( 'stars', this.options ) );
 
-              if (!_.isError(resj)) {
+              this.options.rated = true;
 
-                _.merge(_this60.options, resj);
+              this._trigger ( 'change' );
 
-                _this60.$rater.html(_this60._template('stars', _this60.options));
-
-                _this60.options.rated = true;
-
-                _this60._trigger('change');
-              }
-            },
-
-            complete: function complete() {
-
-              _this60.doingAjax = false;
             }
 
-          });
-        }
+          },
+
+          complete: () => {
+
+            this.doingAjax = false;
+
+          }
+
+        });
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'get',
-      value: function get() {
+    /* API */
 
-        return {
-          value: this.options.value,
-          amount: this.options.amount
-        };
-      }
-    }]);
+    get () {
 
-    return Rater;
-  }(Widgets.Widget);
+      return {
+        value: this.options.value,
+        amount: this.options.amount
+      };
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Rater, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+  Factory.init ( Rater, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Action
@@ -14051,13 +13754,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Not well written
 //FIXME: Clicking an error/success toast doesn't close it
 
-(function ($, _, Svelto, Widgets, Factory, Colors, Sizes) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remoteAction',
     options: {
       closingDelay: Widgets.Toast.config.options.ttl / 2,
@@ -14083,7 +13786,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         spinner: {
           color: Colors.white,
           size: Sizes.small,
-          css: ''
+          css: '',
         }
       }
     }
@@ -14091,164 +13794,160 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE ACTION */
 
-  var RemoteAction = function (_Widgets$Remote) {
-    _inherits(RemoteAction, _Widgets$Remote);
+  class RemoteAction extends Widgets.Remote {
 
-    function RemoteAction() {
-      _classCallCheck(this, RemoteAction);
+    /* TOAST */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteAction).apply(this, arguments));
+    ___confirmationToast () {
+
+      if ( this.$toast ) return;
+
+      /* VARIABLES */
+
+      let options = _.cloneDeep ( this.options.confirmation ),
+          index = _.findIndex ( options.buttons, 'isConfirmative' ),
+          button = ( index >= 0 ) ? options.buttons[index] : _.last ( options.buttons );
+
+      /* ON CLICK */
+
+      button.onClick = function () {
+        this.request ( true );
+        return false;
+      }.bind ( this );
+
+      /* OPENING */
+
+      this._replaceToast ( options );
+
     }
 
-    _createClass(RemoteAction, [{
-      key: '___confirmationToast',
+    ___loadingToast () {
 
+      this._replaceToast ( `<svg class="spinner ${this.options.classes.spinner.color} ${this.options.classes.spinner.size} ${this.options.classes.spinner.css}"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>` );
 
-      /* TOAST */
+    }
 
-      value: function ___confirmationToast() {
+    _replaceToast ( options ) {
 
-        if (this.$toast) return;
+      let instance = $.toast ( _.isString ( options ) ? { body: options, autoplay: false } : _.extend ( {}, options, { autoplay: false } ) );
 
-        /* VARIABLES */
+      instance.close ();
 
-        var options = _.cloneDeep(this.options.confirmation),
-            index = _.findIndex(options.buttons, 'isConfirmative'),
-            button = index >= 0 ? options.buttons[index] : _.last(options.buttons);
+      let $toast = instance.$element;
 
-        /* ON CLICK */
+      if ( this.$toast ) {
 
-        button.onClick = function () {
-          this.request(true);
-          return false;
-        }.bind(this);
+        this.$toast.html ( $toast.html () ).widgetize ();
 
-        /* OPENING */
+      } else {
 
-        this._replaceToast(options);
-      }
-    }, {
-      key: '___loadingToast',
-      value: function ___loadingToast() {
+        this.$toast = $toast;
 
-        this._replaceToast('<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>');
-      }
-    }, {
-      key: '_replaceToast',
-      value: function _replaceToast(options) {
+        this.$toast.toast ( 'open' );
 
-        var instance = $.toast(_.isString(options) ? { body: options, autoplay: false } : _.extend({}, options, { autoplay: false }));
-
-        instance.close();
-
-        var $toast = instance.$element;
-
-        if (this.$toast) {
-
-          this.$toast.html($toast.html()).widgetize();
-        } else {
-
-          this.$toast = $toast;
-
-          this.$toast.toast('open');
-        }
-      }
-    }, {
-      key: '_destroyToast',
-      value: function _destroyToast(delay) {
-
-        if (!this.$toast) return;
-
-        this._delay(function () {
-
-          this.$toast.toast('close');
-
-          this._delay(function () {
-
-            this.$toast.remove();
-
-            this.$toast = false;
-          }, Widgets.Toast.config.options.animations.close);
-        }, delay ? this.options.closingDelay : 0);
       }
 
-      /* REQUEST HANDLERS */
+    }
 
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
+    _destroyToast ( delay ) {
 
-        if (this.isAborted()) return;
+      if ( !this.$toast ) return;
 
-        this.___loadingToast();
+      this._delay ( function () {
 
-        _get(Object.getPrototypeOf(RemoteAction.prototype), '__beforesend', this).call(this, res);
+        this.$toast.toast ( 'close' );
+
+        this._delay ( function () {
+
+          this.$toast.remove ();
+
+          this.$toast = false;
+
+        }, Widgets.Toast.config.options.animations.close );
+
+      }, delay ? this.options.closingDelay : 0 );
+
+    }
+
+    /* REQUEST HANDLERS */
+
+    __beforesend ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      this.___loadingToast ();
+
+      super.__beforesend ( res );
+
+    }
+
+    __error ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+
+      this._replaceToast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+
+      this._destroyToast ( true );
+
+      super.__error ( res );
+
+    }
+
+    __success ( res ) {
+
+      if ( this.isAborted () ) return;
+
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+
+      if ( _.isError ( resj ) ) {
+
+        return this.__error ( res );
+
+      } else {
+
+        this._replaceToast ( 'msg' in resj ? resj.msg : this.options.messages.success );
+        this._destroyToast ( true );
+
+        super.__success ( res );
+
       }
-    }, {
-      key: '__error',
-      value: function __error(res) {
 
-        if (this.isAborted()) return;
+    }
 
-        var resj = _.attempt(JSON.parse, res);
+    /* API OVERRIDES */
 
-        this._replaceToast(_.isError(resj) || !('msg' in resj) ? this.options.messages.error : resj.msg);
+    request ( _confirmation ) {
 
-        this._destroyToast(true);
+      if ( !_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length ) {
 
-        _get(Object.getPrototypeOf(RemoteAction.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
+        this.___confirmationToast ();
 
-        if (this.isAborted()) return;
+      } else {
 
-        var resj = _.attempt(JSON.parse, res);
+        super.request ();
 
-        if (_.isError(resj)) {
-
-          return this.__error(res);
-        } else {
-
-          this._replaceToast('msg' in resj ? resj.msg : this.options.messages.success);
-          this._destroyToast(true);
-
-          _get(Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
-        }
       }
 
-      /* API OVERRIDES */
+    }
 
-    }, {
-      key: 'request',
-      value: function request(_confirmation) {
+    abort () {
 
-        if (!_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length) {
+      this._destroyToast ();
 
-          this.___confirmationToast();
-        } else {
+      super.abort ();
 
-          _get(Object.getPrototypeOf(RemoteAction.prototype), 'request', this).call(this);
-        }
-      }
-    }, {
-      key: 'abort',
-      value: function abort() {
+    }
 
-        this._destroyToast();
-
-        _get(Object.getPrototypeOf(RemoteAction.prototype), 'abort', this).call(this);
-      }
-    }]);
-
-    return RemoteAction;
-  }(Widgets.Remote);
+  }
 
   /* FACTORY */
 
-  Factory.init(RemoteAction, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes);
+  Factory.init ( RemoteAction, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Action (Helper)
@@ -14259,17 +13958,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./action.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
   /* HELPER */
 
-  $.remoteAction = function (ajax) {
+  $.remoteAction = function ( ajax ) {
 
-    new Widgets.RemoteAction({ ajax: ajax }).request();
+    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
+
   };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Action (Trigger)
@@ -14281,13 +13983,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./action.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remoteActionTrigger',
     plugin: true,
     selector: '.remote-action-trigger',
@@ -14298,22 +14000,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE ACTION TRIGGER */
 
-  var RemoteActionTrigger = function (_Widgets$RemoteTrigge) {
-    _inherits(RemoteActionTrigger, _Widgets$RemoteTrigge);
-
-    function RemoteActionTrigger() {
-      _classCallCheck(this, RemoteActionTrigger);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteActionTrigger).apply(this, arguments));
-    }
-
-    return RemoteActionTrigger;
-  }(Widgets.RemoteTrigger);
+  class RemoteActionTrigger extends Widgets.RemoteTrigger {}
 
   /* FACTORY */
 
-  Factory.init(RemoteActionTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( RemoteActionTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal
@@ -14329,13 +14023,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 //FIXME: Not well written
 
-(function ($, _, Svelto, Widgets, Factory, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remoteModal',
     options: {
       persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
@@ -14360,240 +14054,203 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE MODAL */
 
-  var RemoteModal = function (_Widgets$Remote2) {
-    _inherits(RemoteModal, _Widgets$Remote2);
+  class RemoteModal extends Widgets.Remote {
 
-    function RemoteModal() {
-      _classCallCheck(this, RemoteModal);
+    /* PRIVATE */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteModal).apply(this, arguments));
+    _getUrl () {
+
+      return window.location.href.split ( '#' )[0];
+
     }
 
-    _createClass(RemoteModal, [{
-      key: '_getUrl',
+    /* PERSISTENT */
 
+    ___persistent () {
 
-      /* PRIVATE */
+      if ( !this.options.persistent ) {
 
-      value: function _getUrl() {
+        this.___route ();
 
-        return window.location.href.split('#')[0];
       }
 
-      /* PERSISTENT */
+    }
 
-    }, {
-      key: '___persistent',
-      value: function ___persistent() {
+    __route () {
 
-        if (!this.options.persistent) {
+      let currentUrl = this._getUrl ();
 
-          this.___route();
-        }
-      }
-    }, {
-      key: '__route',
-      value: function __route() {
+      if ( this._openUrl && this._openUrl !== currentUrl ) {
 
-        var currentUrl = this._getUrl();
+        this.abort ();
 
-        if (this._openUrl && this._openUrl !== currentUrl) {
-
-          this.abort();
-        }
       }
 
-      /* MODAL */
+    }
 
-    }, {
-      key: '___loadingModal',
-      value: function ___loadingModal() {
+    /* MODAL */
 
-        /*
-          <div class="modal ${this.options.classes.placeholder} card">
-            <div class="card-block">
-              <svg class="spinner">
-                <circle cx="1.625em" cy="1.625em" r="1.25em">
-              </svg>
-            </div>
+    ___loadingModal () {
+
+      /*
+        <div class="modal ${this.options.classes.placeholder} card">
+          <div class="card-block">
+            <svg class="spinner">
+              <circle cx="1.625em" cy="1.625em" r="1.25em">
+            </svg>
           </div>
-        */
+        </div>
+      */
 
-        this.$modal = $('<div class="modal ' + this.options.classes.placeholder + ' card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo(this.$layout);
-      }
-    }, {
-      key: '_destroyModal',
-      value: function _destroyModal() {
+      this.$modal = $(`<div class="modal ${this.options.classes.placeholder} card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>`).appendTo ( this.$layout );
 
-        if (!this.$modal) return;
+    }
 
-        this.$modal.modal('close');
+    _destroyModal () {
 
-        this._delay(function () {
+      if ( !this.$modal ) return;
 
-          this.$modal.remove();
+      this.$modal.modal ( 'close' );
 
-          this.$modal = false;
-        }, Widgets.Modal.config.options.animations.close);
-      }
+      this._delay ( function () {
 
-      /* ABORT */
+        if ( !this.$modal ) return;
 
-    }, {
-      key: '___abort',
-      value: function ___abort() {
+        this.$modal.remove ();
 
-        this._on(true, this.$modal, 'modal:close', this.abort);
-      }
+        this.$modal = false;
 
-      /* REQUEST HANDLERS */
+      }, Widgets.Modal.config.options.animations.close );
 
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
+    }
 
-        if (this.isAborted()) return;
+    /* ABORT */
 
-        this._defer(function () {
+    ___abort () {
 
-          this._openUrl = this._getUrl();
-        });
+      this._on ( true, this.$modal, 'modal:beforeclose', this.abort );
 
-        this.___persistent();
-        this.___loadingModal();
-        this.___abort();
+    }
 
-        this.$modal.modal('open');
+    /* REQUEST HANDLERS */
 
-        _get(Object.getPrototypeOf(RemoteModal.prototype), '__beforesend', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
+    __beforesend ( res ) {
 
-        if (this.isAborted()) return;
+      if ( this.isAborted () ) return;
 
-        var resj = _.attempt(JSON.parse, res);
+      this._defer ( function () {
 
-        $.toast(_.isError(resj) || !('msg' in resj) ? this.options.messages.error : resj.msg);
+        this._openUrl = this._getUrl ();
 
-        this._destroyModal();
+      });
 
-        _get(Object.getPrototypeOf(RemoteModal.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-        var _this64 = this;
+      this.___persistent ();
+      this.___loadingModal ();
+      this.___abort ();
 
-        if (this.isAborted()) return;
+      this.$modal.modal ( 'open' );
 
-        var resj = _.attempt(JSON.parse, res);
+      super.__beforesend ( res );
 
-        if (_.isError(resj) || !('modal' in resj)) {
+    }
 
-          return this.__error(res);
-        } else {
-          (function () {
+    __error ( res ) {
 
-            /* VARIABLES */
+      if ( this.isAborted () ) return;
 
-            var prevRect = _this64.$modal.getRect(),
-                $remoteModal = $(resj.modal),
-                attributes = Array.from($remoteModal.prop('attributes'));
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-            /* CLONING ATTRIBUTES */
+      $.toast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
+      this._destroyModal ();
 
-            try {
-              for (var _iterator13 = attributes[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                var attribute = _step13.value;
+      super.__error ( res );
 
+    }
 
-                if (attribute.name !== 'class') {
+    __success ( res ) {
 
-                  _this64.$modal.attr(attribute.name, attribute.value);
-                } else {
+      if ( this.isAborted () ) return;
 
-                  _this64.$modal.addClass(attribute.value);
-                }
-              }
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-              /* RESIZING */
-            } catch (err) {
-              _didIteratorError13 = true;
-              _iteratorError13 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                  _iterator13.return();
-                }
-              } finally {
-                if (_didIteratorError13) {
-                  throw _iteratorError13;
-                }
-              }
-            }
+      if ( _.isError ( resj ) || !('modal' in resj) ) {
 
-            _this64._frame(function () {
+        return this.__error ( res );
 
-              this.$modal.html($remoteModal.html()).widgetize();
+      } else {
 
-              this.$modal.addClass(this.options.classes.loaded);
+        /* VARIABLES */
 
-              var newRect = this.$modal.getRect();
+        let prevRect = this.$modal.getRect (),
+            $remoteModal = $(resj.modal);
 
-              this.$modal.css({
-                width: prevRect.width,
-                height: prevRect.height
-              });
+        $remoteModal.addClass ( Widgets.Modal.config.options.classes.show ).addClass ( Widgets.Modal.config.options.classes.open );
 
-              this.$modal.addClass(this.options.classes.resizing);
+        /* AVOIDING MODAL CLOSE */
 
-              this._frame(function () {
-                var _this65 = this;
+        let instance = this.$modal.modal ( 'instance' );
+        instance.close = instance._reset;
 
-                this.$modal.addClass(this.options.classes.showing);
+        /* RESIZING */
 
-                this.$modal.animate({
-                  width: newRect.width,
-                  height: newRect.height
-                }, this.options.animations.resize, function () {
-                  _this65.$modal.css({
-                    width: '',
-                    height: ''
-                  }).removeClass(_this65.options.classes.placeholder + ' ' + _this65.options.classes.loaded + ' ' + _this65.options.classes.resizing + ' ' + _this65.options.classes.showing);
-                });
-              });
+        this._frame ( function () {
+
+          this.$modal.replaceWith ( $remoteModal );
+          this.$modal = $remoteModal;
+          this.$modal.widgetize ();
+
+          let newRect = this.$modal.getRect ();
+
+          this.$modal.css ({
+            width: prevRect.width,
+            height: prevRect.height
+          });
+
+          this.$modal.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
+
+          this._frame ( function () {
+
+            this.$modal.addClass ( this.options.classes.showing );
+
+            this.$modal.animate ({
+              width: newRect.width,
+              height: newRect.height
+            }, this.options.animations.resize, () => {
+              this.$modal.css ({
+                width: '',
+                height: ''
+              }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.resizing + ' ' + this.options.classes.showing );
             });
 
-            _get(Object.getPrototypeOf(RemoteModal.prototype), '__success', _this64).call(_this64, res);
-          })();
-        }
+          });
+
+        });
+
+        super.__success ( res );
+
       }
 
-      /* API OVERRIDES */
+    }
 
-    }, {
-      key: 'abort',
-      value: function abort() {
+    /* API OVERRIDES */
 
-        this._destroyModal();
+    abort () {
 
-        _get(Object.getPrototypeOf(RemoteModal.prototype), 'abort', this).call(this);
-      }
-    }]);
+      this._destroyModal ();
 
-    return RemoteModal;
-  }(Widgets.Remote);
+      super.abort ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(RemoteModal, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+  Factory.init ( RemoteModal, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal (Helper)
@@ -14604,17 +14261,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./modal.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
   /* HELPER */
 
-  $.remoteModal = function (ajax) {
+  $.remoteModal = function ( ajax ) {
 
-    new Widgets.RemoteModal({ ajax: ajax }).request();
+    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
+
   };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal (Trigger)
@@ -14626,13 +14286,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./modal.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'remoteModalTrigger',
     plugin: true,
     selector: '.remote-modal-trigger',
@@ -14643,22 +14303,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE MODAL TRIGGER */
 
-  var RemoteModalTrigger = function (_Widgets$RemoteTrigge2) {
-    _inherits(RemoteModalTrigger, _Widgets$RemoteTrigge2);
-
-    function RemoteModalTrigger() {
-      _classCallCheck(this, RemoteModalTrigger);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteModalTrigger).apply(this, arguments));
-    }
-
-    return RemoteModalTrigger;
-  }(Widgets.RemoteTrigger);
+  class RemoteModalTrigger extends Widgets.RemoteTrigger {}
 
   /* FACTORY */
 
-  Factory.init(RemoteModalTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( RemoteModalTrigger, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tagbox
@@ -14672,18 +14324,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 
-(function ($, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tagbox',
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' + '<span>' + '<%= o.value %>' + '</span>' + ('<i class="icon ' + Sizes.xsmall + ' actionable tagbox-tag-remover">close</i>') + '</div>'
+      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' +
+             '<span>' +
+               '<%= o.value %>' +
+             '</span>' +
+             `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">close</i>` +
+           '</div>'
     },
     options: {
       init: '', // Initial value
@@ -14696,7 +14353,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       characters: {
         forbid: true, // Forbid or not
-        forbidden: ['<', '>', ';', '`'],
+        forbidden: [ '<', '>', ';', '`' ],
         separator: ',', // It will also become kind of a forbidden character, used for insertion
         inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
       },
@@ -14730,429 +14387,444 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TAGBOX */
 
-  var Tagbox = function (_Widgets$Widget34) {
-    _inherits(Tagbox, _Widgets$Widget34);
+  class Tagbox extends Widgets.Widget {
 
-    function Tagbox() {
-      _classCallCheck(this, Tagbox);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Tagbox).apply(this, arguments));
+    _variables () {
+
+      this.$tagbox = this.$element;
+      this.$tags = this.$tagbox.find ( this.options.selectors.tags );
+      this.$input = this.$tagbox.find ( this.options.selectors.input );
+      this.$partial = this.$tagbox.find ( this.options.selectors.partial );
+
     }
 
-    _createClass(Tagbox, [{
-      key: '_variables',
+    _init ( suppressTriggers ) {
 
+      /* REMOVE PREVIOUS */
 
-      /* SPECIAL */
+      this.$tagbox.find ( this.options.selectors.tag ).remove ();
 
-      value: function _variables() {
+      /* OPTIONS */
 
-        this.$tagbox = this.$element;
-        this.$tags = this.$tagbox.find(this.options.selectors.tags);
-        this.$input = this.$tagbox.find(this.options.selectors.input);
-        this.$partial = this.$tagbox.find(this.options.selectors.partial);
-      }
-    }, {
-      key: '_init',
-      value: function _init(suppressTriggers) {
+      this.options.init = this.$input.val () || this.options.init;
 
-        /* REMOVE PREVIOUS */
+      /* POPULATING */
 
-        this.$tagbox.find(this.options.selectors.tag).remove();
+      this.add ( this.options.init, suppressTriggers );
 
-        /* OPTIONS */
+    }
 
-        this.options.init = this.$input.val() || this.options.init;
+    _events () {
 
-        /* POPULATING */
+      this.___partial ();
 
-        this.add(this.options.init, suppressTriggers);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this.___tapOnEmpty ();
+      this.___tapOnTagRemover ();
 
-        this.___partial();
+    }
 
-        this.___tapOnEmpty();
-        this.___tapOnTagRemover();
+    /* PRIVATE */
+
+    _sanitizeTag ( value ) {
+
+      value = _.trim ( value );
+
+      if ( this.options.escape ) {
+
+        value = _.escape ( value );
+
       }
 
-      /* PRIVATE */
+      if ( this.options.deburr ) {
 
-    }, {
-      key: '_sanitizeTag',
-      value: function _sanitizeTag(value) {
+        value = _.deburr ( value );
 
-        value = _.trim(value);
+      }
 
-        if (this.options.escape) {
+      return value;
 
-          value = _.escape(value);
+    }
+
+    _getTagHtml ( value ) {
+
+      return this._template ( 'tag', _.extend ( { value: value }, this.options.tag ) );
+
+    }
+
+    _clearPartial () {
+
+      this.$partial.val ( '' ).trigger ( 'change' );
+
+    }
+
+    /* UPDATE */
+
+    _updateInput () {
+
+      this.$input.val ( this.options.tags.join ( this.options.characters.separator ) ).trigger ( 'change' );
+
+    }
+
+    /* TAG */
+
+    _add ( value ) {
+
+      let valueTrimmed = _.trim ( value );
+
+      value = this._sanitizeTag ( value );
+
+      if ( valueTrimmed.length < this.options.tag.minLength ) {
+
+        if ( valueTrimmed.length ) { // So it won't be triggered when the user presses enter and the $partial is empty
+
+          $.toast ( _.format ( this.options.messages.tooShort, value, this.options.tag.minLength ) );
+
         }
 
-        if (this.options.deburr) {
+      } else if ( _.includes ( this.options.tags, value ) ) {
 
-          value = _.deburr(value);
+        $.toast ( _.format ( this.options.messages.duplicate, value ) );
+
+      } else {
+
+        this.options.tags.push ( value );
+
+        if ( this.options.sort ) {
+
+          this.options.tags.sort ();
+
         }
 
-        return value;
-      }
-    }, {
-      key: '_getTagHtml',
-      value: function _getTagHtml(value) {
+        let tagHtml = this._getTagHtml ( value );
 
-        return this._template('tag', _.extend({ value: value }, this.options.tag));
-      }
-    }, {
-      key: '_clearPartial',
-      value: function _clearPartial() {
+        if ( this.options.tags.length === 1 ) {
 
-        this.$partial.val('').trigger('change');
-      }
+          this.$tags.prepend ( tagHtml );
 
-      /* UPDATE */
+        } else if ( !this.options.sort ) {
 
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
+          this.$tagbox.find ( this.options.selectors.tag ).last ().after ( tagHtml );
 
-        this.$input.val(this.options.tags.join(this.options.characters.separator)).trigger('change');
-      }
-
-      /* TAG */
-
-    }, {
-      key: '_add',
-      value: function _add(value) {
-
-        var valueTrimmed = _.trim(value);
-
-        value = this._sanitizeTag(value);
-
-        if (valueTrimmed.length < this.options.tag.minLength) {
-
-          if (valueTrimmed.length) {
-            // So it won't be triggered when the user presses enter and the $partial is empty
-
-            $.toast(_.format(this.options.messages.tooShort, value, this.options.tag.minLength));
-          }
-        } else if (_.includes(this.options.tags, value)) {
-
-          $.toast(_.format(this.options.messages.duplicate, value));
         } else {
 
-          this.options.tags.push(value);
+          let index = this.options.tags.indexOf ( value );
 
-          if (this.options.sort) {
+          if ( index === 0 ) {
 
-            this.options.tags.sort();
-          }
+            this.$tagbox.find ( this.options.selectors.tag ).first ().before ( tagHtml );
 
-          var tagHtml = this._getTagHtml(value);
-
-          if (this.options.tags.length === 1) {
-
-            this.$tags.prepend(tagHtml);
-          } else if (!this.options.sort) {
-
-            this.$tagbox.find(this.options.selectors.tag).last().after(tagHtml);
           } else {
 
-            var index = this.options.tags.indexOf(value);
+            this.$tagbox.find ( this.options.selectors.tag ).eq ( index - 1 ).after ( tagHtml );
 
-            if (index === 0) {
-
-              this.$tagbox.find(this.options.selectors.tag).first().before(tagHtml);
-            } else {
-
-              this.$tagbox.find(this.options.selectors.tag).eq(index - 1).after(tagHtml);
-            }
           }
 
-          return true;
         }
 
-        return false;
-      }
-    }, {
-      key: '_remove',
-      value: function _remove($tag, tag) {
+        return true;
 
-        $tag.remove();
-
-        _.pull(this.options.tags, tag);
       }
 
-      /* PARTIAL */
+      return false;
 
-    }, {
-      key: '___partial',
-      value: function ___partial() {
+    }
 
-        this._on(this.$partial, 'keypress keydown', this.__keypressKeydown); // `keypress` is for printable characters, `keydown` for the others
+    _remove ( $tag, tag ) {
 
-        this._on(this.$partial, 'paste', this.__paste);
-      }
+      $tag.remove ();
 
-      /* KEYPRESS / KEYDOWN */
+      _.pull ( this.options.tags, tag );
 
-    }, {
-      key: '__keypressKeydown',
-      value: function __keypressKeydown(event) {
+    }
 
-        var value = this.$partial.val();
+    /* PARTIAL */
 
-        if (_.includes(this.options.characters.inserters, event.keyCode) || event.keyCode === this.options.characters.separator.charCodeAt(0)) {
+    ___partial () {
 
-          var added = this.add(value);
+      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); // `keypress` is for printable characters, `keydown` for the others
 
-          if (added) {
+      this._on ( this.$partial, 'paste', this.__paste );
 
-            this._clearPartial();
-          }
+    }
 
-          event.preventDefault();
-          event.stopImmediatePropagation();
-        } else if (event.keyCode === Keyboard.keys.BACKSPACE) {
+    /* KEYPRESS / KEYDOWN */
 
-          if (!value.length && this.options.tags.length) {
+    __keypressKeydown ( event ) {
 
-            var $tag = this.$tagbox.find(this.options.selectors.tag).last(),
-                edit = !Keyboard.keystroke.hasCtrlOrCmd(event);
+      let value = this.$partial.val ();
 
-            this.remove($tag, edit);
+      if ( _.includes ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
-            event.preventDefault();
-            event.stopImmediatePropagation();
-          }
-        } else if (this.options.characters.forbid && _.includes(this.options.characters.forbidden, String.fromCharCode(event.keyCode))) {
+        let added = this.add ( value );
 
-          $.toast(this.options.messages.forbidden);
+        if ( added ) {
 
-          event.preventDefault();
-          event.stopImmediatePropagation();
-        }
-      }
+          this._clearPartial ();
 
-      /* PASTE */
-
-    }, {
-      key: '__paste',
-      value: function __paste(event) {
-
-        this.add(event.originalEvent.clipboardData.getData('text'));
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-
-      /* TAP ON TAG REMOVER */
-
-    }, {
-      key: '___tapOnTagRemover',
-      value: function ___tapOnTagRemover() {
-
-        this._on(Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover);
-      }
-    }, {
-      key: '__tapOnTagRemover',
-      value: function __tapOnTagRemover(event) {
-
-        var $tag = $(event.currentTarget).closest(this.options.selectors.tag);
-
-        this.remove($tag);
-      }
-
-      /* TAP ON EMPTY */
-
-    }, {
-      key: '___tapOnEmpty',
-      value: function ___tapOnEmpty() {
-
-        this._on(Pointer.tap, this.__tapOnEmpty);
-      }
-    }, {
-      key: '__tapOnEmpty',
-      value: function __tapOnEmpty(event) {
-
-        if (document.activeElement !== this.$partial[0] && !$(event.target).is(this.options.selectors.partial + ',' + this.options.selectors.tagLabel)) {
-
-          this.$partial.focus();
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return _.clone(this.options.tags);
-      }
-    }, {
-      key: 'add',
-      value: function add(tag, suppressTriggers) {
-        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
-
-        if (_.isArray(tag)) {
-
-          tag = _.flatten(tag).join(this.options.characters.separator);
         }
 
-        var tags = tag.split(this.options.characters.separator),
-            adds = _.map(tags, this._add.bind(this));
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
 
-        var added = !!_.compact(adds).length;
+      } else if ( event.keyCode === Keyboard.keys.BACKSPACE ) {
 
-        if (added) {
+        if ( !value.length && this.options.tags.length ) {
 
-          this._updateInput();
+          let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
+              edit = !Keyboard.keystroke.hasCtrlOrCmd ( event );
 
-          if (!suppressTriggers) {
+          this.remove ( $tag, edit );
 
-            this._trigger('change');
+          event.preventDefault ();
+          event.stopImmediatePropagation ();
 
-            var addedTags = _.filter(tags, function (tag, index) {
-              return adds[index];
-            });
-
-            this._trigger('add', addedTags);
-          }
         }
 
-        return added;
+      } else if ( this.options.characters.forbid && _.includes ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+
+        $.toast ( this.options.messages.forbidden );
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
       }
-    }, {
-      key: 'remove',
-      value: function remove(tag, edit, suppressTriggers) {
-        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
-        var $tags = [],
-            tags = [];
+    }
 
-        if (tag instanceof $) {
+    /* PASTE */
 
-          $tags = [tag];
-          tags = [tag.data(this.options.datas.value)];
-        } else {
+    __paste ( event ) {
 
-          if (_.isArray(tag)) {
+        this.add ( event.originalEvent.clipboardData.getData ( 'text' ) );
 
-            tag = _.flatten(tag).join(this.options.characters.separator);
-          }
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
 
-          tag = tag.split(this.options.characters.separator);
+    }
 
-          for (var i = 0, l = tag.length; i < l; i++) {
+    /* TAP ON TAG REMOVER */
 
-            var value = this._sanitizeTag(tag[i]),
-                $tag = this.$tagbox.find(this.options.selectors.tag + '[data-' + this.options.datas.value + '="' + value.replace(/"/g, '\\"') + '"]');
+    ___tapOnTagRemover () {
 
-            if ($tag.length === 1) {
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
 
-              $tags.push($tag);
-              tags.push(value);
-            }
-          }
-        }
+    }
 
-        if (tags.length) {
+    __tapOnTagRemover ( event ) {
 
-          for (var _i2 = 0, _l2 = tags.length; _i2 < _l2; _i2++) {
+      event.stopImmediatePropagation ();
 
-            this._remove($tags[_i2], tags[_i2]);
-          }
+      let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
 
-          this._updateInput();
+      this.remove ( $tag );
 
-          if (tags.length === 1 && edit === true) {
+    }
 
-            this.$partial.val(tags[0]).trigger('change');
-          }
+    /* TAP ON EMPTY */
 
-          if (!suppressTriggers) {
+    ___tapOnEmpty () {
 
-            this._trigger('change');
+      this._on ( Pointer.tap, this.__tapOnEmpty );
 
-            this._trigger('remove', tags);
+    }
 
-            if (!this.options.tags.length) {
+    __tapOnEmpty ( event ) {
 
-              this._trigger('empty');
-            }
-          }
-        }
+      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( this.options.selectors.partial + ',' + this.options.selectors.tagLabel ) ) { //TODO: Add an helper for checking if is focused
+
+        this.$partial.focus ();
+
       }
-    }, {
-      key: 'clear',
-      value: function clear(suppressTriggers) {
 
-        if (this.options.tags.length) {
+    }
 
-          var previous = this.options.tags;
+    /* API */
 
-          this.options.tags = [];
+    get () {
 
-          this.$tagbox.find(this.options.selectors.tag).remove();
+      return _.clone ( this.options.tags );
 
-          this._clearPartial();
+    }
 
-          this._updateInput();
+    add ( tag, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
-          if (!suppressTriggers) {
+      if ( _.isArray ( tag ) ) {
 
-            this._trigger('change');
+        tag = _.flatten ( tag ).join ( this.options.characters.separator );
 
-            this._trigger('remove', previous);
-
-            this._trigger('empty');
-          }
-        }
       }
-    }, {
-      key: 'reset',
-      value: function reset() {
 
-        var previous = this.options.tags;
+      let tags = tag.split ( this.options.characters.separator ),
+          adds = _.map ( tags, this._add.bind ( this ) );
 
-        this.clear(true);
+      let added = !!_.compact ( adds ).length;
 
-        this._init(true);
+      if ( added ) {
 
-        if (!_.isEqual(previous, this.options.tags)) {
+        this._updateInput ();
 
-          this._trigger('change');
+        if ( !suppressTriggers ) {
 
-          var added = _.difference(this.options.tags, previous);
+          this._trigger ( 'change' );
 
-          if (added.length) {
+          let addedTags = _.filter ( tags, ( tag, index ) => adds[index] );
 
-            this._trigger('add', added);
-          }
+          this._trigger ( 'add', addedTags );
 
-          var removed = _.difference(previous, this.options.tags);
-
-          if (removed.length) {
-
-            this._trigger('remove', removed);
-          }
-
-          if (!this.options.tags.length) {
-
-            this._trigger('empty');
-          }
         }
-      }
-    }]);
 
-    return Tagbox;
-  }(Widgets.Widget);
+      }
+
+      return added;
+
+    }
+
+    remove ( tag, edit, suppressTriggers ) { // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
+
+      let $tags = [],
+          tags = [];
+
+      if ( tag instanceof $ ) {
+
+        $tags = [tag];
+        tags = [tag.data ( this.options.datas.value )];
+
+      } else {
+
+        if ( _.isArray ( tag ) ) {
+
+          tag = _.flatten ( tag ).join ( this.options.characters.separator );
+
+        }
+
+        tag = tag.split ( this.options.characters.separator );
+
+        for ( let i = 0, l = tag.length; i < l; i++ ) {
+
+          let value = this._sanitizeTag ( tag[i] ),
+              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-' + this.options.datas.value + '="' + value.replace ( /"/g, '\\"' ) + '"]' );
+
+          if ( $tag.length === 1 ) {
+
+            $tags.push ( $tag );
+            tags.push ( value );
+
+          }
+
+        }
+
+      }
+
+      if ( tags.length ) {
+
+        for ( let i = 0, l = tags.length; i < l; i++ ) {
+
+          this._remove ( $tags[i], tags[i] );
+
+        }
+
+        this._updateInput ();
+
+        if ( tags.length === 1 && edit === true ) {
+
+          this.$partial.val ( tags[0] ).trigger ( 'change' );
+
+        }
+
+        if ( !suppressTriggers ) {
+
+          this._trigger ( 'change' );
+
+          this._trigger ( 'remove', tags );
+
+          if ( !this.options.tags.length ) {
+
+            this._trigger ( 'empty' );
+
+          }
+
+        }
+
+      }
+
+    }
+
+    clear ( suppressTriggers ) {
+
+      if ( this.options.tags.length ) {
+
+        let previous = this.options.tags;
+
+        this.options.tags = [];
+
+        this.$tagbox.find ( this.options.selectors.tag ).remove ();
+
+        this._clearPartial ();
+
+        this._updateInput ();
+
+        if ( !suppressTriggers ) {
+
+          this._trigger ( 'change' );
+
+          this._trigger ( 'remove', previous );
+
+          this._trigger ( 'empty' );
+
+        }
+
+      }
+
+    }
+
+    reset () {
+
+      let previous = this.options.tags;
+
+      this.clear ( true );
+
+      this._init ( true );
+
+      if ( !_.isEqual ( previous, this.options.tags ) ) {
+
+        this._trigger ( 'change' );
+
+        let added = _.difference ( this.options.tags, previous );
+
+        if ( added.length ) {
+
+          this._trigger ( 'add', added );
+
+        }
+
+        let removed = _.difference ( previous, this.options.tags );
+
+        if ( removed.length ) {
+
+          this._trigger ( 'remove', removed );
+
+        }
+
+        if ( !this.options.tags.length ) {
+
+          this._trigger ( 'empty' );
+
+        }
+
+      }
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Tagbox, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard);
+  Factory.init ( Tagbox, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Toast (Helper)
@@ -15163,32 +14835,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ./toast.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets) {
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
   /* HELPER */
 
-  $.toast = function () {
-    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
+  $.toast = function ( options = {} ) {
 
     /* OPTIONS */
 
-    options = _.isPlainObject(options) ? options : { body: String(options) };
+    options = _.isPlainObject ( options ) ? options : { body: String ( options ) };
 
     /* TYPE */
 
-    if (options.buttons) {
+    if ( options.buttons ) {
 
       options.type = 'action';
+
     }
 
     /* TOAST */
 
-    return new Widgets.Toast(options);
+    return new Widgets.Toast ( options );
+
   };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+
 
 /* =========================================================================
  * Svelto - Lib - Touching
@@ -15199,23 +14873,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, Svelto) {
+(function ( $, _, Svelto ) {
 
   'use strict';
 
   /* UTILITIES */
 
-  var getOverlappingArea = function getOverlappingArea(rect1, rect2) {
+  let getOverlappingArea = function ( rect1, rect2 ) {
 
-    var overlapX = Math.max(0, Math.min(rect1.right, rect2.right) - Math.max(rect1.left, rect2.left)),
-        overlapY = Math.max(0, Math.min(rect1.bottom, rect2.bottom) - Math.max(rect1.top, rect2.top));
+    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
 
     return overlapX * overlapY;
+
   };
 
   /* DEFAULTS */
 
-  var defaults = {
+  let defaults = {
     point: false, // Used for the punctual search
     $comparer: false, // Used for the overlapping search
     $not: false,
@@ -15224,105 +14899,76 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOUCHING */
 
-  $.fn.touching = function (options) {
+  $.fn.touching = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend({}, $.fn.touching.defaults, options);
+    options = _.extend ( {}, $.fn.touching.defaults, options );
 
     /* SEARCHABLE */
 
-    var $searchable = options.$not ? this.not(options.$not) : this;
+    let $searchable = options.$not ? this.not ( options.$not ) : this;
 
     /* COMPARER */
 
-    if (options.$comparer) {
+    if ( options.$comparer ) {
 
-      var rect1 = options.$comparer.getRect(),
+      let rect1 = options.$comparer.getRect (),
           nodes = [],
           areas = [];
 
-      var _iteratorNormalCompletion14 = true;
-      var _didIteratorError14 = false;
-      var _iteratorError14 = undefined;
+      for ( let searchable of $searchable ) {
 
-      try {
-        for (var _iterator14 = $searchable[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-          var searchable = _step14.value;
+        let rect2 = $.getRect ( searchable ),
+            area = getOverlappingArea ( rect1, rect2 );
 
+        if ( area > 0 ) {
 
-          var rect2 = $.getRect(searchable),
-              area = getOverlappingArea(rect1, rect2);
+          nodes.push ( searchable );
+          areas.push ( area );
 
-          if (area > 0) {
-
-            nodes.push(searchable);
-            areas.push(area);
-          }
         }
-      } catch (err) {
-        _didIteratorError14 = true;
-        _iteratorError14 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion14 && _iterator14.return) {
-            _iterator14.return();
-          }
-        } finally {
-          if (_didIteratorError14) {
-            throw _iteratorError14;
-          }
-        }
+
       }
 
-      return nodes.length ? options.onlyBest ? $(nodes[areas.indexOf(_.max(areas))]) : $(nodes) : false;
+      return nodes.length
+               ? options.onlyBest
+                 ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ])
+                 : $(nodes)
+               : false;
+
     }
 
     /* PUNCTUAL */
 
-    if (options.point) {
-      var _iteratorNormalCompletion15 = true;
-      var _didIteratorError15 = false;
-      var _iteratorError15 = undefined;
+    if ( options.point ) {
 
-      try {
+      for ( let searchable of $searchable ) {
 
-        for (var _iterator15 = $searchable[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-          var _searchable = _step15.value;
+        let rect = $.getRect ( searchable );
 
+        if ( options.point.y >= rect.top && options.point.y <= rect.bottom && options.point.x >= rect.left && options.point.x <= rect.right ) {
 
-          var rect = $.getRect(_searchable);
+          return $(searchable);
 
-          if (options.point.y >= rect.top && options.point.y <= rect.bottom && options.point.x >= rect.left && options.point.x <= rect.right) {
-
-            return $(_searchable);
-          }
         }
-      } catch (err) {
-        _didIteratorError15 = true;
-        _iteratorError15 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion15 && _iterator15.return) {
-            _iterator15.return();
-          }
-        } finally {
-          if (_didIteratorError15) {
-            throw _iteratorError15;
-          }
-        }
+
       }
+
     }
 
     /* DEFAULT */
 
     return false;
+
   };
 
   /* BINDING */
 
   $.fn.touching.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto);
+
+}( Svelto.$, Svelto._, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Droppable
@@ -15334,13 +14980,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require lib/touching/touching.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'droppable',
     plugin: true,
     selector: '.droppable',
@@ -15360,136 +15006,129 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPPABLE */
 
-  var Droppable = function (_Widgets$Widget35) {
-    _inherits(Droppable, _Widgets$Widget35);
+  class Droppable extends Widgets.Widget {
 
-    function Droppable() {
-      _classCallCheck(this, Droppable);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Droppable).apply(this, arguments));
+    _variables () {
+
+      this.droppable = this.element;
+      this.$droppable = this.$element;
+
+      this.__isCompatible = undefined;
+      this._wasHovering = false;
+
     }
 
-    _createClass(Droppable, [{
-      key: '_variables',
+    _events () {
 
+      this.___drag ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* PRIVATE */
 
-        this.droppable = this.element;
-        this.$droppable = this.$element;
+    _isCompatible ( element ) {
 
-        this.__isCompatible = undefined;
-        this._wasHovering = false;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      if ( _.isUndefined ( this.__isCompatible ) ) {
 
-        this.___drag();
-      }
+        this.__isCompatible = $(element).is ( this.options.selector );
 
-      /* PRIVATE */
+        if ( this.__isCompatible ) {
 
-    }, {
-      key: '_isCompatible',
-      value: function _isCompatible(element) {
+          this.$droppable.addClass ( this.options.classes.target );
 
-        if (_.isUndefined(this.__isCompatible)) {
-
-          this.__isCompatible = $(element).is(this.options.selector);
-
-          if (this.__isCompatible) {
-
-            this.$droppable.addClass(this.options.classes.target);
-          }
         }
 
-        return this.__isCompatible;
-      }
-    }, {
-      key: '_isPointHovering',
-      value: function _isPointHovering(pointXY) {
-
-        return !!this.$droppable.touching({ point: pointXY }).length;
       }
 
-      /* DRAG */
+      return this.__isCompatible;
 
-    }, {
-      key: '___drag',
-      value: function ___drag() {
+    }
 
-        this.___dragMove();
-        this.___dragEnd();
-      }
+    _isPointHovering ( pointXY ) {
 
-      /* DRAG MOVE */
+      return !!this.$droppable.touching ({ point: pointXY }).length;
 
-    }, {
-      key: '___dragMove',
-      value: function ___dragMove() {
+    }
 
-        this._on(this.$layout, 'draggable:move', this._throttle(this.__dragMove, 100));
-      }
-    }, {
-      key: '__dragMove',
-      value: function __dragMove(event, data) {
+    /* DRAG */
 
-        if (this._isCompatible(data.draggable)) {
+    ___drag () {
 
-          var isHovering = this._isPointHovering(data.moveXY);
+      this.___dragMove ();
+      this.___dragEnd ();
 
-          if (isHovering !== this._wasHovering) {
+    }
 
-            this.$droppable.toggleClass(this.options.classes.hover, isHovering);
+    /* DRAG MOVE */
 
-            this._trigger(isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable });
-          }
+    ___dragMove () {
 
-          this._wasHovering = isHovering;
-        }
-      }
+      this._on ( this.$layout, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
 
-      /* DRAG END */
+    }
 
-    }, {
-      key: '___dragEnd',
-      value: function ___dragEnd() {
+    __dragMove ( event, data ) {
 
-        this._on(this.$layout, 'draggable:end', this.__dragEnd);
-      }
-    }, {
-      key: '__dragEnd',
-      value: function __dragEnd(event, data) {
+      if ( this._isCompatible ( data.draggable ) ) {
 
-        if (this._isCompatible(data.draggable)) {
+        let isHovering = this._isPointHovering ( data.moveXY );
 
-          this.$droppable.removeClass(this.options.classes.target);
+        if ( isHovering !== this._wasHovering ) {
 
-          if (this._isPointHovering(data.endXY)) {
+          this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
 
-            if (this._wasHovering) {
+          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
 
-              this.$droppable.removeClass(this.options.classes.hover);
-            }
-
-            this._trigger('drop', { draggable: data.draggable, helper: data.helper, droppable: this.droppable });
-          }
         }
 
-        this.__isCompatible = undefined;
-      }
-    }]);
+        this._wasHovering = isHovering;
 
-    return Droppable;
-  }(Widgets.Widget);
+      }
+
+    }
+
+    /* DRAG END */
+
+    ___dragEnd () {
+
+      this._on ( this.$layout, 'draggable:end', this.__dragEnd );
+
+    }
+
+    __dragEnd ( event, data ) {
+
+      if ( this._isCompatible ( data.draggable ) ) {
+
+        this.$droppable.removeClass ( this.options.classes.target );
+
+        if ( this._isPointHovering ( data.endXY ) ) {
+
+          if ( this._wasHovering ) {
+
+            this.$droppable.removeClass ( this.options.classes.hover );
+
+          }
+
+          this._trigger ( 'drop', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
+
+        }
+
+      }
+
+      this.__isCompatible = undefined;
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Droppable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Droppable, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Lib - Transform
@@ -15502,81 +15141,90 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* TRANSFORM UTILITIES */
 
-(function ($, _, Modernizr, Svelto) {
+(function ( $, _, Modernizr, Svelto ) {
 
   'use strict';
 
   /* MATRIX */
 
-  var property = Modernizr.prefixedCSS('transform');
+  let property = Modernizr.prefixedCSS ( 'transform' );
 
-  $.fn.matrix = function (values) {
+  $.fn.matrix = function ( values ) {
 
-    if (values) {
+    if ( values ) {
 
-      values = values.map(function (val) {
-        return Number(val).toFixed(20);
-      }).join(',');
+      values = values.map ( val => Number ( val ).toFixed ( 20 ) ).join ( ',' );
 
-      this.css(property, 'matrix(' + values + ')');
+      this.css ( property, `matrix(${values})` );
 
       return this;
+
     } else {
 
-      var transformStr = this.css(property);
+      let transformStr = this.css ( property );
 
-      return transformStr && transformStr !== 'none' ? transformStr.match(/[0-9., e-]+/)[0].split(', ').map(function (value) {
-        return parseFloat(value);
-      }) : [1, 0, 0, 1, 0, 0];
+      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
+
     }
+
   };
 
   /* TRANSFORMATIONS */
 
-  var transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; // Their index is also the corresponsing index when applying `transform: matrix()`
+  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; // Their index is also the corresponsing index when applying `transform: matrix()`
 
-  for (var i = 0, l = transformations.length; i < l; i++) {
+  for ( let i = 0, l = transformations.length; i < l; i++ ) {
 
-    $.fn[transformations[i]] = function (index) {
+    $.fn[transformations[i]] = (function ( index ) {
 
-      return function (value) {
+       return function ( value ) {
 
-        var matrix = this.matrix();
+         let matrix = this.matrix ();
 
-        if (!_.isUndefined(value)) {
+         if ( !_.isUndefined ( value ) ) {
 
-          matrix[index] = value;
+           matrix[index] = value;
 
-          return this.matrix(matrix);
-        } else {
+           return this.matrix ( matrix );
 
-          return matrix[index];
-        }
-      };
-    }(i);
+         } else {
+
+           return matrix[index];
+
+         }
+
+       };
+
+     })( i );
+
   }
 
   /* TRANSLATE */
 
-  $.fn.translate = function (X, Y) {
+  $.fn.translate = function ( X, Y ) {
 
-    var matrix = this.matrix();
+    let matrix = this.matrix ();
 
-    if (!_.isUndefined(X) && !_.isUndefined(Y)) {
+    if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
 
       matrix[4] = X;
       matrix[5] = Y;
 
-      return this.matrix(matrix);
+      return this.matrix ( matrix );
+
     } else {
 
       return {
         x: matrix[4],
         y: matrix[5]
       };
+
     }
+
   };
-})(Svelto.$, Svelto._, Svelto.Modernizr, Svelto);
+
+}( Svelto.$, Svelto._, Svelto.Modernizr, Svelto ));
+
 
 /* =========================================================================
  * Svelto - Lib - Positionate
@@ -15592,29 +15240,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //FIXME: If the positionable element is let than half of the anchor, and it must be pointed than the pointer may be not well positionated (expecially if we are not aligning to the center)
 
-(function ($, _, Svelto, Directions, EmbeddedCSS) {
+(function ( $, _, Svelto, Directions, EmbeddedCSS ) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var $window = $(window);
+  let $window = $(window);
 
   /* UTILITES */
 
-  var isHorizontal = function isHorizontal(direction) {
+  let isHorizontal = function ( direction ) {
 
     return direction === 'left' || direction === 'right';
+
   };
 
-  var isVertical = function isVertical(direction) {
+  let isVertical = function ( direction ) {
 
-    return !isHorizontal(direction);
+    return !isHorizontal ( direction );
+
   };
 
   /* DEFAULTS */
 
-  var defaults = {
+  let defaults = {
     axis: false, // Set a preferred axis
     strict: false, // If enabled only use the setted axis/direction, even if it won't be the optimial choice
     $anchor: false, // Positionate next to an $anchor element
@@ -15645,38 +15295,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POSITIONATE */
 
-  $.fn.positionate = function (options) {
+  $.fn.positionate = function ( options ) {
 
     /* NO ELEMENTS */
 
-    if (!this.length) return this;
+    if ( !this.length ) return this;
 
     /* OPTIONS */
 
-    options = _.merge({}, $.fn.positionate.defaults, options);
+    options = _.merge ( {}, $.fn.positionate.defaults, options );
 
     /* VARIABLES */
 
-    var positionable = this[0],
+    let positionable = this[0],
         $positionable = $(positionable),
-        positionableRect = $positionable.getRect(),
-        windowWidth = $window.width(),
-        windowHeight = $window.height(),
-        directions = _.uniq(_.union(options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [])),
-        anchorRect = options.$anchor ? options.$anchor.getRect() : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
+        positionableRect = $positionable.getRect (),
+        windowWidth = $window.width (),
+        windowHeight = $window.height (),
+        directions = _.uniq ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
+        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* ID */
 
     positionable._positionateGuid = positionable._positionateGuid || $.guid++;
-    positionable._positionateGuc = 'positionate-' + positionable._positionateGuid;
+    positionable._positionateGuc = `positionate-${positionable._positionateGuid}`;
 
-    $positionable.addClass(positionable._positionateGuc);
+    $positionable.addClass ( positionable._positionateGuc );
 
     /* SPACES */
 
-    var spaces = directions.map(function (direction) {
+    let spaces = directions.map ( direction => {
 
-      switch (direction) {
+      switch ( direction ) {
 
         case 'top':
           return anchorRect.top;
@@ -15691,51 +15341,56 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return windowWidth - anchorRect.right;
 
       }
+
     });
 
     /* SPACES PRIORITIZATION */
 
-    spaces.forEach(function (space, index) {
+    spaces.forEach ( ( space, index ) => {
 
-      if (space < 0) {
+      if ( space < 0 ) {
 
-        var opposite = Directions.getOpposite(directions[index]),
-            oppositeIndex = directions.indexOf(opposite);
+        let opposite = Directions.getOpposite ( directions[index] ),
+            oppositeIndex = directions.indexOf ( opposite );
 
-        if (oppositeIndex !== -1) {
+        if ( oppositeIndex !== -1 ) {
 
-          _.move(directions, oppositeIndex, 0);
-          _.move(spaces, oppositeIndex, 0);
+          _.move ( directions, oppositeIndex, 0 );
+          _.move ( spaces, oppositeIndex, 0 );
+
         }
+
       }
+
     });
 
     /* AREAS */
 
-    var areas = directions.map(function (direction, index) {
+    let areas = directions.map ( ( direction, index ) => {
 
-      switch (direction) {
+      switch ( direction ) {
 
         case 'top':
         case 'bottom':
-          return Math.min(positionableRect.height, spaces[index]) * Math.min(windowWidth, positionableRect.width);
+          return Math.min ( positionableRect.height, spaces[index] ) * Math.min ( windowWidth, positionableRect.width );
 
         case 'left':
         case 'right':
-          return Math.min(positionableRect.width, spaces[index]) * Math.min(windowHeight, positionableRect.height);
+          return Math.min ( positionableRect.width, spaces[index] ) * Math.min ( windowHeight, positionableRect.height );
 
       }
+
     });
 
     /* BEST DIRECTION */
 
-    var bestIndex = areas.indexOf(_.max(areas)),
+    let bestIndex = areas.indexOf ( _.max ( areas ) ),
         bestDirection = directions[bestIndex],
         coordinates = {};
 
     /* TOP / LEFT */
 
-    switch (bestDirection) {
+    switch ( bestDirection ) {
 
       case 'top':
         coordinates.top = anchorRect.top - positionableRect.height - options.spacing;
@@ -15755,16 +15410,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }
 
-    switch (bestDirection) {
+    switch ( bestDirection ) {
 
       case 'top':
       case 'bottom':
-        switch (options.alignment.x) {
+        switch ( options.alignment.x ) {
           case 'left':
             coordinates.left = anchorRect.left;
             break;
           case 'center':
-            coordinates.left = anchorRect.left + anchorRect.width / 2 - positionableRect.width / 2;
+            coordinates.left = anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 );
             break;
           case 'right':
             coordinates.left = anchorRect.right - positionableRect.width;
@@ -15774,12 +15429,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       case 'left':
       case 'right':
-        switch (options.alignment.y) {
+        switch ( options.alignment.y ) {
           case 'top':
             coordinates.top = anchorRect.top;
             break;
           case 'center':
-            coordinates.top = anchorRect.top + anchorRect.height / 2 - positionableRect.height / 2;
+            coordinates.top = anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 );
             break;
           case 'bottom':
             coordinates.top = anchorRect.bottom - positionableRect.height;
@@ -15791,31 +15446,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* CONSTRAIN */
 
-    if (options.$anchor) {
+    if ( options.$anchor ) {
 
-      var oppositeSpace = spaces[bestIndex],
-          isAnchorVisible = isVertical(bestDirection) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+      let oppositeSpace = spaces[bestIndex],
+          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-      if (isAnchorVisible) {
+      if ( isAnchorVisible ) {
 
-        coordinates.top = _.clamp(coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing);
-        coordinates.left = _.clamp(coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing);
+        coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+        coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+
       }
-    } else if (options.constrainer.$element) {
 
-      var constrainerRect = options.constrainer.$element.getRect(),
+    } else if ( options.constrainer.$element ) {
+
+      let constrainerRect = options.constrainer.$element.getRect (),
           halfWidth = options.constrainer.center ? positionableRect.width / 2 : 0,
           halfHeight = options.constrainer.center ? positionableRect.height / 2 : 0;
 
       /* COORDINATES */
 
-      coordinates.top = _.clamp(coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + options.spacing, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - options.spacing);
-      coordinates.left = _.clamp(coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + options.spacing, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - options.spacing);
+      coordinates.top = _.clamp ( coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + options.spacing, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - options.spacing );
+      coordinates.left = _.clamp ( coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + options.spacing, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - options.spacing );
+
     }
 
     /* DATAS */
 
-    var data = {
+    let data = {
       positionable: positionable,
       coordinates: coordinates,
       direction: bestDirection
@@ -15823,81 +15481,88 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* TRANSLATE */
 
-    $positionable.translate(coordinates.left, coordinates.top);
+    $positionable.translate ( coordinates.left, coordinates.top );
 
     /* CSS CLASS */
 
-    var prevDirection = positionable._positionatePrevDirection;
+    let prevDirection = positionable._positionatePrevDirection;
 
     positionable._positionatePrevDirection = bestDirection;
 
-    if (prevDirection !== bestDirection) {
+    if ( prevDirection !== bestDirection ) {
 
-      $positionable.removeClass('position-' + prevDirection).addClass('position-' + bestDirection);
+      $positionable.removeClass ( `position-${prevDirection}` ).addClass ( `position-${bestDirection}` );
+
     }
 
     /* POINTER */
 
-    var prevPointer = positionable._positionatePrevPointer;
+    let prevPointer = positionable._positionatePrevPointer;
 
     positionable._positionatePrevPointer = options.pointer;
 
-    if (prevPointer === 'auto' && (options.pointer !== 'auto' || bestDirection !== prevDirection)) {
+    if ( prevPointer === 'auto' && ( options.pointer !== 'auto' || bestDirection !== prevDirection ) ) {
 
-      var oppositeDirection = Directions.getOpposite(prevDirection);
+      let oppositeDirection = Directions.getOpposite ( prevDirection );
 
-      $positionable.removeClass('pointing-' + oppositeDirection);
+      $positionable.removeClass ( `pointing-${oppositeDirection}` );
+
     }
 
-    if (options.pointer) {
+    if ( options.pointer ) {
 
-      if (options.pointer === 'auto') {
+      if ( options.pointer === 'auto' ) {
 
-        var _oppositeDirection = Directions.getOpposite(bestDirection);
+        let oppositeDirection = Directions.getOpposite ( bestDirection );
 
-        $positionable.addClass('pointing-' + _oppositeDirection);
+        $positionable.addClass ( `pointing-${oppositeDirection}` );
+
       }
 
       /* MOVING */
 
-      switch (bestDirection) {
+      switch ( bestDirection ) {
 
         case 'top':
         case 'bottom':
-          var deltaX = _.clamp(anchorRect.left - coordinates.left + anchorRect.width / 2, 0, positionableRect.width);
-          if (options.pointer instanceof $) {
-            options.pointer.translate(deltaX, 0);
-          } else if (options.pointer === 'auto') {
-            EmbeddedCSS.set('.' + positionable._positionateGuc + ':after', 'left:' + deltaX + 'px !important;'); //TODO: Maybe use `transform` instead, since it lead to improved performances
+          let deltaX = _.clamp ( anchorRect.left - coordinates.left + ( anchorRect.width / 2 ), 0, positionableRect.width );
+          if ( options.pointer instanceof $ ) {
+            options.pointer.translate ( deltaX, 0 );
+          } else if ( options.pointer === 'auto' ) {
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `left:${deltaX}px !important;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 
         case 'left':
         case 'right':
-          var deltaY = _.clamp(positionableRect.height, anchorRect.top - coordinates.top + anchorRect.height / 2, 0, positionableRect.height);
-          if (options.pointer instanceof $) {
-            options.pointer.translate(0, deltaY);
-          } else if (options.pointer === 'auto') {
-            EmbeddedCSS.set('.' + positionable._positionateGuc + ':after', 'top:' + deltaY + 'px !important;'); //TODO: Maybe use `transform` instead, since it lead to improved performances
+          let deltaY = _.clamp ( positionableRect.height, anchorRect.top - coordinates.top + ( anchorRect.height / 2 ), 0, positionableRect.height );
+          if ( options.pointer instanceof $ ) {
+            options.pointer.translate ( 0, deltaY );
+          } else if ( options.pointer === 'auto' ) {
+            EmbeddedCSS.set ( `.${positionable._positionateGuc}:after`, `top:${deltaY}px !important;` ); //TODO: Maybe use `transform` instead, since it lead to improved performances
           }
           break;
 
       }
+
     }
 
     /* CALLBACK */
 
-    options.callbacks.change(data);
+    options.callbacks.change ( data );
 
     /* RETURN */
 
     return this;
+
   };
 
   /* BINDING */
 
   $.fn.positionate.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto, Svelto.Directions, Svelto.EmbeddedCSS);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Directions, Svelto.EmbeddedCSS ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Popover
@@ -15913,17 +15578,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //FIXME: Close it if after a `route` event the trigger element is no longer visible
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'popover',
     plugin: true,
     selector: '.popover',
     options: {
+      contentChangeEvents: 'inputAutogrow:change tabs:change tagbox:change textareaAutogrow:change', // When one of these events are triggered update the position because the content probably changed
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
@@ -15952,282 +15618,289 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER */
 
-  var Popover = function (_Widgets$Widget36) {
-    _inherits(Popover, _Widgets$Widget36);
+  class Popover extends Widgets.Widget {
 
-    function Popover() {
-      _classCallCheck(this, Popover);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Popover).apply(this, arguments));
+    _variables () {
+
+      this.$popover = this.$element;
+
+      this.$popover.addClass ( this.guc );
+
+      this.hasTip = !this.$popover.hasClass ( this.options.classes.noTip );
+      this.isAffixed = this.$popover.hasClass ( this.options.classes.affixed );
+
+      this._isOpen = false;
+
     }
 
-    _createClass(Popover, [{
-      key: '_variables',
+    _events () {
 
+      if ( this._isOpen ) {
 
-      /* SPECIAL */
+        this.___contentChange ();
+        this.___resize ();
+        this.___parentsScroll ();
+        this.___layoutTap ();
 
-      value: function _variables() {
-
-        this.$popover = this.$element;
-
-        this.$popover.addClass(this.guc);
-
-        this.hasTip = !this.$popover.hasClass(this.options.classes.noTip);
-        this.isAffixed = this.$popover.hasClass(this.options.classes.affixed);
-
-        this._isOpen = false;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___resize();
-          this.___parentsScroll();
-          this.___layoutTap();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
       }
 
-      /* PARENTS SCROLL */
+    }
 
-    }, {
-      key: '___parentsScroll',
-      value: function ___parentsScroll() {
+    _destroy () {
 
-        var $parents = this.$popover.parents().add(this.$anchor ? this.$anchor.parents() : undefined).add(this.$window);
+      this.close ();
 
-        this._on(true, $parents, 'scroll', this._throttle(this._positionate, 100));
-      }
+    }
 
-      /* RESIZE */
+    /* CONTENT CHANGE */
 
-    }, {
-      key: '___resize',
-      value: function ___resize() {
+    ___contentChange () {
 
-        this._on(true, this.$window, 'resize', this._throttle(this._positionate, 100)); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
-      }
+      this._on ( true, this.options.contentChangeEvents, this._positionate );
 
-      /* LAYOUT TAP */
+    }
 
-    }, {
-      key: '___layoutTap',
-      value: function ___layoutTap() {
+    /* RESIZE */
 
-        this._on(true, this.$layout, Pointer.tap, this.__layoutTap);
-      }
-    }, {
-      key: '__layoutTap',
-      value: function __layoutTap(event) {
+    ___resize () {
 
-        if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event) }).length) return;
+      this._on ( true, this.$window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
 
-        this.close();
-      }
+    }
+
+    /* PARENTS SCROLL */
+
+    ___parentsScroll () {
+
+      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
+
+      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
+
+    }
+
+    /* LAYOUT TAP */
+
+    ___layoutTap () {
+
+      this._on ( true, this.$layout, Pointer.tap, this.__layoutTap );
+
+    }
+
+    __layoutTap ( event ) {
+
+      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event )} ).length ) return;
+
+      this.close ();
+
+    }
+
+    /* POSITIONATE */
+
+    _positionate () {
+
+      /* VARIABLES */
+
+      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed,
+          spacing = this.isAffixed ? this.options.spacing.affixed : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
 
       /* POSITIONATE */
 
-    }, {
-      key: '_positionate',
-      value: function _positionate() {
-
-        /* VARIABLES */
-
-        var noTip = this.$anchor && this.$anchor.hasClass(this.options.classes.noTip) || !this.hasTip || this.isAffixed,
-            spacing = this.isAffixed ? this.options.spacing.affixed : noTip ? this.options.spacing.noTip : this.options.spacing.normal;
-
-        /* POSITIONATE */
-
-        this.$popover.positionate(_.extend({
-          $anchor: this.$anchor,
-          pointer: noTip ? false : 'auto',
-          spacing: spacing,
-          callbacks: {
-            change: this.__positionChange.bind(this)
-          }
-        }, this.options.positionate));
-      }
-    }, {
-      key: '_toggleAnchorDirectionClass',
-      value: function _toggleAnchorDirectionClass(direction, force) {
-
-        if (!this.$anchor) return;
-
-        this.$anchor.toggleClass(_.format(this.options.classes.anchorDirection, direction), force);
-      }
-    }, {
-      key: '__positionChange',
-      value: function __positionChange(data) {
-
-        /* ANCHOR CLASS */
-
-        if (this._prevDirection !== data.direction) {
-
-          if (this._prevDirection) {
-
-            this._toggleAnchorDirectionClass(this._prevDirection, false);
-          }
-
-          this._toggleAnchorDirectionClass(data.direction, true);
-
-          this._prevDirection = data.direction;
+      this.$popover.positionate ( _.extend ({
+        $anchor: this.$anchor,
+        pointer: noTip ? false : 'auto',
+        spacing: spacing,
+        callbacks: {
+          change: this.__positionChange.bind ( this )
         }
-      }
+      }, this.options.positionate ));
 
-      /* API */
+    }
 
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
+    _toggleAnchorDirectionClass ( direction, force ) {
 
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(force, anchor, event) {
+      if ( !this.$anchor ) return;
 
-        if (!_.isBoolean(force)) {
+      this.$anchor.toggleClass ( _.format ( this.options.classes.anchorDirection, direction ), force );
 
-          force = anchor && (!this.$anchor || this.$anchor && this.$anchor[0] !== anchor) ? true : this.$prevAnchor || this.$anchor || 'point' in this.options.positionate ? !this._isOpen : false;
+    }
+
+    __positionChange ( data ) {
+
+      /* ANCHOR CLASS */
+
+      if ( this._prevDirection !== data.direction ) {
+
+        if ( this._prevDirection ) {
+
+          this._toggleAnchorDirectionClass ( this._prevDirection, false );
+
         }
 
-        this[force ? 'open' : 'close'](anchor, event);
+        this._toggleAnchorDirectionClass ( data.direction, true );
+
+        this._prevDirection = data.direction;
+
       }
-    }, {
-      key: 'open',
-      value: function open(anchor, event) {
 
-        /* RESTORING ANCHOR */
+    }
 
-        if (!anchor && this.$prevAnchor && !('point' in this.options.positionate)) {
+    /* API */
 
-          anchor = this.$prevAnchor[0];
-        }
+    isOpen () {
 
-        /* CHECKING */
+      return this._isOpen;
 
-        if (this._lock || (!anchor || this._isOpen && this.$anchor && anchor === this.$anchor[0]) && !('point' in this.options.positionate)) return;
+    }
 
-        /* VARIABLES */
+    toggle ( force, anchor, event ) {
 
-        this._lock = true;
-        this._isOpen = true;
+      if ( !_.isBoolean ( force ) ) {
 
-        this._openEvent = event;
-        this._wasMoving = false;
+        force = anchor && ( !this.$anchor || this.$anchor && this.$anchor[0] !== anchor ) ? true : ( this.$prevAnchor || this.$anchor || 'point' in this.options.positionate ? !this._isOpen : false );
 
-        /* PREVIOUS ANCHOR */
-
-        if (this.$anchor) {
-
-          this._toggleAnchorDirectionClass(this._prevDirection, false);
-          this._prevDirection = false;
-
-          this.$prevAnchor = this.$anchor;
-
-          if (this._isOpen) {
-
-            this._wasMoving = true;
-
-            this.$popover.addClass(this.options.classes.moving);
-          }
-        }
-
-        /* ANCHOR */
-
-        this.$anchor = anchor ? $(anchor) : false;
-
-        /* BEFORE OPENING */
-
-        this._trigger('beforeopen');
-
-        /* OPENING */
-
-        this._frame(function () {
-
-          this.$popover.addClass('show');
-
-          this._positionate();
-
-          this._frame(function () {
-
-            this.$popover.addClass(this.options.classes.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        /* EVENTS */
-
-        this._reset();
-
-        this.___layoutTap();
-        this.___resize();
-        this.___parentsScroll();
       }
-    }, {
-      key: 'close',
-      value: function close() {
 
-        if (this._lock || !this._isOpen) return;
+      this[force ? 'open' : 'close']( anchor, event );
 
-        /* VARIABLES */
+    }
 
-        this._lock = true;
-        this._isOpen = false;
+    open ( anchor, event ) {
 
-        /* ANCHOR */
+      /* RESTORING ANCHOR */
 
-        this._toggleAnchorDirectionClass(this._prevDirection, false);
+      if ( !anchor && this.$prevAnchor && !('point' in this.options.positionate) ) {
+
+        anchor = this.$prevAnchor[0];
+
+      }
+
+      /* CHECKING */
+
+      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) ) ) return;
+
+      /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = true;
+
+      this._openEvent = event;
+      this._wasMoving = false;
+
+      /* PREVIOUS ANCHOR */
+
+      if ( this.$anchor ) {
+
+        this._toggleAnchorDirectionClass ( this._prevDirection, false );
         this._prevDirection = false;
 
         this.$prevAnchor = this.$anchor;
-        this.$anchor = false;
 
-        /* CLOSING */
+        if ( this._isOpen ) {
 
-        this._frame(function () {
+          this._wasMoving = true;
 
-          this.$popover.removeClass(this.options.classes.open);
+          this.$popover.addClass ( this.options.classes.moving );
 
-          if (this._wasMoving) {
+        }
 
-            this.$popover.removeClass(this.options.classes.moving);
-          }
+      }
 
-          this._delay(function () {
+      /* ANCHOR */
 
-            this.$popover.removeClass(this.options.classes.show);
+      this.$anchor = anchor ? $(anchor) : false;
 
-            this._lock = false;
+      /* BEFORE OPENING */
 
-            this._trigger('close');
-          }, this.options.animations.close);
+      this._trigger ( 'beforeopen' );
+
+      /* OPENING */
+
+      this._frame ( function () {
+
+        this.$popover.addClass ( 'show' );
+
+        this._positionate ();
+
+        this._frame ( function () {
+
+          this.$popover.addClass ( this.options.classes.open );
+
+          this._lock = false;
+
+          this._trigger ( 'open' );
+
         });
 
-        /* RESETTING */
+      });
 
-        this._reset();
-      }
-    }]);
+      /* EVENTS */
 
-    return Popover;
-  }(Widgets.Widget);
+      this._reset ();
+
+      this.___layoutTap ();
+      this.___contentChange ();
+      this.___resize ();
+      this.___parentsScroll ();
+
+    }
+
+    close () {
+
+      if ( this._lock || !this._isOpen ) return;
+
+      /* VARIABLES */
+
+      this._lock = true;
+      this._isOpen = false;
+
+      /* ANCHOR */
+
+      this._toggleAnchorDirectionClass ( this._prevDirection, false );
+      this._prevDirection = false;
+
+      this.$prevAnchor = this.$anchor;
+      this.$anchor = false;
+
+      /* CLOSING */
+
+      this._frame ( function () {
+
+        this.$popover.removeClass ( this.options.classes.open  );
+
+        if ( this._wasMoving ) {
+
+          this.$popover.removeClass ( this.options.classes.moving );
+
+        }
+
+        this._delay ( function () {
+
+          this.$popover.removeClass ( this.options.classes.show );
+
+          this._lock = false;
+
+          this._trigger ( 'close' );
+
+        }, this.options.animations.close );
+
+      });
+
+      /* RESETTING */
+
+      this._reset ();
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Popover, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations);
+  Factory.init ( Popover, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Closer
@@ -16239,13 +15912,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'popoverCloser',
     plugin: true,
     selector: '.popover-closer',
@@ -16256,22 +15929,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER CLOSER */
 
-  var PopoverCloser = function (_Widgets$Closer7) {
-    _inherits(PopoverCloser, _Widgets$Closer7);
-
-    function PopoverCloser() {
-      _classCallCheck(this, PopoverCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverCloser).apply(this, arguments));
-    }
-
-    return PopoverCloser;
-  }(Widgets.Closer);
+  class PopoverCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(PopoverCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PopoverCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Opener
@@ -16283,13 +15948,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'popoverOpener',
     plugin: true,
     selector: '.popover-opener',
@@ -16300,22 +15965,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER OPENER */
 
-  var PopoverOpener = function (_Widgets$Opener6) {
-    _inherits(PopoverOpener, _Widgets$Opener6);
-
-    function PopoverOpener() {
-      _classCallCheck(this, PopoverOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverOpener).apply(this, arguments));
-    }
-
-    return PopoverOpener;
-  }(Widgets.Opener);
+  class PopoverOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(PopoverOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PopoverOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Toggler
@@ -16327,13 +15984,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'popoverToggler',
     plugin: true,
     selector: '.popover-toggler',
@@ -16344,22 +16001,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER TOGGLER */
 
-  var PopoverToggler = function (_Widgets$Toggler6) {
-    _inherits(PopoverToggler, _Widgets$Toggler6);
-
-    function PopoverToggler() {
-      _classCallCheck(this, PopoverToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverToggler).apply(this, arguments));
-    }
-
-    return PopoverToggler;
-  }(Widgets.Toggler);
+  class PopoverToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(PopoverToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( PopoverToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Select
@@ -16374,20 +16023,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
 
-(function ($, _, Svelto, Widgets, Factory, Browser, Pointer, Colors) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Colors ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'select',
     plugin: true,
     selector: '.select',
     templates: {
-      base: '<div class="popover select-popover card <%= o.size %> <%= o.color %> <%= o.css %> <%= o.guc %>">' + '<div class="card-block">' + '<% for ( var i = 0, l = o.options.length; i < l; i++ ) { %>' + '<% print ( self[ o.options[i].value ? "option" : "optgroup" ] ( { opt: o.options[i], color: o.color } ) ) %>' + '<% } %>' + '</div>' + '</div>',
-      optgroup: '<div class="divider">' + '<%= o.opt.prop %>' + '</div>',
-      option: '<div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">' + '<%= o.opt.value %>' + '</div>'
+      base: '<div class="popover select-popover card <%= o.size %> <%= o.color %> <%= o.css %> <%= o.guc %>">' +
+              '<div class="card-block">' +
+                '<% for ( var i = 0, l = o.options.length; i < l; i++ ) { %>' +
+                  '<% print ( self[ o.options[i].value ? "option" : "optgroup" ] ( { opt: o.options[i], color: o.color } ) ) %>' +
+                '<% } %>' +
+              '</div>' +
+            '</div>',
+      optgroup: '<div class="divider">' +
+                  '<%= o.opt.prop %>' +
+                '</div>',
+      option: '<div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">' +
+                '<%= o.opt.value %>' +
+              '</div>'
     },
     options: {
       native: Browser.is.touchDevice, // Don't show the popover and use the native select, by default on touch devices
@@ -16406,7 +16065,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: {
         select: 'select',
         option: 'option',
-        valueholder: '.select-value',
+        valueholder: '.select-value, label',
         button: '.button'
       },
       callbacks: {
@@ -16419,265 +16078,243 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECT */
 
-  var Select = function (_Widgets$Widget37) {
-    _inherits(Select, _Widgets$Widget37);
+  class Select extends Widgets.Widget {
 
-    function Select() {
-      _classCallCheck(this, Select);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Select).apply(this, arguments));
+    _variables () {
+
+      this.$wrp = this.$element;
+      this.$select = this.$wrp.find ( this.options.selectors.select );
+      this.$options = this.$select.find ( this.options.selectors.option );
+      this.$valueholder = this.$wrp.find ( this.options.selectors.valueholder ).first ();
+
+      this.selectOptions = [];
+
+      this.$popover = false;
+
     }
 
-    _createClass(Select, [{
-      key: '_variables',
+    _init () {
 
+      this._updateValueholder ();
 
-      /* SPECIAL */
+      if ( !this.options.native ) {
 
-      value: function _variables() {
+        this.$select.addClass ( this.options.classes.hidden );
 
-        this.$wrp = this.$element;
-        this.$select = this.$wrp.find(this.options.selectors.select);
-        this.$options = this.$select.find(this.options.selectors.option);
-        this.$valueholder = this.$wrp.find(this.options.selectors.valueholder);
+        this.___selectOptions ();
+        this.___popover ();
 
-        this.selectOptions = [];
-
-        this.$popover = false;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this._updateValueholder();
-
-        if (!this.options.native) {
-
-          this.$select.addClass(this.options.classes.hidden);
-
-          this.___selectOptions();
-          this.___popover();
-        }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___change();
       }
 
-      /* CHANGE */
+    }
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    _events () {
 
-        this._on(true, this.$select, 'change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change() {
+      this.___change ();
 
-        this._update();
+    }
 
-        this._trigger('change');
-      }
+    /* CHANGE */
 
-      /* BUTTON TAP */
+    ___change () {
 
-    }, {
-      key: '___buttonTap',
-      value: function ___buttonTap() {
+      this._on ( true, this.$select, 'change', this.__change );
 
-        if (!Browser.is.touchDevice) {
+    }
 
-          /* BUTTON TAP */
+    __change () {
 
-          this._on(this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap);
-        }
-      }
-    }, {
-      key: '__buttonTap',
-      value: function __buttonTap(event) {
+      this._update ();
 
-        this.$popover.popover('close');
+      this._trigger ( 'change' );
 
-        this.set($(event.currentTarget).data(this.options.datas.value));
+    }
+
+    /* BUTTON TAP */
+
+    ___buttonTap () {
+
+      if ( !Browser.is.touchDevice ) {
+
+        /* BUTTON TAP */
+
+        this._on ( this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap );
+
       }
 
-      /* OPTIONS */
+    }
 
-    }, {
-      key: '___selectOptions',
-      value: function ___selectOptions() {
-        //FIXME: Add support for arbitrary number of optgroups nesting levels
+    __buttonTap ( event ) {
 
-        var previousOptgroup = void 0;
+      event.stopImmediatePropagation ();
 
-        var _iteratorNormalCompletion16 = true;
-        var _didIteratorError16 = false;
-        var _iteratorError16 = undefined;
+      this.$popover.popover ( 'close' );
 
-        try {
-          for (var _iterator16 = this.$options[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-            var option = _step16.value;
+      this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
 
+    }
 
-            var $option = $(option),
-                $parent = $option.parent();
+    /* OPTIONS */
 
-            if ($parent.is('optgroup')) {
+    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups nesting levels
 
-              var currentOptgroup = $parent.attr('label');
+      let previousOptgroup;
 
-              if (currentOptgroup !== previousOptgroup) {
+      for ( let option of this.$options ) {
 
-                previousOptgroup = currentOptgroup;
+        let $option = $(option),
+            $parent = $option.parent ();
 
-                this.selectOptions.push({
-                  prop: currentOptgroup
-                });
-              }
-            }
+        if ( $parent.is ( 'optgroup' ) ) {
 
-            this.selectOptions.push({
-              value: $option.text(),
-              prop: $option.attr('value')
+          let currentOptgroup = $parent.attr ( 'label' );
+
+          if ( currentOptgroup !== previousOptgroup ) {
+
+            previousOptgroup = currentOptgroup;
+
+            this.selectOptions.push ({
+              prop: currentOptgroup
             });
+
           }
-        } catch (err) {
-          _didIteratorError16 = true;
-          _iteratorError16 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion16 && _iterator16.return) {
-              _iterator16.return();
-            }
-          } finally {
-            if (_didIteratorError16) {
-              throw _iteratorError16;
-            }
-          }
+
         }
-      }
 
-      /* POPOVER */
+        let value = $option.text ();
 
-    }, {
-      key: '___popover',
-      value: function ___popover() {
+        if ( value ) {
 
-        var html = this._template('base', _.extend({ guc: this.guc, options: this.selectOptions }, this.options.popover));
+          this.selectOptions.push ({
+            value: $option.text (),
+            prop: $option.attr ( 'value' )
+          });
 
-        this.$popover = $(html).appendTo(this.$layout);
-        this.$buttons = this.$popover.find(this.options.selectors.button);
-
-        this.$popover.popover({
-          positionate: {
-            axis: 'y',
-            strict: true
-          },
-          callbacks: {
-            beforeopen: this.__setPopoverWidth.bind(this),
-            open: this.__popoverOpen.bind(this),
-            close: this.__popoverClose.bind(this)
-          }
-        });
-
-        this.$wrp.attr('data-' + Widgets.Targeter.config.options.datas.target, '.' + this.guc).popoverToggler();
-
-        this._updatePopover();
-      }
-    }, {
-      key: '__setPopoverWidth',
-      value: function __setPopoverWidth() {
-
-        if (this.$popover.is('.' + this.options.classes.affixed)) {
-
-          this.$popover.css('min-width', this.$wrp.outerWidth());
         }
-      }
-    }, {
-      key: '__popoverOpen',
-      value: function __popoverOpen() {
 
-        this.___buttonTap();
-
-        this._trigger('open');
-      }
-    }, {
-      key: '__popoverClose',
-      value: function __popoverClose() {
-
-        this._reset();
-
-        this.___change();
-
-        this._trigger('close');
       }
 
-      /* UPDATE */
+    }
 
-    }, {
-      key: '_updateValueholder',
-      value: function _updateValueholder() {
+    /* POPOVER */
 
-        var value = this.$select.val();
+    ___popover () {
 
-        if (_.isString(value) && value.length) {
+      let html = this._template ( 'base', _.extend ( { guc: this.guc, options: this.selectOptions }, this.options.popover ) );
 
-          var $selectedOption = this.$options.filter('[value="' + value + '"]');
+      this.$popover = $(html).appendTo ( this.$layout );
+      this.$buttons = this.$popover.find ( this.options.selectors.button );
 
-          this.$valueholder.text($selectedOption.text());
+      this.$popover.popover ({
+        positionate: {
+          axis: 'y',
+          strict: true
+        },
+        callbacks: {
+          beforeopen: this.__setPopoverWidth.bind ( this ),
+          open: this.__popoverOpen.bind ( this ),
+          close: this.__popoverClose.bind ( this )
         }
-      }
-    }, {
-      key: '_updatePopover',
-      value: function _updatePopover() {
+      });
 
-        this.$buttons.removeClass(this.options.classes.selected);
+      this.$wrp.attr ( `data-${Widgets.Targeter.config.options.datas.target}`, '.' + this.guc ).popoverToggler ();
 
-        this.$buttons.filter('[data-' + this.options.datas.value + '="' + this.$select.val() + '"]').addClass(this.options.classes.selected);
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
+      this._updatePopover ();
 
-        this._updateValueholder();
+    }
 
-        if (!Browser.is.touchDevice) {
+    __setPopoverWidth () {
 
-          this._updatePopover();
-        }
+      if ( this.$popover.is ( '.' + this.options.classes.affixed ) ) {
+
+        this.$popover.css ( 'min-width', this.$wrp.outerWidth () );
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'get',
-      value: function get() {
+    __popoverOpen () {
 
-        return this.$select.val();
+      this.___buttonTap ();
+
+      this._trigger ( 'open' );
+
+    }
+
+    __popoverClose () {
+
+      this._reset ();
+
+      this.___change ();
+
+      this._trigger ( 'close' );
+
+    }
+
+    /* UPDATE */
+
+    _updateValueholder () {
+
+      let value = this.$select.val ();
+
+      if ( _.isString ( value ) && value.length ) {
+
+        let $selectedOption = this.$options.filter ( `[value="${value}"]` ).first ();
+
+        this.$valueholder.text ( $selectedOption.text () );
+
       }
-    }, {
-      key: 'set',
-      value: function set(value) {
 
-        var $button = this.$buttons.filter('[data-' + this.options.datas.value + '="' + value + '"]');
+    }
 
-        if (!$button.length) return;
+    _updatePopover () {
 
-        this.$select.val(value).trigger('change');
+      this.$buttons.removeClass ( this.options.classes.selected );
+
+      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).first ().addClass ( this.options.classes.selected );
+
+    }
+
+    _update () {
+
+      this._updateValueholder ();
+
+      if ( !Browser.is.touchDevice ) {
+
+        this._updatePopover ();
+
       }
-    }]);
 
-    return Select;
-  }(Widgets.Widget);
+    }
+
+    /* API */
+
+    get () {
+
+      return this.$select.val ();
+
+    }
+
+    set ( value ) {
+
+      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' ).first ();
+
+      if ( !$button.length ) return;
+
+      this.$select.val ( value ).trigger ( 'change' );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Select, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors);
+  Factory.init ( Select, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tooltip
@@ -16688,13 +16325,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/popover/popover.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tooltip',
     plugin: true,
     selector: '.tooltip'
@@ -16702,22 +16339,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP */
 
-  var Tooltip = function (_Widgets$Popover) {
-    _inherits(Tooltip, _Widgets$Popover);
-
-    function Tooltip() {
-      _classCallCheck(this, Tooltip);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Tooltip).apply(this, arguments));
-    }
-
-    return Tooltip;
-  }(Widgets.Popover);
+  class Tooltip extends Widgets.Popover {}
 
   /* FACTORY */
 
-  Factory.init(Tooltip, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Tooltip, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Closer
@@ -16729,13 +16358,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/closer/closer.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tooltipCloser',
     plugin: true,
     selector: '.tooltip-closer',
@@ -16746,22 +16375,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP CLOSER */
 
-  var TooltipCloser = function (_Widgets$Closer8) {
-    _inherits(TooltipCloser, _Widgets$Closer8);
-
-    function TooltipCloser() {
-      _classCallCheck(this, TooltipCloser);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipCloser).apply(this, arguments));
-    }
-
-    return TooltipCloser;
-  }(Widgets.Closer);
+  class TooltipCloser extends Widgets.Closer {}
 
   /* FACTORY */
 
-  Factory.init(TooltipCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( TooltipCloser, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Opener
@@ -16773,13 +16394,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/opener/opener.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tooltipOpener',
     plugin: true,
     selector: '.tooltip-opener',
@@ -16793,22 +16414,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP OPENER */
 
-  var TooltipOpener = function (_Widgets$Opener7) {
-    _inherits(TooltipOpener, _Widgets$Opener7);
-
-    function TooltipOpener() {
-      _classCallCheck(this, TooltipOpener);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipOpener).apply(this, arguments));
-    }
-
-    return TooltipOpener;
-  }(Widgets.Opener);
+  class TooltipOpener extends Widgets.Opener {}
 
   /* FACTORY */
 
-  Factory.init(TooltipOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( TooltipOpener, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Toggler
@@ -16820,13 +16433,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/toggler/toggler.js
  * ========================================================================= */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'tooltipToggler',
     plugin: true,
     selector: '.tooltip-toggler',
@@ -16840,22 +16453,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP TOGGLER */
 
-  var TooltipToggler = function (_Widgets$Toggler7) {
-    _inherits(TooltipToggler, _Widgets$Toggler7);
-
-    function TooltipToggler() {
-      _classCallCheck(this, TooltipToggler);
-
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipToggler).apply(this, arguments));
-    }
-
-    return TooltipToggler;
-  }(Widgets.Toggler);
+  class TooltipToggler extends Widgets.Toggler {}
 
   /* FACTORY */
 
-  Factory.init(TooltipToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( TooltipToggler, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Slider
@@ -16869,13 +16474,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add vertical slider
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'slider',
     plugin: true,
     selector: '.slider',
@@ -16911,270 +16516,255 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SLIDER */
 
-  var Slider = function (_Widgets$Widget38) {
-    _inherits(Slider, _Widgets$Widget38);
+  class Slider extends Widgets.Widget {
 
-    function Slider() {
-      _classCallCheck(this, Slider);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Slider).apply(this, arguments));
+    _variables () {
+
+      this.$slider = this.$element;
+      this.$input = this.$slider.find ( this.options.selectors.input );
+      this.$bar = this.$slider.find ( this.options.selectors.bar );
+      this.$highlight = this.$slider.find ( this.options.selectors.highlight );
+      this.$handler = this.$slider.find ( this.options.selectors.handler );
+      this.$label = this.$slider.find ( this.options.selectors.label );
+
     }
 
-    _createClass(Slider, [{
-      key: '_variables',
+    _init () {
 
+      /* VARIABLES */
 
-      /* SPECIAL */
+      let value = this.$input.val ();
 
-      value: function _variables() {
+      /* OPTIONS */
 
-        this.$slider = this.$element;
-        this.$input = this.$slider.find(this.options.selectors.input);
-        this.$bar = this.$slider.find(this.options.selectors.bar);
-        this.$highlight = this.$slider.find(this.options.selectors.highlight);
-        this.$handler = this.$slider.find(this.options.selectors.handler);
-        this.$label = this.$slider.find(this.options.selectors.label);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+      this.options.min = Number ( this.$slider.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$slider.data ( this.options.datas.max ) || this.options.max );
+      this.options.value = this._sanitizeValue ( value || this.options.value );
+      this.options.step = Number ( this.$slider.data ( this.options.datas.step ) || this.options.step );
+      this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) || this.options.decimals );
 
-        /* VARIABLES */
+      /* STEPS NR */
 
-        var value = this.$input.val();
-
-        /* OPTIONS */
-
-        this.options.min = Number(this.$slider.data(this.options.datas.min) || this.options.min);
-        this.options.max = Number(this.$slider.data(this.options.datas.max) || this.options.max);
-        this.options.value = this._sanitizeValue(value || this.options.value);
-        this.options.step = Number(this.$slider.data(this.options.datas.step) || this.options.step);
-        this.options.decimals = Number(this.$slider.data(this.options.datas.decimals) || this.options.decimals);
-
-        /* STEPS NR */
-
-        this.stepsNr = (this.options.max - this.options.min) / this.options.step;
-
-        /* UPDATE */
-
-        if (Number(value) !== this.options.value) {
-
-          this._update();
-        } else {
-
-          this._updatePositions();
-          this._updateLabel();
-        }
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___change();
-        this.___keydown();
-        this.___drag();
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_sanitizeValue',
-      value: function _sanitizeValue(value) {
-
-        return _.clamp(Number(Number(value).toFixed(this.options.decimals)), this.options.min, this.options.max);
-      }
+      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
 
       /* UPDATE */
 
-    }, {
-      key: '_updateVariables',
-      value: function _updateVariables() {
+      if ( Number ( value ) !== this.options.value ) {
 
-        this.barWidth = this.$bar.width();
+        this._update ();
 
-        this.stepWidth = this.barWidth / this.stepsNr;
-      }
-    }, {
-      key: '_updatePositions',
-      value: function _updatePositions() {
-        var value = arguments.length <= 0 || arguments[0] === undefined ? this.options.value : arguments[0];
+      } else {
 
+        this._updatePositions ();
+        this._updateLabel ();
 
-        var percentage = (value - this.options.min) / this.options.step * 100 / this.stepsNr;
-
-        this.$handler.css('left', percentage + '%');
-        this.$highlight.css('right', 100 - percentage + '%');
-      }
-    }, {
-      key: '_updateLabel',
-      value: function _updateLabel() {
-        var value = arguments.length <= 0 || arguments[0] === undefined ? this.options.value : arguments[0];
-
-
-        this.$label.text(value);
-      }
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
-
-        this.$input.val(this.options.value).trigger('change');
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
-
-        this._updatePositions();
-        this._updateLabel();
-        this._updateInput();
       }
 
-      /* CHANGE */
+    }
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+    _events () {
 
-        this._on(true, this.$input, 'change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change() {
+      this.___change ();
+      this.___keydown ();
+      this.___drag ();
 
-        this.set(this.$input.val());
-      }
+    }
 
-      /* KEYDOWN */
+    /* PRIVATE */
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    _sanitizeValue ( value ) {
 
-        this._onHover([this.$document, 'keydown', this.__keydown]);
-      }
+      return _.clamp ( Number ( Number ( value ).toFixed ( this.options.decimals ) ), this.options.min, this.options.max );
 
-      /* DRAG */
+    }
 
-    }, {
-      key: '___drag',
-      value: function ___drag() {
+    /* UPDATE */
 
-        this.$handler.draggable({
-          draggable: this.isEnabled.bind(this),
-          axis: 'x',
-          proxy: {
-            $element: this.$slider,
-            noMotion: this.__dragNoMotion.bind(this)
-          },
-          modifiers: {
-            x: this.__dragModifierX.bind(this)
-          },
-          callbacks: {
-            start: this.__dragStart.bind(this),
-            move: this.__dragMove.bind(this),
-            end: this.__dragEnd.bind(this)
-          }
-        });
-      }
-    }, {
-      key: '__dragNoMotion',
-      value: function __dragNoMotion() {
+    _updateVariables () {
 
-        return !this._dragDistance;
-      }
-    }, {
-      key: '_dragValue',
-      value: function _dragValue() {
+      this.barWidth = this.$bar.width ();
 
-        return this._sanitizeValue(this.options.value + this._dragDistance / this.stepWidth * this.options.step);
-      }
-    }, {
-      key: '__dragModifierX',
-      value: function __dragModifierX(distance) {
+      this.stepWidth = this.barWidth / this.stepsNr;
 
-        this._dragDistance = this._dragProxyDistance + _.roundCloser(distance, this.stepWidth);
+    }
 
-        if (this._dragIsProxyed && !this._dragProxyDistance) {
+    _updatePositions ( value = this.options.value ) {
 
-          this._dragProxyDistance = this._dragDistance;
+      let percentage = ( value - this.options.min ) / this.options.step * 100 / this.stepsNr;
+
+      this.$handler.css ( 'left', percentage + '%' );
+      this.$highlight.css ( 'right', ( 100 - percentage ) + '%' );
+
+    }
+
+    _updateLabel ( value = this.options.value ) {
+
+      this.$label.text ( value );
+
+    }
+
+    _updateInput () {
+
+      this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _update () {
+
+      this._updatePositions ();
+      this._updateLabel ();
+      this._updateInput ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$input, 'change', this.__change );
+
+    }
+
+    __change () {
+
+      this.set ( this.$input.val () );
+
+    }
+
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* DRAG */
+
+    ___drag () {
+
+      this.$handler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'x',
+        proxy: {
+          $element: this.$slider,
+          noMotion: this.__dragNoMotion.bind ( this )
+        },
+        modifiers: {
+          x: this.__dragModifierX.bind ( this )
+        },
+        callbacks: {
+          start: this.__dragStart.bind ( this ),
+          move: this.__dragMove.bind ( this ),
+          end: this.__dragEnd.bind ( this )
         }
+      });
 
-        return false;
-      }
-    }, {
-      key: '__dragStart',
-      value: function __dragStart(event, data) {
+    }
 
-        this._dragIsProxyed = data.isProxyed;
-        this._dragProxyDistance = 0;
-        this._dragDistance = 0;
+    __dragNoMotion () {
 
-        this._updateVariables();
-      }
-    }, {
-      key: '__dragMove',
-      value: function __dragMove() {
+      return !this._dragDistance;
 
-        var value = this._dragValue();
+    }
 
-        if (this.options.live) {
+    _dragValue () {
 
-          this.set(value);
-        } else {
+      return this._sanitizeValue ( this.options.value + ( this._dragDistance / this.stepWidth * this.options.step ) );
 
-          this._updateLabel(value);
-          this._updatePositions(value);
-        }
-      }
-    }, {
-      key: '__dragEnd',
-      value: function __dragEnd() {
+    }
 
-        this.set(this._dragValue());
+    __dragModifierX ( distance ) {
+
+      this._dragDistance = this._dragProxyDistance + _.roundCloser ( distance, this.stepWidth );
+
+      if ( this._dragIsProxyed && !this._dragProxyDistance ) {
+
+        this._dragProxyDistance = this._dragDistance;
+
       }
 
-      /* API */
+      return false;
 
-    }, {
-      key: 'get',
-      value: function get() {
+    }
 
-        return this.options.value;
+    __dragStart ( event, data ) {
+
+      this._dragIsProxyed = data.isProxyed;
+      this._dragProxyDistance = 0;
+      this._dragDistance = 0;
+
+      this._updateVariables ();
+
+    }
+
+    __dragMove () {
+
+      let value = this._dragValue ();
+
+      if ( this.options.live ) {
+
+        this.set ( value );
+
+      } else {
+
+        this._updateLabel ( value );
+        this._updatePositions ( value );
+
       }
-    }, {
-      key: 'set',
-      value: function set(value) {
 
-        value = this._sanitizeValue(value);
+    }
 
-        if (_.isNaN(value) || value === this.options.value) return;
+    __dragEnd () {
 
-        this.options.value = value;
+      this.set ( this._dragValue () );
 
-        this._update();
+    }
 
-        this._trigger('change');
-      }
-    }, {
-      key: 'increase',
-      value: function increase() {
+    /* API */
 
-        this.set(this.options.value + this.options.step);
-      }
-    }, {
-      key: 'decrease',
-      value: function decrease() {
+    get () {
 
-        this.set(this.options.value - this.options.step);
-      }
-    }]);
+      return this.options.value;
 
-    return Slider;
-  }(Widgets.Widget);
+    }
+
+    set ( value ) {
+
+      value = this._sanitizeValue ( value );
+
+      if ( _.isNaN ( value ) || value === this.options.value ) return;
+
+      this.options.value = value;
+
+      this._update ();
+
+      this._trigger ( 'change' );
+
+    }
+
+    increase () {
+
+      this.set ( this.options.value + this.options.step );
+
+    }
+
+    decrease () {
+
+      this.set ( this.options.value - this.options.step );
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(Slider, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( Slider, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Switch
@@ -17189,13 +16779,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add flick support
 
-(function ($, _, Svelto, Widgets, Factory, Colors) {
+(function ( $, _, Svelto, Widgets, Factory, Colors ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'switch',
     plugin: true,
     selector: '.switch',
@@ -17233,209 +16823,199 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SWITCH */
 
-  var Switch = function (_Widgets$Widget39) {
-    _inherits(Switch, _Widgets$Widget39);
+  class Switch extends Widgets.Widget {
 
-    function Switch() {
-      _classCallCheck(this, Switch);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).apply(this, arguments));
+    _variables () {
+
+      this.$switch = this.$element;
+      this.$input = this.$switch.find ( this.options.selectors.input );
+      this.$bar = this.$switch.find ( this.options.selectors.bar );
+      this.$handler = this.$switch.find ( this.options.selectors.handler );
+
+      this.isChecked = this.$input.prop ( 'checked' );
+
+      this.switchWidth = this.$switch.width ();
+      this.handlerWidth = this.$handler.width ();
+
     }
 
-    _createClass(Switch, [{
-      key: '_variables',
+    _init () {
 
+      /* OPTIONS */
 
-      /* SPECIAL */
+      this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
+      this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;
 
-      value: function _variables() {
+      /* INITIAL SETTING */
 
-        this.$switch = this.$element;
-        this.$input = this.$switch.find(this.options.selectors.input);
-        this.$bar = this.$switch.find(this.options.selectors.bar);
-        this.$handler = this.$switch.find(this.options.selectors.handler);
+      this._updateColors ();
+      this._updatePosition ();
 
-        this.isChecked = this.$input.prop('checked');
+    }
 
-        this.switchWidth = this.$switch.width();
-        this.handlerWidth = this.$handler.width();
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
+    _events () {
 
-        /* OPTIONS */
+      this.___change ();
+      this.___keydown ();
+      this.___drag ();
 
-        this.options.colors.on = this.$switch.data(this.options.datas.colors.on) || this.options.colors.on;
-        this.options.colors.off = this.$switch.data(this.options.datas.colors.off) || this.options.colors.off;
+    }
 
-        /* INITIAL SETTING */
+    _destroy () {
 
-        this._updateColors();
-        this._updatePosition();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this.$handler.draggable ( 'destroy' );
 
-        this.___change();
-        this.___keydown();
-        this.___drag();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
+    }
 
-        this.$handler.draggable('destroy');
-      }
+    /* CHANGE */
 
-      /* CHANGE */
+    ___change () {
 
-    }, {
-      key: '___change',
-      value: function ___change() {
+      this._on ( true, this.$input, 'change', this.__change );
 
-        this._on(true, this.$input, 'change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change() {
+    }
 
-        this.toggle(this.$input.prop('checked'));
-      }
+    __change () {
 
-      /* KEYDOWN */
+      this.toggle ( this.$input.prop ( 'checked' ) );
 
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
+    }
 
-        this._onHover([this.$document, 'keydown', this.__keydown]);
-      }
+    /* KEYDOWN */
 
-      /* DRAG */
+    ___keydown () {
 
-    }, {
-      key: '___drag',
-      value: function ___drag() {
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
-        this.$handler.draggable({
-          draggable: this.isEnabled.bind(this),
-          axis: 'x',
-          proxy: {
-            $element: this.$switch,
-            noMotion: false
-          },
-          constrainer: {
-            $element: this.$switch
-          },
-          callbacks: {
-            end: this.__dragEnd.bind(this)
-          }
-        });
-      }
-    }, {
-      key: '__dragEnd',
-      value: function __dragEnd(event, data) {
+    }
 
-        if (data.motion) {
+    /* DRAG */
 
-          var isChecked = data.dragXY.x + this.handlerWidth / 2 >= this.switchWidth / 2;
+    ___drag () {
 
-          this.toggle(isChecked, true);
-        } else {
-
-          this.toggle();
+      this.$handler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'x',
+        proxy: {
+          $element: this.$switch,
+          noMotion: false
+        },
+        constrainer: {
+          $element: this.$switch
+        },
+        callbacks: {
+          end: this.__dragEnd.bind ( this )
         }
+      });
+
+    }
+
+    __dragEnd ( event, data ) {
+
+      if ( data.motion ) {
+
+        let isChecked = ( data.dragXY.x + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+
+        this.toggle ( isChecked, true );
+
+      } else {
+
+        this.toggle ();
+
       }
 
-      /* UPDATE */
+    }
 
-    }, {
-      key: '_updatePosition',
-      value: function _updatePosition() {
+    /* UPDATE */
 
-        this.$handler.translateX(this.isChecked ? this.switchWidth - this.handlerWidth : 0);
+    _updatePosition () {
+
+      this.$handler.translateX ( this.isChecked ? this.switchWidth - this.handlerWidth : 0 );
+
+    }
+
+    _updateColors () {
+
+      this.$bar.toggleClass ( this.options.colors.on, this.isChecked );
+      this.$bar.toggleClass ( this.options.colors.off, !this.isChecked );
+
+      this.$handler.toggleClass ( this.options.colors.on, this.isChecked );
+      this.$handler.toggleClass ( this.options.colors.off, !this.isChecked );
+
+    }
+
+    _updateInput () {
+
+      this.$input.prop ( 'checked', this.isChecked ).trigger ( 'change' );
+
+    }
+
+    _update () {
+
+      this._updatePosition ();
+      this._updateColors ();
+      this._updateInput ();
+
+    }
+
+    /* API */
+
+    get () {
+
+      return this.isChecked;
+
+    }
+
+    toggle ( force, _reset ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this.isChecked;
+
       }
-    }, {
-      key: '_updateColors',
-      value: function _updateColors() {
 
-        this.$bar.toggleClass(this.options.colors.on, this.isChecked);
-        this.$bar.toggleClass(this.options.colors.off, !this.isChecked);
+      if ( force !== this.isChecked ) {
 
-        this.$handler.toggleClass(this.options.colors.on, this.isChecked);
-        this.$handler.toggleClass(this.options.colors.off, !this.isChecked);
-      }
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
+        this.isChecked = force;
 
-        this.$input.prop('checked', this.isChecked).trigger('change');
-      }
-    }, {
-      key: '_update',
-      value: function _update() {
+        this.$switch.toggleClass ( this.options.classes.checked, this.isChecked );
 
-        this._updatePosition();
-        this._updateColors();
-        this._updateInput();
+        this._update ();
+
+        this._trigger ( 'change' );
+
+        this._trigger ( this.isChecked ? 'check' : 'uncheck' );
+
+      } else if ( _reset ) {
+
+        this._updatePosition ();
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'get',
-      value: function get() {
+    check () {
 
-        return this.isChecked;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(force, _reset) {
+      this.toggle ( true );
 
-        if (!_.isBoolean(force)) {
+    }
 
-          force = !this.isChecked;
-        }
+    uncheck () {
 
-        if (force !== this.isChecked) {
+      this.toggle ( false );
 
-          this.isChecked = force;
+    }
 
-          this.$switch.toggleClass(this.options.classes.checked, this.isChecked);
-
-          this._update();
-
-          this._trigger('change');
-
-          this._trigger(this.isChecked ? 'check' : 'uncheck');
-        } else if (_reset) {
-
-          this._updatePosition();
-        }
-      }
-    }, {
-      key: 'check',
-      value: function check() {
-
-        this.toggle(true);
-      }
-    }, {
-      key: 'uncheck',
-      value: function uncheck() {
-
-        this.toggle(false);
-      }
-    }]);
-
-    return Switch;
-  }(Widgets.Widget);
+  }
 
   /* FACTORY */
 
-  Factory.init(Switch, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
+  Factory.init ( Switch, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));
+
 
 /* =========================================================================
  * Svelto - Lib - Validator
@@ -17452,104 +17032,101 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // `value` is supposed to be a string
 // Strings will be trimmed inside some validators
 
-(function ($, _, Svelto, Regexes) {
+(function ( $, _, Svelto, Regexes ) {
 
   'use strict';
 
   /* VALIDATOR */
 
-  var Validator = {
+  let Validator = {
 
     /* TYPE */
 
-    alpha: function alpha(value) {
-      return !!value.match(Regexes.alpha);
+    alpha ( value ) {
+      return !!value.match ( Regexes.alpha );
     },
-    alphanumeric: function alphanumeric(value) {
-      return !!value.match(Regexes.alphanumeric);
+    alphanumeric ( value ) {
+      return !!value.match ( Regexes.alphanumeric );
     },
-    hexadecimal: function hexadecimal(value) {
-      return !!value.match(Regexes.hexadecimal);
+    hexadecimal ( value ) {
+      return !!value.match ( Regexes.hexadecimal );
     },
-    number: function number(value) {
-      return !!value.match(Regexes.integer) || !!value.match(Regexes.float);
+    number ( value ) {
+      return !!value.match ( Regexes.integer ) || !!value.match ( Regexes.float );
     },
-    integer: function integer(value) {
-      return !!value.match(Regexes.integer);
+    integer ( value ) {
+      return !!value.match ( Regexes.integer );
     },
-    float: function float(value) {
-      return !!value.match(Regexes.float);
+    float ( value ) {
+      return !!value.match ( Regexes.float );
     },
-
 
     /* NUMBER */
 
-    min: function min(value, _min) {
-      return Number(value) >= Number(_min);
+    min ( value, min ) {
+      return ( Number ( value ) >= Number ( min ) );
     },
-    max: function max(value, _max) {
-      return Number(value) <= Number(_max);
+    max ( value, max ) {
+      return ( Number ( value ) <= Number ( max ) );
     },
-    range: function range(value, min, max) {
-      value = Number(value);
-      return value >= Number(min) && value <= Number(max);
+    range ( value, min, max ) {
+      value = Number ( value );
+      return ( value >= Number ( min ) && value <= Number ( max ) );
     },
-
 
     /* LENGTH */
 
-    minLength: function minLength(value, _minLength) {
-      return value.trim().length >= Number(_minLength);
+    minLength ( value, minLength ) {
+      return ( value.trim ().length >= Number ( minLength ) );
     },
-    maxLength: function maxLength(value, _maxLength) {
-      return value.trim().length <= Number(_maxLength);
+    maxLength ( value, maxLength ) {
+      return ( value.trim ().length <= Number ( maxLength ) );
     },
-    rangeLength: function rangeLength(value, minLength, maxLength) {
-      value = value.trim();
-      return value.length >= Number(minLength) && value.length <= Number(maxLength);
+    rangeLength ( value, minLength, maxLength ) {
+      value = value.trim ();
+      return ( value.length >= Number ( minLength ) && value.length <= Number ( maxLength ) );
     },
-    exactLength: function exactLength(value, length) {
-      return value.trim().length === Number(length);
+    exactLength ( value, length ) {
+      return ( value.trim ().length === Number ( length ) );
     },
-
 
     /* THINGS */
 
-    email: function email(value) {
-      return !!value.match(Regexes.email);
+    email ( value ) {
+      return !!value.match ( Regexes.email );
     },
-    creditCard: function creditCard(value) {
-      return !!value.match(Regexes.creditCard);
+    creditCard ( value ) {
+      return !!value.match ( Regexes.creditCard );
     },
-    ssn: function ssn(value) {
-      return !!value.match(Regexes.ssn);
+    ssn ( value ) {
+      return !!value.match ( Regexes.ssn );
     },
-    ipv4: function ipv4(value) {
-      return !!value.match(Regexes.ipv4);
+    ipv4 ( value ) {
+      return !!value.match ( Regexes.ipv4 );
     },
-    url: function url(value) {
-      return !!value.match(Regexes.url);
+    url ( value ) {
+      return !!value.match ( Regexes.url );
     },
-
 
     /* OTHERS */
 
-    empty: function empty(value) {
-      return _.isEmpty(value.trim());
+    empty ( value ) {
+      return _.isEmpty ( value.trim () );
     },
-    included: function included(value, values) {
-      value = value.toLowerCase();
-      values = values.map(function (value) {
-        return value.toLowerCase();
-      });
-      return _.includes(values, value);
+    included ( value, values ) {
+      value = value.toLowerCase ();
+      values = values.map ( value => value.toLowerCase () );
+      return _.includes ( values, value );
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Validator = Validator;
-})(Svelto.$, Svelto._, Svelto, Svelto.Regexes);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Regexes ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Form Validate
@@ -17562,50 +17139,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
+//FIXME: If a form gets autofilled with `SafeInCloud` the value doesn't get updated (it probably doesn't trigger 'change') -> force a value refresh when submitting
 //TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 
-(function ($, _, Svelto, Widgets, Factory, Validator) {
+(function ( $, _, Svelto, Widgets, Factory, Validator ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'formValidate',
     plugin: true,
     selector: 'form.validate',
     templates: {
-      message: '<p class="form-validate-message <%= o.validity %>">' + '<%= o.message %>' + '</p>',
-      messages: '<ul class="form-validate-message <%= o.validity %>">' + '<% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %>' + '<li><%= o.messages[i] %></li>' + '<% } %>' + '</ul>'
+      message: '<p class="form-validate-message <%= o.validity %>">' +
+                 '<%= o.message %>' +
+               '</p>',
+      messages: '<ul class="form-validate-message <%= o.validity %>">' +
+                  '<% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %>' +
+                    '<li><%= o.messages[i] %></li>' +
+                  '<% } %>' +
+                '</ul>'
     },
     options: {
       validators: { // If not found here it will use `Validator`'s validators
-
-        required: function required(value) {
-          return !Validator.empty(value);
+        required ( value ) {
+          return !Validator.empty ( value );
         },
-        values: function values(value) {
-          for (var _len6 = arguments.length, _values = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-            _values[_key6 - 1] = arguments[_key6];
-          }
-
-          return Validator.included(value, _values);
+        values ( value, ...values ) {
+          return Validator.included ( value, values );
         },
-        field: function field(value, fieldName) {
-          var fieldValue = _.find(this.elements, { name: fieldName }).value;
-          return value === fieldValue;
+        field ( value, fieldName ) {
+          let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
+          return ( value === fieldValue );
         },
-        checked: function checked() {
-          return this.element.$element.prop('checked');
+        checked () {
+          return this.element.$element.prop ( 'checked' );
         },
-        regex: function regex(value, _regex) {
-          return !!value.match(new RegExp(_regex));
+        regex ( value, regex ) {
+          return !!value.match ( new RegExp ( regex ) );
         }
       },
       messages: {
         form: {
-          invalid: 'The form contains some errors'
+          invalid: 'The form contains some errors',
         },
         validators: {
           invalid: {
@@ -17666,405 +17245,373 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = function (_Widgets$Widget40) {
-    _inherits(FormValidate, _Widgets$Widget40);
+  class FormValidate extends Widgets.Widget {
 
-    function FormValidate() {
-      _classCallCheck(this, FormValidate);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(FormValidate).apply(this, arguments));
+    _variables () {
+
+      this.$form = this.$element;
+      this.$elements = this.$form.find ( this.options.selectors.element );
+      this.$textfields = this.$elements.filter ( this.options.selectors.textfield );
+
+      this.___elements ();
+
     }
 
-    _createClass(FormValidate, [{
-      key: '_variables',
+    _events () {
 
+      this.___change ();
+      this.___focus ();
+      this.___blur ();
+      this.___submit ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* ELEMENTS */
 
-        this.$form = this.$element;
-        this.$elements = this.$form.find(this.options.selectors.element);
-        this.$textfields = this.$elements.filter(this.options.selectors.textfield);
+    ___elements () {
 
-        this.___elements();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+      this.elements = {};
 
-        this.___change();
-        this.___focus();
-        this.___blur();
-        this.___submit();
-      }
+      for ( let element of this.$elements ) {
 
-      /* ELEMENTS */
+        let $element = $(element),
+            $wrappers = $element.parents ( this.options.selectors.wrapper ),
+            $wrapper = $wrappers.length ? $wrappers.first () : $element,
+            id = $.guid++,
+            validationsStr = $element.data ( this.options.datas.validations ),
+            validations = false;
 
-    }, {
-      key: '___elements',
-      value: function ___elements() {
+        if ( validationsStr ) {
 
-        this.elements = {};
+          validations = {};
 
-        var _iteratorNormalCompletion17 = true;
-        var _didIteratorError17 = false;
-        var _iteratorError17 = undefined;
+          let validationsArr = validationsStr.split ( this.options.characters.separators.validations );
 
-        try {
-          for (var _iterator17 = this.$elements[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-            var element = _step17.value;
+          for ( let validationStr of validationsArr ) {
 
+            let matches = validationStr.match ( this.options.regexes.validation );
 
-            var $element = $(element),
-                $wrappers = $element.parents(this.options.selectors.wrapper),
-                $wrapper = $wrappers.length ? $wrappers.first() : $element,
-                id = $.guid++,
-                validationsStr = $element.data(this.options.datas.validations),
-                validations = false;
+            if ( !matches ) continue;
 
-            if (validationsStr) {
+            let validationName = matches[1],
+                validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
+                validator = this.options.validators[validationName] || Validator[validationName];
 
-              validations = {};
+            if ( !validator ) continue;
 
-              var validationsArr = validationsStr.split(this.options.characters.separators.validations);
-
-              var _iteratorNormalCompletion18 = true;
-              var _didIteratorError18 = false;
-              var _iteratorError18 = undefined;
-
-              try {
-                for (var _iterator18 = validationsArr[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
-                  var validationStr = _step18.value;
-
-
-                  var matches = validationStr.match(this.options.regexes.validation);
-
-                  if (!matches) continue;
-
-                  var validationName = matches[1],
-                      validationArgs = matches[2] ? matches[2].split(this.options.characters.separators.arguments) : [],
-                      validator = this.options.validators[validationName] || Validator[validationName];
-
-                  if (!validator) continue;
-
-                  validations[validationName] = {
-                    args: validationArgs,
-                    validator: validator
-                  };
-                }
-              } catch (err) {
-                _didIteratorError18 = true;
-                _iteratorError18 = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion18 && _iterator18.return) {
-                    _iterator18.return();
-                  }
-                } finally {
-                  if (_didIteratorError18) {
-                    throw _iteratorError18;
-                  }
-                }
-              }
-
-              if (_.isEmpty(validations)) {
-
-                validations = false;
-              }
-            }
-
-            element[this.options.datas.id] = id;
-
-            this.elements[id] = {
-              id: id,
-              $element: $element,
-              $wrapper: $wrapper,
-              $message: false,
-              name: element.name,
-              value: $element.val(),
-              validations: validations,
-              isDirty: false,
-              isValid: undefined,
-              messages: {
-                invalid: $wrapper.data(this.options.datas.messages.invalid),
-                valid: $wrapper.data(this.options.datas.messages.valid)
-              }
+            validations[validationName] = {
+              args: validationArgs,
+              validator: validator
             };
+
           }
-        } catch (err) {
-          _didIteratorError17 = true;
-          _iteratorError17 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion17 && _iterator17.return) {
-              _iterator17.return();
-            }
-          } finally {
-            if (_didIteratorError17) {
-              throw _iteratorError17;
-            }
+
+          if ( _.isEmpty ( validations ) ) {
+
+            validations = false;
+
           }
+
         }
-      }
 
-      /* CHANGE */
+        element[this.options.datas.id] = id;
 
-    }, {
-      key: '___change',
-      value: function ___change() {
-
-        this._on(true, this.$elements, 'change', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change(event) {
-
-        /* FORM */
-
-        this._isValid = undefined;
-
-        /* ELEMENT */
-
-        var elementObj = this.elements[event.currentTarget[this.options.datas.id]];
-
-        elementObj.isDirty = true;
-        elementObj.isValid = undefined;
-
-        this._validateWorker(elementObj);
-
-        /* OTHERS */
-
-        for (var id in this.elements) {
-
-          if (this.elements.hasOwnProperty(id)) {
-
-            if (id === elementObj.id) continue;
-
-            var otherElementObj = this.elements[id],
-                isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf(elementObj.name) !== -1,
-                hasSameName = !_.isEmpty(elementObj.name) && otherElementObj.name === elementObj.name;
-
-            if (isDepending || hasSameName) {
-
-              otherElementObj.isValid = undefined;
-
-              this._validateWorker(otherElementObj);
-            }
+        this.elements[id] = {
+          id: id,
+          $element: $element,
+          $wrapper: $wrapper,
+          $message: false,
+          name: element.name,
+          value: $element.val (),
+          validations: validations,
+          isDirty: false,
+          isValid: undefined,
+          messages: {
+            invalid: $wrapper.data ( this.options.datas.messages.invalid ),
+            valid: $wrapper.data ( this.options.datas.messages.valid )
           }
-        }
+        };
+
       }
 
-      /* FOCUS */
+    }
 
-    }, {
-      key: '___focus',
-      value: function ___focus() {
+    /* CHANGE */
 
-        this._on(this.$textfields, 'focus', this.__focus);
-      }
-    }, {
-      key: '__focus',
-      value: function __focus(event) {
+    ___change () {
 
-        var elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+      this._on ( true, this.$elements, 'change', this.__change );
 
-        elementObj.isValid = undefined;
+    }
 
-        this.__indeterminate(elementObj);
-      }
+    __change ( event ) {
 
-      /* BLUR */
+      /* FORM */
 
-    }, {
-      key: '___blur',
-      value: function ___blur() {
+      this._isValid = undefined;
 
-        this._on(this.$textfields, 'blur', this.__blur);
-      }
-    }, {
-      key: '__blur',
-      value: function __blur(event) {
+      /* ELEMENT */
 
-        var elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
-        this._validateWorker(elementObj);
-      }
+      elementObj.isDirty = true;
+      elementObj.isValid = undefined;
 
-      /* SUBMIT */
+      this._validateWorker ( elementObj );
 
-    }, {
-      key: '___submit',
-      value: function ___submit() {
+      /* OTHERS */
 
-        this._on(true, 'submit', this.__submit);
-      }
-    }, {
-      key: '__submit',
-      value: function __submit(event) {
+      for ( let id in this.elements ) {
 
-        if (!this.isValid()) {
+        if ( this.elements.hasOwnProperty ( id ) ) {
 
-          event.preventDefault();
-          event.stopImmediatePropagation();
+          if ( id === elementObj.id ) continue;
 
-          $.toast(this.options.messages.form.invalid);
-        }
-      }
+          let otherElementObj = this.elements[id],
+              isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf ( elementObj.name ) !== -1,
+              hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
 
-      /* VALIDATION */
+          if ( isDepending || hasSameName ) {
 
-    }, {
-      key: '_validateWorker',
-      value: function _validateWorker(elementObj) {
+            otherElementObj.isValid = undefined;
 
-        if (_.isUndefined(elementObj.isValid)) {
+            this._validateWorker ( otherElementObj );
 
-          var result = this._validate(elementObj),
-              isValid = result === true;
-
-          elementObj.isValid = isValid;
-
-          if (isValid) {
-
-            this.__valid(elementObj);
-          } else {
-
-            this.__invalid(elementObj, result);
           }
-        }
-      }
-    }, {
-      key: '_validate',
-      value: function _validate(elementObj) {
 
-        var errors = [],
-            validations = elementObj.validations;
-
-        if (elementObj.isDirty) {
-
-          elementObj.value = elementObj.$element.val();
-
-          elementObj.isDirty = false;
         }
 
-        if (validations) {
-
-          for (var name in validations) {
-
-            if (validations.hasOwnProperty(name)) {
-
-              var validation = validations[name],
-                  isValid = validation.validator.apply({ elements: this.elements, element: elementObj }, [elementObj.value].concat(validation.args));
-
-              if (!isValid) {
-
-                var error = _.format.apply(_, [this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value].concat(_toConsumableArray(validation.args)));
-
-                errors.push(error);
-              }
-            }
-          }
-        }
-
-        return _.isEmpty(errors) ? true : errors;
       }
 
-      /* STATE */
+    }
 
-    }, {
-      key: '__indeterminate',
-      value: function __indeterminate(elementObj) {
+    /* FOCUS */
 
-        elementObj.$wrapper.removeClass(this.options.classes.invalid + ' ' + this.options.classes.valid);
+    ___focus () {
 
-        this._updateMessage(elementObj, false);
+      this._on ( this.$textfields, 'focus', this.__focus );
+
+    }
+
+    __focus ( event ) {
+
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+
+      elementObj.isValid = undefined;
+
+      this.__indeterminate ( elementObj );
+
+    }
+
+    /* BLUR */
+
+    ___blur () {
+
+      this._on ( this.$textfields, 'blur', this.__blur );
+
+    }
+
+    __blur ( event ) {
+
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+
+      this._validateWorker ( elementObj );
+
+    }
+
+    /* SUBMIT */
+
+    ___submit () {
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
+
+    __submit ( event ) {
+
+      if ( !this.isValid () ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        $.toast ( this.options.messages.form.invalid );
+
       }
-    }, {
-      key: '__valid',
-      value: function __valid(elementObj) {
 
-        elementObj.$wrapper.removeClass(this.options.classes.invalid).addClass(this.options.classes.valid);
+    }
 
-        this._updateMessage(elementObj, elementObj.messages.valid);
-      }
-    }, {
-      key: '__invalid',
-      value: function __invalid(elementObj, errors) {
+    /* VALIDATION */
 
-        elementObj.$wrapper.removeClass(this.options.classes.valid).addClass(this.options.classes.invalid);
+    _validateWorker ( elementObj ) {
 
-        this._updateMessage(elementObj, elementObj.messages.invalid || errors);
-      }
+      if ( _.isUndefined ( elementObj.isValid ) ) {
 
-      /* ERRORS */
+        let result = this._validate ( elementObj ),
+            isValid = ( result === true );
 
-    }, {
-      key: '_updateMessage',
-      value: function _updateMessage(elementObj, message) {
+        elementObj.isValid = isValid;
 
-        if (elementObj.$message) {
+        if ( isValid ) {
 
-          elementObj.$message.remove();
-        }
+          this.__valid ( elementObj );
 
-        if (message) {
-
-          var validity = elementObj.isValid ? this.options.classes.valid : this.options.classes.invalid,
-              msgHtml = _.isString(message) ? this._template('message', { message: message, validity: validity }) : message.length === 1 ? this._template('message', { message: message[0], validity: validity }) : this._template('messages', { messages: message, validity: validity });
-
-          elementObj.$message = $(msgHtml);
-
-          elementObj.$wrapper.after(elementObj.$message);
         } else {
 
-          elementObj.$message = false;
+          this.__invalid ( elementObj, result );
+
         }
+
       }
 
-      /* API */
+    }
 
-    }, {
-      key: 'isValid',
-      value: function isValid() {
+    _validate ( elementObj ) {
 
-        if (_.isUndefined(this._isValid)) {
+      let errors = [],
+          validations = elementObj.validations;
 
-          for (var id in this.elements) {
+      if ( elementObj.isDirty ) {
 
-            if (this.elements.hasOwnProperty(id)) {
+        elementObj.value = elementObj.$element.val ();
 
-              var elementObj = this.elements[id];
+        elementObj.isDirty = false;
 
-              if (_.isUndefined(elementObj.isValid)) {
+      }
 
-                this._validateWorker(elementObj);
-              }
+      if ( validations ) {
 
-              if (!elementObj.isValid) {
+        for ( let name in validations ) {
 
-                this._isValid = false;
-              }
+          if ( validations.hasOwnProperty ( name ) ) {
+
+            let validation = validations[name],
+                isValid = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
+
+            if ( !isValid ) {
+
+              let error = _.format ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
+
+              errors.push ( error );
+
             }
+
           }
 
-          if (_.isUndefined(this._isValid)) {
-
-            this._isValid = true;
-          }
         }
 
-        return this._isValid;
       }
-    }]);
 
-    return FormValidate;
-  }(Widgets.Widget);
+      return _.isEmpty ( errors ) ? true : errors;
+
+    }
+
+    /* STATE */
+
+    __indeterminate ( elementObj ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
+
+      this._updateMessage ( elementObj, false );
+
+    }
+
+    __valid ( elementObj ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
+
+      this._updateMessage ( elementObj, elementObj.messages.valid );
+
+    }
+
+    __invalid ( elementObj, errors ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
+
+      this._updateMessage ( elementObj, elementObj.messages.invalid || errors );
+
+    }
+
+    /* ERRORS */
+
+    _updateMessage ( elementObj, message ) {
+
+      if ( elementObj.$message ) {
+
+        elementObj.$message.remove ();
+
+      }
+
+      if ( message ) {
+
+        let validity = elementObj.isValid ? this.options.classes.valid : this.options.classes.invalid,
+            msgHtml = _.isString ( message )
+                        ? this._template ( 'message', { message: message, validity: validity } )
+                        : message.length === 1
+                          ? this._template ( 'message', { message: message[0], validity: validity } )
+                          : this._template ( 'messages', { messages: message, validity: validity } );
+
+        elementObj.$message = $(msgHtml);
+
+        elementObj.$wrapper.after ( elementObj.$message );
+
+      } else {
+
+        elementObj.$message = false;
+
+      }
+
+    }
+
+    /* API */
+
+    isValid () {
+
+      if ( _.isUndefined ( this._isValid ) ) {
+
+        for ( let id in this.elements ) {
+
+          if ( this.elements.hasOwnProperty ( id ) ) {
+
+            let elementObj = this.elements[id];
+
+            if ( _.isUndefined ( elementObj.isValid ) ) {
+
+              this._validateWorker ( elementObj );
+
+            }
+
+            if ( !elementObj.isValid ) {
+
+              this._isValid = false;
+
+            }
+
+          }
+
+        }
+
+        if ( _.isUndefined ( this._isValid ) ) {
+
+          this._isValid = true;
+
+        }
+
+      }
+
+      return this._isValid;
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(FormValidate, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator);
+  Factory.init ( FormValidate, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator ));
+
 
 /* =========================================================================
  * Svelto - Widgets - Form Ajax
@@ -18080,13 +17627,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'formAjax',
     plugin: true,
     selector: 'form.ajax',
@@ -18110,135 +17657,136 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM AJAX */
 
-  var FormAjax = function (_Widgets$Widget41) {
-    _inherits(FormAjax, _Widgets$Widget41);
+  class FormAjax extends Widgets.Widget {
 
-    function FormAjax() {
-      _classCallCheck(this, FormAjax);
+    /* SPECIAL */
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(FormAjax).apply(this, arguments));
+    _variables () {
+
+      this.form = this.element;
+      this.$form = this.$element;
+
     }
 
-    _createClass(FormAjax, [{
-      key: '_variables',
+    _events () {
 
+      this.___submit ();
 
-      /* SPECIAL */
+    }
 
-      value: function _variables() {
+    /* PRIVATE */
 
-        this.form = this.element;
-        this.$form = this.$element;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
+    ___submit () {
 
-        this.___submit();
-      }
+      this._on ( true, 'submit', this.__submit );
 
-      /* PRIVATE */
+    }
 
-    }, {
-      key: '___submit',
-      value: function ___submit() {
+    __submit ( event ) {
 
-        this._on(true, 'submit', this.__submit);
-      }
-    }, {
-      key: '__submit',
-      value: function __submit(event) {
-        var _this82 = this;
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
-        event.preventDefault();
-        event.stopImmediatePropagation();
+      $.ajax ({
 
-        $.ajax({
+        cache: false,
+        contentType: false,
+        data: new FormData ( this.form ),
+        processData: false,
+        timeout: this.options.timeout,
+        type: this.$form.attr ( 'method' ) || 'POST',
+        url: this.$form.attr ( 'action' ),
 
-          cache: false,
-          contentType: false,
-          data: new FormData(this.form),
-          processData: false,
-          timeout: this.options.timeout,
-          type: this.$form.attr('method') || 'POST',
-          url: this.$form.attr('action'),
+        beforeSend: () => {
 
-          beforeSend: function beforeSend() {
+          if ( this.options.spinnerOverlay ) {
 
-            if (_this82.options.spinnerOverlay) {
+            this.$form.spinnerOverlay ( 'open' );
 
-              _this82.$form.spinnerOverlay('open');
-            }
-
-            _this82._trigger('beforesend');
-          },
-
-          error: function error(res) {
-
-            var resj = _.attempt(JSON.parse, res);
-
-            if (!_.isError(resj)) {
-
-              $.toast(resj.msg || _this82.options.messages.error);
-            } else {
-
-              $.toast(_this82.options.messages.error);
-            }
-
-            _this82._trigger('error');
-          },
-
-          success: function success(res) {
-
-            var resj = _.attempt(JSON.parse, res);
-
-            if (!_.isError(resj)) {
-
-              if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
-
-                $.toast(resj.msg || _this82.options.messages.refreshing);
-
-                location.reload();
-              } else if (resj.url) {
-
-                // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
-
-                $.toast(resj.msg || _this82.options.messages.redirecting);
-
-                location.assign(resj.url);
-              } else {
-
-                $.toast(resj.msg || _this82.options.messages.success);
-              }
-            } else {
-
-              $.toast(_this82.options.messages.success);
-            }
-
-            _this82._trigger('success');
-          },
-
-          complete: function complete() {
-
-            if (_this82.options.spinnerOverlay) {
-
-              _this82.$form.spinnerOverlay('close');
-            }
-
-            _this82._trigger('complete');
           }
 
-        });
-      }
-    }]);
+          this._trigger ( 'beforesend' );
 
-    return FormAjax;
-  }(Widgets.Widget);
+        },
+
+        error: ( res ) => {
+
+          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+
+          if ( !_.isError ( resj ) ) {
+
+            $.toast ( resj.msg || this.options.messages.error );
+
+          } else {
+
+            $.toast ( this.options.messages.error );
+
+          }
+
+          this._trigger ( 'error' );
+
+        },
+
+        success: ( res ) => {
+
+          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+
+          if ( !_.isError ( resj ) ) {
+
+            if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
+
+              $.toast ( resj.msg || this.options.messages.refreshing );
+
+              location.reload ();
+
+            } else if ( resj.url ) {
+
+              // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+              $.toast ( resj.msg || this.options.messages.redirecting );
+
+              location.assign ( resj.url );
+
+            } else {
+
+              $.toast ( resj.msg || this.options.messages.success );
+
+            }
+
+          } else {
+
+            $.toast ( this.options.messages.success );
+
+          }
+
+          this._trigger ( 'success' );
+
+        },
+
+        complete: () => {
+
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'close' );
+
+          }
+
+          this._trigger ( 'complete' );
+
+        }
+
+      });
+
+    }
+
+  }
 
   /* FACTORY */
 
-  Factory.init(FormAjax, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init ( FormAjax, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+
 
 /* =========================================================================
  * Svelto - Widgets - _ - Scroll
@@ -18254,112 +17802,1863 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: It doesn't work if the layout is body, it also need html in some browsers (Which browsers?)
 //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
-(function ($, _, Svelto, Widgetize, Pointer, Animations) {
+(function ( $, _, Svelto, Widgetize, Pointer, Animations ) {
 
   'use strict';
 
   /* SCROLL TO TOP */
 
-  Widgetize.add('.scroll-to-top', function ($scroller) {
+  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
-    var $layout = $scroller.parent().closest('.layout, body'); // `body` is used as a fallback
+    let $layout = $scroller.parent ().closest ( '.layout, body' ); // `body` is used as a fallback
 
-    $scroller.on(Pointer.tap, function () {
+    $scroller.on ( Pointer.tap, function () {
 
-      $layout.animate({ scrollTop: 0 }, Animations.normal);
+      $layout.animate ( { scrollTop: 0 }, Animations.normal );
+
     });
+
   });
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations);
 
-(function () {
-  'use strict';
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations ));
 
-  var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+/**
+ * marked - a markdown parser
+ * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+ * https://github.com/chjj/marked
+ */
 
-  var fn = function () {
-    var val;
-    var valLength;
+;(function() {
 
-    var fnMap = [['requestFullscreen', 'exitFullscreen', 'fullscreenElement', 'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'],
-    // new WebKit
-    ['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'],
-    // old WebKit (Safari 5.1)
-    ['webkitRequestFullScreen', 'webkitCancelFullScreen', 'webkitCurrentFullScreenElement', 'webkitCancelFullScreen', 'webkitfullscreenchange', 'webkitfullscreenerror'], ['mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement', 'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'], ['msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement', 'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError']];
+/**
+ * Block-Level Grammar
+ */
 
-    var i = 0;
-    var l = fnMap.length;
-    var ret = {};
+var block = {
+  newline: /^\n+/,
+  code: /^( {4}[^\n]+\n*)+/,
+  fences: noop,
+  hr: /^( *[-*_]){3,} *(?:\n+|$)/,
+  heading: /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,
+  nptable: noop,
+  lheading: /^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,
+  blockquote: /^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,
+  list: /^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
+  html: /^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
+  table: noop,
+  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,
+  text: /^[^\n]+/
+};
 
-    for (; i < l; i++) {
-      val = fnMap[i];
-      if (val && val[1] in document) {
-        for (i = 0, valLength = val.length; i < valLength; i++) {
-          ret[fnMap[0][i]] = val[i];
-        }
-        return ret;
+block.bullet = /(?:[*+-]|\d+\.)/;
+block.item = /^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;
+block.item = replace(block.item, 'gm')
+  (/bull/g, block.bullet)
+  ();
+
+block.list = replace(block.list)
+  (/bull/g, block.bullet)
+  ('hr', '\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))')
+  ('def', '\\n+(?=' + block.def.source + ')')
+  ();
+
+block.blockquote = replace(block.blockquote)
+  ('def', block.def)
+  ();
+
+block._tag = '(?!(?:'
+  + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code'
+  + '|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo'
+  + '|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b';
+
+block.html = replace(block.html)
+  ('comment', /<!--[\s\S]*?-->/)
+  ('closed', /<(tag)[\s\S]+?<\/\1>/)
+  ('closing', /<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)
+  (/tag/g, block._tag)
+  ();
+
+block.paragraph = replace(block.paragraph)
+  ('hr', block.hr)
+  ('heading', block.heading)
+  ('lheading', block.lheading)
+  ('blockquote', block.blockquote)
+  ('tag', '<' + block._tag)
+  ('def', block.def)
+  ();
+
+/**
+ * Normal Block Grammar
+ */
+
+block.normal = merge({}, block);
+
+/**
+ * GFM Block Grammar
+ */
+
+block.gfm = merge({}, block.normal, {
+  fences: /^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,
+  paragraph: /^/,
+  heading: /^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/
+});
+
+block.gfm.paragraph = replace(block.paragraph)
+  ('(?!', '(?!'
+    + block.gfm.fences.source.replace('\\1', '\\2') + '|'
+    + block.list.source.replace('\\1', '\\3') + '|')
+  ();
+
+/**
+ * GFM + Tables Block Grammar
+ */
+
+block.tables = merge({}, block.gfm, {
+  nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
+  table: /^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/
+});
+
+/**
+ * Block Lexer
+ */
+
+function Lexer(options) {
+  this.tokens = [];
+  this.tokens.links = {};
+  this.options = options || marked.defaults;
+  this.rules = block.normal;
+
+  if (this.options.gfm) {
+    if (this.options.tables) {
+      this.rules = block.tables;
+    } else {
+      this.rules = block.gfm;
+    }
+  }
+}
+
+/**
+ * Expose Block Rules
+ */
+
+Lexer.rules = block;
+
+/**
+ * Static Lex Method
+ */
+
+Lexer.lex = function(src, options) {
+  var lexer = new Lexer(options);
+  return lexer.lex(src);
+};
+
+/**
+ * Preprocessing
+ */
+
+Lexer.prototype.lex = function(src) {
+  src = src
+    .replace(/\r\n|\r/g, '\n')
+    .replace(/\t/g, '    ')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\u2424/g, '\n');
+
+  return this.token(src, true);
+};
+
+/**
+ * Lexing
+ */
+
+Lexer.prototype.token = function(src, top, bq) {
+  var src = src.replace(/^ +$/gm, '')
+    , next
+    , loose
+    , cap
+    , bull
+    , b
+    , item
+    , space
+    , i
+    , l;
+
+  while (src) {
+    // newline
+    if (cap = this.rules.newline.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[0].length > 1) {
+        this.tokens.push({
+          type: 'space'
+        });
       }
     }
 
-    return false;
-  }();
+    // code
+    if (cap = this.rules.code.exec(src)) {
+      src = src.substring(cap[0].length);
+      cap = cap[0].replace(/^ {4}/gm, '');
+      this.tokens.push({
+        type: 'code',
+        text: !this.options.pedantic
+          ? cap.replace(/\n+$/, '')
+          : cap
+      });
+      continue;
+    }
 
-  var screenfull = {
-    request: function request(elem) {
-      var request = fn.requestFullscreen;
+    // fences (gfm)
+    if (cap = this.rules.fences.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'code',
+        lang: cap[2],
+        text: cap[3] || ''
+      });
+      continue;
+    }
 
-      elem = elem || document.documentElement;
+    // heading
+    if (cap = this.rules.heading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[1].length,
+        text: cap[2]
+      });
+      continue;
+    }
 
-      // Work around Safari 5.1 bug: reports support for
-      // keyboard in fullscreen even though it doesn't.
-      // Browser sniffing, since the alternative with
-      // setTimeout is even worse.
-      if (/5\.1[\.\d]* Safari/.test(navigator.userAgent)) {
-        elem[request]();
-      } else {
-        elem[request](keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT);
+    // table no leading pipe (gfm)
+    if (top && (cap = this.rules.nptable.exec(src))) {
+      src = src.substring(cap[0].length);
+
+      item = {
+        type: 'table',
+        header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3].replace(/\n$/, '').split('\n')
+      };
+
+      for (i = 0; i < item.align.length; i++) {
+        if (/^ *-+: *$/.test(item.align[i])) {
+          item.align[i] = 'right';
+        } else if (/^ *:-+: *$/.test(item.align[i])) {
+          item.align[i] = 'center';
+        } else if (/^ *:-+ *$/.test(item.align[i])) {
+          item.align[i] = 'left';
+        } else {
+          item.align[i] = null;
+        }
       }
-    },
-    exit: function exit() {
-      document[fn.exitFullscreen]();
-    },
-    toggle: function toggle(elem) {
-      if (this.isFullscreen) {
-        this.exit();
-      } else {
-        this.request(elem);
-      }
-    },
-    raw: fn
-  };
 
-  if (!fn) {
-    window.screenfull = false;
-    return;
+      for (i = 0; i < item.cells.length; i++) {
+        item.cells[i] = item.cells[i].split(/ *\| */);
+      }
+
+      this.tokens.push(item);
+
+      continue;
+    }
+
+    // lheading
+    if (cap = this.rules.lheading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[2] === '=' ? 1 : 2,
+        text: cap[1]
+      });
+      continue;
+    }
+
+    // hr
+    if (cap = this.rules.hr.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'hr'
+      });
+      continue;
+    }
+
+    // blockquote
+    if (cap = this.rules.blockquote.exec(src)) {
+      src = src.substring(cap[0].length);
+
+      this.tokens.push({
+        type: 'blockquote_start'
+      });
+
+      cap = cap[0].replace(/^ *> ?/gm, '');
+
+      // Pass `top` to keep the current
+      // "toplevel" state. This is exactly
+      // how markdown.pl works.
+      this.token(cap, top, true);
+
+      this.tokens.push({
+        type: 'blockquote_end'
+      });
+
+      continue;
+    }
+
+    // list
+    if (cap = this.rules.list.exec(src)) {
+      src = src.substring(cap[0].length);
+      bull = cap[2];
+
+      this.tokens.push({
+        type: 'list_start',
+        ordered: bull.length > 1
+      });
+
+      // Get each top-level item.
+      cap = cap[0].match(this.rules.item);
+
+      next = false;
+      l = cap.length;
+      i = 0;
+
+      for (; i < l; i++) {
+        item = cap[i];
+
+        // Remove the list item's bullet
+        // so it is seen as the next token.
+        space = item.length;
+        item = item.replace(/^ *([*+-]|\d+\.) +/, '');
+
+        // Outdent whatever the
+        // list item contains. Hacky.
+        if (~item.indexOf('\n ')) {
+          space -= item.length;
+          item = !this.options.pedantic
+            ? item.replace(new RegExp('^ {1,' + space + '}', 'gm'), '')
+            : item.replace(/^ {1,4}/gm, '');
+        }
+
+        // Determine whether the next list item belongs here.
+        // Backpedal if it does not belong in this list.
+        if (this.options.smartLists && i !== l - 1) {
+          b = block.bullet.exec(cap[i + 1])[0];
+          if (bull !== b && !(bull.length > 1 && b.length > 1)) {
+            src = cap.slice(i + 1).join('\n') + src;
+            i = l - 1;
+          }
+        }
+
+        // Determine whether item is loose or not.
+        // Use: /(^|\n)(?! )[^\n]+\n\n(?!\s*$)/
+        // for discount behavior.
+        loose = next || /\n\n(?!\s*$)/.test(item);
+        if (i !== l - 1) {
+          next = item.charAt(item.length - 1) === '\n';
+          if (!loose) loose = next;
+        }
+
+        this.tokens.push({
+          type: loose
+            ? 'loose_item_start'
+            : 'list_item_start'
+        });
+
+        // Recurse.
+        this.token(item, false, bq);
+
+        this.tokens.push({
+          type: 'list_item_end'
+        });
+      }
+
+      this.tokens.push({
+        type: 'list_end'
+      });
+
+      continue;
+    }
+
+    // html
+    if (cap = this.rules.html.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: this.options.sanitize
+          ? 'paragraph'
+          : 'html',
+        pre: !this.options.sanitizer
+          && (cap[1] === 'pre' || cap[1] === 'script' || cap[1] === 'style'),
+        text: cap[0]
+      });
+      continue;
+    }
+
+    // def
+    if ((!bq && top) && (cap = this.rules.def.exec(src))) {
+      src = src.substring(cap[0].length);
+      this.tokens.links[cap[1].toLowerCase()] = {
+        href: cap[2],
+        title: cap[3]
+      };
+      continue;
+    }
+
+    // table (gfm)
+    if (top && (cap = this.rules.table.exec(src))) {
+      src = src.substring(cap[0].length);
+
+      item = {
+        type: 'table',
+        header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3].replace(/(?: *\| *)?\n$/, '').split('\n')
+      };
+
+      for (i = 0; i < item.align.length; i++) {
+        if (/^ *-+: *$/.test(item.align[i])) {
+          item.align[i] = 'right';
+        } else if (/^ *:-+: *$/.test(item.align[i])) {
+          item.align[i] = 'center';
+        } else if (/^ *:-+ *$/.test(item.align[i])) {
+          item.align[i] = 'left';
+        } else {
+          item.align[i] = null;
+        }
+      }
+
+      for (i = 0; i < item.cells.length; i++) {
+        item.cells[i] = item.cells[i]
+          .replace(/^ *\| *| *\| *$/g, '')
+          .split(/ *\| */);
+      }
+
+      this.tokens.push(item);
+
+      continue;
+    }
+
+    // top-level paragraph
+    if (top && (cap = this.rules.paragraph.exec(src))) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'paragraph',
+        text: cap[1].charAt(cap[1].length - 1) === '\n'
+          ? cap[1].slice(0, -1)
+          : cap[1]
+      });
+      continue;
+    }
+
+    // text
+    if (cap = this.rules.text.exec(src)) {
+      // Top-level should never reach here.
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'text',
+        text: cap[0]
+      });
+      continue;
+    }
+
+    if (src) {
+      throw new
+        Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
   }
 
-  Object.defineProperties(screenfull, {
-    isFullscreen: {
-      get: function get() {
-        return !!document[fn.fullscreenElement];
+  return this.tokens;
+};
+
+/**
+ * Inline-Level Grammar
+ */
+
+var inline = {
+  escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
+  autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
+  url: noop,
+  tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
+  link: /^!?\[(inside)\]\(href\)/,
+  reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
+  nolink: /^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,
+  strong: /^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,
+  em: /^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+  code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
+  br: /^ {2,}\n(?!\s*$)/,
+  del: noop,
+  text: /^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/
+};
+
+inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
+inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+
+inline.link = replace(inline.link)
+  ('inside', inline._inside)
+  ('href', inline._href)
+  ();
+
+inline.reflink = replace(inline.reflink)
+  ('inside', inline._inside)
+  ();
+
+/**
+ * Normal Inline Grammar
+ */
+
+inline.normal = merge({}, inline);
+
+/**
+ * Pedantic Inline Grammar
+ */
+
+inline.pedantic = merge({}, inline.normal, {
+  strong: /^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,
+  em: /^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/
+});
+
+/**
+ * GFM Inline Grammar
+ */
+
+inline.gfm = merge({}, inline.normal, {
+  escape: replace(inline.escape)('])', '~|])')(),
+  url: /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
+  del: /^~~(?=\S)([\s\S]*?\S)~~/,
+  text: replace(inline.text)
+    (']|', '~]|')
+    ('|', '|https?://|')
+    ()
+});
+
+/**
+ * GFM + Line Breaks Inline Grammar
+ */
+
+inline.breaks = merge({}, inline.gfm, {
+  br: replace(inline.br)('{2,}', '*')(),
+  text: replace(inline.gfm.text)('{2,}', '*')()
+});
+
+/**
+ * Inline Lexer & Compiler
+ */
+
+function InlineLexer(links, options) {
+  this.options = options || marked.defaults;
+  this.links = links;
+  this.rules = inline.normal;
+  this.renderer = this.options.renderer || new Renderer;
+  this.renderer.options = this.options;
+
+  if (!this.links) {
+    throw new
+      Error('Tokens array requires a `links` property.');
+  }
+
+  if (this.options.gfm) {
+    if (this.options.breaks) {
+      this.rules = inline.breaks;
+    } else {
+      this.rules = inline.gfm;
+    }
+  } else if (this.options.pedantic) {
+    this.rules = inline.pedantic;
+  }
+}
+
+/**
+ * Expose Inline Rules
+ */
+
+InlineLexer.rules = inline;
+
+/**
+ * Static Lexing/Compiling Method
+ */
+
+InlineLexer.output = function(src, links, options) {
+  var inline = new InlineLexer(links, options);
+  return inline.output(src);
+};
+
+/**
+ * Lexing/Compiling
+ */
+
+InlineLexer.prototype.output = function(src) {
+  var out = ''
+    , link
+    , text
+    , href
+    , cap;
+
+  while (src) {
+    // escape
+    if (cap = this.rules.escape.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += cap[1];
+      continue;
+    }
+
+    // autolink
+    if (cap = this.rules.autolink.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[2] === '@') {
+        text = cap[1].charAt(6) === ':'
+          ? this.mangle(cap[1].substring(7))
+          : this.mangle(cap[1]);
+        href = this.mangle('mailto:') + text;
+      } else {
+        text = escape(cap[1]);
+        href = text;
       }
-    },
-    element: {
-      enumerable: true,
-      get: function get() {
-        return document[fn.fullscreenElement];
+      out += this.renderer.link(href, null, text);
+      continue;
+    }
+
+    // url (gfm)
+    if (!this.inLink && (cap = this.rules.url.exec(src))) {
+      src = src.substring(cap[0].length);
+      text = escape(cap[1]);
+      href = text;
+      out += this.renderer.link(href, null, text);
+      continue;
+    }
+
+    // tag
+    if (cap = this.rules.tag.exec(src)) {
+      if (!this.inLink && /^<a /i.test(cap[0])) {
+        this.inLink = true;
+      } else if (this.inLink && /^<\/a>/i.test(cap[0])) {
+        this.inLink = false;
       }
-    },
-    enabled: {
-      enumerable: true,
-      get: function get() {
-        // Coerce to boolean in case of old WebKit
-        return !!document[fn.fullscreenEnabled];
+      src = src.substring(cap[0].length);
+      out += this.options.sanitize
+        ? this.options.sanitizer
+          ? this.options.sanitizer(cap[0])
+          : escape(cap[0])
+        : cap[0]
+      continue;
+    }
+
+    // link
+    if (cap = this.rules.link.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.inLink = true;
+      out += this.outputLink(cap, {
+        href: cap[2],
+        title: cap[3]
+      });
+      this.inLink = false;
+      continue;
+    }
+
+    // reflink, nolink
+    if ((cap = this.rules.reflink.exec(src))
+        || (cap = this.rules.nolink.exec(src))) {
+      src = src.substring(cap[0].length);
+      link = (cap[2] || cap[1]).replace(/\s+/g, ' ');
+      link = this.links[link.toLowerCase()];
+      if (!link || !link.href) {
+        out += cap[0].charAt(0);
+        src = cap[0].substring(1) + src;
+        continue;
+      }
+      this.inLink = true;
+      out += this.outputLink(cap, link);
+      this.inLink = false;
+      continue;
+    }
+
+    // strong
+    if (cap = this.rules.strong.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.strong(this.output(cap[2] || cap[1]));
+      continue;
+    }
+
+    // em
+    if (cap = this.rules.em.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.em(this.output(cap[2] || cap[1]));
+      continue;
+    }
+
+    // code
+    if (cap = this.rules.code.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.codespan(escape(cap[2], true));
+      continue;
+    }
+
+    // br
+    if (cap = this.rules.br.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.br();
+      continue;
+    }
+
+    // del (gfm)
+    if (cap = this.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.del(this.output(cap[1]));
+      continue;
+    }
+
+    // text
+    if (cap = this.rules.text.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.text(escape(this.smartypants(cap[0])));
+      continue;
+    }
+
+    if (src) {
+      throw new
+        Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
+  }
+
+  return out;
+};
+
+/**
+ * Compile Link
+ */
+
+InlineLexer.prototype.outputLink = function(cap, link) {
+  var href = escape(link.href)
+    , title = link.title ? escape(link.title) : null;
+
+  return cap[0].charAt(0) !== '!'
+    ? this.renderer.link(href, title, this.output(cap[1]))
+    : this.renderer.image(href, title, escape(cap[1]));
+};
+
+/**
+ * Smartypants Transformations
+ */
+
+InlineLexer.prototype.smartypants = function(text) {
+  if (!this.options.smartypants) return text;
+  return text
+    // em-dashes
+    .replace(/---/g, '\u2014')
+    // en-dashes
+    .replace(/--/g, '\u2013')
+    // opening singles
+    .replace(/(^|[-\u2014/(\[{"\s])'/g, '$1\u2018')
+    // closing singles & apostrophes
+    .replace(/'/g, '\u2019')
+    // opening doubles
+    .replace(/(^|[-\u2014/(\[{\u2018\s])"/g, '$1\u201c')
+    // closing doubles
+    .replace(/"/g, '\u201d')
+    // ellipses
+    .replace(/\.{3}/g, '\u2026');
+};
+
+/**
+ * Mangle Links
+ */
+
+InlineLexer.prototype.mangle = function(text) {
+  if (!this.options.mangle) return text;
+  var out = ''
+    , l = text.length
+    , i = 0
+    , ch;
+
+  for (; i < l; i++) {
+    ch = text.charCodeAt(i);
+    if (Math.random() > 0.5) {
+      ch = 'x' + ch.toString(16);
+    }
+    out += '&#' + ch + ';';
+  }
+
+  return out;
+};
+
+/**
+ * Renderer
+ */
+
+function Renderer(options) {
+  this.options = options || {};
+}
+
+Renderer.prototype.code = function(code, lang, escaped) {
+  if (this.options.highlight) {
+    var out = this.options.highlight(code, lang);
+    if (out != null && out !== code) {
+      escaped = true;
+      code = out;
+    }
+  }
+
+  if (!lang) {
+    return '<pre><code>'
+      + (escaped ? code : escape(code, true))
+      + '\n</code></pre>';
+  }
+
+  return '<pre><code class="'
+    + this.options.langPrefix
+    + escape(lang, true)
+    + '">'
+    + (escaped ? code : escape(code, true))
+    + '\n</code></pre>\n';
+};
+
+Renderer.prototype.blockquote = function(quote) {
+  return '<blockquote>\n' + quote + '</blockquote>\n';
+};
+
+Renderer.prototype.html = function(html) {
+  return html;
+};
+
+Renderer.prototype.heading = function(text, level, raw) {
+  return '<h'
+    + level
+    + ' id="'
+    + this.options.headerPrefix
+    + raw.toLowerCase().replace(/[^\w]+/g, '-')
+    + '">'
+    + text
+    + '</h'
+    + level
+    + '>\n';
+};
+
+Renderer.prototype.hr = function() {
+  return this.options.xhtml ? '<hr/>\n' : '<hr>\n';
+};
+
+Renderer.prototype.list = function(body, ordered) {
+  var type = ordered ? 'ol' : 'ul';
+  return '<' + type + '>\n' + body + '</' + type + '>\n';
+};
+
+Renderer.prototype.listitem = function(text) {
+  return '<li>' + text + '</li>\n';
+};
+
+Renderer.prototype.paragraph = function(text) {
+  return '<p>' + text + '</p>\n';
+};
+
+Renderer.prototype.table = function(header, body) {
+  return '<table>\n'
+    + '<thead>\n'
+    + header
+    + '</thead>\n'
+    + '<tbody>\n'
+    + body
+    + '</tbody>\n'
+    + '</table>\n';
+};
+
+Renderer.prototype.tablerow = function(content) {
+  return '<tr>\n' + content + '</tr>\n';
+};
+
+Renderer.prototype.tablecell = function(content, flags) {
+  var type = flags.header ? 'th' : 'td';
+  var tag = flags.align
+    ? '<' + type + ' style="text-align:' + flags.align + '">'
+    : '<' + type + '>';
+  return tag + content + '</' + type + '>\n';
+};
+
+// span level renderer
+Renderer.prototype.strong = function(text) {
+  return '<strong>' + text + '</strong>';
+};
+
+Renderer.prototype.em = function(text) {
+  return '<em>' + text + '</em>';
+};
+
+Renderer.prototype.codespan = function(text) {
+  return '<code>' + text + '</code>';
+};
+
+Renderer.prototype.br = function() {
+  return this.options.xhtml ? '<br/>' : '<br>';
+};
+
+Renderer.prototype.del = function(text) {
+  return '<del>' + text + '</del>';
+};
+
+Renderer.prototype.link = function(href, title, text) {
+  if (this.options.sanitize) {
+    try {
+      var prot = decodeURIComponent(unescape(href))
+        .replace(/[^\w:]/g, '')
+        .toLowerCase();
+    } catch (e) {
+      return '';
+    }
+    if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {
+      return '';
+    }
+  }
+  var out = '<a href="' + href + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += '>' + text + '</a>';
+  return out;
+};
+
+Renderer.prototype.image = function(href, title, text) {
+  var out = '<img src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? '/>' : '>';
+  return out;
+};
+
+Renderer.prototype.text = function(text) {
+  return text;
+};
+
+/**
+ * Parsing & Compiling
+ */
+
+function Parser(options) {
+  this.tokens = [];
+  this.token = null;
+  this.options = options || marked.defaults;
+  this.options.renderer = this.options.renderer || new Renderer;
+  this.renderer = this.options.renderer;
+  this.renderer.options = this.options;
+}
+
+/**
+ * Static Parse Method
+ */
+
+Parser.parse = function(src, options, renderer) {
+  var parser = new Parser(options, renderer);
+  return parser.parse(src);
+};
+
+/**
+ * Parse Loop
+ */
+
+Parser.prototype.parse = function(src) {
+  this.inline = new InlineLexer(src.links, this.options, this.renderer);
+  this.tokens = src.reverse();
+
+  var out = '';
+  while (this.next()) {
+    out += this.tok();
+  }
+
+  return out;
+};
+
+/**
+ * Next Token
+ */
+
+Parser.prototype.next = function() {
+  return this.token = this.tokens.pop();
+};
+
+/**
+ * Preview Next Token
+ */
+
+Parser.prototype.peek = function() {
+  return this.tokens[this.tokens.length - 1] || 0;
+};
+
+/**
+ * Parse Text Tokens
+ */
+
+Parser.prototype.parseText = function() {
+  var body = this.token.text;
+
+  while (this.peek().type === 'text') {
+    body += '\n' + this.next().text;
+  }
+
+  return this.inline.output(body);
+};
+
+/**
+ * Parse Current Token
+ */
+
+Parser.prototype.tok = function() {
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        this.token.text);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'table': {
+      var header = ''
+        , body = ''
+        , i
+        , row
+        , cell
+        , flags
+        , j;
+
+      // header
+      cell = '';
+      for (i = 0; i < this.token.header.length; i++) {
+        flags = { header: true, align: this.token.align[i] };
+        cell += this.renderer.tablecell(
+          this.inline.output(this.token.header[i]),
+          { header: true, align: this.token.align[i] }
+        );
+      }
+      header += this.renderer.tablerow(cell);
+
+      for (i = 0; i < this.token.cells.length; i++) {
+        row = this.token.cells[i];
+
+        cell = '';
+        for (j = 0; j < row.length; j++) {
+          cell += this.renderer.tablecell(
+            this.inline.output(row[j]),
+            { header: false, align: this.token.align[j] }
+          );
+        }
+
+        body += this.renderer.tablerow(cell);
+      }
+      return this.renderer.table(header, body);
+    }
+    case 'blockquote_start': {
+      var body = '';
+
+      while (this.next().type !== 'blockquote_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      var body = ''
+        , ordered = this.token.ordered;
+
+      while (this.next().type !== 'list_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.list(body, ordered);
+    }
+    case 'list_item_start': {
+      var body = '';
+
+      while (this.next().type !== 'list_item_end') {
+        body += this.token.type === 'text'
+          ? this.parseText()
+          : this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'loose_item_start': {
+      var body = '';
+
+      while (this.next().type !== 'list_item_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'html': {
+      var html = !this.token.pre && !this.options.pedantic
+        ? this.inline.output(this.token.text)
+        : this.token.text;
+      return this.renderer.html(html);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
+    }
+  }
+};
+
+/**
+ * Helpers
+ */
+
+function escape(html, encode) {
+  return html
+    .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function unescape(html) {
+  return html.replace(/&([#\w]+);/g, function(_, n) {
+    n = n.toLowerCase();
+    if (n === 'colon') return ':';
+    if (n.charAt(0) === '#') {
+      return n.charAt(1) === 'x'
+        ? String.fromCharCode(parseInt(n.substring(2), 16))
+        : String.fromCharCode(+n.substring(1));
+    }
+    return '';
+  });
+}
+
+function replace(regex, opt) {
+  regex = regex.source;
+  opt = opt || '';
+  return function self(name, val) {
+    if (!name) return new RegExp(regex, opt);
+    val = val.source || val;
+    val = val.replace(/(^|[^\[])\^/g, '$1');
+    regex = regex.replace(name, val);
+    return self;
+  };
+}
+
+function noop() {}
+noop.exec = noop;
+
+function merge(obj) {
+  var i = 1
+    , target
+    , key;
+
+  for (; i < arguments.length; i++) {
+    target = arguments[i];
+    for (key in target) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
+        obj[key] = target[key];
       }
     }
-  });
+  }
 
-  window.screenfull = screenfull;
+  return obj;
+}
+
+
+/**
+ * Marked
+ */
+
+function marked(src, opt, callback) {
+  if (callback || typeof opt === 'function') {
+    if (!callback) {
+      callback = opt;
+      opt = null;
+    }
+
+    opt = merge({}, marked.defaults, opt || {});
+
+    var highlight = opt.highlight
+      , tokens
+      , pending
+      , i = 0;
+
+    try {
+      tokens = Lexer.lex(src, opt)
+    } catch (e) {
+      return callback(e);
+    }
+
+    pending = tokens.length;
+
+    var done = function(err) {
+      if (err) {
+        opt.highlight = highlight;
+        return callback(err);
+      }
+
+      var out;
+
+      try {
+        out = Parser.parse(tokens, opt);
+      } catch (e) {
+        err = e;
+      }
+
+      opt.highlight = highlight;
+
+      return err
+        ? callback(err)
+        : callback(null, out);
+    };
+
+    if (!highlight || highlight.length < 3) {
+      return done();
+    }
+
+    delete opt.highlight;
+
+    if (!pending) return done();
+
+    for (; i < tokens.length; i++) {
+      (function(token) {
+        if (token.type !== 'code') {
+          return --pending || done();
+        }
+        return highlight(token.text, token.lang, function(err, code) {
+          if (err) return done(err);
+          if (code == null || code === token.text) {
+            return --pending || done();
+          }
+          token.text = code;
+          token.escaped = true;
+          --pending || done();
+        });
+      })(tokens[i]);
+    }
+
+    return;
+  }
+  try {
+    if (opt) opt = merge({}, marked.defaults, opt);
+    return Parser.parse(Lexer.lex(src, opt), opt);
+  } catch (e) {
+    e.message += '\nPlease report this to https://github.com/chjj/marked.';
+    if ((opt || marked.defaults).silent) {
+      return '<p>An error occured:</p><pre>'
+        + escape(e.message + '', true)
+        + '</pre>';
+    }
+    throw e;
+  }
+}
+
+/**
+ * Options
+ */
+
+marked.options =
+marked.setOptions = function(opt) {
+  merge(marked.defaults, opt);
+  return marked;
+};
+
+marked.defaults = {
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  sanitizer: null,
+  mangle: true,
+  smartLists: false,
+  silent: false,
+  highlight: null,
+  langPrefix: 'lang-',
+  smartypants: false,
+  headerPrefix: '',
+  renderer: new Renderer,
+  xhtml: false
+};
+
+/**
+ * Expose
+ */
+
+marked.Parser = Parser;
+marked.parser = Parser.parse;
+
+marked.Renderer = Renderer;
+
+marked.Lexer = Lexer;
+marked.lexer = Lexer.lex;
+
+marked.InlineLexer = InlineLexer;
+marked.inlineLexer = InlineLexer.output;
+
+marked.parse = marked;
+
+this.marked = marked;
+
+}).call(function() {
+  return this || (typeof window !== 'undefined' ? window : global);
+}());
+
+
+/* =========================================================================
+ * Svelto - Widgets - Editor
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./vendor/marked.js
+ * @require core/widget/widget.js
+ * ========================================================================= */
+
+//TODO: Cross browser testing
+//TODO: Add headings support (level 1/3/5, like github does)
+//TODO: Add emoji support
+//TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
+//FIXME: Add history support
+
+(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'editor',
+    plugin: true,
+    selector: '.editor',
+    options: {
+      parser: window.marked,
+      actions: {
+        bold () {
+          this._action ( '**', '**', 'bold' );
+        },
+        italic () {
+          this._action ( '_', '_', 'italic' );
+        },
+        strikethrough () {
+          this._action ( '~~', '~~', 'removed' );
+        },
+        list_unordered () {
+          this._action ( '\n- ', '\n', 'List element' );
+        },
+        list_ordered () {
+          this._action ( '\n1. ', '\n', 'List element' );
+        },
+        link () {
+          this._action ( '[', '](http://example.com)', 'Link' );
+        },
+        image () {
+          this._action ( '![', '](http://example.com/image.jpg)', 'Image' );
+        },
+        code () {
+          this._action ( '`', '`', 'code' );
+        },
+        quote () {
+          this._action ( '\n> ', '\n', 'Quote' );
+        },
+        divider () {
+          this._action ( '\n-----', '\n', '', false );
+        },
+        undo () {
+          document.execCommand ( 'undo' );
+        },
+        redo () {
+          document.execCommand ( 'redo' );
+        },
+        preview () {
+          this.togglePreview ();
+        },
+        fullscreen () {
+          this.toggleFullscreen ();
+        }
+      },
+      datas: {
+        action: 'action'
+      },
+      classes: {
+        preview: 'preview',
+        fullscreen: 'fullscreen',
+        trigger: {
+          active: 'active text-secondary',
+        }
+      },
+      selectors: {
+        actions: '[data-action]',
+        textarea: 'textarea',
+        preview: '.editor-preview',
+        triggers: {
+          all: '[data-action]',
+          preview: '[data-action="preview"]',
+          fullscreen: '[data-action="fullscreen"]'
+        }
+      },
+      keystrokes: {
+        'ctmd + b': ['action', 'bold'],
+        'ctmd + i': ['action', 'italic'],
+        'ctmd + s': ['action', 'strikethrough'],
+        'ctmd + u': ['action', 'list_unordered'],
+        'ctmd + o': ['action', 'list_ordered'],
+        'ctmd + l': ['action', 'link'],
+        'ctmd + g': ['action', 'image'],
+        'ctmd + k': ['action', 'code'],
+        'ctmd + m': ['action', 'quote'],
+        'ctmd + d': ['action', 'divider'],
+        'ctmd + p': ['action', 'preview'],
+        'ctmd + f': ['action', 'fullscreen'],
+        'esc': 'unfullscreen'
+      },
+      callbacks: {
+        action: _.noop
+      }
+    }
+  };
+
+  /* EDITOR */
+
+  class Editor extends Widgets.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$editor = this.$element;
+      this.$textarea = this.$editor.find ( this.options.selectors.textarea );
+      this.textarea = this.$textarea[0];
+      this.$preview = this.$editor.find ( this.options.selectors.preview );
+
+      this.$triggers = this.$editor.find ( this.options.selectors.triggers.all );
+      this.$triggerPreview = this.$triggers.filter ( this.options.selectors.triggers.preview );
+      this.$triggerFullscreen = this.$triggers.filter ( this.options.selectors.triggers.fullscreen );
+
+      this._isPreview = this.$editor.hasClass ( this.options.classes.preview );
+      this._isFullscreen = this.$editor.hasClass ( this.options.classes.fullscreen );
+
+    }
+
+    _init () {
+
+      this.___keydown ();
+      this.___triggers ();
+
+    }
+
+    /* TRIGGERS */
+
+    ___triggers () {
+
+      for ( let trigger of this.$triggers ) {
+
+        let $trigger = $(trigger),
+            action = $trigger.data ( this.options.datas.action );
+
+        this._on ( $trigger, Pointer.tap, _.wrap ( action, this.action ) );
+
+      }
+
+    }
+
+    /* SELECTION */
+
+    _getSelection () {
+
+      let start = this.textarea.selectionStart,
+          end = this.textarea.selectionEnd;
+
+      return {
+        start: start,
+        end: end,
+        text: this.$textarea.val ().substring ( start, end )
+      };
+
+    }
+
+    _getWordSelection () {
+
+      let value = this.$textarea.val (),
+          selection = this._getSelection ();
+
+      if ( selection.text.length || !value ) return selection;
+
+      /* FINDING */
+
+      let start = selection.start;
+
+      while ( start >= 0 && start < value.length ) {
+
+        if ( !value[start].match ( /[a-zA-Z0-9-]/ ) ) break;
+
+        start -= 1;
+
+      }
+
+      start = Math.min ( selection.start, start + 1 );
+
+
+      let end = selection.end + 1;
+
+      while ( end < value.length ) {
+
+        if ( !value[end].match ( /[a-zA-Z0-9-]/ ) ) break;
+
+        end += 1;
+
+      }
+
+      if ( start === selection.start || end === selection.end ) return selection;
+
+      this.textarea.setSelectionRange ( start, end );
+
+      return this._getSelection ();
+
+    }
+
+    _replaceSelection ( prefix, suffix, placeholder ) {
+
+      let value = this.$textarea.val (),
+          selection = this._getSelection (),
+          newValue = value.substr ( 0, selection.start ) + prefix + placeholder + suffix + value.substr ( selection.end, value.length );
+
+      this.$textarea.val ( newValue ).change ();
+
+      this.textarea.setSelectionRange ( selection.start + prefix.length, selection.start + prefix.length + placeholder.length );
+
+    }
+
+    _isSelectionWrapped ( prefix, suffix ) {
+
+      let value = this.$textarea.val (),
+          selection = this._getSelection ();
+
+      return value.substr ( selection.start - prefix.length, prefix.length ) === prefix &&
+             value.substr ( selection.end, suffix.length ) === suffix;
+
+    }
+
+    _toggleWrapSelection ( prefix, suffix, placeholder ) {
+
+      if ( this._isSelectionWrapped ( prefix, suffix ) ) {
+
+        this._unwrapSelection ( prefix, suffix, placeholder );
+
+      } else {
+
+        this._wrapSelection ( prefix, suffix );
+
+      }
+
+    }
+
+    _wrapSelection ( prefix, suffix ) {
+
+      let value = this.$textarea.val (),
+          selection = this._getSelection (),
+          newValue = value.substr ( 0, selection.start ) + prefix + selection.text + suffix + value.substr ( selection.end, value.length );
+
+      this.$textarea.val ( newValue ).change ();
+
+      this.textarea.setSelectionRange ( selection.start + prefix.length, selection.end + prefix.length );
+
+    }
+
+    _unwrapSelection ( prefix, suffix, placeholder ) {
+
+      let value = this.$textarea.val (),
+          selection = this._getSelection (),
+          isPlaceholder = selection.text === placeholder,
+          newValue = value.substr ( 0, selection.start - prefix.length ) + ( isPlaceholder ? '' : selection.text ) + value.substr ( selection.end + suffix.length, value.length );
+
+      this.$textarea.val ( newValue ).change ();
+
+      this.textarea.setSelectionRange ( selection.start - prefix.length, selection.end - prefix.length - ( isPlaceholder ? selection.text.length : 0 ) );
+
+    }
+
+    /* ACTION */
+
+    _action ( prefix, suffix, placeholder, needWord = true ) {
+
+      let selection = needWord ? this._getWordSelection () : this._getSelection ();
+
+      if ( selection.text.length ) {
+
+        this._toggleWrapSelection ( prefix, suffix, placeholder );
+
+      } else {
+
+        this._replaceSelection ( prefix, suffix, placeholder );
+
+      }
+
+    }
+
+    /* PARSE */
+
+    _parse ( str = this.$textarea.val () ) {
+
+      return this.options.parser ( str );
+
+    }
+
+    /* RENDER */
+
+    _render () {
+
+      this.$preview.html ( this._parse () );
+
+    }
+
+    /* API */
+
+    get ( parsed ) {
+
+      return parsed ? this._parse () : this.$textarea.val ();
+
+    }
+
+    action ( name ) {
+
+      if ( !name ) return;
+
+      if ( !this.options.actions.hasOwnProperty ( name ) ) return;
+
+      this.options.actions[name].apply ( this );
+
+      this.$textarea.focus ();
+
+      this._trigger ( 'action', { action: name } );
+
+    }
+
+    /* PREVIEW */
+
+    isPreview () {
+
+      return this._isPreview;
+
+    }
+
+    togglePreview ( force = !this._isPreview ) {
+
+      if ( !!force !== this._isPreview ) {
+
+        this[force ? 'preview' : 'unpreview']();
+
+      }
+
+    }
+
+    preview () {
+
+      if ( this._isPreview ) return;
+
+      this._isPreview = true;
+
+      this._render ();
+
+      this.$preview.outerHeight ( this.$textarea.outerHeight () );
+
+      this.$editor.addClass ( this.options.classes.preview );
+
+      this.$triggerPreview.addClass ( this.options.classes.trigger.active );
+
+    }
+
+    unpreview () {
+
+      if ( !this._isPreview ) return;
+
+      this._isPreview = false;
+
+      this.$editor.removeClass ( this.options.classes.preview );
+
+      this.$triggerPreview.removeClass ( this.options.classes.trigger.active );
+
+    }
+
+    /* FULLSCREEN */
+
+    isFullscreen () {
+
+      return this._isFullscreen;
+
+    }
+
+    toggleFullscreen ( force = !this._isFullscreen ) {
+
+      if ( !!force !== this._isFullscreen ) {
+
+        this[force ? 'fullscreen' : 'unfullscreen']();
+
+      }
+
+    }
+
+    fullscreen () {
+
+      if ( this._isFullscreen ) return;
+
+      this._isFullscreen = true;
+
+      this.$editor.addClass ( this.options.classes.fullscreen );
+
+      this.$triggerFullscreen.addClass ( this.options.classes.trigger.active );
+
+    }
+
+    unfullscreen () {
+
+      if ( !this._isFullscreen ) return;
+
+      this._isFullscreen = false;
+
+      this.$editor.removeClass ( this.options.classes.fullscreen );
+
+      this.$triggerFullscreen.removeClass ( this.options.classes.trigger.active );
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.init ( Editor, config, Widgets );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+
+(function () {
+	'use strict';
+
+	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+
+	var fn = (function () {
+		var val;
+		var valLength;
+
+		var fnMap = [
+			[
+				'requestFullscreen',
+				'exitFullscreen',
+				'fullscreenElement',
+				'fullscreenEnabled',
+				'fullscreenchange',
+				'fullscreenerror'
+			],
+			// new WebKit
+			[
+				'webkitRequestFullscreen',
+				'webkitExitFullscreen',
+				'webkitFullscreenElement',
+				'webkitFullscreenEnabled',
+				'webkitfullscreenchange',
+				'webkitfullscreenerror'
+
+			],
+			// old WebKit (Safari 5.1)
+			[
+				'webkitRequestFullScreen',
+				'webkitCancelFullScreen',
+				'webkitCurrentFullScreenElement',
+				'webkitCancelFullScreen',
+				'webkitfullscreenchange',
+				'webkitfullscreenerror'
+
+			],
+			[
+				'mozRequestFullScreen',
+				'mozCancelFullScreen',
+				'mozFullScreenElement',
+				'mozFullScreenEnabled',
+				'mozfullscreenchange',
+				'mozfullscreenerror'
+			],
+			[
+				'msRequestFullscreen',
+				'msExitFullscreen',
+				'msFullscreenElement',
+				'msFullscreenEnabled',
+				'MSFullscreenChange',
+				'MSFullscreenError'
+			]
+		];
+
+		var i = 0;
+		var l = fnMap.length;
+		var ret = {};
+
+		for (; i < l; i++) {
+			val = fnMap[i];
+			if (val && val[1] in document) {
+				for (i = 0, valLength = val.length; i < valLength; i++) {
+					ret[fnMap[0][i]] = val[i];
+				}
+				return ret;
+			}
+		}
+
+		return false;
+	})();
+
+	var screenfull = {
+		request: function (elem) {
+			var request = fn.requestFullscreen;
+
+			elem = elem || document.documentElement;
+
+			// Work around Safari 5.1 bug: reports support for
+			// keyboard in fullscreen even though it doesn't.
+			// Browser sniffing, since the alternative with
+			// setTimeout is even worse.
+			if (/5\.1[\.\d]* Safari/.test(navigator.userAgent)) {
+				elem[request]();
+			} else {
+				elem[request](keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT);
+			}
+		},
+		exit: function () {
+			document[fn.exitFullscreen]();
+		},
+		toggle: function (elem) {
+			if (this.isFullscreen) {
+				this.exit();
+			} else {
+				this.request(elem);
+			}
+		},
+		raw: fn
+	};
+
+	if (!fn) {
+    window.screenfull = false;
+		return;
+	}
+
+	Object.defineProperties(screenfull, {
+		isFullscreen: {
+			get: function () {
+				return !!document[fn.fullscreenElement];
+			}
+		},
+		element: {
+			enumerable: true,
+			get: function () {
+				return document[fn.fullscreenElement];
+			}
+		},
+		enabled: {
+			enumerable: true,
+			get: function () {
+				// Coerce to boolean in case of old WebKit
+				return !!document[fn.fullscreenEnabled];
+			}
+		}
+	});
+
+	window.screenfull = screenfull;
 })();
+
 
 /* =========================================================================
  * Svelto - Widgets - Fullscreen
@@ -18377,23 +19676,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Rewrite it
 //TODO: Add the ability to trigger the fullscreen for a specific element
 
-(function ($, _, Svelto, Widgetize, Pointer) {
+(function ( $, _, Svelto, Widgetize, Pointer ) {
 
   'use strict';
 
   /* FULLSCREEN */
 
-  Widgetize.add('.fullscreen-toggler', function ($toggler) {
+  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
-    $toggler.on(Pointer.tap, screenfull.toggle);
+    $toggler.on ( Pointer.tap, screenfull.toggle );
+
   });
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer);
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer ));
 
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
-var _self = typeof window !== 'undefined' ? window // if in browser
-: typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope ? self // if in worker
-: {} // if in node js
-;
+var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
 
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
@@ -18401,468 +19705,467 @@ var _self = typeof window !== 'undefined' ? window // if in browser
  * @author Lea Verou http://lea.verou.me
  */
 
-var Prism = function () {
-
-  // Private helper vars
-  var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
-
-  var _ = _self.Prism = {
-    util: {
-      encode: function encode(tokens) {
-        if (tokens instanceof Token) {
-          return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-        } else if (_.util.type(tokens) === 'Array') {
-          return tokens.map(_.util.encode);
-        } else {
-          return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-        }
-      },
-
-      type: function type(o) {
-        return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
-      },
-
-      // Deep clone a language definition (e.g. to extend it)
-      clone: function clone(o) {
-        var type = _.util.type(o);
-
-        switch (type) {
-          case 'Object':
-            var clone = {};
-
-            for (var key in o) {
-              if (o.hasOwnProperty(key)) {
-                clone[key] = _.util.clone(o[key]);
-              }
-            }
-
-            return clone;
-
-          case 'Array':
-            // Check for existence for IE8
-            return o.map && o.map(function (v) {
-              return _.util.clone(v);
-            });
-        }
-
-        return o;
-      }
-    },
-
-    languages: {
-      extend: function extend(id, redef) {
-        var lang = _.util.clone(_.languages[id]);
-
-        for (var key in redef) {
-          lang[key] = redef[key];
-        }
-
-        return lang;
-      },
-
-      /**
-       * Insert a token before another token in a language literal
-       * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-       * we cannot just provide an object, we need anobject and a key.
-       * @param inside The key (or language id) of the parent
-       * @param before The key to insert before. If not provided, the function appends instead.
-       * @param insert Object with the key/value pairs to insert
-       * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-       */
-      insertBefore: function insertBefore(inside, before, insert, root) {
-        root = root || _.languages;
-        var grammar = root[inside];
-
-        if (arguments.length == 2) {
-          insert = arguments[1];
-
-          for (var newToken in insert) {
-            if (insert.hasOwnProperty(newToken)) {
-              grammar[newToken] = insert[newToken];
-            }
-          }
-
-          return grammar;
-        }
-
-        var ret = {};
-
-        for (var token in grammar) {
-
-          if (grammar.hasOwnProperty(token)) {
-
-            if (token == before) {
-
-              for (var newToken in insert) {
-
-                if (insert.hasOwnProperty(newToken)) {
-                  ret[newToken] = insert[newToken];
-                }
-              }
-            }
-
-            ret[token] = grammar[token];
-          }
-        }
-
-        // Update references in other language definitions
-        _.languages.DFS(_.languages, function (key, value) {
-          if (value === root[inside] && key != inside) {
-            this[key] = ret;
-          }
-        });
-
-        return root[inside] = ret;
-      },
-
-      // Traverse a language definition with Depth First Search
-      DFS: function DFS(o, callback, type) {
-        for (var i in o) {
-          if (o.hasOwnProperty(i)) {
-            callback.call(o, i, o[i], type || i);
-
-            if (_.util.type(o[i]) === 'Object') {
-              _.languages.DFS(o[i], callback);
-            } else if (_.util.type(o[i]) === 'Array') {
-              _.languages.DFS(o[i], callback, i);
-            }
-          }
-        }
-      }
-    },
-    plugins: {},
-
-    highlightAll: function highlightAll(async, callback) {
-      var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
-
-      for (var i = 0, element; element = elements[i++];) {
-        _.highlightElement(element, async === true, callback);
-      }
-    },
-
-    highlightElement: function highlightElement(element, async, callback) {
-      // Find language
-      var language,
-          grammar,
-          parent = element;
-
-      while (parent && !lang.test(parent.className)) {
-        parent = parent.parentNode;
-      }
-
-      if (parent) {
-        language = (parent.className.match(lang) || [, ''])[1];
-        grammar = _.languages[language];
-      }
-
-      // Set language on the element, if not present
-      element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+var Prism = (function(){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+
+var _ = _self.Prism = {
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (_.util.type(tokens) === 'Array') {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function (o) {
+			var type = _.util.type(o);
+
+			switch (type) {
+				case 'Object':
+					var clone = {};
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = _.util.clone(o[key]);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					// Check for existence for IE8
+					return o.map && o.map(function(v) { return _.util.clone(v); });
+			}
+
+			return o;
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need anobject and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before. If not provided, the function appends instead.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+
+			if (arguments.length == 2) {
+				insert = arguments[1];
+
+				for (var newToken in insert) {
+					if (insert.hasOwnProperty(newToken)) {
+						grammar[newToken] = insert[newToken];
+					}
+				}
+
+				return grammar;
+			}
+
+			var ret = {};
+
+			for (var token in grammar) {
+
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+
+						for (var newToken in insert) {
+
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					ret[token] = grammar[token];
+				}
+			}
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === root[inside] && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return root[inside] = ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function(o, callback, type) {
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					if (_.util.type(o[i]) === 'Object') {
+						_.languages.DFS(o[i], callback);
+					}
+					else if (_.util.type(o[i]) === 'Array') {
+						_.languages.DFS(o[i], callback, i);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
 
-      // Set language on the parent, for styling
-      parent = element.parentNode;
-
-      if (/pre/i.test(parent.nodeName)) {
-        parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-      }
-
-      var code = element.textContent;
-
-      var env = {
-        element: element,
-        language: language,
-        grammar: grammar,
-        code: code
-      };
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1];
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
 
-      if (!code || !grammar) {
-        _.hooks.run('complete', env);
-        return;
-      }
-
-      _.hooks.run('before-highlight', env);
-
-      if (async && _self.Worker) {
-        var worker = new Worker(_.filename);
-
-        worker.onmessage = function (evt) {
-          env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
-
-          _.hooks.run('before-insert', env);
+		// Set language on the parent, for styling
+		parent = element.parentNode;
 
-          env.element.innerHTML = env.highlightedCode;
+		if (/pre/i.test(parent.nodeName)) {
+			parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+		}
 
-          callback && callback.call(env.element);
-          _.hooks.run('after-highlight', env);
-          _.hooks.run('complete', env);
-        };
+		var code = element.textContent;
 
-        worker.postMessage(JSON.stringify({
-          language: env.language,
-          code: env.code,
-          immediateClose: true
-        }));
-      } else {
-        env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
 
-        _.hooks.run('before-insert', env);
+		if (!code || !grammar) {
+			_.hooks.run('complete', env);
+			return;
+		}
 
-        env.element.innerHTML = env.highlightedCode;
+		_.hooks.run('before-highlight', env);
 
-        callback && callback.call(element);
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
 
-        _.hooks.run('after-highlight', env);
-        _.hooks.run('complete', env);
-      }
-    },
+			worker.onmessage = function(evt) {
+				env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
 
-    highlight: function highlight(text, grammar, language) {
-      var tokens = _.tokenize(text, grammar);
-      return Token.stringify(_.util.encode(tokens), language);
-    },
+				_.hooks.run('before-insert', env);
 
-    tokenize: function tokenize(text, grammar, language) {
-      var Token = _.Token;
+				env.element.innerHTML = env.highlightedCode;
 
-      var strarr = [text];
+				callback && callback.call(env.element);
+				_.hooks.run('after-highlight', env);
+				_.hooks.run('complete', env);
+			};
 
-      var rest = grammar.rest;
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
 
-      if (rest) {
-        for (var token in rest) {
-          grammar[token] = rest[token];
-        }
+			_.hooks.run('before-insert', env);
 
-        delete grammar.rest;
-      }
+			env.element.innerHTML = env.highlightedCode;
 
-      tokenloop: for (var token in grammar) {
-        if (!grammar.hasOwnProperty(token) || !grammar[token]) {
-          continue;
-        }
+			callback && callback.call(element);
 
-        var patterns = grammar[token];
-        patterns = _.util.type(patterns) === "Array" ? patterns : [patterns];
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+		}
+	},
 
-        for (var j = 0; j < patterns.length; ++j) {
-          var pattern = patterns[j],
-              inside = pattern.inside,
-              lookbehind = !!pattern.lookbehind,
-              lookbehindLength = 0,
-              alias = pattern.alias;
+	highlight: function (text, grammar, language) {
+		var tokens = _.tokenize(text, grammar);
+		return Token.stringify(_.util.encode(tokens), language);
+	},
 
-          pattern = pattern.pattern || pattern;
-
-          for (var i = 0; i < strarr.length; i++) {
-            // Don’t cache length as it changes during the loop
-
-            var str = strarr[i];
-
-            if (strarr.length > text.length) {
-              // Something went terribly wrong, ABORT, ABORT!
-              break tokenloop;
-            }
-
-            if (str instanceof Token) {
-              continue;
-            }
-
-            pattern.lastIndex = 0;
-
-            var match = pattern.exec(str);
-
-            if (match) {
-              if (lookbehind) {
-                lookbehindLength = match[1].length;
-              }
-
-              var from = match.index - 1 + lookbehindLength,
-                  match = match[0].slice(lookbehindLength),
-                  len = match.length,
-                  to = from + len,
-                  before = str.slice(0, from + 1),
-                  after = str.slice(to + 1);
-
-              var args = [i, 1];
-
-              if (before) {
-                args.push(before);
-              }
-
-              var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias);
-
-              args.push(wrapped);
-
-              if (after) {
-                args.push(after);
-              }
-
-              Array.prototype.splice.apply(strarr, args);
-            }
-          }
-        }
-      }
-
-      return strarr;
-    },
-
-    hooks: {
-      all: {},
-
-      add: function add(name, callback) {
-        var hooks = _.hooks.all;
-
-        hooks[name] = hooks[name] || [];
-
-        hooks[name].push(callback);
-      },
-
-      run: function run(name, env) {
-        var callbacks = _.hooks.all[name];
-
-        if (!callbacks || !callbacks.length) {
-          return;
-        }
-
-        for (var i = 0, callback; callback = callbacks[i++];) {
-          callback(env);
-        }
-      }
-    }
-  };
-
-  var Token = _.Token = function (type, content, alias) {
-    this.type = type;
-    this.content = content;
-    this.alias = alias;
-  };
-
-  Token.stringify = function (o, language, parent) {
-    if (typeof o == 'string') {
-      return o;
-    }
-
-    if (_.util.type(o) === 'Array') {
-      return o.map(function (element) {
-        return Token.stringify(element, language, o);
-      }).join('');
-    }
-
-    var env = {
-      type: o.type,
-      content: Token.stringify(o.content, language, parent),
-      tag: 'span',
-      classes: ['token', o.type],
-      attributes: {},
-      language: language,
-      parent: parent
-    };
-
-    if (env.type == 'comment') {
-      env.attributes['spellcheck'] = 'true';
-    }
-
-    if (o.alias) {
-      var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-      Array.prototype.push.apply(env.classes, aliases);
-    }
-
-    _.hooks.run('wrap', env);
-
-    var attributes = '';
-
-    for (var name in env.attributes) {
-      attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
-    }
-
-    return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
-  };
-
-  if (!_self.document) {
-    if (!_self.addEventListener) {
-      // in Node.js
-      return _self.Prism;
-    }
-    // In worker
-    _self.addEventListener('message', function (evt) {
-      var message = JSON.parse(evt.data),
-          lang = message.language,
-          code = message.code,
-          immediateClose = message.immediateClose;
-
-      _self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
-      if (immediateClose) {
-        _self.close();
-      }
-    }, false);
-
-    return _self.Prism;
-  }
-
-  // Get current script and highlight
-  var script = document.getElementsByTagName('script');
-
-  script = script[script.length - 1];
-
-  if (script) {
-    _.filename = script.src;
-
-    if (document.addEventListener && !script.hasAttribute('data-manual')) {
-      document.addEventListener('DOMContentLoaded', _.highlightAll);
-    }
-  }
-
-  return _self.Prism;
-}();
+	tokenize: function(text, grammar, language) {
+		var Token = _.Token;
+
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		tokenloop: for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				pattern = pattern.pattern || pattern;
+
+				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						break tokenloop;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					pattern.lastIndex = 0;
+
+					var match = pattern.exec(str);
+
+					if (match) {
+						if(lookbehind) {
+							lookbehindLength = match[1].length;
+						}
+
+						var from = match.index - 1 + lookbehindLength,
+							match = match[0].slice(lookbehindLength),
+							len = match.length,
+							to = from + len,
+							before = str.slice(0, from + 1),
+							after = str.slice(to + 1);
+
+						var args = [i, 1];
+
+						if (before) {
+							args.push(before);
+						}
+
+						var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias);
+
+						args.push(wrapped);
+
+						if (after) {
+							args.push(after);
+						}
+
+						Array.prototype.splice.apply(strarr, args);
+					}
+				}
+			}
+		}
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	}
+};
+
+var Token = _.Token = function(type, content, alias) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+};
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (_.util.type(o) === 'Array') {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (env.type == 'comment') {
+		env.attributes['spellcheck'] = 'true';
+	}
+
+	if (o.alias) {
+		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = '';
+
+	for (var name in env.attributes) {
+		attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
+	}
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _self.Prism;
+	}
+ 	// In worker
+	_self.addEventListener('message', function(evt) {
+		var message = JSON.parse(evt.data),
+		    lang = message.language,
+		    code = message.code,
+			immediateClose = message.immediateClose;
+
+		_self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
+		if (immediateClose) {
+			_self.close();
+		}
+	}, false);
+
+	return _self.Prism;
+}
+
+// Get current script and highlight
+var script = document.getElementsByTagName('script');
+
+script = script[script.length - 1];
+
+if (script) {
+	_.filename = script.src;
+
+	if (document.addEventListener && !script.hasAttribute('data-manual')) {
+		document.addEventListener('DOMContentLoaded', _.highlightAll);
+	}
+}
+
+return _self.Prism;
+
+})();
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = Prism;
+	module.exports = Prism;
 }
 
 // hack for components to work correctly in node.js
 if (typeof global !== 'undefined') {
-  global.Prism = Prism;
+	global.Prism = Prism;
 }
 ;
 Prism.languages.markup = {
-  'comment': /<!--[\w\W]*?-->/,
-  'prolog': /<\?[\w\W]+?\?>/,
-  'doctype': /<!DOCTYPE[\w\W]+?>/,
-  'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
-  'tag': {
-    pattern: /<\/?[^\s>\/=.]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
-    inside: {
-      'tag': {
-        pattern: /^<\/?[^\s>\/]+/i,
-        inside: {
-          'punctuation': /^<\/?/,
-          'namespace': /^[^\s>\/:]+:/
-        }
-      },
-      'attr-value': {
-        pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
-        inside: {
-          'punctuation': /[=>"']/
-        }
-      },
-      'punctuation': /\/?>/,
-      'attr-name': {
-        pattern: /[^\s>\/]+/,
-        inside: {
-          'namespace': /^[^\s>\/:]+:/
-        }
-      }
+	'comment': /<!--[\w\W]*?-->/,
+	'prolog': /<\?[\w\W]+?\?>/,
+	'doctype': /<!DOCTYPE[\w\W]+?>/,
+	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
+	'tag': {
+		pattern: /<\/?[^\s>\/=.]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
+		inside: {
+			'tag': {
+				pattern: /^<\/?[^\s>\/]+/i,
+				inside: {
+					'punctuation': /^<\/?/,
+					'namespace': /^[^\s>\/:]+:/
+				}
+			},
+			'attr-value': {
+				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
+				inside: {
+					'punctuation': /[=>"']/
+				}
+			},
+			'punctuation': /\/?>/,
+			'attr-name': {
+				pattern: /[^\s>\/]+/,
+				inside: {
+					'namespace': /^[^\s>\/:]+:/
+				}
+			}
 
-    }
-  },
-  'entity': /&#?[\da-z]{1,8};/i
+		}
+	},
+	'entity': /&#?[\da-z]{1,8};/i
 };
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function (env) {
+Prism.hooks.add('wrap', function(env) {
 
-  if (env.type === 'entity') {
-    env.attributes['title'] = env.content.replace(/&amp;/, '&');
-  }
+	if (env.type === 'entity') {
+		env.attributes['title'] = env.content.replace(/&amp;/, '&');
+	}
 });
 
 Prism.languages.xml = Prism.languages.markup;
@@ -18871,129 +20174,132 @@ Prism.languages.mathml = Prism.languages.markup;
 Prism.languages.svg = Prism.languages.markup;
 
 Prism.languages.css = {
-  'comment': /\/\*[\w\W]*?\*\//,
-  'atrule': {
-    pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
-    inside: {
-      'rule': /@[\w-]+/
-      // See rest below
-    }
-  },
-  'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
-  'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
-  'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
-  'property': /(\b|\B)[\w-]+(?=\s*:)/i,
-  'important': /\B!important\b/i,
-  'function': /[-a-z0-9]+(?=\()/i,
-  'punctuation': /[(){};:]/
+	'comment': /\/\*[\w\W]*?\*\//,
+	'atrule': {
+		pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
+		inside: {
+			'rule': /@[\w-]+/
+			// See rest below
+		}
+	},
+	'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
+	'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
+	'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
+	'property': /(\b|\B)[\w-]+(?=\s*:)/i,
+	'important': /\B!important\b/i,
+	'function': /[-a-z0-9]+(?=\()/i,
+	'punctuation': /[(){};:]/
 };
 
 Prism.languages.css['atrule'].inside.rest = Prism.util.clone(Prism.languages.css);
 
 if (Prism.languages.markup) {
-  Prism.languages.insertBefore('markup', 'tag', {
-    'style': {
-      pattern: /<style[\w\W]*?>[\w\W]*?<\/style>/i,
-      inside: {
-        'tag': {
-          pattern: /<style[\w\W]*?>|<\/style>/i,
-          inside: Prism.languages.markup.tag.inside
-        },
-        rest: Prism.languages.css
-      },
-      alias: 'language-css'
-    }
-  });
+	Prism.languages.insertBefore('markup', 'tag', {
+		'style': {
+			pattern: /<style[\w\W]*?>[\w\W]*?<\/style>/i,
+			inside: {
+				'tag': {
+					pattern: /<style[\w\W]*?>|<\/style>/i,
+					inside: Prism.languages.markup.tag.inside
+				},
+				rest: Prism.languages.css
+			},
+			alias: 'language-css'
+		}
+	});
 
-  Prism.languages.insertBefore('inside', 'attr-value', {
-    'style-attr': {
-      pattern: /\s*style=("|').*?\1/i,
-      inside: {
-        'attr-name': {
-          pattern: /^\s*style/i,
-          inside: Prism.languages.markup.tag.inside
-        },
-        'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-        'attr-value': {
-          pattern: /.+/i,
-          inside: Prism.languages.css
-        }
-      },
-      alias: 'language-css'
-    }
-  }, Prism.languages.markup.tag);
+	Prism.languages.insertBefore('inside', 'attr-value', {
+		'style-attr': {
+			pattern: /\s*style=("|').*?\1/i,
+			inside: {
+				'attr-name': {
+					pattern: /^\s*style/i,
+					inside: Prism.languages.markup.tag.inside
+				},
+				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+				'attr-value': {
+					pattern: /.+/i,
+					inside: Prism.languages.css
+				}
+			},
+			alias: 'language-css'
+		}
+	}, Prism.languages.markup.tag);
 };
 Prism.languages.clike = {
-  'comment': [{
-    pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
-    lookbehind: true
-  }, {
-    pattern: /(^|[^\\:])\/\/.*/,
-    lookbehind: true
-  }],
-  'string': /("|')(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-  'class-name': {
-    pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
-    lookbehind: true,
-    inside: {
-      punctuation: /(\.|\\)/
-    }
-  },
-  'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-  'boolean': /\b(true|false)\b/,
-  'function': /[a-z0-9_]+(?=\()/i,
-  'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
-  'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
-  'punctuation': /[{}[\];(),.:]/
+	'comment': [
+		{
+			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^\\:])\/\/.*/,
+			lookbehind: true
+		}
+	],
+	'string': /("|')(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+	'class-name': {
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
+		lookbehind: true,
+		inside: {
+			punctuation: /(\.|\\)/
+		}
+	},
+	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(true|false)\b/,
+	'function': /[a-z0-9_]+(?=\()/i,
+	'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+	'punctuation': /[{}[\];(),.:]/
 };
 
 Prism.languages.javascript = Prism.languages.extend('clike', {
-  'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
-  'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
-  // Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-  'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
+	'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
+	'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
 });
 
 Prism.languages.insertBefore('javascript', 'keyword', {
-  'regex': {
-    pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
-    lookbehind: true
-  }
+	'regex': {
+		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
+		lookbehind: true
+	}
 });
 
 Prism.languages.insertBefore('javascript', 'class-name', {
-  'template-string': {
-    pattern: /`(?:\\`|\\?[^`])*`/,
-    inside: {
-      'interpolation': {
-        pattern: /\$\{[^}]+\}/,
-        inside: {
-          'interpolation-punctuation': {
-            pattern: /^\$\{|\}$/,
-            alias: 'punctuation'
-          },
-          rest: Prism.languages.javascript
-        }
-      },
-      'string': /[\s\S]+/
-    }
-  }
+	'template-string': {
+		pattern: /`(?:\\`|\\?[^`])*`/,
+		inside: {
+			'interpolation': {
+				pattern: /\$\{[^}]+\}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\$\{|\}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	}
 });
 
 if (Prism.languages.markup) {
-  Prism.languages.insertBefore('markup', 'tag', {
-    'script': {
-      pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/i,
-      inside: {
-        'tag': {
-          pattern: /<script[\w\W]*?>|<\/script>/i,
-          inside: Prism.languages.markup.tag.inside
-        },
-        rest: Prism.languages.javascript
-      },
-      alias: 'language-javascript'
-    }
-  });
+	Prism.languages.insertBefore('markup', 'tag', {
+		'script': {
+			pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/i,
+			inside: {
+				'tag': {
+					pattern: /<script[\w\W]*?>|<\/script>/i,
+					inside: Prism.languages.markup.tag.inside
+				},
+				rest: Prism.languages.javascript
+			},
+			alias: 'language-javascript'
+		}
+	});
 }
 
 Prism.languages.js = Prism.languages.javascript;

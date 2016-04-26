@@ -55,6 +55,13 @@
     overflow: auto;
   }
 
+  /* BORDER RADIUS */
+
+  > *,
+  > .table {
+    border-radius: 0;
+  }
+
   /* BORDER RADIUS INHERITANCE */
 
   > :first-child:not(.overlay):not(.ripple-circle),
