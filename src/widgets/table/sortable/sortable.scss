@@ -9,70 +9,71 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* SORTABLE */
+/* SORTABLE HEADER */
 
-table.sortable {
+table.sortable th[data-sort],
+table th.sortable { // In order to better support datatables
 
-  /* HEADER */
+  position: relative;
+  cursor: pointer;
+  padding-right: $table-sortable-th-padding-right;
 
-  th[data-sort] {
+  /* TEXT CENTER */
 
-    position: relative;
-    cursor: pointer;
-    padding-right: $table-sortable-th-padding-right;
+  &.text-center {
+    padding-left: $table-sortable-th-padding-right; // In order to have the text perfectly aligned
+  }
 
-    /* HOVER */
+  /* HOVER */
 
-    &:hover {
-      background-color: $table-sortable-th-hover-bg-color;
-    }
+  &:hover {
+    background-color: $table-sortable-th-hover-bg-color;
+  }
 
-    /* ACTIVE */
+  /* ACTIVE */
 
-    &:active {
-      background-color: $table-sortable-th-active-bg-color;
-    }
+  &:active {
+    background-color: $table-sortable-th-active-bg-color;
+  }
 
-    /* BEFORE / AFTER */
+  /* BEFORE / AFTER */
 
-    &:before,
-    &:after {
-      @extend %icon-base;
-      @include absolute ( 0 $table-sortable-th-icon-right 0 false );
-      margin: auto;
-      opacity: 0;
-    }
+  &:before,
+  &:after {
+    @extend %icon-base;
+    @include absolute ( 0 $table-sortable-th-icon-right 0 false );
+    margin: auto;
+    opacity: 0;
+  }
 
-    /* BEFORE */
+  /* BEFORE */
 
-    &:before {
-      content: $sortable-desc-icon;
-      top: $soratable-table-th-icon-gutter;
-    }
+  &:before {
+    content: $sortable-desc-icon;
+    top: $soratable-table-th-icon-gutter;
+  }
 
-    /* AFTER */
+  /* AFTER */
 
-    &:after {
-      content: $sortable-asc-icon;
-      bottom: $soratable-table-th-icon-gutter;
-    }
+  &:after {
+    content: $sortable-asc-icon;
+    bottom: $soratable-table-th-icon-gutter;
+  }
 
-    /* INACTIVE OPACITY */
+  /* INACTIVE OPACITY */
 
-    &:hover:before,
-    &:hover:after,
-    &.sort-desc:after,
-    &.sort-asc:before {
-      opacity: $table-sortable-th-icon-opacity;
-    }
+  &:hover:before,
+  &:hover:after,
+  &.sort-desc:after,
+  &.sort-asc:before {
+    opacity: $table-sortable-th-icon-opacity;
+  }
 
-    /* ACTIVE OPACITY */
+  /* ACTIVE OPACITY */
 
-    &.sort-desc:before,
-    &.sort-asc:after {
-      opacity: $table-sortable-th-icon-active-opacity;
-    }
-
+  &.sort-desc:before,
+  &.sort-asc:after {
+    opacity: $table-sortable-th-icon-active-opacity;
   }
 
 }
