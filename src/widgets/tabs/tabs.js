@@ -111,6 +111,12 @@
       $trigger.toggleClass ( this.options.classes.active.trigger, force );
       $container.toggleClass ( this.options.classes.active.container, force );
 
+      if ( force ) {
+
+        $container.widgetize ();
+
+      }
+
       if ( this.options.highlight ) {
 
         let oppositeDirection = Directions.getOpposite ( this.options.direction );
