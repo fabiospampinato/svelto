@@ -1,0 +1,104 @@
+
+/* =========================================================================
+ * WallpaperUP - Widgets - Datatables
+ * =========================================================================
+ * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * =========================================================================
+ * @require widgets/table/table.scss
+ * ========================================================================= */
+
+//TODO: Add support for all DataTable's variants, like scrolling etc.
+
+/* WRAPPER */
+
+.datatable-wrapper {
+
+  /* BLOCK */
+
+  > .card-block {
+    padding: 0;
+  }
+
+  /* TABLE */
+
+  table.table.datatable {
+
+    border-radius: inherit;
+    border-width: 0;
+
+    /* THEAD */
+
+    thead {
+
+      > tr {
+
+        &:first-child > th {
+          border-top-width: 0;
+        }
+
+        > th:first-child {
+          border-left-width: 0;
+        }
+
+        > th:last-child {
+          border-right-width: 0;
+        }
+
+      }
+
+    }
+
+    /* TBODY */
+
+    tbody {
+
+      > tr {
+
+        > td:first-child {
+          border-left-width: 0;
+        }
+
+        > td:last-child {
+          border-right-width: 0;
+        }
+
+      }
+
+      &:nth-child(1) {
+
+        > tr:first-child > td {
+          border-top-width: 0;
+        }
+
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+
+        > tr:last-child > td {
+          border-bottom-width: 0;
+        }
+
+      }
+
+    }
+
+    /* TFOOT */
+
+    tfoot {
+      border-right-width: 0;
+      border-bottom-width: 0;
+      border-left-width: 0;
+    }
+
+  }
+
+}
+
+/* EMPTY ROW */
+
+.datatable-row-empty {
+  height: $table-row-empty-height;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
