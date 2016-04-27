@@ -141,6 +141,14 @@
 
     }
 
+    /* KEYDOWN */
+
+    ___keydown () {
+
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
     /* TRIGGERS */
 
     ___triggers () {
