@@ -19,7 +19,7 @@
   let config = {
     name: 'tableSortable',
     plugin: true,
-    selector: 'table.sortable',
+    selector: 'table.sortable:not(.datatable)',
     options: {
       sorters: {
         int: function ( a, b ) {
