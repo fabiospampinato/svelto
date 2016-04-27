@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @before widgets/datatables/datatables.js
  * @require core/browser/browser.js
  * @require core/widget/widget.js
  * ========================================================================= */
@@ -22,7 +23,9 @@
     options: {
       moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
       classes: {
-        selected: 'selected'
+        selected: 'selected',
+        single: 'select-single',
+        datatable: 'datatable'
       },
       selectors: {
         element: 'tbody tr:not(.empty)'
@@ -47,6 +50,12 @@
     _variables () {
 
       this.$selectable = this.$element;
+
+      this._isSingle = this.$selectable.hasClass ( this.options.classes.single );
+      this._isDataTable = this.$selectable.hasClass ( this.options.classes.datatable );
+
+      this._dtapi = this._isDataTable ? this.$selectable.DataTable () : false;
+
       this.$elements = this._getElements ();
 
     }
@@ -69,7 +78,15 @@
 
     ___change () {
 
-      this._on ( true, 'change tablehelper:change sortable:sort', this.__change );
+      this._on ( true, 'change tablehelper:change sortable:sort sort.dt search.dt', this.__change ); //FIXME: Does it get triggered also after fetching data from ajax? (DT)
+
+    }
+
+    __change () {
+
+      this.$elements = this._getElements ();
+
+      this._resetPrev ();
 
     }
 
@@ -77,11 +94,7 @@
 
     ___keydown () {
 
-      if ( !Browser.is.touchDevice ) {
-
-        this._onHover ( [this.$document, 'keydown', this.__keydown] );
-
-      }
+      this._onHover ( [this.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -89,7 +102,7 @@
 
     ___downTap () {
 
-      if ( Browser.is.touchDevice ) {
+      if ( Browser.is.touchDevice || this._isSingle ) {
 
         this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
 
@@ -101,13 +114,23 @@
 
     }
 
-    /* TAP */ // Just for touch devices
+    /* TAP */ // Just for touch devices or single select
 
     __tapTouch ( event ) {
 
       event.preventDefault ();
 
-      $(event.currentTarget).toggleClass ( this.options.classes.selected );
+      let $target = $(event.currentTarget);
+
+      if ( this._isSingle ) {
+
+        this.$elements.not ( $target ).removeClass ( this.options.classes.selected ); //FIXME: Quite performance intensive, most of it could be avoided
+
+      }
+
+      $target.toggleClass ( this.options.classes.selected );
+
+      this._trigger ( 'change' );
 
     }
 
@@ -234,16 +257,6 @@
 
     }
 
-    /* OTHER EVENTS */
-
-    __change () {
-
-      this.$elements = this._getElements ();
-
-      this._resetPrev ();
-
-    }
-
     /* PRIVATE */
 
     _toggleGroup ( $start, $end ) {
@@ -280,7 +293,7 @@
 
     _getElements () {
 
-      return this.$element.find ( this.options.selectors.element );
+      return this._dtapi ? $(this._dtapi.rows ().nodes ()) : this.$selectable.find ( this.options.selectors.element );
 
     }
 
@@ -301,6 +314,8 @@
 
     all () {
 
+      if ( this._isSingle ) return;
+
       this.$elements.addClass ( this.options.classes.selected );
 
       this._resetPrev ();
@@ -320,6 +335,8 @@
     }
 
     invert () {
+
+      if ( this._isSingle ) return;
 
       this.$elements.toggleClass ( this.options.classes.selected );
 
