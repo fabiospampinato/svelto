@@ -23,6 +23,7 @@
       <div class="label bordered constrained">Constrained</div>
       <div class="label bordered constrained-center">Constrained center</div>
       <div class="label bordered constrained-tolerance">Constrained 100-50 tolerance</div>
+      <div class="label bordered constrained-window">Constrained (Window)</div>
       <div class="label bordered constrained-coordinates-modifier">Modifier 2x</div>
       <div class="label bordered proxyed">Proxy</div>
     </div>
@@ -84,6 +85,11 @@
           x: 100,
           y: 50
         }
+      }
+    });
+    $('.constrained-window').draggable ({
+      constrainer: {
+        $element: $(window)
       }
     });
     $('.constrained-coordinates-modifier').draggable ({

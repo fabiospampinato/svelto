@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable - Actions
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/datatables/datatables.scss
+ * ========================================================================= */
+
+/* ACTIONS INSIDE DATATABLE */
+
+// This make it slightly better when different colors are used between the actions and the table, perhaps the actions have a different color to attract the attention?
+
+.datatable-wrapper > .selectable-actions:not(.open) + .table-wrapper {
+  border-top-width: 0;
+}

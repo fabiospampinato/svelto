@@ -24,7 +24,7 @@
     dom: '<"card-header bordered"' +
            '<"multiple center" l <"spacer hidden-xs-down"> f>' +
          '>' +
-         '<"card-block bordered" t>' +
+         '<"card-block bordered table-wrapper" t>' +
          '<"card-footer bordered"' +
            '<"multiple center" i <"spacer hidden-xs-down"> p>' +
          '>',
@@ -85,7 +85,7 @@
     sStripeEven: 'even',
     sStripeOdd: 'odd',
     sTable: 'datatable',
-    sWrapper: 'datatable-wrapper card limited centered'
+    sWrapper: 'datatable-wrapper card bordered limited centered'
   });
 
   /* PAGER */
