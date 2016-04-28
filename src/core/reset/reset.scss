@@ -20,7 +20,7 @@
 /* HTML */
 
 html {
-  @include fill-absolute (); // This fixes a bug in IE where all `.multiple` in the demo's homepage are not wrapping
+  height: 100%;
   font-size: $font-size;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
