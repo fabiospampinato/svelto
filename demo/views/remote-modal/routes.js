@@ -6,7 +6,7 @@ Router.route ( '/remote-modal-1', function () {
   setTimeout ( () => {
 
     this.response.end ( JSON.stringify ({
-      modal: '<div class="card modal xs-8">' +
+      modal: '<form class="card modal xs-8">' +
                '<div class="card-header text-center">This is a remote modal!</div>' +
                '<div class="card-block">' +
                  '<div class="placeholder" style="width:95%; height:10px;"></div>' +
@@ -18,7 +18,7 @@ Router.route ( '/remote-modal-1', function () {
                  '<div class="placeholder" style="width:97%; height:10px;"></div>' +
                '</div>' +
                '<div class="card-footer">Footer</div>' +
-             '</div>'
+             '</form>'
     }));
 
   }, 1500 );
