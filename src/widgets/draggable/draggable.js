@@ -147,7 +147,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          let constrainerOffset = this.options.constrainer.$element.offset (),
+          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: 0, left: 0 } : this.options.constrainer.$element.offset (),
               movableOffset = this.$movable.offset ();
 
           if ( this.options.axis !== 'y' ) {
@@ -520,7 +520,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && Mouse.hasButton ( event, Mouse.buttons.LEFT ) ) {
+        if ( ( _.isFunction ( this.options.proxy.noMotion ) ? this.options.proxy.noMotion () : this.options.proxy.noMotion ) && Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) ) {
 
           dragXY = this._centerToPoint ( endXY, true );
 

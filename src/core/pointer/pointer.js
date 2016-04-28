@@ -112,7 +112,7 @@
 
   function upHandler ( event ) {
 
-    if ( Mouse.hasButton ( event, Mouse.buttons.LEFT ) && ( !Browser.is.touchDevice || !motion ) ) {
+    if ( Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) && ( !Browser.is.touchDevice || !motion ) ) {
 
       let tapTimestamp = event.timeStamp || Date.now ();
 

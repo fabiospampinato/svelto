@@ -20,7 +20,7 @@
       MIDDLE: 1,
       RIGHT: 2
     },
-    hasButton ( event, button, orNone = true ) {
+    hasButton ( event, button, orNone = false ) {
 
       if ( 'originalEvent' in event ) {
 
