@@ -11,7 +11,7 @@
  * @require lib/transform/transform.js
  * ========================================================================= */
 
-//FIXME: If the positionable element is let than half of the anchor, and it must be pointed than the pointer may be not well positionated (expecially if we are not aligning to the center)
+//FIXME: If the positionable element is less than half of the anchor, and it must be pointed, than the pointer may be not well positionated (expecially if we are not aligning to the center)
 
 (function ( $, _, Svelto, Directions, EmbeddedCSS ) {
 
@@ -86,7 +86,7 @@
         windowWidth = $window.width (),
         windowHeight = $window.height (),
         directions = _.uniq ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
-        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
+        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y - window.scrollY, bottom: options.point.y - window.scrollY, left: options.point.x - window.scrollX, right: options.point.x - window.scrollX, width: 0, height: 0 };
 
     /* ID */
 
