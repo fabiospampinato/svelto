@@ -20,7 +20,7 @@
       widget: false, // The `Remote` widget class to call
       ajax: {}, // Using as `new widget ( ajax )`
       attributes: {
-        href: 'href' // In order to better support `a` elements (the `method` data has higher priority)
+        href: 'href' // In order to better support `a` elements (the data value has higher priority)
       },
       datas: {
         url: 'url',

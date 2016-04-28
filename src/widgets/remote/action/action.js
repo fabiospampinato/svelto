@@ -12,6 +12,7 @@
  * ========================================================================= */
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
+//TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`
 
 //FIXME: Not well written
 //FIXME: Clicking an error/success toast doesn't close it
