@@ -7,10 +7,11 @@
  * =========================================================================
  * @before widgets/datatables/datatables.js
  * @require core/browser/browser.js
+ * @require core/mouse/mouse.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse ) {
 
   'use strict';
 
@@ -28,7 +29,7 @@
         datatable: 'datatable'
       },
       selectors: {
-        element: 'tbody tr:not(.empty)'
+        element: 'tbody tr:not(.table-row-empty)' //FIXME: Add support for datatables' empty row
       },
       keystrokes: {
         'ctmd + a': 'all',
@@ -214,13 +215,15 @@
 
       this._off ( this.$document, Pointer.cancel, this.__cancel );
 
+      let isRightButton = Mouse.hasButton ( event, Mouse.buttons.RIGHT ); // When right clicking we suppose that we also want to select that element (useful when used in conjuction with SelectableActionsPopover)
+      
       if ( event.shiftKey ) {
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
 
       } else if ( Keyboard.keystroke.hasCtrlOrCmd ( event ) ) {
 
-        this.$startElement.toggleClass ( this.options.classes.selected );
+        this.$startElement.toggleClass ( this.options.classes.selected, isRightButton ? true : undefined );
 
         this._resetPrev ( this.$startElement );
 
@@ -237,7 +240,7 @@
 
         } else {
 
-          this.$startElement.toggleClass ( this.options.classes.selected );
+          this.$startElement.toggleClass ( this.options.classes.selected, isRightButton ? true : undefined );
 
         }
 
@@ -352,4 +355,4 @@
 
   Factory.init ( Selectable, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));
