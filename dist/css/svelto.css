@@ -1381,6 +1381,13 @@
  * ========================================================================= */
 /* TEXT */
 /* =========================================================================
+ * Svelto - Widgets - Editor - Fullscreen (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* FULLSCREEN */
+/* =========================================================================
  * Svelto - Widgets - Embed - Ratios (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2728,7 +2735,7 @@ script:last-child {
 }
 
 .layout .layout-header.sticky + .layout-content {
-  margin-top: 56px;
+  margin-top: 57px;
 }
 
 .layout .layout {
@@ -2759,7 +2766,7 @@ script:last-child {
   position: fixed;
   z-index: 1200;
   margin: 0;
-  border-radius: 0;
+  border-radius: 0 !important;
   transition: -webkit-transform 0.35s;
   transition: transform 0.35s;
   transition: transform 0.35s, -webkit-transform 0.35s;
@@ -3181,7 +3188,7 @@ script:last-child {
   width: 8.3333333333%;
 }
 
-.multiple > .xs-1:not(.multiple), .multiple > .xs-1.multiple.no-wrap, .multiple > .xs-1.multiple.vertical, .multiple > .xs-1.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-1:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-1.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-1.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-1.multiple.joined {
   width: calc(8.3333333333% - 0.625rem);
 }
 
@@ -3189,7 +3196,7 @@ script:last-child {
   width: 16.6666666667%;
 }
 
-.multiple > .xs-2:not(.multiple), .multiple > .xs-2.multiple.no-wrap, .multiple > .xs-2.multiple.vertical, .multiple > .xs-2.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-2:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-2.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-2.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-2.multiple.joined {
   width: calc(16.6666666667% - 0.625rem);
 }
 
@@ -3197,7 +3204,7 @@ script:last-child {
   width: 25%;
 }
 
-.multiple > .xs-3:not(.multiple), .multiple > .xs-3.multiple.no-wrap, .multiple > .xs-3.multiple.vertical, .multiple > .xs-3.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-3:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-3.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-3.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-3.multiple.joined {
   width: calc(25% - 0.625rem);
 }
 
@@ -3205,7 +3212,7 @@ script:last-child {
   width: 33.3333333333%;
 }
 
-.multiple > .xs-4:not(.multiple), .multiple > .xs-4.multiple.no-wrap, .multiple > .xs-4.multiple.vertical, .multiple > .xs-4.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-4:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-4.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-4.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-4.multiple.joined {
   width: calc(33.3333333333% - 0.625rem);
 }
 
@@ -3213,7 +3220,7 @@ script:last-child {
   width: 41.6666666667%;
 }
 
-.multiple > .xs-5:not(.multiple), .multiple > .xs-5.multiple.no-wrap, .multiple > .xs-5.multiple.vertical, .multiple > .xs-5.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-5:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-5.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-5.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-5.multiple.joined {
   width: calc(41.6666666667% - 0.625rem);
 }
 
@@ -3221,7 +3228,7 @@ script:last-child {
   width: 50%;
 }
 
-.multiple > .xs-6:not(.multiple), .multiple > .xs-6.multiple.no-wrap, .multiple > .xs-6.multiple.vertical, .multiple > .xs-6.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-6:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-6.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-6.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-6.multiple.joined {
   width: calc(50% - 0.625rem);
 }
 
@@ -3229,7 +3236,7 @@ script:last-child {
   width: 58.3333333333%;
 }
 
-.multiple > .xs-7:not(.multiple), .multiple > .xs-7.multiple.no-wrap, .multiple > .xs-7.multiple.vertical, .multiple > .xs-7.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-7:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-7.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-7.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-7.multiple.joined {
   width: calc(58.3333333333% - 0.625rem);
 }
 
@@ -3237,7 +3244,7 @@ script:last-child {
   width: 66.6666666667%;
 }
 
-.multiple > .xs-8:not(.multiple), .multiple > .xs-8.multiple.no-wrap, .multiple > .xs-8.multiple.vertical, .multiple > .xs-8.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-8:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-8.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-8.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-8.multiple.joined {
   width: calc(66.6666666667% - 0.625rem);
 }
 
@@ -3245,7 +3252,7 @@ script:last-child {
   width: 75%;
 }
 
-.multiple > .xs-9:not(.multiple), .multiple > .xs-9.multiple.no-wrap, .multiple > .xs-9.multiple.vertical, .multiple > .xs-9.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-9:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-9.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-9.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-9.multiple.joined {
   width: calc(75% - 0.625rem);
 }
 
@@ -3253,7 +3260,7 @@ script:last-child {
   width: 83.3333333333%;
 }
 
-.multiple > .xs-10:not(.multiple), .multiple > .xs-10.multiple.no-wrap, .multiple > .xs-10.multiple.vertical, .multiple > .xs-10.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-10:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-10.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-10.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-10.multiple.joined {
   width: calc(83.3333333333% - 0.625rem);
 }
 
@@ -3261,7 +3268,7 @@ script:last-child {
   width: 91.6666666667%;
 }
 
-.multiple > .xs-11:not(.multiple), .multiple > .xs-11.multiple.no-wrap, .multiple > .xs-11.multiple.vertical, .multiple > .xs-11.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-11:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-11.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-11.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-11.multiple.joined {
   width: calc(91.6666666667% - 0.625rem);
 }
 
@@ -3269,7 +3276,7 @@ script:last-child {
   width: 100%;
 }
 
-.multiple > .xs-12:not(.multiple), .multiple > .xs-12.multiple.no-wrap, .multiple > .xs-12.multiple.vertical, .multiple > .xs-12.multiple.joined {
+.multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-12:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-12.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-12.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xs-12.multiple.joined {
   width: calc(100% - 0.625rem);
 }
 
@@ -3277,73 +3284,73 @@ script:last-child {
   .sm-1 {
     width: 8.3333333333%;
   }
-  .multiple > .sm-1:not(.multiple), .multiple > .sm-1.multiple.no-wrap, .multiple > .sm-1.multiple.vertical, .multiple > .sm-1.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-1:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-1.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-1.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-1.multiple.joined {
     width: calc(8.3333333333% - 0.625rem);
   }
   .sm-2 {
     width: 16.6666666667%;
   }
-  .multiple > .sm-2:not(.multiple), .multiple > .sm-2.multiple.no-wrap, .multiple > .sm-2.multiple.vertical, .multiple > .sm-2.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-2:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-2.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-2.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-2.multiple.joined {
     width: calc(16.6666666667% - 0.625rem);
   }
   .sm-3 {
     width: 25%;
   }
-  .multiple > .sm-3:not(.multiple), .multiple > .sm-3.multiple.no-wrap, .multiple > .sm-3.multiple.vertical, .multiple > .sm-3.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-3:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-3.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-3.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-3.multiple.joined {
     width: calc(25% - 0.625rem);
   }
   .sm-4 {
     width: 33.3333333333%;
   }
-  .multiple > .sm-4:not(.multiple), .multiple > .sm-4.multiple.no-wrap, .multiple > .sm-4.multiple.vertical, .multiple > .sm-4.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-4:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-4.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-4.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-4.multiple.joined {
     width: calc(33.3333333333% - 0.625rem);
   }
   .sm-5 {
     width: 41.6666666667%;
   }
-  .multiple > .sm-5:not(.multiple), .multiple > .sm-5.multiple.no-wrap, .multiple > .sm-5.multiple.vertical, .multiple > .sm-5.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-5:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-5.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-5.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-5.multiple.joined {
     width: calc(41.6666666667% - 0.625rem);
   }
   .sm-6 {
     width: 50%;
   }
-  .multiple > .sm-6:not(.multiple), .multiple > .sm-6.multiple.no-wrap, .multiple > .sm-6.multiple.vertical, .multiple > .sm-6.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-6:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-6.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-6.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-6.multiple.joined {
     width: calc(50% - 0.625rem);
   }
   .sm-7 {
     width: 58.3333333333%;
   }
-  .multiple > .sm-7:not(.multiple), .multiple > .sm-7.multiple.no-wrap, .multiple > .sm-7.multiple.vertical, .multiple > .sm-7.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-7:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-7.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-7.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-7.multiple.joined {
     width: calc(58.3333333333% - 0.625rem);
   }
   .sm-8 {
     width: 66.6666666667%;
   }
-  .multiple > .sm-8:not(.multiple), .multiple > .sm-8.multiple.no-wrap, .multiple > .sm-8.multiple.vertical, .multiple > .sm-8.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-8:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-8.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-8.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-8.multiple.joined {
     width: calc(66.6666666667% - 0.625rem);
   }
   .sm-9 {
     width: 75%;
   }
-  .multiple > .sm-9:not(.multiple), .multiple > .sm-9.multiple.no-wrap, .multiple > .sm-9.multiple.vertical, .multiple > .sm-9.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-9:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-9.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-9.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-9.multiple.joined {
     width: calc(75% - 0.625rem);
   }
   .sm-10 {
     width: 83.3333333333%;
   }
-  .multiple > .sm-10:not(.multiple), .multiple > .sm-10.multiple.no-wrap, .multiple > .sm-10.multiple.vertical, .multiple > .sm-10.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-10:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-10.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-10.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-10.multiple.joined {
     width: calc(83.3333333333% - 0.625rem);
   }
   .sm-11 {
     width: 91.6666666667%;
   }
-  .multiple > .sm-11:not(.multiple), .multiple > .sm-11.multiple.no-wrap, .multiple > .sm-11.multiple.vertical, .multiple > .sm-11.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-11:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-11.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-11.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-11.multiple.joined {
     width: calc(91.6666666667% - 0.625rem);
   }
   .sm-12 {
     width: 100%;
   }
-  .multiple > .sm-12:not(.multiple), .multiple > .sm-12.multiple.no-wrap, .multiple > .sm-12.multiple.vertical, .multiple > .sm-12.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-12:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-12.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-12.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .sm-12.multiple.joined {
     width: calc(100% - 0.625rem);
   }
 }
@@ -3352,73 +3359,73 @@ script:last-child {
   .md-1 {
     width: 8.3333333333%;
   }
-  .multiple > .md-1:not(.multiple), .multiple > .md-1.multiple.no-wrap, .multiple > .md-1.multiple.vertical, .multiple > .md-1.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-1:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-1.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-1.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-1.multiple.joined {
     width: calc(8.3333333333% - 0.625rem);
   }
   .md-2 {
     width: 16.6666666667%;
   }
-  .multiple > .md-2:not(.multiple), .multiple > .md-2.multiple.no-wrap, .multiple > .md-2.multiple.vertical, .multiple > .md-2.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-2:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-2.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-2.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-2.multiple.joined {
     width: calc(16.6666666667% - 0.625rem);
   }
   .md-3 {
     width: 25%;
   }
-  .multiple > .md-3:not(.multiple), .multiple > .md-3.multiple.no-wrap, .multiple > .md-3.multiple.vertical, .multiple > .md-3.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-3:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-3.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-3.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-3.multiple.joined {
     width: calc(25% - 0.625rem);
   }
   .md-4 {
     width: 33.3333333333%;
   }
-  .multiple > .md-4:not(.multiple), .multiple > .md-4.multiple.no-wrap, .multiple > .md-4.multiple.vertical, .multiple > .md-4.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-4:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-4.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-4.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-4.multiple.joined {
     width: calc(33.3333333333% - 0.625rem);
   }
   .md-5 {
     width: 41.6666666667%;
   }
-  .multiple > .md-5:not(.multiple), .multiple > .md-5.multiple.no-wrap, .multiple > .md-5.multiple.vertical, .multiple > .md-5.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-5:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-5.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-5.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-5.multiple.joined {
     width: calc(41.6666666667% - 0.625rem);
   }
   .md-6 {
     width: 50%;
   }
-  .multiple > .md-6:not(.multiple), .multiple > .md-6.multiple.no-wrap, .multiple > .md-6.multiple.vertical, .multiple > .md-6.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-6:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-6.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-6.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-6.multiple.joined {
     width: calc(50% - 0.625rem);
   }
   .md-7 {
     width: 58.3333333333%;
   }
-  .multiple > .md-7:not(.multiple), .multiple > .md-7.multiple.no-wrap, .multiple > .md-7.multiple.vertical, .multiple > .md-7.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-7:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-7.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-7.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-7.multiple.joined {
     width: calc(58.3333333333% - 0.625rem);
   }
   .md-8 {
     width: 66.6666666667%;
   }
-  .multiple > .md-8:not(.multiple), .multiple > .md-8.multiple.no-wrap, .multiple > .md-8.multiple.vertical, .multiple > .md-8.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-8:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-8.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-8.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-8.multiple.joined {
     width: calc(66.6666666667% - 0.625rem);
   }
   .md-9 {
     width: 75%;
   }
-  .multiple > .md-9:not(.multiple), .multiple > .md-9.multiple.no-wrap, .multiple > .md-9.multiple.vertical, .multiple > .md-9.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-9:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-9.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-9.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-9.multiple.joined {
     width: calc(75% - 0.625rem);
   }
   .md-10 {
     width: 83.3333333333%;
   }
-  .multiple > .md-10:not(.multiple), .multiple > .md-10.multiple.no-wrap, .multiple > .md-10.multiple.vertical, .multiple > .md-10.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-10:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-10.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-10.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-10.multiple.joined {
     width: calc(83.3333333333% - 0.625rem);
   }
   .md-11 {
     width: 91.6666666667%;
   }
-  .multiple > .md-11:not(.multiple), .multiple > .md-11.multiple.no-wrap, .multiple > .md-11.multiple.vertical, .multiple > .md-11.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-11:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-11.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-11.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-11.multiple.joined {
     width: calc(91.6666666667% - 0.625rem);
   }
   .md-12 {
     width: 100%;
   }
-  .multiple > .md-12:not(.multiple), .multiple > .md-12.multiple.no-wrap, .multiple > .md-12.multiple.vertical, .multiple > .md-12.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-12:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-12.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-12.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .md-12.multiple.joined {
     width: calc(100% - 0.625rem);
   }
 }
@@ -3427,73 +3434,73 @@ script:last-child {
   .lg-1 {
     width: 8.3333333333%;
   }
-  .multiple > .lg-1:not(.multiple), .multiple > .lg-1.multiple.no-wrap, .multiple > .lg-1.multiple.vertical, .multiple > .lg-1.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-1:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-1.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-1.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-1.multiple.joined {
     width: calc(8.3333333333% - 0.625rem);
   }
   .lg-2 {
     width: 16.6666666667%;
   }
-  .multiple > .lg-2:not(.multiple), .multiple > .lg-2.multiple.no-wrap, .multiple > .lg-2.multiple.vertical, .multiple > .lg-2.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-2:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-2.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-2.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-2.multiple.joined {
     width: calc(16.6666666667% - 0.625rem);
   }
   .lg-3 {
     width: 25%;
   }
-  .multiple > .lg-3:not(.multiple), .multiple > .lg-3.multiple.no-wrap, .multiple > .lg-3.multiple.vertical, .multiple > .lg-3.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-3:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-3.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-3.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-3.multiple.joined {
     width: calc(25% - 0.625rem);
   }
   .lg-4 {
     width: 33.3333333333%;
   }
-  .multiple > .lg-4:not(.multiple), .multiple > .lg-4.multiple.no-wrap, .multiple > .lg-4.multiple.vertical, .multiple > .lg-4.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-4:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-4.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-4.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-4.multiple.joined {
     width: calc(33.3333333333% - 0.625rem);
   }
   .lg-5 {
     width: 41.6666666667%;
   }
-  .multiple > .lg-5:not(.multiple), .multiple > .lg-5.multiple.no-wrap, .multiple > .lg-5.multiple.vertical, .multiple > .lg-5.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-5:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-5.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-5.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-5.multiple.joined {
     width: calc(41.6666666667% - 0.625rem);
   }
   .lg-6 {
     width: 50%;
   }
-  .multiple > .lg-6:not(.multiple), .multiple > .lg-6.multiple.no-wrap, .multiple > .lg-6.multiple.vertical, .multiple > .lg-6.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-6:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-6.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-6.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-6.multiple.joined {
     width: calc(50% - 0.625rem);
   }
   .lg-7 {
     width: 58.3333333333%;
   }
-  .multiple > .lg-7:not(.multiple), .multiple > .lg-7.multiple.no-wrap, .multiple > .lg-7.multiple.vertical, .multiple > .lg-7.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-7:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-7.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-7.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-7.multiple.joined {
     width: calc(58.3333333333% - 0.625rem);
   }
   .lg-8 {
     width: 66.6666666667%;
   }
-  .multiple > .lg-8:not(.multiple), .multiple > .lg-8.multiple.no-wrap, .multiple > .lg-8.multiple.vertical, .multiple > .lg-8.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-8:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-8.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-8.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-8.multiple.joined {
     width: calc(66.6666666667% - 0.625rem);
   }
   .lg-9 {
     width: 75%;
   }
-  .multiple > .lg-9:not(.multiple), .multiple > .lg-9.multiple.no-wrap, .multiple > .lg-9.multiple.vertical, .multiple > .lg-9.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-9:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-9.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-9.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-9.multiple.joined {
     width: calc(75% - 0.625rem);
   }
   .lg-10 {
     width: 83.3333333333%;
   }
-  .multiple > .lg-10:not(.multiple), .multiple > .lg-10.multiple.no-wrap, .multiple > .lg-10.multiple.vertical, .multiple > .lg-10.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-10:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-10.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-10.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-10.multiple.joined {
     width: calc(83.3333333333% - 0.625rem);
   }
   .lg-11 {
     width: 91.6666666667%;
   }
-  .multiple > .lg-11:not(.multiple), .multiple > .lg-11.multiple.no-wrap, .multiple > .lg-11.multiple.vertical, .multiple > .lg-11.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-11:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-11.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-11.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-11.multiple.joined {
     width: calc(91.6666666667% - 0.625rem);
   }
   .lg-12 {
     width: 100%;
   }
-  .multiple > .lg-12:not(.multiple), .multiple > .lg-12.multiple.no-wrap, .multiple > .lg-12.multiple.vertical, .multiple > .lg-12.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-12:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-12.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-12.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .lg-12.multiple.joined {
     width: calc(100% - 0.625rem);
   }
 }
@@ -3502,73 +3509,73 @@ script:last-child {
   .xl-1 {
     width: 8.3333333333%;
   }
-  .multiple > .xl-1:not(.multiple), .multiple > .xl-1.multiple.no-wrap, .multiple > .xl-1.multiple.vertical, .multiple > .xl-1.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-1:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-1.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-1.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-1.multiple.joined {
     width: calc(8.3333333333% - 0.625rem);
   }
   .xl-2 {
     width: 16.6666666667%;
   }
-  .multiple > .xl-2:not(.multiple), .multiple > .xl-2.multiple.no-wrap, .multiple > .xl-2.multiple.vertical, .multiple > .xl-2.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-2:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-2.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-2.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-2.multiple.joined {
     width: calc(16.6666666667% - 0.625rem);
   }
   .xl-3 {
     width: 25%;
   }
-  .multiple > .xl-3:not(.multiple), .multiple > .xl-3.multiple.no-wrap, .multiple > .xl-3.multiple.vertical, .multiple > .xl-3.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-3:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-3.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-3.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-3.multiple.joined {
     width: calc(25% - 0.625rem);
   }
   .xl-4 {
     width: 33.3333333333%;
   }
-  .multiple > .xl-4:not(.multiple), .multiple > .xl-4.multiple.no-wrap, .multiple > .xl-4.multiple.vertical, .multiple > .xl-4.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-4:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-4.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-4.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-4.multiple.joined {
     width: calc(33.3333333333% - 0.625rem);
   }
   .xl-5 {
     width: 41.6666666667%;
   }
-  .multiple > .xl-5:not(.multiple), .multiple > .xl-5.multiple.no-wrap, .multiple > .xl-5.multiple.vertical, .multiple > .xl-5.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-5:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-5.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-5.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-5.multiple.joined {
     width: calc(41.6666666667% - 0.625rem);
   }
   .xl-6 {
     width: 50%;
   }
-  .multiple > .xl-6:not(.multiple), .multiple > .xl-6.multiple.no-wrap, .multiple > .xl-6.multiple.vertical, .multiple > .xl-6.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-6:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-6.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-6.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-6.multiple.joined {
     width: calc(50% - 0.625rem);
   }
   .xl-7 {
     width: 58.3333333333%;
   }
-  .multiple > .xl-7:not(.multiple), .multiple > .xl-7.multiple.no-wrap, .multiple > .xl-7.multiple.vertical, .multiple > .xl-7.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-7:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-7.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-7.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-7.multiple.joined {
     width: calc(58.3333333333% - 0.625rem);
   }
   .xl-8 {
     width: 66.6666666667%;
   }
-  .multiple > .xl-8:not(.multiple), .multiple > .xl-8.multiple.no-wrap, .multiple > .xl-8.multiple.vertical, .multiple > .xl-8.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-8:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-8.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-8.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-8.multiple.joined {
     width: calc(66.6666666667% - 0.625rem);
   }
   .xl-9 {
     width: 75%;
   }
-  .multiple > .xl-9:not(.multiple), .multiple > .xl-9.multiple.no-wrap, .multiple > .xl-9.multiple.vertical, .multiple > .xl-9.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-9:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-9.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-9.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-9.multiple.joined {
     width: calc(75% - 0.625rem);
   }
   .xl-10 {
     width: 83.3333333333%;
   }
-  .multiple > .xl-10:not(.multiple), .multiple > .xl-10.multiple.no-wrap, .multiple > .xl-10.multiple.vertical, .multiple > .xl-10.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-10:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-10.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-10.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-10.multiple.joined {
     width: calc(83.3333333333% - 0.625rem);
   }
   .xl-11 {
     width: 91.6666666667%;
   }
-  .multiple > .xl-11:not(.multiple), .multiple > .xl-11.multiple.no-wrap, .multiple > .xl-11.multiple.vertical, .multiple > .xl-11.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-11:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-11.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-11.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-11.multiple.joined {
     width: calc(91.6666666667% - 0.625rem);
   }
   .xl-12 {
     width: 100%;
   }
-  .multiple > .xl-12:not(.multiple), .multiple > .xl-12.multiple.no-wrap, .multiple > .xl-12.multiple.vertical, .multiple > .xl-12.multiple.joined {
+  .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-12:not(.multiple), .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-12.multiple.no-wrap, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-12.multiple.vertical, .multiple:not(.no-wrap):not(.vertical):not(.joined) > .xl-12.multiple.joined {
     width: calc(100% - 0.625rem);
   }
 }
@@ -4262,11 +4269,7 @@ th {
  * ========================================================================= */
 /* HTML */
 html {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  height: 100%;
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -4342,7 +4345,7 @@ hr.horizontal:not(:first-child), hr:not(:first-child):not(.vertical), .divider.l
  * ========================================================================= */
 /* BUTTON */
 button {
-  border: none;
+  border: 0;
   padding: 0;
 }
 
@@ -4455,6 +4458,13 @@ code, kbd, pre {
   border-color: inherit;
   border-radius: 0.25em;
   background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* INSIDE PRE */
+pre > code {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 /* =========================================================================
@@ -4919,7 +4929,7 @@ span > script:last-child {
  * ========================================================================= */
 /* WIDGET */
 blockquote, blockquote > footer, .widget, .breadcrumb, .carousel, .centerer, .placeholder, .colorpicker, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), .chat, .datepicker, fieldset, .infobar, .tagbox, figcaption,
-.figcaption, .card, .chat-message, .divider.block, hr.vertical, .divider.linear.vertical:empty, .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .embed, figure,
+.figcaption, .card, .chat-message, .divider.block, hr.vertical, .divider.linear.vertical:empty, .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
 .figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input:not([type]),
 input[type="text"],
 input[type="password"],
@@ -4933,13 +4943,13 @@ h2,
 h3,
 h4,
 h5,
-h6, .accordion {
+h6 {
   position: relative;
   margin: 0 0 0.625rem;
 }
 
 blockquote:last-child, .widget:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
-.figcaption:last-child, .card:last-child, .chat-message:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .embed:last-child, figure:last-child,
+.figcaption:last-child, .card:last-child, .chat-message:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
 .figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child:not([type]),
 input[type="text"]:last-child,
 input[type="password"]:last-child,
@@ -4953,14 +4963,14 @@ h2:last-child,
 h3:last-child,
 h4:last-child,
 h5:last-child,
-h6:last-child, .accordion:last-child {
+h6:last-child {
   margin-bottom: 0;
 }
 
 .multiple > blockquote:last-child, .pager > blockquote:last-child, .tagbox-tags > blockquote:last-child, blockquote.multiple > footer:last-child, blockquote.pager > footer:last-child, blockquote.tagbox-tags > footer:last-child, .multiple > .widget:last-child, .pager > .widget:last-child, .tagbox-tags > .widget:last-child, .multiple > .breadcrumb:last-child, .pager > .breadcrumb:last-child, .tagbox-tags > .breadcrumb:last-child, .multiple > .carousel:last-child, .pager > .carousel:last-child, .tagbox-tags > .carousel:last-child, .multiple > .centerer:last-child, .pager > .centerer:last-child, .tagbox-tags > .centerer:last-child, .multiple > .placeholder:last-child, .pager > .placeholder:last-child, .tagbox-tags > .placeholder:last-child, .multiple > .colorpicker:last-child, .pager > .colorpicker:last-child, .tagbox-tags > .colorpicker:last-child, .multiple > .container:last-child, .pager > .container:last-child, .tagbox-tags > .container:last-child, .multiple > .card-header:last-child:not(.multiple), .pager > .card-header:last-child:not(.multiple), .tagbox-tags > .card-header:last-child:not(.multiple), .multiple > .card-block:last-child:not(.multiple), .pager > .card-block:last-child:not(.multiple), .tagbox-tags > .card-block:last-child:not(.multiple), .multiple > .card-footer:last-child:not(.multiple), .pager > .card-footer:last-child:not(.multiple), .tagbox-tags > .card-footer:last-child:not(.multiple), .multiple > .chat:last-child, .pager > .chat:last-child, .tagbox-tags > .chat:last-child, .multiple > .datepicker:last-child, .pager > .datepicker:last-child, .tagbox-tags > .datepicker:last-child, .multiple > fieldset:last-child, .pager > fieldset:last-child, .tagbox-tags > fieldset:last-child, .multiple > .infobar:last-child, .pager > .infobar:last-child, .tagbox-tags > .infobar:last-child, .multiple > .tagbox:last-child, .pager > .tagbox:last-child, .tagbox-tags > .tagbox:last-child, .multiple > figcaption:last-child, .pager > figcaption:last-child, .tagbox-tags > figcaption:last-child, .multiple >
 .figcaption:last-child, .pager >
 .figcaption:last-child, .tagbox-tags >
-.figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
+.figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
 .figure:last-child, .pager >
 .figure:last-child, .tagbox-tags >
 .figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child:not([type]), .pager > input:last-child:not([type]), .tagbox-tags > input:last-child:not([type]), .multiple >
@@ -5002,7 +5012,7 @@ h5:last-child, .tagbox-tags >
 h5:last-child, .multiple >
 h6:last-child, .pager >
 h6:last-child, .tagbox-tags >
-h6:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child {
+h6:last-child {
   margin-bottom: 0.625rem;
 }
 
@@ -5376,7 +5386,7 @@ h6:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child
 }
 
 .colorpicker input {
-  display: none;
+  display: none !important;
 }
 
 .colorpicker-handler {
@@ -5532,6 +5542,7 @@ h6:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child
   /* HEADER / BLOCK / FOOTER */
   /* HEADER / FOOTER */
   /* BLOCK */
+  /* BORDER RADIUS */
   /* BORDER RADIUS INHERITANCE */
   /* NEXT CHILDREN BORDERED */
 }
@@ -5564,6 +5575,11 @@ h6:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: auto;
+}
+
+.card > *,
+.card > .table {
+  border-radius: 0;
 }
 
 .card > :first-child:not(.overlay):not(.ripple-circle),
@@ -5823,7 +5839,7 @@ html.clip-path-url .chat-message.no-tip.direction-right .chat-message-content {
 }
 
 .datepicker input {
-  display: none;
+  display: none !important;
 }
 
 .datepicker-navigation {
@@ -6281,7 +6297,7 @@ html.flexbox-tweener .toast-queue:not(.expanded):not(:empty) .toast {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 1400;
+  z-index: 1500;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -6680,6 +6696,15 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
  * ========================================================================= */
 /* DEFAULT */
 /* =========================================================================
+ * Svelto - Widgets - Editor
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+/* EDITOR */
+/* =========================================================================
  * Svelto - Widgets - Embed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -6730,6 +6755,92 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
 
 .embed.ratio-1-1 {
   padding-bottom: 100%;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Expander
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+/* EXPANDER */
+/* =========================================================================
+ * Svelto - Widgets - Accordion
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/expander/expander.scss
+ * ========================================================================= */
+.accordion {
+  /* EXPANDER */
+}
+
+.accordion > .expander {
+  margin-bottom: 0;
+}
+
+.accordion > .expander:not(:first-child) {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.accordion > .expander:not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  /* BORDERED */
+}
+
+.accordion > .expander:not(:last-child).bordered {
+  border-bottom-width: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.scss
+ * ========================================================================= */
+/* CLOSED */
+.expander:not(.open) {
+  /* IS A CARD */
+  /* CONTENT */
+}
+
+.expander:not(.open).card > :not(.expander-content) {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.expander:not(.open).card.bordered > :not(.expander-content) {
+  margin-bottom: -1px !important;
+}
+
+.expander:not(.open) > .expander-content {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Opened
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.scss
+ * ========================================================================= */
+/* OPENED */
+.expander.open {
+  /* ICON */
+}
+
+.expander.open .expander-icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 /* =========================================================================
@@ -6825,6 +6936,14 @@ figcaption,
   /* FRONT / BACK */
   /* FRONT */
   /* BACK */
+}
+
+.flippable > * {
+  margin-bottom: 0 !important;
+}
+
+.flippable > script:last-child {
+  display: none !important;
 }
 
 .flippable-front, .flippable-back {
@@ -7015,7 +7134,9 @@ header, footer {
  * ========================================================================= */
 /* ICON */
 i.icon, .carousel.inset .carousel-previous:after,
-.carousel.inset .carousel-next:after, input[type="checkbox"] + label:before, input[type=radio] + label:before, input[type="checkbox"] + label:after, input[type=radio] + label:after, table.sortable th[data-sort]:before, table.sortable th[data-sort]:after, .rater-star:before, select + label:after {
+.carousel.inset .carousel-next:after, input[type="checkbox"] + label:before, input[type=radio] + label:before, input[type="checkbox"] + label:after, input[type=radio] + label:after, table.sortable th[data-sort]:before, table.sortable th[data-sort]:after,
+table th.sortable:before,
+table th.sortable:after, .rater-star:before, .select select + label:after {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -7191,7 +7312,7 @@ i.xxxxlarge.icon {
  * ========================================================================= */
 /* CHECKBOX */
 input[type="checkbox"], input[type=radio] {
-  display: none;
+  display: none !important;
   /* LABEL */
   /* CHECKED LABEL */
 }
@@ -7439,15 +7560,13 @@ input[type=radio] + label:after {
  * @require core/reset/reset.scss
  * @require widgets/icon/icon.scss
  * ========================================================================= */
-/* SORTABLE */
-table.sortable {
-  /* HEADER */
-}
-
-table.sortable th[data-sort] {
+/* SORTABLE HEADER */
+table.sortable th[data-sort],
+table th.sortable {
   position: relative;
   cursor: pointer;
   padding-right: 1.75em;
+  /* TEXT CENTER */
   /* HOVER */
   /* ACTIVE */
   /* BEFORE / AFTER */
@@ -7457,15 +7576,24 @@ table.sortable th[data-sort] {
   /* ACTIVE OPACITY */
 }
 
-table.sortable th[data-sort]:hover {
+table.sortable th[data-sort].text-center,
+table th.sortable.text-center {
+  padding-left: 1.75em;
+}
+
+table.sortable th[data-sort]:hover,
+table th.sortable:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-table.sortable th[data-sort]:active {
+table.sortable th[data-sort]:active,
+table th.sortable:active {
   background-color: rgba(0, 0, 0, 0.025);
 }
 
-table.sortable th[data-sort]:before, table.sortable th[data-sort]:after {
+table.sortable th[data-sort]:before, table.sortable th[data-sort]:after,
+table th.sortable:before,
+table th.sortable:after {
   position: absolute;
   top: 0;
   right: 0.125em;
@@ -7474,21 +7602,29 @@ table.sortable th[data-sort]:before, table.sortable th[data-sort]:after {
   opacity: 0;
 }
 
-table.sortable th[data-sort]:before {
+table.sortable th[data-sort]:before,
+table th.sortable:before {
   content: "arrow_drop_down";
   top: 0.3125em;
 }
 
-table.sortable th[data-sort]:after {
+table.sortable th[data-sort]:after,
+table th.sortable:after {
   content: "arrow_drop_up";
   bottom: 0.3125em;
 }
 
-table.sortable th[data-sort]:hover:before, table.sortable th[data-sort]:hover:after, table.sortable th[data-sort].sort-desc:after, table.sortable th[data-sort].sort-asc:before {
+table.sortable th[data-sort]:hover:before, table.sortable th[data-sort]:hover:after, table.sortable th[data-sort].sort-desc:after, table.sortable th[data-sort].sort-asc:before,
+table th.sortable:hover:before,
+table th.sortable:hover:after,
+table th.sortable.sort-desc:after,
+table th.sortable.sort-asc:before {
   opacity: 0.35;
 }
 
-table.sortable th[data-sort].sort-desc:before, table.sortable th[data-sort].sort-asc:after {
+table.sortable th[data-sort].sort-desc:before, table.sortable th[data-sort].sort-asc:after,
+table th.sortable.sort-desc:before,
+table th.sortable.sort-asc:after {
   opacity: 1;
 }
 
@@ -7749,7 +7885,7 @@ input.compact[type="search"], textarea.compact {
  * ========================================================================= */
 /* FILE */
 input[type="file"] {
-  display: none;
+  display: none !important;
 }
 
 /* =========================================================================
@@ -9070,7 +9206,18 @@ html.scrollbar-size-17 .rails .rails-content.multiple {
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 /* SELECT */
-select {
+.select {
+  cursor: pointer;
+  position: relative;
+  /* LABEL */
+  /* SELECT */
+}
+
+.select.label, .select.button {
+  text-align: left;
+}
+
+.select select {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -9092,7 +9239,7 @@ select {
   /* LABEL */
 }
 
-select + label {
+.select select + label {
   padding-right: 1.875em;
   min-height: 1.5em;
   min-width: 1.5em;
@@ -9102,29 +9249,18 @@ select + label {
   /* CUSTOM AFTER */
 }
 
-select + label:empty {
+.select select + label:empty {
   padding-right: 0;
 }
 
-select + label:after {
+.select select + label:after {
   position: absolute;
   right: 0;
   content: "arrow_drop_down";
 }
 
-select + label[data-icon]:after {
+.select select + label[data-icon]:after {
   content: attr(data-icon);
-}
-
-/* WRAPPER */
-.select {
-  cursor: pointer;
-  position: relative;
-  /* LABEL */
-}
-
-.select.label, .select.button {
-  text-align: left;
 }
 
 /* =========================================================================
@@ -9227,6 +9363,7 @@ select + label.invalid:after {
   display: block;
   border-radius: 0;
   margin-bottom: 0;
+  text-align: left;
 }
 
 .select-popover .divider {
@@ -9521,7 +9658,7 @@ span .triangle {
 }
 
 .slider input {
-  display: none;
+  display: none !important;
 }
 
 .slider-bar {
@@ -9965,7 +10102,7 @@ svg.spinner.base circle {
 }
 
 .switch input {
-  display: none;
+  display: none !important;
 }
 
 .switch-bar {
@@ -10233,6 +10370,85 @@ svg.spinner.base circle {
 
 .table tfoot tr:last-child td:last-child {
   border-bottom-right-radius: inherit;
+}
+
+/* =========================================================================
+ * WallpaperUP - Widgets - Datatables
+ * =========================================================================
+ * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * =========================================================================
+ * @require widgets/table/table.scss
+ * ========================================================================= */
+/* WRAPPER */
+.datatable-wrapper {
+  /* BLOCK */
+  /* TABLE */
+}
+
+.datatable-wrapper > .table-wrapper {
+  padding: 0;
+}
+
+.datatable-wrapper table.table.datatable {
+  border-radius: inherit;
+  border-width: 0;
+  /* THEAD */
+  /* TBODY */
+  /* TFOOT */
+}
+
+.datatable-wrapper table.table.datatable thead > tr:first-child > th {
+  border-top-width: 0;
+}
+
+.datatable-wrapper table.table.datatable thead > tr > th:first-child {
+  border-left-width: 0;
+}
+
+.datatable-wrapper table.table.datatable thead > tr > th:last-child {
+  border-right-width: 0;
+}
+
+.datatable-wrapper table.table.datatable tbody > tr > td:first-child {
+  border-left-width: 0;
+}
+
+.datatable-wrapper table.table.datatable tbody > tr > td:last-child {
+  border-right-width: 0;
+}
+
+.datatable-wrapper table.table.datatable tbody:nth-child(1) > tr:first-child > td {
+  border-top-width: 0;
+}
+
+.datatable-wrapper table.table.datatable tbody:nth-child(1) > tr:last-child > td, .datatable-wrapper table.table.datatable tbody:nth-child(2) > tr:last-child > td {
+  border-bottom-width: 0;
+}
+
+.datatable-wrapper table.table.datatable tfoot {
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+/* EMPTY ROW */
+.datatable-row-empty {
+  height: 4.5em;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable - Actions
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/datatables/datatables.scss
+ * ========================================================================= */
+/* ACTIONS INSIDE DATATABLE */
+.datatable-wrapper > .selectable-actions:not(.open) + .table-wrapper {
+  border-top-width: 0;
 }
 
 /* =========================================================================
@@ -10866,6 +11082,11 @@ dl {
 dd {
   margin: 0;
   padding-left: 1.25rem;
+}
+
+/* NESTED OL */
+ol ol {
+  list-style-type: upper-roman;
 }
 
 /* =========================================================================
@@ -12635,99 +12856,99 @@ blockquote:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.bl
  * ========================================================================= */
 /* TEXT */
 .text-primary {
-  color: #1565c0;
+  color: #1565c0 !important;
 }
 
 .text-secondary {
-  color: #ef6c00;
+  color: #ef6c00 !important;
 }
 
 .text-tertiary {
-  color: #6a1b9a;
+  color: #6a1b9a !important;
 }
 
 .text-quaternary {
-  color: #2e7d32;
+  color: #2e7d32 !important;
 }
 
 .text-black {
-  color: #212121;
+  color: #212121 !important;
 }
 
 .text-blue {
-  color: #2196f3;
+  color: #2196f3 !important;
 }
 
 .text-brown {
-  color: #795548;
+  color: #795548 !important;
 }
 
 .text-gray {
-  color: #e0e0e0;
+  color: #e0e0e0 !important;
 }
 
 .text-green {
-  color: #4caf50;
+  color: #4caf50 !important;
 }
 
 .text-olive {
-  color: #cddc39;
+  color: #cddc39 !important;
 }
 
 .text-orange {
-  color: #ff9800;
+  color: #ff9800 !important;
 }
 
 .text-pink {
-  color: #e91e63;
+  color: #e91e63 !important;
 }
 
 .text-purple {
-  color: #9c27b0;
+  color: #9c27b0 !important;
 }
 
 .text-red {
-  color: #f44336;
+  color: #f44336 !important;
 }
 
 .text-teal {
-  color: #009688;
+  color: #009688 !important;
 }
 
 .text-violet {
-  color: #673ab7;
+  color: #673ab7 !important;
 }
 
 .text-white {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .text-yellow {
-  color: #fabf40;
+  color: #fabf40 !important;
 }
 
 .text-error {
-  color: #f44336;
+  color: #f44336 !important;
 }
 
 .text-success {
-  color: #4caf50;
+  color: #4caf50 !important;
 }
 
 .text-warning {
-  color: #fabf40;
+  color: #fabf40 !important;
 }
 
 .text-base {
-  color: #eceff1;
+  color: #eceff1 !important;
 }
 
 .text-inherit {
-  color: inherit;
+  color: inherit !important;
 }
 
 .text-transparent {
-  color: transparent;
+  color: transparent !important;
 }
 
 /* =========================================================================
@@ -13468,8 +13689,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -13561,8 +13782,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -13685,8 +13906,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -13730,8 +13951,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.1#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14178,75 +14399,46 @@ h6 > small {
 }
 
 /* =========================================================================
- * Svelto - Widgets - Expander
+ * Svelto - Widgets - Editor - Fullscreen
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-/* EXPANDER */
-/* =========================================================================
- * Svelto - Widgets - Accordion
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.scss
- * @require widgets/expander/expander.scss
- * ========================================================================= */
-.accordion {
-  /* EXPANDER */
-}
-
-.accordion > .expander {
-  margin-bottom: 0;
-}
-
-.accordion > .expander:not(:first-child) {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.accordion > .expander:not(:last-child) {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  /* BORDERED */
-}
-
-.accordion > .expander:not(:last-child).bordered {
-  border-bottom-width: 0;
+/* FULLSCREEN */
+.editor.fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1400;
+  border-radius: 0;
 }
 
 /* =========================================================================
- * Svelto - Widgets - Expander - Closed
+ * Svelto - Widgets - Editor - Preview
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.scss
  * ========================================================================= */
-/* CLOSED */
-.expander:not(.open) {
-  /* IS A CARD */
-  /* CONTENT */
-  /* ICON */
+/* PREVIEW */
+.editor.preview {
+  /* TEXTAREA */
 }
 
-.expander:not(.open).card > :not(.expander-content) {
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: inherit;
-}
-
-.expander:not(.open).card.bordered > :not(.expander-content) {
-  margin-bottom: -1px !important;
-}
-
-.expander:not(.open) > .expander-content {
+.editor.preview textarea {
   display: none;
 }
 
-.expander:not(.open) .expander-icon {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+/* =========================================================================
+ * Svelto - Widgets - Editor - Unpreview
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* UNPREVIEW */
+.editor:not(.preview) .editor-preview {
+  display: none;
 }
 
 /* =========================================================================
@@ -14263,7 +14455,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.5.1);
+  background-image: url(/images/flags.png?v=0.5.4);
 }
 
 /* FLAGS */
@@ -15280,7 +15472,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.1) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.1) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.4) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.4) format("woff");
 }
 
 /* =========================================================================
@@ -15297,9 +15489,8 @@ i.flag {
           transform: translate(-50%, -50%);
   position: fixed;
   z-index: 1300;
-  overflow: auto;
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 80vw;
+  max-height: 80vh;
   margin: 0;
   transition-property: opacity, -webkit-transform;
   transition-property: transform, opacity;
@@ -15317,6 +15508,15 @@ i.flag {
   cursor: pointer;
   z-index: 1299;
   transition-duration: 0.35s;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+html.flexbox-tweener .modal.card {
+  max-height: none;
+}
+
+html.flexbox-tweener .modal.card > .card-block {
+  max-height: 64vh;
 }
 
 /* =========================================================================
@@ -15354,6 +15554,11 @@ i.flag {
   width: 100%;
   max-height: none;
   height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+html.flexbox-tweener .modal.fullscreen.card > .card-block {
+  max-height: none;
 }
 
 /* =========================================================================
@@ -15452,12 +15657,12 @@ i.flag {
 }
 
 /* =========================================================================
- * Svelto - Widgets - Popover - Close
+ * Svelto - Widgets - Popover - Closed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-/* CLOSE */
+/* CLOSED */
 .popover:not(.show), .tooltip:not(.show) {
   display: none;
 }
@@ -15478,7 +15683,7 @@ i.flag {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1500;
+  z-index: 1600;
   overflow: visible;
   max-width: 70vw;
   margin: 0;
@@ -15826,6 +16031,17 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
 
 .ripple-base > .ripple-circle:before {
   background-color: #eceff1;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable - Actions - Container - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* CLOSED */
+.selectable-actions:not(.popover):not(.open) {
+  display: none;
 }
 
 /* =========================================================================

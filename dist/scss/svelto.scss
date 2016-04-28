@@ -2383,8 +2383,8 @@ $modal-z-depth: 6 !default;
 $modal-z-depth-force: true !default;
 $modal-z-depth-basic: true !default;
 
-$modal-max-width: 80% !default;
-$modal-max-height: 80% !default;
+$modal-max-width: 80vw !default;
+$modal-max-height: 80vh !default;
 
 /* ANIMATION */
 
@@ -3383,7 +3383,7 @@ $list-padding-left: $gutter * 2 !default;
 
 /* STICKY */
 
-$layout-sticky-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm
+$layout-sticky-header-height: 57px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm
 $layout-sticky-header-z-index: 1100 !default;
 
 
@@ -4469,7 +4469,7 @@ $flags: (
 
 /* POPOVER */
 
-$popover-z-index: 1500 !default;
+$popover-z-index: 1600 !default;
 
 $popover-z-depth: 4 !default;
 $popover-z-depth-force: true !default;
@@ -4492,7 +4492,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.1' !default;
+$svelto-version: '0.5.4' !default;
 
 
 /* =========================================================================
@@ -5735,6 +5735,18 @@ $divider-text-opacity: .75 !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Editor - Fullscreen (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+$editor-fullscreen-z-index: 1400 !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Embed - Ratios (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -6255,7 +6267,7 @@ $table-striped-row-even-bg-color: rgba( 0, 0, 0, 0 ) !default;
 
 /* QUEUES */
 
-$toast-queues-z-index: 1400 !default;
+$toast-queues-z-index: 1500 !default;
 
 
 /* =========================================================================
@@ -7468,7 +7480,7 @@ script:last-child {
   position: fixed;
   z-index: $panel-z-index;
   margin: 0;
-  border-radius: 0;
+  border-radius: 0 !important;
   transition: transform $panel-animation-duration;
 }
 
@@ -7999,20 +8011,13 @@ script:last-child {
         width: calc(#{$percentage} - #{$gutter});
       }
 
-      .multiple > .#{$class}-#{$nr} {
+      .multiple:not(.no-wrap):not(.vertical):not(.joined) > .#{$class}-#{$nr} {
 
-        &:not(.multiple) {
+        &:not(.multiple),
+        &.multiple.no-wrap,
+        &.multiple.vertical,
+        &.multiple.joined {
           @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
-        }
-
-        &.multiple {
-
-          &.no-wrap,
-          &.vertical,
-          &.joined {
-            @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
-          }
-
         }
 
       }
@@ -8806,7 +8811,7 @@ th {
 /* HTML */
 
 html {
-  @include fill-absolute (); // This fixes a bug in IE where all `.multiple` in the demo's homepage are not wrapping
+  height: 100%;
   font-size: $font-size;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -8897,7 +8902,7 @@ hr.horizontal {
 /* BUTTON */
 
 button {
-  border: none;
+  border: 0;
   padding: 0;
 }
 
@@ -9032,6 +9037,7 @@ blockquote {
  * ========================================================================= */
 
 //TODO: Add support for `samp`
+
 // We are separating the border property since the color may be `inherit`
 
 /* CODE */
@@ -9048,6 +9054,14 @@ blockquote {
 
 code {
   @extend %code;
+}
+
+/* INSIDE PRE */
+
+pre > code {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 
@@ -9758,7 +9772,7 @@ span {
   /* INPUT */
 
   input {
-    display: none;
+    display: none !important;
   }
 
   /* HANDLER */
@@ -9979,6 +9993,13 @@ span {
   &-block {
     flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
     overflow: auto;
+  }
+
+  /* BORDER RADIUS */
+
+  > *,
+  > .table {
+    border-radius: 0;
   }
 
   /* BORDER RADIUS INHERITANCE */
@@ -10289,7 +10310,7 @@ html.clip-path-url {
   /* INPUT */
 
   input {
-    display: none;
+    display: none !important;
   }
 
   /* NAVIGATION */
@@ -11263,6 +11284,24 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Editor
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Cross browser testing
+
+/* EDITOR */
+
+.editor {
+  @extend %widget;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Embed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -11313,6 +11352,128 @@ html.flexbox-tweener {
 
   .embed.ratio-#{$width}-#{$height} {
     padding-bottom: ( $height * 100 / $width ) * 1%;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Expander
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for horizontal expander -> basically add support for horizontal cards
+//TODO: Add a sliding animation
+
+/* EXPANDER */
+
+.expander {
+  @extend %widget;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Accordion
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/expander/expander.scss
+ * ========================================================================= */
+
+//TODO: Add support for horizontal accordions, basically wait until horizontal expanders are supported
+
+.accordion {
+
+  @extend %widget;
+
+  /* EXPANDER */
+
+  > .expander {
+
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+      @include border-top-radius ( 0 );
+    }
+
+    &:not(:last-child) {
+
+      @include border-bottom-radius ( 0 );
+
+      /* BORDERED */
+
+      &.bordered {
+        border-bottom-width: 0;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.expander:not(.open) {
+
+  /* IS A CARD */
+
+  &.card {
+
+    //FIXME: We are taking for granted that there will be only the toggler visible
+
+    > :not(.expander-content) {
+      @include border-bottom-radius ( inherit );
+    }
+
+    &.bordered > :not(.expander-content) {
+      margin-bottom: -1px !important;
+    }
+
+  }
+
+  /* CONTENT */
+
+  > .expander-content {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Opened
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.scss
+ * ========================================================================= */
+
+/* OPENED */
+
+.expander.open {
+
+  /* ICON */
+
+  .expander-icon {
+    transform: rotate(180deg);
   }
 
 }
@@ -11411,6 +11572,7 @@ figcaption,
 .flippable {
 
   @extend %widget;
+  @include children-no-gutter ();
   perspective: $flippable-perspective;
   transform-style: preserve-3d;
   transform-origin: 50%;
@@ -11843,7 +12005,7 @@ i.icon {
 
 input[type="checkbox"] {
 
-  display: none;
+  display: none !important;
 
   /* LABEL */
 
@@ -12145,70 +12307,71 @@ input[type=radio] {
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* SORTABLE */
+/* SORTABLE HEADER */
 
-table.sortable {
+table.sortable th[data-sort],
+table th.sortable { // In order to better support datatables
 
-  /* HEADER */
+  position: relative;
+  cursor: pointer;
+  padding-right: $table-sortable-th-padding-right;
 
-  th[data-sort] {
+  /* TEXT CENTER */
 
-    position: relative;
-    cursor: pointer;
-    padding-right: $table-sortable-th-padding-right;
+  &.text-center {
+    padding-left: $table-sortable-th-padding-right; // In order to have the text perfectly aligned
+  }
 
-    /* HOVER */
+  /* HOVER */
 
-    &:hover {
-      background-color: $table-sortable-th-hover-bg-color;
-    }
+  &:hover {
+    background-color: $table-sortable-th-hover-bg-color;
+  }
 
-    /* ACTIVE */
+  /* ACTIVE */
 
-    &:active {
-      background-color: $table-sortable-th-active-bg-color;
-    }
+  &:active {
+    background-color: $table-sortable-th-active-bg-color;
+  }
 
-    /* BEFORE / AFTER */
+  /* BEFORE / AFTER */
 
-    &:before,
-    &:after {
-      @extend %icon-base;
-      @include absolute ( 0 $table-sortable-th-icon-right 0 false );
-      margin: auto;
-      opacity: 0;
-    }
+  &:before,
+  &:after {
+    @extend %icon-base;
+    @include absolute ( 0 $table-sortable-th-icon-right 0 false );
+    margin: auto;
+    opacity: 0;
+  }
 
-    /* BEFORE */
+  /* BEFORE */
 
-    &:before {
-      content: $sortable-desc-icon;
-      top: $soratable-table-th-icon-gutter;
-    }
+  &:before {
+    content: $sortable-desc-icon;
+    top: $soratable-table-th-icon-gutter;
+  }
 
-    /* AFTER */
+  /* AFTER */
 
-    &:after {
-      content: $sortable-asc-icon;
-      bottom: $soratable-table-th-icon-gutter;
-    }
+  &:after {
+    content: $sortable-asc-icon;
+    bottom: $soratable-table-th-icon-gutter;
+  }
 
-    /* INACTIVE OPACITY */
+  /* INACTIVE OPACITY */
 
-    &:hover:before,
-    &:hover:after,
-    &.sort-desc:after,
-    &.sort-asc:before {
-      opacity: $table-sortable-th-icon-opacity;
-    }
+  &:hover:before,
+  &:hover:after,
+  &.sort-desc:after,
+  &.sort-asc:before {
+    opacity: $table-sortable-th-icon-opacity;
+  }
 
-    /* ACTIVE OPACITY */
+  /* ACTIVE OPACITY */
 
-    &.sort-desc:before,
-    &.sort-asc:after {
-      opacity: $table-sortable-th-icon-active-opacity;
-    }
-
+  &.sort-desc:before,
+  &.sort-asc:after {
+    opacity: $table-sortable-th-icon-active-opacity;
   }
 
 }
@@ -12476,7 +12639,7 @@ input[type="search"] {
 /* FILE */
 
 input[type="file"] {
-  display: none;
+  display: none !important;
 }
 
 
@@ -13879,63 +14042,6 @@ textarea.disabled,
 
 /* SELECT */
 
-select {
-
-  @include fill ();
-  @include fill-absolute ();
-  appearance: none;
-  cursor: pointer;
-  margin: 0 !important;
-  font-size: 0;
-  opacity: 0;
-  border: 0;
-  border-radius: inherit;
-  z-index: $select-z-index;
-
-  /* BORDERED */
-
-  //FIXME: Not stretching properly, at maximum it reached 100% width and height
-
-  // .bordered > & {
-  //   @include absolute ( - $border-width );
-  // }
-
-  /* LABEL */
-
-  + label {
-
-    padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
-    min-height: 1em * $icon-scale-factor;
-    min-width: 1em * $icon-scale-factor;
-    cursor: pointer;
-
-    /* EMPTY */
-
-    &:empty {
-      padding-right: 0;
-    }
-
-    /* AFTER */
-
-    &:after {
-      @extend %icon-base;
-      position: absolute;
-      right: 0;
-      content: $select-icon;
-    }
-
-    /* CUSTOM AFTER */
-
-    &[data-icon]:after {
-      content: attr(data-icon);
-    }
-
-  }
-
-}
-
-/* WRAPPER */
-
 .select {
 
   @extend %widget;
@@ -13946,6 +14052,63 @@ select {
 
   &.label {
     text-align: left;
+  }
+
+  /* SELECT */
+
+  select {
+
+    @include fill ();
+    @include fill-absolute ();
+    appearance: none;
+    cursor: pointer;
+    margin: 0 !important;
+    font-size: 0;
+    opacity: 0;
+    border: 0;
+    border-radius: inherit;
+    z-index: $select-z-index;
+
+    /* BORDERED */
+
+    //FIXME: Not stretching properly, at maximum it reached 100% width and height
+
+    // .bordered > & {
+    //   @include absolute ( - $border-width );
+    // }
+
+    /* LABEL */
+
+    + label {
+
+      padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
+      min-height: 1em * $icon-scale-factor;
+      min-width: 1em * $icon-scale-factor;
+      cursor: pointer;
+
+      /* EMPTY */
+
+      &:empty {
+        padding-right: 0;
+      }
+
+      /* AFTER */
+
+      &:after {
+        @extend %icon-base;
+        position: absolute;
+        right: 0;
+        content: $select-icon;
+      }
+
+      /* CUSTOM AFTER */
+
+      &[data-icon]:after {
+        content: attr(data-icon);
+      }
+
+    }
+
   }
 
 }
@@ -14066,6 +14229,7 @@ select + label.invalid {
     display: block;
     border-radius: 0;
     margin-bottom: 0;
+    text-align: left;
   }
 
   /* DIVIDER */
@@ -14386,7 +14550,7 @@ select + label.valid {
   /* INPUT */
 
   input {
-    display: none;
+    display: none !important;
   }
 
   /* BAR */
@@ -14741,7 +14905,7 @@ svg.spinner {
   /* INPUT */
 
   input {
-    display: none;
+    display: none !important;
   }
 
   /* BAR */
@@ -15096,6 +15260,129 @@ svg.spinner {
 
   }
 
+}
+
+
+/* =========================================================================
+ * WallpaperUP - Widgets - Datatables
+ * =========================================================================
+ * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * =========================================================================
+ * @require widgets/table/table.scss
+ * ========================================================================= */
+
+//TODO: Add support for all DataTable's variants, like scrolling etc.
+
+/* WRAPPER */
+
+.datatable-wrapper {
+
+  /* BLOCK */
+
+  > .table-wrapper {
+    padding: 0;
+  }
+
+  /* TABLE */
+
+  table.table.datatable {
+
+    border-radius: inherit;
+    border-width: 0;
+
+    /* THEAD */
+
+    thead {
+
+      > tr {
+
+        &:first-child > th {
+          border-top-width: 0;
+        }
+
+        > th:first-child {
+          border-left-width: 0;
+        }
+
+        > th:last-child {
+          border-right-width: 0;
+        }
+
+      }
+
+    }
+
+    /* TBODY */
+
+    tbody {
+
+      > tr {
+
+        > td:first-child {
+          border-left-width: 0;
+        }
+
+        > td:last-child {
+          border-right-width: 0;
+        }
+
+      }
+
+      &:nth-child(1) {
+
+        > tr:first-child > td {
+          border-top-width: 0;
+        }
+
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+
+        > tr:last-child > td {
+          border-bottom-width: 0;
+        }
+
+      }
+
+    }
+
+    /* TFOOT */
+
+    tfoot {
+      border-right-width: 0;
+      border-bottom-width: 0;
+      border-left-width: 0;
+    }
+
+  }
+
+}
+
+/* EMPTY ROW */
+
+.datatable-row-empty {
+  height: $table-row-empty-height;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable - Actions
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/datatables/datatables.scss
+ * ========================================================================= */
+
+/* ACTIONS INSIDE DATATABLE */
+
+// This make it slightly better when different colors are used between the actions and the table, perhaps the actions have a different color to attract the attention?
+
+.datatable-wrapper > .selectable-actions:not(.open) + .table-wrapper {
+  border-top-width: 0;
 }
 
 
@@ -15873,6 +16160,12 @@ dd {
   padding-left: $list-padding-left;
 }
 
+/* NESTED OL */
+
+ol ol {
+  list-style-type: upper-roman;
+}
+
 
 /* =========================================================================
  * Svelto - Widgets - Typography - Lists - No bullet
@@ -15993,6 +16286,8 @@ pre {
  * ========================================================================= */
 
 // The attached element shouldn't match `:last-child` or it may cause issues with the gutter
+
+//TODO: Improve support for attaching `.multiple` (set `:first-child` and `:last-child` `border-radius`)
 
 /* ATTACHED */
 
@@ -16675,7 +16970,7 @@ pre {
   $bg: nth( $datas, 1 );
 
   .text-#{$class} {
-    color: $bg;
+    color: $bg !important;
   }
 
 }
@@ -17826,102 +18121,54 @@ h6 {
 
 
 /* =========================================================================
- * Svelto - Widgets - Expander
+ * Svelto - Widgets - Editor - Fullscreen
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Add support for horizontal expander -> basically add support for horizontal cards
-//TODO: Add a sliding animation
+/* FULLSCREEN */
 
-/* EXPANDER */
-
-.expander {}
+.editor.fullscreen {
+  @include fill-fixed ();
+  z-index: $editor-fullscreen-z-index;
+  border-radius: 0;
+}
 
 
 /* =========================================================================
- * Svelto - Widgets - Accordion
+ * Svelto - Widgets - Editor - Preview
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.scss
- * @require widgets/expander/expander.scss
  * ========================================================================= */
 
-//TODO: Add support for horizontal accordions, basically wait until horizontal expanders are supported
+/* PREVIEW */
 
-.accordion {
+.editor.preview {
 
-  @extend %widget;
+  /* TEXTAREA */
 
-  /* EXPANDER */
-
-  > .expander {
-
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      @include border-top-radius ( 0 );
-    }
-
-    &:not(:last-child) {
-
-      @include border-bottom-radius ( 0 );
-
-      /* BORDERED */
-
-      &.bordered {
-        border-bottom-width: 0;
-      }
-
-    }
-
+  textarea {
+    display: none;
   }
 
 }
 
 
 /* =========================================================================
- * Svelto - Widgets - Expander - Closed
+ * Svelto - Widgets - Editor - Unpreview
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.scss
  * ========================================================================= */
 
-/* CLOSED */
+/* UNPREVIEW */
 
-.expander:not(.open) {
+.editor:not(.preview) {
 
-  /* IS A CARD */
-
-  &.card {
-
-    //FIXME: We are taking for granted that there will be only the toggler visible
-
-    > :not(.expander-content) {
-      @include border-bottom-radius ( inherit );
-    }
-
-    &.bordered > :not(.expander-content) {
-      margin-bottom: -1px !important;
-    }
-
-  }
-
-  /* CONTENT */
-
-  > .expander-content {
+  .editor-preview {
     display: none;
-  }
-
-  /* ICON */
-
-  .expander-icon {
-    transform: rotate(180deg);
   }
 
 }
@@ -18029,7 +18276,6 @@ i.flag {
   @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
   position: fixed;
   z-index: $modal-z-index;
-  overflow: auto;
   max-width: $modal-max-width;
   max-height: $modal-max-height;
   margin: 0;
@@ -18048,6 +18294,22 @@ i.flag {
     cursor: pointer;
     z-index: $modal-z-index - 1;
     transition-duration: $modal-animation-duration;
+  }
+
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.card {
+
+    max-height: none;
+
+    > .card-block {
+      max-height: $modal-max-height * .8;
+    }
+
   }
 
 }
@@ -18092,6 +18354,16 @@ i.flag {
   width: 100%;
   max-height: none;
   height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.fullscreen.card > .card-block {
+    max-height: none;
+  }
+
 }
 
 
@@ -18206,13 +18478,13 @@ i.flag {
 
 
 /* =========================================================================
- * Svelto - Widgets - Popover - Close
+ * Svelto - Widgets - Popover - Closed
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* CLOSE */
+/* CLOSED */
 
 .popover:not(.show) {
   display: none;
@@ -18576,6 +18848,20 @@ html.flexbox-tweener {
 
   }
 
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable - Actions - Container - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CLOSED */
+
+.selectable-actions:not(.popover):not(.open) {
+  display: none;
 }
 
 

@@ -232,8 +232,8 @@ $modal-z-depth: 6 !default;
 $modal-z-depth-force: true !default;
 $modal-z-depth-basic: true !default;
 
-$modal-max-width: 80% !default;
-$modal-max-height: 80% !default;
+$modal-max-width: 80vw !default;
+$modal-max-height: 80vh !default;
 
 /* ANIMATION */
 
@@ -1232,7 +1232,7 @@ $list-padding-left: $gutter * 2 !default;
 
 /* STICKY */
 
-$layout-sticky-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm
+$layout-sticky-header-height: 57px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm
 $layout-sticky-header-z-index: 1100 !default;
 
 
@@ -2318,7 +2318,7 @@ $flags: (
 
 /* POPOVER */
 
-$popover-z-index: 1500 !default;
+$popover-z-index: 1600 !default;
 
 $popover-z-depth: 4 !default;
 $popover-z-depth-force: true !default;
@@ -2341,7 +2341,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.1' !default;
+$svelto-version: '0.5.4' !default;
 
 
 /* =========================================================================
@@ -3584,6 +3584,18 @@ $divider-text-opacity: .75 !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Editor - Fullscreen (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+$editor-fullscreen-z-index: 1400 !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Embed - Ratios (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -4104,7 +4116,7 @@ $table-striped-row-even-bg-color: rgba( 0, 0, 0, 0 ) !default;
 
 /* QUEUES */
 
-$toast-queues-z-index: 1400 !default;
+$toast-queues-z-index: 1500 !default;
 
 
 /* =========================================================================
