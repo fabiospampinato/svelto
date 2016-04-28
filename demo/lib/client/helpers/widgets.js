@@ -184,7 +184,7 @@ SWHelpers.define ( 'editor', function () {
                  '<i class="icon">visibility</i>' +
                '</div>' +
                '<div class="button compact small bordered" title="Fullscreen" data-action="fullscreen">' +
-                 '<i class="icon">fullscreen</i>' +
+                 '<i class="icon">zoom_out_map</i>' +
                '</div>' +
              '</div>' +
            '</div>' +
