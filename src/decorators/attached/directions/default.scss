@@ -17,6 +17,6 @@
 
 /* DEFAULT */
 
-.attached:not(.attached-top):not(.attached-top-left):not(.attached-top-right):not(.attached-right):not(.attached-bottom):not(.attached-bottom-left):not(.attached-bottom-right):not(.attached-left) {
+.attached:not(.attached-top):not(.attached-top-left):not(.attached-top-right):not(.attached-right):not(.attached-bottom-left):not(.attached-bottom-right):not(.attached-left) {
   @extend .attached-bottom;
 }
