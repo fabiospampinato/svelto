@@ -183,12 +183,12 @@
 						break;
 
 					case 'next':
-            if ( page === pages - 1 ) continue;
+            if ( pages === 0 || page === pages - 1 ) continue;
 						btnText = lang.sNext;
 						break;
 
 					case 'last':
-            if ( page === pages - 1 ) continue;
+            if ( pages === 0 || page === pages - 1 ) continue;
 						btnText = lang.sLast;
 						break;
 
