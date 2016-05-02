@@ -34,6 +34,18 @@
       text-align: left;
     }
 
+    /* THEAD CELLS */
+
+    > th {
+      vertical-align: middle;
+    }
+
+    /* TBODY CELLS */
+
+    > td {
+      vertical-align: top;
+    }
+
   }
 
   /* ROW EMPTY */ //TODO: Maybe move it to its own module
