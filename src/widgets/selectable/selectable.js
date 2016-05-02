@@ -79,7 +79,7 @@
 
     ___change () {
 
-      this._on ( true, 'change tablehelper:change sortable:sort sort.dt search.dt', this.__change ); //FIXME: Does it get triggered also after fetching data from ajax? (DT)
+      this._on ( true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change ); //FIXME: Does it get triggered also after fetching data from ajax? (DT)
 
     }
 
@@ -216,7 +216,7 @@
       this._off ( this.$document, Pointer.cancel, this.__cancel );
 
       let isRightButton = Mouse.hasButton ( event, Mouse.buttons.RIGHT ); // When right clicking we suppose that we also want to select that element (useful when used in conjuction with SelectableActionsPopover)
-      
+
       if ( event.shiftKey ) {
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
