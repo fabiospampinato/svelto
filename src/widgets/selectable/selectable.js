@@ -79,7 +79,7 @@
 
     ___change () {
 
-      this._on ( true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change ); //FIXME: Does it get triggered also after fetching data from ajax? (DT)
+      this._on ( true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change );
 
     }
 
@@ -88,6 +88,8 @@
       this.$elements = this._getElements ();
 
       this._resetPrev ();
+
+      this._trigger ( 'change' );
 
     }
 
