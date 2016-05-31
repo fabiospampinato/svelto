@@ -406,6 +406,7 @@
 
       this._isFullscreen = true;
 
+      this.$layout.disableScroll ();
       this.$editor.addClass ( this.options.classes.fullscreen );
 
       this.$triggerFullscreen.addClass ( this.options.classes.trigger.active );
@@ -418,6 +419,7 @@
 
       this._isFullscreen = false;
 
+      this.$layout.enableScroll ();
       this.$editor.removeClass ( this.options.classes.fullscreen );
 
       this.$triggerFullscreen.removeClass ( this.options.classes.trigger.active );
