@@ -26,6 +26,8 @@
 
   /* NOTIFICATION */
 
+  //TODO: Add support for string options
+
   $.notification = function ( options ) {
 
     /* OPTIONS */
