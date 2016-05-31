@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * WallpaperUP - Widgets - Datatables
+ * Svelto - Widgets - Datatables
  * =========================================================================
  * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
  * =========================================================================
@@ -8,6 +8,7 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
+//TODO: Add a spinnerOverlay when processing
 //TODO: Proxy all `*.dt` events as `dt:*`
 //TODO: Test in all browsers
 
