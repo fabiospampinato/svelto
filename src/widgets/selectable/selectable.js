@@ -23,13 +23,15 @@
     selector: 'table.selectable',
     options: {
       moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
+      single: false, // Enforcing `select-single` even without the need to add the class
       classes: {
         selected: 'selected',
         single: 'select-single',
         datatable: 'datatable'
       },
       selectors: {
-        element: 'tbody tr:not(.table-row-empty)' //FIXME: Add support for datatables' empty row
+        element: 'tbody tr:not(.table-row-empty)', //FIXME: Add support for datatables' empty row
+        selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler
       },
       keystrokes: {
         'ctmd + a': 'all',
@@ -52,12 +54,15 @@
 
       this.$selectable = this.$element;
 
-      this._isSingle = this.$selectable.hasClass ( this.options.classes.single );
+      this._isSingle = this.options.single || this.$selectable.hasClass ( this.options.classes.single );
       this._isDataTable = this.$selectable.hasClass ( this.options.classes.datatable );
 
       this._dtapi = this._isDataTable ? this.$selectable.DataTable () : false;
 
       this.$elements = this._getElements ();
+
+      this._usingSelectionToggler = !!this.options.selectors.selectionToggler;
+      this.options.selectors.selectionToggler = this._usingSelectionToggler ? this.options.selectors.element + ' ' + this.options.selectors.selectionToggler : this.options.selectors.element;
 
     }
 
@@ -107,11 +112,11 @@
 
       if ( Browser.is.touchDevice || this._isSingle ) {
 
-        this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
+        this._on ( Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch );
 
       } else {
 
-        this._on ( Pointer.down, this.options.selectors.element, this.__down );
+        this._on ( Pointer.down, this.options.selectors.selectionToggler, this.__down );
 
       }
 
@@ -123,7 +128,7 @@
 
       event.preventDefault ();
 
-      let $target = $(event.currentTarget);
+      let $target = this._getEventElement ( event );
 
       if ( this._isSingle ) {
 
@@ -144,7 +149,7 @@
       event.preventDefault ();
 
       this.startEvent = event;
-      this.$startElement = $(event.currentTarget);
+      this.$startElement = this._getEventElement ( event );
 
       this._on ( true, this.$document, Pointer.move, this.__move );
 
@@ -199,7 +204,7 @@
 
     __dragEnter ( event ) {
 
-      this._toggleGroup ( this.$startElement, $(event.currentTarget) );
+      this._toggleGroup ( this.$startElement, this._getEventElement ( event ) );
 
       this._trigger ( 'change' );
 
@@ -299,6 +304,12 @@
     _getElements () {
 
       return this._dtapi ? $(this._dtapi.rows ().nodes ()) : this.$selectable.find ( this.options.selectors.element );
+
+    }
+
+    _getEventElement ( event ) {
+
+      return this._usingSelectionToggler ? $(event.currentTarget).closest ( this.options.selectors.element) : $(event.currentTarget);
 
     }
 
