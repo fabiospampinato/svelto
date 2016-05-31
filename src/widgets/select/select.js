@@ -85,6 +85,8 @@
 
       }
 
+      this.initialValueholder = this.$valueholder.text ();
+
       this.selectOptions = [];
 
       this.$popover = false;
@@ -255,11 +257,19 @@
 
       let value = this.$select.val ();
 
-      if ( _.isString ( value ) && value.length ) {
+      if ( _.isString ( value ) ) { //FIXME: Is it needed?
 
-        let $selectedOption = this.$options.filter ( `[value="${value}"]` ).first ();
+        if ( value.length ) {
 
-        this.$valueholder.text ( $selectedOption.text () );
+          let $selectedOption = this.$options.filter ( `[value="${value}"]` ).first ();
+
+          this.$valueholder.text ( $selectedOption.text () );
+
+        } else {
+
+          this.$valueholder.text ( this.initialValueholder );
+
+        }
 
       }
 
@@ -277,7 +287,7 @@
 
       this._updateValueholder ();
 
-      if ( !Browser.is.touchDevice ) {
+      if ( !this.options.native ) {
 
         this._updatePopover ();
 
