@@ -73,10 +73,22 @@
 
       /* ON CLICK */
 
+      let _prevOnClick = button.onClick,
+          instance = this;
+
       button.onClick = function () {
-        this.request ( true );
+
+        instance.request ( true );
+
+        if ( _.isFunction ( _prevOnClick ) ) {
+
+          _prevOnClick.apply ( this, arguments );
+
+        }
+
         return false;
-      }.bind ( this );
+
+      };
 
       /* OPENING */
 
