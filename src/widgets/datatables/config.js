@@ -10,13 +10,13 @@
 
 /* DATATABLES */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, DataTable ) {
 
   'use strict';
 
-  /* DATATABLES */
+  /* CHECK IF LOADED */
 
-  let DataTable = $.fn.dataTable;
+  if ( !DataTable ) return;
 
   /* DEFAULTS */
 
@@ -239,4 +239,4 @@
 
   Svelto.DataTable = DataTable;
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.$.fn.dataTable ));

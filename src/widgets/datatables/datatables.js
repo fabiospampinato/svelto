@@ -14,9 +14,13 @@
 
 /* DATATABLES */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, DataTable ) {
 
   'use strict';
+
+  /* CHECK IF LOADED */
+
+  if ( !DataTable ) return;
 
   /* CONFIG */
 
@@ -100,4 +104,4 @@
 
   Factory.init ( DT, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable ));
