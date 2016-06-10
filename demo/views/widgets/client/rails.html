@@ -237,6 +237,14 @@
     {{{sw.iconAction "last_page" "api ( 'end' )"}}}
   </div>
 
+  {{{sw.divider "Navigation"}}}
+
+  <div class="multiple joined actions">
+    <div class="label bordered pointing-right">Hidable</div>
+    {{{sw.radioAction "No" "hidable" "set_hidable ( false )" true}}}
+    {{{sw.radioAction "Yes" "hidable" "set_hidable ( true )"}}}
+  </div>
+
   {{{sw.divider "Style"}}}
 
   {{{sw.checkAction "Borderd" "toggle_class ( 'bordered' )"}}}
@@ -263,6 +271,10 @@
 
     function toggle_class ( name ) {
       $('.rails .button').toggleClass ( name );
+    }
+
+    function set_hidable ( value ) {
+      $('.rails').rails ( 'option', 'navigation.hidable', value );
     }
 
     function set_size ( size ) {

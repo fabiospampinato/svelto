@@ -20,6 +20,9 @@
     plugin: true,
     selector: '.rails',
     options: {
+      navigation: {
+        hidable: false // Controls whether the navigation should be hidden when all the buttons are disabled
+      },
       scroll: {
         speed: 200 // The distance scrolled when calling `left` or `right`
       },
@@ -28,6 +31,7 @@
         left: '.rails-left',
         right: '.rails-right',
         end: '.rails-end',
+        navigation: '.rails-navigation, .rails-start, .rails-left, .rails-right, .rails-end',
         content: '.rails-content',
         active: '.rails-active'
       },
@@ -57,6 +61,7 @@
       this.$left = this.$rails.find ( this.options.selectors.left );
       this.$right = this.$rails.find ( this.options.selectors.right );
       this.$end = this.$rails.find ( this.options.selectors.end );
+      this.$navigation = this.$rails.find ( this.options.selectors.navigation );
       this.$content = this.$rails.find ( this.options.selectors.content );
       this.$active = this.$content.find ( this.options.selectors.active );
 
@@ -65,13 +70,14 @@
     _init () {
 
       this._scrollToElement ( this.$active );
-      this._updateButtons ();
+      this._updateNavigation ();
 
     }
 
     _events () {
 
       this.___keydown ();
+      this.___resize ();
       this.___scroll ();
       this.___startTap ();
       this.___leftTap ();
@@ -122,19 +128,15 @@
 
     /* UPDATE */
 
-    _updateButtons () {
+    _updateNavigation () {
 
-      let scrollLeft;
+      if ( !this.$navigation.length ) return;
 
-      if ( this.$start.length || this.$left.length || this.$right.length || this.$end.length ) {
-
-        scrollLeft = this.$content.scrollLeft ();
-
-      }
+      let scrollLeft = this.$content.scrollLeft (),
+          isStart = ( scrollLeft === 0 ),
+          isEnd = ( this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth () <= 1 ); // If we use `0`, as we should` it won't always trigger
 
       if ( this.$start.length || this.$left.length ) {
-
-        let isStart = ( scrollLeft === 0 );
 
         this.$start.add ( this.$left ).toggleClass ( this.options.classes.disabled, isStart );
 
@@ -142,11 +144,25 @@
 
       if ( this.$end.length || this.$right.length ) {
 
-        let isEnd = ( this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth () <= 1 );
-
         this.$end.add ( this.$right ).toggleClass ( this.options.classes.disabled, isEnd );
 
       }
+
+      if ( this.options.navigation.hidable ) {
+
+        let hidable = ( isStart && isEnd );
+
+        this.$navigation.toggleClass ( this.options.classes.hidden, hidable );
+
+      }
+
+    }
+
+    /* RESIZE */
+
+    ___resize () {
+
+      this._on ( true, this.$window, 'resize', this._throttle ( this._updateNavigation, Math.max ( this.options.animations.scroll || 100 ) ) );
 
     }
 
@@ -154,7 +170,7 @@
 
     ___scroll () {
 
-      this._on ( true, this.$content, 'scroll', this._throttle ( this._updateButtons, Math.max ( this.options.animations.scroll || 100 ) ) );
+      this._on ( true, this.$content, 'scroll', this._throttle ( this._updateNavigation, Math.max ( this.options.animations.scroll || 100 ) ) );
 
     }
 
