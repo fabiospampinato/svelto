@@ -147,9 +147,9 @@
 
       /* CALLBACKS */
 
-      this._variables ();
-      this._init ();
-      this._events ();
+      if ( this._variables () === false ) return this.destroy ();
+      if ( this._init ()      === false ) return this.destroy ();
+      if ( this._events ()    === false ) return this.destroy ();
 
       /* BREAKPOINT */
 
