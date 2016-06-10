@@ -13,7 +13,7 @@
 //FIXME: If a form gets autofilled with `SafeInCloud` the value doesn't get updated (it probably doesn't trigger 'change') -> force a value refresh when submitting
 //TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
-//TODO: Maybe make it generic and just call it `validate`
+//TODO: Maybe make it generic (so that it can be used in single elements) and just call it `validate`
 
 (function ( $, _, Svelto, Widgets, Factory, Validator ) {
 
@@ -210,23 +210,15 @@
 
     }
 
-    /* CHANGE */
+    /* UPDATE */
 
-    ___change () {
-
-      this._on ( true, this.$elements, 'change', this.__change );
-
-    }
-
-    __change ( event ) {
+    _updateElement ( elementObj ) {
 
       /* FORM */
 
       this._isValid = undefined;
 
       /* ELEMENT */
-
-      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
       elementObj.isDirty = true;
       elementObj.isValid = undefined;
@@ -256,6 +248,26 @@
         }
 
       }
+
+    }
+
+    _updateElements () {
+
+      this.elements.map ( this._updateElement );
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, this.$elements, 'change', this.__change );
+
+    }
+
+    __change ( event ) {
+
+      this._updateElement ( this.elements[event.currentTarget[this.options.datas.id]] );
 
     }
 
@@ -302,6 +314,8 @@
     }
 
     __submit ( event ) {
+
+      this._updateElements ();
 
       if ( !this.isValid () ) {
 
