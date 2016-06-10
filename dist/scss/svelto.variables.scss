@@ -2341,7 +2341,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.4' !default;
+$svelto-version: '0.5.6' !default;
 
 
 /* =========================================================================
@@ -2589,6 +2589,27 @@ $circular-border-radius: 1000000px !default; // If we use `50%` we may get an ov
 
 
 /* =========================================================================
+ * Svelto - Widgets - Avatar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require decorators/border_radius/variables.scss
+ * ========================================================================= */
+
+/* AVATAR */
+
+$avatar-size: 3em !default;
+$avatar-border-radius: $circular-border-radius !default;
+$avatar-img-hover-opacity: 0.8 !default;
+
+/* ANIMATION */
+
+$avatar-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Badge (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2816,6 +2837,7 @@ $card-section-color-basic: true !default;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * @require widgets/avatar/variables.scss
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
@@ -2838,7 +2860,7 @@ $chat-message-img-border-width: 1px !default;
 $chat-message-img-border-style: solid !default;
 $chat-message-img-border-color: inherit !default;
 
-$chat-message-img-hover-opacity: .8 !default;
+$chat-message-img-hover-opacity: $avatar-img-hover-opacity !default;
 
 /* ANIMATION */
 

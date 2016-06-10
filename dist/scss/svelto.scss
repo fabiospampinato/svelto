@@ -637,11 +637,11 @@
 
   } @elseif $unit == 'em' {
 
-    @return $font-size;
+    @return $length / 1em * $font-size;
 
   } @elseif $unit == 'rem' {
 
-    @return $font-size;
+    @return $length / 1rem * $font-size;
 
   } @else {
 
@@ -4492,7 +4492,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.4' !default;
+$svelto-version: '0.5.6' !default;
 
 
 /* =========================================================================
@@ -4740,6 +4740,27 @@ $circular-border-radius: 1000000px !default; // If we use `50%` we may get an ov
 
 
 /* =========================================================================
+ * Svelto - Widgets - Avatar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require decorators/border_radius/variables.scss
+ * ========================================================================= */
+
+/* AVATAR */
+
+$avatar-size: 3em !default;
+$avatar-border-radius: $circular-border-radius !default;
+$avatar-img-hover-opacity: 0.8 !default;
+
+/* ANIMATION */
+
+$avatar-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Badge (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -4967,6 +4988,7 @@ $card-section-color-basic: true !default;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * @require widgets/avatar/variables.scss
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
@@ -4989,7 +5011,7 @@ $chat-message-img-border-width: 1px !default;
 $chat-message-img-border-style: solid !default;
 $chat-message-img-border-color: inherit !default;
 
-$chat-message-img-hover-opacity: .8 !default;
+$chat-message-img-hover-opacity: $avatar-img-hover-opacity !default;
 
 /* ANIMATION */
 
@@ -8244,7 +8266,7 @@ html {
 
 input {
   border: 0;
-  appearance: none;
+  appearance: none !important;
 }
 
 /* NUMBER */
@@ -9353,6 +9375,48 @@ span {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Avatar
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Cross-browser test
+
+/* AVATAR */
+
+.avatar {
+
+  @extend %widget;
+  @include dimension ( $avatar-size !important );
+  transition: opacity $avatar-animation-duration;
+  border-radius: $avatar-border-radius;
+  display: block;
+
+  /* IMAGE */
+
+  img {
+    border-radius: $avatar-border-radius;
+  }
+
+}
+
+/* AVATAR HOVER */
+
+a,
+.actionable {
+
+  &:hover .avatar,
+  &.avatar:hover {
+    opacity: $avatar-img-hover-opacity;
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Breadcrumb
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -10156,6 +10220,10 @@ span {
   display: flex;
 
   /* IMAGE */
+
+  .chat-message-img {
+    @extend %widget;
+  }
 
   .chat-message-img,
   .chat-message-img img {
@@ -15119,6 +15187,18 @@ svg.spinner {
       text-align: left;
     }
 
+    /* THEAD CELLS */
+
+    > th {
+      vertical-align: middle;
+    }
+
+    /* TBODY CELLS */
+
+    > td {
+      vertical-align: top;
+    }
+
   }
 
   /* ROW EMPTY */ //TODO: Maybe move it to its own module
@@ -15264,9 +15344,10 @@ svg.spinner {
 
 
 /* =========================================================================
- * WallpaperUP - Widgets - Datatables
+ * Svelto - Widgets - Datatables
  * =========================================================================
- * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/table/table.scss
  * ========================================================================= */
@@ -15709,6 +15790,7 @@ svg.spinner {
 
 //TODO: Update the highlight dynamically when we switch direction between top, bottom, left or right
 //TODO: Add support for a more relaxed implementation with support for inputs and other buttons in the tabs bar as well, basically custom content
+//TODO: Add support for bordered tabs, triggers and containers
 
 /* TABS */
 
@@ -18127,12 +18209,15 @@ h6 {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: When inside a model it doens't quite look right
+
 /* FULLSCREEN */
 
 .editor.fullscreen {
   @include fill-fixed ();
   z-index: $editor-fullscreen-z-index;
   border-radius: 0;
+  max-width: none; // Since the editor may as well be `.limited`
 }
 
 

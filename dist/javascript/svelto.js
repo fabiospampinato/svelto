@@ -2562,7 +2562,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.5.4',
+				VERSION: '0.5.6',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -3797,9 +3797,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						/* CALLBACKS */
 
-						this._variables();
-						this._init();
-						this._events();
+						if (this._variables() === false) return this.destroy();
+						if (this._init() === false) return this.destroy();
+						if (this._events() === false) return this.destroy();
 
 						/* BREAKPOINT */
 
@@ -7980,6 +7980,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				plugin: true,
 				selector: '.rails',
 				options: {
+						navigation: {
+								hidable: false // Controls whether the navigation should be hidden when all the buttons are disabled
+						},
 						scroll: {
 								speed: 200 // The distance scrolled when calling `left` or `right`
 						},
@@ -7988,6 +7991,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								left: '.rails-left',
 								right: '.rails-right',
 								end: '.rails-end',
+								navigation: '.rails-navigation, .rails-start, .rails-left, .rails-right, .rails-end',
 								content: '.rails-content',
 								active: '.rails-active'
 						},
@@ -8028,6 +8032,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$left = this.$rails.find(this.options.selectors.left);
 								this.$right = this.$rails.find(this.options.selectors.right);
 								this.$end = this.$rails.find(this.options.selectors.end);
+								this.$navigation = this.$rails.find(this.options.selectors.navigation);
 								this.$content = this.$rails.find(this.options.selectors.content);
 								this.$active = this.$content.find(this.options.selectors.active);
 						}
@@ -8036,13 +8041,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function _init() {
 
 								this._scrollToElement(this.$active);
-								this._updateButtons();
+								this._updateNavigation();
 						}
 				}, {
 						key: '_events',
 						value: function _events() {
 
 								this.___keydown();
+								this.___resize();
 								this.___scroll();
 								this.___startTap();
 								this.___leftTap();
@@ -8098,29 +8104,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* UPDATE */
 
 				}, {
-						key: '_updateButtons',
-						value: function _updateButtons() {
+						key: '_updateNavigation',
+						value: function _updateNavigation() {
 
-								var scrollLeft = void 0;
+								if (!this.$navigation.length) return;
 
-								if (this.$start.length || this.$left.length || this.$right.length || this.$end.length) {
-
-										scrollLeft = this.$content.scrollLeft();
-								}
+								var scrollLeft = this.$content.scrollLeft(),
+								    isStart = scrollLeft === 0,
+								    isEnd = this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth() <= 1; // If we use `0`, as we should` it won't always trigger
 
 								if (this.$start.length || this.$left.length) {
-
-										var isStart = scrollLeft === 0;
 
 										this.$start.add(this.$left).toggleClass(this.options.classes.disabled, isStart);
 								}
 
 								if (this.$end.length || this.$right.length) {
 
-										var isEnd = this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth() <= 1;
-
 										this.$end.add(this.$right).toggleClass(this.options.classes.disabled, isEnd);
 								}
+
+								if (this.options.navigation.hidable) {
+
+										var hidable = isStart && isEnd;
+
+										this.$navigation.toggleClass(this.options.classes.hidden, hidable);
+								}
+						}
+
+						/* RESIZE */
+
+				}, {
+						key: '___resize',
+						value: function ___resize() {
+
+								this._on(true, this.$window, 'resize', this._throttle(this._updateNavigation, Math.max(this.options.animations.scroll || 100)));
 						}
 
 						/* SCROLL */
@@ -8129,7 +8146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___scroll',
 						value: function ___scroll() {
 
-								this._on(true, this.$content, 'scroll', this._throttle(this._updateButtons, Math.max(this.options.animations.scroll || 100)));
+								this._on(true, this.$content, 'scroll', this._throttle(this._updateNavigation, Math.max(this.options.animations.scroll || 100)));
 						}
 				}, {
 						key: '_scroll',
@@ -9177,6 +9194,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._targetSelector = this.options.target || this.$element.data(this.options.datas.target);
 
 								this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest(this.options.widget.config.selector);
+
+								if (!this.$target.length) return false;
 
 								this._targetInstance = this.$target[this.options.widget.config.name]('instance');
 						}
@@ -10785,6 +10804,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require lib/color/color.js
  * ========================================================================= */
 
+//FIXME: Add support of it working without a `startColor`
 //TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
@@ -13494,6 +13514,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* NOTIFICATION */
 
+		//TODO: Add support for string options
+
 		$.notification = function (options) {
 
 				/* OPTIONS */
@@ -13662,12 +13684,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-														$.toast(_.isError(resj) || !('msg' in resj) ? _this59.options.messages.error : resj.msg);
+														$.toast(_.isError(resj) || !('message' in resj) ? _this59.options.messages.error : resj.message);
 												},
 
 												success: function success(res) {
 
 														//FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
+														//TODO: Make it work like formAjax's
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
@@ -13757,7 +13780,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						},
 						messages: {
 								error: 'An error occurred, please try again later',
-								success: 'The action has been executed'
+								success: 'Done! A page refresh may be needed',
+								refreshing: 'Done! Refreshing the page...',
+								redirecting: 'Done! Redirecting...'
 						},
 						classes: {
 								spinner: {
@@ -13798,10 +13823,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* ON CLICK */
 
+								var _prevOnClick = button.onClick,
+								    instance = this;
+
 								button.onClick = function () {
-										this.request(true);
+
+										instance.request(true);
+
+										if (_.isFunction(_prevOnClick)) {
+
+												_prevOnClick.apply(this, arguments);
+										}
+
 										return false;
-								}.bind(this);
+								};
 
 								/* OPENING */
 
@@ -13872,7 +13907,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-								this._replaceToast(_.isError(resj) || !('msg' in resj) ? this.options.messages.error : resj.msg);
+								this._replaceToast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
 
 								this._destroyToast(true);
 
@@ -13886,16 +13921,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-								if (_.isError(resj)) {
+								if (!_.isError(resj)) {
 
-										return this.__error(res);
+										if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+
+												this._replaceToast(resj.message || this.options.messages.refreshing);
+
+												location.reload();
+										} else if (resj.url) {
+
+												// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+												this._replaceToast(resj.message || this.options.messages.redirecting);
+
+												location.assign(resj.url);
+										} else {
+
+												this._replaceToast(resj.message || this.options.messages.success);
+										}
 								} else {
 
-										this._replaceToast('msg' in resj ? resj.msg : this.options.messages.success);
-										this._destroyToast(true);
-
-										_get(Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
+										this._replaceToast(this.options.messages.success);
 								}
+
+								this._destroyToast(true);
+
+								_get(Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
 						}
 
 						/* API OVERRIDES */
@@ -14157,7 +14208,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-								$.toast(_.isError(resj) || !('msg' in resj) ? this.options.messages.error : resj.msg);
+								$.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
 
 								this._destroyModal();
 
@@ -14166,67 +14217,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__success',
 						value: function __success(res) {
-								var _this63 = this;
 
 								if (this.isAborted()) return;
 
 								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-								if (_.isError(resj) || !('modal' in resj)) {
+								if (_.isError(resj) || !('modal' in resj)) return this.__error(res);
 
-										return this.__error(res);
-								} else {
-										(function () {
+								/* VARIABLES */
 
-												/* VARIABLES */
+								var prevRect = this.$modal.getRect(),
+								    $remoteModal = $(resj.modal);
 
-												var prevRect = _this63.$modal.getRect(),
-												    $remoteModal = $(resj.modal);
+								$remoteModal.addClass(Widgets.Modal.config.options.classes.show).addClass(Widgets.Modal.config.options.classes.open);
 
-												$remoteModal.addClass(Widgets.Modal.config.options.classes.show).addClass(Widgets.Modal.config.options.classes.open);
+								/* AVOIDING MODAL CLOSE */
 
-												/* AVOIDING MODAL CLOSE */
+								var instance = this.$modal.modal('instance');
+								instance.close = instance._reset;
 
-												var instance = _this63.$modal.modal('instance');
-												instance.close = instance._reset;
+								/* RESIZING */
 
-												/* RESIZING */
+								this._frame(function () {
 
-												_this63._frame(function () {
+										this.$modal.replaceWith($remoteModal);
+										this.$modal = $remoteModal;
+										this.$modal.widgetize();
 
-														this.$modal.replaceWith($remoteModal);
-														this.$modal = $remoteModal;
-														this.$modal.widgetize();
+										var newRect = this.$modal.getRect();
 
-														var newRect = this.$modal.getRect();
+										this.$modal.css({
+												width: prevRect.width,
+												height: prevRect.height
+										});
 
-														this.$modal.css({
-																width: prevRect.width,
-																height: prevRect.height
-														});
+										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
 
-														this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
+										this._frame(function () {
+												var _this63 = this;
 
-														this._frame(function () {
-																var _this64 = this;
+												this.$modal.addClass(this.options.classes.showing);
 
-																this.$modal.addClass(this.options.classes.showing);
-
-																this.$modal.animate({
-																		width: newRect.width,
-																		height: newRect.height
-																}, this.options.animations.resize, function () {
-																		_this64.$modal.css({
-																				width: '',
-																				height: ''
-																		}).removeClass(_this64.options.classes.placeholder + ' ' + _this64.options.classes.loaded + ' ' + _this64.options.classes.resizing + ' ' + _this64.options.classes.showing);
-																});
-														});
+												this.$modal.animate({
+														width: newRect.width,
+														height: newRect.height
+												}, this.options.animations.resize, function () {
+														_this63.$modal.css({
+																width: '',
+																height: ''
+														}).removeClass(_this63.options.classes.placeholder + ' ' + _this63.options.classes.loaded + ' ' + _this63.options.classes.resizing + ' ' + _this63.options.classes.showing);
 												});
+										});
+								});
 
-												_get(Object.getPrototypeOf(RemoteModal.prototype), '__success', _this63).call(_this63, res);
-										})();
-								}
+								_get(Object.getPrototypeOf(RemoteModal.prototype), '__success', this).call(this, res);
 						}
 
 						/* API OVERRIDES */
@@ -16116,6 +16160,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$valueholder = this.$wrp.find(this.options.selectors.valueholderFallback).first();
 								}
 
+								this.initialValueholder = this.$valueholder.text();
+
 								this.selectOptions = [];
 
 								this.$popover = false;
@@ -16306,11 +16352,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var value = this.$select.val();
 
-								if (_.isString(value) && value.length) {
+								if (_.isString(value)) {
+										//FIXME: Is it needed?
 
-										var $selectedOption = this.$options.filter('[value="' + value + '"]').first();
+										if (value.length) {
 
-										this.$valueholder.text($selectedOption.text());
+												var $selectedOption = this.$options.filter('[value="' + value + '"]').first();
+
+												this.$valueholder.text($selectedOption.text());
+										} else {
+
+												this.$valueholder.text(this.initialValueholder);
+										}
 								}
 						}
 				}, {
@@ -16327,7 +16380,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._updateValueholder();
 
-								if (!Browser.is.touchDevice) {
+								if (!this.options.native) {
 
 										this._updatePopover();
 								}
@@ -17244,9 +17297,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//FIXME: If a form gets autofilled with `SafeInCloud` the value doesn't get updated (it probably doesn't trigger 'change') -> force a value refresh when submitting
 //TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
+//TODO: Maybe make it generic (so that it can be used in single elements) and just call it `validate`
 
 (function ($, _, Svelto, Widgets, Factory, Validator) {
 
@@ -17342,7 +17395,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						selectors: {
 								element: 'input:not([type="button"]), textarea, select',
 								textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
-								wrapper: '.checkbox, .colorpicker, .datepicker, .radio, .select, .slider, .switch'
+								wrapper: '.checkbox, .colorpicker, .datepicker, .editor, .radio, .select, .slider, .switch'
 						}
 				}
 		};
@@ -17491,25 +17544,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 						}
 
-						/* CHANGE */
+						/* UPDATE */
 
 				}, {
-						key: '___change',
-						value: function ___change() {
-
-								this._on(true, this.$elements, 'change', this.__change);
-						}
-				}, {
-						key: '__change',
-						value: function __change(event) {
+						key: '_updateElement',
+						value: function _updateElement(elementObj) {
 
 								/* FORM */
 
 								this._isValid = undefined;
 
 								/* ELEMENT */
-
-								var elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
 								elementObj.isDirty = true;
 								elementObj.isValid = undefined;
@@ -17536,6 +17581,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												}
 										}
 								}
+						}
+				}, {
+						key: '_updateElements',
+						value: function _updateElements() {
+
+								for (var id in this.elements) {
+
+										if (this.elements.hasOwnProperty(id)) {
+
+												this._updateElement(this.elements[id]);
+										}
+								}
+						}
+
+						/* CHANGE */
+
+				}, {
+						key: '___change',
+						value: function ___change() {
+
+								this._on(true, this.$elements, 'change', this.__change);
+						}
+				}, {
+						key: '__change',
+						value: function __change(event) {
+
+								this._updateElement(this.elements[event.currentTarget[this.options.datas.id]]);
 						}
 
 						/* FOCUS */
@@ -17585,6 +17657,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
+
+								this._updateElements();
 
 								if (!this.isValid()) {
 
@@ -17831,7 +17905,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this81 = this;
+								var _this80 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -17848,27 +17922,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this81.options.spinnerOverlay) {
+												if (_this80.options.spinnerOverlay) {
 
-														_this81.$form.spinnerOverlay('open');
+														_this80.$form.spinnerOverlay('open');
 												}
 
-												_this81._trigger('beforesend');
+												_this80._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												if (!_.isError(resj)) {
+												$.toast(_.isError(resj) || !('message' in resj) ? _this80.options.messages.error : resj.msg);
 
-														$.toast(resj.msg || _this81.options.messages.error);
-												} else {
-
-														$.toast(_this81.options.messages.error);
-												}
-
-												_this81._trigger('error');
+												_this80._trigger('error');
 										},
 
 										success: function success(res) {
@@ -17879,36 +17947,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.msg || _this81.options.messages.refreshing);
+																$.toast(resj.message || _this80.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.msg || _this81.options.messages.redirecting);
+																$.toast(resj.message || _this80.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.msg || _this81.options.messages.success);
+																$.toast(resj.message || _this80.options.messages.success);
 														}
 												} else {
 
-														$.toast(_this81.options.messages.success);
+														$.toast(_this80.options.messages.success);
 												}
 
-												_this81._trigger('success');
+												_this80._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this81.options.spinnerOverlay) {
+												if (_this80.options.spinnerOverlay) {
 
-														_this81.$form.spinnerOverlay('close');
+														_this80.$form.spinnerOverlay('close');
 												}
 
-												_this81._trigger('complete');
+												_this80._trigger('complete');
 										}
 
 								});
@@ -31836,9 +31904,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 });
 
 /* =========================================================================
- * WallpaperUP - Widgets - Datatables (Config)
+ * Svelto - Widgets - Datatables (Config)
  * =========================================================================
- * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/datatables.js
  * @require core/svelto/svelto.js
@@ -31846,20 +31915,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* DATATABLES */
 
-(function ($, _, Svelto) {
+(function ($, _, Svelto, DataTable) {
 
 		'use strict';
 
-		/* DATATABLES */
+		/* CHECK IF LOADED */
 
-		var DataTable = $.fn.dataTable;
+		if (!DataTable) return;
 
 		/* DEFAULTS */
 
 		_.extend(DataTable.defaults, {
 				dom: '<"card-header bordered"' + '<"multiple center" l <"spacer hidden-xs-down"> f>' + '>' + '<"card-block bordered table-wrapper" t>' + '<"card-footer bordered"' + '<"multiple center" i <"spacer hidden-xs-down"> p>' + '>',
 				autoWidth: false,
-				lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+				lengthMenu: [[10, 25, 50, 100, 250], [10, 25, 50, 100, 250]],
 				pageLength: 10,
 				pagingType: 'simple_numbers_no_ellipses',
 				renderer: 'svelto',
@@ -32006,12 +32075,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												break;
 
 										case 'next':
-												if (page === pages - 1) continue;
+												if (pages === 0 || page === pages - 1) continue;
 												btnText = lang.sNext;
 												break;
 
 										case 'last':
-												if (page === pages - 1) continue;
+												if (pages === 0 || page === pages - 1) continue;
 												btnText = lang.sLast;
 												break;
 
@@ -32055,25 +32124,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* EXPORT */
 
 		Svelto.DataTable = DataTable;
-})(Svelto.$, Svelto._, Svelto);
+})(Svelto.$, Svelto._, Svelto, Svelto.$.fn.dataTable);
 
 /* =========================================================================
- * WallpaperUP - Widgets - Datatables
+ * Svelto - Widgets - Datatables
  * =========================================================================
- * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./config.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
+//TODO: Add a spinnerOverlay when processing
 //TODO: Proxy all `*.dt` events as `dt:*`
 //TODO: Test in all browsers
 
 /* DATATABLES */
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ($, _, Svelto, Widgets, Factory, DataTable) {
 
 		'use strict';
+
+		/* CHECK IF LOADED */
+
+		if (!DataTable) return;
 
 		/* CONFIG */
 
@@ -32175,7 +32250,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* FACTORY */
 
 		Factory.init(DT, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable);
 
 /* =========================================================================
  * Svelto - Widgets - Selectable
@@ -32201,13 +32276,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				selector: 'table.selectable',
 				options: {
 						moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
+						single: false, // Enforcing `select-single` even without the need to add the class
 						classes: {
 								selected: 'selected',
 								single: 'select-single',
 								datatable: 'datatable'
 						},
 						selectors: {
-								element: 'tbody tr:not(.table-row-empty)' //FIXME: Add support for datatables' empty row
+								element: 'tbody tr:not(.table-row-empty)', //FIXME: Add support for datatables' empty row
+								selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler
 						},
 						keystrokes: {
 								'ctmd + a': 'all',
@@ -32241,12 +32318,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.$selectable = this.$element;
 
-								this._isSingle = this.$selectable.hasClass(this.options.classes.single);
+								this._isSingle = this.options.single || this.$selectable.hasClass(this.options.classes.single);
 								this._isDataTable = this.$selectable.hasClass(this.options.classes.datatable);
 
 								this._dtapi = this._isDataTable ? this.$selectable.DataTable() : false;
 
 								this.$elements = this._getElements();
+
+								this._usingSelectionToggler = !!this.options.selectors.selectionToggler;
+								this.options.selectors.selectionToggler = this._usingSelectionToggler ? this.options.selectors.element + ' ' + this.options.selectors.selectionToggler : this.options.selectors.element;
 						}
 				}, {
 						key: '_events',
@@ -32269,7 +32349,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___change',
 						value: function ___change() {
 
-								this._on(true, 'change tablehelper:change sortable:sort sort.dt search.dt', this.__change); //FIXME: Does it get triggered also after fetching data from ajax? (DT)
+								this._on(true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change);
 						}
 				}, {
 						key: '__change',
@@ -32278,6 +32358,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$elements = this._getElements();
 
 								this._resetPrev();
+
+								this._trigger('change');
 						}
 
 						/* KEYDOWN */
@@ -32297,10 +32379,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (Browser.is.touchDevice || this._isSingle) {
 
-										this._on(Pointer.tap, this.options.selectors.element, this.__tapTouch);
+										this._on(Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch);
 								} else {
 
-										this._on(Pointer.down, this.options.selectors.element, this.__down);
+										this._on(Pointer.down, this.options.selectors.selectionToggler, this.__down);
 								}
 						}
 
@@ -32312,7 +32394,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								event.preventDefault();
 
-								var $target = $(event.currentTarget);
+								var $target = this._getEventElement(event);
 
 								if (this._isSingle) {
 
@@ -32333,7 +32415,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								event.preventDefault();
 
 								this.startEvent = event;
-								this.$startElement = $(event.currentTarget);
+								this.$startElement = this._getEventElement(event);
 
 								this._on(true, this.$document, Pointer.move, this.__move);
 
@@ -32386,7 +32468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__dragEnter',
 						value: function __dragEnter(event) {
 
-								this._toggleGroup(this.$startElement, $(event.currentTarget));
+								this._toggleGroup(this.$startElement, this._getEventElement(event));
 
 								this._trigger('change');
 						}
@@ -32480,6 +32562,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function _getElements() {
 
 								return this._dtapi ? $(this._dtapi.rows().nodes()) : this.$selectable.find(this.options.selectors.element);
+						}
+				}, {
+						key: '_getEventElement',
+						value: function _getEventElement(event) {
+
+								return this._usingSelectionToggler ? $(event.currentTarget).closest(this.options.selectors.element) : $(event.currentTarget);
 						}
 				}, {
 						key: '_resetPrev',
@@ -32582,7 +32670,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										window.location.href = ajax.url;
 								}
 						},
-						defaultType: 'page',
+						defaultAction: 'page',
 						widget: Widgets.Selectable,
 						characters: {
 								separator: ','
@@ -32663,7 +32751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								if (!ids.length) return $.toast(this.options.messages.no_selected);
 
 								var $action = $(event.target),
-								    type = $action.data(this.options.datas.type) || this.options.defaultType,
+								    type = $action.data(this.options.datas.type) || this.options.defaultAction,
 								    action = this.options.actions[type];
 
 								if (!action) return;
@@ -32691,11 +32779,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this85 = this;
+								var _this84 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this85.options.selectors.id ? $(row).find(_this85.options.selectors.id).text() : $(row).data(_this85.options.datas.id);
+										return _this84.options.selectors.id ? $(row).find(_this84.options.selectors.id).text() : $(row).data(_this84.options.datas.id);
 								});
 
 								return _.compact(ids);
@@ -34607,6 +34695,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._isFullscreen = true;
 
+								this.$layout.disableScroll();
 								this.$editor.addClass(this.options.classes.fullscreen);
 
 								this.$triggerFullscreen.addClass(this.options.classes.trigger.active);
@@ -34619,6 +34708,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._isFullscreen = false;
 
+								this.$layout.enableScroll();
 								this.$editor.removeClass(this.options.classes.fullscreen);
 
 								this.$triggerFullscreen.removeClass(this.options.classes.trigger.active);

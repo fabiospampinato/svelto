@@ -951,6 +951,17 @@
  * ========================================================================= */
 /* BORDER RADIUS */
 /* =========================================================================
+ * Svelto - Widgets - Avatar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require decorators/border_radius/variables.scss
+ * ========================================================================= */
+/* AVATAR */
+/* ANIMATION */
+/* =========================================================================
  * Svelto - Widgets - Badge (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -1029,6 +1040,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * @require widgets/avatar/variables.scss
  * @require widgets/container/variables.scss
  * ========================================================================= */
 /* LEVELS */
@@ -3744,9 +3756,9 @@ html {
 /* BORDER / iOS SHADOW */
 input {
   border: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
 }
 
 /* NUMBER */
@@ -4928,8 +4940,8 @@ span > script:last-child {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* WIDGET */
-blockquote, blockquote > footer, .widget, .breadcrumb, .carousel, .centerer, .placeholder, .colorpicker, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), .chat, .datepicker, fieldset, .infobar, .tagbox, figcaption,
-.figcaption, .card, .chat-message, .divider.block, hr.vertical, .divider.linear.vertical:empty, .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
+blockquote, blockquote > footer, .widget, .avatar, .breadcrumb, .carousel, .centerer, .placeholder, .colorpicker, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), .chat, .datepicker, fieldset, .infobar, .tagbox, figcaption,
+.figcaption, .card, .chat-message, .chat-message .chat-message-img, .divider.block, hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
 .figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input:not([type]),
 input[type="text"],
 input[type="password"],
@@ -4948,8 +4960,8 @@ h6 {
   margin: 0 0 0.625rem;
 }
 
-blockquote:last-child, .widget:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
-.figcaption:last-child, .card:last-child, .chat-message:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
+blockquote:last-child, blockquote > footer:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
+.figcaption:last-child, .card:last-child, .chat-message:last-child, .chat-message .chat-message-img:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.vertical:last-child:empty, .vertical.divider:last-child:empty:not(.block):not(.text), .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
 .figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child:not([type]),
 input[type="text"]:last-child,
 input[type="password"]:last-child,
@@ -4967,10 +4979,10 @@ h6:last-child {
   margin-bottom: 0;
 }
 
-.multiple > blockquote:last-child, .pager > blockquote:last-child, .tagbox-tags > blockquote:last-child, blockquote.multiple > footer:last-child, blockquote.pager > footer:last-child, blockquote.tagbox-tags > footer:last-child, .multiple > .widget:last-child, .pager > .widget:last-child, .tagbox-tags > .widget:last-child, .multiple > .breadcrumb:last-child, .pager > .breadcrumb:last-child, .tagbox-tags > .breadcrumb:last-child, .multiple > .carousel:last-child, .pager > .carousel:last-child, .tagbox-tags > .carousel:last-child, .multiple > .centerer:last-child, .pager > .centerer:last-child, .tagbox-tags > .centerer:last-child, .multiple > .placeholder:last-child, .pager > .placeholder:last-child, .tagbox-tags > .placeholder:last-child, .multiple > .colorpicker:last-child, .pager > .colorpicker:last-child, .tagbox-tags > .colorpicker:last-child, .multiple > .container:last-child, .pager > .container:last-child, .tagbox-tags > .container:last-child, .multiple > .card-header:last-child:not(.multiple), .pager > .card-header:last-child:not(.multiple), .tagbox-tags > .card-header:last-child:not(.multiple), .multiple > .card-block:last-child:not(.multiple), .pager > .card-block:last-child:not(.multiple), .tagbox-tags > .card-block:last-child:not(.multiple), .multiple > .card-footer:last-child:not(.multiple), .pager > .card-footer:last-child:not(.multiple), .tagbox-tags > .card-footer:last-child:not(.multiple), .multiple > .chat:last-child, .pager > .chat:last-child, .tagbox-tags > .chat:last-child, .multiple > .datepicker:last-child, .pager > .datepicker:last-child, .tagbox-tags > .datepicker:last-child, .multiple > fieldset:last-child, .pager > fieldset:last-child, .tagbox-tags > fieldset:last-child, .multiple > .infobar:last-child, .pager > .infobar:last-child, .tagbox-tags > .infobar:last-child, .multiple > .tagbox:last-child, .pager > .tagbox:last-child, .tagbox-tags > .tagbox:last-child, .multiple > figcaption:last-child, .pager > figcaption:last-child, .tagbox-tags > figcaption:last-child, .multiple >
+.multiple > blockquote:last-child, .pager > blockquote:last-child, .tagbox-tags > blockquote:last-child, blockquote.multiple > footer:last-child, blockquote.pager > footer:last-child, blockquote.tagbox-tags > footer:last-child, .multiple > .widget:last-child, .pager > .widget:last-child, .tagbox-tags > .widget:last-child, .multiple > .avatar:last-child, .pager > .avatar:last-child, .tagbox-tags > .avatar:last-child, .multiple > .breadcrumb:last-child, .pager > .breadcrumb:last-child, .tagbox-tags > .breadcrumb:last-child, .multiple > .carousel:last-child, .pager > .carousel:last-child, .tagbox-tags > .carousel:last-child, .multiple > .centerer:last-child, .pager > .centerer:last-child, .tagbox-tags > .centerer:last-child, .multiple > .placeholder:last-child, .pager > .placeholder:last-child, .tagbox-tags > .placeholder:last-child, .multiple > .colorpicker:last-child, .pager > .colorpicker:last-child, .tagbox-tags > .colorpicker:last-child, .multiple > .container:last-child, .pager > .container:last-child, .tagbox-tags > .container:last-child, .multiple > .card-header:last-child:not(.multiple), .pager > .card-header:last-child:not(.multiple), .tagbox-tags > .card-header:last-child:not(.multiple), .multiple > .card-block:last-child:not(.multiple), .pager > .card-block:last-child:not(.multiple), .tagbox-tags > .card-block:last-child:not(.multiple), .multiple > .card-footer:last-child:not(.multiple), .pager > .card-footer:last-child:not(.multiple), .tagbox-tags > .card-footer:last-child:not(.multiple), .multiple > .chat:last-child, .pager > .chat:last-child, .tagbox-tags > .chat:last-child, .multiple > .datepicker:last-child, .pager > .datepicker:last-child, .tagbox-tags > .datepicker:last-child, .multiple > fieldset:last-child, .pager > fieldset:last-child, .tagbox-tags > fieldset:last-child, .multiple > .infobar:last-child, .pager > .infobar:last-child, .tagbox-tags > .infobar:last-child, .multiple > .tagbox:last-child, .pager > .tagbox:last-child, .tagbox-tags > .tagbox:last-child, .multiple > figcaption:last-child, .pager > figcaption:last-child, .tagbox-tags > figcaption:last-child, .multiple >
 .figcaption:last-child, .pager >
 .figcaption:last-child, .tagbox-tags >
-.figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
+.figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .chat-message .multiple > .chat-message-img:last-child, .chat-message .pager > .chat-message-img:last-child, .chat-message .tagbox-tags > .chat-message-img:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
 .figure:last-child, .pager >
 .figure:last-child, .tagbox-tags >
 .figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child:not([type]), .pager > input:last-child:not([type]), .tagbox-tags > input:last-child:not([type]), .multiple >
@@ -5014,6 +5026,36 @@ h6:last-child, .pager >
 h6:last-child, .tagbox-tags >
 h6:last-child {
   margin-bottom: 0.625rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Avatar
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+/* AVATAR */
+.avatar {
+  width: 3em !important;
+  height: 3em !important;
+  transition: opacity 0.35s;
+  border-radius: 1000000px;
+  display: block;
+  /* IMAGE */
+}
+
+.avatar img {
+  border-radius: 1000000px;
+}
+
+/* AVATAR HOVER */
+a:hover .avatar, a.avatar:hover,
+.actionable:hover .avatar, .button:hover .avatar,
+.actionable.avatar:hover,
+.avatar.button:hover {
+  opacity: 0.8;
 }
 
 /* =========================================================================
@@ -10267,11 +10309,21 @@ svg.spinner.base circle {
 
 .table tr {
   /* CELLS */
+  /* THEAD CELLS */
+  /* TBODY CELLS */
 }
 
 .table tr > * {
   padding: 0.625rem 0.625rem;
   text-align: left;
+}
+
+.table tr > th {
+  vertical-align: middle;
+}
+
+.table tr > td {
+  vertical-align: top;
 }
 
 .table .table-row-empty:not(:only-child) {
@@ -10373,9 +10425,10 @@ svg.spinner.base circle {
 }
 
 /* =========================================================================
- * WallpaperUP - Widgets - Datatables
+ * Svelto - Widgets - Datatables
  * =========================================================================
- * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/table/table.scss
  * ========================================================================= */
@@ -13689,8 +13742,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -13782,8 +13835,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -13906,8 +13959,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -13951,8 +14004,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.4#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14413,6 +14466,7 @@ h6 > small {
   left: 0;
   z-index: 1400;
   border-radius: 0;
+  max-width: none;
 }
 
 /* =========================================================================
@@ -14455,7 +14509,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.5.4);
+  background-image: url(/images/flags.png?v=0.5.6);
 }
 
 /* FLAGS */
@@ -15472,7 +15526,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.4) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.4) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.6) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.6) format("woff");
 }
 
 /* =========================================================================

@@ -637,11 +637,11 @@
 
   } @elseif $unit == 'em' {
 
-    @return $font-size;
+    @return $length / 1em * $font-size;
 
   } @elseif $unit == 'rem' {
 
-    @return $font-size;
+    @return $length / 1rem * $font-size;
 
   } @else {
 
