@@ -30,7 +30,7 @@
            '<"multiple center" i <"spacer hidden-xs-down"> p>' +
          '>',
     autoWidth: false,
-    lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
+    lengthMenu: [ [10, 25, 50, 100, 250], [10, 25, 50, 100, 250] ],
     pageLength: 10,
     pagingType: 'simple_numbers_no_ellipses',
     renderer: 'svelto',
