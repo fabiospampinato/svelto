@@ -99,7 +99,7 @@
 
           let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-          $.toast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+          $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.msg );
 
           this._trigger ( 'error' );
 
@@ -113,7 +113,7 @@
 
             if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-              $.toast ( resj.msg || this.options.messages.refreshing );
+              $.toast ( resj.message || this.options.messages.refreshing );
 
               location.reload ();
 
@@ -121,13 +121,13 @@
 
               // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              $.toast ( resj.msg || this.options.messages.redirecting );
+              $.toast ( resj.message || this.options.messages.redirecting );
 
               location.assign ( resj.url );
 
             } else {
 
-              $.toast ( resj.msg || this.options.messages.success );
+              $.toast ( resj.message || this.options.messages.success );
 
             }
 

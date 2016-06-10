@@ -10,7 +10,7 @@ Router.route ( '/selectable-action/action', function () {
     ids = _.isArray ( ids ) ? ids.join ( ', ' ) : ids;
 
     this.response.end ( JSON.stringify ({
-      msg: `Work performed on ids: ${ids}!`
+      message: `Work performed on ids: ${ids}!`
     }));
 
   }, 1500 );

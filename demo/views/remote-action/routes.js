@@ -6,7 +6,7 @@ Router.route ( '/remote-action-1', function () {
   setTimeout ( () => {
 
     this.response.end ( JSON.stringify ({
-      msg: 'Task accomplished Master!'
+      message: 'Task accomplished Master!'
     }));
 
   }, 1500 );
@@ -20,7 +20,7 @@ Router.route ( '/remote-action-2', function () {
   setTimeout ( () => {
 
     this.response.end ( JSON.stringify ({
-      msg: 'Color: `' + this.request.body.color + '`'
+      message: 'Color: `' + this.request.body.color + '`'
     }));
 
   }, 1500 );

@@ -150,7 +150,7 @@
 
       let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-      $.toast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
+      $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.message );
 
       this._destroyModal ();
 

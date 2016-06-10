@@ -10,7 +10,7 @@ Router.route ( '/form-ajax-basic', function () {
     setTimeout ( () => {
 
       this.response.end ( JSON.stringify ({
-        msg: 'Form submitted using ajax! What\'s "' + fields.input_1 + '"?'
+        message: 'Form submitted using ajax! What\'s "' + fields.input_1 + '"?'
       }));
 
     }, 1500 );
@@ -30,7 +30,7 @@ Router.route ( '/form-ajax-file', function () {
     setTimeout ( () => {
 
       this.response.end ( JSON.stringify ({
-        msg: 'Form submitted using ajax! "' + files.file.name + '" has been uploaded too!'
+        message: 'Form submitted using ajax! "' + files.file.name + '" has been uploaded too!'
       }));
 
     }, 1500 );
