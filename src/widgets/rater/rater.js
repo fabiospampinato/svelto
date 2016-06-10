@@ -126,6 +126,7 @@
           success: ( res ) => {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
+            //TODO: Make it work like formAjax's
 
             let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
