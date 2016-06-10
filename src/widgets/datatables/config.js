@@ -2,7 +2,8 @@
 /* =========================================================================
  * Svelto - Widgets - Datatables (Config)
  * =========================================================================
- * Copyright (c) 2011-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/datatables.js
  * @require core/svelto/svelto.js
