@@ -1,0 +1,41 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Avatar
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Cross-browser test
+
+/* AVATAR */
+
+.avatar {
+
+  @extend %widget;
+  @include dimension ( $avatar-size !important );
+  transition: opacity $avatar-animation-duration;
+  border-radius: $avatar-border-radius;
+  display: block;
+
+  /* IMAGE */
+
+  img {
+    border-radius: $avatar-border-radius;
+  }
+
+}
+
+/* AVATAR HOVER */
+
+a,
+.actionable {
+
+  &:hover .avatar,
+  &.avatar:hover {
+    opacity: $avatar-img-hover-opacity;
+  }
+
+}

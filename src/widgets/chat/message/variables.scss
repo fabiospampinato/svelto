@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * @require widgets/avatar/variables.scss
  * @require widgets/container/variables.scss
  * ========================================================================= */
 
@@ -28,7 +29,7 @@ $chat-message-img-border-width: 1px !default;
 $chat-message-img-border-style: solid !default;
 $chat-message-img-border-color: inherit !default;
 
-$chat-message-img-hover-opacity: .8 !default;
+$chat-message-img-hover-opacity: $avatar-img-hover-opacity !default;
 
 /* ANIMATION */
 

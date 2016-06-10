@@ -11,6 +11,7 @@
 %widget {
   @include last-child-no-gutter ();
   position: relative;
+  display: block;
   margin: 0 0 $gutter;
 }
 

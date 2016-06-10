@@ -5,6 +5,8 @@ SampleHelpers.registerAs ( 'sample' );
 
 /* STRINGS */
 
+SampleHelpers.define ( 'avatarUrl', () => '/sample/avatar.png' );
+
 SampleHelpers.define ( 'imageUrl', () => '/sample/sample.png' );
 
 SampleHelpers.define ( 'imageWideUrl', () => '/sample/sample-wide.png' );
@@ -24,6 +26,14 @@ SampleHelpers.define ( 'text', function ( wordsNr = false ) {
 });
 
 /* WIDGETS */
+
+SampleHelpers.define ( 'avatar', function ( classes = '' ) {
+
+  let url = SampleHelpers.avatarUrl ();
+
+  return `<img src="${url}" class="avatar ${classes}"/>`;
+
+});
 
 SampleHelpers.define ( 'image', function ( classes = '' ) {
 
