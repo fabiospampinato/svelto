@@ -99,15 +99,7 @@
 
           let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-          if ( !_.isError ( resj ) ) {
-
-            $.toast ( resj.msg || this.options.messages.error );
-
-          } else {
-
-            $.toast ( this.options.messages.error );
-
-          }
+          $.toast ( _.isError ( resj ) || !('msg' in resj) ? this.options.messages.error : resj.msg );
 
           this._trigger ( 'error' );
 

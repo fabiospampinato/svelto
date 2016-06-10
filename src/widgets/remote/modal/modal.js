@@ -164,62 +164,56 @@
 
       let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-      if ( _.isError ( resj ) || !('modal' in resj) ) {
+      if ( _.isError ( resj ) || !('modal' in resj) ) return this.__error ( res );
 
-        return this.__error ( res );
+      /* VARIABLES */
 
-      } else {
+      let prevRect = this.$modal.getRect (),
+          $remoteModal = $(resj.modal);
 
-        /* VARIABLES */
+      $remoteModal.addClass ( Widgets.Modal.config.options.classes.show ).addClass ( Widgets.Modal.config.options.classes.open );
 
-        let prevRect = this.$modal.getRect (),
-            $remoteModal = $(resj.modal);
+      /* AVOIDING MODAL CLOSE */
 
-        $remoteModal.addClass ( Widgets.Modal.config.options.classes.show ).addClass ( Widgets.Modal.config.options.classes.open );
+      let instance = this.$modal.modal ( 'instance' );
+      instance.close = instance._reset;
 
-        /* AVOIDING MODAL CLOSE */
+      /* RESIZING */
 
-        let instance = this.$modal.modal ( 'instance' );
-        instance.close = instance._reset;
+      this._frame ( function () {
 
-        /* RESIZING */
+        this.$modal.replaceWith ( $remoteModal );
+        this.$modal = $remoteModal;
+        this.$modal.widgetize ();
+
+        let newRect = this.$modal.getRect ();
+
+        this.$modal.css ({
+          width: prevRect.width,
+          height: prevRect.height
+        });
+
+        this.$modal.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
 
         this._frame ( function () {
 
-          this.$modal.replaceWith ( $remoteModal );
-          this.$modal = $remoteModal;
-          this.$modal.widgetize ();
+          this.$modal.addClass ( this.options.classes.showing );
 
-          let newRect = this.$modal.getRect ();
-
-          this.$modal.css ({
-            width: prevRect.width,
-            height: prevRect.height
-          });
-
-          this.$modal.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
-
-          this._frame ( function () {
-
-            this.$modal.addClass ( this.options.classes.showing );
-
-            this.$modal.animate ({
-              width: newRect.width,
-              height: newRect.height
-            }, this.options.animations.resize, () => {
-              this.$modal.css ({
-                width: '',
-                height: ''
-              }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.resizing + ' ' + this.options.classes.showing );
-            });
-
+          this.$modal.animate ({
+            width: newRect.width,
+            height: newRect.height
+          }, this.options.animations.resize, () => {
+            this.$modal.css ({
+              width: '',
+              height: ''
+            }).removeClass ( this.options.classes.placeholder + ' ' + this.options.classes.loaded + ' ' + this.options.classes.resizing + ' ' + this.options.classes.showing );
           });
 
         });
 
-        super.__success ( res );
+      });
 
-      }
+      super.__success ( res );
 
     }
 
