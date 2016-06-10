@@ -43,7 +43,9 @@
       },
       messages: {
         error: 'An error occurred, please try again later',
-        success: 'The action has been executed'
+        success: 'Done! A page refresh may be needed',
+        refreshing: 'Done! Refreshing the page...',
+        redirecting: 'Done! Redirecting...'
       },
       classes: {
         spinner: {
@@ -176,18 +178,37 @@
 
       let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
 
-      if ( _.isError ( resj ) ) {
+      if ( !_.isError ( resj ) ) {
 
-        return this.__error ( res );
+        if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
+
+          this._replaceToast ( resj.msg || this.options.messages.refreshing );
+
+          location.reload ();
+
+        } else if ( resj.url ) {
+
+          // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+          this._replaceToast ( resj.msg || this.options.messages.redirecting );
+
+          location.assign ( resj.url );
+
+        } else {
+
+          this._replaceToast ( resj.msg || this.options.messages.success );
+
+        }
 
       } else {
 
-        this._replaceToast ( 'msg' in resj ? resj.msg : this.options.messages.success );
-        this._destroyToast ( true );
-
-        super.__success ( res );
+        this._replaceToast ( this.options.messages.success );
 
       }
+
+      this._destroyToast ( true );
+
+      super.__success ( res );
 
     }
 
