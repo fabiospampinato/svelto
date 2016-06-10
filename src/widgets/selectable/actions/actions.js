@@ -37,7 +37,7 @@
           window.location.href = ajax.url;
         }
       },
-      defaultType: 'page',
+      defaultAction: 'page',
       widget: Widgets.Selectable,
       characters: {
         separator: ','
@@ -106,7 +106,7 @@
       if ( !ids.length ) return $.toast ( this.options.messages.no_selected );
 
       let $action = $(event.target),
-          type = $action.data ( this.options.datas.type ) || this.options.defaultType,
+          type = $action.data ( this.options.datas.type ) || this.options.defaultAction,
           action = this.options.actions[type];
 
       if ( !action ) return;
