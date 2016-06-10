@@ -21,3 +21,4 @@ iron:router
 stevezhu:lodash@=4.6.1
 standard-minifier-css
 standard-minifier-js
+msavin:mongol
