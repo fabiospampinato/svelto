@@ -19,6 +19,10 @@
 
   /* IMAGE */
 
+  .chat-message-img {
+    @extend %widget;
+  }
+
   .chat-message-img,
   .chat-message-img img {
     @include dimension-force ( $chat-message-img-size );
