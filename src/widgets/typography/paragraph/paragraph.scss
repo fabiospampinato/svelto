@@ -15,4 +15,5 @@ p {
   @extend %widget;
   @include children-no-gutter ();
   max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+  word-wrap: break-word;
 }

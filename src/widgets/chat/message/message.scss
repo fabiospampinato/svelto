@@ -58,7 +58,8 @@
   /* CONTENT */
 
   .chat-message-content {
-    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
+    flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
+    width: 0;
   }
 
 }
