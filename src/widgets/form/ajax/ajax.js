@@ -111,7 +111,7 @@
 
           if ( !_.isError ( resj ) ) {
 
-            if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
+            if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
 
               $.toast ( resj.message || this.options.messages.refreshing );
 
