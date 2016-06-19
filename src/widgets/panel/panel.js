@@ -13,7 +13,7 @@
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations, Directions ) {
+(function ( $, _, Svelto, Widgets, Factory, Breakpoints, Breakpoint, Pointer, Animations, Directions ) {
 
   'use strict';
 
@@ -291,6 +291,8 @@
 
       if ( !this._isPinned ) {
 
+        if ( this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin] ) this.pin ();
+
         this.$layout.disableScroll ();
 
       }
@@ -328,7 +330,7 @@
 
       if ( this._lock || !this._isOpen ) return;
 
-      this.unpin ( true );
+      this.unpin ();
 
       this._lock = true;
       this._isOpen = false;
@@ -403,7 +405,7 @@
 
     }
 
-    unpin ( _closing ) {
+    unpin () {
 
       if ( !this._isOpen || !this._isPinned ) return;
 
@@ -411,13 +413,13 @@
 
       this.$layout.removeClass ( this.layoutPinnedClass ).disableScroll ();
 
-      this.$backdrop.removeClass ( this.options.classes.backdrop.pinned );
-
       this._delay ( function () {
+
+        this.$backdrop.removeClass ( this.options.classes.backdrop.pinned );
 
         this.$panel.removeClass ( this.options.classes.pinned );
 
-      }, _closing ? this.options.animations.close : 0 );
+      }, this.options.animations.close );
 
     }
 
@@ -427,4 +429,4 @@
 
   Factory.init ( Panel, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations, Svelto.Directions ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint, Svelto.Pointer, Svelto.Animations, Svelto.Directions ));
