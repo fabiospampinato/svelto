@@ -410,8 +410,8 @@
 
     __down ( event ) {
 
-      if ( this._lock || !this.options.draggable () ) return;
-
+      if ( this._lock || !this.options.draggable () || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
+      
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
