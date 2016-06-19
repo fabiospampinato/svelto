@@ -149,7 +149,8 @@
 
         let $element = $(element),
             $wrappers = $element.parents ( this.options.selectors.wrapper ),
-            $wrapper = $wrappers.length ? $wrappers.first () : $element,
+            isWrapped = !!$wrappers.length,
+            $wrapper = isWrapped ? $wrappers.first () : $element,
             id = $.guid++,
             validationsStr = $element.data ( this.options.datas.validations ),
             validations = false;
@@ -200,8 +201,8 @@
           isDirty: false,
           isValid: undefined,
           messages: {
-            invalid: $wrapper.data ( this.options.datas.messages.invalid ),
-            valid: $wrapper.data ( this.options.datas.messages.valid )
+            invalid: isWrapped ? $element.data ( this.options.datas.messages.invalid ) || $wrapper.data ( this.options.datas.messages.invalid ) : $element.data ( this.options.datas.messages.invalid ),
+            valid: isWrapped ? $element.data ( this.options.datas.messages.valid ) || $wrapper.data ( this.options.datas.messages.valid ) : $element.data ( this.options.datas.messages.valid )
           }
         };
 

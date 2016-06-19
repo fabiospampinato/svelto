@@ -42,8 +42,6 @@
       {{{sw.divider "Unnamed"}}}
       <input placeholder="Unnamed 1..." class="bordered fluid">
       <input placeholder="Unnamed 2..." class="bordered fluid">
-      {{{sw.divider "Custom messages"}}}
-      <input placeholder="Custom messages..." class="bordered fluid" data-validations="required" data-invalid="Hey dude, this field is required!" data-valid="Thank you!">
       {{{sw.divider "Textarea"}}}
       <textarea name="txt_multiple" placeholder="Multiple..." class="bordered fluid" data-validations="required|alphanumeric|minLength[3]"></textarea>
       {{{sw.divider "Checkbox"}}}
@@ -61,6 +59,25 @@
           <input type="radio" name="radio_name" value="false">
           <label>Radio 2</label>
         </div>
+      </div>
+    </div>
+    <div class="card-block bordered">
+      {{{sw.divider "Custom messages"}}}
+      <input placeholder="Custom messages..." class="bordered fluid" data-validations="required" data-invalid="Hey dude, this field is required!" data-valid="Thank you!">
+      {{{sw.divider "Element messages"}}}
+      <div class="button checkbox right bordered fluid">
+        <input type="checkbox" name="checkbox_txt_1" value="true" data-validations="checked" data-invalid="Element invalid message" data-valid="Element valid message">
+        <label>Needed to be checked</label>
+      </div>
+      {{{sw.divider "Wrapper messages"}}}
+      <div class="button checkbox right bordered fluid" data-invalid="Wrapper invalid message" data-valid="Wrapper valid message">
+        <input type="checkbox" name="checkbox_txt_2" value="true" data-validations="checked">
+        <label>Needed to be checked</label>
+      </div>
+      {{{sw.divider "Both messages"}}}
+      <div class="button checkbox right bordered fluid" data-invalid="Wrapper invalid message" data-valid="Wrapper valid message">
+        <input type="checkbox" name="checkbox_txt_3" value="true" data-validations="checked" data-invalid="Element invalid message" data-valid="Element valid message">
+        <label>Needed to be checked</label>
       </div>
     </div>
     <div class="card-footer bordered text-center">
