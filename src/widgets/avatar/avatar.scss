@@ -26,6 +26,14 @@
     border-radius: $avatar-border-radius;
   }
 
+  /* INLINE */
+
+  address &,
+  p &,
+  span & {
+    display: inline-block;
+  }
+
 }
 
 /* AVATAR HOVER */

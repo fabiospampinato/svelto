@@ -3,6 +3,19 @@
 
 <template name="floated">
 
+  {{{sw.divider "Avatar"}}}
+
+  <div class="container bordered clearfix">
+    <p>
+      {{{sample.avatar "floated"}}}
+      {{{sample.text 75}}}
+    </p>
+    <p>
+      {{{sample.avatar "floated right"}}}
+      {{{sample.text 75}}}
+    </p>
+  </div>
+
   {{{sw.divider "Image"}}}
 
   <div class="container bordered clearfix">
@@ -49,7 +62,7 @@
 
   <script>
     function toggle_class ( name ) {
-      $('img, figure').not ( 'figure img' ).toggleClass ( name );
+      $('.avatar, img, figure').not ( 'figure img' ).toggleClass ( name );
     }
   </script>
 

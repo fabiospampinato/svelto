@@ -3,6 +3,18 @@
 
 <template name="spaced">
 
+  {{{sw.divider "Avatar"}}}
+
+  <div class="container bordered">
+    <p>
+      {{{sample.avatar "spaced right"}}}
+      {{{sample.text 35}}}
+      {{{sample.avatar "spaced"}}}
+      {{{sample.text 35}}}
+      {{{sample.avatar "spaced left"}}}
+    </p>
+  </div>
+
   {{{sw.divider "Image"}}}
 
   <div class="container bordered">
@@ -47,7 +59,7 @@
 
   <script>
     function toggle_class ( name ) {
-      $('img, figure').not ( 'figure img' ).toggleClass ( name );
+      $('.avatar, img, figure').not ( 'figure img' ).toggleClass ( name );
     }
   </script>
 
