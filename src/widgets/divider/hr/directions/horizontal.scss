@@ -13,18 +13,13 @@
 %hr-horizontal-base {
   @extend %hr-base;
   height: $hr-size;
+  width: 100%;
 }
 
 %hr-horizontal {
-
   @extend %hr-horizontal-base;
   @include last-child-no-gutter ( $gutter-half );
-  margin-bottom: $gutter-half;
-
-  &:not(:first-child) {
-    margin-top: - $gutter-half;
-  }
-
+  margin-bottom: $gutter;
 }
 
 hr.horizontal {
