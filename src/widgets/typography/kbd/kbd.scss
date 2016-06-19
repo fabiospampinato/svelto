@@ -5,13 +5,21 @@
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../code/code.scss
+ * @require core/reset/reset.scss
  * ========================================================================= */
+
+// We are separating the border property since the color may be `inherit`
 
 /* KBD */
 
 kbd {
-  @extend %code;
+  font-family: $kbd-font-family;
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;
+  background-color: $kbd-bg-color;
+  padding: $kbd-padding-y $kbd-padding-x;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-color: $kbd-border-color;
+  border-radius: $kbd-border-radius;
 }

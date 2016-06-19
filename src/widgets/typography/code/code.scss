@@ -10,28 +10,19 @@
 
 //TODO: Add support for `samp`
 
-// We are separating the border property since the color may be `inherit`
-
-/* CODE */
-
-%code {
-  font-family: $code-font-family;
-  padding: $code-padding-y $code-padding-x;
-  border-width: $code-border-width;
-  border-style: $code-border-style;
-  border-color: $code-border-color;
-  border-radius: $code-border-radius;
-  background-color: $code-bg-color;
-}
-
 code {
-  @extend %code;
-}
 
-/* INSIDE PRE */
+  font-family: $code-font-family;
+  background-color: $code-bg-color;
+  padding: $code-padding-y $code-padding-x;
+  border-radius: $code-border-radius;
 
-pre > code {
-  padding: 0;
-  border: 0;
-  background: transparent;
+  /* INSIDE PRE */
+
+  pre > & {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
 }

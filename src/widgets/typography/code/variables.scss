@@ -13,13 +13,9 @@
 
 $code-font-family: $font-family-monospace !default;
 
-$code-bg-color: rgba( 0, 0, 0, .04 ) !default;
-
-$code-border-width: 1px !default;
-$code-border-style: solid !default;
-$code-border-color: inherit !default;
+$code-bg-color: rgba( 0, 0, 0, .075 ) !default;
 
 $code-border-radius: $container-border-radius !default;
 
-$code-padding-x: .375em !default;
+$code-padding-x: .18em !default;
 $code-padding-y: $code-padding-x / 2 !default;
