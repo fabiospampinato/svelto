@@ -207,9 +207,18 @@
 
     ___navigation () {
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.previousMonth );
-      this._on ( this.$navigationNext, Pointer.tap, this.nextMonth );
-      this._on ( this.$navigationToday, Pointer.tap, this.navigateToToday );
+      this._on ( this.$navigationPrev, Pointer.tap, _.wrap ( 'previousMonth', this.__navigation ) );
+      this._on ( this.$navigationNext, Pointer.tap, _.wrap ( 'nextMonth', this.__navigation ) );
+      this._on ( this.$navigationToday, Pointer.tap, _.wrap ( 'navigateToToday', this.__navigation ) );
+
+    }
+
+    __navigation ( method, event ) {
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+      this[method] ();
 
     }
 
