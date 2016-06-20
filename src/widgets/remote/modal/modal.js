@@ -122,6 +122,14 @@
 
     }
 
+    /* CLOSE */
+
+    ___close () {
+
+      this._on ( true, this.$modal, 'modal:close', this._destroyModal );
+
+    }
+
     /* REQUEST HANDLERS */
 
     __beforesend ( res ) {
@@ -185,6 +193,8 @@
         this.$modal.replaceWith ( $remoteModal );
         this.$modal = $remoteModal;
         this.$modal.widgetize ();
+
+        this.___close ();
 
         let newRect = this.$modal.getRect ();
 
