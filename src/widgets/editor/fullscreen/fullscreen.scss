@@ -15,4 +15,5 @@
   z-index: $editor-fullscreen-z-index;
   border-radius: 0;
   max-width: none; // Since the editor may as well be `.limited`
+  margin-bottom: 0 !important;
 }
