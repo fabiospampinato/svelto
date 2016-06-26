@@ -22,10 +22,6 @@
   padding: $input-padding-y $input-padding-x;
 }
 
-input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="number"],
-input[type="search"] {
+input {
   @extend %input;
 }
