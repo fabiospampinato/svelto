@@ -2562,7 +2562,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.5.6',
+				VERSION: '0.5.7',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -5100,9 +5100,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___navigation',
 						value: function ___navigation() {
 
-								this._on(this.$navigationPrev, Pointer.tap, this.previousMonth);
-								this._on(this.$navigationNext, Pointer.tap, this.nextMonth);
-								this._on(this.$navigationToday, Pointer.tap, this.navigateToToday);
+								this._on(this.$navigationPrev, Pointer.tap, _.wrap('previousMonth', this.__navigation));
+								this._on(this.$navigationNext, Pointer.tap, _.wrap('nextMonth', this.__navigation));
+								this._on(this.$navigationToday, Pointer.tap, _.wrap('navigateToToday', this.__navigation));
+						}
+				}, {
+						key: '__navigation',
+						value: function __navigation(method, event) {
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
+								this[method]();
 						}
 
 						/* DAY TAP */
@@ -5808,7 +5817,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__down',
 						value: function __down(event) {
 
-								if (this._lock || !this.options.draggable()) return;
+								if (this._lock || !this.options.draggable() || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -11257,7 +11266,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Animations, Directions) {
+(function ($, _, Svelto, Widgets, Factory, Breakpoints, Breakpoint, Pointer, Animations, Directions) {
 
 		'use strict';
 
@@ -11549,6 +11558,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (!this._isPinned) {
 
+										if (this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin]) this.pin();
+
 										this.$layout.disableScroll();
 								}
 
@@ -11583,7 +11594,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this._lock || !this._isOpen) return;
 
-								this.unpin(true);
+								this.unpin();
 
 								this._lock = true;
 								this._isOpen = false;
@@ -11656,7 +11667,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 				}, {
 						key: 'unpin',
-						value: function unpin(_closing) {
+						value: function unpin() {
 
 								if (!this._isOpen || !this._isPinned) return;
 
@@ -11664,12 +11675,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.$layout.removeClass(this.layoutPinnedClass).disableScroll();
 
-								this.$backdrop.removeClass(this.options.classes.backdrop.pinned);
-
 								this._delay(function () {
 
+										this.$backdrop.removeClass(this.options.classes.backdrop.pinned);
+
 										this.$panel.removeClass(this.options.classes.pinned);
-								}, _closing ? this.options.animations.close : 0);
+								}, this.options.animations.close);
 						}
 				}]);
 
@@ -11679,7 +11690,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* FACTORY */
 
 		Factory.init(Panel, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations, Svelto.Directions);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint, Svelto.Pointer, Svelto.Animations, Svelto.Directions);
 
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Closer
@@ -13923,7 +13934,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (!_.isError(resj)) {
 
-										if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+										if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
 												this._replaceToast(resj.message || this.options.messages.refreshing);
 
@@ -14179,6 +14190,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._on(true, this.$modal, 'modal:beforeclose', this.abort);
 						}
 
+						/* CLOSE */
+
+				}, {
+						key: '___close',
+						value: function ___close() {
+
+								this._on(true, this.$modal, 'modal:close', this._destroyModal);
+						}
+
 						/* REQUEST HANDLERS */
 
 				}, {
@@ -14243,6 +14263,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$modal.replaceWith($remoteModal);
 										this.$modal = $remoteModal;
 										this.$modal.widgetize();
+
+										this.___close();
 
 										var newRect = this.$modal.getRect();
 
@@ -17454,7 +17476,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												var $element = $(element),
 												    $wrappers = $element.parents(this.options.selectors.wrapper),
-												    $wrapper = $wrappers.length ? $wrappers.first() : $element,
+												    isWrapped = !!$wrappers.length,
+												    $wrapper = isWrapped ? $wrappers.first() : $element,
 												    id = $.guid++,
 												    validationsStr = $element.data(this.options.datas.validations),
 												    validations = false;
@@ -17523,8 +17546,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 														isDirty: false,
 														isValid: undefined,
 														messages: {
-																invalid: $wrapper.data(this.options.datas.messages.invalid),
-																valid: $wrapper.data(this.options.datas.messages.valid)
+																invalid: isWrapped ? $element.data(this.options.datas.messages.invalid) || $wrapper.data(this.options.datas.messages.invalid) : $element.data(this.options.datas.messages.invalid),
+																valid: isWrapped ? $element.data(this.options.datas.messages.valid) || $wrapper.data(this.options.datas.messages.valid) : $element.data(this.options.datas.messages.valid)
 														}
 												};
 										}
@@ -17945,7 +17968,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												if (!_.isError(resj)) {
 
-														if (resj.refresh || resj.url === window.location.href || _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
 																$.toast(resj.message || _this80.options.messages.refreshing);
 

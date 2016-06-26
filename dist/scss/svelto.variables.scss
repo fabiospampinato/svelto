@@ -2341,7 +2341,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.6' !default;
+$svelto-version: '0.5.7' !default;
 
 
 /* =========================================================================
@@ -3326,15 +3326,11 @@ $toast-animation-duration: $animation-normal !default;
 
 $code-font-family: $font-family-monospace !default;
 
-$code-bg-color: rgba( 0, 0, 0, .04 ) !default;
-
-$code-border-width: 1px !default;
-$code-border-style: solid !default;
-$code-border-color: inherit !default;
+$code-bg-color: rgba( 0, 0, 0, .075 ) !default;
 
 $code-border-radius: $container-border-radius !default;
 
-$code-padding-x: .375em !default;
+$code-padding-x: .18em !default;
 $code-padding-y: $code-padding-x / 2 !default;
 
 
@@ -3353,6 +3349,35 @@ $samp-font-family: $code-font-family !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Typography - Kbd (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../code/variables.scss
+ * @require core/typography/variables.scss
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* KBD */
+
+$kbd-font-family: $font-family-monospace !default;
+$kbd-font-size: .875em !default;
+$kbd-font-weight: bold !default;
+
+$kbd-bg-color: inherit !default;
+
+$kbd-border-radius: $container-border-radius !default;
+
+$kbd-border-width: 1px !default;
+$kbd-border-style: solid !default;
+$kbd-border-color: inherit !default;
+
+$kbd-padding-x: .375em !default;
+$kbd-padding-y: $kbd-padding-x / 2 !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Typography - Mark (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -3365,7 +3390,7 @@ $samp-font-family: $code-font-family !default;
 
 /* MARK */
 
-$mark-bg-color: rgba( $color-yellow, .2 );
+$mark-bg-color: rgba( $color-yellow, .25 );
 
 $mark-padding-x: $code-padding-x !default;
 $mark-padding-y: $code-padding-y !default;
@@ -4218,19 +4243,6 @@ $heading-fond-weight: 500 !default;
 /* SMALL */
 
 $heading-small-opacity: .875 !default;
-
-
-/* =========================================================================
- * Svelto - Widgets - Typography - Kbd (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* KBD */
-
-$kbd-font-size: .875em !default;
-$kbd-font-weight: bold !default;
 
 
 /* =========================================================================

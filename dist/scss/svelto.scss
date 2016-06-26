@@ -4492,7 +4492,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.6' !default;
+$svelto-version: '0.5.7' !default;
 
 
 /* =========================================================================
@@ -5477,15 +5477,11 @@ $toast-animation-duration: $animation-normal !default;
 
 $code-font-family: $font-family-monospace !default;
 
-$code-bg-color: rgba( 0, 0, 0, .04 ) !default;
-
-$code-border-width: 1px !default;
-$code-border-style: solid !default;
-$code-border-color: inherit !default;
+$code-bg-color: rgba( 0, 0, 0, .075 ) !default;
 
 $code-border-radius: $container-border-radius !default;
 
-$code-padding-x: .375em !default;
+$code-padding-x: .18em !default;
 $code-padding-y: $code-padding-x / 2 !default;
 
 
@@ -5504,6 +5500,35 @@ $samp-font-family: $code-font-family !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Typography - Kbd (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../code/variables.scss
+ * @require core/typography/variables.scss
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+
+/* KBD */
+
+$kbd-font-family: $font-family-monospace !default;
+$kbd-font-size: .875em !default;
+$kbd-font-weight: bold !default;
+
+$kbd-bg-color: inherit !default;
+
+$kbd-border-radius: $container-border-radius !default;
+
+$kbd-border-width: 1px !default;
+$kbd-border-style: solid !default;
+$kbd-border-color: inherit !default;
+
+$kbd-padding-x: .375em !default;
+$kbd-padding-y: $kbd-padding-x / 2 !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Typography - Mark (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -5516,7 +5541,7 @@ $samp-font-family: $code-font-family !default;
 
 /* MARK */
 
-$mark-bg-color: rgba( $color-yellow, .2 );
+$mark-bg-color: rgba( $color-yellow, .25 );
 
 $mark-padding-x: $code-padding-x !default;
 $mark-padding-y: $code-padding-y !default;
@@ -6369,19 +6394,6 @@ $heading-fond-weight: 500 !default;
 /* SMALL */
 
 $heading-small-opacity: .875 !default;
-
-
-/* =========================================================================
- * Svelto - Widgets - Typography - Kbd (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* KBD */
-
-$kbd-font-size: .875em !default;
-$kbd-font-weight: bold !default;
 
 
 /* =========================================================================
@@ -7485,482 +7497,6 @@ script:last-child {
 
 
 /* =========================================================================
- * Svelto - Widgets - Panel
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before core/layout/layout.scss
- * ========================================================================= */
-
-//TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
-
-/* PANEL */
-
-.panel {
-  @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
-  position: fixed;
-  z-index: $panel-z-index;
-  margin: 0;
-  border-radius: 0 !important;
-  transition: transform $panel-animation-duration;
-}
-
-/* BACKDROP */
-
-.panel-backdrop {
-
-  /* OBSCURED */
-
-  &:before {
-    position: fixed;
-    cursor: pointer;
-    z-index: $panel-z-index - 1;
-    transition-duration: $panel-animation-duration;
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout {
-
-  transition: padding $panel-animation-duration;
-
-  > .layout-header.sticky {
-    transition-property: top, right, bottom, left;
-    transition-duration: $panel-animation-duration;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Closed
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* CLOSED */
-
-.panel:not(.show) {
-  display: none;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.bottom {
-
-  height: $panel-default-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY($panel-default-y-height);
-  }
-  
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-bottom {
-  padding-bottom: $panel-default-y-height;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.left {
-
-  width: $panel-default-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX(- $panel-default-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-left {
-
-  padding-left: $panel-default-x-width;
-
-  > .layout-header.sticky {
-    left: $panel-default-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.right {
-
-  width: $panel-default-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX($panel-default-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-right {
-
-  padding-right: $panel-default-x-width;
-
-  > .layout-header.sticky {
-    right: $panel-default-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.top {
-
-  height: $panel-default-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY(- $panel-default-y-height);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-top {
-
-  padding-top: $panel-default-y-height;
-
-  > .layout-header.sticky {
-    top: $panel-default-y-height;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.bottom {
-  @include fixed ( false 0 0 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.left {
-  @include fixed ( 0 false 0 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.right {
-  @include fixed ( 0 0 0 false );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.top {
-  @include fixed ( 0 0 false 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Default
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before ./top.scss
- * @before ./right.scss
- * @before ./bottom.scss
- * @before ./left.scss
- * ========================================================================= */
-
-/* DEFAULT */
-
-.panel:not(.top):not(.right):not(.bottom) {
-  @extend .panel.left;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Open
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* OPEN */
-
-.panel.open {
-  transform: translate(0, 0);
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Pinned
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* PINNED */
-
-.panel.pinned {
-  @include z-depth ( $panel-pinned-z-depth, $panel-pinned-z-depth-force, $panel-pinned-z-depth-basic );
-}
-
-/* BACKDROP */
-
-.panel-backdrop-pinned {
-
-  /* OBSCURED */
-
-  &:before {
-    display: none;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.slim.bottom {
-
-  height: $panel-slim-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY($panel-slim-y-height);
-  }
-
-}
-
-.panel-layout.panel-slim-pinned-bottom {
-  padding-bottom: $panel-slim-y-height;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.slim.left {
-
-  width: $panel-slim-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX(- $panel-slim-x-width);
-  }
-  
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-left {
-
-  padding-left: $panel-slim-x-width;
-
-  > .layout-header.sticky {
-    left: $panel-slim-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.slim.right {
-
-  width: $panel-slim-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX($panel-slim-x-width);
-  }
-  
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-right {
-
-  padding-right: $panel-slim-x-width;
-
-  > .layout-header.sticky {
-    right: $panel-slim-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.slim.top {
-
-  height: $panel-slim-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY(- $panel-slim-y-height);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-top {
-
-  padding-top: $panel-slim-y-height;
-
-  > .layout-header.sticky {
-    top: $panel-slim-y-height;
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Decorators - Fluid
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -8849,6 +8385,7 @@ body {
   font-family: $font-family-root;
   font-size: 1rem;
   line-height: $line-height;
+  height: 100%;
 }
 
 
@@ -8867,6 +8404,7 @@ body {
   display: flex;
   z-index: $hr-z-index;
   background-color: $hr-bg-color;
+  margin-top: 0;
 }
 
 %hr {
@@ -8893,18 +8431,13 @@ hr {
 %hr-horizontal-base {
   @extend %hr-base;
   height: $hr-size;
+  width: 100%;
 }
 
 %hr-horizontal {
-
   @extend %hr-horizontal-base;
   @include last-child-no-gutter ( $gutter-half );
-  margin-bottom: $gutter-half;
-
-  &:not(:first-child) {
-    margin-top: - $gutter-half;
-  }
-
+  margin-bottom: $gutter;
 }
 
 hr.horizontal {
@@ -9060,30 +8593,21 @@ blockquote {
 
 //TODO: Add support for `samp`
 
-// We are separating the border property since the color may be `inherit`
-
-/* CODE */
-
-%code {
-  font-family: $code-font-family;
-  padding: $code-padding-y $code-padding-x;
-  border-width: $code-border-width;
-  border-style: $code-border-style;
-  border-color: $code-border-color;
-  border-radius: $code-border-radius;
-  background-color: $code-bg-color;
-}
-
 code {
-  @extend %code;
-}
 
-/* INSIDE PRE */
+  font-family: $code-font-family;
+  background-color: $code-bg-color;
+  padding: $code-padding-y $code-padding-x;
+  border-radius: $code-border-radius;
 
-pre > code {
-  padding: 0;
-  border: 0;
-  background: transparent;
+  /* INSIDE PRE */
+
+  pre > & {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
 }
 
 
@@ -9193,15 +8717,23 @@ code[class*='language-'] {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../code/code.scss
+ * @require core/reset/reset.scss
  * ========================================================================= */
+
+// We are separating the border property since the color may be `inherit`
 
 /* KBD */
 
 kbd {
-  @extend %code;
+  font-family: $kbd-font-family;
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;
+  background-color: $kbd-bg-color;
+  padding: $kbd-padding-y $kbd-padding-x;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-color: $kbd-border-color;
+  border-radius: $kbd-border-radius;
 }
 
 
@@ -9223,6 +8755,8 @@ a {
 
   color: inherit;
   text-decoration: none;
+
+  /* STYLE */
 
   // Elsewhere this might be an unwanted style
 
@@ -9399,6 +8933,14 @@ span {
 
   img {
     border-radius: $avatar-border-radius;
+  }
+
+  /* INLINE */
+
+  address &,
+  p &,
+  span & {
+    display: inline-block;
   }
 
 }
@@ -10183,6 +9725,590 @@ a,
 
 
 /* =========================================================================
+ * Svelto - Widgets - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+
+/* MODAL */
+
+.modal {
+  @include center-transform ();
+  @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
+  position: fixed;
+  z-index: $modal-z-index;
+  max-width: $modal-max-width;
+  max-height: $modal-max-height;
+  margin: 0;
+  transition-property: transform, opacity;
+  transition-duration: $modal-animation-duration;
+}
+
+/* BACKDROP */
+
+.modal-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $modal-z-index - 1 !important;
+    transition-duration: $modal-animation-duration !important;
+  }
+
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.card {
+
+    max-height: none;
+
+    > .card-block {
+      max-height: $modal-max-height * .8;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.modal:not(.show) {
+  display: none;
+}
+
+.modal:not(.open) {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(#{$modal-closed-offset});
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+.modal.fullscreen {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.fullscreen.card > .card-block {
+    max-height: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before core/layout/layout.scss
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+
+//TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+
+/* PANEL */
+
+.panel {
+  @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
+  position: fixed;
+  z-index: $panel-z-index;
+  margin: 0;
+  border-radius: 0 !important;
+  transition: transform $panel-animation-duration;
+}
+
+/* BACKDROP */
+
+.panel-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $panel-z-index - 1 !important;
+    transition-duration: $panel-animation-duration !important;
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout {
+
+  transition: padding $panel-animation-duration;
+
+  > .layout-header.sticky {
+    transition-property: top, right, bottom, left;
+    transition-duration: $panel-animation-duration;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.panel:not(.show) {
+  display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.bottom {
+
+  height: $panel-default-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-default-y-height);
+  }
+  
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-bottom {
+  padding-bottom: $panel-default-y-height;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.left {
+
+  width: $panel-default-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(- $panel-default-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-left {
+
+  padding-left: $panel-default-x-width;
+
+  > .layout-header.sticky {
+    left: $panel-default-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.right {
+
+  width: $panel-default-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX($panel-default-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-right {
+
+  padding-right: $panel-default-x-width;
+
+  > .layout-header.sticky {
+    right: $panel-default-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.top {
+
+  height: $panel-default-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(- $panel-default-y-height);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-top {
+
+  padding-top: $panel-default-y-height;
+
+  > .layout-header.sticky {
+    top: $panel-default-y-height;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.bottom {
+  @include fixed ( false 0 0 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.left {
+  @include fixed ( 0 false 0 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.right {
+  @include fixed ( 0 0 0 false );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.top {
+  @include fixed ( 0 0 false 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./top.scss
+ * @before ./right.scss
+ * @before ./bottom.scss
+ * @before ./left.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.panel:not(.top):not(.right):not(.bottom) {
+  @extend .panel.left;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Open
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* OPEN */
+
+.panel.open {
+  transform: translate(0, 0);
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Pinned
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* PINNED */
+
+.panel.pinned {
+  @include z-depth ( $panel-pinned-z-depth, $panel-pinned-z-depth-force, $panel-pinned-z-depth-basic );
+}
+
+/* BACKDROP */
+
+.panel-backdrop-pinned {
+
+  /* OBSCURED */
+
+  &:before {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.slim.bottom {
+
+  height: $panel-slim-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-slim-y-height);
+  }
+
+}
+
+.panel-layout.panel-slim-pinned-bottom {
+  padding-bottom: $panel-slim-y-height;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.slim.left {
+
+  width: $panel-slim-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(- $panel-slim-x-width);
+  }
+  
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-left {
+
+  padding-left: $panel-slim-x-width;
+
+  > .layout-header.sticky {
+    left: $panel-slim-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.slim.right {
+
+  width: $panel-slim-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX($panel-slim-x-width);
+  }
+  
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-right {
+
+  padding-right: $panel-slim-x-width;
+
+  > .layout-header.sticky {
+    right: $panel-slim-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.slim.top {
+
+  height: $panel-slim-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(- $panel-slim-y-height);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-top {
+
+  padding-top: $panel-slim-y-height;
+
+  > .layout-header.sticky {
+    top: $panel-slim-y-height;
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Chat
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -10260,7 +10386,8 @@ a,
   /* CONTENT */
 
   .chat-message-content {
-    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
+    flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
+    width: 0;
   }
 
 }
@@ -12089,6 +12216,7 @@ input[type="checkbox"] {
     &:after {
       @extend %icon-base;
       position: absolute;
+      top: 0;
       transition: opacity $checkbox-icon-animation-duration;
     }
 
@@ -12670,11 +12798,7 @@ img {
   padding: $input-padding-y $input-padding-x;
 }
 
-input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="number"],
-input[type="search"] {
+input {
   @extend %input;
 }
 
@@ -14131,7 +14255,6 @@ textarea.disabled,
     appearance: none;
     cursor: pointer;
     margin: 0 !important;
-    font-size: 0;
     opacity: 0;
     border: 0;
     border-radius: inherit;
@@ -16282,6 +16405,7 @@ p {
   @extend %widget;
   @include children-no-gutter ();
   max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+  word-wrap: break-word;
 }
 
 
@@ -16291,16 +16415,13 @@ p {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../code/code.scss
+ * @require core/reset/reset.scss
  * @require core/widget/widget.scss
  * ========================================================================= */
-
-// We are separating the border property since the color may be `inherit`
 
 /* PRE */
 
 pre {
-  @extend %code;
   @extend %widget;
   display: flex;
   padding: $pre-padding-y $pre-padding-x;
@@ -18218,6 +18339,7 @@ h6 {
   z-index: $editor-fullscreen-z-index;
   border-radius: 0;
   max-width: none; // Since the editor may as well be `.limited`
+  margin-bottom: 0 !important;
 }
 
 
@@ -18342,111 +18464,6 @@ i.flag {
          local('MaterialIcons-Regular'),
          url(#{$icon-path-fonts}MaterialIcons-Regular.woff2#{$revision}) format('woff2'),
          url(#{$icon-path-fonts}MaterialIcons-Regular.woff#{$revision}) format('woff');
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* MODAL */
-
-.modal {
-  @include center-transform ();
-  @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
-  position: fixed;
-  z-index: $modal-z-index;
-  max-width: $modal-max-width;
-  max-height: $modal-max-height;
-  margin: 0;
-  transition-property: transform, opacity;
-  transition-duration: $modal-animation-duration;
-}
-
-/* BACKDROP */
-
-.modal-backdrop {
-
-  /* OBSCURED */
-
-  &:before {
-    position: fixed;
-    cursor: pointer;
-    z-index: $modal-z-index - 1;
-    transition-duration: $modal-animation-duration;
-  }
-
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-
-html.flexbox-tweener {
-
-  .modal.card {
-
-    max-height: none;
-
-    > .card-block {
-      max-height: $modal-max-height * .8;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Closed
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-
-/* CLOSED */
-
-.modal:not(.show) {
-  display: none;
-}
-
-.modal:not(.open) {
-  opacity: 0;
-  transform: translate(-50%, -50%) translateY(#{$modal-closed-offset});
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Fullscreen
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-
-/* FULLSCREEN */
-
-.modal.fullscreen {
-  border-width: 0;
-  border-radius: 0;
-  max-width: none;
-  width: 100%;
-  max-height: none;
-  height: 100%;
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-
-html.flexbox-tweener {
-
-  .modal.fullscreen.card > .card-block {
-    max-height: none;
   }
 
 }

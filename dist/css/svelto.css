@@ -1281,6 +1281,17 @@
  * ========================================================================= */
 /* SAMP */
 /* =========================================================================
+ * Svelto - Widgets - Typography - Kbd (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../code/variables.scss
+ * @require core/typography/variables.scss
+ * @require widgets/container/variables.scss
+ * ========================================================================= */
+/* KBD */
+/* =========================================================================
  * Svelto - Widgets - Typography - Mark (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -1697,13 +1708,6 @@
  * ========================================================================= */
 /* SIZES */
 /* SMALL */
-/* =========================================================================
- * Svelto - Widgets - Typography - Kbd (Variables)
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* KBD */
 /* =========================================================================
  * Svelto - Widgets - Typography - Link (Variables)
  * =========================================================================
@@ -2763,391 +2767,6 @@ script:last-child {
 
 .layout .layout .layout-header.sticky + .layout-content {
   margin-top: 0;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before core/layout/layout.scss
- * ========================================================================= */
-/* PANEL */
-.panel {
-  position: fixed;
-  z-index: 1200;
-  margin: 0;
-  border-radius: 0 !important;
-  transition: -webkit-transform 0.35s;
-  transition: transform 0.35s;
-  transition: transform 0.35s, -webkit-transform 0.35s;
-}
-
-/* BACKDROP */
-.panel-backdrop {
-  /* OBSCURED */
-}
-
-.panel-backdrop:before {
-  position: fixed;
-  cursor: pointer;
-  z-index: 1199;
-  transition-duration: 0.35s;
-}
-
-/* LAYOUT */
-.panel-layout {
-  transition: padding 0.35s;
-}
-
-.panel-layout > .layout-header.sticky {
-  transition-property: top, right, bottom, left;
-  transition-duration: 0.35s;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Closed
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* CLOSED */
-.panel:not(.show) {
-  display: none;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* BOTTOM */
-.panel.bottom {
-  height: 7.5rem;
-  /* CLOSED */
-}
-
-.panel.bottom:not(.open) {
-  -webkit-transform: translateY(7.5rem);
-          transform: translateY(7.5rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-default-pinned-bottom {
-  padding-bottom: 7.5rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* LEFT */
-.panel.left, .panel:not(.top):not(.right):not(.bottom) {
-  width: 15rem;
-  /* CLOSED */
-}
-
-.panel.left:not(.open), .panel:not(.open):not(.top):not(.right):not(.bottom) {
-  -webkit-transform: translateX(-15rem);
-          transform: translateX(-15rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-default-pinned-left {
-  padding-left: 15rem;
-}
-
-.panel-layout.panel-default-pinned-left > .layout-header.sticky {
-  left: 15rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* RIGHT */
-.panel.right {
-  width: 15rem;
-  /* CLOSED */
-}
-
-.panel.right:not(.open) {
-  -webkit-transform: translateX(15rem);
-          transform: translateX(15rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-default-pinned-right {
-  padding-right: 15rem;
-}
-
-.panel-layout.panel-default-pinned-right > .layout-header.sticky {
-  right: 15rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* TOP */
-.panel.top {
-  height: 7.5rem;
-  /* CLOSED */
-}
-
-.panel.top:not(.open) {
-  -webkit-transform: translateY(-7.5rem);
-          transform: translateY(-7.5rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-default-pinned-top {
-  padding-top: 7.5rem;
-}
-
-.panel-layout.panel-default-pinned-top > .layout-header.sticky {
-  top: 7.5rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* BOTTOM */
-.panel.bottom {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* LEFT */
-.panel.left, .panel:not(.top):not(.right):not(.bottom) {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* RIGHT */
-.panel.right {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* TOP */
-.panel.top {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Default
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before ./top.scss
- * @before ./right.scss
- * @before ./bottom.scss
- * @before ./left.scss
- * ========================================================================= */
-/* DEFAULT */
-/* =========================================================================
- * Svelto - Widgets - Panel - Open
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* OPEN */
-.panel.open {
-  -webkit-transform: translate(0, 0);
-          transform: translate(0, 0);
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Pinned
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-/* PINNED */
-/* BACKDROP */
-.panel-backdrop-pinned {
-  /* OBSCURED */
-}
-
-.panel-backdrop-pinned:before {
-  display: none;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* BOTTOM */
-.panel.slim.bottom {
-  height: 4.25rem;
-  /* CLOSED */
-}
-
-.panel.slim.bottom:not(.open) {
-  -webkit-transform: translateY(4.25rem);
-          transform: translateY(4.25rem);
-}
-
-.panel-layout.panel-slim-pinned-bottom {
-  padding-bottom: 4.25rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* LEFT */
-.panel.slim.left, .slim.panel:not(.top):not(.right):not(.bottom) {
-  width: 4.25rem;
-  /* CLOSED */
-}
-
-.panel.slim.left:not(.open), .slim.panel:not(.open):not(.top):not(.right):not(.bottom) {
-  -webkit-transform: translateX(-4.25rem);
-          transform: translateX(-4.25rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-slim-pinned-left {
-  padding-left: 4.25rem;
-}
-
-.panel-layout.panel-slim-pinned-left > .layout-header.sticky {
-  left: 4.25rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* RIGHT */
-.panel.slim.right {
-  width: 4.25rem;
-  /* CLOSED */
-}
-
-.panel.slim.right:not(.open) {
-  -webkit-transform: translateX(4.25rem);
-          transform: translateX(4.25rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-slim-pinned-right {
-  padding-right: 4.25rem;
-}
-
-.panel-layout.panel-slim-pinned-right > .layout-header.sticky {
-  right: 4.25rem;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-/* TOP */
-.panel.slim.top {
-  height: 4.25rem;
-  /* CLOSED */
-}
-
-.panel.slim.top:not(.open) {
-  -webkit-transform: translateY(-4.25rem);
-          transform: translateY(-4.25rem);
-}
-
-/* LAYOUT */
-.panel-layout.panel-slim-pinned-top {
-  padding-top: 4.25rem;
-}
-
-.panel-layout.panel-slim-pinned-top > .layout-header.sticky {
-  top: 4.25rem;
 }
 
 /* =========================================================================
@@ -4295,6 +3914,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.375;
+  height: 100%;
 }
 
 /* =========================================================================
@@ -4312,6 +3932,7 @@ hr, hr.horizontal, hr:not(.vertical), .divider.linear.horizontal:empty, .divider
   display: flex;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.1);
+  margin-top: 0;
 }
 
 hr {
@@ -4329,10 +3950,11 @@ hr {
 /* HORIZONTAL */
 hr.horizontal, hr:not(.vertical), .divider.linear.horizontal:empty, .divider.linear:empty:not(.vertical), .divider:empty:not(.vertical):not(.block):not(.text), .horizontal.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty):before, .divider.linear:not(.vertical):not(:empty):before, .divider:not(.text):not(.block):not(.vertical):not(:empty):before, .horizontal.divider:not(.text):not(.block):not(:empty):before, .divider.linear.horizontal:not(:empty):after, .divider.linear:not(.vertical):not(:empty):after, .divider:not(.text):not(.block):not(.vertical):not(:empty):after, .horizontal.divider:not(.text):not(.block):not(:empty):after {
   height: 1px;
+  width: 100%;
 }
 
 hr.horizontal, hr:not(.vertical), .divider.linear.horizontal:empty, .divider.linear:empty:not(.vertical), .divider:empty:not(.vertical):not(.block):not(.text), .horizontal.divider:empty:not(.block):not(.text) {
-  margin-bottom: 0.3125rem;
+  margin-bottom: 0.625rem;
 }
 
 hr.horizontal:last-child, hr:last-child:not(.vertical), .divider.linear.horizontal:last-child:empty, .divider.linear:last-child:empty:not(.vertical), .divider:last-child:empty:not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:empty:not(.block):not(.text) {
@@ -4341,10 +3963,6 @@ hr.horizontal:last-child, hr:last-child:not(.vertical), .divider.linear.horizont
 
 .multiple > hr.horizontal:last-child, .pager > hr.horizontal:last-child, .tagbox-tags > hr.horizontal:last-child, .multiple > hr:last-child:not(.vertical), .pager > hr:last-child:not(.vertical), .tagbox-tags > hr:last-child:not(.vertical), .multiple > .divider.linear.horizontal:last-child:empty, .pager > .divider.linear.horizontal:last-child:empty, .tagbox-tags > .divider.linear.horizontal:last-child:empty, .multiple > .divider.linear:last-child:empty:not(.vertical), .pager > .divider.linear:last-child:empty:not(.vertical), .tagbox-tags > .divider.linear:last-child:empty:not(.vertical), .multiple > .divider:last-child:empty:not(.vertical):not(.block):not(.text), .pager > .divider:last-child:empty:not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:empty:not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:empty:not(.block):not(.text), .pager > .horizontal.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:empty:not(.block):not(.text) {
   margin-bottom: 0.3125rem;
-}
-
-hr.horizontal:not(:first-child), hr:not(:first-child):not(.vertical), .divider.linear.horizontal:not(:first-child):empty, .divider.linear:not(:first-child):empty:not(.vertical), .divider:not(:first-child):empty:not(.vertical):not(.block):not(.text), .horizontal.divider:not(:first-child):empty:not(.block):not(.text) {
-  margin-top: -0.3125rem;
 }
 
 /* =========================================================================
@@ -4461,18 +4079,14 @@ blockquote > footer:before {
  * =========================================================================
  * @require core/reset/reset.scss
  * ========================================================================= */
-/* CODE */
-code, kbd, pre {
+code {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  padding: 0.1875em 0.375em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: inherit;
+  background-color: rgba(0, 0, 0, 0.075);
+  padding: 0.09em 0.18em;
   border-radius: 0.25em;
-  background-color: rgba(0, 0, 0, 0.04);
+  /* INSIDE PRE */
 }
 
-/* INSIDE PRE */
 pre > code {
   padding: 0;
   border: 0;
@@ -4560,12 +4174,19 @@ code[class*='language-'] .namespace {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../code/code.scss
+ * @require core/reset/reset.scss
  * ========================================================================= */
 /* KBD */
 kbd {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.875em;
   font-weight: bold;
+  background-color: inherit;
+  padding: 0.1875em 0.375em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+  border-radius: 0.25em;
 }
 
 /* =========================================================================
@@ -4580,6 +4201,7 @@ kbd {
 a {
   color: inherit;
   text-decoration: none;
+  /* STYLE */
 }
 
 p a:hover,
@@ -4885,8 +4507,8 @@ address a:active, .link-primary:active {
  * ========================================================================= */
 /* MARK */
 mark {
-  background-color: rgba(250, 191, 64, 0.2);
-  padding: 0.1875em 0.375em;
+  background-color: rgba(250, 191, 64, 0.25);
+  padding: 0.09em 0.18em;
   border-radius: 0.25em;
 }
 
@@ -4941,12 +4563,8 @@ span > script:last-child {
  * ========================================================================= */
 /* WIDGET */
 blockquote, blockquote > footer, .widget, .avatar, .breadcrumb, .carousel, .centerer, .placeholder, .colorpicker, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), .chat, .datepicker, fieldset, .infobar, .tagbox, figcaption,
-.figcaption, .card, .chat-message, .chat-message .chat-message-img, .divider.block, hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
-.figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="number"],
-input[type="search"], textarea, .label, .button, .numbox, .parallax, .progressbar, .rails, .rater, .sections, .section-left,
+.figcaption, .card, .chat-message, .chat-message .chat-message-img, .divider.block, hr.vertical, .divider.linear.vertical:empty, .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
+.figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input, textarea, .label, .button, .numbox, .parallax, .progressbar, .rails, .rater, .sections, .section-left,
 .section-center,
 .section-right, .select, .circle, .square-sample, .square, .triangle, .slider, .spacer, svg.spinner, .spinner-label, .statistic, .switch, .table, .tabs, .toolbar, address, ul,
 ol,
@@ -4960,13 +4578,9 @@ h6 {
   margin: 0 0 0.625rem;
 }
 
-blockquote:last-child, blockquote > footer:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
-.figcaption:last-child, .card:last-child, .chat-message:last-child, .chat-message .chat-message-img:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.vertical:last-child:empty, .vertical.divider:last-child:empty:not(.block):not(.text), .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
-.figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child:not([type]),
-input[type="text"]:last-child,
-input[type="password"]:last-child,
-input[type="number"]:last-child,
-input[type="search"]:last-child, textarea:last-child, .label:last-child, .button:last-child, .numbox:last-child, .parallax:last-child, .progressbar:last-child, .rails:last-child, .rater:last-child, .sections:last-child, .section-left:last-child,
+blockquote:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
+.figcaption:last-child, .card:last-child, .chat-message:last-child, .chat-message .chat-message-img:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
+.figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child, textarea:last-child, .label:last-child, .button:last-child, .numbox:last-child, .parallax:last-child, .progressbar:last-child, .rails:last-child, .rater:last-child, .sections:last-child, .section-left:last-child,
 .section-center:last-child,
 .section-right:last-child, .select:last-child, .circle:last-child, .square-sample:last-child, .square:last-child, .triangle:last-child, .slider:last-child, .spacer:last-child, svg.spinner:last-child, .spinner-label:last-child, .statistic:last-child, .switch:last-child, .table:last-child, .tabs:last-child, .toolbar:last-child, address:last-child, ul:last-child,
 ol:last-child,
@@ -4985,19 +4599,7 @@ h6:last-child {
 .figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .chat-message .multiple > .chat-message-img:last-child, .chat-message .pager > .chat-message-img:last-child, .chat-message .tagbox-tags > .chat-message-img:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
 .figure:last-child, .pager >
 .figure:last-child, .tagbox-tags >
-.figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child:not([type]), .pager > input:last-child:not([type]), .tagbox-tags > input:last-child:not([type]), .multiple >
-input[type="text"]:last-child, .pager >
-input[type="text"]:last-child, .tagbox-tags >
-input[type="text"]:last-child, .multiple >
-input[type="password"]:last-child, .pager >
-input[type="password"]:last-child, .tagbox-tags >
-input[type="password"]:last-child, .multiple >
-input[type="number"]:last-child, .pager >
-input[type="number"]:last-child, .tagbox-tags >
-input[type="number"]:last-child, .multiple >
-input[type="search"]:last-child, .pager >
-input[type="search"]:last-child, .tagbox-tags >
-input[type="search"]:last-child, .multiple > textarea:last-child, .pager > textarea:last-child, .tagbox-tags > textarea:last-child, .multiple > .label:last-child, .pager > .label:last-child, .tagbox-tags > .label:last-child, .multiple > .button:last-child, .pager > .button:last-child, .tagbox-tags > .button:last-child, .multiple > .numbox:last-child, .pager > .numbox:last-child, .tagbox-tags > .numbox:last-child, .multiple > .parallax:last-child, .pager > .parallax:last-child, .tagbox-tags > .parallax:last-child, .multiple > .progressbar:last-child, .pager > .progressbar:last-child, .tagbox-tags > .progressbar:last-child, .multiple > .rails:last-child, .pager > .rails:last-child, .tagbox-tags > .rails:last-child, .multiple > .rater:last-child, .pager > .rater:last-child, .tagbox-tags > .rater:last-child, .multiple > .sections:last-child, .pager > .sections:last-child, .tagbox-tags > .sections:last-child, .multiple > .section-left:last-child, .pager > .section-left:last-child, .tagbox-tags > .section-left:last-child, .multiple >
+.figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child, .pager > input:last-child, .tagbox-tags > input:last-child, .multiple > textarea:last-child, .pager > textarea:last-child, .tagbox-tags > textarea:last-child, .multiple > .label:last-child, .pager > .label:last-child, .tagbox-tags > .label:last-child, .multiple > .button:last-child, .pager > .button:last-child, .tagbox-tags > .button:last-child, .multiple > .numbox:last-child, .pager > .numbox:last-child, .tagbox-tags > .numbox:last-child, .multiple > .parallax:last-child, .pager > .parallax:last-child, .tagbox-tags > .parallax:last-child, .multiple > .progressbar:last-child, .pager > .progressbar:last-child, .tagbox-tags > .progressbar:last-child, .multiple > .rails:last-child, .pager > .rails:last-child, .tagbox-tags > .rails:last-child, .multiple > .rater:last-child, .pager > .rater:last-child, .tagbox-tags > .rater:last-child, .multiple > .sections:last-child, .pager > .sections:last-child, .tagbox-tags > .sections:last-child, .multiple > .section-left:last-child, .pager > .section-left:last-child, .tagbox-tags > .section-left:last-child, .multiple >
 .section-center:last-child, .pager >
 .section-center:last-child, .tagbox-tags >
 .section-center:last-child, .multiple >
@@ -5044,10 +4646,17 @@ h6:last-child {
   border-radius: 1000000px;
   display: block;
   /* IMAGE */
+  /* INLINE */
 }
 
 .avatar img {
   border-radius: 1000000px;
+}
+
+address .avatar,
+p .avatar,
+span .avatar {
+  display: inline-block;
 }
 
 /* AVATAR HOVER */
@@ -5713,6 +5322,480 @@ a:hover .avatar, a.avatar:hover,
 }
 
 /* =========================================================================
+ * Svelto - Widgets - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+/* MODAL */
+.modal {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 1300;
+  max-width: 80vw;
+  max-height: 80vh;
+  margin: 0;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  transition-duration: 0.35s;
+}
+
+/* BACKDROP */
+.modal-backdrop {
+  /* OBSCURED */
+}
+
+.modal-backdrop:before {
+  position: fixed !important;
+  cursor: pointer !important;
+  z-index: 1299 !important;
+  transition-duration: 0.35s !important;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+html.flexbox-tweener .modal.card {
+  max-height: none;
+}
+
+html.flexbox-tweener .modal.card > .card-block {
+  max-height: 64vh;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+/* CLOSED */
+.modal:not(.show) {
+  display: none;
+}
+
+.modal:not(.open) {
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%) translateY(-3rem);
+          transform: translate(-50%, -50%) translateY(-3rem);
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+/* FULLSCREEN */
+.modal.fullscreen {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+html.flexbox-tweener .modal.fullscreen.card > .card-block {
+  max-height: none;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before core/layout/layout.scss
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+/* PANEL */
+.panel {
+  position: fixed;
+  z-index: 1200;
+  margin: 0;
+  border-radius: 0 !important;
+  transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  transition: transform 0.35s, -webkit-transform 0.35s;
+}
+
+/* BACKDROP */
+.panel-backdrop {
+  /* OBSCURED */
+}
+
+.panel-backdrop:before {
+  position: fixed !important;
+  cursor: pointer !important;
+  z-index: 1199 !important;
+  transition-duration: 0.35s !important;
+}
+
+/* LAYOUT */
+.panel-layout {
+  transition: padding 0.35s;
+}
+
+.panel-layout > .layout-header.sticky {
+  transition-property: top, right, bottom, left;
+  transition-duration: 0.35s;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* CLOSED */
+.panel:not(.show) {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* BOTTOM */
+.panel.bottom {
+  height: 7.5rem;
+  /* CLOSED */
+}
+
+.panel.bottom:not(.open) {
+  -webkit-transform: translateY(7.5rem);
+          transform: translateY(7.5rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-default-pinned-bottom {
+  padding-bottom: 7.5rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* LEFT */
+.panel.left, .panel:not(.top):not(.right):not(.bottom) {
+  width: 15rem;
+  /* CLOSED */
+}
+
+.panel.left:not(.open), .panel:not(.open):not(.top):not(.right):not(.bottom) {
+  -webkit-transform: translateX(-15rem);
+          transform: translateX(-15rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-default-pinned-left {
+  padding-left: 15rem;
+}
+
+.panel-layout.panel-default-pinned-left > .layout-header.sticky {
+  left: 15rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* RIGHT */
+.panel.right {
+  width: 15rem;
+  /* CLOSED */
+}
+
+.panel.right:not(.open) {
+  -webkit-transform: translateX(15rem);
+          transform: translateX(15rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-default-pinned-right {
+  padding-right: 15rem;
+}
+
+.panel-layout.panel-default-pinned-right > .layout-header.sticky {
+  right: 15rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* TOP */
+.panel.top {
+  height: 7.5rem;
+  /* CLOSED */
+}
+
+.panel.top:not(.open) {
+  -webkit-transform: translateY(-7.5rem);
+          transform: translateY(-7.5rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-default-pinned-top {
+  padding-top: 7.5rem;
+}
+
+.panel-layout.panel-default-pinned-top > .layout-header.sticky {
+  top: 7.5rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* BOTTOM */
+.panel.bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* LEFT */
+.panel.left, .panel:not(.top):not(.right):not(.bottom) {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* RIGHT */
+.panel.right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* TOP */
+.panel.top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./top.scss
+ * @before ./right.scss
+ * @before ./bottom.scss
+ * @before ./left.scss
+ * ========================================================================= */
+/* DEFAULT */
+/* =========================================================================
+ * Svelto - Widgets - Panel - Open
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* OPEN */
+.panel.open {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Pinned
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+/* PINNED */
+/* BACKDROP */
+.panel-backdrop-pinned {
+  /* OBSCURED */
+}
+
+.panel-backdrop-pinned:before {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* BOTTOM */
+.panel.slim.bottom {
+  height: 4.25rem;
+  /* CLOSED */
+}
+
+.panel.slim.bottom:not(.open) {
+  -webkit-transform: translateY(4.25rem);
+          transform: translateY(4.25rem);
+}
+
+.panel-layout.panel-slim-pinned-bottom {
+  padding-bottom: 4.25rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* LEFT */
+.panel.slim.left, .slim.panel:not(.top):not(.right):not(.bottom) {
+  width: 4.25rem;
+  /* CLOSED */
+}
+
+.panel.slim.left:not(.open), .slim.panel:not(.open):not(.top):not(.right):not(.bottom) {
+  -webkit-transform: translateX(-4.25rem);
+          transform: translateX(-4.25rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-slim-pinned-left {
+  padding-left: 4.25rem;
+}
+
+.panel-layout.panel-slim-pinned-left > .layout-header.sticky {
+  left: 4.25rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* RIGHT */
+.panel.slim.right {
+  width: 4.25rem;
+  /* CLOSED */
+}
+
+.panel.slim.right:not(.open) {
+  -webkit-transform: translateX(4.25rem);
+          transform: translateX(4.25rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-slim-pinned-right {
+  padding-right: 4.25rem;
+}
+
+.panel-layout.panel-slim-pinned-right > .layout-header.sticky {
+  right: 4.25rem;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* TOP */
+.panel.slim.top {
+  height: 4.25rem;
+  /* CLOSED */
+}
+
+.panel.slim.top:not(.open) {
+  -webkit-transform: translateY(-4.25rem);
+          transform: translateY(-4.25rem);
+}
+
+/* LAYOUT */
+.panel-layout.panel-slim-pinned-top {
+  padding-top: 4.25rem;
+}
+
+.panel-layout.panel-slim-pinned-top > .layout-header.sticky {
+  top: 4.25rem;
+}
+
+/* =========================================================================
  * Svelto - Widgets - Chat
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -5780,9 +5863,10 @@ a:hover .avatar, a.avatar:hover,
 }
 
 .chat-message .chat-message-content {
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  -webkit-flex: 1 1 0%;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
+  width: 0;
 }
 
 /* =========================================================================
@@ -7371,6 +7455,7 @@ input[type="checkbox"] + label, input[type=radio] + label {
 
 input[type="checkbox"] + label:before, input[type=radio] + label:before, input[type="checkbox"] + label:after, input[type=radio] + label:after {
   position: absolute;
+  top: 0;
   transition: opacity 0.15s;
 }
 
@@ -7883,11 +7968,7 @@ img.xxxxlarge {
  * @require core/widget/widget.scss
  * ========================================================================= */
 /* INPUT */
-input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="number"],
-input[type="search"], textarea {
+input, textarea {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -7909,11 +7990,7 @@ input[type="search"], textarea {
  * @require ../input.scss
  * ========================================================================= */
 /* COMPACT */
-input.compact:not([type]),
-input.compact[type="text"],
-input.compact[type="password"],
-input.compact[type="number"],
-input.compact[type="search"], textarea.compact {
+input.compact, textarea.compact {
   padding: 0.5em 0.5em;
 }
 
@@ -7939,11 +8016,7 @@ input[type="file"] {
  * @require ../input.scss
  * ========================================================================= */
 /* INVALID */
-input.invalid:not([type]),
-input.invalid[type="text"],
-input.invalid[type="password"],
-input.invalid[type="number"],
-input.invalid[type="search"], textarea.invalid {
+input.invalid, textarea.invalid {
   border-color: #f44336 !important;
 }
 
@@ -7978,11 +8051,7 @@ input.invalid[type="search"], textarea.invalid {
  * @require ../input.scss
  * ========================================================================= */
 /* VALID */
-input.valid:not([type]),
-input.valid[type="text"],
-input.valid[type="password"],
-input.valid[type="number"],
-input.valid[type="search"], textarea.valid {
+input.valid, textarea.valid {
   border-color: #4caf50 !important;
 }
 
@@ -9272,7 +9341,6 @@ html.scrollbar-size-17 .rails .rails-content.multiple {
           appearance: none;
   cursor: pointer;
   margin: 0 !important;
-  font-size: 0;
   opacity: 0;
   border: 0;
   border-radius: inherit;
@@ -11168,6 +11236,7 @@ ul.no-bullet {
 /* PARAGRAPH */
 p {
   max-width: 100%;
+  word-wrap: break-word;
 }
 
 p > * {
@@ -11184,7 +11253,7 @@ p > script:last-child {
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../code/code.scss
+ * @require core/reset/reset.scss
  * @require core/widget/widget.scss
  * ========================================================================= */
 /* PRE */
@@ -12349,11 +12418,7 @@ figcaption.attached-bottom:not(.primary):not(.secondary):not(.tertiary):not(.qua
 }
 
 .container:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .card:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .chat:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .infobar:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .tagbox:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), figure:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent),
-.figure:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), input:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent):not([type]),
-input[type="text"]:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent),
-input[type="password"]:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent),
-input[type="number"]:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent),
-input[type="search"]:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), textarea:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .numbox:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .label:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .button:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .white {
+.figure:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), input:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), textarea:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .numbox:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .label:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .button:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .white {
   background-color: #ffffff;
   border-color: #d6d6d6;
   color: #3f3f3f;
@@ -13742,8 +13807,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -13835,8 +13900,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -13959,8 +14024,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -14004,8 +14069,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.5.6#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.5.7#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14222,7 +14287,7 @@ h6 > small {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4);
 }
 
-.z-depth-6, .floating.button.raisable:not(.disabled):hover:not([class*="z-depth-"]), .label.floating.raisable:not(.disabled):hover:not([class*="z-depth-"]), .z-depth-4.raisable:not(.disabled):hover, .modal {
+.modal, .z-depth-6, .floating.button.raisable:not(.disabled):hover:not([class*="z-depth-"]), .label.floating.raisable:not(.disabled):hover:not([class*="z-depth-"]), .z-depth-4.raisable:not(.disabled):hover {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
 }
 
@@ -14467,6 +14532,7 @@ h6 > small {
   z-index: 1400;
   border-radius: 0;
   max-width: none;
+  margin-bottom: 0 !important;
 }
 
 /* =========================================================================
@@ -14509,7 +14575,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.5.6);
+  background-image: url(/images/flags.png?v=0.5.7);
 }
 
 /* FLAGS */
@@ -15526,93 +15592,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.6) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.6) format("woff");
-}
-
-/* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* MODAL */
-.modal {
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  position: fixed;
-  z-index: 1300;
-  max-width: 80vw;
-  max-height: 80vh;
-  margin: 0;
-  transition-property: opacity, -webkit-transform;
-  transition-property: transform, opacity;
-  transition-property: transform, opacity, -webkit-transform;
-  transition-duration: 0.35s;
-}
-
-/* BACKDROP */
-.modal-backdrop {
-  /* OBSCURED */
-}
-
-.modal-backdrop:before {
-  position: fixed;
-  cursor: pointer;
-  z-index: 1299;
-  transition-duration: 0.35s;
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-html.flexbox-tweener .modal.card {
-  max-height: none;
-}
-
-html.flexbox-tweener .modal.card > .card-block {
-  max-height: 64vh;
-}
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Closed
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-/* CLOSED */
-.modal:not(.show) {
-  display: none;
-}
-
-.modal:not(.open) {
-  opacity: 0;
-  -webkit-transform: translate(-50%, -50%) translateY(-3rem);
-          transform: translate(-50%, -50%) translateY(-3rem);
-}
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Fullscreen
- * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-/* FULLSCREEN */
-.modal.fullscreen {
-  border-width: 0;
-  border-radius: 0;
-  max-width: none;
-  width: 100%;
-  max-height: none;
-  height: 100%;
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-html.flexbox-tweener .modal.fullscreen.card > .card-block {
-  max-height: none;
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.5.7) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.5.7) format("woff");
 }
 
 /* =========================================================================
