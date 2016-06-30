@@ -51,13 +51,11 @@
 
     namespace ( Widget, config, namespace ) {
 
-      if ( _.isObject ( namespace ) ) {
+      if ( !_.isObject ( namespace ) ) return;
 
-        let name = _.upperFirst ( Widget.config.name );
+      let name = _.upperFirst ( Widget.config.name );
 
-        namespace[name] = Widget;
-
-      }
+      namespace[name] = Widget;
 
     },
 
@@ -69,11 +67,9 @@
 
     widgetize ( Widget ) {
 
-      if ( Widget.config.plugin && _.isString ( Widget.config.selector ) ) {
+      if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
 
-        Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config );
-
-      }
+      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config );
 
     },
 

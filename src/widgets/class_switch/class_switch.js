@@ -111,15 +111,11 @@
 
       for ( let key in Breakpoints ) {
 
-        if ( Breakpoints.hasOwnProperty ( key ) ) {
+        if ( !Breakpoints.hasOwnProperty ( key ) ) continue;
 
-          if ( _.isString ( Breakpoints[key] ) ) {
+        if ( !_.isString ( Breakpoints[key] ) ) continue;
 
-            this._populateBreakpoint ( key );
-
-          }
-
-        }
+        this._populateBreakpoint ( key );
 
       }
 
@@ -136,13 +132,11 @@
 
       for ( let breakpoint in this.options.switch.up ) {
 
-        if ( this.options.switch.up.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.switch.up.hasOwnProperty ( breakpoint ) ) continue;
 
-          let active = ( width >= Breakpoints.widths[breakpoint] );
+        let active = ( width >= Breakpoints.widths[breakpoint] );
 
-          status.up[breakpoint] = active;
-
-        }
+        status.up[breakpoint] = active;
 
       }
 
@@ -150,13 +144,11 @@
 
       for ( let breakpoint in this.options.switch.down ) {
 
-        if ( this.options.switch.down.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.switch.down.hasOwnProperty ( breakpoint ) ) continue;
 
-          let active = ( width <= Breakpoints.widths[breakpoint] );
+        let active = ( width <= Breakpoints.widths[breakpoint] );
 
-          status.down[breakpoint] = active;
-
-        }
+        status.down[breakpoint] = active;
 
       }
 
@@ -164,13 +156,11 @@
 
       for ( let breakpoint in this.options.switch.only ) {
 
-        if ( this.options.switch.only.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.switch.only.hasOwnProperty ( breakpoint ) ) continue;
 
-          let active = ( width === Breakpoints.widths[breakpoint] );
+        let active = ( width === Breakpoints.widths[breakpoint] );
 
-          status.only[breakpoint] = active;
-
-        }
+        status.only[breakpoint] = active;
 
       }
 
@@ -184,19 +174,15 @@
 
       for ( let type in current ) {
 
-        if ( current.hasOwnProperty ( type ) ) {
+        if ( !current.hasOwnProperty ( type ) ) continue;
 
-          for ( let breakpoint in current[type] ) {
+        for ( let breakpoint in current[type] ) {
 
-            if ( current[type].hasOwnProperty ( breakpoint ) ) {
+          if ( !current[type].hasOwnProperty ( breakpoint ) ) continue;
 
-              if ( !!previous[type][breakpoint] !== !!current[type][breakpoint] ) {
+          if ( !!previous[type][breakpoint] !== !!current[type][breakpoint] ) {
 
-                delta[type][breakpoint] = !!current[type][breakpoint];
-
-              }
-
-            }
+            delta[type][breakpoint] = !!current[type][breakpoint];
 
           }
 
@@ -223,17 +209,13 @@
 
       for ( let type in delta ) {
 
-        if ( delta.hasOwnProperty ( type ) ) {
+        if ( !delta.hasOwnProperty ( type ) ) continue;
 
-          for ( let breakpoint in delta[type] ) {
+        for ( let breakpoint in delta[type] ) {
 
-            if ( delta[type].hasOwnProperty ( breakpoint ) ) {
+          if ( !delta[type].hasOwnProperty ( breakpoint ) ) continue;
 
-              this.$element.toggleClass ( this.options.switch[type][breakpoint], delta[type][breakpoint] );
-
-            }
-
-          }
+          this.$element.toggleClass ( this.options.switch[type][breakpoint], delta[type][breakpoint] );
 
         }
 

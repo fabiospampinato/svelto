@@ -19,11 +19,7 @@
 
 	$.fn.zIndex = function ( val ) {
 
-    if ( !_.isUndefined ( val ) ) {
-
-      return this.css ( 'zIndex', val );
-
-    }
+    if ( !_.isUndefined ( val ) ) return this.css ( 'zIndex', val );
 
 		if ( !this.length ) return 0;
 

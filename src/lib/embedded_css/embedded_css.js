@@ -33,31 +33,27 @@
 
       for ( let selector in this.tree ) {
 
-        if ( this.tree.hasOwnProperty ( selector ) ) {
+        if ( !this.tree.hasOwnProperty ( selector ) ) continue;
 
-          css += selector + '{';
+        css += selector + '{';
 
-          if ( _.isPlainObject ( this.tree[selector] ) ) {
+        if ( _.isPlainObject ( this.tree[selector] ) ) {
 
-            for ( let property in this.tree[selector] ) {
+          for ( let property in this.tree[selector] ) {
 
-              if ( this.tree[selector].hasOwnProperty ( property ) ) {
+            if ( !this.tree[selector].hasOwnProperty ( property ) ) continue;
 
-                css += property + ':' + this.tree[selector][property] + ';';
-
-              }
-
-            }
-
-          } else if ( _.isString ( this.tree[selector] ) ) {
-
-            css += this.tree[selector] + ';';
+            css += property + ':' + this.tree[selector][property] + ';';
 
           }
 
-          css += '}';
+        } else if ( _.isString ( this.tree[selector] ) ) {
+
+          css += this.tree[selector] + ';';
 
         }
+
+        css += '}';
 
       }
 

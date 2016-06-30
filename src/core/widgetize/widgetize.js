@@ -68,14 +68,12 @@
 
       for ( let selector in this.widgetizers ) {
 
-        if ( this.widgetizers.hasOwnProperty ( selector ) ) {
+        if ( !this.widgetizers.hasOwnProperty ( selector ) ) continue;
 
-          let widgetizers = this.widgetizers[selector];
+        let widgetizers = this.widgetizers[selector];
 
-          this.worker ( widgetizers, $roots.filter ( selector ) );
-          this.worker ( widgetizers, $roots.find ( selector ) );
-
-        }
+        this.worker ( widgetizers, $roots.filter ( selector ) );
+        this.worker ( widgetizers, $roots.find ( selector ) );
 
       }
 

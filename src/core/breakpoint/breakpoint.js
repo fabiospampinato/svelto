@@ -33,14 +33,12 @@
 
       let current = this.get ();
 
-      if ( current !== this.current ) {
+      if ( current === this.current ) return;
 
-        this.previous = this.current;
-        this.current = current;
+      this.previous = this.current;
+      this.current = current;
 
-        $window.trigger ( 'breakpoint:change' );
-
-      }
+      $window.trigger ( 'breakpoint:change' );
 
     },
 

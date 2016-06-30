@@ -229,21 +229,19 @@
 
       for ( let id in this.elements ) {
 
-        if ( this.elements.hasOwnProperty ( id ) ) {
+        if ( !this.elements.hasOwnProperty ( id ) ) continue;
 
-          if ( id === elementObj.id ) continue;
+        if ( id === elementObj.id ) continue;
 
-          let otherElementObj = this.elements[id],
-              isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf ( elementObj.name ) !== -1,
-              hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
+        let otherElementObj = this.elements[id],
+            isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf ( elementObj.name ) !== -1,
+            hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
 
-          if ( isDepending || hasSameName ) {
+        if ( isDepending || hasSameName ) {
 
-            otherElementObj.isValid = undefined;
+          otherElementObj.isValid = undefined;
 
-            this._validateWorker ( otherElementObj );
-
-          }
+          this._validateWorker ( otherElementObj );
 
         }
 
@@ -255,11 +253,9 @@
 
       for ( let id in this.elements ) {
 
-        if ( this.elements.hasOwnProperty ( id ) ) {
+        if ( !this.elements.hasOwnProperty ( id ) ) continue;
 
-          this._updateElement ( this.elements[id] );
-
-        }
+        this._updateElement ( this.elements[id] );
 
       }
 
@@ -378,18 +374,16 @@
 
         for ( let name in validations ) {
 
-          if ( validations.hasOwnProperty ( name ) ) {
+          if ( !validations.hasOwnProperty ( name ) ) continue;
 
-            let validation = validations[name],
-                isValid = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
+          let validation = validations[name],
+              isValid = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
 
-            if ( !isValid ) {
+          if ( !isValid ) {
 
-              let error = _.format ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
+            let error = _.format ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
 
-              errors.push ( error );
-
-            }
+            errors.push ( error );
 
           }
 
@@ -466,21 +460,19 @@
 
         for ( let id in this.elements ) {
 
-          if ( this.elements.hasOwnProperty ( id ) ) {
+          if ( !this.elements.hasOwnProperty ( id ) ) continue;
 
-            let elementObj = this.elements[id];
+          let elementObj = this.elements[id];
 
-            if ( _.isUndefined ( elementObj.isValid ) ) {
+          if ( _.isUndefined ( elementObj.isValid ) ) {
 
-              this._validateWorker ( elementObj );
+            this._validateWorker ( elementObj );
 
-            }
+          }
 
-            if ( !elementObj.isValid ) {
+          if ( !elementObj.isValid ) {
 
-              this._isValid = false;
-
-            }
+            this._isValid = false;
 
           }
 

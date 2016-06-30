@@ -83,11 +83,9 @@
 
         for ( let template in this.templates ) {
 
-          if ( this.templates.hasOwnProperty ( template ) && this.templates[template] ) {
+          if ( !this.templates.hasOwnProperty ( template ) || !this.templates[template] ) continue;
 
-            Templates[this.templatesNamespace][template] = _.template ( this.templates[template], options );
-
-          }
+          Templates[this.templatesNamespace][template] = _.template ( this.templates[template], options );
 
         }
 
@@ -317,11 +315,9 @@
 
         for ( let prop in key ) {
 
-          if ( key.hasOwnProperty ( prop ) ) {
+          if ( !key.hasOwnProperty ( prop ) ) continue;
 
-            this._setOption ( key, value );
-
-          }
+          this._setOption ( key, value );
 
         }
 
@@ -511,15 +507,10 @@
 
         for ( let prop in originalEvent ) {
 
-          if ( originalEvent.hasOwnProperty ( prop ) ) {
+          if ( !originalEvent.hasOwnProperty ( prop ) ) continue;
+          if ( prop in event ) continue;
 
-            if ( !(prop in event) ) {
-
-              event[prop] = originalEvent[prop];
-
-            }
-
-          }
+          event[prop] = originalEvent[prop];
 
         }
 
@@ -557,13 +548,11 @@
 
       for ( let breakpoint in this.options.breakpoints.up ) {
 
-        if ( this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) continue;
 
-          if ( width >= Breakpoints.widths[breakpoint] ) {
+        if ( width >= Breakpoints.widths[breakpoint] ) {
 
-            this[this.options.breakpoints.up[breakpoint]]();
-
-          }
+          this[this.options.breakpoints.up[breakpoint]]();
 
         }
 
@@ -573,13 +562,11 @@
 
       for ( let breakpoint in this.options.breakpoints.down ) {
 
-        if ( this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) continue;
 
-          if ( width <= Breakpoints.widths[breakpoint] ) {
+        if ( width <= Breakpoints.widths[breakpoint] ) {
 
-            this[this.options.breakpoints.down[breakpoint]]();
-
-          }
+          this[this.options.breakpoints.down[breakpoint]]();
 
         }
 
@@ -589,13 +576,11 @@
 
       for ( let breakpoint in this.options.breakpoints.only ) {
 
-        if ( this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) {
+        if ( !this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) continue;
 
-          if ( width === Breakpoints.widths[breakpoint] ) {
+        if ( width === Breakpoints.widths[breakpoint] ) {
 
-            this[this.options.breakpoints.only[breakpoint]]();
-
-          }
+          this[this.options.breakpoints.only[breakpoint]]();
 
         }
 
@@ -617,26 +602,22 @@
 
       for ( let keystrokes in this.options.keystrokes ) {
 
-        if ( this.options.keystrokes.hasOwnProperty ( keystrokes ) ) {
+        if ( !this.options.keystrokes.hasOwnProperty ( keystrokes ) ) continue;
 
-          for ( let keystroke of keystrokes.split ( ',' ) ) {
+        for ( let keystroke of keystrokes.split ( ',' ) ) {
 
-            if ( Keyboard.keystroke.match ( event, keystroke ) ) {
+          if ( !Keyboard.keystroke.match ( event, keystroke ) ) continue;
 
-              let toCall = this.options.keystrokes[keystrokes],
-                  method = _.isArray ( toCall ) ? toCall[0] : toCall,
-                  args   = _.isArray ( toCall ) ? _.castArray ( toCall[1] ) : [];
+          let toCall = this.options.keystrokes[keystrokes],
+              method = _.isArray ( toCall ) ? toCall[0] : toCall,
+              args   = _.isArray ( toCall ) ? _.castArray ( toCall[1] ) : [];
 
-              this[method].apply ( this, args );
+          this[method].apply ( this, args );
 
-              event.preventDefault ();
-              event.stopImmediatePropagation ();
+          event.preventDefault ();
+          event.stopImmediatePropagation ();
 
-              return;
-
-            }
-
-          }
+          return;
 
         }
 
