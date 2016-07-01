@@ -416,7 +416,7 @@
 
       /* EVENTS NAMESPACING */
 
-      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
+      events = $.eventNamespacer ( events, this.eventNamespace );
 
       /* TRIGGERING */
 
@@ -468,7 +468,7 @@
 
       /* EVENTS NAMESPACING */
 
-      events = events.split ( /\s+/ ).map ( event => event + this.eventNamespace ).join ( ' ' );
+      events = $.eventNamespacer ( events, this.eventNamespace );
 
       /* REMOVING HANDLER */
 
