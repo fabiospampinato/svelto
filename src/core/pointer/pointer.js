@@ -16,65 +16,75 @@
 
   'use strict';
 
+  /* VARIABLES */
+
+  let prefix = 'spointer';
+
   /* POINTER */
 
   let Pointer = {
+    /* OPTIONS */
     options: {
       events: {
-        prefix: 'spointer'
+        prefix: prefix
       },
       dbltap: {
         interval: 300 // 2 taps within this interval will trigger a dbltap event
       },
-    }
-  };
-
-  /* EVENTS */
-
-  let events = {
-    tap: Pointer.options.events.prefix + 'tap',
-    dbltap: Pointer.options.events.prefix + 'dbltap',
+    },
+    /* EVENTS */
+    tap: `${prefix}tap`,
+    dbltap: `${prefix}dbltap`,
     click: 'click',
     dblclick: 'dblclick',
-    down: Browser.is.touchDevice ? 'touchstart' : 'mousedown',
-    move: Browser.is.touchDevice ? 'touchmove' : 'mousemove',
-    up: Browser.is.touchDevice ? 'touchend' : 'mouseup',
-    cancel: Browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
+    down: Browser.is.touchDevice ? 'touchstart mousedown' : 'mousedown',
+    move: Browser.is.touchDevice ? 'touchmove mousemove' : 'mousemove',
+    up: Browser.is.touchDevice ? 'touchend mouseup' : 'mouseup',
+    cancel: Browser.is.touchDevice ? 'touchcancel mouseleave' : 'mouseleave',
     over: 'mouseover',
     enter: 'mouseenter',
     out: 'mouseout',
-    leave: 'mouseleave'
+    leave: 'mouseleave',
+    /* METHODS */
+    isDeviceEvent ( event, device ) {
+      return _.startsWith ( event.type, device.toLowerCase () );
+    },
+    isPointerEvent ( event ) {
+      return Pointer.isDeviceEvent ( event, Pointer.options.events.prefix );
+    },
+    isMouseEvent ( event ) {
+      return Pointer.isDeviceEvent ( event, 'mouse' );
+    },
+    isTouchEvent ( event ) {
+      return Pointer.isDeviceEvent ( event, 'touch' );
+    }
   };
 
   /* EVENTS METHODS */
 
-  for ( let name in events ) {
+  ['tap', 'dbltap'].forEach ( name => {
 
-    if ( events.hasOwnProperty ( name ) ) {
+    $.fn[name] = function ( data, fn ) {
 
-      Pointer[name] = events[name];
+      return arguments.length ? this.on ( Pointer[name], null, data, fn ) : this.triggger ( name );
 
-      if ( !( name in $.fn ) ) {
+    };
 
-        $.fn[name] = function ( fn ) {
-
-          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
-
-        };
-
-      }
-
-    }
-
-  }
+  });
 
   /* ----- POINTER LOGIC ----- */
 
   /* VARIABLES */
 
-  let target,
-      $target,
+  let $document = $(document),
+      namespace = `._${Pointer.options.events.prefix}`,
+      down = $.eventNamespacer ( Pointer.down, namespace ),
+      move = $.eventNamespacer ( Pointer.move, namespace ),
+      up = $.eventNamespacer ( Pointer.up, namespace ),
+      cancel = $.eventNamespacer ( Pointer.cancel, namespace ),
+      target,
       prevTapTimestamp = 0,
+      dbltapTriggerable = true,
       motion;
 
   /* EVENT CREATOR */
@@ -93,14 +103,15 @@
 
   function downHandler ( event ) {
 
+    $document.off ( namespace );
+
     target = event.target;
-    $target = $(target);
 
     motion = false;
 
-    $target.one ( Pointer.move, moveHandler );
-    $target.one ( Pointer.up, upHandler );
-    $target.one ( Pointer.cancel, cancelHandler );
+    $document.one ( move, moveHandler );
+    $document.one ( up, upHandler );
+    $document.one ( cancel, reset );
 
   }
 
@@ -112,15 +123,26 @@
 
   function upHandler ( event ) {
 
-    if ( Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) && ( !Browser.is.touchDevice || !motion ) ) {
+    if ( target === event.target && ( !motion || !Pointer.isTouchEvent ( event ) ) && Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) ) {
 
-      let tapTimestamp = event.timeStamp || Date.now ();
+      let tapTimestamp = event.timeStamp || Date.now (),
+          $target = $(target);
 
       $target.trigger ( createEvent ( Pointer.tap, event ) );
 
       if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
-        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+        if ( dbltapTriggerable ) {
+
+          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+
+          dbltapTriggerable = false;
+
+        }
+
+      } else {
+
+        dbltapTriggerable = true;
 
       }
 
@@ -128,31 +150,33 @@
 
     }
 
-    if ( !motion ) {
-
-      $target.off ( Pointer.move, moveHandler );
-
-    }
-
-    $target.off ( Pointer.cancel, cancelHandler );
+    reset ();
 
   }
 
-  function cancelHandler () {
+  /* STATUS */
 
-    if ( !motion ) {
+  function init () {
 
-      $target.off ( Pointer.move, moveHandler );
+    setTimeout ( function () { // So that we'll listen to it after a possible `mousedown` event, occurring after a `touchstart` event, gets triggered
 
-    }
+      $document.one ( down, downHandler );
 
-    $target.off ( Pointer.up, upHandler );
+    }, 0 );
 
   }
 
-  /* BIND */
+  function reset () {
 
-  $(document).on ( Pointer.down, downHandler );
+    $document.off ( namespace );
+
+    init ();
+
+  }
+
+  /* INIT */
+
+  init ();
 
   /* EXPORT */
 

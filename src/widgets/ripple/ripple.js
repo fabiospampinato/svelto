@@ -67,13 +67,15 @@
 
     ___downTap () {
 
-      // Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
-
-      this._on ( Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
+      this._on ( `${Pointer.tap} mousedown`, this.__downTap );
 
     }
 
     __downTap ( event ) {
+
+      if ( this._lock ) return;
+
+      this._lock = true;
 
       if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
@@ -98,13 +100,19 @@
 
     __up () {
 
-      for ( let [$circle, timestamp] of this.circles ) {
+      this._defer ( function () { // So that the `tap` event gets parsed before removing the lock
 
-        this._hide ( $circle, timestamp );
+        this._lock = false;
 
-      }
+        for ( let [$circle, timestamp] of this.circles ) {
 
-      this.circles = [];
+          this._hide ( $circle, timestamp );
+
+        }
+
+        this.circles = [];
+
+      });
 
     }
 

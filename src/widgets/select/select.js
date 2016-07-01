@@ -38,7 +38,7 @@
               '</div>'
     },
     options: {
-      native: Browser.is.touchDevice, // Don't show the popover and use the native select, by default on touch devices
+      native: true, // Don't show the popover and use the native select, enabled by default
       popover: {
         size: '',
         color: Colors.white,
@@ -134,13 +134,11 @@
 
     ___buttonTap () {
 
-      if ( !Browser.is.touchDevice ) {
+      if ( this.options.native ) return;
 
-        /* BUTTON TAP */
+      /* BUTTON TAP */
 
-        this._on ( this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap );
-
-      }
+      this._on ( this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap );
 
     }
 

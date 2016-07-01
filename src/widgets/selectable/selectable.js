@@ -110,21 +110,42 @@
 
     ___downTap () {
 
-      if ( Browser.is.touchDevice || this._isSingle ) {
+      if ( this._isSingle ) {
 
-        this._on ( Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch );
+        this.___tap ();
+
+      } else if ( Browser.is.touchDevice ) {
+
+        this.___down ();
+        this.___tap ();
 
       } else {
 
-        this._on ( Pointer.down, this.options.selectors.selectionToggler, this.__down );
+        this.___down ();
 
       }
+
+    }
+
+    ___down () {
+
+      this._on ( Pointer.down, this.options.selectors.selectionToggler, this.__down );
+
+    }
+
+    ___tap () {
+
+      this._tappable = true;
+
+      this._on ( Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch );
 
     }
 
     /* TAP */ // Just for touch devices or single select
 
     __tapTouch ( event ) {
+
+      if ( !this._tappable ) return;
 
       event.preventDefault ();
 
@@ -145,6 +166,10 @@
     /* CLICK / CTMD + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
     __down ( event ) {
+
+      this._tappable = Pointer.isTouchEvent ( event );
+
+      if ( this._tappable ) return;
 
       event.preventDefault ();
 

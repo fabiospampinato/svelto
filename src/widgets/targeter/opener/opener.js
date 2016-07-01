@@ -63,7 +63,7 @@
 
     ___hover () {
 
-      if ( this.options.hover.active && !Browser.is.touchDevice ) {
+      if ( this.options.hover.active ) {
 
         this._on ( Pointer.enter, this.__hoverEnter );
 

@@ -46,9 +46,8 @@
     }
 
     for ( var prop in Svelto.Pointer ) {
-      if ( prop !== 'options' ) {
-        $('.target').on ( Svelto.Pointer[prop], { name: prop }, pointer_handler );
-      }
+      if ( !lodash.isString ( Svelto.Pointer[prop] ) ) continue;
+      $('.target').on ( Svelto.Pointer[prop], { name: prop }, pointer_handler );
     }
   </script>
 

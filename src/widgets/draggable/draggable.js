@@ -25,7 +25,10 @@
     selector: '.draggable',
     options: {
       draggable: _.true, // Checks if we can drag it or not
-      threshold: Browser.is.touchDevice ? 5 : 0, // Minimum moving treshold for triggering a drag
+      threshold: { // Minimum moving treshold for triggering a drag
+        touch: 5, // Enabled on touch events
+        mouse: 0 // Enabled on mouse events
+      },
       onlyHandlers: false, // Only an handler can drag it around
       revert: false, // On dragend take it back to the starting position
       axis: false, // Limit the movements to this axis
@@ -411,7 +414,7 @@
     __down ( event ) {
 
       if ( this._lock || !this.options.draggable () || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
-      
+
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
@@ -462,9 +465,10 @@
             x: Math.abs ( deltaXY.x ),
             y: Math.abs ( deltaXY.y )
           },
-          dragXY;
+          dragXY,
+          threshold = Pointer.isTouchEvent ( event ) ? this.options.threshold.touch : this.options.threshold.mouse;
 
-      if ( absDeltaXY.x < this.options.threshold && absDeltaXY.y < this.options.threshold ) return;
+      if ( absDeltaXY.x < threshold && absDeltaXY.y < threshold ) return;
 
       if ( !this.inited && this.isProxyed ) {
 
