@@ -89,6 +89,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(jQuery);
 
 /* =========================================================================
+ * Svelto - Core - jQuery - Helpers (Event namespacer)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function ($) {
+
+		'use strict';
+
+		/* EVENT NAMESPACER */
+
+		$.eventNamespacer = function (events, namespace) {
+
+				return events.split(/\s+/).map(function (event) {
+						return event + namespace;
+				}).join(' ');
+		};
+})(jQuery);
+
+/* =========================================================================
  * Svelto - Core - jQuery - Helpers (Event XY)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -697,10 +720,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		$.fn.zIndex = function (val) {
 
-				if (!_.isUndefined(val)) {
-
-						return this.css('zIndex', val);
-				}
+				if (!_.isUndefined(val)) return this.css('zIndex', val);
 
 				if (!this.length) return 0;
 
@@ -775,6 +795,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./clean_data.js
+ * @require ./event_namespacer.js
  * @require ./event_xy.js
  * @require ./frame.js
  * @require ./get_rect.js
@@ -2672,13 +2693,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						var current = this.get();
 
-						if (current !== this.current) {
+						if (current === this.current) return;
 
-								this.previous = this.current;
-								this.current = current;
+						this.previous = this.current;
+						this.current = current;
 
-								$window.trigger('breakpoint:change');
-						}
+						$window.trigger('breakpoint:change');
 				},
 
 
@@ -3101,65 +3121,73 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		'use strict';
 
+		/* VARIABLES */
+
+		var prefix = 'spointer';
+
 		/* POINTER */
 
 		var Pointer = {
+				/* OPTIONS */
 				options: {
 						events: {
-								prefix: 'spointer'
+								prefix: prefix
 						},
 						dbltap: {
 								interval: 300 // 2 taps within this interval will trigger a dbltap event
 						}
-				}
-		};
-
-		/* EVENTS */
-
-		var events = {
-				tap: Pointer.options.events.prefix + 'tap',
-				dbltap: Pointer.options.events.prefix + 'dbltap',
+				},
+				/* EVENTS */
+				tap: prefix + 'tap',
+				dbltap: prefix + 'dbltap',
 				click: 'click',
 				dblclick: 'dblclick',
-				down: Browser.is.touchDevice ? 'touchstart' : 'mousedown',
-				move: Browser.is.touchDevice ? 'touchmove' : 'mousemove',
-				up: Browser.is.touchDevice ? 'touchend' : 'mouseup',
-				cancel: Browser.is.touchDevice ? 'touchcancel' : 'mouseleave',
+				down: Browser.is.touchDevice ? 'touchstart mousedown' : 'mousedown',
+				move: Browser.is.touchDevice ? 'touchmove mousemove' : 'mousemove',
+				up: Browser.is.touchDevice ? 'touchend mouseup' : 'mouseup',
+				cancel: Browser.is.touchDevice ? 'touchcancel mouseleave' : 'mouseleave',
 				over: 'mouseover',
 				enter: 'mouseenter',
 				out: 'mouseout',
-				leave: 'mouseleave'
+				leave: 'mouseleave',
+				/* METHODS */
+				isDeviceEvent: function isDeviceEvent(event, device) {
+						return _.startsWith(event.type, device.toLowerCase());
+				},
+				isPointerEvent: function isPointerEvent(event) {
+						return Pointer.isDeviceEvent(event, Pointer.options.events.prefix);
+				},
+				isMouseEvent: function isMouseEvent(event) {
+						return Pointer.isDeviceEvent(event, 'mouse');
+				},
+				isTouchEvent: function isTouchEvent(event) {
+						return Pointer.isDeviceEvent(event, 'touch');
+				}
 		};
 
 		/* EVENTS METHODS */
 
-		var _loop2 = function _loop2(name) {
+		['tap', 'dbltap'].forEach(function (name) {
 
-				if (events.hasOwnProperty(name)) {
+				$.fn[name] = function (data, fn) {
 
-						Pointer[name] = events[name];
-
-						if (!(name in $.fn)) {
-
-								$.fn[name] = function (fn) {
-
-										return fn ? this.on(Pointer[name], fn) : this.trigger(Pointer[name]);
-								};
-						}
-				}
-		};
-
-		for (var name in events) {
-				_loop2(name);
-		}
+						return arguments.length ? this.on(Pointer[name], null, data, fn) : this.triggger(name);
+				};
+		});
 
 		/* ----- POINTER LOGIC ----- */
 
 		/* VARIABLES */
 
-		var target = void 0,
-		    $target = void 0,
+		var $document = $(document),
+		    namespace = '._' + Pointer.options.events.prefix,
+		    down = $.eventNamespacer(Pointer.down, namespace),
+		    move = $.eventNamespacer(Pointer.move, namespace),
+		    up = $.eventNamespacer(Pointer.up, namespace),
+		    cancel = $.eventNamespacer(Pointer.cancel, namespace),
+		    target = void 0,
 		    prevTapTimestamp = 0,
+		    dbltapTriggerable = true,
 		    motion = void 0;
 
 		/* EVENT CREATOR */
@@ -3177,14 +3205,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		function downHandler(event) {
 
+				$document.off(namespace);
+
 				target = event.target;
-				$target = $(target);
 
 				motion = false;
 
-				$target.one(Pointer.move, moveHandler);
-				$target.one(Pointer.up, upHandler);
-				$target.one(Pointer.cancel, cancelHandler);
+				$document.one(move, moveHandler);
+				$document.one(up, upHandler);
+				$document.one(cancel, reset);
 		}
 
 		function moveHandler() {
@@ -3194,41 +3223,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		function upHandler(event) {
 
-				if (Mouse.hasButton(event, Mouse.buttons.LEFT, true) && (!Browser.is.touchDevice || !motion)) {
+				if (target === event.target && (!motion || !Pointer.isTouchEvent(event)) && Mouse.hasButton(event, Mouse.buttons.LEFT, true)) {
 
-						var tapTimestamp = event.timeStamp || Date.now();
+						var tapTimestamp = event.timeStamp || Date.now(),
+						    $target = $(target);
 
 						$target.trigger(createEvent(Pointer.tap, event));
 
 						if (tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval) {
 
-								$target.trigger(createEvent(Pointer.dbltap, event));
+								if (dbltapTriggerable) {
+
+										$target.trigger(createEvent(Pointer.dbltap, event));
+
+										dbltapTriggerable = false;
+								}
+						} else {
+
+								dbltapTriggerable = true;
 						}
 
 						prevTapTimestamp = tapTimestamp;
 				}
 
-				if (!motion) {
-
-						$target.off(Pointer.move, moveHandler);
-				}
-
-				$target.off(Pointer.cancel, cancelHandler);
+				reset();
 		}
 
-		function cancelHandler() {
+		/* STATUS */
 
-				if (!motion) {
+		function init() {
 
-						$target.off(Pointer.move, moveHandler);
-				}
+				setTimeout(function () {
+						// So that we'll listen to it after a possible `mousedown` event, occurring after a `touchstart` event, gets triggered
 
-				$target.off(Pointer.up, upHandler);
+						$document.one(down, downHandler);
+				}, 0);
 		}
 
-		/* BIND */
+		function reset() {
 
-		$(document).on(Pointer.down, downHandler);
+				$document.off(namespace);
+
+				init();
+		}
+
+		/* INIT */
+
+		init();
 
 		/* EXPORT */
 
@@ -3409,13 +3450,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var selector in this.widgetizers) {
 
-										if (this.widgetizers.hasOwnProperty(selector)) {
+										if (!this.widgetizers.hasOwnProperty(selector)) continue;
 
-												var widgetizers = this.widgetizers[selector];
+										var widgetizers = this.widgetizers[selector];
 
-												this.worker(widgetizers, $roots.filter(selector));
-												this.worker(widgetizers, $roots.find(selector));
-										}
+										this.worker(widgetizers, $roots.filter(selector));
+										this.worker(widgetizers, $roots.find(selector));
 								}
 						}
 				}, {
@@ -3570,12 +3610,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				},
 				namespace: function namespace(Widget, config, _namespace) {
 
-						if (_.isObject(_namespace)) {
+						if (!_.isObject(_namespace)) return;
 
-								var name = _.upperFirst(Widget.config.name);
+						var name = _.upperFirst(Widget.config.name);
 
-								_namespace[name] = Widget;
-						}
+						_namespace[name] = Widget;
 				},
 				ready: function ready(Widget) {
 
@@ -3583,10 +3622,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				},
 				widgetize: function widgetize(Widget) {
 
-						if (Widget.config.plugin && _.isString(Widget.config.selector)) {
+						if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
 
-								Widgetize.add(Widget.config.selector, Widget.widgetize, Widget.config);
-						}
+						Widgetize.add(Widget.config.selector, Widget.widgetize, Widget.config);
 				},
 				plugin: function plugin(Widget) {
 
@@ -3737,10 +3775,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var template in this.templates) {
 
-										if (this.templates.hasOwnProperty(template) && this.templates[template]) {
+										if (!this.templates.hasOwnProperty(template) || !this.templates[template]) continue;
 
-												Templates[this.templatesNamespace][template] = _.template(this.templates[template], _options);
-										}
+										Templates[this.templatesNamespace][template] = _.template(this.templates[template], _options);
 								}
 						}
 
@@ -3966,10 +4003,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										for (var prop in key) {
 
-												if (key.hasOwnProperty(prop)) {
+												if (!key.hasOwnProperty(prop)) continue;
 
-														this._setOption(key, value);
-												}
+												this._setOption(key, value);
 										}
 								}
 						}
@@ -4069,9 +4105,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* EVENTS NAMESPACING */
 
-								events = events.split(/\s+/).map(function (event) {
-										return event + _this.eventNamespace;
-								}).join(' ');
+								events = $.eventNamespacer(events, this.eventNamespace);
 
 								/* TRIGGERING */
 
@@ -4118,7 +4152,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_off',
 						value: function _off($element, events, handler) {
-								var _this3 = this;
 
 								/* NORMALIZATION */
 
@@ -4131,9 +4164,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* EVENTS NAMESPACING */
 
-								events = events.split(/\s+/).map(function (event) {
-										return event + _this3.eventNamespace;
-								}).join(' ');
+								events = $.eventNamespacer(events, this.eventNamespace);
 
 								/* REMOVING HANDLER */
 
@@ -4169,13 +4200,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										for (var prop in originalEvent) {
 
-												if (originalEvent.hasOwnProperty(prop)) {
+												if (!originalEvent.hasOwnProperty(prop)) continue;
+												if (prop in event) continue;
 
-														if (!(prop in event)) {
-
-																event[prop] = originalEvent[prop];
-														}
-												}
+												event[prop] = originalEvent[prop];
 										}
 								}
 
@@ -4213,12 +4241,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var breakpoint in this.options.breakpoints.up) {
 
-										if (this.options.breakpoints.up.hasOwnProperty(breakpoint)) {
+										if (!this.options.breakpoints.up.hasOwnProperty(breakpoint)) continue;
 
-												if (width >= Breakpoints.widths[breakpoint]) {
+										if (width >= Breakpoints.widths[breakpoint]) {
 
-														this[this.options.breakpoints.up[breakpoint]]();
-												}
+												this[this.options.breakpoints.up[breakpoint]]();
 										}
 								}
 
@@ -4226,12 +4253,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var _breakpoint in this.options.breakpoints.down) {
 
-										if (this.options.breakpoints.down.hasOwnProperty(_breakpoint)) {
+										if (!this.options.breakpoints.down.hasOwnProperty(_breakpoint)) continue;
 
-												if (width <= Breakpoints.widths[_breakpoint]) {
+										if (width <= Breakpoints.widths[_breakpoint]) {
 
-														this[this.options.breakpoints.down[_breakpoint]]();
-												}
+												this[this.options.breakpoints.down[_breakpoint]]();
 										}
 								}
 
@@ -4239,12 +4265,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var _breakpoint2 in this.options.breakpoints.only) {
 
-										if (this.options.breakpoints.only.hasOwnProperty(_breakpoint2)) {
+										if (!this.options.breakpoints.only.hasOwnProperty(_breakpoint2)) continue;
 
-												if (width === Breakpoints.widths[_breakpoint2]) {
+										if (width === Breakpoints.widths[_breakpoint2]) {
 
-														this[this.options.breakpoints.only[_breakpoint2]]();
-												}
+												this[this.options.breakpoints.only[_breakpoint2]]();
 										}
 								}
 						}
@@ -4265,43 +4290,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var keystrokes in this.options.keystrokes) {
 
-										if (this.options.keystrokes.hasOwnProperty(keystrokes)) {
-												var _iteratorNormalCompletion7 = true;
-												var _didIteratorError7 = false;
-												var _iteratorError7 = undefined;
+										if (!this.options.keystrokes.hasOwnProperty(keystrokes)) continue;
 
+										var _iteratorNormalCompletion7 = true;
+										var _didIteratorError7 = false;
+										var _iteratorError7 = undefined;
+
+										try {
+												for (var _iterator7 = keystrokes.split(',')[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+														var keystroke = _step7.value;
+
+
+														if (!Keyboard.keystroke.match(event, keystroke)) continue;
+
+														var toCall = this.options.keystrokes[keystrokes],
+														    method = _.isArray(toCall) ? toCall[0] : toCall,
+														    _args = _.isArray(toCall) ? _.castArray(toCall[1]) : [];
+
+														this[method].apply(this, _args);
+
+														event.preventDefault();
+														event.stopImmediatePropagation();
+
+														return;
+												}
+										} catch (err) {
+												_didIteratorError7 = true;
+												_iteratorError7 = err;
+										} finally {
 												try {
-
-														for (var _iterator7 = keystrokes.split(',')[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-																var keystroke = _step7.value;
-
-
-																if (Keyboard.keystroke.match(event, keystroke)) {
-
-																		var toCall = this.options.keystrokes[keystrokes],
-																		    method = _.isArray(toCall) ? toCall[0] : toCall,
-																		    _args = _.isArray(toCall) ? _.castArray(toCall[1]) : [];
-
-																		this[method].apply(this, _args);
-
-																		event.preventDefault();
-																		event.stopImmediatePropagation();
-
-																		return;
-																}
+														if (!_iteratorNormalCompletion7 && _iterator7.return) {
+																_iterator7.return();
 														}
-												} catch (err) {
-														_didIteratorError7 = true;
-														_iteratorError7 = err;
 												} finally {
-														try {
-																if (!_iteratorNormalCompletion7 && _iterator7.return) {
-																		_iterator7.return();
-																}
-														} finally {
-																if (_didIteratorError7) {
-																		throw _iteratorError7;
-																}
+														if (_didIteratorError7) {
+																throw _iteratorError7;
 														}
 												}
 										}
@@ -4334,10 +4357,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_delay',
 						value: function _delay(fn, delay) {
-								var _this4 = this;
+								var _this3 = this;
 
 								return setTimeout(function () {
-										return fn.apply(_this4);
+										return fn.apply(_this3);
 								}, delay || 0);
 						}
 
@@ -4754,13 +4777,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var key in Breakpoints) {
 
-										if (Breakpoints.hasOwnProperty(key)) {
+										if (!Breakpoints.hasOwnProperty(key)) continue;
 
-												if (_.isString(Breakpoints[key])) {
+										if (!_.isString(Breakpoints[key])) continue;
 
-														this._populateBreakpoint(key);
-												}
-										}
+										this._populateBreakpoint(key);
 								}
 						}
 
@@ -4777,36 +4798,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var breakpoint in this.options.switch.up) {
 
-										if (this.options.switch.up.hasOwnProperty(breakpoint)) {
+										if (!this.options.switch.up.hasOwnProperty(breakpoint)) continue;
 
-												var active = width >= Breakpoints.widths[breakpoint];
+										var active = width >= Breakpoints.widths[breakpoint];
 
-												status.up[breakpoint] = active;
-										}
+										status.up[breakpoint] = active;
 								}
 
 								/* DOWN */
 
 								for (var _breakpoint3 in this.options.switch.down) {
 
-										if (this.options.switch.down.hasOwnProperty(_breakpoint3)) {
+										if (!this.options.switch.down.hasOwnProperty(_breakpoint3)) continue;
 
-												var _active = width <= Breakpoints.widths[_breakpoint3];
+										var _active = width <= Breakpoints.widths[_breakpoint3];
 
-												status.down[_breakpoint3] = _active;
-										}
+										status.down[_breakpoint3] = _active;
 								}
 
 								/* ONLY */
 
 								for (var _breakpoint4 in this.options.switch.only) {
 
-										if (this.options.switch.only.hasOwnProperty(_breakpoint4)) {
+										if (!this.options.switch.only.hasOwnProperty(_breakpoint4)) continue;
 
-												var _active2 = width === Breakpoints.widths[_breakpoint4];
+										var _active2 = width === Breakpoints.widths[_breakpoint4];
 
-												status.only[_breakpoint4] = _active2;
-										}
+										status.only[_breakpoint4] = _active2;
 								}
 
 								return status;
@@ -4819,17 +4837,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var type in current) {
 
-										if (current.hasOwnProperty(type)) {
+										if (!current.hasOwnProperty(type)) continue;
 
-												for (var breakpoint in current[type]) {
+										for (var breakpoint in current[type]) {
 
-														if (current[type].hasOwnProperty(breakpoint)) {
+												if (!current[type].hasOwnProperty(breakpoint)) continue;
 
-																if (!!previous[type][breakpoint] !== !!current[type][breakpoint]) {
+												if (!!previous[type][breakpoint] !== !!current[type][breakpoint]) {
 
-																		delta[type][breakpoint] = !!current[type][breakpoint];
-																}
-														}
+														delta[type][breakpoint] = !!current[type][breakpoint];
 												}
 										}
 								}
@@ -4854,15 +4870,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var type in delta) {
 
-										if (delta.hasOwnProperty(type)) {
+										if (!delta.hasOwnProperty(type)) continue;
 
-												for (var breakpoint in delta[type]) {
+										for (var breakpoint in delta[type]) {
 
-														if (delta[type].hasOwnProperty(breakpoint)) {
+												if (!delta[type].hasOwnProperty(breakpoint)) continue;
 
-																this.$element.toggleClass(this.options.switch[type][breakpoint], delta[type][breakpoint]);
-														}
-												}
+												this.$element.toggleClass(this.options.switch[type][breakpoint], delta[type][breakpoint]);
 										}
 								}
 
@@ -5447,7 +5461,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				selector: '.draggable',
 				options: {
 						draggable: _.true, // Checks if we can drag it or not
-						threshold: Browser.is.touchDevice ? 5 : 0, // Minimum moving treshold for triggering a drag
+						threshold: { // Minimum moving treshold for triggering a drag
+								touch: 5, // Enabled on touch events
+								mouse: 0 // Enabled on mouse events
+						},
 						onlyHandlers: false, // Only an handler can drag it around
 						revert: false, // On dragend take it back to the starting position
 						axis: false, // Limit the movements to this axis
@@ -5867,9 +5884,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										x: Math.abs(deltaXY.x),
 										y: Math.abs(deltaXY.y)
 								},
-								    dragXY = void 0;
+								    dragXY = void 0,
+								    threshold = Pointer.isTouchEvent(event) ? this.options.threshold.touch : this.options.threshold.mouse;
 
-								if (absDeltaXY.x < this.options.threshold && absDeltaXY.y < this.options.threshold) return;
+								if (absDeltaXY.x < threshold && absDeltaXY.y < threshold) return;
 
 								if (!this.inited && this.isProxyed) {
 
@@ -8537,13 +8555,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___downTap',
 						value: function ___downTap() {
 
-								// Touch devices triggers a `Pointer.down` event, but maybe they will just scroll the page, more appropriate to bind on `Pointer.tap`
-
-								this._on(Browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap);
+								this._on(Pointer.tap + ' mousedown', this.__downTap);
 						}
 				}, {
 						key: '__downTap',
 						value: function __downTap(event) {
+
+								if (this._lock) return;
+
+								this._lock = true;
 
 								if (this.$ripple.hasClass(this.options.classes.center)) {
 
@@ -8566,37 +8586,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__up',
 						value: function __up() {
-								var _iteratorNormalCompletion10 = true;
-								var _didIteratorError10 = false;
-								var _iteratorError10 = undefined;
 
-								try {
+								this._defer(function () {
+										// So that the `tap` event gets parsed before removing the lock
 
-										for (var _iterator10 = this.circles[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-												var _step10$value = _slicedToArray(_step10.value, 2);
+										this._lock = false;
 
-												var $circle = _step10$value[0];
-												var timestamp = _step10$value[1];
+										var _iteratorNormalCompletion10 = true;
+										var _didIteratorError10 = false;
+										var _iteratorError10 = undefined;
 
-
-												this._hide($circle, timestamp);
-										}
-								} catch (err) {
-										_didIteratorError10 = true;
-										_iteratorError10 = err;
-								} finally {
 										try {
-												if (!_iteratorNormalCompletion10 && _iterator10.return) {
-														_iterator10.return();
+												for (var _iterator10 = this.circles[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+														var _step10$value = _slicedToArray(_step10.value, 2);
+
+														var $circle = _step10$value[0];
+														var timestamp = _step10$value[1];
+
+
+														this._hide($circle, timestamp);
 												}
+										} catch (err) {
+												_didIteratorError10 = true;
+												_iteratorError10 = err;
 										} finally {
-												if (_didIteratorError10) {
-														throw _iteratorError10;
+												try {
+														if (!_iteratorNormalCompletion10 && _iterator10.return) {
+																_iterator10.return();
+														}
+												} finally {
+														if (_didIteratorError10) {
+																throw _iteratorError10;
+														}
 												}
 										}
-								}
 
-								this.circles = [];
+										this.circles = [];
+								});
 						}
 
 						/* SHOW */
@@ -9579,7 +9605,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___hover',
 						value: function ___hover() {
 
-								if (this.options.hover.active && !Browser.is.touchDevice) {
+								if (this.options.hover.active) {
 
 										this._on(Pointer.enter, this.__hoverEnter);
 								}
@@ -11334,7 +11360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this48 = this;
+								var _this47 = this;
 
 								this.$panel = this.$element;
 								this.panel = this.element;
@@ -11342,7 +11368,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$backdrop = this.$html;
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this48.$panel.hasClass(direction);
+										return _this47.$panel.hasClass(direction);
 								}) || this.options.direction;
 								this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
 
@@ -11885,14 +11911,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this53 = this;
+								var _this52 = this;
 
 								this.$tabs = this.$element;
 								this.$triggers = this.$tabs.find(this.options.selectors.triggers);
 								this.$containers = this.$tabs.find(this.options.selectors.containers);
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this53.$tabs.hasClass(direction);
+										return _this52.$tabs.hasClass(direction);
 								}) || this.options.direction;
 
 								this.index = false;
@@ -12056,26 +12082,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var selector in this.tree) {
 
-										if (this.tree.hasOwnProperty(selector)) {
+										if (!this.tree.hasOwnProperty(selector)) continue;
 
-												css += selector + '{';
+										css += selector + '{';
 
-												if (_.isPlainObject(this.tree[selector])) {
+										if (_.isPlainObject(this.tree[selector])) {
 
-														for (var property in this.tree[selector]) {
+												for (var property in this.tree[selector]) {
 
-																if (this.tree[selector].hasOwnProperty(property)) {
+														if (!this.tree[selector].hasOwnProperty(property)) continue;
 
-																		css += property + ':' + this.tree[selector][property] + ';';
-																}
-														}
-												} else if (_.isString(this.tree[selector])) {
-
-														css += this.tree[selector] + ';';
+														css += property + ':' + this.tree[selector][property] + ';';
 												}
+										} else if (_.isString(this.tree[selector])) {
 
-												css += '}';
+												css += this.tree[selector] + ';';
 										}
+
+										css += '}';
 								}
 
 								return css;
@@ -12607,7 +12631,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'once',
 						value: function once(time) {
-								var _this54 = this;
+								var _this53 = this;
 
 								if (isNaN(time)) {
 
@@ -12615,7 +12639,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 
 								setTimeout(function () {
-										return _this54.action();
+										return _this53.action();
 								}, time);
 
 								return this;
@@ -12698,7 +12722,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'setTimer',
 						value: function setTimer(time) {
-								var _this55 = this;
+								var _this54 = this;
 
 								if (isNaN(time)) {
 
@@ -12710,7 +12734,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.clearTimer();
 
 								this.timeoutObject = setTimeout(function () {
-										return _this55.go();
+										return _this54.go();
 								}, time);
 						}
 				}, {
@@ -13674,7 +13698,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__tap',
 						value: function __tap(event) {
-								var _this59 = this;
+								var _this58 = this;
 
 								if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -13688,14 +13712,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												beforeSend: function beforeSend() {
 
-														_this59.doingAjax = true;
+														_this58.doingAjax = true;
 												},
 
 												error: function error(res) {
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-														$.toast(_.isError(resj) || !('message' in resj) ? _this59.options.messages.error : resj.message);
+														$.toast(_.isError(resj) || !('message' in resj) ? _this58.options.messages.error : resj.message);
 												},
 
 												success: function success(res) {
@@ -13707,19 +13731,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (!_.isError(resj)) {
 
-																_.merge(_this59.options, resj);
+																_.merge(_this58.options, resj);
 
-																_this59.$rater.html(_this59._template('stars', _this59.options));
+																_this58.$rater.html(_this58._template('stars', _this58.options));
 
-																_this59.options.rated = true;
+																_this58.options.rated = true;
 
-																_this59._trigger('change');
+																_this58._trigger('change');
 														}
 												},
 
 												complete: function complete() {
 
-														_this59.doingAjax = false;
+														_this58.doingAjax = false;
 												}
 
 										});
@@ -14276,7 +14300,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
 
 										this._frame(function () {
-												var _this63 = this;
+												var _this62 = this;
 
 												this.$modal.addClass(this.options.classes.showing);
 
@@ -14284,10 +14308,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 														width: newRect.width,
 														height: newRect.height
 												}, this.options.animations.resize, function () {
-														_this63.$modal.css({
+														_this62.$modal.css({
 																width: '',
 																height: ''
-														}).removeClass(_this63.options.classes.placeholder + ' ' + _this63.options.classes.loaded + ' ' + _this63.options.classes.resizing + ' ' + _this63.options.classes.showing);
+														}).removeClass(_this62.options.classes.placeholder + ' ' + _this62.options.classes.loaded + ' ' + _this62.options.classes.resizing + ' ' + _this62.options.classes.showing);
 												});
 										});
 								});
@@ -16125,7 +16149,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						option: '<div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">' + '<%= o.opt.value %>' + '</div>'
 				},
 				options: {
-						native: Browser.is.touchDevice, // Don't show the popover and use the native select, by default on touch devices
+						native: true, // Don't show the popover and use the native select, enabled by default
 						popover: {
 								size: '',
 								color: Colors.white,
@@ -16232,12 +16256,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___buttonTap',
 						value: function ___buttonTap() {
 
-								if (!Browser.is.touchDevice) {
+								if (this.options.native) return;
 
-										/* BUTTON TAP */
+								/* BUTTON TAP */
 
-										this._on(this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap);
-								}
+								this._on(this.$popover, Pointer.tap, this.options.selectors.button, this.__buttonTap);
 						}
 				}, {
 						key: '__buttonTap',
@@ -17588,20 +17611,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var id in this.elements) {
 
-										if (this.elements.hasOwnProperty(id)) {
+										if (!this.elements.hasOwnProperty(id)) continue;
 
-												if (id === elementObj.id) continue;
+										if (id === elementObj.id) continue;
 
-												var otherElementObj = this.elements[id],
-												    isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf(elementObj.name) !== -1,
-												    hasSameName = !_.isEmpty(elementObj.name) && otherElementObj.name === elementObj.name;
+										var otherElementObj = this.elements[id],
+										    isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf(elementObj.name) !== -1,
+										    hasSameName = !_.isEmpty(elementObj.name) && otherElementObj.name === elementObj.name;
 
-												if (isDepending || hasSameName) {
+										if (isDepending || hasSameName) {
 
-														otherElementObj.isValid = undefined;
+												otherElementObj.isValid = undefined;
 
-														this._validateWorker(otherElementObj);
-												}
+												this._validateWorker(otherElementObj);
 										}
 								}
 						}
@@ -17611,10 +17633,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								for (var id in this.elements) {
 
-										if (this.elements.hasOwnProperty(id)) {
+										if (!this.elements.hasOwnProperty(id)) continue;
 
-												this._updateElement(this.elements[id]);
-										}
+										this._updateElement(this.elements[id]);
 								}
 						}
 
@@ -17732,17 +17753,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										for (var name in validations) {
 
-												if (validations.hasOwnProperty(name)) {
+												if (!validations.hasOwnProperty(name)) continue;
 
-														var validation = validations[name],
-														    isValid = validation.validator.apply({ elements: this.elements, element: elementObj }, [elementObj.value].concat(validation.args));
+												var validation = validations[name],
+												    isValid = validation.validator.apply({ elements: this.elements, element: elementObj }, [elementObj.value].concat(validation.args));
 
-														if (!isValid) {
+												if (!isValid) {
 
-																var error = _.format.apply(_, [this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value].concat(_toConsumableArray(validation.args)));
+														var error = _.format.apply(_, [this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value].concat(_toConsumableArray(validation.args)));
 
-																errors.push(error);
-														}
+														errors.push(error);
 												}
 										}
 								}
@@ -17812,19 +17832,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										for (var id in this.elements) {
 
-												if (this.elements.hasOwnProperty(id)) {
+												if (!this.elements.hasOwnProperty(id)) continue;
 
-														var elementObj = this.elements[id];
+												var elementObj = this.elements[id];
 
-														if (_.isUndefined(elementObj.isValid)) {
+												if (_.isUndefined(elementObj.isValid)) {
 
-																this._validateWorker(elementObj);
-														}
+														this._validateWorker(elementObj);
+												}
 
-														if (!elementObj.isValid) {
+												if (!elementObj.isValid) {
 
-																this._isValid = false;
-														}
+														this._isValid = false;
 												}
 										}
 
@@ -17928,7 +17947,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this80 = this;
+								var _this79 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -17945,21 +17964,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this80.options.spinnerOverlay) {
+												if (_this79.options.spinnerOverlay) {
 
-														_this80.$form.spinnerOverlay('open');
+														_this79.$form.spinnerOverlay('open');
 												}
 
-												_this80._trigger('beforesend');
+												_this79._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												$.toast(_.isError(resj) || !('message' in resj) ? _this80.options.messages.error : resj.msg);
+												$.toast(_.isError(resj) || !('message' in resj) ? _this79.options.messages.error : resj.msg);
 
-												_this80._trigger('error');
+												_this79._trigger('error');
 										},
 
 										success: function success(res) {
@@ -17970,36 +17989,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.message || _this80.options.messages.refreshing);
+																$.toast(resj.message || _this79.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.message || _this80.options.messages.redirecting);
+																$.toast(resj.message || _this79.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.message || _this80.options.messages.success);
+																$.toast(resj.message || _this79.options.messages.success);
 														}
 												} else {
 
-														$.toast(_this80.options.messages.success);
+														$.toast(_this79.options.messages.success);
 												}
 
-												_this80._trigger('success');
+												_this79._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this80.options.spinnerOverlay) {
+												if (_this79.options.spinnerOverlay) {
 
-														_this80.$form.spinnerOverlay('close');
+														_this79.$form.spinnerOverlay('close');
 												}
 
-												_this80._trigger('complete');
+												_this79._trigger('complete');
 										}
 
 								});
@@ -32400,13 +32419,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___downTap',
 						value: function ___downTap() {
 
-								if (Browser.is.touchDevice || this._isSingle) {
+								if (this._isSingle) {
 
-										this._on(Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch);
+										this.___tap();
+								} else if (Browser.is.touchDevice) {
+
+										this.___down();
+										this.___tap();
 								} else {
 
-										this._on(Pointer.down, this.options.selectors.selectionToggler, this.__down);
+										this.___down();
 								}
+						}
+				}, {
+						key: '___down',
+						value: function ___down() {
+
+								this._on(Pointer.down, this.options.selectors.selectionToggler, this.__down);
+						}
+				}, {
+						key: '___tap',
+						value: function ___tap() {
+
+								this._tappable = true;
+
+								this._on(Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch);
 						}
 
 						/* TAP */ // Just for touch devices or single select
@@ -32414,6 +32451,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__tapTouch',
 						value: function __tapTouch(event) {
+
+								if (!this._tappable) return;
 
 								event.preventDefault();
 
@@ -32434,6 +32473,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__down',
 						value: function __down(event) {
+
+								this._tappable = Pointer.isTouchEvent(event);
+
+								if (this._tappable) return;
 
 								event.preventDefault();
 
@@ -32802,11 +32845,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this84 = this;
+								var _this83 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this84.options.selectors.id ? $(row).find(_this84.options.selectors.id).text() : $(row).data(_this84.options.datas.id);
+										return _this83.options.selectors.id ? $(row).find(_this83.options.selectors.id).text() : $(row).data(_this83.options.datas.id);
 								});
 
 								return _.compact(ids);
