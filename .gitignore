@@ -26,6 +26,10 @@
 *.sublime-workspace
 nbproject
 Thumbs.db
+.fseventsd
+.DocumentRevisions*
+.TemporaryItems
+.Trashes
 
 # Other paths to ignore
 bower_components
