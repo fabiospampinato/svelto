@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "isShellCommand": true,
+  "showOutput": "silent",
+  "tasks": [{
+    "taskName": "Init terminals",
+    "suppressTaskName": true,
+    "args" : ["osascript .applescripts/init_terminals.applescript"]
+  }]
+}
