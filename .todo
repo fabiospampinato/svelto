@@ -1,0 +1,57 @@
+
+Now:
+  ☐ maybe .table tbody tr.table-row-empty td should have vertical-align: middle
+  ☐ maybe non-center sections should have `no-grow` by default
+  ☐ add support for a `close` parameter, useful on ajax request when a remoteModal should be closed on completion
+  ☐ maybe enforce min-height on toolbar maybe, and use that value for layout-header sticky margin-top
+  ☐ add a @before in toolbar for card, so that a card-header can have toolbar's padding instead
+    ☐ are you sure it will work?
+  ☐ style default select (too ugly on firefox)
+  ☐ .multiple.only-separators don't seem to work properly
+  ☐ repositionate popover on resize, for instance when using a datepicker or a select it may change width
+
+Next:
+  ☐ `a` elements should be `actionable` by default
+  ☐ select inside a remote modal, the modal could get closed while the select will still be there
+  ☐ add support for CommonJS or AMD export syntax
+    ☐ datatables don't get loaded under Meteor for instance
+  ☐ center sortable names, or when also `text-align: center` they will look misaligned
+  ☐ rotate select's icon when open
+    ☐ also keep the select button `.active`... SURE?
+  Gulp:
+    ☐ admin tasks only for admin with the `isAdmin` task specified into the project
+    ☐ add a `gulp install` or `gulp init` task, very much like Semantic UI did
+  To fix:
+    ☐ dinamically check for classes, like when using `isOpen` etc.
+    ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
+    ☐ lower cyclomatic complexity
+    ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
+
+Future:
+  ☐ [widget] add better support for updating after options are set at runtime
+  ☐ add style on :focus, also add better keyboard navigation support
+  ☐ adding `@require`s to extenders (.before, .after) doesn't work, since they get moved after... maybe we should move left or right the one more to the left in the dependencies list instead...
+  ☐ emoji
+    ☐ https://github.com/Ranks/emojify.js
+    ☐ https://github.com/twitter/twemoji
+  ☐ an utility for dinamically creating a dialog, like a noty but with more buttons
+  ☐ add autofocus capabilities to noty, modal and panel, basically everything that appears
+  ☐ add pure css tooltips like materializecss'
+  ☐ [SASS] add string related functions to _, take them from here: https://github.com/HugoGiraudel/SassyStrings/tree/master/stylesheets
+  ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
+  ☐ add this._onFocus ()
+  ☐ widget for running actions over selectable's selected elements, like a floating noty or a slim panel
+  ☐ selecter, like numbox but with custom values and chevrons, not editable (once it's done add it for editing the colors of the widgets)
+  ☐ remote loader of stuff, not just remoteModal but more generic
+  ☐ new checkable widget, like selectable but with checkboxes (should work like gmail's)
+  ☐ maybe add also a special `scroll` option key, for triggering actions automagically
+  ☐ input autocomplete plugin (like typeahead.js)
+  ☐ fullscreen library
+  ☐ chart library
+  ☐ add i18n support
+
+Maybe:
+  ☐ add a .multiple.reverse
+  ☐ sort sass files properties
+  ☐ maybe rename lQuery to yocto or atto o some other prefix, like zepto
+  ☐ create proper admin@getsvelto.com that we'll use for npm, atmosphere, github etc.
