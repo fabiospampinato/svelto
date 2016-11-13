@@ -1,5 +1,5 @@
 # Svelto
-A rich, modular, web framework for modern browsers. With jade mixins.
+Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.
 
 ---
 
