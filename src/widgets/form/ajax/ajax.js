@@ -26,6 +26,12 @@
     options: {
       spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
       timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
+      autoclose: { // Close the form (or its container) on success
+        enabled: true,
+        selectors: ['.modal', '.panel', '.popover', '.overlay', '.expander'], // Possible selectors for the container that needs to be closed
+        plugins: ['modal', 'panel', 'popover', 'overlay', 'expander'], // Maps each selector to its jQuery plugin name
+        methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
+      },
       messages: {
         error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
@@ -60,7 +66,39 @@
 
     }
 
-    /* PRIVATE */
+    /* AUTOCLOSE */
+
+    _autoclose () {
+
+      let {selectors, plugins, methods} = this.options.autoclose;
+
+      for ( let i = 0, l = selectors.length; i < l; i++ ) {
+
+        let $closable = this.$form.closest ( selectors[i] );
+
+        if ( !$closable.length ) continue;
+
+        let method = _.isArray ( methods ) ? methods[i] : methods;
+
+        if ( this.options.spinnerOverlay ) {
+
+          this._on ( 'spinneroverlay:close', () => $closable[plugins[i]]( method ) );
+
+        } else {
+
+          $closable[plugins[i]]( method );
+
+        }
+
+        break;
+
+      }
+
+      return this;
+
+    }
+
+    /* SUBMIT */
 
     ___submit () {
 
@@ -130,6 +168,8 @@
               $.toast ( resj.message || this.options.messages.success );
 
             }
+
+            if ( this.options.autoclose.enabled ) this._autoclose ();
 
           } else {
 

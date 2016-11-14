@@ -2,7 +2,7 @@
 Now:
   ☐ maybe .table tbody tr.table-row-empty td should have vertical-align: middle
   ☐ maybe non-center sections should have `no-grow` by default
-  ☐ add support for a `close` parameter, useful on ajax request when a remoteModal should be closed on completion
+  ✔ add support for a `close` parameter, useful on ajax request when a remoteModal should be closed on completion @done (11/14/2016, 5:30:36 PM)
   ☐ maybe enforce min-height on toolbar maybe, and use that value for layout-header sticky margin-top
   ☐ add a @before in toolbar for card, so that a card-header can have toolbar's padding instead
     ☐ are you sure it will work?

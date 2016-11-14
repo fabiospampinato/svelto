@@ -49,8 +49,28 @@
     </div>
   </form>
 
+  {{{sw.divider "Autoclose"}}}
+
+  <div class="button modal-toggler bordered" data-target="#autoclose">Open form</div>
+
+  {{> form_ajax_modals}}
   {{> form_ajax_actions}}
 
+</template>
+
+<!-- MODALS -->
+
+<template name="form_ajax_modals">
+  <form action="/form-ajax-basic" class="card bordered validate ajax modal xs-8" id="autoclose">
+    <div class="card-header primary bordered">Autoclosable form</div>
+    <div class="card-block">
+      <label>Input:</label>
+      <input name="input_1" placeholder="Input..." class="fluid bordered" data-validations="required">
+    </div>
+    <div class="card-footer bordered text-center">
+      <button type="submit" class="button secondary">Submit</button>
+    </div>
+  </form>
 </template>
 
 <!-- ACTIONS -->
