@@ -259,7 +259,7 @@
 
         if ( value.length ) {
 
-          let $selectedOption = this.$options.filter ( `[value="${value}"]` ).first ();
+          let $selectedOption = this.$options.filter ( `[value="${value}"]` ).last ();
 
           this.$valueholder.text ( $selectedOption.text () );
 
@@ -277,7 +277,7 @@
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
-      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).first ().addClass ( this.options.classes.selected );
+      this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + this.$select.val () + '"]' ).last ().addClass ( this.options.classes.selected );
 
     }
 
@@ -303,7 +303,7 @@
 
     set ( value ) {
 
-      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' ).first ();
+      let $button = this.$buttons.filter ( '[data-' + this.options.datas.value + '="' + value + '"]' );
 
       if ( !$button.length ) return;
 
