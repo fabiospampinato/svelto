@@ -69,13 +69,45 @@
         @extend %icon-base;
         position: absolute;
         right: 0;
-        content: $select-icon;
+        content: $select-icon-closed;
       }
 
       /* CUSTOM AFTER */
 
       &[data-icon]:after {
         content: attr(data-icon);
+      }
+
+      &[data-icon-closed]:after {
+        content: attr(data-icon-closed);
+      }
+
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+
+    /* LABEL */
+
+    select + label {
+
+      /* AFTER */
+
+      &:after {
+        content: $select-icon-open;
+      }
+
+      /* CUSTOM AFTER */
+
+      &[data-icon]:after {
+        content: attr(data-icon);
+      }
+
+      &[data-icon-open]:after {
+        content: attr(data-icon-open);
       }
 
     }

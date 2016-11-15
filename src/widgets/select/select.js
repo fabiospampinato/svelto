@@ -45,6 +45,7 @@
         css: Widgets.Popover.config.options.classes.affixed + ' bordered'
       },
       classes: {
+        open: 'open active',
         selected: 'active highlighted highlight-left',
         affixed: Widgets.Popover.config.options.classes.affixed
       },
@@ -235,6 +236,8 @@
 
       this.___buttonTap ();
 
+      this.$wrp.addClass ( this.options.classes.open );
+
       this._trigger ( 'open' );
 
     }
@@ -244,6 +247,8 @@
       this._reset ();
 
       this.___change ();
+
+      this.$wrp.removeClass ( this.options.classes.open );
 
       this._trigger ( 'close' );
 
