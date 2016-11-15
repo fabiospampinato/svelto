@@ -55,7 +55,7 @@
         select: 'select',
         option: 'option',
         valueholder: '.select-value',
-        valueholderFallback: 'label',
+        valueholderFallback: 'label:not(.no-value)',
         button: '.button'
       },
       callbacks: {
