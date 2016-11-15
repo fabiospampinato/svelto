@@ -270,10 +270,10 @@
 
     /* HELPER */
 
-    _getHelper () {
+    _getHelper ( $draggable ) {
 
       return _.isFunction ( this.options.$helper )
-               ? this.options.$helper ()
+               ? this.options.$helper ( $draggable )
                : this.options.$helper instanceof $ && this.options.$helper.length
                  ? this.options.$helper
                  : false;
@@ -422,7 +422,7 @@
       this.motion = false;
       this.scrollInited = false;
 
-      this.$helper = this._getHelper ();
+      this.$helper = this._getHelper ( this.$draggable );
       this.helper = this.$helper ? this.$helper[0] : false;
 
       this.$movable = ( this.$helper || this.$draggable );
