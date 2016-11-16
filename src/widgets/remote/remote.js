@@ -40,6 +40,12 @@
 
     /* SPECIAL */
 
+    _variables () {
+
+      this._requestsNr = 0;
+
+    }
+
     _reset () {
 
       this.abort ();
@@ -96,8 +102,15 @@
 
     }
 
+    getRequestsNr () {
+
+      return this._requestsNr;
+
+    }
+
     request () {
 
+      this._requestsNr++;
       this._isAborted = false;
 
       this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, {
