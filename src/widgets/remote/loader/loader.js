@@ -90,7 +90,7 @@
 
     __request () {
 
-      if ( this.$loader.getRect ().top - ( this.$window.scrollTop () + this.$window.outerHeight () ) > this.options.autorequest.threshold ) return;
+      if ( this.$loader.getRect ().top - this.$window.outerHeight () > this.options.autorequest.threshold ) return;
 
       this.request ();
 
