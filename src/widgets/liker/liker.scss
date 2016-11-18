@@ -9,9 +9,9 @@
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* LIKER */
-
 //TODO: Change the color of the counter and/or label if the icon is not present
+
+/* LIKER */
 
 .liker {
 
@@ -156,6 +156,12 @@
         content: attr(data-likes);
       }
 
+      /* NO COUNTER 0 */
+
+      &:not([data-text-counter]).no-counter-0[data-likes="0"]:not(:hover):after {
+        display: none;
+      }
+
     }
 
     /* DISLIKE */
@@ -166,6 +172,25 @@
 
       &:not(:hover):after {
         content: attr(data-dislikes);
+      }
+
+      /* NO COUNTER 0 */
+
+      &:not([data-text-counter]).no-counter-0[data-dislikes="0"]:not(:hover):after {
+        display: none;
+      }
+
+    }
+
+    /* NO COUNTERS 0 */
+
+    &.no-counters-0 {
+
+      /* LIKE / DISLIKE */
+
+      .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:not(:hover):after,
+      .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:not(:hover):after {
+        display: none
       }
 
     }
