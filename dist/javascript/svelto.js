@@ -127,8 +127,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* EVENT XY */
 
 		$.eventXY = function (event) {
-				var X = arguments.length <= 1 || arguments[1] === undefined ? 'pageX' : arguments[1];
-				var Y = arguments.length <= 2 || arguments[2] === undefined ? 'pageY' : arguments[2];
+				var X = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'pageX';
+				var Y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'pageY';
 
 
 				if ('originalEvent' in event) {
@@ -499,7 +499,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		_.mixin({
 				format: function format(msg) {
 
-						for (var i = 1, l = arguments.length - 1; i <= l; i++) {
+						for (var i = 1, l = arguments.length <= 1 ? 0 : arguments.length - 1; i <= l; i++) {
 
 								msg = msg.replace('$' + i, arguments.length <= i - 1 + 1 ? undefined : arguments[i - 1 + 1]);
 						}
@@ -526,7 +526,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		_.mixin({
 				mkize: function mkize(number) {
-						var decimals = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+						var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
 
 						var bases = [1000000000, 1000000, 1000],
@@ -2583,7 +2583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.5.7',
+				VERSION: '0.6.0',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -3087,7 +3087,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						RIGHT: 2
 				},
 				hasButton: function hasButton(event, button) {
-						var orNone = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+						var orNone = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
 
 						if ('originalEvent' in event) {
@@ -3476,11 +3476,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												try {
 
 														for (var _iterator4 = widgetizers[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-																var _step4$value = _slicedToArray(_step4.value, 2);
-
-																var widgetizer = _step4$value[0];
-																var data = _step4$value[1];
-
+																var _step4$value = _slicedToArray(_step4.value, 2),
+																    widgetizer = _step4$value[0],
+																    data = _step4$value[1];
 
 																widgetizer($(widget), data);
 														}
@@ -3603,7 +3601,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				/* WORKERS */
 
 				configure: function configure(Widget) {
-						var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+						var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 
 						Widget.config = config;
@@ -4422,7 +4420,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_template',
 						value: function _template(name) {
-								var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+								var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 
 								return Templates[this.templatesNamespace][name](options);
@@ -4522,7 +4520,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Checkbox() {
 						_classCallCheck(this, Checkbox);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Checkbox).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
 				}
 
 				_createClass(Checkbox, [{
@@ -4607,7 +4605,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Radio() {
 						_classCallCheck(this, Radio);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Radio).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).apply(this, arguments));
 				}
 
 				_createClass(Radio, [{
@@ -4710,7 +4708,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ClassSwitch() {
 						_classCallCheck(this, ClassSwitch);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ClassSwitch).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ClassSwitch.__proto__ || Object.getPrototypeOf(ClassSwitch)).apply(this, arguments));
 				}
 
 				_createClass(ClassSwitch, [{
@@ -5002,7 +5000,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Datepicker() {
 						_classCallCheck(this, Datepicker);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Datepicker).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Datepicker.__proto__ || Object.getPrototypeOf(Datepicker)).apply(this, arguments));
 				}
 
 				_createClass(Datepicker, [{
@@ -5519,7 +5517,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Draggable() {
 						_classCallCheck(this, Draggable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Draggable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Draggable.__proto__ || Object.getPrototypeOf(Draggable)).apply(this, arguments));
 				}
 
 				_createClass(Draggable, [{
@@ -5710,9 +5708,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				}, {
 						key: '_getHelper',
-						value: function _getHelper() {
+						value: function _getHelper($draggable) {
 
-								return _.isFunction(this.options.$helper) ? this.options.$helper() : this.options.$helper instanceof $ && this.options.$helper.length ? this.options.$helper : false;
+								return _.isFunction(this.options.$helper) ? this.options.$helper($draggable) : this.options.$helper instanceof $ && this.options.$helper.length ? this.options.$helper : false;
 						}
 				}, {
 						key: '_initHelper',
@@ -5843,7 +5841,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.motion = false;
 								this.scrollInited = false;
 
-								this.$helper = this._getHelper();
+								this.$helper = this._getHelper(this.$draggable);
 								this.helper = this.$helper ? this.$helper[0] : false;
 
 								this.$movable = this.$helper || this.$draggable;
@@ -6035,7 +6033,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Expander() {
 						_classCallCheck(this, Expander);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Expander).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Expander.__proto__ || Object.getPrototypeOf(Expander)).apply(this, arguments));
 				}
 
 				_createClass(Expander, [{
@@ -6063,7 +6061,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
 
 
 								if (!!force !== this._isOpen) {
@@ -6138,7 +6136,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Accordion() {
 						_classCallCheck(this, Accordion);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Accordion).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
 				}
 
 				_createClass(Accordion, [{
@@ -6215,7 +6213,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'enable',
 						value: function enable() {
 
-								_get(Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
+								_get(Accordion.prototype.__proto__ || Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
 
 								_.invokeMap(this.instances, 'enable');
 						}
@@ -6298,7 +6296,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Flickable() {
 						_classCallCheck(this, Flickable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Flickable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Flickable.__proto__ || Object.getPrototypeOf(Flickable)).apply(this, arguments));
 				}
 
 				_createClass(Flickable, [{
@@ -6476,7 +6474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Flippable() {
 						_classCallCheck(this, Flippable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Flippable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Flippable.__proto__ || Object.getPrototypeOf(Flippable)).apply(this, arguments));
 				}
 
 				_createClass(Flippable, [{
@@ -6503,7 +6501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'flip',
 						value: function flip() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isFlipped : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFlipped;
 
 
 								if (!!force !== this._isFlipped) {
@@ -6585,7 +6583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function FormSync() {
 						_classCallCheck(this, FormSync);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(FormSync).apply(this, arguments));
+						return _possibleConstructorReturn(this, (FormSync.__proto__ || Object.getPrototypeOf(FormSync)).apply(this, arguments));
 				}
 
 				_createClass(FormSync, [{
@@ -6733,7 +6731,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Infobar() {
 						_classCallCheck(this, Infobar);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Infobar).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Infobar.__proto__ || Object.getPrototypeOf(Infobar)).apply(this, arguments));
 				}
 
 				_createClass(Infobar, [{
@@ -6805,7 +6803,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function InputAutogrow() {
 						_classCallCheck(this, InputAutogrow);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(InputAutogrow).apply(this, arguments));
+						return _possibleConstructorReturn(this, (InputAutogrow.__proto__ || Object.getPrototypeOf(InputAutogrow)).apply(this, arguments));
 				}
 
 				_createClass(InputAutogrow, [{
@@ -6938,7 +6936,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function InputFileNames() {
 						_classCallCheck(this, InputFileNames);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(InputFileNames).apply(this, arguments));
+						return _possibleConstructorReturn(this, (InputFileNames.__proto__ || Object.getPrototypeOf(InputFileNames)).apply(this, arguments));
 				}
 
 				_createClass(InputFileNames, [{
@@ -7082,7 +7080,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Modal() {
 						_classCallCheck(this, Modal);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Modal).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
 				}
 
 				_createClass(Modal, [{
@@ -7158,7 +7156,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
 
 
 								if (!!force !== this._isOpen) {
@@ -7292,7 +7290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Numbox() {
 						_classCallCheck(this, Numbox);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Numbox).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Numbox.__proto__ || Object.getPrototypeOf(Numbox)).apply(this, arguments));
 				}
 
 				_createClass(Numbox, [{
@@ -7540,7 +7538,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Overlay() {
 						_classCallCheck(this, Overlay);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Overlay).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
 				}
 
 				_createClass(Overlay, [{
@@ -7605,7 +7603,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
 
 
 								if (!!force !== this._isOpen) {
@@ -7722,7 +7720,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function SpinnerOverlay() {
 						_classCallCheck(this, SpinnerOverlay);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(SpinnerOverlay).apply(this, arguments));
+						return _possibleConstructorReturn(this, (SpinnerOverlay.__proto__ || Object.getPrototypeOf(SpinnerOverlay)).apply(this, arguments));
 				}
 
 				_createClass(SpinnerOverlay, [{
@@ -7750,7 +7748,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this.isOpen() : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.isOpen();
 
 
 								if (!!force !== this.isOpen()) {
@@ -7856,7 +7854,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Progressbar() {
 						_classCallCheck(this, Progressbar);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Progressbar).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Progressbar.__proto__ || Object.getPrototypeOf(Progressbar)).apply(this, arguments));
 				}
 
 				_createClass(Progressbar, [{
@@ -8042,7 +8040,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Rails() {
 						_classCallCheck(this, Rails);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Rails).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Rails.__proto__ || Object.getPrototypeOf(Rails)).apply(this, arguments));
 				}
 
 				_createClass(Rails, [{
@@ -8254,6 +8252,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		var config = {
 				name: 'remote',
 				options: {
+						requests: {
+								multiple: {
+										parallel: false,
+										sequential: true
+								}
+						},
 						ajax: { // Options to pass to `$.ajax`
 								cache: true, // If set to false, it will force the requested url not to be cached by the browser
 								method: 'GET', // Method of the remote request
@@ -8277,20 +8281,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Remote() {
 						_classCallCheck(this, Remote);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Remote).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Remote.__proto__ || Object.getPrototypeOf(Remote)).apply(this, arguments));
 				}
 
 				_createClass(Remote, [{
-						key: '_reset',
+						key: '_variables',
 
 
 						/* SPECIAL */
 
+						value: function _variables() {
+
+								this._requestsNr = 0;
+						}
+				}, {
+						key: '_reset',
 						value: function _reset() {
 
 								this.abort();
 
-								_get(Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
+								_get(Remote.prototype.__proto__ || Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
 						}
 
 						/* REQUEST HANDLERS */
@@ -8343,12 +8353,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return !!this.xhr && !_.includes([0, 4], this.xhr.readyState); // 0: UNSENT, 4: DONE
 						}
 				}, {
-						key: 'request',
-						value: function request() {
+						key: 'getRequestsNr',
+						value: function getRequestsNr() {
 
+								return this._requestsNr;
+						}
+				}, {
+						key: 'canRequest',
+						value: function canRequest() {
+
+								if (!this.options.requests.multiple.parallel && this.isRequesting()) return false;
+
+								if (!this.options.requests.multiple.sequential && this._requestsNr) return false;
+
+								return true;
+						}
+				}, {
+						key: 'request',
+						value: function request(options) {
+
+								if (!this.canRequest()) return;
+
+								this._requestsNr++;
 								this._isAborted = false;
 
-								this.xhr = $.ajax(_.extend({}, this.options.ajax, {
+								this.xhr = $.ajax(_.extend({}, this.options.ajax, options, {
 										beforeSend: this.__beforesend.bind(this),
 										complete: this.__complete.bind(this),
 										error: this.__error.bind(this),
@@ -8422,7 +8451,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function RemoteTrigger() {
 						_classCallCheck(this, RemoteTrigger);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteTrigger).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteTrigger.__proto__ || Object.getPrototypeOf(RemoteTrigger)).apply(this, arguments));
 				}
 
 				_createClass(RemoteTrigger, [{
@@ -8527,7 +8556,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Ripple() {
 						_classCallCheck(this, Ripple);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Ripple).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Ripple.__proto__ || Object.getPrototypeOf(Ripple)).apply(this, arguments));
 				}
 
 				_createClass(Ripple, [{
@@ -8598,11 +8627,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										try {
 												for (var _iterator10 = this.circles[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-														var _step10$value = _slicedToArray(_step10.value, 2);
-
-														var $circle = _step10$value[0];
-														var timestamp = _step10$value[1];
-
+														var _step10$value = _slicedToArray(_step10.value, 2),
+														    $circle = _step10$value[0],
+														    timestamp = _step10$value[1];
 
 														this._hide($circle, timestamp);
 												}
@@ -8768,7 +8795,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TableSortable() {
 						_classCallCheck(this, TableSortable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TableSortable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TableSortable.__proto__ || Object.getPrototypeOf(TableSortable)).apply(this, arguments));
 				}
 
 				_createClass(TableSortable, [{
@@ -9023,7 +9050,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TableHelper() {
 						_classCallCheck(this, TableHelper);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TableHelper).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TableHelper.__proto__ || Object.getPrototypeOf(TableHelper)).apply(this, arguments));
 				}
 
 				_createClass(TableHelper, [{
@@ -9066,7 +9093,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (datas.length) {
 
-										if (rowId && $('.' + rowId).length === 1) return this;
+										if (rowId && $('.' + rowId).length === 1) return;
 
 										var chunks = _.chunk(datas, this.columnsNr),
 										    $rows = $();
@@ -9215,7 +9242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Targeter() {
 						_classCallCheck(this, Targeter);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Targeter).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Targeter.__proto__ || Object.getPrototypeOf(Targeter)).apply(this, arguments));
 				}
 
 				_createClass(Targeter, [{
@@ -9298,7 +9325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Closer() {
 						_classCallCheck(this, Closer);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Closer).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Closer.__proto__ || Object.getPrototypeOf(Closer)).apply(this, arguments));
 				}
 
 				_createClass(Closer, [{
@@ -9385,7 +9412,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ExpanderCloser() {
 						_classCallCheck(this, ExpanderCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ExpanderCloser.__proto__ || Object.getPrototypeOf(ExpanderCloser)).apply(this, arguments));
 				}
 
 				return ExpanderCloser;
@@ -9429,7 +9456,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function InfobarCloser() {
 						_classCallCheck(this, InfobarCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(InfobarCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (InfobarCloser.__proto__ || Object.getPrototypeOf(InfobarCloser)).apply(this, arguments));
 				}
 
 				return InfobarCloser;
@@ -9473,7 +9500,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ModalCloser() {
 						_classCallCheck(this, ModalCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ModalCloser.__proto__ || Object.getPrototypeOf(ModalCloser)).apply(this, arguments));
 				}
 
 				return ModalCloser;
@@ -9517,7 +9544,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function OverlayCloser() {
 						_classCallCheck(this, OverlayCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (OverlayCloser.__proto__ || Object.getPrototypeOf(OverlayCloser)).apply(this, arguments));
 				}
 
 				return OverlayCloser;
@@ -9568,7 +9595,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Opener() {
 						_classCallCheck(this, Opener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Opener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Opener.__proto__ || Object.getPrototypeOf(Opener)).apply(this, arguments));
 				}
 
 				_createClass(Opener, [{
@@ -9758,7 +9785,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ExpanderOpener() {
 						_classCallCheck(this, ExpanderOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ExpanderOpener.__proto__ || Object.getPrototypeOf(ExpanderOpener)).apply(this, arguments));
 				}
 
 				return ExpanderOpener;
@@ -9802,7 +9829,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ModalOpener() {
 						_classCallCheck(this, ModalOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ModalOpener.__proto__ || Object.getPrototypeOf(ModalOpener)).apply(this, arguments));
 				}
 
 				return ModalOpener;
@@ -9846,7 +9873,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function OverlayOpener() {
 						_classCallCheck(this, OverlayOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (OverlayOpener.__proto__ || Object.getPrototypeOf(OverlayOpener)).apply(this, arguments));
 				}
 
 				return OverlayOpener;
@@ -9889,7 +9916,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Toggler() {
 						_classCallCheck(this, Toggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Toggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Toggler.__proto__ || Object.getPrototypeOf(Toggler)).apply(this, arguments));
 				}
 
 				_createClass(Toggler, [{
@@ -9954,7 +9981,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ExpanderToggler() {
 						_classCallCheck(this, ExpanderToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ExpanderToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ExpanderToggler.__proto__ || Object.getPrototypeOf(ExpanderToggler)).apply(this, arguments));
 				}
 
 				return ExpanderToggler;
@@ -10003,7 +10030,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function FlippableFlipper() {
 						_classCallCheck(this, FlippableFlipper);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(FlippableFlipper).apply(this, arguments));
+						return _possibleConstructorReturn(this, (FlippableFlipper.__proto__ || Object.getPrototypeOf(FlippableFlipper)).apply(this, arguments));
 				}
 
 				return FlippableFlipper;
@@ -10047,7 +10074,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function ModalToggler() {
 						_classCallCheck(this, ModalToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (ModalToggler.__proto__ || Object.getPrototypeOf(ModalToggler)).apply(this, arguments));
 				}
 
 				return ModalToggler;
@@ -10091,7 +10118,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function OverlayToggler() {
 						_classCallCheck(this, OverlayToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(OverlayToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (OverlayToggler.__proto__ || Object.getPrototypeOf(OverlayToggler)).apply(this, arguments));
 				}
 
 				return OverlayToggler;
@@ -10138,7 +10165,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function AutogrowTextarea() {
 						_classCallCheck(this, AutogrowTextarea);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(AutogrowTextarea).apply(this, arguments));
+						return _possibleConstructorReturn(this, (AutogrowTextarea.__proto__ || Object.getPrototypeOf(AutogrowTextarea)).apply(this, arguments));
 				}
 
 				_createClass(AutogrowTextarea, [{
@@ -10261,7 +10288,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TimeAgo() {
 						_classCallCheck(this, TimeAgo);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TimeAgo).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TimeAgo.__proto__ || Object.getPrototypeOf(TimeAgo)).apply(this, arguments));
 				}
 
 				_createClass(TimeAgo, [{
@@ -10300,7 +10327,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_loop',
 						value: function _loop() {
-								var seconds = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+								var seconds = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
 
 								this.loopId = this._delay(function () {
@@ -10336,7 +10363,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'enable',
 						value: function enable() {
 
-								_get(Object.getPrototypeOf(TimeAgo.prototype), 'enable', this).call(this);
+								_get(TimeAgo.prototype.__proto__ || Object.getPrototypeOf(TimeAgo.prototype), 'enable', this).call(this);
 
 								this._loop();
 						}
@@ -10344,7 +10371,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'disable',
 						value: function disable() {
 
-								_get(Object.getPrototypeOf(TimeAgo.prototype), 'disable', this).call(this);
+								_get(TimeAgo.prototype.__proto__ || Object.getPrototypeOf(TimeAgo.prototype), 'disable', this).call(this);
 
 								clearTimeout(this.loopId);
 						}
@@ -10891,7 +10918,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Colorpicker() {
 						_classCallCheck(this, Colorpicker);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Colorpicker).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Colorpicker.__proto__ || Object.getPrototypeOf(Colorpicker)).apply(this, arguments));
 				}
 
 				_createClass(Colorpicker, [{
@@ -11140,7 +11167,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_updateSb',
 						value: function _updateSb() {
-								var _translate = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+								var _translate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
 								/* HSL */
 
@@ -11161,7 +11188,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_updateHue',
 						value: function _updateHue() {
-								var _translate = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+								var _translate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
 								/* HSL */
 
@@ -11350,7 +11377,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Panel() {
 						_classCallCheck(this, Panel);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Panel).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).apply(this, arguments));
 				}
 
 				_createClass(Panel, [{
@@ -11565,7 +11592,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
 
 
 								if (!!force !== this._isOpen) {
@@ -11661,7 +11688,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'togglePin',
 						value: function togglePin() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isPinned : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isPinned;
 
 
 								if (!!force !== this._isPinned) {
@@ -11751,7 +11778,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PanelCloser() {
 						_classCallCheck(this, PanelCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PanelCloser.__proto__ || Object.getPrototypeOf(PanelCloser)).apply(this, arguments));
 				}
 
 				return PanelCloser;
@@ -11795,7 +11822,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PanelOpener() {
 						_classCallCheck(this, PanelOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PanelOpener.__proto__ || Object.getPrototypeOf(PanelOpener)).apply(this, arguments));
 				}
 
 				return PanelOpener;
@@ -11839,7 +11866,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PanelToggler() {
 						_classCallCheck(this, PanelToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PanelToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PanelToggler.__proto__ || Object.getPrototypeOf(PanelToggler)).apply(this, arguments));
 				}
 
 				return PanelToggler;
@@ -11901,7 +11928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Tabs() {
 						_classCallCheck(this, Tabs);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).apply(this, arguments));
 				}
 
 				_createClass(Tabs, [{
@@ -12212,7 +12239,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		var Fuzzy = {
 				match: function match(str, search) {
-						var isCaseSensitive = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+						var isCaseSensitive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
 
 						if (!isCaseSensitive) {
@@ -12831,7 +12858,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Carousel() {
 						_classCallCheck(this, Carousel);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Carousel.__proto__ || Object.getPrototypeOf(Carousel)).apply(this, arguments));
 				}
 
 				_createClass(Carousel, [{
@@ -13015,7 +13042,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'enable',
 						value: function enable() {
 
-								_get(Object.getPrototypeOf(Carousel.prototype), 'enable', this).call(this);
+								_get(Carousel.prototype.__proto__ || Object.getPrototypeOf(Carousel.prototype), 'enable', this).call(this);
 
 								if (this.options.cycle || this._wasCycling) {
 
@@ -13026,7 +13053,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'disable',
 						value: function disable() {
 
-								_get(Object.getPrototypeOf(Carousel.prototype), 'disable', this).call(this);
+								_get(Carousel.prototype.__proto__ || Object.getPrototypeOf(Carousel.prototype), 'disable', this).call(this);
 
 								this._wasCycling = this.options.cycle;
 
@@ -13234,7 +13261,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Toast() {
 						_classCallCheck(this, Toast);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Toast).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Toast.__proto__ || Object.getPrototypeOf(Toast)).apply(this, arguments));
 				}
 
 				_createClass(Toast, [{
@@ -13427,7 +13454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* SUPER */
 
-								_get(Object.getPrototypeOf(Toast.prototype), '_reset', this).call(this);
+								_get(Toast.prototype.__proto__ || Object.getPrototypeOf(Toast.prototype), '_reset', this).call(this);
 						}
 
 						/* API */
@@ -13593,6 +13620,239 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
 
 /* =========================================================================
+ * Svelto - Widgets - Liker
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/remote/remote.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'liker',
+				plugin: true,
+				selector: '.liker',
+				options: {
+						likes: 0,
+						dislikes: 0,
+						state: null,
+						url: false,
+						ajax: {
+								cache: false,
+								method: 'POST'
+						},
+						messages: {
+								error: 'An error occurred, please try again later'
+						},
+						datas: {
+								likes: 'likes',
+								dislikes: 'dislikes',
+								state: 'state',
+								url: 'url'
+						},
+						selectors: {
+								like: '.like',
+								dislike: '.dislike'
+						}
+				}
+		};
+
+		/* LIKES */
+
+		var Liker = function (_Widgets$Remote) {
+				_inherits(Liker, _Widgets$Remote);
+
+				function Liker() {
+						_classCallCheck(this, Liker);
+
+						return _possibleConstructorReturn(this, (Liker.__proto__ || Object.getPrototypeOf(Liker)).apply(this, arguments));
+				}
+
+				_createClass(Liker, [{
+						key: '_variables',
+
+
+						/* SPECIAL */
+
+						value: function _variables() {
+
+								this.$liker = this.$element;
+								this.$like = this.$liker.find(this.options.selectors.like);
+								this.$dislike = this.$liker.find(this.options.selectors.dislike);
+						}
+				}, {
+						key: '_init',
+						value: function _init() {
+
+								this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
+								this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
+								this.options.url = this.$liker.data(this.options.datas.url) || this.options.url;
+
+								var state = this.$liker.data(this.options.datas.state);
+								this.options.state = _.isBoolean(state) ? state : this.options.state;
+
+								this._update();
+						}
+				}, {
+						key: '_events',
+						value: function _events() {
+
+								this.___like();
+								this.___dislike();
+						}
+
+						/* UPDATE */
+
+				}, {
+						key: '_update',
+						value: function _update() {
+
+								this.$liker.attr('data-' + this.options.datas.state, String(this.options.state));
+								this.$like.attr('data-' + this.options.datas.likes, this.options.likes);
+								this.$dislike.attr('data-' + this.options.datas.dislikes, this.options.dislikes);
+						}
+
+						/* LIKE */
+
+				}, {
+						key: '___like',
+						value: function ___like() {
+
+								this._on(this.$like, Pointer.tap, this.__like);
+						}
+				}, {
+						key: '__like',
+						value: function __like() {
+
+								this[this.options.state ? 'reset' : 'like']();
+						}
+
+						/* DISLIKE */
+
+				}, {
+						key: '___dislike',
+						value: function ___dislike() {
+
+								this._on(this.$dislike, Pointer.tap, this.__dislike);
+						}
+				}, {
+						key: '__dislike',
+						value: function __dislike() {
+
+								this[this.options.state === false ? 'reset' : 'dislike']();
+						}
+
+						/* REQUEST HANDLERS */
+
+				}, {
+						key: '__beforesend',
+						value: function __beforesend(res) {
+
+								this.disable();
+
+								return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__beforesend', this).call(this, res);
+						}
+				}, {
+						key: '__error',
+						value: function __error(res) {
+
+								if (this.isAborted()) return;
+
+								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+								$.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.msg);
+
+								return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__error', this).call(this, res);
+						}
+				}, {
+						key: '__success',
+						value: function __success(res) {
+
+								if (this.isAborted()) return;
+
+								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+								if (_.isError(resj)) return this.__error(res);
+
+								_.extend(this.options, _.pick(resj, ['likes', 'dislikes', 'state']));
+
+								this._update();
+
+								if ('message' in resj) $.toast(resj.message);
+
+								return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__success', this).call(this);
+						}
+				}, {
+						key: '__complete',
+						value: function __complete(res) {
+
+								this.enable();
+
+								return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__complete', this).call(this, res);
+						}
+
+						/* API */
+
+				}, {
+						key: 'get',
+						value: function get() {
+
+								return _.pick(this.options, ['likes', 'dislikes', 'state']);
+						}
+				}, {
+						key: 'set',
+						value: function set() {
+								var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+
+								if (state === this.options.state) return;
+
+								var options = {
+										data: {
+												current: this.get(),
+												state: state
+										},
+										url: this.options.url || this.options.ajax.url
+								};
+
+								return this.request(options);
+						}
+				}, {
+						key: 'reset',
+						value: function reset() {
+
+								return this.set(null);
+						}
+				}, {
+						key: 'like',
+						value: function like() {
+
+								return this.set(true);
+						}
+				}, {
+						key: 'dislike',
+						value: function dislike() {
+
+								return this.set(false);
+						}
+				}]);
+
+				return Liker;
+		}(Widgets.Remote);
+
+		/* FACTORY */
+
+		Factory.init(Liker, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
  * Svelto - Widgets - Rater
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -13601,7 +13861,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//FIXME: Crappy, not working atm, maybe should get removed
+//FIXME: Crappy, not working ATM, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
@@ -13643,7 +13903,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 		};
 
-		/* SELECT */
+		/* RATER */
 
 		var Rater = function (_Widgets$Widget32) {
 				_inherits(Rater, _Widgets$Widget32);
@@ -13651,7 +13911,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Rater() {
 						_classCallCheck(this, Rater);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Rater).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Rater.__proto__ || Object.getPrototypeOf(Rater)).apply(this, arguments));
 				}
 
 				_createClass(Rater, [{
@@ -13698,7 +13958,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__tap',
 						value: function __tap(event) {
-								var _this58 = this;
+								var _this59 = this;
 
 								if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -13712,14 +13972,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												beforeSend: function beforeSend() {
 
-														_this58.doingAjax = true;
+														_this59.doingAjax = true;
 												},
 
 												error: function error(res) {
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-														$.toast(_.isError(resj) || !('message' in resj) ? _this58.options.messages.error : resj.message);
+														$.toast(_.isError(resj) || !('message' in resj) ? _this59.options.messages.error : resj.message);
 												},
 
 												success: function success(res) {
@@ -13731,19 +13991,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (!_.isError(resj)) {
 
-																_.merge(_this58.options, resj);
+																_.merge(_this59.options, resj);
 
-																_this58.$rater.html(_this58._template('stars', _this58.options));
+																_this59.$rater.html(_this59._template('stars', _this59.options));
 
-																_this58.options.rated = true;
+																_this59.options.rated = true;
 
-																_this58._trigger('change');
+																_this59._trigger('change');
 														}
 												},
 
 												complete: function complete() {
 
-														_this58.doingAjax = false;
+														_this59.doingAjax = false;
 												}
 
 										});
@@ -13831,13 +14091,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* REMOTE ACTION */
 
-		var RemoteAction = function (_Widgets$Remote) {
-				_inherits(RemoteAction, _Widgets$Remote);
+		var RemoteAction = function (_Widgets$Remote2) {
+				_inherits(RemoteAction, _Widgets$Remote2);
 
 				function RemoteAction() {
 						_classCallCheck(this, RemoteAction);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteAction).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteAction.__proto__ || Object.getPrototypeOf(RemoteAction)).apply(this, arguments));
 				}
 
 				_createClass(RemoteAction, [{
@@ -13932,7 +14192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.___loadingToast();
 
-								_get(Object.getPrototypeOf(RemoteAction.prototype), '__beforesend', this).call(this, res);
+								_get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__beforesend', this).call(this, res);
 						}
 				}, {
 						key: '__error',
@@ -13946,7 +14206,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._destroyToast(true);
 
-								_get(Object.getPrototypeOf(RemoteAction.prototype), '__error', this).call(this, res);
+								_get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__error', this).call(this, res);
 						}
 				}, {
 						key: '__success',
@@ -13981,7 +14241,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._destroyToast(true);
 
-								_get(Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
+								_get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
 						}
 
 						/* API OVERRIDES */
@@ -13995,7 +14255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.___confirmationToast();
 								} else {
 
-										_get(Object.getPrototypeOf(RemoteAction.prototype), 'request', this).call(this);
+										_get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'request', this).call(this);
 								}
 						}
 				}, {
@@ -14004,7 +14264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._destroyToast();
 
-								_get(Object.getPrototypeOf(RemoteAction.prototype), 'abort', this).call(this);
+								_get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'abort', this).call(this);
 						}
 				}]);
 
@@ -14070,7 +14330,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function RemoteActionTrigger() {
 						_classCallCheck(this, RemoteActionTrigger);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteActionTrigger).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteActionTrigger.__proto__ || Object.getPrototypeOf(RemoteActionTrigger)).apply(this, arguments));
 				}
 
 				return RemoteActionTrigger;
@@ -14079,6 +14339,295 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* FACTORY */
 
 		Factory.init(RemoteActionTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'remoteLoader',
+				plugin: true,
+				selector: '.remote-loader',
+				options: {
+						autorequest: {
+								threshold: 400
+						},
+						requests: {
+								multiple: {
+										parallel: false,
+										sequential: false
+								}
+						},
+						attributes: {
+								href: 'href' // In order to better support `a` elements (the data value has higher priority)
+						},
+						datas: {
+								url: 'url',
+								data: 'data',
+								method: 'method'
+						},
+						messages: {
+								error: 'An error occurred, please try again later'
+						}
+				}
+		};
+
+		/* REMOTE LOADER */
+
+		var RemoteLoader = function (_Widgets$Remote3) {
+				_inherits(RemoteLoader, _Widgets$Remote3);
+
+				function RemoteLoader() {
+						_classCallCheck(this, RemoteLoader);
+
+						return _possibleConstructorReturn(this, (RemoteLoader.__proto__ || Object.getPrototypeOf(RemoteLoader)).apply(this, arguments));
+				}
+
+				_createClass(RemoteLoader, [{
+						key: '_variables',
+
+
+						/* SPECIAL */
+
+						value: function _variables() {
+
+								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '_variables', this).call(this);
+
+								this.$loader = this.$element;
+								this.$window = $(window);
+						}
+				}, {
+						key: '_init',
+						value: function _init() {
+								var _this63 = this;
+
+								this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
+								this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
+								this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
+
+								this._defer(function () {
+										return !_this63.isRequesting() && _this63.disable();
+								}); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
+						}
+				}, {
+						key: '_events',
+						value: function _events() {
+
+								this.___request();
+						}
+
+						/* REQUEST */
+
+				}, {
+						key: '___request',
+						value: function ___request() {
+
+								this.__request();
+
+								var $scrollable = this.$window.add(this.$loader.parents()),
+								    handler = this._throttle(this.__request, 100);
+
+								this._on(true, this.$window, 'resize', handler);
+								this._on(true, $scrollable, 'scroll', handler);
+						}
+				}, {
+						key: '__request',
+						value: function __request() {
+
+								if (this.$loader.getRect().top - (this.$window.scrollTop() + this.$window.outerHeight()) > this.options.autorequest.threshold) return;
+
+								this.request();
+						}
+
+						/* REQUEST HANDLERS */
+
+				}, {
+						key: '__error',
+						value: function __error(res) {
+
+								if (this.isAborted()) return;
+
+								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+								$.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
+
+								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__error', this).call(this, res);
+						}
+				}, {
+						key: '__success',
+						value: function __success(res) {
+
+								if (this.isAborted()) return;
+
+								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res),
+								    isJSON = !_.isError(resj);
+
+								if (isJSON && !('html' in resj)) return this.__error(res);
+
+								var content = isJSON ? resj.html : res,
+								    id = 'remote-loaded-' + $.guid++,
+								    container = '<div id="' + id + '" class="remote-loaded">' + content + '</div>';
+
+								this.$loader[0].outerHTML = container;
+
+								$('#' + id).widgetize();
+
+								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__success', this).call(this, res);
+						}
+				}, {
+						key: '__complete',
+						value: function __complete(res) {
+
+								this.$loader.remove();
+
+								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__complete', this).call(this, res);
+						}
+
+						/* API OVERRIDES */
+
+				}, {
+						key: 'request',
+						value: function request() {
+
+								if (!this.canRequest()) return;
+
+								this.enable();
+
+								return _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), 'request', this).call(this);
+						}
+				}]);
+
+				return RemoteLoader;
+		}(Widgets.Remote);
+
+		/* FACTORY */
+
+		Factory.init(RemoteLoader, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./loader.js
+ * ========================================================================= */
+
+//TODO: Maybe namespace ajax-related options into an `ajax` key -> easier to read, harder to use
+
+(function ($, _, Svelto, Widgets, RemoteLoader) {
+
+		'use strict';
+
+		/* DEFAULTS */
+
+		var datas = RemoteLoader.config.options.datas;
+		var defaults = {
+				template: '<div class="remote-loader" data-' + datas.method + '="<%= o.method %>" data-' + datas.data + '=\'<%= JSON.stringify ( o.data ) %>\' data-' + datas.url + '="<%= o.url %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' + '</svg>' + '</div>',
+				url: '',
+				data: {
+						text: "test"
+				},
+				method: ''
+		};
+
+		/* HELPER */
+
+		$.remoteLoader = function (options, $anchor) {
+				var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'after';
+				// The method could me any valid jQuery method, like `before`, `prepend`, `append` or `after`
+
+				/* OPTIONS */
+
+				options = _.merge({}, $.remoteLoader.defaults, options);
+
+				/* LOADER */
+
+				var html = _.template(options.template, { variable: 'o' })(options),
+				    $loader = $(html);
+
+				$anchor[method]($loader);
+
+				$loader.widgetize();
+		};
+
+		/* BINDING */
+
+		$.remoteLoader.defaults = defaults;
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Widgets.RemoteLoader);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./loader.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'remoteLoaderTrigger',
+				plugin: true,
+				selector: '.remote-loader-trigger',
+				options: {
+						widget: Widgets.RemoteLoader
+				}
+		};
+
+		/* REMOTE LOADER TRIGGER */
+
+		var RemoteLoaderTrigger = function (_Widgets$RemoteTrigge2) {
+				_inherits(RemoteLoaderTrigger, _Widgets$RemoteTrigge2);
+
+				function RemoteLoaderTrigger() {
+						_classCallCheck(this, RemoteLoaderTrigger);
+
+						return _possibleConstructorReturn(this, (RemoteLoaderTrigger.__proto__ || Object.getPrototypeOf(RemoteLoaderTrigger)).apply(this, arguments));
+				}
+
+				_createClass(RemoteLoaderTrigger, [{
+						key: 'trigger',
+						value: function trigger() {
+								var _this65 = this;
+
+								this.$trigger[this.options.widget.config.name]({
+										ajax: this.options.ajax,
+										callbacks: {
+												beforesend: function beforesend() {
+														return _this65.$trigger.addClass(_this65.options.classes.disabled);
+												} //TODO: Replace with a linear "spinner" overlay
+										}
+								});
+						}
+				}]);
+
+				return RemoteLoaderTrigger;
+		}(Widgets.RemoteTrigger);
+
+		/* FACTORY */
+
+		Factory.init(RemoteLoaderTrigger, config, Widgets);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -14126,13 +14675,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* REMOTE MODAL */
 
-		var RemoteModal = function (_Widgets$Remote2) {
-				_inherits(RemoteModal, _Widgets$Remote2);
+		var RemoteModal = function (_Widgets$Remote4) {
+				_inherits(RemoteModal, _Widgets$Remote4);
 
 				function RemoteModal() {
 						_classCallCheck(this, RemoteModal);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteModal).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteModal.__proto__ || Object.getPrototypeOf(RemoteModal)).apply(this, arguments));
 				}
 
 				_createClass(RemoteModal, [{
@@ -14242,7 +14791,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.$modal.modal('open');
 
-								_get(Object.getPrototypeOf(RemoteModal.prototype), '__beforesend', this).call(this, res);
+								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__beforesend', this).call(this, res);
 						}
 				}, {
 						key: '__error',
@@ -14256,7 +14805,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._destroyModal();
 
-								_get(Object.getPrototypeOf(RemoteModal.prototype), '__error', this).call(this, res);
+								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__error', this).call(this, res);
 						}
 				}, {
 						key: '__success',
@@ -14300,7 +14849,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
 
 										this._frame(function () {
-												var _this62 = this;
+												var _this67 = this;
 
 												this.$modal.addClass(this.options.classes.showing);
 
@@ -14308,15 +14857,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 														width: newRect.width,
 														height: newRect.height
 												}, this.options.animations.resize, function () {
-														_this62.$modal.css({
+														_this67.$modal.css({
 																width: '',
 																height: ''
-														}).removeClass(_this62.options.classes.placeholder + ' ' + _this62.options.classes.loaded + ' ' + _this62.options.classes.resizing + ' ' + _this62.options.classes.showing);
+														}).removeClass(_this67.options.classes.placeholder + ' ' + _this67.options.classes.loaded + ' ' + _this67.options.classes.resizing + ' ' + _this67.options.classes.showing);
 												});
 										});
 								});
 
-								_get(Object.getPrototypeOf(RemoteModal.prototype), '__success', this).call(this, res);
+								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__success', this).call(this, res);
 						}
 
 						/* API OVERRIDES */
@@ -14327,7 +14876,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._destroyModal();
 
-								_get(Object.getPrototypeOf(RemoteModal.prototype), 'abort', this).call(this);
+								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), 'abort', this).call(this);
 						}
 				}]);
 
@@ -14387,13 +14936,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* REMOTE MODAL TRIGGER */
 
-		var RemoteModalTrigger = function (_Widgets$RemoteTrigge2) {
-				_inherits(RemoteModalTrigger, _Widgets$RemoteTrigge2);
+		var RemoteModalTrigger = function (_Widgets$RemoteTrigge3) {
+				_inherits(RemoteModalTrigger, _Widgets$RemoteTrigge3);
 
 				function RemoteModalTrigger() {
 						_classCallCheck(this, RemoteModalTrigger);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoteModalTrigger).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteModalTrigger.__proto__ || Object.getPrototypeOf(RemoteModalTrigger)).apply(this, arguments));
 				}
 
 				return RemoteModalTrigger;
@@ -14480,7 +15029,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Tagbox() {
 						_classCallCheck(this, Tagbox);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Tagbox).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Tagbox.__proto__ || Object.getPrototypeOf(Tagbox)).apply(this, arguments));
 				}
 
 				_createClass(Tagbox, [{
@@ -14917,7 +15466,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* HELPER */
 
 		$.toast = function () {
-				var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+				var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 
 				/* OPTIONS */
@@ -15113,7 +15662,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Droppable() {
 						_classCallCheck(this, Droppable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Droppable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Droppable.__proto__ || Object.getPrototypeOf(Droppable)).apply(this, arguments));
 				}
 
 				_createClass(Droppable, [{
@@ -15706,7 +16255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Popover() {
 						_classCallCheck(this, Popover);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Popover).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Popover.__proto__ || Object.getPrototypeOf(Popover)).apply(this, arguments));
 				}
 
 				_createClass(Popover, [{
@@ -16021,7 +16570,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PopoverCloser() {
 						_classCallCheck(this, PopoverCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PopoverCloser.__proto__ || Object.getPrototypeOf(PopoverCloser)).apply(this, arguments));
 				}
 
 				return PopoverCloser;
@@ -16065,7 +16614,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PopoverOpener() {
 						_classCallCheck(this, PopoverOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PopoverOpener.__proto__ || Object.getPrototypeOf(PopoverOpener)).apply(this, arguments));
 				}
 
 				return PopoverOpener;
@@ -16109,7 +16658,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function PopoverToggler() {
 						_classCallCheck(this, PopoverToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(PopoverToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (PopoverToggler.__proto__ || Object.getPrototypeOf(PopoverToggler)).apply(this, arguments));
 				}
 
 				return PopoverToggler;
@@ -16156,6 +16705,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								css: Widgets.Popover.config.options.classes.affixed + ' bordered'
 						},
 						classes: {
+								open: 'open active',
 								selected: 'active highlighted highlight-left',
 								affixed: Widgets.Popover.config.options.classes.affixed
 						},
@@ -16166,7 +16716,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								select: 'select',
 								option: 'option',
 								valueholder: '.select-value',
-								valueholderFallback: 'label',
+								valueholderFallback: 'label:not(.no-value)',
 								button: '.button'
 						},
 						callbacks: {
@@ -16185,7 +16735,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Select() {
 						_classCallCheck(this, Select);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Select).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).apply(this, arguments));
 				}
 
 				_createClass(Select, [{
@@ -16376,6 +16926,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.___buttonTap();
 
+								this.$wrp.addClass(this.options.classes.open);
+
 								this._trigger('open');
 						}
 				}, {
@@ -16385,6 +16937,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._reset();
 
 								this.___change();
+
+								this.$wrp.removeClass(this.options.classes.open);
 
 								this._trigger('close');
 						}
@@ -16402,7 +16956,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										if (value.length) {
 
-												var $selectedOption = this.$options.filter('[value="' + value + '"]').first();
+												var $selectedOption = this.$options.filter('[value="' + value + '"]').last();
 
 												this.$valueholder.text($selectedOption.text());
 										} else {
@@ -16417,7 +16971,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.$buttons.removeClass(this.options.classes.selected);
 
-								this.$buttons.filter('[data-' + this.options.datas.value + '="' + this.$select.val() + '"]').first().addClass(this.options.classes.selected);
+								this.$buttons.filter('[data-' + this.options.datas.value + '="' + this.$select.val() + '"]').last().addClass(this.options.classes.selected);
 						}
 				}, {
 						key: '_update',
@@ -16443,7 +16997,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'set',
 						value: function set(value) {
 
-								var $button = this.$buttons.filter('[data-' + this.options.datas.value + '="' + value + '"]').first();
+								var $button = this.$buttons.filter('[data-' + this.options.datas.value + '="' + value + '"]');
 
 								if (!$button.length) return;
 
@@ -16488,7 +17042,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Tooltip() {
 						_classCallCheck(this, Tooltip);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Tooltip).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).apply(this, arguments));
 				}
 
 				return Tooltip;
@@ -16532,7 +17086,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TooltipCloser() {
 						_classCallCheck(this, TooltipCloser);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipCloser).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TooltipCloser.__proto__ || Object.getPrototypeOf(TooltipCloser)).apply(this, arguments));
 				}
 
 				return TooltipCloser;
@@ -16579,7 +17133,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TooltipOpener() {
 						_classCallCheck(this, TooltipOpener);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipOpener).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TooltipOpener.__proto__ || Object.getPrototypeOf(TooltipOpener)).apply(this, arguments));
 				}
 
 				return TooltipOpener;
@@ -16626,7 +17180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function TooltipToggler() {
 						_classCallCheck(this, TooltipToggler);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(TooltipToggler).apply(this, arguments));
+						return _possibleConstructorReturn(this, (TooltipToggler.__proto__ || Object.getPrototypeOf(TooltipToggler)).apply(this, arguments));
 				}
 
 				return TooltipToggler;
@@ -16697,7 +17251,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Slider() {
 						_classCallCheck(this, Slider);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Slider).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).apply(this, arguments));
 				}
 
 				_createClass(Slider, [{
@@ -16777,7 +17331,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_updatePositions',
 						value: function _updatePositions() {
-								var value = arguments.length <= 0 || arguments[0] === undefined ? this.options.value : arguments[0];
+								var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.value;
 
 
 								var percentage = (value - this.options.min) / this.options.step * 100 / this.stepsNr;
@@ -16788,7 +17342,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_updateLabel',
 						value: function _updateLabel() {
-								var value = arguments.length <= 0 || arguments[0] === undefined ? this.options.value : arguments[0];
+								var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.value;
 
 
 								this.$label.text(value);
@@ -17019,7 +17573,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Switch() {
 						_classCallCheck(this, Switch);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Switch.__proto__ || Object.getPrototypeOf(Switch)).apply(this, arguments));
 				}
 
 				_createClass(Switch, [{
@@ -17453,7 +18007,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function FormValidate() {
 						_classCallCheck(this, FormValidate);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(FormValidate).apply(this, arguments));
+						return _possibleConstructorReturn(this, (FormValidate.__proto__ || Object.getPrototypeOf(FormValidate)).apply(this, arguments));
 				}
 
 				_createClass(FormValidate, [{
@@ -17892,6 +18446,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				options: {
 						spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
 						timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
+						autoclose: { // Close the form (or its container) on success
+								enabled: true,
+								selectors: ['.modal', '.panel', '.popover', '.overlay', '.expander'], // Possible selectors for the container that needs to be closed
+								plugins: ['modal', 'panel', 'popover', 'overlay', 'expander'], // Maps each selector to its jQuery plugin name
+								methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
+						},
 						messages: {
 								error: 'An error occurred, please try again later',
 								success: 'Done! A page refresh may be needed',
@@ -17915,7 +18475,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function FormAjax() {
 						_classCallCheck(this, FormAjax);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(FormAjax).apply(this, arguments));
+						return _possibleConstructorReturn(this, (FormAjax.__proto__ || Object.getPrototypeOf(FormAjax)).apply(this, arguments));
 				}
 
 				_createClass(FormAjax, [{
@@ -17936,7 +18496,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.___submit();
 						}
 
-						/* PRIVATE */
+						/* AUTOCLOSE */
+
+				}, {
+						key: '_autoclose',
+						value: function _autoclose() {
+								var _this84 = this;
+
+								var _options$autoclose = this.options.autoclose,
+								    selectors = _options$autoclose.selectors,
+								    plugins = _options$autoclose.plugins,
+								    methods = _options$autoclose.methods;
+
+								var _loop2 = function _loop2(i, l) {
+
+										var $closable = _this84.$form.closest(selectors[i]);
+
+										if (!$closable.length) return 'continue';
+
+										var method = _.isArray(methods) ? methods[i] : methods;
+
+										if (_this84.options.spinnerOverlay) {
+
+												_this84._on('spinneroverlay:close', function () {
+														return $closable[plugins[i]](method);
+												});
+										} else {
+
+												$closable[plugins[i]](method);
+										}
+
+										return 'break';
+								};
+
+								_loop3: for (var i = 0, l = selectors.length; i < l; i++) {
+										var _ret3 = _loop2(i, l);
+
+										switch (_ret3) {
+												case 'continue':
+														continue;
+
+												case 'break':
+														break _loop3;}
+								}
+						}
+
+						/* SUBMIT */
 
 				}, {
 						key: '___submit',
@@ -17947,7 +18552,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this79 = this;
+								var _this85 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -17964,21 +18569,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this79.options.spinnerOverlay) {
+												if (_this85.options.spinnerOverlay) {
 
-														_this79.$form.spinnerOverlay('open');
+														_this85.$form.spinnerOverlay('open');
 												}
 
-												_this79._trigger('beforesend');
+												_this85._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												$.toast(_.isError(resj) || !('message' in resj) ? _this79.options.messages.error : resj.msg);
+												$.toast(_.isError(resj) || !('message' in resj) ? _this85.options.messages.error : resj.msg);
 
-												_this79._trigger('error');
+												_this85._trigger('error');
 										},
 
 										success: function success(res) {
@@ -17989,36 +18594,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.message || _this79.options.messages.refreshing);
+																$.toast(resj.message || _this85.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.message || _this79.options.messages.redirecting);
+																$.toast(resj.message || _this85.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.message || _this79.options.messages.success);
+																$.toast(resj.message || _this85.options.messages.success);
 														}
+
+														if (_this85.options.autoclose.enabled) _this85._autoclose();
 												} else {
 
-														$.toast(_this79.options.messages.success);
+														$.toast(_this85.options.messages.success);
 												}
 
-												_this79._trigger('success');
+												_this85._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this79.options.spinnerOverlay) {
+												if (_this85.options.spinnerOverlay) {
 
-														_this79.$form.spinnerOverlay('close');
+														_this85.$form.spinnerOverlay('close');
 												}
 
-												_this79._trigger('complete');
+												_this85._trigger('complete');
 										}
 
 								});
@@ -32219,7 +32826,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function DT() {
 						_classCallCheck(this, DT);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(DT).apply(this, arguments));
+						return _possibleConstructorReturn(this, (DT.__proto__ || Object.getPrototypeOf(DT)).apply(this, arguments));
 				}
 
 				_createClass(DT, [{
@@ -32347,7 +32954,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Selectable() {
 						_classCallCheck(this, Selectable);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Selectable).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Selectable.__proto__ || Object.getPrototypeOf(Selectable)).apply(this, arguments));
 				}
 
 				_createClass(Selectable, [{
@@ -32638,8 +33245,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_resetPrev',
 						value: function _resetPrev() {
-								var $element = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-								var $group = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+								var $element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+								var $group = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 
 								this.$prevElement = $element;
@@ -32775,7 +33382,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function SelectableActions() {
 						_classCallCheck(this, SelectableActions);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(SelectableActions).apply(this, arguments));
+						return _possibleConstructorReturn(this, (SelectableActions.__proto__ || Object.getPrototypeOf(SelectableActions)).apply(this, arguments));
 				}
 
 				_createClass(SelectableActions, [{
@@ -32786,7 +33393,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						value: function _variables() {
 
-								_get(Object.getPrototypeOf(SelectableActions.prototype), '_variables', this).call(this);
+								_get(SelectableActions.prototype.__proto__ || Object.getPrototypeOf(SelectableActions.prototype), '_variables', this).call(this);
 
 								this.$wrapper = this.$element;
 								this.$actions = this.$wrapper.find(this.options.selectors.action);
@@ -32795,7 +33402,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_events',
 						value: function _events() {
 
-								_get(Object.getPrototypeOf(SelectableActions.prototype), '_events', this).call(this);
+								_get(SelectableActions.prototype.__proto__ || Object.getPrototypeOf(SelectableActions.prototype), '_events', this).call(this);
 
 								this.___action();
 						}
@@ -32845,11 +33452,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this83 = this;
+								var _this89 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this83.options.selectors.id ? $(row).find(_this83.options.selectors.id).text() : $(row).data(_this83.options.datas.id);
+										return _this89.options.selectors.id ? $(row).find(_this89.options.selectors.id).text() : $(row).data(_this89.options.datas.id);
 								});
 
 								return _.compact(ids);
@@ -32905,7 +33512,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function SelectableActionsContainer() {
 						_classCallCheck(this, SelectableActionsContainer);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(SelectableActionsContainer).apply(this, arguments));
+						return _possibleConstructorReturn(this, (SelectableActionsContainer.__proto__ || Object.getPrototypeOf(SelectableActionsContainer)).apply(this, arguments));
 				}
 
 				_createClass(SelectableActionsContainer, [{
@@ -32916,7 +33523,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						value: function _variables() {
 
-								_get(Object.getPrototypeOf(SelectableActionsContainer.prototype), '_variables', this).call(this);
+								_get(SelectableActionsContainer.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsContainer.prototype), '_variables', this).call(this);
 
 								this.$container = this.$element;
 
@@ -32927,7 +33534,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_init',
 						value: function _init() {
 
-								_get(Object.getPrototypeOf(SelectableActionsContainer.prototype), '_init', this).call(this);
+								_get(SelectableActionsContainer.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsContainer.prototype), '_init', this).call(this);
 
 								this.___datatable();
 								this.__update();
@@ -32936,7 +33543,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_events',
 						value: function _events() {
 
-								_get(Object.getPrototypeOf(SelectableActionsContainer.prototype), '_events', this).call(this);
+								_get(SelectableActionsContainer.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsContainer.prototype), '_events', this).call(this);
 
 								this.___update();
 						}
@@ -32979,7 +33586,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggle',
 						value: function toggle() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isOpen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
 
 
 								if (!!force !== this._isOpen) {
@@ -33046,7 +33653,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function SelectableActionsPopover() {
 						_classCallCheck(this, SelectableActionsPopover);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(SelectableActionsPopover).apply(this, arguments));
+						return _possibleConstructorReturn(this, (SelectableActionsPopover.__proto__ || Object.getPrototypeOf(SelectableActionsPopover)).apply(this, arguments));
 				}
 
 				_createClass(SelectableActionsPopover, [{
@@ -33057,7 +33664,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						value: function _variables() {
 
-								_get(Object.getPrototypeOf(SelectableActionsPopover.prototype), '_variables', this).call(this);
+								_get(SelectableActionsPopover.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsPopover.prototype), '_variables', this).call(this);
 
 								this.$popover = this.$element;
 
@@ -33067,7 +33674,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_init',
 						value: function _init() {
 
-								_get(Object.getPrototypeOf(SelectableActionsPopover.prototype), '_init', this).call(this);
+								_get(SelectableActionsPopover.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsPopover.prototype), '_init', this).call(this);
 
 								this._popoverInstance.option('positionate.alignment.x', 'left');
 								this._popoverInstance.option('positionate.constrainer.$element', this.$window);
@@ -33076,7 +33683,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_events',
 						value: function _events() {
 
-								_get(Object.getPrototypeOf(SelectableActionsPopover.prototype), '_events', this).call(this);
+								_get(SelectableActionsPopover.prototype.__proto__ || Object.getPrototypeOf(SelectableActionsPopover.prototype), '_events', this).call(this);
 
 								this.___context();
 								this.___action();
@@ -34437,7 +35044,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				function Editor() {
 						_classCallCheck(this, Editor);
 
-						return _possibleConstructorReturn(this, Object.getPrototypeOf(Editor).apply(this, arguments));
+						return _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).apply(this, arguments));
 				}
 
 				_createClass(Editor, [{
@@ -34629,7 +35236,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_action',
 						value: function _action(prefix, suffix, placeholder) {
-								var needWord = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
+								var needWord = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
 
 								var selection = needWord ? this._getWordSelection() : this._getSelection();
@@ -34648,7 +35255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_parse',
 						value: function _parse() {
-								var str = arguments.length <= 0 || arguments[0] === undefined ? this.$textarea.val() : arguments[0];
+								var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$textarea.val();
 
 
 								return this.options.parser(str);
@@ -34697,7 +35304,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'togglePreview',
 						value: function togglePreview() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isPreview : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isPreview;
 
 
 								if (!!force !== this._isPreview) {
@@ -34745,7 +35352,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'toggleFullscreen',
 						value: function toggleFullscreen() {
-								var force = arguments.length <= 0 || arguments[0] === undefined ? !this._isFullscreen : arguments[0];
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFullscreen;
 
 
 								if (!!force !== this._isFullscreen) {

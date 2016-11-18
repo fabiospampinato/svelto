@@ -6986,6 +6986,305 @@ textarea.disabled,
 
 
 /* =========================================================================
+ * Svelto - Widgets - Liker
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
+ * ========================================================================= */
+
+/* LIKER */
+
+//TODO: Change the color of the counter and/or label if the icon is not present
+
+.liker {
+
+  @extend %widget;
+  display: flex;
+
+  /* LIKE / DISLIKE */
+
+  .like,
+  .dislike {
+
+    cursor: pointer;
+
+    /* MARGINS */
+
+    &:not(:first-child) {
+      margin-left: $liker-inner-gutter + em( $gutter-half );
+    }
+
+  }
+
+  /* ICONS */
+
+  &:not(.no-icons) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* BEFORE (ICON) */
+
+      &:not(.no-icon):before {
+        @extend %icon-base;
+        margin-bottom: 0;
+      }
+
+      &[data-icon]:not(.no-icon):before {
+        content: attr(data-icon);
+      }
+
+      &:not(.no-icon):not(:hover):before {
+        opacity: $liker-counter-opacity;
+      }
+
+      &:not(.no-icon):hover:before {
+        opacity: $liker-icon-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: $liker-like-icon;
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: $liker-dislike-icon;
+      }
+
+    }
+
+    /* LIKED */
+
+    &[data-state="true"] .like:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        color: $liker-icon-active-color;
+      }
+
+    }
+
+    /* DISLIKED */
+
+    &[data-state="false"] .dislike:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        color: $liker-icon-active-color;
+      }
+
+    }
+
+  }
+
+  /* COUNTERS */
+
+  &:not(.no-counters) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* AFTER */
+
+      &:not(.no-counter):not(:hover):after {
+        vertical-align: middle;
+      }
+
+      &[data-text-counter]:not(.no-counter):not(:hover):after {
+        content: attr(data-text-counter);
+      }
+
+      &:not(.no-counter):not(:hover):after {
+        opacity: $liker-counter-opacity;
+      }
+
+      &:not(.no-counter):hover:before {
+        opacity: $liker-counter-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-counter) {
+
+      /* AFTER */
+
+      &:not(:hover):after {
+        content: attr(data-likes);
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-counter) {
+
+      /* AFTER */
+
+      &:not(:hover):after {
+        content: attr(data-dislikes);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icons) {
+
+      /* LIKE / DISLIKE */
+
+      .like,
+      .dislike {
+
+        /* AFTER */
+
+        &:not(.no-icon):after {
+          margin-left: $liker-inner-gutter;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* LABELS */
+
+  &:not(.no-labels) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* AFTER */
+
+      &:not(.no-label):hover:after {
+        vertical-align: middle;
+      }
+
+      &:not(.no-label):not(:hover):after {
+        opacity: $liker-label-opacity;
+      }
+
+      &:not(.no-label):hover:before {
+        opacity: $liker-label-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-like-text-on;
+      }
+
+      &[data-text-on]:hover:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-label) {
+
+      &:hover:after {
+        content: $liker-dislike-text-on;
+      }
+
+      &[data-text-on]:hover:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* LIKED */
+
+    &[data-state="true"] .like:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-like-text-off;
+      }
+
+      &[data-text-off]:hover:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* DISLIKED */
+
+    &[data-state="false"] .dislike:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-dislike-text-off;
+      }
+
+      &[data-text-off]:hover:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icons) {
+
+      /* LIKE / DISLIKE */
+
+      .like,
+      .dislike {
+
+        /* AFTER */
+
+        &:not(.no-icon):after {
+          margin-left: $liker-inner-gutter;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Numbox
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -7751,13 +8050,45 @@ textarea.disabled,
         @extend %icon-base;
         position: absolute;
         right: 0;
-        content: $select-icon;
+        content: $select-icon-closed;
       }
 
       /* CUSTOM AFTER */
 
       &[data-icon]:after {
         content: attr(data-icon);
+      }
+
+      &[data-icon-closed]:after {
+        content: attr(data-icon-closed);
+      }
+
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+
+    /* LABEL */
+
+    select + label {
+
+      /* AFTER */
+
+      &:after {
+        content: $select-icon-open;
+      }
+
+      /* CUSTOM AFTER */
+
+      &[data-icon]:after {
+        content: attr(data-icon);
+      }
+
+      &[data-icon-open]:after {
+        content: attr(data-icon-open);
       }
 
     }
@@ -8401,6 +8732,23 @@ svg.spinner {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Loader
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/spinner/spinner.scss
+ * ========================================================================= */
+
+/* REMOTE LOADER */
+
+.remote-loader,
+.remote-loaded {
+  @extend %widget;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Spinner - Colors
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -8830,6 +9178,7 @@ svg.spinner {
       &.table-row-empty td {
         height: $table-row-empty-height;
         text-align: center;
+        vertical-align: middle;
       }
 
       &:first-child,
@@ -12250,7 +12599,7 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
- * Svelto - Widgets - Remote Modal
+ * Svelto - Widgets - Remote - Modal
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12274,7 +12623,7 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
- * Svelto - Widgets - Remote Modal - Resizing
+ * Svelto - Widgets - Remote - Modal - Resizing
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12308,7 +12657,7 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
- * Svelto - Widgets - Remote Modal - Unloaded
+ * Svelto - Widgets - Remote - Modal - Unloaded
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

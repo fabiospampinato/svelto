@@ -349,7 +349,7 @@ $progressbar-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Widgets - Remote Modal (Variables)
+ * Svelto - Widgets - Remote - Modal (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2341,7 +2341,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.5.7' !default;
+$svelto-version: '0.6.0' !default;
 
 
 /* =========================================================================
@@ -3076,7 +3076,8 @@ $select-z-index: 200 !default;
 
 $select-inner-gutter: $checkbox-inner-gutter !default;
 
-$select-icon: 'arrow_drop_down' !default;
+$select-icon-closed: 'arrow_drop_down' !default;
+$select-icon-open: 'arrow_drop_up' !default;
 
 
 /* =========================================================================
@@ -3191,6 +3192,49 @@ $label-floating-offset: 1.5rem !default;
 
 $label-floating-compact-padding-x: $label-floating-padding-x * .75 !default;
 $label-floating-compact-padding-y: $label-floating-padding-y * .75 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Liker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * @require widgets/label/variables.scss
+ * ========================================================================= */
+
+/* LIKER */
+
+$liker-inner-gutter: $label-inner-gutter + .23em !default; //FIXME: A little hacky, done for having the same spacing that it would have if we used plain buttons
+
+/* ICON */
+
+$liker-icon-active-color: $color-secondary !default;
+$liker-icon-opacity: .85 !default;
+$liker-icon-hover-opacity: 1 !default;
+
+/* COUNTER */
+
+$liker-counter-opacity: $liker-icon-opacity !default;
+$liker-counter-hover-opacity: $liker-icon-hover-opacity !default;
+
+/* LABEL */
+
+$liker-label-opacity: $liker-icon-opacity !default;
+$liker-label-hover-opacity: $liker-icon-hover-opacity !default;
+
+/* LIKE */
+
+$liker-like-icon: 'thumb_up' !default;
+$liker-like-text-on: 'Like' !default;
+$liker-like-text-off: 'Remove Like' !default;
+
+/* DISLIKE */
+
+$liker-dislike-icon: 'thumb_down' !default;
+$liker-dislike-text-on: 'Dislike' !default;
+$liker-dislike-text-off: 'Remove Dislike' !default;
 
 
 /* =========================================================================
