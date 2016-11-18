@@ -1,0 +1,298 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Liker
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
+ * ========================================================================= */
+
+/* LIKER */
+
+//TODO: Change the color of the counter and/or label if the icon is not present
+
+.liker {
+
+  @extend %widget;
+  display: flex;
+
+  /* LIKE / DISLIKE */
+
+  .like,
+  .dislike {
+
+    cursor: pointer;
+
+    /* MARGINS */
+
+    &:not(:first-child) {
+      margin-left: $liker-inner-gutter + em( $gutter-half );
+    }
+
+  }
+
+  /* ICONS */
+
+  &:not(.no-icons) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* BEFORE (ICON) */
+
+      &:not(.no-icon):before {
+        @extend %icon-base;
+        margin-bottom: 0;
+      }
+
+      &[data-icon]:not(.no-icon):before {
+        content: attr(data-icon);
+      }
+
+      &:not(.no-icon):not(:hover):before {
+        opacity: $liker-counter-opacity;
+      }
+
+      &:not(.no-icon):hover:before {
+        opacity: $liker-icon-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: $liker-like-icon;
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: $liker-dislike-icon;
+      }
+
+    }
+
+    /* LIKED */
+
+    &[data-state="true"] .like:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        color: $liker-icon-active-color;
+      }
+
+    }
+
+    /* DISLIKED */
+
+    &[data-state="false"] .dislike:not(.no-icon) {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        color: $liker-icon-active-color;
+      }
+
+    }
+
+  }
+
+  /* COUNTERS */
+
+  &:not(.no-counters) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* AFTER */
+
+      &:not(.no-counter):not(:hover):after {
+        vertical-align: middle;
+      }
+
+      &[data-text-counter]:not(.no-counter):not(:hover):after {
+        content: attr(data-text-counter);
+      }
+
+      &:not(.no-counter):not(:hover):after {
+        opacity: $liker-counter-opacity;
+      }
+
+      &:not(.no-counter):hover:before {
+        opacity: $liker-counter-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-counter) {
+
+      /* AFTER */
+
+      &:not(:hover):after {
+        content: attr(data-likes);
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-counter) {
+
+      /* AFTER */
+
+      &:not(:hover):after {
+        content: attr(data-dislikes);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icons) {
+
+      /* LIKE / DISLIKE */
+
+      .like,
+      .dislike {
+
+        /* AFTER */
+
+        &:not(.no-icon):after {
+          margin-left: $liker-inner-gutter;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* LABELS */
+
+  &:not(.no-labels) {
+
+    /* LIKE / DISLIKE */
+
+    .like,
+    .dislike {
+
+      /* AFTER */
+
+      &:not(.no-label):hover:after {
+        vertical-align: middle;
+      }
+
+      &:not(.no-label):not(:hover):after {
+        opacity: $liker-label-opacity;
+      }
+
+      &:not(.no-label):hover:before {
+        opacity: $liker-label-hover-opacity;
+      }
+
+    }
+
+    /* LIKE */
+
+    .like:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-like-text-on;
+      }
+
+      &[data-text-on]:hover:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* DISLIKE */
+
+    .dislike:not(.no-label) {
+
+      &:hover:after {
+        content: $liker-dislike-text-on;
+      }
+
+      &[data-text-on]:hover:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* LIKED */
+
+    &[data-state="true"] .like:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-like-text-off;
+      }
+
+      &[data-text-off]:hover:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* DISLIKED */
+
+    &[data-state="false"] .dislike:not(.no-label) {
+
+      /* AFTER */
+
+      &:hover:after {
+        content: $liker-dislike-text-off;
+      }
+
+      &[data-text-off]:hover:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icons) {
+
+      /* LIKE / DISLIKE */
+
+      .like,
+      .dislike {
+
+        /* AFTER */
+
+        &:not(.no-icon):after {
+          margin-left: $liker-inner-gutter;
+        }
+
+      }
+
+    }
+
+  }
+
+}

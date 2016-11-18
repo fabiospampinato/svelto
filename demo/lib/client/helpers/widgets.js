@@ -205,6 +205,22 @@ SWHelpers.define ( 'iconAction', function ( icon, action ) {
 
 });
 
+SWHelpers.define ( 'liker', function ( options ) {
+
+  options = options.hash;
+
+  options.likes = options.likes || 0;
+  options.dislikes = options.dislikes || 0;
+  options.state = lodash.isBoolean ( options.state ) ? options.state : null;
+  options.url = options.url || '';
+
+  return `<div class="liker" data-state='${JSON.stringify ( options.state )}' data-url="${options.url}">` +
+           `<div class="like" data-likes="${options.likes}"></div>` +
+           `<div class="dislike" data-dislikes="${options.dislikes}"></div>` +
+         '</div>';
+
+});
+
 SWHelpers.define ( 'numbox', function ( options ) {
 
   options = options.hash;

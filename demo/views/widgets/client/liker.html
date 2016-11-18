@@ -1,0 +1,107 @@
+
+<!-- LIKER -->
+
+<template name="liker">
+
+  {{{sw.divider "Liker"}}}
+
+  {{{sw.liker url="/liker-update"}}}
+  {{{sw.liker likes=100 dislikes=10 url="/liker-update"}}}
+  {{{sw.liker likes=101 dislikes=10 state=true url="/liker-update"}}}
+  {{{sw.liker likes=100 dislikes=11 state=false url="/liker-update"}}}
+
+  <div class="multiple">
+    <div class="liker" data-url="/liker-update">
+      <div class="like" data-likes="100" data-text-counter="Likes" data-text-on="Custom Like" data-text-off="Custom Remote Like"></div>
+      <div class="dislike" data-dislikes="10" data-text-counter="Dislikes" data-text-on="Custom Dislike" data-text-off="Custom Remove Dislike"></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="liker" data-state="true" data-url="/liker-update">
+      <div class="like" data-likes="101" data-text-on="Custom Like" data-text-off="Custom Remove Like"></div>
+      <div class="dislike" data-dislikes="10" data-text-on="Custom Dislike" data-text-off="Custom Remove Dislike"></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="liker" data-state="false" data-url="/liker-update">
+      <div class="like" data-likes="100" data-text-on="Custom Like" data-text-off="Custom Remove Like"></div>
+      <div class="dislike" data-dislikes="11" data-text-on="Custom Dislike" data-text-off="Custom Remove Dislike"></div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <div class="liker" data-url="/liker-update">
+    <div class="like" data-likes="100" data-icon="keyboard_arrow_up"></div>
+    <div class="dislike" data-dislikes="10" data-icon="keyboard_arrow_down"></div>
+  </div>
+
+  <div class="liker multiple joined" data-url="/liker-update">
+    <div class="like button bordered" data-likes="100"></div>
+    <div class="dislike button bordered" data-dislikes="10"></div>
+  </div>
+
+  <div class="multiple joined">
+    <div class="button bordered">
+      <i class="icon">thumb_up</i>
+      <span>100</span>
+    </div>
+    <div class="button bordered">
+      <i class="icon">thumb_down</i>
+      <span>10</span>
+    </div>
+  </div>
+
+  {{> liker_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="liker_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Get" "api_get ()"}}}
+    <div class="multiple joined">
+      <div class="label bordered gray pointing-right">Set</div>
+      {{{sw.action "false" "api ( 'set', false )"}}}
+      {{{sw.action "true" "api ( 'set', true )"}}}
+      {{{sw.action "null" "api ( 'set', null )"}}}
+    </div>
+    {{{sw.action "Reset" "api ( 'reset' )"}}}
+    {{{sw.action "Like" "api ( 'like' )"}}}
+    {{{sw.action "Dislike" "api ( 'dislike' )"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
+  </div>
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "No icons" "toggle_class ( 'no-icons' )"}}}
+    {{{sw.checkAction "No counters" "toggle_class ( 'no-counters' )"}}}
+    {{{sw.checkAction "No labels" "toggle_class ( 'no-labels' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function api ( action, ...args ) {
+      $('.liker').liker ( action, ...args );
+    }
+
+    function api_get () {
+      let result = $('.liker').first ().liker ( 'get' );
+      $.toast ( JSON.stringify ( result ) );
+    }
+
+    function toggle_class ( name ) {
+      $('.liker').toggleClass ( name );
+    }
+  </script>
+
+</template>
