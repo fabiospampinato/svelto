@@ -8,7 +8,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//FIXME: Crappy, not working atm, maybe should get removed
+//FIXME: Crappy, not working ATM, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
@@ -54,7 +54,7 @@
     },
   };
 
-  /* SELECT */
+  /* RATER */
 
   class Rater extends Widgets.Widget {
 
