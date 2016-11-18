@@ -15,8 +15,12 @@
 
 .liker {
 
-  @extend %widget;
-  display: flex;
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    @extend %widget;
+    display: flex;
+  }
 
   /* LIKE / DISLIKE */
 
