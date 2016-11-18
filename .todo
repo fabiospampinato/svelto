@@ -1,6 +1,7 @@
 
 Now:
-  ☐ maybe .table tbody tr.table-row-empty td should have vertical-align: middle
+  ✔ select: if there are multiple with the same value we have to select the latest, not the first @done (11/15/2016, 9:22:55 AM)
+  ✔ maybe .table tbody tr.table-row-empty td should have vertical-align: middle @done (11/15/2016, 9:49:36 AM)
   ☐ maybe non-center sections should have `no-grow` by default
   ✔ add support for a `close` parameter, useful on ajax request when a remoteModal should be closed on completion @done (11/14/2016, 5:30:36 PM)
   ☐ maybe enforce min-height on toolbar maybe, and use that value for layout-header sticky margin-top
@@ -16,8 +17,8 @@ Next:
   ☐ add support for CommonJS or AMD export syntax
     ☐ datatables don't get loaded under Meteor for instance
   ☐ center sortable names, or when also `text-align: center` they will look misaligned
-  ☐ rotate select's icon when open
-    ☐ also keep the select button `.active`... SURE?
+  ✔ rotate select's icon when open @done (11/15/2016, 9:41:31 AM)
+    ✔ also keep the select button `.active`... SURE? @done (11/15/2016, 9:41:32 AM)
   Gulp:
     ☐ admin tasks only for admin with the `isAdmin` task specified into the project
     ☐ add a `gulp install` or `gulp init` task, very much like Semantic UI did
@@ -42,7 +43,7 @@ Future:
   ☐ add this._onFocus ()
   ☐ widget for running actions over selectable's selected elements, like a floating noty or a slim panel
   ☐ selecter, like numbox but with custom values and chevrons, not editable (once it's done add it for editing the colors of the widgets)
-  ☐ remote loader of stuff, not just remoteModal but more generic
+  ✔ remote loader of stuff, not just remoteModal but more generic @done (11/16/2016, 10:20:55 AM)
   ☐ new checkable widget, like selectable but with checkboxes (should work like gmail's)
   ☐ maybe add also a special `scroll` option key, for triggering actions automagically
   ☐ input autocomplete plugin (like typeahead.js)
