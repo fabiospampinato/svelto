@@ -23,6 +23,12 @@
       autorequest: {
         threshold: 400
       },
+      requests: {
+        multiple: {
+          parallel: false,
+          sequential: false
+        }
+      },
       attributes: {
         href: 'href' // In order to better support `a` elements (the data value has higher priority)
       },
@@ -137,9 +143,7 @@
 
     request () {
 
-      if ( this.isRequesting () || this.getRequestsNr () ) return;
-
-      if ( this.getRequestsNr () >= 1 ) debugger;
+      if ( !this.canRequest () ) return;
 
       this.enable ();
 

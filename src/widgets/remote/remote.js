@@ -19,6 +19,12 @@
   let config = {
     name: 'remote',
     options: {
+      requests: {
+        multiple: {
+          parallel: false,
+          sequential: true
+        }
+      },
       ajax: { // Options to pass to `$.ajax`
         cache: true, // If set to false, it will force the requested url not to be cached by the browser
         method: 'GET', // Method of the remote request
@@ -108,7 +114,19 @@
 
     }
 
-    request () {
+    canRequest () {
+
+      if ( !this.options.requests.multiple.parallel && this.isRequesting () ) return false;
+
+      if ( !this.options.requests.multiple.sequential && this._requestsNr ) return false;
+
+      return true;
+
+    }
+
+    request ( options ) {
+
+      if ( !this.canRequest () ) return;
 
       this._requestsNr++;
       this._isAborted = false;
