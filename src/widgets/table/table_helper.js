@@ -84,7 +84,7 @@
 
       if ( datas.length ) {
 
-        if ( rowId && $( '.' + rowId ).length === 1 ) return this;
+        if ( rowId && $( '.' + rowId ).length === 1 ) return;
 
         let chunks = _.chunk ( datas, this.columnsNr ),
             $rows = $();

@@ -94,8 +94,6 @@
 
       }
 
-      return this;
-
     }
 
     /* SUBMIT */
