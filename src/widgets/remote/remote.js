@@ -113,7 +113,7 @@
       this._requestsNr++;
       this._isAborted = false;
 
-      this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, {
+      this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, options, {
         beforeSend: this.__beforesend.bind ( this ),
         complete: this.__complete.bind ( this ),
         error: this.__error.bind ( this ),
