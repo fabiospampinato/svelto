@@ -212,9 +212,10 @@ SWHelpers.define ( 'liker', function ( options ) {
   options.likes = options.likes || 0;
   options.dislikes = options.dislikes || 0;
   options.state = lodash.isBoolean ( options.state ) ? options.state : null;
+  options['state-url'] = options['state-url'] || '';
   options.url = options.url || '';
 
-  return `<div class="liker" data-state='${JSON.stringify ( options.state )}' data-url="${options.url}">` +
+  return `<div class="liker" data-state='${JSON.stringify ( options.state )}' data-state-url="${options['state-url']}" data-url="${options.url}">` +
            `<div class="like" data-likes="${options.likes}"></div>` +
            `<div class="dislike" data-dislikes="${options.dislikes}"></div>` +
          '</div>';

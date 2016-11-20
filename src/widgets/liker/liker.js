@@ -23,6 +23,7 @@
       likes: 0,
       dislikes: 0,
       state: null,
+      stateUrl: false,
       url: false,
       ajax: {
         cache: false,
@@ -35,6 +36,7 @@
         likes: 'likes',
         dislikes: 'dislikes',
         state: 'state',
+        stateUrl: 'state-url',
         url: 'url'
       },
       selectors: {
@@ -62,11 +64,13 @@
 
       this.options.likes = Number ( this.$like.data ( this.options.datas.likes ) ) || this.options.likes;
       this.options.dislikes = Number ( this.$dislike.data ( this.options.datas.dislikes ) ) || this.options.dislikes;
+      this.options.stateUrl = this.$liker.data ( this.options.datas.stateUrl ) || this.options.stateUrl;
       this.options.url = this.$liker.data ( this.options.datas.url ) || this.options.url;
 
       let state = this.$liker.data ( this.options.datas.state );
       this.options.state = _.isBoolean ( state ) ? state : this.options.state;
 
+      this.___remoteState ();
       this._update ();
 
     }
@@ -75,6 +79,28 @@
 
       this.___like ();
       this.___dislike ();
+
+    }
+
+    /* REMOTE STATE */
+
+    ___remoteState () {
+
+      if ( !this.options.stateUrl ) return;
+
+      $.get ( this.options.stateUrl, this.__remoteState.bind ( this ) );
+
+    }
+
+    __remoteState ( res ) {
+
+      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+
+      if ( _.isError ( resj ) || !('state' in resj) || resj.state === this.options.state ) return;
+
+      this.options.state = resj.state;
+
+      this._update ();
 
     }
 

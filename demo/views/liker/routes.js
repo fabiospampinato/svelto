@@ -23,3 +23,17 @@ Router.route ( '/liker-update', function () {
   }, 1000 );
 
 }, { where: 'server' });
+
+/* LIKER - STATE */
+
+Router.route ( '/liker-state', function () {
+
+  setTimeout ( () => {
+
+    this.response.end ( JSON.stringify ({
+      state: true
+    }));
+
+  }, 1000 );
+
+}, { where: 'server' });
