@@ -51,7 +51,7 @@
       },
       animations: {
         open: Animations.normal,
-        close: Animations.normal,
+        close: Animations.normal
       },
       keystrokes: {
         'esc': '__esc'
@@ -137,6 +137,9 @@
     __tap ( event ) {
 
       if ( this._lock || this._isPinned || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this.close ();
 
