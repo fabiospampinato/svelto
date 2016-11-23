@@ -1,0 +1,30 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ZOOMABLE */
+
+.zoomable {
+  cursor: zoom-in;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* BACKDROP */
+
+.zoomable-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $panel-z-index - 1 !important;
+    transition-duration: $panel-animation-duration !important;
+  }
+
+}
