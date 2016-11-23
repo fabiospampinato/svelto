@@ -2,7 +2,7 @@
 Package.describe ({
   name: 'svelto:svelto',
   summary: 'Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.',
-  version: '0.6.0',
+  version: '0.7.0',
   git: 'https://github.com/svelto/svelto.git'
 });
 
