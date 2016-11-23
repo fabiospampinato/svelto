@@ -24,7 +24,6 @@
     selector: 'img.zoomable',
     options: {
       offset: 50, // Size of the offset between the zoomed element and the viewport edges
-      preload: false, // Preload the original image
       src: false, // Source of the image
       original: {
         src: false, // Original source of the image
@@ -36,6 +35,10 @@
         enabled: false, // Zoom in magnified mode, where the image is enlarged
         offset: 50, // A spacing used in order not to trigger hot corners while reaching the edge of the zoomable
         side: Math.min ( screen.width, screen.height ) * 2 // Minimum length of each side
+      },
+      preloading: {
+        enabled: false, // Preload the original image
+        wait: true // Don't zoom until the original has been preloaded
       },
       classes: {
         magnified: 'magnified',
@@ -65,6 +68,7 @@
         'esc': '__esc'
       },
       callbacks: {
+        loading: _.noop,
         zoom: _.noop,
         unzoom: _.noop
       }
@@ -90,12 +94,12 @@
 
     _init () {
 
-      this.options.preload = this.$zoomable.hasClass ( this.options.classes.preload ) || this.options.preload;
       this.options.src = this.$zoomable.attr ( this.options.attributes.src ) || this.options.src;
       this.options.original.src = this.$zoomable.data ( this.options.datas.original ) || this.options.original.src;
       this.options.original.width = this.$zoomable.data ( this.options.datas.width ) || this.options.original.width;
       this.options.original.height = this.$zoomable.data ( this.options.datas.height ) || this.options.original.height;
       this.options.magnification.enabled = this.$zoomable.hasClass ( this.options.classes.magnified ) || this.options.magnification.enabled;
+      this.options.preloading.enabled = this.$zoomable.hasClass ( this.options.classes.preload ) || this.options.preloading.enabled;
 
       if ( this.options.original.src && ( !_.isNumber ( this.options.original.width ) || !_.isNumber ( this.options.original.height ) ) ) {
 
@@ -105,7 +109,7 @@
 
       }
 
-      if ( this.options.preload && this.options.original.src ) this.preload ();
+      if ( this.options.preloading.enabled && this.options.original.src ) this.preload ();
 
       if ( this.$zoomable.hasClass ( this.options.classes.zoom ) ) this.zoom ();
 
@@ -332,11 +336,51 @@
 
     /* API */
 
-    preload () {
+    isPreloading () {
 
-      $(`<img src="${this.options.original.src}" />`).load ( () => {
-        if ( !this.options.original.substitute ) return;
-        this.$zoomable.attr ( 'src', this.options.original.src );
+      return !!this._isPreloading;
+
+    }
+
+    isPreloaded () {
+
+      return !!this._isPreloaded;
+
+    }
+
+    preload ( callback ) {
+
+      if ( this._isPreloading || this._isPreloaded ) return;
+
+      this._isPreloading = true;
+
+      $.ajax ({
+        url: this.options.original.src,
+        xhr: () => {
+          let xhr = new window.XMLHttpRequest ();
+          xhr.addEventListener ( 'progress', event => {
+            if ( !event.lengthComputable ) return;
+            this._trigger ( 'loading', {
+              loaded: event.loaded,
+              total: event.total,
+              percentage: event.loaded / event.total * 100
+            });
+          }, false );
+          return xhr;
+        },
+        success: () => {
+          this._isPreloaded = true;
+          if ( this.options.original.substitute ) {
+            this.$zoomable.attr ( 'src', this.options.original.src );
+          }
+          if ( callback ) callback ();
+        },
+        error: () => {
+          console.error ( `Zoomable: failed to preload "${this.options.original.src}"` );
+        },
+        complete: () => {
+          this._isPreloading = false;
+        }
       });
 
     }
@@ -360,6 +404,8 @@
     zoom ( event ) {
 
       if ( this._lock || this._isZoomed ) return;
+
+      if ( this.options.original.src && this.options.preloading.wait && !this._isPreloaded ) return this.preload ( () => this.zoom ( event ) );
 
       this._lock = true;
       this._isZoomed = true;
