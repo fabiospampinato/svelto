@@ -28,6 +28,7 @@
       src: false, // Source of the image
       original: {
         src: false, // Original source of the image
+        substitute: true, // Once load, permanently substitute the thumnail with it
         width: false,
         height: false
       },
@@ -333,7 +334,10 @@
 
     preload () {
 
-      $(`<img src="${this.options.original.src}" />`);
+      $(`<img src="${this.options.original.src}" />`).load ( () => {
+        if ( !this.options.original.substitute ) return;
+        this.$zoomable.attr ( 'src', this.options.original.src );
+      });
 
     }
 
@@ -426,7 +430,7 @@
 
           this._delay ( function () {
 
-            if ( this.options.original.src ) this.$zoomable.attr ( 'src', this.options.src );
+            if ( this.options.original.src && !this.options.original.substitute ) this.$zoomable.attr ( 'src', this.options.src );
 
             this.$zoomable.removeClass ( this.options.classes.show );
             this.$backdrop.removeClass ( this.options.classes.backdrop.show );
