@@ -33,8 +33,10 @@
       },
       magnification: {
         enabled: false, // Zoom in magnified mode, where the image is enlarged
+        limited: true, // Controls magnification over the zoomable actual dimensions
         offset: 50, // A spacing used in order not to trigger hot corners while reaching the edge of the zoomable
-        side: Math.min ( screen.width, screen.height ) * 2 // Minimum length of each side
+        minSide: Math.min ( screen.width, screen.height ) * 2, // Minimum length of each side
+        maxSide: Math.min ( screen.width, screen.height ) * 3 // Maximum length of each side
       },
       preloading: {
         enabled: false, // Preload the original image
@@ -305,11 +307,29 @@
 
         if ( this._maxWidth <= this._maxHeight ) {
 
-          this._scale += this.options.magnification.side / ( this._minWidth * this._scale );
+          this._scale += this.options.magnification.minSide / ( this._minWidth * this._scale );
+
+          if ( this._minHeight * this._scale > this.options.magnification.maxSide ) {
+
+            this._scale = this.options.magnification.maxSide * this._maxScale / this._maxHeight;
+
+          }
 
         } else {
 
-          this._scale += this.options.magnification.side / ( this._minHeight * this._scale );
+          this._scale += this.options.magnification.minSide / ( this._minHeight * this._scale );
+
+          if ( this._minWidth * this._scale > this.options.magnification.maxSide ) {
+
+            this._scale = this.options.magnification.maxSide * this._maxScale / this._maxWidth;
+
+          }
+
+        }
+
+        if ( this.options.magnification.limited ) {
+
+          this._scale = Math.min ( this._maxScale, this._scale );
 
         }
 
