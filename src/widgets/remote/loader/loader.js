@@ -54,7 +54,6 @@
       super._variables ();
 
       this.$loader = this.$element;
-      this.$window = $(window);
 
     }
 
