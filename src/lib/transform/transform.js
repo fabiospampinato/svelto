@@ -68,28 +68,37 @@
 
   }
 
-  /* TRANSLATE */
+  /* 2D TRANSFORMATIONS */
 
-  $.fn.translate = function ( X, Y ) {
+  let transformations2D = ['scale', 'skew', 'translate'],
+      indexes2D = [[0, 3], [1, 2], [4, 5]];
 
-    let matrix = this.matrix ();
+  for ( let i = 0, l = transformations2D.length; i < l; i++ ) {
 
-    if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
+    $.fn[transformations2D[i]] = (function ( index ) {
 
-      matrix[4] = X;
-      matrix[5] = Y;
+      return function ( X, Y = X ) {
 
-      return this.matrix ( matrix );
+        let matrix = this.matrix (),
+            indexes = indexes2D[index];
 
-    } else {
+        if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
 
-      return {
-        x: matrix[4],
-        y: matrix[5]
-      };
+          matrix[indexes[0]] = X;
+          matrix[indexes[1]] = Y;
 
-    }
+          return this.matrix ( matrix );
 
-  };
+        } else {
+
+          return [matrix[indexes[0]], matrix[indexes[1]]];
+
+        }
+
+      }
+
+    })( i );
+
+  }
 
 }( Svelto.$, Svelto._, Svelto.Modernizr, Svelto ));

@@ -33,10 +33,23 @@
   </div>
 
   <div class="multiple actions joined">
+    <input name="scale_x" class="bordered" placeholder="X...">
+    <input name="scale_y" class="bordered" placeholder="Y...">
+    {{{sw.action "scale" "transform2d ( 'scale' )"}}}
+  </div>
+
+  <div class="multiple actions joined">
+    <input name="skew_x" class="bordered" placeholder="X...">
+    <input name="skew_y" class="bordered" placeholder="Y...">
+    {{{sw.action "skew" "transform2d ( 'skew' )"}}}
+  </div>
+
+  <div class="multiple actions joined">
     <input name="translate_x" class="bordered" placeholder="X...">
     <input name="translate_y" class="bordered" placeholder="Y...">
-    {{{sw.action "translate" "translation ()"}}}
+    {{{sw.action "translate" "transform2d ( 'translate' )"}}}
   </div>
+
 
   <script>
     var $sample = $('.square-sample');
@@ -63,13 +76,13 @@
       }
     }
 
-    function translation () {
-      var x = getValue ( 'translate_x' ),
-          y = getValue ( 'translate_y' );
-      if ( x && y ) {
-        $sample.translate ( x, y );
+    function transform2d ( name ) {
+      var x = getValue ( name + '_x' ),
+          y = getValue ( name + '_y' );
+      if ( !_.isEmpty ( x ) && !_.isEmpty ( y ) ) {
+        $sample[name] ( x, y );
       } else {
-        $.toast ( $sample.translate () );
+        $.toast ( $sample[name]() );
       }
     }
   </script>
