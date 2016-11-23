@@ -32,7 +32,7 @@
     /* MARGINS */
 
     &:not(:first-child) {
-      margin-left: $liker-inner-gutter + em( $gutter-half );
+      margin-left: calc( #{$liker-inner-gutter} + #{$gutter-half} );
     }
 
   }
