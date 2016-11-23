@@ -8,8 +8,11 @@ SampleHelpers.registerAs ( 'sample' );
 SampleHelpers.define ( 'avatarUrl', () => '/sample/avatar.png' );
 
 SampleHelpers.define ( 'imageUrl', () => '/sample/sample.png' );
-
 SampleHelpers.define ( 'imageWideUrl', () => '/sample/sample-wide.png' );
+
+SampleHelpers.define ( 'photoUrl', () => '/sample/photo.jpg' );
+SampleHelpers.define ( 'photoThumbUrl', () => '/sample/photo-thumb.jpg' );
+SampleHelpers.define ( 'photoThumbBigUrl', () => '/sample/photo-thumb-big.jpg' );
 
 SampleHelpers.define ( 'text', function ( wordsNr = false ) {
 
@@ -46,6 +49,30 @@ SampleHelpers.define ( 'image', function ( classes = '' ) {
 SampleHelpers.define ( 'imageWide', function ( classes = '' ) {
 
   let url = SampleHelpers.imageWideUrl ();
+
+  return `<img src="${url}" class="${classes}"/>`;
+
+});
+
+SampleHelpers.define ( 'photo', function ( classes = '' ) {
+
+  let url = SampleHelpers.photoUrl ();
+
+  return `<img src="${url}" class="${classes}"/>`;
+
+});
+
+SampleHelpers.define ( 'photoThumb', function ( classes = '' ) {
+
+  let url = SampleHelpers.photoThumbUrl ();
+
+  return `<img src="${url}" class="${classes}"/>`;
+
+});
+
+SampleHelpers.define ( 'photoThumbBig', function ( classes = '' ) {
+
+  let url = SampleHelpers.photoThumbBigUrl ();
 
   return `<img src="${url}" class="${classes}"/>`;
 
