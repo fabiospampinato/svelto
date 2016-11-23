@@ -432,6 +432,38 @@ $switch-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Zoomable - Show (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* SHOW */
+
+$zoomable-show-z-index: 1300 !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* ZOOMABLE */
+
+$zoomable-z-index: 1300 !default;
+
+/* ANIMATION */
+
+$zoomable-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
  * Svelto - Core - Breakpoints (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -2341,7 +2373,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.6.0' !default;
+$svelto-version: '0.7.0' !default;
 
 
 /* =========================================================================

@@ -2583,7 +2583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.6.0',
+				VERSION: '0.7.0',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -10386,6 +10386,602 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer);
 
 /* =========================================================================
+ * Svelto - Widgets - Zoomable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require core/browser/browser.js
+ * @require core/widget/widget.js
+ * ========================================================================= */
+
+//TODO: Generalize it for other kind of elements other than `img`
+
+(function ($, _, Svelto, Widgets, Factory, Browser, Pointer, Keyboard, Animations) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'zoomable',
+				plugin: Browser.is.desktop,
+				selector: 'img.zoomable',
+				options: {
+						offset: 50, // Size of the offset between the zoomed element and the viewport edges
+						preload: false, // Preload the original image
+						src: false, // Source of the image
+						original: {
+								src: false, // Original source of the image
+								width: false,
+								height: false
+						},
+						magnification: {
+								enabled: false, // Zoom in magnified mode, where the image is enlarged
+								offset: 50, // A spacing used in order not to trigger hot corners while reaching the edge of the zoomable
+								side: Math.min(screen.width, screen.height) * 2 // Minimum length of each side
+						},
+						classes: {
+								magnified: 'magnified',
+								preload: 'preload',
+								show: 'show',
+								zoom: 'zoom',
+								zoomed: 'zoomed',
+								backdrop: {
+										show: 'zoomable-backdrop obscured-show obscured',
+										zoom: 'obscured-open',
+										zoomed: ''
+								}
+						},
+						attributes: {
+								src: 'src'
+						},
+						datas: {
+								original: 'original',
+								width: 'width',
+								height: 'height'
+						},
+						animations: {
+								zoom: Animations.normal,
+								unzoom: Animations.normal
+						},
+						keystrokes: {
+								'esc': '__esc'
+						},
+						callbacks: {
+								zoom: _.noop,
+								unzoom: _.noop
+						}
+				}
+		};
+
+		/* ZOOMABLE */
+
+		var Zoomable = function (_Widgets$Widget27) {
+				_inherits(Zoomable, _Widgets$Widget27);
+
+				function Zoomable() {
+						_classCallCheck(this, Zoomable);
+
+						return _possibleConstructorReturn(this, (Zoomable.__proto__ || Object.getPrototypeOf(Zoomable)).apply(this, arguments));
+				}
+
+				_createClass(Zoomable, [{
+						key: '_variables',
+
+
+						/* SPECIAL */
+
+						value: function _variables() {
+
+								this.$zoomable = this.$element;
+								this.zoomable = this.element;
+
+								this.$backdrop = this.$html;
+
+								this._isZoomed = false;
+						}
+				}, {
+						key: '_init',
+						value: function _init() {
+
+								this.options.preload = this.$zoomable.hasClass(this.options.classes.preload) || this.options.preload;
+								this.options.src = this.$zoomable.attr(this.options.attributes.src) || this.options.src;
+								this.options.original.src = this.$zoomable.data(this.options.datas.original) || this.options.original.src;
+								this.options.original.width = this.$zoomable.data(this.options.datas.width) || this.options.original.width;
+								this.options.original.height = this.$zoomable.data(this.options.datas.height) || this.options.original.height;
+								this.options.magnification.enabled = this.$zoomable.hasClass(this.options.classes.magnified) || this.options.magnification.enabled;
+
+								if (this.options.original.src && (!_.isNumber(this.options.original.width) || !_.isNumber(this.options.original.height))) {
+
+										console.error("Zoomable: wrong 'data-width' and/or 'data-height', they are required when using 'data-original'");
+
+										return false;
+								}
+
+								if (this.options.preload && this.options.original.src) this.preload();
+
+								if (this.$zoomable.hasClass(this.options.classes.zoom)) this.zoom();
+						}
+				}, {
+						key: '_events',
+						value: function _events() {
+
+								this.___tap();
+
+								if (!this._isZoomed) return;
+
+								this.___tapOutside();
+								this.___keydown();
+								this.___scroll();
+								this.___resize();
+
+								if (this.options.magnification.enabled) this.___move();
+						}
+				}, {
+						key: '_destroy',
+						value: function _destroy() {
+
+								this.unzoom();
+						}
+
+						/* TAP */
+
+				}, {
+						key: '___tap',
+						value: function ___tap() {
+
+								this._on(Pointer.tap, this.__tap);
+						}
+				}, {
+						key: '__tap',
+						value: function __tap(event) {
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
+								if (Keyboard.keystroke.match(event.originalEvent, 'ctmd')) {
+
+										window.open(this.options.original.src || this.options.src, '_new');
+								} else {
+
+										this.toggle(undefined, event);
+								}
+						}
+				}, {
+						key: '___tapOutside',
+						value: function ___tapOutside() {
+
+								this._on(true, this.$html, Pointer.tap, this.__tapOutside);
+						}
+				}, {
+						key: '__tapOutside',
+						value: function __tapOutside(event) {
+
+								if (this._lock || !$(event.target).isAttached() || $(event.target).closest(this.$zoomable).length) return;
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
+								this.unzoom();
+						}
+
+						/* ESC */
+
+				}, {
+						key: '___keydown',
+						value: function ___keydown() {
+								//TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
+
+								this._on(true, this.$document, 'keydown', this.__keydown);
+						}
+				}, {
+						key: '__esc',
+						value: function __esc() {
+
+								this.unzoom();
+						}
+
+						/* SCROLL */
+
+				}, {
+						key: '___scroll',
+						value: function ___scroll() {
+
+								if (this.options.magnification.enabled) return;
+
+								this._on(true, this.$window.add(this.$zoomable.parents()), 'scroll', this._throttle(this.__scroll, 100));
+						}
+				}, {
+						key: '__scroll',
+						value: function __scroll() {
+
+								this.unzoom();
+						}
+
+						/* RESIZE */
+
+				}, {
+						key: '___resize',
+						value: function ___resize() {
+
+								this._on(true, this.$window, 'resize', this._throttle(this.__resize, 100));
+						}
+				}, {
+						key: '__resize',
+						value: function __resize() {
+
+								this._positionate();
+						}
+
+						/* MOVE */
+
+				}, {
+						key: '___move',
+						value: function ___move() {
+
+								this._on(true, this.$document, Pointer.move, this.__move);
+						}
+				}, {
+						key: '__move',
+						value: function __move(event) {
+								var _$$eventXY = $.eventXY(event),
+								    x = _$$eventXY.x,
+								    y = _$$eventXY.y;
+
+								x -= this.$window.scrollLeft();
+								y -= this.$window.scrollTop();
+
+								var zOffset = this.options.offset,
+								    mOffset = this.options.magnification.offset,
+								    width = this._minWidth * this._scale,
+								    height = this._minHeight * this._scale,
+								    xClamped = _.clamp(x - mOffset, 0, this._viewportWidth - mOffset),
+								    yClamped = _.clamp(y - mOffset, 0, this._viewportHeight - mOffset),
+								    xPercentage = _.clamp(xClamped / (this._viewportWidth - mOffset * 2), 0, 1),
+								    yPercentage = _.clamp(yClamped / (this._viewportHeight - mOffset * 2), 0, 1),
+								    xExceeding = Math.max(0, width - this._viewportWidth + zOffset * 2),
+								    yExceeding = Math.max(0, height - this._viewportHeight + zOffset * 2);
+
+								/* SETTING */
+
+								this._matrix[4] = this._translateX + xExceeding / 2 - xExceeding * xPercentage;
+								this._matrix[5] = this._translateY + yExceeding / 2 - yExceeding * yPercentage;
+
+								this.$zoomable.matrix(this._matrix);
+						}
+
+						/* POSITIONING */
+
+				}, {
+						key: '_positionate',
+						value: function _positionate(initial) {
+
+								/* VARIABLES */
+
+								if (initial) {
+
+										this._initialMatrix = this.$zoomable.matrix();
+										this._translateX = 0;
+										this._translateY = 0;
+
+										this._minWidth = this.zoomable.width || this.$zoomable.outerWidth(); //FIXME: It may change on resize
+										this._minHeight = this.zoomable.height || this.$zoomable.outerHeight(); //FIXME: It may change on resize
+										this._maxWidth = this.options.original.src ? this.options.original.width : this.zoomable.naturalWidth ? this.zoomable.naturalWidth : this._minWidth;
+										this._maxHeight = this.options.original.src ? this.options.original.height : this.zoomable.naturalHeight ? this.zoomable.naturalHeight : this._minHeight;
+										this._aspectRatio = this._maxWidth / this._maxHeight;
+										this._maxScale = this._maxWidth / this._minWidth;
+								}
+
+								this._viewportRect = this.$window.getRect();
+								this._viewportWidth = this._viewportRect.width;
+								this._viewportHeight = this._viewportRect.height;
+								this._viewportAspectRatio = this._viewportWidth / this._viewportHeight;
+
+								var rect = this.$zoomable.getRect();
+
+								/* SCALE */
+
+								if (this._maxWidth <= this._viewportWidth - this.options.offset && this._maxHeight <= this._viewportHeight - this.options.offset) {
+
+										this._scale = this._maxScale;
+								} else if (this._aspectRatio < this._viewportAspectRatio) {
+
+										this._scale = (this._viewportHeight - this.options.offset) / this._maxHeight * this._maxScale;
+								} else {
+
+										this._scale = (this._viewportWidth - this.options.offset) / this._maxWidth * this._maxScale;
+								}
+
+								if (this.options.magnification.enabled) {
+
+										if (this._maxWidth <= this._maxHeight) {
+
+												this._scale += this.options.magnification.side / (this._minWidth * this._scale);
+										} else {
+
+												this._scale += this.options.magnification.side / (this._minHeight * this._scale);
+										}
+								}
+
+								/* CENTER */
+
+								this._translateX = this._translateX + (initial ? this._initialMatrix[4] : 0) + this._viewportWidth / 2 - (rect.left + rect.width / 2);
+								this._translateY = this._translateY + (initial ? this._initialMatrix[5] : 0) + this._viewportHeight / 2 - (rect.top + rect.height / 2);
+
+								/* SETTING */
+
+								this._matrix = [this._scale, this._initialMatrix[1], this._initialMatrix[2], this._scale, this._translateX, this._translateY];
+
+								this.$zoomable.matrix(this._matrix);
+						}
+				}, {
+						key: '_unpositionate',
+						value: function _unpositionate() {
+
+								this.$zoomable.matrix(this._initialMatrix);
+						}
+
+						/* API */
+
+				}, {
+						key: 'preload',
+						value: function preload() {
+
+								$('<img src="' + this.options.original.src + '" />');
+						}
+				}, {
+						key: 'isZoomed',
+						value: function isZoomed() {
+
+								return this._isZoomed;
+						}
+				}, {
+						key: 'toggle',
+						value: function toggle() {
+								var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isZoomed;
+								var event = arguments[1];
+
+
+								if (!!force !== this._isZoomed) {
+
+										this[force ? 'zoom' : 'unzoom'](event);
+								}
+						}
+				}, {
+						key: 'zoom',
+						value: function zoom(event) {
+
+								if (this._lock || this._isZoomed) return;
+
+								this._lock = true;
+								this._isZoomed = true;
+
+								if (this.options.magnification.enabled) this.$layout.disableScroll();
+
+								this._frame(function () {
+
+										this.$zoomable.addClass(this.options.classes.show);
+										this.$backdrop.addClass(this.options.classes.backdrop.show);
+
+										this._frame(function () {
+
+												this.$zoomable.addClass(this.options.classes.zoom);
+												this.$backdrop.addClass(this.options.classes.backdrop.zoom);
+
+												this._positionate(true);
+
+												if (this.options.magnification.enabled && event) this.__move(event);
+
+												this._delay(function () {
+
+														this.$zoomable.addClass(this.options.classes.zoomed);
+														this.$backdrop.addClass(this.options.classes.backdrop.zoomed);
+
+														if (this.options.original.src) this.$zoomable.attr('src', this.options.original.src);
+
+														this._lock = false;
+
+														this._trigger('zoom');
+												}, this.options.animations.zoom);
+										});
+								});
+
+								this._reset();
+
+								this.___tap();
+								this.___tapOutside();
+								this.___keydown();
+								this.___scroll();
+								this.___resize();
+
+								if (this.options.magnification.enabled) this.___move();
+						}
+				}, {
+						key: 'unzoom',
+						value: function unzoom() {
+
+								if (this._lock || !this._isZoomed) return;
+
+								this._lock = true;
+								this._isZoomed = false;
+
+								this._frame(function () {
+
+										this.$zoomable.removeClass(this.options.classes.zoomed);
+										this.$backdrop.removeClass(this.options.classes.backdrop.zoomed);
+
+										this._frame(function () {
+
+												this._unpositionate();
+
+												this.$zoomable.removeClass(this.options.classes.zoom);
+												this.$backdrop.removeClass(this.options.classes.backdrop.zoom);
+
+												this._delay(function () {
+
+														if (this.options.original.src) this.$zoomable.attr('src', this.options.src);
+
+														this.$zoomable.removeClass(this.options.classes.show);
+														this.$backdrop.removeClass(this.options.classes.backdrop.show);
+
+														if (this.options.magnification.enabled) this.$layout.enableScroll();
+
+														this._lock = false;
+
+														this._trigger('unzoom');
+												}, this.options.animations.unzoom);
+										});
+								});
+
+								this._reset();
+
+								this.___tap();
+						}
+				}]);
+
+				return Zoomable;
+		}(Widgets.Widget);
+
+		/* FACTORY */
+
+		Factory.init(Zoomable, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../zoomable.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'zoomableCloser',
+				plugin: true,
+				selector: '.zoomable-closer',
+				options: {
+						widget: Widgets.Zoomable
+				}
+		};
+
+		/* ZOOMABLE CLOSER */
+
+		var ZoomableCloser = function (_Widgets$Closer6) {
+				_inherits(ZoomableCloser, _Widgets$Closer6);
+
+				function ZoomableCloser() {
+						_classCallCheck(this, ZoomableCloser);
+
+						return _possibleConstructorReturn(this, (ZoomableCloser.__proto__ || Object.getPrototypeOf(ZoomableCloser)).apply(this, arguments));
+				}
+
+				return ZoomableCloser;
+		}(Widgets.Closer);
+
+		/* FACTORY */
+
+		Factory.init(ZoomableCloser, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../zoomable.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'zoomableOpener',
+				plugin: true,
+				selector: '.zoomable-opener',
+				options: {
+						widget: Widgets.Zoomable
+				}
+		};
+
+		/* ZOOMABLE OPENER */
+
+		var ZoomableOpener = function (_Widgets$Opener5) {
+				_inherits(ZoomableOpener, _Widgets$Opener5);
+
+				function ZoomableOpener() {
+						_classCallCheck(this, ZoomableOpener);
+
+						return _possibleConstructorReturn(this, (ZoomableOpener.__proto__ || Object.getPrototypeOf(ZoomableOpener)).apply(this, arguments));
+				}
+
+				return ZoomableOpener;
+		}(Widgets.Opener);
+
+		/* FACTORY */
+
+		Factory.init(ZoomableOpener, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../zoomable.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'zoomableToggler',
+				plugin: true,
+				selector: '.zoomable-toggler',
+				options: {
+						widget: Widgets.Zoomable
+				}
+		};
+
+		/* ZOOMABLE TOGGLER */
+
+		var ZoomableToggler = function (_Widgets$Toggler5) {
+				_inherits(ZoomableToggler, _Widgets$Toggler5);
+
+				function ZoomableToggler() {
+						_classCallCheck(this, ZoomableToggler);
+
+						return _possibleConstructorReturn(this, (ZoomableToggler.__proto__ || Object.getPrototypeOf(ZoomableToggler)).apply(this, arguments));
+				}
+
+				return ZoomableToggler;
+		}(Widgets.Toggler);
+
+		/* FACTORY */
+
+		Factory.init(ZoomableToggler, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
  * Svelto - Core - Z-Depths
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -10912,8 +11508,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* COLORPICKER */
 
-		var Colorpicker = function (_Widgets$Widget27) {
-				_inherits(Colorpicker, _Widgets$Widget27);
+		var Colorpicker = function (_Widgets$Widget28) {
+				_inherits(Colorpicker, _Widgets$Widget28);
 
 				function Colorpicker() {
 						_classCallCheck(this, Colorpicker);
@@ -11371,8 +11967,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* PANEL */
 
-		var Panel = function (_Widgets$Widget28) {
-				_inherits(Panel, _Widgets$Widget28);
+		var Panel = function (_Widgets$Widget29) {
+				_inherits(Panel, _Widgets$Widget29);
 
 				function Panel() {
 						_classCallCheck(this, Panel);
@@ -11387,7 +11983,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this47 = this;
+								var _this51 = this;
 
 								this.$panel = this.$element;
 								this.panel = this.element;
@@ -11395,7 +11991,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$backdrop = this.$html;
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this47.$panel.hasClass(direction);
+										return _this51.$panel.hasClass(direction);
 								}) || this.options.direction;
 								this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
 
@@ -11451,6 +12047,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function __tap(event) {
 
 								if (this._lock || this._isPinned || !$(event.target).isAttached() || $(event.target).closest(this.$panel).length) return;
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
 
 								this.close();
 						}
@@ -11772,8 +12371,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* PANEL CLOSER */
 
-		var PanelCloser = function (_Widgets$Closer6) {
-				_inherits(PanelCloser, _Widgets$Closer6);
+		var PanelCloser = function (_Widgets$Closer7) {
+				_inherits(PanelCloser, _Widgets$Closer7);
 
 				function PanelCloser() {
 						_classCallCheck(this, PanelCloser);
@@ -11816,8 +12415,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* PANEL OPENER */
 
-		var PanelOpener = function (_Widgets$Opener5) {
-				_inherits(PanelOpener, _Widgets$Opener5);
+		var PanelOpener = function (_Widgets$Opener6) {
+				_inherits(PanelOpener, _Widgets$Opener6);
 
 				function PanelOpener() {
 						_classCallCheck(this, PanelOpener);
@@ -11860,8 +12459,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* PANEL TOGGLER */
 
-		var PanelToggler = function (_Widgets$Toggler5) {
-				_inherits(PanelToggler, _Widgets$Toggler5);
+		var PanelToggler = function (_Widgets$Toggler6) {
+				_inherits(PanelToggler, _Widgets$Toggler6);
 
 				function PanelToggler() {
 						_classCallCheck(this, PanelToggler);
@@ -11922,8 +12521,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TABS */
 
-		var Tabs = function (_Widgets$Widget29) {
-				_inherits(Tabs, _Widgets$Widget29);
+		var Tabs = function (_Widgets$Widget30) {
+				_inherits(Tabs, _Widgets$Widget30);
 
 				function Tabs() {
 						_classCallCheck(this, Tabs);
@@ -11938,14 +12537,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this52 = this;
+								var _this56 = this;
 
 								this.$tabs = this.$element;
 								this.$triggers = this.$tabs.find(this.options.selectors.triggers);
 								this.$containers = this.$tabs.find(this.options.selectors.containers);
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this52.$tabs.hasClass(direction);
+										return _this56.$tabs.hasClass(direction);
 								}) || this.options.direction;
 
 								this.index = false;
@@ -12658,7 +13257,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'once',
 						value: function once(time) {
-								var _this53 = this;
+								var _this57 = this;
 
 								if (isNaN(time)) {
 
@@ -12666,7 +13265,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 
 								setTimeout(function () {
-										return _this53.action();
+										return _this57.action();
 								}, time);
 
 								return this;
@@ -12749,7 +13348,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'setTimer',
 						value: function setTimer(time) {
-								var _this54 = this;
+								var _this58 = this;
 
 								if (isNaN(time)) {
 
@@ -12761,7 +13360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.clearTimer();
 
 								this.timeoutObject = setTimeout(function () {
-										return _this54.go();
+										return _this58.go();
 								}, time);
 						}
 				}, {
@@ -12852,8 +13451,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* CAROUSEL */
 
-		var Carousel = function (_Widgets$Widget30) {
-				_inherits(Carousel, _Widgets$Widget30);
+		var Carousel = function (_Widgets$Widget31) {
+				_inherits(Carousel, _Widgets$Widget31);
 
 				function Carousel() {
 						_classCallCheck(this, Carousel);
@@ -13255,8 +13854,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TOAST */
 
-		var Toast = function (_Widgets$Widget31) {
-				_inherits(Toast, _Widgets$Widget31);
+		var Toast = function (_Widgets$Widget32) {
+				_inherits(Toast, _Widgets$Widget32);
 
 				function Toast() {
 						_classCallCheck(this, Toast);
@@ -13643,6 +14242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						likes: 0,
 						dislikes: 0,
 						state: null,
+						stateUrl: false,
 						url: false,
 						ajax: {
 								cache: false,
@@ -13655,6 +14255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								likes: 'likes',
 								dislikes: 'dislikes',
 								state: 'state',
+								stateUrl: 'state-url',
 								url: 'url'
 						},
 						selectors: {
@@ -13693,11 +14294,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
 								this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
+								this.options.stateUrl = this.$liker.data(this.options.datas.stateUrl) || this.options.stateUrl;
 								this.options.url = this.$liker.data(this.options.datas.url) || this.options.url;
 
 								var state = this.$liker.data(this.options.datas.state);
 								this.options.state = _.isBoolean(state) ? state : this.options.state;
 
+								this.___remoteState();
 								this._update();
 						}
 				}, {
@@ -13706,6 +14309,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.___like();
 								this.___dislike();
+						}
+
+						/* REMOTE STATE */
+
+				}, {
+						key: '___remoteState',
+						value: function ___remoteState() {
+
+								if (!this.options.stateUrl) return;
+
+								$.get(this.options.stateUrl, this.__remoteState.bind(this));
+						}
+				}, {
+						key: '__remoteState',
+						value: function __remoteState(res) {
+
+								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+								if (_.isError(resj) || !('state' in resj) || resj.state === this.options.state) return;
+
+								this.options.state = resj.state;
+
+								this._update();
 						}
 
 						/* UPDATE */
@@ -13905,8 +14531,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* RATER */
 
-		var Rater = function (_Widgets$Widget32) {
-				_inherits(Rater, _Widgets$Widget32);
+		var Rater = function (_Widgets$Widget33) {
+				_inherits(Rater, _Widgets$Widget33);
 
 				function Rater() {
 						_classCallCheck(this, Rater);
@@ -13958,7 +14584,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__tap',
 						value: function __tap(event) {
-								var _this59 = this;
+								var _this63 = this;
 
 								if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -13972,14 +14598,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												beforeSend: function beforeSend() {
 
-														_this59.doingAjax = true;
+														_this63.doingAjax = true;
 												},
 
 												error: function error(res) {
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-														$.toast(_.isError(resj) || !('message' in resj) ? _this59.options.messages.error : resj.message);
+														$.toast(_.isError(resj) || !('message' in resj) ? _this63.options.messages.error : resj.message);
 												},
 
 												success: function success(res) {
@@ -13991,19 +14617,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (!_.isError(resj)) {
 
-																_.merge(_this59.options, resj);
+																_.merge(_this63.options, resj);
 
-																_this59.$rater.html(_this59._template('stars', _this59.options));
+																_this63.$rater.html(_this63._template('stars', _this63.options));
 
-																_this59.options.rated = true;
+																_this63.options.rated = true;
 
-																_this59._trigger('change');
+																_this63._trigger('change');
 														}
 												},
 
 												complete: function complete() {
 
-														_this59.doingAjax = false;
+														_this63.doingAjax = false;
 												}
 
 										});
@@ -14407,19 +15033,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '_variables', this).call(this);
 
 								this.$loader = this.$element;
-								this.$window = $(window);
 						}
 				}, {
 						key: '_init',
 						value: function _init() {
-								var _this63 = this;
+								var _this67 = this;
 
 								this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
 								this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
 								this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
 
 								this._defer(function () {
-										return !_this63.isRequesting() && _this63.disable();
+										return !_this67.isRequesting() && _this67.disable();
 								}); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
 						}
 				}, {
@@ -14447,7 +15072,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__request',
 						value: function __request() {
 
-								if (this.$loader.getRect().top - (this.$window.scrollTop() + this.$window.outerHeight()) > this.options.autorequest.threshold) return;
+								if (this.$loader.getRect().top - this.$window.outerHeight() > this.options.autorequest.threshold) return;
 
 								this.request();
 						}
@@ -14609,13 +15234,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				_createClass(RemoteLoaderTrigger, [{
 						key: 'trigger',
 						value: function trigger() {
-								var _this65 = this;
+								var _this69 = this;
 
 								this.$trigger[this.options.widget.config.name]({
 										ajax: this.options.ajax,
 										callbacks: {
 												beforesend: function beforesend() {
-														return _this65.$trigger.addClass(_this65.options.classes.disabled);
+														return _this69.$trigger.addClass(_this69.options.classes.disabled);
 												} //TODO: Replace with a linear "spinner" overlay
 										}
 								});
@@ -14849,7 +15474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
 
 										this._frame(function () {
-												var _this67 = this;
+												var _this71 = this;
 
 												this.$modal.addClass(this.options.classes.showing);
 
@@ -14857,10 +15482,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 														width: newRect.width,
 														height: newRect.height
 												}, this.options.animations.resize, function () {
-														_this67.$modal.css({
+														_this71.$modal.css({
 																width: '',
 																height: ''
-														}).removeClass(_this67.options.classes.placeholder + ' ' + _this67.options.classes.loaded + ' ' + _this67.options.classes.resizing + ' ' + _this67.options.classes.showing);
+														}).removeClass(_this71.options.classes.placeholder + ' ' + _this71.options.classes.loaded + ' ' + _this71.options.classes.resizing + ' ' + _this71.options.classes.showing);
 												});
 										});
 								});
@@ -15023,8 +15648,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TAGBOX */
 
-		var Tagbox = function (_Widgets$Widget33) {
-				_inherits(Tagbox, _Widgets$Widget33);
+		var Tagbox = function (_Widgets$Widget34) {
+				_inherits(Tagbox, _Widgets$Widget34);
 
 				function Tagbox() {
 						_classCallCheck(this, Tagbox);
@@ -15656,8 +16281,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* DROPPABLE */
 
-		var Droppable = function (_Widgets$Widget34) {
-				_inherits(Droppable, _Widgets$Widget34);
+		var Droppable = function (_Widgets$Widget35) {
+				_inherits(Droppable, _Widgets$Widget35);
 
 				function Droppable() {
 						_classCallCheck(this, Droppable);
@@ -15852,26 +16477,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}(i);
 		}
 
-		/* TRANSLATE */
+		/* 2D TRANSFORMATIONS */
 
-		$.fn.translate = function (X, Y) {
+		var transformations2D = ['scale', 'skew', 'translate'],
+		    indexes2D = [[0, 3], [1, 2], [4, 5]];
 
-				var matrix = this.matrix();
+		for (var _i3 = 0, _l3 = transformations2D.length; _i3 < _l3; _i3++) {
 
-				if (!_.isUndefined(X) && !_.isUndefined(Y)) {
+				$.fn[transformations2D[_i3]] = function (index) {
 
-						matrix[4] = X;
-						matrix[5] = Y;
+						return function (X) {
+								var Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : X;
 
-						return this.matrix(matrix);
-				} else {
 
-						return {
-								x: matrix[4],
-								y: matrix[5]
+								var matrix = this.matrix(),
+								    indexes = indexes2D[index];
+
+								if (!_.isUndefined(X) && !_.isUndefined(Y)) {
+
+										matrix[indexes[0]] = X;
+										matrix[indexes[1]] = Y;
+
+										return this.matrix(matrix);
+								} else {
+
+										return [matrix[indexes[0]], matrix[indexes[1]]];
+								}
 						};
-				}
-		};
+				}(_i3);
+		}
 })(Svelto.$, Svelto._, Svelto.Modernizr, Svelto);
 
 /* =========================================================================
@@ -16249,8 +16883,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* POPOVER */
 
-		var Popover = function (_Widgets$Widget35) {
-				_inherits(Popover, _Widgets$Widget35);
+		var Popover = function (_Widgets$Widget36) {
+				_inherits(Popover, _Widgets$Widget36);
 
 				function Popover() {
 						_classCallCheck(this, Popover);
@@ -16564,8 +17198,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* POPOVER CLOSER */
 
-		var PopoverCloser = function (_Widgets$Closer7) {
-				_inherits(PopoverCloser, _Widgets$Closer7);
+		var PopoverCloser = function (_Widgets$Closer8) {
+				_inherits(PopoverCloser, _Widgets$Closer8);
 
 				function PopoverCloser() {
 						_classCallCheck(this, PopoverCloser);
@@ -16608,8 +17242,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* POPOVER OPENER */
 
-		var PopoverOpener = function (_Widgets$Opener6) {
-				_inherits(PopoverOpener, _Widgets$Opener6);
+		var PopoverOpener = function (_Widgets$Opener7) {
+				_inherits(PopoverOpener, _Widgets$Opener7);
 
 				function PopoverOpener() {
 						_classCallCheck(this, PopoverOpener);
@@ -16652,8 +17286,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* POPOVER TOGGLER */
 
-		var PopoverToggler = function (_Widgets$Toggler6) {
-				_inherits(PopoverToggler, _Widgets$Toggler6);
+		var PopoverToggler = function (_Widgets$Toggler7) {
+				_inherits(PopoverToggler, _Widgets$Toggler7);
 
 				function PopoverToggler() {
 						_classCallCheck(this, PopoverToggler);
@@ -16729,8 +17363,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* SELECT */
 
-		var Select = function (_Widgets$Widget36) {
-				_inherits(Select, _Widgets$Widget36);
+		var Select = function (_Widgets$Widget37) {
+				_inherits(Select, _Widgets$Widget37);
 
 				function Select() {
 						_classCallCheck(this, Select);
@@ -17080,8 +17714,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TOOLTIP CLOSER */
 
-		var TooltipCloser = function (_Widgets$Closer8) {
-				_inherits(TooltipCloser, _Widgets$Closer8);
+		var TooltipCloser = function (_Widgets$Closer9) {
+				_inherits(TooltipCloser, _Widgets$Closer9);
 
 				function TooltipCloser() {
 						_classCallCheck(this, TooltipCloser);
@@ -17127,8 +17761,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TOOLTIP OPENER */
 
-		var TooltipOpener = function (_Widgets$Opener7) {
-				_inherits(TooltipOpener, _Widgets$Opener7);
+		var TooltipOpener = function (_Widgets$Opener8) {
+				_inherits(TooltipOpener, _Widgets$Opener8);
 
 				function TooltipOpener() {
 						_classCallCheck(this, TooltipOpener);
@@ -17174,8 +17808,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* TOOLTIP TOGGLER */
 
-		var TooltipToggler = function (_Widgets$Toggler7) {
-				_inherits(TooltipToggler, _Widgets$Toggler7);
+		var TooltipToggler = function (_Widgets$Toggler8) {
+				_inherits(TooltipToggler, _Widgets$Toggler8);
 
 				function TooltipToggler() {
 						_classCallCheck(this, TooltipToggler);
@@ -17245,8 +17879,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* SLIDER */
 
-		var Slider = function (_Widgets$Widget37) {
-				_inherits(Slider, _Widgets$Widget37);
+		var Slider = function (_Widgets$Widget38) {
+				_inherits(Slider, _Widgets$Widget38);
 
 				function Slider() {
 						_classCallCheck(this, Slider);
@@ -17567,8 +18201,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* SWITCH */
 
-		var Switch = function (_Widgets$Widget38) {
-				_inherits(Switch, _Widgets$Widget38);
+		var Switch = function (_Widgets$Widget39) {
+				_inherits(Switch, _Widgets$Widget39);
 
 				function Switch() {
 						_classCallCheck(this, Switch);
@@ -18001,8 +18635,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* FORM VALIDATE */
 
-		var FormValidate = function (_Widgets$Widget39) {
-				_inherits(FormValidate, _Widgets$Widget39);
+		var FormValidate = function (_Widgets$Widget40) {
+				_inherits(FormValidate, _Widgets$Widget40);
 
 				function FormValidate() {
 						_classCallCheck(this, FormValidate);
@@ -18469,8 +19103,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* FORM AJAX */
 
-		var FormAjax = function (_Widgets$Widget40) {
-				_inherits(FormAjax, _Widgets$Widget40);
+		var FormAjax = function (_Widgets$Widget41) {
+				_inherits(FormAjax, _Widgets$Widget41);
 
 				function FormAjax() {
 						_classCallCheck(this, FormAjax);
@@ -18501,7 +19135,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_autoclose',
 						value: function _autoclose() {
-								var _this84 = this;
+								var _this88 = this;
 
 								var _options$autoclose = this.options.autoclose,
 								    selectors = _options$autoclose.selectors,
@@ -18510,15 +19144,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var _loop2 = function _loop2(i, l) {
 
-										var $closable = _this84.$form.closest(selectors[i]);
+										var $closable = _this88.$form.closest(selectors[i]);
 
 										if (!$closable.length) return 'continue';
 
 										var method = _.isArray(methods) ? methods[i] : methods;
 
-										if (_this84.options.spinnerOverlay) {
+										if (_this88.options.spinnerOverlay) {
 
-												_this84._on('spinneroverlay:close', function () {
+												_this88._on('spinneroverlay:close', function () {
 														return $closable[plugins[i]](method);
 												});
 										} else {
@@ -18552,7 +19186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this85 = this;
+								var _this89 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -18569,21 +19203,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this85.options.spinnerOverlay) {
+												if (_this89.options.spinnerOverlay) {
 
-														_this85.$form.spinnerOverlay('open');
+														_this89.$form.spinnerOverlay('open');
 												}
 
-												_this85._trigger('beforesend');
+												_this89._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												$.toast(_.isError(resj) || !('message' in resj) ? _this85.options.messages.error : resj.msg);
+												$.toast(_.isError(resj) || !('message' in resj) ? _this89.options.messages.error : resj.msg);
 
-												_this85._trigger('error');
+												_this89._trigger('error');
 										},
 
 										success: function success(res) {
@@ -18594,38 +19228,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.message || _this85.options.messages.refreshing);
+																$.toast(resj.message || _this89.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.message || _this85.options.messages.redirecting);
+																$.toast(resj.message || _this89.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.message || _this85.options.messages.success);
+																$.toast(resj.message || _this89.options.messages.success);
 														}
 
-														if (_this85.options.autoclose.enabled) _this85._autoclose();
+														if (_this89.options.autoclose.enabled) _this89._autoclose();
 												} else {
 
-														$.toast(_this85.options.messages.success);
+														$.toast(_this89.options.messages.success);
 												}
 
-												_this85._trigger('success');
+												_this89._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this85.options.spinnerOverlay) {
+												if (_this89.options.spinnerOverlay) {
 
-														_this85.$form.spinnerOverlay('close');
+														_this89.$form.spinnerOverlay('close');
 												}
 
-												_this85._trigger('complete');
+												_this89._trigger('complete');
 										}
 
 								});
@@ -32820,8 +33454,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* DATATABLE */
 
-		var DT = function (_Widgets$Widget41) {
-				_inherits(DT, _Widgets$Widget41);
+		var DT = function (_Widgets$Widget42) {
+				_inherits(DT, _Widgets$Widget42);
 
 				function DT() {
 						_classCallCheck(this, DT);
@@ -32948,8 +33582,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* SELECTABLE */
 
-		var Selectable = function (_Widgets$Widget42) {
-				_inherits(Selectable, _Widgets$Widget42);
+		var Selectable = function (_Widgets$Widget43) {
+				_inherits(Selectable, _Widgets$Widget43);
 
 				function Selectable() {
 						_classCallCheck(this, Selectable);
@@ -33452,11 +34086,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this89 = this;
+								var _this93 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this89.options.selectors.id ? $(row).find(_this89.options.selectors.id).text() : $(row).data(_this89.options.datas.id);
+										return _this93.options.selectors.id ? $(row).find(_this93.options.selectors.id).text() : $(row).data(_this93.options.datas.id);
 								});
 
 								return _.compact(ids);
@@ -35038,8 +35672,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* EDITOR */
 
-		var Editor = function (_Widgets$Widget43) {
-				_inherits(Editor, _Widgets$Widget43);
+		var Editor = function (_Widgets$Widget44) {
+				_inherits(Editor, _Widgets$Widget44);
 
 				function Editor() {
 						_classCallCheck(this, Editor);

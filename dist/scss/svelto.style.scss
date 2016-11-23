@@ -6995,14 +6995,18 @@ textarea.disabled,
  * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-/* LIKER */
-
 //TODO: Change the color of the counter and/or label if the icon is not present
+
+/* LIKER */
 
 .liker {
 
-  @extend %widget;
-  display: flex;
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    @extend %widget;
+    display: flex;
+  }
 
   /* LIKE / DISLIKE */
 
@@ -7014,7 +7018,7 @@ textarea.disabled,
     /* MARGINS */
 
     &:not(:first-child) {
-      margin-left: $liker-inner-gutter + em( $gutter-half );
+      margin-left: calc( #{$liker-inner-gutter} + #{$gutter-half} );
     }
 
   }
@@ -7138,6 +7142,12 @@ textarea.disabled,
         content: attr(data-likes);
       }
 
+      /* NO COUNTER 0 */
+
+      &:not([data-text-counter]).no-counter-0[data-likes="0"]:not(:hover):after {
+        display: none;
+      }
+
     }
 
     /* DISLIKE */
@@ -7148,6 +7158,25 @@ textarea.disabled,
 
       &:not(:hover):after {
         content: attr(data-dislikes);
+      }
+
+      /* NO COUNTER 0 */
+
+      &:not([data-text-counter]).no-counter-0[data-dislikes="0"]:not(:hover):after {
+        display: none;
+      }
+
+    }
+
+    /* NO COUNTERS 0 */
+
+    &.no-counters-0 {
+
+      /* LIKE / DISLIKE */
+
+      .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:not(:hover):after,
+      .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:not(:hover):after {
+        display: none
       }
 
     }
@@ -12895,6 +12924,63 @@ html.flexbox-tweener {
 
     }
 
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* ZOOMABLE */
+
+.zoomable {
+  cursor: zoom-in;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* BACKDROP */
+
+.zoomable-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $panel-z-index - 1 !important;
+    transition-duration: $panel-animation-duration !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable - Show
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../zoomable.scss
+ * ========================================================================= */
+
+/* SHOW */
+
+.zoomable.show {
+
+  z-index: $zoomable-show-z-index;
+  cursor: zoom-out;
+
+  /* UNZOOMED */
+
+  &:not(.zoomed) {
+    transition-property: transform;
+    transition-duration: $zoomable-animation-duration;
   }
 
 }

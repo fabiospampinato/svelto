@@ -581,6 +581,25 @@
 /* HANDLER:BEFORE ACTIVE */
 /* ANIMATION */
 /* =========================================================================
+ * Svelto - Widgets - Zoomable - Show (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+/* SHOW */
+/* =========================================================================
+ * Svelto - Widgets - Zoomable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * ========================================================================= */
+/* ZOOMABLE */
+/* ANIMATION */
+/* =========================================================================
  * Svelto - Core - Breakpoints (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
@@ -4577,7 +4596,7 @@ span > script:last-child {
 /* WIDGET */
 blockquote, blockquote > footer, .widget, .avatar, .breadcrumb, .carousel, .centerer, .placeholder, .colorpicker, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), .chat, .datepicker, fieldset, .infobar, .tagbox, figcaption,
 .figcaption, .card, .chat-message, .chat-message .chat-message-img, .divider.block, hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
-.figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input, textarea, .label, .button, .liker, .numbox, .parallax, .progressbar, .rails, .rater, .sections, .section-left,
+.figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, input, textarea, .label, .button, .liker:not(.multiple), .numbox, .parallax, .progressbar, .rails, .rater, .sections, .section-left,
 .section-center,
 .section-right, .select, .circle, .square-sample, .square, .triangle, .slider, .spacer, svg.spinner, .remote-loader,
 .remote-loaded, .spinner-label, .statistic, .switch, .table, .tabs, .toolbar, address, ul,
@@ -4594,7 +4613,7 @@ h6 {
 
 blockquote:last-child, blockquote > footer:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, .colorpicker:last-child, .container:last-child, .card-header:last-child:not(.multiple), .card-block:last-child:not(.multiple), .card-footer:last-child:not(.multiple), .chat:last-child, .datepicker:last-child, fieldset:last-child, .infobar:last-child, .tagbox:last-child, figcaption:last-child,
 .figcaption:last-child, .card:last-child, .chat-message:last-child, .chat-message .chat-message-img:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.vertical:last-child:empty, .vertical.divider:last-child:empty:not(.block):not(.text), .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
-.figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child, textarea:last-child, .label:last-child, .button:last-child, .liker:last-child, .numbox:last-child, .parallax:last-child, .progressbar:last-child, .rails:last-child, .rater:last-child, .sections:last-child, .section-left:last-child,
+.figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, input:last-child, textarea:last-child, .label:last-child, .button:last-child, .liker:last-child:not(.multiple), .numbox:last-child, .parallax:last-child, .progressbar:last-child, .rails:last-child, .rater:last-child, .sections:last-child, .section-left:last-child,
 .section-center:last-child,
 .section-right:last-child, .select:last-child, .circle:last-child, .square-sample:last-child, .square:last-child, .triangle:last-child, .slider:last-child, .spacer:last-child, svg.spinner:last-child, .remote-loader:last-child,
 .remote-loaded:last-child, .spinner-label:last-child, .statistic:last-child, .switch:last-child, .table:last-child, .tabs:last-child, .toolbar:last-child, address:last-child, ul:last-child,
@@ -4614,7 +4633,7 @@ h6:last-child {
 .figcaption:last-child, .multiple > .card:last-child, .pager > .card:last-child, .tagbox-tags > .card:last-child, .multiple > .chat-message:last-child, .pager > .chat-message:last-child, .tagbox-tags > .chat-message:last-child, .chat-message .multiple > .chat-message-img:last-child, .chat-message .pager > .chat-message-img:last-child, .chat-message .tagbox-tags > .chat-message-img:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
 .figure:last-child, .pager >
 .figure:last-child, .tagbox-tags >
-.figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child, .pager > input:last-child, .tagbox-tags > input:last-child, .multiple > textarea:last-child, .pager > textarea:last-child, .tagbox-tags > textarea:last-child, .multiple > .label:last-child, .pager > .label:last-child, .tagbox-tags > .label:last-child, .multiple > .button:last-child, .pager > .button:last-child, .tagbox-tags > .button:last-child, .multiple > .liker:last-child, .pager > .liker:last-child, .tagbox-tags > .liker:last-child, .multiple > .numbox:last-child, .pager > .numbox:last-child, .tagbox-tags > .numbox:last-child, .multiple > .parallax:last-child, .pager > .parallax:last-child, .tagbox-tags > .parallax:last-child, .multiple > .progressbar:last-child, .pager > .progressbar:last-child, .tagbox-tags > .progressbar:last-child, .multiple > .rails:last-child, .pager > .rails:last-child, .tagbox-tags > .rails:last-child, .multiple > .rater:last-child, .pager > .rater:last-child, .tagbox-tags > .rater:last-child, .multiple > .sections:last-child, .pager > .sections:last-child, .tagbox-tags > .sections:last-child, .multiple > .section-left:last-child, .pager > .section-left:last-child, .tagbox-tags > .section-left:last-child, .multiple >
+.figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > input:last-child, .pager > input:last-child, .tagbox-tags > input:last-child, .multiple > textarea:last-child, .pager > textarea:last-child, .tagbox-tags > textarea:last-child, .multiple > .label:last-child, .pager > .label:last-child, .tagbox-tags > .label:last-child, .multiple > .button:last-child, .pager > .button:last-child, .tagbox-tags > .button:last-child, .multiple > .liker:last-child:not(.multiple), .pager > .liker:last-child:not(.multiple), .tagbox-tags > .liker:last-child:not(.multiple), .multiple > .numbox:last-child, .pager > .numbox:last-child, .tagbox-tags > .numbox:last-child, .multiple > .parallax:last-child, .pager > .parallax:last-child, .tagbox-tags > .parallax:last-child, .multiple > .progressbar:last-child, .pager > .progressbar:last-child, .tagbox-tags > .progressbar:last-child, .multiple > .rails:last-child, .pager > .rails:last-child, .tagbox-tags > .rails:last-child, .multiple > .rater:last-child, .pager > .rater:last-child, .tagbox-tags > .rater:last-child, .multiple > .sections:last-child, .pager > .sections:last-child, .tagbox-tags > .sections:last-child, .multiple > .section-left:last-child, .pager > .section-left:last-child, .tagbox-tags > .section-left:last-child, .multiple >
 .section-center:last-child, .pager >
 .section-center:last-child, .tagbox-tags >
 .section-center:last-child, .multiple >
@@ -8709,13 +8728,17 @@ textarea.disabled,
  * ========================================================================= */
 /* LIKER */
 .liker {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  /* NOT MULTIPLE */
   /* LIKE / DISLIKE */
   /* ICONS */
   /* COUNTERS */
   /* LABELS */
+}
+
+.liker:not(.multiple) {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .liker .like,
@@ -8726,7 +8749,7 @@ textarea.disabled,
 
 .liker .like:not(:first-child),
 .liker .dislike:not(:first-child) {
-  margin-left: 0.9175em;
+  margin-left: calc( 0.605em + 0.3125rem);
 }
 
 .liker:not(.no-icons) {
@@ -8798,6 +8821,7 @@ textarea.disabled,
   /* LIKE / DISLIKE */
   /* LIKE */
   /* DISLIKE */
+  /* NO COUNTERS 0 */
   /* MARGIN */
 }
 
@@ -8828,18 +8852,37 @@ textarea.disabled,
 
 .liker:not(.no-counters) .like:not(.no-counter) {
   /* AFTER */
+  /* NO COUNTER 0 */
 }
 
 .liker:not(.no-counters) .like:not(.no-counter):not(:hover):after {
   content: attr(data-likes);
 }
 
+.liker:not(.no-counters) .like:not(.no-counter):not([data-text-counter]).no-counter-0[data-likes="0"]:not(:hover):after {
+  display: none;
+}
+
 .liker:not(.no-counters) .dislike:not(.no-counter) {
   /* AFTER */
+  /* NO COUNTER 0 */
 }
 
 .liker:not(.no-counters) .dislike:not(.no-counter):not(:hover):after {
   content: attr(data-dislikes);
+}
+
+.liker:not(.no-counters) .dislike:not(.no-counter):not([data-text-counter]).no-counter-0[data-dislikes="0"]:not(:hover):after {
+  display: none;
+}
+
+.liker:not(.no-counters).no-counters-0 {
+  /* LIKE / DISLIKE */
+}
+
+.liker:not(.no-counters).no-counters-0 .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:not(:hover):after,
+.liker:not(.no-counters).no-counters-0 .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:not(:hover):after {
+  display: none;
 }
 
 .liker:not(.no-counters):not(.no-icons) {
@@ -14106,8 +14149,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -14199,8 +14242,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -14323,8 +14366,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -14368,8 +14411,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.6.0#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.0#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14874,7 +14917,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.6.0);
+  background-image: url(/images/flags.png?v=0.7.0);
 }
 
 /* FLAGS */
@@ -15891,7 +15934,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.6.0) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.6.0) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.0) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.0) format("woff");
 }
 
 /* =========================================================================
@@ -16454,3 +16497,52 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* OPACIFY */
+/* =========================================================================
+ * Svelto - Widgets - Zoomable
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* ZOOMABLE */
+.zoomable {
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
+}
+
+/* BACKDROP */
+.zoomable-backdrop {
+  /* OBSCURED */
+}
+
+.zoomable-backdrop:before {
+  position: fixed !important;
+  cursor: pointer !important;
+  z-index: 1199 !important;
+  transition-duration: 0.35s !important;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Zoomable - Show
+ * =========================================================================
+ * Copyright (c) 2015-2016 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../zoomable.scss
+ * ========================================================================= */
+/* SHOW */
+.zoomable.show {
+  z-index: 1300;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+  /* UNZOOMED */
+}
+
+.zoomable.show:not(.zoomed) {
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.35s;
+}
