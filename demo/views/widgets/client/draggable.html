@@ -7,9 +7,12 @@
 
   <div class="container constrainer bordered">
     <div class="multiple">
+      <a href="/" class="button bordered draggable">Link</a>
       <div class="label bordered draggable">Draggable</div>
       <div class="label bordered scroll">Scroll</div>
+      <div class="label bordered revert">Revert</div>
       <div class="label bordered helper">Helper</div>
+      <div class="label bordered helper-revert">Helper - Revert</div>
       {{{sw.checkbox "Toggable draggable"}}}
       <div class="multiple joined only-handler">
         <div class="label bordered pointing-right">Only handler</div>
@@ -17,7 +20,6 @@
           <i class="icon">menu</i>
         </div>
       </div>
-      <div class="label bordered revert">Revert</div>
       <div class="label bordered x-axis">X-Axis</div>
       <div class="label bordered y-axis">Y-Axis</div>
       <div class="label bordered constrained">Constrained</div>
@@ -25,8 +27,20 @@
       <div class="label bordered constrained-tolerance">Constrained 100-50 tolerance</div>
       <div class="label bordered constrained-window">Constrained (Window)</div>
       <div class="label bordered constrained-coordinates-modifier">Modifier 2x</div>
-      <div class="label bordered proxyed">Proxy</div>
+      {{{sample.image "xxxxsmall draggable"}}}
     </div>
+  </div>
+
+  {{{sw.divider "Proxy"}}}
+
+  <div class="container bordered">
+    <div class="label bordered proxyed">Proxy</div>
+  </div>
+
+  {{{sw.divider "Proxy - Helper"}}}
+
+  <div class="container bordered">
+    <div class="label bordered proxyed-helper">Proxy</div>
   </div>
 
   {{> draggables_init}}
@@ -46,9 +60,18 @@
         active: true
       }
     });
+    $('.revert').draggable ({
+      revert: true
+    });
     $('.helper').draggable ({
       $helper: $('<div class="container red fixed">Helper!</div>')
     });
+
+    $('.helper-revert').draggable ({
+      $helper: $('<div class="container red fixed">Helper!</div>'),
+      revert: true
+    });
+
     $('.only-handler').draggable ({
       onlyHandlers: true
     });
@@ -57,9 +80,6 @@
       draggable: function () {
         return !!$('.checkbox input').prop ( 'checked' );
       }
-    });
-    $('.revert').draggable ({
-      revert: true
     });
     $('.x-axis').draggable ({
       axis: 'x'
@@ -104,7 +124,13 @@
     });
     $('.proxyed').draggable ({
       proxy: {
-        $element: $('.constrainer')
+        $element: $('.proxyed').closest ( '.container' )
+      }
+    });
+    $('.proxyed-helper').draggable ({
+      $helper: $('<div class="container red fixed">Helper!</div>'),
+      proxy: {
+        $element: $('.proxyed-helper').closest ( '.container' )
       }
     });
   </script>
@@ -118,7 +144,6 @@
   {{{sw.divider "Actions"}}}
 
   <div class="multiple actions">
-    {{{sw.action "Remove proxy" "remove_proxy ()"}}}
     {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
@@ -143,7 +168,7 @@
     }
 
     function api ( action ) {
-      $('.label, .checkbox').draggable ( action );
+      $('.label, .draggable, .checkbox').draggable ( action );
     }
 
     function no_scrollability () {
