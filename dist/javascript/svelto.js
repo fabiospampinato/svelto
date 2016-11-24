@@ -2583,7 +2583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.0',
+				VERSION: '0.7.1',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -5443,7 +5443,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 //TODO: Maybe return less datas to triggered events and callbacks
-
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
@@ -5462,6 +5461,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						threshold: { // Minimum moving treshold for triggering a drag
 								touch: 5, // Enabled on touch events
 								mouse: 0 // Enabled on mouse events
+						},
+						tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore
+								touch: 7, // Enabled on touch events
+								mouse: 5 // Enabled on mouse events
 						},
 						onlyHandlers: false, // Only an handler can drag it around
 						revert: false, // On dragend take it back to the starting position
@@ -5534,6 +5537,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$handlers = this.options.onlyHandlers ? this.$draggable.find(this.options.selectors.handler) : this.$draggable;
 						}
 				}, {
+						key: '_init',
+						value: function _init() {
+
+								this.$draggable.attr('draggable', false); // In order to disable default dragging when using a threshold
+						}
+				}, {
 						key: '_events',
 						value: function _events() {
 
@@ -5580,12 +5589,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_actionMove',
 						value: function _actionMove(deltaXY, suppressClasses) {
 
-								/* BASE */
+								/* INITIAL */
 
-								var baseXY = {
-										x: this.proxyXY ? this.proxyXY.x : this.initialXY.x,
-										y: this.proxyXY ? this.proxyXY.y : this.initialXY.y
-								};
+								this.initialXY = this.initialXY || this.$movable.translate();
 
 								/* INIT */
 
@@ -5604,16 +5610,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														var halfWidth = this.options.constrainer.center ? this.$movable.outerWidth() / 2 : 0;
 
-														this.translateX_min = constrainerOffset.left - (movableOffset.left - baseXY.x) - halfWidth;
-														this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth() - (movableOffset.left - baseXY.x + this.$movable.outerWidth()) + halfWidth;
+														this.translateX_min = constrainerOffset.left - (movableOffset.left - this.initialXY.x) - halfWidth;
+														this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth() - (movableOffset.left - this.initialXY.x + this.$movable.outerWidth()) + halfWidth;
 												}
 
 												if (this.options.axis !== 'x') {
 
 														var halfHeight = this.options.constrainer.center ? this.$movable.outerHeight() / 2 : 0;
 
-														this.translateY_min = constrainerOffset.top - (movableOffset.top - baseXY.y) - halfHeight;
-														this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight() - (movableOffset.top - baseXY.y + this.$movable.outerHeight()) + halfHeight;
+														this.translateY_min = constrainerOffset.top - (movableOffset.top - this.initialXY.y) - halfHeight;
+														this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight() - (movableOffset.top - this.initialXY.y + this.$movable.outerHeight()) + halfHeight;
 												}
 										}
 
@@ -5627,8 +5633,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* CLAMPING */
 
-								var translateX = baseXY.x,
-								    translateY = baseXY.y;
+								var translateX = this.initialXY.x,
+								    translateY = this.initialXY.y;
 
 								if (this.options.axis !== 'y') {
 
@@ -5659,13 +5665,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* ABORTION */
 
-								if (modifiedXY.x === false && modifiedXY.y === false) return baseXY;
+								if (modifiedXY.x === false && modifiedXY.y === false) return this.initialXY;
 
 								/* SETTING */
 
 								var endXY = {
-										x: _.isBoolean(modifiedXY.x) ? modifiedXY.x ? translateX : baseXY.x : modifiedXY.x,
-										y: _.isBoolean(modifiedXY.y) ? modifiedXY.y ? translateY : baseXY.y : modifiedXY.y
+										x: _.isBoolean(modifiedXY.x) ? modifiedXY.x ? translateX : this.initialXY.x : modifiedXY.x,
+										y: _.isBoolean(modifiedXY.y) ? modifiedXY.y ? translateY : this.initialXY.y : modifiedXY.y
 								};
 
 								this.$movable.translate(endXY.x, endXY.y);
@@ -5678,9 +5684,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								return endXY;
 						}
-				}, {
-						key: '_actionSet',
-						value: function _actionSet(XY) {}
 
 						/* CLASSES */
 
@@ -5820,22 +5823,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														this.$movable.removeClass(this.options.classes.reverting);
 
+														if (this.$helper) {
+
+																this._destroyHelper();
+														}
+
 														this._lock = false;
 												}, this.options.animations.revert);
 										});
 								});
 						}
 
-						/* HANDLERS */
+						/* CLICK */
+
+				}, {
+						key: '__click',
+						value: function __click(event) {
+
+								if (!this.motion) return;
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+						}
+
+						/* DRAG HANDLERS */
 
 				}, {
 						key: '__down',
 						value: function __down(event) {
 
 								if (this._lock || !this.options.draggable() || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
-
-								event.preventDefault();
-								event.stopImmediatePropagation();
 
 								this.inited = false;
 								this.motion = false;
@@ -5849,25 +5866,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.startEvent = event;
 								this.startXY = $.eventXY(event);
 
-								if (this.$helper) {
-
-										this._initHelper();
-										this.initialXY = this.$movable.translate();
-										this.initialXY = this._centerToPoint(this.startXY);
-								} else {
-
-										this.initialXY = this.$movable.translate();
-								}
-
 								this.isProxyed = this.options.proxy.$element && event.currentTarget === this.options.proxy.$element[0];
 
-								this.proxyXY = false;
+								this.initialXY = false;
 
-								this._trigger('start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY });
+								this._trigger('start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, startEvent: this.startEvent, startXY: this.startXY });
 
 								this._on(true, this.$document, Pointer.move, this.__move);
 								this._one(true, this.$document, Pointer.up, this.__up);
 								this._one(true, this.$document, Pointer.cancel, this.__cancel);
+								this._one(true, Pointer.click, this.__click);
 						}
 				}, {
 						key: '__move',
@@ -5878,29 +5886,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										x: moveXY.x - this.startXY.x,
 										y: moveXY.y - this.startXY.y
 								},
-								    absDeltaXY = {
-										x: Math.abs(deltaXY.x),
-										y: Math.abs(deltaXY.y)
-								},
-								    dragXY = void 0,
-								    threshold = Pointer.isTouchEvent(event) ? this.options.threshold.touch : this.options.threshold.mouse;
+								    dragXY = void 0;
 
-								if (absDeltaXY.x < threshold && absDeltaXY.y < threshold) return;
+								if (!this.motion) {
 
-								if (!this.inited && this.isProxyed) {
+										var absDeltaXY = {
+												x: Math.abs(deltaXY.x),
+												y: Math.abs(deltaXY.y)
+										},
+										    isTouch = Pointer.isTouchEvent(event);
 
-										dragXY = this._centerToPoint(moveXY);
+										/* TOLERANCE */
 
-										this.proxyXY = dragXY;
-								} else {
+										if (this.options.axis) {
 
-										var _deltaXY = {
-												x: moveXY.x - this.startXY.x,
-												y: moveXY.y - this.startXY.y
-										};
+												var tolerance = isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse,
+												    exceeded = this.options.axis === 'x' && absDeltaXY.y > tolerance || this.options.axis === 'y' && absDeltaXY.x > tolerance;
 
-										dragXY = this._actionMove(_deltaXY);
+												if (exceeded) return this._off(this.$document, Pointer.move, this.__move);
+										}
+
+										/* THRESHOLD */
+
+										var threshold = isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
+
+										switch (this.options.axis) {
+												case 'x':
+														if (absDeltaXY.x < threshold) return;
+														break;
+												case 'y':
+														if (absDeltaXY.y < threshold) return;
+														break;
+												default:
+														if (absDeltaXY.x < threshold && absDeltaXY.y < threshold) return;
+														break;
+										}
 								}
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
+								if (!this.inited) {
+
+										if (this.$helper) {
+
+												this._initHelper();
+										}
+
+										if (this.$helper || this.isProxyed) {
+
+												this.initialXY = this._centerToPoint(this.startXY);
+										}
+								}
+
+								dragXY = this._actionMove(deltaXY);
 
 								this._autoscroll(moveXY);
 
@@ -5915,12 +5954,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this.inited) {
 
+										event.preventDefault();
+										event.stopImmediatePropagation();
+
 										this._removeClasses();
-								}
-
-								if (this.$helper) {
-
-										this._destroyHelper();
 								}
 
 								if (this.motion) {
@@ -5928,11 +5965,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										if (this.options.revert) {
 
 												this._revert();
+										} else if (this.$helper) {
+
+												this._destroyHelper();
 										} else {
 
 												dragXY = this.$movable.translate();
 										}
-								} else if (this.isProxyed) {
+								} else if (this.isProxyed && !this.$helper) {
 
 										if ((_.isFunction(this.options.proxy.noMotion) ? this.options.proxy.noMotion() : this.options.proxy.noMotion) && Mouse.hasButton(event, Mouse.buttons.LEFT, true)) {
 
@@ -5942,6 +5982,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._off(this.$document, Pointer.move, this.__move);
 								this._off(this.$document, Pointer.cancel, this.__cancel);
+
+								if (this.startEvent.target !== event.target) this._off(Pointer.click, this.__click);
 
 								this._trigger('end', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion });
 						}
@@ -5954,12 +5996,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this.inited) {
 
+										event.preventDefault();
+										event.stopImmediatePropagation();
+
 										this._removeClasses();
-								}
-
-								if (this.$helper) {
-
-										this._destroyHelper();
 								}
 
 								if (this.motion) {
@@ -5969,11 +6009,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												this._revert();
 
 												dragXY = this.initialXY;
+										} else {
+
+												this._destroyHelper();
 										}
 								}
 
 								this._off(this.$document, Pointer.move, this.__move);
 								this._off(this.$document, Pointer.up, this.__up);
+								this._off(Pointer.click, this.__click);
 
 								this._trigger('end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion });
 						}
@@ -10410,17 +10454,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				selector: 'img.zoomable',
 				options: {
 						offset: 50, // Size of the offset between the zoomed element and the viewport edges
-						preload: false, // Preload the original image
 						src: false, // Source of the image
 						original: {
 								src: false, // Original source of the image
+								substitute: true, // Once load, permanently substitute the thumnail with it
 								width: false,
 								height: false
 						},
 						magnification: {
 								enabled: false, // Zoom in magnified mode, where the image is enlarged
+								limited: true, // Controls magnification over the zoomable actual dimensions
 								offset: 50, // A spacing used in order not to trigger hot corners while reaching the edge of the zoomable
-								side: Math.min(screen.width, screen.height) * 2 // Minimum length of each side
+								minSide: Math.min(screen.width, screen.height) * 2, // Minimum length of each side
+								maxSide: Math.min(screen.width, screen.height) * 3 // Maximum length of each side
+						},
+						preloading: {
+								enabled: false, // Preload the original image
+								wait: true // Don't zoom until the original has been preloaded
 						},
 						classes: {
 								magnified: 'magnified',
@@ -10450,6 +10500,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								'esc': '__esc'
 						},
 						callbacks: {
+								loading: _.noop,
 								zoom: _.noop,
 								unzoom: _.noop
 						}
@@ -10486,12 +10537,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_init',
 						value: function _init() {
 
-								this.options.preload = this.$zoomable.hasClass(this.options.classes.preload) || this.options.preload;
 								this.options.src = this.$zoomable.attr(this.options.attributes.src) || this.options.src;
 								this.options.original.src = this.$zoomable.data(this.options.datas.original) || this.options.original.src;
 								this.options.original.width = this.$zoomable.data(this.options.datas.width) || this.options.original.width;
 								this.options.original.height = this.$zoomable.data(this.options.datas.height) || this.options.original.height;
 								this.options.magnification.enabled = this.$zoomable.hasClass(this.options.classes.magnified) || this.options.magnification.enabled;
+								this.options.preloading.enabled = this.$zoomable.hasClass(this.options.classes.preload) || this.options.preloading.enabled;
 
 								if (this.options.original.src && (!_.isNumber(this.options.original.width) || !_.isNumber(this.options.original.height))) {
 
@@ -10500,7 +10551,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										return false;
 								}
 
-								if (this.options.preload && this.options.original.src) this.preload();
+								if (this.options.preloading.enabled && this.options.original.src) this.preload();
 
 								if (this.$zoomable.hasClass(this.options.classes.zoom)) this.zoom();
 						}
@@ -10698,10 +10749,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										if (this._maxWidth <= this._maxHeight) {
 
-												this._scale += this.options.magnification.side / (this._minWidth * this._scale);
+												this._scale += this.options.magnification.minSide / (this._minWidth * this._scale);
+
+												if (this._minHeight * this._scale > this.options.magnification.maxSide) {
+
+														this._scale = this.options.magnification.maxSide * this._maxScale / this._maxHeight;
+												}
 										} else {
 
-												this._scale += this.options.magnification.side / (this._minHeight * this._scale);
+												this._scale += this.options.magnification.minSide / (this._minHeight * this._scale);
+
+												if (this._minWidth * this._scale > this.options.magnification.maxSide) {
+
+														this._scale = this.options.magnification.maxSide * this._maxScale / this._maxWidth;
+												}
+										}
+
+										if (this.options.magnification.limited) {
+
+												this._scale = Math.min(this._maxScale, this._scale);
 										}
 								}
 
@@ -10726,10 +10792,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* API */
 
 				}, {
-						key: 'preload',
-						value: function preload() {
+						key: 'isPreloading',
+						value: function isPreloading() {
 
-								$('<img src="' + this.options.original.src + '" />');
+								return !!this._isPreloading;
+						}
+				}, {
+						key: 'isPreloaded',
+						value: function isPreloaded() {
+
+								return !!this._isPreloaded;
+						}
+				}, {
+						key: 'preload',
+						value: function preload(callback) {
+								var _this46 = this;
+
+								if (this._isPreloading || this._isPreloaded) return;
+
+								this._isPreloading = true;
+
+								$.ajax({
+										url: this.options.original.src,
+										xhr: function xhr() {
+												var xhr = new window.XMLHttpRequest();
+												xhr.addEventListener('progress', function (event) {
+														if (!event.lengthComputable) return;
+														_this46._trigger('loading', {
+																loaded: event.loaded,
+																total: event.total,
+																percentage: event.loaded / event.total * 100
+														});
+												}, false);
+												return xhr;
+										},
+										success: function success() {
+												_this46._isPreloaded = true;
+												if (_this46.options.original.substitute) {
+														_this46.$zoomable.attr('src', _this46.options.original.src);
+												}
+												if (callback) callback();
+										},
+										error: function error() {
+												console.error('Zoomable: failed to preload "' + _this46.options.original.src + '"');
+										},
+										complete: function complete() {
+												_this46._isPreloading = false;
+										}
+								});
 						}
 				}, {
 						key: 'isZoomed',
@@ -10752,8 +10862,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'zoom',
 						value: function zoom(event) {
+								var _this47 = this;
 
 								if (this._lock || this._isZoomed) return;
+
+								if (this.options.original.src && this.options.preloading.wait && !this._isPreloaded) return this.preload(function () {
+										return _this47.zoom(event);
+								});
 
 								this._lock = true;
 								this._isZoomed = true;
@@ -10821,7 +10936,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												this._delay(function () {
 
-														if (this.options.original.src) this.$zoomable.attr('src', this.options.src);
+														if (this.options.original.src && !this.options.original.substitute) this.$zoomable.attr('src', this.options.src);
 
 														this.$zoomable.removeClass(this.options.classes.show);
 														this.$backdrop.removeClass(this.options.classes.backdrop.show);
@@ -11645,6 +11760,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												center: true
 										},
 										callbacks: {
+												start: this.__sbDragStart.bind(this),
 												move: this._throttle(this.__sbDragMove.bind(this), 100),
 												end: this.__sbDragEnd.bind(this)
 										}
@@ -11665,14 +11781,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 						}
 				}, {
+						key: '__sbDragStart',
+						value: function __sbDragStart() {
+
+								this._sbDragging = true;
+						}
+				}, {
 						key: '__sbDragMove',
 						value: function __sbDragMove(event, data) {
+
+								if (!this._sbDragging) return;
 
 								this._sbDragSet(data.dragXY, this.options.live);
 						}
 				}, {
 						key: '__sbDragEnd',
 						value: function __sbDragEnd(event, data) {
+
+								this._sbDragging = false;
 
 								this._sbDragSet(data.dragXY, true);
 						}
@@ -11727,6 +11853,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												$element: this.$hueWrp
 										},
 										callbacks: {
+												start: this.__hueDragStart.bind(this),
 												move: this._throttle(this.__hueDragMove.bind(this), 50),
 												end: this.__hueDragEnd.bind(this)
 										}
@@ -11746,14 +11873,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 						}
 				}, {
+						key: '__hueDragStart',
+						value: function __hueDragStart() {
+
+								this._hueDragging = true;
+						}
+				}, {
 						key: '__hueDragMove',
 						value: function __hueDragMove(event, data) {
+
+								if (!this._hueDragging) return;
 
 								this._hueDragSet(data.dragXY, this.options.live);
 						}
 				}, {
 						key: '__hueDragEnd',
 						value: function __hueDragEnd(event, data) {
+
+								this._hueDragging = false;
 
 								this._hueDragSet(data.dragXY, true);
 						}
@@ -11983,7 +12120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this51 = this;
+								var _this53 = this;
 
 								this.$panel = this.$element;
 								this.panel = this.element;
@@ -11991,7 +12128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$backdrop = this.$html;
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this51.$panel.hasClass(direction);
+										return _this53.$panel.hasClass(direction);
 								}) || this.options.direction;
 								this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
 
@@ -12537,14 +12674,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* SPECIAL */
 
 						value: function _variables() {
-								var _this56 = this;
+								var _this58 = this;
 
 								this.$tabs = this.$element;
 								this.$triggers = this.$tabs.find(this.options.selectors.triggers);
 								this.$containers = this.$tabs.find(this.options.selectors.containers);
 
 								this.options.direction = Directions.get().find(function (direction) {
-										return _this56.$tabs.hasClass(direction);
+										return _this58.$tabs.hasClass(direction);
 								}) || this.options.direction;
 
 								this.index = false;
@@ -13257,7 +13394,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'once',
 						value: function once(time) {
-								var _this57 = this;
+								var _this59 = this;
 
 								if (isNaN(time)) {
 
@@ -13265,7 +13402,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 
 								setTimeout(function () {
-										return _this57.action();
+										return _this59.action();
 								}, time);
 
 								return this;
@@ -13348,7 +13485,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: 'setTimer',
 						value: function setTimer(time) {
-								var _this58 = this;
+								var _this60 = this;
 
 								if (isNaN(time)) {
 
@@ -13360,7 +13497,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.clearTimer();
 
 								this.timeoutObject = setTimeout(function () {
-										return _this58.go();
+										return _this60.go();
 								}, time);
 						}
 				}, {
@@ -14584,7 +14721,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__tap',
 						value: function __tap(event) {
-								var _this63 = this;
+								var _this65 = this;
 
 								if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -14598,14 +14735,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 												beforeSend: function beforeSend() {
 
-														_this63.doingAjax = true;
+														_this65.doingAjax = true;
 												},
 
 												error: function error(res) {
 
 														var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-														$.toast(_.isError(resj) || !('message' in resj) ? _this63.options.messages.error : resj.message);
+														$.toast(_.isError(resj) || !('message' in resj) ? _this65.options.messages.error : resj.message);
 												},
 
 												success: function success(res) {
@@ -14617,19 +14754,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (!_.isError(resj)) {
 
-																_.merge(_this63.options, resj);
+																_.merge(_this65.options, resj);
 
-																_this63.$rater.html(_this63._template('stars', _this63.options));
+																_this65.$rater.html(_this65._template('stars', _this65.options));
 
-																_this63.options.rated = true;
+																_this65.options.rated = true;
 
-																_this63._trigger('change');
+																_this65._trigger('change');
 														}
 												},
 
 												complete: function complete() {
 
-														_this63.doingAjax = false;
+														_this65.doingAjax = false;
 												}
 
 										});
@@ -15037,14 +15174,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_init',
 						value: function _init() {
-								var _this67 = this;
+								var _this69 = this;
 
 								this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
 								this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
 								this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
 
 								this._defer(function () {
-										return !_this67.isRequesting() && _this67.disable();
+										return !_this69.isRequesting() && _this69.disable();
 								}); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
 						}
 				}, {
@@ -15234,13 +15371,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				_createClass(RemoteLoaderTrigger, [{
 						key: 'trigger',
 						value: function trigger() {
-								var _this69 = this;
+								var _this71 = this;
 
 								this.$trigger[this.options.widget.config.name]({
 										ajax: this.options.ajax,
 										callbacks: {
 												beforesend: function beforesend() {
-														return _this69.$trigger.addClass(_this69.options.classes.disabled);
+														return _this71.$trigger.addClass(_this71.options.classes.disabled);
 												} //TODO: Replace with a linear "spinner" overlay
 										}
 								});
@@ -15474,7 +15611,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
 
 										this._frame(function () {
-												var _this71 = this;
+												var _this73 = this;
 
 												this.$modal.addClass(this.options.classes.showing);
 
@@ -15482,10 +15619,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 														width: newRect.width,
 														height: newRect.height
 												}, this.options.animations.resize, function () {
-														_this71.$modal.css({
+														_this73.$modal.css({
 																width: '',
 																height: ''
-														}).removeClass(_this71.options.classes.placeholder + ' ' + _this71.options.classes.loaded + ' ' + _this71.options.classes.resizing + ' ' + _this71.options.classes.showing);
+														}).removeClass(_this73.options.classes.placeholder + ' ' + _this73.options.classes.loaded + ' ' + _this73.options.classes.resizing + ' ' + _this73.options.classes.showing);
 												});
 										});
 								});
@@ -16342,8 +16479,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___drag',
 						value: function ___drag() {
 
+								this.___dragStart();
 								this.___dragMove();
 								this.___dragEnd();
+						}
+
+						/* DRAG START */
+
+				}, {
+						key: '___dragStart',
+						value: function ___dragStart() {
+
+								this._on(this.$layout, 'draggable:start', this.__dragStart);
+						}
+				}, {
+						key: '__dragStart',
+						value: function __dragStart() {
+
+								this._dragging = true;
 						}
 
 						/* DRAG MOVE */
@@ -16357,6 +16510,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__dragMove',
 						value: function __dragMove(event, data) {
+
+								if (!this._dragging) return;
 
 								if (this._isCompatible(data.draggable)) {
 
@@ -16384,6 +16539,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__dragEnd',
 						value: function __dragEnd(event, data) {
+
+								this._dragging = false;
 
 								if (this._isCompatible(data.draggable)) {
 
@@ -16480,7 +16637,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* 2D TRANSFORMATIONS */
 
 		var transformations2D = ['scale', 'skew', 'translate'],
-		    indexes2D = [[0, 3], [1, 2], [4, 5]];
+		    indexes2D = [[0, 3], [2, 1], [4, 5]];
 
 		for (var _i3 = 0, _l3 = transformations2D.length; _i3 < _l3; _i3++) {
 
@@ -16501,7 +16658,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										return this.matrix(matrix);
 								} else {
 
-										return [matrix[indexes[0]], matrix[indexes[1]]];
+										return {
+												x: matrix[indexes[0]],
+												y: matrix[indexes[1]]
+										};
 								}
 						};
 				}(_i3);
@@ -19135,7 +19295,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_autoclose',
 						value: function _autoclose() {
-								var _this88 = this;
+								var _this90 = this;
 
 								var _options$autoclose = this.options.autoclose,
 								    selectors = _options$autoclose.selectors,
@@ -19144,15 +19304,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var _loop2 = function _loop2(i, l) {
 
-										var $closable = _this88.$form.closest(selectors[i]);
+										var $closable = _this90.$form.closest(selectors[i]);
 
 										if (!$closable.length) return 'continue';
 
 										var method = _.isArray(methods) ? methods[i] : methods;
 
-										if (_this88.options.spinnerOverlay) {
+										if (_this90.options.spinnerOverlay) {
 
-												_this88._on('spinneroverlay:close', function () {
+												_this90._on('spinneroverlay:close', function () {
 														return $closable[plugins[i]](method);
 												});
 										} else {
@@ -19186,7 +19346,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this89 = this;
+								var _this91 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -19203,21 +19363,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this89.options.spinnerOverlay) {
+												if (_this91.options.spinnerOverlay) {
 
-														_this89.$form.spinnerOverlay('open');
+														_this91.$form.spinnerOverlay('open');
 												}
 
-												_this89._trigger('beforesend');
+												_this91._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												$.toast(_.isError(resj) || !('message' in resj) ? _this89.options.messages.error : resj.msg);
+												$.toast(_.isError(resj) || !('message' in resj) ? _this91.options.messages.error : resj.msg);
 
-												_this89._trigger('error');
+												_this91._trigger('error');
 										},
 
 										success: function success(res) {
@@ -19228,38 +19388,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.message || _this89.options.messages.refreshing);
+																$.toast(resj.message || _this91.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.message || _this89.options.messages.redirecting);
+																$.toast(resj.message || _this91.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.message || _this89.options.messages.success);
+																$.toast(resj.message || _this91.options.messages.success);
 														}
 
-														if (_this89.options.autoclose.enabled) _this89._autoclose();
+														if (_this91.options.autoclose.enabled) _this91._autoclose();
 												} else {
 
-														$.toast(_this89.options.messages.success);
+														$.toast(_this91.options.messages.success);
 												}
 
-												_this89._trigger('success');
+												_this91._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this89.options.spinnerOverlay) {
+												if (_this91.options.spinnerOverlay) {
 
-														_this89.$form.spinnerOverlay('close');
+														_this91.$form.spinnerOverlay('close');
 												}
 
-												_this89._trigger('complete');
+												_this91._trigger('complete');
 										}
 
 								});
@@ -34086,11 +34246,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this93 = this;
+								var _this95 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this93.options.selectors.id ? $(row).find(_this93.options.selectors.id).text() : $(row).data(_this93.options.datas.id);
+										return _this95.options.selectors.id ? $(row).find(_this95.options.selectors.id).text() : $(row).data(_this95.options.datas.id);
 								});
 
 								return _.compact(ids);

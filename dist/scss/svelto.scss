@@ -4524,7 +4524,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.0' !default;
+$svelto-version: '0.7.1' !default;
 
 
 /* =========================================================================
@@ -18773,6 +18773,7 @@ h6 {
 /* REVERTING */
 
 .draggable-reverting {
+  z-index: $draggable-dragging-z-index !important;
   transition: transform $draggable-reverting-animation-duration !important;
 }
 

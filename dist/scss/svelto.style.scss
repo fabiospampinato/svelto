@@ -12159,6 +12159,7 @@ h6 {
 /* REVERTING */
 
 .draggable-reverting {
+  z-index: $draggable-dragging-z-index !important;
   transition: transform $draggable-reverting-animation-duration !important;
 }
 
