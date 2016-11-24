@@ -71,7 +71,7 @@
   /* 2D TRANSFORMATIONS */
 
   let transformations2D = ['scale', 'skew', 'translate'],
-      indexes2D = [[0, 3], [1, 2], [4, 5]];
+      indexes2D = [[0, 3], [2, 1], [4, 5]];
 
   for ( let i = 0, l = transformations2D.length; i < l; i++ ) {
 
@@ -91,7 +91,10 @@
 
         } else {
 
-          return [matrix[indexes[0]], matrix[indexes[1]]];
+          return {
+            x: matrix[indexes[0]],
+            y: matrix[indexes[1]]
+          };
 
         }
 
