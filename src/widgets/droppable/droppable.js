@@ -85,8 +85,23 @@
 
     ___drag () {
 
+      this.___dragStart ();
       this.___dragMove ();
       this.___dragEnd ();
+
+    }
+
+    /* DRAG START */
+
+    ___dragStart () {
+
+      this._on ( this.$layout, 'draggable:start', this.__dragStart );
+
+    }
+
+    __dragStart () {
+
+      this._dragging = true;
 
     }
 
@@ -99,6 +114,8 @@
     }
 
     __dragMove ( event, data ) {
+
+      if ( !this._dragging ) return;
 
       if ( this._isCompatible ( data.draggable ) ) {
 
@@ -127,6 +144,8 @@
     }
 
     __dragEnd ( event, data ) {
+
+      this._dragging = false;
 
       if ( this._isCompatible ( data.draggable ) ) {
 

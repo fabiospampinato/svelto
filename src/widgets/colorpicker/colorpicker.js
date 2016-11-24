@@ -179,6 +179,7 @@
           center: true
         },
         callbacks: {
+          start: this.__sbDragStart.bind ( this ),
           move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
           end: this.__sbDragEnd.bind ( this )
         }
@@ -201,13 +202,23 @@
 
     }
 
+    __sbDragStart () {
+
+      this._sbDragging = true;
+
+    }
+
     __sbDragMove ( event, data ) {
+
+      if ( !this._sbDragging ) return;
 
       this._sbDragSet ( data.dragXY, this.options.live );
 
     }
 
     __sbDragEnd ( event, data ) {
+
+      this._sbDragging = false;
 
       this._sbDragSet ( data.dragXY, true );
 
@@ -260,6 +271,7 @@
           $element: this.$hueWrp
         },
         callbacks: {
+          start: this.__hueDragStart.bind ( this ),
           move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
           end: this.__hueDragEnd.bind ( this )
         }
@@ -281,13 +293,24 @@
 
     }
 
+    __hueDragStart () {
+
+      this._hueDragging = true;
+
+    }
+
+
     __hueDragMove ( event, data ) {
+
+      if ( !this._hueDragging ) return;
 
       this._hueDragSet ( data.dragXY, this.options.live );
 
     }
 
     __hueDragEnd ( event, data ) {
+
+      this._hueDragging = false;
 
       this._hueDragSet ( data.dragXY, true );
 
