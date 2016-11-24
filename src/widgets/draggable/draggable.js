@@ -28,6 +28,10 @@
         touch: 5, // Enabled on touch events
         mouse: 0 // Enabled on mouse events
       },
+      tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore
+        touch: 7, // Enabled on touch events
+        mouse: 5 // Enabled on mouse events
+      },
       onlyHandlers: false, // Only an handler can drag it around
       revert: false, // On dragend take it back to the starting position
       axis: false, // Limit the movements to this axis
@@ -469,7 +473,22 @@
               x: Math.abs ( deltaXY.x ),
               y: Math.abs ( deltaXY.y )
             },
-            threshold = Pointer.isTouchEvent ( event ) ? this.options.threshold.touch : this.options.threshold.mouse;
+            isTouch = Pointer.isTouchEvent ( event );
+
+        /* TOLERANCE */
+
+        if ( this.options.axis ) {
+
+          let tolerance = isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse,
+              exceeded = ( this.options.axis === 'x' && absDeltaXY.y > tolerance ) || ( this.options.axis === 'y' && absDeltaXY.x > tolerance );
+
+          if ( exceeded ) return this._off ( this.$document, Pointer.move, this.__move );
+
+        }
+
+        /* THRESHOLD */
+
+        let threshold = isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
 
         switch ( this.options.axis ) {
           case 'x':
