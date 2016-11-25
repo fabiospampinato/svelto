@@ -8,7 +8,30 @@
 
 /* REQUIRE */
 
-var path = require ( 'path' );
+var _ = require ( 'lodash' ),
+    path = require ( 'path' );
+
+/* BABEL PRESET */
+
+// We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
+
+var preset,
+    levels = [0, -2], // [0] Inside Svelto [-2] Svelto is inside a `node_modules`
+    cwd = process.cwd ();
+
+for ( var i = 0, l = levels.length; i < l; i++ ) {
+
+  var level = levels[i],
+      attempt = path.join ( cwd, _.repeat ( '../', - level ), './node_modules/babel-preset-es2015' ),
+      required = _.attempt ( require, attempt );
+
+  if ( _.isError ( required ) ) continue;
+
+  preset = attempt;
+
+  break;
+
+}
 
 /* PLUGINS */
 
@@ -23,7 +46,7 @@ var plugins = {
   babel: {
     enabled: true,
     options: {
-      presets: [path.join ( process.cwd (), './node_modules/babel-preset-es2015' )], // We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
+      presets: [preset],
       babelrc: false,
       compact: false
     }
