@@ -703,6 +703,32 @@
 
     }
 
+    /* FRAMES */
+
+    _frames ( fn, frames ) { // `frames` can be a number or undefined (in this case requestAnimationFrame will be used)
+
+      if ( frames ) return this._throttle ( fn, 1000 / frames );
+
+      let wait,
+          args,
+          self = this,
+          proxy = function () {
+            wait = false;
+            fn.apply ( self, args );
+          },
+          limited = function () {
+            if ( wait ) return;
+            wait = true;
+            args = arguments;
+            requestAnimationFrame ( proxy );
+          };
+
+      limited.guid = fn.guid = ( fn.guid || $.guid++ );
+
+      return limited;
+
+    }
+
     /* TEMPLATE */
 
     _template ( name, options = {} ) {
