@@ -24,12 +24,14 @@
     selector: '.draggable',
     options: {
       draggable: _.true, // Checks if we can drag it or not
-      threshold: { // Minimum moving treshold for triggering a drag
-        touch: 5, // Enabled on touch events
+      threshold: { // Minimum moving treshold for triggering a drag. They can also be functions that return the threshold
+        touch () { // Enabled on touch events
+          return this.options.axis ? 0 : 5; // If an axis is specified we disable the threshold, in order to enable scrolling
+        },
         mouse: 0 // Enabled on mouse events
       },
-      tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore
-        touch: 7, // Enabled on touch events
+      tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore. They can also be functions that return the tolerance
+        touch: 0, // Enabled on touch events, it should be 0 since we want to black any scrolling from happeing
         mouse: 5 // Enabled on mouse events
       },
       onlyHandlers: false, // Only an handler can drag it around
@@ -91,6 +93,8 @@
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
 
+      this.__doMove = this._frames ( this.__doMove ); // For performance reasons
+
     }
 
     _init () {
@@ -103,6 +107,24 @@
 
       this.___down ();
       this.___proxy ();
+
+    }
+
+    /* UTILITIES */
+
+    _getThreshold () {
+
+      let threshold = this.isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
+
+      return _.isFunction ( threshold ) ? threshold.call ( this ) : threshold;
+
+    }
+
+    _getTolerance () {
+
+      let tolerance = this.isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse;
+
+      return _.isFunction ( tolerance ) ? tolerance.call ( this ) : tolerance;
 
     }
 
@@ -433,9 +455,13 @@
 
       if ( this._lock || !this.options.draggable () || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
 
+      event.stopImmediatePropagation ();
+
       this.inited = false;
       this.motion = false;
+      this.skippable = true;
       this.scrollInited = false;
+      this.ended = false;
 
       this.$helper = this._getHelper ( this.$draggable );
       this.helper = this.$helper ? this.$helper[0] : false;
@@ -460,27 +486,26 @@
 
     __move ( event ) {
 
-      let moveXY = $.eventXY ( event ),
-          deltaXY = {
-            x: moveXY.x - this.startXY.x,
-            y: moveXY.y - this.startXY.y
-          },
-          dragXY;
+      this.moveEvent = event;
+      this.moveXY = $.eventXY ( event ),
+      this.deltaXY = {
+        x: this.moveXY.x - this.startXY.x,
+        y: this.moveXY.y - this.startXY.y
+      };
 
-      if ( !this.motion ) {
+      if ( this.skippable ) {
 
-        let absDeltaXY = {
-              x: Math.abs ( deltaXY.x ),
-              y: Math.abs ( deltaXY.y )
-            },
-            isTouch = Pointer.isTouchEvent ( event );
+        this.isTouch = Pointer.isTouchEvent ( event );
+
+        let x = Math.abs ( this.deltaXY.x ),
+            y = Math.abs ( this.deltaXY.y );
 
         /* TOLERANCE */
 
         if ( this.options.axis ) {
 
-          let tolerance = isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse,
-              exceeded = ( this.options.axis === 'x' && absDeltaXY.y > tolerance ) || ( this.options.axis === 'y' && absDeltaXY.x > tolerance );
+          let tolerance = this._getTolerance (),
+              exceeded = ( this.options.axis === 'x' && y > tolerance && y > x ) || ( this.options.axis === 'y' && x > tolerance && x > y );
 
           if ( exceeded ) return this._off ( this.$document, Pointer.move, this.__move );
 
@@ -488,24 +513,34 @@
 
         /* THRESHOLD */
 
-        let threshold = isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
+        let threshold = this._getThreshold ();
 
         switch ( this.options.axis ) {
           case 'x':
-            if ( absDeltaXY.x < threshold ) return;
+            if ( x < threshold ) return;
             break;
           case 'y':
-            if ( absDeltaXY.y < threshold ) return;
+            if ( y < threshold ) return;
             break;
           default:
-            if ( absDeltaXY.x < threshold && absDeltaXY.y < threshold ) return;
+            if ( x < threshold && y < threshold ) return;
             break;
         }
+
+        this.skippable = false;
 
       }
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
+
+      this.__doMove ();
+
+    }
+
+    __doMove () {
+
+      if ( this.ended ) return;
 
       if ( !this.inited ) {
 
@@ -523,15 +558,17 @@
 
       }
 
-      dragXY = this._actionMove ( deltaXY );
+      let dragXY = this._actionMove ( this.deltaXY );
 
-      this._autoscroll ( moveXY );
+      this._autoscroll ( this.moveXY );
 
-      this._trigger ( 'move', { draggable: this.draggable, helper: this.helper,isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY } );
+      this._trigger ( 'move', { draggable: this.draggable, helper: this.helper,isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: this.moveEvent, moveXY: this.moveXY, dragXY: dragXY } );
 
     }
 
     __up ( event ) {
+
+      this.ended = true;
 
       let endXY = $.eventXY ( event ),
           dragXY = this.initialXY;
@@ -581,6 +618,8 @@
     }
 
     __cancel ( event ) {
+
+      this.ended = true;
 
       let endXY = $.eventXY ( event ),
           dragXY = this.$movable.translate ();
