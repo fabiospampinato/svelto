@@ -20,7 +20,9 @@
 
   $.fn.hsl = function ( h, s, l ) {
 
-    return this.css ( 'background-color', `hsl(${h},${s}%,${l}%)` );
+    this[0].style.backgroundColor = `hsl(${h},${s}%,${l}%)`;
+
+    return this;
 
   };
 
