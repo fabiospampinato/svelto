@@ -176,7 +176,7 @@
       this.startEvent = event;
       this.$startElement = this._getEventElement ( event );
 
-      this._on ( true, this.$document, Pointer.move, this.__move );
+      this._on ( true, this.$document, Pointer.move, this._frames ( this.__move ) );
 
       this._one ( true, this.$document, Pointer.up, this.__up );
 
@@ -334,7 +334,9 @@
 
     _getEventElement ( event ) {
 
-      return this._usingSelectionToggler ? $(event.currentTarget).closest ( this.options.selectors.element) : $(event.currentTarget);
+      let $target = $(event.currentTarget);
+
+      return this._usingSelectionToggler ? $target.closest ( this.options.selectors.element) : $target;
 
     }
 
