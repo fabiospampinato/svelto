@@ -240,7 +240,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		$.fn.hsl = function (h, s, l) {
 
-				return this.css('background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)');
+				this[0].style.backgroundColor = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+
+				return this;
 		};
 })(jQuery);
 
@@ -2583,7 +2585,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.1',
+				VERSION: '0.7.2',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -4415,6 +4417,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return debounced;
 						}
 
+						/* FRAMES */
+
+				}, {
+						key: '_frames',
+						value: function _frames(fn, frames) {
+								// `frames` can be a number or undefined (in this case requestAnimationFrame will be used)
+
+								if (frames) return this._throttle(fn, 1000 / frames);
+
+								var wait = void 0,
+								    args = void 0,
+								    self = this,
+								    proxy = function proxy() {
+										wait = false;
+										fn.apply(self, args);
+								},
+								    limited = function limited() {
+										if (wait) return;
+										wait = true;
+										args = arguments;
+										requestAnimationFrame(proxy);
+								};
+
+								limited.guid = fn.guid = fn.guid || $.guid++;
+
+								return limited;
+						}
+
 						/* TEMPLATE */
 
 				}, {
@@ -5458,12 +5488,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				selector: '.draggable',
 				options: {
 						draggable: _.true, // Checks if we can drag it or not
-						threshold: { // Minimum moving treshold for triggering a drag
-								touch: 5, // Enabled on touch events
+						threshold: { // Minimum moving treshold for triggering a drag. They can also be functions that return the threshold
+
+								touch: function touch() {
+										// Enabled on touch events
+										return this.options.axis ? 0 : 5; // If an axis is specified we disable the threshold, in order to enable scrolling
+								},
+
 								mouse: 0 // Enabled on mouse events
 						},
-						tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore
-								touch: 7, // Enabled on touch events
+						tolerance: { // If an axis is set, the draggable didn't move yet, and we drag by more than tolerance in the wrong axis we won't be able to drag it anymore. They can also be functions that return the tolerance
+								touch: 0, // Enabled on touch events, it should be 0 since we want to black any scrolling from happeing
 								mouse: 5 // Enabled on mouse events
 						},
 						onlyHandlers: false, // Only an handler can drag it around
@@ -5535,6 +5570,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.$draggable = this.$element;
 
 								this.$handlers = this.options.onlyHandlers ? this.$draggable.find(this.options.selectors.handler) : this.$draggable;
+
+								this.__doMove = this._frames(this.__doMove); // For performance reasons
 						}
 				}, {
 						key: '_init',
@@ -5548,6 +5585,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this.___down();
 								this.___proxy();
+						}
+
+						/* UTILITIES */
+
+				}, {
+						key: '_getThreshold',
+						value: function _getThreshold() {
+
+								var threshold = this.isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
+
+								return _.isFunction(threshold) ? threshold.call(this) : threshold;
+						}
+				}, {
+						key: '_getTolerance',
+						value: function _getTolerance() {
+
+								var tolerance = this.isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse;
+
+								return _.isFunction(tolerance) ? tolerance.call(this) : tolerance;
 						}
 
 						/* DOWN */
@@ -5854,9 +5910,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this._lock || !this.options.draggable() || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
 
+								event.stopImmediatePropagation();
+
 								this.inited = false;
 								this.motion = false;
+								this.skippable = true;
 								this.scrollInited = false;
+								this.ended = false;
 
 								this.$helper = this._getHelper(this.$draggable);
 								this.helper = this.$helper ? this.$helper[0] : false;
@@ -5881,50 +5941,58 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__move',
 						value: function __move(event) {
 
-								var moveXY = $.eventXY(event),
-								    deltaXY = {
-										x: moveXY.x - this.startXY.x,
-										y: moveXY.y - this.startXY.y
-								},
-								    dragXY = void 0;
+								this.moveEvent = event;
+								this.moveXY = $.eventXY(event), this.deltaXY = {
+										x: this.moveXY.x - this.startXY.x,
+										y: this.moveXY.y - this.startXY.y
+								};
 
-								if (!this.motion) {
+								if (this.skippable) {
 
-										var absDeltaXY = {
-												x: Math.abs(deltaXY.x),
-												y: Math.abs(deltaXY.y)
-										},
-										    isTouch = Pointer.isTouchEvent(event);
+										this.isTouch = Pointer.isTouchEvent(event);
+
+										var x = Math.abs(this.deltaXY.x),
+										    y = Math.abs(this.deltaXY.y);
 
 										/* TOLERANCE */
 
 										if (this.options.axis) {
 
-												var tolerance = isTouch ? this.options.tolerance.touch : this.options.tolerance.mouse,
-												    exceeded = this.options.axis === 'x' && absDeltaXY.y > tolerance || this.options.axis === 'y' && absDeltaXY.x > tolerance;
+												var tolerance = this._getTolerance(),
+												    exceeded = this.options.axis === 'x' && y > tolerance && y > x || this.options.axis === 'y' && x > tolerance && x > y;
 
 												if (exceeded) return this._off(this.$document, Pointer.move, this.__move);
 										}
 
 										/* THRESHOLD */
 
-										var threshold = isTouch ? this.options.threshold.touch : this.options.threshold.mouse;
+										var threshold = this._getThreshold();
 
 										switch (this.options.axis) {
 												case 'x':
-														if (absDeltaXY.x < threshold) return;
+														if (x < threshold) return;
 														break;
 												case 'y':
-														if (absDeltaXY.y < threshold) return;
+														if (y < threshold) return;
 														break;
 												default:
-														if (absDeltaXY.x < threshold && absDeltaXY.y < threshold) return;
+														if (x < threshold && y < threshold) return;
 														break;
 										}
+
+										this.skippable = false;
 								}
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
+
+								this.__doMove();
+						}
+				}, {
+						key: '__doMove',
+						value: function __doMove() {
+
+								if (this.ended) return;
 
 								if (!this.inited) {
 
@@ -5939,15 +6007,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										}
 								}
 
-								dragXY = this._actionMove(deltaXY);
+								var dragXY = this._actionMove(this.deltaXY);
 
-								this._autoscroll(moveXY);
+								this._autoscroll(this.moveXY);
 
-								this._trigger('move', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: event, moveXY: moveXY, dragXY: dragXY });
+								this._trigger('move', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, moveEvent: this.moveEvent, moveXY: this.moveXY, dragXY: dragXY });
 						}
 				}, {
 						key: '__up',
 						value: function __up(event) {
+
+								this.ended = true;
 
 								var endXY = $.eventXY(event),
 								    dragXY = this.initialXY;
@@ -5990,6 +6060,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__cancel',
 						value: function __cancel(event) {
+
+								this.ended = true;
 
 								var endXY = $.eventXY(event),
 								    dragXY = this.$movable.translate();
@@ -10672,7 +10744,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___move',
 						value: function ___move() {
 
-								this._on(true, this.$document, Pointer.move, this.__move);
+								this._on(true, this.$document, Pointer.move, this._frames(this.__move));
 						}
 				}, {
 						key: '__move',
@@ -16586,7 +16658,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* MATRIX */
 
-		var property = Modernizr.prefixedCSS('transform');
+		var property = _.camelCase(Modernizr.prefixedCSS('transform'));
 
 		$.fn.matrix = function (values) {
 
@@ -16596,12 +16668,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return Number(val).toFixed(20);
 						}).join(',');
 
-						this.css(property, 'matrix(' + values + ')');
+						this[0].style[property] = 'matrix(' + values + ')';
 
 						return this;
 				} else {
 
-						var transformStr = this.css(property);
+						var transformStr = getComputedStyle(this[0], null)[property];
 
 						return transformStr && transformStr !== 'none' ? transformStr.match(/[0-9., e-]+/)[0].split(', ').map(function (value) {
 								return parseFloat(value);
@@ -33884,7 +33956,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.startEvent = event;
 								this.$startElement = this._getEventElement(event);
 
-								this._on(true, this.$document, Pointer.move, this.__move);
+								this._on(true, this.$document, Pointer.move, this._frames(this.__move));
 
 								this._one(true, this.$document, Pointer.up, this.__up);
 
@@ -34034,7 +34106,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '_getEventElement',
 						value: function _getEventElement(event) {
 
-								return this._usingSelectionToggler ? $(event.currentTarget).closest(this.options.selectors.element) : $(event.currentTarget);
+								var $target = $(event.currentTarget);
+
+								return this._usingSelectionToggler ? $target.closest(this.options.selectors.element) : $target;
 						}
 				}, {
 						key: '_resetPrev',

@@ -4524,7 +4524,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.1' !default;
+$svelto-version: '0.7.2' !default;
 
 
 /* =========================================================================
@@ -19555,7 +19555,8 @@ html.flexbox-tweener {
 
 .zoomable {
   cursor: zoom-in;
-  transform: translateZ(0);
+  perspective: 1000;
+  backface-visibility: hidden;
   will-change: transform;
 }
 

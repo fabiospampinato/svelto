@@ -14149,8 +14149,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -14242,8 +14242,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -14366,8 +14366,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -14411,8 +14411,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.1#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.2#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14918,7 +14918,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.7.1);
+  background-image: url(/images/flags.png?v=0.7.2);
 }
 
 /* FLAGS */
@@ -15935,7 +15935,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.1) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.1) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.2) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.2) format("woff");
 }
 
 /* =========================================================================
@@ -16508,8 +16508,10 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
 .zoomable {
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
+  -webkit-perspective: 1000;
+          perspective: 1000;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   will-change: transform;
 }
 
