@@ -16,7 +16,7 @@
 
   /* MATRIX */
 
-  let property = Modernizr.prefixedCSS ( 'transform' );
+  let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) );
 
   $.fn.matrix = function ( values ) {
 
@@ -24,13 +24,13 @@
 
       values = values.map ( val => Number ( val ).toFixed ( 20 ) ).join ( ',' );
 
-      this.css ( property, `matrix(${values})` );
+      this[0].style[property] = `matrix(${values})`;
 
       return this;
 
     } else {
 
-      let transformStr = this.css ( property );
+      let transformStr = getComputedStyle ( this[0], null )[property];
 
       return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
 
