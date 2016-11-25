@@ -10,7 +10,8 @@
 
 .zoomable {
   cursor: zoom-in;
-  transform: translateZ(0);
+  perspective: 1000;
+  backface-visibility: hidden;
   will-change: transform;
 }
 

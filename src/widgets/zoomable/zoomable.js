@@ -228,7 +228,7 @@
 
     ___move () {
 
-      this._on ( true, this.$document, Pointer.move, this.__move );
+      this._on ( true, this.$document, Pointer.move, this._frames ( this.__move ) );
 
     }
 
