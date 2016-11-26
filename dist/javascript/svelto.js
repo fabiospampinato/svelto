@@ -133,7 +133,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				if ('originalEvent' in event) {
 
-						return $.eventXY(event.originalEvent);
+						return $.eventXY(event.originalEvent, X, Y);
 				} else if ('changedTouches' in event && event.changedTouches.length) {
 
 						return {
@@ -2585,7 +2585,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.2',
+				VERSION: '0.7.3',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -5908,7 +5908,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__down',
 						value: function __down(event) {
 
-								if (this._lock || !this.options.draggable() || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
+								if (this._lock || !this.options.draggable(this) || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
 
 								event.stopImmediatePropagation();
 
@@ -6017,15 +6017,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__up',
 						value: function __up(event) {
 
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
 								this.ended = true;
 
 								var endXY = $.eventXY(event),
 								    dragXY = this.initialXY;
 
 								if (this.inited) {
-
-										event.preventDefault();
-										event.stopImmediatePropagation();
 
 										this._removeClasses();
 								}
@@ -6061,15 +6061,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__cancel',
 						value: function __cancel(event) {
 
+								event.preventDefault();
+								event.stopImmediatePropagation();
+
 								this.ended = true;
 
 								var endXY = $.eventXY(event),
 								    dragXY = this.$movable.translate();
 
 								if (this.inited) {
-
-										event.preventDefault();
-										event.stopImmediatePropagation();
 
 										this._removeClasses();
 								}
@@ -10749,14 +10749,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__move',
 						value: function __move(event) {
-								var _$$eventXY = $.eventXY(event),
+								var _$$eventXY = $.eventXY(event, 'clientX', 'clientY'),
 								    x = _$$eventXY.x,
-								    y = _$$eventXY.y;
-
-								x -= this.$window.scrollLeft();
-								y -= this.$window.scrollTop();
-
-								var zOffset = this.options.offset,
+								    y = _$$eventXY.y,
+								    zOffset = this.options.offset,
 								    mOffset = this.options.magnification.offset,
 								    width = this._minWidth * this._scale,
 								    height = this._minHeight * this._scale,
@@ -16540,9 +16536,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 				}, {
 						key: '_isPointHovering',
-						value: function _isPointHovering(pointXY) {
+						value: function _isPointHovering(pointXY, event) {
 
-								return !!this.$droppable.touching({ point: pointXY }).length;
+								var point = pointXY || $.eventXY(event, 'clientX', 'clientY');
+
+								return !!this.$droppable.touching({ point: point }).length;
 						}
 
 						/* DRAG */
@@ -16587,7 +16585,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this._isCompatible(data.draggable)) {
 
-										var isHovering = this._isPointHovering(data.moveXY);
+										var isHovering = this._isPointHovering(false, data.moveEvent);
 
 										if (isHovering !== this._wasHovering) {
 
@@ -16618,7 +16616,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										this.$droppable.removeClass(this.options.classes.target);
 
-										if (this._isPointHovering(data.endXY)) {
+										if (this._isPointHovering(false, data.endEvent)) {
 
 												if (this._wasHovering) {
 
