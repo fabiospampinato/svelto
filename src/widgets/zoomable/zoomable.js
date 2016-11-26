@@ -234,12 +234,8 @@
 
     __move ( event ) {
 
-      let {x, y} = $.eventXY ( event );
-
-      x -= this.$window.scrollLeft ();
-      y -= this.$window.scrollTop ();
-
-      let zOffset = this.options.offset,
+      let {x, y} = $.eventXY ( event, 'clientX', 'clientY' ),
+          zOffset = this.options.offset,
           mOffset = this.options.magnification.offset,
           width = this._minWidth * this._scale,
           height = this._minHeight * this._scale,
