@@ -18,7 +18,7 @@
 
     if ( 'originalEvent' in event ) {
 
-      return $.eventXY ( event.originalEvent );
+      return $.eventXY ( event.originalEvent, X, Y );
 
     } else if ( 'changedTouches' in event && event.changedTouches.length ) {
 
