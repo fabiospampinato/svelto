@@ -75,9 +75,11 @@
 
     }
 
-    _isPointHovering ( pointXY ) {
+    _isPointHovering ( pointXY, event  ) {
 
-      return !!this.$droppable.touching ({ point: pointXY }).length;
+      let point = pointXY || $.eventXY ( event, 'clientX', 'clientY' );
+
+      return !!this.$droppable.touching ({ point }).length;
 
     }
 
@@ -119,7 +121,7 @@
 
       if ( this._isCompatible ( data.draggable ) ) {
 
-        let isHovering = this._isPointHovering ( data.moveXY );
+        let isHovering = this._isPointHovering ( false, data.moveEvent );
 
         if ( isHovering !== this._wasHovering ) {
 
@@ -151,7 +153,7 @@
 
         this.$droppable.removeClass ( this.options.classes.target );
 
-        if ( this._isPointHovering ( data.endXY ) ) {
+        if ( this._isPointHovering ( false, data.endEvent ) ) {
 
           if ( this._wasHovering ) {
 
