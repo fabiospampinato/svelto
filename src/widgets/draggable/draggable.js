@@ -453,7 +453,7 @@
 
     __down ( event ) {
 
-      if ( this._lock || !this.options.draggable () || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
+      if ( this._lock || !this.options.draggable ( this ) || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
 
       event.stopImmediatePropagation ();
 
@@ -568,15 +568,15 @@
 
     __up ( event ) {
 
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
       this.ended = true;
 
       let endXY = $.eventXY ( event ),
           dragXY = this.initialXY;
 
       if ( this.inited ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
 
         this._removeClasses ();
 
@@ -619,15 +619,15 @@
 
     __cancel ( event ) {
 
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
       this.ended = true;
 
       let endXY = $.eventXY ( event ),
           dragXY = this.$movable.translate ();
 
       if ( this.inited ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
 
         this._removeClasses ();
 
