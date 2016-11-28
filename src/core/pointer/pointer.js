@@ -26,7 +26,13 @@
     /* OPTIONS */
     options: {
       events: {
-        prefix: prefix
+        prefix: prefix,
+        emulated: {
+          timeout: 300 // Amount of milliseconds to wait for an emulated event
+        }
+      },
+      tap: {
+        threshold: 6 // Over this distance threshold the touch event won't be considered a tap
       },
       dbltap: {
         interval: 300 // 2 taps within this interval will trigger a dbltap event
@@ -77,15 +83,15 @@
   /* VARIABLES */
 
   let $document = $(document),
-      namespace = `._${Pointer.options.events.prefix}`,
-      down = $.eventNamespacer ( Pointer.down, namespace ),
-      move = $.eventNamespacer ( Pointer.move, namespace ),
-      up = $.eventNamespacer ( Pointer.up, namespace ),
-      cancel = $.eventNamespacer ( Pointer.cancel, namespace ),
-      target,
+      canTouch = Browser.is.touchDevice,
+      isTouch,
+      delta = 0,
+      skipping,
+      scrolled,
+      timeoutId,
+      downEvent,
       prevTapTimestamp = 0,
-      dbltapTriggerable = true,
-      motion;
+      dbltapTriggerable = true;
 
   /* EVENT CREATOR */
 
@@ -103,80 +109,116 @@
 
   function downHandler ( event ) {
 
-    $document.off ( namespace );
+    if ( canTouch ) {
 
-    target = event.target;
+      isTouch = Pointer.isTouchEvent ( event );
 
-    motion = false;
+      if ( isTouch ) {
 
-    $document.one ( move, moveHandler );
-    $document.one ( up, upHandler );
-    $document.one ( cancel, reset );
+        scrolled = false;
 
-  }
+        window.onscroll = scrollHandler;
 
-  function moveHandler () {
+        delta++;
 
-    motion = true;
+      } else if ( delta > 0 ) {
+
+        skipping = true;
+
+        delta--;
+
+        return;
+
+      }
+
+      skipping = false;
+
+    }
+
+    downEvent = event;
 
   }
 
   function upHandler ( event ) {
 
-    if ( target === event.target && ( !motion || !Pointer.isTouchEvent ( event ) ) && Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) ) {
-
-      let tapTimestamp = event.timeStamp || Date.now (),
-          $target = $(target);
-
-      $target.trigger ( createEvent ( Pointer.tap, event ) );
-
-      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-        if ( dbltapTriggerable ) {
-
-          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-          dbltapTriggerable = false;
-
-        }
-
-      } else {
-
-        dbltapTriggerable = true;
-
-      }
-
-      prevTapTimestamp = tapTimestamp;
-
-    }
+    if ( skipping ) return;
 
     reset ();
 
+    if ( isTouch && scrolled ) return;
+    if ( !isTouch && !Mouse.hasButton ( event, Mouse.buttons.LEFT, true ) ) return;
+    if ( downEvent.target !== event.target ) return;
+
+    if ( isTouch ) {
+
+      let downXY = $.eventXY ( downEvent ),
+          upXY = $.eventXY ( event ),
+          threshold = Pointer.options.tap.threshold;
+
+      if ( Math.abs ( downXY.x - upXY.x ) > threshold || Math.abs ( downXY.y - upXY.y ) > threshold ) return;
+
+    }
+
+    let tapTimestamp = event.timeStamp || Date.now (),
+        $target = $(downEvent.target);
+
+    $target.trigger ( createEvent ( Pointer.tap, event ) );
+
+    if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+
+      if ( dbltapTriggerable ) {
+
+        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+
+        dbltapTriggerable = false;
+
+      }
+
+    } else {
+
+      dbltapTriggerable = true;
+
+    }
+
+    prevTapTimestamp = tapTimestamp;
+
   }
 
-  /* STATUS */
+  function scrollHandler () {
 
-  function init () {
+    scrolled = true;
 
-    setTimeout ( function () { // So that we'll listen to it after a possible `mousedown` event, occurring after a `touchstart` event, gets triggered
-
-      $document.one ( down, downHandler );
-
-    }, 0 );
+    window.onscroll = null;
 
   }
 
   function reset () {
 
-    $document.off ( namespace );
+    if ( isTouch ) {
 
-    init ();
+      if ( !scrolled ) window.onscroll = null;
+
+      if ( timeoutId ) clearTimeout ( timeoutId );
+
+      timeoutId = setTimeout ( resetDelta, Pointer.options.events.emulated.timeout );
+
+    }
+
+  }
+
+  function resetDelta () {
+
+    delta = 0;
+
+    timeoutId = false;
 
   }
 
   /* INIT */
 
-  init ();
+  $document.on ( Pointer.down, downHandler );
+  $document.on ( Pointer.up, upHandler );
+  $document.on ( Pointer.cancel, reset );
 
   /* EXPORT */
 
