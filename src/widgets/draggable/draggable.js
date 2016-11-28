@@ -97,12 +97,6 @@
 
     }
 
-    _init () {
-
-      this.$draggable.attr ( 'draggable', false ); // In order to disable default dragging when using a threshold
-
-    }
-
     _events () {
 
       this.___down ();
@@ -449,6 +443,15 @@
 
     }
 
+    /* DRAG START */
+
+    __dragStart ( event ) { // We have to catch it or dragging `img`s on Firefox won't work reliably
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+    }
+
     /* DRAG HANDLERS */
 
     __down ( event ) {
@@ -481,6 +484,7 @@
       this._one ( true, this.$document, Pointer.up, this.__up );
       this._one ( true, this.$document, Pointer.cancel, this.__cancel );
       this._one ( true, Pointer.click, this.__click );
+      this._one ( true, this.$document, 'dragstart', this.__dragStart );
 
     }
 
@@ -610,6 +614,7 @@
 
       this._off ( this.$document, Pointer.move, this.__move );
       this._off ( this.$document, Pointer.cancel, this.__cancel );
+      this._off ( this.$document, 'dragstart', this.__dragStart );
 
       if ( this.startEvent.target !== event.target ) this._off ( Pointer.click, this.__click );
 
@@ -652,6 +657,7 @@
       this._off ( this.$document, Pointer.move, this.__move );
       this._off ( this.$document, Pointer.up, this.__up );
       this._off ( Pointer.click, this.__click );
+      this._off ( this.$document, 'dragstart', this.__dragStart );
 
       this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
 
