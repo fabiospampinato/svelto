@@ -43,6 +43,9 @@
         open: Animations.fast,
         close: Animations.fast
       },
+      keystrokes: {
+        'esc': '__esc'
+      },
       callbacks: {
         beforeopen: _.noop,
         open: _.noop,
@@ -78,6 +81,7 @@
         this.___resize ();
         this.___parentsScroll ();
         this.___layoutTap ();
+        this.___keydown ();
 
       }
 
@@ -126,6 +130,20 @@
     __layoutTap ( event ) {
 
       if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event )} ).length ) return;
+
+      this.close ();
+
+    }
+
+    /* ESC */
+
+    ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
+
+      this._on ( true, this.$document, 'keydown', this.__keydown );
+
+    }
+
+    __esc () {
 
       this.close ();
 
@@ -275,6 +293,7 @@
       this._reset ();
 
       this.___layoutTap ();
+      this.___keydown ();
       this.___contentChange ();
       this.___resize ();
       this.___parentsScroll ();
