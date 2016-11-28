@@ -142,6 +142,7 @@
   function upHandler ( event ) {
 
     if ( skipping ) return;
+    if ( !downEvent ) return;
 
     reset ();
 
@@ -192,7 +193,11 @@
 
   }
 
+  /* RESET */
+
   function reset () {
+
+    setTimeout ( resetEvents, 0 );
 
     if ( isTouch ) {
 
@@ -203,6 +208,12 @@
       timeoutId = setTimeout ( resetDelta, Pointer.options.events.emulated.timeout );
 
     }
+
+  }
+
+  function resetEvents () {
+
+    downEvent = undefined;
 
   }
 
