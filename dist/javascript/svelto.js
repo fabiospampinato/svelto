@@ -2585,7 +2585,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.3',
+				VERSION: '0.7.4',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -3133,7 +3133,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				/* OPTIONS */
 				options: {
 						events: {
-								prefix: prefix
+								prefix: prefix,
+								emulated: {
+										timeout: 300 // Amount of milliseconds to wait for an emulated event
+								}
+						},
+						tap: {
+								threshold: 6 // Over this distance threshold the touch event won't be considered a tap
 						},
 						dbltap: {
 								interval: 300 // 2 taps within this interval will trigger a dbltap event
@@ -3182,15 +3188,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* VARIABLES */
 
 		var $document = $(document),
-		    namespace = '._' + Pointer.options.events.prefix,
-		    down = $.eventNamespacer(Pointer.down, namespace),
-		    move = $.eventNamespacer(Pointer.move, namespace),
-		    up = $.eventNamespacer(Pointer.up, namespace),
-		    cancel = $.eventNamespacer(Pointer.cancel, namespace),
-		    target = void 0,
+		    canTouch = Browser.is.touchDevice,
+		    isTouch = void 0,
+		    delta = 0,
+		    skipping = void 0,
+		    scrolled = void 0,
+		    timeoutId = void 0,
+		    downEvent = void 0,
 		    prevTapTimestamp = 0,
-		    dbltapTriggerable = true,
-		    motion = void 0;
+		    dbltapTriggerable = true;
 
 		/* EVENT CREATOR */
 
@@ -3207,71 +3213,103 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		function downHandler(event) {
 
-				$document.off(namespace);
+				if (canTouch) {
 
-				target = event.target;
+						isTouch = Pointer.isTouchEvent(event);
 
-				motion = false;
+						if (isTouch) {
 
-				$document.one(move, moveHandler);
-				$document.one(up, upHandler);
-				$document.one(cancel, reset);
-		}
+								scrolled = false;
 
-		function moveHandler() {
+								window.onscroll = scrollHandler;
 
-				motion = true;
+								delta++;
+						} else if (delta > 0) {
+
+								skipping = true;
+
+								delta--;
+
+								return;
+						}
+
+						skipping = false;
+				}
+
+				downEvent = event;
 		}
 
 		function upHandler(event) {
 
-				if (target === event.target && (!motion || !Pointer.isTouchEvent(event)) && Mouse.hasButton(event, Mouse.buttons.LEFT, true)) {
-
-						var tapTimestamp = event.timeStamp || Date.now(),
-						    $target = $(target);
-
-						$target.trigger(createEvent(Pointer.tap, event));
-
-						if (tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval) {
-
-								if (dbltapTriggerable) {
-
-										$target.trigger(createEvent(Pointer.dbltap, event));
-
-										dbltapTriggerable = false;
-								}
-						} else {
-
-								dbltapTriggerable = true;
-						}
-
-						prevTapTimestamp = tapTimestamp;
-				}
+				if (skipping) return;
 
 				reset();
+
+				if (isTouch && scrolled) return;
+				if (!isTouch && !Mouse.hasButton(event, Mouse.buttons.LEFT, true)) return;
+				if (downEvent.target !== event.target) return;
+
+				if (isTouch) {
+
+						var downXY = $.eventXY(downEvent),
+						    upXY = $.eventXY(event),
+						    threshold = Pointer.options.tap.threshold;
+
+						if (Math.abs(downXY.x - upXY.x) > threshold || Math.abs(downXY.y - upXY.y) > threshold) return;
+				}
+
+				var tapTimestamp = event.timeStamp || Date.now(),
+				    $target = $(downEvent.target);
+
+				$target.trigger(createEvent(Pointer.tap, event));
+
+				if (tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval) {
+
+						if (dbltapTriggerable) {
+
+								$target.trigger(createEvent(Pointer.dbltap, event));
+
+								dbltapTriggerable = false;
+						}
+				} else {
+
+						dbltapTriggerable = true;
+				}
+
+				prevTapTimestamp = tapTimestamp;
 		}
 
-		/* STATUS */
+		function scrollHandler() {
 
-		function init() {
+				scrolled = true;
 
-				setTimeout(function () {
-						// So that we'll listen to it after a possible `mousedown` event, occurring after a `touchstart` event, gets triggered
-
-						$document.one(down, downHandler);
-				}, 0);
+				window.onscroll = null;
 		}
 
 		function reset() {
 
-				$document.off(namespace);
+				if (isTouch) {
 
-				init();
+						if (!scrolled) window.onscroll = null;
+
+						if (timeoutId) clearTimeout(timeoutId);
+
+						timeoutId = setTimeout(resetDelta, Pointer.options.events.emulated.timeout);
+				}
+		}
+
+		function resetDelta() {
+
+				delta = 0;
+
+				timeoutId = false;
 		}
 
 		/* INIT */
 
-		init();
+		$document.on(Pointer.down, downHandler);
+		$document.on(Pointer.up, upHandler);
+		$document.on(Pointer.cancel, reset);
 
 		/* EXPORT */
 
@@ -5574,12 +5612,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.__doMove = this._frames(this.__doMove); // For performance reasons
 						}
 				}, {
-						key: '_init',
-						value: function _init() {
-
-								this.$draggable.attr('draggable', false); // In order to disable default dragging when using a threshold
-						}
-				}, {
 						key: '_events',
 						value: function _events() {
 
@@ -5902,6 +5934,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								event.stopImmediatePropagation();
 						}
 
+						/* DRAG START */
+
+				}, {
+						key: '__dragStart',
+						value: function __dragStart(event) {
+								// We have to catch it or dragging `img`s on Firefox won't work reliably
+
+								event.preventDefault();
+								event.stopImmediatePropagation();
+						}
+
 						/* DRAG HANDLERS */
 
 				}, {
@@ -5936,6 +5979,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._one(true, this.$document, Pointer.up, this.__up);
 								this._one(true, this.$document, Pointer.cancel, this.__cancel);
 								this._one(true, Pointer.click, this.__click);
+								this._one(true, this.$document, 'dragstart', this.__dragStart);
 						}
 				}, {
 						key: '__move',
@@ -6052,6 +6096,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._off(this.$document, Pointer.move, this.__move);
 								this._off(this.$document, Pointer.cancel, this.__cancel);
+								this._off(this.$document, 'dragstart', this.__dragStart);
 
 								if (this.startEvent.target !== event.target) this._off(Pointer.click, this.__click);
 
@@ -6090,6 +6135,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._off(this.$document, Pointer.move, this.__move);
 								this._off(this.$document, Pointer.up, this.__up);
 								this._off(Pointer.click, this.__click);
+								this._off(this.$document, 'dragstart', this.__dragStart);
 
 								this._trigger('end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion });
 						}
@@ -17103,6 +17149,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								open: Animations.fast,
 								close: Animations.fast
 						},
+						keystrokes: {
+								'esc': '__esc'
+						},
 						callbacks: {
 								beforeopen: _.noop,
 								open: _.noop,
@@ -17149,6 +17198,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										this.___resize();
 										this.___parentsScroll();
 										this.___layoutTap();
+										this.___keydown();
 								}
 						}
 				}, {
@@ -17200,6 +17250,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function __layoutTap(event) {
 
 								if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event) }).length) return;
+
+								this.close();
+						}
+
+						/* ESC */
+
+				}, {
+						key: '___keydown',
+						value: function ___keydown() {
+								//TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
+
+								this._on(true, this.$document, 'keydown', this.__keydown);
+						}
+				}, {
+						key: '__esc',
+						value: function __esc() {
 
 								this.close();
 						}
@@ -17343,6 +17409,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._reset();
 
 								this.___layoutTap();
+								this.___keydown();
 								this.___contentChange();
 								this.___resize();
 								this.___parentsScroll();

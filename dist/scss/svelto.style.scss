@@ -7114,19 +7114,19 @@ textarea.disabled,
 
       /* AFTER */
 
-      &:not(.no-counter):not(:hover):after {
+      &:not(.no-counter):after {
         vertical-align: middle;
       }
 
-      &[data-text-counter]:not(.no-counter):not(:hover):after {
+      &[data-text-counter]:not(.no-counter):after {
         content: attr(data-text-counter);
       }
 
-      &:not(.no-counter):not(:hover):after {
+      &:not(.no-counter):after {
         opacity: $liker-counter-opacity;
       }
 
-      &:not(.no-counter):hover:before {
+      &:not(.no-counter):hover:after {
         opacity: $liker-counter-hover-opacity;
       }
 
@@ -7138,13 +7138,13 @@ textarea.disabled,
 
       /* AFTER */
 
-      &:not(:hover):after {
+      &:after {
         content: attr(data-likes);
       }
 
       /* NO COUNTER 0 */
 
-      &:not([data-text-counter]).no-counter-0[data-likes="0"]:not(:hover):after {
+      &:not([data-text-counter]).no-counter-0[data-likes="0"]:after {
         display: none;
       }
 
@@ -7156,13 +7156,13 @@ textarea.disabled,
 
       /* AFTER */
 
-      &:not(:hover):after {
+      &:after {
         content: attr(data-dislikes);
       }
 
       /* NO COUNTER 0 */
 
-      &:not([data-text-counter]).no-counter-0[data-dislikes="0"]:not(:hover):after {
+      &:not([data-text-counter]).no-counter-0[data-dislikes="0"]:after {
         display: none;
       }
 
@@ -7174,8 +7174,8 @@ textarea.disabled,
 
       /* LIKE / DISLIKE */
 
-      .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:not(:hover):after,
-      .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:not(:hover):after {
+      .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:after,
+      .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:after {
         display: none
       }
 
@@ -7214,11 +7214,8 @@ textarea.disabled,
       /* AFTER */
 
       &:not(.no-label):hover:after {
+        display: inline !important; // Since we may use `no-counters-0` or `no-couter-0` that use higher level selectors
         vertical-align: middle;
-      }
-
-      &:not(.no-label):not(:hover):after {
-        opacity: $liker-label-opacity;
       }
 
       &:not(.no-label):hover:before {

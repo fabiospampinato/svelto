@@ -8830,23 +8830,23 @@ textarea.disabled,
   /* AFTER */
 }
 
-.liker:not(.no-counters) .like:not(.no-counter):not(:hover):after,
-.liker:not(.no-counters) .dislike:not(.no-counter):not(:hover):after {
+.liker:not(.no-counters) .like:not(.no-counter):after,
+.liker:not(.no-counters) .dislike:not(.no-counter):after {
   vertical-align: middle;
 }
 
-.liker:not(.no-counters) .like[data-text-counter]:not(.no-counter):not(:hover):after,
-.liker:not(.no-counters) .dislike[data-text-counter]:not(.no-counter):not(:hover):after {
+.liker:not(.no-counters) .like[data-text-counter]:not(.no-counter):after,
+.liker:not(.no-counters) .dislike[data-text-counter]:not(.no-counter):after {
   content: attr(data-text-counter);
 }
 
-.liker:not(.no-counters) .like:not(.no-counter):not(:hover):after,
-.liker:not(.no-counters) .dislike:not(.no-counter):not(:hover):after {
+.liker:not(.no-counters) .like:not(.no-counter):after,
+.liker:not(.no-counters) .dislike:not(.no-counter):after {
   opacity: 0.85;
 }
 
-.liker:not(.no-counters) .like:not(.no-counter):hover:before,
-.liker:not(.no-counters) .dislike:not(.no-counter):hover:before {
+.liker:not(.no-counters) .like:not(.no-counter):hover:after,
+.liker:not(.no-counters) .dislike:not(.no-counter):hover:after {
   opacity: 1;
 }
 
@@ -8855,11 +8855,11 @@ textarea.disabled,
   /* NO COUNTER 0 */
 }
 
-.liker:not(.no-counters) .like:not(.no-counter):not(:hover):after {
+.liker:not(.no-counters) .like:not(.no-counter):after {
   content: attr(data-likes);
 }
 
-.liker:not(.no-counters) .like:not(.no-counter):not([data-text-counter]).no-counter-0[data-likes="0"]:not(:hover):after {
+.liker:not(.no-counters) .like:not(.no-counter):not([data-text-counter]).no-counter-0[data-likes="0"]:after {
   display: none;
 }
 
@@ -8868,11 +8868,11 @@ textarea.disabled,
   /* NO COUNTER 0 */
 }
 
-.liker:not(.no-counters) .dislike:not(.no-counter):not(:hover):after {
+.liker:not(.no-counters) .dislike:not(.no-counter):after {
   content: attr(data-dislikes);
 }
 
-.liker:not(.no-counters) .dislike:not(.no-counter):not([data-text-counter]).no-counter-0[data-dislikes="0"]:not(:hover):after {
+.liker:not(.no-counters) .dislike:not(.no-counter):not([data-text-counter]).no-counter-0[data-dislikes="0"]:after {
   display: none;
 }
 
@@ -8880,8 +8880,8 @@ textarea.disabled,
   /* LIKE / DISLIKE */
 }
 
-.liker:not(.no-counters).no-counters-0 .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:not(:hover):after,
-.liker:not(.no-counters).no-counters-0 .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:not(:hover):after {
+.liker:not(.no-counters).no-counters-0 .like:not(.no-counter):not([data-text-counter])[data-likes="0"]:after,
+.liker:not(.no-counters).no-counters-0 .dislike:not(.no-counter):not([data-text-counter])[data-dislikes="0"]:after {
   display: none;
 }
 
@@ -8915,12 +8915,8 @@ textarea.disabled,
 
 .liker:not(.no-labels) .like:not(.no-label):hover:after,
 .liker:not(.no-labels) .dislike:not(.no-label):hover:after {
+  display: inline !important;
   vertical-align: middle;
-}
-
-.liker:not(.no-labels) .like:not(.no-label):not(:hover):after,
-.liker:not(.no-labels) .dislike:not(.no-label):not(:hover):after {
-  opacity: 0.85;
 }
 
 .liker:not(.no-labels) .like:not(.no-label):hover:before,
@@ -14149,8 +14145,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -14242,8 +14238,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -14366,8 +14362,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -14411,8 +14407,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.3#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.4#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -14918,7 +14914,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.7.3);
+  background-image: url(/images/flags.png?v=0.7.4);
 }
 
 /* FLAGS */
@@ -15935,7 +15931,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.3) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.3) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.4) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.4) format("woff");
 }
 
 /* =========================================================================
