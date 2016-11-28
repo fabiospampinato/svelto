@@ -234,6 +234,8 @@
 
     __move ( event ) {
 
+      if ( !this._matrix ) return; // Not yet positionated
+
       let {x, y} = $.eventXY ( event, 'clientX', 'clientY' ),
           zOffset = this.options.offset,
           mOffset = this.options.magnification.offset,
