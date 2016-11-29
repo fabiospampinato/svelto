@@ -32,6 +32,9 @@
         close: true,
         treshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
+      scroll: {
+        disable: true // Disable scroll when the panel is open
+      },
       classes: {
         show: 'show',
         open: 'open',
@@ -294,9 +297,15 @@
 
       if ( !this._isPinned ) {
 
-        if ( this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin] ) this.pin ();
+        if ( this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin] ) {
 
-        this.$layout.disableScroll ();
+          this.pin ();
+
+        } else if ( this.options.scroll.disable ) {
+
+          this.$layout.disableScroll ();
+
+        }
 
       }
 
@@ -349,7 +358,7 @@
           this.$backdrop.removeClass ( this.options.classes.backdrop.show );
           this.$layout.removeClass ( this.options.classes.layout.show );
 
-          this.$layout.enableScroll ();
+          if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 
           this._lock = false;
 

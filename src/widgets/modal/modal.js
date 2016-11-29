@@ -22,6 +22,9 @@
     plugin: true,
     selector: '.modal',
     options: {
+      scroll: {
+        disable: true // Disable scroll when the modal is open
+      },
       classes: {
         show: 'show',
         open: 'open',
@@ -136,7 +139,7 @@
 
       this._trigger ( 'beforeopen' );
 
-      this.$layout.disableScroll ();
+      if ( this.options.scroll.disable ) this.$layout.disableScroll ();
 
       this._frame ( function () {
 
@@ -181,7 +184,7 @@
           this.$modal.removeClass ( this.options.classes.show );
           this.$backdrop.removeClass ( this.options.classes.backdrop.show );
 
-          this.$layout.enableScroll ();
+          if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 
           this._lock = false;
 
