@@ -28,7 +28,7 @@
       events: {
         prefix: prefix,
         emulated: {
-          timeout: 300 // Amount of milliseconds to wait for an emulated event
+          timeout: 500 // Milliseconds to wait for an emulated event
         }
       },
       tap: {
