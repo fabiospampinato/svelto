@@ -1,7 +1,7 @@
 {
   "name": "svelto",
   "description": "Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "keywords": [
     "css",
     "sass",

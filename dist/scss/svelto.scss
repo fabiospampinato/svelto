@@ -4524,7 +4524,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.4' !default;
+$svelto-version: '0.7.5' !default;
 
 
 /* =========================================================================
@@ -6858,6 +6858,38 @@ $small-font-size: .75em !default;
 
 .overflow-hidden {
   overflow: hidden !important;
+}
+
+.overflow-scroll {
+  overflow: scroll !important;
+}
+
+/* X */
+
+.overflow-x-visible { //TODO: Add demo
+  overflow-x: visible !important;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll !important;
+}
+
+/* Y */
+
+.overflow-y-visible { //TODO: Add demo
+  overflow-y: visible !important;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden !important;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll !important;
 }
 
 

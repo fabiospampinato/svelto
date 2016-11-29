@@ -372,21 +372,69 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				return $(document);
 		};
 
-		//TODO: Preserve the scrollbars if possible, when disabling
+		$.hasScrollbars = function (node) {
+				var both = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-		$.fn.toggleScroll = function (force) {
 
-				return this.toggleClass('overflow-hidden', !force);
+				return both ? $.hasScrollbarY(node) && $.hasScrollbarX(node) : $.hasScrollbarY(node) || $.hasScrollbarX(node);
+		};
+
+		$.fn.hasScrollbars = function () {
+
+				return this.length && $.hasScrollbars(this[0]);
+		};
+
+		$.hasScrollbarX = function (node) {
+				//FIXME: Doesn't work on body
+
+				var style = getComputedStyle(node);
+
+				if (style.overflowX === 'scroll') return true;
+
+				var isScrollable = node.scrollWidth > node.clientWidth;
+
+				return isScrollable && style.overflowX === 'auto';
+		};
+
+		$.fn.hasScrollbarX = function () {
+
+				return this.length && $.hasScrollbarX(this[0]);
+		};
+
+		$.hasScrollbarY = function (node) {
+
+				var style = getComputedStyle(node);
+
+				if (style.overflowY === 'scroll') return true;
+
+				var isScrollable = node.scrollHeight > node.clientHeight;
+
+				return isScrollable && style.overflowY === 'auto';
+		};
+
+		$.fn.hasScrollbarY = function () {
+
+				return this.length && $.hasScrollbarY(this[0]);
+		};
+
+		$.fn.toggleScroll = function () {
+				var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.hasClass('overflow-hidden');
+				var keepScrollbars = arguments[1];
+
+
+				return force ? this.enableScroll() : this.disableScroll(keepScrollbars);
 		};
 
 		$.fn.disableScroll = function () {
+				var keepScrollbars = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+				//TODO: Implement keepScrollbars, we should prevent default scroll events behaviour
 
-				return this.toggleScroll(false);
+				return this.addClass('overflow-hidden');
 		};
 
 		$.fn.enableScroll = function () {
 
-				return this.toggleScroll(true);
+				return this.removeClass('overflow-hidden');
 		};
 })(jQuery);
 
@@ -2585,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.4',
+				VERSION: '0.7.5',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -2685,7 +2733,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				/* VARIABLES */
 
-				throttle: 150, // The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
+				throttle: 150, // Milliseconds used to throttle the `$window.on ( 'resize' )` handler
 				previous: undefined, // Previous breakpoint
 				current: undefined, // Current breakpoint
 
@@ -3135,7 +3183,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						events: {
 								prefix: prefix,
 								emulated: {
-										timeout: 300 // Amount of milliseconds to wait for an emulated event
+										timeout: 500 // Milliseconds to wait for an emulated event
 								}
 						},
 						tap: {
@@ -3242,6 +3290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		function upHandler(event) {
 
 				if (skipping) return;
+				if (!downEvent) return;
 
 				reset();
 
@@ -3286,7 +3335,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				window.onscroll = null;
 		}
 
+		/* RESET */
+
 		function reset() {
+
+				setTimeout(resetEvents, 0);
 
 				if (isTouch) {
 
@@ -3296,6 +3349,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						timeoutId = setTimeout(resetDelta, Pointer.options.events.emulated.timeout);
 				}
+		}
+
+		function resetEvents() {
+
+				downEvent = undefined;
 		}
 
 		function resetDelta() {
@@ -3588,7 +3646,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ($, _, Svelto, Widgetize) {
+(function ($, _, Svelto, Widgetize, Widgets) {
 
 		'use strict';
 
@@ -3656,13 +3714,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				},
 				ready: function ready(Widget) {
 
-						$(Widget.ready);
+						var ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready; //IE10 support -- static property
+
+						$(ready);
 				},
 				widgetize: function widgetize(Widget) {
 
 						if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
 
-						Widgetize.add(Widget.config.selector, Widget.widgetize, Widget.config);
+						var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+						Widgetize.add(Widget.config.selector, widgetize, Widget.config);
 				},
 				plugin: function plugin(Widget) {
 
@@ -3726,7 +3788,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* EXPORT */
 
 		Svelto.Factory = Factory;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Widgets);
 
 /* =========================================================================
  * Svelto - Core - Widget
@@ -5691,7 +5753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										if (this.options.constrainer.$element) {
 
-												var constrainerOffset = this.options.constrainer.$element[0] === window ? { top: 0, left: 0 } : this.options.constrainer.$element.offset(),
+												var constrainerOffset = this.options.constrainer.$element[0] === window ? { top: this.$window.scrollTop(), left: this.$window.scrollLeft() } : this.options.constrainer.$element.offset(),
 												    movableOffset = this.$movable.offset();
 
 												if (this.options.axis !== 'y') {
@@ -7210,6 +7272,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				plugin: true,
 				selector: '.modal',
 				options: {
+						scroll: {
+								disable: true // Disable scroll when the modal is open
+						},
 						classes: {
 								show: 'show',
 								open: 'open',
@@ -7337,7 +7402,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								this._trigger('beforeopen');
 
-								this.$layout.disableScroll();
+								if (this.options.scroll.disable) this.$layout.disableScroll();
 
 								this._frame(function () {
 
@@ -7380,7 +7445,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												this.$modal.removeClass(this.options.classes.show);
 												this.$backdrop.removeClass(this.options.classes.backdrop.show);
 
-												this.$layout.enableScroll();
+												if (this.options.scroll.disable) this.$layout.enableScroll();
 
 												this._lock = false;
 
@@ -10795,6 +10860,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__move',
 						value: function __move(event) {
+
+								if (!this._matrix) return; // Not yet positionated
+
 								var _$$eventXY = $.eventXY(event, 'clientX', 'clientY'),
 								    x = _$$eventXY.x,
 								    y = _$$eventXY.y,
@@ -12185,6 +12253,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								close: true,
 								treshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
 						},
+						scroll: {
+								disable: true // Disable scroll when the panel is open
+						},
 						classes: {
 								show: 'show',
 								open: 'open',
@@ -12461,9 +12532,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (!this._isPinned) {
 
-										if (this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin]) this.pin();
+										if (this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin]) {
 
-										this.$layout.disableScroll();
+												this.pin();
+										} else if (this.options.scroll.disable) {
+
+												this.$layout.disableScroll();
+										}
 								}
 
 								this._frame(function () {
@@ -12513,7 +12588,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 												this.$backdrop.removeClass(this.options.classes.backdrop.show);
 												this.$layout.removeClass(this.options.classes.layout.show);
 
-												this.$layout.enableScroll();
+												if (this.options.scroll.disable) this.$layout.enableScroll();
 
 												this._lock = false;
 
