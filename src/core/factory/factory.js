@@ -9,7 +9,7 @@
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, Svelto, Widgetize ) {
+(function ( $, _, Svelto, Widgetize, Widgets ) {
 
   'use strict';
 
@@ -61,7 +61,9 @@
 
     ready ( Widget ) {
 
-      $(Widget.ready);
+      let ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready; //IE10 support -- static property
+
+      $(ready);
 
     },
 
@@ -69,7 +71,9 @@
 
       if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
 
-      Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config );
+      let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+      Widgetize.add ( Widget.config.selector, widgetize, Widget.config );
 
     },
 
@@ -117,4 +121,4 @@
 
   Svelto.Factory = Factory;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Widgets ));
