@@ -101,9 +101,9 @@ SampleHelpers.define ( 'select', function ( name = '' ) {
 
 });
 
-SampleHelpers.define ( 'square', function ( classes = '' ) {
+SampleHelpers.define ( 'square', function ( classes = '', text ) {
 
-  let text = SampleHelpers.text ( 9 );
+  text = lodash.isString ( text ) ? text : SampleHelpers.text ( 9 );
 
   return `<div class="square-sample ${classes}">` +
            `<p>${text}</p>` +
