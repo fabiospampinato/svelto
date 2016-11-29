@@ -23,7 +23,7 @@
 
     /* VARIABLES */
 
-    throttle: 150, // The amount of milliseconds used to throttle the `$window.on ( 'resize' )` handler
+    throttle: 150, // Milliseconds used to throttle the `$window.on ( 'resize' )` handler
     previous: undefined, // Previous breakpoint
     current: undefined, // Current breakpoint
 

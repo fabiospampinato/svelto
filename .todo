@@ -56,3 +56,4 @@ Maybe:
   ☐ sort sass files properties
   ☐ maybe rename lQuery to yocto or atto o some other prefix, like zepto
   ☐ create proper admin@getsvelto.com that we'll use for npm, atmosphere, github etc.
+  ☐ abort zoomable preloading on subsequent taps
