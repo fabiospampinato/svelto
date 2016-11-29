@@ -65,23 +65,69 @@
 
   };
 
-  //TODO: Preserve the scrollbars if possible, when disabling
+  $.hasScrollbars = function ( node, both = false ) {
 
-  $.fn.toggleScroll = function ( force ) {
-
-    return this.toggleClass ( 'overflow-hidden', !force );
+    return both ? $.hasScrollbarY ( node ) && $.hasScrollbarX ( node ) : $.hasScrollbarY ( node ) || $.hasScrollbarX ( node );
 
   };
 
-  $.fn.disableScroll = function () {
+  $.fn.hasScrollbars = function () {
 
-    return this.toggleScroll ( false );
+    return this.length && $.hasScrollbars ( this[0] );
+
+  };
+
+  $.hasScrollbarX = function ( node ) { //FIXME: Doesn't work on body
+
+    let style = getComputedStyle ( node );
+
+    if ( style.overflowX === 'scroll' ) return true;
+
+    let isScrollable = node.scrollWidth > node.clientWidth;
+
+    return isScrollable && style.overflowX === 'auto';
+
+  };
+
+  $.fn.hasScrollbarX = function () {
+
+    return this.length && $.hasScrollbarX ( this[0] );
+
+  };
+
+  $.hasScrollbarY = function ( node ) {
+
+    let style = getComputedStyle ( node );
+
+    if ( style.overflowY === 'scroll' ) return true;
+
+    let isScrollable = node.scrollHeight > node.clientHeight;
+
+    return isScrollable && style.overflowY === 'auto';
+
+  };
+
+  $.fn.hasScrollbarY = function () {
+
+    return this.length && $.hasScrollbarY ( this[0] );
+
+  };
+
+  $.fn.toggleScroll = function ( force = this.hasClass ( 'overflow-hidden' ), keepScrollbars ) {
+
+    return force ? this.enableScroll () : this.disableScroll ( keepScrollbars );
+
+  };
+
+  $.fn.disableScroll = function ( keepScrollbars = true ) { //TODO: Implement keepScrollbars, we should prevent default scroll events behaviour
+
+    return this.addClass ( 'overflow-hidden' );
 
   };
 
   $.fn.enableScroll = function () {
 
-    return this.toggleScroll ( true );
+    return this.removeClass ( 'overflow-hidden' );
 
   };
 
