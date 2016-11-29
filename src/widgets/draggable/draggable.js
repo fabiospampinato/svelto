@@ -172,7 +172,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: 0, left: 0 } : this.options.constrainer.$element.offset (),
+          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: this.$window.scrollTop (), left: this.$window.scrollLeft () } : this.options.constrainer.$element.offset (),
               movableOffset = this.$movable.offset ();
 
           if ( this.options.axis !== 'y' ) {
