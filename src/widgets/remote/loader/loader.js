@@ -23,6 +23,10 @@
       autorequest: {
         threshold: 400
       },
+      preloading: {
+        enabled: false, // Preload the content
+        wait: true // Wait for an explicit request or autorequesting before doing the actual work
+      },
       requests: {
         multiple: {
           parallel: false,
@@ -31,6 +35,9 @@
       },
       attributes: {
         href: 'href' // In order to better support `a` elements (the data value has higher priority)
+      },
+      classes: {
+        preload: 'preload'
       },
       datas: {
         url: 'url',
@@ -59,9 +66,12 @@
 
     _init () {
 
+      this.options.preloading.enabled = this.$loader.hasClass ( this.options.classes.preload ) || this.options.preloading.enabled;
       this.options.ajax.url = this.$loader.data ( this.options.datas.url ) || this.$loader.attr ( this.options.attributes.href ) || this.options.ajax.url;
       this.options.ajax.data = this.$loader.data ( this.options.datas.data ) || this.options.ajax.data;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
+
+      if ( this.options.preloading.enabled ) this.preload ();
 
       this._defer ( () => !this.isRequesting () && this.disable () ); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
 
@@ -70,6 +80,22 @@
     _events () {
 
       this.___request ();
+
+    }
+
+    /* UTILITIES */
+
+    _replace ( res, resj, isJSON ) {
+
+      let content = isJSON ? resj.html : res,
+          id = `remote-loaded-${$.guid++}`,
+          container = `<div id="${id}" class="remote-loaded">${content}</div>`;
+
+      this.$loader[0].outerHTML = container;
+
+      $(`#${id}`).widgetize ();
+
+      this.$loader.remove ();
 
     }
 
@@ -97,6 +123,14 @@
 
     /* REQUEST HANDLERS */
 
+    __complete ( res ) {
+
+      this._preloading = false;
+
+      super.__complete ( res );
+
+    }
+
     __error ( res ) {
 
       if ( this.isAborted () ) return;
@@ -106,6 +140,8 @@
       $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.message );
 
       super.__error ( res );
+
+      this.$loader.remove ();
 
     }
 
@@ -118,29 +154,39 @@
 
       if ( isJSON && !('html' in resj) ) return this.__error ( res );
 
-      let content = isJSON ? resj.html : res,
-          id = `remote-loaded-${$.guid++}`,
-          container = `<div id="${id}" class="remote-loaded">${content}</div>`;
-
-      this.$loader[0].outerHTML = container;
-
-      $(`#${id}`).widgetize ();
-
       super.__success ( res );
 
-    }
+      if ( this._preloading && this.options.preloading.wait && !this._requested ) {
 
-    __complete ( res ) {
+        this.disable ();
 
-      this.$loader.remove ();
+        this._res = res;
+        this._resj = resj;
+        this._isJSON = isJSON;
 
-      super.__complete ( res );
+      } else {
+
+        this._replace ( res, resj, isJSON );
+
+      }
 
     }
 
     /* API OVERRIDES */
 
-    request () {
+    preload () {
+
+      this._preloading = true;
+
+      this.request ( true );
+
+    }
+
+    request ( preloading ) {
+
+      if ( this._res ) return this._replace ( this._res, this._resj, this._isJSON );
+
+      if ( !preloading ) this._requested = true;
 
       if ( !this.canRequest () ) return;
 

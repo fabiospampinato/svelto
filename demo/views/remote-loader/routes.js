@@ -72,3 +72,13 @@ Router.route ( '/remote-loader-scroll', function () {
   }));
 
 }, { where: 'server' });
+
+/* REMOTE LOADER - PRELOAD */
+
+Router.route ( '/remote-loader-preload', function () {
+
+  this.response.end ( JSON.stringify ({
+    html: 'Preloaded!'
+  }));
+
+}, { where: 'server' });
