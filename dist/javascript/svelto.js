@@ -2633,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.5',
+				VERSION: '0.7.6',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -15317,6 +15317,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						autorequest: {
 								threshold: 400
 						},
+						preloading: {
+								enabled: false, // Preload the content
+								wait: true // Wait for an explicit request or autorequesting before doing the actual work
+						},
 						requests: {
 								multiple: {
 										parallel: false,
@@ -15325,6 +15329,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						},
 						attributes: {
 								href: 'href' // In order to better support `a` elements (the data value has higher priority)
+						},
+						classes: {
+								preload: 'preload'
 						},
 						datas: {
 								url: 'url',
@@ -15365,9 +15372,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function _init() {
 								var _this69 = this;
 
+								this.options.preloading.enabled = this.$loader.hasClass(this.options.classes.preload) || this.options.preloading.enabled;
 								this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
 								this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
 								this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
+
+								if (this.options.preloading.enabled) this.preload();
 
 								this._defer(function () {
 										return !_this69.isRequesting() && _this69.disable();
@@ -15378,6 +15388,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						value: function _events() {
 
 								this.___request();
+						}
+
+						/* UTILITIES */
+
+				}, {
+						key: '_replace',
+						value: function _replace(res, resj, isJSON) {
+
+								var content = isJSON ? resj.html : res,
+								    id = 'remote-loaded-' + $.guid++,
+								    container = '<div id="' + id + '" class="remote-loaded">' + content + '</div>';
+
+								this.$loader[0].outerHTML = container;
+
+								$('#' + id).widgetize();
+
+								this.$loader.remove();
 						}
 
 						/* REQUEST */
@@ -15406,6 +15433,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* REQUEST HANDLERS */
 
 				}, {
+						key: '__complete',
+						value: function __complete(res) {
+
+								this._preloading = false;
+
+								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__complete', this).call(this, res);
+						}
+				}, {
 						key: '__error',
 						value: function __error(res) {
 
@@ -15416,6 +15451,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								$.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
 
 								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__error', this).call(this, res);
+
+								this.$loader.remove();
 						}
 				}, {
 						key: '__success',
@@ -15428,30 +15465,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (isJSON && !('html' in resj)) return this.__error(res);
 
-								var content = isJSON ? resj.html : res,
-								    id = 'remote-loaded-' + $.guid++,
-								    container = '<div id="' + id + '" class="remote-loaded">' + content + '</div>';
-
-								this.$loader[0].outerHTML = container;
-
-								$('#' + id).widgetize();
-
 								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__success', this).call(this, res);
-						}
-				}, {
-						key: '__complete',
-						value: function __complete(res) {
 
-								this.$loader.remove();
+								if (this._preloading && this.options.preloading.wait && !this._requested) {
 
-								_get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__complete', this).call(this, res);
+										this.disable();
+
+										this._res = res;
+										this._resj = resj;
+										this._isJSON = isJSON;
+								} else {
+
+										this._replace(res, resj, isJSON);
+								}
 						}
 
 						/* API OVERRIDES */
 
 				}, {
+						key: 'preload',
+						value: function preload() {
+
+								this._preloading = true;
+
+								this.request(true);
+						}
+				}, {
 						key: 'request',
-						value: function request() {
+						value: function request(preloading) {
+
+								if (this._res) return this._replace(this._res, this._resj, this._isJSON);
+
+								if (!preloading) this._requested = true;
 
 								if (!this.canRequest()) return;
 
