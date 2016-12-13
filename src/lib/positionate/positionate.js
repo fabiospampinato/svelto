@@ -21,20 +21,6 @@
 
   let $window = $(window);
 
-  /* UTILITES */
-
-  let isHorizontal = function ( direction ) {
-
-    return direction === 'left' || direction === 'right';
-
-  };
-
-  let isVertical = function ( direction ) {
-
-    return !isHorizontal ( direction );
-
-  };
-
   /* DEFAULTS */
 
   let defaults = {
@@ -222,14 +208,11 @@
     if ( options.$anchor ) {
 
       let oppositeSpace = spaces[bestIndex],
-          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+          isExtendedX = anchorRect.top + anchorRect.height >= 0 && anchorRect.top <= windowHeight,
+          isExtendedY = anchorRect.left + anchorRect.width >= 0 && anchorRect.left <= windowWidth;
 
-      if ( isAnchorVisible ) {
-
-        coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
-        coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
-
-      }
+      if ( isExtendedX ) coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
+      if ( isExtendedY ) coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
 
     } else if ( options.constrainer.$element ) {
 
