@@ -129,7 +129,7 @@
 
     __layoutTap ( event ) {
 
-      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event )} ).length ) return;
+      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return;
 
       this.close ();
 
