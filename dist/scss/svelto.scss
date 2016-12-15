@@ -3235,7 +3235,7 @@ $spinner-size: 3.25em !default;
 
 /* STROKE */
 
-$spinner-stroke-width: .25em !default;
+$spinner-stroke-width: 7.5% !default; // Expressed in `%` instead of `em` since otherwise the computed value gets doubled by Chrome under Windows 10 (Virtualized)
 
 $spinner-stroke-color: $color-secondary !default;
 
@@ -4524,7 +4524,7 @@ $popover-animation-duration: $animation-fast !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.6' !default;
+$svelto-version: '0.7.7' !default;
 
 
 /* =========================================================================
@@ -7917,7 +7917,7 @@ input {
 
 [type="number"] {
 
-  -moz-appearance: textfield;
+  -moz-appearance: textfield !important;
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {

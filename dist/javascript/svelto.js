@@ -2540,9 +2540,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		/* OVERLAY SCROLLBARS */
 
-		var overlay = Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll}', function (ele) {
+		var overlay = Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll;position:absolute;z-index:-1}', function (ele) {
 				return ele.offsetWidth === ele.clientWidth;
-		});
+		}); // The absolute position ensures that the height is setted correctly (FF and IE bug)
 
 		Modernizr.addTest('overlay-scrollbars', overlay);
 })(Modernizr);
@@ -2582,9 +2582,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		var size = void 0;
 
-		Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll}', function (ele) {
+		Modernizr.testStyles('#modernizr {width:100px;height:100px;overflow:scroll;position:absolute;z-index:-1}', function (ele) {
 				return size = ele.offsetWidth - ele.clientWidth;
-		});
+		}); // The absolute position ensures that the height is setted correctly (FF and IE bug)
 
 		Modernizr.addTest('scrollbar-size-' + size, true);
 })(Modernizr);
@@ -2633,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.6',
+				VERSION: '0.7.7',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -16926,18 +16926,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		var $window = $(window);
 
-		/* UTILITES */
-
-		var isHorizontal = function isHorizontal(direction) {
-
-				return direction === 'left' || direction === 'right';
-		};
-
-		var isVertical = function isVertical(direction) {
-
-				return !isHorizontal(direction);
-		};
-
 		/* DEFAULTS */
 
 		var defaults = {
@@ -17120,13 +17108,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (options.$anchor) {
 
 						var oppositeSpace = spaces[bestIndex],
-						    isAnchorVisible = isVertical(bestDirection) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+						    isExtendedX = anchorRect.top + anchorRect.height >= 0 && anchorRect.top <= windowHeight,
+						    isExtendedY = anchorRect.left + anchorRect.width >= 0 && anchorRect.left <= windowWidth;
 
-						if (isAnchorVisible) {
-
-								coordinates.top = _.clamp(coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing);
-								coordinates.left = _.clamp(coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing);
-						}
+						if (isExtendedX) coordinates.top = _.clamp(coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing);
+						if (isExtendedY) coordinates.left = _.clamp(coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing);
 				} else if (options.constrainer.$element) {
 
 						var constrainerRect = options.constrainer.$element.getRect(),
@@ -17369,7 +17355,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__layoutTap',
 						value: function __layoutTap(event) {
 
-								if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event) }).length) return;
+								if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event, 'clientX', 'clientY') }).length) return;
 
 								this.close();
 						}
