@@ -2633,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.7',
+				VERSION: '0.7.8',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -15314,6 +15314,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				plugin: true,
 				selector: '.remote-loader',
 				options: {
+						target: false, // Selector pointing to the element that cointains the content
 						autorequest: {
 								threshold: 400
 						},
@@ -15336,7 +15337,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						datas: {
 								url: 'url',
 								data: 'data',
-								method: 'method'
+								method: 'method',
+								target: 'target'
 						},
 						messages: {
 								error: 'An error occurred, please try again later'
@@ -15376,6 +15378,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
 								this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
 								this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
+								this.options.target = this.$loader.data(this.options.datas.target) || this.options.target;
+
+								if (this.options.target) {
+
+										this.$target = $(this.options.target);
+										this.$target = this.$target.length ? this.$target : false;
+								}
 
 								if (this.options.preloading.enabled) this.preload();
 
@@ -15405,6 +15414,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								$('#' + id).widgetize();
 
 								this.$loader.remove();
+
+								this._replaced = true;
 						}
 
 						/* REQUEST */
@@ -15483,16 +15494,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						/* API OVERRIDES */
 
 				}, {
-						key: 'preload',
-						value: function preload() {
-
-								this._preloading = true;
-
-								this.request(true);
-						}
-				}, {
 						key: 'request',
 						value: function request(preloading) {
+
+								if (this._replaced) return;
+
+								if (this.$target) return this._replace(this.$target.html(), null, false);
 
 								if (this._res) return this._replace(this._res, this._resj, this._isJSON);
 
@@ -15503,6 +15510,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.enable();
 
 								return _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), 'request', this).call(this);
+						}
+
+						/* API */
+
+				}, {
+						key: 'preload',
+						value: function preload() {
+
+								if (this.$target) return;
+
+								this._preloading = true;
+
+								this.request(true);
 						}
 				}]);
 

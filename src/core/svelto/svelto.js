@@ -17,7 +17,7 @@
   /* SVELTO */
 
   let Svelto = {
-    VERSION: '0.7.7',
+    VERSION: '0.7.8',
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
