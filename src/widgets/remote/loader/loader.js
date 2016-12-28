@@ -20,6 +20,7 @@
     plugin: true,
     selector: '.remote-loader',
     options: {
+      target: false, // Selector pointing to the element that cointains the content
       autorequest: {
         threshold: 400
       },
@@ -42,7 +43,8 @@
       datas: {
         url: 'url',
         data: 'data',
-        method: 'method'
+        method: 'method',
+        target: 'target'
       },
       messages: {
         error: 'An error occurred, please try again later'
@@ -70,6 +72,14 @@
       this.options.ajax.url = this.$loader.data ( this.options.datas.url ) || this.$loader.attr ( this.options.attributes.href ) || this.options.ajax.url;
       this.options.ajax.data = this.$loader.data ( this.options.datas.data ) || this.options.ajax.data;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
+      this.options.target = this.$loader.data ( this.options.datas.target ) || this.options.target;
+
+      if ( this.options.target ) {
+
+        this.$target = $(this.options.target);
+        this.$target = this.$target.length ? this.$target : false;
+
+      }
 
       if ( this.options.preloading.enabled ) this.preload ();
 
@@ -96,6 +106,8 @@
       $(`#${id}`).widgetize ();
 
       this.$loader.remove ();
+
+      this._replaced = true;
 
     }
 
@@ -174,15 +186,11 @@
 
     /* API OVERRIDES */
 
-    preload () {
-
-      this._preloading = true;
-
-      this.request ( true );
-
-    }
-
     request ( preloading ) {
+
+      if ( this._replaced ) return;
+
+      if ( this.$target ) return this._replace ( this.$target.html (), null, false );
 
       if ( this._res ) return this._replace ( this._res, this._resj, this._isJSON );
 
@@ -193,6 +201,18 @@
       this.enable ();
 
       return super.request ();
+
+    }
+
+    /* API */
+
+    preload () {
+
+      if ( this.$target ) return;
+
+      this._preloading = true;
+
+      this.request ( true );
 
     }
 
