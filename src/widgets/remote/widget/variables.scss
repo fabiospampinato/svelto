@@ -1,24 +1,13 @@
 
 /* =========================================================================
- * Svelto - Widgets - Remote - Modal - Resizing
+ * Svelto - Widgets - Remote - Widget (Variables)
  * =========================================================================
  * Copyright (c) 2015-2016 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/resizing/resizing.scss
- * @require ../modal.scss
+ * @require core/animations/variables.scss
  * ========================================================================= */
 
-/* RESIZING */
+/* ANIMATION */
 
-.remote-modal-resizing {
-  @extend %remote-widget-resizing;
-}
-
-.remote-modal-showing {
-  @extend %remote-widget-showing;
-}
-
-.remote-modal-placeholder.remote-modal-resizing.remote-modal-showing > * {
-  transition-duration: $remote-modal-animation-duration !important;
-}
+$remote-widget-animation-duration: $animation-normal !default;

@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * @require widgets/modal/variables.scss
+ * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 
 /* REMOTE MODAL */
@@ -15,4 +17,4 @@ $remote-modal-height: 8.75rem !default;
 
 /* ANIMATION */
 
-$remote-modal-animation-duration: $animation-normal !default;
+$remote-modal-animation-duration: $modal-animation-duration !default;
