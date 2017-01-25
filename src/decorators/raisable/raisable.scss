@@ -30,8 +30,11 @@
 
   /* BASE */
 
-  &:not(.disabled):hover {
-    @include z-depth ( raisable-next( 0 ), true, true );
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      @include z-depth ( raisable-next( 0 ), true, true );
+    }
   }
 
   /* STEPS */
@@ -40,8 +43,11 @@
 
     @if $depth > 0 {
 
-      &%z-depth-#{$depth}:not(.disabled):hover {
-        @include z-depth ( raisable-next( $depth ), true, true );
+      &%z-depth-#{$depth}:not(.disabled) {
+        &:hover,
+        &:focus {
+          @include z-depth ( raisable-next( $depth ), true, true );
+        }
       }
 
     }
