@@ -2,7 +2,7 @@
 /* =========================================================================
  * Svelto - _ - Math - Constants (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -20,7 +20,7 @@ $TAU: 6.28318530717958647692528676655900576 !default;
 /* =========================================================================
  * Svelto - _ - Rotation (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -32,7 +32,7 @@ $rotating-animation-duration: .9s !default;
 /* =========================================================================
  * Svelto - Core - Animations (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -58,7 +58,7 @@ $animations: (
 /* =========================================================================
  * Svelto - Core - Widget (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -72,7 +72,7 @@ $widget-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Decorators - Attached - On hover (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -86,7 +86,7 @@ $attached-on-hover-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Decorators - Disabled (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -104,7 +104,7 @@ $disabled-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Decorators - Obscured (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -122,7 +122,7 @@ $obscured-animation-duration: $animation-fast;
 /* =========================================================================
  * Svelto - Decorators - Raisable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -140,7 +140,7 @@ $raisable-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Carousel - Fade (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -154,7 +154,7 @@ $carousel-fade-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Carousel - Slide (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -168,7 +168,7 @@ $carousel-slide-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Draggable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -186,7 +186,7 @@ $draggable-reverting-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Expander (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -200,7 +200,7 @@ $expander-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Flippable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -218,7 +218,7 @@ $flippable-animation-duration: $animation-slow !default;
 /* =========================================================================
  * Svelto - Widgets - Modal (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -243,7 +243,7 @@ $modal-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Overlay (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -265,7 +265,7 @@ $overlay-siblings-animation-duration: $overlay-animation-duration !default;
 /* =========================================================================
  * Svelto - Widgets - Overlay - Dimmer (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -283,7 +283,7 @@ $overlay-dimmer-bg-opacity: .75 !default;
 /* =========================================================================
  * Svelto - Widgets - Panel (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -305,7 +305,7 @@ $panel-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Panel - Pinned (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -321,7 +321,7 @@ $panel-pinned-z-depth-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -349,12 +349,28 @@ $progressbar-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
- * Svelto - Widgets - Remote - Modal (Variables)
+ * Svelto - Widgets - Remote - Widget (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
+ * ========================================================================= */
+
+/* ANIMATION */
+
+$remote-widget-animation-duration: $animation-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require widgets/modal/variables.scss
+ * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 
 /* REMOTE MODAL */
@@ -364,13 +380,13 @@ $remote-modal-height: 8.75rem !default;
 
 /* ANIMATION */
 
-$remote-modal-animation-duration: $animation-normal !default;
+$remote-modal-animation-duration: $modal-animation-duration !default;
 
 
 /* =========================================================================
  * Svelto - Widgets - Spinner - Overlay (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -384,7 +400,7 @@ $spinner-overlay-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Switch (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require _/math/constants/variables.scss
@@ -434,7 +450,7 @@ $switch-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Zoomable - Show (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -448,7 +464,7 @@ $zoomable-show-z-index: 1300 !default;
 /* =========================================================================
  * Svelto - Widgets - Zoomable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -466,7 +482,7 @@ $zoomable-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Core - Breakpoints (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -502,7 +518,7 @@ $breakpoint-epsilon: .1 + ( map-get( $breakpoints, last( map-keys( $breakpoints 
 /* =========================================================================
  * Svelto - Decorators - Limited (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/breakpoints/variables.scss
@@ -516,7 +532,7 @@ $limited-width: map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 1.05
 /* =========================================================================
  * Svelto - Widgets - Toast - Autoexpand (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/breakpoints/variables.scss
@@ -531,7 +547,7 @@ $toast-autoexpand-width: map-get( $breakpoints, $toast-autoexpand-breakpoint ) -
 /* =========================================================================
  * Svelto - Core - Characters (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -602,7 +618,7 @@ $char-swhitesquare: '\25ab' !default; // Small white square
 /* =========================================================================
  * Svelto - Core - Colors (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -897,7 +913,7 @@ $colors: (
 /* =========================================================================
  * Svelto - Core - Reset (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -915,7 +931,7 @@ $body-color: 'base' !default;
 /* =========================================================================
  * Svelto - Widgets - Datepicker (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -970,7 +986,7 @@ $datepicker-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Tag (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -994,7 +1010,7 @@ $label-tag-circle-box-shadow: inset 0 1px 1px 0 rgba( 0, 0, 0, .1 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Rater (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1014,7 +1030,7 @@ $star-on-icon: 'start' !default;
 /* =========================================================================
  * Svelto - Widgets - Ripple (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -1041,7 +1057,7 @@ $ripple-animation-duration: $animation-xslow !default;
 /* =========================================================================
  * Svelto - Widgets - Selectable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1055,7 +1071,7 @@ $selectable-table-row-selected-bg-color: lighten( $color-primary, 50 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Spinner - Multicolor (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1072,7 +1088,7 @@ $spinner-multicolor-color-fourth: $color-green !default;
 /* =========================================================================
  * Svelto - Widgets - Spinner (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1098,7 +1114,7 @@ $spinner-stroke-animation-dash-duration: 1.5s !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Abbr (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1114,7 +1130,7 @@ $abbr-border-color: inherit !default;
 /* =========================================================================
  * Svelto - Core - Easings (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -1153,7 +1169,7 @@ $ease-in-out-back:  cubic-bezier( 0.680, -0.550, 0.265, 1.550 ) !default;
 /* =========================================================================
  * Svelto - Core - Grid (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -1165,7 +1181,7 @@ $grid-columns: 12 !default;
 /* =========================================================================
  * Svelto - Core - Gutter (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -1178,7 +1194,7 @@ $gutter-half: $gutter / 2;
 /* =========================================================================
  * Svelto - Core - Layout (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -1203,7 +1219,7 @@ $layout-footer-bg-color: $layout-header-bg-color !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Blockquote (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/characters/variables.scss
@@ -1244,7 +1260,7 @@ $blockquote-footer-prefix: $char-mdash + $char-nbsp !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Lists (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/gutter/variables.scss
@@ -1258,7 +1274,7 @@ $list-padding-left: $gutter * 2 !default;
 /* =========================================================================
  * Svelto - Core - Layout - Sticky (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -1271,7 +1287,7 @@ $layout-sticky-header-z-index: 1100 !default;
 /* =========================================================================
  * Svelto - Core - Paths (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -1285,7 +1301,7 @@ $path-images: $path-root + 'images/' !default;
 /* =========================================================================
  * Svelto - Decorators - Blurred (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/paths/variables.scss
@@ -1308,7 +1324,7 @@ $blurred-animation-duration: $disabled-animation-duration !default;
 /* =========================================================================
  * Svelto - Decorators - Pointing (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require _/math/constants/variables.scss
@@ -1335,7 +1351,7 @@ $pointing-path-images: $path-images !default;
 /* =========================================================================
  * Svelto - Widgets - Flag (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/paths/variables.scss
@@ -2341,7 +2357,7 @@ $flags: (
 /* =========================================================================
  * Svelto - Widgets - Popover (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -2365,21 +2381,42 @@ $popover-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Popover (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/variables.scss
+ * @require widgets/popover/variables.scss
+ * @require widgets/remote/widget/variables.scss
+ * ========================================================================= */
+
+/* REMOTE POPOVER */
+
+$remote-popover-width: 5rem !default;
+$remote-popover-height: 5rem !default;
+
+/* ANIMATION */
+
+$remote-popover-animation-duration: $popover-animation-duration !default;
+
+
+/* =========================================================================
  * Svelto - Core - Svelto (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
 /* SVELTO */
 
-$svelto-version: '0.7.8' !default;
+$svelto-version: '0.7.9' !default;
 
 
 /* =========================================================================
  * Svelto - Core - Revision (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/variables.scss
@@ -2395,7 +2432,7 @@ $revision: '?v=' + $svelto-version !default;
 /* =========================================================================
  * Svelto - Core - Typography (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -2419,7 +2456,7 @@ $line-height-em: $line-height * 1em;
 /* =========================================================================
  * Svelto - Core - Icon (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/typography/variables.scss
@@ -2434,7 +2471,7 @@ $icon-scale-factor: $icon-size / $font-size !default; // This is the scale facto
 /* =========================================================================
  * Svelto - Core - Sizes (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/icon/variables.scss
@@ -2498,7 +2535,7 @@ $sizes: (
 /* =========================================================================
  * Svelto - Widgets - Icon (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/icon/variables.scss
@@ -2517,7 +2554,7 @@ $icon-path-fonts: $path-fonts !default;
 /* =========================================================================
  * Svelto - Widgets - Icons - Corner (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/icon/variables.scss
@@ -2531,7 +2568,7 @@ $icon-corner-font-size: $icon-scale-factor / 2 * 1em !default;
 /* =========================================================================
  * Svelto - Core - Z-Depths (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -2597,7 +2634,7 @@ $z-depths: (
 /* =========================================================================
  * Svelto - Decorators - Attached (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -2609,7 +2646,7 @@ $attached-z-index: 300 !default;
 /* =========================================================================
  * Svelto - Decorators - Border Radius (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -2623,7 +2660,7 @@ $circular-border-radius: 1000000px !default; // If we use `50%` we may get an ov
 /* =========================================================================
  * Svelto - Widgets - Avatar (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -2644,7 +2681,7 @@ $avatar-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Badge (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require decorators/border_radius/variables.scss
@@ -2656,7 +2693,7 @@ $badge-color: 'secondary' !default;
 $badge-color-force: false !default;
 $badge-color-basic: false !default;
 
-$badge-size: 'xxsmall' !default; 
+$badge-size: 'xxsmall' !default;
 $badge-size-force: false !default;
 $badge-size-basic: true !default;
 
@@ -2682,7 +2719,7 @@ $badge-offset: - ( $badge-min-width * .35 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Carousel (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -2728,7 +2765,7 @@ $carousel-indicator-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Carousel - Inset (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -2767,7 +2804,7 @@ $carousel-inset-previous-next-animation-duration: $carousel-indicator-animation-
 /* =========================================================================
  * Svelto - Widgets - Colorpicker (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -2819,7 +2856,7 @@ $colorpicker-handler-hue-border-radius: .125em !default;
 /* =========================================================================
  * Svelto - Widgets - Container (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/gutter/variables.scss
@@ -2841,7 +2878,7 @@ $container-padding-y: $container-padding-x !default;
 /* =========================================================================
  * Svelto - Widgets - Card (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -2865,7 +2902,7 @@ $card-section-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Chat - Message (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -2902,7 +2939,7 @@ $chat-message-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Chat (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -2918,7 +2955,7 @@ $chat-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Container - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -2933,7 +2970,7 @@ $container-compact-padding-y: $container-compact-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Card - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/compact/variables.scss
@@ -2948,7 +2985,7 @@ $card-compact-padding-y: $container-compact-padding-y !default;
 /* =========================================================================
  * Svelto - Widgets - Figure (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -2973,7 +3010,7 @@ $figure-image-border-radius: inherit !default;
 /* =========================================================================
  * Svelto - Widgets - Header (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -2989,7 +3026,7 @@ $header-padding-y: $container-padding-y !default;
 /* =========================================================================
  * Svelto - Widgets - Image (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -3005,7 +3042,7 @@ $image-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Infobar (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -3027,7 +3064,7 @@ $infobar-title-size-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Label (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -3052,7 +3089,7 @@ $label-inner-gutter: $label-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Button (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/label/variables.scss
@@ -3068,7 +3105,7 @@ $button-color-basic: false !default;
 /* =========================================================================
  * Svelto - Widgets - Checkbox (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -3096,7 +3133,7 @@ $checkbox-icon-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Select (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/checkbox/variables.scss
@@ -3115,7 +3152,7 @@ $select-icon-open: 'arrow_drop_up' !default;
 /* =========================================================================
  * Svelto - Widgets - Input (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/label/variables.scss
@@ -3136,7 +3173,7 @@ $input-padding-y: $label-padding-y !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -3153,7 +3190,7 @@ $label-compact-inner-gutter: $label-compact-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Input - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/label/compact/variables.scss
@@ -3168,7 +3205,7 @@ $input-compact-padding-y: $label-compact-padding-y !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Corner (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -3191,7 +3228,7 @@ $label-corner-size: $line-height-em + ( $label-corner-padding * 2 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Floating (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -3214,7 +3251,7 @@ $label-floating-offset: 1.5rem !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Floating - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -3229,7 +3266,7 @@ $label-floating-compact-padding-y: $label-floating-padding-y * .75 !default;
 /* =========================================================================
  * Svelto - Widgets - Liker (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/variables.scss
@@ -3272,7 +3309,7 @@ $liker-dislike-text-off: 'Remove Dislike' !default;
 /* =========================================================================
  * Svelto - Widgets - Numbox (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/label/variables.scss
@@ -3290,7 +3327,7 @@ $numbox-border-radius: $label-border-radius !default;
 /* =========================================================================
  * Svelto - Widgets - Table (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/gutter/variables.scss
@@ -3326,7 +3363,7 @@ $table-cell-padding-y: $table-cell-padding-x !default;
 /* =========================================================================
  * Svelto - Widgets - Table - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -3341,7 +3378,7 @@ $table-compact-cell-padding-y: $table-compact-cell-padding-x !default;
 /* =========================================================================
  * Svelto - Widgets - Tagbox (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -3361,7 +3398,7 @@ $tagbox-partial-min-width: 6.5em !default;
 /* =========================================================================
  * Svelto - Widgets - Toast (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/variables.scss
@@ -3391,7 +3428,7 @@ $toast-animation-duration: $animation-normal !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Code (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/typography/variables.scss
@@ -3413,7 +3450,7 @@ $code-padding-y: $code-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Samp (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/typography/code/variables.scss
@@ -3427,7 +3464,7 @@ $samp-font-family: $code-font-family !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Kbd (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../code/variables.scss
@@ -3456,7 +3493,7 @@ $kbd-padding-y: $kbd-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Mark (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../code/variables.scss
@@ -3477,7 +3514,7 @@ $mark-border-radius: $container-border-radius !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Pre (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/container/variables.scss
@@ -3492,7 +3529,7 @@ $pre-padding-y: $container-padding-y !default;
 /* =========================================================================
  * Svelto - Widgets - Divider - Block (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require decorators/border_radius/variables.scss
@@ -3513,7 +3550,7 @@ $divider-block-border-radius: $circular-border-radius !default;
 /* =========================================================================
  * Svelto - Widgets - Slider (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require _/math/constants/variables.scss
@@ -3570,7 +3607,7 @@ $slider-animation-duration: $animation-fast !default;
 /* =========================================================================
  * Svelto - Widgets - Spinner - Label (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require decorators/border_radius/variables.scss
@@ -3596,7 +3633,7 @@ $spinner-label-border-radius: $circular-border-radius !default;
 /* =========================================================================
  * Svelto - Decorators - Bordered (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3609,7 +3646,7 @@ $border-style: solid !default;
 /* =========================================================================
  * Svelto - Decorators - Floated (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3621,7 +3658,7 @@ $floated-gutter: $gutter !default;
 /* =========================================================================
  * Svelto - Decorators - Highlighted (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3634,7 +3671,7 @@ $highlight-style: solid !default;
 /* =========================================================================
  * Svelto - Decorators - Spaced (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3646,7 +3683,7 @@ $spaced-gutter: $gutter-half !default;
 /* =========================================================================
  * Svelto - Widgets - Boilerplate (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3658,7 +3695,7 @@ $spaced-gutter: $gutter-half !default;
 /* =========================================================================
  * Svelto - Widgets - Breadcrumb (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3675,7 +3712,7 @@ $breadcrumb-after-current-hover-opacity: .75 !default;
 /* =========================================================================
  * Svelto - Widgets - Divider - Hr (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3691,7 +3728,7 @@ $hr-bg-color: rgba( 0, 0, 0, .1 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Divider - Text (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3709,7 +3746,7 @@ $divider-text-opacity: .75 !default;
 /* =========================================================================
  * Svelto - Widgets - Editor - Fullscreen (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3721,7 +3758,7 @@ $editor-fullscreen-z-index: 1400 !default;
 /* =========================================================================
  * Svelto - Widgets - Embed - Ratios (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3733,7 +3770,7 @@ $embed-ratios: ( 21 9 ), ( 16 9 ), ( 4 3 ), ( 1 1 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Figure - Figcaption - Attached (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3747,7 +3784,7 @@ $figcaption-attached-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Figure - Figcaption (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3761,7 +3798,7 @@ $figcaption-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Fieldset (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3775,7 +3812,7 @@ $fieldset-border-color: inherit !default;
 /* =========================================================================
  * Svelto - Widgets - Image - Sizes (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3787,7 +3824,7 @@ $image-sizes-scaling-factor: 12 !default;
 /* =========================================================================
  * Svelto - Widgets - Input - Placeholder (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3799,7 +3836,7 @@ $input-placeholder-opacity: .65 !default;
 /* =========================================================================
  * Svelto - Widgets - Label - Ribbon (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3815,7 +3852,7 @@ $label-ribbon-fold-size: 1rem !default;
 /* =========================================================================
  * Svelto - Widgets - Modal - Closed (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3827,7 +3864,7 @@ $modal-closed-offset: - 3rem !default;
 /* =========================================================================
  * Svelto - Widgets - Panel - Default (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3840,7 +3877,7 @@ $panel-default-x-width: $panel-default-y-height * 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Panel - Slim
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3853,7 +3890,7 @@ $panel-slim-x-width: $panel-slim-y-height !default;
 /* =========================================================================
  * Svelto - Widgets - Parallax (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3881,7 +3918,7 @@ $parallax-foreground-scale: .7 !default;
 /* =========================================================================
  * Svelto - Widgets - Placeholder (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3898,7 +3935,7 @@ $placeholder-padding-y: $placeholder-padding-x !default;
 /* =========================================================================
  * Svelto - Widgets - Popover - Closed (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3910,7 +3947,7 @@ $popover-closed-offset: - 1rem !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Compact - Labeled (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3922,7 +3959,7 @@ $progressbar-compact-label-font-size: .5em !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Compact (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3934,7 +3971,7 @@ $progressbar-compact-height: .5em !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Indeterminate (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3946,7 +3983,7 @@ $progressbar-indeterminate-animation-duration: 2s !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Labeled (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3961,7 +3998,7 @@ $progressbar-label-padding-y: 0 !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Slim - Labeled (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3973,7 +4010,7 @@ $progressbar-slim-label-font-size: 0 !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Slim (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -3985,7 +4022,7 @@ $progressbar-slim-height: .25em !default;
 /* =========================================================================
  * Svelto - Widgets - Progressbar - Striped (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4006,7 +4043,7 @@ $progressbar-stripes-animation-move-duration: $animation-slow !default;
 /* =========================================================================
  * Svelto - Widgets - Radio (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4019,7 +4056,7 @@ $radio-icon-off: 'radio_button_unchecked' !default;
 /* =========================================================================
  * Svelto - Widgets - Rails (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4032,7 +4069,7 @@ $rails-scrollbar-sizes: 0, 12px, 15px, 16px, 17px !default; // Possible scrollba
 /* =========================================================================
  * Svelto - Widgets - Select - Popover (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4046,7 +4083,7 @@ $select-popover-z-depth-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Shape - Square - Sample (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4071,7 +4108,7 @@ $square-smaple-p-size-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Shape (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4083,7 +4120,7 @@ $shape-size: 1em !default;
 /* =========================================================================
  * Svelto - Widgets - Shape - Circle (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -4101,7 +4138,7 @@ $circle-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Shape - Square (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -4115,7 +4152,7 @@ $square-size: $shape-size !default;
 /* =========================================================================
  * Svelto - Widgets - Shape - Triangle (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -4131,7 +4168,7 @@ $triangle-color: $color-gray !default;
 /* =========================================================================
  * Svelto - Widgets - Statistic (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4151,7 +4188,7 @@ $statistic-description-size-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Table - Hoverable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4164,7 +4201,7 @@ $table-hoverable-row-even-hover-bg-color: $table-hoverable-row-odd-hover-bg-colo
 /* =========================================================================
  * Svelto - Widgets - Table - Separated (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4178,7 +4215,7 @@ $table-separated-border-color: inherit !default;
 /* =========================================================================
  * Svelto - Widgets - Table - Celled (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../separated/variables.scss
@@ -4194,7 +4231,7 @@ $table-celled-border-color: $table-separated-border-color !default;
 /* =========================================================================
  * Svelto - Widgets - Table - Sortable (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4220,7 +4257,7 @@ $sortable-desc-icon: 'arrow_drop_down' !default;
 /* =========================================================================
  * Svelto - Widgets - Table - Striped (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4233,7 +4270,7 @@ $table-striped-row-even-bg-color: rgba( 0, 0, 0, 0 ) !default;
 /* =========================================================================
  * Svelto - Widgets - Toast - Queues (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4245,7 +4282,7 @@ $toast-queues-z-index: 1500 !default;
 /* =========================================================================
  * Svelto - Widgets - Toolbar (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4258,7 +4295,7 @@ $toolbar-padding-y: $toolbar-padding-x / 2 !default;
 /* =========================================================================
  * Svelto - Widgets - Toolbar - Vertical (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
@@ -4273,7 +4310,7 @@ $toolbar-vertical-padding-y: $toolbar-padding-x !default;
 /* =========================================================================
  * Svelto - Widgets - Tooltip (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4285,7 +4322,7 @@ $tooltip-max-width: 18rem !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Address (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4297,7 +4334,7 @@ $address-font-style: normal !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Headings (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4324,7 +4361,7 @@ $heading-small-opacity: .875 !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Link (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
@@ -4338,7 +4375,7 @@ $link-color-basic: true !default;
 /* =========================================================================
  * Svelto - Widgets - Typography - Small (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 

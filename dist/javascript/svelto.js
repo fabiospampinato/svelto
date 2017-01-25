@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery (Init)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/jquery.js
@@ -55,7 +55,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Clean data)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -91,7 +91,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Event namespacer)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -114,7 +114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Event XY)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -159,7 +159,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Frame)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -180,7 +180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Get rect)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -222,7 +222,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (HSL)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -249,7 +249,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Is attached)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -272,7 +272,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Iterator)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -290,7 +290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Scroll)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -441,7 +441,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Selection)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -476,7 +476,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash (Init)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/lodash.js
@@ -510,7 +510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Constants)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -534,7 +534,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Format)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -562,7 +562,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (MKize)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -598,7 +598,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Move)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -621,7 +621,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Now secs)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -644,7 +644,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Round closer)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -675,7 +675,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers (Time ago)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -728,7 +728,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash - Helpers
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./constants.js
@@ -743,7 +743,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - lodash
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./init.js
@@ -753,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Z Index)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -811,7 +811,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers (Top index)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -841,7 +841,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery - Helpers
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./clean_data.js
@@ -861,7 +861,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - jQuery
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./init.js
@@ -2367,7 +2367,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr (Init)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./vendor/modernizr.js
@@ -2397,7 +2397,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Clip Path Polygon)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2415,7 +2415,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Clip Path Url)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2474,7 +2474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2492,7 +2492,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox Legacy)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2510,7 +2510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Flexbox Tweener)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2528,7 +2528,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Overlay Scrollbars)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2550,7 +2550,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Position Sticky)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2568,7 +2568,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests (Scrollbar size)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
@@ -2592,7 +2592,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr - Tests
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./clip_path_polygon.js
@@ -2608,7 +2608,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Modernizr
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./init.js
@@ -2618,7 +2618,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Svelto
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/jquery/jquery.js
@@ -2633,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/* SVELTO */
 
 		var Svelto = {
-				VERSION: '0.7.8',
+				VERSION: '0.7.9',
 				$: jQuery,
 				_: lodash,
 				Modernizr: Modernizr,
@@ -2649,7 +2649,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Animations
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -2677,7 +2677,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Breakpoints
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -2712,7 +2712,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Breakpoint
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/breakpoints/breakpoints.js
@@ -2796,7 +2796,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Browser
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -2874,7 +2874,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Colors
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -2924,7 +2924,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Cookie
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
@@ -3014,7 +3014,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Keyboard
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
@@ -3118,7 +3118,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Mouse
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -3157,7 +3157,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Pointer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
@@ -3377,7 +3377,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Push state
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -3413,7 +3413,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Route
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/push_state/push_state.js
@@ -3452,7 +3452,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Sizes
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -3486,7 +3486,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Widgetize
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -3639,7 +3639,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Factory
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -3793,7 +3793,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Widget
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/breakpoint/breakpoint.js
@@ -4619,7 +4619,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Checkbox
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -4704,7 +4704,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Radio
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/checkbox/checkbox.js
@@ -4765,7 +4765,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - ClassSwitch
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -5023,7 +5023,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Datepicker
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -5566,7 +5566,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Draggable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -6214,7 +6214,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Expander
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -6322,7 +6322,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Accordion
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/expander/expander.js
@@ -6487,7 +6487,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Flickable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -6663,7 +6663,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Flippable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -6762,7 +6762,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Form Sync
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -6924,7 +6924,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Infobar
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -6992,7 +6992,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Input - Autogrow
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
@@ -7128,7 +7128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Input - File - Names
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -7252,7 +7252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Modal
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -7468,7 +7468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Numbox
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -7717,7 +7717,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Overlay
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -7905,7 +7905,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Spinner - Overlay
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/colors.js
@@ -8027,7 +8027,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
 * Svelto - Widgets - Progressbar
 * =========================================================================
-* Copyright (c) 2015-2016 Fabio Spampinato
+* Copyright (c) 2015-2017 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 * =========================================================================
 * @require core/widget/widget.js
@@ -8191,7 +8191,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Progressbar (Helper)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./progressbar.js
@@ -8214,7 +8214,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Rails
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -8462,7 +8462,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -8528,6 +8528,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.abort();
 
 								_get(Remote.prototype.__proto__ || Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
+						}
+
+						/* PRIVATE */
+
+				}, {
+						key: '_getAjax',
+						value: function _getAjax(options) {
+
+								return _.extend({}, this.options.ajax, options, {
+										beforeSend: this.__beforesend.bind(this),
+										complete: this.__complete.bind(this),
+										error: this.__error.bind(this),
+										success: this.__success.bind(this)
+								});
 						}
 
 						/* REQUEST HANDLERS */
@@ -8604,12 +8618,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this._requestsNr++;
 								this._isAborted = false;
 
-								this.xhr = $.ajax(_.extend({}, this.options.ajax, options, {
-										beforeSend: this.__beforesend.bind(this),
-										complete: this.__complete.bind(this),
-										error: this.__error.bind(this),
-										success: this.__success.bind(this)
-								}));
+								this.ajax = this._getAjax(options);
+								this.xhr = $.ajax(this.ajax);
 						}
 				}, {
 						key: 'isAborted',
@@ -8642,7 +8652,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote (Trigger)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -8734,7 +8744,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Ripple
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -8959,7 +8969,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Table - Sortable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -9230,7 +9240,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Table Helper
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -9438,7 +9448,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Targeter
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -9522,7 +9532,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Targeter - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../targeter.js
@@ -9609,7 +9619,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../expander.js
@@ -9653,7 +9663,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Infobar - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../infobar.js
@@ -9697,7 +9707,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../modal.js
@@ -9741,7 +9751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../overlay.js
@@ -9785,7 +9795,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Targeter - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../closer/closer.js
@@ -9982,7 +9992,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../expander.js
@@ -10026,7 +10036,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../modal.js
@@ -10070,7 +10080,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../overlay.js
@@ -10114,7 +10124,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Targeter - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../opener/opener.js
@@ -10178,7 +10188,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Expander - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../expander.js
@@ -10222,7 +10232,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Flippable - Targeters - Flipper
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../flippable.js
@@ -10271,7 +10281,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Modal - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../modal.js
@@ -10315,7 +10325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Overlay - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../overlay.js
@@ -10359,7 +10369,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Textarea - Autogrow
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -10479,7 +10489,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Time Ago
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -10615,7 +10625,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Zoomable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -11149,7 +11159,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Zoomable - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../zoomable.js
@@ -11193,7 +11203,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Zoomable - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../zoomable.js
@@ -11237,7 +11247,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Zoomable - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../zoomable.js
@@ -11281,7 +11291,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Core - Z-Depths
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -11308,7 +11318,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Decorators - Blurred
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -11329,7 +11339,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Decorators - Obscured
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -11350,7 +11360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Color
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -11752,7 +11762,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Colorpicker
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -12187,7 +12197,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Directions
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -12223,7 +12233,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Panel
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -12673,7 +12683,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../panel.js
@@ -12717,7 +12727,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../panel.js
@@ -12761,7 +12771,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Panel - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../panel.js
@@ -12805,7 +12815,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tabs
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -13002,7 +13012,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Embedded CSS
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -13150,7 +13160,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Fuzzy
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -13206,7 +13216,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - N Times Action (Group)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/cookie/cookie.js
@@ -13352,7 +13362,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - N Times Action (Action)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./NTA.Group.js
@@ -13405,7 +13415,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - N Times Action
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./NTA.Action.js
@@ -13477,7 +13487,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - One Time Action
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -13499,7 +13509,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Regexes
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -13539,7 +13549,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Timer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
@@ -13725,7 +13735,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Carousel
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -14099,7 +14109,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Toast
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
@@ -14477,7 +14487,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Notification
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -14547,7 +14557,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Liker
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/remote/remote.js
@@ -14807,7 +14817,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Rater
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/toast/toast.js
@@ -14986,7 +14996,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Action
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
@@ -15231,7 +15241,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Action (Helper)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./action.js
@@ -15252,7 +15262,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Action (Trigger)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote_trigger.js
@@ -15296,7 +15306,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Loader
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
@@ -15537,7 +15547,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Loader (Helper)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./loader.js
@@ -15589,7 +15599,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Loader (Trigger)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote_trigger.js
@@ -15647,41 +15657,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
- * Svelto - Widgets - Remote - Modal
+ * Svelto - Widgets - Remote - Widget
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
- * @require widgets/modal/modal.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
-//FIXME: Not well written
 
 (function ($, _, Svelto, Widgets, Factory, Animations) {
 
 		'use strict';
 
+		/* VARIABLES */
+
+		var cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside
+
 		/* CONFIG */
 
 		var config = {
-				name: 'remoteModal',
+				name: 'remoteWidget',
+				templates: {
+						placeholder: false
+				},
 				options: {
 						persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+						resize: true, // Wether performing a resize transition between the loading widget and the remove widget or not
+						$wrapper: false, // The loading widget will be appended to it, fallback to the $layout
+						widget: false,
+						methods: {
+								open: 'open',
+								close: 'close'
+						},
+						events: {
+								beforeclose: 'beforeclose',
+								close: 'close'
+						},
 						ajax: {
 								cache: false,
 								method: 'POST'
 						},
+						cache: {
+								enabled: false, // Wether remote widgets should be cached or not
+								size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
+						},
 						messages: {
 								error: 'An error occurred, please try again later'
 						},
+						attributes: {
+								id: 'data-remote-widget-id'
+						},
 						classes: {
-								placeholder: 'remote-modal-placeholder',
-								loaded: 'remote-modal-loaded',
-								resizing: 'remote-modal-resizing',
-								showing: 'remote-modal-showing'
+								placeholder: 'remote-widget-placeholder',
+								placeholderExtra: '',
+								loaded: 'remote-widget-loaded',
+								resizing: 'remote-widget-resizing',
+								showing: 'remote-widget-showing'
 						},
 						animations: {
 								resize: Animations.normal
@@ -15689,26 +15723,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 		};
 
-		/* REMOTE MODAL */
+		/* REMOTE WIDGET */
 
-		var RemoteModal = function (_Widgets$Remote4) {
-				_inherits(RemoteModal, _Widgets$Remote4);
+		var RemoteWidget = function (_Widgets$Remote4) {
+				_inherits(RemoteWidget, _Widgets$Remote4);
 
-				function RemoteModal() {
-						_classCallCheck(this, RemoteModal);
+				function RemoteWidget() {
+						_classCallCheck(this, RemoteWidget);
 
-						return _possibleConstructorReturn(this, (RemoteModal.__proto__ || Object.getPrototypeOf(RemoteModal)).apply(this, arguments));
+						return _possibleConstructorReturn(this, (RemoteWidget.__proto__ || Object.getPrototypeOf(RemoteWidget)).apply(this, arguments));
 				}
 
-				_createClass(RemoteModal, [{
-						key: '_getUrl',
+				_createClass(RemoteWidget, [{
+						key: '_init',
 
+
+						/* SPECIAL */
+
+						value: function _init() {
+
+								this.options.$wrapper = this.options.$wrapper || this.$layout;
+						}
 
 						/* PRIVATE */
 
+				}, {
+						key: '_getUrl',
 						value: function _getUrl() {
 
 								return window.location.href.split('#')[0];
+						}
+				}, {
+						key: '_getRequestId',
+						value: function _getRequestId(ajax) {
+								var method = ajax.method,
+								    url = ajax.url,
+								    data = ajax.data;
+
+
+								if (_.isPlainObject(data)) data = JSON.stringify(data);
+
+								return btoa([method, url, data].join()); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
 						}
 
 						/* PERSISTENT */
@@ -15734,40 +15789,108 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								}
 						}
 
-						/* MODAL */
+						/* WIDGET */
 
 				}, {
-						key: '___loadingModal',
-						value: function ___loadingModal() {
+						key: '___widget',
+						value: function ___widget(widget) {
 
-								/*
-          <div class="modal ${this.options.classes.placeholder} card">
-            <div class="card-block">
-              <svg class="spinner">
-                <circle cx="1.625em" cy="1.625em" r="1.25em">
-              </svg>
-            </div>
-          </div>
-        */
+								if (!widget) {
 
-								this.$modal = $('<div class="modal ' + this.options.classes.placeholder + ' card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo(this.$layout);
+										widget = $(this._template('placeholder', this.options)).attr(this.options.attributes.id, this.requestId);
+								}
+
+								this.$widget = $(widget).appendTo(this.options.$wrapper);
 						}
 				}, {
-						key: '_destroyModal',
-						value: function _destroyModal() {
+						key: '_widgetInit',
+						value: function _widgetInit() {
 
-								if (!this.$modal) return;
+								this.$widget.widgetize();
+						}
+				}, {
+						key: '_widgetOpen',
+						value: function _widgetOpen() {
 
-								this.$modal.modal('close');
+								this.$widget[this.options.widget.config.name](this.options.methods.open);
+						}
+				}, {
+						key: '_widgetReplaceWith',
+						value: function _widgetReplaceWith($replacement) {
+
+								var instance = this.$widget[this.options.widget.config.name]('instance');
+
+								instance[this.options.methods.close] = _.noop;
+								instance.destroy();
+
+								this.$widget.replaceWith($replacement);
+								this.$widget = $replacement;
+
+								this._widgetInit();
+						}
+				}, {
+						key: '_widgetResizing',
+						value: function _widgetResizing() {}
+				}, {
+						key: '_widgetResized',
+						value: function _widgetResized() {
+
+								this.$widget.css({
+										width: '',
+										height: ''
+								});
+
+								this.$widget.removeClass(this.options.classes.placeholder).removeClass(this.options.classes.loaded).removeClass(this.options.classes.resizing).removeClass(this.options.classes.showing);
+						}
+				}, {
+						key: '_widgetDestroy',
+						value: function _widgetDestroy() {
+
+								if (!this.$widget) return;
+
+								this.$widget[this.options.widget.config.name](this.options.methods.close);
 
 								this._delay(function () {
 
-										if (!this.$modal) return;
+										if (!this.$widget) return;
 
-										this.$modal.remove();
+										this.$widget.remove();
 
-										this.$modal = false;
-								}, Widgets.Modal.config.options.animations.close);
+										this.$widget = false;
+								}, this.options.widget.config.options.animations[this.options.methods.close]);
+						}
+
+						/* CACHE */
+
+				}, {
+						key: '_cacheGet',
+						value: function _cacheGet(id) {
+
+								return cache.find(function (obj) {
+										return obj.id === id;
+								});
+						}
+				}, {
+						key: '_cacheSet',
+						value: function _cacheSet(id, widget) {
+
+								cache.unshift({ id: id, widget: widget });
+
+								if (cache.length > this.options.cache.size) {
+
+										cache = cache.slice(0, this.options.cache.size);
+								}
+						}
+				}, {
+						key: '_cacheShow',
+						value: function _cacheShow(obj) {
+
+								var $widget = $(obj.widget).attr(this.options.attributes.id, obj.id);
+
+								this.___widget($widget);
+								this._widgetInit();
+								this._widgetOpen();
+								this.___close();
 						}
 
 						/* ABORT */
@@ -15776,7 +15899,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___abort',
 						value: function ___abort() {
 
-								this._on(true, this.$modal, 'modal:beforeclose', this.abort);
+								this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.beforeclose).toLowerCase(), this.abort);
 						}
 
 						/* CLOSE */
@@ -15785,7 +15908,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___close',
 						value: function ___close() {
 
-								this._on(true, this.$modal, 'modal:close', this._destroyModal);
+								this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.close).toLowerCase(), this._widgetDestroy);
 						}
 
 						/* REQUEST HANDLERS */
@@ -15796,18 +15919,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								if (this.isAborted()) return;
 
+								this.requestId = this._getRequestId(this.ajax);
+
+								/* CLOSING */
+
+								var $widget = $('[' + this.options.attributes.id + '="' + this.requestId + '"]');
+
+								if ($widget.length) {
+
+										$widget[this.options.widget.config.name](this.options.methods.close);
+
+										return false;
+								}
+
+								/* CACHE */
+
+								if (this.options.cache.enabled) {
+
+										var cached = this._cacheGet(this.requestId);
+
+										if (cached) {
+
+												this._cacheShow(cached);
+
+												return false;
+										}
+								}
+
+								/* REQUEST */
+
 								this._defer(function () {
 
 										this._openUrl = this._getUrl();
 								});
 
 								this.___persistent();
-								this.___loadingModal();
+								this.___widget();
 								this.___abort();
 
-								this.$modal.modal('open');
+								this._widgetInit();
+								this._widgetOpen();
 
-								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__beforesend', this).call(this, res);
+								_get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__beforesend', this).call(this, res);
 						}
 				}, {
 						key: '__error',
@@ -15819,9 +15972,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								$.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
 
-								this._destroyModal();
+								this._widgetDestroy();
 
-								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__error', this).call(this, res);
+								_get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__error', this).call(this, res);
 						}
 				}, {
 						key: '__success',
@@ -15831,57 +15984,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-								if (_.isError(resj) || !('modal' in resj)) return this.__error(res);
+								if (_.isError(resj) || !(this.options.widget.config.name in resj)) return this.__error(res);
 
 								/* VARIABLES */
 
-								var prevRect = this.$modal.getRect(),
-								    $remoteModal = $(resj.modal);
+								var remoteWidget = resj[this.options.widget.config.name],
+								    $remoteWidget = $(remoteWidget),
+								    prevRect = void 0;
 
-								$remoteModal.addClass(Widgets.Modal.config.options.classes.show).addClass(Widgets.Modal.config.options.classes.open);
+								if (this.options.resize) prevRect = this.$widget.getRect();
 
-								/* AVOIDING MODAL CLOSE */
+								$remoteWidget.addClass(this.options.widget.config.options.classes.show).addClass(this.options.widget.config.options.classes[this.options.methods.open]);
+								$remoteWidget.attr(this.options.attributes.id, this.requestId);
 
-								var instance = this.$modal.modal('instance');
-								instance.close = instance._reset;
+								/* CACHE */
 
-								/* RESIZING */
+								if (this.options.cache.enabled) {
+
+										this._cacheSet(this.requestId, remoteWidget);
+								}
+
+								/* REPLACING */
 
 								this._frame(function () {
+										var _this73 = this;
 
-										this.$modal.replaceWith($remoteModal);
-										this.$modal = $remoteModal;
-										this.$modal.widgetize();
+										this._widgetReplaceWith($remoteWidget);
 
 										this.___close();
 
-										var newRect = this.$modal.getRect();
+										if (this.options.resize) {
+												(function () {
 
-										this.$modal.css({
-												width: prevRect.width,
-												height: prevRect.height
-										});
+														var newRect = _this73.$widget.getRect();
 
-										this.$modal.addClass(this.options.classes.placeholder).addClass(this.options.classes.resizing);
+														_this73.$widget.css({
+																width: prevRect.width,
+																height: prevRect.height
+														});
 
-										this._frame(function () {
-												var _this73 = this;
+														_this73.$widget.addClass(_this73.options.classes.placeholder).addClass(_this73.options.classes.resizing);
 
-												this.$modal.addClass(this.options.classes.showing);
+														_this73._frame(function () {
 
-												this.$modal.animate({
-														width: newRect.width,
-														height: newRect.height
-												}, this.options.animations.resize, function () {
-														_this73.$modal.css({
-																width: '',
-																height: ''
-														}).removeClass(_this73.options.classes.placeholder + ' ' + _this73.options.classes.loaded + ' ' + _this73.options.classes.resizing + ' ' + _this73.options.classes.showing);
-												});
-										});
+																this.$widget.addClass(this.options.classes.showing);
+
+																this.$widget.animate({
+																		width: newRect.width,
+																		height: newRect.height
+																}, {
+																		duration: this.options.animations.resize,
+																		step: this._widgetResizing.bind(this),
+																		always: this._widgetResized.bind(this)
+																});
+														});
+												})();
+										}
 								});
 
-								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), '__success', this).call(this, res);
+								_get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__success', this).call(this, res);
 						}
 
 						/* API OVERRIDES */
@@ -15890,14 +16051,69 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: 'abort',
 						value: function abort() {
 
-								this._destroyModal();
+								this._widgetDestroy();
 
-								_get(RemoteModal.prototype.__proto__ || Object.getPrototypeOf(RemoteModal.prototype), 'abort', this).call(this);
+								_get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), 'abort', this).call(this);
 						}
 				}]);
 
-				return RemoteModal;
+				return RemoteWidget;
 		}(Widgets.Remote);
+
+		/* FACTORY */
+
+		Factory.init(RemoteWidget, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/modal/modal.js
+ * @require widgets/remote/widget/widget.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'remoteModal',
+				templates: {
+						placeholder: '<div class="modal container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
+				},
+				options: {
+						widget: Widgets.Modal,
+						classes: {
+								placeholder: 'remote-modal-placeholder',
+								loaded: 'remote-modal-loaded',
+								resizing: 'remote-modal-resizing',
+								showing: 'remote-modal-showing'
+						},
+						animations: {
+								resize: Animations.normal
+						}
+				}
+		};
+
+		/* REMOTE MODAL */
+
+		var RemoteModal = function (_Widgets$RemoteWidget) {
+				_inherits(RemoteModal, _Widgets$RemoteWidget);
+
+				function RemoteModal() {
+						_classCallCheck(this, RemoteModal);
+
+						return _possibleConstructorReturn(this, (RemoteModal.__proto__ || Object.getPrototypeOf(RemoteModal)).apply(this, arguments));
+				}
+
+				return RemoteModal;
+		}(Widgets.RemoteWidget);
 
 		/* FACTORY */
 
@@ -15907,7 +16123,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal (Helper)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./modal.js
@@ -15928,7 +16144,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal (Trigger)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote_trigger.js
@@ -15972,7 +16188,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tagbox
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/keyboard/keyboard.js
@@ -16469,7 +16685,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Toast (Helper)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./toast.js
@@ -16505,7 +16721,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Touching
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -16639,7 +16855,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Droppable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -16735,24 +16951,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '___drag',
 						value: function ___drag() {
 
-								this.___dragStart();
 								this.___dragMove();
 								this.___dragEnd();
-						}
-
-						/* DRAG START */
-
-				}, {
-						key: '___dragStart',
-						value: function ___dragStart() {
-
-								this._on(this.$layout, 'draggable:start', this.__dragStart);
-						}
-				}, {
-						key: '__dragStart',
-						value: function __dragStart() {
-
-								this._dragging = true;
 						}
 
 						/* DRAG MOVE */
@@ -16767,21 +16967,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						key: '__dragMove',
 						value: function __dragMove(event, data) {
 
-								if (!this._dragging) return;
+								if (!this._isCompatible(data.draggable)) return;
 
-								if (this._isCompatible(data.draggable)) {
+								var isHovering = this._isPointHovering(false, data.moveEvent);
 
-										var isHovering = this._isPointHovering(false, data.moveEvent);
+								if (isHovering !== this._wasHovering) {
 
-										if (isHovering !== this._wasHovering) {
+										this.$droppable.toggleClass(this.options.classes.hover, isHovering);
 
-												this.$droppable.toggleClass(this.options.classes.hover, isHovering);
-
-												this._trigger(isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable });
-										}
-
-										this._wasHovering = isHovering;
+										this._trigger(isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable });
 								}
+
+								this._wasHovering = isHovering;
 						}
 
 						/* DRAG END */
@@ -16795,8 +16992,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__dragEnd',
 						value: function __dragEnd(event, data) {
-
-								this._dragging = false;
 
 								if (this._isCompatible(data.draggable)) {
 
@@ -16828,7 +17023,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Transform
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -16927,7 +17122,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Positionate
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -17234,7 +17429,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Popover
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -17243,7 +17438,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require lib/touching/touching.js
  * ========================================================================= */
 
-//FIXME: Close it if after a `route` event the trigger element is no longer visible
+//FIXME: Close it if after a `route` event if the trigger element is no longer visible
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations) {
 
@@ -17281,6 +17476,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						callbacks: {
 								beforeopen: _.noop,
 								open: _.noop,
+								beforeclose: _.noop,
 								close: _.noop
 						}
 				}
@@ -17312,7 +17508,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								this.hasTip = !this.$popover.hasClass(this.options.classes.noTip);
 								this.isAffixed = this.$popover.hasClass(this.options.classes.affixed);
 
-								this._isOpen = false;
+								this._isOpen = this.$popover.hasClass(this.options.classes.open);
 						}
 				}, {
 						key: '_events',
@@ -17470,14 +17666,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* RESTORING ANCHOR */
 
-								if (!anchor && this.$prevAnchor && !('point' in this.options.positionate)) {
+								if (!anchor && this.$prevAnchor && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate)) {
 
 										anchor = this.$prevAnchor[0];
 								}
 
 								/* CHECKING */
 
-								if (this._lock || (!anchor || this._isOpen && this.$anchor && anchor === this.$anchor[0]) && !('point' in this.options.positionate)) return;
+								if (this._lock || (!anchor || this._isOpen && this.$anchor && anchor === this.$anchor[0]) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate)) return;
 
 								/* VARIABLES */
 
@@ -17506,7 +17702,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* ANCHOR */
 
-								this.$anchor = anchor ? $(anchor) : false;
+								this.$anchor = anchor ? $(anchor) : this.options.positionate.$anchor || false;
 
 								/* BEFORE OPENING */
 
@@ -17561,6 +17757,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								/* CLOSING */
 
+								this._trigger('beforeclose');
+
 								this._frame(function () {
 
 										this.$popover.removeClass(this.options.classes.open);
@@ -17597,7 +17795,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../popover.js
@@ -17641,7 +17839,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../popover.js
@@ -17685,7 +17883,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Popover - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../popover.js
@@ -17727,9 +17925,209 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/popover/popover.js
+ * @require widgets/remote/widget/widget.js
+ * ========================================================================= */
+
+//FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'remotePopover',
+				templates: {
+						placeholder: '<div class="popover container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
+				},
+				options: {
+						widget: Widgets.Popover,
+						positionate: {}, // Extending Widget.Popover.options.positionate
+						cache: {
+								enabled: true
+						},
+						classes: {
+								placeholder: 'remote-popover-placeholder',
+								loaded: 'remote-popover-loaded',
+								resizing: 'remote-popover-resizing',
+								showing: 'remote-popover-showing'
+						},
+						animations: {
+								resize: Animations.fast
+						}
+				}
+		};
+
+		/* REMOTE POPOVER */
+
+		var RemotePopover = function (_Widgets$RemoteWidget2) {
+				_inherits(RemotePopover, _Widgets$RemoteWidget2);
+
+				function RemotePopover() {
+						_classCallCheck(this, RemotePopover);
+
+						return _possibleConstructorReturn(this, (RemotePopover.__proto__ || Object.getPrototypeOf(RemotePopover)).apply(this, arguments));
+				}
+
+				_createClass(RemotePopover, [{
+						key: '_positionate',
+
+
+						/* PRIVATE */
+
+						value: function _positionate() {
+
+								this.$widget.popover('instance')._positionate();
+						}
+
+						/* WIDGET */
+
+				}, {
+						key: '_widgetInit',
+						value: function _widgetInit() {
+
+								this.$widget.popover('option', 'positionate', this.options.positionate);
+
+								_get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetInit', this).call(this);
+						}
+				}, {
+						key: '_widgetReplaceWith',
+						value: function _widgetReplaceWith($replacement) {
+
+								var classList = this.$widget.attr('class') || '',
+								    pointingClass = classList.split(' ').find(function (cls) {
+										return cls.startsWith('pointing-');
+								}),
+								    matrix = this.$widget.matrix(),
+								    positionateGuid = this.$widget[0]._positionateGuid;
+
+								if (pointingClass) $replacement.addClass(pointingClass);
+
+								_get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetReplaceWith', this).call(this, $replacement);
+
+								this.$widget.matrix(matrix);
+								this.$widget[0]._positionateGuid = positionateGuid;
+
+								if (!this.options.resize) this._positionate();
+						}
+				}, {
+						key: '_widgetResizing',
+						value: function _widgetResizing() {
+
+								this._positionate();
+						}
+				}]);
+
+				return RemotePopover;
+		}(Widgets.RemoteWidget);
+
+		/* FACTORY */
+
+		Factory.init(RemotePopover, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Popover (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./popover.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets) {
+
+		'use strict';
+
+		/* HELPER */
+
+		$.remotePopover = function (ajax, target) {
+
+				var positionate = {};
+
+				if (target instanceof $) {
+
+						positionate.$anchor = target;
+				} else if ('x' in target && 'y' in target) {
+
+						positionate.point = target;
+				}
+
+				new Widgets.RemotePopover({ ajax: ajax, positionate: positionate }).request();
+		};
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Popover (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./popover.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+		'use strict';
+
+		/* CONFIG */
+
+		var config = {
+				name: 'remotePopoverTrigger',
+				plugin: true,
+				selector: '.remote-popover-trigger',
+				options: {
+						widget: Widgets.RemotePopover
+				}
+		};
+
+		/* REMOTE POPOVER TRIGGER */
+
+		var RemotePopoverTrigger = function (_Widgets$RemoteTrigge4) {
+				_inherits(RemotePopoverTrigger, _Widgets$RemoteTrigge4);
+
+				function RemotePopoverTrigger() {
+						_classCallCheck(this, RemotePopoverTrigger);
+
+						return _possibleConstructorReturn(this, (RemotePopoverTrigger.__proto__ || Object.getPrototypeOf(RemotePopoverTrigger)).apply(this, arguments));
+				}
+
+				_createClass(RemotePopoverTrigger, [{
+						key: 'trigger',
+						value: function trigger() {
+
+								var options = {
+										ajax: this.options.ajax,
+										positionate: {
+												$anchor: this.$trigger
+										}
+								};
+
+								new this.options.widget(options).request();
+						}
+				}]);
+
+				return RemotePopoverTrigger;
+		}(Widgets.RemoteTrigger);
+
+		/* FACTORY */
+
+		Factory.init(RemotePopoverTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
  * Svelto - Widgets - Select
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/browser/browser.js
@@ -18073,7 +18471,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tooltip
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/popover/popover.js
@@ -18113,7 +18511,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Closer
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../tooltip.js
@@ -18157,7 +18555,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Opener
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../tooltip.js
@@ -18204,7 +18602,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Tooltip - Targeters - Toggler
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../tooltip.js
@@ -18251,7 +18649,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Slider
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require lib/transform/transform.js
@@ -18570,7 +18968,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Switch
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/colors/colors.js
@@ -18831,7 +19229,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Lib - Validator
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
@@ -18945,7 +19343,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Form Validate
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.js
@@ -19479,7 +19877,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Form Ajax
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ../validate/validate.js
@@ -19558,7 +19956,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_autoclose',
 						value: function _autoclose() {
-								var _this90 = this;
+								var _this93 = this;
 
 								var _options$autoclose = this.options.autoclose,
 								    selectors = _options$autoclose.selectors,
@@ -19567,15 +19965,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 								var _loop2 = function _loop2(i, l) {
 
-										var $closable = _this90.$form.closest(selectors[i]);
+										var $closable = _this93.$form.closest(selectors[i]);
 
 										if (!$closable.length) return 'continue';
 
 										var method = _.isArray(methods) ? methods[i] : methods;
 
-										if (_this90.options.spinnerOverlay) {
+										if (_this93.options.spinnerOverlay) {
 
-												_this90._on('spinneroverlay:close', function () {
+												_this93._on('spinneroverlay:close', function () {
 														return $closable[plugins[i]](method);
 												});
 										} else {
@@ -19587,9 +19985,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								};
 
 								_loop3: for (var i = 0, l = selectors.length; i < l; i++) {
-										var _ret3 = _loop2(i, l);
+										var _ret4 = _loop2(i, l);
 
-										switch (_ret3) {
+										switch (_ret4) {
 												case 'continue':
 														continue;
 
@@ -19609,7 +20007,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '__submit',
 						value: function __submit(event) {
-								var _this91 = this;
+								var _this94 = this;
 
 								event.preventDefault();
 								event.stopImmediatePropagation();
@@ -19626,21 +20024,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 										beforeSend: function beforeSend() {
 
-												if (_this91.options.spinnerOverlay) {
+												if (_this94.options.spinnerOverlay) {
 
-														_this91.$form.spinnerOverlay('open');
+														_this94.$form.spinnerOverlay('open');
 												}
 
-												_this91._trigger('beforesend');
+												_this94._trigger('beforesend');
 										},
 
 										error: function error(res) {
 
 												var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-												$.toast(_.isError(resj) || !('message' in resj) ? _this91.options.messages.error : resj.msg);
+												$.toast(_.isError(resj) || !('message' in resj) ? _this94.options.messages.error : resj.msg);
 
-												_this91._trigger('error');
+												_this94._trigger('error');
 										},
 
 										success: function success(res) {
@@ -19651,38 +20049,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 														if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-																$.toast(resj.message || _this91.options.messages.refreshing);
+																$.toast(resj.message || _this94.options.messages.refreshing);
 
 																location.reload();
 														} else if (resj.url) {
 
 																// In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-																$.toast(resj.message || _this91.options.messages.redirecting);
+																$.toast(resj.message || _this94.options.messages.redirecting);
 
 																location.assign(resj.url);
 														} else {
 
-																$.toast(resj.message || _this91.options.messages.success);
+																$.toast(resj.message || _this94.options.messages.success);
 														}
 
-														if (_this91.options.autoclose.enabled) _this91._autoclose();
+														if (_this94.options.autoclose.enabled) _this94._autoclose();
 												} else {
 
-														$.toast(_this91.options.messages.success);
+														$.toast(_this94.options.messages.success);
 												}
 
-												_this91._trigger('success');
+												_this94._trigger('success');
 										},
 
 										complete: function complete() {
 
-												if (_this91.options.spinnerOverlay) {
+												if (_this94.options.spinnerOverlay) {
 
-														_this91.$form.spinnerOverlay('close');
+														_this94.$form.spinnerOverlay('close');
 												}
 
-												_this91._trigger('complete');
+												_this94._trigger('complete');
 										}
 
 								});
@@ -19700,7 +20098,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - _ - Scroll
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/pointer/pointer.js
@@ -33612,7 +34010,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Datatables (Config)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/datatables.js
@@ -33835,7 +34233,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Datatables
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./config.js
@@ -33961,7 +34359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Selectable
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before widgets/datatables/datatables.js
@@ -34367,7 +34765,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Selectable - Actions
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before widgets/remote/action/action.js
@@ -34511,11 +34909,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, {
 						key: '_getIds',
 						value: function _getIds() {
-								var _this95 = this;
+								var _this98 = this;
 
 								var $rows = this._targetInstance.get(),
 								    ids = $rows.get().map(function (row) {
-										return _this95.options.selectors.id ? $(row).find(_this95.options.selectors.id).text() : $(row).data(_this95.options.datas.id);
+										return _this98.options.selectors.id ? $(row).find(_this98.options.selectors.id).text() : $(row).data(_this98.options.datas.id);
 								});
 
 								return _.compact(ids);
@@ -34533,7 +34931,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Selectable - Actions - Container
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before widgets/datatables/datatables.js
@@ -34682,7 +35080,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Selectable - Actions - Popover
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../actions.js
@@ -35985,7 +36383,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Editor
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ./vendor/marked.js
@@ -36548,7 +36946,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* =========================================================================
  * Svelto - Widgets - Fullscreen
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/pointer/pointer.js
