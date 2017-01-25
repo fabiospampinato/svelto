@@ -2,7 +2,7 @@
 /* =========================================================================
  * Svelto - Widgets - Badge (Variables)
  * =========================================================================
- * Copyright (c) 2015-2016 Fabio Spampinato
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require decorators/border_radius/variables.scss
@@ -14,7 +14,7 @@ $badge-color: 'secondary' !default;
 $badge-color-force: false !default;
 $badge-color-basic: false !default;
 
-$badge-size: 'xxsmall' !default; 
+$badge-size: 'xxsmall' !default;
 $badge-size-force: false !default;
 $badge-size-basic: true !default;
 
