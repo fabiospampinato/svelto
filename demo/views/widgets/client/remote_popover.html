@@ -1,0 +1,36 @@
+
+<!-- REMOTE POPOVER -->
+
+<template name="remote_popover">
+
+  {{{sw.divider "Remote Popover"}}}
+
+  <div class="multiple">
+    <div class="button bordered remote-popover-trigger" data-url="/remote-popover-1">Load remote</div>
+    <div class="button bordered remote-popover-trigger" data-url="/remote-popover-2" data-data='{"color": "primary"}'>Load remote (Primary)</div>
+    <div class="button bordered remote-popover-trigger" data-url="/remote-popover-2" data-data='{"color": "secondary"}'>Load remote (Secondary)</div>
+    <div class="button bordered remote-popover-trigger" data-url="/remote-popover-error">Load remote (Error)</div>
+  </div>
+
+  {{> remote_popover_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="remote_popover_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('.remote-popover-trigger').remotePopoverTrigger ( action );
+    }
+  </script>
+
+</template>

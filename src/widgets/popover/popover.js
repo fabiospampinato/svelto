@@ -11,7 +11,7 @@
  * @require lib/touching/touching.js
  * ========================================================================= */
 
-//FIXME: Close it if after a `route` event the trigger element is no longer visible
+//FIXME: Close it if after a `route` event if the trigger element is no longer visible
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmbeddedCSS, Animations ) {
 
@@ -49,6 +49,7 @@
       callbacks: {
         beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -69,7 +70,7 @@
       this.hasTip = !this.$popover.hasClass ( this.options.classes.noTip );
       this.isAffixed = this.$popover.hasClass ( this.options.classes.affixed );
 
-      this._isOpen = false;
+      this._isOpen = this.$popover.hasClass ( this.options.classes.open );
 
     }
 
@@ -223,7 +224,7 @@
 
       /* RESTORING ANCHOR */
 
-      if ( !anchor && this.$prevAnchor && !('point' in this.options.positionate) ) {
+      if ( !anchor && this.$prevAnchor && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) {
 
         anchor = this.$prevAnchor[0];
 
@@ -231,7 +232,7 @@
 
       /* CHECKING */
 
-      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) ) ) return;
+      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return;
 
       /* VARIABLES */
 
@@ -262,7 +263,7 @@
 
       /* ANCHOR */
 
-      this.$anchor = anchor ? $(anchor) : false;
+      this.$anchor = anchor ? $(anchor) : this.options.positionate.$anchor || false;
 
       /* BEFORE OPENING */
 
@@ -318,6 +319,8 @@
       this.$anchor = false;
 
       /* CLOSING */
+
+      this._trigger ( 'beforeclose' );
 
       this._frame ( function () {
 
