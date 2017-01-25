@@ -16,13 +16,14 @@
 
   /* MATRIX */
 
-  let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) );
+  let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) ),
+      precision = 3; // Or sometimes we may get weird values like `2.4492935982947064e-16` on Safari
 
   $.fn.matrix = function ( values ) {
 
     if ( values ) {
 
-      values = values.map ( val => Number ( val ).toFixed ( 20 ) ).join ( ',' );
+      values = values.map ( val => parseFloat ( parseFloat ( val ).toFixed ( precision ) ) ).join ( ',' );
 
       this[0].style[property] = `matrix(${values})`;
 
@@ -32,7 +33,7 @@
 
       let transformStr = getComputedStyle ( this[0], null )[property];
 
-      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
+      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( parseFloat ( value ).toFixed ( precision ) ) ) : [1, 0, 0, 1, 0, 0];
 
     }
 
