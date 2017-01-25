@@ -60,6 +60,19 @@
 
     }
 
+    /* PRIVATE */
+
+    _getAjax ( options ) {
+
+      return _.extend ( {}, this.options.ajax, options, {
+        beforeSend: this.__beforesend.bind ( this ),
+        complete: this.__complete.bind ( this ),
+        error: this.__error.bind ( this ),
+        success: this.__success.bind ( this )
+      });
+
+    }
+
     /* REQUEST HANDLERS */
 
     __beforesend ( res ) {
@@ -131,12 +144,8 @@
       this._requestsNr++;
       this._isAborted = false;
 
-      this.xhr = $.ajax ( _.extend ( {}, this.options.ajax, options, {
-        beforeSend: this.__beforesend.bind ( this ),
-        complete: this.__complete.bind ( this ),
-        error: this.__error.bind ( this ),
-        success: this.__success.bind ( this )
-      }));
+      this.ajax = this._getAjax ( options );
+      this.xhr = $.ajax ( this.ajax );
 
     }
 

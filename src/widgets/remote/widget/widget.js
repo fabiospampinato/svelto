@@ -11,11 +11,14 @@
 
 //FIXME: Clicking on the trigger when it's open should close it, not request another
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
-//TODO: Add caching capabilities, no need to request the same thing twice
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
   'use strict';
+
+  /* VARIABLES */
+
+  let cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside
 
   /* CONFIG */
 
@@ -40,6 +43,10 @@
       ajax: {
         cache: false,
         method: 'POST'
+      },
+      cache: {
+        enabled: false, // Wether remote widgets should be cached or not
+        size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
       },
       messages: {
         error: 'An error occurred, please try again later'
@@ -77,6 +84,16 @@
 
     }
 
+    _getRequestId ( ajax ) {
+
+      let {method, url, data} = ajax;
+
+      if ( _.isPlainObject ( data ) ) data = JSON.stringify ( data );
+
+      return [method, url, data].join ( '.' );
+
+    }
+
     /* PERSISTENT */
 
     ___persistent () {
@@ -103,15 +120,19 @@
 
     /* WIDGET */
 
-    ___widget () {
+    ___widget ( widget ) {
 
-      let html = this._template ( 'placeholder', this.options );
+      widget = widget || this._template ( 'placeholder', this.options );
 
-      this.$widget = $(html).appendTo ( this.options.$wrapper );
+      this.$widget = $(widget).appendTo ( this.options.$wrapper );
 
     }
 
-    _widgetInit () {}
+    _widgetInit () {
+
+      this.$widget.widgetize ();
+
+    }
 
     _widgetOpen () {
 
@@ -130,8 +151,6 @@
       this.$widget = $replacement;
 
       this._widgetInit ();
-
-      this.$widget.widgetize ();
 
     }
 
@@ -166,6 +185,40 @@
 
     }
 
+    /* CACHE */
+
+    _cacheGet ( id ) {
+
+      return cache.find ( obj => obj.id === id );
+
+    }
+
+    _cacheSet ( id, widget ) {
+
+      cache.unshift ({
+        id,
+        widget
+      });
+
+      if ( cache.length > this.options.cache.size ) {
+
+        cache = cache.slice ( 0, this.options.cache.size );
+
+      }
+
+    }
+
+    _cacheShow ( obj ) {
+
+      let $widget = $(obj.widget);
+
+      this.___widget ( $widget );
+      this._widgetInit ();
+      this._widgetOpen ();
+      this.___close ();
+
+    }
+
     /* ABORT */
 
     ___abort () {
@@ -187,6 +240,26 @@
     __beforesend ( res ) {
 
       if ( this.isAborted () ) return;
+
+      this.requestId = this._getRequestId ( this.ajax );
+
+      /* CACHE */
+
+      if ( this.options.cache.enabled ) {
+
+        let cached = this._cacheGet ( this.requestId );
+
+        if ( cached ) {
+
+          this._cacheShow ( cached );
+
+          return false;
+
+        }
+
+      }
+
+      /* REQUEST */
 
       this._defer ( function () {
 
@@ -229,16 +302,21 @@
 
       /* VARIABLES */
 
-      let $remoteWidget = $(resj[this.options.widget.config.name]),
+      let remoteWidget = resj[this.options.widget.config.name],
+          $remoteWidget = $(remoteWidget),
           prevRect;
 
       if ( this.options.resize ) prevRect = this.$widget.getRect ();
 
       $remoteWidget.addClass ( this.options.widget.config.options.classes.show ).addClass ( this.options.widget.config.options.classes[this.options.methods.open] );
 
-      /* AVOIDING WIDGET CLOSE */ //Triggered with the `replaceWith` call below
+      /* CACHE */
 
-      // this.$widget[this.options.widget.config.name]( 'instance' ).close = _.noop;
+      if ( this.options.cache.enabled ) {
+
+        this._cacheSet ( this.requestId, remoteWidget );
+
+      }
 
       /* REPLACING */
 

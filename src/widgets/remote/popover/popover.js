@@ -30,6 +30,9 @@
     options: {
       widget: Widgets.Popover,
       positionate: {}, // Extending Widget.Popover.options.positionate
+      cache: {
+        enabled: true
+      },
       classes: {
         placeholder: 'remote-popover-placeholder',
         loaded: 'remote-popover-loaded',
@@ -59,6 +62,8 @@
     _widgetInit () {
 
       this.$widget.popover ( 'option', 'positionate', this.options.positionate );
+
+      super._widgetInit ();
 
     }
 
