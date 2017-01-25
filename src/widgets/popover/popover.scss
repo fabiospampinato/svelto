@@ -7,7 +7,6 @@
  * ========================================================================= */
 
 //TODO: Test a multi-level popover menu
-//TODO: Safari is wrongly animating `transform`, for some reasons
 
 /* POPOVER */
 
@@ -19,6 +18,7 @@
   overflow: visible;
   max-width: $popover-max-width;
   margin: 0;
+  transition: none; // Safari fix
   transition-property: opacity, margin-top;
   transition-duration: $popover-animation-duration;
 

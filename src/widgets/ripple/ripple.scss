@@ -31,6 +31,7 @@
       border-radius: 50%;
       background-color: $ripple-bg-color;
       opacity: $ripple-opacity;
+      transition: none; // Safari fix
       transition-property: opacity, transform;
       transition-duration: $ripple-animation-duration;
       transition-timing-function: $ripple-animation-timing-function;

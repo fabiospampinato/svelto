@@ -21,6 +21,7 @@
   display: block;
   border-radius: $toast-border-radius;
   pointer-events: auto;
+  transition: none; // Safari fix
   transition-property: border-radius, border-width, opacity, filter, box-shadow, font-size, padding, margin;
   transition-duration: $toast-animation-duration;
   transform: translateZ(0);

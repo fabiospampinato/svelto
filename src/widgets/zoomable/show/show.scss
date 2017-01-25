@@ -18,6 +18,7 @@
   /* UNZOOMED */
 
   &:not(.zoomed) {
+    transition: none; // Safari fix
     transition-property: transform;
     transition-duration: $zoomable-animation-duration;
   }

@@ -44,6 +44,7 @@
   transition: padding $panel-animation-duration;
 
   > .layout-header.sticky {
+    transition: none; // Safari fix
     transition-property: top, right, bottom, left;
     transition-duration: $panel-animation-duration;
   }

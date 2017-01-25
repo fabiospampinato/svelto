@@ -124,6 +124,7 @@
 
         &:before {
           background-color: $datepicker-day-selected-circle-color;
+          transition: none; // Safari fix
           transition-property: box-shadow, background-color;
           transition-duration: $datepicker-animation-duration;
         }

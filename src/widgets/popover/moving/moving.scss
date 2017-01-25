@@ -17,6 +17,7 @@
   /* TIP */
 
   &:after {
+    transition: none; // Safari fix
     transition-property: left, top; //TODO: Animate `transform` instead
     transition-duration: $popover-animation-duration;
   }

@@ -18,6 +18,7 @@
   max-width: $modal-max-width;
   max-height: $modal-max-height;
   margin: 0;
+  transition: none; // Safari fix
   transition-property: transform, opacity;
   transition-duration: $modal-animation-duration;
 }

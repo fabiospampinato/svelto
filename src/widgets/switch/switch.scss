@@ -61,6 +61,7 @@
       z-index: -1;
       opacity: 0;
       transform: scale($switch-handler-before-scale);
+      transition: none; // Safari fix
       transition-property: opacity, transform;
       transition-duration: $switch-animation-duration;
     }
@@ -68,7 +69,7 @@
     /* DRAGGING */
 
     &.draggable-dragging {
-      transition-property: none;
+      transition: none; // Safari fix
     }
 
   }
