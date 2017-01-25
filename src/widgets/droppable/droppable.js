@@ -87,23 +87,8 @@
 
     ___drag () {
 
-      this.___dragStart ();
       this.___dragMove ();
       this.___dragEnd ();
-
-    }
-
-    /* DRAG START */
-
-    ___dragStart () {
-
-      this._on ( this.$layout, 'draggable:start', this.__dragStart );
-
-    }
-
-    __dragStart () {
-
-      this._dragging = true;
 
     }
 
@@ -117,23 +102,19 @@
 
     __dragMove ( event, data ) {
 
-      if ( !this._dragging ) return;
+      if ( !this._isCompatible ( data.draggable ) ) return;
 
-      if ( this._isCompatible ( data.draggable ) ) {
+      let isHovering = this._isPointHovering ( false, data.moveEvent );
 
-        let isHovering = this._isPointHovering ( false, data.moveEvent );
+      if ( isHovering !== this._wasHovering ) {
 
-        if ( isHovering !== this._wasHovering ) {
+        this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
 
-          this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
-
-          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
-
-        }
-
-        this._wasHovering = isHovering;
+        this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, helper: data.helper, droppable: this.droppable } );
 
       }
+
+      this._wasHovering = isHovering;
 
     }
 
@@ -146,8 +127,6 @@
     }
 
     __dragEnd ( event, data ) {
-
-      this._dragging = false;
 
       if ( this._isCompatible ( data.draggable ) ) {
 
