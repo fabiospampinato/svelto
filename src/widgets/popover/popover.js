@@ -106,7 +106,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._throttle ( this._positionate, 100 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
+      this._on ( true, this.$window, 'resize', this._frames ( this._positionate, 60 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
 
     }
 
@@ -116,7 +116,7 @@
 
       let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
 
-      this._on ( true, $parents, 'scroll', this._throttle ( this._positionate, 100 ) );
+      this._on ( true, $parents, 'scroll', this._frames ( this._positionate, 60 ) );
 
     }
 

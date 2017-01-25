@@ -118,7 +118,7 @@
       this.__request ();
 
       let $scrollable = this.$window.add ( this.$loader.parents () ),
-          handler = this._throttle ( this.__request, 100 );
+          handler = this._frames ( this.__request, 60 );
 
       this._on ( true, this.$window, 'resize', handler );
       this._on ( true, $scrollable, 'scroll', handler );

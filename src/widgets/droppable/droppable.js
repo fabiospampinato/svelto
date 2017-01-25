@@ -96,7 +96,7 @@
 
     ___dragMove () {
 
-      this._on ( this.$layout, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
+      this._on ( this.$layout, 'draggable:move', this._frames ( this.__dragMove, 60 ) );
 
     }
 

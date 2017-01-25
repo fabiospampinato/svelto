@@ -200,7 +200,7 @@
 
       if ( this.options.magnification.enabled ) return;
 
-      this._on ( true, this.$window.add ( this.$zoomable.parents () ), 'scroll', this._throttle ( this.__scroll, 100 ) );
+      this._on ( true, this.$window.add ( this.$zoomable.parents () ), 'scroll', this._frames ( this.__scroll, 60 ) );
 
     }
 
@@ -214,7 +214,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._throttle ( this.__resize, 100 ) );
+      this._on ( true, this.$window, 'resize', this._frames ( this.__resize, 60 ) );
 
     }
 

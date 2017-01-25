@@ -162,7 +162,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._throttle ( this._updateNavigation, Math.max ( this.options.animations.scroll || 100 ) ) );
+      this._on ( true, this.$window, 'resize', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
 
     }
 
@@ -170,7 +170,7 @@
 
     ___scroll () {
 
-      this._on ( true, this.$content, 'scroll', this._throttle ( this._updateNavigation, Math.max ( this.options.animations.scroll || 100 ) ) );
+      this._on ( true, this.$content, 'scroll', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
 
     }
 
