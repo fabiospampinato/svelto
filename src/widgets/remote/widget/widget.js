@@ -9,7 +9,6 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//FIXME: Clicking on the trigger when it's open should close it, not request another
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -51,6 +50,9 @@
       messages: {
         error: 'An error occurred, please try again later'
       },
+      attributes: {
+        id: 'data-remote-widget-id'
+      },
       classes: {
         placeholder: 'remote-widget-placeholder',
         placeholderExtra: '',
@@ -90,7 +92,7 @@
 
       if ( _.isPlainObject ( data ) ) data = JSON.stringify ( data );
 
-      return [method, url, data].join ( '.' );
+      return btoa ( [method, url, data].join () ); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
 
     }
 
@@ -122,7 +124,11 @@
 
     ___widget ( widget ) {
 
-      widget = widget || this._template ( 'placeholder', this.options );
+      if ( !widget ) {
+
+        widget = $(this._template ( 'placeholder', this.options )).attr ( this.options.attributes.id, this.requestId );
+
+      }
 
       this.$widget = $(widget).appendTo ( this.options.$wrapper );
 
@@ -195,10 +201,7 @@
 
     _cacheSet ( id, widget ) {
 
-      cache.unshift ({
-        id,
-        widget
-      });
+      cache.unshift ({ id, widget });
 
       if ( cache.length > this.options.cache.size ) {
 
@@ -210,7 +213,7 @@
 
     _cacheShow ( obj ) {
 
-      let $widget = $(obj.widget);
+      let $widget = $(obj.widget).attr ( this.options.attributes.id, obj.id );
 
       this.___widget ( $widget );
       this._widgetInit ();
@@ -242,6 +245,18 @@
       if ( this.isAborted () ) return;
 
       this.requestId = this._getRequestId ( this.ajax );
+
+      /* CLOSING */
+
+      let $widget = $(`[${this.options.attributes.id}="${this.requestId}"]`);
+
+      if ( $widget.length ) {
+
+        $widget[this.options.widget.config.name]( this.options.methods.close );
+
+        return false;
+
+      }
 
       /* CACHE */
 
@@ -309,6 +324,7 @@
       if ( this.options.resize ) prevRect = this.$widget.getRect ();
 
       $remoteWidget.addClass ( this.options.widget.config.options.classes.show ).addClass ( this.options.widget.config.options.classes[this.options.methods.open] );
+      $remoteWidget.attr ( this.options.attributes.id, this.requestId );
 
       /* CACHE */
 
