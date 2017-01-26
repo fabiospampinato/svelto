@@ -399,7 +399,7 @@ SWHelpers.define ( 'pagination', function ( options ) {
       let nr = options.current + 1,
           url = getUrl ( nr );
 
-      pagination += `<a href="${nr}" class="button compact bordered next" title="Next page">` +
+      pagination += `<a href="${url}" class="button compact bordered next" title="Next page">` +
                       '<i class="icon">chevron_right</i>' +
                     '</a>';
 
