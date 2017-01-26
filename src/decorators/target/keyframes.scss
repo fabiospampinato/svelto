@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Target (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes target {
+  50% {
+    @include z-depth-inline ( 1 );
+    background-color: $target-bg-color;
+  }
+}

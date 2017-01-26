@@ -1,0 +1,18 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Target (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* TARGET */
+
+$target-bg-color: rgba( $color-yellow, .25 ) !default;
+
+/* ANIMATION */
+
+$target-animation-iteration-count: 1 !default;
+$target-animation-duration: $animation-xslow !default;
