@@ -1,0 +1,26 @@
+
+/* =========================================================================
+ * Svelto - _ - Cursor (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CURSOR */
+
+$cursor-values: (
+  'auto',
+  'default',
+  'none',
+  'context-menu',
+  'help',
+  'pointer',
+  'progress',
+  'wait',
+  'move',
+  'not-allowed',
+  'zoom-in',
+  'zoom-out',
+  'grab',
+  'grabbing'
+) !default;
