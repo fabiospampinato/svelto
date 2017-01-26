@@ -15,6 +15,6 @@ var input = require ( '../utilities/input' ),
 
 gulp.task ( 'watch-scss', 'Watch SCSS', function () {
 
-  return gulp.watch ( input.getPath ( 'scss.all' ), ['build-css'] );
+  return gulp.watch ( input.getPath ( 'scss.all' ), { interval: 500 }, ['build-css'] );
 
 });

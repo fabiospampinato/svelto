@@ -15,6 +15,6 @@ var input = require ( '../utilities/input' ),
 
 gulp.task ( 'watch-images', 'Watch images', function () {
 
-  return gulp.watch ( input.getPath ( 'images' ), ['build-images'] );
+  return gulp.watch ( input.getPath ( 'images' ), { interval: 500 }, ['build-images'] );
 
 });
