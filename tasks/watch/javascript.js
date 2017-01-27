@@ -8,13 +8,19 @@
 
 /* REQUIRE */
 
-var input = require ( '../utilities/input' ),
-    gulp  = require ( 'gulp' );
+const gulp  = require ( 'gulp' ),
+      input = require ( '../utilities/input' );
 
-/* JAVASCRIPT */
+/* TASK */
 
-gulp.task ( 'watch-javascript', 'Watch javascript', function () {
+function task () {
 
-  return gulp.watch ( input.getPath ( 'javascript.all' ), { interval: 500 }, ['build-javascript'] );
+  return gulp.watch ( input.getPath ( 'javascript.all' ), gulp.task ( 'build-javascript' ) );
 
-});
+}
+
+task.description = '[ALL] Watch javascript';
+
+/* GULP */
+
+gulp.task ( 'watch-javascript', task );

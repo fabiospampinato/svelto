@@ -8,12 +8,12 @@
 
 /* REQUIRE */
 
-var plugins = require ( './project' ).plugins,
-    GHAPI   = require ( 'github' );
+const plugins = require ( './project' ).plugins,
+      GHAPI   = require ( 'github' );
 
 /* GITHUB */
 
-var github = new GHAPI ({
+const github = new GHAPI ({
   version: '3.0.0',
   debug: true,
   protocol: 'https',

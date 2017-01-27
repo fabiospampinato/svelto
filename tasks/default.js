@@ -8,8 +8,14 @@
 
 /* REQUIRE */
 
-var gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
+const gulp = require ( 'gulp' );
 
-/* DEFAULT */
+/* TASK */
 
-gulp.task ( 'default', false, ['build'] );
+const task = gulp.series ( 'build', gulp.parallel ( 'watch', 'demo' ) );
+
+task.description = 'Build, watch and serve the demo';
+
+/* GULP */
+
+gulp.task ( 'default', task );

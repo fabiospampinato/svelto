@@ -8,29 +8,29 @@
 
 /* REQUIRE */
 
-var _   = require ( 'lodash' ),
-    fs  = require ( 'fs' ),
-    rdf = require ( 'require-dot-file' );
+const _   = require ( 'lodash' ),
+      fs  = require ( 'fs' ),
+      rdf = require ( 'require-dot-file' );
 
 /* FILE */
 
-var file = {
+const file = {
 
-  load: function ( path, defaultValue ) {
+  load ( path, defaultValue ) {
 
-    var file = _.attempt ( require, path );
+    const file = _.attempt ( require, path );
 
     return _.isError ( file ) ? defaultValue : file;
 
   },
 
-  loadRecursive: function ( name, defaultValue ) {
+  loadRecursive ( name, defaultValue ) {
 
     return rdf ( name ) || defaultValue;
 
   },
 
-  write: function ( path, content ) {
+  write ( path, content ) {
 
     fs.writeFileSync ( path, JSON.stringify ( content ) );
 

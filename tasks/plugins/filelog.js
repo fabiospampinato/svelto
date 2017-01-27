@@ -8,18 +8,18 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    through = require ( 'through2' );
+const _       = require ( 'lodash' ),
+      through = require ( 'through2' );
 
 /* UTILITIES */
 
-var logFiles = function ( files ) {
+function logFiles ( files ) {
 
   if ( files.length ) {
 
-    var list = 'Files:\n';
+    let list = 'Files:\n';
 
-    for ( var i = 0, l = files.length; i < l; i++ ) {
+    for ( let i = 0, l = files.length; i < l; i++ ) {
 
       list += _.padEnd ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
 
@@ -39,15 +39,15 @@ var logFiles = function ( files ) {
 
   }
 
-};
+}
 
 /* FILE LOG */
 
-var filelog = function () {
+function filelog () {
 
   /* VARIABLES */
 
-  var files = [];
+  let files = [];
 
   /* FILE LOG */
 
@@ -61,7 +61,7 @@ var filelog = function () {
 
     logFiles ( files );
 
-    for ( var i = 0, l = files.length; i < l; i++ ) {
+    for ( let i = 0, l = files.length; i < l; i++ ) {
 
       this.push ( files[i] );
 
@@ -71,7 +71,7 @@ var filelog = function () {
 
   });
 
-};
+}
 
 /* EXPORT */
 

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Watch
+ * Svelto - Tasks - Demo
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,8 +8,15 @@
 
 /* REQUIRE */
 
-var gulp = require ( 'gulp-help' )( require ( 'gulp' ) );
+const gulp = require ( 'gulp' ),
+      log  = require ( '../utilities/log' );
 
-/* WATCH */
+/* TASK */
 
-gulp.task ( 'watch', 'Watch for changes and auto rebuild', ['watch-fonts', 'watch-images', 'watch-javascript', 'watch-scss'] );
+const task = gulp.parallel ( 'demo-browser-sync', 'demo-meteor' );
+
+task.description = 'Serve the demo ' + log.options ( ['port', 3333], ['bsport', 4444], ['uiport', 5555] );
+
+/* GULP */
+
+gulp.task ( 'demo', task );

@@ -8,23 +8,26 @@
 
 /* REQUIRE */
 
-var log     = require ( '../utilities/log' ),
-    output  = require ( '../utilities/output' ),
-    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) ),
-    concat  = require ( 'gulp-concat' ),
-    newer   = require ( 'gulp-newer' ),
-    plumber = require ( 'gulp-plumber' );
+const gulp   = require ( 'gulp' ),
+      concat = require ( 'gulp-concat' ),
+      newer  = require ( 'gulp-newer' ),
+      output = require ( '../../utilities/output' );
 
-/* SCSS */
+/* TASK */
 
-gulp.task ( 'build-scss', 'Build SCSS', ['build-scss-parts'], function () {
+function task () {
 
-  var parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
+  const parts = ['functions', 'mixins', 'variables', 'keyframes', 'style'];
 
-  return gulp.src ( parts.map ( function ( part ) { return output.getPath ( 'scss.' + part ); } ) )
-             .pipe ( plumber ( log.error ) )
+  return gulp.src ( parts.map ( part => output.getPath ( `scss.${part}` ) ) )
              .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
              .pipe ( concat ( output.getName ( 'scss.all' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
 
-});
+}
+
+task.description = '[ALL] Build scss';
+
+/* GULP */
+
+gulp.task ( 'build-scss', task );

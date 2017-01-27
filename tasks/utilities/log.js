@@ -8,30 +8,33 @@
 
 /* REQUIRE */
 
-var notifier = require ( 'node-notifier' ),
-    path     = require ( 'path' ),
-    gutil    = require ( 'gulp-util' ),
-    chalk    = gutil.colors;
+const _        = require ( 'lodash' ),
+      chalk    = require ( 'chalk' ),
+      notifier = require ( 'node-notifier' ),
+      path     = require ( 'path' ),
+      gutil    = require ( 'gulp-util' );
 
 /* UTILITIES */
 
-var line = function ( type, style, message ) {
+const line = function ( type, style, message ) {
 
-  return '[' + chalk[style]( type ) + '] ' + message + '\n';
+  type = chalk[style( type )];
+
+  return `[${type}] ${message}\n`;
 
 };
 
 /* LOG */
 
-var log = {
+const log = {
 
-  buffer: function ( buffer ) {
+  buffer ( buffer ) {
 
     console.log ( buffer.toString ( 'utf8' ) );
 
   },
 
-  error: function ( error ) {
+  error ( error ) {
 
     /* NOTIFICATION */
 
@@ -45,7 +48,7 @@ var log = {
 
     /* LOG */
 
-    var report = '';
+    let report = '';
 
     report += line ( 'Error', 'red', 'Plugin `' + chalk.underline ( error.plugin ) + '` encountered an error' );
     if ( error.fileName || error.relativePath || error.file ) report += line ( 'File', 'yellow', error.fileName || error.relativePath || error.file );
@@ -61,6 +64,34 @@ var log = {
     // Prevents `watch` tasks from crashing
 
     this.emit ( 'end' );
+
+  },
+
+  options ( ...options ) {
+
+    let output = [];
+
+    for ( let [key, args] of options ) {
+
+      let part = chalk.cyan ( `--${key}` );
+
+      if ( args ) {
+
+        if ( !_.isArray ( args ) ) args = [args];
+
+        if ( args.length ) {
+
+          part += '=' + args.map ( arg => chalk.magenta ( arg ) ).join ( '|' );
+
+        }
+
+      }
+
+      output.push ( part );
+
+    }
+
+    return `[${output.join ( ', ' )}]`;
 
   }
 

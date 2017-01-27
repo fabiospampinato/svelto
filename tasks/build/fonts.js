@@ -8,32 +8,34 @@
 
 /* REQUIRE */
 
-var changed  = require ( '../utilities/changed' ),
-    input    = require ( '../utilities/input' ),
-    log      = require ( '../utilities/log' ),
-    output   = require ( '../utilities/output' ),
-    plugins  = require ( '../config/project' ).plugins,
-    filter   = require ( '../plugins/filter' ),
-    override = require ( '../plugins/override' ),
-    gulp     = require ( 'gulp-help' )( require ( 'gulp' ) ),
-    gulpif   = require ( 'gulp-if' ),
-    flatten  = require ( 'gulp-flatten' ),
-    gulpif   = require ( 'gulp-if' ),
-    newer    = require ( 'gulp-newer' ),
-    plumber  = require ( 'gulp-plumber' );
+const gulp     = require ( 'gulp' ),
+      gulpif   = require ( 'gulp-if' ),
+      flatten  = require ( 'gulp-flatten' ),
+      newer    = require ( 'gulp-newer' ),
+      changed  = require ( '../utilities/changed' ),
+      input    = require ( '../utilities/input' ),
+      output   = require ( '../utilities/output' ),
+      plugins  = require ( '../config/project' ).plugins,
+      filter   = require ( '../plugins/filter' ),
+      override = require ( '../plugins/override' );
 
-/* FONTS */
+/* TASK */
 
-gulp.task ( 'build-fonts', 'Build fonts', function () {
+function task () {
 
-  var needUpdate = changed.plugin ( 'override' );
+  const needUpdate = changed.plugin ( 'override' );
 
   return gulp.src ( input.getPath ( 'fonts' ) )
-             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'fonts' ) ) ) )
              .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) );
 
-});
+}
+
+task.description = '[ALL] Build fonts';
+
+/* GULP */
+
+gulp.task ( 'build-fonts', task );

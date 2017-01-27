@@ -8,13 +8,19 @@
 
 /* REQUIRE */
 
-var input = require ( '../utilities/input' ),
-    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
+const gulp  = require ( 'gulp' ),
+      input = require ( '../utilities/input' );
 
-/* IMAGES */
+/* TASK */
 
-gulp.task ( 'watch-images', 'Watch images', function () {
+function task () {
 
-  return gulp.watch ( input.getPath ( 'images' ), { interval: 500 }, ['build-images'] );
+  return gulp.watch ( input.getPath ( 'images' ), gulp.task ( 'build-images' ) );
 
-});
+}
+
+task.description = '[ALL] Watch images';
+
+/* GULP */
+
+gulp.task ( 'watch-images', task );

@@ -8,27 +8,27 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    path    = require ( 'path' ),
-    project = require ( '../config/project' );
+const _       = require ( 'lodash' ),
+      path    = require ( 'path' ),
+      project = require ( '../config/project' );
 
 /* OUTPUT */
 
-var output = {
+const output = {
 
-  getDir: function ( key ) {
+  getDir ( key ) {
 
     return path.parse ( this.getPath ( key ) ).dir;
 
   },
 
-  getName: function ( key ) {
+  getName ( key ) {
 
     return path.parse ( this.getPath ( key ) ).base;
 
   },
 
-  getPath: function ( key ) {
+  getPath ( key ) {
 
     return _.get ( project.paths.output, key );
 

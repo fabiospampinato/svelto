@@ -10,41 +10,41 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    path    = require ( 'path' ),
-    through = require ( 'through2' ),
-    gutil   = require ( 'gulp-util' );
+const _       = require ( 'lodash' ),
+      path    = require ( 'path' ),
+      through = require ( 'through2' ),
+      gutil   = require ( 'gulp-util' );
 
 /* UTILITIES */
 
-var getFilePaths = function ( file ) {
+function getFilePaths ( file ) {
 
-  var relative  = file.relative,
-      basename  = path.basename ( relative ),
-      dirs      = relative.substr ( 0, relative.indexOf ( basename ) ),
-      ext       = path.extname ( basename ),
-      fullname  = basename.substr ( 0, basename.indexOf ( ext ) ),
-      nameParts = fullname.split ( '.' ),
-      name      = nameParts.length > 1 ? nameParts.slice ( 0, nameParts.length - 1 ).join ( '.' ) : fullname,
-      suffix    = nameParts.length > 1 ? _.last ( nameParts ) : '';
+  const relative  = file.relative,
+        basename  = path.basename ( relative ),
+        dirs      = relative.substr ( 0, relative.indexOf ( basename ) ),
+        ext       = path.extname ( basename ),
+        fullname  = basename.substr ( 0, basename.indexOf ( ext ) ),
+        nameParts = fullname.split ( '.' ),
+        name      = nameParts.length > 1 ? nameParts.slice ( 0, nameParts.length - 1 ).join ( '.' ) : fullname,
+        suffix    = nameParts.length > 1 ? _.last ( nameParts ) : '';
 
   return {
-    relative: relative,
-    dirs: dirs,
-    basename: basename,
-    fullname: fullname,
-    name: name,
-    suffix: suffix,
-    ext: ext
+    relative,
+    dirs,
+    basename,
+    fullname,
+    name,
+    suffix,
+    ext
   };
 
-};
+}
 
-var getFilesPaths = function ( files ) {
+function getFilesPaths ( files ) {
 
-  var paths = {};
+  const paths = {};
 
-  for ( var i = 0, l = files.length; i < l; i++ ) {
+  for ( let i = 0, l = files.length; i < l; i++ ) {
 
     paths[files[i].path] = getFilePaths ( files[i] );
 
@@ -52,9 +52,9 @@ var getFilesPaths = function ( files ) {
 
   return paths;
 
-};
+}
 
-var partitionFiles = function ( files, paths, prefixes ) {
+function partitionFiles ( files, paths, prefixes ) {
 
   return _.partition ( files, function ( file ) {
 
@@ -62,23 +62,23 @@ var partitionFiles = function ( files, paths, prefixes ) {
 
   });
 
-};
+}
 
-var needsTarget = function ( file, paths, suffix ) {
+function needsTarget ( file, paths, suffix ) {
 
   return paths[file.path].suffix === suffix;
 
-};
+}
 
-var isTarget = function ( base, target, paths ) {
+function isTarget ( base, target, paths ) {
 
   return paths[base.path].dirs === paths[target.path].dirs && paths[base.path].ext === paths[target.path].ext && paths[base.path].name === paths[target.path].fullname;
 
-};
+}
 
-var getTargetIndex = function ( file, files, paths ) {
+function getTargetIndex ( file, files, paths ) {
 
-  for ( var i = 0, l = files.length; i < l; i++ ) {
+  for ( let i = 0, l = files.length; i < l; i++ ) {
 
     if ( isTarget ( file, files[i], paths ) ) {
 
@@ -90,17 +90,17 @@ var getTargetIndex = function ( file, files, paths ) {
 
   return -1;
 
-};
+}
 
 /* WORKERS */
 
-var workerPartial = function ( partition, paths, options ) {
+function workerPartial ( partition, paths, options ) {
 
-  for ( var i = 0, l = partition[1].length; i < l; i++ ) {
+  for ( let i = 0, l = partition[1].length; i < l; i++ ) {
 
     if ( needsTarget ( partition[1][i], paths, options.suffix ) ) {
 
-      var ti = getTargetIndex ( partition[1][i], partition[0], paths );
+      const ti = getTargetIndex ( partition[1][i], partition[0], paths );
 
       if ( ti >= 0 ) {
 
@@ -117,9 +117,9 @@ var workerPartial = function ( partition, paths, options ) {
 
   partition[1] = _.compact ( partition[1] );
 
-};
+}
 
-var workerBefore = function ( partition, paths, config ) {
+function workerBefore ( partition, paths, config ) {
 
   workerPartial ( partition, paths, {
     suffix: 'before',
@@ -132,9 +132,9 @@ var workerBefore = function ( partition, paths, config ) {
     }
   });
 
-};
+}
 
-var workerAfter = function ( partition, paths, config ) {
+function workerAfter ( partition, paths, config ) {
 
   workerPartial ( partition, paths, {
     suffix: 'after',
@@ -147,21 +147,21 @@ var workerAfter = function ( partition, paths, config ) {
     }
   });
 
-};
+}
 
 /* WORKER */
 
-var worker = function ( files, config ) {
+function worker ( files, config ) {
 
-  var paths = getFilesPaths ( files ),
-      partition = partitionFiles ( files, paths, ['before', 'after'] );
+  const paths = getFilesPaths ( files ),
+        partition = partitionFiles ( files, paths, ['before', 'after'] );
 
   workerBefore ( partition, paths, config );
   workerAfter ( partition, paths, config );
 
   if ( partition[1].length ) {
 
-    var filepaths = partition[1].map ( function ( file ) { return file.path; } );
+    const filepaths = partition[1].map ( file => file.path );
 
     return new gutil.PluginError ( 'Extend', 'Missing target files for: ' + filepaths.join ( ', ' ) );
 
@@ -171,11 +171,11 @@ var worker = function ( files, config ) {
 
   }
 
-};
+}
 
 /* EXTEND */
 
-var extend = function ( config ) {
+function extend ( config ) {
 
   /* CONFIG */
 
@@ -185,7 +185,7 @@ var extend = function ( config ) {
 
   /* VARIABLES */
 
-  var files = [];
+  let files = [];
 
   /* EXTEND */
 
@@ -205,7 +205,7 @@ var extend = function ( config ) {
 
     } else {
 
-      for ( var i = 0, l = files.length; i < l; i++ ) {
+      for ( let i = 0, l = files.length; i < l; i++ ) {
 
         this.push ( files[i] );
 
@@ -217,7 +217,7 @@ var extend = function ( config ) {
 
   });
 
-};
+}
 
 /* EXPORT */
 

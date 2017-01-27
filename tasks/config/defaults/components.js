@@ -12,16 +12,18 @@
 
 /* COMPONENTS */
 
-var components = {
+const components = {
   _: true,
   core: {
-    'lodash/vendor': false,
-    'jquery/vendor': false
+    'jquery/vendor': false,
+    'lodash/vendor': false
   },
   decorators: true,
   lib: true,
   widgets: {
-    boilerplate: false
+    boilerplate: false,
+    'chart/vendor': false,
+    'datatables/vendor': false
   }
 };
 

@@ -8,13 +8,19 @@
 
 /* REQUIRE */
 
-var input = require ( '../utilities/input' ),
-    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
+const gulp  = require ( 'gulp' );
+      input = require ( '../utilities/input' );
 
-/* SCSS */
+/* TASK */
 
-gulp.task ( 'watch-scss', 'Watch SCSS', function () {
+function task () {
 
-  return gulp.watch ( input.getPath ( 'scss.all' ), { interval: 500 }, ['build-css'] );
+  return gulp.watch ( input.getPath ( 'scss.all' ), gulp.task ( 'build-style' ) );
 
-});
+}
+
+task.description = '[ALL] Watch scss';
+
+/* GULP */
+
+gulp.task ( 'watch-scss', task );

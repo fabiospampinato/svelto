@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Config - Defaults - Development (Plugins)
+ * Svelto - Tasks - Config - Defaults - Development - Plugins
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,11 +8,8 @@
 
 /* PLUGINS */
 
-var plugins = {
+const plugins = {
   babel: {
-    enabled: false
-  },
-  cssnano: {
     enabled: false
   },
   extend: {
@@ -33,6 +30,12 @@ var plugins = {
       log: true
     }
   },
+  postcss: {
+    enabled: false
+  },
+  uglify: {
+    enabled: false
+  }
 };
 
 /* EXPORT */

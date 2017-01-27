@@ -8,30 +8,22 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    project = require ( '../config/project' );
+const _       = require ( 'lodash' ),
+      project = require ( '../config/project' );
 
 /* INPUT */
 
-var input = {
+const input = {
 
-  getPath: function ( key ) {
+  getPath ( key ) {
 
-    var roots = project.paths.input.roots,
+    let roots = project.paths.input.roots,
         partials = _.get ( project.paths.input, key );
 
     roots = _.isString ( roots ) ? [roots] : roots;
     partials = _.isString ( partials ) ? [partials] : partials;
 
-    var globs = roots.map ( function ( root ) {
-
-      return partials.map ( function ( partial ) {
-
-        return partial.replace ( /<root>/g, root );
-
-      });
-
-    });
+    const globs = roots.map ( root => partials.map ( partial => partial.replace ( /<root>/g, root ) ) );
 
     return _.uniq ( _.flatten ( globs ) );
 

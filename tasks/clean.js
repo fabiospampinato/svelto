@@ -8,15 +8,21 @@
 
 /* REQUIRE */
 
-var del     = require ( 'del' ),
-    project = require ( './config/project' ),
-    plugins = project.plugins,
-    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) );
+const del     = require ( 'del' ),
+      gulp    = require ( 'gulp' ),
+      project = require ( './config/project' ),
+      plugins = project.plugins;
 
-/* CLEAN */
+/* TASK */
 
-gulp.task ( 'clean', 'Clean builded and temporary files', function () {
+function task () {
 
   return del ( project.paths.clean, plugins.del.options );
 
-});
+}
+
+task.description = 'Clean generated files';
+
+/* GULP */
+
+gulp.task ( 'clean', task );

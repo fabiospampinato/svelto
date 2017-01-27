@@ -8,22 +8,22 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    through = require ( 'through2' ),
-    project = require ( '../config/project' ),
-    gutil   = require ( 'gulp-util' );
+const _       = require ( 'lodash' ),
+      through = require ( 'through2' ),
+      gutil   = require ( 'gulp-util' ),
+      project = require ( '../config/project' );
 
 /* COMPONENTS */
 
-var parseComponents = function ( obj, prefix ) {
+function parseComponents ( obj, prefix ) {
 
-  var parsed = {};
+  const parsed = {};
 
-  for ( var key in obj ) {
+  for ( let key in obj ) {
 
     if ( obj.hasOwnProperty ( key ) ) {
 
-      var value = obj[key];
+      const value = obj[key];
 
       if ( _.isBoolean ( value ) ) {
 
@@ -33,7 +33,7 @@ var parseComponents = function ( obj, prefix ) {
 
         parsed[_.trim ( prefix + key, '/' )] = true;
 
-        _.extend ( parsed, parseComponents ( value, prefix + key + '/' ) );
+        _.extend ( parsed, parseComponents ( value, `${prefix}${key}/` ) );
 
       }
 
@@ -43,22 +43,23 @@ var parseComponents = function ( obj, prefix ) {
 
   return parsed;
 
-};
+}
 
 /* UTILITIES */
 
-var needsFiltering = function ( components, file ) {
+function needsFiltering ( components, file ) {
 
-  var relative = file.relative.replace ( /\\\\/g, '/' ).replace ( /\/\//g, '/' ),
-      maxPriority = relative.split ( '/' ).length,
-      priority = 0,
+  const relative = file.relative.replace ( /\\\\/g, '/' ).replace ( /\/\//g, '/' ),
+        maxPriority = relative.split ( '/' ).length;
+
+  let priority = 0,
       needs = false;
 
-  for ( var component in components ) {
+  for ( let component in components ) {
 
     if ( components.hasOwnProperty ( component ) ) {
 
-      var newPriority = component.split ( '/' ).length;
+      const newPriority = component.split ( '/' ).length;
 
       if ( newPriority > priority && newPriority <= maxPriority && _.startsWith ( relative, component ) ) {
 
@@ -73,21 +74,21 @@ var needsFiltering = function ( components, file ) {
 
   return needs;
 
-};
+}
 
-var partitionFiles = function ( files, components ) {
+function partitionFiles ( files, components ) {
 
   return _.partition ( files, _.partial ( needsFiltering, components ) );
 
-};
+}
 
-var logFiltered = function ( files ) {
+function logFiltered ( files ) {
 
   if ( files.length ) {
 
-    var list = 'Filtered files:\n';
+    let list = 'Filtered files:\n';
 
-    for ( var i = 0, l = files.length; i < l; i++ ) {
+    for ( let i = 0, l = files.length; i < l; i++ ) {
 
       list += _.padEnd ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
 
@@ -103,15 +104,15 @@ var logFiltered = function ( files ) {
 
   }
 
-};
+}
 
 /* WORKER */
 
-var worker = function ( files, config, components ) {
+function worker ( files, config, components ) {
 
-  var partition = partitionFiles ( files, components ),
-      filtered = partition[0],
-      allowed = partition[1];
+  const partition = partitionFiles ( files, components ),
+        filtered = partition[0],
+        allowed = partition[1];
 
   if ( config.log ) {
 
@@ -121,11 +122,11 @@ var worker = function ( files, config, components ) {
 
   return allowed;
 
-};
+}
 
 /* FILTER */
 
-var filter = function ( config ) {
+function filter ( config ) {
 
   /* CONFIG */
 
@@ -135,8 +136,9 @@ var filter = function ( config ) {
 
   /* VARIABLES */
 
-  var files = [],
-      components = parseComponents ( project.components, '' );
+  const components = parseComponents ( project.components, '' );
+
+  let files = [];
 
   /* FILTER */
 
@@ -156,7 +158,7 @@ var filter = function ( config ) {
 
     } else {
 
-      for ( var i = 0, l = files.length; i < l; i++ ) {
+      for ( let i = 0, l = files.length; i < l; i++ ) {
 
         this.push ( files[i] );
 
@@ -168,7 +170,7 @@ var filter = function ( config ) {
 
   });
 
-};
+}
 
 /* EXPORT */
 

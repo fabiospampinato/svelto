@@ -11,7 +11,7 @@
 // All the properties of the active environment will be merged with the basic object
 // Setting `isDevelopment: true` will basically make the build process faster, some plugins will be skipped and javascript will get partial compilation so it's much faster to watch and rebuild on changes
 
-var defaults = {
+const defaults = {
 
   /* GENERAL */
 

@@ -8,22 +8,25 @@
 
 /* REQUIRE */
 
-var _ = require ( 'lodash' ),
-    path = require ( 'path' );
+const _       = require ( 'lodash' ),
+     path     = require ( 'path' ),
+     cssnano  = require ( 'cssnano' ),
+     imagemin = require ( 'gulp-imagemin' );
 
 /* BABEL PRESET */
 
 // We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
 
-var preset,
-    levels = [0, -2], // [0] Inside Svelto [-2] Svelto is inside a `node_modules`
-    cwd = process.cwd ();
+const levels = [0, -2], // [0] Inside Svelto [-2] Svelto is inside a `node_modules`
+      cwd = process.cwd ();
 
-for ( var i = 0, l = levels.length; i < l; i++ ) {
+let preset;
 
-  var level = levels[i],
-      attempt = path.join ( cwd, _.repeat ( '../', - level ), './node_modules/babel-preset-es2015' ),
-      required = _.attempt ( require, attempt );
+for ( let i = 0, l = levels.length; i < l; i++ ) {
+
+  const level = levels[i],
+        attempt = path.join ( cwd, _.repeat ( '../', - level ), './node_modules/babel-preset-es2015' ),
+        required = _.attempt ( require, attempt );
 
   if ( _.isError ( required ) ) continue;
 
@@ -35,7 +38,7 @@ for ( var i = 0, l = levels.length; i < l; i++ ) {
 
 /* PLUGINS */
 
-var plugins = {
+const plugins = {
   autoprefixer: {
     enabled: true,
     options: {
@@ -54,13 +57,6 @@ var plugins = {
   del: {
     options: {
       force: false
-    }
-  },
-  cssnano: {
-    enabled: true,
-    options: {
-      autoprefixer: false,
-      zindex: false
     }
   },
   dependencies: {
@@ -92,22 +88,45 @@ var plugins = {
   },
   imagemin: {
     enabled: true,
-    options: {
-      interlaced: true, // GIF
-      progressive: true, // JPG
-      optimizationLevel: 7, // PNG
-      multipass: true, // SVG
-      svgoPlugins: [{
-        cleanupIDs: false,
-        removeViewBox: false
-      }]
-    }
+    plugins: [
+      imagemin.gifsicle ({
+        interlaced: true,
+        optimizationLevel: 3
+      }),
+      imagemin.jpegtran ({
+        progressive: true
+      }),
+      imagemin.optipng ({
+        optimizationLevel: 7
+      }),
+      imagemin.svgo ({
+        multipass: true,
+        plugins: [{
+          cleanupIDs: false,
+        }, {
+          removeViewBox: false
+        }]
+      })
+    ],
+    options: {}
   },
   override: {
     enabled: true,
     options: {
       log: false
     }
+  },
+  postcss: {
+    enabled: true,
+    plugins: [
+      cssnano ({
+        autoprefixer: false,
+        normalizeUrl: false,
+        svgo: false,
+        zindex: false
+      })
+    ],
+    options: {}
   },
   sass: {
     enabled: true,

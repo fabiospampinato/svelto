@@ -8,13 +8,19 @@
 
 /* REQUIRE */
 
-var input = require ( '../utilities/input' ),
-    gulp  = require ( 'gulp-help' )( require ( 'gulp' ) );
+const gulp  = require ( 'gulp' ),
+      input = require ( '../utilities/input' );
 
-/* FONTS */
+/* TASK */
 
-gulp.task ( 'watch-fonts', 'Watch fonts', function () {
+function task () {
 
-  return gulp.watch ( input.getPath ( 'fonts' ), { interval: 500 }, ['build-fonts'] );
+  return gulp.watch ( input.getPath ( 'fonts' ), gulp.task ( 'build-fonts' ) );
 
-});
+}
+
+task.description = '[ALL] Watch fonts';
+
+/* GULP */
+
+gulp.task ( 'watch-fonts', task );

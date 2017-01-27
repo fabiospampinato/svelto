@@ -8,29 +8,33 @@
 
 /* REQUIRE */
 
-var _           = require ( 'lodash' ),
-    project     = require ( '../config/project' ),
-    projectPrev = require ( '../config/previous/project' );
+const _           = require ( 'lodash' ),
+      argv        = require ( 'yargs' ).argv,
+      project     = require ( '../config/project' ),
+      projectPrev = require ( '../config/previous/project' );
 
 /* CHANGED */
 
-var changed = {
+const changed = {
 
-  project: function ( key ) {
+  _previous: JSON.parse ( JSON.stringify ( projectPrev ) ), // Using JSON so that all the objects get parsed the same way (basically for supporting functions)
+  _current : JSON.parse ( JSON.stringify ( project     ) ), // Using JSON so that all the objects get parsed the same way (basically for supporting functions)
 
-    return key ? !_.isEqual ( _.get ( project, key ), _.get ( projectPrev, key ) ) : !_.isEqual ( project, projectPrev );
+  project ( key ) {
+
+    if ( argv.fresh ) return true;
+
+    return key ? !_.isEqual ( _.get ( changed._current, key ), _.get ( changed._previous, key ) ) : !_.isEqual ( changed._current, changed._previous );
 
   },
 
-  plugin: function ( name ) {
+  plugin ( name ) {
 
-    return changed.project ( 'plugins.' + name );
+    return changed.project ( `plugins.${name}` );
 
   },
 
-  plugins: function () {
-
-    var names = Array.prototype.slice.call ( arguments );
+  plugins ( ...names ) {
 
     return names.length ? !!_.compact ( names.map ( changed.plugin ) ).length : changed.project ( 'plugins' );
 

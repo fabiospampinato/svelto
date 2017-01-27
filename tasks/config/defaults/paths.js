@@ -14,7 +14,7 @@
 
 /* PATHS */
 
-var paths = {
+const paths = {
   input: {
     roots: ['src'],
     fonts: '<root>/**/*.{eot,ttf,woff,woff2}',

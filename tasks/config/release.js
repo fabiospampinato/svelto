@@ -8,7 +8,7 @@
 
 /* REQUIRE */
 
-var release = require ( '../../package.json' );
+const release = require ( '../../package.json' );
 
 /* EXPORT */
 

@@ -8,14 +8,25 @@
 
 /* REQUIRE */
 
-var _       = require ( 'lodash' ),
-    release = require ( './config/release' ),
-    gulp    = require ( 'gulp-help' )( require ( 'gulp' ) );
+const _       = require ( 'lodash' ),
+      gulp    = require ( 'gulp' ),
+      release = require ( './config/release' );
 
-/* VERSION */
+/* TASK */
 
-gulp.task ( 'version', 'Display Svelto\'s version', function () {
+function task ( done ) {
 
-  console.log ( _.upperFirst ( release.name ) + ' version: ' + release.version );
+  const name = _.upperFirst ( release.name ),
+        version = release.version;
 
-});
+  console.log ( `${name} version: ${version}` );
+
+  done ();
+
+}
+
+task.description = 'Display Svelto\'s version';
+
+/* GULP */
+
+gulp.task ( 'version', task );
