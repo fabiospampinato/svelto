@@ -27,6 +27,12 @@
     opacity: 1;
   }
 
+  /* NO DESKTOP */
+
+  html.no-desktop & {
+    display: none;
+  }
+
   /* DISABLED */
 
   .disabled & {
