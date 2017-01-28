@@ -8,7 +8,15 @@
 
 /* TARGET */
 
-.target {
+%target {
   animation: target $target-animation-duration ease-in-out;
   animation-iteration-count: $target-animation-iteration-count;
+}
+
+%targetable:target {
+  @extend %target;
+}
+
+.target {
+  @extend %target;
 }

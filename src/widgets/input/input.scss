@@ -7,12 +7,14 @@
  * =========================================================================
  * @require core/reset/reset.scss
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 
 /* INPUT */
 
 %input {
   @extend %widget;
+  @extend %targetable;
   @include color ( $input-color, $input-color-force, $input-color-basic );
   display: flex;
   flex-shrink: 1;

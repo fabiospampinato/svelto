@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before core/multiple/multiple.scss
+ * @require decorators/target/target.scss
  * @require widgets/container/container.scss
  * ========================================================================= */
 
@@ -16,6 +17,7 @@
 .card {
 
   @extend %widget;
+  @extend %targetable;
   @include children-no-gutter ();
   @include color ( $card-color, $card-color-force, $card-color-basic );
   display: flex;

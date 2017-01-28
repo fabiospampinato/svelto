@@ -7,12 +7,14 @@
  * =========================================================================
  * @require core/reset/reset.scss
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 
 /* PRE */
 
 pre {
   @extend %widget;
+  @extend %targetable;
   display: flex;
   padding: $pre-padding-y $pre-padding-x;
 }

@@ -10,7 +10,7 @@
 
 /* TARGET */
 
-$target-bg-color: rgba( $color-yellow, .25 ) !default;
+$target-bg-color: lighten( $color-yellow, 25% ) !default;
 
 /* ANIMATION */
 

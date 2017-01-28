@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/reset/reset.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 
 // We are separating the border property since the color may be `inherit`
@@ -13,6 +14,7 @@
 /* KBD */
 
 kbd {
+  @extend %targetable;
   font-family: $kbd-font-family;
   font-size: $kbd-font-size;
   font-weight: $kbd-font-weight;

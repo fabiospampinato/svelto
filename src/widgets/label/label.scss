@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * @before widgets/icon/icon.scss
  * @before widgets/icons/icons.scss
  * ========================================================================= */
@@ -18,6 +19,7 @@
 .label {
 
   @extend %widget;
+  @extend %targetable;
   @include children-no-gutter ();
   @include color ( $label-color, $label-color-force, $label-color-basic );
   font-weight: $label-font-weight;

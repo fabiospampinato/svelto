@@ -13,6 +13,7 @@
 .infobar {
 
   @extend %container;
+  @extend %targetable;
   @include children-no-gutter ();
   @include color ( $infobar-color, $infobar-color-force, $infobar-color-basic );
   display: flex;
