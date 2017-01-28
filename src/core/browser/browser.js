@@ -37,6 +37,11 @@
   /* BROWSER */
 
   let Browser = {
+    support: {
+      browsers: ['chrome', 'firefox', 'edge', 'ie', 'opera', 'safari'],
+      devices: ['desktop', 'mobile', 'tablet'],
+      oss: ['ios', 'android', 'blackberry', 'linux', 'mac', 'windows']
+    },
     is: {
       chrome: !isOpera && /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
       firefox: /firefox/i.test ( userAgent ),
