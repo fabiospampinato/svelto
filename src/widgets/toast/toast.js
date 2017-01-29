@@ -120,11 +120,13 @@
 
   class Toast extends Widgets.Widget {
 
-    /* SPECIAL */
+    /* READY */
 
-    static ready () {
+    static ready ( done ) {
 
-      $('.layout, body').first ().append ( // `body` is used as a fallback
+      let $layout = $('.layout, body').first (); // `body` is used as a fallback
+
+      $layout.append (
         '<div class="toast-queues top">' +
           '<div class="toast-queue expanded"></div>' +
           '<div class="toast-queues-row">' +
@@ -143,7 +145,11 @@
         '</div>'
       );
 
+      done ();
+
     }
+
+    /* SPECIAL */
 
     _variables () {
 

@@ -65,6 +65,32 @@
 
     }
 
+    /* READY */
+
+    static ready ( done ) { // Called when the DOM is `ready`
+
+      done ();
+
+    }
+
+    static isReady () {
+
+      return !!this._ready;
+
+    }
+
+    static _initReady () {
+
+      this._setReady ( false );
+
+    }
+
+    static _setReady ( ready = true ) {
+
+      this._ready = ready;
+
+    }
+
     /* CONSTRUCTION */
 
     constructor ( options, element ) {
@@ -262,8 +288,6 @@
     _destroy () {} // Clean the stuff, remove possible memory leaks
 
     /* SPECIAL */
-
-    static ready () {} // Called when the DOM is `ready`, perhaps the widget needs to perform some operations, like `Toast` do for instance
 
     _variables () {} // Init your variables inside this function
     _init () {} // Perform the init stuff inside this function
