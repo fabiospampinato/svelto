@@ -8,7 +8,7 @@
  * @require ./popover.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, RemotePopover ) {
 
   'use strict';
 
@@ -28,8 +28,8 @@
 
     }
 
-    new Widgets.RemotePopover ( { ajax, positionate } ).request ();
+    new RemotePopover ( { ajax, positionate } ).request ();
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemotePopover ));

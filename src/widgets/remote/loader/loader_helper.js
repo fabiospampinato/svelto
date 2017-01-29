@@ -10,7 +10,7 @@
 
 //TODO: Maybe namespace ajax-related options into an `ajax` key -> easier to read, harder to use
 
-(function ( $, _, Svelto, Widgets, RemoteLoader ) {
+(function ( $, _, Svelto, RemoteLoader ) {
 
   'use strict';
 
@@ -53,4 +53,4 @@
 
   $.remoteLoader.defaults = defaults;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Widgets.RemoteLoader ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteLoader ));

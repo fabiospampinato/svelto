@@ -8,7 +8,7 @@
  * @require ./progressbar.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Progressbar ) {
 
   'use strict';
 
@@ -18,8 +18,8 @@
 
     options = _.isNumber ( options ) ? { value: options } : options;
 
-    return new Widgets.Progressbar ( options );
+    return new Progressbar ( options );
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.Progressbar ));

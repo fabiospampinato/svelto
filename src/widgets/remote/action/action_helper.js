@@ -8,7 +8,7 @@
  * @require ./action.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, RemoteAction ) {
 
   'use strict';
 
@@ -16,8 +16,8 @@
 
   $.remoteAction = function ( ajax ) {
 
-    new Widgets.RemoteAction ( { ajax: ajax } ).request ();
+    new RemoteAction ( { ajax: ajax } ).request ();
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteAction ));

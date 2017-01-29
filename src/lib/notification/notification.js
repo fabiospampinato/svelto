@@ -11,7 +11,7 @@
 
 // If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Toast ) {
 
   'use strict';
 
@@ -21,7 +21,7 @@
     title: false,
     body: false,
     img: false,
-    ttl: Widgets.Toast.config.options.ttl
+    ttl: Toast.config.options.ttl
   };
 
   /* NOTIFICATION */
@@ -74,4 +74,4 @@
 
   $.notification.defaults = defaults;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast ));

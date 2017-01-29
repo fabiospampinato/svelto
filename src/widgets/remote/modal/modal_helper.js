@@ -8,7 +8,7 @@
  * @require ./modal.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, RemoteModal ) {
 
   'use strict';
 
@@ -16,8 +16,8 @@
 
   $.remoteModal = function ( ajax ) {
 
-    new Widgets.RemoteModal ( { ajax: ajax } ).request ();
+    new RemoteModal ( { ajax: ajax } ).request ();
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteModal ));

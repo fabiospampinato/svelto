@@ -8,7 +8,7 @@
  * @require ./toast.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Toast ) {
 
   'use strict';
 
@@ -30,8 +30,8 @@
 
     /* TOAST */
 
-    return new Widgets.Toast ( options );
+    return new Toast ( options );
 
   };
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast ));
