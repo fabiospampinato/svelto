@@ -40,8 +40,6 @@
     _variables () {
 
       this.$pager = this.$element;
-      this.$previous = this.$pager.find ( this.options.selectors.previous );
-      this.$next = this.$pager.find ( this.options.selectors.next );
 
     }
 
@@ -81,13 +79,21 @@
 
     previous () {
 
-      this._clickElement ( this.$previous );
+      let $previous = this.$pager.find ( this.options.selectors.previous );
+
+      if ( !$previous.length ) return;
+
+      this._clickElement ( $previous );
 
     }
 
     next () {
 
-      this._clickElement ( this.$next );
+      let $next = this.$pager.find ( this.options.selectors.next );
+
+      if ( !$next.length ) return;
+
+      this._clickElement ( $next );
 
     }
 
