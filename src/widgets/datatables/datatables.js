@@ -12,6 +12,7 @@
 //TODO: Add a spinnerOverlay when processing
 //TODO: Proxy all `*.dt` events as `dt:*`
 //TODO: Test in all browsers
+//FIXME: We actually `require` Selectable, but requiring it creates a circular dependency...
 
 /* DATATABLES */
 
@@ -30,6 +31,17 @@
     plugin: true,
     selector: 'table.datatable:visible',
     options: {
+      select: false, // Select rows, even after a draw occurs -- basically supporting deferred loading
+      /*
+              {
+                column: 0, // Index of the column used for finding rows to select
+                value: 'value', // Selecting rows with this value in the appropriate column
+                values: [] // Selecting rows with one of this values in the appropriate column
+              }
+      */
+      datas: {
+        select: 'select'
+      },
       selectors: {
         wrapper: '.datatable-wrapper',
         length: '.datatable-length select'
@@ -62,13 +74,21 @@
       this.$table = this.$element;
       this.$wrapper = this.$table.closest ( this.options.selectors.wrapper );
       this.$length = this.$wrapper.find ( this.options.selectors.length );
+
       this._api = this.$table.DataTable ();
 
     }
 
     _init () {
 
+      this.options.select = this.$table.data ( this.options.datas.select ) || this.options.select;
+
+    }
+
+    _events () {
+
       this.___keydown ();
+      this.___select ();
 
     }
 
@@ -83,6 +103,34 @@
     ___keydown () {
 
       this._onHover ( this.$wrapper, [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* SELECT */
+
+    ___select () {
+
+      if ( !_.isPlainObject ( this.options.select ) ) return;
+
+      this._on ( true, 'draw.dt', this.__select );
+
+    }
+
+    __select ( event, data ) {
+
+      if ( this.$table.selectable ( 'get' ).length ) return;
+
+      let column = this.options.select.column,
+          values = this.options.select.values || [this.options.select.value],
+          rows   = data.aoData.filter ( row => _.includes ( values, row._aData[column] ) );
+
+      if ( !rows.length ) return;
+
+      let trs = rows.map ( row => row.nTr );
+
+      $(trs).addClass ( Widgets.Selectable.config.options.classes.selected );
+
+      this.$table.trigger ( 'change' ); // In order to make other widgets (Selectable etc.) adjust for this
 
     }
 
