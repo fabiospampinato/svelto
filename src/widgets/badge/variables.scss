@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/animations/variables.scss
  * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
@@ -35,3 +36,7 @@ $badge-min-width: 1em + ( $badge-padding-x * 2 ) !default;
 $badge-min-height: 1em + ( $badge-padding-y * 2 ) !default;
 
 $badge-offset: - ( $badge-min-width * .35 ) !default;
+
+/* ANIMATION */
+
+$badge-animation-duration: $animation-fast !default;

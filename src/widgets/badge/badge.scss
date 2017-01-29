@@ -24,12 +24,19 @@
   min-width: $badge-min-width;
   min-height: $badge-min-height;
   margin: 0 !important;
+  transition: transform $animation-fast;
 
   /* BORDERED */
 
   &.bordered {
     min-width: calc(#{$badge-min-width} + #{$border-width * 2});
     min-height: calc(#{$badge-min-height} + #{$border-width * 2});
+  }
+
+  /* DISABLED */
+
+  &.disabled {
+    transform: scale(0);
   }
 
 }
