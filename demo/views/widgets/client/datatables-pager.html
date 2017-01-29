@@ -1,0 +1,62 @@
+
+<!-- DATATABLES PAGER -->
+
+<template name="datatables-pager">
+
+  {{{sw.divider "DataTable Pager"}}}
+
+  <div class="multiple">
+    <div class="button bordered datatables-pager" data-target="table.datatable" data-page="1">Page #2</div>
+    <div class="button bordered datatables-pager" data-target="table.datatable" data-row="26">Row #27</div>
+  </div>
+
+  {{> datatables_pager_actions}}
+
+  {{{sw.divider "DataTable"}}}
+
+  {{> datatables_base}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="datatables_pager_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    {{{sw.action "Init" "api ()"}}}
+    <div class="multiple joined">
+      <input name="page" placeholder="Page number..." class="bordered">
+      <input name="row" placeholder="Row number..." class="bordered">
+      {{{sw.action "Go" "api_go ()"}}}
+    </div>
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_go () {
+      let page = getValue ( 'page' ),
+          row = getValue ( 'row' );
+      page = page ? Number ( page ) : NaN;
+      row = row ? Number ( row ) : NaN;
+      $('.datatables-pager').first ().datatablesPager ( 'go', page, row );
+    }
+
+    function api ( action ) {
+      $('.datatables-pager').datatablesPager ( action );
+    }
+  </script>
+
+</template>
