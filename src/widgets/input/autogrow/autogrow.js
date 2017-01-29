@@ -33,7 +33,7 @@
 
   class InputAutogrow extends Widgets.Widget {
 
-    /* SPECIAL */
+    /* WIDGETIZE */
 
     static widgetize ( $input ) {
 
@@ -48,6 +48,8 @@
       $input.inputAutogrow ();
 
     }
+
+    /* SPECIAL */
 
     _variables () {
 

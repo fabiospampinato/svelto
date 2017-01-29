@@ -42,7 +42,7 @@
 
   class Boilerplate extends Widgets.Widget {
 
-    /* SPECIAL */
+    /* WIDGETIZE */
 
     static widgetize () {
 
@@ -51,6 +51,8 @@
     static ready () {
 
     }
+
+    /* SPECIAL */
 
     _variables () {
 

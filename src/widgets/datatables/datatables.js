@@ -46,13 +46,15 @@
 
   class DT extends Widgets.Widget {
 
-    /* SPECIAL */
+    /* WIDGETIZE */
 
     static widgetize ( $ele ) {
 
       $ele.dataTable ().dt ();
 
     }
+
+    /* SPECIAL */
 
     _variables () {
 
