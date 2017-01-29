@@ -142,11 +142,15 @@
 
     }
 
-    page ( nr, rowNr ) { // nr and rowNr are 0-index numbers
+    page ( page, row ) { // `page` and `row` are 0-index numbers, `page` can optionally be a string supported by Datatables
 
-      let page = _.isNumber ( nr ) && !_.isNaN ( nr ) ? nr : Math.floor ( rowNr / this.$length.val () );
+      if ( !_.isString ( page ) ) {
 
-      if ( _.isNaN ( page ) ) return this.api ( 'page' );
+        page = _.isNumber ( page ) && !_.isNaN ( page ) ? page : Math.floor ( row / this.$length.val () );
+
+        if ( _.isNaN ( page ) ) return this.api ( 'page' );
+
+      }
 
       this.api ( 'page', page );
       this.api ( 'draw', false );
