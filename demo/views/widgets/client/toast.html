@@ -250,4 +250,22 @@
     }
   </script>
 
+  {{> toast_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="toast_actions">
+
+  {{{sw.divider "Style"}}}
+
+  {{{sw.checkAction "Sticky header" "toggle_sticky_header ()" true}}}
+
+  <script>
+    function toggle_sticky_header () {
+      $('.layout-header').toggleClass ( 'sticky' );
+    }
+  </script>
+
 </template>
