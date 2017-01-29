@@ -5,6 +5,15 @@
 
   {{{sw.divider "DataTable"}}}
 
+  {{> datatables_base}}
+  {{> datatables_actions}}
+
+</template>
+
+<!-- BASE -->
+
+<template name="datatables_base">
+
   <table class="table datatable white celled selectable">
     <thead>
       <tr>
@@ -475,5 +484,49 @@
       </tr>
     </tbody>
   </table>
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="datatables_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      <input name="page" placeholder="Page number..." class="bordered">
+      <input name="row" placeholder="Row number..." class="bordered">
+      {{{sw.action "Page" "api_page ()"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_page () {
+      let page = getValue ( 'page' ),
+          row = getValue ( 'row' );
+      page = page ? Number ( page ) : NaN;
+      row = row ? Number ( row ) : NaN;
+      let result = $('table.datatable').first ().dt ( 'page', page, row );
+      if ( lodash.isNumber ( result ) ) {
+        $.toast ( result );
+      }
+    }
+
+    function api ( action ) {
+      $('table.datatable').dt ( action );
+    }
+  </script>
 
 </template>

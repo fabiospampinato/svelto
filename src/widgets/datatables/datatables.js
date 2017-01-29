@@ -31,7 +31,8 @@
     selector: 'table.datatable:visible',
     options: {
       selectors: {
-        wrapper: '.datatable-wrapper'
+        wrapper: '.datatable-wrapper',
+        length: '.datatable-length select'
       },
       keystrokes: {
         'ctmd + shift + left': ['page', 'first'],
@@ -60,6 +61,7 @@
 
       this.$table = this.$element;
       this.$wrapper = this.$table.closest ( this.options.selectors.wrapper );
+      this.$length = this.$wrapper.find ( this.options.selectors.length );
       this._api = this.$table.DataTable ();
 
     }
@@ -92,11 +94,13 @@
 
     }
 
-    page ( nr ) {
+    page ( nr, rowNr ) { // nr and rowNr are 0-index numbers
 
-      if ( _.isUndefined ( nr ) ) return this.api ( 'page' );
+      let page = _.isNumber ( nr ) && !_.isNaN ( nr ) ? nr : Math.floor ( rowNr / this.$length.val () );
 
-      this.api ( 'page', nr );
+      if ( _.isNaN ( page ) ) return this.api ( 'page' );
+
+      this.api ( 'page', page );
       this.api ( 'draw', false );
 
     }
