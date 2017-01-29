@@ -22,12 +22,12 @@ table.selectable {
       cursor: pointer;
     }
 
-    /* SELECTED */
-
-    &.selected {
-      background-color: $selectable-table-row-selected-bg-color !important;
-    }
-
   }
 
+}
+
+/* SELECTED ROW */
+
+table tbody tr.selected {
+  background-color: $selectable-table-row-selected-bg-color !important;
 }
