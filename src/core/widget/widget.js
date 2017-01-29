@@ -79,15 +79,40 @@
 
     }
 
-    static _initReady () {
+    static whenReady ( callback ) {
 
-      this._setReady ( false );
+      let isReady = this.isReady || this.__proto__.isReady; //IE10 support -- static property
+
+      if ( isReady.bind ( this )() ) {
+
+        callback ();
+
+      } else {
+
+        this._readyQueue.push ( callback );
+
+      }
 
     }
 
-    static _setReady ( ready = true ) {
+    static _initReady () {
 
-      this._ready = ready;
+      this._ready = false;
+      this._readyQueue = [];
+
+    }
+
+    static _setReady () {
+
+      this._ready = true;
+
+      for ( let callback of this._readyQueue ) {
+
+        callback ();
+
+      }
+
+      this._readyQueue = [];
 
     }
 
