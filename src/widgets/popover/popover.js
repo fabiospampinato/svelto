@@ -24,7 +24,7 @@
     plugin: true,
     selector: '.popover',
     options: {
-      contentChangeEvents: 'inputAutogrow:change tabs:change tagbox:change textareaAutogrow:change', // When one of these events are triggered update the position because the content probably changed
+      contentChangeEvents: 'change datepicker:change inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,

@@ -36,6 +36,7 @@
       <span>Long text</span>
       <i class="icon">expand_more</i>
     </div>
+    <div class="button popover-toggler bordered" data-target="#size_change">Size change</div>
   </div>
 
   {{> popover_popovers}}
@@ -105,6 +106,21 @@
       <p>{{sample.text}}</p>
     </div>
     <div class="card-footer bordered">Footer</div>
+  </div>
+
+  <div id="size_change" class="popover container bordered">
+    <input value="Horizontally..." class="autogrow bordered">
+    <textarea class="autogrow bordered">Vertically...</textarea>
+    <div class="tagbox bordered">
+      <input name="name" value="this,est,tagbox" class="hidden">
+      <div class="tagbox-tags">
+        <input name="partial_name" placeholder="Add tag..." class="tagbox-partial autogrow compact">
+      </div>
+    </div>
+    <!-- datepicker:change -->
+    <!-- tabs:change -->
+    <!-- tablehelper:change -->
+    <!-- textarea increase in size -->
   </div>
 
 </template>
