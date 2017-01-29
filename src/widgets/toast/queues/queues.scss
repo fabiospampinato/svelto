@@ -26,6 +26,12 @@
 
     top: 0;
 
+    /* STICKY HEADER */
+
+    .layout-header.sticky ~ & {
+      top: $layout-sticky-header-height;
+    }
+
     /* ROW */
 
     .toast-queues-row {

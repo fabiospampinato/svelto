@@ -124,28 +124,32 @@
 
     static ready ( done ) {
 
-      let $layout = $('.layout, body').first (); // `body` is used as a fallback
+      _.delay ( function () { // In order to better support client size rendering
 
-      $layout.append (
-        '<div class="toast-queues top">' +
-          '<div class="toast-queue expanded"></div>' +
-          '<div class="toast-queues-row">' +
-            '<div class="toast-queue left"></div>' +
-            '<div class="toast-queue center"></div>' +
-            '<div class="toast-queue right"></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="toast-queues bottom">' +
-          '<div class="toast-queues-row">' +
-            '<div class="toast-queue left"></div>' +
-            '<div class="toast-queue center"></div>' +
-            '<div class="toast-queue right"></div>' +
-          '</div>' +
-          '<div class="toast-queue expanded"></div>' +
-        '</div>'
-      );
+        let $layout = $('.layout, body').first (); // `body` is used as a fallback
 
-      done ();
+        $layout.append (
+          '<div class="toast-queues top">' +
+            '<div class="toast-queue expanded"></div>' +
+            '<div class="toast-queues-row">' +
+              '<div class="toast-queue left"></div>' +
+              '<div class="toast-queue center"></div>' +
+              '<div class="toast-queue right"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="toast-queues bottom">' +
+            '<div class="toast-queues-row">' +
+              '<div class="toast-queue left"></div>' +
+              '<div class="toast-queue center"></div>' +
+              '<div class="toast-queue right"></div>' +
+            '</div>' +
+            '<div class="toast-queue expanded"></div>' +
+          '</div>'
+        );
+
+        done ();
+
+      });
 
     }
 
@@ -180,7 +184,9 @@
 
       } else if ( this.options.autoplay ) {
 
-        this.open ();
+        let whenReady = Toast.whenReady || Toast.__proto__.whenReady; //IE10 support -- static property
+
+        whenReady.bind ( Toast )( this.open.bind ( this ) );
 
       }
 
