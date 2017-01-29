@@ -21,7 +21,7 @@
 
   /* VARIABLES */
 
-  let openNotiesData = {};
+  let openToastsData = {};
 
   /* CONFIG */
 
@@ -210,7 +210,7 @@
 
         }
 
-        openNotiesData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
+        openToastsData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
 
       }
 
@@ -266,11 +266,11 @@
 
       this.$toast.hover ( function () {
 
-        _.forOwn ( openNotiesData, data => data[0].pause () );
+        _.forOwn ( openToastsData, data => data[0].pause () );
 
       }, function () {
 
-        _.forOwn ( openNotiesData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+        _.forOwn ( openToastsData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
 
       });
 
@@ -332,7 +332,7 @@
 
       /* TIMER */
 
-      delete openNotiesData[this.guid];
+      delete openToastsData[this.guid];
 
       /* FLICK */
 
