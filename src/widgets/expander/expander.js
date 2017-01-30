@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/widget/widget.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -39,7 +39,7 @@
 
   /* EXPANDER */
 
-  class Expander extends Widgets.Widget {
+  class Expander extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -67,6 +67,8 @@
         this._isOpen = !!force;
 
         this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
+
+        this._isOpen ? this.autofocus () : this.autoblur ();
 
         this._trigger ( this._isOpen ? 'open' : 'close' );
 

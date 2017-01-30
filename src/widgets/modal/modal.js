@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/widget/widget.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
@@ -51,7 +51,7 @@
 
   /* MODAL */
 
-  class Modal extends Widgets.Widget {
+  class Modal extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -151,6 +151,8 @@
           this.$modal.addClass ( this.options.classes.open );
           this.$backdrop.addClass ( this.options.classes.backdrop.open );
 
+          this.autofocus ();
+
           this._lock = false;
 
           this._trigger ( 'open' );
@@ -183,6 +185,8 @@
 
           this.$modal.removeClass ( this.options.classes.show );
           this.$backdrop.removeClass ( this.options.classes.backdrop.show );
+
+          this.autoblur ();
 
           if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 

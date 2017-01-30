@@ -6,8 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/widget/widget.js
  * @require lib/directions/directions.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
@@ -68,7 +68,7 @@
 
   /* PANEL */
 
-  class Panel extends Widgets.Widget {
+  class Panel extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -320,6 +320,8 @@
           this.$panel.addClass ( this.options.classes.open );
           this.$backdrop.addClass ( this.options.classes.backdrop.open );
 
+          this.autofocus ();
+
           this._lock = false;
 
           this._trigger ( 'open' );
@@ -357,6 +359,8 @@
           this.$panel.removeClass ( this.options.classes.show );
           this.$backdrop.removeClass ( this.options.classes.backdrop.show );
           this.$layout.removeClass ( this.options.classes.layout.show );
+
+          this.autoblur ();
 
           if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 

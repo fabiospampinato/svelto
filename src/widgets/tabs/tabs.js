@@ -5,8 +5,8 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.js
  * @require lib/directions/directions.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
@@ -44,7 +44,7 @@
 
   /* TABS */
 
-  class Tabs extends Widgets.Widget {
+  class Tabs extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -111,9 +111,15 @@
       $trigger.toggleClass ( this.options.classes.active.trigger, force );
       $container.toggleClass ( this.options.classes.active.container, force );
 
-      if ( force ) {
+      if ( !force ) {
+
+        this.autoblur ( $container );
+
+      } else {
 
         $container.widgetize ();
+
+        this.autofocus ( $container );
 
       }
 

@@ -6,10 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require lib/autofocus/autofocus.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, Autofocus ) {
 
   'use strict';
 
@@ -103,7 +104,11 @@
 
       this.$loader[0].outerHTML = container;
 
-      $(`#${id}`).widgetize ();
+      let $loaded = $(`#${id}`);
+
+      $loaded.widgetize ();
+
+      Autofocus.focus ( $loaded );
 
       this.$loader.remove ();
 
@@ -222,4 +227,4 @@
 
   Factory.init ( RemoteLoader, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus ));

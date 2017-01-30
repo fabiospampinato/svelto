@@ -1,0 +1,84 @@
+
+<!-- AUTOFOCUS -->
+
+<template name="autofocus">
+
+  {{{sw.divider "Autofocus"}}}
+
+  <div class="multiple">
+    <input class="bordered" autofocus>
+    <div class="button modal-toggler bordered" data-target="#modal">Modal</div>
+    <div class="button popover-toggler bordered" data-target="#popover">Popover</div>
+    <div class="button panel-toggler bordered" data-target="#panel">Panel</div>
+    <div class="button bordered remote-loader-trigger" data-url="/remote-loader-autofocus">Remote Loader</div>
+    {{{sw.action "Toast" "toast ()"}}}
+    <div class="flippable text-center">
+      <div class="flippable-front container bordered red">
+        <div class="multiple joined">
+          <input class="autogrow bordered">
+          <div class="button bordered flippable-flipper">Flip</div>
+        </div>
+      </div>
+      <div class="flippable-back container bordered blue">
+        <div class="multiple joined">
+          <input class="autogrow bordered" autofocus>
+          <div class="button bordered flippable-flipper">Flip</div>
+        </div>
+      </div>
+    </div>
+    <div class="card bordered expander">
+      <div class="card-header bordered actionable expander-toggler">Expander</div>
+      <div class="card-block expander-content">
+        <input class="bordered" autofocus>
+      </div>
+    </div>
+    <div class="card bordered">
+      <div class="card-block">
+        {{{sample.paragraph}}}
+        <div id="overlay-togglerable" class="overlay centerer">
+          <input class="bordered" autofocus>
+        </div>
+      </div>
+      <div class="card-footer bordered centerer">
+        <div class="button primary overlay-toggler" data-target="#overlay-togglerable">Overlay</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tabs-triggers">
+        <div class="button bordered">Tabs</div>
+        <div class="button bordered">Autofocus</div>
+      </div>
+      <div class="tabs-containers">
+        <div class="container bordered">
+          <p>Nothing here...</p>
+        </div>
+        <div class="container bordered">
+          <input class="bordered" autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIDDEN STUFF -->
+
+  <div class="container modal xs-8" id="modal">
+    <input class="bordered centered" autofocus>
+  </div>
+
+  <div class="container bordered popover" id="popover">
+    <input class="bordered" autofocus>
+  </div>
+
+  <div class="container panel bottom slim" id="panel">
+    <input class="bordered centered" autofocus>
+  </div>
+
+  <!-- SCRIPT -->
+
+  <script>
+    function toast () {
+      $.toast ( '<input class="bordered" autofocus>' );
+    }
+  </script>
+
+</template>

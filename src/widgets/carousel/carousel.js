@@ -11,6 +11,7 @@
  * ========================================================================= */
 
 //TODO: Add slides drag support
+//TODO: Maybe add `autofocus` capabilities
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 

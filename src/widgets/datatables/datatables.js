@@ -12,6 +12,7 @@
 //TODO: Add a spinnerOverlay when processing
 //TODO: Proxy all `*.dt` events as `dt:*`
 //TODO: Test in all browsers
+//TODO: Maybe add `autofocus` capabilities
 //FIXME: We actually `require` Selectable, but requiring it creates a circular dependency...
 
 /* DATATABLES */

@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/widget/widget.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
@@ -44,7 +44,7 @@
 
   /* OVERLAY */
 
-  class Overlay extends Widgets.Widget {
+  class Overlay extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -129,6 +129,8 @@
           this.$overlay.addClass ( this.options.classes.open );
           this._getParent ().addClass ( this.options.classes.parent.open );
 
+          this.autofocus ();
+
           this._lock = false;
 
           this._trigger ( 'open' );
@@ -157,6 +159,8 @@
 
           this.$overlay.removeClass ( this.options.classes.show );
           this._getParent ().removeClass ( this.options.classes.parent.show );
+
+          this.autoblur ();
 
           this._lock = false;
 

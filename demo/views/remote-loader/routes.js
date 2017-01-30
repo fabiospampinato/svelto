@@ -82,3 +82,13 @@ Router.route ( '/remote-loader-preload', function () {
   }));
 
 }, { where: 'server' });
+
+/* REMOTE LOADER - AUTOFOCUS */
+
+Router.route ( '/remote-loader-autofocus', function () {
+
+  this.response.end ( JSON.stringify ({
+    html: '<input class="bordered" autofocus>'
+  }));
+
+}, { where: 'server' });

@@ -5,10 +5,10 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.js
  * @require lib/embedded_css/embedded_css.js
  * @require lib/positionate/positionate.js
  * @require lib/touching/touching.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //FIXME: Close it if after a `route` event if the trigger element is no longer visible
@@ -57,7 +57,7 @@
 
   /* POPOVER */
 
-  class Popover extends Widgets.Widget {
+  class Popover extends Widgets.Autofocusable {
 
     /* SPECIAL */
 
@@ -281,6 +281,8 @@
 
           this.$popover.addClass ( this.options.classes.open );
 
+          this.autofocus ();
+
           this._lock = false;
 
           this._trigger ( 'open' );
@@ -335,6 +337,8 @@
         this._delay ( function () {
 
           this.$popover.removeClass ( this.options.classes.show );
+
+          this.autoblur ();
 
           this._lock = false;
 

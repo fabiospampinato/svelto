@@ -8,8 +8,8 @@
  * @require core/animations/animations.js
  * @require core/colors/colors.js
  * @require core/sizes/sizes.js
- * @require core/widget/widget.js
  * @require lib/timer/timer.js
+ * @require widgets/autofocusable/autofocusable.js
  * @require widgets/toasts/toasts.js
  * ========================================================================= */
 
@@ -131,7 +131,7 @@
 
   /* TOAST */
 
-  class Toast extends Widgets.Widget {
+  class Toast extends Widgets.Autofocusable {
 
     /* READY */
 
@@ -376,6 +376,8 @@
 
           this.$toast.addClass ( this.options.classes.open );
 
+          this.autofocus ();
+
           this._lock = false;
 
           this._trigger ( 'open' );
@@ -412,6 +414,8 @@
       this._frame ( function () {
 
         this.$toast.removeClass ( this.options.classes.open );
+
+        this.autoblur ();
 
         this._delay ( function () {
 
