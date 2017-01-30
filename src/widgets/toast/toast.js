@@ -10,39 +10,15 @@
  * @require core/sizes/sizes.js
  * @require core/widget/widget.js
  * @require lib/timer/timer.js
+ * @require widgets/toasts/toasts.js
  * ========================================================================= */
 
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes ) {
+(function ( $, _, Svelto, Toasts, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes ) {
 
   'use strict';
-
-  /* VARIABLES */
-
-  let timers = {}, // Storing toasts' timers here //TODO: Maybe make this variable accessible from the outside
-      hovering = false; // Global to check if are hovering a toast -- used in conjuction with pagevisibility
-
-  /* PAGE VISIBILITY */
-
-  //TODO: Test with loading without ever focusing a page
-
-  $(document).on ( 'visibilitychange', function () {
-
-    if ( hovering ) return;
-
-    if ( document.hidden ) {
-
-      _.forOwn ( timers, data => data[0].pause () );
-
-    } else {
-
-      _.forOwn ( timers, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
-
-    }
-
-  });
 
   /* CONFIG */
 
@@ -237,7 +213,7 @@
 
         }
 
-        timers[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
+        Toasts.add ( this );
 
       }
 
@@ -293,17 +269,18 @@
 
       this.$toast.hover ( function () {
 
-        hovering = true;
-
-        _.forOwn ( timers, data => data[0].pause () );
+        Toasts.setHovering ( true );
+        Toasts.pauseAll ();
 
       }, function () {
 
-        hovering = false;
+        Toasts.setHovering ( false );
 
-        if ( document.hidden ) return;
+        if ( !document.hidden ) {
 
-        _.forOwn ( timers, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+          Toasts.resumeAll ();
+
+        }
 
       });
 
@@ -363,9 +340,9 @@
 
     _reset () {
 
-      /* TIMER */
+      /* TOASTS */
 
-      delete timers[this.guid];
+      Toasts.remove ( this );
 
       /* FLICK */
 
@@ -459,4 +436,4 @@
 
   Factory.init ( Toast, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toasts, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));
