@@ -2151,6 +2151,33 @@
 
 
 /* =========================================================================
+ * Svelto - _ - Cursor (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CURSOR */
+
+$cursor-values: (
+  'auto',
+  'default',
+  'none',
+  'context-menu',
+  'help',
+  'pointer',
+  'progress',
+  'wait',
+  'move',
+  'not-allowed',
+  'zoom-in',
+  'zoom-out',
+  'grab',
+  'grabbing'
+) !default;
+
+
+/* =========================================================================
  * Svelto - _ - Math - Constants (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -3031,33 +3058,33 @@ $color-transparent-text: $color-inherit !default;
 /* COLORS */
 
 $colors: (
-  'primary' : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text ),
-  'secondary' : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text ),
-  'tertiary' : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text ),
-  'quaternary' : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text ),
+  'primary': ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text ),
+  'secondary': ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text ),
+  'tertiary': ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text ),
+  'quaternary': ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text ),
 
-  'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text ),
-  'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text ),
-  'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text ),
-  'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text ),
-  'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text ),
-  'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text ),
-  'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text ),
-  'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text ),
-  'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text ),
-  'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text ),
-  'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text ),
-  'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text ),
-  'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text ),
-  'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text ),
+  'black': ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text ),
+  'blue': ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text ),
+  'brown': ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text ),
+  'gray': ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text ),
+  'green': ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text ),
+  'olive': ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text ),
+  'orange': ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text ),
+  'pink': ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text ),
+  'purple': ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text ),
+  'red': ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text ),
+  'teal': ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text ),
+  'violet': ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text ),
+  'white': ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text ),
+  'yellow': ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text ),
 
-  'error' : ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text ),
-  'success' : ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text ),
-  'warning' : ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text ),
+  'error': ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text ),
+  'success': ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text ),
+  'warning': ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text ),
 
-  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text ),
-  'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text ),
-  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text )
+  'base': ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text ),
+  'inherit': ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text ),
+  'transparent': ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text )
 ) !default;
 
 
@@ -3077,6 +3104,25 @@ $selection-bg-color: rgba( $color-primary, .2 ) !default;
 /* BODY */
 
 $body-color: 'base' !default;
+
+
+/* =========================================================================
+ * Svelto - Decorators - Target (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * ========================================================================= */
+
+/* TARGET */
+
+$target-bg-color: lighten( $color-yellow, 25% ) !default;
+
+/* ANIMATION */
+
+$target-animation-iteration-count: 1 !default;
+$target-animation-duration: $animation-xslow !default;
 
 
 /* =========================================================================
@@ -4835,6 +4881,7 @@ $avatar-animation-duration: $animation-normal !default;
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/animations/variables.scss
  * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
@@ -4865,6 +4912,10 @@ $badge-min-width: 1em + ( $badge-padding-x * 2 ) !default;
 $badge-min-height: 1em + ( $badge-padding-y * 2 ) !default;
 
 $badge-offset: - ( $badge-min-width * .35 ) !default;
+
+/* ANIMATION */
+
+$badge-animation-duration: $animation-fast !default;
 
 
 /* =========================================================================
@@ -5654,7 +5705,7 @@ $kbd-padding-y: $kbd-padding-x / 2 !default;
 
 /* MARK */
 
-$mark-bg-color: rgba( $color-yellow, .25 );
+$mark-bg-color: rgba( $color-yellow, .25 ) !default;
 
 $mark-padding-x: $code-padding-x !default;
 $mark-padding-y: $code-padding-y !default;
@@ -6582,6 +6633,23 @@ $small-font-size: .75em !default;
 
 
 /* =========================================================================
+ * Svelto - Decorators - Target (Keyframes)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* KEYFRAMES */
+
+@keyframes target {
+  50% {
+    @include z-depth-inline ( 1 );
+    background-color: $target-bg-color;
+  }
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Progressbar - Indeterminate (Keyframes)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -6746,6 +6814,24 @@ $small-font-size: .75em !default;
 
 .clearfix {
   @include clearfix ();
+}
+
+
+/* =========================================================================
+ * Svelto - _ - Cursor
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CURSOR */
+
+@each $value in $cursor-values {
+
+  .cursor-#{$value} {
+    cursor: #{$value} !important;
+  }
+
 }
 
 
@@ -8698,14 +8784,14 @@ table.selectable {
       cursor: pointer;
     }
 
-    /* SELECTED */
-
-    &.selected {
-      background-color: $selectable-table-row-selected-bg-color !important;
-    }
-
   }
 
+}
+
+/* SELECTED ROW */
+
+table tbody tr.selected {
+  background-color: $selectable-table-row-selected-bg-color !important;
 }
 
 
@@ -8905,32 +8991,6 @@ code[class*='language-'] {
   	opacity: .7;
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Typography - Kbd
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * ========================================================================= */
-
-// We are separating the border property since the color may be `inherit`
-
-/* KBD */
-
-kbd {
-  font-family: $kbd-font-family;
-  font-size: $kbd-font-size;
-  font-weight: $kbd-font-weight;
-  background-color: $kbd-bg-color;
-  padding: $kbd-padding-y $kbd-padding-x;
-  border-width: $kbd-border-width;
-  border-style: $kbd-border-style;
-  border-color: $kbd-border-color;
-  border-radius: $kbd-border-radius;
 }
 
 
@@ -9254,6 +9314,7 @@ a,
     background-color: $carousel-indicator-bg-color;
     cursor: pointer;
     opacity: $carousel-indicator-opacity;
+    transition: none; // Safari fix
     transition-property: background-color, opacity;
     transition-duration: $carousel-indicator-animation-duration;
 
@@ -9557,6 +9618,22 @@ a,
 
 
 /* =========================================================================
+ * Svelto - Widgets - Chart
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* CHART */
+
+canvas.chart {
+  @extend %widget;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Colorpicker
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9712,1704 +9789,6 @@ a,
   .colorpicker-sb,
   .colorpicker-hue {
     border-color: $color-success !important;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Container
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.scss
- * ========================================================================= */
-
-// If we set is as `display: flex` then the padding-bottom will collpase when used as `overlay`
-
-/* CONTAINER */
-
-%container {
-  @extend %widget;
-  border-radius: $container-border-radius;
-  padding: $container-padding-y $container-padding-x;
-}
-
-.container {
-  @extend %container;
-  @include color ( $container-color, $container-color-force, $container-color-basic );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Card
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before core/multiple/multiple.scss
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-//TODO: Maybe use slimmer `.card-header` and `.card-footer`
-
-/* CARD */
-
-.card {
-
-  @extend %widget;
-  @include children-no-gutter ();
-  @include color ( $card-color, $card-color-force, $card-color-basic );
-  display: flex;
-  flex-direction: column;
-  border-radius: $card-border-radius;
-
-  /* HEADER / BLOCK / FOOTER */
-
-  &-header,
-  &-block,
-  &-footer {
-
-    &:not(.multiple) {
-      @extend %container;
-      @include color ( $card-section-color, $card-section-color-force, $card-section-color-basic );
-      border-radius: 0;
-    }
-
-    &.multiple > * {
-      border-radius: 0;
-      margin-bottom: 0 !important;
-    }
-
-  }
-
-  /* HEADER / FOOTER */
-
-  &-header,
-  &-footer {
-    flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
-  }
-
-  /* BLOCK */
-
-  &-block {
-    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
-    overflow: auto;
-  }
-
-  /* BORDER RADIUS */
-
-  > *,
-  > .table {
-    border-radius: 0;
-  }
-
-  /* BORDER RADIUS INHERITANCE */
-
-  > :first-child:not(.overlay):not(.ripple-circle),
-  > :first-child.overlay + *,
-  > :first-child.ripple-circle + * {
-    @include border-top-radius ( inherit );
-  }
-
-  > .multiple:first-child {
-
-    > :first-child {
-      border-top-left-radius: inherit;
-    }
-
-    > :last-child {
-      border-top-right-radius: inherit;
-    }
-
-  }
-
-  > :last-child {
-    @include border-bottom-radius ( inherit );
-  }
-
-  > .multiple:last-child {
-
-    > :first-child {
-      border-bottom-left-radius: inherit;
-    }
-
-    > :last-child {
-      border-bottom-right-radius: inherit;
-    }
-
-  }
-
-  /* NEXT CHILDREN BORDERED */
-
-  > .bordered + .bordered {
-
-    &:not(.card-footer) {
-      border-top-width: 0;
-    }
-
-    &.card-footer {
-      margin-top: - $border-width;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Card - Bordered
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../card.scss
- * ========================================================================= */
-
-/* BORDERED */
-
-.card.bordered {
-
-  /* INSET BORDERED */
-
-  > .bordered {
-
-    margin-left: - $border-width;
-    margin-right: - $border-width;
-
-    /* FIRST / LAST */
-
-    &:first-child:not(.overlay):not(.ripple-circle) {
-      margin-top: - $border-width;
-    }
-
-    &:last-child {
-      margin-bottom: - $border-width !important;
-    }
-
-  }
-
-  > :first-child.overlay + .bordered,
-  > :first-child.ripple-circle + .bordered {
-    margin-top: - $border-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Card - Compact
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../card.scss
- * ========================================================================= */
-
-/* HEADER / BLOCK / FOOTER */
-
-.card-header,
-.card-block,
-.card-footer {
-
-  &.compact:not(.multiple),
-  .card.compact > &:not(.multiple) {
-    padding: $card-compact-padding-y $card-compact-padding-x;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before widgets/card/card.scss
- * ========================================================================= */
-
-/* MODAL */
-
-.modal {
-  @include center-transform ();
-  @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
-  position: fixed;
-  z-index: $modal-z-index;
-  max-width: $modal-max-width;
-  max-height: $modal-max-height;
-  margin: 0;
-  transition-property: transform, opacity;
-  transition-duration: $modal-animation-duration;
-}
-
-/* BACKDROP */
-
-.modal-backdrop {
-
-  /* OBSCURED */
-
-  &:before {
-    position: fixed !important;
-    cursor: pointer !important;
-    z-index: $modal-z-index - 1 !important;
-    transition-duration: $modal-animation-duration !important;
-  }
-
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-
-html.flexbox-tweener {
-
-  .modal.card {
-
-    max-height: none;
-
-    > .card-block {
-      max-height: $modal-max-height * .8;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Closed
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-
-/* CLOSED */
-
-.modal:not(.show) {
-  display: none;
-}
-
-.modal:not(.open) {
-  opacity: 0;
-  transform: translate(-50%, -50%) translateY(#{$modal-closed-offset});
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Fullscreen
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.scss
- * ========================================================================= */
-
-/* FULLSCREEN */
-
-.modal.fullscreen {
-  border-width: 0;
-  border-radius: 0;
-  max-width: none;
-  width: 100%;
-  max-height: none;
-  height: 100%;
-}
-
-/* VERTICAL SHRINKING FIX (IE-10/11) */
-
-html.flexbox-tweener {
-
-  .modal.fullscreen.card > .card-block {
-    max-height: none;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before core/layout/layout.scss
- * @before widgets/card/card.scss
- * ========================================================================= */
-
-//TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
-
-/* PANEL */
-
-.panel {
-  @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
-  position: fixed;
-  z-index: $panel-z-index;
-  margin: 0;
-  border-radius: 0 !important;
-  transition: transform $panel-animation-duration;
-}
-
-/* BACKDROP */
-
-.panel-backdrop {
-
-  /* OBSCURED */
-
-  &:before {
-    position: fixed !important;
-    cursor: pointer !important;
-    z-index: $panel-z-index - 1 !important;
-    transition-duration: $panel-animation-duration !important;
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout {
-
-  transition: padding $panel-animation-duration;
-
-  > .layout-header.sticky {
-    transition-property: top, right, bottom, left;
-    transition-duration: $panel-animation-duration;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Closed
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* CLOSED */
-
-.panel:not(.show) {
-  display: none;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.bottom {
-
-  height: $panel-default-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY($panel-default-y-height);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-bottom {
-  padding-bottom: $panel-default-y-height;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.left {
-
-  width: $panel-default-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX(- $panel-default-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-left {
-
-  padding-left: $panel-default-x-width;
-
-  > .layout-header.sticky {
-    left: $panel-default-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.right {
-
-  width: $panel-default-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX($panel-default-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-right {
-
-  padding-right: $panel-default-x-width;
-
-  > .layout-header.sticky {
-    right: $panel-default-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Default - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.top {
-
-  height: $panel-default-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY(- $panel-default-y-height);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-default-pinned-top {
-
-  padding-top: $panel-default-y-height;
-
-  > .layout-header.sticky {
-    top: $panel-default-y-height;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.bottom {
-  @include fixed ( false 0 0 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.left {
-  @include fixed ( 0 false 0 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.right {
-  @include fixed ( 0 0 0 false );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.top {
-  @include fixed ( 0 0 false 0 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Directions - Default
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before ./top.scss
- * @before ./right.scss
- * @before ./bottom.scss
- * @before ./left.scss
- * ========================================================================= */
-
-/* DEFAULT */
-
-.panel:not(.top):not(.right):not(.bottom) {
-  @extend .panel.left;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Open
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* OPEN */
-
-.panel.open {
-  transform: translate(0, 0);
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Pinned
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../panel.scss
- * ========================================================================= */
-
-/* PINNED */
-
-.panel.pinned {
-  @include z-depth ( $panel-pinned-z-depth, $panel-pinned-z-depth-force, $panel-pinned-z-depth-basic );
-}
-
-/* BACKDROP */
-
-.panel-backdrop-pinned {
-
-  /* OBSCURED */
-
-  &:before {
-    display: none;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Bottom
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* BOTTOM */
-
-.panel.slim.bottom {
-
-  height: $panel-slim-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY($panel-slim-y-height);
-  }
-
-}
-
-.panel-layout.panel-slim-pinned-bottom {
-  padding-bottom: $panel-slim-y-height;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.panel.slim.left {
-
-  width: $panel-slim-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX(- $panel-slim-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-left {
-
-  padding-left: $panel-slim-x-width;
-
-  > .layout-header.sticky {
-    left: $panel-slim-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.panel.slim.right {
-
-  width: $panel-slim-x-width;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateX($panel-slim-x-width);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-right {
-
-  padding-right: $panel-slim-x-width;
-
-  > .layout-header.sticky {
-    right: $panel-slim-x-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Panel - Slim - Directions - Top
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../../panel.scss
- * @require core/layout/layout.scss
- * ========================================================================= */
-
-/* TOP */
-
-.panel.slim.top {
-
-  height: $panel-slim-y-height;
-
-  /* CLOSED */
-
-  &:not(.open) {
-    transform: translateY(- $panel-slim-y-height);
-  }
-
-}
-
-/* LAYOUT */
-
-.panel-layout.panel-slim-pinned-top {
-
-  padding-top: $panel-slim-y-height;
-
-  > .layout-header.sticky {
-    top: $panel-slim-y-height;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-//TODO: Add support for bidirectional chat
-
-/* CHAT */
-
-.chat {
-  @extend %container;
-  @include color ( $chat-color, $chat-color-force, $chat-color-basic );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../chat.scss
- * @require core/widget/widget.scss
- * ========================================================================= */
-
-/* CHAT */
-
-.chat-message {
-
-  @extend %widget;
-  @include children-no-gutter ();
-  display: flex;
-
-  /* IMAGE */
-
-  .chat-message-img {
-    @extend %widget;
-  }
-
-  .chat-message-img,
-  .chat-message-img img {
-    @include dimension-force ( $chat-message-img-size );
-    border-radius: if( $chat-message-img-rounded, $circular-border-radius, $chat-message-img-border-radius );
-    overflow: hidden;
-  }
-
-  img.chat-message-img,
-  .chat-message-img img {
-    border-width: $chat-message-img-border-width;
-    border-style: $chat-message-img-border-style;
-    border-color: $chat-message-img-border-color;
-    // Transitioning `filter`  in order to support `blurred`
-    // Transitioning `box-shadow`  in order to support `raisable`
-    transition: opacity $chat-message-animation-duration,
-                filter $blurred-animation-duration,
-                box-shadow $raisable-animation-duration;
-  }
-
-  a.chat-message-img:hover,
-  .chat-message-img a:hover {
-
-    img {
-      opacity: $chat-message-img-hover-opacity;
-    }
-
-    .overlay + img {
-      opacity: 1;
-    }
-
-  }
-
-  /* CONTENT */
-
-  .chat-message-content {
-    flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
-    width: 0;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - No img
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../message.scss
- * ========================================================================= */
-
-/* NO IMG */
-
-.chat-message.no-img .chat-message-img {
-  display: none;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - No tip
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../message.scss
- * ========================================================================= */
-
-/* NO TIP */
-
-.chat-message.no-tip .chat-message-content .card-header:after {
-  display: none;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - No tip - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../no_tip.scss
- * ========================================================================= */
-
-/* CLIP-PATH SUPPORTED */
-
-html.clip-path-polygon,
-html.clip-path-url {
-
-  /* LEFT */
-
-  .chat-message.no-tip.direction-left .chat-message-content {
-    margin-left: $gutter;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - No tip - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../no_tip.scss
- * ========================================================================= */
-
-/* CLIP-PATH SUPPORTED */
-
-html.clip-path-polygon,
-html.clip-path-url {
-
-  /* RIGHT */
-
-  .chat-message.no-tip.direction-right .chat-message-content {
-    margin-right: $gutter;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Container - Compact
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../container.scss
- * ========================================================================= */
-
-/* COMPACT */
-
-.container.compact {
-  padding: $container-compact-padding-y $container-compact-padding-x;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Datepicker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-/* DATEPICKER */
-
-.datepicker {
-
-  @extend %container;
-
-  /* INPUT */
-
-  input {
-    display: none !important;
-  }
-
-  /* NAVIGATION */
-
-  &-navigation {
-
-    @include children-no-gutter ();
-    display: flex;
-    align-items: center;
-
-    /* LABEL / PREVIOUS / NEXT */
-
-    > .label,
-    .previous,
-    .next {
-      width: $datepicker-day-width;
-      flex-grow: 0;
-    }
-
-    /* TITLE */
-
-    .datepicker-title {
-      @include margin-x ( $gutter );
-      text-align: center;
-      flex-grow: 1;
-    }
-
-  }
-
-  /* DAY NAMES */
-
-  &-days-names {
-
-    display: flex;
-    height: $datepicker-day-height;
-    align-items: center;
-
-    /* DAY NAME */
-
-    > * {
-      font-weight: $datepicker-day-name-font-weight;
-      width: $datepicker-day-width;
-      text-align: center;
-    }
-
-  }
-
-  /* DAYS */
-
-  &-days {
-
-    display: flex;
-    flex-wrap: wrap;
-
-    /* DAY */
-
-    > * {
-
-      line-height: $datepicker-day-height;
-      position: relative;
-      z-index: 1;
-      width: $datepicker-day-width;
-      height: $datepicker-day-height;
-      text-align: center;
-
-      /* BEFORE */
-
-      &:before {
-        @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
-        z-index: -1;
-        width: $datepicker-day-circle-size;
-        height: $datepicker-day-circle-size;
-        content: '';
-        border-radius: 50%;
-        background-color: transparent;
-      }
-
-      /* TODAY */
-
-      &.datepicker-day-today {
-
-        color: $datepicker-day-today-color;
-
-        /* BEFORE */
-
-        &:before {
-          background-color: $datepicker-day-today-circle-color;
-        }
-
-      }
-
-      /* SELECTED */
-
-      &.datepicker-day-selected {
-
-        color: $datepicker-day-selected-color;
-        transition: color $datepicker-animation-duration;
-
-        /* BEFORE */
-
-        &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
-          @include z-depth ( $datepicker-day-selected-z-depth, $datepicker-day-selected-z-depth-force, $datepicker-day-selected-z-depth-basic );
-        }
-
-        &:before {
-          background-color: $datepicker-day-selected-circle-color;
-          transition-property: box-shadow, background-color;
-          transition-duration: $datepicker-animation-duration;
-        }
-
-      }
-
-    }
-
-    /* PREVIOUS / NEXT */
-
-    .previous,
-    .next {
-      opacity: $datepicker-day-prev-next-opacity;
-    }
-
-    /* CLAMPED */
-
-    .datepicker-day-clamped {
-      opacity: $datepicker-day-clamped-opacity;
-    }
-
-    /* SELECTABLE */
-
-    :not(.previous):not(.next):not(.datepicker-day-clamped) {
-      cursor: pointer;
-    }
-
-  }
-
-  /* ENABLED */
-
-  &:not(.disabled) {
-
-    /* DAY */
-
-    .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
-
-      /* HOVER */
-
-      &:not(.datepicker-day-selected):hover {
-
-        color: $datepicker-day-hover-color;
-
-        /* BEFORE */
-
-        &:before {
-          background-color: $datepicker-day-hover-circle-color;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Datepicker - Inset
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../datepicker.scss
- * ========================================================================= */
-
-/* INSET */
-
-.datepicker.inset {
-  padding: 0;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Datepicker - Invalid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../datepicker.scss
- * ========================================================================= */
-
-/* INVALID */
-
-.datepicker.invalid {
-  border-color: $color-error !important;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Datepicker - Valid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../datepicker.scss
- * ========================================================================= */
-
-/* VALID */
-
-.datepicker.valid {
-  border-color: $color-success !important;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Fieldset
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-/* FIELDSET */
-
-fieldset {
-  @extend %container;
-  background-color: $fieldset-bg-color;
-  border-color: $fieldset-border-color;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Infobar
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-/* INFOBAR */
-
-.infobar {
-
-  @extend %container;
-  @include children-no-gutter ();
-  @include color ( $infobar-color, $infobar-color-force, $infobar-color-basic );
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
-  /* SECTIONS GUTTER */
-
-  > :not(:first-child):not(.infobar-title):not(.infobar-subtitle):not(.infobar-bottom) {
-    margin-left: $gutter;
-  }
-
-  /* LEFT / RIGHT */
-
-  &-left,
-  &-right {
-    flex-shrink: 0;
-  }
-
-  /* CENTER */
-
-  &-center {
-    flex: 1 1 0%; // IE-10/11 sets flex-shrink to 0 // IE-10/11 misinterpreter a unitless 0 flex-basis
-  }
-
-  /* BOTTOM */
-
-  //FIXME: Cannot be used for not 100% or fixed width elements, or the .infobar will be bigger than needed (for instance take a look at `toast`)
-
-  &-bottom {
-    width: 100%;
-    margin-top: $gutter;
-  }
-
-  /* TITLE / SUBTITLE */
-
-  &-title,
-  &-subtitle {
-    margin-bottom: 0 !important;
-  }
-
-  /* TITLE */
-
-  &-title {
-    @include size ( $infobar-title-size, $infobar-title-size-force, $infobar-title-size-basic );
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Infobar - Inset
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../infobar.scss
- * ========================================================================= */
-
-/* INSET */
-
-.infobar.inset {
-  padding: 0;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Toast
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/infobar/infobar.scss
- * ========================================================================= */
-
-//TODO: Push up `FAB` if needed
-//TODO: Make toast scrollables, maybe, so that in no case they will fill up the entire screen
-//TODO: Maybe switch to an equally good but faster to compute animation
-
-/* TOAST */
-
-.toast {
-
-  @include children-no-gutter ();
-  @include z-depth ( $toast-z-depth, $toast-z-depth-force, $toast-z-depth-basic );
-  display: block;
-  border-radius: $toast-border-radius;
-  pointer-events: auto;
-  transition-property: border-radius, border-width, opacity, filter, box-shadow, font-size, padding, margin;
-  transition-duration: $toast-animation-duration;
-  transform: translateZ(0);
-
-  /* IMG */
-
-  &-img {
-    width: $toast-img-size;
-    border-radius: if( $toast-img-rounded, $circular-border-radius, $toast-border-radius );
-  }
-
-  /* BUTTONS */
-
-  &-buttons {
-    @include padding-x ( $gutter );
-  }
-
-  /* INFOBAR */
-
-  > .infobar {
-    transition: padding $toast-animation-duration;
-  }
-
-}
-
-/* HORIZONTAL GROW FIX (IE-10/11)*/
-
-html.flexbox-tweener {
-
-  .toast {
-
-    > .infobar {
-
-      flex-wrap: nowrap;
-
-      .infobar-center {
-        flex-basis: auto;
-      }
-
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Toast - Closed
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../toast.scss
- * ========================================================================= */
-
-/* CLOSED */
-
-.toast:not(.open) {
-
-  border-width: 0 !important;
-  opacity: 0;
-  font-size: 0;
-  padding: 0;
-  margin: 0;
-
-  /* INFOBAR */
-
-  > .infobar {
-    padding: 0;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Toast - Queue
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../toast.scss
- * ========================================================================= */
-
-/* QUEUE */
-
-.toast-queue {
-
-  display: flex;
-
-  /* LEFT */
-
-  &.left {
-
-    align-items: flex-start;
-
-    &:not(:empty) {
-      margin-left: $gutter;
-    }
-
-  }
-
-  /* CENTER */
-
-  &.center {
-
-    @include margin-x ( $gutter );
-    align-items: center;
-
-    &:empty {
-      @include margin-x ( $gutter-half );
-    }
-
-  }
-
-  /* RIGHT */
-
-  &.right {
-
-    align-items: flex-end;
-
-    &:not(:empty) {
-      margin-right: $gutter;
-    }
-
-  }
-
-  /* EXPANDED */
-
-  &.expanded {
-    @include toast-queue-expand ();
-  }
-
-}
-
-/* COLUMNS SHRINKING FIX (IE-10/11)*/
-
-html.flexbox-tweener {
-
-  /* QUEUE */
-
-  .toast-queue:not(.expanded):not(:empty) {
-
-    flex: 1 1 0%;
-
-    /* TOAST */
-
-    .toast {
-      max-width: 100%;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Toast - Queues
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../toast.scss
- * @require ../queue/queue.scss
- * ========================================================================= */
-
-/* QUEUES */
-
-.toast-queues {
-
-  @include fixed ( false 0 false 0 );
-  z-index: $toast-queues-z-index;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  pointer-events: none;
-
-  /* TOP */
-
-  &.top {
-
-    top: 0;
-
-    /* ROW */
-
-    .toast-queues-row {
-      align-items: flex-start;
-    }
-
-    /* QUEUE */
-
-    .toast-queue {
-
-      flex-direction: column;
-
-      /* TOAST */
-
-      .toast {
-        margin-top: $gutter;
-      }
-
-      /* EXPANDED */
-
-      &.expanded .toast {
-        border-top-width: 0;
-        border-bottom-width: $border-width;
-        border-bottom-style: solid;
-      }
-
-    }
-
-  }
-
-  /* BOTTOM */
-
-  &.bottom {
-
-    bottom: 0;
-
-    /* ROW */
-
-    .toast-queues-row {
-      align-items: flex-end;
-    }
-
-    /* QUEUE */
-
-    .toast-queue {
-
-      flex-direction: column-reverse;
-
-      /* TOAST */
-
-      .toast {
-        margin-bottom: $gutter;
-      }
-
-      /* EXPANDED */
-
-      &.expanded .toast {
-        border-bottom-width: 0;
-        border-top-width: $border-width;
-        border-top-style: solid;
-      }
-
-    }
-
-  }
-
-  /* ROW */
-
-  &-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Toast - Autoexpand
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../toast.scss
- * @require ../queue/queue.scss
- * @require ../queues/queues.scss
- * ========================================================================= */
-
-//TODO: Attach the shadow to `.toast-queues`, but only if there are some noties
-
-/* AUTOEXPAND */
-
-@include media-width-down ( $toast-autoexpand-width ) {
-
-  /* QUEUES */
-
-  .toast-queues {
-
-    /* TOP */
-
-    &.top {
-
-      /* ROW */
-
-      .toast-queues-row {
-        flex-direction: column;
-      }
-
-      /* TOAST */
-
-      .toast {
-        border-top-width: 0;
-        border-bottom-width: $border-width;
-        border-bottom-style: solid;
-      }
-
-    }
-
-    /* BOTTOM */
-
-    &.bottom {
-
-      /* ROW */
-
-      .toast-queues-row {
-        flex-direction: column-reverse;
-      }
-
-      /* TOAST */
-
-      .toast {
-        border-bottom-width: 0;
-        border-top-width: $border-width;
-        border-top-style: solid;
-      }
-
-    }
-
-  }
-
-  /* QUEUE */
-
-  .toast-queue {
-    @include toast-queue-expand ();
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Tagbox
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/multiple/multiple.scss
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-/* TAGBOX */
-
-.tagbox {
-
-  @extend %container;
-  @include color ( $tagbox-color, $tagbox-color-force, $tagbox-color-basic );
-
-  /* TAGS */
-
-  &-tags {
-
-    @extend %multiple;
-    @include last-child-no-gutter ( 0, - $gutter );
-    @include margin-x ( - $gutter-half );
-    display: flex;
-    flex-wrap: wrap;
-
-    /* CHILDREN */
-
-    > .tagbox-tag,
-    > .tagbox-partial {
-      @include margin-x ( $gutter-half );
-      white-space: nowrap;
-    }
-
-  }
-
-  /* PARTIAL */
-
-  input.tagbox-partial {
-    @include color ( 'inherit', true, true );
-    margin-bottom: $gutter;
-    min-width: $tagbox-partial-min-width;
   }
 
 }
@@ -11922,31 +10301,6 @@ html.flexbox-tweener {
 figure,
 .figure {
   @extend %figure;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Figure - Figcaption
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../figure.scss
- * @require widgets/container/container.scss
- * ========================================================================= */
-
-/* FIGCAPTION */
-
-%figcaption {
-  @extend %container;
-  @include color ( $figcaption-color, $figcaption-color-force, $figcaption-color-basic );
-  overflow: auto;
-  border-radius: inherit;
-}
-
-figcaption,
-.figcaption {
-  @extend %figcaption;
 }
 
 
@@ -12967,754 +11321,6 @@ img {
 
   img.#{$class} {
     width: unit-strip( $font-size * $image-sizes-scaling-factor ) * 1rem;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * @require core/widget/widget.scss
- * ========================================================================= */
-
-/* INPUT */
-
-%input {
-  @extend %widget;
-  @include color ( $input-color, $input-color-force, $input-color-basic );
-  display: flex;
-  flex-shrink: 1;
-  min-width: 0;
-  border-radius: $input-border-radius;
-  line-height: $line-height;
-  padding: $input-padding-y $input-padding-x;
-}
-
-input {
-  @extend %input;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input - Compact
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
- * ========================================================================= */
-
-/* COMPACT */
-
-%input.compact {
-  padding: $input-compact-padding-y $input-compact-padding-x;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input - File
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
- * ========================================================================= */
-
-/* FILE */
-
-input[type="file"] {
-  display: none !important;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input - Invalid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
- * ========================================================================= */
-
-/* INVALID */
-
-%input.invalid {
-  border-color: $color-error !important;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input - Placeholder
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
- * ========================================================================= */
-
-/* PLACEHOLDER */
-
-::placeholder {
-  color: rgba( nth( map-get( $colors, $input-color ), 6 ), $input-placeholder-opacity );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Input - Valid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../input.scss
- * ========================================================================= */
-
-/* VALID */
-
-%input.valid {
-  border-color: $color-success !important;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Textarea
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * @require widgets/input/input.scss
- * ========================================================================= */
-
-/* TEXTAREA */
-
-textarea {
-  @extend %input;
-  resize: vertical;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Textarea - Unresizable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../textarea.scss
- * ========================================================================= */
-
-/* UNRESIZABLE */
-
-textarea.unresizable {
-  resize: none;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Textarea - Autogrow
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../unresizable/unresizable.scss
- * ========================================================================= */
-
-/* AUTOGROW */
-
-textarea.autogrow {
-  @extend textarea.unresizable;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Textarea - Disabled
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../unresizable/unresizable.scss
- * ========================================================================= */
-
-/* DISABLED */
-
-textarea[disabled],
-textarea.disabled,
-.disabled textarea {
-  @extend textarea.unresizable;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.scss
- * @before widgets/icon/icon.scss
- * @before widgets/icons/icons.scss
- * ========================================================================= */
-
-//TODO: Add a way to force labels icons to have the same height as labels with just text
-//TODO: Add support for img inside it (It should probably behave like Angular Material's chip)
-
-/* LABEL */
-
-.label {
-
-  @extend %widget;
-  @include children-no-gutter ();
-  @include color ( $label-color, $label-color-force, $label-color-basic );
-  font-weight: $label-font-weight;
-  display: inline-block;
-  text-align: center;
-  border-radius: $label-border-radius;
-  padding: $label-padding-y $label-padding-x;
-  min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
-
-  /* HORIZONTAL GUTTER */
-
-  > :not(.overlay):not(.ripple-circle):not(input):not(select) {
-
-    /* HORIZONTAL GUTTER */
-
-    + * {
-      margin-left: $label-inner-gutter;
-    }
-
-    + %icon,
-    + %icons {
-      margin-left: $label-inner-gutter / $icon-scale-factor;
-    }
-
-  }
-
-  /* ALIGNMENT */
-
-  > %icon,
-  > %icons,
-  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child),
-  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child) ~ *,
-  > .overlay + :not(:last-child),
-  > .ripple-circle + :not(:last-child) {
-    vertical-align: middle;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Compact
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-/* COMPACT */
-
-.label.compact {
-
-  padding: $label-compact-padding-y $label-compact-padding-x;
-  min-width: $line-height-em + ( $label-compact-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
-
-  /* CHILDREN */
-
-  > :not(.overlay):not(.ripple-circle):not(input):not(select) {
-
-    /* HORIZONTAL GUTTER */
-
-    + * {
-      margin-left: $label-compact-inner-gutter;
-    }
-
-    + %icon,
-    + %icons {
-      margin-left: $label-compact-inner-gutter / $icon-scale-factor;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-/* CORNER */
-
-.label.corner {
-
-  @include dimension ( $label-corner-size );
-  z-index: $label-corner-z-index;
-  margin: 0 !important;
-  border-width: 0 !important;
-  background-color: transparent !important;
-  border-radius: 0;
-  display: block;
-  overflow: hidden;
-
-  /* BEFORE */
-
-  &:before {
-    content: '';
-    position: absolute;
-    border-color: inherit;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner - Directions - Bottom left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../corner.scss
- * ========================================================================= */
-
-/* BOTTOM LEFT */
-
-.label.corner.bottom-left {
-
-  @include absolute ( false false 0 0 );
-  border-bottom-left-radius: inherit;
-
-  /* BEFORE */
-
-  &:before {
-    @include absolute ( false false 0 0 );
-    @include triangle ( $label-corner-size, bottom-left );
-  }
-
-  /* CHILDREN */
-
-  > * {
-    @include absolute ( false false 35% 35% );
-    transform: translate(-63%, 63%);
-  }
-
-  /* BORDERED */
-
-  .bordered > & {
-    @include absolute ( false false ( - $border-width ) ( - $border-width ) );
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner - Directions - Bottom right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../corner.scss
- * ========================================================================= */
-
-/* BOTTOM RIGHT */
-
-.label.corner.bottom-right {
-
-  @include absolute ( false 0 0 false );
-  border-bottom-right-radius: inherit;
-
-  /* BEFORE */
-
-  &:before {
-    @include absolute ( false 0 0 false );
-    @include triangle ( $label-corner-size, bottom-right );
-  }
-
-  /* CHILDREN */
-
-  > * {
-    @include absolute ( false 35% 35% false );
-    transform: translate(63%, 63%);
-  }
-
-  /* BORDERED */
-
-  .bordered > & {
-    @include absolute ( false ( - $border-width ) ( - $border-width ) false );
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner - Directions - Top left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../corner.scss
- * ========================================================================= */
-
-/* TOP LEFT */
-
-.label.corner.top-left {
-
-  @include absolute ( 0 false false 0 );
-  border-top-left-radius: inherit;
-
-  /* BEFORE */
-
-  &:before {
-    @include absolute ( 0 false false 0 );
-    @include triangle ( $label-corner-size, top-left );
-  }
-
-  /* CHILDREN */
-
-  > * {
-    @include absolute ( 35% false false 35% );
-    transform: translate(-63%, -63%);
-  }
-
-  /* BORDERED */
-
-  .bordered > & {
-    @include absolute ( ( - $border-width ) false false ( - $border-width ) );
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner - Directions - Top right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../corner.scss
- * ========================================================================= */
-
-/* TOP RIGHT */
-
-.label.corner.top-right {
-
-  @include absolute ( 0 0 false false );
-  border-top-right-radius: inherit;
-
-  /* BEFORE */
-
-  &:before {
-    @include absolute ( 0 0 false false );
-    @include triangle ( $label-corner-size, top-right );
-  }
-
-  /* CHILDREN */
-
-  > * {
-    @include absolute ( 35% 35% false false );
-    transform: translate(63%, -63%);
-  }
-
-  /* BORDERED */
-
-  .bordered > & {
-    @include absolute ( ( - $border-width ) ( - $border-width ) false false );
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Corner - Directions - Default
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before ./top_left.scss
- * @before ./top_right.scss
- * @before ./bottom_right.scss
- * @before ./bottom_left.scss
- * ========================================================================= */
-
-/* TOP LEFT */
-
-.label.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
-  @extend .label.corner.top-right;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Floating
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-//TODO: Make it a component of its own (Sure?)
-//TODO: Add it while scrolling to bottom, show him when scrolling to top
-//TODO: Add sub floating actions
-
-/* FLOATING */
-
-.label.floating {
-  @include z-depth ( $label-floating-z-depth, $label-floating-z-depth-force, $label-floating-z-depth-basic );
-  position: fixed;
-  z-index: $label-floating-z-index;
-  right: $label-floating-offset;
-  bottom: $label-floating-offset;
-  margin-bottom: 0;
-  padding: $label-floating-padding-y $label-floating-padding-x;
-  min-height: $line-height-em + ( $label-floating-padding-y * 2 );
-  min-width: $line-height-em + ( $label-floating-padding-x * 2 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Floating - Compact
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../floating.scss
- * ========================================================================= */
-
-/* COMPACT */
-
-.label.floating.compact {
-  padding: $label-floating-compact-padding-y $label-floating-compact-padding-x;
-  min-height: $line-height-em + ( $label-floating-compact-padding-y * 2 );
-  min-width: $line-height-em + ( $label-floating-compact-padding-x * 2 );
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Invalid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-/* INVALID */
-
-.label.invalid {
-
-  border-color: $color-error !important;
-
-  /* ICON / ICONS */
-
-  > %icon,
-  > %icons {
-    color: $color-error !important;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Ribbon
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-//TODO: Write it better
-//TODO: Modularize it
-//TODO: Add corners support
-//FIXME: Ribbon.right cause an overflowing bug in IE and Edge
-
-/* RIBBON */
-
-.label.ribbon {
-
-  @include z-depth ( $label-ribbon-z-depth, $label-ribbon-z-depth-force, $label-ribbon-z-depth-basic );
-
-  /* BEFORE / AFTER */
-
-  &.ribbon-left:before,
-  &.ribbon-right:after {
-    position: absolute;
-    z-index: -1;
-    content: '';
-    border: ( $label-ribbon-fold-size / 2 ) solid transparent;
-    border-top-color: inherit;
-    bottom: - $label-ribbon-fold-size;
-  }
-
-  /* LEFT */
-
-  &.ribbon-left {
-
-    @include border-left-radius ( 0 );
-    left: calc( (#{$gutter} + #{$label-ribbon-fold-size}) * -1 );
-    padding-left: calc(#{$label-padding-x} + #{$gutter});
-
-    &:before {
-      left: 0;
-      border-right-color: inherit;
-    }
-
-  }
-
-  /* LEFT & RIGHT */
-
-  &.ribbon-left.ribbon-right {
-    width: calc(100% + #{($gutter * 2)} + #{($label-ribbon-fold-size * 2)});
-  }
-
-  /* RIGHT */
-
-  &.ribbon-right {
-
-    @include border-right-radius ( 0 );
-    padding-right: calc(#{$label-padding-x} + #{$gutter});
-
-    &:after {
-      right: 0;
-      border-left-color: inherit;
-    }
-
-  }
-
-  /* ONLY RIGHT */
-
-  //FIXME: It is a bit off
-
-  &.ribbon-right:not(.ribbon-left) {
-    left: calc(100% + #{$gutter} + #{$label-ribbon-fold-size});
-    transform: translateX(-100%);
-  }
-
-  /* BORDERED */
-
-  &.bordered {
-
-    /* BEFORE / AFTER */
-
-    &.ribbon-left:before,
-    &.ribbon-right:after {
-      bottom: calc( (#{$border-width} + #{$label-ribbon-fold-size}) * -1 );
-    }
-
-    /* BEFORE */
-
-    &.ribbon-left:before {
-      left: - $border-width;
-    }
-
-    /* AFTER */
-
-    &.ribbon-right:after {
-      right: - $border-width;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Tag
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-//FIXME: Missing pointer `bordered` in IE10
-
-/* TAG */
-
-.label.tag {
-
-  @include border-left-radius ( $label-tag-border-left-radius );
-  padding-left: $label-tag-padding-left !important;
-
-  /* CIRCLE */
-
-  &:before {
-    @include absolute ( 0 false 0 ( $label-tag-padding-left - $label-tag-circle-size * 2 ) );
-    @include dimension ( $label-tag-circle-size );
-    content: '';
-    margin: auto;
-    background-color: $label-tab-circle-bg-color;
-    border-radius: 50%;
-    box-shadow: $label-tag-circle-box-shadow;
-    box-sizing: padding-box;
-    border: inherit;
-  }
-
-  /* BORDERED */
-
-  &.bordered:before {
-    border-width: $border-width;
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Tag - Colors
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../tag.scss
- * ========================================================================= */
-
-/* COLORS */
-
-@each $name, $datas in $colors {
-
-  @if $name != 'inherit' and $name != 'transparent' {
-
-    $class: color-get-class( $name );
-
-    $bg: nth( $datas, 1 );
-
-    .label.tag.circle-#{$class}:before {
-      background-color: $bg;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Label - Valid
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../label.scss
- * ========================================================================= */
-
-/* VALID */
-
-.label.valid {
-
-  border-color: $color-success !important;
-
-  /* ICON / ICONS */
-
-  > %icon,
-  > %icons {
-    color: $color-success !important;
   }
 
 }
@@ -15335,6 +12941,7 @@ select + label.valid {
     height: $slider-handler-height;
     border-radius: $slider-handler-border-radius;
     cursor: move;
+    transition: none; // Safari fix
     transition-property: transform, border-radius, box-shadow;
     transition-duration: $slider-animation-duration;
   }
@@ -15703,6 +13310,7 @@ svg.spinner {
       z-index: -1;
       opacity: 0;
       transform: scale($switch-handler-before-scale);
+      transition: none; // Safari fix
       transition-property: opacity, transform;
       transition-duration: $switch-animation-duration;
     }
@@ -15710,7 +13318,7 @@ svg.spinner {
     /* DRAGGING */
 
     &.draggable-dragging {
-      transition-property: none;
+      transition: none; // Safari fix
     }
 
   }
@@ -16056,7 +13664,7 @@ svg.spinner {
   /* BLOCK */
 
   > .table-wrapper {
-    padding: 0;
+    padding: 0 !important;
   }
 
   /* TABLE */
@@ -16982,25 +14590,6 @@ p {
 
 
 /* =========================================================================
- * Svelto - Widgets - Typography - Pre
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * @require core/widget/widget.scss
- * ========================================================================= */
-
-/* PRE */
-
-pre {
-  @extend %widget;
-  display: flex;
-  padding: $pre-padding-y $pre-padding-x;
-}
-
-
-/* =========================================================================
  * Svelto - Decorators - Actionable
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -17011,25 +14600,6 @@ pre {
 
 .actionable {
   cursor: pointer;
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Button
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require decorators/actionable/actionable.scss
- * @require widgets/label/label.scss
- * ========================================================================= */
-
-/* BUTTON */
-
-.button {
-  @extend .actionable;
-  @extend .label;
-  @include color ( $button-color, $button-color-force, $button-color-basic );
 }
 
 
@@ -17335,29 +14905,18 @@ pre {
     opacity: 1;
   }
 
+  /* NO DESKTOP */
+
+  html.no-desktop & {
+    display: none;
+  }
+
   /* DISABLED */
 
   .disabled & {
     display: none;
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Figure - Figcaption - Attached
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../figcaption.scss
- * @require decorators/attached/attached.scss
- * ========================================================================= */
-
-/* ATTACHED */
-
-%figcaption%attached {
-  @include color ( $figcaption-attached-color, $figcaption-attached-color-force, $figcaption-attached-color-basic );
 }
 
 
@@ -17752,37 +15311,6 @@ pre {
 
 
 /* =========================================================================
- * Svelto - Widgets - Input - Placeholder - Colors
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../placeholder.scss
- * @require decorators/colors/colors.scss
- * ========================================================================= */
-
-//TODO: Add support for inverted colors
-
-/* COLORS */
-
-@each $name, $datas in $colors {
-
-  @if $name != 'inherit' and $name != 'transparent' {
-
-    $class: color-get-class( $name );
-
-    $text: nth( $datas, 6 );
-
-    %color-#{$class}::placeholder {
-      color: rgba( $text, $input-placeholder-opacity );
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Decorators - Disabled
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18135,72 +15663,6 @@ html.clip-path-url {
 
 
 /* =========================================================================
- * Svelto - Widgets - Chat - Message - Directions - Left
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../message.scss
- * @require decorators/pointing/directions/left.scss
- * ========================================================================= */
-
-/* LEFT */
-
-.chat-message.direction-left {
-
-  /* LEVELS */
-
-  &.level-3,
-  &[class*='level-'] {
-    margin-left: $chat-message-level-3-offset;
-  }
-
-  &.level-2 {
-    margin-left: $chat-message-level-2-offset;
-  }
-
-  &.level-1 {
-    margin-left: $chat-message-level-1-offset;
-  }
-
-  /* IMAGE */
-
-  .chat-message-img {
-    order: 1;
-  }
-
-  /* CONTENT */
-
-  .chat-message-content {
-    order: 2;
-    margin-left: $gutter;
-  }
-
-}
-
-/* CLIP-PATH SUPPORTED */
-
-html.clip-path-polygon,
-html.clip-path-url {
-
-  /* CONTENT */
-
-  .chat-message.direction-left .chat-message-content {
-
-    margin-left: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
-
-    /* HEADER */
-
-    > .card-header {
-      @extend %pointing-left-base;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Decorators - Pointing - Directions - Right
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18249,89 +15711,6 @@ html.clip-path-url {
     @extend %pointing-right;
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - Directions - Right
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../message.scss
- * @require decorators/pointing/directions/right.scss
- * ========================================================================= */
-
-/* RIGHT */
-
-.chat-message.direction-right {
-
-  /* LEVELS */
-
-  &.level-3,
-  &[class*='level-'] {
-    margin-right: $chat-message-level-3-offset;
-  }
-
-  &.level-2 {
-    margin-right: $chat-message-level-2-offset;
-  }
-
-  &.level-1 {
-    margin-right: $chat-message-level-1-offset;
-  }
-
-  /* IMAGE */
-
-  .chat-message-img {
-    order: 2;
-  }
-
-  /* CONTENT */
-
-  .chat-message-content {
-    order: 1;
-    margin-right: $gutter;
-  }
-
-}
-
-/* CLIP-PATH SUPPORTED */
-
-html.clip-path-polygon,
-html.clip-path-url {
-
-  /* CONTENT */
-
-  .chat-message.direction-right .chat-message-content {
-
-    margin-right: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
-
-    /* HEADER */
-
-    > .card-header {
-      @extend %pointing-right-base;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - Directions - Default
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before ./left.scss
- * @before ./right.scss
- * ========================================================================= */
-
-/* DEFAULT */
-
-.chat-message:not(.direction-right) {
-  @extend .chat-message.direction-left;
 }
 
 
@@ -18668,6 +16047,2784 @@ h6 {
 
 
 /* =========================================================================
+ * Svelto - Decorators - Target (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TARGET */
+
+%target {
+  animation: target $target-animation-duration ease-in-out;
+  animation-iteration-count: $target-animation-iteration-count;
+}
+
+%targetable:target {
+  @extend %target;
+}
+
+.target {
+  @extend %target;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Container
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
+ * ========================================================================= */
+
+// If we set is as `display: flex` then the padding-bottom will collpase when used as `overlay`
+
+/* CONTAINER */
+
+%container {
+  @extend %widget;
+  border-radius: $container-border-radius;
+  padding: $container-padding-y $container-padding-x;
+}
+
+.container {
+  @extend %container;
+  @extend %targetable;
+  @include color ( $container-color, $container-color-force, $container-color-basic );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Card
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before core/multiple/multiple.scss
+ * @require decorators/target/target.scss
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+//TODO: Maybe use slimmer `.card-header` and `.card-footer`
+
+/* CARD */
+
+.card {
+
+  @extend %widget;
+  @extend %targetable;
+  @include children-no-gutter ();
+  @include color ( $card-color, $card-color-force, $card-color-basic );
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-border-radius;
+
+  /* HEADER / BLOCK / FOOTER */
+
+  &-header,
+  &-block,
+  &-footer {
+
+    &:not(.multiple) {
+      @extend %container;
+      @include color ( $card-section-color, $card-section-color-force, $card-section-color-basic );
+      border-radius: 0;
+    }
+
+    &.multiple > * {
+      border-radius: 0;
+      margin-bottom: 0 !important;
+    }
+
+  }
+
+  /* HEADER / FOOTER */
+
+  &-header,
+  &-footer {
+    flex-shrink: 0; // So that when there's an overflow just `.card-block` scrolls
+  }
+
+  /* BLOCK */
+
+  &-block {
+    flex: 1 1 auto; // IE-10/11 sets flex-shrink to 0
+    overflow: auto;
+  }
+
+  /* BORDER RADIUS */
+
+  > *,
+  > .table {
+    border-radius: 0;
+  }
+
+  /* BORDER RADIUS INHERITANCE */
+
+  > :first-child:not(.overlay):not(.ripple-circle),
+  > :first-child.overlay + *,
+  > :first-child.ripple-circle + * {
+    @include border-top-radius ( inherit );
+  }
+
+  > .multiple:first-child {
+
+    > :first-child {
+      border-top-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-top-right-radius: inherit;
+    }
+
+  }
+
+  > :last-child {
+    @include border-bottom-radius ( inherit );
+  }
+
+  > .multiple:last-child {
+
+    > :first-child {
+      border-bottom-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-bottom-right-radius: inherit;
+    }
+
+  }
+
+  /* NEXT CHILDREN BORDERED */
+
+  > .bordered + .bordered {
+
+    &:not(.card-footer) {
+      border-top-width: 0;
+    }
+
+    &.card-footer {
+      margin-top: - $border-width;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Card - Bordered
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../card.scss
+ * ========================================================================= */
+
+/* BORDERED */
+
+.card.bordered {
+
+  /* INSET BORDERED */
+
+  > .bordered {
+
+    margin-left: - $border-width;
+    margin-right: - $border-width;
+
+    /* FIRST / LAST */
+
+    &:first-child:not(.overlay):not(.ripple-circle) {
+      margin-top: - $border-width;
+    }
+
+    &:last-child {
+      margin-bottom: - $border-width !important;
+    }
+
+  }
+
+  > :first-child.overlay + .bordered,
+  > :first-child.ripple-circle + .bordered {
+    margin-top: - $border-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Card - Compact
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../card.scss
+ * ========================================================================= */
+
+/* HEADER / BLOCK / FOOTER */
+
+.card-header,
+.card-block,
+.card-footer {
+
+  &.compact:not(.multiple),
+  .card.compact > &:not(.multiple) {
+    padding: $card-compact-padding-y $card-compact-padding-x;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+
+/* MODAL */
+
+.modal {
+  @include center-transform ();
+  @include z-depth ( $modal-z-depth, $modal-z-depth-force, $modal-z-depth-basic );
+  position: fixed;
+  z-index: $modal-z-index;
+  max-width: $modal-max-width;
+  max-height: $modal-max-height;
+  margin: 0;
+  transition: none; // Safari fix
+  transition-property: transform, opacity;
+  transition-duration: $modal-animation-duration;
+}
+
+/* BACKDROP */
+
+.modal-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $modal-z-index - 1 !important;
+    transition-duration: $modal-animation-duration !important;
+  }
+
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.card {
+
+    max-height: none;
+
+    > .card-block {
+      max-height: $modal-max-height * .8;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.modal:not(.show) {
+  display: none;
+}
+
+.modal:not(.open) {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(#{$modal-closed-offset});
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.scss
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+.modal.fullscreen {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .modal.fullscreen.card > .card-block {
+    max-height: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before core/layout/layout.scss
+ * @before widgets/card/card.scss
+ * ========================================================================= */
+
+//TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+
+/* PANEL */
+
+.panel {
+  @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
+  position: fixed;
+  z-index: $panel-z-index;
+  margin: 0;
+  border-radius: 0 !important;
+  transition: transform $panel-animation-duration;
+}
+
+/* BACKDROP */
+
+.panel-backdrop {
+
+  /* OBSCURED */
+
+  &:before {
+    position: fixed !important;
+    cursor: pointer !important;
+    z-index: $panel-z-index - 1 !important;
+    transition-duration: $panel-animation-duration !important;
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout {
+
+  transition: padding $panel-animation-duration;
+
+  > .layout-header.sticky {
+    transition: none; // Safari fix
+    transition-property: top, right, bottom, left;
+    transition-duration: $panel-animation-duration;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.panel:not(.show) {
+  display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.bottom {
+
+  height: $panel-default-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-default-y-height);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-bottom {
+  padding-bottom: $panel-default-y-height;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.left {
+
+  width: $panel-default-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(- $panel-default-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-left {
+
+  padding-left: $panel-default-x-width;
+
+  > .layout-header.sticky {
+    left: $panel-default-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.right {
+
+  width: $panel-default-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX($panel-default-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-right {
+
+  padding-right: $panel-default-x-width;
+
+  > .layout-header.sticky {
+    right: $panel-default-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Default - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.top {
+
+  height: $panel-default-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(- $panel-default-y-height);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-default-pinned-top {
+
+  padding-top: $panel-default-y-height;
+
+  > .layout-header.sticky {
+    top: $panel-default-y-height;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.bottom {
+  @include fixed ( false 0 0 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.left {
+  @include fixed ( 0 false 0 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.right {
+  @include fixed ( 0 0 0 false );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.top {
+  @include fixed ( 0 0 false 0 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./top.scss
+ * @before ./right.scss
+ * @before ./bottom.scss
+ * @before ./left.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.panel:not(.top):not(.right):not(.bottom) {
+  @extend .panel.left;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Open
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* OPEN */
+
+.panel.open {
+  transform: translate(0, 0);
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Pinned
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* PINNED */
+
+.panel.pinned {
+  @include z-depth ( $panel-pinned-z-depth, $panel-pinned-z-depth-force, $panel-pinned-z-depth-basic );
+}
+
+/* BACKDROP */
+
+.panel-backdrop-pinned {
+
+  /* OBSCURED */
+
+  &:before {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.slim.bottom {
+
+  height: $panel-slim-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY($panel-slim-y-height);
+  }
+
+}
+
+.panel-layout.panel-slim-pinned-bottom {
+  padding-bottom: $panel-slim-y-height;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.slim.left {
+
+  width: $panel-slim-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(- $panel-slim-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-left {
+
+  padding-left: $panel-slim-x-width;
+
+  > .layout-header.sticky {
+    left: $panel-slim-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.slim.right {
+
+  width: $panel-slim-x-width;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX($panel-slim-x-width);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-right {
+
+  padding-right: $panel-slim-x-width;
+
+  > .layout-header.sticky {
+    right: $panel-slim-x-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Slim - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.slim.top {
+
+  height: $panel-slim-y-height;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(- $panel-slim-y-height);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-slim-pinned-top {
+
+  padding-top: $panel-slim-y-height;
+
+  > .layout-header.sticky {
+    top: $panel-slim-y-height;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+//TODO: Add support for bidirectional chat
+
+/* CHAT */
+
+.chat {
+  @extend %container;
+  @include color ( $chat-color, $chat-color-force, $chat-color-basic );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../chat.scss
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* CHAT */
+
+.chat-message {
+
+  @extend %widget;
+  @include children-no-gutter ();
+  display: flex;
+
+  /* IMAGE */
+
+  .chat-message-img {
+    @extend %widget;
+  }
+
+  .chat-message-img,
+  .chat-message-img img {
+    @include dimension-force ( $chat-message-img-size );
+    border-radius: if( $chat-message-img-rounded, $circular-border-radius, $chat-message-img-border-radius );
+    overflow: hidden;
+  }
+
+  img.chat-message-img,
+  .chat-message-img img {
+    border-width: $chat-message-img-border-width;
+    border-style: $chat-message-img-border-style;
+    border-color: $chat-message-img-border-color;
+    // Transitioning `filter`  in order to support `blurred`
+    // Transitioning `box-shadow`  in order to support `raisable`
+    transition: opacity $chat-message-animation-duration,
+                filter $blurred-animation-duration,
+                box-shadow $raisable-animation-duration;
+  }
+
+  a.chat-message-img:hover,
+  .chat-message-img a:hover {
+
+    img {
+      opacity: $chat-message-img-hover-opacity;
+    }
+
+    .overlay + img {
+      opacity: 1;
+    }
+
+  }
+
+  /* CONTENT */
+
+  .chat-message-content {
+    flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
+    width: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * @require decorators/pointing/directions/left.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.chat-message.direction-left {
+
+  /* LEVELS */
+
+  &.level-3,
+  &[class*='level-'] {
+    margin-left: $chat-message-level-3-offset;
+  }
+
+  &.level-2 {
+    margin-left: $chat-message-level-2-offset;
+  }
+
+  &.level-1 {
+    margin-left: $chat-message-level-1-offset;
+  }
+
+  /* IMAGE */
+
+  .chat-message-img {
+    order: 1;
+  }
+
+  /* CONTENT */
+
+  .chat-message-content {
+    order: 2;
+    margin-left: $gutter;
+  }
+
+}
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  /* CONTENT */
+
+  .chat-message.direction-left .chat-message-content {
+
+    margin-left: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
+
+    /* HEADER */
+
+    > .card-header {
+      @extend %pointing-left-base;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * @require decorators/pointing/directions/right.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.chat-message.direction-right {
+
+  /* LEVELS */
+
+  &.level-3,
+  &[class*='level-'] {
+    margin-right: $chat-message-level-3-offset;
+  }
+
+  &.level-2 {
+    margin-right: $chat-message-level-2-offset;
+  }
+
+  &.level-1 {
+    margin-right: $chat-message-level-1-offset;
+  }
+
+  /* IMAGE */
+
+  .chat-message-img {
+    order: 2;
+  }
+
+  /* CONTENT */
+
+  .chat-message-content {
+    order: 1;
+    margin-right: $gutter;
+  }
+
+}
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  /* CONTENT */
+
+  .chat-message.direction-right .chat-message-content {
+
+    margin-right: calc(#{$gutter-half} + #{$pointing-tip-diagonal-half});
+
+    /* HEADER */
+
+    > .card-header {
+      @extend %pointing-right-base;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./left.scss
+ * @before ./right.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.chat-message:not(.direction-right) {
+  @extend .chat-message.direction-left;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - No img
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * ========================================================================= */
+
+/* NO IMG */
+
+.chat-message.no-img .chat-message-img {
+  display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - No tip
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * ========================================================================= */
+
+/* NO TIP */
+
+.chat-message.no-tip .chat-message-content .card-header:after {
+  display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - No tip - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../no_tip.scss
+ * ========================================================================= */
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  /* LEFT */
+
+  .chat-message.no-tip.direction-left .chat-message-content {
+    margin-left: $gutter;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - No tip - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../no_tip.scss
+ * ========================================================================= */
+
+/* CLIP-PATH SUPPORTED */
+
+html.clip-path-polygon,
+html.clip-path-url {
+
+  /* RIGHT */
+
+  .chat-message.no-tip.direction-right .chat-message-content {
+    margin-right: $gutter;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Container - Compact
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../container.scss
+ * ========================================================================= */
+
+/* COMPACT */
+
+.container.compact {
+  padding: $container-compact-padding-y $container-compact-padding-x;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Datepicker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* DATEPICKER */
+
+.datepicker {
+
+  @extend %container;
+
+  /* INPUT */
+
+  input {
+    display: none !important;
+  }
+
+  /* NAVIGATION */
+
+  &-navigation {
+
+    @include children-no-gutter ();
+    display: flex;
+    align-items: center;
+
+    /* LABEL / PREVIOUS / NEXT */
+
+    > .label,
+    .previous,
+    .next {
+      width: $datepicker-day-width;
+      flex-grow: 0;
+    }
+
+    /* TITLE */
+
+    .datepicker-title {
+      @include margin-x ( $gutter );
+      text-align: center;
+      flex-grow: 1;
+    }
+
+  }
+
+  /* DAY NAMES */
+
+  &-days-names {
+
+    display: flex;
+    height: $datepicker-day-height;
+    align-items: center;
+
+    /* DAY NAME */
+
+    > * {
+      font-weight: $datepicker-day-name-font-weight;
+      width: $datepicker-day-width;
+      text-align: center;
+    }
+
+  }
+
+  /* DAYS */
+
+  &-days {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    /* DAY */
+
+    > * {
+
+      line-height: $datepicker-day-height;
+      position: relative;
+      z-index: 1;
+      width: $datepicker-day-width;
+      height: $datepicker-day-height;
+      text-align: center;
+
+      /* BEFORE */
+
+      &:before {
+        @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
+        z-index: -1;
+        width: $datepicker-day-circle-size;
+        height: $datepicker-day-circle-size;
+        content: '';
+        border-radius: 50%;
+        background-color: transparent;
+      }
+
+      /* TODAY */
+
+      &.datepicker-day-today {
+
+        color: $datepicker-day-today-color;
+
+        /* BEFORE */
+
+        &:before {
+          background-color: $datepicker-day-today-circle-color;
+        }
+
+      }
+
+      /* SELECTED */
+
+      &.datepicker-day-selected {
+
+        color: $datepicker-day-selected-color;
+        transition: color $datepicker-animation-duration;
+
+        /* BEFORE */
+
+        &:not(.previous):not(.next):not(.datepicker-day-clamped):before {
+          @include z-depth ( $datepicker-day-selected-z-depth, $datepicker-day-selected-z-depth-force, $datepicker-day-selected-z-depth-basic );
+        }
+
+        &:before {
+          background-color: $datepicker-day-selected-circle-color;
+          transition: none; // Safari fix
+          transition-property: box-shadow, background-color;
+          transition-duration: $datepicker-animation-duration;
+        }
+
+      }
+
+    }
+
+    /* PREVIOUS / NEXT */
+
+    .previous,
+    .next {
+      opacity: $datepicker-day-prev-next-opacity;
+    }
+
+    /* CLAMPED */
+
+    .datepicker-day-clamped {
+      opacity: $datepicker-day-clamped-opacity;
+    }
+
+    /* SELECTABLE */
+
+    :not(.previous):not(.next):not(.datepicker-day-clamped) {
+      cursor: pointer;
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* DAY */
+
+    .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-clamped) {
+
+      /* HOVER */
+
+      &:not(.datepicker-day-selected):hover {
+
+        color: $datepicker-day-hover-color;
+
+        /* BEFORE */
+
+        &:before {
+          background-color: $datepicker-day-hover-circle-color;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Datepicker - Inset
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../datepicker.scss
+ * ========================================================================= */
+
+/* INSET */
+
+.datepicker.inset {
+  padding: 0;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Datepicker - Invalid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../datepicker.scss
+ * ========================================================================= */
+
+/* INVALID */
+
+.datepicker.invalid {
+  border-color: $color-error !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Datepicker - Valid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../datepicker.scss
+ * ========================================================================= */
+
+/* VALID */
+
+.datepicker.valid {
+  border-color: $color-success !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Figure - Figcaption
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../figure.scss
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* FIGCAPTION */
+
+%figcaption {
+  @extend %container;
+  @include color ( $figcaption-color, $figcaption-color-force, $figcaption-color-basic );
+  overflow: auto;
+  border-radius: inherit;
+}
+
+figcaption,
+.figcaption {
+  @extend %figcaption;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Figure - Figcaption - Attached
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../figcaption.scss
+ * @require decorators/attached/attached.scss
+ * ========================================================================= */
+
+/* ATTACHED */
+
+%figcaption%attached {
+  @include color ( $figcaption-attached-color, $figcaption-attached-color-force, $figcaption-attached-color-basic );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Fieldset
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* FIELDSET */
+
+fieldset {
+  @extend %container;
+  background-color: $fieldset-bg-color;
+  border-color: $fieldset-border-color;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Infobar
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* INFOBAR */
+
+.infobar {
+
+  @extend %container;
+  @extend %targetable;
+  @include children-no-gutter ();
+  @include color ( $infobar-color, $infobar-color-force, $infobar-color-basic );
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  /* SECTIONS GUTTER */
+
+  > :not(:first-child):not(.infobar-title):not(.infobar-subtitle):not(.infobar-bottom) {
+    margin-left: $gutter;
+  }
+
+  /* LEFT / RIGHT */
+
+  &-left,
+  &-right {
+    flex-shrink: 0;
+  }
+
+  /* CENTER */
+
+  &-center {
+    flex: 1 1 0%; // IE-10/11 sets flex-shrink to 0 // IE-10/11 misinterpreter a unitless 0 flex-basis
+  }
+
+  /* BOTTOM */
+
+  //FIXME: Cannot be used for not 100% or fixed width elements, or the .infobar will be bigger than needed (for instance take a look at `toast`)
+
+  &-bottom {
+    width: 100%;
+    margin-top: $gutter;
+  }
+
+  /* TITLE / SUBTITLE */
+
+  &-title,
+  &-subtitle {
+    margin-bottom: 0 !important;
+  }
+
+  /* TITLE */
+
+  &-title {
+    @include size ( $infobar-title-size, $infobar-title-size-force, $infobar-title-size-basic );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Infobar - Inset
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../infobar.scss
+ * ========================================================================= */
+
+/* INSET */
+
+.infobar.inset {
+  padding: 0;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toast
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/infobar/infobar.scss
+ * ========================================================================= */
+
+//TODO: Push up `FAB` if needed
+//TODO: Make toast scrollables, maybe, so that in no case they will fill up the entire screen
+//TODO: Maybe switch to an equally good but faster to compute animation
+
+/* TOAST */
+
+.toast {
+
+  @include children-no-gutter ();
+  @include z-depth ( $toast-z-depth, $toast-z-depth-force, $toast-z-depth-basic );
+  display: block;
+  border-radius: $toast-border-radius;
+  pointer-events: auto;
+  transition: none; // Safari fix
+  transition-property: border-radius, border-width, opacity, filter, box-shadow, font-size, padding, margin;
+  transition-duration: $toast-animation-duration;
+  transform: translateZ(0);
+
+  /* IMG */
+
+  &-img {
+    width: $toast-img-size;
+    border-radius: if( $toast-img-rounded, $circular-border-radius, $toast-border-radius );
+  }
+
+  /* BUTTONS */
+
+  &-buttons {
+    @include padding-x ( $gutter );
+  }
+
+  /* INFOBAR */
+
+  > .infobar {
+    transition: padding $toast-animation-duration;
+  }
+
+}
+
+/* HORIZONTAL GROW FIX (IE-10/11)*/
+
+html.flexbox-tweener {
+
+  .toast {
+
+    > .infobar {
+
+      flex-wrap: nowrap;
+
+      .infobar-center {
+        flex-basis: auto;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toast - Closed
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../toast.scss
+ * ========================================================================= */
+
+/* CLOSED */
+
+.toast:not(.open) {
+
+  border-width: 0 !important;
+  opacity: 0;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+
+  /* INFOBAR */
+
+  > .infobar {
+    padding: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toast - Queue
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../toast.scss
+ * ========================================================================= */
+
+/* QUEUE */
+
+.toast-queue {
+
+  display: flex;
+
+  /* LEFT */
+
+  &.left {
+
+    align-items: flex-start;
+
+    &:not(:empty) {
+      margin-left: $gutter;
+    }
+
+  }
+
+  /* CENTER */
+
+  &.center {
+
+    @include margin-x ( $gutter );
+    align-items: center;
+
+    &:empty {
+      @include margin-x ( $gutter-half );
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    align-items: flex-end;
+
+    &:not(:empty) {
+      margin-right: $gutter;
+    }
+
+  }
+
+  /* EXPANDED */
+
+  &.expanded {
+    @include toast-queue-expand ();
+  }
+
+}
+
+/* COLUMNS SHRINKING FIX (IE-10/11)*/
+
+html.flexbox-tweener {
+
+  /* QUEUE */
+
+  .toast-queue:not(.expanded):not(:empty) {
+
+    flex: 1 1 0%;
+
+    /* TOAST */
+
+    .toast {
+      max-width: 100%;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toast - Queues
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../toast.scss
+ * @require ../queue/queue.scss
+ * ========================================================================= */
+
+/* QUEUES */
+
+.toast-queues {
+
+  @include fixed ( false 0 false 0 );
+  z-index: $toast-queues-z-index;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  pointer-events: none;
+
+  /* TOP */
+
+  &.top {
+
+    top: 0;
+
+    /* STICKY HEADER */
+
+    .layout-header.sticky ~ & {
+      top: $layout-sticky-header-height;
+    }
+
+    /* ROW */
+
+    .toast-queues-row {
+      align-items: flex-start;
+    }
+
+    /* QUEUE */
+
+    .toast-queue {
+
+      flex-direction: column;
+
+      /* TOAST */
+
+      .toast {
+        margin-top: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .toast {
+        border-top-width: 0;
+        border-bottom-width: $border-width;
+        border-bottom-style: solid;
+      }
+
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    bottom: 0;
+
+    /* ROW */
+
+    .toast-queues-row {
+      align-items: flex-end;
+    }
+
+    /* QUEUE */
+
+    .toast-queue {
+
+      flex-direction: column-reverse;
+
+      /* TOAST */
+
+      .toast {
+        margin-bottom: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .toast {
+        border-bottom-width: 0;
+        border-top-width: $border-width;
+        border-top-style: solid;
+      }
+
+    }
+
+  }
+
+  /* ROW */
+
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Toast - Autoexpand
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../toast.scss
+ * @require ../queue/queue.scss
+ * @require ../queues/queues.scss
+ * ========================================================================= */
+
+//TODO: Attach the shadow to `.toast-queues`, but only if there are some noties
+
+/* AUTOEXPAND */
+
+@include media-width-down ( $toast-autoexpand-width ) {
+
+  /* QUEUES */
+
+  .toast-queues {
+
+    /* TOP */
+
+    &.top {
+
+      /* ROW */
+
+      .toast-queues-row {
+        flex-direction: column;
+      }
+
+      /* TOAST */
+
+      .toast {
+        border-top-width: 0;
+        border-bottom-width: $border-width;
+        border-bottom-style: solid;
+      }
+
+    }
+
+    /* BOTTOM */
+
+    &.bottom {
+
+      /* ROW */
+
+      .toast-queues-row {
+        flex-direction: column-reverse;
+      }
+
+      /* TOAST */
+
+      .toast {
+        border-bottom-width: 0;
+        border-top-width: $border-width;
+        border-top-style: solid;
+      }
+
+    }
+
+  }
+
+  /* QUEUE */
+
+  .toast-queue {
+    @include toast-queue-expand ();
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Tagbox
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/multiple/multiple.scss
+ * @require widgets/container/container.scss
+ * ========================================================================= */
+
+/* TAGBOX */
+
+.tagbox {
+
+  @extend %container;
+  @include color ( $tagbox-color, $tagbox-color-force, $tagbox-color-basic );
+
+  /* TAGS */
+
+  &-tags {
+
+    @extend %multiple;
+    @include last-child-no-gutter ( 0, - $gutter );
+    @include margin-x ( - $gutter-half );
+    display: flex;
+    flex-wrap: wrap;
+
+    /* CHILDREN */
+
+    > .tagbox-tag,
+    > .tagbox-partial {
+      @include margin-x ( $gutter-half );
+      white-space: nowrap;
+    }
+
+  }
+
+  /* PARTIAL */
+
+  input.tagbox-partial {
+    @include color ( 'inherit', true, true );
+    margin-bottom: $gutter;
+    min-width: $tagbox-partial-min-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+%input {
+  @extend %widget;
+  @extend %targetable;
+  @include color ( $input-color, $input-color-force, $input-color-basic );
+  display: flex;
+  flex-shrink: 1;
+  min-width: 0;
+  border-radius: $input-border-radius;
+  line-height: $line-height;
+  padding: $input-padding-y $input-padding-x;
+}
+
+input {
+  @extend %input;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Compact
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* COMPACT */
+
+%input.compact {
+  padding: $input-compact-padding-y $input-compact-padding-x;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - File
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* FILE */
+
+input[type="file"] {
+  display: none !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Invalid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* INVALID */
+
+%input.invalid {
+  border-color: $color-error !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Placeholder
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* PLACEHOLDER */
+
+::placeholder {
+  color: rgba( nth( map-get( $colors, $input-color ), 6 ), $input-placeholder-opacity );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Placeholder - Colors
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../placeholder.scss
+ * @require decorators/colors/colors.scss
+ * ========================================================================= */
+
+//TODO: Add support for inverted colors
+
+/* COLORS */
+
+@each $name, $datas in $colors {
+
+  @if $name != 'inherit' and $name != 'transparent' {
+
+    $class: color-get-class( $name );
+
+    $text: nth( $datas, 6 );
+
+    %color-#{$class}::placeholder {
+      color: rgba( $text, $input-placeholder-opacity );
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Input - Valid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../input.scss
+ * ========================================================================= */
+
+/* VALID */
+
+%input.valid {
+  border-color: $color-success !important;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Textarea
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require widgets/input/input.scss
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+textarea {
+  @extend %input;
+  resize: vertical;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Textarea - Unresizable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../textarea.scss
+ * ========================================================================= */
+
+/* UNRESIZABLE */
+
+textarea.unresizable {
+  resize: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Textarea - Autogrow
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../unresizable/unresizable.scss
+ * ========================================================================= */
+
+/* AUTOGROW */
+
+textarea.autogrow {
+  @extend textarea.unresizable;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Textarea - Disabled
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../unresizable/unresizable.scss
+ * ========================================================================= */
+
+/* DISABLED */
+
+textarea[disabled],
+textarea.disabled,
+.disabled textarea {
+  @extend textarea.unresizable;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
+ * @before widgets/icon/icon.scss
+ * @before widgets/icons/icons.scss
+ * ========================================================================= */
+
+//TODO: Add a way to force labels icons to have the same height as labels with just text
+//TODO: Add support for img inside it (It should probably behave like Angular Material's chip)
+
+/* LABEL */
+
+.label {
+
+  @extend %widget;
+  @extend %targetable;
+  @include children-no-gutter ();
+  @include color ( $label-color, $label-color-force, $label-color-basic );
+  font-weight: $label-font-weight;
+  display: inline-block;
+  text-align: center;
+  border-radius: $label-border-radius;
+  padding: $label-padding-y $label-padding-x;
+  min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
+
+  /* HORIZONTAL GUTTER */
+
+  > :not(.overlay):not(.ripple-circle):not(input):not(select) {
+
+    /* HORIZONTAL GUTTER */
+
+    + * {
+      margin-left: $label-inner-gutter;
+    }
+
+    + %icon,
+    + %icons {
+      margin-left: $label-inner-gutter / $icon-scale-factor;
+    }
+
+  }
+
+  /* ALIGNMENT */
+
+  > %icon,
+  > %icons,
+  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child),
+  > :not(.overlay):not(.ripple-circle):first-child:not(:last-child) ~ *,
+  > .overlay + :not(:last-child),
+  > .ripple-circle + :not(:last-child) {
+    vertical-align: middle;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Button
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/actionable/actionable.scss
+ * @require widgets/label/label.scss
+ * ========================================================================= */
+
+/* BUTTON */
+
+.button {
+  @extend .actionable;
+  @extend .label;
+  @include color ( $button-color, $button-color-force, $button-color-basic );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Compact
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* COMPACT */
+
+.label.compact {
+
+  padding: $label-compact-padding-y $label-compact-padding-x;
+  min-width: $line-height-em + ( $label-compact-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
+
+  /* CHILDREN */
+
+  > :not(.overlay):not(.ripple-circle):not(input):not(select) {
+
+    /* HORIZONTAL GUTTER */
+
+    + * {
+      margin-left: $label-compact-inner-gutter;
+    }
+
+    + %icon,
+    + %icons {
+      margin-left: $label-compact-inner-gutter / $icon-scale-factor;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* CORNER */
+
+.label.corner {
+
+  @include dimension ( $label-corner-size );
+  z-index: $label-corner-z-index;
+  margin: 0 !important;
+  border-width: 0 !important;
+  background-color: transparent !important;
+  border-radius: 0;
+  display: block;
+  overflow: hidden;
+
+  /* BEFORE */
+
+  &:before {
+    content: '';
+    position: absolute;
+    border-color: inherit;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Bottom left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../corner.scss
+ * ========================================================================= */
+
+/* BOTTOM LEFT */
+
+.label.corner.bottom-left {
+
+  @include absolute ( false false 0 0 );
+  border-bottom-left-radius: inherit;
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( false false 0 0 );
+    @include triangle ( $label-corner-size, bottom-left );
+  }
+
+  /* CHILDREN */
+
+  > * {
+    @include absolute ( false false 35% 35% );
+    transform: translate(-63%, 63%);
+  }
+
+  /* BORDERED */
+
+  .bordered > & {
+    @include absolute ( false false ( - $border-width ) ( - $border-width ) );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Bottom right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../corner.scss
+ * ========================================================================= */
+
+/* BOTTOM RIGHT */
+
+.label.corner.bottom-right {
+
+  @include absolute ( false 0 0 false );
+  border-bottom-right-radius: inherit;
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( false 0 0 false );
+    @include triangle ( $label-corner-size, bottom-right );
+  }
+
+  /* CHILDREN */
+
+  > * {
+    @include absolute ( false 35% 35% false );
+    transform: translate(63%, 63%);
+  }
+
+  /* BORDERED */
+
+  .bordered > & {
+    @include absolute ( false ( - $border-width ) ( - $border-width ) false );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Top left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../corner.scss
+ * ========================================================================= */
+
+/* TOP LEFT */
+
+.label.corner.top-left {
+
+  @include absolute ( 0 false false 0 );
+  border-top-left-radius: inherit;
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( 0 false false 0 );
+    @include triangle ( $label-corner-size, top-left );
+  }
+
+  /* CHILDREN */
+
+  > * {
+    @include absolute ( 35% false false 35% );
+    transform: translate(-63%, -63%);
+  }
+
+  /* BORDERED */
+
+  .bordered > & {
+    @include absolute ( ( - $border-width ) false false ( - $border-width ) );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Top right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../corner.scss
+ * ========================================================================= */
+
+/* TOP RIGHT */
+
+.label.corner.top-right {
+
+  @include absolute ( 0 0 false false );
+  border-top-right-radius: inherit;
+
+  /* BEFORE */
+
+  &:before {
+    @include absolute ( 0 0 false false );
+    @include triangle ( $label-corner-size, top-right );
+  }
+
+  /* CHILDREN */
+
+  > * {
+    @include absolute ( 35% 35% false false );
+    transform: translate(63%, -63%);
+  }
+
+  /* BORDERED */
+
+  .bordered > & {
+    @include absolute ( ( - $border-width ) ( - $border-width ) false false );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Corner - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./top_left.scss
+ * @before ./top_right.scss
+ * @before ./bottom_right.scss
+ * @before ./bottom_left.scss
+ * ========================================================================= */
+
+/* TOP LEFT */
+
+.label.corner:not(.top-left):not(.bottom-right):not(.bottom-left) {
+  @extend .label.corner.top-right;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Floating
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+//TODO: Make it a component of its own (Sure?)
+//TODO: Add it while scrolling to bottom, show him when scrolling to top
+//TODO: Add sub floating actions
+
+/* FLOATING */
+
+.label.floating {
+  @include z-depth ( $label-floating-z-depth, $label-floating-z-depth-force, $label-floating-z-depth-basic );
+  position: fixed;
+  z-index: $label-floating-z-index;
+  right: $label-floating-offset;
+  bottom: $label-floating-offset;
+  margin-bottom: 0;
+  padding: $label-floating-padding-y $label-floating-padding-x;
+  min-height: $line-height-em + ( $label-floating-padding-y * 2 );
+  min-width: $line-height-em + ( $label-floating-padding-x * 2 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Floating - Compact
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../floating.scss
+ * ========================================================================= */
+
+/* COMPACT */
+
+.label.floating.compact {
+  padding: $label-floating-compact-padding-y $label-floating-compact-padding-x;
+  min-height: $line-height-em + ( $label-floating-compact-padding-y * 2 );
+  min-width: $line-height-em + ( $label-floating-compact-padding-x * 2 );
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Invalid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* INVALID */
+
+.label.invalid {
+
+  border-color: $color-error !important;
+
+  /* ICON / ICONS */
+
+  > %icon,
+  > %icons {
+    color: $color-error !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Ribbon
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+//TODO: Write it better
+//TODO: Modularize it
+//TODO: Add corners support
+//FIXME: Ribbon.right cause an overflowing bug in IE and Edge
+
+/* RIBBON */
+
+.label.ribbon {
+
+  @include z-depth ( $label-ribbon-z-depth, $label-ribbon-z-depth-force, $label-ribbon-z-depth-basic );
+
+  /* BEFORE / AFTER */
+
+  &.ribbon-left:before,
+  &.ribbon-right:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    border: ( $label-ribbon-fold-size / 2 ) solid transparent;
+    border-top-color: inherit;
+    bottom: - $label-ribbon-fold-size;
+  }
+
+  /* LEFT */
+
+  &.ribbon-left {
+
+    @include border-left-radius ( 0 );
+    left: calc( (#{$gutter} + #{$label-ribbon-fold-size}) * -1 );
+    padding-left: calc(#{$label-padding-x} + #{$gutter});
+
+    &:before {
+      left: 0;
+      border-right-color: inherit;
+    }
+
+  }
+
+  /* LEFT & RIGHT */
+
+  &.ribbon-left.ribbon-right {
+    width: calc(100% + #{($gutter * 2)} + #{($label-ribbon-fold-size * 2)});
+  }
+
+  /* RIGHT */
+
+  &.ribbon-right {
+
+    @include border-right-radius ( 0 );
+    padding-right: calc(#{$label-padding-x} + #{$gutter});
+
+    &:after {
+      right: 0;
+      border-left-color: inherit;
+    }
+
+  }
+
+  /* ONLY RIGHT */
+
+  //FIXME: It is a bit off
+
+  &.ribbon-right:not(.ribbon-left) {
+    left: calc(100% + #{$gutter} + #{$label-ribbon-fold-size});
+    transform: translateX(-100%);
+  }
+
+  /* BORDERED */
+
+  &.bordered {
+
+    /* BEFORE / AFTER */
+
+    &.ribbon-left:before,
+    &.ribbon-right:after {
+      bottom: calc( (#{$border-width} + #{$label-ribbon-fold-size}) * -1 );
+    }
+
+    /* BEFORE */
+
+    &.ribbon-left:before {
+      left: - $border-width;
+    }
+
+    /* AFTER */
+
+    &.ribbon-right:after {
+      right: - $border-width;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Tag
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+//FIXME: Missing pointer `bordered` in IE10
+
+/* TAG */
+
+.label.tag {
+
+  @include border-left-radius ( $label-tag-border-left-radius );
+  padding-left: $label-tag-padding-left !important;
+
+  /* CIRCLE */
+
+  &:before {
+    @include absolute ( 0 false 0 ( $label-tag-padding-left - $label-tag-circle-size * 2 ) );
+    @include dimension ( $label-tag-circle-size );
+    content: '';
+    margin: auto;
+    background-color: $label-tab-circle-bg-color;
+    border-radius: 50%;
+    box-shadow: $label-tag-circle-box-shadow;
+    box-sizing: padding-box;
+    border: inherit;
+  }
+
+  /* BORDERED */
+
+  &.bordered:before {
+    border-width: $border-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Tag - Colors
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../tag.scss
+ * ========================================================================= */
+
+/* COLORS */
+
+@each $name, $datas in $colors {
+
+  @if $name != 'inherit' and $name != 'transparent' {
+
+    $class: color-get-class( $name );
+
+    $bg: nth( $datas, 1 );
+
+    .label.tag.circle-#{$class}:before {
+      background-color: $bg;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Label - Valid
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../label.scss
+ * ========================================================================= */
+
+/* VALID */
+
+.label.valid {
+
+  border-color: $color-success !important;
+
+  /* ICON / ICONS */
+
+  > %icon,
+  > %icons {
+    color: $color-success !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Kbd
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require decorators/target/target.scss
+ * ========================================================================= */
+
+// We are separating the border property since the color may be `inherit`
+
+/* KBD */
+
+kbd {
+  @extend %targetable;
+  font-family: $kbd-font-family;
+  font-size: $kbd-font-size;
+  font-weight: $kbd-font-weight;
+  background-color: $kbd-bg-color;
+  padding: $kbd-padding-y $kbd-padding-x;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-color: $kbd-border-color;
+  border-radius: $kbd-border-radius;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Pre
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
+ * ========================================================================= */
+
+/* PRE */
+
+pre {
+  @extend %widget;
+  @extend %targetable;
+  display: flex;
+  padding: $pre-padding-y $pre-padding-x;
+}
+
+
+/* =========================================================================
  * Svelto - Decorators - Z-Depths
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18726,8 +18883,11 @@ h6 {
 
   /* BASE */
 
-  &:not(.disabled):hover {
-    @include z-depth ( raisable-next( 0 ), true, true );
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      @include z-depth ( raisable-next( 0 ), true, true );
+    }
   }
 
   /* STEPS */
@@ -18736,8 +18896,11 @@ h6 {
 
     @if $depth > 0 {
 
-      &%z-depth-#{$depth}:not(.disabled):hover {
-        @include z-depth ( raisable-next( $depth ), true, true );
+      &%z-depth-#{$depth}:not(.disabled) {
+        &:hover,
+        &:focus {
+          @include z-depth ( raisable-next( $depth ), true, true );
+        }
       }
 
     }
@@ -18776,12 +18939,19 @@ h6 {
   min-width: $badge-min-width;
   min-height: $badge-min-height;
   margin: 0 !important;
+  transition: transform $animation-fast;
 
   /* BORDERED */
 
   &.bordered {
     min-width: calc(#{$badge-min-width} + #{$border-width * 2});
     min-height: calc(#{$badge-min-height} + #{$border-width * 2});
+  }
+
+  /* DISABLED */
+
+  &.disabled {
+    transform: scale(0);
   }
 
 }
@@ -19179,7 +19349,6 @@ i.flag {
  * ========================================================================= */
 
 //TODO: Test a multi-level popover menu
-//TODO: Safari is wrongly animating `transform`, for some reasons
 
 /* POPOVER */
 
@@ -19191,6 +19360,7 @@ i.flag {
   overflow: visible;
   max-width: $popover-max-width;
   margin: 0;
+  transition: none; // Safari fix
   transition-property: opacity, margin-top;
   transition-duration: $popover-animation-duration;
 
@@ -19237,6 +19407,7 @@ html.flexbox-tweener {
   /* TIP */
 
   &:after {
+    transition: none; // Safari fix
     transition-property: left, top; //TODO: Animate `transform` instead
     transition-duration: $popover-animation-duration;
   }
@@ -19357,6 +19528,34 @@ html.flexbox-tweener {
 .tooltip {
   @extend .popover;
   max-width: $tooltip-max-width;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Remote (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* REMOTE TRIGGER */
+
+//FIXME: It actually also matches things like: `class="remote-foo bar-trigger"`, but there's no way around that at the moment
+
+[class^="remote-"],
+[class*=" remote-"] {
+
+  &[class$="-trigger"],
+  &[class*="-trigger "] {
+
+    /* ENABLED */
+
+    &:not(.disabled) {
+      cursor: pointer;
+    }
+
+  }
+
 }
 
 
@@ -19592,6 +19791,7 @@ html.flexbox-tweener {
       border-radius: 50%;
       background-color: $ripple-bg-color;
       opacity: $ripple-opacity;
+      transition: none; // Safari fix
       transition-property: opacity, transform;
       transition-duration: $ripple-animation-duration;
       transition-timing-function: $ripple-animation-timing-function;
@@ -19677,6 +19877,7 @@ html.flexbox-tweener {
 
   > * {
     margin-bottom: 0;
+    transition: none; // Safari fix
     transition-property: opacity, transform;
     transition-duration: $spinner-overlay-animation-duration;
   }
@@ -19722,6 +19923,69 @@ html.flexbox-tweener {
       animation-play-state: paused;
     }
 
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Targeter - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CLOSER */
+
+[class$="-closer"],
+[class*="-closer "] {
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Targeter - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OPENER */
+
+[class$="-opener"],
+[class*="-opener "] {
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Targeter - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOGGLER */
+
+[class$="-toggler"],
+[class*="-toggler "] {
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
   }
 
 }
@@ -19830,6 +20094,7 @@ html.flexbox-tweener {
   /* UNZOOMED */
 
   &:not(.zoomed) {
+    transition: none; // Safari fix
     transition-property: transform;
     transition-duration: $zoomable-animation-duration;
   }
