@@ -17,10 +17,6 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let $window = $(window);
-
   /* DEFAULTS */
 
   let defaults = {
@@ -69,8 +65,8 @@
     let positionable = this[0],
         $positionable = $(positionable),
         positionableRect = $positionable.getRect (),
-        windowWidth = $window.width (),
-        windowHeight = $window.height (),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight,
         directions = _.uniq ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
         anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y - window.scrollY, bottom: options.point.y - window.scrollY, left: options.point.x - window.scrollX, right: options.point.x - window.scrollX, width: 0, height: 0 };
 
