@@ -21,7 +21,28 @@
 
   /* VARIABLES */
 
-  let openToastsData = {};
+  let timers = {}, // Storing toasts' timers here //TODO: Maybe make this variable accessible from the outside
+      hovering = false; // Global to check if are hovering a toast -- used in conjuction with pagevisibility
+
+  /* PAGE VISIBILITY */
+
+  //TODO: Test with loading without ever focusing a page
+
+  $(document).on ( 'visibilitychange', function () {
+
+    if ( hovering ) return;
+
+    if ( document.hidden ) {
+
+      _.forOwn ( timers, data => data[0].pause () );
+
+    } else {
+
+      _.forOwn ( timers, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+
+    }
+
+  });
 
   /* CONFIG */
 
@@ -208,7 +229,7 @@
 
         if ( !this.timer ) {
 
-          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+          this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, !document.hidden );
 
         } else {
 
@@ -216,7 +237,7 @@
 
         }
 
-        openToastsData[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
+        timers[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
 
       }
 
@@ -272,11 +293,17 @@
 
       this.$toast.hover ( function () {
 
-        _.forOwn ( openToastsData, data => data[0].pause () );
+        hovering = true;
+
+        _.forOwn ( timers, data => data[0].pause () );
 
       }, function () {
 
-        _.forOwn ( openToastsData, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
+        hovering = false;
+
+        if ( document.hidden ) return;
+
+        _.forOwn ( timers, data => data[0].remaining ( Math.max ( data[1], data[0].remaining () ) ).play () );
 
       });
 
@@ -338,7 +365,7 @@
 
       /* TIMER */
 
-      delete openToastsData[this.guid];
+      delete timers[this.guid];
 
       /* FLICK */
 
