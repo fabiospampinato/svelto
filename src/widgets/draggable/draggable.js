@@ -646,7 +646,7 @@
 
           dragXY = this.initialXY;
 
-        } else {
+        } else if ( this.$helper ) {
 
           this._destroyHelper ();
 
