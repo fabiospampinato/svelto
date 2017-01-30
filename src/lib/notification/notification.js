@@ -36,7 +36,7 @@
 
     /* NOTIFICATIONS */
 
-    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
+    if ( document.hidden && window.Notification && Notification.permission !== 'denied' ) {
 
       Notification.requestPermission ( function ( status ) {
 
