@@ -27,6 +27,22 @@
     plugin: true,
     selector: '.toast',
     templates: {
+      queues: '<div class="toast-queues top">' +
+                '<div class="toast-queue expanded"></div>' +
+                '<div class="toast-queues-row">' +
+                  '<div class="toast-queue left"></div>' +
+                  '<div class="toast-queue center"></div>' +
+                  '<div class="toast-queue right"></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="toast-queues bottom">' +
+                '<div class="toast-queues-row">' +
+                  '<div class="toast-queue left"></div>' +
+                  '<div class="toast-queue center"></div>' +
+                  '<div class="toast-queue right"></div>' +
+                '</div>' +
+                '<div class="toast-queue expanded"></div>' +
+              '</div>',
       base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' +
               `<div class="infobar ${Colors.transparent}">` +
                 '<% if ( o.img ) { %>' +
@@ -125,24 +141,7 @@
 
         let $layout = $('.layout, body').first (); // `body` is used as a fallback
 
-        $layout.append (
-          '<div class="toast-queues top">' +
-            '<div class="toast-queue expanded"></div>' +
-            '<div class="toast-queues-row">' +
-              '<div class="toast-queue left"></div>' +
-              '<div class="toast-queue center"></div>' +
-              '<div class="toast-queue right"></div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="toast-queues bottom">' +
-            '<div class="toast-queues-row">' +
-              '<div class="toast-queue left"></div>' +
-              '<div class="toast-queue center"></div>' +
-              '<div class="toast-queue right"></div>' +
-            '</div>' +
-            '<div class="toast-queue expanded"></div>' +
-          '</div>'
-        );
+        $layout.append ( Toast.config.templates.queues );
 
         done ();
 
