@@ -29,7 +29,7 @@
 
   /* NO DESKTOP */
 
-  html.no-desktop & {
+  html:not(.desktop) & {
     display: none;
   }
 
