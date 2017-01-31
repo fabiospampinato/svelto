@@ -10,6 +10,7 @@
 
 const gulp         = require ( 'gulp' ),
       babel        = require ( 'gulp-babel' ),
+      closure      = require ( 'google-closure-compiler-js' ).gulp (),
       concat       = require ( 'gulp-concat' ),
       flatten      = require ( 'gulp-flatten' ),
       gulpif       = require ( 'gulp-if' ),
@@ -45,6 +46,7 @@ function task () {
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
              .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
+             .pipe ( gulpif ( plugins.closure.enabled, closure ( plugins.closure.options ) ) )
              .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
 

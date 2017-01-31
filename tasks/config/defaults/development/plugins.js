@@ -12,6 +12,9 @@ const plugins = {
   babel: {
     enabled: false
   },
+  closure: {
+    enabled: false
+  },
   extend: {
     options: {
       log: true

@@ -54,6 +54,17 @@ const plugins = {
       compact: false
     }
   },
+  closure: {
+    enabled: false,
+    options: {
+      assumeFunctionWrapper: true,
+      compilationLevel: 'SIMPLE',
+      languageIn: 'ECMASCRIPT5_STRICT',
+      languageOut: 'ECMASCRIPT5_STRICT',
+      outputWrapper: '(function(){\n%output%\n}).call(this)',
+      warningLevel: 'QUIET'
+    }
+  },
   del: {
     options: {
       force: false
