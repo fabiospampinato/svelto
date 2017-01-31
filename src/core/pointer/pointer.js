@@ -26,7 +26,7 @@
     /* OPTIONS */
     options: {
       events: {
-        prefix: prefix,
+        prefix,
         emulated: {
           timeout: 500 // Milliseconds to wait for an emulated event
         }
