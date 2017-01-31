@@ -94,7 +94,10 @@
 
     __tap ( event ) {
 
-      if ( this._lock || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
+      if ( this._lock || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this.close ();
 
