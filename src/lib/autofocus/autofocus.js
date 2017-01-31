@@ -42,6 +42,16 @@
 
       ele.focus ();
 
+      /* CARET TO THE END */
+
+      let length = ele.value.length * 2; // Double the length because Opera is inconsistent about whether a carriage return is one character or two
+
+      if ( !length ) return;
+
+      setTimeout ( () => ele.setSelectionRange ( length, length ), 1 ); // Timeout seems to be required for Blink
+
+      ele.scrollTop = 1000000; // In case it's a tall textarea
+
     },
 
     find ( $parent = $html, focused ) {
