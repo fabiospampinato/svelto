@@ -7,6 +7,7 @@
  * =========================================================================
  * @require ../chat.scss
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 
 /* CHAT */
@@ -16,6 +17,12 @@
   @extend %widget;
   @include children-no-gutter ();
   display: flex;
+
+  /* TARGET */
+
+  &:target > .chat-message-content {
+    @extend %target;
+  }
 
   /* IMAGE */
 
