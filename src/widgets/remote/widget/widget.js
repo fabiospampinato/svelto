@@ -6,12 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require lib/autofocus/autofocus.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 
-(function ( $, _, Svelto, Widgets, Factory, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, Autofocus ) {
 
   'use strict';
 
@@ -137,6 +138,8 @@
     _widgetInit () {
 
       this.$widget.widgetize ();
+
+      Autofocus.focus ( this.$widget );
 
     }
 
@@ -392,4 +395,4 @@
 
   Factory.init ( RemoteWidget, config, Widgets );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus ));

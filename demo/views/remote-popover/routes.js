@@ -25,7 +25,7 @@ Router.route ( '/remote-popover-1', function () {
 
 }, { where: 'server' });
 
-/* REMOTE POPOVER 1 */
+/* REMOTE POPOVER 2 */
 
 Router.route ( '/remote-popover-2', function () {
 
@@ -50,5 +50,17 @@ Router.route ( '/remote-popover-2', function () {
     }));
 
   }, 1500 );
+
+}, { where: 'server' });
+
+/* REMOTE POPOVER AUTOFOCUS */
+
+Router.route ( '/remote-popover-autofocus', function () {
+
+  this.response.end ( JSON.stringify ({
+    popover: '<div class="container bordered popover">' +
+               '<input class="bordered" autofocus>' +
+             '</div>'
+  }));
 
 }, { where: 'server' });

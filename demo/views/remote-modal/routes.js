@@ -85,3 +85,15 @@ Router.route ( '/remote-modal-fullscreen', function () {
   }, 1500 );
 
 }, { where: 'server' });
+
+/* REMOTE MODAL AUTOFOCUS */
+
+Router.route ( '/remote-modal-autofocus', function () {
+
+  this.response.end ( JSON.stringify ({
+    modal: '<div class="container bordered modal xs-8">' +
+             '<input class="bordered centered" autofocus>' +
+           '</div>'
+  }));
+
+}, { where: 'server' });
