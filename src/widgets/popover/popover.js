@@ -25,6 +25,7 @@
     selector: '.popover',
     options: {
       contentChangeEvents: 'change datepicker:change inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
+      mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
@@ -79,6 +80,7 @@
       if ( this._isOpen ) {
 
         this.___contentChange ();
+        this.___mustClose ();
         this.___resize ();
         this.___parentsScroll ();
         this.___layoutTap ();
@@ -99,6 +101,14 @@
     ___contentChange () {
 
       this._on ( true, this.options.contentChangeEvents, this._positionate );
+
+    }
+
+    /* MUST CLOSE */
+
+    ___mustClose () {
+
+      this._on ( true, this.$layout, this.options.mustCloseEvents, this.close );
 
     }
 
@@ -298,6 +308,7 @@
       this.___layoutTap ();
       this.___keydown ();
       this.___contentChange ();
+      this.___mustClose ();
       this.___resize ();
       this.___parentsScroll ();
 

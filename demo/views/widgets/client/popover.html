@@ -37,6 +37,7 @@
       <i class="icon">expand_more</i>
     </div>
     <div class="button popover-toggler bordered" data-target="#size_change">Size change</div>
+    <div class="button modal-toggler bordered" data-target="#modal">Nested</div>
   </div>
 
   {{> popover_popovers}}
@@ -122,6 +123,12 @@
     <!-- tablehelper:change -->
     <!-- textarea increase in size -->
   </div>
+
+  <div id="modal" class="container modal xs-8 centerer">
+    <div class="button popover-toggler bordered" data-target="#popover-nested">Popover</div>
+  </div>
+
+  <div id="popover-nested" class="popover container">Popover</div>
 
 </template>
 
