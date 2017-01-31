@@ -8,6 +8,10 @@
 
 /* ACTIONABLE */
 
-.actionable {
+%actionable {
   cursor: pointer;
+}
+
+.actionable {
+  @extend %actionable;
 }

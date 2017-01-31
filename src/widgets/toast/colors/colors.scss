@@ -31,7 +31,7 @@
     @if opacity( $bg-hover ) != opacity( $bg-opacified-hover ) {
 
       .toast%color-#{$name}.hover,
-      .toast%color-#{$name}.actionable:not(.active):hover {
+      .toast%color-#{$name}%actionable:not(.active):hover {
         background-color: $bg-opacified-hover;
       }
 
@@ -40,7 +40,7 @@
     @if opacity( $bg-active ) != opacity( $bg-opacified-active ) {
 
       .toast%color-#{$name}.active,
-      .toast%color-#{$name}.actionable:not(.ripple):active {
+      .toast%color-#{$name}%actionable:not(.ripple):active {
         background-color: $bg-opacified-active;
       }
 

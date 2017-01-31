@@ -15,7 +15,7 @@
 
   @if $name != 'inherit' and $name != 'transparent' {
 
-    %color-#{$name}.actionable.inverted:not(.disabled) {
+    %color-#{$name}%actionable.inverted:not(.disabled) {
 
       &:not(.active):hover {
         @extend %color-#{$name}-inverted-hover;
