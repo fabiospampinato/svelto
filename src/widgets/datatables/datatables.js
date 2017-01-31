@@ -119,19 +119,23 @@
 
     __select ( event, data ) {
 
-      if ( this.$table.selectable ( 'get' ).length ) return;
+      this._defer ( function () { // So that Selectable's listeners get triggered first //FIXME: Ugly
 
-      let column = this.options.select.column,
-          values = this.options.select.values || [this.options.select.value],
-          rows   = data.aoData.filter ( row => _.includes ( values, row._aData[column] ) );
+        if ( this.$table.selectable ( 'get' ).length ) return;
 
-      if ( !rows.length ) return;
+        let column = this.options.select.column,
+            values = this.options.select.values || [this.options.select.value],
+            rows   = data.aoData.filter ( row => _.includes ( values, row._aData[column] ) );
 
-      let trs = rows.map ( row => row.nTr );
+        if ( !rows.length ) return;
 
-      $(trs).addClass ( Widgets.Selectable.config.options.classes.selected );
+        let trs = rows.map ( row => row.nTr );
 
-      this.$table.trigger ( 'change' ); // In order to make other widgets (Selectable etc.) adjust for this
+        $(trs).addClass ( Widgets.Selectable.config.options.classes.selected );
+
+        this.$table.trigger ( 'change' ); // In order to make other widgets (Selectable etc.) adjust for this
+
+      });
 
     }
 
