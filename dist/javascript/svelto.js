@@ -2633,7 +2633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* SVELTO */
 
   var Svelto = {
-    VERSION: '0.7.10',
+    VERSION: '0.7.11',
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
@@ -6598,7 +6598,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this._revert();
 
             dragXY = this.initialXY;
-          } else {
+          } else if (this.$helper) {
 
             this._destroyHelper();
           }
@@ -6620,279 +6620,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Factory.init(Draggable, config, Widgets);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse);
-
-/* =========================================================================
- * Svelto - Widgets - Expander
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/widget/widget.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expander',
-    plugin: true,
-    selector: '.expander',
-    options: {
-      classes: {
-        open: 'open'
-      },
-      selectors: {
-        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
-      },
-      animations: {
-        open: Animations.normal,
-        close: Animations.normal
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* EXPANDER */
-
-  var Expander = function (_Widgets$Widget6) {
-    _inherits(Expander, _Widgets$Widget6);
-
-    function Expander() {
-      _classCallCheck(this, Expander);
-
-      return _possibleConstructorReturn(this, (Expander.__proto__ || Object.getPrototypeOf(Expander)).apply(this, arguments));
-    }
-
-    _createClass(Expander, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$expander = this.$element;
-        this.$content = this.$expander.find(this.options.selectors.content);
-
-        this._isOpen = this.$expander.hasClass(this.options.classes.open);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this._isOpen = !!force;
-
-          this.$expander.toggleClass(this.options.classes.open, this._isOpen);
-
-          this._trigger(this._isOpen ? 'open' : 'close');
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        this.toggle(true);
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        this.toggle(false);
-      }
-    }]);
-
-    return Expander;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Expander, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Accordion
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/expander/expander.js
- * ========================================================================= */
-
-//TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'accordion',
-    plugin: true,
-    selector: '.accordion',
-    options: {
-      multiple: false, // Wheter to allow multiple expanders open or not
-      selectors: {
-        expander: Widgets.Expander.config.selector
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* ACCORDION */
-
-  var Accordion = function (_Widgets$Widget7) {
-    _inherits(Accordion, _Widgets$Widget7);
-
-    function Accordion() {
-      _classCallCheck(this, Accordion);
-
-      return _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
-    }
-
-    _createClass(Accordion, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$accordion = this.$element;
-        this.$expanders = this.$accordion.children(this.options.selectors.expander);
-
-        this.instances = this.$expanders.get().map(function (expander) {
-          return $(expander).expander('instance');
-        });
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___open();
-        this.___close();
-      }
-
-      /* EXPANDER OPEN */
-
-    }, {
-      key: '___open',
-      value: function ___open() {
-
-        this._on(true, this.$expanders, 'expander:open', this.__open);
-      }
-    }, {
-      key: '__open',
-      value: function __open(event) {
-
-        this._trigger('open', { index: this.$expanders.index(event.target) });
-
-        this.__multiple(event.target);
-      }
-
-      /* EXPANDER CLOSE */
-
-    }, {
-      key: '___close',
-      value: function ___close() {
-
-        this._on(true, this.$expanders, 'expander:close', this.__close);
-      }
-    }, {
-      key: '__close',
-      value: function __close(event) {
-
-        this._trigger('close', { index: this.$expanders.index(event.target) });
-      }
-
-      /* MULTIPLE */
-
-    }, {
-      key: '__multiple',
-      value: function __multiple(expander) {
-
-        if (this.options.multiple) return;
-
-        this.instances.forEach(function (instance) {
-          return instance.element !== expander ? instance.close() : false;
-        });
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'enable',
-      value: function enable() {
-
-        _get(Accordion.prototype.__proto__ || Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
-
-        _.invokeMap(this.instances, 'enable');
-      }
-    }, {
-      key: 'disable',
-      value: function disable() {
-
-        _.invokeMap(this.instances, 'disable');
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen(index) {
-
-        return this.instances[index].isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(index, force) {
-
-        this.instances[index].toggle(force);
-      }
-    }, {
-      key: 'open',
-      value: function open(index) {
-
-        this.toggle(index, true);
-      }
-    }, {
-      key: 'close',
-      value: function close(index) {
-
-        this.toggle(index, false);
-      }
-    }]);
-
-    return Accordion;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Accordion, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
  * Svelto - Widgets - Flickable
@@ -6924,8 +6651,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLICKABLE */
 
-  var Flickable = function (_Widgets$Widget8) {
-    _inherits(Flickable, _Widgets$Widget8);
+  var Flickable = function (_Widgets$Widget6) {
+    _inherits(Flickable, _Widgets$Widget6);
 
     function Flickable() {
       _classCallCheck(this, Flickable);
@@ -7071,105 +6798,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Flippable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'flippable',
-    plugin: true,
-    selector: '.flippable',
-    options: {
-      classes: {
-        flip: 'flipped'
-      },
-      callbacks: {
-        front: _.noop,
-        back: _.noop
-      }
-    }
-  };
-
-  /* FLIPPABLE */
-
-  var Flippable = function (_Widgets$Widget9) {
-    _inherits(Flippable, _Widgets$Widget9);
-
-    function Flippable() {
-      _classCallCheck(this, Flippable);
-
-      return _possibleConstructorReturn(this, (Flippable.__proto__ || Object.getPrototypeOf(Flippable)).apply(this, arguments));
-    }
-
-    _createClass(Flippable, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$flippable = this.$element;
-
-        this._isFlipped = this.$flippable.hasClass(this.options.classes.flip);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isFlipped',
-      value: function isFlipped() {
-
-        return this._isFlipped;
-      }
-    }, {
-      key: 'flip',
-      value: function flip() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFlipped;
-
-
-        if (!!force !== this._isFlipped) {
-
-          this._isFlipped = force;
-
-          this.$flippable.toggleClass(this.options.classes.flip, this._isFlipped);
-
-          this._trigger(this._isFlipped ? 'back' : 'front');
-        }
-      }
-    }, {
-      key: 'front',
-      value: function front() {
-
-        this.flip(false);
-      }
-    }, {
-      key: 'back',
-      value: function back() {
-
-        this.flip(true);
-      }
-    }]);
-
-    return Flippable;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Flippable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - Widgets - Form Sync
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -7211,8 +6839,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM SYNC */
 
-  var FormSync = function (_Widgets$Widget10) {
-    _inherits(FormSync, _Widgets$Widget10);
+  var FormSync = function (_Widgets$Widget7) {
+    _inherits(FormSync, _Widgets$Widget7);
 
     function FormSync() {
       _classCallCheck(this, FormSync);
@@ -7359,8 +6987,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR */
 
-  var Infobar = function (_Widgets$Widget11) {
-    _inherits(Infobar, _Widgets$Widget11);
+  var Infobar = function (_Widgets$Widget8) {
+    _inherits(Infobar, _Widgets$Widget8);
 
     function Infobar() {
       _classCallCheck(this, Infobar);
@@ -7431,8 +7059,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT AUTOGROW */
 
-  var InputAutogrow = function (_Widgets$Widget12) {
-    _inherits(InputAutogrow, _Widgets$Widget12);
+  var InputAutogrow = function (_Widgets$Widget9) {
+    _inherits(InputAutogrow, _Widgets$Widget9);
 
     function InputAutogrow() {
       _classCallCheck(this, InputAutogrow);
@@ -7568,8 +7196,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT FILE NAMES */
 
-  var InputFileNames = function (_Widgets$Widget13) {
-    _inherits(InputFileNames, _Widgets$Widget13);
+  var InputFileNames = function (_Widgets$Widget10) {
+    _inherits(InputFileNames, _Widgets$Widget10);
 
     function InputFileNames() {
       _classCallCheck(this, InputFileNames);
@@ -7664,222 +7292,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/widget/widget.js
- * ========================================================================= */
-
-//FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
-
-(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modal',
-    plugin: true,
-    selector: '.modal',
-    options: {
-      scroll: {
-        disable: true // Disable scroll when the modal is open
-      },
-      classes: {
-        show: 'show',
-        open: 'open',
-        backdrop: {
-          show: 'modal-backdrop obscured-show obscured',
-          open: 'obscured-open'
-        }
-      },
-      animations: {
-        open: Animations.normal,
-        close: Animations.normal
-      },
-      keystrokes: {
-        'esc': 'close'
-      },
-      callbacks: {
-        beforeopen: _.noop,
-        open: _.noop,
-        beforeclose: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* MODAL */
-
-  var Modal = function (_Widgets$Widget14) {
-    _inherits(Modal, _Widgets$Widget14);
-
-    function Modal() {
-      _classCallCheck(this, Modal);
-
-      return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
-    }
-
-    _createClass(Modal, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$modal = this.$element;
-        this.modal = this.element;
-
-        this.$backdrop = this.$html;
-
-        this._isOpen = this.$modal.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-          this.___tap();
-          this.___route();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        this._on(true, this.$html, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        if (this._lock || !$(event.target).isAttached() || $(event.target).closest(this.$modal).length) return;
-
-        this.close();
-      }
-
-      /* ROUTE */
-
-    }, {
-      key: '__route',
-      value: function __route() {
-
-        if (this._isOpen && !this.$modal.isAttached()) {
-
-          this.close();
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._trigger('beforeopen');
-
-        if (this.options.scroll.disable) this.$layout.disableScroll();
-
-        this._frame(function () {
-
-          this.$modal.addClass(this.options.classes.show);
-          this.$backdrop.addClass(this.options.classes.backdrop.show);
-
-          this._frame(function () {
-
-            this.$modal.addClass(this.options.classes.open);
-            this.$backdrop.addClass(this.options.classes.backdrop.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        this.___keydown();
-        this.___tap();
-        this.___route();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this.lock || !this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = false;
-
-        this._trigger('beforeclose');
-
-        this._frame(function () {
-
-          this.$modal.removeClass(this.options.classes.open);
-          this.$backdrop.removeClass(this.options.classes.backdrop.open);
-
-          this._delay(function () {
-
-            this.$modal.removeClass(this.options.classes.show);
-            this.$backdrop.removeClass(this.options.classes.backdrop.show);
-
-            if (this.options.scroll.disable) this.$layout.enableScroll();
-
-            this._lock = false;
-
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
-
-        this._reset();
-      }
-    }]);
-
-    return Modal;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Modal, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
-
-/* =========================================================================
  * Svelto - Widgets - Numbox
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -7925,8 +7337,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NUMBOX */
 
-  var Numbox = function (_Widgets$Widget15) {
-    _inherits(Numbox, _Widgets$Widget15);
+  var Numbox = function (_Widgets$Widget11) {
+    _inherits(Numbox, _Widgets$Widget11);
 
     function Numbox() {
       _classCallCheck(this, Numbox);
@@ -8129,316 +7541,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Overlay
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/widget/widget.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlay',
-    plugin: true,
-    selector: '.overlay',
-    options: {
-      classes: {
-        show: 'show',
-        open: 'open',
-        parent: {
-          show: 'overlay-parent-show',
-          open: 'overlay-parent-open'
-        }
-      },
-      animations: {
-        open: Animations.fast,
-        close: Animations.fast
-      },
-      keystrokes: {
-        'esc': 'close'
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* OVERLAY */
-
-  var Overlay = function (_Widgets$Widget16) {
-    _inherits(Overlay, _Widgets$Widget16);
-
-    function Overlay() {
-      _classCallCheck(this, Overlay);
-
-      return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
-    }
-
-    _createClass(Overlay, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$overlay = this.$element;
-
-        this._isOpen = this.$overlay.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
-      }
-
-      /* PARENT */
-
-    }, {
-      key: '_getParent',
-      value: function _getParent() {
-
-        if (!this.$parent) {
-
-          this.$parent = this.$overlay.parent();
-        }
-
-        return this.$parent;
-      }
-
-      /* KEYDOWN */
-
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
-
-        this._onHover(true, [this.$document, 'keydown', this.__keydown]); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._frame(function () {
-
-          this.$overlay.addClass(this.options.classes.show);
-          this._getParent().addClass(this.options.classes.parent.show);
-
-          this._frame(function () {
-
-            this.$overlay.addClass(this.options.classes.open);
-            this._getParent().addClass(this.options.classes.parent.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        this.___keydown();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this._lock || !this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = false;
-
-        this._frame(function () {
-
-          this.$overlay.removeClass(this.options.classes.open);
-          this._getParent().removeClass(this.options.classes.parent.open);
-
-          this._delay(function () {
-
-            this.$overlay.removeClass(this.options.classes.show);
-            this._getParent().removeClass(this.options.classes.parent.show);
-
-            this._lock = false;
-
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
-
-        this._reset();
-      }
-    }]);
-
-    return Overlay;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Overlay, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Spinner - Overlay
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/colors/colors.js
- * @require widgets/overlay/overlay.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Colors) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'spinnerOverlay',
-    plugin: true,
-    templates: {
-      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' + '<% if ( o.labeled ) { %>' + '<div class="spinner-label <%= o.colors.labeled %>">' + '<% } %>' + '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '<% if ( o.labeled ) { %>' + '</div>' + '<% } %>' + '</div>'
-    },
-    options: {
-      labeled: true,
-      dimmer: true,
-      multicolor: false,
-      colors: {
-        labeled: Colors.white,
-        unlabeled: Colors.secondary
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* SPINNER OVERLAY */
-
-  var SpinnerOverlay = function (_Widgets$Widget17) {
-    _inherits(SpinnerOverlay, _Widgets$Widget17);
-
-    function SpinnerOverlay() {
-      _classCallCheck(this, SpinnerOverlay);
-
-      return _possibleConstructorReturn(this, (SpinnerOverlay.__proto__ || Object.getPrototypeOf(SpinnerOverlay)).apply(this, arguments));
-    }
-
-    _createClass(SpinnerOverlay, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$overlayed = this.$element;
-        this.$overlay = $(this._template('overlay', this.options));
-
-        this.instance = this.$overlay.overlay('instance');
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this.instance.isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.isOpen();
-
-
-        if (!!force !== this.isOpen()) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this.isOpen()) return;
-
-        this.$overlay.prependTo(this.$overlayed);
-
-        this.instance.open();
-
-        this._trigger('open');
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this._lock || !this.isOpen()) return;
-
-        this._lock = true;
-
-        this.instance.close();
-
-        this._delay(function () {
-
-          this.$overlay.detach();
-
-          this._lock = false;
-
-          this._trigger('close');
-        }, Widgets.Overlay.config.options.animations.close);
-      }
-    }]);
-
-    return SpinnerOverlay;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(SpinnerOverlay, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
-
-/* =========================================================================
  * Svelto - Widgets - Pager
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -8472,8 +7574,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PAGER */
 
-  var Pager = function (_Widgets$Widget18) {
-    _inherits(Pager, _Widgets$Widget18);
+  var Pager = function (_Widgets$Widget12) {
+    _inherits(Pager, _Widgets$Widget12);
 
     function Pager() {
       _classCallCheck(this, Pager);
@@ -8512,7 +7614,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '__keydown',
       value: function __keydown(event) {
-        var _this24 = this;
+        var _this18 = this;
 
         //FIXME: Don't do anything if a scroll happens
 
@@ -8522,7 +7624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (event.isPropagationStopped()) return; // Probably another widget was listening for the same event, and it should take priority over this
 
-          _get(Pager.prototype.__proto__ || Object.getPrototypeOf(Pager.prototype), '__keydown', _this24).call(_this24, event);
+          _get(Pager.prototype.__proto__ || Object.getPrototypeOf(Pager.prototype), '__keydown', _this18).call(_this18, event);
         });
       }
 
@@ -8649,8 +7751,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PROGRESSBAR */
 
-  var Progressbar = function (_Widgets$Widget19) {
-    _inherits(Progressbar, _Widgets$Widget19);
+  var Progressbar = function (_Widgets$Widget13) {
+    _inherits(Progressbar, _Widgets$Widget13);
 
     function Progressbar() {
       _classCallCheck(this, Progressbar);
@@ -8835,8 +7937,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RAILS */
 
-  var Rails = function (_Widgets$Widget20) {
-    _inherits(Rails, _Widgets$Widget20);
+  var Rails = function (_Widgets$Widget14) {
+    _inherits(Rails, _Widgets$Widget14);
 
     function Rails() {
       _classCallCheck(this, Rails);
@@ -9076,8 +8178,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE */
 
-  var Remote = function (_Widgets$Widget21) {
-    _inherits(Remote, _Widgets$Widget21);
+  var Remote = function (_Widgets$Widget15) {
+    _inherits(Remote, _Widgets$Widget15);
 
     function Remote() {
       _classCallCheck(this, Remote);
@@ -9256,8 +8358,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE TRIGGER */
 
-  var RemoteTrigger = function (_Widgets$Widget22) {
-    _inherits(RemoteTrigger, _Widgets$Widget22);
+  var RemoteTrigger = function (_Widgets$Widget16) {
+    _inherits(RemoteTrigger, _Widgets$Widget16);
 
     function RemoteTrigger() {
       _classCallCheck(this, RemoteTrigger);
@@ -9361,8 +8463,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RIPPLE */
 
-  var Ripple = function (_Widgets$Widget23) {
-    _inherits(Ripple, _Widgets$Widget23);
+  var Ripple = function (_Widgets$Widget17) {
+    _inherits(Ripple, _Widgets$Widget17);
 
     function Ripple() {
       _classCallCheck(this, Ripple);
@@ -9600,8 +8702,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABLE SORTABLE */
 
-  var TableSortable = function (_Widgets$Widget24) {
-    _inherits(TableSortable, _Widgets$Widget24);
+  var TableSortable = function (_Widgets$Widget18) {
+    _inherits(TableSortable, _Widgets$Widget18);
 
     function TableSortable() {
       _classCallCheck(this, TableSortable);
@@ -9855,8 +8957,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABLE HELPER */
 
-  var TableHelper = function (_Widgets$Widget25) {
-    _inherits(TableHelper, _Widgets$Widget25);
+  var TableHelper = function (_Widgets$Widget19) {
+    _inherits(TableHelper, _Widgets$Widget19);
 
     function TableHelper() {
       _classCallCheck(this, TableHelper);
@@ -10047,8 +9149,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TARGETER */
 
-  var Targeter = function (_Widgets$Widget26) {
-    _inherits(Targeter, _Widgets$Widget26);
+  var Targeter = function (_Widgets$Widget20) {
+    _inherits(Targeter, _Widgets$Widget20);
 
     function Targeter() {
       _classCallCheck(this, Targeter);
@@ -10191,50 +9293,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderCloser',
-    plugin: true,
-    selector: '.expander-closer',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER CLOSER */
-
-  var ExpanderCloser = function (_Widgets$Closer) {
-    _inherits(ExpanderCloser, _Widgets$Closer);
-
-    function ExpanderCloser() {
-      _classCallCheck(this, ExpanderCloser);
-
-      return _possibleConstructorReturn(this, (ExpanderCloser.__proto__ || Object.getPrototypeOf(ExpanderCloser)).apply(this, arguments));
-    }
-
-    return ExpanderCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.init(ExpanderCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - Widgets - Infobar - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -10261,8 +9319,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR CLOSER */
 
-  var InfobarCloser = function (_Widgets$Closer2) {
-    _inherits(InfobarCloser, _Widgets$Closer2);
+  var InfobarCloser = function (_Widgets$Closer) {
+    _inherits(InfobarCloser, _Widgets$Closer);
 
     function InfobarCloser() {
       _classCallCheck(this, InfobarCloser);
@@ -10276,94 +9334,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   Factory.init(InfobarCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalCloser',
-    plugin: true,
-    selector: '.modal-closer',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL CLOSER */
-
-  var ModalCloser = function (_Widgets$Closer3) {
-    _inherits(ModalCloser, _Widgets$Closer3);
-
-    function ModalCloser() {
-      _classCallCheck(this, ModalCloser);
-
-      return _possibleConstructorReturn(this, (ModalCloser.__proto__ || Object.getPrototypeOf(ModalCloser)).apply(this, arguments));
-    }
-
-    return ModalCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.init(ModalCloser, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayCloser',
-    plugin: true,
-    selector: '.overlay-closer',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY CLOSER */
-
-  var OverlayCloser = function (_Widgets$Closer4) {
-    _inherits(OverlayCloser, _Widgets$Closer4);
-
-    function OverlayCloser() {
-      _classCallCheck(this, OverlayCloser);
-
-      return _possibleConstructorReturn(this, (OverlayCloser.__proto__ || Object.getPrototypeOf(OverlayCloser)).apply(this, arguments));
-    }
-
-    return OverlayCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.init(OverlayCloser, config, Widgets);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -10400,8 +9370,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OPENER */
 
-  var Opener = function (_Widgets$Closer5) {
-    _inherits(Opener, _Widgets$Closer5);
+  var Opener = function (_Widgets$Closer2) {
+    _inherits(Opener, _Widgets$Closer2);
 
     function Opener() {
       _classCallCheck(this, Opener);
@@ -10564,138 +9534,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderOpener',
-    plugin: true,
-    selector: '.expander-opener',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER OPENER */
-
-  var ExpanderOpener = function (_Widgets$Opener) {
-    _inherits(ExpanderOpener, _Widgets$Opener);
-
-    function ExpanderOpener() {
-      _classCallCheck(this, ExpanderOpener);
-
-      return _possibleConstructorReturn(this, (ExpanderOpener.__proto__ || Object.getPrototypeOf(ExpanderOpener)).apply(this, arguments));
-    }
-
-    return ExpanderOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.init(ExpanderOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalOpener',
-    plugin: true,
-    selector: '.modal-opener',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL OPENER */
-
-  var ModalOpener = function (_Widgets$Opener2) {
-    _inherits(ModalOpener, _Widgets$Opener2);
-
-    function ModalOpener() {
-      _classCallCheck(this, ModalOpener);
-
-      return _possibleConstructorReturn(this, (ModalOpener.__proto__ || Object.getPrototypeOf(ModalOpener)).apply(this, arguments));
-    }
-
-    return ModalOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.init(ModalOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayOpener',
-    plugin: true,
-    selector: '.overlay-opener',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY OPENER */
-
-  var OverlayOpener = function (_Widgets$Opener3) {
-    _inherits(OverlayOpener, _Widgets$Opener3);
-
-    function OverlayOpener() {
-      _classCallCheck(this, OverlayOpener);
-
-      return _possibleConstructorReturn(this, (OverlayOpener.__proto__ || Object.getPrototypeOf(OverlayOpener)).apply(this, arguments));
-    }
-
-    return OverlayOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.init(OverlayOpener, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - Widgets - Targeter - Toggler
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -10721,8 +9559,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOGGLER */
 
-  var Toggler = function (_Widgets$Opener4) {
-    _inherits(Toggler, _Widgets$Opener4);
+  var Toggler = function (_Widgets$Opener) {
+    _inherits(Toggler, _Widgets$Opener);
 
     function Toggler() {
       _classCallCheck(this, Toggler);
@@ -10760,187 +9598,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderToggler',
-    plugin: true,
-    selector: '.expander-toggler',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER TOGGLER */
-
-  var ExpanderToggler = function (_Widgets$Toggler) {
-    _inherits(ExpanderToggler, _Widgets$Toggler);
-
-    function ExpanderToggler() {
-      _classCallCheck(this, ExpanderToggler);
-
-      return _possibleConstructorReturn(this, (ExpanderToggler.__proto__ || Object.getPrototypeOf(ExpanderToggler)).apply(this, arguments));
-    }
-
-    return ExpanderToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.init(ExpanderToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Flippable - Targeters - Flipper
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../flippable.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'flippableFlipper',
-    plugin: true,
-    selector: '.flippable-flipper',
-    options: {
-      widget: Widgets.Flippable,
-      methods: {
-        toggle: 'flip',
-        open: 'front',
-        close: 'back'
-      }
-    }
-  };
-
-  /* FLIPPABLE FLIPPER */
-
-  var FlippableFlipper = function (_Widgets$Toggler2) {
-    _inherits(FlippableFlipper, _Widgets$Toggler2);
-
-    function FlippableFlipper() {
-      _classCallCheck(this, FlippableFlipper);
-
-      return _possibleConstructorReturn(this, (FlippableFlipper.__proto__ || Object.getPrototypeOf(FlippableFlipper)).apply(this, arguments));
-    }
-
-    return FlippableFlipper;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.init(FlippableFlipper, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalToggler',
-    plugin: true,
-    selector: '.modal-toggler',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL TOGGLER */
-
-  var ModalToggler = function (_Widgets$Toggler3) {
-    _inherits(ModalToggler, _Widgets$Toggler3);
-
-    function ModalToggler() {
-      _classCallCheck(this, ModalToggler);
-
-      return _possibleConstructorReturn(this, (ModalToggler.__proto__ || Object.getPrototypeOf(ModalToggler)).apply(this, arguments));
-    }
-
-    return ModalToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.init(ModalToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayToggler',
-    plugin: true,
-    selector: '.overlay-toggler',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY TOGGLER */
-
-  var OverlayToggler = function (_Widgets$Toggler4) {
-    _inherits(OverlayToggler, _Widgets$Toggler4);
-
-    function OverlayToggler() {
-      _classCallCheck(this, OverlayToggler);
-
-      return _possibleConstructorReturn(this, (OverlayToggler.__proto__ || Object.getPrototypeOf(OverlayToggler)).apply(this, arguments));
-    }
-
-    return OverlayToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.init(OverlayToggler, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
-
-/* =========================================================================
  * Svelto - Widgets - Textarea - Autogrow
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -10970,8 +9627,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* AUTOGROW TEXTAREA */
 
-  var AutogrowTextarea = function (_Widgets$Widget27) {
-    _inherits(AutogrowTextarea, _Widgets$Widget27);
+  var AutogrowTextarea = function (_Widgets$Widget21) {
+    _inherits(AutogrowTextarea, _Widgets$Widget21);
 
     function AutogrowTextarea() {
       _classCallCheck(this, AutogrowTextarea);
@@ -11091,8 +9748,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TEXTAREA SENDER */
 
-  var TextareaSender = function (_Widgets$Widget28) {
-    _inherits(TextareaSender, _Widgets$Widget28);
+  var TextareaSender = function (_Widgets$Widget22) {
+    _inherits(TextareaSender, _Widgets$Widget22);
 
     function TextareaSender() {
       _classCallCheck(this, TextareaSender);
@@ -11171,8 +9828,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TIME AGO */
 
-  var TimeAgo = function (_Widgets$Widget29) {
-    _inherits(TimeAgo, _Widgets$Widget29);
+  var TimeAgo = function (_Widgets$Widget23) {
+    _inherits(TimeAgo, _Widgets$Widget23);
 
     function TimeAgo() {
       _classCallCheck(this, TimeAgo);
@@ -11354,8 +10011,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE */
 
-  var Zoomable = function (_Widgets$Widget30) {
-    _inherits(Zoomable, _Widgets$Widget30);
+  var Zoomable = function (_Widgets$Widget24) {
+    _inherits(Zoomable, _Widgets$Widget24);
 
     function Zoomable() {
       _classCallCheck(this, Zoomable);
@@ -11455,7 +10112,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__tapOutside',
       value: function __tapOutside(event) {
 
-        if (this._lock || !$(event.target).isAttached() || $(event.target).closest(this.$zoomable).length) return;
+        if (this._lock || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$zoomable).length) return;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -11650,7 +10307,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'preload',
       value: function preload(callback) {
-        var _this52 = this;
+        var _this36 = this;
 
         if (this._isPreloading || this._isPreloaded) return;
 
@@ -11662,7 +10319,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var xhr = new window.XMLHttpRequest();
             xhr.addEventListener('progress', function (event) {
               if (!event.lengthComputable) return;
-              _this52._trigger('loading', {
+              _this36._trigger('loading', {
                 loaded: event.loaded,
                 total: event.total,
                 percentage: event.loaded / event.total * 100
@@ -11671,17 +10328,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return xhr;
           },
           success: function success() {
-            _this52._isPreloaded = true;
-            if (_this52.options.original.substitute) {
-              _this52.$zoomable.attr('src', _this52.options.original.src);
+            _this36._isPreloaded = true;
+            if (_this36.options.original.substitute) {
+              _this36.$zoomable.attr('src', _this36.options.original.src);
             }
             if (callback) callback();
           },
           error: function error() {
-            console.error('Zoomable: failed to preload "' + _this52.options.original.src + '"');
+            console.error('Zoomable: failed to preload "' + _this36.options.original.src + '"');
           },
           complete: function complete() {
-            _this52._isPreloading = false;
+            _this36._isPreloading = false;
           }
         });
       }
@@ -11706,12 +10363,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'zoom',
       value: function zoom(event) {
-        var _this53 = this;
+        var _this37 = this;
 
         if (this._lock || this._isZoomed) return;
 
         if (this.options.original.src && this.options.preloading.wait && !this._isPreloaded) return this.preload(function () {
-          return _this53.zoom(event);
+          return _this37.zoom(event);
         });
 
         this._lock = true;
@@ -11835,8 +10492,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE CLOSER */
 
-  var ZoomableCloser = function (_Widgets$Closer6) {
-    _inherits(ZoomableCloser, _Widgets$Closer6);
+  var ZoomableCloser = function (_Widgets$Closer3) {
+    _inherits(ZoomableCloser, _Widgets$Closer3);
 
     function ZoomableCloser() {
       _classCallCheck(this, ZoomableCloser);
@@ -11879,8 +10536,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE OPENER */
 
-  var ZoomableOpener = function (_Widgets$Opener5) {
-    _inherits(ZoomableOpener, _Widgets$Opener5);
+  var ZoomableOpener = function (_Widgets$Opener2) {
+    _inherits(ZoomableOpener, _Widgets$Opener2);
 
     function ZoomableOpener() {
       _classCallCheck(this, ZoomableOpener);
@@ -11923,8 +10580,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE TOGGLER */
 
-  var ZoomableToggler = function (_Widgets$Toggler5) {
-    _inherits(ZoomableToggler, _Widgets$Toggler5);
+  var ZoomableToggler = function (_Widgets$Toggler) {
+    _inherits(ZoomableToggler, _Widgets$Toggler);
 
     function ZoomableToggler() {
       _classCallCheck(this, ZoomableToggler);
@@ -12008,6 +10665,1518 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return this.toggleClass('obscured', force);
   };
 })(Svelto.$, Svelto._, Svelto);
+
+/* =========================================================================
+ * Svelto - Lib - Autofocus
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+(function ($, _, Svelto) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var $html = $('html');
+
+  /* AUTOFOCUS */
+
+  var Autofocus = {
+
+    /* VARIABLES */
+
+    history: [], // List of autofocused elements
+    historySize: 3, // How many elements to keep in the history
+
+    /* INIT */
+
+    init: function init() {
+
+      Autofocus.focus($html);
+    },
+
+
+    /* API */
+
+    set: function set(ele) {
+
+      Autofocus.history.unshift(ele);
+      Autofocus.history = _.uniq(Autofocus.history).slice(0, Autofocus.historySize);
+
+      ele.focus();
+    },
+    find: function find() {
+      var $parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $html;
+      var focused = arguments[1];
+
+
+      var $focusable = $parent.find('[autofocus], .autofocus').filter(':visible');
+
+      if (_.isBoolean(focused)) {
+
+        $focusable = focused ? $focusable.filter(':focus') : $focusable.filter(':not(:focus)');
+      }
+
+      return $focusable.length ? $focusable[0] : null;
+    },
+    focus: function focus($parent) {
+
+      var focusable = Autofocus.find($parent);
+
+      if (!focusable || focusable === Autofocus.history[0]) return;
+
+      Autofocus.set(focusable);
+    },
+    blur: function blur($parent) {
+
+      if (!Autofocus.history[0] || !$.contains($parent[0], Autofocus.history[0])) return;
+
+      var previous = Autofocus.history.find(function (ele) {
+        return $(ele).is(':visible');
+      }) || Autofocus.find($html);
+
+      if (previous) Autofocus.set(previous);
+    }
+  };
+
+  /* READY */
+
+  $(Autofocus.init);
+
+  /* EXPORT */
+
+  Svelto.Autofocus = Autofocus;
+})(Svelto.$, Svelto._, Svelto);
+
+/* =========================================================================
+ * Svelto - Widgets - Autofocusable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.js
+ * @require lib/autofocus/autofocus.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Autofocus) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'autofocusable'
+  };
+
+  /* AUTOFOCUSABLE */
+
+  var Autofocusable = function (_Widgets$Widget25) {
+    _inherits(Autofocusable, _Widgets$Widget25);
+
+    function Autofocusable() {
+      _classCallCheck(this, Autofocusable);
+
+      return _possibleConstructorReturn(this, (Autofocusable.__proto__ || Object.getPrototypeOf(Autofocusable)).apply(this, arguments));
+    }
+
+    _createClass(Autofocusable, [{
+      key: 'autofocus',
+
+
+      /* API */
+
+      value: function autofocus() {
+        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
+
+
+        Autofocus.focus($ele);
+      }
+    }, {
+      key: 'autoblur',
+      value: function autoblur() {
+        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
+
+
+        Autofocus.blur($ele);
+      }
+    }]);
+
+    return Autofocusable;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.init(Autofocusable, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
+
+/* =========================================================================
+ * Svelto - Widgets - Expander
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expander',
+    plugin: true,
+    selector: '.expander',
+    options: {
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* EXPANDER */
+
+  var Expander = function (_Widgets$Autofocusabl) {
+    _inherits(Expander, _Widgets$Autofocusabl);
+
+    function Expander() {
+      _classCallCheck(this, Expander);
+
+      return _possibleConstructorReturn(this, (Expander.__proto__ || Object.getPrototypeOf(Expander)).apply(this, arguments));
+    }
+
+    _createClass(Expander, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$expander = this.$element;
+        this.$content = this.$expander.find(this.options.selectors.content);
+
+        this._isOpen = this.$expander.hasClass(this.options.classes.open);
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this._isOpen = !!force;
+
+          this.$expander.toggleClass(this.options.classes.open, this._isOpen);
+
+          this._isOpen ? this.autofocus() : this.autoblur();
+
+          this._trigger(this._isOpen ? 'open' : 'close');
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        this.toggle(true);
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        this.toggle(false);
+      }
+    }]);
+
+    return Expander;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.init(Expander, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Accordion
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/expander/expander.js
+ * ========================================================================= */
+
+//TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'accordion',
+    plugin: true,
+    selector: '.accordion',
+    options: {
+      multiple: false, // Wheter to allow multiple expanders open or not
+      selectors: {
+        expander: Widgets.Expander.config.selector
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* ACCORDION */
+
+  var Accordion = function (_Widgets$Widget26) {
+    _inherits(Accordion, _Widgets$Widget26);
+
+    function Accordion() {
+      _classCallCheck(this, Accordion);
+
+      return _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
+    }
+
+    _createClass(Accordion, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$accordion = this.$element;
+        this.$expanders = this.$accordion.children(this.options.selectors.expander);
+
+        this.instances = this.$expanders.get().map(function (expander) {
+          return $(expander).expander('instance');
+        });
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___open();
+        this.___close();
+      }
+
+      /* EXPANDER OPEN */
+
+    }, {
+      key: '___open',
+      value: function ___open() {
+
+        this._on(true, this.$expanders, 'expander:open', this.__open);
+      }
+    }, {
+      key: '__open',
+      value: function __open(event) {
+
+        this._trigger('open', { index: this.$expanders.index(event.target) });
+
+        this.__multiple(event.target);
+      }
+
+      /* EXPANDER CLOSE */
+
+    }, {
+      key: '___close',
+      value: function ___close() {
+
+        this._on(true, this.$expanders, 'expander:close', this.__close);
+      }
+    }, {
+      key: '__close',
+      value: function __close(event) {
+
+        this._trigger('close', { index: this.$expanders.index(event.target) });
+      }
+
+      /* MULTIPLE */
+
+    }, {
+      key: '__multiple',
+      value: function __multiple(expander) {
+
+        if (this.options.multiple) return;
+
+        this.instances.forEach(function (instance) {
+          return instance.element !== expander ? instance.close() : false;
+        });
+      }
+
+      /* API OVERRIDES */
+
+    }, {
+      key: 'enable',
+      value: function enable() {
+
+        _get(Accordion.prototype.__proto__ || Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
+
+        _.invokeMap(this.instances, 'enable');
+      }
+    }, {
+      key: 'disable',
+      value: function disable() {
+
+        _.invokeMap(this.instances, 'disable');
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen(index) {
+
+        return this.instances[index].isOpen();
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle(index, force) {
+
+        this.instances[index].toggle(force);
+      }
+    }, {
+      key: 'open',
+      value: function open(index) {
+
+        this.toggle(index, true);
+      }
+    }, {
+      key: 'close',
+      value: function close(index) {
+
+        this.toggle(index, false);
+      }
+    }]);
+
+    return Accordion;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.init(Accordion, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderCloser',
+    plugin: true,
+    selector: '.expander-closer',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER CLOSER */
+
+  var ExpanderCloser = function (_Widgets$Closer4) {
+    _inherits(ExpanderCloser, _Widgets$Closer4);
+
+    function ExpanderCloser() {
+      _classCallCheck(this, ExpanderCloser);
+
+      return _possibleConstructorReturn(this, (ExpanderCloser.__proto__ || Object.getPrototypeOf(ExpanderCloser)).apply(this, arguments));
+    }
+
+    return ExpanderCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.init(ExpanderCloser, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderOpener',
+    plugin: true,
+    selector: '.expander-opener',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER OPENER */
+
+  var ExpanderOpener = function (_Widgets$Opener3) {
+    _inherits(ExpanderOpener, _Widgets$Opener3);
+
+    function ExpanderOpener() {
+      _classCallCheck(this, ExpanderOpener);
+
+      return _possibleConstructorReturn(this, (ExpanderOpener.__proto__ || Object.getPrototypeOf(ExpanderOpener)).apply(this, arguments));
+    }
+
+    return ExpanderOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.init(ExpanderOpener, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderToggler',
+    plugin: true,
+    selector: '.expander-toggler',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER TOGGLER */
+
+  var ExpanderToggler = function (_Widgets$Toggler2) {
+    _inherits(ExpanderToggler, _Widgets$Toggler2);
+
+    function ExpanderToggler() {
+      _classCallCheck(this, ExpanderToggler);
+
+      return _possibleConstructorReturn(this, (ExpanderToggler.__proto__ || Object.getPrototypeOf(ExpanderToggler)).apply(this, arguments));
+    }
+
+    return ExpanderToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.init(ExpanderToggler, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'flippable',
+    plugin: true,
+    selector: '.flippable',
+    options: {
+      classes: {
+        flip: 'flipped'
+      },
+      selectors: {
+        front: '.flippable-front',
+        back: '.flippable-back'
+      },
+      callbacks: {
+        front: _.noop,
+        back: _.noop
+      }
+    }
+  };
+
+  /* FLIPPABLE */
+
+  var Flippable = function (_Widgets$Autofocusabl2) {
+    _inherits(Flippable, _Widgets$Autofocusabl2);
+
+    function Flippable() {
+      _classCallCheck(this, Flippable);
+
+      return _possibleConstructorReturn(this, (Flippable.__proto__ || Object.getPrototypeOf(Flippable)).apply(this, arguments));
+    }
+
+    _createClass(Flippable, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$flippable = this.$element;
+        this.$front = this.$flippable.find(this.options.selectors.front);
+        this.$back = this.$flippable.find(this.options.selectors.back);
+
+        this._isFlipped = this.$flippable.hasClass(this.options.classes.flip);
+      }
+
+      /* API */
+
+    }, {
+      key: 'isFlipped',
+      value: function isFlipped() {
+
+        return this._isFlipped;
+      }
+    }, {
+      key: 'flip',
+      value: function flip() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFlipped;
+
+
+        if (!!force !== this._isFlipped) {
+
+          this._isFlipped = force;
+
+          this.$flippable.toggleClass(this.options.classes.flip, this._isFlipped);
+
+          this.autoblur(this._isFlipped ? this.$front : this.$back);
+          this.autofocus(this._isFlipped ? this.$back : this.$front);
+
+          this._trigger(this._isFlipped ? 'back' : 'front');
+        }
+      }
+    }, {
+      key: 'front',
+      value: function front() {
+
+        this.flip(false);
+      }
+    }, {
+      key: 'back',
+      value: function back() {
+
+        this.flip(true);
+      }
+    }]);
+
+    return Flippable;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.init(Flippable, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable - Targeters - Flipper
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../flippable.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'flippableFlipper',
+    plugin: true,
+    selector: '.flippable-flipper',
+    options: {
+      widget: Widgets.Flippable,
+      methods: {
+        toggle: 'flip',
+        open: 'front',
+        close: 'back'
+      }
+    }
+  };
+
+  /* FLIPPABLE FLIPPER */
+
+  var FlippableFlipper = function (_Widgets$Toggler3) {
+    _inherits(FlippableFlipper, _Widgets$Toggler3);
+
+    function FlippableFlipper() {
+      _classCallCheck(this, FlippableFlipper);
+
+      return _possibleConstructorReturn(this, (FlippableFlipper.__proto__ || Object.getPrototypeOf(FlippableFlipper)).apply(this, arguments));
+    }
+
+    return FlippableFlipper;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.init(FlippableFlipper, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+//FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
+
+(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modal',
+    plugin: true,
+    selector: '.modal',
+    options: {
+      scroll: {
+        disable: true // Disable scroll when the modal is open
+      },
+      classes: {
+        show: 'show',
+        open: 'open',
+        backdrop: {
+          show: 'modal-backdrop obscured-show obscured',
+          open: 'obscured-open'
+        }
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
+      },
+      keystrokes: {
+        'esc': 'close'
+      },
+      callbacks: {
+        beforeopen: _.noop,
+        open: _.noop,
+        beforeclose: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* MODAL */
+
+  var Modal = function (_Widgets$Autofocusabl3) {
+    _inherits(Modal, _Widgets$Autofocusabl3);
+
+    function Modal() {
+      _classCallCheck(this, Modal);
+
+      return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
+    }
+
+    _createClass(Modal, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$modal = this.$element;
+        this.modal = this.element;
+
+        this.$backdrop = this.$html;
+
+        this._isOpen = this.$modal.hasClass(this.options.classes.open);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        if (this._isOpen) {
+
+          this.___keydown();
+          this.___tap();
+          this.___route();
+        }
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.close();
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._on(true, this.$html, Pointer.tap, this.__tap);
+      }
+    }, {
+      key: '__tap',
+      value: function __tap(event) {
+
+        if (this._lock || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$modal).length) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        this.close();
+      }
+
+      /* ROUTE */
+
+    }, {
+      key: '__route',
+      value: function __route() {
+
+        if (this._isOpen && !this.$modal.isAttached()) {
+
+          this.close();
+        }
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this._lock || this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = true;
+
+        this._trigger('beforeopen');
+
+        if (this.options.scroll.disable) this.$layout.disableScroll();
+
+        this._frame(function () {
+
+          this.$modal.addClass(this.options.classes.show);
+          this.$backdrop.addClass(this.options.classes.backdrop.show);
+
+          this._frame(function () {
+
+            this.$modal.addClass(this.options.classes.open);
+            this.$backdrop.addClass(this.options.classes.backdrop.open);
+
+            this.autofocus();
+
+            this._lock = false;
+
+            this._trigger('open');
+          });
+        });
+
+        this.___keydown();
+        this.___tap();
+        this.___route();
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this.lock || !this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = false;
+
+        this._trigger('beforeclose');
+
+        this._frame(function () {
+
+          this.$modal.removeClass(this.options.classes.open);
+          this.$backdrop.removeClass(this.options.classes.backdrop.open);
+
+          this._delay(function () {
+
+            this.$modal.removeClass(this.options.classes.show);
+            this.$backdrop.removeClass(this.options.classes.backdrop.show);
+
+            this.autoblur();
+
+            if (this.options.scroll.disable) this.$layout.enableScroll();
+
+            this._lock = false;
+
+            this._trigger('close');
+          }, this.options.animations.close);
+        });
+
+        this._reset();
+      }
+    }]);
+
+    return Modal;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.init(Modal, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalCloser',
+    plugin: true,
+    selector: '.modal-closer',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL CLOSER */
+
+  var ModalCloser = function (_Widgets$Closer5) {
+    _inherits(ModalCloser, _Widgets$Closer5);
+
+    function ModalCloser() {
+      _classCallCheck(this, ModalCloser);
+
+      return _possibleConstructorReturn(this, (ModalCloser.__proto__ || Object.getPrototypeOf(ModalCloser)).apply(this, arguments));
+    }
+
+    return ModalCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.init(ModalCloser, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalOpener',
+    plugin: true,
+    selector: '.modal-opener',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL OPENER */
+
+  var ModalOpener = function (_Widgets$Opener4) {
+    _inherits(ModalOpener, _Widgets$Opener4);
+
+    function ModalOpener() {
+      _classCallCheck(this, ModalOpener);
+
+      return _possibleConstructorReturn(this, (ModalOpener.__proto__ || Object.getPrototypeOf(ModalOpener)).apply(this, arguments));
+    }
+
+    return ModalOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.init(ModalOpener, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalToggler',
+    plugin: true,
+    selector: '.modal-toggler',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL TOGGLER */
+
+  var ModalToggler = function (_Widgets$Toggler4) {
+    _inherits(ModalToggler, _Widgets$Toggler4);
+
+    function ModalToggler() {
+      _classCallCheck(this, ModalToggler);
+
+      return _possibleConstructorReturn(this, (ModalToggler.__proto__ || Object.getPrototypeOf(ModalToggler)).apply(this, arguments));
+    }
+
+    return ModalToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.init(ModalToggler, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlay',
+    plugin: true,
+    selector: '.overlay',
+    options: {
+      classes: {
+        show: 'show',
+        open: 'open',
+        parent: {
+          show: 'overlay-parent-show',
+          open: 'overlay-parent-open'
+        }
+      },
+      animations: {
+        open: Animations.fast,
+        close: Animations.fast
+      },
+      keystrokes: {
+        'esc': 'close'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* OVERLAY */
+
+  var Overlay = function (_Widgets$Autofocusabl4) {
+    _inherits(Overlay, _Widgets$Autofocusabl4);
+
+    function Overlay() {
+      _classCallCheck(this, Overlay);
+
+      return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
+    }
+
+    _createClass(Overlay, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$overlay = this.$element;
+
+        this._isOpen = this.$overlay.hasClass(this.options.classes.open);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        if (this._isOpen) {
+
+          this.___keydown();
+        }
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.close();
+      }
+
+      /* PARENT */
+
+    }, {
+      key: '_getParent',
+      value: function _getParent() {
+
+        if (!this.$parent) {
+
+          this.$parent = this.$overlay.parent();
+        }
+
+        return this.$parent;
+      }
+
+      /* KEYDOWN */
+
+    }, {
+      key: '___keydown',
+      value: function ___keydown() {
+
+        this._onHover(true, [this.$document, 'keydown', this.__keydown]); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this._lock || this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = true;
+
+        this._frame(function () {
+
+          this.$overlay.addClass(this.options.classes.show);
+          this._getParent().addClass(this.options.classes.parent.show);
+
+          this._frame(function () {
+
+            this.$overlay.addClass(this.options.classes.open);
+            this._getParent().addClass(this.options.classes.parent.open);
+
+            this.autofocus();
+
+            this._lock = false;
+
+            this._trigger('open');
+          });
+        });
+
+        this.___keydown();
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this._lock || !this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = false;
+
+        this._frame(function () {
+
+          this.$overlay.removeClass(this.options.classes.open);
+          this._getParent().removeClass(this.options.classes.parent.open);
+
+          this._delay(function () {
+
+            this.$overlay.removeClass(this.options.classes.show);
+            this._getParent().removeClass(this.options.classes.parent.show);
+
+            this.autoblur();
+
+            this._lock = false;
+
+            this._trigger('close');
+          }, this.options.animations.close);
+        });
+
+        this._reset();
+      }
+    }]);
+
+    return Overlay;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.init(Overlay, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayCloser',
+    plugin: true,
+    selector: '.overlay-closer',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY CLOSER */
+
+  var OverlayCloser = function (_Widgets$Closer6) {
+    _inherits(OverlayCloser, _Widgets$Closer6);
+
+    function OverlayCloser() {
+      _classCallCheck(this, OverlayCloser);
+
+      return _possibleConstructorReturn(this, (OverlayCloser.__proto__ || Object.getPrototypeOf(OverlayCloser)).apply(this, arguments));
+    }
+
+    return OverlayCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.init(OverlayCloser, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayOpener',
+    plugin: true,
+    selector: '.overlay-opener',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY OPENER */
+
+  var OverlayOpener = function (_Widgets$Opener5) {
+    _inherits(OverlayOpener, _Widgets$Opener5);
+
+    function OverlayOpener() {
+      _classCallCheck(this, OverlayOpener);
+
+      return _possibleConstructorReturn(this, (OverlayOpener.__proto__ || Object.getPrototypeOf(OverlayOpener)).apply(this, arguments));
+    }
+
+    return OverlayOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.init(OverlayOpener, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayToggler',
+    plugin: true,
+    selector: '.overlay-toggler',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY TOGGLER */
+
+  var OverlayToggler = function (_Widgets$Toggler5) {
+    _inherits(OverlayToggler, _Widgets$Toggler5);
+
+    function OverlayToggler() {
+      _classCallCheck(this, OverlayToggler);
+
+      return _possibleConstructorReturn(this, (OverlayToggler.__proto__ || Object.getPrototypeOf(OverlayToggler)).apply(this, arguments));
+    }
+
+    return OverlayToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.init(OverlayToggler, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner - Overlay
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/colors.js
+ * @require widgets/overlay/overlay.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Colors) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'spinnerOverlay',
+    plugin: true,
+    templates: {
+      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' + '<% if ( o.labeled ) { %>' + '<div class="spinner-label <%= o.colors.labeled %>">' + '<% } %>' + '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '<% if ( o.labeled ) { %>' + '</div>' + '<% } %>' + '</div>'
+    },
+    options: {
+      labeled: true,
+      dimmer: true,
+      multicolor: false,
+      colors: {
+        labeled: Colors.white,
+        unlabeled: Colors.secondary
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* SPINNER OVERLAY */
+
+  var SpinnerOverlay = function (_Widgets$Widget27) {
+    _inherits(SpinnerOverlay, _Widgets$Widget27);
+
+    function SpinnerOverlay() {
+      _classCallCheck(this, SpinnerOverlay);
+
+      return _possibleConstructorReturn(this, (SpinnerOverlay.__proto__ || Object.getPrototypeOf(SpinnerOverlay)).apply(this, arguments));
+    }
+
+    _createClass(SpinnerOverlay, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$overlayed = this.$element;
+        this.$overlay = $(this._template('overlay', this.options));
+
+        this.instance = this.$overlay.overlay('instance');
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this.instance.isOpen();
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.isOpen();
+
+
+        if (!!force !== this.isOpen()) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this._lock || this.isOpen()) return;
+
+        this.$overlay.prependTo(this.$overlayed);
+
+        this.instance.open();
+
+        this._trigger('open');
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this._lock || !this.isOpen()) return;
+
+        this._lock = true;
+
+        this.instance.close();
+
+        this._delay(function () {
+
+          this.$overlay.detach();
+
+          this._lock = false;
+
+          this._trigger('close');
+        }, Widgets.Overlay.config.options.animations.close);
+      }
+    }]);
+
+    return SpinnerOverlay;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.init(SpinnerOverlay, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
 
 /* =========================================================================
  * Svelto - Lib - Color
@@ -12467,8 +12636,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* COLORPICKER */
 
-  var Colorpicker = function (_Widgets$Widget31) {
-    _inherits(Colorpicker, _Widgets$Widget31);
+  var Colorpicker = function (_Widgets$Widget28) {
+    _inherits(Colorpicker, _Widgets$Widget28);
 
     function Colorpicker() {
       _classCallCheck(this, Colorpicker);
@@ -12889,8 +13058,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/animations/animations.js
- * @require core/widget/widget.js
  * @require lib/directions/directions.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
@@ -12943,7 +13112,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         'esc': '__esc'
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -12951,8 +13122,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PANEL */
 
-  var Panel = function (_Widgets$Widget32) {
-    _inherits(Panel, _Widgets$Widget32);
+  var Panel = function (_Widgets$Autofocusabl5) {
+    _inherits(Panel, _Widgets$Autofocusabl5);
 
     function Panel() {
       _classCallCheck(this, Panel);
@@ -12967,7 +13138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /* SPECIAL */
 
       value: function _variables() {
-        var _this59 = this;
+        var _this60 = this;
 
         this.$panel = this.$element;
         this.panel = this.element;
@@ -12975,7 +13146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$backdrop = this.$html;
 
         this.options.direction = Directions.get().find(function (direction) {
-          return _this59.$panel.hasClass(direction);
+          return _this60.$panel.hasClass(direction);
         }) || this.options.direction;
         this.options.flick.open = this.options.flick.open || this.$panel.hasClass(this.options.classes.flickable);
 
@@ -13030,7 +13201,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__tap',
       value: function __tap(event) {
 
-        if (this._lock || this._isPinned || !$(event.target).isAttached() || $(event.target).closest(this.$panel).length) return;
+        if (this._lock || this._isPinned || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$panel).length) return;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -13192,6 +13363,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._lock = true;
         this._isOpen = true;
 
+        this._trigger('beforeopen');
+
         if (!this._isPinned) {
 
           if (this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin]) {
@@ -13213,6 +13386,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.$panel.addClass(this.options.classes.open);
             this.$backdrop.addClass(this.options.classes.backdrop.open);
+
+            this.autofocus();
 
             this._lock = false;
 
@@ -13239,6 +13414,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._lock = true;
         this._isOpen = false;
 
+        this._trigger('beforeclose');
+
         this._frame(function () {
 
           this.$panel.removeClass(this.options.classes.open);
@@ -13249,6 +13426,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.$panel.removeClass(this.options.classes.show);
             this.$backdrop.removeClass(this.options.classes.backdrop.show);
             this.$layout.removeClass(this.options.classes.layout.show);
+
+            this.autoblur();
 
             if (this.options.scroll.disable) this.$layout.enableScroll();
 
@@ -13325,7 +13504,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Panel;
-  }(Widgets.Widget);
+  }(Widgets.Autofocusable);
 
   /* FACTORY */
 
@@ -13470,8 +13649,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.js
  * @require lib/directions/directions.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
@@ -13509,8 +13688,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABS */
 
-  var Tabs = function (_Widgets$Widget33) {
-    _inherits(Tabs, _Widgets$Widget33);
+  var Tabs = function (_Widgets$Autofocusabl6) {
+    _inherits(Tabs, _Widgets$Autofocusabl6);
 
     function Tabs() {
       _classCallCheck(this, Tabs);
@@ -13525,14 +13704,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /* SPECIAL */
 
       value: function _variables() {
-        var _this64 = this;
+        var _this65 = this;
 
         this.$tabs = this.$element;
         this.$triggers = this.$tabs.find(this.options.selectors.triggers);
         this.$containers = this.$tabs.find(this.options.selectors.containers);
 
         this.options.direction = Directions.get().find(function (direction) {
-          return _this64.$tabs.hasClass(direction);
+          return _this65.$tabs.hasClass(direction);
         }) || this.options.direction;
 
         this.index = false;
@@ -13593,9 +13772,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $trigger.toggleClass(this.options.classes.active.trigger, force);
         $container.toggleClass(this.options.classes.active.container, force);
 
-        if (force) {
+        if (!force) {
+
+          this.autoblur($container);
+        } else {
 
           $container.widgetize();
+
+          this.autofocus($container);
         }
 
         if (this.options.highlight) {
@@ -13654,7 +13838,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Tabs;
-  }(Widgets.Widget);
+  }(Widgets.Autofocusable);
 
   /* FACTORY */
 
@@ -14245,7 +14429,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'once',
       value: function once(time) {
-        var _this65 = this;
+        var _this66 = this;
 
         if (isNaN(time)) {
 
@@ -14253,7 +14437,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         setTimeout(function () {
-          return _this65.action();
+          return _this66.action();
         }, time);
 
         return this;
@@ -14336,7 +14520,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'setTimer',
       value: function setTimer(time) {
-        var _this66 = this;
+        var _this67 = this;
 
         if (isNaN(time)) {
 
@@ -14348,7 +14532,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clearTimer();
 
         this.timeoutObject = setTimeout(function () {
-          return _this66.go();
+          return _this67.go();
         }, time);
       }
     }, {
@@ -14396,6 +14580,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 //TODO: Add slides drag support
+//TODO: Maybe add `autofocus` capabilities
 
 (function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations) {
 
@@ -14439,8 +14624,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CAROUSEL */
 
-  var Carousel = function (_Widgets$Widget34) {
-    _inherits(Carousel, _Widgets$Widget34);
+  var Carousel = function (_Widgets$Widget29) {
+    _inherits(Carousel, _Widgets$Widget29);
 
     function Carousel() {
       _classCallCheck(this, Carousel);
@@ -14759,2661 +14944,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations);
 
 /* =========================================================================
- * Svelto - Widgets - Toast
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/colors/colors.js
- * @require core/sizes/sizes.js
- * @require core/widget/widget.js
- * @require lib/timer/timer.js
- * ========================================================================= */
-
-//TODO: Add support for dismissing a toast that contains only one button
-//TODO: Add better support for swipe to dismiss
-
-(function ($, _, Svelto, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  var timers = {},
-      // Storing toasts' timers here //TODO: Maybe make this variable accessible from the outside
-  hovering = false; // Global to check if are hovering a toast -- used in conjuction with pagevisibility
-
-  /* PAGE VISIBILITY */
-
-  //TODO: Test with loading without ever focusing a page
-
-  $(document).on('visibilitychange', function () {
-
-    if (hovering) return;
-
-    if (document.hidden) {
-
-      _.forOwn(timers, function (data) {
-        return data[0].pause();
-      });
-    } else {
-
-      _.forOwn(timers, function (data) {
-        return data[0].remaining(Math.max(data[1], data[0].remaining())).play();
-      });
-    }
-  });
-
-  /* CONFIG */
-
-  var config = {
-    name: 'toast',
-    plugin: true,
-    selector: '.toast',
-    templates: {
-      queues: '<div class="toast-queues top">' + '<div class="toast-queue expanded"></div>' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '</div>' + '<div class="toast-queues bottom">' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '<div class="toast-queue expanded"></div>' + '</div>',
-      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' + ('<div class="infobar ' + Colors.transparent + '">') + '<% if ( o.img ) { %>' + '<img src="<%= o.img %>" class="toast-img infobar-left">' + '<% } %>' + '<% if ( o.icon ) { %>' + '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' + '<% } %>' + '<% if ( o.title || o.body ) { %>' + '<div class="infobar-center">' + '<% if ( o.title ) { %>' + '<p class="infobar-title">' + '<%= o.title %>' + '</p>' + '<% } %>' + '<% if ( o.body ) { %>' + '<%= o.body %>' + '<% } %>' + '</div>' + '<% } %>' + '<% if ( o.buttons.length === 1 ) { %>' + '<div class="infobar-right">' + '<% print ( self.button ( o.buttons[0] ) ) %>' + '</div>' + '<% } %>' + '</div>' + '<% if ( o.buttons.length > 1 ) { %>' + '<div class="toast-buttons multiple center-x">' + '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' + '<% print ( self.button ( o.buttons[i] ) ) %>' + '<% } %>' + '</div>' + '<% } %>' + '</div>',
-      button: '<div class="button <%= o.color || "' + Colors.white + '" %> <%= o.size || "' + Sizes.small + '" %> <%= o.css || "" %>">' + '<%= o.text || "" %>' + '</div>'
-    },
-    options: {
-      anchor: { // Used for selecting the proper queue where this Toast should be attached
-        x: 'left',
-        y: 'bottom'
-      },
-      title: false,
-      body: false,
-      img: false,
-      icon: false,
-      buttons: [],
-      /*
-             : [{
-                color: Colors.white,
-                size: Sizes.small,
-                css: '',
-                text: '',
-                onClick: _.noop // If it returns `false` the Toast won't be closed
-             }],
-      */
-      type: 'alert',
-      color: Colors.black,
-      css: '',
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
-      autoplay: true,
-      ttl: 3500,
-      ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
-      classes: {
-        open: 'open'
-      },
-      selectors: {
-        queues: '.toast-queues',
-        queue: '.toast-queue',
-        button: '.toast-buttons .button, .infobar-right .button'
-      },
-      animations: {
-        open: Animations.normal,
-        close: Animations.normal
-      },
-      keystrokes: {
-        'esc': 'close'
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* TOAST */
-
-  var Toast = function (_Widgets$Widget35) {
-    _inherits(Toast, _Widgets$Widget35);
-
-    function Toast() {
-      _classCallCheck(this, Toast);
-
-      return _possibleConstructorReturn(this, (Toast.__proto__ || Object.getPrototypeOf(Toast)).apply(this, arguments));
-    }
-
-    _createClass(Toast, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$toast = this.$element;
-        this.$buttons = this.$toast.find(this.options.selectors.button);
-
-        this.timer = false;
-        this._openUrl = false;
-
-        this._isOpen = this.$toast.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this.$toast.widgetize();
-
-        if (this._isOpen) {
-
-          this.___timer();
-          this.___tap();
-          this.___flick();
-          this.___buttonTap();
-          this.___hover();
-          this.___persistent();
-          this.___keydown();
-          this.___breakpoint();
-        } else if (this.options.autoplay) {
-
-          var whenReady = Toast.whenReady || Toast.__proto__.whenReady; //IE10 support -- static property
-
-          whenReady.bind(Toast)(this.open.bind(this));
-        }
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_getUrl',
-      value: function _getUrl() {
-
-        return window.location.href.split('#')[0];
-      }
-
-      /* TIMER */
-
-    }, {
-      key: '___timer',
-      value: function ___timer() {
-
-        if (this.options.type !== 'action' && _.isNumber(this.options.ttl) && !_.isNaN(this.options.ttl) && this.options.ttl !== Infinity) {
-
-          if (!this.timer) {
-
-            this.timer = new Timer(this.close.bind(this), this.options.ttl, !document.hidden);
-          } else {
-
-            this.timer.reset();
-          }
-
-          timers[this.guid] = [this.timer, this.options.ttlMinimumRemaining];
-        }
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        if (this.options.type !== 'action') {
-
-          this._on(Pointer.tap, this.__tap);
-        }
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        event.preventDefault(); // Otherwise the click goes through the toast in Chrome for iOS
-
-        this.close();
-      }
-
-      /* BUTTON TAP */
-
-    }, {
-      key: '___buttonTap',
-      value: function ___buttonTap() {
-
-        this._on(this.$buttons, Pointer.tap, this.__buttonTap);
-      }
-    }, {
-      key: '__buttonTap',
-      value: function __buttonTap(event, data) {
-
-        var $button = $(event.target),
-            index = this.$buttons.index($button),
-            buttonObj = this.options.buttons[index];
-
-        if (buttonObj.onClick) {
-
-          if (buttonObj.onClick.apply($button[0], [event, data]) === false) return;
-        }
-
-        this.close();
-      }
-
-      /* HOVER */
-
-    }, {
-      key: '___hover',
-      value: function ___hover() {
-
-        this.$toast.hover(function () {
-
-          hovering = true;
-
-          _.forOwn(timers, function (data) {
-            return data[0].pause();
-          });
-        }, function () {
-
-          hovering = false;
-
-          if (document.hidden) return;
-
-          _.forOwn(timers, function (data) {
-            return data[0].remaining(Math.max(data[1], data[0].remaining())).play();
-          });
-        });
-      }
-
-      /* FLICK */
-
-    }, {
-      key: '___flick',
-      value: function ___flick() {
-
-        if (this.options.type !== 'action') {
-
-          this.$toast.flickable({
-            callbacks: {
-              flick: this.__flick.bind(this)
-            }
-          });
-        }
-      }
-    }, {
-      key: '__flick',
-      value: function __flick(event, data) {
-
-        if (data.orientation === 'horizontal') {
-
-          this.close();
-        }
-      }
-
-      /* PERSISTENT */
-
-    }, {
-      key: '___persistent',
-      value: function ___persistent() {
-
-        if (!this.options.persistent) {
-
-          this.___route();
-        }
-      }
-    }, {
-      key: '__route',
-      value: function __route() {
-
-        var currentUrl = this._getUrl();
-
-        if (this._openUrl && this._openUrl !== currentUrl) {
-
-          this.close();
-        }
-      }
-
-      /* RESET */
-
-    }, {
-      key: '_reset',
-      value: function _reset() {
-
-        /* TIMER */
-
-        delete timers[this.guid];
-
-        /* FLICK */
-
-        this.$toast.flickable('destroy');
-
-        /* SUPER */
-
-        _get(Toast.prototype.__proto__ || Object.getPrototypeOf(Toast.prototype), '_reset', this).call(this);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._frame(function () {
-
-          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append(this.$toast);
-
-          this._frame(function () {
-
-            this.$toast.addClass(this.options.classes.open);
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        this.___timer();
-        this.___tap();
-        this.___flick();
-        this.___buttonTap();
-        this.___hover();
-        this.___persistent();
-        this.___keydown();
-        this.___breakpoint();
-
-        this._defer(function () {
-
-          this._openUrl = this._getUrl();
-        });
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this._lock || !this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = false;
-        this._openUrl = false;
-
-        this._frame(function () {
-
-          this.$toast.removeClass(this.options.classes.open);
-
-          this._delay(function () {
-
-            this.$toast.remove();
-
-            this._lock = false;
-
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
-
-        this._reset();
-      }
-    }], [{
-      key: 'ready',
-
-
-      /* READY */
-
-      value: function ready(done) {
-
-        _.delay(function () {
-          // In order to better support client size rendering
-
-          var $layout = $('.layout, body').first(); // `body` is used as a fallback
-
-          $layout.append(Toast.config.templates.queues);
-
-          done();
-        });
-      }
-    }]);
-
-    return Toast;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Toast, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes);
-
-/* =========================================================================
- * Svelto - Lib - Notification
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
-
-(function ($, _, Svelto, Toast) {
-
-  'use strict';
-
-  /* DEFAULTS */
-
-  var defaults = {
-    title: false,
-    body: false,
-    img: false,
-    ttl: Toast.config.options.ttl
-  };
-
-  /* NOTIFICATION */
-
-  //TODO: Add support for string options
-
-  $.notification = function (options) {
-
-    /* OPTIONS */
-
-    options = _.extend({}, $.notification.defaults, options);
-
-    /* NOTIFICATIONS */
-
-    if (document.hidden && window.Notification && Notification.permission !== 'denied') {
-
-      Notification.requestPermission(function (status) {
-
-        if (status === 'granted') {
-          (function () {
-
-            var notification = new Notification(options.title, { body: options.body, icon: options.img });
-
-            if (_.isNumber(options.ttl) && !_.isNaN(options.ttl) && options.ttl !== Infinity) {
-
-              setTimeout(function () {
-
-                notification.close();
-              }, options.ttl);
-            }
-          })();
-        } else {
-
-          $.toast(options);
-        }
-      });
-    } else {
-
-      $.toast(options);
-    }
-  };
-
-  /* BINDING */
-
-  $.notification.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast);
-
-/* =========================================================================
- * Svelto - Widgets - Liker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/remote/remote.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'liker',
-    plugin: true,
-    selector: '.liker',
-    options: {
-      likes: 0,
-      dislikes: 0,
-      state: null,
-      stateUrl: false,
-      url: false,
-      ajax: {
-        cache: false,
-        method: 'POST'
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
-      datas: {
-        likes: 'likes',
-        dislikes: 'dislikes',
-        state: 'state',
-        stateUrl: 'state-url',
-        url: 'url'
-      },
-      selectors: {
-        like: '.like',
-        dislike: '.dislike'
-      }
-    }
-  };
-
-  /* LIKES */
-
-  var Liker = function (_Widgets$Remote) {
-    _inherits(Liker, _Widgets$Remote);
-
-    function Liker() {
-      _classCallCheck(this, Liker);
-
-      return _possibleConstructorReturn(this, (Liker.__proto__ || Object.getPrototypeOf(Liker)).apply(this, arguments));
-    }
-
-    _createClass(Liker, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$liker = this.$element;
-        this.$like = this.$liker.find(this.options.selectors.like);
-        this.$dislike = this.$liker.find(this.options.selectors.dislike);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
-        this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
-        this.options.stateUrl = this.$liker.data(this.options.datas.stateUrl) || this.options.stateUrl;
-        this.options.url = this.$liker.data(this.options.datas.url) || this.options.url;
-
-        var state = this.$liker.data(this.options.datas.state);
-        this.options.state = _.isBoolean(state) ? state : this.options.state;
-
-        this.___remoteState();
-        this._update();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___like();
-        this.___dislike();
-      }
-
-      /* REMOTE STATE */
-
-    }, {
-      key: '___remoteState',
-      value: function ___remoteState() {
-
-        if (!this.options.stateUrl) return;
-
-        $.get(this.options.stateUrl, this.__remoteState.bind(this));
-      }
-    }, {
-      key: '__remoteState',
-      value: function __remoteState(res) {
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (_.isError(resj) || !('state' in resj) || resj.state === this.options.state) return;
-
-        this.options.state = resj.state;
-
-        this._update();
-      }
-
-      /* UPDATE */
-
-    }, {
-      key: '_update',
-      value: function _update() {
-
-        this.$liker.attr('data-' + this.options.datas.state, String(this.options.state));
-        this.$like.attr('data-' + this.options.datas.likes, this.options.likes);
-        this.$dislike.attr('data-' + this.options.datas.dislikes, this.options.dislikes);
-      }
-
-      /* LIKE */
-
-    }, {
-      key: '___like',
-      value: function ___like() {
-
-        this._on(this.$like, Pointer.tap, this.__like);
-      }
-    }, {
-      key: '__like',
-      value: function __like() {
-
-        this[this.options.state ? 'reset' : 'like']();
-      }
-
-      /* DISLIKE */
-
-    }, {
-      key: '___dislike',
-      value: function ___dislike() {
-
-        this._on(this.$dislike, Pointer.tap, this.__dislike);
-      }
-    }, {
-      key: '__dislike',
-      value: function __dislike() {
-
-        this[this.options.state === false ? 'reset' : 'dislike']();
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
-
-        this.disable();
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__beforesend', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.msg);
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (_.isError(resj)) return this.__error(res);
-
-        _.extend(this.options, _.pick(resj, ['likes', 'dislikes', 'state']));
-
-        this._update();
-
-        if ('message' in resj) $.toast(resj.message);
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__success', this).call(this);
-      }
-    }, {
-      key: '__complete',
-      value: function __complete(res) {
-
-        this.enable();
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__complete', this).call(this, res);
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return _.pick(this.options, ['likes', 'dislikes', 'state']);
-      }
-    }, {
-      key: 'set',
-      value: function set() {
-        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-
-        if (state === this.options.state) return;
-
-        var options = {
-          data: {
-            current: this.get(),
-            state: state
-          },
-          url: this.options.url || this.options.ajax.url
-        };
-
-        return this.request(options);
-      }
-    }, {
-      key: 'reset',
-      value: function reset() {
-
-        return this.set(null);
-      }
-    }, {
-      key: 'like',
-      value: function like() {
-
-        return this.set(true);
-      }
-    }, {
-      key: 'dislike',
-      value: function dislike() {
-
-        return this.set(false);
-      }
-    }]);
-
-    return Liker;
-  }(Widgets.Remote);
-
-  /* FACTORY */
-
-  Factory.init(Liker, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
-
-/* =========================================================================
- * Svelto - Widgets - Rater
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-//FIXME: Crappy, not working ATM, maybe should get removed
-//TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
-
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'rater',
-    plugin: true,
-    selector: '.rater',
-    templates: {
-      base: '<div class="rater">' + '<% print ( self.stars ( o ) ) %>' + '</div>',
-      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' + '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' + '<% } %>'
-    },
-    options: {
-      value: 0,
-      amount: 5,
-      url: false,
-      rated: false,
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
-      datas: {
-        value: 'value',
-        amount: 'amount',
-        url: 'url'
-      },
-      classes: {
-        rated: 'rated'
-      },
-      selectors: {
-        star: '.rater-star'
-      },
-      callbacks: {
-        change: _.noop
-      }
-    }
-  };
-
-  /* RATER */
-
-  var Rater = function (_Widgets$Widget36) {
-    _inherits(Rater, _Widgets$Widget36);
-
-    function Rater() {
-      _classCallCheck(this, Rater);
-
-      return _possibleConstructorReturn(this, (Rater.__proto__ || Object.getPrototypeOf(Rater)).apply(this, arguments));
-    }
-
-    _createClass(Rater, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$rater = this.$element;
-
-        this.doingAjax = false;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this.options.value = Number(this.$rater.data(this.options.datas.value)) || this.options.value;
-        this.options.amount = Number(this.$rater.data(this.options.datas.amount)) || this.options.amount;
-        this.options.url = Number(this.$rater.data(this.options.datas.url)) || this.options.url;
-        this.options.rated = this.$rater.hasClass(this.options.classes.rated);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___tap();
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        if (!this.options.rated) {
-
-          /* TAP */
-
-          this._on(Pointer.tap, this.options.selectors.star, this.__tap);
-        }
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-        var _this71 = this;
-
-        if (!this.options.rated && !this.doingAjax && this.options.url) {
-
-          var rating = this.$stars.index(event.currentTarget) + 1;
-
-          $.ajax({
-
-            data: { rating: rating },
-            type: 'POST',
-            url: this.options.url,
-
-            beforeSend: function beforeSend() {
-
-              _this71.doingAjax = true;
-            },
-
-            error: function error(res) {
-
-              var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-              $.toast(_.isError(resj) || !('message' in resj) ? _this71.options.messages.error : resj.message);
-            },
-
-            success: function success(res) {
-
-              //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
-              //TODO: Make it work like formAjax's
-
-              var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-              if (!_.isError(resj)) {
-
-                _.merge(_this71.options, resj);
-
-                _this71.$rater.html(_this71._template('stars', _this71.options));
-
-                _this71.options.rated = true;
-
-                _this71._trigger('change');
-              }
-            },
-
-            complete: function complete() {
-
-              _this71.doingAjax = false;
-            }
-
-          });
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return {
-          value: this.options.value,
-          amount: this.options.amount
-        };
-      }
-    }]);
-
-    return Rater;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Rater, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Action
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require core/colors/colors.js
- * @require core/sizes/sizes.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-//TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
-//TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`
-
-//FIXME: Not well written
-//FIXME: Clicking an error/success toast doesn't close it
-
-(function ($, _, Svelto, Widgets, Factory, Colors, Sizes) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteAction',
-    options: {
-      closingDelay: Widgets.Toast.config.options.ttl / 2,
-      ajax: {
-        cache: false,
-        method: 'POST'
-      },
-      confirmation: { // Options to pass to a confirmation toast, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
-        body: 'Execute action?',
-        buttons: [{
-          text: 'Cancel'
-        }, {
-          text: 'Execute',
-          color: Colors.secondary,
-          isConfirmative: true
-        }]
-      },
-      messages: {
-        error: 'An error occurred, please try again later',
-        success: 'Done! A page refresh may be needed',
-        refreshing: 'Done! Refreshing the page...',
-        redirecting: 'Done! Redirecting...'
-      },
-      classes: {
-        spinner: {
-          color: Colors.white,
-          size: Sizes.small,
-          css: ''
-        }
-      }
-    }
-  };
-
-  /* REMOTE ACTION */
-
-  var RemoteAction = function (_Widgets$Remote2) {
-    _inherits(RemoteAction, _Widgets$Remote2);
-
-    function RemoteAction() {
-      _classCallCheck(this, RemoteAction);
-
-      return _possibleConstructorReturn(this, (RemoteAction.__proto__ || Object.getPrototypeOf(RemoteAction)).apply(this, arguments));
-    }
-
-    _createClass(RemoteAction, [{
-      key: '___confirmationToast',
-
-
-      /* TOAST */
-
-      value: function ___confirmationToast() {
-
-        if (this.$toast) return;
-
-        /* VARIABLES */
-
-        var options = _.cloneDeep(this.options.confirmation),
-            index = _.findIndex(options.buttons, 'isConfirmative'),
-            button = index >= 0 ? options.buttons[index] : _.last(options.buttons);
-
-        /* ON CLICK */
-
-        var _prevOnClick = button.onClick,
-            instance = this;
-
-        button.onClick = function () {
-
-          instance.request(true);
-
-          if (_.isFunction(_prevOnClick)) {
-
-            _prevOnClick.apply(this, arguments);
-          }
-
-          return false;
-        };
-
-        /* OPENING */
-
-        this._replaceToast(options);
-      }
-    }, {
-      key: '___loadingToast',
-      value: function ___loadingToast() {
-
-        this._replaceToast('<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>');
-      }
-    }, {
-      key: '_replaceToast',
-      value: function _replaceToast(options) {
-
-        var instance = $.toast(_.isString(options) ? { body: options, autoplay: false } : _.extend({}, options, { autoplay: false }));
-
-        instance.close();
-
-        var $toast = instance.$element;
-
-        if (this.$toast) {
-
-          this.$toast.html($toast.html()).widgetize();
-        } else {
-
-          this.$toast = $toast;
-
-          this.$toast.toast('open');
-        }
-      }
-    }, {
-      key: '_destroyToast',
-      value: function _destroyToast(delay) {
-
-        if (!this.$toast) return;
-
-        this._delay(function () {
-
-          this.$toast.toast('close');
-
-          this._delay(function () {
-
-            this.$toast.remove();
-
-            this.$toast = false;
-          }, Widgets.Toast.config.options.animations.close);
-        }, delay ? this.options.closingDelay : 0);
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
-
-        if (this.isAborted()) return;
-
-        this.___loadingToast();
-
-        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__beforesend', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        this._replaceToast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
-
-        this._destroyToast(true);
-
-        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (!_.isError(resj)) {
-
-          if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
-
-            this._replaceToast(resj.message || this.options.messages.refreshing);
-
-            location.reload();
-          } else if (resj.url) {
-
-            // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
-
-            this._replaceToast(resj.message || this.options.messages.redirecting);
-
-            location.assign(resj.url);
-          } else {
-
-            this._replaceToast(resj.message || this.options.messages.success);
-          }
-        } else {
-
-          this._replaceToast(this.options.messages.success);
-        }
-
-        this._destroyToast(true);
-
-        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'request',
-      value: function request(_confirmation) {
-
-        if (!_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length) {
-
-          this.___confirmationToast();
-        } else {
-
-          _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'request', this).call(this);
-        }
-      }
-    }, {
-      key: 'abort',
-      value: function abort() {
-
-        this._destroyToast();
-
-        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'abort', this).call(this);
-      }
-    }]);
-
-    return RemoteAction;
-  }(Widgets.Remote);
-
-  /* FACTORY */
-
-  Factory.init(RemoteAction, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Action (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./action.js
- * ========================================================================= */
-
-(function ($, _, Svelto, RemoteAction) {
-
-  'use strict';
-
-  /* HELPER */
-
-  $.remoteAction = function (ajax) {
-
-    new RemoteAction({ ajax: ajax }).request();
-  };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteAction);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Action (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./action.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteActionTrigger',
-    plugin: true,
-    selector: '.remote-action-trigger',
-    options: {
-      widget: Widgets.RemoteAction
-    }
-  };
-
-  /* REMOTE ACTION TRIGGER */
-
-  var RemoteActionTrigger = function (_Widgets$RemoteTrigge) {
-    _inherits(RemoteActionTrigger, _Widgets$RemoteTrigge);
-
-    function RemoteActionTrigger() {
-      _classCallCheck(this, RemoteActionTrigger);
-
-      return _possibleConstructorReturn(this, (RemoteActionTrigger.__proto__ || Object.getPrototypeOf(RemoteActionTrigger)).apply(this, arguments));
-    }
-
-    return RemoteActionTrigger;
-  }(Widgets.RemoteTrigger);
-
-  /* FACTORY */
-
-  Factory.init(RemoteActionTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteLoader',
-    plugin: true,
-    selector: '.remote-loader',
-    options: {
-      target: false, // Selector pointing to the element that cointains the content
-      autorequest: {
-        threshold: 400
-      },
-      preloading: {
-        enabled: false, // Preload the content
-        wait: true // Wait for an explicit request or autorequesting before doing the actual work
-      },
-      requests: {
-        multiple: {
-          parallel: false,
-          sequential: false
-        }
-      },
-      attributes: {
-        href: 'href' // In order to better support `a` elements (the data value has higher priority)
-      },
-      classes: {
-        preload: 'preload'
-      },
-      datas: {
-        url: 'url',
-        data: 'data',
-        method: 'method',
-        target: 'target'
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
-      }
-    }
-  };
-
-  /* REMOTE LOADER */
-
-  var RemoteLoader = function (_Widgets$Remote3) {
-    _inherits(RemoteLoader, _Widgets$Remote3);
-
-    function RemoteLoader() {
-      _classCallCheck(this, RemoteLoader);
-
-      return _possibleConstructorReturn(this, (RemoteLoader.__proto__ || Object.getPrototypeOf(RemoteLoader)).apply(this, arguments));
-    }
-
-    _createClass(RemoteLoader, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '_variables', this).call(this);
-
-        this.$loader = this.$element;
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-        var _this75 = this;
-
-        this.options.preloading.enabled = this.$loader.hasClass(this.options.classes.preload) || this.options.preloading.enabled;
-        this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
-        this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
-        this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
-        this.options.target = this.$loader.data(this.options.datas.target) || this.options.target;
-
-        if (this.options.target) {
-
-          this.$target = $(this.options.target);
-          this.$target = this.$target.length ? this.$target : false;
-        }
-
-        if (this.options.preloading.enabled) this.preload();
-
-        this._defer(function () {
-          return !_this75.isRequesting() && _this75.disable();
-        }); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___request();
-      }
-
-      /* UTILITIES */
-
-    }, {
-      key: '_replace',
-      value: function _replace(res, resj, isJSON) {
-
-        var content = isJSON ? resj.html : res,
-            id = 'remote-loaded-' + $.guid++,
-            container = '<div id="' + id + '" class="remote-loaded">' + content + '</div>';
-
-        this.$loader[0].outerHTML = container;
-
-        $('#' + id).widgetize();
-
-        this.$loader.remove();
-
-        this._replaced = true;
-      }
-
-      /* REQUEST */
-
-    }, {
-      key: '___request',
-      value: function ___request() {
-
-        this.__request();
-
-        var $scrollable = this.$window.add(this.$loader.parents()),
-            handler = this._frames(this.__request, 60);
-
-        this._on(true, this.$window, 'resize', handler);
-        this._on(true, $scrollable, 'scroll', handler);
-      }
-    }, {
-      key: '__request',
-      value: function __request() {
-
-        if (this.$loader.getRect().top - this.$window.outerHeight() > this.options.autorequest.threshold) return;
-
-        this.request();
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__complete',
-      value: function __complete(res) {
-
-        this._preloading = false;
-
-        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__complete', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
-
-        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__error', this).call(this, res);
-
-        this.$loader.remove();
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res),
-            isJSON = !_.isError(resj);
-
-        if (isJSON && !('html' in resj)) return this.__error(res);
-
-        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__success', this).call(this, res);
-
-        if (this._preloading && this.options.preloading.wait && !this._requested) {
-
-          this.disable();
-
-          this._res = res;
-          this._resj = resj;
-          this._isJSON = isJSON;
-        } else {
-
-          this._replace(res, resj, isJSON);
-        }
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'request',
-      value: function request(preloading) {
-
-        if (this._replaced) return;
-
-        if (this.$target) return this._replace(this.$target.html(), null, false);
-
-        if (this._res) return this._replace(this._res, this._resj, this._isJSON);
-
-        if (!preloading) this._requested = true;
-
-        if (!this.canRequest()) return;
-
-        this.enable();
-
-        return _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), 'request', this).call(this);
-      }
-
-      /* API */
-
-    }, {
-      key: 'preload',
-      value: function preload() {
-
-        if (this.$target) return;
-
-        this._preloading = true;
-
-        this.request(true);
-      }
-    }]);
-
-    return RemoteLoader;
-  }(Widgets.Remote);
-
-  /* FACTORY */
-
-  Factory.init(RemoteLoader, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./loader.js
- * ========================================================================= */
-
-//TODO: Maybe namespace ajax-related options into an `ajax` key -> easier to read, harder to use
-
-(function ($, _, Svelto, RemoteLoader) {
-
-  'use strict';
-
-  /* DEFAULTS */
-
-  var datas = RemoteLoader.config.options.datas;
-  var defaults = {
-    template: '<div class="remote-loader" data-' + datas.method + '="<%= o.method %>" data-' + datas.data + '=\'<%= JSON.stringify ( o.data ) %>\' data-' + datas.url + '="<%= o.url %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' + '</svg>' + '</div>',
-    url: '',
-    data: {
-      text: "test"
-    },
-    method: ''
-  };
-
-  /* HELPER */
-
-  $.remoteLoader = function (options, $anchor) {
-    var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'after';
-    // The method could me any valid jQuery method, like `before`, `prepend`, `append` or `after`
-
-    /* OPTIONS */
-
-    options = _.merge({}, $.remoteLoader.defaults, options);
-
-    /* LOADER */
-
-    var html = _.template(options.template, { variable: 'o' })(options),
-        $loader = $(html);
-
-    $anchor[method]($loader);
-
-    $loader.widgetize();
-  };
-
-  /* BINDING */
-
-  $.remoteLoader.defaults = defaults;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteLoader);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./loader.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteLoaderTrigger',
-    plugin: true,
-    selector: '.remote-loader-trigger',
-    options: {
-      widget: Widgets.RemoteLoader
-    }
-  };
-
-  /* REMOTE LOADER TRIGGER */
-
-  var RemoteLoaderTrigger = function (_Widgets$RemoteTrigge2) {
-    _inherits(RemoteLoaderTrigger, _Widgets$RemoteTrigge2);
-
-    function RemoteLoaderTrigger() {
-      _classCallCheck(this, RemoteLoaderTrigger);
-
-      return _possibleConstructorReturn(this, (RemoteLoaderTrigger.__proto__ || Object.getPrototypeOf(RemoteLoaderTrigger)).apply(this, arguments));
-    }
-
-    _createClass(RemoteLoaderTrigger, [{
-      key: 'trigger',
-      value: function trigger() {
-        var _this77 = this;
-
-        this.$trigger[this.options.widget.config.name]({
-          ajax: this.options.ajax,
-          callbacks: {
-            beforesend: function beforesend() {
-              return _this77.$trigger.addClass(_this77.options.classes.disabled);
-            } //TODO: Replace with a linear "spinner" overlay
-          }
-        });
-      }
-    }]);
-
-    return RemoteLoaderTrigger;
-  }(Widgets.RemoteTrigger);
-
-  /* FACTORY */
-
-  Factory.init(RemoteLoaderTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Widget
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-//TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  var cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteWidget',
-    templates: {
-      placeholder: false
-    },
-    options: {
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
-      resize: true, // Wether performing a resize transition between the loading widget and the remove widget or not
-      $wrapper: false, // The loading widget will be appended to it, fallback to the $layout
-      widget: false,
-      methods: {
-        open: 'open',
-        close: 'close'
-      },
-      events: {
-        beforeclose: 'beforeclose',
-        close: 'close'
-      },
-      ajax: {
-        cache: false,
-        method: 'POST'
-      },
-      cache: {
-        enabled: false, // Wether remote widgets should be cached or not
-        size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
-      attributes: {
-        id: 'data-remote-widget-id'
-      },
-      classes: {
-        placeholder: 'remote-widget-placeholder',
-        placeholderExtra: '',
-        loaded: 'remote-widget-loaded',
-        resizing: 'remote-widget-resizing',
-        showing: 'remote-widget-showing'
-      },
-      animations: {
-        resize: Animations.normal
-      }
-    }
-  };
-
-  /* REMOTE WIDGET */
-
-  var RemoteWidget = function (_Widgets$Remote4) {
-    _inherits(RemoteWidget, _Widgets$Remote4);
-
-    function RemoteWidget() {
-      _classCallCheck(this, RemoteWidget);
-
-      return _possibleConstructorReturn(this, (RemoteWidget.__proto__ || Object.getPrototypeOf(RemoteWidget)).apply(this, arguments));
-    }
-
-    _createClass(RemoteWidget, [{
-      key: '_init',
-
-
-      /* SPECIAL */
-
-      value: function _init() {
-
-        this.options.$wrapper = this.options.$wrapper || this.$layout;
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_getUrl',
-      value: function _getUrl() {
-
-        return window.location.href.split('#')[0];
-      }
-    }, {
-      key: '_getRequestId',
-      value: function _getRequestId(ajax) {
-        var method = ajax.method,
-            url = ajax.url,
-            data = ajax.data;
-
-
-        if (_.isPlainObject(data)) data = JSON.stringify(data);
-
-        return btoa([method, url, data].join()); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
-      }
-
-      /* PERSISTENT */
-
-    }, {
-      key: '___persistent',
-      value: function ___persistent() {
-
-        if (!this.options.persistent) {
-
-          this.___route();
-        }
-      }
-    }, {
-      key: '__route',
-      value: function __route() {
-
-        var currentUrl = this._getUrl();
-
-        if (this._openUrl && this._openUrl !== currentUrl) {
-
-          this.abort();
-        }
-      }
-
-      /* WIDGET */
-
-    }, {
-      key: '___widget',
-      value: function ___widget(widget) {
-
-        if (!widget) {
-
-          widget = $(this._template('placeholder', this.options)).attr(this.options.attributes.id, this.requestId);
-        }
-
-        this.$widget = $(widget).appendTo(this.options.$wrapper);
-      }
-    }, {
-      key: '_widgetInit',
-      value: function _widgetInit() {
-
-        this.$widget.widgetize();
-      }
-    }, {
-      key: '_widgetOpen',
-      value: function _widgetOpen() {
-
-        this.$widget[this.options.widget.config.name](this.options.methods.open);
-      }
-    }, {
-      key: '_widgetReplaceWith',
-      value: function _widgetReplaceWith($replacement) {
-
-        var instance = this.$widget[this.options.widget.config.name]('instance');
-
-        instance[this.options.methods.close] = _.noop;
-        instance.destroy();
-
-        this.$widget.replaceWith($replacement);
-        this.$widget = $replacement;
-
-        this._widgetInit();
-      }
-    }, {
-      key: '_widgetResizing',
-      value: function _widgetResizing() {}
-    }, {
-      key: '_widgetResized',
-      value: function _widgetResized() {
-
-        this.$widget.css({
-          width: '',
-          height: ''
-        });
-
-        this.$widget.removeClass(this.options.classes.placeholder).removeClass(this.options.classes.loaded).removeClass(this.options.classes.resizing).removeClass(this.options.classes.showing);
-      }
-    }, {
-      key: '_widgetDestroy',
-      value: function _widgetDestroy() {
-
-        if (!this.$widget) return;
-
-        this.$widget[this.options.widget.config.name](this.options.methods.close);
-
-        this._delay(function () {
-
-          if (!this.$widget) return;
-
-          this.$widget.remove();
-
-          this.$widget = false;
-        }, this.options.widget.config.options.animations[this.options.methods.close]);
-      }
-
-      /* CACHE */
-
-    }, {
-      key: '_cacheGet',
-      value: function _cacheGet(id) {
-
-        return cache.find(function (obj) {
-          return obj.id === id;
-        });
-      }
-    }, {
-      key: '_cacheSet',
-      value: function _cacheSet(id, widget) {
-
-        cache.unshift({ id: id, widget: widget });
-
-        if (cache.length > this.options.cache.size) {
-
-          cache = cache.slice(0, this.options.cache.size);
-        }
-      }
-    }, {
-      key: '_cacheShow',
-      value: function _cacheShow(obj) {
-
-        var $widget = $(obj.widget).attr(this.options.attributes.id, obj.id);
-
-        this.___widget($widget);
-        this._widgetInit();
-        this._widgetOpen();
-        this.___close();
-      }
-
-      /* ABORT */
-
-    }, {
-      key: '___abort',
-      value: function ___abort() {
-
-        this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.beforeclose).toLowerCase(), this.abort);
-      }
-
-      /* CLOSE */
-
-    }, {
-      key: '___close',
-      value: function ___close() {
-
-        this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.close).toLowerCase(), this._widgetDestroy);
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
-
-        if (this.isAborted()) return;
-
-        this.requestId = this._getRequestId(this.ajax);
-
-        /* CLOSING */
-
-        var $widget = $('[' + this.options.attributes.id + '="' + this.requestId + '"]');
-
-        if ($widget.length) {
-
-          $widget[this.options.widget.config.name](this.options.methods.close);
-
-          return false;
-        }
-
-        /* CACHE */
-
-        if (this.options.cache.enabled) {
-
-          var cached = this._cacheGet(this.requestId);
-
-          if (cached) {
-
-            this._cacheShow(cached);
-
-            return false;
-          }
-        }
-
-        /* REQUEST */
-
-        this._defer(function () {
-
-          this._openUrl = this._getUrl();
-        });
-
-        this.___persistent();
-        this.___widget();
-        this.___abort();
-
-        this._widgetInit();
-        this._widgetOpen();
-
-        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__beforesend', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
-
-        this._widgetDestroy();
-
-        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (_.isError(resj) || !(this.options.widget.config.name in resj)) return this.__error(res);
-
-        /* VARIABLES */
-
-        var remoteWidget = resj[this.options.widget.config.name],
-            $remoteWidget = $(remoteWidget),
-            prevRect = void 0;
-
-        if (this.options.resize) prevRect = this.$widget.getRect();
-
-        $remoteWidget.addClass(this.options.widget.config.options.classes.show).addClass(this.options.widget.config.options.classes[this.options.methods.open]);
-        $remoteWidget.attr(this.options.attributes.id, this.requestId);
-
-        /* CACHE */
-
-        if (this.options.cache.enabled) {
-
-          this._cacheSet(this.requestId, remoteWidget);
-        }
-
-        /* REPLACING */
-
-        this._frame(function () {
-          var _this79 = this;
-
-          this._widgetReplaceWith($remoteWidget);
-
-          this.___close();
-
-          if (this.options.resize) {
-            (function () {
-
-              var newRect = _this79.$widget.getRect();
-
-              _this79.$widget.css({
-                width: prevRect.width,
-                height: prevRect.height
-              });
-
-              _this79.$widget.addClass(_this79.options.classes.placeholder).addClass(_this79.options.classes.resizing);
-
-              _this79._frame(function () {
-
-                this.$widget.addClass(this.options.classes.showing);
-
-                this.$widget.animate({
-                  width: newRect.width,
-                  height: newRect.height
-                }, {
-                  duration: this.options.animations.resize,
-                  step: this._widgetResizing.bind(this),
-                  always: this._widgetResized.bind(this)
-                });
-              });
-            })();
-          }
-        });
-
-        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__success', this).call(this, res);
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'abort',
-      value: function abort() {
-
-        this._widgetDestroy();
-
-        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), 'abort', this).call(this);
-      }
-    }]);
-
-    return RemoteWidget;
-  }(Widgets.Remote);
-
-  /* FACTORY */
-
-  Factory.init(RemoteWidget, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Modal
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require widgets/modal/modal.js
- * @require widgets/remote/widget/widget.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteModal',
-    templates: {
-      placeholder: '<div class="modal container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
-    },
-    options: {
-      widget: Widgets.Modal,
-      classes: {
-        placeholder: 'remote-modal-placeholder',
-        loaded: 'remote-modal-loaded',
-        resizing: 'remote-modal-resizing',
-        showing: 'remote-modal-showing'
-      },
-      animations: {
-        resize: Animations.normal
-      }
-    }
-  };
-
-  /* REMOTE MODAL */
-
-  var RemoteModal = function (_Widgets$RemoteWidget) {
-    _inherits(RemoteModal, _Widgets$RemoteWidget);
-
-    function RemoteModal() {
-      _classCallCheck(this, RemoteModal);
-
-      return _possibleConstructorReturn(this, (RemoteModal.__proto__ || Object.getPrototypeOf(RemoteModal)).apply(this, arguments));
-    }
-
-    return RemoteModal;
-  }(Widgets.RemoteWidget);
-
-  /* FACTORY */
-
-  Factory.init(RemoteModal, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Modal (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./modal.js
- * ========================================================================= */
-
-(function ($, _, Svelto, RemoteModal) {
-
-  'use strict';
-
-  /* HELPER */
-
-  $.remoteModal = function (ajax) {
-
-    new RemoteModal({ ajax: ajax }).request();
-  };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteModal);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Modal (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./modal.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remoteModalTrigger',
-    plugin: true,
-    selector: '.remote-modal-trigger',
-    options: {
-      widget: Widgets.RemoteModal
-    }
-  };
-
-  /* REMOTE MODAL TRIGGER */
-
-  var RemoteModalTrigger = function (_Widgets$RemoteTrigge3) {
-    _inherits(RemoteModalTrigger, _Widgets$RemoteTrigge3);
-
-    function RemoteModalTrigger() {
-      _classCallCheck(this, RemoteModalTrigger);
-
-      return _possibleConstructorReturn(this, (RemoteModalTrigger.__proto__ || Object.getPrototypeOf(RemoteModalTrigger)).apply(this, arguments));
-    }
-
-    return RemoteModalTrigger;
-  }(Widgets.RemoteTrigger);
-
-  /* FACTORY */
-
-  Factory.init(RemoteModalTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Tagbox
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/keyboard/keyboard.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-//FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
-
-(function ($, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'tagbox',
-    plugin: true,
-    selector: '.tagbox',
-    templates: {
-      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' + '<span>' + '<%= o.value %>' + '</span>' + ('<i class="icon ' + Sizes.xsmall + ' actionable tagbox-tag-remover">close</i>') + '</div>'
-    },
-    options: {
-      init: '', // Initial value
-      tags: [],
-      tag: {
-        minLength: 3,
-        color: Colors.gray,
-        size: '',
-        css: 'circular'
-      },
-      characters: {
-        forbid: true, // Forbid or not
-        forbidden: ['<', '>', ';', '`'],
-        separator: ',', // It will also become kind of a forbidden character, used for insertion
-        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
-      },
-      sort: false, // The tags will be outputted in alphanumeric-sort order
-      escape: false, // Escape potential XSS characters
-      deburr: false, // Replace non basic-latin characters
-      messages: {
-        tooShort: '`$1` is shorter than $2 characters',
-        duplicate: '`$1` is a duplicate',
-        forbidden: 'The character you entered is forbidden'
-      },
-      datas: {
-        value: 'tag-value'
-      },
-      selectors: {
-        input: 'input.hidden',
-        partial: 'input.tagbox-partial, .tagbox-partial input',
-        tags: '.tagbox-tags',
-        tag: '.tagbox-tag',
-        tagLabel: 'span',
-        tagRemover: '.tagbox-tag-remover'
-      },
-      callbacks: {
-        change: _.noop,
-        add: _.noop,
-        remove: _.noop,
-        empty: _.noop
-      }
-    }
-  };
-
-  /* TAGBOX */
-
-  var Tagbox = function (_Widgets$Widget37) {
-    _inherits(Tagbox, _Widgets$Widget37);
-
-    function Tagbox() {
-      _classCallCheck(this, Tagbox);
-
-      return _possibleConstructorReturn(this, (Tagbox.__proto__ || Object.getPrototypeOf(Tagbox)).apply(this, arguments));
-    }
-
-    _createClass(Tagbox, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$tagbox = this.$element;
-        this.$tags = this.$tagbox.find(this.options.selectors.tags);
-        this.$input = this.$tagbox.find(this.options.selectors.input);
-        this.$partial = this.$tagbox.find(this.options.selectors.partial);
-      }
-    }, {
-      key: '_init',
-      value: function _init(suppressTriggers) {
-
-        /* REMOVE PREVIOUS */
-
-        this.$tagbox.find(this.options.selectors.tag).remove();
-
-        /* OPTIONS */
-
-        this.options.init = this.$input.val() || this.options.init;
-
-        /* POPULATING */
-
-        this.add(this.options.init, suppressTriggers);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___partial();
-
-        this.___tapOnEmpty();
-        this.___tapOnTagRemover();
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_sanitizeTag',
-      value: function _sanitizeTag(value) {
-
-        value = _.trim(value);
-
-        if (this.options.escape) {
-
-          value = _.escape(value);
-        }
-
-        if (this.options.deburr) {
-
-          value = _.deburr(value);
-        }
-
-        return value;
-      }
-    }, {
-      key: '_getTagHtml',
-      value: function _getTagHtml(value) {
-
-        return this._template('tag', _.extend({ value: value }, this.options.tag));
-      }
-    }, {
-      key: '_clearPartial',
-      value: function _clearPartial() {
-
-        this.$partial.val('').trigger('change');
-      }
-
-      /* UPDATE */
-
-    }, {
-      key: '_updateInput',
-      value: function _updateInput() {
-
-        this.$input.val(this.options.tags.join(this.options.characters.separator)).trigger('change');
-      }
-
-      /* TAG */
-
-    }, {
-      key: '_add',
-      value: function _add(value) {
-
-        var valueTrimmed = _.trim(value);
-
-        value = this._sanitizeTag(value);
-
-        if (valueTrimmed.length < this.options.tag.minLength) {
-
-          if (valueTrimmed.length) {
-            // So it won't be triggered when the user presses enter and the $partial is empty
-
-            $.toast(_.format(this.options.messages.tooShort, value, this.options.tag.minLength));
-          }
-        } else if (_.includes(this.options.tags, value)) {
-
-          $.toast(_.format(this.options.messages.duplicate, value));
-        } else {
-
-          this.options.tags.push(value);
-
-          if (this.options.sort) {
-
-            this.options.tags.sort();
-          }
-
-          var tagHtml = this._getTagHtml(value);
-
-          if (this.options.tags.length === 1) {
-
-            this.$tags.prepend(tagHtml);
-          } else if (!this.options.sort) {
-
-            this.$tagbox.find(this.options.selectors.tag).last().after(tagHtml);
-          } else {
-
-            var index = this.options.tags.indexOf(value);
-
-            if (index === 0) {
-
-              this.$tagbox.find(this.options.selectors.tag).first().before(tagHtml);
-            } else {
-
-              this.$tagbox.find(this.options.selectors.tag).eq(index - 1).after(tagHtml);
-            }
-          }
-
-          return true;
-        }
-
-        return false;
-      }
-    }, {
-      key: '_remove',
-      value: function _remove($tag, tag) {
-
-        $tag.remove();
-
-        _.pull(this.options.tags, tag);
-      }
-
-      /* PARTIAL */
-
-    }, {
-      key: '___partial',
-      value: function ___partial() {
-
-        this._on(this.$partial, 'keypress keydown', this.__keypressKeydown); // `keypress` is for printable characters, `keydown` for the others
-
-        this._on(this.$partial, 'paste', this.__paste);
-      }
-
-      /* KEYPRESS / KEYDOWN */
-
-    }, {
-      key: '__keypressKeydown',
-      value: function __keypressKeydown(event) {
-
-        var value = this.$partial.val();
-
-        if (_.includes(this.options.characters.inserters, event.keyCode) || event.keyCode === this.options.characters.separator.charCodeAt(0)) {
-
-          var added = this.add(value);
-
-          if (added) {
-
-            this._clearPartial();
-          }
-
-          event.preventDefault();
-          event.stopImmediatePropagation();
-        } else if (event.keyCode === Keyboard.keys.BACKSPACE) {
-
-          if (!value.length && this.options.tags.length) {
-
-            var $tag = this.$tagbox.find(this.options.selectors.tag).last(),
-                edit = !Keyboard.keystroke.hasCtrlOrCmd(event);
-
-            this.remove($tag, edit);
-
-            event.preventDefault();
-            event.stopImmediatePropagation();
-          }
-        } else if (this.options.characters.forbid && _.includes(this.options.characters.forbidden, String.fromCharCode(event.keyCode))) {
-
-          $.toast(this.options.messages.forbidden);
-
-          event.preventDefault();
-          event.stopImmediatePropagation();
-        }
-      }
-
-      /* PASTE */
-
-    }, {
-      key: '__paste',
-      value: function __paste(event) {
-
-        this.add(event.originalEvent.clipboardData.getData('text'));
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-
-      /* TAP ON TAG REMOVER */
-
-    }, {
-      key: '___tapOnTagRemover',
-      value: function ___tapOnTagRemover() {
-
-        this._on(Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover);
-      }
-    }, {
-      key: '__tapOnTagRemover',
-      value: function __tapOnTagRemover(event) {
-
-        event.stopImmediatePropagation();
-
-        var $tag = $(event.currentTarget).closest(this.options.selectors.tag);
-
-        this.remove($tag);
-      }
-
-      /* TAP ON EMPTY */
-
-    }, {
-      key: '___tapOnEmpty',
-      value: function ___tapOnEmpty() {
-
-        this._on(Pointer.tap, this.__tapOnEmpty);
-      }
-    }, {
-      key: '__tapOnEmpty',
-      value: function __tapOnEmpty(event) {
-
-        if (document.activeElement !== this.$partial[0] && !$(event.target).is(this.options.selectors.partial + ',' + this.options.selectors.tagLabel)) {
-          //TODO: Add an helper for checking if is focused
-
-          this.$partial.focus();
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return _.clone(this.options.tags);
-      }
-    }, {
-      key: 'add',
-      value: function add(tag, suppressTriggers) {
-        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
-
-        if (_.isArray(tag)) {
-
-          tag = _.flatten(tag).join(this.options.characters.separator);
-        }
-
-        var tags = tag.split(this.options.characters.separator),
-            adds = _.map(tags, this._add.bind(this));
-
-        var added = !!_.compact(adds).length;
-
-        if (added) {
-
-          this._updateInput();
-
-          if (!suppressTriggers) {
-
-            this._trigger('change');
-
-            var addedTags = _.filter(tags, function (tag, index) {
-              return adds[index];
-            });
-
-            this._trigger('add', addedTags);
-          }
-        }
-
-        return added;
-      }
-    }, {
-      key: 'remove',
-      value: function remove(tag, edit, suppressTriggers) {
-        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
-
-        var $tags = [],
-            tags = [];
-
-        if (tag instanceof $) {
-
-          $tags = [tag];
-          tags = [tag.data(this.options.datas.value)];
-        } else {
-
-          if (_.isArray(tag)) {
-
-            tag = _.flatten(tag).join(this.options.characters.separator);
-          }
-
-          tag = tag.split(this.options.characters.separator);
-
-          for (var i = 0, l = tag.length; i < l; i++) {
-
-            var value = this._sanitizeTag(tag[i]),
-                $tag = this.$tagbox.find(this.options.selectors.tag + '[data-' + this.options.datas.value + '="' + value.replace(/"/g, '\\"') + '"]');
-
-            if ($tag.length === 1) {
-
-              $tags.push($tag);
-              tags.push(value);
-            }
-          }
-        }
-
-        if (tags.length) {
-
-          for (var _i2 = 0, _l2 = tags.length; _i2 < _l2; _i2++) {
-
-            this._remove($tags[_i2], tags[_i2]);
-          }
-
-          this._updateInput();
-
-          if (tags.length === 1 && edit === true) {
-
-            this.$partial.val(tags[0]).trigger('change');
-          }
-
-          if (!suppressTriggers) {
-
-            this._trigger('change');
-
-            this._trigger('remove', tags);
-
-            if (!this.options.tags.length) {
-
-              this._trigger('empty');
-            }
-          }
-        }
-      }
-    }, {
-      key: 'clear',
-      value: function clear(suppressTriggers) {
-
-        if (this.options.tags.length) {
-
-          var previous = this.options.tags;
-
-          this.options.tags = [];
-
-          this.$tagbox.find(this.options.selectors.tag).remove();
-
-          this._clearPartial();
-
-          this._updateInput();
-
-          if (!suppressTriggers) {
-
-            this._trigger('change');
-
-            this._trigger('remove', previous);
-
-            this._trigger('empty');
-          }
-        }
-      }
-    }, {
-      key: 'reset',
-      value: function reset() {
-
-        var previous = this.options.tags;
-
-        this.clear(true);
-
-        this._init(true);
-
-        if (!_.isEqual(previous, this.options.tags)) {
-
-          this._trigger('change');
-
-          var added = _.difference(this.options.tags, previous);
-
-          if (added.length) {
-
-            this._trigger('add', added);
-          }
-
-          var removed = _.difference(previous, this.options.tags);
-
-          if (removed.length) {
-
-            this._trigger('remove', removed);
-          }
-
-          if (!this.options.tags.length) {
-
-            this._trigger('empty');
-          }
-        }
-      }
-    }]);
-
-    return Tagbox;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.init(Tagbox, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard);
-
-/* =========================================================================
- * Svelto - Widgets - Toast (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./toast.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Toast) {
-
-  'use strict';
-
-  /* HELPER */
-
-  $.toast = function () {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-
-    /* OPTIONS */
-
-    options = _.isPlainObject(options) ? options : { body: String(options) };
-
-    /* TYPE */
-
-    if (options.buttons) {
-
-      options.type = 'action';
-    }
-
-    /* TOAST */
-
-    return new Toast(options);
-  };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast);
-
-/* =========================================================================
  * Svelto - Lib - Touching
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -17583,8 +15113,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPPABLE */
 
-  var Droppable = function (_Widgets$Widget38) {
-    _inherits(Droppable, _Widgets$Widget38);
+  var Droppable = function (_Widgets$Widget30) {
+    _inherits(Droppable, _Widgets$Widget30);
 
     function Droppable() {
       _classCallCheck(this, Droppable);
@@ -17786,9 +15316,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var transformations2D = ['scale', 'skew', 'translate'],
       indexes2D = [[0, 3], [2, 1], [4, 5]];
 
-  for (var _i3 = 0, _l3 = transformations2D.length; _i3 < _l3; _i3++) {
+  for (var _i2 = 0, _l2 = transformations2D.length; _i2 < _l2; _i2++) {
 
-    $.fn[transformations2D[_i3]] = function (index) {
+    $.fn[transformations2D[_i2]] = function (index) {
 
       return function (X) {
         var Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : X;
@@ -17811,7 +15341,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
         }
       };
-    }(_i3);
+    }(_i2);
   }
 })(Svelto.$, Svelto._, Svelto.Modernizr, Svelto);
 
@@ -17832,10 +15362,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 (function ($, _, Svelto, Directions, EmbeddedCSS) {
 
   'use strict';
-
-  /* VARIABLES */
-
-  var $window = $(window);
 
   /* DEFAULTS */
 
@@ -17885,8 +15411,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var positionable = this[0],
         $positionable = $(positionable),
         positionableRect = $positionable.getRect(),
-        windowWidth = $window.width(),
-        windowHeight = $window.height(),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight,
         directions = _.uniq(_.union(options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [])),
         anchorRect = options.$anchor ? options.$anchor.getRect() : { top: options.point.y - window.scrollY, bottom: options.point.y - window.scrollY, left: options.point.x - window.scrollX, right: options.point.x - window.scrollX, width: 0, height: 0 };
 
@@ -18128,10 +15654,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.js
  * @require lib/embedded_css/embedded_css.js
  * @require lib/positionate/positionate.js
  * @require lib/touching/touching.js
+ * @require widgets/autofocusable/autofocusable.js
  * ========================================================================= */
 
 //FIXME: Close it if after a `route` event if the trigger element is no longer visible
@@ -18148,6 +15674,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     selector: '.popover',
     options: {
       contentChangeEvents: 'change datepicker:change inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
+      mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
@@ -18180,8 +15707,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER */
 
-  var Popover = function (_Widgets$Widget39) {
-    _inherits(Popover, _Widgets$Widget39);
+  var Popover = function (_Widgets$Autofocusabl7) {
+    _inherits(Popover, _Widgets$Autofocusabl7);
 
     function Popover() {
       _classCallCheck(this, Popover);
@@ -18213,6 +15740,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this._isOpen) {
 
           this.___contentChange();
+          this.___mustClose();
           this.___resize();
           this.___parentsScroll();
           this.___layoutTap();
@@ -18233,6 +15761,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function ___contentChange() {
 
         this._on(true, this.options.contentChangeEvents, this._positionate);
+      }
+
+      /* MUST CLOSE */
+
+    }, {
+      key: '___mustClose',
+      value: function ___mustClose() {
+
+        this._on(true, this.$layout, this.options.mustCloseEvents, this.close);
       }
 
       /* RESIZE */
@@ -18267,7 +15804,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__layoutTap',
       value: function __layoutTap(event) {
 
-        if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event, 'clientX', 'clientY') }).length) return;
+        if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event, 'clientX', 'clientY') }).length) return event.preventDefault();
 
         this.close();
       }
@@ -18416,6 +15953,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.$popover.addClass(this.options.classes.open);
 
+            this.autofocus();
+
             this._lock = false;
 
             this._trigger('open');
@@ -18429,6 +15968,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.___layoutTap();
         this.___keydown();
         this.___contentChange();
+        this.___mustClose();
         this.___resize();
         this.___parentsScroll();
       }
@@ -18468,6 +16008,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.$popover.removeClass(this.options.classes.show);
 
+            this.autoblur();
+
             this._lock = false;
 
             this._trigger('close');
@@ -18481,7 +16023,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }]);
 
     return Popover;
-  }(Widgets.Widget);
+  }(Widgets.Autofocusable);
 
   /* FACTORY */
 
@@ -18621,206 +16163,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
- * Svelto - Widgets - Remote - Popover
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require widgets/popover/popover.js
- * @require widgets/remote/widget/widget.js
- * ========================================================================= */
-
-//FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remotePopover',
-    templates: {
-      placeholder: '<div class="popover container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
-    },
-    options: {
-      widget: Widgets.Popover,
-      positionate: {}, // Extending Widget.Popover.options.positionate
-      cache: {
-        enabled: true
-      },
-      classes: {
-        placeholder: 'remote-popover-placeholder',
-        loaded: 'remote-popover-loaded',
-        resizing: 'remote-popover-resizing',
-        showing: 'remote-popover-showing'
-      },
-      animations: {
-        resize: Animations.fast
-      }
-    }
-  };
-
-  /* REMOTE POPOVER */
-
-  var RemotePopover = function (_Widgets$RemoteWidget2) {
-    _inherits(RemotePopover, _Widgets$RemoteWidget2);
-
-    function RemotePopover() {
-      _classCallCheck(this, RemotePopover);
-
-      return _possibleConstructorReturn(this, (RemotePopover.__proto__ || Object.getPrototypeOf(RemotePopover)).apply(this, arguments));
-    }
-
-    _createClass(RemotePopover, [{
-      key: '_positionate',
-
-
-      /* PRIVATE */
-
-      value: function _positionate() {
-
-        this.$widget.popover('instance')._positionate();
-      }
-
-      /* WIDGET */
-
-    }, {
-      key: '_widgetInit',
-      value: function _widgetInit() {
-
-        this.$widget.popover('option', 'positionate', this.options.positionate);
-
-        _get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetInit', this).call(this);
-      }
-    }, {
-      key: '_widgetReplaceWith',
-      value: function _widgetReplaceWith($replacement) {
-
-        var classList = this.$widget.attr('class') || '',
-            pointingClass = classList.split(' ').find(function (cls) {
-          return cls.startsWith('pointing-');
-        }),
-            matrix = this.$widget.matrix(),
-            positionateGuid = this.$widget[0]._positionateGuid;
-
-        if (pointingClass) $replacement.addClass(pointingClass);
-
-        _get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetReplaceWith', this).call(this, $replacement);
-
-        this.$widget.matrix(matrix);
-        this.$widget[0]._positionateGuid = positionateGuid;
-
-        if (!this.options.resize) this._positionate();
-      }
-    }, {
-      key: '_widgetResizing',
-      value: function _widgetResizing() {
-
-        this._positionate();
-      }
-    }]);
-
-    return RemotePopover;
-  }(Widgets.RemoteWidget);
-
-  /* FACTORY */
-
-  Factory.init(RemotePopover, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Popover (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./popover.js
- * ========================================================================= */
-
-(function ($, _, Svelto, RemotePopover) {
-
-  'use strict';
-
-  /* HELPER */
-
-  $.remotePopover = function (ajax, target) {
-
-    var positionate = {};
-
-    if (target instanceof $) {
-
-      positionate.$anchor = target;
-    } else if ('x' in target && 'y' in target) {
-
-      positionate.point = target;
-    }
-
-    new RemotePopover({ ajax: ajax, positionate: positionate }).request();
-  };
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemotePopover);
-
-/* =========================================================================
- * Svelto - Widgets - Remote - Popover (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./popover.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remotePopoverTrigger',
-    plugin: true,
-    selector: '.remote-popover-trigger',
-    options: {
-      widget: Widgets.RemotePopover
-    }
-  };
-
-  /* REMOTE POPOVER TRIGGER */
-
-  var RemotePopoverTrigger = function (_Widgets$RemoteTrigge4) {
-    _inherits(RemotePopoverTrigger, _Widgets$RemoteTrigge4);
-
-    function RemotePopoverTrigger() {
-      _classCallCheck(this, RemotePopoverTrigger);
-
-      return _possibleConstructorReturn(this, (RemotePopoverTrigger.__proto__ || Object.getPrototypeOf(RemotePopoverTrigger)).apply(this, arguments));
-    }
-
-    _createClass(RemotePopoverTrigger, [{
-      key: 'trigger',
-      value: function trigger() {
-
-        var options = {
-          ajax: this.options.ajax,
-          positionate: {
-            $anchor: this.$trigger
-          }
-        };
-
-        new this.options.widget(options).request();
-      }
-    }]);
-
-    return RemotePopoverTrigger;
-  }(Widgets.RemoteTrigger);
-
-  /* FACTORY */
-
-  Factory.init(RemotePopoverTrigger, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - Widgets - Select
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18880,8 +16222,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECT */
 
-  var Select = function (_Widgets$Widget40) {
-    _inherits(Select, _Widgets$Widget40);
+  var Select = function (_Widgets$Widget31) {
+    _inherits(Select, _Widgets$Widget31);
 
     function Select() {
       _classCallCheck(this, Select);
@@ -19396,8 +16738,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SLIDER */
 
-  var Slider = function (_Widgets$Widget41) {
-    _inherits(Slider, _Widgets$Widget41);
+  var Slider = function (_Widgets$Widget32) {
+    _inherits(Slider, _Widgets$Widget32);
 
     function Slider() {
       _classCallCheck(this, Slider);
@@ -19718,8 +17060,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SWITCH */
 
-  var Switch = function (_Widgets$Widget42) {
-    _inherits(Switch, _Widgets$Widget42);
+  var Switch = function (_Widgets$Widget33) {
+    _inherits(Switch, _Widgets$Widget33);
 
     function Switch() {
       _classCallCheck(this, Switch);
@@ -20037,6 +17379,1560 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Regexes);
 
 /* =========================================================================
+ * Svelto - Widgets - Datatables (Config)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/datatables.js
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+/* DATATABLES */
+
+(function ($, _, Svelto, DataTable) {
+
+  'use strict';
+
+  /* CHECK IF LOADED */
+
+  if (!DataTable) return;
+
+  /* DEFAULTS */
+
+  _.extend(DataTable.defaults, {
+    dom: '<"card-header bordered"' + '<"multiple center" l <"spacer hidden-xs-down"> f>' + '>' + '<"card-block bordered table-wrapper" t>' + '<"card-footer bordered"' + '<"multiple center" i <"spacer hidden-xs-down"> p>' + '>',
+    autoWidth: false,
+    lengthMenu: [[10, 25, 50, 100, 250], [10, 25, 50, 100, 250]],
+    pageLength: 10,
+    pagingType: 'simple_numbers_no_ellipses',
+    renderer: 'svelto',
+    drawCallback: function drawCallback() {
+      $(this).widgetize();
+    },
+    initComplete: function initComplete() {
+      $(this).closest('.datatable-wrapper').widgetize();
+    }
+  });
+
+  _.extend(DataTable.defaults.oLanguage, {
+    sInfo: 'Entries _START_-_END_ of _TOTAL_',
+    sInfoEmpty: 'No entries to show',
+    sInfoFiltered: ' (_MAX_ total)',
+    sLengthMenu: '_MENU_<label>Show <strong><span class="select-value">10</span></strong> entries</label>',
+    sSearch: '<div class="multiple joined no-separators">_INPUT_<div class="label compact bordered"><i class="icon">search</i></div></div>',
+    sSearchPlaceholder: 'Search...'
+  });
+
+  _.extend(DataTable.defaults.oLanguage.oPaginate, {
+    sFirst: '<i class="icon">first_page</i>',
+    sPrevious: '<i class="icon">chevron_left</i>',
+    sNext: '<i class="icon">chevron_right</i>',
+    sLast: '<i class="icon">last_page</i>'
+  });
+
+  _.extend(DataTable.ext.classes, {
+    sFilter: 'datatable-filter',
+    sFilterInput: 'bordered',
+    sInfo: 'datatable-info',
+    sLength: 'datatable-length button bordered select',
+    sLengthSelect: '',
+    sPageButton: 'button bordered compact',
+    sPageButtonActive: 'active highlighted',
+    sPageButtonDisabled: 'disabled',
+    sPaging: 'datatable-pagination pagination multiple joined ', // Not a type, `pagingType` will get attached after this
+    sProcessing: 'datatable-processing',
+    sRowEmpty: 'datatable-row-empty',
+    sScrollBody: 'datatable-scroll-body',
+    sScrollFoot: 'datatable-scroll-foot',
+    sScrollFootInner: 'datatable-scroll-foot-inner',
+    sScrollHead: 'datatable-scroll-head',
+    sScrollHeadInner: 'datatable-scroll-head-inner',
+    sScrollWrapper: 'datatable-scroll',
+    sSortAsc: 'sortable sort-asc',
+    sSortColumn: 'sort-',
+    sSortDesc: 'sortable sort-desc',
+    sSortable: 'sortable',
+    sSortableAsc: 'sort-asc-disabled',
+    sSortableDesc: 'sort-desc-disabled',
+    sSortableNone: 'sort-disabled',
+    sStripeEven: 'even',
+    sStripeOdd: 'odd',
+    sTable: 'datatable',
+    sWrapper: 'datatable-wrapper card bordered limited centered'
+  });
+
+  /* PAGER */
+
+  DataTable.ext.pager.numbers_length = 5;
+  DataTable.ext.pager.simple_numbers_no_ellipses = function (page, pages) {
+
+    var blocks = DataTable.ext.pager.numbers_length,
+        halfBlocks = Math.floor(blocks / 2),
+        numbers = void 0;
+
+    if (pages <= blocks) {
+
+      numbers = _.range(0, pages);
+    } else if (page <= halfBlocks) {
+
+      numbers = _.range(0, blocks);
+    } else if (page >= pages - 1 - halfBlocks) {
+
+      numbers = _.range(pages - blocks, pages);
+    } else {
+
+      numbers = _.range(page - halfBlocks, page + halfBlocks + 1);
+    }
+
+    numbers.DT_el = false;
+
+    return ['previous', numbers, 'next'];
+  };
+
+  /* RENDERER */
+
+  DataTable.ext.renderer.pageButton.svelto = function (settings, previous, idx, buttons, page, pages) {
+
+    /* VARIABLES */
+
+    var api = new DataTable.Api(settings),
+        classes = settings.oClasses,
+        lang = settings.oLanguage.oPaginate,
+        aria = settings.oLanguage.oAria.paginate || {},
+        counter = 0;
+
+    /* ATTACH */
+
+    var attach = function attach(container, buttons) {
+
+      /* CLICK HANDLER */
+
+      var clickHandler = function clickHandler(event) {
+
+        event.preventDefault();
+
+        if ($(event.currentTarget).hasClass(classes.sPageButtonDisabled) || api.page() === event.data.action) return;
+
+        api.page(event.data.action).draw('page');
+      };
+
+      /* CONTENT */
+
+      for (var i = 0, l = buttons.length; i < l; i++) {
+
+        var button = buttons[i];
+
+        if ($.isArray(button)) {
+
+          attach(container, button);
+
+          continue;
+        }
+
+        var btnText = '',
+            btnClasses = button;
+
+        switch (button) {
+
+          case 'ellipsis':
+            btnText = '<i class="icon">more_horiz</i>';
+            break;
+
+          case 'first':
+            if (page === 0) continue;
+            btnText = lang.sFirst;
+            break;
+
+          case 'previous':
+            if (page === 0) continue;
+            btnText = lang.sPrevious;
+            break;
+
+          case 'next':
+            if (pages === 0 || page === pages - 1) continue;
+            btnText = lang.sNext;
+            break;
+
+          case 'last':
+            if (pages === 0 || page === pages - 1) continue;
+            btnText = lang.sLast;
+            break;
+
+          default:
+            btnText = button + 1;
+            btnClasses += page === button ? ' ' + classes.sPageButtonActive : '';
+            break;
+
+        }
+
+        var node = $('<div>', {
+          'aria-controls': settings.sTableId,
+          'aria-label': aria[button],
+          'data-dt-idx': counter,
+          'tabindex': settings.iTabIndex,
+          'class': classes.sPageButton + ' ' + btnClasses,
+          'id': idx === 0 && typeof button === 'string' ? settings.sTableId + '_' + button : null
+        }).html(btnText).appendTo(container);
+
+        if (button !== 'ellipsis') {
+
+          settings.oApi._fnBindAction(node, { action: button }, clickHandler);
+        }
+
+        counter++;
+      }
+    };
+
+    /* FOCUS */
+
+    var activeIDX = $(previous).find(document.activeElement).data('dt-idx');
+
+    attach($(previous).empty(), buttons);
+
+    if (activeIDX) {
+
+      $(previous).find('[data-dt-idx=' + activeIDX + ']').focus();
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.DataTable = DataTable;
+})(Svelto.$, Svelto._, Svelto, Svelto.$.fn.dataTable);
+
+/* =========================================================================
+ * Svelto - Widgets - Datatables
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./config.js
+ * @require core/widget/widget.js
+ * ========================================================================= */
+
+//TODO: Add a spinnerOverlay when processing
+//TODO: Proxy all `*.dt` events as `dt:*`
+//TODO: Test in all browsers
+//TODO: Maybe add `autofocus` capabilities
+//FIXME: We actually `require` Selectable, but requiring it creates a circular dependency...
+
+/* DATATABLES */
+
+(function ($, _, Svelto, Widgets, Factory, DataTable) {
+
+  'use strict';
+
+  /* CHECK IF LOADED */
+
+  if (!DataTable) return;
+
+  /* CONFIG */
+
+  var config = {
+    name: 'dt',
+    plugin: true,
+    selector: 'table.datatable:visible',
+    options: {
+      select: false, // Select rows, even after a draw occurs -- basically supporting deferred loading
+      /*
+              {
+                column: 0, // Index of the column used for finding rows to select
+                value: 'value', // Selecting rows with this value in the appropriate column
+                values: [] // Selecting rows with one of this values in the appropriate column
+              }
+      */
+      datas: {
+        select: 'select'
+      },
+      selectors: {
+        wrapper: '.datatable-wrapper',
+        length: '.datatable-length select'
+      },
+      keystrokes: {
+        'ctmd + shift + left': ['page', 'first'],
+        'ctmd + left': ['page', 'previous'],
+        'ctmd + right': ['page', 'next'],
+        'ctmd + shift + right': ['page', 'last']
+      }
+    }
+  };
+
+  /* DATATABLE */
+
+  var DT = function (_Widgets$Widget34) {
+    _inherits(DT, _Widgets$Widget34);
+
+    function DT() {
+      _classCallCheck(this, DT);
+
+      return _possibleConstructorReturn(this, (DT.__proto__ || Object.getPrototypeOf(DT)).apply(this, arguments));
+    }
+
+    _createClass(DT, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$table = this.$element;
+        this.$wrapper = this.$table.closest(this.options.selectors.wrapper);
+        this.$length = this.$wrapper.find(this.options.selectors.length);
+
+        this._api = this.$table.DataTable();
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.options.select = this.$table.data(this.options.datas.select) || this.options.select;
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___keydown();
+        this.___select();
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.$wrapper.remove();
+      }
+
+      /* KEYDOWN */
+
+    }, {
+      key: '___keydown',
+      value: function ___keydown() {
+
+        this._onHover(this.$wrapper, [this.$document, 'keydown', this.__keydown]);
+      }
+
+      /* SELECT */
+
+    }, {
+      key: '___select',
+      value: function ___select() {
+
+        if (!_.isPlainObject(this.options.select)) return;
+
+        this._on(true, 'draw.dt', this.__select);
+      }
+    }, {
+      key: '__select',
+      value: function __select(event, data) {
+
+        if (this.$table.selectable('get').length) return;
+
+        var column = this.options.select.column,
+            values = this.options.select.values || [this.options.select.value],
+            rows = data.aoData.filter(function (row) {
+          return _.includes(values, row._aData[column]);
+        });
+
+        if (!rows.length) return;
+
+        var trs = rows.map(function (row) {
+          return row.nTr;
+        });
+
+        $(trs).addClass(Widgets.Selectable.config.options.classes.selected);
+
+        this.$table.trigger('change'); // In order to make other widgets (Selectable etc.) adjust for this
+      }
+
+      /* API */
+
+    }, {
+      key: 'api',
+      value: function api(method) {
+        var _api;
+
+        for (var _len6 = arguments.length, args = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+          args[_key6 - 1] = arguments[_key6];
+        }
+
+        return (_api = this._api)[method].apply(_api, args);
+      }
+    }, {
+      key: 'page',
+      value: function page(_page, row) {
+        // `page` and `row` are 0-index numbers, `page` can optionally be a string supported by Datatables
+
+        if (!_.isString(_page)) {
+
+          _page = _.isNumber(_page) && !_.isNaN(_page) ? _page : Math.floor(row / this.$length.val());
+
+          if (_.isNaN(_page)) return this.api('page');
+        }
+
+        this.api('page', _page);
+        this.api('draw', false);
+      }
+    }], [{
+      key: 'widgetize',
+
+
+      /* WIDGETIZE */
+
+      value: function widgetize($ele) {
+
+        $ele.dataTable().dt();
+      }
+    }]);
+
+    return DT;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.init(DT, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable);
+
+/* =========================================================================
+ * Svelto - Widgets - Datatables - Pager
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../datatables.js
+ * @require widgets/targeter/targeter.js
+ * ========================================================================= */
+
+//FIXME: Doesn't work with custom sorting
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'datatablesPager',
+    plugin: true,
+    selector: '.datatables-pager',
+    options: {
+      widget: Widgets.Dt,
+      page: NaN, // The page to go to (higher priority than row number)
+      row: NaN, // The row number to go to
+      datas: {
+        page: 'page',
+        row: 'row'
+      }
+    }
+  };
+
+  /* DATATABLES PAGER */
+
+  var DatatablesPager = function (_Widgets$Targeter2) {
+    _inherits(DatatablesPager, _Widgets$Targeter2);
+
+    function DatatablesPager() {
+      _classCallCheck(this, DatatablesPager);
+
+      return _possibleConstructorReturn(this, (DatatablesPager.__proto__ || Object.getPrototypeOf(DatatablesPager)).apply(this, arguments));
+    }
+
+    _createClass(DatatablesPager, [{
+      key: '_init',
+
+
+      /* SPECIAL */
+
+      value: function _init() {
+
+        this.options.page = Number(this.$element.data(this.options.datas.page)) || this.options.page;
+        this.options.row = Number(this.$element.data(this.options.datas.row)) || this.options.row;
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___targetRemove();
+        this.___tap();
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._on(Pointer.tap, this.__tap);
+      }
+    }, {
+      key: '__tap',
+      value: function __tap() {
+
+        this.go();
+      }
+
+      /* API */
+
+    }, {
+      key: 'go',
+      value: function go() {
+        var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.page;
+        var row = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.options.row;
+
+
+        this._targetInstance.page(page, row);
+      }
+    }]);
+
+    return DatatablesPager;
+  }(Widgets.Targeter);
+
+  /* FACTORY */
+
+  Factory.init(DatatablesPager, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Selectable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/datatables/datatables.js
+ * @require core/browser/browser.js
+ * @require core/mouse/mouse.js
+ * @require core/widget/widget.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'selectable',
+    plugin: true,
+    selector: 'table.selectable',
+    options: {
+      moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
+      single: false, // Enforcing `select-single` even without the need to add the class
+      classes: {
+        selected: 'selected',
+        single: 'select-single',
+        datatable: 'datatable'
+      },
+      selectors: {
+        element: 'tbody tr:not(.table-row-empty)', //FIXME: Add support for datatables' empty row
+        selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler
+      },
+      keystrokes: {
+        'ctmd + a': 'all',
+        'ctmd + shift + a': 'clear',
+        'ctmd + i': 'invert'
+      },
+      callbacks: {
+        change: _.noop
+      }
+    }
+  };
+
+  /* SELECTABLE */
+
+  var Selectable = function (_Widgets$Widget35) {
+    _inherits(Selectable, _Widgets$Widget35);
+
+    function Selectable() {
+      _classCallCheck(this, Selectable);
+
+      return _possibleConstructorReturn(this, (Selectable.__proto__ || Object.getPrototypeOf(Selectable)).apply(this, arguments));
+    }
+
+    _createClass(Selectable, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$selectable = this.$element;
+
+        this._isSingle = this.options.single || this.$selectable.hasClass(this.options.classes.single);
+        this._isDataTable = this.$selectable.hasClass(this.options.classes.datatable);
+
+        this._dtapi = this._isDataTable ? this.$selectable.DataTable() : false;
+
+        this.$elements = this._getElements();
+
+        this._usingSelectionToggler = !!this.options.selectors.selectionToggler;
+        this.options.selectors.selectionToggler = this._usingSelectionToggler ? this.options.selectors.element + ' ' + this.options.selectors.selectionToggler : this.options.selectors.element;
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___change();
+        this.___keydown();
+        this.___downTap();
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.clear();
+      }
+
+      /* CHANGE */
+
+    }, {
+      key: '___change',
+      value: function ___change() {
+
+        this._on(true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change);
+      }
+    }, {
+      key: '__change',
+      value: function __change() {
+
+        this.$elements = this._getElements();
+
+        this._resetPrev();
+
+        this._trigger('change');
+      }
+
+      /* KEYDOWN */
+
+    }, {
+      key: '___keydown',
+      value: function ___keydown() {
+
+        this._onHover([this.$document, 'keydown', this.__keydown]);
+      }
+
+      /* DOWN / TAP */
+
+    }, {
+      key: '___downTap',
+      value: function ___downTap() {
+
+        if (this._isSingle) {
+
+          this.___tap();
+        } else if (Browser.is.touchDevice) {
+
+          this.___down();
+          this.___tap();
+        } else {
+
+          this.___down();
+        }
+      }
+    }, {
+      key: '___down',
+      value: function ___down() {
+
+        this._on(Pointer.down, this.options.selectors.selectionToggler, this.__down);
+      }
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._tappable = true;
+
+        this._on(Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch);
+      }
+
+      /* TAP */ // Just for touch devices or single select
+
+    }, {
+      key: '__tapTouch',
+      value: function __tapTouch(event) {
+
+        if (!this._tappable) return;
+
+        event.preventDefault();
+
+        var $target = this._getEventElement(event);
+
+        if (this._isSingle) {
+
+          this.$elements.not($target).removeClass(this.options.classes.selected); //FIXME: Quite performance intensive, most of it could be avoided
+        }
+
+        $target.toggleClass(this.options.classes.selected);
+
+        this._trigger('change');
+      }
+
+      /* CLICK / CTMD + CLICK / SHIFT + CLICK / CLICK -> DRAG */
+
+    }, {
+      key: '__down',
+      value: function __down(event) {
+
+        this._tappable = Pointer.isTouchEvent(event);
+
+        if (this._tappable) return;
+
+        event.preventDefault();
+
+        this.startEvent = event;
+        this.$startElement = this._getEventElement(event);
+
+        this._on(true, this.$document, Pointer.move, this._frames(this.__move));
+
+        this._one(true, this.$document, Pointer.up, this.__up);
+
+        this._one(true, this.$document, Pointer.cancel, this.__cancel);
+      }
+    }, {
+      key: '__move',
+      value: function __move(event) {
+
+        event.preventDefault();
+
+        var startXY = $.eventXY(this.startEvent),
+            endXY = $.eventXY(event),
+            deltaXY = {
+          x: endXY.x - startXY.x,
+          y: endXY.y - startXY.y
+        },
+            absDeltaXY = {
+          x: Math.abs(deltaXY.x),
+          y: Math.abs(deltaXY.y)
+        };
+
+        if (absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold) {
+
+          this._off(this.$document, Pointer.move, this.__move);
+
+          this._off(this.$document, Pointer.up, this.__up);
+
+          this._off(this.$document, Pointer.cancel, this.__cancel);
+
+          this._resetPrev();
+
+          if (!Keyboard.keystroke.hasCtrlOrCmd(event)) {
+
+            this.$elements.removeClass(this.options.classes.selected);
+          }
+
+          this.$startElement.toggleClass(this.options.classes.selected);
+
+          this._on(true, Pointer.enter, this.options.selectors.element, this.__dragEnter);
+
+          this._one(true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd);
+
+          this._trigger('change');
+        }
+      }
+    }, {
+      key: '__dragEnter',
+      value: function __dragEnter(event) {
+
+        this._toggleGroup(this.$startElement, this._getEventElement(event));
+
+        this._trigger('change');
+      }
+    }, {
+      key: '__dragEnd',
+      value: function __dragEnd() {
+
+        this._off(Pointer.enter, this.__dragEnter);
+      }
+    }, {
+      key: '__up',
+      value: function __up(event) {
+
+        this._off(this.$document, Pointer.move, this.__move);
+
+        this._off(this.$document, Pointer.cancel, this.__cancel);
+
+        var isRightButton = Mouse.hasButton(event, Mouse.buttons.RIGHT); // When right clicking we suppose that we also want to select that element (useful when used in conjuction with SelectableActionsPopover)
+
+        if (event.shiftKey) {
+
+          this._toggleGroup(this.$prevElement, this.$startElement);
+        } else if (Keyboard.keystroke.hasCtrlOrCmd(event)) {
+
+          this.$startElement.toggleClass(this.options.classes.selected, isRightButton ? true : undefined);
+
+          this._resetPrev(this.$startElement);
+        } else {
+
+          var $selected = this.get(),
+              $others = $selected.not(this.$startElement);
+
+          if ($others.length) {
+
+            $others.removeClass(this.options.classes.selected);
+
+            this.$startElement.addClass(this.options.classes.selected);
+          } else {
+
+            this.$startElement.toggleClass(this.options.classes.selected, isRightButton ? true : undefined);
+          }
+
+          this._resetPrev(this.$startElement);
+        }
+
+        this._trigger('change');
+      }
+    }, {
+      key: '__cancel',
+      value: function __cancel() {
+
+        this._off(this.$document, Pointer.move, this.__move);
+
+        this._off(this.$document, Pointer.up, this.__up);
+      }
+
+      /* PRIVATE */
+
+    }, {
+      key: '_toggleGroup',
+      value: function _toggleGroup($start, $end) {
+
+        var startIndex = $start ? this.$elements.index($start) : 0,
+            endIndex = this.$elements.index($end),
+            minIndex = Math.min(startIndex, endIndex),
+            maxIndex = Math.max(startIndex, endIndex);
+
+        if (minIndex === startIndex) {
+          // Direction: down
+
+          minIndex += 1;
+          maxIndex += 1;
+        }
+
+        var $newGroup = this.$elements.slice(minIndex, maxIndex);
+
+        if (this.$prevGroup) {
+
+          $newGroup.not(this.$prevGroup).toggleClass(this.options.classes.selected);
+
+          this.$prevGroup.not($newGroup).toggleClass(this.options.classes.selected);
+        } else {
+
+          $newGroup.toggleClass(this.options.classes.selected);
+        }
+
+        this.$prevGroup = $newGroup;
+      }
+    }, {
+      key: '_getElements',
+      value: function _getElements() {
+
+        return this._dtapi ? $(this._dtapi.rows().nodes()) : this.$selectable.find(this.options.selectors.element);
+      }
+    }, {
+      key: '_getEventElement',
+      value: function _getEventElement(event) {
+
+        var $target = $(event.currentTarget);
+
+        return this._usingSelectionToggler ? $target.closest(this.options.selectors.element) : $target;
+      }
+    }, {
+      key: '_resetPrev',
+      value: function _resetPrev() {
+        var $element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var $group = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+        this.$prevElement = $element;
+        this.$prevGroup = $group;
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return this.$elements.filter('.' + this.options.classes.selected);
+      }
+    }, {
+      key: 'all',
+      value: function all() {
+
+        if (this._isSingle) return;
+
+        this.$elements.addClass(this.options.classes.selected);
+
+        this._resetPrev();
+
+        this._trigger('change');
+      }
+    }, {
+      key: 'clear',
+      value: function clear() {
+
+        this.$elements.removeClass(this.options.classes.selected);
+
+        this._resetPrev();
+
+        this._trigger('change');
+      }
+    }, {
+      key: 'invert',
+      value: function invert() {
+
+        if (this._isSingle) return;
+
+        this.$elements.toggleClass(this.options.classes.selected);
+
+        this._resetPrev();
+
+        this._trigger('change');
+      }
+    }]);
+
+    return Selectable;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.init(Selectable, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse);
+
+/* =========================================================================
+ * Svelto - Widgets - _ - Scroll
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/pointer/pointer.js
+ * @require core/svelto/svelto.js
+ * @require core/widgetize/widgetize.js
+ * ========================================================================= */
+
+//FIXME: It doesn't work if the layout is body, it also need html in some browsers (Which browsers?)
+//TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
+
+(function ($, _, Svelto, Widgetize, Pointer, Animations) {
+
+  'use strict';
+
+  /* SCROLL TO TOP */
+
+  Widgetize.add('.scroll-to-top', function ($scroller) {
+
+    var $layout = $scroller.parent().closest('.layout, body'); // `body` is used as a fallback
+
+    $scroller.on(Pointer.tap, function () {
+
+      $layout.animate({ scrollTop: 0 }, Animations.normal);
+    });
+  });
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Toasts
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+//TODO: Add a page to the demo
+
+(function ($, _, Svelto, Widgets) {
+
+  'use strict';
+
+  /* TOASTS */
+
+  var Toasts = function () {
+    function Toasts() {
+      _classCallCheck(this, Toasts);
+
+      this.reset();
+
+      this.___visibility();
+    }
+
+    /* GENERAL */
+
+    _createClass(Toasts, [{
+      key: 'get',
+      value: function get() {
+
+        return this.toasts;
+      }
+    }, {
+      key: 'set',
+      value: function set(toasts) {
+
+        this.toasts = toasts;
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+
+        this.set([]);
+      }
+    }, {
+      key: 'add',
+      value: function add(toast) {
+
+        this.toasts.push(toast);
+      }
+    }, {
+      key: 'remove',
+      value: function remove(toast) {
+
+        _.pull(this.toasts, toast);
+      }
+
+      /* HOVERING */
+
+    }, {
+      key: 'isHovering',
+      value: function isHovering() {
+
+        return !!this.hovering;
+      }
+    }, {
+      key: 'setHovering',
+      value: function setHovering(hovering) {
+
+        this.hovering = hovering;
+      }
+
+      /* VISIBILITY */
+
+    }, {
+      key: '___visibility',
+      value: function ___visibility() {
+
+        $(document).on('visibilitychange', this.__visibility.bind(this));
+      }
+    }, {
+      key: '__visibility',
+      value: function __visibility() {
+
+        if (this.isHovering()) return;
+
+        if (document.hidden) {
+
+          this.pauseAll();
+        } else {
+
+          this.resumeAll();
+        }
+      }
+
+      /* PAUSE */
+
+    }, {
+      key: 'pause',
+      value: function pause(toast) {
+
+        toast.timer.pause();
+      }
+    }, {
+      key: 'pauseAll',
+      value: function pauseAll() {
+
+        this.toasts.forEach(this.pause);
+      }
+
+      /* RESUME */
+
+    }, {
+      key: 'resume',
+      value: function resume(toast) {
+
+        toast.timer.remaining(Math.max(toast.options.ttlMinimumRemaining, toast.timer.remaining())).play();
+      }
+    }, {
+      key: 'resumeAll',
+      value: function resumeAll() {
+
+        this.toasts.forEach(this.resume);
+      }
+    }]);
+
+    return Toasts;
+  }();
+
+  ;
+
+  /* EXPORT */
+
+  Widgets.Toasts = new Toasts();
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+/* =========================================================================
+ * Svelto - Widgets - Toast
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require core/colors/colors.js
+ * @require core/sizes/sizes.js
+ * @require lib/timer/timer.js
+ * @require widgets/autofocusable/autofocusable.js
+ * @require widgets/toasts/toasts.js
+ * ========================================================================= */
+
+//TODO: Add support for dismissing a toast that contains only one button
+//TODO: Add better support for swipe to dismiss
+
+(function ($, _, Svelto, Toasts, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'toast',
+    plugin: true,
+    selector: '.toast',
+    templates: {
+      queues: '<div class="toast-queues top">' + '<div class="toast-queue expanded"></div>' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '</div>' + '<div class="toast-queues bottom">' + '<div class="toast-queues-row">' + '<div class="toast-queue left"></div>' + '<div class="toast-queue center"></div>' + '<div class="toast-queue right"></div>' + '</div>' + '<div class="toast-queue expanded"></div>' + '</div>',
+      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' + ('<div class="infobar ' + Colors.transparent + '">') + '<% if ( o.img ) { %>' + '<img src="<%= o.img %>" class="toast-img infobar-left">' + '<% } %>' + '<% if ( o.icon ) { %>' + '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' + '<% } %>' + '<% if ( o.title || o.body ) { %>' + '<div class="infobar-center">' + '<% if ( o.title ) { %>' + '<p class="infobar-title">' + '<%= o.title %>' + '</p>' + '<% } %>' + '<% if ( o.body ) { %>' + '<%= o.body %>' + '<% } %>' + '</div>' + '<% } %>' + '<% if ( o.buttons.length === 1 ) { %>' + '<div class="infobar-right">' + '<% print ( self.button ( o.buttons[0] ) ) %>' + '</div>' + '<% } %>' + '</div>' + '<% if ( o.buttons.length > 1 ) { %>' + '<div class="toast-buttons multiple center-x">' + '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' + '<% print ( self.button ( o.buttons[i] ) ) %>' + '<% } %>' + '</div>' + '<% } %>' + '</div>',
+      button: '<div class="button <%= o.color || "' + Colors.white + '" %> <%= o.size || "' + Sizes.small + '" %> <%= o.css || "" %>">' + '<%= o.text || "" %>' + '</div>'
+    },
+    options: {
+      anchor: { // Used for selecting the proper queue where this Toast should be attached
+        x: 'left',
+        y: 'bottom'
+      },
+      title: false,
+      body: false,
+      img: false,
+      icon: false,
+      buttons: [],
+      /*
+             : [{
+                color: Colors.white,
+                size: Sizes.small,
+                css: '',
+                text: '',
+                onClick: _.noop // If it returns `false` the Toast won't be closed
+             }],
+      */
+      type: 'alert',
+      color: Colors.black,
+      css: '',
+      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      autoplay: true,
+      ttl: 3500,
+      ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        queues: '.toast-queues',
+        queue: '.toast-queue',
+        button: '.toast-buttons .button, .infobar-right .button'
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
+      },
+      keystrokes: {
+        'esc': 'close'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* TOAST */
+
+  var Toast = function (_Widgets$Autofocusabl8) {
+    _inherits(Toast, _Widgets$Autofocusabl8);
+
+    function Toast() {
+      _classCallCheck(this, Toast);
+
+      return _possibleConstructorReturn(this, (Toast.__proto__ || Object.getPrototypeOf(Toast)).apply(this, arguments));
+    }
+
+    _createClass(Toast, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$toast = this.$element;
+        this.$buttons = this.$toast.find(this.options.selectors.button);
+
+        this.timer = false;
+        this._openUrl = false;
+
+        this._isOpen = this.$toast.hasClass(this.options.classes.open);
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.$toast.widgetize();
+
+        if (this._isOpen) {
+
+          this.___timer();
+          this.___tap();
+          this.___flick();
+          this.___buttonTap();
+          this.___hover();
+          this.___persistent();
+          this.___keydown();
+          this.___breakpoint();
+        } else if (this.options.autoplay) {
+
+          var whenReady = Toast.whenReady || Toast.__proto__.whenReady; //IE10 support -- static property
+
+          whenReady.bind(Toast)(this.open.bind(this));
+        }
+      }
+
+      /* PRIVATE */
+
+    }, {
+      key: '_getUrl',
+      value: function _getUrl() {
+
+        return window.location.href.split('#')[0];
+      }
+
+      /* TIMER */
+
+    }, {
+      key: '___timer',
+      value: function ___timer() {
+
+        if (this.options.type !== 'action' && _.isNumber(this.options.ttl) && !_.isNaN(this.options.ttl) && this.options.ttl !== Infinity) {
+
+          if (!this.timer) {
+
+            this.timer = new Timer(this.close.bind(this), this.options.ttl, !document.hidden);
+          } else {
+
+            this.timer.reset();
+          }
+
+          Toasts.add(this);
+        }
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        if (this.options.type !== 'action') {
+
+          this._on(Pointer.tap, this.__tap);
+        }
+      }
+    }, {
+      key: '__tap',
+      value: function __tap(event) {
+
+        event.preventDefault(); // Otherwise the click goes through the toast in Chrome for iOS
+
+        this.close();
+      }
+
+      /* BUTTON TAP */
+
+    }, {
+      key: '___buttonTap',
+      value: function ___buttonTap() {
+
+        this._on(this.$buttons, Pointer.tap, this.__buttonTap);
+      }
+    }, {
+      key: '__buttonTap',
+      value: function __buttonTap(event, data) {
+
+        var $button = $(event.target),
+            index = this.$buttons.index($button),
+            buttonObj = this.options.buttons[index];
+
+        if (buttonObj.onClick) {
+
+          if (buttonObj.onClick.apply($button[0], [event, data]) === false) return;
+        }
+
+        this.close();
+      }
+
+      /* HOVER */
+
+    }, {
+      key: '___hover',
+      value: function ___hover() {
+
+        this.$toast.hover(function () {
+
+          Toasts.setHovering(true);
+          Toasts.pauseAll();
+        }, function () {
+
+          Toasts.setHovering(false);
+
+          if (!document.hidden) {
+
+            Toasts.resumeAll();
+          }
+        });
+      }
+
+      /* FLICK */
+
+    }, {
+      key: '___flick',
+      value: function ___flick() {
+
+        if (this.options.type !== 'action') {
+
+          this.$toast.flickable({
+            callbacks: {
+              flick: this.__flick.bind(this)
+            }
+          });
+        }
+      }
+    }, {
+      key: '__flick',
+      value: function __flick(event, data) {
+
+        if (data.orientation === 'horizontal') {
+
+          this.close();
+        }
+      }
+
+      /* PERSISTENT */
+
+    }, {
+      key: '___persistent',
+      value: function ___persistent() {
+
+        if (!this.options.persistent) {
+
+          this.___route();
+        }
+      }
+    }, {
+      key: '__route',
+      value: function __route() {
+
+        var currentUrl = this._getUrl();
+
+        if (this._openUrl && this._openUrl !== currentUrl) {
+
+          this.close();
+        }
+      }
+
+      /* RESET */
+
+    }, {
+      key: '_reset',
+      value: function _reset() {
+
+        /* TOASTS */
+
+        Toasts.remove(this);
+
+        /* FLICK */
+
+        this.$toast.flickable('destroy');
+
+        /* SUPER */
+
+        _get(Toast.prototype.__proto__ || Object.getPrototypeOf(Toast.prototype), '_reset', this).call(this);
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this._lock || this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = true;
+
+        this._frame(function () {
+
+          $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append(this.$toast);
+
+          this._frame(function () {
+
+            this.$toast.addClass(this.options.classes.open);
+
+            this.autofocus();
+
+            this._lock = false;
+
+            this._trigger('open');
+          });
+        });
+
+        this.___timer();
+        this.___tap();
+        this.___flick();
+        this.___buttonTap();
+        this.___hover();
+        this.___persistent();
+        this.___keydown();
+        this.___breakpoint();
+
+        this._defer(function () {
+
+          this._openUrl = this._getUrl();
+        });
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this._lock || !this._isOpen) return;
+
+        this._lock = true;
+        this._isOpen = false;
+        this._openUrl = false;
+
+        this._frame(function () {
+
+          this.$toast.removeClass(this.options.classes.open);
+
+          this.autoblur();
+
+          this._delay(function () {
+
+            this.$toast.remove();
+
+            this._lock = false;
+
+            this._trigger('close');
+          }, this.options.animations.close);
+        });
+
+        this._reset();
+      }
+    }], [{
+      key: 'ready',
+
+
+      /* READY */
+
+      value: function ready(done) {
+
+        _.delay(function () {
+          // In order to better support client size rendering
+
+          var $layout = $('.layout, body').first(); // `body` is used as a fallback
+
+          $layout.append(Toast.config.templates.queues);
+
+          done();
+        });
+      }
+    }]);
+
+    return Toast;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.init(Toast, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toasts, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes);
+
+/* =========================================================================
+ * Svelto - Lib - Notification
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/svelto.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
+
+(function ($, _, Svelto, Toast) {
+
+  'use strict';
+
+  /* DEFAULTS */
+
+  var defaults = {
+    title: false,
+    body: false,
+    img: false,
+    ttl: Toast.config.options.ttl
+  };
+
+  /* NOTIFICATION */
+
+  //TODO: Add support for string options
+
+  $.notification = function (options) {
+
+    /* OPTIONS */
+
+    options = _.extend({}, $.notification.defaults, options);
+
+    /* NOTIFICATIONS */
+
+    if (document.hidden && window.Notification && Notification.permission !== 'denied') {
+
+      Notification.requestPermission(function (status) {
+
+        if (status === 'granted') {
+          (function () {
+
+            var notification = new Notification(options.title, { body: options.body, icon: options.img });
+
+            if (_.isNumber(options.ttl) && !_.isNaN(options.ttl) && options.ttl !== Infinity) {
+
+              setTimeout(function () {
+
+                notification.close();
+              }, options.ttl);
+            }
+          })();
+        } else {
+
+          $.toast(options);
+        }
+      });
+    } else {
+
+      $.toast(options);
+    }
+  };
+
+  /* BINDING */
+
+  $.notification.defaults = defaults;
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast);
+
+/* =========================================================================
  * Svelto - Widgets - Form Validate
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -20072,8 +18968,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return !Validator.empty(value);
         },
         values: function values(value) {
-          for (var _len6 = arguments.length, _values = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-            _values[_key6 - 1] = arguments[_key6];
+          for (var _len7 = arguments.length, _values = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+            _values[_key7 - 1] = arguments[_key7];
           }
 
           return Validator.included(value, _values);
@@ -20152,8 +19048,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = function (_Widgets$Widget43) {
-    _inherits(FormValidate, _Widgets$Widget43);
+  var FormValidate = function (_Widgets$Widget36) {
+    _inherits(FormValidate, _Widgets$Widget36);
 
     function FormValidate() {
       _classCallCheck(this, FormValidate);
@@ -20571,296 +19467,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator);
 
 /* =========================================================================
- * Svelto - Widgets - Datatables (Config)
+ * Svelto - Widgets - Form Ajax
  * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
+ * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ./vendor/datatables.js
+ * @before ../validate/validate.js
  * @require core/svelto/svelto.js
+ * @require widgets/toast/toast.js
+ * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
-/* DATATABLES */
+//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
-(function ($, _, Svelto, DataTable) {
-
-  'use strict';
-
-  /* CHECK IF LOADED */
-
-  if (!DataTable) return;
-
-  /* DEFAULTS */
-
-  _.extend(DataTable.defaults, {
-    dom: '<"card-header bordered"' + '<"multiple center" l <"spacer hidden-xs-down"> f>' + '>' + '<"card-block bordered table-wrapper" t>' + '<"card-footer bordered"' + '<"multiple center" i <"spacer hidden-xs-down"> p>' + '>',
-    autoWidth: false,
-    lengthMenu: [[10, 25, 50, 100, 250], [10, 25, 50, 100, 250]],
-    pageLength: 10,
-    pagingType: 'simple_numbers_no_ellipses',
-    renderer: 'svelto',
-    drawCallback: function drawCallback() {
-      $(this).widgetize();
-    },
-    initComplete: function initComplete() {
-      $(this).closest('.datatable-wrapper').widgetize();
-    }
-  });
-
-  _.extend(DataTable.defaults.oLanguage, {
-    sInfo: 'Entries _START_-_END_ of _TOTAL_',
-    sInfoEmpty: 'No entries to show',
-    sInfoFiltered: ' (_MAX_ total)',
-    sLengthMenu: '_MENU_<label>Show <strong><span class="select-value">10</span></strong> entries</label>',
-    sSearch: '<div class="multiple joined no-separators">_INPUT_<div class="label compact bordered"><i class="icon">search</i></div></div>',
-    sSearchPlaceholder: 'Search...'
-  });
-
-  _.extend(DataTable.defaults.oLanguage.oPaginate, {
-    sFirst: '<i class="icon">first_page</i>',
-    sPrevious: '<i class="icon">chevron_left</i>',
-    sNext: '<i class="icon">chevron_right</i>',
-    sLast: '<i class="icon">last_page</i>'
-  });
-
-  _.extend(DataTable.ext.classes, {
-    sFilter: 'datatable-filter',
-    sFilterInput: 'bordered',
-    sInfo: 'datatable-info',
-    sLength: 'datatable-length button bordered select',
-    sLengthSelect: '',
-    sPageButton: 'button bordered compact',
-    sPageButtonActive: 'active highlighted',
-    sPageButtonDisabled: 'disabled',
-    sPaging: 'datatable-pagination pagination multiple joined ', // Not a type, `pagingType` will get attached after this
-    sProcessing: 'datatable-processing',
-    sRowEmpty: 'datatable-row-empty',
-    sScrollBody: 'datatable-scroll-body',
-    sScrollFoot: 'datatable-scroll-foot',
-    sScrollFootInner: 'datatable-scroll-foot-inner',
-    sScrollHead: 'datatable-scroll-head',
-    sScrollHeadInner: 'datatable-scroll-head-inner',
-    sScrollWrapper: 'datatable-scroll',
-    sSortAsc: 'sortable sort-asc',
-    sSortColumn: 'sort-',
-    sSortDesc: 'sortable sort-desc',
-    sSortable: 'sortable',
-    sSortableAsc: 'sort-asc-disabled',
-    sSortableDesc: 'sort-desc-disabled',
-    sSortableNone: 'sort-disabled',
-    sStripeEven: 'even',
-    sStripeOdd: 'odd',
-    sTable: 'datatable',
-    sWrapper: 'datatable-wrapper card bordered limited centered'
-  });
-
-  /* PAGER */
-
-  DataTable.ext.pager.numbers_length = 5;
-  DataTable.ext.pager.simple_numbers_no_ellipses = function (page, pages) {
-
-    var blocks = DataTable.ext.pager.numbers_length,
-        halfBlocks = Math.floor(blocks / 2),
-        numbers = void 0;
-
-    if (pages <= blocks) {
-
-      numbers = _.range(0, pages);
-    } else if (page <= halfBlocks) {
-
-      numbers = _.range(0, blocks);
-    } else if (page >= pages - 1 - halfBlocks) {
-
-      numbers = _.range(pages - blocks, pages);
-    } else {
-
-      numbers = _.range(page - halfBlocks, page + halfBlocks + 1);
-    }
-
-    numbers.DT_el = false;
-
-    return ['previous', numbers, 'next'];
-  };
-
-  /* RENDERER */
-
-  DataTable.ext.renderer.pageButton.svelto = function (settings, previous, idx, buttons, page, pages) {
-
-    /* VARIABLES */
-
-    var api = new DataTable.Api(settings),
-        classes = settings.oClasses,
-        lang = settings.oLanguage.oPaginate,
-        aria = settings.oLanguage.oAria.paginate || {},
-        counter = 0;
-
-    /* ATTACH */
-
-    var attach = function attach(container, buttons) {
-
-      /* CLICK HANDLER */
-
-      var clickHandler = function clickHandler(event) {
-
-        event.preventDefault();
-
-        if ($(event.currentTarget).hasClass(classes.sPageButtonDisabled) || api.page() === event.data.action) return;
-
-        api.page(event.data.action).draw('page');
-      };
-
-      /* CONTENT */
-
-      for (var i = 0, l = buttons.length; i < l; i++) {
-
-        var button = buttons[i];
-
-        if ($.isArray(button)) {
-
-          attach(container, button);
-
-          continue;
-        }
-
-        var btnText = '',
-            btnClasses = button;
-
-        switch (button) {
-
-          case 'ellipsis':
-            btnText = '<i class="icon">more_horiz</i>';
-            break;
-
-          case 'first':
-            if (page === 0) continue;
-            btnText = lang.sFirst;
-            break;
-
-          case 'previous':
-            if (page === 0) continue;
-            btnText = lang.sPrevious;
-            break;
-
-          case 'next':
-            if (pages === 0 || page === pages - 1) continue;
-            btnText = lang.sNext;
-            break;
-
-          case 'last':
-            if (pages === 0 || page === pages - 1) continue;
-            btnText = lang.sLast;
-            break;
-
-          default:
-            btnText = button + 1;
-            btnClasses += page === button ? ' ' + classes.sPageButtonActive : '';
-            break;
-
-        }
-
-        var node = $('<div>', {
-          'aria-controls': settings.sTableId,
-          'aria-label': aria[button],
-          'data-dt-idx': counter,
-          'tabindex': settings.iTabIndex,
-          'class': classes.sPageButton + ' ' + btnClasses,
-          'id': idx === 0 && typeof button === 'string' ? settings.sTableId + '_' + button : null
-        }).html(btnText).appendTo(container);
-
-        if (button !== 'ellipsis') {
-
-          settings.oApi._fnBindAction(node, { action: button }, clickHandler);
-        }
-
-        counter++;
-      }
-    };
-
-    /* FOCUS */
-
-    var activeIDX = $(previous).find(document.activeElement).data('dt-idx');
-
-    attach($(previous).empty(), buttons);
-
-    if (activeIDX) {
-
-      $(previous).find('[data-dt-idx=' + activeIDX + ']').focus();
-    }
-  };
-
-  /* EXPORT */
-
-  Svelto.DataTable = DataTable;
-})(Svelto.$, Svelto._, Svelto, Svelto.$.fn.dataTable);
-
-/* =========================================================================
- * Svelto - Widgets - Datatables
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./config.js
- * @require core/widget/widget.js
- * ========================================================================= */
-
-//TODO: Add a spinnerOverlay when processing
-//TODO: Proxy all `*.dt` events as `dt:*`
-//TODO: Test in all browsers
-//FIXME: We actually `require` Selectable, but requiring it creates a circular dependency...
-
-/* DATATABLES */
-
-(function ($, _, Svelto, Widgets, Factory, DataTable) {
+(function ($, _, Svelto, Widgets, Factory) {
 
   'use strict';
-
-  /* CHECK IF LOADED */
-
-  if (!DataTable) return;
 
   /* CONFIG */
 
   var config = {
-    name: 'dt',
+    name: 'formAjax',
     plugin: true,
-    selector: 'table.datatable:visible',
+    selector: 'form.ajax',
     options: {
-      select: false, // Select rows, even after a draw occurs -- basically supporting deferred loading
-      /*
-              {
-                column: 0, // Index of the column used for finding rows to select
-                value: 'value', // Selecting rows with this value in the appropriate column
-                values: [] // Selecting rows with one of this values in the appropriate column
-              }
-      */
-      datas: {
-        select: 'select'
+      spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
+      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
+      autoclose: { // Close the form (or its container) on success
+        enabled: true,
+        selectors: ['.modal', '.panel', '.popover', '.overlay', '.expander'], // Possible selectors for the container that needs to be closed
+        plugins: ['modal', 'panel', 'popover', 'overlay', 'expander'], // Maps each selector to its jQuery plugin name
+        methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
       },
-      selectors: {
-        wrapper: '.datatable-wrapper',
-        length: '.datatable-length select'
+      messages: {
+        error: 'An error occurred, please try again later',
+        success: 'Done! A page refresh may be needed',
+        refreshing: 'Done! Refreshing the page...',
+        redirecting: 'Done! Redirecting...'
       },
-      keystrokes: {
-        'ctmd + shift + left': ['page', 'first'],
-        'ctmd + left': ['page', 'previous'],
-        'ctmd + right': ['page', 'next'],
-        'ctmd + shift + right': ['page', 'last']
+      callbacks: {
+        beforesend: _.noop,
+        error: _.noop,
+        success: _.noop,
+        complete: _.noop
       }
     }
   };
 
-  /* DATATABLE */
+  /* FORM AJAX */
 
-  var DT = function (_Widgets$Widget44) {
-    _inherits(DT, _Widgets$Widget44);
+  var FormAjax = function (_Widgets$Widget37) {
+    _inherits(FormAjax, _Widgets$Widget37);
 
-    function DT() {
-      _classCallCheck(this, DT);
+    function FormAjax() {
+      _classCallCheck(this, FormAjax);
 
-      return _possibleConstructorReturn(this, (DT.__proto__ || Object.getPrototypeOf(DT)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (FormAjax.__proto__ || Object.getPrototypeOf(FormAjax)).apply(this, arguments));
     }
 
-    _createClass(DT, [{
+    _createClass(FormAjax, [{
       key: '_variables',
 
 
@@ -20868,133 +19533,169 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _variables() {
 
-        this.$table = this.$element;
-        this.$wrapper = this.$table.closest(this.options.selectors.wrapper);
-        this.$length = this.$wrapper.find(this.options.selectors.length);
-
-        this._api = this.$table.DataTable();
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this.options.select = this.$table.data(this.options.datas.select) || this.options.select;
+        this.form = this.element;
+        this.$form = this.$element;
       }
     }, {
       key: '_events',
       value: function _events() {
 
-        this.___keydown();
-        this.___select();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.$wrapper.remove();
+        this.___submit();
       }
 
-      /* KEYDOWN */
+      /* AUTOCLOSE */
 
     }, {
-      key: '___keydown',
-      value: function ___keydown() {
+      key: '_autoclose',
+      value: function _autoclose() {
+        var _this87 = this;
 
-        this._onHover(this.$wrapper, [this.$document, 'keydown', this.__keydown]);
-      }
+        var _options$autoclose = this.options.autoclose,
+            selectors = _options$autoclose.selectors,
+            plugins = _options$autoclose.plugins,
+            methods = _options$autoclose.methods;
 
-      /* SELECT */
+        var _loop2 = function _loop2(i, l) {
 
-    }, {
-      key: '___select',
-      value: function ___select() {
+          var $closable = _this87.$form.closest(selectors[i]);
 
-        if (!_.isPlainObject(this.options.select)) return;
+          if (!$closable.length) return 'continue';
 
-        this._on(true, 'draw.dt', this.__select);
-      }
-    }, {
-      key: '__select',
-      value: function __select(event, data) {
+          var method = _.isArray(methods) ? methods[i] : methods;
 
-        if (this.$table.selectable('get').length) return;
+          if (_this87.options.spinnerOverlay) {
 
-        var column = this.options.select.column,
-            values = this.options.select.values || [this.options.select.value],
-            rows = data.aoData.filter(function (row) {
-          return _.includes(values, row._aData[column]);
-        });
+            _this87._on('spinneroverlay:close', function () {
+              return $closable[plugins[i]](method);
+            });
+          } else {
 
-        if (!rows.length) return;
+            $closable[plugins[i]](method);
+          }
 
-        var trs = rows.map(function (row) {
-          return row.nTr;
-        });
+          return 'break';
+        };
 
-        $(trs).addClass(Widgets.Selectable.config.options.classes.selected);
+        _loop3: for (var i = 0, l = selectors.length; i < l; i++) {
+          var _ret3 = _loop2(i, l);
 
-        this.$table.trigger('change'); // In order to make other widgets (Selectable etc.) adjust for this
-      }
+          switch (_ret3) {
+            case 'continue':
+              continue;
 
-      /* API */
-
-    }, {
-      key: 'api',
-      value: function api(method) {
-        var _api;
-
-        for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-          args[_key7 - 1] = arguments[_key7];
+            case 'break':
+              break _loop3;}
         }
+      }
 
-        return (_api = this._api)[method].apply(_api, args);
+      /* SUBMIT */
+
+    }, {
+      key: '___submit',
+      value: function ___submit() {
+
+        this._on(true, 'submit', this.__submit);
       }
     }, {
-      key: 'page',
-      value: function page(_page, row) {
-        // `page` and `row` are 0-index numbers, `page` can optionally be a string supported by Datatables
+      key: '__submit',
+      value: function __submit(event) {
+        var _this88 = this;
 
-        if (!_.isString(_page)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
-          _page = _.isNumber(_page) && !_.isNaN(_page) ? _page : Math.floor(row / this.$length.val());
+        $.ajax({
 
-          if (_.isNaN(_page)) return this.api('page');
-        }
+          cache: false,
+          contentType: false,
+          data: new FormData(this.form),
+          processData: false,
+          timeout: this.options.timeout,
+          type: this.$form.attr('method') || 'POST',
+          url: this.$form.attr('action'),
 
-        this.api('page', _page);
-        this.api('draw', false);
-      }
-    }], [{
-      key: 'widgetize',
+          beforeSend: function beforeSend() {
 
+            if (_this88.options.spinnerOverlay) {
 
-      /* WIDGETIZE */
+              _this88.$form.spinnerOverlay('open');
+            }
 
-      value: function widgetize($ele) {
+            _this88._trigger('beforesend');
+          },
 
-        $ele.dataTable().dt();
+          error: function error(res) {
+
+            var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+            $.toast(_.isError(resj) || !('message' in resj) ? _this88.options.messages.error : resj.msg);
+
+            _this88._trigger('error');
+          },
+
+          success: function success(res) {
+
+            var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+            if (!_.isError(resj)) {
+
+              if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+
+                $.toast(resj.message || _this88.options.messages.refreshing);
+
+                location.reload();
+              } else if (resj.url) {
+
+                // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+                $.toast(resj.message || _this88.options.messages.redirecting);
+
+                location.assign(resj.url);
+              } else {
+
+                $.toast(resj.message || _this88.options.messages.success);
+              }
+
+              if (_this88.options.autoclose.enabled) _this88._autoclose();
+            } else {
+
+              $.toast(_this88.options.messages.success);
+            }
+
+            _this88._trigger('success');
+          },
+
+          complete: function complete() {
+
+            if (_this88.options.spinnerOverlay) {
+
+              _this88.$form.spinnerOverlay('close');
+            }
+
+            _this88._trigger('complete');
+          }
+
+        });
       }
     }]);
 
-    return DT;
+    return FormAjax;
   }(Widgets.Widget);
 
   /* FACTORY */
 
-  Factory.init(DT, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable);
+  Factory.init(FormAjax, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
- * Svelto - Widgets - Datatables - Pager
+ * Svelto - Widgets - Liker
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../datatables.js
- * @require widgets/targeter/targeter.js
+ * @require widgets/remote/remote.js
+ * @require widgets/toast/toast.js
  * ========================================================================= */
-
-//FIXME: Doesn't work with custom sorting
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
 
@@ -21003,47 +19704,336 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* CONFIG */
 
   var config = {
-    name: 'datatablesPager',
+    name: 'liker',
     plugin: true,
-    selector: '.datatables-pager',
+    selector: '.liker',
     options: {
-      widget: Widgets.Dt,
-      page: NaN, // The page to go to (higher priority than row number)
-      row: NaN, // The row number to go to
+      likes: 0,
+      dislikes: 0,
+      state: null,
+      stateUrl: false,
+      url: false,
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
       datas: {
-        page: 'page',
-        row: 'row'
+        likes: 'likes',
+        dislikes: 'dislikes',
+        state: 'state',
+        stateUrl: 'state-url',
+        url: 'url'
+      },
+      selectors: {
+        like: '.like',
+        dislike: '.dislike'
       }
     }
   };
 
-  /* DATATABLES PAGER */
+  /* LIKES */
 
-  var DatatablesPager = function (_Widgets$Targeter2) {
-    _inherits(DatatablesPager, _Widgets$Targeter2);
+  var Liker = function (_Widgets$Remote) {
+    _inherits(Liker, _Widgets$Remote);
 
-    function DatatablesPager() {
-      _classCallCheck(this, DatatablesPager);
+    function Liker() {
+      _classCallCheck(this, Liker);
 
-      return _possibleConstructorReturn(this, (DatatablesPager.__proto__ || Object.getPrototypeOf(DatatablesPager)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (Liker.__proto__ || Object.getPrototypeOf(Liker)).apply(this, arguments));
     }
 
-    _createClass(DatatablesPager, [{
-      key: '_init',
+    _createClass(Liker, [{
+      key: '_variables',
 
 
       /* SPECIAL */
 
+      value: function _variables() {
+
+        this.$liker = this.$element;
+        this.$like = this.$liker.find(this.options.selectors.like);
+        this.$dislike = this.$liker.find(this.options.selectors.dislike);
+      }
+    }, {
+      key: '_init',
       value: function _init() {
 
-        this.options.page = Number(this.$element.data(this.options.datas.page)) || this.options.page;
-        this.options.row = Number(this.$element.data(this.options.datas.row)) || this.options.row;
+        this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
+        this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
+        this.options.stateUrl = this.$liker.data(this.options.datas.stateUrl) || this.options.stateUrl;
+        this.options.url = this.$liker.data(this.options.datas.url) || this.options.url;
+
+        var state = this.$liker.data(this.options.datas.state);
+        this.options.state = _.isBoolean(state) ? state : this.options.state;
+
+        this.___remoteState();
+        this._update();
       }
     }, {
       key: '_events',
       value: function _events() {
 
-        this.___targetRemove();
+        this.___like();
+        this.___dislike();
+      }
+
+      /* REMOTE STATE */
+
+    }, {
+      key: '___remoteState',
+      value: function ___remoteState() {
+
+        if (!this.options.stateUrl) return;
+
+        $.get(this.options.stateUrl, this.__remoteState.bind(this));
+      }
+    }, {
+      key: '__remoteState',
+      value: function __remoteState(res) {
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (_.isError(resj) || !('state' in resj) || resj.state === this.options.state) return;
+
+        this.options.state = resj.state;
+
+        this._update();
+      }
+
+      /* UPDATE */
+
+    }, {
+      key: '_update',
+      value: function _update() {
+
+        this.$liker.attr('data-' + this.options.datas.state, String(this.options.state));
+        this.$like.attr('data-' + this.options.datas.likes, this.options.likes);
+        this.$dislike.attr('data-' + this.options.datas.dislikes, this.options.dislikes);
+      }
+
+      /* LIKE */
+
+    }, {
+      key: '___like',
+      value: function ___like() {
+
+        this._on(this.$like, Pointer.tap, this.__like);
+      }
+    }, {
+      key: '__like',
+      value: function __like() {
+
+        this[this.options.state ? 'reset' : 'like']();
+      }
+
+      /* DISLIKE */
+
+    }, {
+      key: '___dislike',
+      value: function ___dislike() {
+
+        this._on(this.$dislike, Pointer.tap, this.__dislike);
+      }
+    }, {
+      key: '__dislike',
+      value: function __dislike() {
+
+        this[this.options.state === false ? 'reset' : 'dislike']();
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__beforesend',
+      value: function __beforesend(res) {
+
+        this.disable();
+
+        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__beforesend', this).call(this, res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.msg);
+
+        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__error', this).call(this, res);
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (_.isError(resj)) return this.__error(res);
+
+        _.extend(this.options, _.pick(resj, ['likes', 'dislikes', 'state']));
+
+        this._update();
+
+        if ('message' in resj) $.toast(resj.message);
+
+        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__success', this).call(this);
+      }
+    }, {
+      key: '__complete',
+      value: function __complete(res) {
+
+        this.enable();
+
+        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__complete', this).call(this, res);
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return _.pick(this.options, ['likes', 'dislikes', 'state']);
+      }
+    }, {
+      key: 'set',
+      value: function set() {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+
+        if (state === this.options.state) return;
+
+        var options = {
+          data: {
+            current: this.get(),
+            state: state
+          },
+          url: this.options.url || this.options.ajax.url
+        };
+
+        return this.request(options);
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+
+        return this.set(null);
+      }
+    }, {
+      key: 'like',
+      value: function like() {
+
+        return this.set(true);
+      }
+    }, {
+      key: 'dislike',
+      value: function dislike() {
+
+        return this.set(false);
+      }
+    }]);
+
+    return Liker;
+  }(Widgets.Remote);
+
+  /* FACTORY */
+
+  Factory.init(Liker, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Rater
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+//FIXME: Crappy, not working ATM, maybe should get removed
+//TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'rater',
+    plugin: true,
+    selector: '.rater',
+    templates: {
+      base: '<div class="rater">' + '<% print ( self.stars ( o ) ) %>' + '</div>',
+      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' + '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' + '<% } %>'
+    },
+    options: {
+      value: 0,
+      amount: 5,
+      url: false,
+      rated: false,
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
+      datas: {
+        value: 'value',
+        amount: 'amount',
+        url: 'url'
+      },
+      classes: {
+        rated: 'rated'
+      },
+      selectors: {
+        star: '.rater-star'
+      },
+      callbacks: {
+        change: _.noop
+      }
+    }
+  };
+
+  /* RATER */
+
+  var Rater = function (_Widgets$Widget38) {
+    _inherits(Rater, _Widgets$Widget38);
+
+    function Rater() {
+      _classCallCheck(this, Rater);
+
+      return _possibleConstructorReturn(this, (Rater.__proto__ || Object.getPrototypeOf(Rater)).apply(this, arguments));
+    }
+
+    _createClass(Rater, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$rater = this.$element;
+
+        this.doingAjax = false;
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.options.value = Number(this.$rater.data(this.options.datas.value)) || this.options.value;
+        this.options.amount = Number(this.$rater.data(this.options.datas.amount)) || this.options.amount;
+        this.options.url = Number(this.$rater.data(this.options.datas.url)) || this.options.url;
+        this.options.rated = this.$rater.hasClass(this.options.classes.rated);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
         this.___tap();
       }
 
@@ -21053,388 +20043,66 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '___tap',
       value: function ___tap() {
 
-        this._on(Pointer.tap, this.__tap);
+        if (!this.options.rated) {
+
+          /* TAP */
+
+          this._on(Pointer.tap, this.options.selectors.star, this.__tap);
+        }
       }
     }, {
       key: '__tap',
-      value: function __tap() {
+      value: function __tap(event) {
+        var _this91 = this;
 
-        this.go();
-      }
+        if (!this.options.rated && !this.doingAjax && this.options.url) {
 
-      /* API */
+          var rating = this.$stars.index(event.currentTarget) + 1;
 
-    }, {
-      key: 'go',
-      value: function go() {
-        var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.page;
-        var row = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.options.row;
+          $.ajax({
 
+            data: { rating: rating },
+            type: 'POST',
+            url: this.options.url,
 
-        this._targetInstance.page(page, row);
-      }
-    }]);
+            beforeSend: function beforeSend() {
 
-    return DatatablesPager;
-  }(Widgets.Targeter);
+              _this91.doingAjax = true;
+            },
 
-  /* FACTORY */
+            error: function error(res) {
 
-  Factory.init(DatatablesPager, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+              var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-/* =========================================================================
- * Svelto - Widgets - Selectable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @before widgets/datatables/datatables.js
- * @require core/browser/browser.js
- * @require core/mouse/mouse.js
- * @require core/widget/widget.js
- * ========================================================================= */
+              $.toast(_.isError(resj) || !('message' in resj) ? _this91.options.messages.error : resj.message);
+            },
 
-(function ($, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse) {
+            success: function success(res) {
 
-  'use strict';
+              //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
+              //TODO: Make it work like formAjax's
 
-  /* CONFIG */
+              var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-  var config = {
-    name: 'selectable',
-    plugin: true,
-    selector: 'table.selectable',
-    options: {
-      moveThreshold: 5, // Threshold after with we start to consider the `Pointer.move` events (Dragging disabled on touch device)
-      single: false, // Enforcing `select-single` even without the need to add the class
-      classes: {
-        selected: 'selected',
-        single: 'select-single',
-        datatable: 'datatable'
-      },
-      selectors: {
-        element: 'tbody tr:not(.table-row-empty)', //FIXME: Add support for datatables' empty row
-        selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler
-      },
-      keystrokes: {
-        'ctmd + a': 'all',
-        'ctmd + shift + a': 'clear',
-        'ctmd + i': 'invert'
-      },
-      callbacks: {
-        change: _.noop
-      }
-    }
-  };
+              if (!_.isError(resj)) {
 
-  /* SELECTABLE */
+                _.merge(_this91.options, resj);
 
-  var Selectable = function (_Widgets$Widget45) {
-    _inherits(Selectable, _Widgets$Widget45);
+                _this91.$rater.html(_this91._template('stars', _this91.options));
 
-    function Selectable() {
-      _classCallCheck(this, Selectable);
+                _this91.options.rated = true;
 
-      return _possibleConstructorReturn(this, (Selectable.__proto__ || Object.getPrototypeOf(Selectable)).apply(this, arguments));
-    }
+                _this91._trigger('change');
+              }
+            },
 
-    _createClass(Selectable, [{
-      key: '_variables',
+            complete: function complete() {
 
+              _this91.doingAjax = false;
+            }
 
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$selectable = this.$element;
-
-        this._isSingle = this.options.single || this.$selectable.hasClass(this.options.classes.single);
-        this._isDataTable = this.$selectable.hasClass(this.options.classes.datatable);
-
-        this._dtapi = this._isDataTable ? this.$selectable.DataTable() : false;
-
-        this.$elements = this._getElements();
-
-        this._usingSelectionToggler = !!this.options.selectors.selectionToggler;
-        this.options.selectors.selectionToggler = this._usingSelectionToggler ? this.options.selectors.element + ' ' + this.options.selectors.selectionToggler : this.options.selectors.element;
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___change();
-        this.___keydown();
-        this.___downTap();
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.clear();
-      }
-
-      /* CHANGE */
-
-    }, {
-      key: '___change',
-      value: function ___change() {
-
-        this._on(true, 'change tablehelper:change sortable:sort processing.dt sort.dt search.dt', this.__change);
-      }
-    }, {
-      key: '__change',
-      value: function __change() {
-
-        this.$elements = this._getElements();
-
-        this._resetPrev();
-
-        this._trigger('change');
-      }
-
-      /* KEYDOWN */
-
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
-
-        this._onHover([this.$document, 'keydown', this.__keydown]);
-      }
-
-      /* DOWN / TAP */
-
-    }, {
-      key: '___downTap',
-      value: function ___downTap() {
-
-        if (this._isSingle) {
-
-          this.___tap();
-        } else if (Browser.is.touchDevice) {
-
-          this.___down();
-          this.___tap();
-        } else {
-
-          this.___down();
+          });
         }
-      }
-    }, {
-      key: '___down',
-      value: function ___down() {
-
-        this._on(Pointer.down, this.options.selectors.selectionToggler, this.__down);
-      }
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        this._tappable = true;
-
-        this._on(Pointer.tap, this.options.selectors.selectionToggler, this.__tapTouch);
-      }
-
-      /* TAP */ // Just for touch devices or single select
-
-    }, {
-      key: '__tapTouch',
-      value: function __tapTouch(event) {
-
-        if (!this._tappable) return;
-
-        event.preventDefault();
-
-        var $target = this._getEventElement(event);
-
-        if (this._isSingle) {
-
-          this.$elements.not($target).removeClass(this.options.classes.selected); //FIXME: Quite performance intensive, most of it could be avoided
-        }
-
-        $target.toggleClass(this.options.classes.selected);
-
-        this._trigger('change');
-      }
-
-      /* CLICK / CTMD + CLICK / SHIFT + CLICK / CLICK -> DRAG */
-
-    }, {
-      key: '__down',
-      value: function __down(event) {
-
-        this._tappable = Pointer.isTouchEvent(event);
-
-        if (this._tappable) return;
-
-        event.preventDefault();
-
-        this.startEvent = event;
-        this.$startElement = this._getEventElement(event);
-
-        this._on(true, this.$document, Pointer.move, this._frames(this.__move));
-
-        this._one(true, this.$document, Pointer.up, this.__up);
-
-        this._one(true, this.$document, Pointer.cancel, this.__cancel);
-      }
-    }, {
-      key: '__move',
-      value: function __move(event) {
-
-        event.preventDefault();
-
-        var startXY = $.eventXY(this.startEvent),
-            endXY = $.eventXY(event),
-            deltaXY = {
-          x: endXY.x - startXY.x,
-          y: endXY.y - startXY.y
-        },
-            absDeltaXY = {
-          x: Math.abs(deltaXY.x),
-          y: Math.abs(deltaXY.y)
-        };
-
-        if (absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold) {
-
-          this._off(this.$document, Pointer.move, this.__move);
-
-          this._off(this.$document, Pointer.up, this.__up);
-
-          this._off(this.$document, Pointer.cancel, this.__cancel);
-
-          this._resetPrev();
-
-          if (!Keyboard.keystroke.hasCtrlOrCmd(event)) {
-
-            this.$elements.removeClass(this.options.classes.selected);
-          }
-
-          this.$startElement.toggleClass(this.options.classes.selected);
-
-          this._on(true, Pointer.enter, this.options.selectors.element, this.__dragEnter);
-
-          this._one(true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd);
-
-          this._trigger('change');
-        }
-      }
-    }, {
-      key: '__dragEnter',
-      value: function __dragEnter(event) {
-
-        this._toggleGroup(this.$startElement, this._getEventElement(event));
-
-        this._trigger('change');
-      }
-    }, {
-      key: '__dragEnd',
-      value: function __dragEnd() {
-
-        this._off(Pointer.enter, this.__dragEnter);
-      }
-    }, {
-      key: '__up',
-      value: function __up(event) {
-
-        this._off(this.$document, Pointer.move, this.__move);
-
-        this._off(this.$document, Pointer.cancel, this.__cancel);
-
-        var isRightButton = Mouse.hasButton(event, Mouse.buttons.RIGHT); // When right clicking we suppose that we also want to select that element (useful when used in conjuction with SelectableActionsPopover)
-
-        if (event.shiftKey) {
-
-          this._toggleGroup(this.$prevElement, this.$startElement);
-        } else if (Keyboard.keystroke.hasCtrlOrCmd(event)) {
-
-          this.$startElement.toggleClass(this.options.classes.selected, isRightButton ? true : undefined);
-
-          this._resetPrev(this.$startElement);
-        } else {
-
-          var $selected = this.get(),
-              $others = $selected.not(this.$startElement);
-
-          if ($others.length) {
-
-            $others.removeClass(this.options.classes.selected);
-
-            this.$startElement.addClass(this.options.classes.selected);
-          } else {
-
-            this.$startElement.toggleClass(this.options.classes.selected, isRightButton ? true : undefined);
-          }
-
-          this._resetPrev(this.$startElement);
-        }
-
-        this._trigger('change');
-      }
-    }, {
-      key: '__cancel',
-      value: function __cancel() {
-
-        this._off(this.$document, Pointer.move, this.__move);
-
-        this._off(this.$document, Pointer.up, this.__up);
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_toggleGroup',
-      value: function _toggleGroup($start, $end) {
-
-        var startIndex = $start ? this.$elements.index($start) : 0,
-            endIndex = this.$elements.index($end),
-            minIndex = Math.min(startIndex, endIndex),
-            maxIndex = Math.max(startIndex, endIndex);
-
-        if (minIndex === startIndex) {
-          // Direction: down
-
-          minIndex += 1;
-          maxIndex += 1;
-        }
-
-        var $newGroup = this.$elements.slice(minIndex, maxIndex);
-
-        if (this.$prevGroup) {
-
-          $newGroup.not(this.$prevGroup).toggleClass(this.options.classes.selected);
-
-          this.$prevGroup.not($newGroup).toggleClass(this.options.classes.selected);
-        } else {
-
-          $newGroup.toggleClass(this.options.classes.selected);
-        }
-
-        this.$prevGroup = $newGroup;
-      }
-    }, {
-      key: '_getElements',
-      value: function _getElements() {
-
-        return this._dtapi ? $(this._dtapi.rows().nodes()) : this.$selectable.find(this.options.selectors.element);
-      }
-    }, {
-      key: '_getEventElement',
-      value: function _getEventElement(event) {
-
-        var $target = $(event.currentTarget);
-
-        return this._usingSelectionToggler ? $target.closest(this.options.selectors.element) : $target;
-      }
-    }, {
-      key: '_resetPrev',
-      value: function _resetPrev() {
-        var $element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-        var $group = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-        this.$prevElement = $element;
-        this.$prevGroup = $group;
       }
 
       /* API */
@@ -21443,51 +20111,1417 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'get',
       value: function get() {
 
-        return this.$elements.filter('.' + this.options.classes.selected);
-      }
-    }, {
-      key: 'all',
-      value: function all() {
-
-        if (this._isSingle) return;
-
-        this.$elements.addClass(this.options.classes.selected);
-
-        this._resetPrev();
-
-        this._trigger('change');
-      }
-    }, {
-      key: 'clear',
-      value: function clear() {
-
-        this.$elements.removeClass(this.options.classes.selected);
-
-        this._resetPrev();
-
-        this._trigger('change');
-      }
-    }, {
-      key: 'invert',
-      value: function invert() {
-
-        if (this._isSingle) return;
-
-        this.$elements.toggleClass(this.options.classes.selected);
-
-        this._resetPrev();
-
-        this._trigger('change');
+        return {
+          value: this.options.value,
+          amount: this.options.amount
+        };
       }
     }]);
 
-    return Selectable;
+    return Rater;
   }(Widgets.Widget);
 
   /* FACTORY */
 
-  Factory.init(Selectable, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse);
+  Factory.init(Rater, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Action
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require core/colors/colors.js
+ * @require core/sizes/sizes.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+//TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
+//TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`
+
+//FIXME: Not well written
+//FIXME: Clicking an error/success toast doesn't close it
+
+(function ($, _, Svelto, Widgets, Factory, Colors, Sizes) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteAction',
+    options: {
+      closingDelay: Widgets.Toast.config.options.ttl / 2,
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      confirmation: { // Options to pass to a confirmation toast, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
+        body: 'Execute action?',
+        buttons: [{
+          text: 'Cancel'
+        }, {
+          text: 'Execute',
+          color: Colors.secondary,
+          isConfirmative: true
+        }]
+      },
+      messages: {
+        error: 'An error occurred, please try again later',
+        success: 'Done! A page refresh may be needed',
+        refreshing: 'Done! Refreshing the page...',
+        redirecting: 'Done! Redirecting...'
+      },
+      classes: {
+        spinner: {
+          color: Colors.white,
+          size: Sizes.small,
+          css: ''
+        }
+      }
+    }
+  };
+
+  /* REMOTE ACTION */
+
+  var RemoteAction = function (_Widgets$Remote2) {
+    _inherits(RemoteAction, _Widgets$Remote2);
+
+    function RemoteAction() {
+      _classCallCheck(this, RemoteAction);
+
+      return _possibleConstructorReturn(this, (RemoteAction.__proto__ || Object.getPrototypeOf(RemoteAction)).apply(this, arguments));
+    }
+
+    _createClass(RemoteAction, [{
+      key: '___confirmationToast',
+
+
+      /* TOAST */
+
+      value: function ___confirmationToast() {
+
+        if (this.$toast) return;
+
+        /* VARIABLES */
+
+        var options = _.cloneDeep(this.options.confirmation),
+            index = _.findIndex(options.buttons, 'isConfirmative'),
+            button = index >= 0 ? options.buttons[index] : _.last(options.buttons);
+
+        /* ON CLICK */
+
+        var _prevOnClick = button.onClick,
+            instance = this;
+
+        button.onClick = function () {
+
+          instance.request(true);
+
+          if (_.isFunction(_prevOnClick)) {
+
+            _prevOnClick.apply(this, arguments);
+          }
+
+          return false;
+        };
+
+        /* OPENING */
+
+        this._replaceToast(options);
+      }
+    }, {
+      key: '___loadingToast',
+      value: function ___loadingToast() {
+
+        this._replaceToast('<svg class="spinner ' + this.options.classes.spinner.color + ' ' + this.options.classes.spinner.size + ' ' + this.options.classes.spinner.css + '"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg>');
+      }
+    }, {
+      key: '_replaceToast',
+      value: function _replaceToast(options) {
+
+        var instance = $.toast(_.isString(options) ? { body: options, autoplay: false } : _.extend({}, options, { autoplay: false }));
+
+        instance.close();
+
+        var $toast = instance.$element;
+
+        if (this.$toast) {
+
+          this.$toast.html($toast.html()).widgetize();
+        } else {
+
+          this.$toast = $toast;
+
+          this.$toast.toast('open');
+        }
+      }
+    }, {
+      key: '_destroyToast',
+      value: function _destroyToast(delay) {
+
+        if (!this.$toast) return;
+
+        this._delay(function () {
+
+          this.$toast.toast('close');
+
+          this._delay(function () {
+
+            this.$toast.remove();
+
+            this.$toast = false;
+          }, Widgets.Toast.config.options.animations.close);
+        }, delay ? this.options.closingDelay : 0);
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__beforesend',
+      value: function __beforesend(res) {
+
+        if (this.isAborted()) return;
+
+        this.___loadingToast();
+
+        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__beforesend', this).call(this, res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        this._replaceToast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
+
+        this._destroyToast(true);
+
+        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__error', this).call(this, res);
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (!_.isError(resj)) {
+
+          if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+
+            this._replaceToast(resj.message || this.options.messages.refreshing);
+
+            location.reload();
+          } else if (resj.url) {
+
+            // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+            this._replaceToast(resj.message || this.options.messages.redirecting);
+
+            location.assign(resj.url);
+          } else {
+
+            this._replaceToast(resj.message || this.options.messages.success);
+          }
+        } else {
+
+          this._replaceToast(this.options.messages.success);
+        }
+
+        this._destroyToast(true);
+
+        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), '__success', this).call(this, res);
+      }
+
+      /* API OVERRIDES */
+
+    }, {
+      key: 'request',
+      value: function request(_confirmation) {
+
+        if (!_confirmation && this.options.confirmation && 'buttons' in this.options.confirmation && this.options.confirmation.buttons.length) {
+
+          this.___confirmationToast();
+        } else {
+
+          _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'request', this).call(this);
+        }
+      }
+    }, {
+      key: 'abort',
+      value: function abort() {
+
+        this._destroyToast();
+
+        _get(RemoteAction.prototype.__proto__ || Object.getPrototypeOf(RemoteAction.prototype), 'abort', this).call(this);
+      }
+    }]);
+
+    return RemoteAction;
+  }(Widgets.Remote);
+
+  /* FACTORY */
+
+  Factory.init(RemoteAction, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Action (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./action.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, RemoteAction) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteAction = function (ajax) {
+
+    new RemoteAction({ ajax: ajax }).request();
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteAction);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Action (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./action.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteActionTrigger',
+    plugin: true,
+    selector: '.remote-action-trigger',
+    options: {
+      widget: Widgets.RemoteAction
+    }
+  };
+
+  /* REMOTE ACTION TRIGGER */
+
+  var RemoteActionTrigger = function (_Widgets$RemoteTrigge) {
+    _inherits(RemoteActionTrigger, _Widgets$RemoteTrigge);
+
+    function RemoteActionTrigger() {
+      _classCallCheck(this, RemoteActionTrigger);
+
+      return _possibleConstructorReturn(this, (RemoteActionTrigger.__proto__ || Object.getPrototypeOf(RemoteActionTrigger)).apply(this, arguments));
+    }
+
+    return RemoteActionTrigger;
+  }(Widgets.RemoteTrigger);
+
+  /* FACTORY */
+
+  Factory.init(RemoteActionTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require lib/autofocus/autofocus.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Autofocus) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteLoader',
+    plugin: true,
+    selector: '.remote-loader',
+    options: {
+      target: false, // Selector pointing to the element that cointains the content
+      autorequest: {
+        threshold: 400
+      },
+      preloading: {
+        enabled: false, // Preload the content
+        wait: true // Wait for an explicit request or autorequesting before doing the actual work
+      },
+      requests: {
+        multiple: {
+          parallel: false,
+          sequential: false
+        }
+      },
+      attributes: {
+        href: 'href' // In order to better support `a` elements (the data value has higher priority)
+      },
+      classes: {
+        preload: 'preload'
+      },
+      datas: {
+        url: 'url',
+        data: 'data',
+        method: 'method',
+        target: 'target'
+      },
+      messages: {
+        error: 'An error occurred, please try again later'
+      }
+    }
+  };
+
+  /* REMOTE LOADER */
+
+  var RemoteLoader = function (_Widgets$Remote3) {
+    _inherits(RemoteLoader, _Widgets$Remote3);
+
+    function RemoteLoader() {
+      _classCallCheck(this, RemoteLoader);
+
+      return _possibleConstructorReturn(this, (RemoteLoader.__proto__ || Object.getPrototypeOf(RemoteLoader)).apply(this, arguments));
+    }
+
+    _createClass(RemoteLoader, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '_variables', this).call(this);
+
+        this.$loader = this.$element;
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+        var _this95 = this;
+
+        this.options.preloading.enabled = this.$loader.hasClass(this.options.classes.preload) || this.options.preloading.enabled;
+        this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
+        this.options.ajax.data = this.$loader.data(this.options.datas.data) || this.options.ajax.data;
+        this.options.ajax.method = this.$loader.data(this.options.datas.method) || this.options.ajax.method;
+        this.options.target = this.$loader.data(this.options.datas.target) || this.options.target;
+
+        if (this.options.target) {
+
+          this.$target = $(this.options.target);
+          this.$target = this.$target.length ? this.$target : false;
+        }
+
+        if (this.options.preloading.enabled) this.preload();
+
+        this._defer(function () {
+          return !_this95.isRequesting() && _this95.disable();
+        }); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___request();
+      }
+
+      /* UTILITIES */
+
+    }, {
+      key: '_replace',
+      value: function _replace(res, resj, isJSON) {
+
+        var content = isJSON ? resj.html : res,
+            id = 'remote-loaded-' + $.guid++,
+            container = '<div id="' + id + '" class="remote-loaded">' + content + '</div>';
+
+        this.$loader[0].outerHTML = container;
+
+        var $loaded = $('#' + id);
+
+        $loaded.widgetize();
+
+        Autofocus.focus($loaded);
+
+        this.$loader.remove();
+
+        this._replaced = true;
+      }
+
+      /* REQUEST */
+
+    }, {
+      key: '___request',
+      value: function ___request() {
+
+        this.__request();
+
+        var $scrollable = this.$window.add(this.$loader.parents()),
+            handler = this._frames(this.__request, 60);
+
+        this._on(true, this.$window, 'resize', handler);
+        this._on(true, $scrollable, 'scroll', handler);
+      }
+    }, {
+      key: '__request',
+      value: function __request() {
+
+        if (this.$loader.getRect().top - this.$window.outerHeight() > this.options.autorequest.threshold) return;
+
+        this.request();
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__complete',
+      value: function __complete(res) {
+
+        this._preloading = false;
+
+        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__complete', this).call(this, res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
+
+        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__error', this).call(this, res);
+
+        this.$loader.remove();
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res),
+            isJSON = !_.isError(resj);
+
+        if (isJSON && !('html' in resj)) return this.__error(res);
+
+        _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), '__success', this).call(this, res);
+
+        if (this._preloading && this.options.preloading.wait && !this._requested) {
+
+          this.disable();
+
+          this._res = res;
+          this._resj = resj;
+          this._isJSON = isJSON;
+        } else {
+
+          this._replace(res, resj, isJSON);
+        }
+      }
+
+      /* API OVERRIDES */
+
+    }, {
+      key: 'request',
+      value: function request(preloading) {
+
+        if (this._replaced) return;
+
+        if (this.$target) return this._replace(this.$target.html(), null, false);
+
+        if (this._res) return this._replace(this._res, this._resj, this._isJSON);
+
+        if (!preloading) this._requested = true;
+
+        if (!this.canRequest()) return;
+
+        this.enable();
+
+        return _get(RemoteLoader.prototype.__proto__ || Object.getPrototypeOf(RemoteLoader.prototype), 'request', this).call(this);
+      }
+
+      /* API */
+
+    }, {
+      key: 'preload',
+      value: function preload() {
+
+        if (this.$target) return;
+
+        this._preloading = true;
+
+        this.request(true);
+      }
+    }]);
+
+    return RemoteLoader;
+  }(Widgets.Remote);
+
+  /* FACTORY */
+
+  Factory.init(RemoteLoader, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./loader.js
+ * ========================================================================= */
+
+//TODO: Maybe namespace ajax-related options into an `ajax` key -> easier to read, harder to use
+
+(function ($, _, Svelto, RemoteLoader) {
+
+  'use strict';
+
+  /* DEFAULTS */
+
+  var datas = RemoteLoader.config.options.datas;
+  var defaults = {
+    template: '<div class="remote-loader" data-' + datas.method + '="<%= o.method %>" data-' + datas.data + '=\'<%= JSON.stringify ( o.data ) %>\' data-' + datas.url + '="<%= o.url %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' + '</svg>' + '</div>',
+    url: '',
+    data: {
+      text: "test"
+    },
+    method: ''
+  };
+
+  /* HELPER */
+
+  $.remoteLoader = function (options, $anchor) {
+    var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'after';
+    // The method could me any valid jQuery method, like `before`, `prepend`, `append` or `after`
+
+    /* OPTIONS */
+
+    options = _.merge({}, $.remoteLoader.defaults, options);
+
+    /* LOADER */
+
+    var html = _.template(options.template, { variable: 'o' })(options),
+        $loader = $(html);
+
+    $anchor[method]($loader);
+
+    $loader.widgetize();
+  };
+
+  /* BINDING */
+
+  $.remoteLoader.defaults = defaults;
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteLoader);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Loader (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./loader.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteLoaderTrigger',
+    plugin: true,
+    selector: '.remote-loader-trigger',
+    options: {
+      widget: Widgets.RemoteLoader
+    }
+  };
+
+  /* REMOTE LOADER TRIGGER */
+
+  var RemoteLoaderTrigger = function (_Widgets$RemoteTrigge2) {
+    _inherits(RemoteLoaderTrigger, _Widgets$RemoteTrigge2);
+
+    function RemoteLoaderTrigger() {
+      _classCallCheck(this, RemoteLoaderTrigger);
+
+      return _possibleConstructorReturn(this, (RemoteLoaderTrigger.__proto__ || Object.getPrototypeOf(RemoteLoaderTrigger)).apply(this, arguments));
+    }
+
+    _createClass(RemoteLoaderTrigger, [{
+      key: 'trigger',
+      value: function trigger() {
+        var _this97 = this;
+
+        this.$trigger[this.options.widget.config.name]({
+          ajax: this.options.ajax,
+          callbacks: {
+            beforesend: function beforesend() {
+              return _this97.$trigger.addClass(_this97.options.classes.disabled);
+            } //TODO: Replace with a linear "spinner" overlay
+          }
+        });
+      }
+    }]);
+
+    return RemoteLoaderTrigger;
+  }(Widgets.RemoteTrigger);
+
+  /* FACTORY */
+
+  Factory.init(RemoteLoaderTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Widget
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+//TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteWidget',
+    templates: {
+      placeholder: false
+    },
+    options: {
+      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      resize: true, // Wether performing a resize transition between the loading widget and the remove widget or not
+      $wrapper: false, // The loading widget will be appended to it, fallback to the $layout
+      widget: false,
+      methods: {
+        open: 'open',
+        close: 'close'
+      },
+      events: {
+        beforeclose: 'beforeclose',
+        close: 'close'
+      },
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      cache: {
+        enabled: false, // Wether remote widgets should be cached or not
+        size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
+      },
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
+      attributes: {
+        id: 'data-remote-widget-id'
+      },
+      classes: {
+        placeholder: 'remote-widget-placeholder',
+        placeholderExtra: '',
+        loaded: 'remote-widget-loaded',
+        resizing: 'remote-widget-resizing',
+        showing: 'remote-widget-showing'
+      },
+      animations: {
+        resize: Animations.normal
+      }
+    }
+  };
+
+  /* REMOTE WIDGET */
+
+  var RemoteWidget = function (_Widgets$Remote4) {
+    _inherits(RemoteWidget, _Widgets$Remote4);
+
+    function RemoteWidget() {
+      _classCallCheck(this, RemoteWidget);
+
+      return _possibleConstructorReturn(this, (RemoteWidget.__proto__ || Object.getPrototypeOf(RemoteWidget)).apply(this, arguments));
+    }
+
+    _createClass(RemoteWidget, [{
+      key: '_init',
+
+
+      /* SPECIAL */
+
+      value: function _init() {
+
+        this.options.$wrapper = this.options.$wrapper || this.$layout;
+      }
+
+      /* PRIVATE */
+
+    }, {
+      key: '_getUrl',
+      value: function _getUrl() {
+
+        return window.location.href.split('#')[0];
+      }
+    }, {
+      key: '_getRequestId',
+      value: function _getRequestId(ajax) {
+        var method = ajax.method,
+            url = ajax.url,
+            data = ajax.data;
+
+
+        if (_.isPlainObject(data)) data = JSON.stringify(data);
+
+        return btoa([method, url, data].join()); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
+      }
+
+      /* PERSISTENT */
+
+    }, {
+      key: '___persistent',
+      value: function ___persistent() {
+
+        if (!this.options.persistent) {
+
+          this.___route();
+        }
+      }
+    }, {
+      key: '__route',
+      value: function __route() {
+
+        var currentUrl = this._getUrl();
+
+        if (this._openUrl && this._openUrl !== currentUrl) {
+
+          this.abort();
+        }
+      }
+
+      /* WIDGET */
+
+    }, {
+      key: '___widget',
+      value: function ___widget(widget) {
+
+        if (!widget) {
+
+          widget = $(this._template('placeholder', this.options)).attr(this.options.attributes.id, this.requestId);
+        }
+
+        this.$widget = $(widget).appendTo(this.options.$wrapper);
+      }
+    }, {
+      key: '_widgetInit',
+      value: function _widgetInit() {
+
+        this.$widget.widgetize();
+      }
+    }, {
+      key: '_widgetOpen',
+      value: function _widgetOpen() {
+
+        this.$widget[this.options.widget.config.name](this.options.methods.open);
+      }
+    }, {
+      key: '_widgetReplaceWith',
+      value: function _widgetReplaceWith($replacement) {
+
+        var instance = this.$widget[this.options.widget.config.name]('instance');
+
+        instance[this.options.methods.close] = _.noop;
+        instance.destroy();
+
+        this.$widget.replaceWith($replacement);
+        this.$widget = $replacement;
+
+        this._widgetInit();
+      }
+    }, {
+      key: '_widgetResizing',
+      value: function _widgetResizing() {}
+    }, {
+      key: '_widgetResized',
+      value: function _widgetResized() {
+
+        this.$widget.css({
+          width: '',
+          height: ''
+        });
+
+        this.$widget.removeClass(this.options.classes.placeholder).removeClass(this.options.classes.loaded).removeClass(this.options.classes.resizing).removeClass(this.options.classes.showing);
+      }
+    }, {
+      key: '_widgetDestroy',
+      value: function _widgetDestroy() {
+
+        if (!this.$widget) return;
+
+        this.$widget[this.options.widget.config.name](this.options.methods.close);
+
+        this._delay(function () {
+
+          if (!this.$widget) return;
+
+          this.$widget.remove();
+
+          this.$widget = false;
+        }, this.options.widget.config.options.animations[this.options.methods.close]);
+      }
+
+      /* CACHE */
+
+    }, {
+      key: '_cacheGet',
+      value: function _cacheGet(id) {
+
+        return cache.find(function (obj) {
+          return obj.id === id;
+        });
+      }
+    }, {
+      key: '_cacheSet',
+      value: function _cacheSet(id, widget) {
+
+        cache.unshift({ id: id, widget: widget });
+
+        if (cache.length > this.options.cache.size) {
+
+          cache = cache.slice(0, this.options.cache.size);
+        }
+      }
+    }, {
+      key: '_cacheShow',
+      value: function _cacheShow(obj) {
+
+        var $widget = $(obj.widget).attr(this.options.attributes.id, obj.id);
+
+        this.___widget($widget);
+        this._widgetInit();
+        this._widgetOpen();
+        this.___close();
+      }
+
+      /* ABORT */
+
+    }, {
+      key: '___abort',
+      value: function ___abort() {
+
+        this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.beforeclose).toLowerCase(), this.abort);
+      }
+
+      /* CLOSE */
+
+    }, {
+      key: '___close',
+      value: function ___close() {
+
+        this._on(true, this.$widget, (this.options.widget.config.name + ':' + this.options.events.close).toLowerCase(), this._widgetDestroy);
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__beforesend',
+      value: function __beforesend(res) {
+
+        if (this.isAborted()) return;
+
+        this.requestId = this._getRequestId(this.ajax);
+
+        /* CLOSING */
+
+        var $widget = $('[' + this.options.attributes.id + '="' + this.requestId + '"]');
+
+        if ($widget.length) {
+
+          $widget[this.options.widget.config.name](this.options.methods.close);
+
+          return false;
+        }
+
+        /* CACHE */
+
+        if (this.options.cache.enabled) {
+
+          var cached = this._cacheGet(this.requestId);
+
+          if (cached) {
+
+            this._cacheShow(cached);
+
+            return false;
+          }
+        }
+
+        /* REQUEST */
+
+        this._defer(function () {
+
+          this._openUrl = this._getUrl();
+        });
+
+        this.___persistent();
+        this.___widget();
+        this.___abort();
+
+        this._widgetInit();
+        this._widgetOpen();
+
+        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__beforesend', this).call(this, res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.message);
+
+        this._widgetDestroy();
+
+        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__error', this).call(this, res);
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (_.isError(resj) || !(this.options.widget.config.name in resj)) return this.__error(res);
+
+        /* VARIABLES */
+
+        var remoteWidget = resj[this.options.widget.config.name],
+            $remoteWidget = $(remoteWidget),
+            prevRect = void 0;
+
+        if (this.options.resize) prevRect = this.$widget.getRect();
+
+        $remoteWidget.addClass(this.options.widget.config.options.classes.show).addClass(this.options.widget.config.options.classes[this.options.methods.open]);
+        $remoteWidget.attr(this.options.attributes.id, this.requestId);
+
+        /* CACHE */
+
+        if (this.options.cache.enabled) {
+
+          this._cacheSet(this.requestId, remoteWidget);
+        }
+
+        /* REPLACING */
+
+        this._frame(function () {
+          var _this99 = this;
+
+          this._widgetReplaceWith($remoteWidget);
+
+          this.___close();
+
+          if (this.options.resize) {
+            (function () {
+
+              var newRect = _this99.$widget.getRect();
+
+              _this99.$widget.css({
+                width: prevRect.width,
+                height: prevRect.height
+              });
+
+              _this99.$widget.addClass(_this99.options.classes.placeholder).addClass(_this99.options.classes.resizing);
+
+              _this99._frame(function () {
+
+                this.$widget.addClass(this.options.classes.showing);
+
+                this.$widget.animate({
+                  width: newRect.width,
+                  height: newRect.height
+                }, {
+                  duration: this.options.animations.resize,
+                  step: this._widgetResizing.bind(this),
+                  always: this._widgetResized.bind(this)
+                });
+              });
+            })();
+          }
+        });
+
+        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), '__success', this).call(this, res);
+      }
+
+      /* API OVERRIDES */
+
+    }, {
+      key: 'abort',
+      value: function abort() {
+
+        this._widgetDestroy();
+
+        _get(RemoteWidget.prototype.__proto__ || Object.getPrototypeOf(RemoteWidget.prototype), 'abort', this).call(this);
+      }
+    }]);
+
+    return RemoteWidget;
+  }(Widgets.Remote);
+
+  /* FACTORY */
+
+  Factory.init(RemoteWidget, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/modal/modal.js
+ * @require widgets/remote/widget/widget.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteModal',
+    templates: {
+      placeholder: '<div class="modal container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
+    },
+    options: {
+      widget: Widgets.Modal,
+      classes: {
+        placeholder: 'remote-modal-placeholder',
+        loaded: 'remote-modal-loaded',
+        resizing: 'remote-modal-resizing',
+        showing: 'remote-modal-showing'
+      },
+      animations: {
+        resize: Animations.normal
+      }
+    }
+  };
+
+  /* REMOTE MODAL */
+
+  var RemoteModal = function (_Widgets$RemoteWidget) {
+    _inherits(RemoteModal, _Widgets$RemoteWidget);
+
+    function RemoteModal() {
+      _classCallCheck(this, RemoteModal);
+
+      return _possibleConstructorReturn(this, (RemoteModal.__proto__ || Object.getPrototypeOf(RemoteModal)).apply(this, arguments));
+    }
+
+    return RemoteModal;
+  }(Widgets.RemoteWidget);
+
+  /* FACTORY */
+
+  Factory.init(RemoteModal, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Modal (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./modal.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, RemoteModal) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remoteModal = function (ajax) {
+
+    new RemoteModal({ ajax: ajax }).request();
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemoteModal);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Modal (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./modal.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteModalTrigger',
+    plugin: true,
+    selector: '.remote-modal-trigger',
+    options: {
+      widget: Widgets.RemoteModal
+    }
+  };
+
+  /* REMOTE MODAL TRIGGER */
+
+  var RemoteModalTrigger = function (_Widgets$RemoteTrigge3) {
+    _inherits(RemoteModalTrigger, _Widgets$RemoteTrigge3);
+
+    function RemoteModalTrigger() {
+      _classCallCheck(this, RemoteModalTrigger);
+
+      return _possibleConstructorReturn(this, (RemoteModalTrigger.__proto__ || Object.getPrototypeOf(RemoteModalTrigger)).apply(this, arguments));
+    }
+
+    return RemoteModalTrigger;
+  }(Widgets.RemoteTrigger);
+
+  /* FACTORY */
+
+  Factory.init(RemoteModalTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/popover/popover.js
+ * @require widgets/remote/widget/widget.js
+ * ========================================================================= */
+
+//FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remotePopover',
+    templates: {
+      placeholder: '<div class="popover container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
+    },
+    options: {
+      widget: Widgets.Popover,
+      positionate: {}, // Extending Widget.Popover.options.positionate
+      cache: {
+        enabled: true
+      },
+      classes: {
+        placeholder: 'remote-popover-placeholder',
+        loaded: 'remote-popover-loaded',
+        resizing: 'remote-popover-resizing',
+        showing: 'remote-popover-showing'
+      },
+      animations: {
+        resize: Animations.fast
+      }
+    }
+  };
+
+  /* REMOTE POPOVER */
+
+  var RemotePopover = function (_Widgets$RemoteWidget2) {
+    _inherits(RemotePopover, _Widgets$RemoteWidget2);
+
+    function RemotePopover() {
+      _classCallCheck(this, RemotePopover);
+
+      return _possibleConstructorReturn(this, (RemotePopover.__proto__ || Object.getPrototypeOf(RemotePopover)).apply(this, arguments));
+    }
+
+    _createClass(RemotePopover, [{
+      key: '_positionate',
+
+
+      /* PRIVATE */
+
+      value: function _positionate() {
+
+        this.$widget.popover('instance')._positionate();
+      }
+
+      /* WIDGET */
+
+    }, {
+      key: '_widgetInit',
+      value: function _widgetInit() {
+
+        this.$widget.popover('option', 'positionate', this.options.positionate);
+
+        _get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetInit', this).call(this);
+      }
+    }, {
+      key: '_widgetReplaceWith',
+      value: function _widgetReplaceWith($replacement) {
+
+        var classList = this.$widget.attr('class') || '',
+            pointingClass = classList.split(' ').find(function (cls) {
+          return cls.startsWith('pointing-');
+        }),
+            matrix = this.$widget.matrix(),
+            positionateGuid = this.$widget[0]._positionateGuid;
+
+        if (pointingClass) $replacement.addClass(pointingClass);
+
+        _get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetReplaceWith', this).call(this, $replacement);
+
+        this.$widget.matrix(matrix);
+        this.$widget[0]._positionateGuid = positionateGuid;
+
+        if (!this.options.resize) this._positionate();
+      }
+    }, {
+      key: '_widgetResizing',
+      value: function _widgetResizing() {
+
+        this._positionate();
+      }
+    }]);
+
+    return RemotePopover;
+  }(Widgets.RemoteWidget);
+
+  /* FACTORY */
+
+  Factory.init(RemotePopover, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Popover (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./popover.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, RemotePopover) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remotePopover = function (ajax, target) {
+
+    var positionate = {};
+
+    if (target instanceof $) {
+
+      positionate.$anchor = target;
+    } else if ('x' in target && 'y' in target) {
+
+      positionate.point = target;
+    }
+
+    new RemotePopover({ ajax: ajax, positionate: positionate }).request();
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemotePopover);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Popover (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./popover.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remotePopoverTrigger',
+    plugin: true,
+    selector: '.remote-popover-trigger',
+    options: {
+      widget: Widgets.RemotePopover
+    }
+  };
+
+  /* REMOTE POPOVER TRIGGER */
+
+  var RemotePopoverTrigger = function (_Widgets$RemoteTrigge4) {
+    _inherits(RemotePopoverTrigger, _Widgets$RemoteTrigge4);
+
+    function RemotePopoverTrigger() {
+      _classCallCheck(this, RemotePopoverTrigger);
+
+      return _possibleConstructorReturn(this, (RemotePopoverTrigger.__proto__ || Object.getPrototypeOf(RemotePopoverTrigger)).apply(this, arguments));
+    }
+
+    _createClass(RemotePopoverTrigger, [{
+      key: 'trigger',
+      value: function trigger() {
+
+        var options = {
+          ajax: this.options.ajax,
+          positionate: {
+            $anchor: this.$trigger
+          }
+        };
+
+        new this.options.widget(options).request();
+      }
+    }]);
+
+    return RemotePopoverTrigger;
+  }(Widgets.RemoteTrigger);
+
+  /* FACTORY */
+
+  Factory.init(RemotePopoverTrigger, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
  * Svelto - Widgets - Selectable - Actions
@@ -21636,11 +21670,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_getIds',
       value: function _getIds() {
-        var _this102 = this;
+        var _this105 = this;
 
         var $rows = this._targetInstance.get(),
             ids = $rows.get().map(function (row) {
-          return _this102.options.selectors.id ? $(row).find(_this102.options.selectors.id).text() : $(row).data(_this102.options.datas.id);
+          return _this105.options.selectors.id ? $(row).find(_this105.options.selectors.id).text() : $(row).data(_this105.options.datas.id);
         });
 
         return _.compact(ids);
@@ -21936,65 +21970,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Form Ajax
+ * Svelto - Widgets - Tagbox
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ../validate/validate.js
- * @require core/svelto/svelto.js
+ * @require core/keyboard/keyboard.js
  * @require widgets/toast/toast.js
- * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
-//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
+//FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 
-(function ($, _, Svelto, Widgets, Factory) {
+(function ($, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard) {
 
   'use strict';
 
   /* CONFIG */
 
   var config = {
-    name: 'formAjax',
+    name: 'tagbox',
     plugin: true,
-    selector: 'form.ajax',
+    selector: '.tagbox',
+    templates: {
+      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' + '<span>' + '<%= o.value %>' + '</span>' + ('<i class="icon ' + Sizes.xsmall + ' actionable tagbox-tag-remover">close</i>') + '</div>'
+    },
     options: {
-      spinnerOverlay: true, // Enable/disable the `spinnerOverlay`, if disabled one can use the triggered events in order to provide a different visual feedback to the user
-      timeout: 31000, // 1 second more than the default value of PHP's `max_execution_time` setting
-      autoclose: { // Close the form (or its container) on success
-        enabled: true,
-        selectors: ['.modal', '.panel', '.popover', '.overlay', '.expander'], // Possible selectors for the container that needs to be closed
-        plugins: ['modal', 'panel', 'popover', 'overlay', 'expander'], // Maps each selector to its jQuery plugin name
-        methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
+      init: '', // Initial value
+      tags: [],
+      tag: {
+        minLength: 3,
+        color: Colors.gray,
+        size: '',
+        css: 'circular'
       },
+      characters: {
+        forbid: true, // Forbid or not
+        forbidden: ['<', '>', ';', '`'],
+        separator: ',', // It will also become kind of a forbidden character, used for insertion
+        inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
+      },
+      sort: false, // The tags will be outputted in alphanumeric-sort order
+      escape: false, // Escape potential XSS characters
+      deburr: false, // Replace non basic-latin characters
       messages: {
-        error: 'An error occurred, please try again later',
-        success: 'Done! A page refresh may be needed',
-        refreshing: 'Done! Refreshing the page...',
-        redirecting: 'Done! Redirecting...'
+        tooShort: '`$1` is shorter than $2 characters',
+        duplicate: '`$1` is a duplicate',
+        forbidden: 'The character you entered is forbidden'
+      },
+      datas: {
+        value: 'tag-value'
+      },
+      selectors: {
+        input: 'input.hidden',
+        partial: 'input.tagbox-partial, .tagbox-partial input',
+        tags: '.tagbox-tags',
+        tag: '.tagbox-tag',
+        tagLabel: 'span',
+        tagRemover: '.tagbox-tag-remover'
       },
       callbacks: {
-        beforesend: _.noop,
-        error: _.noop,
-        success: _.noop,
-        complete: _.noop
+        change: _.noop,
+        add: _.noop,
+        remove: _.noop,
+        empty: _.noop
       }
     }
   };
 
-  /* FORM AJAX */
+  /* TAGBOX */
 
-  var FormAjax = function (_Widgets$Widget46) {
-    _inherits(FormAjax, _Widgets$Widget46);
+  var Tagbox = function (_Widgets$Widget39) {
+    _inherits(Tagbox, _Widgets$Widget39);
 
-    function FormAjax() {
-      _classCallCheck(this, FormAjax);
+    function Tagbox() {
+      _classCallCheck(this, Tagbox);
 
-      return _possibleConstructorReturn(this, (FormAjax.__proto__ || Object.getPrototypeOf(FormAjax)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (Tagbox.__proto__ || Object.getPrototypeOf(Tagbox)).apply(this, arguments));
     }
 
-    _createClass(FormAjax, [{
+    _createClass(Tagbox, [{
       key: '_variables',
 
 
@@ -22002,190 +22056,451 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _variables() {
 
-        this.form = this.element;
-        this.$form = this.$element;
+        this.$tagbox = this.$element;
+        this.$tags = this.$tagbox.find(this.options.selectors.tags);
+        this.$input = this.$tagbox.find(this.options.selectors.input);
+        this.$partial = this.$tagbox.find(this.options.selectors.partial);
+      }
+    }, {
+      key: '_init',
+      value: function _init(suppressTriggers) {
+
+        /* REMOVE PREVIOUS */
+
+        this.$tagbox.find(this.options.selectors.tag).remove();
+
+        /* OPTIONS */
+
+        this.options.init = this.$input.val() || this.options.init;
+
+        /* POPULATING */
+
+        this.add(this.options.init, suppressTriggers);
       }
     }, {
       key: '_events',
       value: function _events() {
 
-        this.___submit();
+        this.___partial();
+
+        this.___tapOnEmpty();
+        this.___tapOnTagRemover();
       }
 
-      /* AUTOCLOSE */
+      /* PRIVATE */
 
     }, {
-      key: '_autoclose',
-      value: function _autoclose() {
-        var _this106 = this;
+      key: '_sanitizeTag',
+      value: function _sanitizeTag(value) {
 
-        var _options$autoclose = this.options.autoclose,
-            selectors = _options$autoclose.selectors,
-            plugins = _options$autoclose.plugins,
-            methods = _options$autoclose.methods;
+        value = _.trim(value);
 
-        var _loop2 = function _loop2(i, l) {
+        if (this.options.escape) {
 
-          var $closable = _this106.$form.closest(selectors[i]);
+          value = _.escape(value);
+        }
 
-          if (!$closable.length) return 'continue';
+        if (this.options.deburr) {
 
-          var method = _.isArray(methods) ? methods[i] : methods;
+          value = _.deburr(value);
+        }
 
-          if (_this106.options.spinnerOverlay) {
+        return value;
+      }
+    }, {
+      key: '_getTagHtml',
+      value: function _getTagHtml(value) {
 
-            _this106._on('spinneroverlay:close', function () {
-              return $closable[plugins[i]](method);
-            });
-          } else {
+        return this._template('tag', _.extend({ value: value }, this.options.tag));
+      }
+    }, {
+      key: '_clearPartial',
+      value: function _clearPartial() {
 
-            $closable[plugins[i]](method);
+        this.$partial.val('').trigger('change');
+      }
+
+      /* UPDATE */
+
+    }, {
+      key: '_updateInput',
+      value: function _updateInput() {
+
+        this.$input.val(this.options.tags.join(this.options.characters.separator)).trigger('change');
+      }
+
+      /* TAG */
+
+    }, {
+      key: '_add',
+      value: function _add(value) {
+
+        var valueTrimmed = _.trim(value);
+
+        value = this._sanitizeTag(value);
+
+        if (valueTrimmed.length < this.options.tag.minLength) {
+
+          if (valueTrimmed.length) {
+            // So it won't be triggered when the user presses enter and the $partial is empty
+
+            $.toast(_.format(this.options.messages.tooShort, value, this.options.tag.minLength));
+          }
+        } else if (_.includes(this.options.tags, value)) {
+
+          $.toast(_.format(this.options.messages.duplicate, value));
+        } else {
+
+          this.options.tags.push(value);
+
+          if (this.options.sort) {
+
+            this.options.tags.sort();
           }
 
-          return 'break';
-        };
+          var tagHtml = this._getTagHtml(value);
 
-        _loop3: for (var i = 0, l = selectors.length; i < l; i++) {
-          var _ret4 = _loop2(i, l);
+          if (this.options.tags.length === 1) {
 
-          switch (_ret4) {
-            case 'continue':
-              continue;
+            this.$tags.prepend(tagHtml);
+          } else if (!this.options.sort) {
 
-            case 'break':
-              break _loop3;}
+            this.$tagbox.find(this.options.selectors.tag).last().after(tagHtml);
+          } else {
+
+            var index = this.options.tags.indexOf(value);
+
+            if (index === 0) {
+
+              this.$tagbox.find(this.options.selectors.tag).first().before(tagHtml);
+            } else {
+
+              this.$tagbox.find(this.options.selectors.tag).eq(index - 1).after(tagHtml);
+            }
+          }
+
+          return true;
+        }
+
+        return false;
+      }
+    }, {
+      key: '_remove',
+      value: function _remove($tag, tag) {
+
+        $tag.remove();
+
+        _.pull(this.options.tags, tag);
+      }
+
+      /* PARTIAL */
+
+    }, {
+      key: '___partial',
+      value: function ___partial() {
+
+        this._on(this.$partial, 'keypress keydown', this.__keypressKeydown); // `keypress` is for printable characters, `keydown` for the others
+
+        this._on(this.$partial, 'paste', this.__paste);
+      }
+
+      /* KEYPRESS / KEYDOWN */
+
+    }, {
+      key: '__keypressKeydown',
+      value: function __keypressKeydown(event) {
+
+        var value = this.$partial.val();
+
+        if (_.includes(this.options.characters.inserters, event.keyCode) || event.keyCode === this.options.characters.separator.charCodeAt(0)) {
+
+          var added = this.add(value);
+
+          if (added) {
+
+            this._clearPartial();
+          }
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        } else if (event.keyCode === Keyboard.keys.BACKSPACE) {
+
+          if (!value.length && this.options.tags.length) {
+
+            var $tag = this.$tagbox.find(this.options.selectors.tag).last(),
+                edit = !Keyboard.keystroke.hasCtrlOrCmd(event);
+
+            this.remove($tag, edit);
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        } else if (this.options.characters.forbid && _.includes(this.options.characters.forbidden, String.fromCharCode(event.keyCode))) {
+
+          $.toast(this.options.messages.forbidden);
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
         }
       }
 
-      /* SUBMIT */
+      /* PASTE */
 
     }, {
-      key: '___submit',
-      value: function ___submit() {
+      key: '__paste',
+      value: function __paste(event) {
 
-        this._on(true, 'submit', this.__submit);
-      }
-    }, {
-      key: '__submit',
-      value: function __submit(event) {
-        var _this107 = this;
+        this.add(event.originalEvent.clipboardData.getData('text'));
 
         event.preventDefault();
         event.stopImmediatePropagation();
+      }
 
-        $.ajax({
+      /* TAP ON TAG REMOVER */
 
-          cache: false,
-          contentType: false,
-          data: new FormData(this.form),
-          processData: false,
-          timeout: this.options.timeout,
-          type: this.$form.attr('method') || 'POST',
-          url: this.$form.attr('action'),
+    }, {
+      key: '___tapOnTagRemover',
+      value: function ___tapOnTagRemover() {
 
-          beforeSend: function beforeSend() {
+        this._on(Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover);
+      }
+    }, {
+      key: '__tapOnTagRemover',
+      value: function __tapOnTagRemover(event) {
 
-            if (_this107.options.spinnerOverlay) {
+        event.stopImmediatePropagation();
 
-              _this107.$form.spinnerOverlay('open');
-            }
+        var $tag = $(event.currentTarget).closest(this.options.selectors.tag);
 
-            _this107._trigger('beforesend');
-          },
+        this.remove($tag);
+      }
 
-          error: function error(res) {
+      /* TAP ON EMPTY */
 
-            var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+    }, {
+      key: '___tapOnEmpty',
+      value: function ___tapOnEmpty() {
 
-            $.toast(_.isError(resj) || !('message' in resj) ? _this107.options.messages.error : resj.msg);
+        this._on(Pointer.tap, this.__tapOnEmpty);
+      }
+    }, {
+      key: '__tapOnEmpty',
+      value: function __tapOnEmpty(event) {
 
-            _this107._trigger('error');
-          },
+        if (document.activeElement !== this.$partial[0] && !$(event.target).is(this.options.selectors.partial + ',' + this.options.selectors.tagLabel)) {
+          //TODO: Add an helper for checking if is focused
 
-          success: function success(res) {
+          this.$partial.focus();
+        }
+      }
 
-            var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+      /* API */
 
-            if (!_.isError(resj)) {
+    }, {
+      key: 'get',
+      value: function get() {
 
-              if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
+        return _.clone(this.options.tags);
+      }
+    }, {
+      key: 'add',
+      value: function add(tag, suppressTriggers) {
+        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
-                $.toast(resj.message || _this107.options.messages.refreshing);
+        if (_.isArray(tag)) {
 
-                location.reload();
-              } else if (resj.url) {
+          tag = _.flatten(tag).join(this.options.characters.separator);
+        }
 
-                // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+        var tags = tag.split(this.options.characters.separator),
+            adds = _.map(tags, this._add.bind(this));
 
-                $.toast(resj.message || _this107.options.messages.redirecting);
+        var added = !!_.compact(adds).length;
 
-                location.assign(resj.url);
-              } else {
+        if (added) {
 
-                $.toast(resj.message || _this107.options.messages.success);
-              }
+          this._updateInput();
 
-              if (_this107.options.autoclose.enabled) _this107._autoclose();
-            } else {
+          if (!suppressTriggers) {
 
-              $.toast(_this107.options.messages.success);
-            }
+            this._trigger('change');
 
-            _this107._trigger('success');
-          },
+            var addedTags = _.filter(tags, function (tag, index) {
+              return adds[index];
+            });
 
-          complete: function complete() {
+            this._trigger('add', addedTags);
+          }
+        }
 
-            if (_this107.options.spinnerOverlay) {
+        return added;
+      }
+    }, {
+      key: 'remove',
+      value: function remove(tag, edit, suppressTriggers) {
+        // The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
-              _this107.$form.spinnerOverlay('close');
-            }
+        var $tags = [],
+            tags = [];
 
-            _this107._trigger('complete');
+        if (tag instanceof $) {
+
+          $tags = [tag];
+          tags = [tag.data(this.options.datas.value)];
+        } else {
+
+          if (_.isArray(tag)) {
+
+            tag = _.flatten(tag).join(this.options.characters.separator);
           }
 
-        });
+          tag = tag.split(this.options.characters.separator);
+
+          for (var i = 0, l = tag.length; i < l; i++) {
+
+            var value = this._sanitizeTag(tag[i]),
+                $tag = this.$tagbox.find(this.options.selectors.tag + '[data-' + this.options.datas.value + '="' + value.replace(/"/g, '\\"') + '"]');
+
+            if ($tag.length === 1) {
+
+              $tags.push($tag);
+              tags.push(value);
+            }
+          }
+        }
+
+        if (tags.length) {
+
+          for (var _i3 = 0, _l3 = tags.length; _i3 < _l3; _i3++) {
+
+            this._remove($tags[_i3], tags[_i3]);
+          }
+
+          this._updateInput();
+
+          if (tags.length === 1 && edit === true) {
+
+            this.$partial.val(tags[0]).trigger('change');
+          }
+
+          if (!suppressTriggers) {
+
+            this._trigger('change');
+
+            this._trigger('remove', tags);
+
+            if (!this.options.tags.length) {
+
+              this._trigger('empty');
+            }
+          }
+        }
+      }
+    }, {
+      key: 'clear',
+      value: function clear(suppressTriggers) {
+
+        if (this.options.tags.length) {
+
+          var previous = this.options.tags;
+
+          this.options.tags = [];
+
+          this.$tagbox.find(this.options.selectors.tag).remove();
+
+          this._clearPartial();
+
+          this._updateInput();
+
+          if (!suppressTriggers) {
+
+            this._trigger('change');
+
+            this._trigger('remove', previous);
+
+            this._trigger('empty');
+          }
+        }
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+
+        var previous = this.options.tags;
+
+        this.clear(true);
+
+        this._init(true);
+
+        if (!_.isEqual(previous, this.options.tags)) {
+
+          this._trigger('change');
+
+          var added = _.difference(this.options.tags, previous);
+
+          if (added.length) {
+
+            this._trigger('add', added);
+          }
+
+          var removed = _.difference(previous, this.options.tags);
+
+          if (removed.length) {
+
+            this._trigger('remove', removed);
+          }
+
+          if (!this.options.tags.length) {
+
+            this._trigger('empty');
+          }
+        }
       }
     }]);
 
-    return FormAjax;
+    return Tagbox;
   }(Widgets.Widget);
 
   /* FACTORY */
 
-  Factory.init(FormAjax, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+  Factory.init(Tagbox, config, Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard);
 
 /* =========================================================================
- * Svelto - Widgets - _ - Scroll
+ * Svelto - Widgets - Toast (Helper)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/pointer/pointer.js
- * @require core/svelto/svelto.js
- * @require core/widgetize/widgetize.js
+ * @require ./toast.js
  * ========================================================================= */
 
-//FIXME: It doesn't work if the layout is body, it also need html in some browsers (Which browsers?)
-//TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
-
-(function ($, _, Svelto, Widgetize, Pointer, Animations) {
+(function ($, _, Svelto, Toast) {
 
   'use strict';
 
-  /* SCROLL TO TOP */
+  /* HELPER */
 
-  Widgetize.add('.scroll-to-top', function ($scroller) {
+  $.toast = function () {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var $layout = $scroller.parent().closest('.layout, body'); // `body` is used as a fallback
 
-    $scroller.on(Pointer.tap, function () {
+    /* OPTIONS */
 
-      $layout.animate({ scrollTop: 0 }, Animations.normal);
-    });
-  });
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations);
+    options = _.isPlainObject(options) ? options : { body: String(options) };
+
+    /* TYPE */
+
+    if (options.buttons) {
+
+      options.type = 'action';
+    }
+
+    /* TOAST */
+
+    return new Toast(options);
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast);
 
 /**
  * marked - a markdown parser
@@ -23474,8 +23789,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EDITOR */
 
-  var Editor = function (_Widgets$Widget47) {
-    _inherits(Editor, _Widgets$Widget47);
+  var Editor = function (_Widgets$Widget40) {
+    _inherits(Editor, _Widgets$Widget40);
 
     function Editor() {
       _classCallCheck(this, Editor);

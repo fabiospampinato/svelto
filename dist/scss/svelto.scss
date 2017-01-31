@@ -4607,7 +4607,7 @@ $remote-popover-animation-duration: $popover-animation-duration !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.9' !default;
+$svelto-version: '0.7.10' !default;
 
 
 /* =========================================================================
@@ -8163,7 +8163,7 @@ label,
 select,
 summary,
 textarea,
-.actionable {
+%actionable {
   touch-action: manipulation;
 }
 
@@ -8995,91 +8995,6 @@ code[class*='language-'] {
 
 
 /* =========================================================================
- * Svelto - Widgets - Typography - Link
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/reset/reset.scss
- * ========================================================================= */
-
-//TODO: Make it more visually appealing
-//TODO: Add support for automatic color selection
-
-/* LINK */
-
-a {
-
-  color: inherit;
-  text-decoration: none;
-
-  /* STYLE */
-
-  // Elsewhere this might be an unwanted style
-
-  p &,
-  address & {
-
-    @include color-link ( $link-color, $link-color-force, $link-color-basic );
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
- * Svelto - Widgets - Typography - Link - Colors
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../link.scss
- * ========================================================================= */
-
-/* COLORS */
-
-@each $name, $datas in $colors {
-
-  @if $name != 'transparent' {
-
-    $class: color-link-get-class( $name );
-
-    $bg: nth( $datas, 1 );
-    $bg-hover: nth( $datas, 2 );
-    $bg-active: nth( $datas, 3 );
-
-    %color-#{$name}-link-base {
-
-      color: $bg;
-
-      &:hover {
-        color: $bg-hover;
-      }
-
-      &:active {
-        color: $bg-active;
-      }
-
-    }
-
-    %color-#{$name}-link {
-      @extend %color-#{$name}-link-base;
-    }
-
-    .#{$class} {
-      @extend %color-#{$name}-link;
-    }
-
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Widgets - Typography - Mark
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9204,8 +9119,7 @@ span {
 
 /* AVATAR HOVER */
 
-a,
-.actionable {
+%actionable {
 
   &:hover .avatar,
   &.avatar:hover {
@@ -12554,45 +12468,6 @@ select + label.invalid {
 
 
 /* =========================================================================
- * Svelto - Widgets - Select - Popover
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../select.scss
- * ========================================================================= */
-
-/* POPOVER */
-
-.select-popover {
-
-  @include z-depth ( $select-popover-z-depth, $select-popover-z-depth-force, $select-popover-z-depth-basic );
-
-  /* CARD BLOCK */
-
-  .card-block {
-    padding: $gutter-half 0;
-  }
-
-  /* BUTTON */
-
-  .button {
-    display: block;
-    border-radius: 0;
-    margin-bottom: 0;
-    text-align: left;
-  }
-
-  /* DIVIDER */
-
-  .divider {
-    margin-top: $gutter-half;
-  }
-
-}
-
-
-/* =========================================================================
  * Svelto - Widgets - Select - Valid
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -14598,8 +14473,99 @@ p {
 
 /* ACTIONABLE */
 
-.actionable {
+%actionable {
   cursor: pointer;
+}
+
+.actionable {
+  @extend %actionable;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Link
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/reset/reset.scss
+ * @require decorators/actionable/actionable.scss
+ * ========================================================================= */
+
+//TODO: Make it more visually appealing
+//TODO: Add support for automatic color selection
+
+/* LINK */
+
+a {
+
+  @extend %actionable;
+  color: inherit;
+  text-decoration: none;
+
+  /* STYLE */
+
+  // Elsewhere this might be an unwanted style
+
+  p &,
+  address & {
+
+    @include color-link ( $link-color, $link-color-force, $link-color-basic );
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Typography - Link - Colors
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../link.scss
+ * ========================================================================= */
+
+/* COLORS */
+
+@each $name, $datas in $colors {
+
+  @if $name != 'transparent' {
+
+    $class: color-link-get-class( $name );
+
+    $bg: nth( $datas, 1 );
+    $bg-hover: nth( $datas, 2 );
+    $bg-active: nth( $datas, 3 );
+
+    %color-#{$name}-link-base {
+
+      color: $bg;
+
+      &:hover {
+        color: $bg-hover;
+      }
+
+      &:active {
+        color: $bg-active;
+      }
+
+    }
+
+    %color-#{$name}-link {
+      @extend %color-#{$name}-link-base;
+    }
+
+    .#{$class} {
+      @extend %color-#{$name}-link;
+    }
+
+  }
+
 }
 
 
@@ -15178,7 +15144,7 @@ p {
 
   @if $name != 'inherit' and $name != 'transparent' {
 
-    %color-#{$name}.actionable:not(.disabled) {
+    %color-#{$name}%actionable:not(.disabled) {
 
       &:not(.active):hover {
         @extend %color-#{$name}-hover;
@@ -15269,7 +15235,7 @@ p {
 
   @if $name != 'inherit' and $name != 'transparent' {
 
-    %color-#{$name}.actionable.inverted:not(.disabled) {
+    %color-#{$name}%actionable.inverted:not(.disabled) {
 
       &:not(.active):hover {
         @extend %color-#{$name}-inverted-hover;
@@ -16864,6 +16830,46 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Select - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * @require ../select.scss
+ * ========================================================================= */
+
+/* POPOVER */
+
+.select-popover {
+
+  @include z-depth ( $select-popover-z-depth, $select-popover-z-depth-force, $select-popover-z-depth-basic );
+
+  /* CARD BLOCK */
+
+  .card-block {
+    padding: $gutter-half 0;
+  }
+
+  /* BUTTON */
+
+  .button {
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* DIVIDER */
+
+  .divider {
+    margin-top: $gutter-half;
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Chat
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18256,7 +18262,7 @@ textarea.disabled,
 /* BUTTON */
 
 .button {
-  @extend .actionable;
+  @extend %actionable;
   @extend .label;
   @include color ( $button-color, $button-color-force, $button-color-basic );
 }
@@ -20023,7 +20029,7 @@ html.flexbox-tweener {
     @if opacity( $bg-hover ) != opacity( $bg-opacified-hover ) {
 
       .toast%color-#{$name}.hover,
-      .toast%color-#{$name}.actionable:not(.active):hover {
+      .toast%color-#{$name}%actionable:not(.active):hover {
         background-color: $bg-opacified-hover;
       }
 
@@ -20032,7 +20038,7 @@ html.flexbox-tweener {
     @if opacity( $bg-active ) != opacity( $bg-opacified-active ) {
 
       .toast%color-#{$name}.active,
-      .toast%color-#{$name}.actionable:not(.ripple):active {
+      .toast%color-#{$name}%actionable:not(.ripple):active {
         background-color: $bg-opacified-active;
       }
 
