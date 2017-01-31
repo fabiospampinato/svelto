@@ -40,8 +40,11 @@
 
     _init () {
 
-      this.options.page = Number ( this.$element.data ( this.options.datas.page ) ) || this.options.page;
-      this.options.row = Number ( this.$element.data ( this.options.datas.row ) ) || this.options.row;
+      let page = this.$element.data ( this.options.datas.page ),
+          row = this.$element.data ( this.options.datas.row );
+
+      this.options.page = _.isString ( page ) ? page : ( _.isNaN ( Number ( page ) ) ? this.options.page : Number ( page ) );
+      this.options.row = _.isNaN ( Number ( row ) ) ? this.options.row : Number ( row );
 
     }
 
