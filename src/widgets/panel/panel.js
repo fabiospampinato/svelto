@@ -60,7 +60,9 @@
         'esc': '__esc'
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -295,6 +297,8 @@
       this._lock = true;
       this._isOpen = true;
 
+      this._trigger ( 'beforeopen' );
+
       if ( !this._isPinned ) {
 
         if ( this.options.pin && Breakpoints.widths[Breakpoint.current] >= Breakpoints.widths[this.options.pin] ) {
@@ -348,6 +352,8 @@
 
       this._lock = true;
       this._isOpen = false;
+
+      this._trigger ( 'beforeclose' );
 
       this._frame ( function () {
 
