@@ -1,59 +1,37 @@
 
 Now:
-  ✔ select: if there are multiple with the same value we have to select the latest, not the first @done (11/15/2016, 9:22:55 AM)
-  ✔ maybe .table tbody tr.table-row-empty td should have vertical-align: middle @done (11/15/2016, 9:49:36 AM)
-  ☐ maybe non-center sections should have `no-grow` by default
-  ✔ add support for a `close` parameter, useful on ajax request when a remoteModal should be closed on completion @done (11/14/2016, 5:30:36 PM)
-  ☐ maybe enforce min-height on toolbar maybe, and use that value for layout-header sticky margin-top
-  ☐ add a @before in toolbar for card, so that a card-header can have toolbar's padding instead
-    ☐ are you sure it will work?
-  ☐ style default select (too ugly on firefox)
-  ☐ .multiple.only-separators don't seem to work properly
-  ☐ repositionate popover on resize, for instance when using a datepicker or a select it may change width
+  ☐ On mobile remove focus from liker after click (it should show the updated counter, not the text for removing the like...) (search for: "sticky hover")
+  ☐ Test pointer with touchpad connected to a phone (working as a mouse), or on touchscreen laptop, or OTG a mouse to it
+  ☐ .multiple.only-separators doesn't seem to work properly
+  ☐ add style on :focus, also add better keyboard navigation support
+  Emoji:
+    ☐ https://github.com/Ranks/emojify.js
+    ☐ https://github.com/twitter/twemoji
 
 Next:
-  ☐ `a` elements should be `actionable` by default
-  ☐ select inside a remote modal, the modal could get closed while the select will still be there
-  ☐ add support for CommonJS or AMD export syntax
-    ☐ datatables don't get loaded under Meteor for instance
   ☐ center sortable names, or when also `text-align: center` they will look misaligned
-  ✔ rotate select's icon when open @done (11/15/2016, 9:41:31 AM)
-    ✔ also keep the select button `.active`... SURE? @done (11/15/2016, 9:41:32 AM)
-  Gulp:
-    ☐ admin tasks only for admin with the `isAdmin` task specified into the project
-    ☐ add a `gulp install` or `gulp init` task, very much like Semantic UI did
-  To fix:
-    ☐ dinamically check for classes, like when using `isOpen` etc.
-    ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
-    ☐ lower cyclomatic complexity
-    ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
+  ☐ dinamically check for classes, like when using `isOpen` etc.
+  ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
+  ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
 
 Future:
   ☐ [widget] add better support for updating after options are set at runtime
-  ☐ add style on :focus, also add better keyboard navigation support
   ☐ adding `@require`s to extenders (.before, .after) doesn't work, since they get moved after... maybe we should move left or right the one more to the left in the dependencies list instead...
-  ☐ emoji
-    ☐ https://github.com/Ranks/emojify.js
-    ☐ https://github.com/twitter/twemoji
-  ☐ an utility for dinamically creating a dialog, like a noty but with more buttons
-  ☐ add autofocus capabilities to noty, modal and panel, basically everything that appears
+  ☐ an utility for dinamically creating a dialog, like a modal for confirmation and stuff
   ☐ add pure css tooltips like materializecss'
   ☐ [SASS] add string related functions to _, take them from here: https://github.com/HugoGiraudel/SassyStrings/tree/master/stylesheets
   ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
   ☐ add this._onFocus ()
-  ☐ widget for running actions over selectable's selected elements, like a floating noty or a slim panel
   ☐ selecter, like numbox but with custom values and chevrons, not editable (once it's done add it for editing the colors of the widgets)
-  ✔ remote loader of stuff, not just remoteModal but more generic @done (11/16/2016, 10:20:55 AM)
   ☐ new checkable widget, like selectable but with checkboxes (should work like gmail's)
   ☐ maybe add also a special `scroll` option key, for triggering actions automagically
   ☐ input autocomplete plugin (like typeahead.js)
   ☐ fullscreen library
-  ☐ chart library
   ☐ add i18n support
+  ☐ add a `KineticDrag` component, or maybe a `kinetic` option to `draggable`
 
 Maybe:
   ☐ add a .multiple.reverse
   ☐ sort sass files properties
-  ☐ maybe rename lQuery to yocto or atto o some other prefix, like zepto
-  ☐ create proper admin@getsvelto.com that we'll use for npm, atmosphere, github etc.
   ☐ abort zoomable preloading on subsequent taps
+  ☐ Add a toggle that switches from $() or $().ready to NOW, sometimes we don't need to wait for EVERYTHING to be loaded... (maybe it can cause problems, for instance Toast adds some nodes on ready, and if we call something earlier it may call Toast can will crash), probably better to add a config option like `instant: false` or `ready: true`
