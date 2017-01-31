@@ -14,7 +14,9 @@ const gulp     = require ( 'gulp' ),
       gulpif   = require ( 'gulp-if' ),
       imagemin = require ( 'gulp-imagemin' ),
       newer    = require ( 'gulp-newer' ),
+      plumber  = require ( 'gulp-plumber' ),
       changed  = require ( '../utilities/changed' ),
+      log      = require ( '../utilities/log' ),
       input    = require ( '../utilities/input' ),
       output   = require ( '../utilities/output' ),
       filter   = require ( '../plugins/filter' ),
@@ -28,6 +30,7 @@ function task () {
   const needUpdate = changed.plugins ( 'override', 'imagemin' );
 
   return gulp.src ( input.getPath ( 'images' ) )
+             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )

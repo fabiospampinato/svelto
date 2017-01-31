@@ -12,7 +12,9 @@ const gulp     = require ( 'gulp' ),
       gulpif   = require ( 'gulp-if' ),
       flatten  = require ( 'gulp-flatten' ),
       newer    = require ( 'gulp-newer' ),
+      plumber  = require ( 'gulp-plumber' ),
       changed  = require ( '../utilities/changed' ),
+      log      = require ( '../utilities/log' ),
       input    = require ( '../utilities/input' ),
       output   = require ( '../utilities/output' ),
       plugins  = require ( '../config/project' ).plugins,
@@ -26,6 +28,7 @@ function task () {
   const needUpdate = changed.plugin ( 'override' );
 
   return gulp.src ( input.getPath ( 'fonts' ) )
+             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )

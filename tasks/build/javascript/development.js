@@ -20,11 +20,11 @@ const gulp   = require ( 'gulp' ),
 function task () {
 
   return gulp.src ( input.getPath ( 'javascript.temp' ) )
-              .pipe ( newer ( output.getPath ( 'javascript.uncompressed' ) ) )
-              .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
-              .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
-              .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
-              .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
+             .pipe ( newer ( output.getPath ( 'javascript.uncompressed' ) ) )
+             .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
+             .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
 
 }
 

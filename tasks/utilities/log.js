@@ -18,7 +18,7 @@ const _        = require ( 'lodash' ),
 
 const line = function ( type, style, message ) {
 
-  type = chalk[style( type )];
+  type = chalk[style]( type );
 
   return `[${type}] ${message}\n`;
 

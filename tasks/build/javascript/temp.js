@@ -19,8 +19,10 @@ const _            = require ( 'lodash' ),
       foreach      = require ( 'gulp-foreach' ),
       gulpif       = require ( 'gulp-if' ),
       newer        = require ( 'gulp-newer' ),
+      plumber      = require ( 'gulp-plumber' ),
       plugins      = require ( '../../config/project' ).plugins,
       changed      = require ( '../../utilities/changed' ),
+      log          = require ( '../../utilities/log' ),
       input        = require ( '../../utilities/input' ),
       output       = require ( '../../utilities/output' ),
       dependencies = require ( '../../plugins/dependencies' ),
@@ -43,6 +45,7 @@ function task () {
   }
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
+             .pipe ( plumber ( log.error ) )
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )

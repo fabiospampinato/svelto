@@ -12,8 +12,10 @@ const gulp         = require ( 'gulp' ),
       gulpif       = require ( 'gulp-if' ),
       concat       = require ( 'gulp-concat' ),
       newer        = require ( 'gulp-newer' ),
+      plumber      = require ( 'gulp-plumber' ),
       plugins      = require ( '../../../config/project' ).plugins,
       changed      = require ( '../../../utilities/changed' ),
+      log          = require ( '../../../utilities/log' ),
       input        = require ( '../../../utilities/input' ),
       output       = require ( '../../../utilities/output' ),
       dependencies = require ( '../../../plugins/dependencies' ),
@@ -28,13 +30,14 @@ function general ( name, filterable ) {
   const needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend' );
 
   return gulp.src ( input.getPath ( `scss.${name}` ) )
-              .pipe ( gulpif ( filterable && plugins.filter.enabled, filter ( plugins.filter.options ) ) )
-              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( `scss.${name}` ) ) ) )
-              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
-              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
-              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
-              .pipe ( concat ( output.getName ( `scss.${name}` ) ) )
-              .pipe ( gulp.dest ( output.getDir ( `scss.${name}` ) ) );
+             .pipe ( plumber ( log.error ) )
+             .pipe ( gulpif ( filterable && plugins.filter.enabled, filter ( plugins.filter.options ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( `scss.${name}` ) ) ) )
+             .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
+             .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
+             .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
+             .pipe ( concat ( output.getName ( `scss.${name}` ) ) )
+             .pipe ( gulp.dest ( output.getDir ( `scss.${name}` ) ) );
 
 }
 
