@@ -151,6 +151,8 @@
 
         if ( _.isNaN ( page ) ) return this.api ( 'page' );
 
+        if ( page === this.api ( 'page' ) ) return;
+
       }
 
       this.api ( 'page', page );
