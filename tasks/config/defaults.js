@@ -23,14 +23,14 @@ const defaults = {
   /* ENVIRONMENT */
 
   environments: {
-    development: {
-      paths: require ( './defaults/development/paths' ),
-      plugins: require ( './defaults/development/plugins' ),
+    demo: {
+      paths: require ( './defaults/demo/paths' ),
+      plugins: require ( './defaults/demo/plugins' ),
       isDevelopment: true
     },
     production: {}
   },
-  environment: 'production'
+  environment: 'demo'
 
 };
 
