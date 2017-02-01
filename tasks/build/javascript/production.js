@@ -32,7 +32,7 @@ const gulp         = require ( 'gulp' ),
 
 function task () {
 
-  const needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend', 'babel', 'uglify' );
+  const needUpdate = changed.project ( 'components' ) || changed.plugins ( 'filter', 'override', 'dependencies', 'extend', 'babel', 'uglify', 'closure' );
 
   return gulp.src ( input.getPath ( 'javascript.all' ) )
              .pipe ( plumber ( log.error ) )
