@@ -38,6 +38,16 @@
 
     },
 
+    unmake ( Widget, namespace = Widgets ) {
+
+      for ( let unmaker of this.unmakers.order ) {
+
+        this.unmakers[unmaker]( Widget, namespace );
+
+      }
+
+    },
+
     /* MAKERS */
 
     makers: {
@@ -107,6 +117,54 @@
           return this;
 
         };
+
+      }
+
+    },
+
+    /* UNMAKERS */
+
+    unmakers: {
+
+      order: ['plugin', 'widgetize', 'ready', 'namespace', 'configure'], // The order in which the unmakers will be called
+
+      configure ( Widget ) {
+
+        delete Widget.config;
+
+      },
+
+      namespace ( Widget, namespace ) {
+
+        if ( !_.isObject ( namespace ) ) return;
+
+        let name = _.upperFirst ( Widget.config.name );
+
+        delete namespace[name];
+
+      },
+
+      ready ( Widget ) {
+
+        Readify.remove ( Widget );
+
+      },
+
+      widgetize ( Widget ) {
+
+        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
+
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+        Widgetize.remove ( Widget.config.selector, widgetize );
+
+      },
+
+      plugin ( Widget ) {
+
+        if ( !Widget.config.plugin ) return;
+
+        delete $.fn[Widget.config.name];
 
       }
 
