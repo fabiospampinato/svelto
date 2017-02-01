@@ -44,17 +44,21 @@
 
       if ( selector in this.widgetizers ) {
 
-        for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
+        if ( widgetizer ) {
 
-          if ( this.widgetizers[selector][i][0] === widgetizer ) {
+          for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
 
-            this.widgetizers[selector].splice ( i, 1 );
+            if ( this.widgetizers[selector][i][0] === widgetizer ) {
+
+              this.widgetizers[selector].splice ( i, 1 );
+
+            }
 
           }
 
         }
 
-        if ( !this.widgetizers[selector].length ) {
+        if ( !widgetizer || !this.widgetizers[selector].length ) {
 
           delete this.widgetizers[selector];
 
