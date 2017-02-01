@@ -8,9 +8,7 @@
  * @require ../init.js
  * ========================================================================= */
 
-//FIXME: I'm not sure if this plugin should exists
-
-// It only works for setting
+// It only currently works for setting
 
 (function ( $ ) {
 

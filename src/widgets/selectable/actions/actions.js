@@ -12,8 +12,6 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-//TODO: Cross-browser test
-
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
   'use strict';

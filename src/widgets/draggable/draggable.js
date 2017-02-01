@@ -8,7 +8,6 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//TODO: Maybe return less datas to triggered events and callbacks
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 

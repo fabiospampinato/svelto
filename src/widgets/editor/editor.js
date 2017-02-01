@@ -9,7 +9,6 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//TODO: Cross browser testing
 //TODO: Add headings support (level 1/3/5, like github does)
 //TODO: Add emoji support
 //TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...

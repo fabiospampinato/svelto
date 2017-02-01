@@ -61,7 +61,7 @@
 
     __keydown ( event ) {
 
-      //FIXME: Don't do anything if a scroll happens
+      //FIXME: Shouldn't do anything if a scroll happens
 
       if ( $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
 
