@@ -4607,7 +4607,7 @@ $remote-popover-animation-duration: $popover-animation-duration !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.10' !default;
+$svelto-version: '0.7.12' !default;
 
 
 /* =========================================================================
@@ -8874,8 +8874,6 @@ blockquote {
  * @require core/reset/reset.scss
  * ========================================================================= */
 
-//TODO: Add support for `samp`
-
 code {
 
   font-family: $code-font-family;
@@ -9089,8 +9087,6 @@ span {
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Cross-browser test
-
 /* AVATAR */
 
 .avatar {
@@ -9193,7 +9189,6 @@ span {
  * ========================================================================= */
 
 //FIXME: Improve support for layout, image and figure items
-//TODO: If posible add indicators without the need to add extra markup
 
 /* CAROUSEL */
 
@@ -9977,8 +9972,6 @@ html.flexbox-tweener {
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Cross browser testing
-
 /* EDITOR */
 
 .editor {
@@ -10173,8 +10166,6 @@ html.flexbox-tweener {
  * @require core/reset/reset.scss
  * @require core/widget/widget.scss
  * ========================================================================= */
-
-//TODO: Add support for svg
 
 /* FIGURE */
 
@@ -11193,7 +11184,6 @@ table th.sortable { // In order to better support datatables
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Add support for svg
 //FIXME: `.multiple.no-wrap > img * 3` doesn't work
 
 /* IMAGE */
@@ -11716,7 +11706,7 @@ img {
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of horizontally attached widget)
+//TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of vertically attached widget)
 //TODO: Add `buffering` variant
 //TODO: Add an `indicating` progressbar, with auto highlight color changing on the basis of the value
 
@@ -14873,7 +14863,7 @@ a {
 
   /* NO DESKTOP */
 
-  html.no-desktop & {
+  html:not(.desktop) & {
     display: none;
   }
 
@@ -16878,7 +16868,7 @@ html.flexbox-tweener {
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-//TODO: Add support for bidirectional chat
+//TODO: Add support for bidirectional chat at the same time
 
 /* CHAT */
 
@@ -16896,6 +16886,7 @@ html.flexbox-tweener {
  * =========================================================================
  * @require ../chat.scss
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 
 /* CHAT */
@@ -16905,6 +16896,12 @@ html.flexbox-tweener {
   @extend %widget;
   @include children-no-gutter ();
   display: flex;
+
+  /* TARGET */
+
+  &:target > .chat-message-content {
+    @extend %target;
+  }
 
   /* IMAGE */
 
@@ -19079,7 +19076,7 @@ pre {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//FIXME: When inside a model it doens't quite look right
+//FIXME: When inside a modal it doens't quite look right
 
 /* FULLSCREEN */
 
@@ -19571,8 +19568,6 @@ html.flexbox-tweener {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-//FIXME: Safari has a buggy resizing animation
 
 /* REMOTE WIDGET PLACEHOLDER */
 

@@ -9868,7 +9868,7 @@ address a:active, .link-primary:active {
   opacity: 1;
 }
 
-html.no-desktop .on-hover.attached-bottom, html.no-desktop .on-hover.attached:not(.attached-top):not(.attached-top-left):not(.attached-top-right):not(.attached-right):not(.attached-bottom-left):not(.attached-bottom-right):not(.attached-left), html.no-desktop .on-hover.attached-bottom-left, html.no-desktop .on-hover.attached-bottom-right, html.no-desktop .on-hover.attached-left, html.no-desktop .on-hover.attached-right, html.no-desktop .on-hover.attached-top, html.no-desktop .on-hover.attached-top-left, html.no-desktop .on-hover.attached-top-right {
+html:not(.desktop) .on-hover.attached-bottom, html:not(.desktop) .on-hover.attached:not(.attached-top):not(.attached-top-left):not(.attached-top-right):not(.attached-right):not(.attached-bottom-left):not(.attached-bottom-right):not(.attached-left), html:not(.desktop) .on-hover.attached-bottom-left, html:not(.desktop) .on-hover.attached-bottom-right, html:not(.desktop) .on-hover.attached-left, html:not(.desktop) .on-hover.attached-right, html:not(.desktop) .on-hover.attached-top, html:not(.desktop) .on-hover.attached-top-left, html:not(.desktop) .on-hover.attached-top-right {
   display: none;
 }
 
@@ -11753,8 +11753,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -11792,8 +11792,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -11853,8 +11853,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -11898,8 +11898,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.10#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -12092,7 +12092,7 @@ h6 > small {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* TARGET */
-.container:target, .card:target, .infobar:target, input:target, textarea:target, .label:target, .button:target, kbd:target, pre:target, .target {
+.container:target, .card:target, .infobar:target, input:target, textarea:target, .label:target, .button:target, kbd:target, pre:target, .target, .chat-message:target > .chat-message-content {
   -webkit-animation: target 0.9s ease-in-out;
           animation: target 0.9s ease-in-out;
   -webkit-animation-iteration-count: 1;
@@ -12789,12 +12789,14 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
  * =========================================================================
  * @require ../chat.scss
  * @require core/widget/widget.scss
+ * @require decorators/target/target.scss
  * ========================================================================= */
 /* CHAT */
 .chat-message {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  /* TARGET */
   /* IMAGE */
   /* CONTENT */
 }
@@ -15202,7 +15204,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.7.10);
+  background-image: url(/images/flags.png?v=0.7.12);
 }
 
 /* FLAGS */
@@ -16219,7 +16221,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.10) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.10) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.12) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.12) format("woff");
 }
 
 /* =========================================================================

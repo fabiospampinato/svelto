@@ -228,9 +228,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require ../init.js
  * ========================================================================= */
 
-//FIXME: I'm not sure if this plugin should exists
-
-// It only works for setting
+// It only currently works for setting
 
 (function ($) {
 
@@ -2633,7 +2631,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* SVELTO */
 
   var Svelto = {
-    VERSION: '0.7.11',
+    VERSION: '0.7.12',
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
@@ -3607,6 +3605,100 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, window.history);
 
 /* =========================================================================
+ * Svelto - Core - Readify
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+//TODO: Maybe make it a little more general, adding support for pure functions as well
+
+(function ($, _, Svelto, Widgets) {
+
+  'use strict';
+
+  /* READIFY */
+
+  var Readify = function () {
+    function Readify() {
+      _classCallCheck(this, Readify);
+
+      this.widgets = [];
+    }
+
+    _createClass(Readify, [{
+      key: 'get',
+      value: function get() {
+
+        return this.widgets;
+      }
+    }, {
+      key: 'add',
+      value: function add(Widget) {
+
+        this.widgets.push(Widget);
+      }
+    }, {
+      key: 'remove',
+      value: function remove(Widget) {
+
+        _.pull(this.widgets, Widget);
+      }
+    }, {
+      key: 'do',
+      value: function _do() {
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
+
+        try {
+
+          for (var _iterator6 = this.widgets[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var Widget = _step6.value;
+
+
+            var ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready,
+                //IE10 support -- static property
+            initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady,
+                //IE10 support -- static property
+            setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
+
+            initReady.bind(Widget)();
+
+            ready.bind(Widget)(setReady.bind(Widget));
+          }
+        } catch (err) {
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6.return) {
+              _iterator6.return();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
+        }
+      }
+    }]);
+
+    return Readify;
+  }();
+
+  /* EXPORT */
+
+  Svelto.Readify = new Readify();
+
+  /* READY */
+
+  $(Svelto.Readify.do.bind(Svelto.Readify));
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+/* =========================================================================
  * Svelto - Core - Route
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -3702,6 +3794,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Widgetize, [{
+      key: 'get',
+      value: function get() {
+
+        return this.widgetizers;
+      }
+    }, {
       key: 'add',
       value: function add(selector, widgetizer, data) {
 
@@ -3713,26 +3811,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.widgetizers[selector].push([widgetizer, data]);
       }
     }, {
-      key: 'get',
-      value: function get() {
-
-        return this.widgetizers;
-      }
-    }, {
       key: 'remove',
       value: function remove(selector, widgetizer) {
 
         if (selector in this.widgetizers) {
 
-          for (var i = 0, l = this.widgetizers[selector].length; i < l; i++) {
+          if (widgetizer) {
 
-            if (this.widgetizers[selector][i][0] === widgetizer) {
+            for (var i = 0, l = this.widgetizers[selector].length; i < l; i++) {
 
-              this.widgetizers[selector].splice(i, 1);
+              if (this.widgetizers[selector][i][0] === widgetizer) {
+
+                this.widgetizers[selector].splice(i, 1);
+              }
             }
           }
 
-          if (!this.widgetizers[selector].length) {
+          if (!widgetizer || !this.widgetizers[selector].length) {
 
             delete this.widgetizers[selector];
           }
@@ -3755,53 +3850,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'worker',
       value: function worker(widgetizers, $widgets) {
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+        var _iteratorNormalCompletion7 = true;
+        var _didIteratorError7 = false;
+        var _iteratorError7 = undefined;
 
         try {
 
-          for (var _iterator6 = $widgets[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            var widget = _step6.value;
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
+          for (var _iterator7 = $widgets[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            var widget = _step7.value;
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
 
             try {
 
-              for (var _iterator7 = widgetizers[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                var _step7$value = _slicedToArray(_step7.value, 2),
-                    widgetizer = _step7$value[0],
-                    data = _step7$value[1];
+              for (var _iterator8 = widgetizers[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                var _step8$value = _slicedToArray(_step8.value, 2),
+                    widgetizer = _step8$value[0],
+                    data = _step8$value[1];
 
                 widgetizer($(widget), data);
               }
             } catch (err) {
-              _didIteratorError7 = true;
-              _iteratorError7 = err;
+              _didIteratorError8 = true;
+              _iteratorError8 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                  _iterator7.return();
+                if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                  _iterator8.return();
                 }
               } finally {
-                if (_didIteratorError7) {
-                  throw _iteratorError7;
+                if (_didIteratorError8) {
+                  throw _iteratorError8;
                 }
               }
             }
           }
         } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
+          _didIteratorError7 = true;
+          _iteratorError7 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion6 && _iterator6.return) {
-              _iterator6.return();
+            if (!_iteratorNormalCompletion7 && _iterator7.return) {
+              _iterator7.return();
             }
           } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
+            if (_didIteratorError7) {
+              throw _iteratorError7;
             }
           }
         }
@@ -3839,10 +3934,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ($, _, Svelto, Widgetize, Widgets) {
+(function ($, _, Svelto, Widgets, Readify, Widgetize) {
 
   'use strict';
 
@@ -3850,147 +3946,207 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var Factory = {
 
-    /* VARIABLES */
+    /* API */
 
-    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // `Factory` methods, in order, to call when initing a `Widget`
-
-    /* METHODS */
-
-    init: function init(Widget, config, namespace) {
-      var _iteratorNormalCompletion8 = true;
-      var _didIteratorError8 = false;
-      var _iteratorError8 = undefined;
-
-      try {
-
-        for (var _iterator8 = this.initializers[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-          var initializer = _step8.value;
-
-
-          this[initializer](Widget, config, namespace);
-        }
-      } catch (err) {
-        _didIteratorError8 = true;
-        _iteratorError8 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion8 && _iterator8.return) {
-            _iterator8.return();
-          }
-        } finally {
-          if (_didIteratorError8) {
-            throw _iteratorError8;
-          }
-        }
-      }
-    },
-    instance: function instance(Widget, options, element) {
+    instanciate: function instanciate(Widget, options, element) {
 
       var name = Widget.config.name;
 
       return $.data(element, 'instance.' + name) || new Widget(options, element);
     },
+    make: function make(Widget, config) {
+      var namespace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Widgets;
+      var _iteratorNormalCompletion9 = true;
+      var _didIteratorError9 = false;
+      var _iteratorError9 = undefined;
+
+      try {
+
+        for (var _iterator9 = this.makers.order[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+          var maker = _step9.value;
 
 
-    /* WORKERS */
-
-    configure: function configure(Widget) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-
-      Widget.config = config;
-    },
-    namespace: function namespace(Widget, config, _namespace) {
-
-      if (!_.isObject(_namespace)) return;
-
-      var name = _.upperFirst(Widget.config.name);
-
-      _namespace[name] = Widget;
-    },
-    ready: function ready(Widget) {
-
-      var ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready,
-          //IE10 support -- static property
-      initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady,
-          //IE10 support -- static property
-      setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
-
-      initReady.bind(Widget)();
-
-      $(_.wrap(setReady.bind(Widget), ready.bind(Widget)));
-    },
-    widgetize: function widgetize(Widget) {
-
-      if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
-
-      var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
-
-      Widgetize.add(Widget.config.selector, widgetize.bind(Widget));
-    },
-    plugin: function plugin(Widget) {
-
-      if (!Widget.config.plugin) return;
-
-      /* NAME */
-
-      var name = Widget.config.name;
-
-      /* JQUERY PLUGIN */
-
-      $.fn[name] = function (options) {
-
-        var isMethodCall = _.isString(options) && options.charAt(0) !== '_'; // Methods starting with '_' are private
-
-        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
+          this.makers[maker](Widget, config, namespace);
         }
-
-        var _iteratorNormalCompletion9 = true;
-        var _didIteratorError9 = false;
-        var _iteratorError9 = undefined;
-
+      } catch (err) {
+        _didIteratorError9 = true;
+        _iteratorError9 = err;
+      } finally {
         try {
-          for (var _iterator9 = this[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-            var element = _step9.value;
+          if (!_iteratorNormalCompletion9 && _iterator9.return) {
+            _iterator9.return();
+          }
+        } finally {
+          if (_didIteratorError9) {
+            throw _iteratorError9;
+          }
+        }
+      }
+    },
+    unmake: function unmake(Widget) {
+      var namespace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Widgets;
+      var _iteratorNormalCompletion10 = true;
+      var _didIteratorError10 = false;
+      var _iteratorError10 = undefined;
+
+      try {
+
+        for (var _iterator10 = this.unmakers.order[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+          var unmaker = _step10.value;
 
 
-            var instance = Factory.instance(Widget, options, element);
+          this.unmakers[unmaker](Widget, namespace);
+        }
+      } catch (err) {
+        _didIteratorError10 = true;
+        _iteratorError10 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion10 && _iterator10.return) {
+            _iterator10.return();
+          }
+        } finally {
+          if (_didIteratorError10) {
+            throw _iteratorError10;
+          }
+        }
+      }
+    },
 
-            if (isMethodCall && _.isFunction(instance[options])) {
 
-              var returnValue = instance[options].apply(instance, args);
+    /* MAKERS */
 
-              if (!_.isUndefined(returnValue)) {
+    makers: {
 
-                return returnValue;
+      order: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // The order in which the makers will be called
+
+      configure: function configure(Widget) {
+        var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+        Widget.config = config;
+      },
+      namespace: function namespace(Widget, config, _namespace) {
+
+        if (!_.isObject(_namespace)) return;
+
+        var name = _.upperFirst(Widget.config.name);
+
+        _namespace[name] = Widget;
+      },
+      ready: function ready(Widget) {
+
+        Readify.add(Widget);
+      },
+      widgetize: function widgetize(Widget) {
+        //TODO: Maybe add native support for Widgets to Widgetize and make this method as simple as `ready`
+
+        if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
+
+        var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+        Widgetize.add(Widget.config.selector, widgetize, Widget);
+      },
+      plugin: function plugin(Widget) {
+
+        if (!Widget.config.plugin) return;
+
+        /* NAME */
+
+        var name = Widget.config.name;
+
+        /* JQUERY PLUGIN */
+
+        $.fn[name] = function (options) {
+
+          var isMethodCall = _.isString(options) && options.charAt(0) !== '_'; // Methods starting with '_' are private
+
+          for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            args[_key - 1] = arguments[_key];
+          }
+
+          var _iteratorNormalCompletion11 = true;
+          var _didIteratorError11 = false;
+          var _iteratorError11 = undefined;
+
+          try {
+            for (var _iterator11 = this[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+              var element = _step11.value;
+
+
+              var instance = Factory.instanciate(Widget, options, element);
+
+              if (isMethodCall && _.isFunction(instance[options])) {
+
+                var returnValue = instance[options].apply(instance, args);
+
+                if (!_.isUndefined(returnValue)) return returnValue;
+              }
+            }
+          } catch (err) {
+            _didIteratorError11 = true;
+            _iteratorError11 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                _iterator11.return();
+              }
+            } finally {
+              if (_didIteratorError11) {
+                throw _iteratorError11;
               }
             }
           }
-        } catch (err) {
-          _didIteratorError9 = true;
-          _iteratorError9 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion9 && _iterator9.return) {
-              _iterator9.return();
-            }
-          } finally {
-            if (_didIteratorError9) {
-              throw _iteratorError9;
-            }
-          }
-        }
 
-        return this;
-      };
+          return this;
+        };
+      }
+    },
+
+    /* UNMAKERS */
+
+    unmakers: {
+
+      order: ['plugin', 'widgetize', 'ready', 'namespace', 'configure'], // The order in which the unmakers will be called
+
+      configure: function configure(Widget) {
+
+        delete Widget.config;
+      },
+      namespace: function namespace(Widget, _namespace2) {
+
+        if (!_.isObject(_namespace2)) return;
+
+        var name = _.upperFirst(Widget.config.name);
+
+        delete _namespace2[name];
+      },
+      ready: function ready(Widget) {
+
+        Readify.remove(Widget);
+      },
+      widgetize: function widgetize(Widget) {
+
+        if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
+
+        var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+        Widgetize.remove(Widget.config.selector, widgetize);
+      },
+      plugin: function plugin(Widget) {
+
+        if (!Widget.config.plugin) return;
+
+        delete $.fn[Widget.config.name];
+      }
     }
+
   };
 
   /* EXPORT */
 
   Svelto.Factory = Factory;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Widgets);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize);
 
 /* =========================================================================
  * Svelto - Core - Widget
@@ -4055,10 +4211,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /* WIDGETIZE */
 
-      value: function widgetize($ele) {
+      value: function widgetize($ele, Widget) {
         // Called for widgetizing an element
 
-        $ele[this.config.name]();
+        $ele[Widget.config.name]();
       }
 
       /* READY */
@@ -4103,28 +4259,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._ready = true;
 
-        var _iteratorNormalCompletion10 = true;
-        var _didIteratorError10 = false;
-        var _iteratorError10 = undefined;
+        var _iteratorNormalCompletion12 = true;
+        var _didIteratorError12 = false;
+        var _iteratorError12 = undefined;
 
         try {
-          for (var _iterator10 = this._readyQueue[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-            var callback = _step10.value;
+          for (var _iterator12 = this._readyQueue[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+            var callback = _step12.value;
 
 
             callback();
           }
         } catch (err) {
-          _didIteratorError10 = true;
-          _iteratorError10 = err;
+          _didIteratorError12 = true;
+          _iteratorError12 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion10 && _iterator10.return) {
-              _iterator10.return();
+            if (!_iteratorNormalCompletion12 && _iterator12.return) {
+              _iterator12.return();
             }
           } finally {
-            if (_didIteratorError10) {
-              throw _iteratorError10;
+            if (_didIteratorError12) {
+              throw _iteratorError12;
             }
           }
         }
@@ -4676,13 +4832,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (!this.options.keystrokes.hasOwnProperty(keystrokes)) continue;
 
-          var _iteratorNormalCompletion11 = true;
-          var _didIteratorError11 = false;
-          var _iteratorError11 = undefined;
+          var _iteratorNormalCompletion13 = true;
+          var _didIteratorError13 = false;
+          var _iteratorError13 = undefined;
 
           try {
-            for (var _iterator11 = keystrokes.split(',')[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-              var keystroke = _step11.value;
+            for (var _iterator13 = keystrokes.split(',')[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+              var keystroke = _step13.value;
 
 
               if (!Keyboard.keystroke.match(event, keystroke)) continue;
@@ -4699,16 +4855,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return;
             }
           } catch (err) {
-            _didIteratorError11 = true;
-            _iteratorError11 = err;
+            _didIteratorError13 = true;
+            _iteratorError13 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                _iterator11.return();
+              if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                _iterator13.return();
               }
             } finally {
-              if (_didIteratorError11) {
-                throw _iteratorError11;
+              if (_didIteratorError13) {
+                throw _iteratorError13;
               }
             }
           }
@@ -4887,7 +5043,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Widget, config, Widgets);
+  Factory.make(Widget, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint);
 
 /* =========================================================================
@@ -4956,28 +5112,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var properties = ['type', 'colors', 'labels', 'datas'];
 
-        var _iteratorNormalCompletion12 = true;
-        var _didIteratorError12 = false;
-        var _iteratorError12 = undefined;
+        var _iteratorNormalCompletion14 = true;
+        var _didIteratorError14 = false;
+        var _iteratorError14 = undefined;
 
         try {
-          for (var _iterator12 = properties[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-            var property = _step12.value;
+          for (var _iterator14 = properties[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+            var property = _step14.value;
 
 
             this[property] = this.$chart.data(this.options.datas[property]) || this.options.defaults[property];
           }
         } catch (err) {
-          _didIteratorError12 = true;
-          _iteratorError12 = err;
+          _didIteratorError14 = true;
+          _iteratorError14 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion12 && _iterator12.return) {
-              _iterator12.return();
+            if (!_iteratorNormalCompletion14 && _iterator14.return) {
+              _iterator14.return();
             }
           } finally {
-            if (_didIteratorError12) {
-              throw _iteratorError12;
+            if (_didIteratorError14) {
+              throw _iteratorError14;
             }
           }
         }
@@ -5023,7 +5179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Chart, config, Widgets);
+  Factory.make(Chart, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, window.Chart);
 
 /* =========================================================================
@@ -5108,7 +5264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Checkbox, config, Widgets);
+  Factory.make(Checkbox, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -5169,7 +5325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Radio, config, Widgets);
+  Factory.make(Radio, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -5192,13 +5348,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var names = _.filter(_.values(Breakpoints), _.isString),
       datas = [];
 
-  var _iteratorNormalCompletion13 = true;
-  var _didIteratorError13 = false;
-  var _iteratorError13 = undefined;
+  var _iteratorNormalCompletion15 = true;
+  var _didIteratorError15 = false;
+  var _iteratorError15 = undefined;
 
   try {
-    for (var _iterator13 = names[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-      var name = _step13.value;
+    for (var _iterator15 = names[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+      var name = _step15.value;
 
 
       datas.push(name + '-up');
@@ -5207,16 +5363,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       datas.push(name);
     }
   } catch (err) {
-    _didIteratorError13 = true;
-    _iteratorError13 = err;
+    _didIteratorError15 = true;
+    _iteratorError15 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion13 && _iterator13.return) {
-        _iterator13.return();
+      if (!_iteratorNormalCompletion15 && _iterator15.return) {
+        _iterator15.return();
       }
     } finally {
-      if (_didIteratorError13) {
-        throw _iteratorError13;
+      if (_didIteratorError15) {
+        throw _iteratorError15;
       }
     }
   }
@@ -5427,7 +5583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ClassSwitch, config, Widgets);
+  Factory.make(ClassSwitch, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint);
 
 /* =========================================================================
@@ -5970,7 +6126,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Datepicker, config, Widgets);
+  Factory.make(Datepicker, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -5982,7 +6138,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//TODO: Maybe return less datas to triggered events and callbacks
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
@@ -6618,7 +6773,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Draggable, config, Widgets);
+  Factory.make(Draggable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse);
 
 /* =========================================================================
@@ -6794,7 +6949,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Flickable, config, Widgets);
+  Factory.make(Flickable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -6909,13 +7064,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var value = $element.val(),
             checked = !!$element.prop('checked');
 
-        var _iteratorNormalCompletion14 = true;
-        var _didIteratorError14 = false;
-        var _iteratorError14 = undefined;
+        var _iteratorNormalCompletion16 = true;
+        var _didIteratorError16 = false;
+        var _iteratorError16 = undefined;
 
         try {
-          for (var _iterator14 = $otherElements[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-            var otherElement = _step14.value;
+          for (var _iterator16 = $otherElements[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+            var otherElement = _step16.value;
 
 
             var $otherElement = $(otherElement),
@@ -6935,16 +7090,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
         } catch (err) {
-          _didIteratorError14 = true;
-          _iteratorError14 = err;
+          _didIteratorError16 = true;
+          _iteratorError16 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion14 && _iterator14.return) {
-              _iterator14.return();
+            if (!_iteratorNormalCompletion16 && _iterator16.return) {
+              _iterator16.return();
             }
           } finally {
-            if (_didIteratorError14) {
-              throw _iteratorError14;
+            if (_didIteratorError16) {
+              throw _iteratorError16;
             }
           }
         }
@@ -6956,7 +7111,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(FormSync, config, Widgets);
+  Factory.make(FormSync, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -7024,7 +7179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Infobar, config, Widgets);
+  Factory.make(Infobar, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -7164,7 +7319,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(InputAutogrow, config, Widgets);
+  Factory.make(InputAutogrow, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser);
 
 /* =========================================================================
@@ -7288,7 +7443,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(InputFileNames, config, Widgets);
+  Factory.make(InputFileNames, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -7537,7 +7692,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Numbox, config, Widgets);
+  Factory.make(Numbox, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -7616,7 +7771,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function __keydown(event) {
         var _this18 = this;
 
-        //FIXME: Don't do anything if a scroll happens
+        //FIXME: Shouldn't do anything if a scroll happens
 
         if ($(document.activeElement).is(this.options.selectors.focusable)) return;
 
@@ -7657,7 +7812,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Pager, config, Widgets);
+  Factory.make(Pager, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -7697,7 +7852,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Pagination, config, Widgets);
+  Factory.make(Pagination, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -7861,7 +8016,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Progressbar, config, Widgets);
+  Factory.make(Progressbar, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -8132,7 +8287,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Rails, config, Widgets);
+  Factory.make(Rails, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer);
 
 /* =========================================================================
@@ -8322,7 +8477,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Remote, config, Widgets);
+  Factory.make(Remote, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -8414,7 +8569,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteTrigger, config, Widgets);
+  Factory.make(RemoteTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -8534,29 +8689,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this._lock = false;
 
-          var _iteratorNormalCompletion15 = true;
-          var _didIteratorError15 = false;
-          var _iteratorError15 = undefined;
+          var _iteratorNormalCompletion17 = true;
+          var _didIteratorError17 = false;
+          var _iteratorError17 = undefined;
 
           try {
-            for (var _iterator15 = this.circles[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-              var _step15$value = _slicedToArray(_step15.value, 2),
-                  $circle = _step15$value[0],
-                  timestamp = _step15$value[1];
+            for (var _iterator17 = this.circles[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+              var _step17$value = _slicedToArray(_step17.value, 2),
+                  $circle = _step17$value[0],
+                  timestamp = _step17$value[1];
 
               this._hide($circle, timestamp);
             }
           } catch (err) {
-            _didIteratorError15 = true;
-            _iteratorError15 = err;
+            _didIteratorError17 = true;
+            _iteratorError17 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                _iterator15.return();
+              if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                _iterator17.return();
               }
             } finally {
-              if (_didIteratorError15) {
-                throw _iteratorError15;
+              if (_didIteratorError17) {
+                throw _iteratorError17;
               }
             }
           }
@@ -8639,7 +8794,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Ripple, config, Widgets);
+  Factory.make(Ripple, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations);
 
 /* =========================================================================
@@ -8910,7 +9065,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TableSortable, config, Widgets);
+  Factory.make(TableSortable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -9011,13 +9166,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var chunks = _.chunk(datas, this.columnsNr),
               $rows = $();
 
-          var _iteratorNormalCompletion16 = true;
-          var _didIteratorError16 = false;
-          var _iteratorError16 = undefined;
+          var _iteratorNormalCompletion18 = true;
+          var _didIteratorError18 = false;
+          var _iteratorError18 = undefined;
 
           try {
-            for (var _iterator16 = chunks[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-              var chunk = _step16.value;
+            for (var _iterator18 = chunks[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+              var chunk = _step18.value;
 
 
               var rowHtml = this._template('row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length });
@@ -9025,16 +9180,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               $rows = $rows.add(rowHtml);
             }
           } catch (err) {
-            _didIteratorError16 = true;
-            _iteratorError16 = err;
+            _didIteratorError18 = true;
+            _iteratorError18 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion16 && _iterator16.return) {
-                _iterator16.return();
+              if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                _iterator18.return();
               }
             } finally {
-              if (_didIteratorError16) {
-                throw _iteratorError16;
+              if (_didIteratorError18) {
+                throw _iteratorError18;
               }
             }
           }
@@ -9118,7 +9273,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TableHelper, config, Widgets);
+  Factory.make(TableHelper, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9202,7 +9357,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Targeter, config, Widgets);
+  Factory.make(Targeter, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9289,7 +9444,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Closer, config, Widgets);
+  Factory.make(Closer, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -9333,7 +9488,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(InfobarCloser, config, Widgets);
+  Factory.make(InfobarCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9530,7 +9685,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Opener, config, Widgets);
+  Factory.make(Opener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer);
 
 /* =========================================================================
@@ -9594,7 +9749,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Toggler, config, Widgets);
+  Factory.make(Toggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9714,7 +9869,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(AutogrowTextarea, config, Widgets);
+  Factory.make(AutogrowTextarea, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9792,7 +9947,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TextareaSender, config, Widgets);
+  Factory.make(TextareaSender, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9928,7 +10083,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TimeAgo, config, Widgets);
+  Factory.make(TimeAgo, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer);
 
 /* =========================================================================
@@ -10462,7 +10617,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Zoomable, config, Widgets);
+  Factory.make(Zoomable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations);
 
 /* =========================================================================
@@ -10506,7 +10661,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ZoomableCloser, config, Widgets);
+  Factory.make(ZoomableCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -10550,7 +10705,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ZoomableOpener, config, Widgets);
+  Factory.make(ZoomableOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -10594,7 +10749,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ZoomableToggler, config, Widgets);
+  Factory.make(ZoomableToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -10708,6 +10863,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       Autofocus.history = _.uniq(Autofocus.history).slice(0, Autofocus.historySize);
 
       ele.focus();
+
+      /* CARET TO THE END */
+
+      if (ele.setSelectionRange) {
+        var _ret2 = function () {
+
+          var length = ele.value.length * 2; // Double the length because Opera is inconsistent about whether a carriage return is one character or two
+
+          if (!length) return {
+              v: void 0
+            };
+
+          setTimeout(function () {
+            return ele.setSelectionRange(length, length);
+          }, 1); // Timeout seems to be required for Blink
+
+          ele.scrollTop = 1000000; // In case it's a tall textarea
+        }();
+
+        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+      }
     },
     find: function find() {
       var $parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $html;
@@ -10810,7 +10986,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Autofocusable, config, Widgets);
+  Factory.make(Autofocusable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
 
 /* =========================================================================
@@ -10920,7 +11096,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Expander, config, Widgets);
+  Factory.make(Expander, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
 
 /* =========================================================================
@@ -11085,7 +11261,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Accordion, config, Widgets);
+  Factory.make(Accordion, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11129,7 +11305,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ExpanderCloser, config, Widgets);
+  Factory.make(ExpanderCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11173,7 +11349,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ExpanderOpener, config, Widgets);
+  Factory.make(ExpanderOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11217,7 +11393,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ExpanderToggler, config, Widgets);
+  Factory.make(ExpanderToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11325,7 +11501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Flippable, config, Widgets);
+  Factory.make(Flippable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11374,7 +11550,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(FlippableFlipper, config, Widgets);
+  Factory.make(FlippableFlipper, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11597,7 +11773,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Modal, config, Widgets);
+  Factory.make(Modal, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
 
 /* =========================================================================
@@ -11641,7 +11817,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ModalCloser, config, Widgets);
+  Factory.make(ModalCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11685,7 +11861,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ModalOpener, config, Widgets);
+  Factory.make(ModalOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11729,7 +11905,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(ModalToggler, config, Widgets);
+  Factory.make(ModalToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -11921,7 +12097,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Overlay, config, Widgets);
+  Factory.make(Overlay, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
 
 /* =========================================================================
@@ -11965,7 +12141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(OverlayCloser, config, Widgets);
+  Factory.make(OverlayCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -12009,7 +12185,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(OverlayOpener, config, Widgets);
+  Factory.make(OverlayOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -12053,7 +12229,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(OverlayToggler, config, Widgets);
+  Factory.make(OverlayToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -12175,7 +12351,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(SpinnerOverlay, config, Widgets);
+  Factory.make(SpinnerOverlay, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
 
 /* =========================================================================
@@ -13012,7 +13188,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Colorpicker, config, Widgets);
+  Factory.make(Colorpicker, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard);
 
 /* =========================================================================
@@ -13508,7 +13684,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Panel, config, Widgets);
+  Factory.make(Panel, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint, Svelto.Pointer, Svelto.Animations, Svelto.Directions);
 
 /* =========================================================================
@@ -13552,7 +13728,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PanelCloser, config, Widgets);
+  Factory.make(PanelCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -13596,7 +13772,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PanelOpener, config, Widgets);
+  Factory.make(PanelOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -13640,7 +13816,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PanelToggler, config, Widgets);
+  Factory.make(PanelToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -13842,7 +14018,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Tabs, config, Widgets);
+  Factory.make(Tabs, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions);
 
 /* =========================================================================
@@ -14940,7 +15116,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Carousel, config, Widgets);
+  Factory.make(Carousel, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations);
 
 /* =========================================================================
@@ -14995,13 +15171,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           nodes = [],
           areas = [];
 
-      var _iteratorNormalCompletion17 = true;
-      var _didIteratorError17 = false;
-      var _iteratorError17 = undefined;
+      var _iteratorNormalCompletion19 = true;
+      var _didIteratorError19 = false;
+      var _iteratorError19 = undefined;
 
       try {
-        for (var _iterator17 = $searchable[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-          var searchable = _step17.value;
+        for (var _iterator19 = $searchable[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+          var searchable = _step19.value;
 
 
           var rect2 = $.getRect(searchable),
@@ -15014,16 +15190,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       } catch (err) {
-        _didIteratorError17 = true;
-        _iteratorError17 = err;
+        _didIteratorError19 = true;
+        _iteratorError19 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion17 && _iterator17.return) {
-            _iterator17.return();
+          if (!_iteratorNormalCompletion19 && _iterator19.return) {
+            _iterator19.return();
           }
         } finally {
-          if (_didIteratorError17) {
-            throw _iteratorError17;
+          if (_didIteratorError19) {
+            throw _iteratorError19;
           }
         }
       }
@@ -15034,14 +15210,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* PUNCTUAL */
 
     if (options.point) {
-      var _iteratorNormalCompletion18 = true;
-      var _didIteratorError18 = false;
-      var _iteratorError18 = undefined;
+      var _iteratorNormalCompletion20 = true;
+      var _didIteratorError20 = false;
+      var _iteratorError20 = undefined;
 
       try {
 
-        for (var _iterator18 = $searchable[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
-          var _searchable = _step18.value;
+        for (var _iterator20 = $searchable[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+          var _searchable = _step20.value;
 
 
           var rect = $.getRect(_searchable);
@@ -15052,16 +15228,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       } catch (err) {
-        _didIteratorError18 = true;
-        _iteratorError18 = err;
+        _didIteratorError20 = true;
+        _iteratorError20 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion18 && _iterator18.return) {
-            _iterator18.return();
+          if (!_iteratorNormalCompletion20 && _iterator20.return) {
+            _iterator20.return();
           }
         } finally {
-          if (_didIteratorError18) {
-            throw _iteratorError18;
+          if (_didIteratorError20) {
+            throw _iteratorError20;
           }
         }
       }
@@ -15242,7 +15418,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Droppable, config, Widgets);
+  Factory.make(Droppable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16027,7 +16203,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Popover, config, Widgets);
+  Factory.make(Popover, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations);
 
 /* =========================================================================
@@ -16071,7 +16247,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PopoverCloser, config, Widgets);
+  Factory.make(PopoverCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16115,7 +16291,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PopoverOpener, config, Widgets);
+  Factory.make(PopoverOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16159,7 +16335,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(PopoverToggler, config, Widgets);
+  Factory.make(PopoverToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16325,13 +16501,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var previousOptgroup = void 0;
 
-        var _iteratorNormalCompletion19 = true;
-        var _didIteratorError19 = false;
-        var _iteratorError19 = undefined;
+        var _iteratorNormalCompletion21 = true;
+        var _didIteratorError21 = false;
+        var _iteratorError21 = undefined;
 
         try {
-          for (var _iterator19 = this.$options[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
-            var option = _step19.value;
+          for (var _iterator21 = this.$options[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
+            var option = _step21.value;
 
 
             var $option = $(option),
@@ -16362,16 +16538,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
         } catch (err) {
-          _didIteratorError19 = true;
-          _iteratorError19 = err;
+          _didIteratorError21 = true;
+          _iteratorError21 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion19 && _iterator19.return) {
-              _iterator19.return();
+            if (!_iteratorNormalCompletion21 && _iterator21.return) {
+              _iterator21.return();
             }
           } finally {
-            if (_didIteratorError19) {
-              throw _iteratorError19;
+            if (_didIteratorError21) {
+              throw _iteratorError21;
             }
           }
         }
@@ -16503,7 +16679,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Select, config, Widgets);
+  Factory.make(Select, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors);
 
 /* =========================================================================
@@ -16543,7 +16719,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Tooltip, config, Widgets);
+  Factory.make(Tooltip, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16587,7 +16763,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TooltipCloser, config, Widgets);
+  Factory.make(TooltipCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16634,7 +16810,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TooltipOpener, config, Widgets);
+  Factory.make(TooltipOpener, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -16681,7 +16857,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(TooltipToggler, config, Widgets);
+  Factory.make(TooltipToggler, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -17000,7 +17176,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Slider, config, Widgets);
+  Factory.make(Slider, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -17261,7 +17437,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Switch, config, Widgets);
+  Factory.make(Switch, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
 
 /* =========================================================================
@@ -17726,23 +17902,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__select',
       value: function __select(event, data) {
 
-        if (this.$table.selectable('get').length) return;
+        this._defer(function () {
+          // So that Selectable's listeners get triggered first //FIXME: Ugly
 
-        var column = this.options.select.column,
-            values = this.options.select.values || [this.options.select.value],
-            rows = data.aoData.filter(function (row) {
-          return _.includes(values, row._aData[column]);
+          if (this.$table.selectable('get').length) return;
+
+          var column = this.options.select.column,
+              values = this.options.select.values || [this.options.select.value],
+              rows = data.aoData.filter(function (row) {
+            return _.includes(values, row._aData[column]);
+          });
+
+          if (!rows.length) return;
+
+          var trs = rows.map(function (row) {
+            return row.nTr;
+          });
+
+          $(trs).addClass(Widgets.Selectable.config.options.classes.selected);
+
+          this.$table.trigger('change'); // In order to make other widgets (Selectable etc.) adjust for this
         });
-
-        if (!rows.length) return;
-
-        var trs = rows.map(function (row) {
-          return row.nTr;
-        });
-
-        $(trs).addClass(Widgets.Selectable.config.options.classes.selected);
-
-        this.$table.trigger('change'); // In order to make other widgets (Selectable etc.) adjust for this
       }
 
       /* API */
@@ -17768,6 +17948,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _page = _.isNumber(_page) && !_.isNaN(_page) ? _page : Math.floor(row / this.$length.val());
 
           if (_.isNaN(_page)) return this.api('page');
+
+          if (_page === this.api('page')) return;
         }
 
         this.api('page', _page);
@@ -17790,7 +17972,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(DT, config, Widgets);
+  Factory.make(DT, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable);
 
 /* =========================================================================
@@ -17845,8 +18027,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _init() {
 
-        this.options.page = Number(this.$element.data(this.options.datas.page)) || this.options.page;
-        this.options.row = Number(this.$element.data(this.options.datas.row)) || this.options.row;
+        var page = this.$element.data(this.options.datas.page),
+            row = this.$element.data(this.options.datas.row);
+
+        this.options.page = _.isString(page) ? page : _.isNaN(Number(page)) ? this.options.page : Number(page);
+        this.options.row = _.isNaN(Number(row)) ? this.options.row : Number(row);
       }
     }, {
       key: '_events',
@@ -17889,7 +18074,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(DatatablesPager, config, Widgets);
+  Factory.make(DatatablesPager, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -18295,7 +18480,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Selectable, config, Widgets);
+  Factory.make(Selectable, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse);
 
 /* =========================================================================
@@ -18859,7 +19044,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Toast, config, Widgets);
+  Factory.make(Toast, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toasts, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes);
 
 /* =========================================================================
@@ -19089,13 +19274,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.elements = {};
 
-        var _iteratorNormalCompletion20 = true;
-        var _didIteratorError20 = false;
-        var _iteratorError20 = undefined;
+        var _iteratorNormalCompletion22 = true;
+        var _didIteratorError22 = false;
+        var _iteratorError22 = undefined;
 
         try {
-          for (var _iterator20 = this.$elements[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
-            var element = _step20.value;
+          for (var _iterator22 = this.$elements[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
+            var element = _step22.value;
 
 
             var $element = $(element),
@@ -19112,13 +19297,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               var validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-              var _iteratorNormalCompletion21 = true;
-              var _didIteratorError21 = false;
-              var _iteratorError21 = undefined;
+              var _iteratorNormalCompletion23 = true;
+              var _didIteratorError23 = false;
+              var _iteratorError23 = undefined;
 
               try {
-                for (var _iterator21 = validationsArr[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
-                  var validationStr = _step21.value;
+                for (var _iterator23 = validationsArr[Symbol.iterator](), _step23; !(_iteratorNormalCompletion23 = (_step23 = _iterator23.next()).done); _iteratorNormalCompletion23 = true) {
+                  var validationStr = _step23.value;
 
 
                   var matches = validationStr.match(this.options.regexes.validation);
@@ -19137,16 +19322,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   };
                 }
               } catch (err) {
-                _didIteratorError21 = true;
-                _iteratorError21 = err;
+                _didIteratorError23 = true;
+                _iteratorError23 = err;
               } finally {
                 try {
-                  if (!_iteratorNormalCompletion21 && _iterator21.return) {
-                    _iterator21.return();
+                  if (!_iteratorNormalCompletion23 && _iterator23.return) {
+                    _iterator23.return();
                   }
                 } finally {
-                  if (_didIteratorError21) {
-                    throw _iteratorError21;
+                  if (_didIteratorError23) {
+                    throw _iteratorError23;
                   }
                 }
               }
@@ -19176,16 +19361,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             };
           }
         } catch (err) {
-          _didIteratorError20 = true;
-          _iteratorError20 = err;
+          _didIteratorError22 = true;
+          _iteratorError22 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion20 && _iterator20.return) {
-              _iterator20.return();
+            if (!_iteratorNormalCompletion22 && _iterator22.return) {
+              _iterator22.return();
             }
           } finally {
-            if (_didIteratorError20) {
-              throw _iteratorError20;
+            if (_didIteratorError22) {
+              throw _iteratorError22;
             }
           }
         }
@@ -19463,7 +19648,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(FormValidate, config, Widgets);
+  Factory.make(FormValidate, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator);
 
 /* =========================================================================
@@ -19577,9 +19762,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
 
         _loop3: for (var i = 0, l = selectors.length; i < l; i++) {
-          var _ret3 = _loop2(i, l);
+          var _ret4 = _loop2(i, l);
 
-          switch (_ret3) {
+          switch (_ret4) {
             case 'continue':
               continue;
 
@@ -19684,7 +19869,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(FormAjax, config, Widgets);
+  Factory.make(FormAjax, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -19944,7 +20129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Liker, config, Widgets);
+  Factory.make(Liker, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -20123,7 +20308,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Rater, config, Widgets);
+  Factory.make(Rater, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -20368,7 +20553,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteAction, config, Widgets);
+  Factory.make(RemoteAction, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes);
 
 /* =========================================================================
@@ -20433,7 +20618,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteActionTrigger, config, Widgets);
+  Factory.make(RemoteActionTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -20679,7 +20864,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteLoader, config, Widgets);
+  Factory.make(RemoteLoader, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
 
 /* =========================================================================
@@ -20791,7 +20976,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteLoaderTrigger, config, Widgets);
+  Factory.make(RemoteLoaderTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -20801,12 +20986,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require lib/autofocus/autofocus.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 
-(function ($, _, Svelto, Widgets, Factory, Animations) {
+(function ($, _, Svelto, Widgets, Factory, Animations, Autofocus) {
 
   'use strict';
 
@@ -20945,6 +21131,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _widgetInit() {
 
         this.$widget.widgetize();
+
+        Autofocus.focus(this.$widget);
       }
     }, {
       key: '_widgetOpen',
@@ -21200,8 +21388,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteWidget, config, Widgets);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+  Factory.make(RemoteWidget, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus);
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Modal
@@ -21255,7 +21443,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteModal, config, Widgets);
+  Factory.make(RemoteModal, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
 
 /* =========================================================================
@@ -21320,7 +21508,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemoteModalTrigger, config, Widgets);
+  Factory.make(RemoteModalTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -21430,7 +21618,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemotePopover, config, Widgets);
+  Factory.make(RemotePopover, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
 
 /* =========================================================================
@@ -21520,7 +21708,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(RemotePopoverTrigger, config, Widgets);
+  Factory.make(RemotePopoverTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -21535,8 +21723,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/targeter/targeter.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
-
-//TODO: Cross-browser test
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
 
@@ -21686,7 +21872,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(SelectableActions, config, Widgets);
+  Factory.make(SelectableActions, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -21835,7 +22021,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(SelectableActionsContainer, config, Widgets);
+  Factory.make(SelectableActionsContainer, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -21966,7 +22152,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(SelectableActionsPopover, config, Widgets);
+  Factory.make(SelectableActionsPopover, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
@@ -22463,7 +22649,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Tagbox, config, Widgets);
+  Factory.make(Tagbox, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard);
 
 /* =========================================================================
@@ -23684,7 +23870,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//TODO: Cross browser testing
 //TODO: Add headings support (level 1/3/5, like github does)
 //TODO: Add emoji support
 //TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
@@ -23840,14 +24025,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '___triggers',
       value: function ___triggers() {
-        var _iteratorNormalCompletion22 = true;
-        var _didIteratorError22 = false;
-        var _iteratorError22 = undefined;
+        var _iteratorNormalCompletion24 = true;
+        var _didIteratorError24 = false;
+        var _iteratorError24 = undefined;
 
         try {
 
-          for (var _iterator22 = this.$triggers[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
-            var trigger = _step22.value;
+          for (var _iterator24 = this.$triggers[Symbol.iterator](), _step24; !(_iteratorNormalCompletion24 = (_step24 = _iterator24.next()).done); _iteratorNormalCompletion24 = true) {
+            var trigger = _step24.value;
 
 
             var $trigger = $(trigger),
@@ -23856,16 +24041,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this._on($trigger, Pointer.tap, _.wrap(action, this.action));
           }
         } catch (err) {
-          _didIteratorError22 = true;
-          _iteratorError22 = err;
+          _didIteratorError24 = true;
+          _iteratorError24 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion22 && _iterator22.return) {
-              _iterator22.return();
+            if (!_iteratorNormalCompletion24 && _iterator24.return) {
+              _iterator24.return();
             }
           } finally {
-            if (_didIteratorError22) {
-              throw _iteratorError22;
+            if (_didIteratorError24) {
+              throw _iteratorError24;
             }
           }
         }
@@ -24144,7 +24329,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FACTORY */
 
-  Factory.init(Editor, config, Widgets);
+  Factory.make(Editor, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 (function () {
