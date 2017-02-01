@@ -13,6 +13,7 @@ const gulp         = require ( 'gulp' ),
       concat       = require ( 'gulp-concat' ),
       newer        = require ( 'gulp-newer' ),
       plumber      = require ( 'gulp-plumber' ),
+      touch        = require ( 'gulp-touch' ),
       plugins      = require ( '../../../config/project' ).plugins,
       changed      = require ( '../../../utilities/changed' ),
       log          = require ( '../../../utilities/log' ),
@@ -37,7 +38,8 @@ function general ( name, filterable ) {
              .pipe ( gulpif ( plugins.dependencies.enabled, dependencies ( plugins.dependencies.options ) ) )
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( concat ( output.getName ( `scss.${name}` ) ) )
-             .pipe ( gulp.dest ( output.getDir ( `scss.${name}` ) ) );
+             .pipe ( gulp.dest ( output.getDir ( `scss.${name}` ) ) )
+             .pipe ( touch () );
 
 }
 

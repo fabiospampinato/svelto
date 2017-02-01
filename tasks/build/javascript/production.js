@@ -17,6 +17,7 @@ const gulp         = require ( 'gulp' ),
       newer        = require ( 'gulp-newer' ),
       plumber      = require ( 'gulp-plumber' ),
       rename       = require ( 'gulp-rename' ),
+      touch        = require ( 'gulp-touch' ),
       uglify       = require ( 'gulp-uglify' ),
       changed      = require ( '../../utilities/changed' ),
       log          = require ( '../../utilities/log' ),
@@ -48,7 +49,8 @@ function task () {
              .pipe ( gulpif ( plugins.uglify.enabled, uglify ( plugins.uglify.options ) ) )
              .pipe ( gulpif ( plugins.closure.enabled, closure ( plugins.closure.options ) ) )
              .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
-             .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
+             .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) )
+             .pipe ( touch () );
 
 }
 

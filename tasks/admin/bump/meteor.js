@@ -10,7 +10,8 @@
 
 const fs      = require ( 'fs' ),
       gulp    = require ( 'gulp' ),
-      replace = require ( 'gulp-replace' );
+      replace = require ( 'gulp-replace' ),
+      touch   = require ( 'gulp-touch' );
 
 /* TASK */
 
@@ -20,7 +21,8 @@ function task () {
 
   return gulp.src ( './package.js' )
              .pipe ( replace ( /version: '(.*)'/, `version: '${version}'` ) )
-             .pipe ( gulp.dest ( './' ) );
+             .pipe ( gulp.dest ( './' ) )
+             .pipe ( touch () );
 
 }
 

@@ -12,7 +12,8 @@ const gulp     = require ( 'gulp' ),
       gulpif   = require ( 'gulp-if' ),
       flatten  = require ( 'gulp-flatten' ),
       newer    = require ( 'gulp-newer' ),
-      plumber  = require ( 'gulp-plumber' ),
+      plumber  = require ( 'gulp-plumber' )
+      touch    = require ( 'gulp-touch' ),
       changed  = require ( '../utilities/changed' ),
       log      = require ( '../utilities/log' ),
       input    = require ( '../utilities/input' ),
@@ -33,7 +34,8 @@ function task () {
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'fonts' ) ) ) )
-             .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) )
+             .pipe ( touch () );
 
 }
 

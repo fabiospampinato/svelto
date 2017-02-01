@@ -15,6 +15,7 @@ const gulp     = require ( 'gulp' ),
       imagemin = require ( 'gulp-imagemin' ),
       newer    = require ( 'gulp-newer' ),
       plumber  = require ( 'gulp-plumber' ),
+      touch    = require ( 'gulp-touch' ),
       changed  = require ( '../utilities/changed' ),
       log      = require ( '../utilities/log' ),
       input    = require ( '../utilities/input' ),
@@ -38,7 +39,8 @@ function task () {
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.start () ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, imagemin ( plugins.imagemin.plugins, plugins.imagemin.options ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.stop () ) )
-             .pipe ( gulp.dest ( output.getPath ( 'images' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'images' ) ) )
+             .pipe ( touch () );
 
 }
 

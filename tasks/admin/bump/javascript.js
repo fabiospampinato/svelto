@@ -10,7 +10,8 @@
 
 const fs      = require ( 'fs' ),
       gulp    = require ( 'gulp' ),
-      replace = require ( 'gulp-replace' );
+      replace = require ( 'gulp-replace' ),
+      touch   = require ( 'gulp-touch' );
 
 /* TASK */
 
@@ -20,7 +21,8 @@ function task () {
 
   return gulp.src ( './src/core/svelto/svelto.js' )
              .pipe ( replace ( /VERSION: '(.*)'/, `VERSION: '${version}'` ) )
-             .pipe ( gulp.dest ( './src/core/svelto' ) );
+             .pipe ( gulp.dest ( './src/core/svelto' ) )
+             .pipe ( touch () );
 
 }
 

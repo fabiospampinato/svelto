@@ -20,6 +20,7 @@ const _            = require ( 'lodash' ),
       gulpif       = require ( 'gulp-if' ),
       newer        = require ( 'gulp-newer' ),
       plumber      = require ( 'gulp-plumber' ),
+      touch        = require ( 'gulp-touch' ),
       plugins      = require ( '../../config/project' ).plugins,
       changed      = require ( '../../utilities/changed' ),
       log          = require ( '../../utilities/log' ),
@@ -54,7 +55,8 @@ function task () {
              .pipe ( flatten () )
              .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.temp' ) ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-             .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) );
+             .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) )
+             .pipe ( touch () );
 
 }
 

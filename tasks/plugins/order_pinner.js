@@ -10,8 +10,7 @@
 
 const _       = require ( 'lodash' ),
       path    = require ( 'path' ),
-      foreach = require ( 'gulp-foreach' ),
-      newer   = require ( 'gulp-newer' );
+      foreach = require ( 'gulp-foreach' );
 
 /* ORDER PINNER */
 

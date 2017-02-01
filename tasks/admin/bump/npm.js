@@ -8,10 +8,11 @@
 
 /* REQUIRE */
 
-const argv = require ( 'yargs' ).argv,
-      gulp = require ( 'gulp' ),
-      bump = require ( 'gulp-bump' ),
-      log  = require ( '../../utilities/log' );
+const argv  = require ( 'yargs' ).argv,
+      gulp  = require ( 'gulp' ),
+      bump  = require ( 'gulp-bump' ),
+      touch = require ( 'gulp-touch' ),
+      log   = require ( '../../utilities/log' );
 
 /* TASK */
 
@@ -23,7 +24,8 @@ function task () {
                version: argv.version,
                preid:   argv.preid || 'beta'
              }))
-             .pipe ( gulp.dest ( './' ) );
+             .pipe ( gulp.dest ( './' ) )
+             .pipe ( touch () );
 
 }
 

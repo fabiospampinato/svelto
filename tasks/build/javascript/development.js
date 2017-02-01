@@ -12,6 +12,7 @@ const gulp   = require ( 'gulp' ),
       concat = require ( 'gulp-concat' ),
       newer  = require ( 'gulp-newer' ),
       rename = require ( 'gulp-rename' ),
+      touch  = require ( 'gulp-touch' ),
       input  = require ( '../../utilities/input' ),
       output = require ( '../../utilities/output' );
 
@@ -24,7 +25,8 @@ function task () {
              .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
              .pipe ( rename ( output.getName ( 'javascript.compressed' ) ) )
-             .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) );
+             .pipe ( gulp.dest ( output.getDir ( 'javascript.compressed' ) ) )
+             .pipe ( touch () );
 
 }
 

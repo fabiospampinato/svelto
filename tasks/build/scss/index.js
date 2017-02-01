@@ -11,6 +11,7 @@
 const gulp   = require ( 'gulp' ),
       concat = require ( 'gulp-concat' ),
       newer  = require ( 'gulp-newer' ),
+      touch  = require ( 'gulp-touch' ),
       output = require ( '../../utilities/output' );
 
 /* TASK */
@@ -22,7 +23,8 @@ function task () {
   return gulp.src ( parts.map ( part => output.getPath ( `scss.${part}` ) ) )
              .pipe ( newer ( output.getPath ( 'scss.all' ) ) )
              .pipe ( concat ( output.getName ( 'scss.all' ) ) )
-             .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) );
+             .pipe ( gulp.dest ( output.getDir ( 'scss.all' ) ) )
+             .pipe ( touch () );
 
 }
 
