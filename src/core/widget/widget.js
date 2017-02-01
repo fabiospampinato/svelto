@@ -59,9 +59,9 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele ) { // Called for widgetizing an element
+    static widgetize ( $ele, Widget ) { // Called for widgetizing an element
 
-      $ele[this.config.name]();
+      $ele[Widget.config.name]();
 
     }
 

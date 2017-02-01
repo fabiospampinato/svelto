@@ -77,7 +77,7 @@
 
       let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
 
-      Widgetize.add ( Widget.config.selector, widgetize.bind ( Widget ) );
+      Widgetize.add ( Widget.config.selector, widgetize, Widget );
 
     },
 

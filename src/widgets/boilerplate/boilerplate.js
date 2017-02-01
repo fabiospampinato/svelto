@@ -44,13 +44,13 @@
 
     /* WIDGETIZE */
 
-    static widgetize () {
+    static widgetize ( $ele, Widget ) {
 
     }
 
     /* READY */
 
-    static ready () {
+    static ready ( done ) {
 
     }
 
