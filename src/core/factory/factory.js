@@ -6,10 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, Svelto, Widgetize, Widgets ) {
+(function ( $, _, Svelto, Widgets, Readify, Widgetize ) {
 
   'use strict';
 
@@ -61,13 +62,7 @@
 
     ready ( Widget ) {
 
-      let ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property
-          initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady, //IE10 support -- static property
-          setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
-
-      initReady.bind ( Widget )();
-
-      $(_.wrap ( setReady.bind ( Widget ), ready.bind ( Widget ) ));
+      Readify.add ( Widget );
 
     },
 
@@ -125,4 +120,4 @@
 
   Svelto.Factory = Factory;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize ));

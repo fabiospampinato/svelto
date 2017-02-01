@@ -22,6 +22,12 @@
 
     }
 
+    get () {
+
+      return this.widgetizers;
+
+    }
+
     add ( selector, widgetizer, data ) {
 
       if ( !(selector in this.widgetizers) ) {
@@ -31,12 +37,6 @@
       }
 
       this.widgetizers[selector].push ( [widgetizer, data] );
-
-    }
-
-    get () {
-
-      return this.widgetizers;
 
     }
 
