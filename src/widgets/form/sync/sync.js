@@ -126,6 +126,6 @@
 
   /* FACTORY */
 
-  Factory.make ( FormSync, config, Widgets );
+  Factory.make ( FormSync, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

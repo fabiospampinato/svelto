@@ -240,6 +240,6 @@
 
   /* FACTORY */
 
-  Factory.make ( RemoteAction, config, Widgets );
+  Factory.make ( RemoteAction, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes ));

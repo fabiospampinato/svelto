@@ -168,6 +168,6 @@
 
   /* FACTORY */
 
-  Factory.make ( DT, config, Widgets );
+  Factory.make ( DT, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.DataTable ));

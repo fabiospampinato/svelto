@@ -101,6 +101,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Pager, config, Widgets );
+  Factory.make ( Pager, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

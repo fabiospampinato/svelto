@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( PanelToggler, config, Widgets );
+  Factory.make ( PanelToggler, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

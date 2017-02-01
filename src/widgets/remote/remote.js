@@ -171,6 +171,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Remote, config, Widgets );
+  Factory.make ( Remote, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

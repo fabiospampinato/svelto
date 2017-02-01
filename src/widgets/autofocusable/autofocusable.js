@@ -41,6 +41,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Autofocusable, config, Widgets );
+  Factory.make ( Autofocusable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus ));

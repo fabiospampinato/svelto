@@ -45,6 +45,6 @@
 
   /* FACTORY */
 
-  Factory.make ( RemotePopoverTrigger, config, Widgets );
+  Factory.make ( RemotePopoverTrigger, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

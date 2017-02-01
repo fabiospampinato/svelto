@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( OverlayCloser, config, Widgets );
+  Factory.make ( OverlayCloser, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

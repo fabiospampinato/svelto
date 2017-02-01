@@ -67,6 +67,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Targeter, config, Widgets );
+  Factory.make ( Targeter, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

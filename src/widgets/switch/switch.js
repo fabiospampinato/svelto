@@ -245,6 +245,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Switch, config, Widgets );
+  Factory.make ( Switch, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));

@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( ModalCloser, config, Widgets );
+  Factory.make ( ModalCloser, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

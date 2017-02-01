@@ -43,6 +43,6 @@
 
   /* FACTORY */
 
-  Factory.make ( RemoteLoaderTrigger, config, Widgets );
+  Factory.make ( RemoteLoaderTrigger, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

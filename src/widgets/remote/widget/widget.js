@@ -393,6 +393,6 @@
 
   /* FACTORY */
 
-  Factory.make ( RemoteWidget, config, Widgets );
+  Factory.make ( RemoteWidget, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus ));

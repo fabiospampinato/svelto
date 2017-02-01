@@ -74,6 +74,6 @@
 
   /* FACTORY */
 
-  Factory.make ( RemoteTrigger, config, Widgets );
+  Factory.make ( RemoteTrigger, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

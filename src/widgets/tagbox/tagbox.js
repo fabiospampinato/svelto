@@ -508,6 +508,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Tagbox, config, Widgets );
+  Factory.make ( Tagbox, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));

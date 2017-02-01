@@ -101,6 +101,6 @@
 
   /* FACTORY */
 
-  Factory.make ( AutogrowTextarea, config, Widgets );
+  Factory.make ( AutogrowTextarea, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

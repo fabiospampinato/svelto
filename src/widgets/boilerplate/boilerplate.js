@@ -82,6 +82,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Boilerplate, config, Widgets );
+  Factory.make ( Boilerplate, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

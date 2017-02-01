@@ -226,6 +226,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Rails, config, Widgets );
+  Factory.make ( Rails, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer ));

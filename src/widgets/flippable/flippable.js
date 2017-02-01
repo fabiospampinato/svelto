@@ -90,6 +90,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Flippable, config, Widgets );
+  Factory.make ( Flippable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

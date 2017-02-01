@@ -129,6 +129,6 @@
 
   /* FACTORY */
 
-  Factory.make ( SelectableActionsContainer, config, Widgets );
+  Factory.make ( SelectableActionsContainer, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

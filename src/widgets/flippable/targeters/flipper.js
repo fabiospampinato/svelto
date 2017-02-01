@@ -35,6 +35,6 @@
 
   /* FACTORY */
 
-  Factory.make ( FlippableFlipper, config, Widgets );
+  Factory.make ( FlippableFlipper, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

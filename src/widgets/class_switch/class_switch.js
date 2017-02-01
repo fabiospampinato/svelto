@@ -229,6 +229,6 @@
 
   /* FACTORY */
 
-  Factory.make ( ClassSwitch, config, Widgets );
+  Factory.make ( ClassSwitch, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint ));

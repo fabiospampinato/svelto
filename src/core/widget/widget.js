@@ -830,6 +830,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Widget, config, Widgets );
+  Factory.make ( Widget, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));

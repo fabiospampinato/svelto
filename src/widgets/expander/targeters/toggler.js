@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( ExpanderToggler, config, Widgets );
+  Factory.make ( ExpanderToggler, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

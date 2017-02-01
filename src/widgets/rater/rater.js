@@ -171,6 +171,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Rater, config, Widgets );
+  Factory.make ( Rater, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

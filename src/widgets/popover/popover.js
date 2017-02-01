@@ -369,6 +369,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Popover, config, Widgets );
+  Factory.make ( Popover, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmbeddedCSS, Svelto.Animations ));

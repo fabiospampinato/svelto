@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( ZoomableOpener, config, Widgets );
+  Factory.make ( ZoomableOpener, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

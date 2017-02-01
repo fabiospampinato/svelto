@@ -199,6 +199,6 @@
 
   /* FACTORY */
 
-  Factory.make ( FormAjax, config, Widgets );
+  Factory.make ( FormAjax, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

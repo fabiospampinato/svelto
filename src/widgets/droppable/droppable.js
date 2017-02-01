@@ -154,6 +154,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Droppable, config, Widgets );
+  Factory.make ( Droppable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

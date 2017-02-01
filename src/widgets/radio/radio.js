@@ -45,6 +45,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Radio, config, Widgets );
+  Factory.make ( Radio, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

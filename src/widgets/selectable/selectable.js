@@ -393,6 +393,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Selectable, config, Widgets );
+  Factory.make ( Selectable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));

@@ -28,7 +28,7 @@
 
     },
 
-    make ( Widget, config, namespace ) {
+    make ( Widget, config, namespace = Widgets ) {
 
       for ( let maker of this.makers.order ) {
 

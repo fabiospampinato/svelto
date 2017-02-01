@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( PopoverOpener, config, Widgets );
+  Factory.make ( PopoverOpener, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

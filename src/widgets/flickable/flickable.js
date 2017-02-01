@@ -162,6 +162,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Flickable, config, Widgets );
+  Factory.make ( Flickable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

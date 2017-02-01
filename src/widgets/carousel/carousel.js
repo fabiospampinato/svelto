@@ -358,6 +358,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Carousel, config, Widgets );
+  Factory.make ( Carousel, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));

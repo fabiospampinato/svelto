@@ -112,6 +112,6 @@
 
   /* FACTORY */
 
-  Factory.make ( SelectableActionsPopover, config, Widgets );
+  Factory.make ( SelectableActionsPopover, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

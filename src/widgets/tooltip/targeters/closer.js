@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.make ( TooltipCloser, config, Widgets );
+  Factory.make ( TooltipCloser, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

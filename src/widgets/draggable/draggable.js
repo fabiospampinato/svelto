@@ -667,6 +667,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Draggable, config, Widgets );
+  Factory.make ( Draggable, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));

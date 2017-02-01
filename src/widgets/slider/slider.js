@@ -298,6 +298,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Slider, config, Widgets );
+  Factory.make ( Slider, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

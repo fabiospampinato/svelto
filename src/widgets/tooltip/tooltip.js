@@ -26,6 +26,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Tooltip, config, Widgets );
+  Factory.make ( Tooltip, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

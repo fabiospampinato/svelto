@@ -178,6 +178,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Overlay, config, Widgets );
+  Factory.make ( Overlay, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));

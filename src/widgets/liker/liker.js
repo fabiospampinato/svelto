@@ -236,6 +236,6 @@
 
   /* FACTORY */
 
-  Factory.make ( Liker, config, Widgets );
+  Factory.make ( Liker, config );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
