@@ -51,6 +51,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Infobar, config, Widgets );
+  Factory.make ( Infobar, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

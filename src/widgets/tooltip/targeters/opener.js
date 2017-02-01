@@ -33,6 +33,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TooltipOpener, config, Widgets );
+  Factory.make ( TooltipOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

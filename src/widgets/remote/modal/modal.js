@@ -45,6 +45,6 @@
 
   /* FACTORY */
 
-  Factory.init ( RemoteModal, config, Widgets );
+  Factory.make ( RemoteModal, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));

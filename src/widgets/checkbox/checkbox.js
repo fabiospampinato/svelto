@@ -68,6 +68,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Checkbox, config, Widgets );
+  Factory.make ( Checkbox, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

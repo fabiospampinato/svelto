@@ -437,6 +437,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Toast, config, Widgets );
+  Factory.make ( Toast, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toasts, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations, Svelto.Colors, Svelto.Sizes ));

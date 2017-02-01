@@ -177,6 +177,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TableHelper, config, Widgets );
+  Factory.make ( TableHelper, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

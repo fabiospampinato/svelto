@@ -269,6 +269,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TableSortable, config, Widgets );
+  Factory.make ( TableSortable, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

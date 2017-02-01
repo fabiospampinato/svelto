@@ -94,6 +94,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Chart, config, Widgets );
+  Factory.make ( Chart, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, window.Chart ));

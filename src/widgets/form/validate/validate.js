@@ -494,6 +494,6 @@
 
   /* FACTORY */
 
-  Factory.init ( FormValidate, config, Widgets );
+  Factory.make ( FormValidate, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator ));

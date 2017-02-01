@@ -18,23 +18,9 @@
 
   let Factory = {
 
-    /* VARIABLES */
+    /* API */
 
-    initializers: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // `Factory` methods, in order, to call when initing a `Widget`
-
-    /* METHODS */
-
-    init ( Widget, config, namespace ) {
-
-      for ( let initializer of this.initializers ) {
-
-        this[initializer]( Widget, config, namespace );
-
-      }
-
-    },
-
-    instance ( Widget, options, element ) {
+    instanciate ( Widget, options, element ) {
 
       let name = Widget.config.name;
 
@@ -42,75 +28,87 @@
 
     },
 
-    /* WORKERS */
+    make ( Widget, config, namespace ) {
 
-    configure ( Widget, config = {} ) {
+      for ( let maker of this.makers.order ) {
 
-      Widget.config = config;
+        this.makers[maker]( Widget, config, namespace );
 
-    },
-
-    namespace ( Widget, config, namespace ) {
-
-      if ( !_.isObject ( namespace ) ) return;
-
-      let name = _.upperFirst ( Widget.config.name );
-
-      namespace[name] = Widget;
+      }
 
     },
 
-    ready ( Widget ) {
+    /* MAKERS */
 
-      Readify.add ( Widget );
+    makers: {
 
-    },
+      order: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // The order in which the makers will be called
 
-    widgetize ( Widget ) {
+      configure ( Widget, config = {} ) {
 
-      if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
+        Widget.config = config;
 
-      let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+      },
 
-      Widgetize.add ( Widget.config.selector, widgetize, Widget );
+      namespace ( Widget, config, namespace ) {
 
-    },
+        if ( !_.isObject ( namespace ) ) return;
 
-    plugin ( Widget ) {
+        let name = _.upperFirst ( Widget.config.name );
 
-      if ( !Widget.config.plugin ) return;
+        namespace[name] = Widget;
 
-      /* NAME */
+      },
 
-      let name = Widget.config.name;
+      ready ( Widget ) {
 
-      /* JQUERY PLUGIN */
+        Readify.add ( Widget );
 
-      $.fn[name] = function ( options, ...args ) {
+      },
 
-        let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
+      widgetize ( Widget ) { //TODO: Maybe add native support for Widgets to Widgetize and make this method as simple as `ready`
 
-        for ( let element of this ) {
+        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
 
-          let instance = Factory.instance ( Widget, options, element );
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
 
-          if ( isMethodCall && _.isFunction ( instance[options] ) ) {
+        Widgetize.add ( Widget.config.selector, widgetize, Widget );
 
-            let returnValue = instance[options]( ...args );
+      },
 
-            if ( !_.isUndefined ( returnValue ) ) {
+      plugin ( Widget ) {
 
-              return returnValue;
+        if ( !Widget.config.plugin ) return;
+
+        /* NAME */
+
+        let name = Widget.config.name;
+
+        /* JQUERY PLUGIN */
+
+        $.fn[name] = function ( options, ...args ) {
+
+          let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
+
+          for ( let element of this ) {
+
+            let instance = Factory.instanciate ( Widget, options, element );
+
+            if ( isMethodCall && _.isFunction ( instance[options] ) ) {
+
+              let returnValue = instance[options]( ...args );
+
+              if ( !_.isUndefined ( returnValue ) ) return returnValue;
 
             }
 
           }
 
-        }
+          return this;
 
-        return this;
+        };
 
-      };
+      }
 
     }
 

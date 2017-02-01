@@ -183,6 +183,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Tabs, config, Widgets );
+  Factory.make ( Tabs, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions ));

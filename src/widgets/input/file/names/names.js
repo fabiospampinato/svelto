@@ -106,6 +106,6 @@
 
   /* FACTORY */
 
-  Factory.init ( InputFileNames, config, Widgets );
+  Factory.make ( InputFileNames, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

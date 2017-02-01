@@ -320,6 +320,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Select, config, Widgets );
+  Factory.make ( Select, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Colors ));

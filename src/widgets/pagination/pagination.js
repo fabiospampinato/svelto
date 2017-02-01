@@ -26,6 +26,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Pagination, config, Widgets );
+  Factory.make ( Pagination, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

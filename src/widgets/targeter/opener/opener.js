@@ -189,6 +189,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Opener, config, Widgets );
+  Factory.make ( Opener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer ));

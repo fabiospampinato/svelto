@@ -149,6 +149,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Progressbar, config, Widgets );
+  Factory.make ( Progressbar, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

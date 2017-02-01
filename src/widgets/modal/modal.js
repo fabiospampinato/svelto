@@ -209,6 +209,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Modal, config, Widgets );
+  Factory.make ( Modal, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

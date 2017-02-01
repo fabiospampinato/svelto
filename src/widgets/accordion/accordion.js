@@ -140,6 +140,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Accordion, config, Widgets );
+  Factory.make ( Accordion, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

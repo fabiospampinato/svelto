@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( ExpanderOpener, config, Widgets );
+  Factory.make ( ExpanderOpener, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -120,6 +120,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TimeAgo, config, Widgets );
+  Factory.make ( TimeAgo, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer ));

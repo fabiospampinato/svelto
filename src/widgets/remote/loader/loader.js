@@ -225,6 +225,6 @@
 
   /* FACTORY */
 
-  Factory.init ( RemoteLoader, config, Widgets );
+  Factory.make ( RemoteLoader, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus ));

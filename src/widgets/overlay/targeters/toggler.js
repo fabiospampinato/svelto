@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( OverlayToggler, config, Widgets );
+  Factory.make ( OverlayToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

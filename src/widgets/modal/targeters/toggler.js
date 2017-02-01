@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( ModalToggler, config, Widgets );
+  Factory.make ( ModalToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

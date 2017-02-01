@@ -95,6 +95,6 @@
 
   /* FACTORY */
 
-  Factory.init ( RemotePopover, config, Widgets );
+  Factory.make ( RemotePopover, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));

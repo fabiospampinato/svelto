@@ -61,6 +61,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TextareaSender, config, Widgets );
+  Factory.make ( TextareaSender, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

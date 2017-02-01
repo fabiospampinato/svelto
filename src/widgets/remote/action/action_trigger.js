@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( RemoteActionTrigger, config, Widgets );
+  Factory.make ( RemoteActionTrigger, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

@@ -449,6 +449,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Panel, config, Widgets );
+  Factory.make ( Panel, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint, Svelto.Pointer, Svelto.Animations, Svelto.Directions ));

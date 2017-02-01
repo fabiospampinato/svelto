@@ -92,6 +92,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Expander, config, Widgets );
+  Factory.make ( Expander, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations ));

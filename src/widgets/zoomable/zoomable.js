@@ -521,6 +521,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Zoomable, config, Widgets );
+  Factory.make ( Zoomable, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations ));

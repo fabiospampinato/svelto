@@ -47,6 +47,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Toggler, config, Widgets );
+  Factory.make ( Toggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

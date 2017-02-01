@@ -430,6 +430,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Editor, config, Widgets );
+  Factory.make ( Editor, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

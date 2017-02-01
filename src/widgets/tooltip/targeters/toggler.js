@@ -33,6 +33,6 @@
 
   /* FACTORY */
 
-  Factory.init ( TooltipToggler, config, Widgets );
+  Factory.make ( TooltipToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

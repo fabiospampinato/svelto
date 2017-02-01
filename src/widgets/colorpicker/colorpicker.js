@@ -413,6 +413,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Colorpicker, config, Widgets );
+  Factory.make ( Colorpicker, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard ));

@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( InfobarCloser, config, Widgets );
+  Factory.make ( InfobarCloser, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

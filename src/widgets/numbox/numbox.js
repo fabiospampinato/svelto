@@ -231,6 +231,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Numbox, config, Widgets );
+  Factory.make ( Numbox, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

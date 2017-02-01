@@ -531,6 +531,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Datepicker, config, Widgets );
+  Factory.make ( Datepicker, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

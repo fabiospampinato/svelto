@@ -119,6 +119,6 @@
 
   /* FACTORY */
 
-  Factory.init ( InputAutogrow, config, Widgets );
+  Factory.make ( InputAutogrow, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser ));

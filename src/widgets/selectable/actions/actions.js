@@ -145,6 +145,6 @@
 
   /* FACTORY */
 
-  Factory.init ( SelectableActions, config, Widgets );
+  Factory.make ( SelectableActions, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

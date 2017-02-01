@@ -81,6 +81,6 @@
 
   /* FACTORY */
 
-  Factory.init ( DatatablesPager, config, Widgets );
+  Factory.make ( DatatablesPager, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

@@ -115,6 +115,6 @@
 
   /* FACTORY */
 
-  Factory.init ( SpinnerOverlay, config, Widgets );
+  Factory.make ( SpinnerOverlay, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));

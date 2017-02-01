@@ -30,6 +30,6 @@
 
   /* FACTORY */
 
-  Factory.init ( PopoverToggler, config, Widgets );
+  Factory.make ( PopoverToggler, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));

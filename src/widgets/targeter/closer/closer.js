@@ -69,6 +69,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Closer, config, Widgets );
+  Factory.make ( Closer, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));

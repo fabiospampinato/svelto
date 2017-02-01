@@ -189,6 +189,6 @@
 
   /* FACTORY */
 
-  Factory.init ( Ripple, config, Widgets );
+  Factory.make ( Ripple, config, Widgets );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations ));
