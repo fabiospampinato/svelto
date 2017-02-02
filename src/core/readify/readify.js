@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Maybe make it a little more general, adding support for pure functions as well
+//FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
 (function ( $, _, Svelto, Widgets ) {
 

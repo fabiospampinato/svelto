@@ -76,13 +76,9 @@
 
       },
 
-      widgetize ( Widget ) { //TODO: Maybe add native support for Widgets to Widgetize and make this method as simple as `ready`
+      widgetize ( Widget ) {
 
-        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
-
-        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
-
-        Widgetize.add ( Widget.config.selector, widgetize, Widget );
+        Widgetize.add ( Widget );
 
       },
 
@@ -152,11 +148,7 @@
 
       widgetize ( Widget ) {
 
-        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
-
-        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
-
-        Widgetize.remove ( Widget.config.selector, widgetize );
+        Widgetize.remove ( Widget );
 
       },
 

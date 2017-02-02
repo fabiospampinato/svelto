@@ -8,7 +8,9 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, Svelto ) {
+//FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
+
+(function ( $, _, Svelto, Widgets ) {
 
   'use strict';
 
@@ -30,6 +32,18 @@
 
     add ( selector, widgetizer, data ) {
 
+      if ( _.isObject ( selector ) ) {
+
+        let Widget = selector;
+
+        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
+
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+        return this.add ( Widget.config.selector, widgetize, Widget );
+
+      }
+
       if ( !(selector in this.widgetizers) ) {
 
         this.widgetizers[selector] = [];
@@ -41,6 +55,18 @@
     }
 
     remove ( selector, widgetizer ) {
+
+      if ( _.isObject ( selector ) ) {
+
+        let Widget = selector;
+
+        if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
+
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+        return this.remove ( Widget.config.selector, widgetize );
+
+      }
 
       if ( selector in this.widgetizers ) {
 
@@ -121,4 +147,4 @@
 
   });
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
