@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./horizontal.scss
+ * @before ./vertical.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.layout:not(.vertical):not(.horizontal) {
+  @extend .layout.vertical;
+}

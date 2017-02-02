@@ -10,11 +10,11 @@
 
 /* FIRST LAYOUT */
 
-.layout {
+.layout.vertical {
 
   /* HEADER */
 
-  .layout-header.sticky {
+  > .layout-header.sticky {
 
     @include position ( fixed, 0 0 false 0 );
     z-index: $layout-sticky-header-z-index;
@@ -27,11 +27,11 @@
 
   /* NOT FIRST */
 
-  .layout {
+  .layout.vertical {
 
     /* HEADER */
 
-    .layout-header.sticky {
+    > .layout-header.sticky {
 
       position: relative;
       position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)

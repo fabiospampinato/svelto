@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Vertical
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+
+/* VERTICAL */
+
+.layout.vertical {
+  flex-direction: column;
+  overflow: auto
+}

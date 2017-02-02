@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+
+// Header and Footer are always "sticky"
+
+/* HORIZONTAL */
+
+.layout.horizontal {
+
+  flex-direction: row;
+  overflow: hidden;
+
+  /* CONTENT */
+
+  > .layout-content {
+    overflow: auto;
+    flex-shrink: 1;
+  }
+
+}
