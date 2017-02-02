@@ -29,7 +29,9 @@
 
   padding-top: $panel-slim-y-height;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     top: $panel-slim-y-height;
   }
 

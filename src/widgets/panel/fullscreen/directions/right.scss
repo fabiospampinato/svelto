@@ -29,7 +29,9 @@
 
   padding-right: 100vw;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     right: 100vw;
   }
 

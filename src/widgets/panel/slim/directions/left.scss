@@ -29,7 +29,9 @@
 
   padding-left: $panel-slim-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     left: $panel-slim-x-width;
   }
 

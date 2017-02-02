@@ -29,7 +29,9 @@
 
   padding-right: $panel-default-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     right: $panel-default-x-width;
   }
 

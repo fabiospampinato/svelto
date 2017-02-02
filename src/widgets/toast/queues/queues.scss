@@ -28,7 +28,7 @@
 
     /* STICKY HEADER */
 
-    .layout-header.sticky ~ & {
+    .layout.vertical > .layout-header.sticky ~ & {
       top: $layout-sticky-header-height;
     }
 

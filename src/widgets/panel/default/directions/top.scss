@@ -29,7 +29,9 @@
 
   padding-top: $panel-default-y-height;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     top: $panel-default-y-height;
   }
 
