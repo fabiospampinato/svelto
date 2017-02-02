@@ -321,17 +321,29 @@
 
     }
 
-    action ( name ) {
+    set ( value ) {
 
-      if ( !name ) return;
+      this.$textarea.val ( value );
 
-      if ( !this.options.actions.hasOwnProperty ( name ) ) return;
+      if ( this._isPreview ) this._render ();
 
-      this.options.actions[name].apply ( this );
+    }
+
+    reset () {
+
+      return this.set ( '' );
+
+    }
+
+    action ( action ) {
+
+      if ( !action || !this.options.actions.hasOwnProperty ( action ) ) return;
+
+      this.options.actions[action].apply ( this );
 
       this.$textarea.focus ();
 
-      this._trigger ( 'action', { action: name } );
+      this._trigger ( 'action', {action} );
 
     }
 
