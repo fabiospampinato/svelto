@@ -106,7 +106,11 @@
         'esc': 'unfullscreen'
       },
       callbacks: {
-        action: _.noop
+        action: _.noop,
+        preview: _.noop,
+        unpreview: _.noop,
+        fullscreen: _.noop,
+        unfullscreen: _.noop
       }
     }
   };
@@ -323,7 +327,7 @@
 
     set ( value ) {
 
-      this.$textarea.val ( value );
+      this.$textarea.val ( value ).change ();
 
       if ( this._isPreview ) this._render ();
 
@@ -379,6 +383,8 @@
 
       this.$triggerPreview.addClass ( this.options.classes.trigger.active );
 
+      this._trigger ( 'preview' );
+
     }
 
     unpreview () {
@@ -390,6 +396,8 @@
       this.$editor.removeClass ( this.options.classes.preview );
 
       this.$triggerPreview.removeClass ( this.options.classes.trigger.active );
+
+      this._trigger ( 'unpreview' );
 
     }
 
@@ -422,6 +430,8 @@
 
       this.$triggerFullscreen.addClass ( this.options.classes.trigger.active );
 
+      this._trigger ( 'fullscreen' );
+
     }
 
     unfullscreen () {
@@ -434,6 +444,8 @@
       this.$editor.removeClass ( this.options.classes.fullscreen );
 
       this.$triggerFullscreen.removeClass ( this.options.classes.trigger.active );
+
+      this._trigger ( 'unfullscreen' );
 
     }
 

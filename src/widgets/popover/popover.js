@@ -24,7 +24,7 @@
     plugin: true,
     selector: '.popover',
     options: {
-      contentChangeEvents: 'change datepicker:change inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
+      contentChangeEvents: 'change datepicker:change editor:fullscreen editor:unfullscreen editor:preview editor:unpreview inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
       mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
       positionate: {}, // Extending `$.positionate` options
       spacing: {
