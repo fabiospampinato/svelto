@@ -339,9 +339,11 @@
 
     }
 
-    action ( action ) {
+    action ( action, event ) {
 
       if ( !action || !this.options.actions.hasOwnProperty ( action ) ) return;
+
+      if ( event ) event.preventDefault ();
 
       this.options.actions[action].apply ( this );
 
