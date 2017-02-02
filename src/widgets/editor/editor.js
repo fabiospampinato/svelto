@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vendor/marked.js
+ * @before ./vendor/marked.js
  * @require core/widget/widget.js
  * ========================================================================= */
 
@@ -25,7 +25,7 @@
     plugin: true,
     selector: '.editor',
     options: {
-      parser: window.marked,
+      parser: window.marked || _.identity,
       actions: {
         bold () {
           this._action ( '**', '**', 'bold' );
