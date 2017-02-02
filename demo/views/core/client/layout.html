@@ -11,20 +11,50 @@
     <footer class="layout-footer">Footer</footer>
   </div>
 
-  {{{sw.divider "Modal"}}}
+  {{{sw.divider "Special widgets"}}}
 
-  <div class="layout bordered">
-    <header class="layout-header">Header</header>
-    <main class="layout-content">{{> modal}}</main>
-    <footer class="layout-footer">Footer</footer>
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable expander-toggler large text-center">Editor</div>
+    <div class="card-block expander-content">
+      <div class="layout bordered">
+        <header class="layout-header">Header</header>
+        <main class="layout-content">{{> editor}}</main>
+        <footer class="layout-footer">Footer</footer>
+      </div>
+    </div>
   </div>
 
-  {{{sw.divider "Panel"}}}
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable expander-toggler large text-center">Modal</div>
+    <div class="card-block expander-content">
+      <div class="layout bordered">
+        <header class="layout-header">Header</header>
+        <main class="layout-content">{{> modal}}</main>
+        <footer class="layout-footer">Footer</footer>
+      </div>
+    </div>
+  </div>
 
-  <div class="layout bordered">
-    <header class="layout-header">Header</header>
-    <main class="layout-content">{{> panel}}</main>
-    <footer class="layout-footer">Footer</footer>
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable expander-toggler large text-center">Panel</div>
+    <div class="card-block expander-content">
+      <div class="layout bordered">
+        <header class="layout-header">Header</header>
+        <main class="layout-content">{{> panel}}</main>
+        <footer class="layout-footer">Footer</footer>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bordered expander">
+    <div class="card-header bordered actionable expander-toggler large text-center">Popover</div>
+    <div class="card-block expander-content">
+      <div class="layout bordered">
+        <header class="layout-header">Header</header>
+        <main class="layout-content">{{> popover}}</main>
+        <footer class="layout-footer">Footer</footer>
+      </div>
+    </div>
   </div>
 
   {{> layout_actions}}
