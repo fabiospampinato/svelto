@@ -9,7 +9,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
+// If the page isn't visible and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 
 (function ( $, _, Svelto, Toast ) {
 
@@ -18,21 +18,19 @@
   /* DEFAULTS */
 
   let defaults = {
-    title: false,
-    body: false,
-    img: false,
+    title: '',
+    body: '',
+    img: '',
     ttl: Toast.config.options.ttl
   };
 
   /* NOTIFICATION */
 
-  //TODO: Add support for string options
-
   $.notification = function ( options ) {
 
     /* OPTIONS */
 
-    options = _.extend ( {}, $.notification.defaults, options );
+    options = _.isPlainObject ( options ) ? _.extend ( {}, $.notification.defaults, options ) : String ( options );
 
     /* NOTIFICATIONS */
 
@@ -42,15 +40,11 @@
 
         if ( status === 'granted' ) {
 
-          let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+          let notification = _.isString ( options ) ? new Notification ( options ) : new Notification ( options.title, { body: options.body, icon: options.img } );
 
           if ( _.isNumber ( options.ttl ) && !_.isNaN ( options.ttl ) && options.ttl !== Infinity ) {
 
-            setTimeout ( function () {
-
-              notification.close ();
-
-            }, options.ttl );
+            setTimeout ( notification.close.bind ( notification ), options.ttl );
 
           }
 
