@@ -144,6 +144,8 @@
 
     __layoutTap ( event ) {
 
+      if ( event.isDefaultPrevented () ) return;
+
       if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return event.preventDefault ();
 
       this.close ();
