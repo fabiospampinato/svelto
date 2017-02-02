@@ -10,7 +10,8 @@
 
 /* FULLSCREEN */
 
-.editor.fullscreen {
+.editor.fullscreen,
+.editor.fullscreen-request {
   @include fill-fixed ();
   z-index: $editor-fullscreen-z-index;
   border-radius: 0;

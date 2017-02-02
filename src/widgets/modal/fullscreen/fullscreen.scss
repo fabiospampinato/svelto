@@ -10,7 +10,8 @@
 
 /* FULLSCREEN */
 
-.modal.fullscreen {
+.modal.fullscreen,
+.modal.fullscreen-request {
   border-width: 0;
   border-radius: 0;
   max-width: none;
@@ -23,8 +24,15 @@
 
 html.flexbox-tweener {
 
-  .modal.fullscreen.card > .card-block {
-    max-height: none;
+  .modal.fullscreen,
+  .modal.fullscreen-request {
+
+    /* CARD */
+
+    &.card > .card-block {
+      max-height: none;
+    }
+
   }
 
 }

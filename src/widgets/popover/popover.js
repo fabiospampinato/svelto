@@ -38,6 +38,7 @@
         noTip: 'no-tip',
         affixed: 'affixed',
         fullscreen: 'fullscreen',
+        fullscreenRequest: 'fullscreen-request',
         moving: 'moving',
         show: 'show',
         open: 'open'
@@ -169,10 +170,11 @@
 
       /* VARIABLES */
 
-      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed || this.isFullscreen,
+      let isFullscreenRequested = this.$popover.hasClass ( this.options.classes.fullscreenRequest ),
+          noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed || this.isFullscreen || isFullscreenRequested,
           spacing = this.isAffixed
                       ? this.options.spacing.affixed
-                      : this.isFullscreen
+                      : this.isFullscreen || isFullscreenRequested
                         ? this.options.spacing.fullscreen
                         : noTip
                           ? this.options.spacing.noTip

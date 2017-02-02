@@ -12,7 +12,8 @@
 
 /* FULLSCREEN */
 
-.popover.fullscreen {
+.popover.fullscreen,
+.popover.fullscreen-request {
   border-width: 0;
   border-radius: 0;
   max-width: none;
@@ -25,8 +26,15 @@
 
 html.flexbox-tweener {
 
-  .popover.fullscreen.card > .card-block {
-    max-height: none;
+  .popover.fullscreen,
+  .popover.fullscreen-request {
+
+    /* CARD */
+
+    &.card > .card-block {
+      max-height: none;
+    }
+
   }
 
 }
