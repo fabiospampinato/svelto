@@ -7,6 +7,28 @@
 
   {{{sw.editor}}}
 
+  {{{sw.divider "Nested"}}}
+
+  <div class="multiple">
+    <div class="button modal-toggler bordered" data-target="#modal">Modal</div>
+    <div class="button panel-toggler bordered" data-target="#panel">Panel</div>
+    <div class="button popover-toggler bordered" data-target="#popover">Popover</div>
+  </div>
+
+  <!-- HIDDEN STUFF -->
+
+  <div class="container modal xs-8" id="modal">
+    {{{sw.editor}}}
+  </div>
+
+  <div class="container bordered popover" id="popover">
+    {{{sw.editor}}}
+  </div>
+
+  <div class="container panel bottom" id="panel">
+    {{{sw.editor}}}
+  </div>
+
   {{> editor_actions}}
 
 </template>

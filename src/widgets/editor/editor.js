@@ -76,14 +76,18 @@
       classes: {
         preview: 'preview',
         fullscreen: 'fullscreen',
+        fullscreenable: {
+          request: 'fullscreen-request'
+        },
         trigger: {
           active: 'active text-secondary',
         }
       },
       selectors: {
         actions: '[data-action]',
-        textarea: 'textarea',
+        fullscreenable: '.modal, .panel, .popover',
         preview: '.editor-preview',
+        textarea: 'textarea',
         triggers: {
           all: '[data-action]',
           preview: '[data-action="preview"]',
@@ -131,6 +135,8 @@
       this.$triggers = this.$editor.find ( this.options.selectors.triggers.all );
       this.$triggerPreview = this.$triggers.filter ( this.options.selectors.triggers.preview );
       this.$triggerFullscreen = this.$triggers.filter ( this.options.selectors.triggers.fullscreen );
+
+      this.$fullscreenable = this.$editor.parents ( this.options.selectors.fullscreenable );
 
       this._isPreview = this.$editor.hasClass ( this.options.classes.preview );
       this._isFullscreen = this.$editor.hasClass ( this.options.classes.fullscreen );
@@ -428,6 +434,7 @@
       this._isFullscreen = true;
 
       this.$layout.disableScroll ();
+      this.$fullscreenable.addClass ( this.options.classes.fullscreenable.request );
       this.$editor.addClass ( this.options.classes.fullscreen );
 
       this.$triggerFullscreen.addClass ( this.options.classes.trigger.active );
@@ -443,6 +450,7 @@
       this._isFullscreen = false;
 
       this.$layout.enableScroll ();
+      this.$fullscreenable.removeClass ( this.options.classes.fullscreenable.request );
       this.$editor.removeClass ( this.options.classes.fullscreen );
 
       this.$triggerFullscreen.removeClass ( this.options.classes.trigger.active );
