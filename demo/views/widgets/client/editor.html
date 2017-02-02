@@ -7,6 +7,73 @@
 
   {{{sw.editor}}}
 
+  {{> editor_actions}}
+
 </template>
 
-<!-- //TODO: Add API section -->
+<!-- ACTIONS -->
+
+<template name="editor_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    <div class="multiple joined">
+      <div class="label compact bordered gray pointing-right">Get</div>
+      {{{sw.action "Plain" "api ( 'get' )"}}}
+      {{{sw.action "Parsed" "api ( 'get', true )"}}}
+    </div>
+    <div class="multiple joined">
+      <input name="set" placeholder="Set..." class="bordered">
+      {{{sw.action "Set" "api_set ()"}}}
+    </div>
+    {{{sw.action "Reset" "api ( 'reset' )"}}}
+    <div class="multiple joined">
+      <input name="action" placeholder="Action..." class="bordered">
+      {{{sw.action "Action" "api_action ()"}}}
+    </div>
+    <div class="multiple joined">
+      <div class="label compact bordered gray pointing-right">Preview</div>
+      {{{sw.action "Is" "api ( 'isPreview' )"}}}
+      {{{sw.action "Toggle" "api ( 'togglePreview' )"}}}
+      {{{sw.action "Yes" "api ( 'preview' )"}}}
+      {{{sw.action "No" "api ( 'unpreview' )"}}}
+    </div>
+    <div class="multiple joined">
+      <div class="label compact bordered gray pointing-right">Fullscreen</div>
+      {{{sw.action "Is" "api ( 'isFullscreen' )"}}}
+      {{{sw.action "Toggle" "api ( 'toggleFullscreen' )"}}}
+      {{{sw.action "Yes" "api ( 'fullscreen' )"}}}
+      {{{sw.action "No" "api ( 'unfullscreen' )"}}}
+    </div>
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Enabled" "state" "api ( 'enable' )" true}}}
+    {{{sw.radioAction "Disabled" "state" "api ( 'disable' )"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('[name="' + name + '"]').val ();
+    }
+
+    function api_set () {
+      var value = getValue ( 'set' );
+      api ( 'set', value );
+    }
+
+    function api_action () {
+      var action = getValue ( 'action' );
+      api ( 'action', action );
+    }
+
+    function api ( action, extra ) {
+      var result = $('.editor').first ().editor ( action, extra );
+      if ( lodash.isBoolean ( result ) || lodash.isNumber ( result ) || lodash.isString ( result ) ) $.toast ( result );
+    }
+  </script>
+
+</template>
