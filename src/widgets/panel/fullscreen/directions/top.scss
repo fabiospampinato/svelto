@@ -1,0 +1,36 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.fullscreen.top {
+
+  height: 100vh;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(-100%);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-fullscreen-pinned-top {
+
+  padding-top: 100vh;
+
+  > .layout-header.sticky {
+    top: 100vh;
+  }
+
+}

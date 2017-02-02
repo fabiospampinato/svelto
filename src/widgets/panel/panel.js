@@ -25,7 +25,7 @@
     selector: '.panel',
     options: {
       direction: 'left',
-      type: 'default', // `default`, `slim` (officially supported) or any other implemented type
+      type: 'default', // `default`, `slim`, `fullscreen` (officially supported) or any other implemented type
       pin: false, // If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
