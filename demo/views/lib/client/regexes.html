@@ -37,7 +37,7 @@
     $('input').on ( 'input change', function () {
       var $input = $(this),
           match = !!$input.val ().match ( Svelto.Regexes[$input.attr ( 'name' )] );
-      $input.toggleClass ( Svelto.Colors.red, !match ).toggleClass ( Svelto.colors.green, match );
+      $input.toggleClass ( Svelto.Colors.red, !match ).toggleClass ( Svelto.Colors.green, match );
     });
   </script>
 
