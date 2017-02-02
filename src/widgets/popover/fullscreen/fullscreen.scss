@@ -1,0 +1,32 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Popover - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../popover.scss
+ * ========================================================================= */
+
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+
+/* FULLSCREEN */
+
+.popover.fullscreen {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .popover.fullscreen.card > .card-block {
+    max-height: none;
+  }
+
+}

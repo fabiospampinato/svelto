@@ -29,6 +29,7 @@
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
+        fullscreen: 0,
         noTip: 5,
         normal: 12
       },
@@ -36,6 +37,7 @@
         anchorDirection: 'popover-anchor-$1',
         noTip: 'no-tip',
         affixed: 'affixed',
+        fullscreen: 'fullscreen',
         moving: 'moving',
         show: 'show',
         open: 'open'
@@ -70,6 +72,7 @@
 
       this.hasTip = !this.$popover.hasClass ( this.options.classes.noTip );
       this.isAffixed = this.$popover.hasClass ( this.options.classes.affixed );
+      this.isFullscreen = this.$popover.hasClass ( this.options.classes.fullscreen );
 
       this._isOpen = this.$popover.hasClass ( this.options.classes.open );
 
@@ -166,8 +169,14 @@
 
       /* VARIABLES */
 
-      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed,
-          spacing = this.isAffixed ? this.options.spacing.affixed : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal );
+      let noTip = ( this.$anchor && this.$anchor.hasClass ( this.options.classes.noTip ) ) || !this.hasTip || this.isAffixed || this.isFullscreen,
+          spacing = this.isAffixed
+                      ? this.options.spacing.affixed
+                      : this.isFullscreen
+                        ? this.options.spacing.fullscreen
+                        : noTip
+                          ? this.options.spacing.noTip
+                          : this.options.spacing.normal;
 
       /* POSITIONATE */
 
