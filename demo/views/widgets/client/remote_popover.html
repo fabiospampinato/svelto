@@ -9,7 +9,15 @@
     <div class="button bordered remote-popover-trigger" data-url="/remote-popover-1">Load remote</div>
     <div class="button bordered remote-popover-trigger" data-url="/remote-popover-2" data-data='{"color": "primary"}'>Load remote (Primary)</div>
     <div class="button bordered remote-popover-trigger" data-url="/remote-popover-2" data-data='{"color": "secondary"}'>Load remote (Secondary)</div>
+    <div class="button bordered remote-popover-trigger" data-url="/remote-popover-fullscreen">Load remote (Fullscreen)</div>
     <div class="button bordered remote-popover-trigger" data-url="/remote-popover-error">Load remote (Error)</div>
+  </div>
+
+  {{{sw.divider "Helper"}}}
+
+  <div class="multiple">
+    <div class="helper anchor button bordered">Helper (anchor)</div>
+    <div class="helper point button bordered">Helper (point)</div>
   </div>
 
   {{> remote_popover_actions}}
@@ -31,6 +39,17 @@
     function api ( action ) {
       $('.remote-popover-trigger').remotePopoverTrigger ( action );
     }
+
+    var $helperAnchor = $('.helper.anchor'),
+        $helperPoint = $('.helper.point');
+
+    $helperAnchor.on ( Svelto.Pointer.tap, function () {
+      $.remotePopover ( { url: '/remote-popover-1' }, $helperAnchor );
+    });
+
+    $helperPoint.on ( Svelto.Pointer.tap, function () {
+      $.remotePopover ( { url: '/remote-popover-1' }, { x: 200, y: 200 } );
+    });
   </script>
 
 </template>

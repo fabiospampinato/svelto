@@ -13,6 +13,10 @@
     <div class="button bordered remote-modal-trigger" data-url="/remote-modal-error">Load remote (Error)</div>
   </div>
 
+  {{{sw.divider "Helper"}}}
+
+  <div class="helper point button bordered">Helper</div>
+
   {{> remote_modal_actions}}
 
 </template>
@@ -32,6 +36,10 @@
     function api ( action ) {
       $('.remote-modal-trigger').remoteModalTrigger ( action );
     }
+
+    $('.helper').on ( Svelto.Pointer.tap, function () {
+      $.remoteModal ({ url: '/remote-modal-1' });
+    });
   </script>
 
 </template>
