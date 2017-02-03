@@ -347,29 +347,34 @@
 
         if ( this.options.resize ) {
 
-          let newRect = this.$widget.getRect ();
+          let newRect = this.$widget.getRect (),
+              needsResize = ( prevRect.width !== newRect.width || prevRect.height !== newRect.height );
 
-          this.$widget.css ({
-            width: prevRect.width,
-            height: prevRect.height
-          });
+          if ( needsResize ) {
 
-          this.$widget.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
-
-          this._frame ( function () {
-
-            this.$widget.addClass ( this.options.classes.showing );
-
-            this.$widget.animate ({
-              width: newRect.width,
-              height: newRect.height
-            }, {
-              duration: this.options.animations.resize,
-              step: this._widgetResizing.bind ( this ),
-              always: this._widgetResized.bind ( this )
+            this.$widget.css ({
+              width: prevRect.width,
+              height: prevRect.height
             });
 
-          });
+            this.$widget.addClass ( this.options.classes.placeholder ).addClass ( this.options.classes.resizing );
+
+            this._frame ( function () {
+
+              this.$widget.addClass ( this.options.classes.showing );
+
+              this.$widget.animate ({
+                width: newRect.width,
+                height: newRect.height
+              }, {
+                duration: this.options.animations.resize,
+                step: this._widgetResizing.bind ( this ),
+                always: this._widgetResized.bind ( this )
+              });
+
+            });
+
+          }
 
         }
 
