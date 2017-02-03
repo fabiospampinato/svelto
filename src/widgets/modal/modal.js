@@ -94,7 +94,7 @@
 
     __tap ( event ) {
 
-      if ( this.isLocked () || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
+      if ( this.isLocked () || event.isDefaultPrevented () || !$.isAttached ( event.target ) || $(event.target).closest ( this.$modal ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
@@ -107,7 +107,7 @@
 
     __route () {
 
-      if ( this._isOpen && !this.$modal.isAttached () ) {
+      if ( this._isOpen && !$.isAttached ( this.modal ) ) {
 
         this.close ();
 

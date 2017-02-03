@@ -12,13 +12,21 @@
 
   'use strict';
 
+  /* VARIABLES */
+
+  let html = document.documentElement;
+
   /* IS ATTACHED */
+
+  $.isAttached = function ( ele ) {
+
+    return ele === html || $.contains ( html, ele );
+
+  };
 
   $.fn.isAttached = function () {
 
-    let html = document.documentElement;
-
-    return ( this[0] === html ) || $.contains ( html, this[0] );
+    return $.isAttached ( this[0] );
 
   };
 

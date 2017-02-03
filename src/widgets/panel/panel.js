@@ -141,7 +141,7 @@
 
     __tap ( event ) {
 
-      if ( this.isLocked () || this._isPinned || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
+      if ( this.isLocked () || this._isPinned || event.isDefaultPrevented () || !$.isAttached ( event.target ) || $(event.target).closest ( this.$panel ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
@@ -244,7 +244,7 @@
 
     __route () {
 
-      if ( this._isOpen && !this.$panel.isAttached () ) {
+      if ( this._isOpen && !$.isAttached ( this.panel ) ) {
 
         this.close ();
 
