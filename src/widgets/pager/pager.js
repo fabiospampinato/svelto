@@ -8,6 +8,9 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
+//FIXME: Doesn't actually check if the scroll event happened along the same direction of the key that has been pressed
+// It can detect scroll only on the document
+
 (function ( $, _, Svelto, Widgets, Factory ) {
 
   'use strict';
@@ -49,29 +52,50 @@
 
     }
 
-    /* UTILITIES */
-
-    _clickElement ( $ele ) {
-
-      $ele[0].click (); // jQuery won't work
-
-    }
-
     /* KEYDOWN */
 
     __keydown ( event ) {
 
-      //FIXME: Shouldn't do anything if a scroll happens
+      if ( this._lock || $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
 
-      if ( $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
+      this._lock = true;
+      this._scrolled = false;
 
-      this._defer ( () => {
+      this.___scroll ();
 
-        if ( event.isPropagationStopped () ) return; // Probably another widget was listening for the same event, and it should take priority over this
+      this._delay ( () => { // Waiting for the `scroll` event to fire and giving other event handlers precedence
+
+        this._lock = false;
+
+        if ( this._scrolled ) return;
+
+        this.___scrollReset ();
+
+        if ( event.isDefaultPrevented () || event.isPropagationStopped () ) return; // Probably another widget was listening for the same event, and it should take priority over this
 
         super.__keydown ( event );
 
-      });
+      }, 50 ); //FIXME: Not exactly a solid implementation
+
+    }
+
+    /* SCROLL */
+
+    ___scroll () {
+
+      this._one ( true, this.$document, 'scroll', this.__scroll );
+
+    }
+
+    ___scrollReset () {
+
+      this._off ( this.$document, 'scroll', this.__scroll );
+
+    }
+
+    __scroll () {
+
+      this._scrolled = true;
 
     }
 
@@ -83,7 +107,7 @@
 
       if ( !$previous.length ) return;
 
-      this._clickElement ( $previous );
+      $previous[0].click ();
 
     }
 
@@ -93,7 +117,7 @@
 
       if ( !$next.length ) return;
 
-      this._clickElement ( $next );
+      $next[0].click ();
 
     }
 
