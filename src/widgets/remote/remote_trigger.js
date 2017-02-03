@@ -68,7 +68,7 @@
 
     trigger () {
 
-      new this.options.widget ( { ajax: this.options.ajax } ).request ();
+      new this.options.widget ({ ajax: this.options.ajax }).request ();
 
     }
 

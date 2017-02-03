@@ -12,7 +12,7 @@
 //TODO: Add headings support (level 1/3/5, like github does)
 //TODO: Add emoji support
 //TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
-//FIXME: Add history support
+//FIXME: Add history support (localstorage?)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 

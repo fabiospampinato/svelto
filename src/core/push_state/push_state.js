@@ -25,7 +25,7 @@
 
       if ( _.isFunction ( history.onpushstate ) ) {
 
-        history.onpushstate ( { state: state } );
+        history.onpushstate ({ state });
 
       }
 

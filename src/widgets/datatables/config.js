@@ -224,13 +224,14 @@
 
     /* FOCUS */
 
-  	let activeIDX = $(previous).find ( document.activeElement ).data ( 'dt-idx' );
+    let $previous = $(previous),
+  	    activeIDX = $previous.find ( document.activeElement ).data ( 'dt-idx' );
 
-  	attach ( $(previous).empty (), buttons );
+  	attach ( $previous.empty (), buttons );
 
   	if ( activeIDX ) {
 
-  		$(previous).find ( '[data-dt-idx=' + activeIDX + ']' ).focus ();
+  		$previous.find ( '[data-dt-idx=' + activeIDX + ']' ).focus ();
 
   	}
 

@@ -28,12 +28,14 @@
 
   class RemoteLoaderTrigger extends Widgets.RemoteTrigger {
 
+    /* API */
+
     trigger () {
 
       this.$trigger[this.options.widget.config.name] ({
         ajax: this.options.ajax,
         callbacks: {
-          beforesend: () => this.$trigger.addClass ( this.options.classes.disabled ) //TODO: Replace with a linear "spinner" overlay
+          beforesend: this.disable.bind ( this ) //TODO: Replace with a linear "spinner" overlay
         }
       });
 

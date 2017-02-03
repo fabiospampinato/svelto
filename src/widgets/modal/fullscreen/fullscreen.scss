@@ -8,6 +8,8 @@
  * @require ../modal.scss
  * ========================================================================= */
 
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+
 /* FULLSCREEN */
 
 .modal.fullscreen,

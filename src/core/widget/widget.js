@@ -134,7 +134,7 @@
 
         let options = { //TODO: Maybe export them
           imports: {
-            Templates: Templates,
+            Templates,
             self: Templates[this.templatesNamespace]
           },
           variable: 'o'

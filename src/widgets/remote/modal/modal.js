@@ -6,8 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require ../widget/widget.js
  * @require widgets/modal/modal.js
- * @require widgets/remote/widget/widget.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {

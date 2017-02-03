@@ -26,10 +26,10 @@
       ajax: {}, // Default values
       actions: {
         action ( ajax ) {
-          new Widgets.RemoteAction ( { ajax: ajax } ).request ();
+          new Widgets.RemoteAction ({ ajax }).request ();
         },
         modal ( ajax ) {
-          new Widgets.RemoteModal ( { ajax: ajax } ).request ();
+          new Widgets.RemoteModal ({ ajax }).request ();
         },
         page ( ajax ) {
           window.location.href = ajax.url;

@@ -16,7 +16,7 @@
 
   $.remoteAction = function ( ajax ) {
 
-    new RemoteAction ( { ajax: ajax } ).request ();
+    new RemoteAction ({ ajax }).request ();
 
   };
 

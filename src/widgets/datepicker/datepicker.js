@@ -11,7 +11,6 @@
 // When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
 // Accordion to ISO-8601 the first day of the week is Monday
 
-//FIXME: If 21/4/2013 is selected we get "30" selected on 5/2015's page
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {

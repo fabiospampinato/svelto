@@ -28,7 +28,7 @@
 
     }
 
-    new RemotePopover ( { ajax, positionate } ).request ();
+    new RemotePopover ({ ajax, positionate }).request ();
 
   };
 

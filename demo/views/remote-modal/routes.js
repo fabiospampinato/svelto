@@ -25,7 +25,7 @@ Router.route ( '/remote-modal-1', function () {
 
 }, { where: 'server' });
 
-/* REMOTE MODAL 1 */
+/* REMOTE MODAL 2 */
 
 Router.route ( '/remote-modal-2', function () {
 

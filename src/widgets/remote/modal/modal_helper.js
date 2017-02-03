@@ -16,7 +16,7 @@
 
   $.remoteModal = function ( ajax ) {
 
-    new RemoteModal ( { ajax: ajax } ).request ();
+    new RemoteModal ({ ajax }).request ();
 
   };
 
