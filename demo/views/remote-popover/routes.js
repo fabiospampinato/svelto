@@ -53,6 +53,20 @@ Router.route ( '/remote-popover-2', function () {
 
 }, { where: 'server' });
 
+/* REMOTE POPOVER - FULLSCREEN */
+
+Router.route ( '/remote-popover-fullscreen', function () {
+
+  setTimeout ( () => {
+
+    this.response.end ( JSON.stringify ({
+      popover: '<div class="popover fullscreen container">Fullscreen</div>'
+    }));
+
+  }, 1500 );
+
+}, { where: 'server' });
+
 /* REMOTE POPOVER AUTOFOCUS */
 
 Router.route ( '/remote-popover-autofocus', function () {

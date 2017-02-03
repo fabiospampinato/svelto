@@ -6,8 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require ../widget/widget.js
  * @require widgets/popover/popover.js
- * @require widgets/remote/widget/widget.js
  * ========================================================================= */
 
 //FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
@@ -69,12 +69,19 @@
 
     _widgetReplaceWith ( $replacement ) {
 
-      let classList = this.$widget.attr ( 'class' ) || '',
-          pointingClass = classList.split ( ' ' ).find ( cls => cls.startsWith ( 'pointing-' ) ),
+      let {fullscreen, fullscreenRequest} = this.options.widget.config.options.classes,
+          isFullscreen = $replacement.hasClass ( fullscreen ) || $replacement.hasClass ( fullscreenRequest ),
           matrix = this.$widget.matrix (),
           positionateGuid = this.$widget[0]._positionateGuid;
 
-      if ( pointingClass ) $replacement.addClass ( pointingClass );
+      if ( !isFullscreen ) {
+
+        let classList = this.$widget.attr ( 'class' ) || '',
+            pointingClass = classList.split ( ' ' ).find ( cls => cls.startsWith ( 'pointing-' ) );
+
+        if ( pointingClass ) $replacement.addClass ( pointingClass );
+
+      }
 
       super._widgetReplaceWith ( $replacement );
 
