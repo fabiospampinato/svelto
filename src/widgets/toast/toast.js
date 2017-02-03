@@ -363,9 +363,10 @@
 
     open () {
 
-      if ( this._lock || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = true;
 
       this._frame ( function () {
@@ -378,7 +379,7 @@
 
           this.autofocus ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'open' );
 
@@ -405,9 +406,10 @@
 
     close () {
 
-      if ( this._lock || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = false;
       this._openUrl = false;
 
@@ -421,7 +423,7 @@
 
           this.$toast.remove ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'close' );
 

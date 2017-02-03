@@ -56,16 +56,17 @@
 
     __keydown ( event ) {
 
-      if ( this._lock || $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
+      if ( this.isLocked () || $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._scrolled = false;
 
       this.___scroll ();
 
       this._delay ( () => { // Waiting for the `scroll` event to fire and giving other event handlers precedence
 
-        this._lock = false;
+        this.unlock ();
 
         if ( this._scrolled ) return;
 

@@ -410,6 +410,26 @@
 
     }
 
+    /* LOCKING */
+
+    lock () {
+
+      this._lock = true;
+
+    }
+
+    unlock () {
+
+      this._lock = false;
+
+    }
+
+    isLocked () {
+
+      return !!this._lock;
+
+    }
+
     /* EVENTS */
 
     //TODO: Add support for custom data

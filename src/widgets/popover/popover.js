@@ -255,13 +255,13 @@
 
       /* CHECKING */
 
-      if ( this._lock || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return;
+      if ( this.isLocked () || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return;
 
       /* VARIABLES */
 
-      this._lock = true;
-      this._isOpen = true;
+      this.lock ();
 
+      this._isOpen = true;
       this._openEvent = event;
       this._wasMoving = false;
 
@@ -306,7 +306,7 @@
 
           this.autofocus ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'open' );
 
@@ -329,11 +329,12 @@
 
     close () {
 
-      if ( this._lock || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return;
 
       /* VARIABLES */
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = false;
 
       /* ANCHOR */
@@ -364,7 +365,7 @@
 
           this.autoblur ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'close' );
 

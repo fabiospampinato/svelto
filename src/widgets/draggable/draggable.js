@@ -401,7 +401,7 @@
 
     _revert () {
 
-      this._lock = true;
+      this.lock ();
 
       this._frame ( function () {
 
@@ -421,7 +421,7 @@
 
             }
 
-            this._lock = false;
+            this.unlock ();
 
           }, this.options.animations.revert );
 
@@ -455,7 +455,7 @@
 
     __down ( event ) {
 
-      if ( this._lock || !this.options.draggable ( this ) || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
+      if ( this.isLocked () || !this.options.draggable ( this ) || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
 
       event.stopImmediatePropagation ();
 

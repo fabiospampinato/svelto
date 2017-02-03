@@ -81,7 +81,7 @@
 
     open () {
 
-      if ( this._lock || this.isOpen () ) return;
+      if ( this.isLocked () || this.isOpen () ) return;
 
       this.$overlay.prependTo ( this.$overlayed );
 
@@ -93,9 +93,9 @@
 
     close () {
 
-      if ( this._lock || !this.isOpen () ) return;
+      if ( this.isLocked () || !this.isOpen () ) return;
 
-      this._lock = true;
+      this.lock ();
 
       this.instance.close ();
 
@@ -103,7 +103,7 @@
 
         this.$overlay.detach ();
 
-        this._lock = false;
+        this.unlock ();
 
         this._trigger ( 'close' );
 

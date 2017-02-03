@@ -264,9 +264,9 @@
 
       index = this._sanitizeIndex ( index );
 
-      if ( this._lock || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
+      if ( this.isLocked () || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
 
-      this._lock = true;
+      this.lock ();
 
       if ( this._current ) {
 
@@ -303,7 +303,7 @@
 
         }
 
-        this._lock = false;
+        this.unlock ();
 
         this._trigger ( 'change' );
 

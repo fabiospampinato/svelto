@@ -94,7 +94,7 @@
 
     __tap ( event ) {
 
-      if ( this._lock || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
+      if ( this.isLocked () || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$modal ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
@@ -135,9 +135,10 @@
 
     open () {
 
-      if ( this._lock || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = true;
 
       this._trigger ( 'beforeopen' );
@@ -156,7 +157,7 @@
 
           this.autofocus ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'open' );
 
@@ -172,9 +173,10 @@
 
     close () {
 
-      if ( this.lock || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = false;
 
       this._trigger ( 'beforeclose' );
@@ -193,7 +195,7 @@
 
           if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'close' );
 

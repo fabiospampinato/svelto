@@ -141,7 +141,7 @@
 
     __tap ( event ) {
 
-      if ( this._lock || this._isPinned || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
+      if ( this.isLocked () || this._isPinned || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$panel ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
@@ -292,9 +292,10 @@
 
     open () {
 
-      if ( this._lock || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return;
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = true;
 
       this._trigger ( 'beforeopen' );
@@ -326,7 +327,7 @@
 
           this.autofocus ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'open' );
 
@@ -346,11 +347,12 @@
 
     close () {
 
-      if ( this._lock || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return;
 
       this.unpin ();
 
-      this._lock = true;
+      this.lock ();
+
       this._isOpen = false;
 
       this._trigger ( 'beforeclose' );
@@ -370,7 +372,7 @@
 
           if ( this.options.scroll.disable ) this.$layout.enableScroll ();
 
-          this._lock = false;
+          this.unlock ();
 
           this._trigger ( 'close' );
 

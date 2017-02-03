@@ -73,9 +73,9 @@
 
     __downTap ( event ) {
 
-      if ( this._lock ) return;
+      if ( this.isLocked () ) return;
 
-      this._lock = true;
+      this.lock ();
 
       if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
@@ -102,7 +102,7 @@
 
       this._defer ( function () { // So that the `tap` event gets parsed before removing the lock
 
-        this._lock = false;
+        this.unlock ();
 
         for ( let [$circle, timestamp] of this.circles ) {
 

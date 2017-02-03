@@ -171,7 +171,7 @@
 
     __tapOutside ( event ) {
 
-      if ( this._lock || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$zoomable ).length ) return;
+      if ( this.isLocked () || event.isDefaultPrevented () || !$(event.target).isAttached () || $(event.target).closest ( this.$zoomable ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
@@ -421,11 +421,12 @@
 
     zoom ( event ) {
 
-      if ( this._lock || this._isZoomed ) return;
+      if ( this.isLocked () || this._isZoomed ) return;
 
       if ( this.options.original.src && this.options.preloading.wait && !this._isPreloaded ) return this.preload ( () => this.zoom ( event ) );
 
-      this._lock = true;
+      this.lock ();
+
       this._isZoomed = true;
 
       if ( this.options.magnification.enabled ) this.$layout.disableScroll ();
@@ -451,7 +452,7 @@
 
             if ( this.options.original.src ) this.$zoomable.attr ( 'src', this.options.original.src );
 
-            this._lock = false;
+            this.unlock ();
 
             this._trigger ( 'zoom' );
 
@@ -475,10 +476,11 @@
 
     unzoom () {
 
-      if ( this._lock || !this._isZoomed ) return;
+      if ( this.isLocked () || !this._isZoomed ) return;
 
-      this._lock = true;
       this._isZoomed = false;
+
+      this.lock ();
 
       this._frame ( function () {
 
@@ -501,7 +503,7 @@
 
             if ( this.options.magnification.enabled ) this.$layout.enableScroll ();
 
-            this._lock = false;
+            this.unlock ();
 
             this._trigger ( 'unzoom' );
 
