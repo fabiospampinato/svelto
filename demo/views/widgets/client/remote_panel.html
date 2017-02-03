@@ -1,0 +1,65 @@
+
+<!-- REMOTE PANEL -->
+
+<template name="remote_panel">
+
+  {{{sw.divider "Remote Panel"}}}
+
+  <div class="multiple">
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-left" data-direction="left">
+      <span>Left</span>
+      <i class="icon">chevron_left</i>
+    </div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-top" data-direction="top">
+      <span>Top</span>
+      <i class="icon">expand_less</i>
+    </div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-bottom" data-direction="bottom">
+      <span>Bottom</span>
+      <i class="icon">expand_more</i>
+    </div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-right" data-direction="right">
+      <span>Right</span>
+      <i class="icon">chevron_right</i>
+    </div>
+  </div>
+
+  {{{sw.divider "Others"}}}
+
+  <div class="multiple">
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-slim" data-direction="bottom" data-type="slim">Slim</div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-fullscreen" data-direction="top" data-type="fullscreen">Fullscreen</div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-pinned" data-direction="left">Pinned</div>
+    <div class="button remote-panel-trigger bordered" data-url="/remote-panel-error">Error</div>
+  </div>
+
+  {{{sw.divider "Helper"}}}
+
+  <div class="helper point button bordered">Helper</div>
+
+  {{> remote_panel_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="remote_panel_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple actions">
+    {{{sw.action "Init" "api ()"}}}
+    {{{sw.action "Destroy" "api ( 'destroy' )"}}}
+  </div>
+
+  <script>
+    function api ( action ) {
+      $('.remote-panel-trigger').remotePanelTrigger ( action );
+    }
+
+    $('.helper').on ( Svelto.Pointer.tap, function () {
+      $.remotePanel ( { url: '/remote-panel-left' }, 'left' );
+    });
+  </script>
+
+</template>

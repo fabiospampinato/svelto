@@ -1,0 +1,24 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel - Resizing
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../widget/resizing/resizing.scss
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* RESIZING */
+
+.remote-panel-resizing {
+  @extend %remote-widget-resizing;
+}
+
+.remote-panel-showing {
+  @extend %remote-widget-showing;
+}
+
+.remote-panel-placeholder.remote-panel-resizing.remote-panel-showing > * {
+  transition-duration: $remote-panel-animation-duration !important;
+}

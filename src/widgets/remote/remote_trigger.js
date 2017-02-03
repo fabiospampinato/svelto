@@ -40,7 +40,9 @@
 
       this.$trigger = this.$element;
 
-      /* OPTIONS */
+    }
+
+    _init () {
 
       this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
       this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;

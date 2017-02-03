@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/widget.scss
+ * ========================================================================= */
+
+/* REMOTE PANEL PLACEHOLDER */
+
+.remote-panel-placeholder {
+  @extend %remote-widget-placeholder;
+  overflow: hidden;
+}
