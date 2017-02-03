@@ -37,6 +37,8 @@
     _variables () {
 
       this.$textarea = this.$element;
+      this.textarea = this.element;
+
       this.$form = this.$textarea.closest ( this.options.selectors.form );
 
     }
@@ -51,7 +53,7 @@
 
     send () {
 
-      if ( !$(document.activeElement).is ( this.$textarea ) ) return;
+      if ( !$.isFocused ( this.textarea ) ) return;
 
       this.$form.submit ();
 

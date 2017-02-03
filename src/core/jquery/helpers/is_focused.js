@@ -1,21 +1,29 @@
 
 /* =========================================================================
- * Svelto - Core - jQuery - Helpers
+ * Svelto - Core - jQuery - Helpers (Is focused)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./clean_data.js
- * @require ./event_namespacer.js
- * @require ./event_xy.js
- * @require ./frame.js
- * @require ./get_rect.js
- * @require ./hsl.js
- * @require ./is_attached.js
- * @require ./is_focused.js
- * @require ./iterator.js
- * @require ./scroll.js
- * @require ./selection.js
- * @require ./top_index.js
- * @require ./z_index.js
+ * @require ../init.js
  * ========================================================================= */
+
+(function ( $ ) {
+
+  'use strict';
+
+  /* IS FOCUSED */
+
+  $.isFocused = function ( ele ) {
+
+    return ele === document.activeElement && ( !document.hasFocus || document.hasFocus () ) && !!( ele.type || ele.href || ~ele.tabIndex );
+
+  };
+
+  $.fn.isFocused = function () {
+
+    return $.isFocused ( this[0] );
+
+  };
+
+}( jQuery ));

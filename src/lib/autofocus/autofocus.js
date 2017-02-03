@@ -64,7 +64,7 @@
 
       if ( _.isBoolean ( focused ) ) {
 
-        $focusable = focused ? $focusable.filter ( ':focus' ) : $focusable.filter ( ':not(:focus)' );
+        $focusable = $focusable.filter ( ( index, ele ) => $.isFocused ( ele ) === focused );
 
       }
 

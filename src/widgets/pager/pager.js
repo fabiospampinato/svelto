@@ -24,8 +24,7 @@
     options: {
       selectors: {
         previous: '.previous',
-        next: '.next',
-        focusable: 'input, textarea, select, option, [contenteditable]'
+        next: '.next'
       },
       keystrokes: {
         'left': 'previous',
@@ -56,7 +55,7 @@
 
     __keydown ( event ) {
 
-      if ( this.isLocked () || $(document.activeElement).is ( this.options.selectors.focusable ) ) return;
+      if ( this.isLocked () || $.isFocused ( document.activeElement ) ) return;
 
       this.lock ();
 
