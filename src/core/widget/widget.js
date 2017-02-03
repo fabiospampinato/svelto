@@ -202,6 +202,10 @@
 
       this.eventNamespace = `.swns-${this.guid}`;
 
+      /* LOCKS */
+
+      this._locks = {};
+
       /* CALLBACKS */
 
       if ( this._variables () === false ) return this.destroy ();
@@ -412,21 +416,21 @@
 
     /* LOCKING */
 
-    lock () {
+    lock ( namespace ) {
 
-      this._lock = true;
-
-    }
-
-    unlock () {
-
-      this._lock = false;
+      this._locks[namespace] = true;
 
     }
 
-    isLocked () {
+    unlock ( namespace ) {
 
-      return !!this._lock;
+      delete this._locks[namespace];
+
+    }
+
+    isLocked ( namespace ) {
+
+      return !!this._locks[namespace];
 
     }
 
