@@ -1,0 +1,13 @@
+
+/* =========================================================================
+ * Svelto - Core - Browser (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SUPPORT */
+
+$browser-support-browsers:  ( 'chrome', 'firefox', 'edge', 'ie', 'opera', 'safari' ) !default;
+$browser-support-devices: ( 'desktop', 'mobile', 'tablet' ) !default;
+$browser-support-oss: ( 'ios', 'android', 'blackberry', 'linux', 'mac', 'windows' ) !default;

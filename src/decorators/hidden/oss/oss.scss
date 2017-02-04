@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - OSs
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OSS */
+
+@each $os in $browser-support-oss {
+
+  /* HIDDEN */
+
+  html:not(.no-#{$os}) .hidden-#{$os} {
+    display: none !important;
+  }
+
+  /* ONLY */
+
+  html:not(.#{$os}) .only-#{$os} {
+    display: none !important;
+  }
+
+}
