@@ -206,6 +206,7 @@
       /* LOCKS */
 
       this._locks = {};
+      this._lockQueues = {};
 
       /* CALLBACKS */
 
@@ -427,11 +428,46 @@
 
       delete this._locks[namespace];
 
+      if ( this._lockQueues[namespace] ) {
+
+        for ( let callback of this._lockQueues[namespace] ) {
+
+          callback ();
+
+        }
+
+        delete this._lockQueues[namespace];
+
+      }
+
     }
 
     isLocked ( namespace ) {
 
       return !!this._locks[namespace];
+
+    }
+
+    whenUnlocked ( namespace, callback ) {
+
+      if ( !callback ) {
+
+        callback = namespace;
+        namespace = undefined;
+
+      }
+
+      if ( !this.isLocked ( namespace ) ) {
+
+        callback ();
+
+      } else {
+
+        if ( !this._lockQueues[namespace] ) this._lockQueues[namespace] = [];
+
+        this._lockQueues[namespace].push ( callback );
+
+      }
 
     }
 
