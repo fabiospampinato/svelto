@@ -1,16 +1,24 @@
 
+/* UTILITIES */
+
+function getIds ( request ) {
+
+  let ids = request.body['ids[]'];
+
+  return _.isArray ( ids ) ? ids.join ( ', ' ) : ids;
+
+}
+
 /* ACTION */
 
-Router.route ( '/selectable-action/action', function () {
+Router.route ( '/selectable-action-action', function () {
 
   setTimeout ( () => {
 
-    let ids = this.request.body['ids[]'];
-
-    ids = _.isArray ( ids ) ? ids.join ( ', ' ) : ids;
+    let ids = getIds ( this.request );
 
     this.response.end ( JSON.stringify ({
-      message: `Work performed on ids: ${ids}!`
+      message: `Rows ids: ${ids}`
     }));
 
   }, 1500 );
@@ -19,24 +27,46 @@ Router.route ( '/selectable-action/action', function () {
 
 /* MODAL */
 
-Router.route ( '/selectable-action/modal', function () {
+Router.route ( '/selectable-action-modal', function () {
 
   setTimeout ( () => {
 
+    let ids = getIds ( this.request );
+
     this.response.end ( JSON.stringify ({
-      modal: '<form class="card modal xs-8">' +
-               '<div class="card-header text-center">Selectable actions modal</div>' +
-               '<div class="card-block">' +
-                 '<div class="placeholder" style="width:95%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:92%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:100%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:87%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:97%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:93%; height:10px;"></div>' +
-                 '<div class="placeholder" style="width:97%; height:10px;"></div>' +
-               '</div>' +
-               '<div class="card-footer">Footer</div>' +
-             '</form>'
+      modal: `<div class="modal container">Rows ids: ${ids}</div>`
+    }));
+
+  }, 1500 );
+
+}, { where: 'server' });
+
+/* PANEL */
+
+Router.route ( '/selectable-action-panel', function () {
+
+  setTimeout ( () => {
+
+    let ids = getIds ( this.request );
+
+    this.response.end ( JSON.stringify ({
+      panel: `<div class="panel container">Rows ids: ${ids}</div>`
+    }));
+
+  }, 1500 );
+
+}, { where: 'server' });
+
+/* POPOVER */
+
+Router.route ( '/selectable-action-popover', function () {
+
+  setTimeout ( () => {
+
+    let ids = getIds ( this.request );
+
+    this.response.end ( JSON.stringify ({
+      popover: `<div class="popover container">Rows ids: ${ids}</div>`
     }));
 
   }, 1500 );

@@ -22,11 +22,7 @@
     options: {
       widget: Widgets.RemotePanel,
       direction: undefined,
-      type: undefined,
-      datas: {
-        direction: 'direction',
-        type: 'type'
-      }
+      type: undefined
     }
   };
 
@@ -40,8 +36,8 @@
 
       super._init ();
 
-      this.options.direction = this.$trigger.data ( this.options.datas.direction ) || this.options.direction;
-      this.options.type = this.$trigger.data ( this.options.datas.type ) || this.options.type;
+      this.options.direction = this.$trigger.data ( Widgets.Panel.config.options.datas.direction ) || this.options.direction;
+      this.options.type = this.$trigger.data ( Widgets.Panel.config.options.datas.type ) || this.options.type;
 
     }
 

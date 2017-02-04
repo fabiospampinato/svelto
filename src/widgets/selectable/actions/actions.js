@@ -7,6 +7,8 @@
  * =========================================================================
  * @before widgets/remote/action/action.js
  * @before widgets/remote/modal/modal.js
+ * @before widgets/remote/panel/panel.js
+ * @before widgets/remote/popover/popover.js
  * @require ../selectable.js
  * @require widgets/targeter/targeter.js
  * @require widgets/toast/toast.js
@@ -25,23 +27,30 @@
     options: {
       ajax: {}, // Default values
       actions: {
-        action ( ajax ) {
-          new Widgets.RemoteAction ({ ajax }).request ();
-        },
-        modal ( ajax ) {
-          new Widgets.RemoteModal ({ ajax }).request ();
-        },
+        action: $.remoteAction,
+        modal: $.remoteModal,
+        panel: $.remotePanel,
+        popover: $.remotePopover,
         page ( ajax ) {
           window.location.href = ajax.url;
         }
       },
       defaultAction: 'page',
+      actionsArgs: {
+        ajax ( $trigger ) {
+          return this._getAjax ( $trigger );
+        },
+        panel ( $trigger ) {
+          return [this._getAjax ( $trigger ), $trigger.data ( Widgets.Panel.config.options.datas.direction ), $trigger.data ( Widgets.Panel.config.options.datas.type )];
+        },
+        popover ( $trigger ) {
+          return [this._getAjax ( $trigger ), $trigger];
+        }
+      },
+      defaultActionArgs: 'ajax',
       widget: Widgets.Selectable,
       characters: {
         separator: ','
-      },
-      messages: {
-        no_selected: 'No entries selected'
       },
       placeholders: {
         id: '%ID%'
@@ -58,7 +67,7 @@
       },
       selectors: {
         action: '.action',
-        id: false // Selects the element containing the id (from it's `tr` element), for instance it could be `> td:first-child`. If falsy, `datas.id` will be used
+        id: false // Selects the element containing the id (from its `tr` element), for instance it could be `> td:first-child`. If falsy, `datas.id` will be used
       },
       callbacks: {
         action: _.noop
@@ -89,6 +98,43 @@
 
     }
 
+    /* UTILITIES */
+
+    _getIds () {
+
+      let $rows = this._targetInstance.get (),
+          ids = $rows.get ().map ( row => this.options.selectors.id ? $(row).find ( this.options.selectors.id ).text () : $(row).data ( this.options.datas.id ) );
+
+      return _.compact ( ids );
+
+    }
+
+    _getAjax ( $trigger ) {
+
+      let ids = this._getIds (),
+          url = $trigger.data ( this.options.datas.url ) || $trigger.attr ( this.options.attributes.href ) || this.options.ajax.url,
+          data = $trigger.data ( this.options.datas.data ) || this.options.ajax.data || {},
+          method = $trigger.data ( this.options.datas.method ) || this.options.ajax.method;
+
+      url = url.replace ( this.options.placeholders.id, ids.join ( this.options.characters.separator ) );
+      data = _.extend ( {}, data, {ids} );
+
+      return _.extend ( {}, this.options.ajax, { url, data, method } );
+
+    }
+
+    _getArgs ( type, $trigger ) {
+
+      let fn = this.options.actionsArgs[type] || this.options.actionsArgs[this.options.defaultActionArgs];
+
+      if ( !fn ) return;
+
+      let args = fn.call ( this, $trigger );
+
+      return args ? _.castArray ( args ) : false;
+
+    }
+
     /* ACTION */
 
     ___action () {
@@ -99,43 +145,19 @@
 
     __action ( event ) {
 
-      let ids = this._getIds ();
-
-      if ( !ids.length ) return $.toast ( this.options.messages.no_selected );
-
-      let $action = $(event.target),
-          type = $action.data ( this.options.datas.type ) || this.options.defaultAction,
+      let $trigger = $(event.target),
+          type = $trigger.data ( this.options.datas.type ) || this.options.defaultAction,
           action = this.options.actions[type];
 
       if ( !action ) return;
 
-      let url = $action.data ( this.options.datas.url ) || $action.attr ( this.options.attributes.href ) || this.options.ajax.url,
-          data = $action.data ( this.options.datas.data ) || this.options.ajax.data,
-          method = $action.data ( this.options.datas.method ) || this.options.ajax.method;
+      let args = this._getArgs ( type, $trigger );
 
-      url = url.replace ( this.options.placeholders.id, ids.join ( this.options.characters.separator ) );
-      data = _.extend ( data || {}, { ids: ids } );
+      if ( !args ) return;
 
-      let ajax = _.extend ( {}, this.options.ajax, {
-        url: url,
-        data: data,
-        method: method
-      });
+      action ( ...args );
 
-      action ( ajax );
-
-      this._trigger ( 'action', event, { type: type, ajax: ajax } );
-
-    }
-
-    /* IDs */
-
-    _getIds () {
-
-      let $rows = this._targetInstance.get (),
-          ids = $rows.get ().map ( row => this.options.selectors.id ? $(row).find ( this.options.selectors.id ).text () : $(row).data ( this.options.datas.id ) );
-
-      return _.compact ( ids );
+      this._trigger ( 'action', { type, args } );
 
     }
 

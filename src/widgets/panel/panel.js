@@ -50,6 +50,7 @@
         }
       },
       datas: {
+        direction: 'direction',
         type: 'type'
       },
       animations: {
