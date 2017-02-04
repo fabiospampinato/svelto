@@ -24,7 +24,6 @@
     options: {
       characters: {},
       regexes: {},
-      errors: {},
       messages: {},
       attributes: {},
       datas: {},

@@ -34,9 +34,6 @@
       amount: 5,
       url: false,
       rated: false,
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
       datas: {
         value: 'value',
         amount: 'amount',

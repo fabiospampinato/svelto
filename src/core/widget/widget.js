@@ -30,8 +30,9 @@
     options: {
       characters: {}, // Used to store some characters needed by the widget
       regexes: {}, // Contains the used regexes
-      errors: {}, // It contains all the errors that a widget can trigger
-      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.toast`, maybe just logs it
+      messages: { // Messages that the widget somewhere outputs, maybe with a `$.toast`, maybe just logs it
+        error: 'An error occurred, please try again later'
+      },
       attributes: {}, // Attributes used by the widget
       datas: {}, // CSS data-* names
       classes: { // CSS classes to attach inside the widget

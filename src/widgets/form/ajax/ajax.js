@@ -33,7 +33,6 @@
         methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
       },
       messages: {
-        error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
         refreshing: 'Done! Refreshing the page...',
         redirecting: 'Done! Redirecting...'

@@ -46,9 +46,6 @@
         data: 'data',
         method: 'method',
         target: 'target'
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
       }
     }
   };

@@ -29,9 +29,6 @@
         cache: false,
         method: 'POST'
       },
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
       datas: {
         likes: 'likes',
         dislikes: 'dislikes',

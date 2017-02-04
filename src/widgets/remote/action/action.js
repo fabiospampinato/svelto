@@ -42,7 +42,6 @@
         }]
       },
       messages: {
-        error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
         refreshing: 'Done! Refreshing the page...',
         redirecting: 'Done! Redirecting...'
