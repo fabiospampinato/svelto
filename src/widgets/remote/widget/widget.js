@@ -180,17 +180,23 @@
 
       if ( !this.$widget ) return;
 
-      this.$widget[this.options.widget.config.name]( this.options.methods.close );
+      let instance = this.$widget[this.options.widget.config.name]( 'instance' );
 
-      this._delay ( function () {
+      instance.whenUnlocked ( () => {
 
-        if ( !this.$widget ) return;
+        instance[this.options.methods.close]();
 
-        this.$widget.remove ();
+        this._delay ( function () {
 
-        this.$widget = false;
+          if ( !this.$widget ) return;
 
-      }, this.options.widget.config.options.animations[this.options.methods.close] );
+          this.$widget.remove ();
+
+          this.$widget = false;
+
+        }, instance.options.animations[this.options.methods.close] );
+
+      });
 
     }
 
