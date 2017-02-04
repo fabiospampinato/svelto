@@ -37,7 +37,19 @@
 
       this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
 
-      if ( !this.$target.length ) return false;
+      if ( !this.$target.length ) {
+
+        if ( this.options.$fallback && this.options.$fallback.length ) {
+
+          this.$target = this.options.$fallback;
+
+        }  else {
+
+          return false;
+
+        }
+
+      }
 
       this._targetInstance = this.$target[this.options.widget.config.name]( 'instance' );
 
