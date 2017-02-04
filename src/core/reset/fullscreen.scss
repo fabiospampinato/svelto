@@ -1,0 +1,14 @@
+
+/* =========================================================================
+ * Svelto - Core - Reset (Fullscreen)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FULLSCREEN */
+
+:not(html):fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+}
