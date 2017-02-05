@@ -1,0 +1,58 @@
+
+<!-- STORAGE -->
+
+<template name="storage">
+
+  {{{sw.divider "Storage"}}}
+
+  <div class="multiple equal joined">
+    <input name="storage_key_nr" placeholder="Key number..." class="bordered">
+    <input name="storage_key" placeholder="Key..." class="bordered">
+    <input name="storage_value" placeholder="Value..." class="bordered">
+  </div>
+
+  {{> storage_actions}}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="storage_actions">
+
+  {{{sw.divider "API"}}}
+
+  <div class="multiple">
+    {{{sw.action "Key" "storage_key ()"}}}
+    {{{sw.action "Get" "storage_get ()"}}}
+    {{{sw.action "Set" "storage_set ()"}}}
+    {{{sw.action "Remove" "storage_remove ()"}}}
+    {{{sw.action "Clear" "storage_clear ()"}}}
+  </div>
+
+  <script>
+    function getValue ( name ) {
+      return $('input[name="storage_' + name + '"]').val ();
+    }
+
+    function storage_key () {
+      $.toast ( Svelto.Storage.key ( Number ( getValue ( 'key_nr' ) ) ) );
+    }
+
+    function storage_get () {
+      $.toast ( Svelto.Storage.get ( getValue ( 'key' ) ) );
+    }
+
+    function storage_set () {
+      Svelto.Storage.set ( getValue ( 'key' ), getValue ( 'value' ) );
+    }
+
+    function storage_remove () {
+      Svelto.Storage.remove ( getValue ( 'key' ) );
+    }
+
+    function storage_clear () {
+      Svelto.Storage.clear ();
+    }
+  </script>
+
+</template>
