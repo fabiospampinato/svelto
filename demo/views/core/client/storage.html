@@ -9,6 +9,7 @@
     <input name="storage_key_nr" placeholder="Key number..." class="bordered">
     <input name="storage_key" placeholder="Key..." class="bordered">
     <input name="storage_value" placeholder="Value..." class="bordered">
+    <input name="storage_ttl" placeholder="Time To Live..." class="bordered">
   </div>
 
   {{> storage_actions}}
@@ -43,7 +44,9 @@
     }
 
     function storage_set () {
-      Svelto.Storage.set ( getValue ( 'key' ), getValue ( 'value' ) );
+      var ttl = getValue ( 'ttl' );
+      ttl = ttl.length ? Number ( ttl ) : undefined;
+      Svelto.Storage.set ( getValue ( 'key' ), getValue ( 'value' ), ttl );
     }
 
     function storage_remove () {

@@ -8,6 +8,8 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
+// TTL is expressed in seconds
+
 (function ( $, _, Svelto ) {
 
   'use strict';
@@ -16,16 +18,42 @@
 
   let Storage = {
     key: localStorage.key.bind ( localStorage ),
-    get ( key ) {
-      return JSON.parse ( localStorage.getItem ( key ) );
-    },
-    set ( key, value ) {
-      try {
-        localStorage.setItem ( key, JSON.stringify ( value ) );
-      } catch ( e ) {}
-    },
     remove: localStorage.removeItem.bind ( localStorage ),
-    clear: localStorage.clear.bind ( localStorage )
+    clear: localStorage.clear.bind ( localStorage ),
+    get ( key ) {
+
+      let val = localStorage.getItem ( key ),
+          obj = _.attempt ( JSON.parse, val );
+
+      if ( _.isPlainObject ( obj ) ) {
+
+        if ( 'exp' in obj && obj.exp < _.nowSecs () ) {
+
+          Storage.remove ( key );
+          return null;
+
+        }
+
+        return 'val' in obj ? obj.val : obj;
+
+      }
+
+      return val;
+
+    },
+    set ( key, val, ttl ) {
+
+      let obj = {val};
+
+      if ( ttl ) obj.exp = _.nowSecs () + ttl;
+
+      try {
+
+        localStorage.setItem ( key, JSON.stringify ( obj ) );
+
+      } catch ( e ) {}
+
+    }
   };
 
   /* EXPORT */
