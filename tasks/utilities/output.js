@@ -18,13 +18,23 @@ const output = {
 
   getDir ( key ) {
 
-    return path.parse ( this.getPath ( key ) ).dir;
+    const p = output.getPath ( key );
+
+    return _.last ( p.split ( '/' ) ).includes ( '.' ) ? path.parse ( p ).dir : p;
+
+  },
+
+  getDirs ( key ) {
+
+    const path = output.getPath ( key );
+
+    return _.isPlainObject ( path ) ? _.uniq ( Object.keys ( path ).map ( subkey => output.getDir ( `${key}.${subkey}` ) ) ) : path;
 
   },
 
   getName ( key ) {
 
-    return path.parse ( this.getPath ( key ) ).base;
+    return path.parse ( output.getPath ( key ) ).base;
 
   },
 
