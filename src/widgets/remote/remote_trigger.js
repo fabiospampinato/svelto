@@ -56,6 +56,19 @@
 
     }
 
+    /* OPTIONS */
+
+    _getOptions () {
+
+      return {
+        ajax: this.options.ajax,
+        storage: {
+          enabled: _.get ( this.options.widget.config, 'storage.enabled' ) || _.get ( Widgets.RemoteWidget.config, 'storage.enabled' ) || this.$trigger.is ( Widgets.Storable.config.selector ) //FIXME: We should merge the configs at factory time instead
+        }
+      };
+
+    }
+
     /* TAP */
 
     ___tap () {
@@ -68,7 +81,7 @@
 
     trigger () {
 
-      new this.options.widget ({ ajax: this.options.ajax }).request ();
+      new this.options.widget ( this._getOptions () ).request ();
 
     }
 

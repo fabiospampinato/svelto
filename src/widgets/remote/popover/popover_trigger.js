@@ -28,16 +28,15 @@
 
   class RemotePopoverTrigger extends Widgets.RemoteTrigger {
 
-    trigger () {
+    /* OPTIONS */
 
-      let options = {
-        ajax: this.options.ajax,
+    _getOptions () {
+
+      return _.merge ( super._getOptions (), {
         positionate: {
           $anchor: this.$trigger
         }
-      };
-
-      new this.options.widget ( options ).request ();
+      });
 
     }
 

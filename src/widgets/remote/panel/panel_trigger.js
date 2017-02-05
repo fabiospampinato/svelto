@@ -41,13 +41,13 @@
 
     }
 
-    /* API */
+    /* OPTIONS */
 
-    trigger () {
+    _getOptions () {
 
-      let {direction, type, ajax} = this.options;
+      let {direction, type} = this.options;
 
-      new this.options.widget ({ direction, type, ajax }).request ();
+      return _.merge ( super._getOptions (), { direction, type } );
 
     }
 

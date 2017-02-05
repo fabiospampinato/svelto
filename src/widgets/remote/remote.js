@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/widget/widget.js
+ * @require widgets/storable/storable.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities
@@ -30,6 +30,9 @@
         method: 'GET', // Method of the remote request
         timeout: 31000 // 1 second more than the default value of PHP's `max_execution_time` setting
       },
+      storage: {
+        enabled: false
+      },
       callbacks: {
         beforesend: _.noop,
         complete: _.noop,
@@ -42,11 +45,13 @@
 
   /* REMOTE */
 
-  class Remote extends Widgets.Widget {
+  class Remote extends Widgets.Storable {
 
     /* SPECIAL */
 
     _variables () {
+
+      super._variables ();
 
       this._requestsNr = 0;
 

@@ -28,16 +28,23 @@
 
   class RemoteLoaderTrigger extends Widgets.RemoteTrigger {
 
-    /* API */
+    /* OPTIONS */
 
-    trigger () {
+    _getOptions () {
 
-      this.$trigger[this.options.widget.config.name] ({
-        ajax: this.options.ajax,
+      return _.merge ( super._getOptions (), {
         callbacks: {
           beforesend: this.disable.bind ( this ) //TODO: Replace with a linear "spinner" overlay
         }
       });
+
+    }
+
+    /* API */
+
+    trigger () {
+
+      this.$trigger[this.options.widget.config.name] ( this._getOptions () );
 
     }
 

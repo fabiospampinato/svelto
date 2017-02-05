@@ -48,8 +48,9 @@
         enabled: false, // Whether remote widgets should be cached or not
         size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
       },
-      messages: {
-        error: 'An error occurred, please try again later'
+      storage: {
+        enabled: false, // Whether to preserve the content across refreshes/sessions
+        ttl: 86400 // 1 day
       },
       attributes: {
         id: 'data-remote-widget-id'
@@ -283,6 +284,22 @@
 
       }
 
+      /* STORAGE */
+
+      if ( this.options.storage.enabled ) {
+
+        let stored = this._storageGet ( this.requestId );
+
+        if ( stored ) {
+
+          this._cacheShow ( stored );
+
+          return false;
+
+        }
+
+      }
+
       /* REQUEST */
 
       this._defer ( function () {
@@ -340,6 +357,19 @@
       if ( this.options.cache.enabled ) {
 
         this._cacheSet ( this.requestId, remoteWidget );
+
+      }
+
+      /* STORAGE */
+
+      if ( this.options.storage.enabled ) {
+
+        let storable = {
+          id: this.requestId,
+          widget: remoteWidget
+        };
+
+        this._storageSet ( this.requestId, storable, this.options.storage.ttl );
 
       }
 
