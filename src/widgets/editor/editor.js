@@ -6,13 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/marked.js
- * @require core/widget/widget.js
+ * @require widgets/storable/storable.js
  * ========================================================================= */
 
 //TODO: Add headings support (level 1/3/5, like github does)
 //TODO: Add emoji support
 //TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
-//FIXME: Add history support (localstorage?)
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 
@@ -26,6 +25,10 @@
     selector: '.editor',
     options: {
       parser: window.marked || _.identity,
+      storage: {
+        enabled: false, // Whether to preserve the content across refreshes/sessions
+        ttl: 604800 // 1 week
+      },
       actions: {
         bold () {
           this._action ( '**', '**', 'bold' );
@@ -62,6 +65,15 @@
         },
         redo () {
           document.execCommand ( 'redo' );
+        },
+        store () {
+          this._storageSet ( this._storageKey, this.get (), this.options.storage.ttl );
+        },
+        unstore () {
+          this._storageRemove ( this._storageKey );
+        },
+        restore () {
+          this.set ( this._storageGet ( this._storageKey ) );
         },
         preview () {
           this.togglePreview ();
@@ -121,11 +133,13 @@
 
   /* EDITOR */
 
-  class Editor extends Widgets.Widget {
+  class Editor extends Widgets.Storable {
 
     /* SPECIAL */
 
     _variables () {
+
+      super._variables ();
 
       this.$editor = this.$element;
       this.$textarea = this.$editor.find ( this.options.selectors.textarea );
@@ -138,15 +152,39 @@
 
       this.$fullscreenable = this.$editor.parents ( this.options.selectors.fullscreenable );
 
-      this._isPreview = this.$editor.hasClass ( this.options.classes.preview );
-      this._isFullscreen = this.$editor.hasClass ( this.options.classes.fullscreen );
-
     }
 
     _init () {
 
+      this._isPreview = this.$editor.hasClass ( this.options.classes.preview );
+      this._isFullscreen = this.$editor.hasClass ( this.options.classes.fullscreen );
+
+      /* STORAGE */
+
+      this.options.storage.enabled = this.options.storage.enabled || this.$editor.is ( Widgets.Storable.config.selector );
+
+      if ( this.options.storage.enabled ) {
+
+        this._storageInit ();
+
+        if ( this._storageKey ) {
+
+          let action = this.get () ? 'store' : 'restore';
+
+          this.options.actions[action].apply ( this );
+
+        }
+
+      }
+
+    }
+
+    _events () {
+
       this.___keydown ();
       this.___triggers ();
+
+      if ( this.options.storage.enabled && this._storageKey ) this.___storage ();
 
     }
 
@@ -170,6 +208,20 @@
         this._on ( $trigger, Pointer.tap, _.wrap ( action, this.action ) );
 
       }
+
+    }
+
+    /* STORAGE */
+
+    ___storage () {
+
+      this._on ( 'change cut paste keyup', this._throttle ( this.options.actions.store.bind ( this ), 1000 ) );
+
+    }
+
+    _storageInit () {
+
+      this._storageKey = this.$editor.attr ( 'id' );
 
     }
 
@@ -332,6 +384,8 @@
     }
 
     set ( value ) {
+
+      if ( !_.isString ( value ) || value === this.$textarea.val () ) return;
 
       this.$textarea.val ( value ).change ();
 

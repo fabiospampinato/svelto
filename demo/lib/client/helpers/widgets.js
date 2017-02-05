@@ -179,6 +179,17 @@ SWHelpers.define ( 'editor', function () {
                    '<i class="icon">redo</i>' +
                  '</div>' +
                '</div>' +
+               '<div class="multiple joined">' +
+                 '<div class="button compact small bordered" title="Store" data-action="store">' +
+                   '<i class="icon">cloud</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Unstore" data-action="unstore">' +
+                   '<i class="icon">cloud_off</i>' +
+                 '</div>' +
+                 '<div class="button compact small bordered" title="Restore" data-action="restore">' +
+                   '<i class="icon">cloud_download</i>' +
+                 '</div>' +
+               '</div>' +
                '<div class="spacer"></div>' +
                '<div class="button compact small bordered" title="Preview" data-action="preview">' +
                  '<i class="icon">visibility</i>' +
