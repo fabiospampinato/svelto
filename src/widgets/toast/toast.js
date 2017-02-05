@@ -103,7 +103,7 @@
       type: 'alert',
       color: Colors.black,
       css: '',
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      persistent: false, // Whether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
       ttl: 3500,
       ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;

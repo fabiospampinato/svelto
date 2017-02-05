@@ -35,7 +35,7 @@
         type: 'hex', // One of the formats implemented in the exporters
         data: undefined // Passed to the called the exporter
       },
-      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Whether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',

@@ -28,8 +28,8 @@
       placeholder: false
     },
     options: {
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
-      resize: true, // Wether performing a resize transition between the loading widget and the remove widget or not
+      persistent: false, // Whether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      resize: true, // Whether performing a resize transition between the loading widget and the remove widget or not
       $wrapper: false, // The loading widget will be appended to it, fallback to the $layout
       widget: false,
       methods: {
@@ -45,7 +45,7 @@
         method: 'POST'
       },
       cache: {
-        enabled: false, // Wether remote widgets should be cached or not
+        enabled: false, // Whether remote widgets should be cached or not
         size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
       },
       messages: {

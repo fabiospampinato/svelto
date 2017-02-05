@@ -25,7 +25,7 @@
     selector: '.carousel',
     options: {
       startIndex: 0,
-      wrap: true, // Wether we should connect the start with the end, so that when calling `previous` from the start we reach the end and vice versa
+      wrap: true, // Whether we should connect the start with the end, so that when calling `previous` from the start we reach the end and vice versa
       cycle: false, // If the carousel should auto-cycle or not
       interval: 5000, // Interval between auto-cycling slides
       intervalMinimumRemaining: 1000, // Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;

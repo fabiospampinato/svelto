@@ -27,7 +27,7 @@
       value: 0,
       step: 1, // Only multiples of `step` are valid values
       decimals: 0, // Trunc the value to this amount of decimal numbers
-      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Whether it will update the input also on `Draggable.move` or just on `Draggable.end`
       datas: {
         min: 'min',
         max: 'max',
