@@ -32,7 +32,8 @@
 
     _events () {
 
-      this.___targetRemove ();
+      super._events ();
+
       this.___tap ();
 
     }

@@ -39,19 +39,13 @@
 
     _events () {
 
-      this.___targetRemove ();
-      this.___tap ();
+      super._events ();
+
       this.___hover ();
 
     }
 
     /* TAP */
-
-    ___tap () {
-
-      this._on ( Pointer.tap, this.__tap );
-
-    }
 
     __tap ( event ) {
 
