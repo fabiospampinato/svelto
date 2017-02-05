@@ -51,7 +51,9 @@
 
       }
 
-      this._targetInstance = this.$target[this.options.widget.config.name]( 'instance' );
+      this.target = this.$target[0];
+
+      if ( this.options.widget ) this._targetInstance = this.$target[this.options.widget.config.name]( 'instance' );
 
     }
 
