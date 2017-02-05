@@ -35,11 +35,11 @@ function task () {
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )
-             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'images' ) ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getDir ( 'images' ) ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.start () ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, imagemin ( plugins.imagemin.plugins, plugins.imagemin.options ) ) )
              .pipe ( gulpif ( plugins.imagemin.enabled, bytediff.stop () ) )
-             .pipe ( gulp.dest ( output.getPath ( 'images' ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'images' ) ) )
              .pipe ( touch () );
 
 }

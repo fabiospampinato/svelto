@@ -53,9 +53,9 @@ function task () {
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( orderPinner () )
              .pipe ( flatten () )
-             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'javascript.temp' ) ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getDir ( 'javascript.temp' ) ) ) )
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
-             .pipe ( gulp.dest ( output.getPath ( 'javascript.temp' ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'javascript.temp' ) ) )
              .pipe ( touch () );
 
 }

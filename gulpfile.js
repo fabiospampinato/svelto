@@ -20,6 +20,15 @@ require ( './tasks/admin/publish' );
 
 require ( './tasks/admin/release' );
 
+require ( './tasks/clean/fonts' );
+require ( './tasks/clean/images' );
+require ( './tasks/clean/javascript' );
+require ( './tasks/clean/javascript_temp' );
+require ( './tasks/clean/scss' );
+require ( './tasks/clean/css' );
+require ( './tasks/clean/style' );
+require ( './tasks/clean' );
+
 require ( './tasks/build/fonts' );
 require ( './tasks/build/images' );
 require ( './tasks/build/scss/parts/functions' );
@@ -47,7 +56,6 @@ require ( './tasks/demo/meteor' );
 require ( './tasks/demo/browser_sync' );
 require ( './tasks/demo' );
 
-require ( './tasks/clean' );
 require ( './tasks/help' );
 require ( './tasks/version' );
 require ( './tasks/default' );

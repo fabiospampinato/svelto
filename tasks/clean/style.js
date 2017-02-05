@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Build - Javascript
+ * Svelto - Tasks - Clean - Style
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,15 +8,14 @@
 
 /* REQUIRE */
 
-const gulp    = require ( 'gulp' ),
-      project = require ( '../../config/project' );
+const gulp = require ( 'gulp' );
 
 /* TASK */
 
-const task = project.isDevelopment ? gulp.series ( 'clean-javascript-temp', 'build-javascript-temp', 'build-javascript-development' ) : gulp.task ( 'build-javascript-production' );
+let task = gulp.parallel ( 'clean-scss', 'clean-css' );
 
-task.description = '[ALL] Build javascript';
+task.description = '[ALL] Clean generated style';
 
 /* GULP */
 
-gulp.task ( 'build-javascript', task );
+gulp.task ( 'clean-style', task );

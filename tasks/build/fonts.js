@@ -33,8 +33,8 @@ function task () {
              .pipe ( gulpif ( plugins.filter.enabled, filter ( plugins.filter.options ) ) )
              .pipe ( gulpif ( plugins.override.enabled, override ( plugins.override.options ) ) )
              .pipe ( flatten () )
-             .pipe ( gulpif ( !needUpdate, newer ( output.getPath ( 'fonts' ) ) ) )
-             .pipe ( gulp.dest ( output.getPath ( 'fonts' ) ) )
+             .pipe ( gulpif ( !needUpdate, newer ( output.getDir ( 'fonts' ) ) ) )
+             .pipe ( gulp.dest ( output.getDir ( 'fonts' ) ) )
              .pipe ( touch () );
 
 }

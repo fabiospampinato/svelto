@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Build - Javascript
+ * Svelto - Tasks - Clean - Images
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,15 +8,21 @@
 
 /* REQUIRE */
 
-const gulp    = require ( 'gulp' ),
-      project = require ( '../../config/project' );
+const del     = require ( 'del' ),
+      gulp    = require ( 'gulp' ),
+      plugins = require ( '../config/project' ).plugins,
+      output  = require ( '../utilities/output' );
 
 /* TASK */
 
-const task = project.isDevelopment ? gulp.series ( 'clean-javascript-temp', 'build-javascript-temp', 'build-javascript-development' ) : gulp.task ( 'build-javascript-production' );
+function task () {
 
-task.description = '[ALL] Build javascript';
+  return del ( output.getDir ( 'images' ), plugins.del.options );
+
+}
+
+task.description = '[ALL] Clean generated images';
 
 /* GULP */
 
-gulp.task ( 'build-javascript', task );
+gulp.task ( 'clean-images', task );

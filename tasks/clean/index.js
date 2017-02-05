@@ -10,7 +10,7 @@
 
 const del     = require ( 'del' ),
       gulp    = require ( 'gulp' ),
-      project = require ( './config/project' ),
+      project = require ( '../config/project' ),
       plugins = project.plugins;
 
 /* TASK */
@@ -21,7 +21,7 @@ function task () {
 
 }
 
-task.description = 'Clean generated files';
+task.description = '[ALL] Clean generated files';
 
 /* GULP */
 
