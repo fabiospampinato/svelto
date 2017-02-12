@@ -17,6 +17,7 @@
 const paths = {
   input: {
     roots: ['src'],
+    json: '<root>/**/*.json',
     fonts: '<root>/**/*.{eot,ttf,woff,woff2}',
     images: '<root>/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
     javascript: {
@@ -34,6 +35,7 @@ const paths = {
     }
   },
   output: {
+    json: 'dist/json',
     fonts: 'dist/fonts',
     images: 'dist/images',
     javascript: {

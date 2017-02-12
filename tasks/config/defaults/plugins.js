@@ -121,6 +121,10 @@ const plugins = {
     ],
     options: {}
   },
+  jsonminify: {
+    enabled: true,
+    options: {}
+  },
   override: {
     enabled: true,
     options: {

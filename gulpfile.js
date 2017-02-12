@@ -20,6 +20,7 @@ require ( './tasks/admin/publish' );
 
 require ( './tasks/admin/release' );
 
+require ( './tasks/clean/json' );
 require ( './tasks/clean/fonts' );
 require ( './tasks/clean/images' );
 require ( './tasks/clean/javascript' );
@@ -29,6 +30,7 @@ require ( './tasks/clean/css' );
 require ( './tasks/clean/style' );
 require ( './tasks/clean' );
 
+require ( './tasks/build/json' );
 require ( './tasks/build/fonts' );
 require ( './tasks/build/images' );
 require ( './tasks/build/scss/parts/functions' );
@@ -46,6 +48,7 @@ require ( './tasks/build/javascript/production' );
 require ( './tasks/build/javascript' );
 require ( './tasks/build' );
 
+require ( './tasks/watch/json' );
 require ( './tasks/watch/fonts' );
 require ( './tasks/watch/images' );
 require ( './tasks/watch/scss' );

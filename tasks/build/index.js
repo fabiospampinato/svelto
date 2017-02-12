@@ -30,7 +30,7 @@ function notify ( done ) {
 
 /* TASK */
 
-const task = gulp.series ( gulp.parallel ( 'build-fonts', 'build-images', 'build-javascript', 'build-style' ), notify );
+const task = gulp.series ( gulp.parallel ( 'build-json', 'build-fonts', 'build-images', 'build-javascript', 'build-style' ), notify );
 
 task.description = 'Build Svelto ' + log.options ( ['env', '*'], ['environment', '*'], ['fresh'] );
 

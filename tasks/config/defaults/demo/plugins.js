@@ -28,6 +28,9 @@ const plugins = {
   imagemin: {
     enabled: false
   },
+  jsonminify: {
+    enabled: false
+  },
   override: {
     options: {
       log: true

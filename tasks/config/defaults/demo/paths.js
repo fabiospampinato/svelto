@@ -15,6 +15,7 @@ const paths = {
     }
   },
   output: {
+    json: 'demo/public/json',
     fonts: 'demo/public/fonts',
     images: 'demo/public/images',
     javascript: {
@@ -24,7 +25,7 @@ const paths = {
       uncompressed: 'demo/svelto/client/stylesheet/svelto.css'
     }
   },
-  clean: ['dist', '.temp', 'demo/svelto', 'demo/public/fonts', 'demo/public/images']
+  clean: ['dist', '.temp', 'demo/svelto', 'demo/public/json', 'demo/public/fonts', 'demo/public/images']
 };
 
 /* EXPORT */

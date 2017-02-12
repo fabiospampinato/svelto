@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Watch
+ * Svelto - Tasks - Watch - JSON
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,14 +8,19 @@
 
 /* REQUIRE */
 
-const gulp = require ( 'gulp' );
+const gulp  = require ( 'gulp' ),
+      input = require ( '../utilities/input' );
 
 /* TASK */
 
-const task = gulp.parallel ( 'watch-json', 'watch-fonts', 'watch-images', 'watch-javascript', 'watch-scss' );
+function task () {
 
-task.description = 'Watch for changes and auto build';
+  return gulp.watch ( input.getPath ( 'json' ), gulp.task ( 'build-json' ) );
+
+}
+
+task.description = '[ALL] Watch json';
 
 /* GULP */
 
-gulp.task ( 'watch', task );
+gulp.task ( 'watch-json', task );

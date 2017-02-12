@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tasks - Watch
+ * Svelto - Tasks - Clean - JSON
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,14 +8,21 @@
 
 /* REQUIRE */
 
-const gulp = require ( 'gulp' );
+const del     = require ( 'del' ),
+      gulp    = require ( 'gulp' ),
+      plugins = require ( '../config/project' ).plugins,
+      output  = require ( '../utilities/output' );
 
 /* TASK */
 
-const task = gulp.parallel ( 'watch-json', 'watch-fonts', 'watch-images', 'watch-javascript', 'watch-scss' );
+function task () {
 
-task.description = 'Watch for changes and auto build';
+  return del ( output.getDir ( 'json' ), plugins.del.options );
+
+}
+
+task.description = '[ALL] Clean generated json';
 
 /* GULP */
 
-gulp.task ( 'watch', task );
+gulp.task ( 'clean-json', task );
