@@ -13,29 +13,6 @@ const _       = require ( 'lodash' ),
      cssnano  = require ( 'cssnano' ),
      imagemin = require ( 'gulp-imagemin' );
 
-/* BABEL PRESET */
-
-// We are using relative paths because if we add an external path (ie. `../ext`) to `config.paths.input.roots` it won't find the presets
-
-const levels = [0, -2], // [0] Inside Svelto [-2] Svelto is inside a `node_modules`
-      cwd = process.cwd ();
-
-let preset;
-
-for ( let i = 0, l = levels.length; i < l; i++ ) {
-
-  const level = levels[i],
-        attempt = path.join ( cwd, _.repeat ( '../', - level ), './node_modules/babel-preset-es2015' ),
-        required = _.attempt ( require, attempt );
-
-  if ( _.isError ( required ) ) continue;
-
-  preset = attempt;
-
-  break;
-
-}
-
 /* PLUGINS */
 
 const plugins = {
@@ -49,7 +26,7 @@ const plugins = {
   babel: {
     enabled: true,
     options: {
-      presets: [preset],
+      presets: ['babel-preset-es2015'].map ( require.resolve ),
       babelrc: false,
       compact: false
     }
