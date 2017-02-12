@@ -27,6 +27,7 @@ const plugins = {
     enabled: true,
     options: {
       presets: ['babel-preset-es2015'].map ( require.resolve ),
+      plugins: ['babel-plugin-syntax-async-functions', 'babel-plugin-transform-regenerator'].map ( require.resolve ),
       babelrc: false,
       compact: false
     }
