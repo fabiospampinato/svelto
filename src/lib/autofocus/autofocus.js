@@ -76,7 +76,7 @@
 
       let focusable = Autofocus.find ( $parent );
 
-      if ( !focusable || focusable === Autofocus.history[0] ) return;
+      if ( !focusable || $.isFocused ( focusable ) ) return;
 
       Autofocus.set ( focusable );
 
