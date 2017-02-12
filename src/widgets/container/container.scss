@@ -17,6 +17,7 @@
   @extend %widget;
   border-radius: $container-border-radius;
   padding: $container-padding-y $container-padding-x;
+  z-index: 0; // In order to better support actionable icons etc.
 }
 
 .container {

@@ -1046,4 +1046,40 @@
     </div>
   </div>
 
+  {{> icon_actions }}
+
+</template>
+
+<!-- ACTIONS -->
+
+<template name="icon_actions">
+
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "Actionable" "toggle_class ( 'actionable' )"}}}
+    {{{sw.checkAction "Disabled" "toggle_class ( 'disabled' )"}}}
+  </div>
+
+  {{{sw.divider "State"}}}
+
+  <div class="multiple joined actions">
+    {{{sw.radioAction "Base" "state" "set_state ()" true}}}
+    {{{sw.radioAction "Hover" "state" "set_state ( 'hover' )"}}}
+    {{{sw.radioAction "Active" "state" "set_state ( 'active' )"}}}
+  </div>
+
+  <script>
+    function toggle_class ( name ) {
+      $('.container .icon').toggleClass ( name );
+    }
+
+    function set_state ( state ) {
+      var states = ['hover', 'active'];
+      for ( var i = 0, l = states.length; i < l; i++ ) {
+        $('.container .icon').removeClass ( states[i] ).addClass ( state );
+      }
+    }
+  </script>
+
 </template>

@@ -1,0 +1,64 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Icon - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../icon.scss
+ * ========================================================================= */
+
+/* ACTIONABLE */
+
+i.icon.actionable {
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* HOVER / ACTIVE */
+
+    &.hover,
+    &:hover,
+    &.active,
+    &:active {
+
+      overflow: visible;
+
+      &:before {
+        @include center-transform ();
+        @include dimension ( $icon-actionable-before-size );
+        position: absolute;
+        z-index: -1;
+        content: '';
+        background-color: $icon-actionable-before-bg-color;
+        border-radius: $icon-actionable-before-border-radius;
+      }
+
+    }
+
+    /* HOVER */
+
+    &:not(.active) {
+
+      &.hover:before,
+      &:hover:before {
+        opacity: $icon-actionable-before-hover-opacity;
+      }
+
+    }
+
+    /* ACTIVE */
+
+    &:not(.ripple) {
+
+      &.active:before,
+      &:active:before {
+        opacity: $icon-actionable-before-active-opacity;
+      }
+
+    }
+
+  }
+
+}

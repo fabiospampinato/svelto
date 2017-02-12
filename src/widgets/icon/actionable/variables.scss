@@ -1,26 +1,19 @@
 
 /* =========================================================================
- * Svelto - Widgets - Toolbar
+ * Svelto - Widgets - Icon - Actionable (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before core/multiple/multiple.scss
- * @require core/widget/widget.scss
+ * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 
-/* TOOLBAR */
+/* ACTIONABLE */
 
-.toolbar {
+$icon-actionable-before-size: 140% !default;
 
-  @extend %widget;
-  padding: $toolbar-padding-y $toolbar-padding-x;
-  z-index: 0; // In order to better support actionable icons etc.
+$icon-actionable-before-bg-color: #000000 !default;
+$icon-actionable-before-hover-opacity: .04 !default;
+$icon-actionable-before-active-opacity: .06 !default;
 
-  /* MULTIPLE */
-
-  > %multiple:only-child {
-    flex-wrap: nowrap;
-  }
-
-}
+$icon-actionable-before-border-radius: $circular-border-radius !default;
