@@ -19,7 +19,10 @@ const components = {
     'lodash/vendor': false
   },
   decorators: true,
-  lib: true,
+  lib: {
+    'emoji/data/raw/make': false,
+    'emoji/data/raw/raw': false // Disabled, using lazy loading instead
+  },
   widgets: {
     boilerplate: false,
     'chart/vendor': false,

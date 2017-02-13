@@ -1,0 +1,31 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/icon/variables.scss
+ * @require core/typography/variables.scss
+ * ========================================================================= */
+
+/* EMOJI */
+
+$emoji-size: $icon-size !default;
+$emoji-scale-factor: $emoji-size / $font-size !default;
+
+/* TYPE */
+
+$emoji-set: 'emojione' !default; // apple, google, twitter, emojione
+$emoji-tone: 1 !default;
+
+/* IMAGE */
+
+$emoji-image-path: '//cdn.jsdelivr.net/emojione/assets/png/' !default; //TODO: Add one path for each of the possible sets
+
+/* SPRITE */
+
+$emoji-sprite-columns: 41 !default;
+$emoji-sprite-version: '2.4.4' !default;
+$emoji-sprite-size: 64 !default; // 16, 20, 32, 64
+$emoji-sprite-url: '//unpkg.com/emoji-datasource@#{$emoji-sprite-version}/sheet_#{$emoji-set}_#{$emoji-sprite-size}.png' !default;

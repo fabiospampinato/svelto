@@ -1,0 +1,64 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//FIXME: Native wrapped emoji are not perfectly centered
+
+/* EMOJI */
+
+%emoji-base {
+
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1em * $emoji-scale-factor;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
+
+  /* IMAGE */
+
+  &[style*='background-image']:empty {
+    background-size: 100%;
+  }
+
+  /* SPRITE */
+
+  &:not([style*='background-image']):empty {
+    background-image: url($emoji-sprite-url);
+    background-size: 100% * $emoji-sprite-columns;
+  }
+
+}
+
+%emoji {
+  @extend %emoji-base;
+}
+
+%emoji-sizes-scaled {
+
+  @each $size, $font-size in $sizes {
+
+    $class: size-get-class( $size );
+
+    &.#{$class} {
+      font-size: $font-size * $emoji-scale-factor;
+    }
+
+  }
+
+}
+
+i.emoji {
+  @extend %widget;
+  @extend %emoji;
+  @extend %emoji-sizes-scaled;
+}
