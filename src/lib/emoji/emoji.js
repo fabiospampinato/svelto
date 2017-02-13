@@ -26,6 +26,10 @@
         encoded: /:([a-zA-Z0-9+_-]+):(:tone-([1-6]):)?/g,
         emoticon: /(:o\))|(=-?\))|(;-?[bpP)])|(:-?[bdDoOpP>|()\\\/*])|(8-?\))|([cCD()]:)|(<\/?3)|(>:-?\()|(:'\()/g,
       },
+      make: {
+        css: '', // Additional wrapper classes
+        sprite: false // Whether we should a sprite instead of single images
+      },
       native: {
         enabled: Modernizr.emoji, // If enabled the unicode character will be used
         wrap: true // If enabled the emoji will be wrapped by a `i.emoji` element
@@ -121,17 +125,21 @@
 
     },
 
-    encode ( name, tone = Emoji.options.tone ) {
+    encode ( emoji, tone = Emoji.options.tone ) {
+
+      let name = _.isString ( emoji ) ? emoji : emoji.id;
 
       return tone > 1 ? `:${name}::tone-${tone}:` : `:${name}:`;
 
     },
 
-    async make ( emoji, tone = Emoji.options.tone, css = '', sprite = false ) {
+    async make ( emoji, tone = Emoji.options.tone, options = Emoji.options.make ) {
 
       emoji = _.isString ( emoji ) ? await Emoji.getByName ( emoji ) : emoji;
 
       if ( !emoji ) return '';
+
+      tone = emoji.tones ? tone : 1;
 
       if ( Emoji.options.native.enabled ) {
 
@@ -139,7 +147,7 @@
 
         if ( Emoji.options.native.wrap ) {
 
-          return `<i class="emoji ${css}" data-id="${emoji.id}" data-tonable="${!!emoji.tones}" title="${emoji.name}">${unicode}</i>`;
+          return `<i class="emoji ${options.css}" data-id="${emoji.id}" data-tone="${tone}" data-tonable="${!!emoji.tones}" title="${emoji.name}">${unicode}</i>`;
 
         } else {
 
@@ -149,20 +157,20 @@
 
       } else {
 
-        if ( sprite ) {
+        if ( options.sprite ) {
 
           let {x, y} = Emoji.getSpriteXY ( emoji, tone ),
               scale = 100 / ( Emoji.options.sprite.columns - 1 ),
               posX = x * scale,
               posY = y * scale;
 
-          return `<i class="emoji ${css}" data-id="${emoji.id}" data-tonable="${!!emoji.tones}" title="${emoji.name}" style="background-position:${posX}% ${posY}%"></i>`;
+          return `<i class="emoji ${options.css}" data-id="${emoji.id}" data-tone="${tone}" data-tonable="${!!emoji.tones}" title="${emoji.name}" style="background-position:${posX}% ${posY}%"></i>`;
 
         } else {
 
           let url = await Emoji.getImageUrl ( emoji, tone );
 
-          return `<i class="emoji ${css}" data-id="${emoji.id}" data-tonable="${!!emoji.tones}" title="${emoji.name}" style="background-image:url(${url})"></i>`;
+          return `<i class="emoji ${options.css}" data-id="${emoji.id}" data-tone="${tone}" data-tonable="${!!emoji.tones}" title="${emoji.name}" style="background-image:url(${url})"></i>`;
 
         }
 

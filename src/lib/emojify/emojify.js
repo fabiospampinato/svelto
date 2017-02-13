@@ -21,9 +21,9 @@
 
     options: {
       parse: {
-        unicode: false, //FIXME: Doesn't work properly, and it's very slow
         emoticon: true,
-        encoded: true
+        encoded: true,
+        unicode: false //FIXME: Doesn't work properly, and it's very slow
       }
     },
 
@@ -48,7 +48,48 @@
 
     /* PARSE */
 
-    async parseUnicode ( str ) {
+    async parseEmoticon ( str, options ) { //FIXME: Won't work if we are parsing a `:/` emoticon and we have `http://` for instance (we should check if there's another forward slash immediately following the emoticon)
+
+      if ( !Emojify.options.parse.emoticon ) return str;
+
+      let emoticons = Emojify.getEmoticons ( str );
+
+      for ( let emoticon of emoticons ) {
+
+        let emoji = await Emoji.getByEmoticon ( emoticon, true );
+
+        if ( !emoji ) continue;
+
+        str = _.replaceAll ( str, emoticon, await Emoji.make ( emoji.id, Emoji.options.tone, options ) );
+
+      }
+
+      return str;
+
+    },
+
+    async parseEncoded ( str, options ) {
+
+      if ( !Emojify.options.parse.encoded ) return str;
+
+      let matches = Emojify.getEncoded ( str );
+
+      for ( let match in matches ) {
+
+        let {name, tone} = matches[match],
+            emoji = await Emoji.getByName ( name );
+
+        if ( !emoji ) continue;
+
+        str = _.replaceAll ( str, match, await Emoji.make ( emoji.id, tone, options ) );
+
+      }
+
+      return str;
+
+    },
+
+    async parseUnicode ( str, options ) {
 
       if ( !Emojify.options.parse.unicode ) return str;
 
@@ -65,50 +106,9 @@
 
           if ( str.indexOf ( unicode ) === -1 ) continue;
 
-          str = str.replace ( unicode, await Emoji.make ( name, i ) );
+          str = _.replaceAll ( str, unicode, await Emoji.make ( name, i, options ) );
 
         }
-
-      }
-
-      return str;
-
-    },
-
-    async parseEmoticon ( str ) { //FIXME: Won't work if we are parsing a `:/` emoticon and we have `http://` for instance (we should check if there's another forward slash immediately following the emoticon)
-
-      if ( !Emojify.options.parse.emoticon ) return str;
-
-      let emoticons = Emojify.getEmoticons ( str );
-
-      for ( let emoticon of emoticons ) {
-
-        let emoji = await Emoji.getByEmoticon ( emoticon );
-
-        if ( !emoji ) continue;
-
-        str = str.replace ( emoticon, await Emoji.make ( emoji.id ) );
-
-      }
-
-      return str;
-
-    },
-
-    async parseEncoded ( str ) {
-
-      if ( !Emojify.options.parse.encoded ) return str;
-
-      let matches = Emojify.getEncoded ( str );
-
-      for ( let match in matches ) {
-
-        let {name, tone} = matches[match],
-            emoji = await Emoji.getByName ( name );
-
-        if ( !emoji ) continue;
-
-        str = str.replace ( match, await Emoji.make ( emoji.id, tone ) );
 
       }
 
@@ -118,40 +118,40 @@
 
     /* API */
 
-    async emojify ( target ) {
+    async emojify ( target, options ) {
 
       if ( target instanceof $ ) {
 
-        return Promise.all ( target.get ().map ( Emojify.node ) );
+        return Promise.all ( target.get ().map ( node => Emojify.node ( node, options ) ) );
 
       } else if ( _.isElement ( target ) ) {
 
-        return Emojify.node ( target );
+        return Emojify.node ( target, options );
 
       } else if ( _.isString ( target ) ) {
 
-        return Emojify.string ( target );
+        return Emojify.string ( target, options );
 
       }
 
     },
 
-    async string ( str ) {
+    async string ( str, options ) {
 
-      return Emojify.parseUnicode ( str )
-                    .then ( Emojify.parseEmoticon )
-                    .then ( Emojify.parseEncoded );
+      return Emojify.parseUnicode ( str, options )
+                    .then ( str => Emojify.parseEncoded ( str, options ) )
+                    .then ( str => Emojify.parseEmoticon ( str, options ) );
 
     },
 
-    async node ( node ) {
+    async node ( node, options ) {
 
       let type = node.nodeType;
 
       if ( type === 3 ) { // Text node
 
         let value = node.nodeValue,
-            parsed = await Emojify.string ( value );
+            parsed = await Emojify.string ( value, options );
 
         if ( value !== parsed ) {
 
@@ -161,9 +161,19 @@
 
           } else {
 
-            let replacement = $.parseHTML ( `<span>${parsed}</span>` )[0];
+            let parent = node.parentNode;
 
-            node.parentNode.replaceChild ( replacement, node );
+            if ( parent.childNodes.length === 1 ) {
+
+              parent.innerHTML = parsed;
+
+            } else {
+
+              let replacement = $.parseHTML ( `<span>${parsed}</span>` )[0];
+
+              node.parentNode.replaceChild ( replacement, node );
+
+            }
 
           }
 
@@ -171,7 +181,7 @@
 
       } else if ( type === 1 ) { // Element node
 
-        return Promise.all ( Array.prototype.map.call ( node.childNodes, Emojify.node ) );
+        return Promise.all ( Array.prototype.map.call ( node.childNodes, node => Emojify.node ( node, options ) ) );
 
       }
 
@@ -181,9 +191,9 @@
 
   /* PLUGIN */
 
-  $.fn.emojify = function () {
+  $.fn.emojify = function ( options ) {
 
-    Emojify.emojify ( this );
+    return Emojify.emojify ( this, options );
 
   };
 
