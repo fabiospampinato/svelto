@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/normalize.scss
  * ========================================================================= */
 
 /* BORDER / iOS SHADOW */
@@ -11,6 +13,7 @@
 input {
   border: 0;
   appearance: none !important;
+  font-family: $font-family-root;
 }
 
 /* NUMBER */
