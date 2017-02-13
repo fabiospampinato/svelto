@@ -23,7 +23,7 @@
     options: {
       tone: 1, // Default tone
       regexes: {
-        encoded: /:([a-zA-Z0-9-_]+):(:tone-([1-6]):)?/g,
+        encoded: /:([a-zA-Z0-9+_-]+):(:tone-([1-6]):)?/g,
         emoticon: /(:o\))|(=-?\))|(;-?[bpP)])|(:-?[bdDoOpP>|()\\\/*])|(8-?\))|([cCD()]:)|(<\/?3)|(>:-?\()|(:'\()/g,
       },
       native: {
