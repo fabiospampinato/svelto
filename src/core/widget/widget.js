@@ -135,6 +135,7 @@
 
         let options = { //TODO: Maybe export them
           imports: {
+            Svelto,
             Templates,
             self: Templates[this.templatesNamespace]
           },
