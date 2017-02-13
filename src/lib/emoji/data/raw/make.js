@@ -107,7 +107,7 @@ emojiData.forEach ( datum => {
     if ( datum.alts ) parts.push ( datum.alts.map ( s => s.split ( '_' ).map ( _.lowerCase ) ) );
     if ( datum.tags ) parts.push ( datum.tags.split ( ',' ).map ( _.lowerCase ) );
     if ( datum.emoticons ) parts.push ( datum.emoticons );
-    datum.tags = _.uniq ( _.compact ( _.flatten ( parts ) ) ).sort ();
+    datum.tags = _.uniq ( _.compact ( _.flatten ( parts ) ) ).sort ().join ();
   }
 
   datum.char = dec2char ( hex2dec ( datum.unified ) );
