@@ -39,7 +39,9 @@
         for ( let emoji of category.emojis ) {
 
           if ( emoji.alts ) {
+
             emoji.alts.forEach ( alt => data.alts[alt] = emoji );
+
           }
 
           // data.chars.push ([ emoji.char, emoji.id ]);
@@ -47,7 +49,27 @@
           data.emojis[emoji.id] = emoji;
 
           if ( emoji.emoticons ) {
-            emoji.emoticons.forEach ( emoticon => data.emoticons[emoticon] = emoji );
+
+            emoji.emoticons.forEach ( emoticon => {
+
+              let prev = data.emoticons[emoticon];
+
+              if ( _.isUndefined ( prev ) ) {
+
+                data.emoticons[emoticon] = emoji;
+
+              } else if ( _.isArray ( prev ) ) {
+
+                data.emoticons[emoticon].push ( emoji );
+
+              } else {
+
+                data.emoticons[emoticon] = [prev, emoji];
+
+              }
+
+            });
+
           }
 
         }

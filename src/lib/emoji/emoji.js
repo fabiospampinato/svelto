@@ -48,11 +48,12 @@
 
     },
 
-    async getByEmoticon ( emoticon ) {
+    async getByEmoticon ( emoticon, single = false ) {
 
-      let data = await EmojiData.get ();
+      let data = await EmojiData.get (),
+          found = data.emoticons[emoticon];
 
-      return data.emoticons[emoticon];
+      return single && _.isArray ( found ) ? found[0] : found;
 
     },
 
