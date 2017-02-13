@@ -43,33 +43,23 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele, Widget ) {
-
-    }
+    static widgetize ( $ele, Widget ) {}
 
     /* READY */
 
-    static ready ( done ) {
-
-    }
+    static ready ( done ) {}
 
     /* SPECIAL */
 
-    _variables () {
+    _create () {}
 
-    }
+    _variables () {}
 
-    _init () {
+    _init () {}
 
-    }
+    _events () {}
 
-    _events () {
-
-    }
-
-    _destroy () {
-
-    }
+    _destroy () {}
 
     /* PRIVATE */
 

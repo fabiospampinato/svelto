@@ -211,6 +211,7 @@
 
       /* CALLBACKS */
 
+      if ( this._make ()      === false ) return this.destroy ();
       if ( this._variables () === false ) return this.destroy ();
       if ( this._init ()      === false ) return this.destroy ();
       if ( this._events ()    === false ) return this.destroy ();
@@ -321,6 +322,7 @@
 
     /* SPECIAL */
 
+    _make () {} // Creates the widget, if necessary
     _variables () {} // Init your variables inside this function
     _init () {} // Perform the init stuff inside this function
     _events () {} // Bind the event handlers inside this function
