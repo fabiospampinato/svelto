@@ -1,0 +1,35 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../picker.scss
+ * ========================================================================= */
+
+/* POPOVER */
+
+.emojipicker.popover {
+
+  width: $emojipicker-popover-width;
+
+  /* CONTAINERS */
+
+  .emojipicker-containers {
+    height: $emojipicker-popover-containers-height;
+  }
+
+  /* TONES */
+
+  .emojipicker-tones {
+    margin: $emojipicker-popover-tones-spacing 0;
+  }
+
+  /* TONE */
+
+  .emojipicker-tone {
+    @include dimension ( $emojipicker-popover-tone-size );
+  }
+
+}

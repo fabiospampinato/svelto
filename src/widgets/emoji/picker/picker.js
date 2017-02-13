@@ -9,7 +9,6 @@
  * @require widgets/storable/storable.js
  * ========================================================================= */
 
-//TODO: Actual trigger/popover logic
 //TODO: Integration with editor
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, EmojiData, Emoji ) {
