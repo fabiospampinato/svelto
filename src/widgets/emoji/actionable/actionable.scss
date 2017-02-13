@@ -1,0 +1,16 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../emoji.scss
+ * @require widgets/icon/actionable/actionable.scss
+ * ========================================================================= */
+
+/* ACTIONABLE */
+
+i.emoji.actionable {
+  @extend i.icon.actionable;
+}
