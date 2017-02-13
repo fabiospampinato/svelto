@@ -1,0 +1,43 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * @require core/sizes/variables.scss
+ * ========================================================================= */
+
+/* EMOJI PICKER */
+
+$emojipicker-containers-height: 180px !default;
+
+/* EMPTY EMOJIS */
+
+$emojipicker-emojis-empty-opacity: .5 !default;
+
+/* PREVIEW */
+
+$emojipicker-preview-emoji-size: 38px !default;
+$emojipicker-preview-short-names-size: 'xsmall' !default;
+
+/* TONE */
+
+$emojipicker-tone-size: $size-large !default;
+$emojipicker-tone-1-bg-color: #ffc93a !default;
+$emojipicker-tone-2-bg-color: #fadcbc !default;
+$emojipicker-tone-3-bg-color: #e0bb95 !default;
+$emojipicker-tone-4-bg-color: #bf8f68 !default;
+$emojipicker-tone-5-bg-color: #9b643d !default;
+$emojipicker-tone-6-bg-color: #594539 !default;
+
+/* TONES */
+
+$emojipicker-tones-spacing: calc( ( #{$emojipicker-preview-emoji-size} - #{$emojipicker-tone-size} ) / 2 ) !default;
+
+/* TONE DOT */
+
+$emojipicker-tone-dot-z-depth: 1 !default;
+$emojipicker-tone-dot-size: 5px !default;
+$emojipicker-tone-dot-bg-color: $color-white !default;

@@ -1,0 +1,226 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * @before widgets/tabs/tabs.scss
+ * @require ../emoji.scss
+ * ========================================================================= */
+
+/* EMOJI PICKER */
+
+.emojipicker {
+
+  /* TRIGGERS */
+
+  &-triggers {
+
+    padding: 0 !important;
+
+    /* TRIGGER */
+
+    .button {
+      padding-left: 0;
+      padding-right: 0;
+      min-width: 0;
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  &-containers {
+
+    height: $emojipicker-containers-height;
+    padding: 0 !important;
+
+    /* CONTAINER */
+
+    .container {
+
+      min-height: 100%;
+      border-radius: 0;
+
+      /* MAIN */
+
+      &.main {
+
+        flex-direction: column;
+
+        &.active {
+          display: flex;
+        }
+
+        input {
+          flex-grow: 0;
+        }
+
+        .section {
+          position: relative;
+          flex-grow: 1;
+        }
+
+        .emojis {
+
+          flex-grow: 1;
+          white-space: nowrap;
+
+          /* EMPTY */
+
+          &.empty {
+            @include center-transform ();
+            position: absolute;
+            opacity: $emojipicker-emojis-empty-opacity;
+          }
+
+        }
+
+      }
+
+      /* EMOJIFIABLE */
+
+      &:not(.main):not(.emojified) .emojis {
+        visibility: hidden;
+      }
+
+    }
+
+  }
+
+  /* FOOTER */
+
+  &-footer {
+    order: 1;
+  }
+
+  /* PREVIEW */
+
+  &-preview {
+
+    /* EMOJI */
+
+    i.emoji {
+
+      @include dimension ( $emojipicker-preview-emoji-size );
+
+      /* NATIVE */
+
+      &:not(:empty) {
+        font-size: $emojipicker-preview-emoji-size;
+      }
+
+    }
+
+    /* TEXTS */
+
+    .texts {
+
+      white-space: nowrap;
+      overflow: hidden;
+
+      /* TITLE / SHORT NAMES */
+
+      .title,
+      .short-names {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      /* SHORT NAMES */
+
+      .short-names {
+        @include size-inline ( $emojipicker-preview-short-names-size );
+      }
+
+    }
+
+  }
+
+  /* TONES */
+
+  &-tones {
+    margin: $emojipicker-tones-spacing 0;
+  }
+
+  /* TONE */
+
+  &-tone {
+
+    @include dimension ( $emojipicker-tone-size );
+    border-radius: $emojipicker-tone-size;
+    position: relative;
+
+    /* TONES */
+
+    &:nth-child(1) {
+      background-color: $emojipicker-tone-1-bg-color;
+    }
+
+    &:nth-child(2) {
+      background-color: $emojipicker-tone-2-bg-color;
+    }
+
+    &:nth-child(3) {
+      background-color: $emojipicker-tone-3-bg-color;
+    }
+
+    &:nth-child(4) {
+      background-color: $emojipicker-tone-4-bg-color;
+    }
+
+    &:nth-child(5) {
+      background-color: $emojipicker-tone-5-bg-color;
+    }
+
+    &:nth-child(6) {
+      background-color: $emojipicker-tone-6-bg-color;
+    }
+
+    /* INACTIVE */
+
+    &:not(.active) {
+      cursor: pointer;
+    }
+
+    /* HOVER / ACTIVE */
+
+    &.active:after {
+      @include dimension ( $emojipicker-tone-dot-size );
+      @include center-transform ();
+      @include z-depth-inline ( $emojipicker-tone-dot-z-depth );
+      position: absolute;
+      content: '';
+      border-radius: $emojipicker-tone-dot-size;
+      background-color: $emojipicker-tone-dot-bg-color;
+    }
+
+  }
+
+  /* SEARCHING */
+
+  &.searching .frequent-section {
+    display: none;
+  }
+
+  /* NOT SEARCHING */
+
+  &:not(.searching) .search-section {
+    display: none;
+  }
+
+  /* PREVIEWING */
+
+  &.previewing .emojipicker-tones {
+    display: none;
+  }
+
+  /* NOT PREVIEWING */
+
+  &:not(.previewing) .emojipicker-preview {
+    display: none;
+  }
+
+}
