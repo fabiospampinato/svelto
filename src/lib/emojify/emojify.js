@@ -31,13 +31,16 @@
 
     getEmoticons ( str ) {
 
-      return _.findMatches ( str, Emoji.options.regexes.emoticon ).map ( _.first );
+      return _.findMatches ( str, Emoji.options.regexes.emoticon )
+              .map ( _.first )
+              .sort ( ( a, b ) => b.length - a.length );
 
     },
 
     getEncoded ( str ) {
 
-      let matches = _.findMatches ( str, Emoji.options.regexes.encoded );
+      let matches = _.findMatches ( str, Emoji.options.regexes.encoded )
+                     .sort ( ( a, b ) => b[0].length - a[0].length );
 
       return matches.reduce ( ( acc, match ) => _.set ( acc, match[0], {
         name: match[1],
