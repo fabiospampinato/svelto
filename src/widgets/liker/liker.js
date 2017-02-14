@@ -125,9 +125,13 @@
 
     }
 
+    toggle ( force = !this.options.state ) {
 
+      if ( !!force !== this.options.state ) {
 
+        this.set ( !!force );
 
+      }
 
     }
 
