@@ -119,7 +119,7 @@
         'ctmd + d': ['action', 'divider'],
         'ctmd + p': ['action', 'preview'],
         'ctmd + f': ['action', 'fullscreen'],
-        'esc': 'unfullscreen'
+        'esc': '__esc'
       },
       callbacks: {
         action: _.noop,
@@ -193,6 +193,16 @@
     ___keydown () {
 
       this._onHover ( [this.$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* ESC */
+
+    __esc () {
+
+      if ( !this.isFullscreen () ) return false;
+
+      this.unfullscreen ();
 
     }
 
