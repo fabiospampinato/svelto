@@ -18,8 +18,7 @@
 
   $(function () {
 
-    let $window = $(window),
-        pushState = history.pushState;
+    let pushState = history.pushState;
 
     history.pushState = function ( state ) {
 
@@ -29,7 +28,7 @@
 
       }
 
-      $window.trigger ( 'pushstate' );
+      Svelto.$window.trigger ( 'pushstate' );
 
       return pushState.apply ( history, arguments );
 

@@ -17,10 +17,9 @@
 
   $(function () {
 
-    let $window = $(window),
-        previous = window.location.href.split ( '#' )[0];
+    let previous = window.location.href.split ( '#' )[0];
 
-    $window.on ( 'popstate pushstate', function () {
+    Svelto.$window.on ( 'popstate pushstate', function () {
 
       _.defer ( function () { // We need the `window.location.href` to get updated before
 
@@ -30,7 +29,7 @@
 
           previous = current;
 
-          $window.trigger ( 'route' );
+          Svelto.$window.trigger ( 'route' );
 
         }
 

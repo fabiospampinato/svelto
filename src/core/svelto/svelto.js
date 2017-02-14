@@ -17,12 +17,33 @@
   /* SVELTO */
 
   let Svelto = {
+
     VERSION: '0.7.12',
+
+    /* DEPENDENCIES */
+
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
-    Widgets: {}, // Widgets' classes namespace
-    Templates: {} // Widgets' templates namespace
+
+    /* NAMESPACES */
+
+    Widgets: {},
+    Templates: {},
+
+    /* ELEMENTS */
+
+    $window: $(window),
+    window,
+    $document: $(document),
+    document,
+    $html: $(document.documentElement),
+    html: document.documentElement,
+    $head: $(document.head),
+    head: document.head,
+    $body: $(document.body),
+    body: document.body
+
   };
 
   /* EXPORT */

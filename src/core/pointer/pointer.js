@@ -82,7 +82,7 @@
 
   /* VARIABLES */
 
-  let $document = $(document),
+  let $document = Svelto.$document,
       canTouch = Browser.is.touchDevice,
       isTouch,
       delta = 0,

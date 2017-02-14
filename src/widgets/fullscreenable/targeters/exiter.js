@@ -21,7 +21,7 @@
     selector: '.fullscreenable-exiter, .fullscreen-exiter',
     options: {
       widget: Widgets.Fullscreenable,
-      $fallback: $(document.documentElement),
+      $fallback: Svelto.$html,
       methods: {
         isOpen: 'isFullscreen',
         close: 'exit'

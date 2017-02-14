@@ -131,7 +131,7 @@
 
     attach () {
 
-      this.$stylesheet.appendTo ( $(document.head) );
+      this.$stylesheet.appendTo ( Svelto.$head );
 
     }
 

@@ -13,10 +13,6 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let $window = $(window);
-
   /* BREAKPOINT */
 
   let Breakpoint = {
@@ -38,7 +34,7 @@
       this.previous = this.current;
       this.current = current;
 
-      $window.trigger ( 'breakpoint:change' );
+      Svelto.$window.trigger ( 'breakpoint:change' );
 
     },
 
@@ -47,7 +43,7 @@
     get () {
 
       let widths = _.sortBy ( _.values ( Breakpoints.widths ) ),
-          width = $window.width ();
+          width = Svelto.$window.width ();
 
       for ( let i = 0, l = widths.length; i < l; i++ ) {
 
@@ -69,7 +65,7 @@
 
     Breakpoint.current = Breakpoint.get ();
 
-    $window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
+    Svelto.$window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
 
   });
 
