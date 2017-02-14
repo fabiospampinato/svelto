@@ -11,6 +11,7 @@
  * @require ./event_xy.js
  * @require ./frame.js
  * @require ./get_rect.js
+ * @require ./has_attribute.js
  * @require ./hsl.js
  * @require ./is_attached.js
  * @require ./is_focused.js
