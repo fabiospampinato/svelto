@@ -155,6 +155,9 @@ SWHelpers.define ( 'editor', function () {
                  '</div>' +
                '</div>' +
                '<div class="multiple joined">' +
+                 '<div class="button compact small bordered emojipicker-popover-trigger" title="Emoji">' +
+                   '<i class="icon">insert_emoticon</i>' +
+                 '</div>' +
                  '<div class="button compact small bordered" title="Link" data-action="link">' +
                    '<i class="icon">link</i>' +
                  '</div>' +

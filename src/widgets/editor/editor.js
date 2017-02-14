@@ -6,14 +6,15 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/marked.js
+ * @before lib/emojify/emojify.js
  * @require widgets/storable/storable.js
  * ========================================================================= */
 
 //TODO: Add headings support (level 1/3/5, like github does)
-//TODO: Add emoji support
-//TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
+//TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
+//TODO: Switch to a `contenteditable` version where the preview and editor actual are the same thing
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify ) {
 
   'use strict';
 
@@ -185,6 +186,7 @@
       this.___triggers ();
 
       if ( this.options.storage.enabled && this._storageKey ) this.___storage ();
+      if ( Emoji ) this.___emojipicker ();
 
     }
 
@@ -235,24 +237,37 @@
 
     }
 
+    /* EMOJIPICKER */
+
+    ___emojipicker () {
+
+      this._on ( this.$document, 'emojipicker:pick', this.__emojipicker ); //FIXME: We probably shouldn't listen to all the pickers... what if there are multiple editors?
+
+    }
+
+    __emojipicker ( event, data ) {
+
+      let encoded = Emoji.encode ( data.emoji, data.tone );
+
+      this._insertAtSelection ( encoded, true );
+
+    }
+
     /* SELECTION */
 
     _getSelection () {
 
       let start = this.textarea.selectionStart,
-          end = this.textarea.selectionEnd;
+          end   = this.textarea.selectionEnd,
+          text  = this.$textarea.val ().substring ( start, end );
 
-      return {
-        start: start,
-        end: end,
-        text: this.$textarea.val ().substring ( start, end )
-      };
+      return { start, end, text };
 
     }
 
     _getWordSelection () {
 
-      let value = this.$textarea.val (),
+      let value     = this.$textarea.val (),
           selection = this._getSelection ();
 
       if ( selection.text.length || !value ) return selection;
@@ -290,11 +305,26 @@
 
     }
 
+    _insertAtSelection ( text, padding = false ) {
+
+      let value     = this.$textarea.val (),
+          selection = this._getSelection (),
+          padLeft   = padding && selection.start && value[selection.start - 1] !== ' ' ? ' ' : '',
+          padRight  = padding && selection.end < value.length && value[selection.end] !== ' ' ? ' ' : '',
+          newValue  = value.substr ( 0, selection.start ) + padLeft + text + padRight + value.substr ( selection.end, value.length ),
+          newRange  = selection.start + padLeft.length + text.length;
+
+      this.$textarea.val ( newValue ).change ();
+
+      this.textarea.setSelectionRange ( newRange, newRange );
+
+    }
+
     _replaceSelection ( prefix, suffix, placeholder ) {
 
-      let value = this.$textarea.val (),
+      let value     = this.$textarea.val (),
           selection = this._getSelection (),
-          newValue = value.substr ( 0, selection.start ) + prefix + placeholder + suffix + value.substr ( selection.end, value.length );
+          newValue  = value.substr ( 0, selection.start ) + prefix + placeholder + suffix + value.substr ( selection.end, value.length );
 
       this.$textarea.val ( newValue ).change ();
 
@@ -304,7 +334,7 @@
 
     _isSelectionWrapped ( prefix, suffix ) {
 
-      let value = this.$textarea.val (),
+      let value     = this.$textarea.val (),
           selection = this._getSelection ();
 
       return value.substr ( selection.start - prefix.length, prefix.length ) === prefix &&
@@ -328,9 +358,9 @@
 
     _wrapSelection ( prefix, suffix ) {
 
-      let value = this.$textarea.val (),
+      let value     = this.$textarea.val (),
           selection = this._getSelection (),
-          newValue = value.substr ( 0, selection.start ) + prefix + selection.text + suffix + value.substr ( selection.end, value.length );
+          newValue  = value.substr ( 0, selection.start ) + prefix + selection.text + suffix + value.substr ( selection.end, value.length );
 
       this.$textarea.val ( newValue ).change ();
 
@@ -340,10 +370,10 @@
 
     _unwrapSelection ( prefix, suffix, placeholder ) {
 
-      let value = this.$textarea.val (),
-          selection = this._getSelection (),
+      let value         = this.$textarea.val (),
+          selection     = this._getSelection (),
           isPlaceholder = selection.text === placeholder,
-          newValue = value.substr ( 0, selection.start - prefix.length ) + ( isPlaceholder ? '' : selection.text ) + value.substr ( selection.end + suffix.length, value.length );
+          newValue      = value.substr ( 0, selection.start - prefix.length ) + ( isPlaceholder ? '' : selection.text ) + value.substr ( selection.end + suffix.length, value.length );
 
       this.$textarea.val ( newValue ).change ();
 
@@ -382,6 +412,8 @@
     _render () {
 
       this.$preview.html ( this._parse () );
+
+      if ( Emojify ) this.$preview.emojify ();
 
     }
 
@@ -529,4 +561,4 @@
 
   Factory.make ( Editor, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify ));
