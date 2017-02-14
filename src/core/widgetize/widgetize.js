@@ -5,12 +5,12 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * ========================================================================= */
 
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto, Widgets, Readify ) {
 
   'use strict';
 
@@ -23,6 +23,16 @@
       this.widgetizers = {};
 
     }
+
+    /* UTILITIES */
+
+    _getWidgets ( $root, selector ) {
+
+      return $root.filter ( selector ).add ( $root.find ( selector ) );
+
+    }
+
+    /* METHODS */
 
     get () {
 
@@ -51,6 +61,14 @@
       }
 
       this.widgetizers[selector].push ( [widgetizer, data] );
+
+      if ( this._isReady ) {
+
+        let $widgets = this._getWidgets ( Svelto.$body, selector );
+
+        this.worker ( [[widgetizer, data]], $widgets );
+
+      }
 
     }
 
@@ -94,16 +112,24 @@
 
     }
 
-    on ( $roots ) {
+    ready () {
+
+      this._isReady = true;
+
+      this.on ( Svelto.$body );
+
+    }
+
+    on ( $root ) {
 
       for ( let selector in this.widgetizers ) {
 
         if ( !this.widgetizers.hasOwnProperty ( selector ) ) continue;
 
-        let widgetizers = this.widgetizers[selector];
+        let widgetizers = this.widgetizers[selector],
+            $widgets = this._getWidgets ( $root, selector );
 
-        this.worker ( widgetizers, $roots.filter ( selector ) );
-        this.worker ( widgetizers, $roots.find ( selector ) );
+        this.worker ( widgetizers, $widgets );
 
       }
 
@@ -113,9 +139,11 @@
 
       for ( let widget of $widgets ) {
 
+        let $widget = $(widget);
+
         for ( let [widgetizer, data] of widgetizers ) {
 
-          widgetizer ( $(widget), data );
+          widgetizer ( $widget, data );
 
         }
 
@@ -129,7 +157,7 @@
 
   Svelto.Widgetize = new Widgetize ();
 
-  /* JQUERY PLUGIN */
+  /* PLUGIN */
 
   $.fn.widgetize = function () {
 
@@ -141,10 +169,6 @@
 
   /* READY */
 
-  $(function () {
+  Readify.add ( Svelto.Widgetize.ready.bind ( Svelto.Widgetize ) );
 
-    $(document.body).widgetize ();
-
-  });
-
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify ));

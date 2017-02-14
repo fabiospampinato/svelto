@@ -6,10 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/breakpoints/breakpoints.js
- * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Breakpoints ) {
+(function ( $, _, Svelto, Breakpoints, Readify ) {
 
   'use strict';
 
@@ -61,7 +61,7 @@
 
   /* READY */
 
-  $(function () {
+  Readify.add ( function () {
 
     Breakpoint.current = Breakpoint.get ();
 
@@ -73,4 +73,4 @@
 
   Svelto.Breakpoint = Breakpoint;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Breakpoints ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Breakpoints, Svelto.Readify ));

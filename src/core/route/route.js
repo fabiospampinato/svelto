@@ -6,16 +6,16 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/push_state/push_state.js
- * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * ========================================================================= */
 
 /* ROUTE */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Readify ) {
 
   'use strict';
 
-  $(function () {
+  Readify.add ( function () {
 
     let previous = window.location.href.split ( '#' )[0];
 
@@ -39,4 +39,4 @@
 
   });
 
-})( Svelto.$, Svelto._, Svelto );
+})( Svelto.$, Svelto._, Svelto, Svelto.Readify );

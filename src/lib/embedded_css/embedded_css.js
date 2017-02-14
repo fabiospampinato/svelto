@@ -5,12 +5,12 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
+ * @require core/readify/readify.js
  * ========================================================================= */
 
 /* EMBEDDED CSS */
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Readify ) {
 
   'use strict';
 
@@ -149,10 +149,6 @@
 
   /* READY */
 
-  $(function () {
+  Readify.add ( Svelto.EmbeddedCSS.attach.bind ( Svelto.EmbeddedCSS ) );
 
-    Svelto.EmbeddedCSS.attach ();
-
-  });
-
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Readify ));
