@@ -8,7 +8,6 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Maybe make it a little more general, adding support for pure functions as well
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
 (function ( $, _, Svelto, Widgets ) {
@@ -21,39 +20,64 @@
 
     constructor () {
 
-      this.widgets = [];
+      this.queue = [];
 
     }
+
+    /* METHODS */
 
     get () {
 
-      return this.widgets;
+      return this.queue;
 
     }
 
-    add ( Widget ) {
+    add ( fn ) {
 
-      this.widgets.push ( Widget );
+      if ( this._isReady ) {
+
+        this.worker ( fn );
+
+      } else {
+
+        this.queue.push ( fn );
+
+      }
 
     }
 
-    remove ( Widget ) {
+    remove ( fn ) {
 
-      _.pull ( this.widgets, Widget );
+      _.pull ( this.queue, fn );
 
     }
 
-    do () {
+    ready () {
 
-      for ( let Widget of this.widgets ) {
+      this._isReady = true;
 
-        let ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property
+      this.queue.forEach ( this.worker.bind ( this ) );
+
+      this.queue = [];
+
+    }
+
+    worker ( fn ) {
+
+      if ( 'config' in fn ) { //FIXME: Not really future proof
+
+        let Widget = fn,
+            ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property
             initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady, //IE10 support -- static property
             setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
 
         initReady.bind ( Widget )();
 
         ready.bind ( Widget )( setReady.bind ( Widget ) );
+
+      } else {
+
+        fn ();
 
       }
 
@@ -67,6 +91,6 @@
 
   /* READY */
 
-  $(Svelto.Readify.do.bind ( Svelto.Readify ));
+  $(Svelto.Readify.ready.bind ( Svelto.Readify ));
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
