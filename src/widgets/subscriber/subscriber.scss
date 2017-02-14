@@ -1,0 +1,90 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Subscriber
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add liker-like icons support
+//TODO: Add liker-like classes
+
+/* SUBSCRIBER */
+
+.subscriber {
+
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    @extend %widget;
+    display: flex;
+  }
+
+  /* MARGIN */
+
+  .toggle,
+  .counter {
+
+    &:last-child {
+      margin-left: $subscriber-inner-gutter;
+    }
+
+  }
+
+  /* TOGGLE */
+
+  .toggle {
+
+    cursor: pointer;
+
+    /* AFTER */
+
+    &:after {
+      vertical-align: middle;
+      content: $subscriber-toggle-text-on;
+    }
+
+    &[data-text-on]:after {
+      content: attr(data-text-on);
+    }
+
+  }
+
+  /* COUNTER */
+
+  .counter:before {
+    content: attr(data-counter);
+    vertical-align: middle;
+  }
+
+  /* SUBSCRIBED */
+
+  &[data-state="true"] {
+
+    .toggle:after {
+      content: $subscriber-toggle-text-off;
+    }
+
+    .toggle[data-text-off]:after {
+      content: attr(data-text-off);
+    }
+
+  }
+
+  /* UNSUBSCRIBED */
+
+  &[data-state="false"] {
+
+    .toggle:after {
+      content: $subscriber-toggle-text-on;
+    }
+
+    .toggle[data-text-on]:after {
+      content: attr(data-text-on);
+    }
+
+  }
+
+}

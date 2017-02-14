@@ -515,6 +515,22 @@ SWHelpers.define ( 'spinnerLabel', function ( classes = '' ) {
 
 });
 
+SWHelpers.define ( 'subscriber', function ( options ) {
+
+  options = options.hash;
+
+  options.counter = options.counter || 0;
+  options.state = lodash.isBoolean ( options.state ) ? options.state : null;
+  options['state-url'] = options['state-url'] || '';
+  options.url = options.url || '';
+
+  return `<div class="subscriber" data-state='${JSON.stringify ( options.state )}' data-state-url="${options['state-url']}" data-url="${options.url}">` +
+           '<div class="toggle"></div>' +
+           `<div class="counter" data-counter="${options.counter}"></div>` +
+         '</div>';
+
+});
+
 SWHelpers.define ( 'switch', function ( options ) {
 
   options = options.hash;
