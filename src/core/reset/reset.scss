@@ -6,17 +6,17 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @before ./vendor/normalize.scss
- * @require ./border_color.scss
- * @require ./box_sizing.scss
- * @require ./flexbox.scss
- * @require ./fullscreen.scss
- * @require ./input.scss
- * @require ./no_outline.scss
- * @require ./placeholder.scss
- * @require ./selection.scss
- * @require ./table.scss
- * @require ./textarea.scss
- * @require ./touch_action.scss
+ * @before ./border_color.scss
+ * @before ./box_sizing.scss
+ * @before ./flexbox.scss
+ * @before ./fullscreen.scss
+ * @before ./input.scss
+ * @before ./no_outline.scss
+ * @before ./placeholder.scss
+ * @before ./selection.scss
+ * @before ./table.scss
+ * @before ./textarea.scss
+ * @before ./touch_action.scss
  * ========================================================================= */
 
 /* HTML */

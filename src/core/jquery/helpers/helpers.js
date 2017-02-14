@@ -5,20 +5,20 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./clean_data.js
- * @require ./diff.js
- * @require ./event_namespacer.js
- * @require ./event_xy.js
- * @require ./frame.js
- * @require ./get_rect.js
- * @require ./has_attribute.js
- * @require ./hsl.js
- * @require ./is_attached.js
- * @require ./is_focused.js
- * @require ./iterator.js
- * @require ./scroll.js
- * @require ./selection.js
- * @require ./top_index.js
- * @require ./unique_ajax.js
- * @require ./z_index.js
+ * @before ./clean_data.js
+ * @before ./diff.js
+ * @before ./event_namespacer.js
+ * @before ./event_xy.js
+ * @before ./frame.js
+ * @before ./get_rect.js
+ * @before ./has_attribute.js
+ * @before ./hsl.js
+ * @before ./is_attached.js
+ * @before ./is_focused.js
+ * @before ./iterator.js
+ * @before ./scroll.js
+ * @before ./selection.js
+ * @before ./top_index.js
+ * @before ./unique_ajax.js
+ * @before ./z_index.js
  * ========================================================================= */

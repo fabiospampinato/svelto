@@ -5,13 +5,13 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./constants.js
- * @require ./find_matches.js
- * @require ./format.js
- * @require ./mkize.js
- * @require ./move.js
- * @require ./now_secs.js
- * @require ./replace_all.js
- * @require ./round_closer.js
- * @require ./time_ago.js
+ * @before ./constants.js
+ * @before ./find_matches.js
+ * @before ./format.js
+ * @before ./mkize.js
+ * @before ./move.js
+ * @before ./now_secs.js
+ * @before ./replace_all.js
+ * @before ./round_closer.js
+ * @before ./time_ago.js
  * ========================================================================= */
