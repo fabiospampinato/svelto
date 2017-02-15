@@ -5,10 +5,11 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/browser/browser.js
  * @require core/readify/readify.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Readify ) {
+(function ( $, _, Svelto, Browser, Readify ) {
 
   'use strict';
 
@@ -22,6 +23,7 @@
 
     /* VARIABLES */
 
+    enabled: Browser.is.desktop,
     history: [], // List of autofocused elements
     historySize: 3, // How many elements to keep in the history
 
@@ -36,6 +38,8 @@
     /* API */
 
     set ( ele ) {
+
+      if ( !Autofocus.enabled ) return;
 
       Autofocus.history.unshift ( ele );
       Autofocus.history = _.uniq ( Autofocus.history ).slice ( 0, Autofocus.historySize );
@@ -74,6 +78,8 @@
 
     focus ( $parent ) {
 
+      if ( !Autofocus.enabled ) return;
+
       let focusable = Autofocus.find ( $parent );
 
       if ( !focusable || $.isFocused ( focusable ) ) return;
@@ -84,7 +90,7 @@
 
     blur ( $parent ) {
 
-      if ( !Autofocus.history[0] || !$.contains ( $parent[0], Autofocus.history[0] ) ) return;
+      if ( !Autofocus.enabled || !Autofocus.history[0] || !$.contains ( $parent[0], Autofocus.history[0] ) ) return;
 
       let previous = Autofocus.history.find ( ele => $(ele).is ( ':visible' ) ) || Autofocus.find ( $html );
 
@@ -102,4 +108,4 @@
 
   Readify.add ( Autofocus.init.bind ( Autofocus ) );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Readify ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Readify ));
