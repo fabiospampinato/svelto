@@ -82,7 +82,7 @@
 
     static whenReady ( callback ) {
 
-      let isReady = this.isReady || this.__proto__.isReady; //IE10 support -- static property
+      let isReady = this.isReady || this.__proto__.isReady || Widget.isReady; //IE10 support -- static property
 
       if ( isReady.bind ( this )() ) {
 

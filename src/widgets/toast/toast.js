@@ -180,7 +180,7 @@
 
       } else if ( this.options.autoplay ) {
 
-        let whenReady = Toast.whenReady || Toast.__proto__.whenReady; //IE10 support -- static property
+        let whenReady = Toast.whenReady || Toast.__proto__.whenReady || Widgets.Widget.whenReady; //IE10 support -- static property
 
         whenReady.bind ( Toast )( this.open.bind ( this ) );
 
