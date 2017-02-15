@@ -23,12 +23,18 @@
   /* POINTER */
 
   let Pointer = {
+
     /* OPTIONS */
+
     options: {
       events: {
         prefix,
         emulated: {
-          timeout: 500 // Milliseconds to wait for an emulated event
+          tune: true, // Whether to fine-tune the timeout or not
+          tuned: false, // Whether the timeout has been tuned or not
+          timeout: 2500, // Milliseconds to wait for an emulated event
+          min: 500, // Minimum fine-tuned timeout
+          multiplier: 2.5 // The detected timeout will be multiplied by this
         }
       },
       tap: {
@@ -38,7 +44,9 @@
         interval: 300 // 2 taps within this interval will trigger a dbltap event
       },
     },
+
     /* EVENTS */
+
     tap: `${prefix}tap`,
     dbltap: `${prefix}dbltap`,
     click: 'click',
@@ -51,7 +59,9 @@
     enter: 'mouseenter',
     out: 'mouseout',
     leave: 'mouseleave',
+
     /* METHODS */
+
     isDeviceEvent ( event, device ) {
       return _.startsWith ( event.type, device.toLowerCase () );
     },
@@ -64,6 +74,7 @@
     isTouchEvent ( event ) {
       return Pointer.isDeviceEvent ( event, 'touch' );
     }
+
   };
 
   /* EVENTS METHODS */
@@ -90,6 +101,7 @@
       scrolled,
       timeoutId,
       downEvent,
+      emulatedTimeoutTimestamp,
       prevTapTimestamp = 0,
       dbltapTriggerable = true;
 
@@ -115,6 +127,8 @@
 
       if ( isTouch ) {
 
+        if ( !emulatedTimeoutTimestamp && Pointer.options.events.emulated.tune ) emulatedTimeoutTimestamp = Date.now ();
+
         scrolled = false;
 
         window.onscroll = scrollHandler;
@@ -122,6 +136,14 @@
         delta++;
 
       } else if ( delta > 0 ) {
+
+        if ( emulatedTimeoutTimestamp && !Pointer.options.events.emulated.tuned && Pointer.options.events.emulated.tune ) {
+
+          Pointer.options.events.emulated.timeout = Math.ceil ( Math.max ( Pointer.options.events.emulated.min, ( Date.now () - emulatedTimeoutTimestamp ) * Pointer.options.events.emulated.multiplier ) );
+
+          Pointer.options.events.emulated.tuned = true;
+
+        }
 
         skipping = true;
 
