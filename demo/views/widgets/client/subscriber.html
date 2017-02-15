@@ -73,7 +73,7 @@
     }
 
     function api_get () {
-      let result = $('.subscriber').first ().subscriber ( 'get' );
+      var result = $('.subscriber').first ().subscriber ( 'get' );
       $.toast ( JSON.stringify ( result ) );
     }
   </script>

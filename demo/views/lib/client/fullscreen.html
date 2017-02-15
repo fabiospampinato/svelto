@@ -24,7 +24,7 @@
 
   <script>
     $('.button.action').on ( Svelto.Pointer.tap, function () {
-      let property = lodash.lowerFirst ( $(this).text () ),
+      var property = lodash.lowerFirst ( $(this).text () ),
           result = lodash.isFunction ( Svelto.Fullscreen[property] ) ? Svelto.Fullscreen[property]() : Svelto.Fullscreen[property];
       if ( lodash.isBoolean ( result ) || lodash.isNumber ( result ) || lodash.isString ( result ) ) $.toast ( result );
     });

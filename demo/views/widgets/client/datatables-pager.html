@@ -48,7 +48,7 @@
     }
 
     function api_go () {
-      let page = getValue ( 'page' ),
+      var page = getValue ( 'page' ),
           row = getValue ( 'row' );
       page = page ? Number ( page ) : NaN;
       row = row ? Number ( row ) : NaN;

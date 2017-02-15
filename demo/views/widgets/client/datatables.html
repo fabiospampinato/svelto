@@ -514,11 +514,11 @@
     }
 
     function api_page () {
-      let page = getValue ( 'page' ),
+      var page = getValue ( 'page' ),
           row = getValue ( 'row' );
       page = page ? Number ( page ) : NaN;
       row = row ? Number ( row ) : NaN;
-      let result = $('table.datatable').first ().dt ( 'page', page, row );
+      var result = $('table.datatable').first ().dt ( 'page', page, row );
       if ( lodash.isNumber ( result ) ) {
         $.toast ( result );
       }

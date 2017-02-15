@@ -18,7 +18,8 @@
   <div class="multiple actions">
     <div class="multiple joined">
       <div class="label compact bordered gray pointing-right">Type</div>
-      {{{sw.action "Sprite" "render ({ native: { enabled: false } })"}}}
+      {{{sw.action "Images" "render ({ make: { sprite: false }, native: { enabled: false } })"}}}
+      {{{sw.action "Sprite" "render ({ make: { sprite: true }, native: { enabled: false } })"}}}
       {{{sw.action "Native (Wrapped)" "render ({ native: { enabled: true, wrap: true } })"}}}
       {{{sw.action "Native (Unwrapped)" "render ({ native: { enabled: true, wrap: false } })"}}}
     </div>
@@ -68,7 +69,9 @@
     }
 
     function renderCategory ( category ) {
-      return Promise.all ( category.emojis.map ( emoji => Svelto.Emoji.make ( emoji, tone, '', true ) ) ).then ( function ( emojis ) {
+      return Promise.all ( category.emojis.map ( function ( emoji ) {
+        return Svelto.Emoji.make ( emoji, tone );
+      })).then ( function ( emojis ) {
         emojis = emojis.join ( ' ' );
         var content = emojis.indexOf ( '<' ) === -1 ? '<p>' + emojis + '</p>' : '<div class="multiple">' + emojis + '</div>';
         $placeholder.append ( '<div class="divider block"><div class="divider-content">' + category.title + '</div></div>' );

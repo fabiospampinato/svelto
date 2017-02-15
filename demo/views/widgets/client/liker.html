@@ -87,7 +87,7 @@
     }
 
     function api_get () {
-      let result = $('.liker').first ().liker ( 'get' );
+      var result = $('.liker').first ().liker ( 'get' );
       $.toast ( JSON.stringify ( result ) );
     }
 
