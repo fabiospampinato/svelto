@@ -26,6 +26,7 @@
     options: {
       contentChangeEvents: 'change datepicker:change editor:fullscreen editor:unfullscreen editor:preview editor:unpreview inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
       mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
+      parentChangeEvents: 'popover:close modal:close panel:close editor:unfullscreen', // One one of these events happen, and the target is an anchestor of the anchor, we close the popover //FIXME: Ugly
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
@@ -68,6 +69,7 @@
     _variables () {
 
       this.$popover = this.$element;
+      this.popover = this.$popover[0];
 
       this.$popover.addClass ( this.guc );
 
@@ -85,6 +87,7 @@
 
         this.___contentChange ();
         this.___mustClose ();
+        this.___parentChange ();
         this.___resize ();
         this.___parentsScroll ();
         this.___layoutTap ();
@@ -113,6 +116,30 @@
     ___mustClose () {
 
       this._on ( true, this.$layout, this.options.mustCloseEvents, this.close );
+
+    }
+
+    /* PARENT CHANGE */
+
+    ___parentChange () {
+
+      this._on ( true, this.$document, this.options.parentChangeEvents, this.__parentChange );
+
+    }
+
+    __parentChange ( event ) {
+
+      if ( !this.$anchor || !$.contains ( event.target, this.$anchor[0] ) ) return;
+
+      if ( this.$anchor.is ( ':visible' ) ) {
+
+        this._positionate ();
+
+      } else {
+
+        this.close ();
+
+      }
 
     }
 
@@ -322,6 +349,7 @@
       this.___keydown ();
       this.___contentChange ();
       this.___mustClose ();
+      this.___parentChange ();
       this.___resize ();
       this.___parentsScroll ();
 
