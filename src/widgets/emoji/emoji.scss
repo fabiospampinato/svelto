@@ -8,7 +8,7 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//FIXME: Native wrapped emoji are not perfectly centered
+//FIXME: Impossible to have bigger emojis on iOS
 
 /* EMOJI */
 
@@ -16,10 +16,12 @@
 
   display: inline-block;
   vertical-align: middle;
+  overflow: hidden; // So the text won't exceed the icon box even when some composed emojis are not rendered properly
   font-size: 1em * $emoji-scale-factor;
   font-style: normal;
   line-height: 1;
   text-align: center;
+  white-space: nowrap; // Needed for correctly displaying multi-emoji natively on Android
   width: 1em;
   height: 1em;
   flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
@@ -35,6 +37,21 @@
   &:not([style*='background-image']):empty {
     background-image: url($emoji-sprite-url);
     background-size: 100% * $emoji-sprite-columns;
+  }
+
+  /* MACOS / IOS - NATIVE */ //FIXME: Shouldn't be necessary to have these special rules
+
+  html.mac &:not(:empty),
+  html.ios &:not(:empty) {
+    line-height: 1.1; // Otherwise they are not precisely aligned
+  }
+
+  /* ANDROID - NATIVE */ //FIXME: Shouldn't be necessary to have these special rules
+
+  html.android &:not(:empty) {
+    overflow: visible;
+    width: auto;
+    height: auto;
   }
 
 }
