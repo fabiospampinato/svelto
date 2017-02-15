@@ -98,7 +98,7 @@
 
       }
 
-      this.$element.popover ( 'open', anchor );
+      this.$element.popover ( 'toggle', undefined, anchor );
 
       this.___close ();
 
