@@ -25,6 +25,7 @@
     plugin: true,
     selector: '.editor',
     options: {
+      parentUnfullscreenEvents: 'popover:close modal:close panel:close', //FIXME: Ugly
       parser: window.marked || _.identity,
       storage: {
         enabled: false, // Whether to preserve the content across refreshes/sessions
@@ -143,6 +144,8 @@
       super._variables ();
 
       this.$editor = this.$element;
+      this.editor = this.$editor[0];
+
       this.$textarea = this.$editor.find ( this.options.selectors.textarea );
       this.textarea = this.$textarea[0];
       this.$preview = this.$editor.find ( this.options.selectors.preview );
@@ -184,6 +187,7 @@
 
       this.___keydown ();
       this.___triggers ();
+      this.___parentUnfullscreen ();
 
       if ( this.options.storage.enabled && this._storageKey ) this.___storage ();
       if ( Emoji ) this.___emojipicker ();
@@ -220,6 +224,22 @@
         this._on ( $trigger, Pointer.tap, _.wrap ( action, this.action ) );
 
       }
+
+    }
+
+    /* PARENT UNFULLSCREEN */
+
+    ___parentUnfullscreen () {
+
+      this._on ( true, this.$document, this.options.parentUnfullscreenEvents, this.__parentUnfullscreen );
+
+    }
+
+    __parentUnfullscreen ( event ) {
+
+      if ( !$.contains ( event.target, this.editor ) ) return;
+
+      this.unfullscreen ();
 
     }
 
