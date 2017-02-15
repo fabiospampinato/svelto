@@ -41,7 +41,7 @@
 
     .container {
 
-      min-height: 100%;
+      height: 100%; // If `min-height` instead the section won't grow in IE-10/11
       border-radius: 0;
 
       /* MAIN */
@@ -83,7 +83,7 @@
       /* EMOJIFIABLE */
 
       &:not(.main):not(.emojified) .emojis {
-        visibility: hidden;
+        display: none;
       }
 
     }
