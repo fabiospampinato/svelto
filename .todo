@@ -1,12 +1,11 @@
 
 Now:
+  ☐ input autocomplete plugin (like typeahead.js)
+  ☐ add pure css tooltips like materializecss'
+  ☐ add a storable form
   ☐ On mobile remove focus from liker after click (it should show the updated counter, not the text for removing the like...) (search for: "sticky hover")
   ☐ Test pointer with touchpad connected to a phone (working as a mouse), or on touchscreen laptop, or OTG a mouse to it
-  ☐ .multiple.only-separators doesn't seem to work properly
   ☐ add style on :focus, also add better keyboard navigation support
-  Emoji:
-    ☐ https://github.com/Ranks/emojify.js
-    ☐ https://github.com/twitter/twemoji
 
 Next:
   ☐ center sortable names, or when also `text-align: center` they will look misaligned
@@ -15,18 +14,17 @@ Next:
   ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
 
 Future:
+  ☐ use emojione v3
   ☐ [widget] add better support for updating after options are set at runtime
   ☐ adding `@require`s to extenders (.before, .after) doesn't work, since they get moved after... maybe we should move left or right the one more to the left in the dependencies list instead...
   ☐ an utility for dinamically creating a dialog, like a modal for confirmation and stuff
-  ☐ add pure css tooltips like materializecss'
   ☐ [SASS] add string related functions to _, take them from here: https://github.com/HugoGiraudel/SassyStrings/tree/master/stylesheets
   ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
   ☐ add this._onFocus ()
   ☐ selecter, like numbox but with custom values and chevrons, not editable (once it's done add it for editing the colors of the widgets)
   ☐ new checkable widget, like selectable but with checkboxes (should work like gmail's)
   ☐ maybe add also a special `scroll` option key, for triggering actions automagically
-  ☐ input autocomplete plugin (like typeahead.js)
-  ☐ fullscreen library
+  ☐ add generalized affix/sticky support
   ☐ add i18n support
   ☐ add a `KineticDrag` component, or maybe a `kinetic` option to `draggable`
 
@@ -34,4 +32,3 @@ Maybe:
   ☐ add a .multiple.reverse
   ☐ sort sass files properties
   ☐ abort zoomable preloading on subsequent taps
-  ☐ Add a toggle that switches from $() or $().ready to NOW, sometimes we don't need to wait for EVERYTHING to be loaded... (maybe it can cause problems, for instance Toast adds some nodes on ready, and if we call something earlier it may call Toast can will crash), probably better to add a config option like `instant: false` or `ready: true`

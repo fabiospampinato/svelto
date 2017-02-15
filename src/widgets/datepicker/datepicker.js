@@ -217,7 +217,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      this[method] ();
+      this[method]();
 
     }
 
