@@ -13,6 +13,12 @@
 
   'use strict';
 
+  /* VARIABLES */
+
+  let $html = $(document.documentElement),
+      $document = $(document),
+      $body = $(document.body);
+
   /* SCROLL */
 
   //TODO: Not working but probably needed, like for scrolling down a chat
@@ -38,11 +44,19 @@
   //
   // };
 
+  $.scrollTo = function ( target, ...args ) {
+
+    let scrollTop = $(target).offset ().top;
+
+    $html.add ( $body ).animate ( { scrollTop }, ...args );
+
+  };
+
   $.fn.scrollParent = function ( includeHidden ) { // Take from jQuery UI, optimized for performance
 
     let position = this.css ( 'position' );
 
-    if ( position === 'fixed' ) return $(document);
+    if ( position === 'fixed' ) return $document;
 
     let excludeStaticParent = ( position === 'absolute' ),
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
@@ -61,7 +75,7 @@
 
     }
 
-    return $(document);
+    return $document;
 
   };
 

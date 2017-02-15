@@ -66,9 +66,7 @@
 
     scroll () {
 
-      let scrollTop = this.layout.scrollTop + $.getRect ( this.target ).top;
-
-      this.$layout.animate ( { scrollTop }, this.options.animations.scroll );
+      $.scrollTo ( this.target, this.options.animations.scroll );
 
       this._trigger ( 'scroll' );
 
