@@ -31,13 +31,15 @@
 
   let Fullscreen = {
     request ( ele = html ) {
-      return ele[raw.requestFullscreen]( keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT );
+      if ( !raw.requestFullscreen ) return;
+      ele[raw.requestFullscreen]( keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT );
     },
     exit () {
-      return document[raw.exitFullscreen]();
+      if ( !raw.exitFullscreen ) return;
+      document[raw.exitFullscreen]();
     },
 		toggle ( ele ) {
-      return Fullscreen.isFullscreen ? Fullscreen.exit () : Fullscreen.request ( ele );
+      Fullscreen.isFullscreen ? Fullscreen.exit () : Fullscreen.request ( ele );
 		},
     get isFullscreen () {
       return !!Fullscreen.element;
