@@ -8,13 +8,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -85,6 +85,217 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _cleanData(eles);
+  };
+})(jQuery);
+
+/* =========================================================================
+ * Svelto - Core - jQuery - Helpers (Diff)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function ($) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var NODE_INDEX = '_diff_index',
+      ELEMENT_TYPE = window.Node.ELEMENT_NODE,
+      DOCUMENT_TYPE = window.Node.DOCUMENT_NODE;
+
+  /* DEFAULTS */
+
+  var defaults = {
+    attributes: {
+      key: 'data-key',
+      ignore: 'data-ignore',
+      checksum: 'data-checksum'
+    }
+  };
+
+  /* DIFF */
+
+  $.diff = function (prev, next) {
+    var skipAttributes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+
+    if (_.isString(next)) next = $.parseHTML(next)[0];
+
+    if (prev.nodeType === DOCUMENT_TYPE) prev = prev.documentElement;
+
+    $.diff.node(prev, next, skipAttributes);
+  };
+
+  $.diff.node = function (prev, next) {
+    var skipAttributes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+
+    if (prev.nodeType === next.nodeType) {
+
+      if (prev.nodeType === ELEMENT_TYPE) {
+
+        if ($.diff.utilities.getChecksum(prev) === $.diff.utilities.getChecksum(next)) return;
+
+        if ($.diff.utilities.isIgnored(prev) && $.diff.utilities.isIgnored(next)) return;
+
+        var prevChildren = prev.childNodes,
+            nextChildren = next.childNodes;
+
+        if (prevChildren.length !== 0 || nextChildren.length !== 0) {
+
+          $.diff.children(prev, prevChildren, nextChildren, skipAttributes);
+        }
+
+        if (prev.nodeName === next.nodeName) {
+
+          if (!skipAttributes) {
+
+            $.diff.attributes(prev, prev.attributes, next.attributes);
+          }
+        } else {
+
+          var replacement = next.cloneNode();
+
+          while (prev.firstChild) {
+            replacement.appendChild(prev.firstChild);
+          }prev.parentNode.replaceChild(replacement, prev);
+        }
+      } else {
+
+        if (prev.nodeValue !== next.nodeValue) {
+
+          prev.nodeValue = next.nodeValue;
+        }
+      }
+    } else {
+
+      prev.parentNode.replaceChild(next, prev);
+    }
+  };
+
+  $.diff.attributes = function (parent, prev, next) {
+
+    /* NEW */
+
+    for (var i = next.length; i--;) {
+
+      var nextAttr = next[i],
+          name = nextAttr.name,
+          prevAttr = prev.getNamedItem(name);
+
+      if (!prevAttr) {
+        // Create
+
+        next.removeNamedItem(name);
+        prev.setNamedItem(nextAttr);
+      } else if (prevAttr.value !== nextAttr.value) {
+        // Update
+
+        prevAttr.value = nextAttr.value;
+      }
+    }
+
+    /* OLD */
+
+    if (prev.length !== next.length) {
+
+      for (var _i = prev.length; _i--;) {
+
+        var _name = prev[_i].name;
+
+        if (!next.getNamedItem(_name)) prev.removeNamedItem(_name);
+      }
+    }
+  };
+
+  $.diff.children = function (parent, prevChildNodes, nextChildNodes) {
+    var skipAttributes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+    var prev = $.diff.utilities.keyNodes(prevChildNodes),
+        next = $.diff.utilities.keyNodes(nextChildNodes);
+
+    /* OLD */
+
+    for (var key in prev) {
+
+      if (next[key]) continue;
+
+      parent.removeChild(prev[key]);
+    }
+
+    /* NEW */
+
+    for (var _key in next) {
+
+      var a = prev[_key],
+          b = next[_key],
+          newPosition = b[NODE_INDEX];
+
+      if (a) {
+        // Update
+
+        $.diff.node(a, b, skipAttributes);
+
+        if (a[NODE_INDEX] === newPosition) continue;
+
+        var nextEl = prevChildNodes[newPosition] || null; // TODO: figure out if || null is needed.
+
+        if (nextEl === a) continue;
+
+        parent.insertBefore(a, nextEl);
+      } else {
+        // Insert
+
+        var _nextEl = prevChildNodes[newPosition] || null;
+
+        parent.insertBefore(b, _nextEl);
+      }
+    }
+  };
+
+  $.diff.utilities = {
+    keyNodes: function keyNodes(eles) {
+      var result = {};
+      for (var i = 0, l = eles.length; i < l; i++) {
+        var ele = eles[i];
+        ele[NODE_INDEX] = i;
+        result[$.diff.utilities.getKey(ele) || i] = ele;
+      }
+      return result;
+    },
+    getKey: function getKey(ele) {
+      if (ele.nodeType !== ELEMENT_TYPE) return;
+      return ele.getAttribute($.diff.defaults.attributes.key) || ele.id || undefined;
+    },
+    getChecksum: function getChecksum(ele) {
+      return ele.getAttribute($.diff.defaults.attributes.checksum) || NaN;
+    },
+    isIgnored: function isIgnored(ele) {
+      return ele.getAttribute($.diff.defaults.attributes.ignore) !== null;
+    }
+  };
+
+  /* BINDING */
+
+  $.diff.defaults = defaults;
+
+  /* PLUGIN */
+
+  $.fn.diff = function (next) {
+    var skipAttributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+    for (var i = 0, l = this.length; i < l; i++) {
+
+      $.diff(this[i], next, skipAttributes);
+    }
+
+    return this;
   };
 })(jQuery);
 
@@ -220,6 +431,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(jQuery);
 
 /* =========================================================================
+ * Svelto - Core - jQuery - Helpers (Has attribute)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function ($) {
+
+  'use strict';
+
+  /* HAS ATTRIBUTE */
+
+  $.fn.hasAttribute = function (attr) {
+
+    return this.length && this[0].hasAttribute(attr);
+  };
+})(jQuery);
+
+/* =========================================================================
  * Svelto - Core - jQuery - Helpers (HSL)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -257,13 +489,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   'use strict';
 
+  /* VARIABLES */
+
+  var html = document.documentElement;
+
   /* IS ATTACHED */
+
+  $.isAttached = function (ele) {
+
+    return ele === html || $.contains(html, ele);
+  };
 
   $.fn.isAttached = function () {
 
-    var html = document.documentElement;
+    return $.isAttached(this[0]);
+  };
+})(jQuery);
 
-    return this[0] === html || $.contains(html, this[0]);
+/* =========================================================================
+ * Svelto - Core - jQuery - Helpers (Is focused)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function ($) {
+
+  'use strict';
+
+  /* IS FOCUSED */
+
+  $.isFocused = function (ele) {
+
+    return ele === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(ele.type || ele.href || ~ele.tabIndex);
+  };
+
+  $.fn.isFocused = function () {
+
+    return $.isFocused(this[0]);
   };
 })(jQuery);
 
@@ -299,6 +564,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   'use strict';
 
+  /* VARIABLES */
+
+  var $html = $(document.documentElement),
+      $document = $(document),
+      $body = $(document.body);
+
   /* SCROLL */
 
   //TODO: Not working but probably needed, like for scrolling down a chat
@@ -324,12 +595,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   //
   // };
 
+  $.scrollTo = function (target) {
+    var _$html$add;
+
+    var scrollTop = $(target).offset().top;
+
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key2 = 1; _key2 < _len; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    (_$html$add = $html.add($body)).animate.apply(_$html$add, [{ scrollTop: scrollTop }].concat(args));
+  };
+
   $.fn.scrollParent = function (includeHidden) {
     // Take from jQuery UI, optimized for performance
 
     var position = this.css('position');
 
-    if (position === 'fixed') return $(document);
+    if (position === 'fixed') return $document;
 
     var excludeStaticParent = position === 'absolute',
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
@@ -367,7 +650,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }
 
-    return $(document);
+    return $document;
   };
 
   $.hasScrollbars = function (node) {
@@ -472,6 +755,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(jQuery);
 
 /* =========================================================================
+ * Svelto - Core - jQuery - Helpers (Unique AJAX)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function ($) {
+
+  'use strict';
+
+  /* UNIQUE AJAX */
+
+  $.uniqueAjax = function (id) {
+
+    if (id in $.uniqueAjax.requests) return $.uniqueAjax.requests[id];
+
+    for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key3 = 1; _key3 < _len2; _key3++) {
+      args[_key3 - 1] = arguments[_key3];
+    }
+
+    return $.uniqueAjax.requests[id] = $.ajax.apply($, args);
+  };
+
+  $.uniqueAjax.requests = {};
+})(jQuery);
+
+/* =========================================================================
  * Svelto - Core - lodash (Init)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -526,6 +838,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     false: _.constant(false)
 
+  });
+})(lodash);
+
+/* =========================================================================
+ * Svelto - Core - lodash - Helpers (Find matches)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function (_) {
+
+  'use strict';
+
+  /* FIND MATCHES */
+
+  _.mixin({
+    findMatches: function findMatches(str, regex) {
+
+      var matches = [],
+          match = void 0;
+
+      while (match = regex.exec(str)) {
+
+        matches.push(match);
+      }
+
+      return matches;
+    }
   });
 })(lodash);
 
@@ -640,6 +983,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(lodash);
 
 /* =========================================================================
+ * Svelto - Core - lodash - Helpers (Replace all)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../init.js
+ * ========================================================================= */
+
+(function (_) {
+
+  'use strict';
+
+  /* REPLACE ALL */
+
+  _.mixin({
+    replaceAll: function replaceAll(string, pattern, replacement) {
+
+      var escaped = pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      return string.replace(new RegExp(escaped, 'g'), replacement);
+    }
+  });
+})(lodash);
+
+/* =========================================================================
  * Svelto - Core - lodash - Helpers (Round closer)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -729,13 +1097,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./constants.js
- * @require ./format.js
- * @require ./mkize.js
- * @require ./move.js
- * @require ./now_secs.js
- * @require ./round_closer.js
- * @require ./time_ago.js
+ * @before ./constants.js
+ * @before ./find_matches.js
+ * @before ./format.js
+ * @before ./mkize.js
+ * @before ./move.js
+ * @before ./now_secs.js
+ * @before ./replace_all.js
+ * @before ./round_closer.js
+ * @before ./time_ago.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -842,18 +1212,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./clean_data.js
- * @require ./event_namespacer.js
- * @require ./event_xy.js
- * @require ./frame.js
- * @require ./get_rect.js
- * @require ./hsl.js
- * @require ./is_attached.js
- * @require ./iterator.js
- * @require ./scroll.js
- * @require ./selection.js
- * @require ./top_index.js
- * @require ./z_index.js
+ * @before ./clean_data.js
+ * @before ./diff.js
+ * @before ./event_namespacer.js
+ * @before ./event_xy.js
+ * @before ./frame.js
+ * @before ./get_rect.js
+ * @before ./has_attribute.js
+ * @before ./hsl.js
+ * @before ./is_attached.js
+ * @before ./is_focused.js
+ * @before ./iterator.js
+ * @before ./scroll.js
+ * @before ./selection.js
+ * @before ./top_index.js
+ * @before ./unique_ajax.js
+ * @before ./z_index.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -2593,14 +2967,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./clip_path_polygon.js
- * @require ./clip_path_url.js
- * @require ./flexbox.js
- * @require ./flexbox_legacy.js
- * @require ./flexbox_tweener.js
- * @require ./overlay_scrollbars.js
- * @require ./position_sticky.js
- * @require ./scrollbar_size.js
+ * @before ./clip_path_polygon.js
+ * @before ./clip_path_url.js
+ * @before ./flexbox.js
+ * @before ./flexbox_legacy.js
+ * @before ./flexbox_tweener.js
+ * @before ./overlay_scrollbars.js
+ * @before ./position_sticky.js
+ * @before ./scrollbar_size.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -2631,12 +3005,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* SVELTO */
 
   var Svelto = {
-    VERSION: '0.7.12',
+
+    VERSION: '0.7.13',
+
+    /* DEPENDENCIES */
+
     $: jQuery,
     _: lodash,
     Modernizr: Modernizr,
-    Widgets: {}, // Widgets' classes namespace
-    Templates: {} // Widgets' templates namespace
+
+    /* NAMESPACES */
+
+    Widgets: {},
+    Templates: {},
+
+    /* ELEMENTS */
+
+    $window: $(window),
+    window: window,
+    $document: $(document),
+    document: document,
+    $html: $(document.documentElement),
+    html: document.documentElement,
+    $head: $(document.head),
+    head: document.head,
+    $body: $(document.body),
+    body: document.body
+
   };
 
   /* EXPORT */
@@ -2757,90 +3152,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Svelto.Breakpoints = Breakpoints;
 })(Svelto.$, Svelto._, Svelto);
-
-/* =========================================================================
- * Svelto - Core - Breakpoint
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/breakpoints/breakpoints.js
- * @require core/svelto/svelto.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Breakpoints) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  var $window = $(window);
-
-  /* BREAKPOINT */
-
-  var Breakpoint = {
-
-    /* VARIABLES */
-
-    throttle: 150, // Milliseconds used to throttle the `$window.on ( 'resize' )` handler
-    previous: undefined, // Previous breakpoint
-    current: undefined, // Current breakpoint
-
-    /* RESIZE */
-
-    __resize: function __resize() {
-
-      var current = this.get();
-
-      if (current === this.current) return;
-
-      this.previous = this.current;
-      this.current = current;
-
-      $window.trigger('breakpoint:change');
-    },
-
-
-    /* API */
-
-    get: function get() {
-
-      var widths = _.sortBy(_.values(Breakpoints.widths)),
-          width = $window.width();
-
-      var _loop = function _loop(i, l) {
-
-        if (width >= widths[i] && (i === l - 1 || width < widths[i + 1])) {
-
-          return {
-            v: _.findKey(Breakpoints.widths, function (width) {
-              return width === widths[i];
-            })
-          };
-        }
-      };
-
-      for (var i = 0, l = widths.length; i < l; i++) {
-        var _ret = _loop(i, l);
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    }
-  };
-
-  /* READY */
-
-  $(function () {
-
-    Breakpoint.current = Breakpoint.get();
-
-    $window.on('resize', _.throttle(Breakpoint.__resize.bind(Breakpoint), Breakpoint.throttle));
-  });
-
-  /* EXPORT */
-
-  Svelto.Breakpoint = Breakpoint;
-})(Svelto.$, Svelto._, Svelto, Svelto.Breakpoints);
 
 /* =========================================================================
  * Svelto - Core - Browser
@@ -3060,9 +3371,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./browsers.js
- * @require ./devices.js
- * @require ./oss.js
+ * @before ./browsers.js
+ * @before ./devices.js
+ * @before ./oss.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -3372,12 +3683,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* POINTER */
 
   var Pointer = {
+
     /* OPTIONS */
+
     options: {
       events: {
         prefix: prefix,
         emulated: {
-          timeout: 500 // Milliseconds to wait for an emulated event
+          tune: true, // Whether to fine-tune the timeout or not
+          tuned: false, // Whether the timeout has been tuned or not
+          timeout: 2500, // Milliseconds to wait for an emulated event
+          min: 500, // Minimum fine-tuned timeout
+          multiplier: 2.5 // The detected timeout will be multiplied by this
         }
       },
       tap: {
@@ -3387,7 +3704,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         interval: 300 // 2 taps within this interval will trigger a dbltap event
       }
     },
+
     /* EVENTS */
+
     tap: prefix + 'tap',
     dbltap: prefix + 'dbltap',
     click: 'click',
@@ -3400,7 +3719,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     enter: 'mouseenter',
     out: 'mouseout',
     leave: 'mouseleave',
+
     /* METHODS */
+
     isDeviceEvent: function isDeviceEvent(event, device) {
       return _.startsWith(event.type, device.toLowerCase());
     },
@@ -3429,7 +3750,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* VARIABLES */
 
-  var $document = $(document),
+  var $document = Svelto.$document,
       canTouch = Browser.is.touchDevice,
       isTouch = void 0,
       delta = 0,
@@ -3437,6 +3758,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       scrolled = void 0,
       timeoutId = void 0,
       downEvent = void 0,
+      emulatedTimeoutTimestamp = void 0,
       prevTapTimestamp = 0,
       dbltapTriggerable = true;
 
@@ -3461,12 +3783,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       if (isTouch) {
 
+        if (!emulatedTimeoutTimestamp && Pointer.options.events.emulated.tune) emulatedTimeoutTimestamp = Date.now();
+
         scrolled = false;
 
         window.onscroll = scrollHandler;
 
         delta++;
       } else if (delta > 0) {
+
+        if (emulatedTimeoutTimestamp && !Pointer.options.events.emulated.tuned && Pointer.options.events.emulated.tune) {
+
+          Pointer.options.events.emulated.timeout = Math.ceil(Math.max(Pointer.options.events.emulated.min, (Date.now() - emulatedTimeoutTimestamp) * Pointer.options.events.emulated.multiplier));
+
+          Pointer.options.events.emulated.tuned = true;
+        }
 
         skipping = true;
 
@@ -3569,42 +3900,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Mouse);
 
 /* =========================================================================
- * Svelto - Core - Push state
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
-
-// Monkey patching `history.pushState` so that it will trigger an event that we can then use to properly trigger a `route` event
-
-(function ($, _, Svelto, history) {
-
-  'use strict';
-
-  /* PUSH STATE */
-
-  $(function () {
-
-    var $window = $(window),
-        pushState = history.pushState;
-
-    history.pushState = function (state) {
-
-      if (_.isFunction(history.onpushstate)) {
-
-        history.onpushstate({ state: state });
-      }
-
-      $window.trigger('pushstate');
-
-      return pushState.apply(history, arguments);
-    };
-  });
-})(Svelto.$, Svelto._, Svelto, window.history);
-
-/* =========================================================================
  * Svelto - Core - Readify
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -3613,7 +3908,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Maybe make it a little more general, adding support for pure functions as well
+//FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
 (function ($, _, Svelto, Widgets) {
 
@@ -3625,49 +3920,401 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function Readify() {
       _classCallCheck(this, Readify);
 
-      this.widgets = [];
+      this.queue = [];
     }
+
+    /* METHODS */
 
     _createClass(Readify, [{
       key: 'get',
       value: function get() {
 
-        return this.widgets;
+        return this.queue;
       }
     }, {
       key: 'add',
-      value: function add(Widget) {
+      value: function add(fn) {
 
-        this.widgets.push(Widget);
+        if (this._isReady) {
+
+          this.worker(fn);
+        } else {
+
+          this.queue.push(fn);
+        }
       }
     }, {
       key: 'remove',
-      value: function remove(Widget) {
+      value: function remove(fn) {
 
-        _.pull(this.widgets, Widget);
+        _.pull(this.queue, fn);
       }
     }, {
-      key: 'do',
-      value: function _do() {
+      key: 'ready',
+      value: function ready() {
+
+        this._isReady = true;
+
+        this.queue.forEach(this.worker.bind(this));
+
+        this.queue = [];
+      }
+    }, {
+      key: 'worker',
+      value: function worker(fn) {
+
+        if ('config' in fn) {
+          //FIXME: Not really future proof
+
+          var Widget = fn,
+              ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready,
+              //IE10 support -- static property
+          initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady,
+              //IE10 support -- static property
+          setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
+
+          initReady.bind(Widget)();
+
+          ready.bind(Widget)(setReady.bind(Widget));
+        } else {
+
+          fn();
+        }
+      }
+    }]);
+
+    return Readify;
+  }();
+
+  /* EXPORT */
+
+  Svelto.Readify = new Readify();
+
+  /* READY */
+
+  $(Svelto.Readify.ready.bind(Svelto.Readify));
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+
+/* =========================================================================
+ * Svelto - Core - Breakpoint
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/breakpoints/breakpoints.js
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Breakpoints, Readify) {
+
+  'use strict';
+
+  /* BREAKPOINT */
+
+  var Breakpoint = {
+
+    /* VARIABLES */
+
+    throttle: 150, // Milliseconds used to throttle the `$window.on ( 'resize' )` handler
+    previous: undefined, // Previous breakpoint
+    current: undefined, // Current breakpoint
+
+    /* RESIZE */
+
+    __resize: function __resize() {
+
+      var current = this.get();
+
+      if (current === this.current) return;
+
+      this.previous = this.current;
+      this.current = current;
+
+      Svelto.$window.trigger('breakpoint:change');
+    },
+
+
+    /* API */
+
+    get: function get() {
+
+      var widths = _.sortBy(_.values(Breakpoints.widths)),
+          width = Svelto.$window.width();
+
+      var _loop = function _loop(i, l) {
+
+        if (width >= widths[i] && (i === l - 1 || width < widths[i + 1])) {
+
+          return {
+            v: _.findKey(Breakpoints.widths, function (width) {
+              return width === widths[i];
+            })
+          };
+        }
+      };
+
+      for (var i = 0, l = widths.length; i < l; i++) {
+        var _ret = _loop(i, l);
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    }
+  };
+
+  /* READY */
+
+  Readify.add(function () {
+
+    Breakpoint.current = Breakpoint.get();
+
+    Svelto.$window.on('resize', _.throttle(Breakpoint.__resize.bind(Breakpoint), Breakpoint.throttle));
+  });
+
+  /* EXPORT */
+
+  Svelto.Breakpoint = Breakpoint;
+})(Svelto.$, Svelto._, Svelto, Svelto.Breakpoints, Svelto.Readify);
+
+/* =========================================================================
+ * Svelto - Core - Push state
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+// Monkey patching `history.pushState` so that it will trigger an event that we can then use to properly trigger a `route` event
+
+(function ($, _, Svelto, Readify, history) {
+
+  'use strict';
+
+  /* PUSH STATE */
+
+  Readify.add(function () {
+
+    var pushState = history.pushState;
+
+    history.pushState = function (state) {
+
+      if (_.isFunction(history.onpushstate)) {
+
+        history.onpushstate({ state: state });
+      }
+
+      Svelto.$window.trigger('pushstate');
+
+      return pushState.apply(history, arguments);
+    };
+  });
+})(Svelto.$, Svelto._, Svelto, Svelto.Readify, window.history);
+
+/* =========================================================================
+ * Svelto - Core - Route
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/push_state/push_state.js
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+/* ROUTE */
+
+(function ($, _, Svelto, Readify) {
+
+  'use strict';
+
+  Readify.add(function () {
+
+    var previous = window.location.href.split('#')[0];
+
+    Svelto.$window.on('popstate pushstate', function () {
+
+      _.defer(function () {
+        // We need the `window.location.href` to get updated before
+
+        var current = window.location.href.split('#')[0];
+
+        if (current !== previous) {
+
+          previous = current;
+
+          Svelto.$window.trigger('route');
+        }
+      });
+    });
+  });
+})(Svelto.$, Svelto._, Svelto, Svelto.Readify);
+
+/* =========================================================================
+ * Svelto - Core - Widgetize
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+//FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
+
+(function ($, _, Svelto, Widgets, Readify) {
+
+  'use strict';
+
+  /* WIDGETIZE */
+
+  var Widgetize = function () {
+    function Widgetize() {
+      _classCallCheck(this, Widgetize);
+
+      this.widgetizers = {};
+    }
+
+    /* UTILITIES */
+
+    _createClass(Widgetize, [{
+      key: '_getWidgets',
+      value: function _getWidgets($root, selector) {
+
+        return $root.filter(selector).add($root.find(selector));
+      }
+
+      /* METHODS */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return this.widgetizers;
+      }
+    }, {
+      key: 'add',
+      value: function add(selector, widgetizer, data) {
+
+        if (_.isObject(selector)) {
+
+          var Widget = selector;
+
+          if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
+
+          var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+          return this.add(Widget.config.selector, widgetize, Widget);
+        }
+
+        if (!(selector in this.widgetizers)) {
+
+          this.widgetizers[selector] = [];
+        }
+
+        this.widgetizers[selector].push([widgetizer, data]);
+
+        if (this._isReady) {
+
+          var $widgets = this._getWidgets(Svelto.$body, selector);
+
+          this.worker([[widgetizer, data]], $widgets);
+        }
+      }
+    }, {
+      key: 'remove',
+      value: function remove(selector, widgetizer) {
+
+        if (_.isObject(selector)) {
+
+          var Widget = selector;
+
+          if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
+
+          var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+
+          return this.remove(Widget.config.selector, widgetize);
+        }
+
+        if (selector in this.widgetizers) {
+
+          if (widgetizer) {
+
+            for (var i = 0, l = this.widgetizers[selector].length; i < l; i++) {
+
+              if (this.widgetizers[selector][i][0] === widgetizer) {
+
+                this.widgetizers[selector].splice(i, 1);
+              }
+            }
+          }
+
+          if (!widgetizer || !this.widgetizers[selector].length) {
+
+            delete this.widgetizers[selector];
+          }
+        }
+      }
+    }, {
+      key: 'ready',
+      value: function ready() {
+
+        this._isReady = true;
+
+        this.on(Svelto.$body);
+      }
+    }, {
+      key: 'on',
+      value: function on($root) {
+
+        for (var selector in this.widgetizers) {
+
+          if (!this.widgetizers.hasOwnProperty(selector)) continue;
+
+          var widgetizers = this.widgetizers[selector],
+              $widgets = this._getWidgets($root, selector);
+
+          this.worker(widgetizers, $widgets);
+        }
+      }
+    }, {
+      key: 'worker',
+      value: function worker(widgetizers, $widgets) {
         var _iteratorNormalCompletion6 = true;
         var _didIteratorError6 = false;
         var _iteratorError6 = undefined;
 
         try {
 
-          for (var _iterator6 = this.widgets[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            var Widget = _step6.value;
+          for (var _iterator6 = $widgets[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var widget = _step6.value;
 
 
-            var ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready,
-                //IE10 support -- static property
-            initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady,
-                //IE10 support -- static property
-            setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
+            var $widget = $(widget);
 
-            initReady.bind(Widget)();
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
 
-            ready.bind(Widget)(setReady.bind(Widget));
+            try {
+              for (var _iterator7 = widgetizers[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                var _step7$value = _slicedToArray(_step7.value, 2),
+                    widgetizer = _step7$value[0],
+                    data = _step7$value[1];
+
+                widgetizer($widget, data);
+              }
+            } catch (err) {
+              _didIteratorError7 = true;
+              _iteratorError7 = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                  _iterator7.return();
+                }
+              } finally {
+                if (_didIteratorError7) {
+                  throw _iteratorError7;
+                }
+              }
+            }
           }
         } catch (err) {
           _didIteratorError6 = true;
@@ -3686,56 +4333,498 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }]);
 
-    return Readify;
+    return Widgetize;
   }();
 
   /* EXPORT */
 
-  Svelto.Readify = new Readify();
+  Svelto.Widgetize = new Widgetize();
+
+  /* PLUGIN */
+
+  $.fn.widgetize = function () {
+
+    Svelto.Widgetize.on(this);
+
+    return this;
+  };
 
   /* READY */
 
-  $(Svelto.Readify.do.bind(Svelto.Readify));
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets);
+  Readify.add(Svelto.Widgetize.ready.bind(Svelto.Widgetize));
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify);
 
 /* =========================================================================
- * Svelto - Core - Route
+ * Svelto - Core - Factory
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/push_state/push_state.js
  * @require core/svelto/svelto.js
- * ========================================================================= */
+ * @require core/readify/readify.js
+ * @require core/widgetize/widgetize.js
+ *=========================================================================*/
 
-/* ROUTE */
-
-(function ($, _, Svelto) {
+(function ($, _, Svelto, Widgets, Readify, Widgetize) {
 
   'use strict';
 
-  $(function () {
+  /* FACTORY */
 
-    var $window = $(window),
-        previous = window.location.href.split('#')[0];
+  var Factory = {
 
-    $window.on('popstate pushstate', function () {
+    /* API */
 
-      _.defer(function () {
-        // We need the `window.location.href` to get updated before
+    instanciate: function instanciate(Widget, options, element) {
 
-        var current = window.location.href.split('#')[0];
+      var name = Widget.config.name;
 
-        if (current !== previous) {
+      return $.data(element, 'instance.' + name) || new Widget(options, element);
+    },
+    make: function make(Widget, config) {
+      var namespace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Widgets;
+      var _iteratorNormalCompletion8 = true;
+      var _didIteratorError8 = false;
+      var _iteratorError8 = undefined;
 
-          previous = current;
+      try {
 
-          $window.trigger('route');
+        for (var _iterator8 = this.makers.order[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+          var maker = _step8.value;
+
+
+          this.makers[maker](Widget, config, namespace);
         }
-      });
-    });
-  });
-})(Svelto.$, Svelto._, Svelto);
+      } catch (err) {
+        _didIteratorError8 = true;
+        _iteratorError8 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion8 && _iterator8.return) {
+            _iterator8.return();
+          }
+        } finally {
+          if (_didIteratorError8) {
+            throw _iteratorError8;
+          }
+        }
+      }
+    },
+    unmake: function unmake(Widget) {
+      var namespace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Widgets;
+      var _iteratorNormalCompletion9 = true;
+      var _didIteratorError9 = false;
+      var _iteratorError9 = undefined;
+
+      try {
+
+        for (var _iterator9 = this.unmakers.order[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+          var unmaker = _step9.value;
+
+
+          this.unmakers[unmaker](Widget, namespace);
+        }
+      } catch (err) {
+        _didIteratorError9 = true;
+        _iteratorError9 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion9 && _iterator9.return) {
+            _iterator9.return();
+          }
+        } finally {
+          if (_didIteratorError9) {
+            throw _iteratorError9;
+          }
+        }
+      }
+    },
+
+
+    /* MAKERS */
+
+    makers: {
+
+      order: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // The order in which the makers will be called
+
+      configure: function configure(Widget) {
+        var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+        Widget.config = config;
+      },
+      namespace: function namespace(Widget, config, _namespace) {
+
+        if (!_.isObject(_namespace)) return;
+
+        var name = _.upperFirst(Widget.config.name);
+
+        _namespace[name] = Widget;
+      },
+      ready: function ready(Widget) {
+
+        Readify.add(Widget);
+      },
+      widgetize: function widgetize(Widget) {
+
+        Widgetize.add(Widget);
+      },
+      plugin: function plugin(Widget) {
+
+        if (!Widget.config.plugin) return;
+
+        /* NAME */
+
+        var name = Widget.config.name;
+
+        /* JQUERY PLUGIN */
+
+        $.fn[name] = function (options) {
+
+          var isMethodCall = _.isString(options) && options.charAt(0) !== '_'; // Methods starting with '_' are private
+
+          for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key4 = 1; _key4 < _len3; _key4++) {
+            args[_key4 - 1] = arguments[_key4];
+          }
+
+          var _iteratorNormalCompletion10 = true;
+          var _didIteratorError10 = false;
+          var _iteratorError10 = undefined;
+
+          try {
+            for (var _iterator10 = this[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+              var element = _step10.value;
+
+
+              var instance = Factory.instanciate(Widget, options, element);
+
+              if (isMethodCall && _.isFunction(instance[options])) {
+
+                var returnValue = instance[options].apply(instance, args);
+
+                if (!_.isUndefined(returnValue)) return returnValue;
+              }
+            }
+          } catch (err) {
+            _didIteratorError10 = true;
+            _iteratorError10 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                _iterator10.return();
+              }
+            } finally {
+              if (_didIteratorError10) {
+                throw _iteratorError10;
+              }
+            }
+          }
+
+          return this;
+        };
+      }
+    },
+
+    /* UNMAKERS */
+
+    unmakers: {
+
+      order: ['plugin', 'widgetize', 'ready', 'namespace', 'configure'], // The order in which the unmakers will be called
+
+      configure: function configure(Widget) {
+
+        delete Widget.config;
+      },
+      namespace: function namespace(Widget, _namespace2) {
+
+        if (!_.isObject(_namespace2)) return;
+
+        var name = _.upperFirst(Widget.config.name);
+
+        delete _namespace2[name];
+      },
+      ready: function ready(Widget) {
+
+        Readify.remove(Widget);
+      },
+      widgetize: function widgetize(Widget) {
+
+        Widgetize.remove(Widget);
+      },
+      plugin: function plugin(Widget) {
+
+        if (!Widget.config.plugin) return;
+
+        delete $.fn[Widget.config.name];
+      }
+    }
+
+  };
+
+  /* EXPORT */
+
+  Svelto.Factory = Factory;
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize);
+
+/* =========================================================================
+ * Svelto - Lib - Autofocus
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/browser/browser.js
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Browser, Readify) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var $html = $('html');
+
+  /* AUTOFOCUS */
+
+  var Autofocus = {
+
+    /* VARIABLES */
+
+    enabled: Browser.is.desktop,
+    history: [], // List of autofocused elements
+    historySize: 3, // How many elements to keep in the history
+
+    /* INIT */
+
+    init: function init() {
+
+      Autofocus.focus($html);
+    },
+
+
+    /* API */
+
+    set: function set(ele) {
+
+      if (!Autofocus.enabled) return;
+
+      Autofocus.history.unshift(ele);
+      Autofocus.history = _.uniq(Autofocus.history).slice(0, Autofocus.historySize);
+
+      ele.focus();
+
+      /* CARET TO THE END */
+
+      if (ele.setSelectionRange) {
+        var _ret2 = function () {
+
+          var length = ele.value.length * 2; // Double the length because Opera is inconsistent about whether a carriage return is one character or two
+
+          if (!length) return {
+              v: void 0
+            };
+
+          setTimeout(function () {
+            return ele.setSelectionRange(length, length);
+          }, 1); // Timeout seems to be required for Blink
+
+          ele.scrollTop = 1000000; // In case it's a tall textarea
+        }();
+
+        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+      }
+    },
+    find: function find() {
+      var $parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $html;
+      var focused = arguments[1];
+
+
+      var $focusable = $parent.find('[autofocus], .autofocus').filter(':visible');
+
+      if (_.isBoolean(focused)) {
+
+        $focusable = $focusable.filter(function (index, ele) {
+          return $.isFocused(ele) === focused;
+        });
+      }
+
+      return $focusable.length ? $focusable[0] : null;
+    },
+    focus: function focus($parent) {
+
+      if (!Autofocus.enabled) return;
+
+      var focusable = Autofocus.find($parent);
+
+      if (!focusable || $.isFocused(focusable)) return;
+
+      Autofocus.set(focusable);
+    },
+    blur: function blur($parent) {
+
+      if (!Autofocus.enabled || !Autofocus.history[0] || !$.contains($parent[0], Autofocus.history[0])) return;
+
+      var previous = Autofocus.history.find(function (ele) {
+        return $(ele).is(':visible');
+      }) || Autofocus.find($html);
+
+      if (previous) Autofocus.set(previous);
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.Autofocus = Autofocus;
+
+  /* READY */
+
+  Readify.add(Autofocus.init.bind(Autofocus));
+})(Svelto.$, Svelto._, Svelto, Svelto.Browser, Svelto.Readify);
+
+/* =========================================================================
+ * Svelto - Lib - Embedded CSS
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/readify/readify.js
+ * ========================================================================= */
+
+/* EMBEDDED CSS */
+
+(function ($, _, Svelto, Readify) {
+
+  'use strict';
+
+  /* EMBEDDED CSS */
+
+  var EmbeddedCSS = function () {
+    function EmbeddedCSS() {
+      _classCallCheck(this, EmbeddedCSS);
+
+      this.$stylesheet = $('<style class="svelto-embedded svelto-embedded-' + $.guid++ + '">');
+      this.tree = {};
+    }
+
+    /* PRIVATE */
+
+    _createClass(EmbeddedCSS, [{
+      key: '_cssfy',
+      value: function _cssfy() {
+
+        var css = '';
+
+        for (var selector in this.tree) {
+
+          if (!this.tree.hasOwnProperty(selector)) continue;
+
+          css += selector + '{';
+
+          if (_.isPlainObject(this.tree[selector])) {
+
+            for (var property in this.tree[selector]) {
+
+              if (!this.tree[selector].hasOwnProperty(property)) continue;
+
+              css += property + ':' + this.tree[selector][property] + ';';
+            }
+          } else if (_.isString(this.tree[selector])) {
+
+            css += this.tree[selector] + ';';
+          }
+
+          css += '}';
+        }
+
+        return css;
+      }
+    }, {
+      key: '_refresh',
+      value: function _refresh() {
+
+        this.$stylesheet.text(this._cssfy());
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get(selector) {
+
+        return this.tree[selector];
+      }
+    }, {
+      key: 'set',
+      value: function set(selector, property, value) {
+
+        if (property === false) {
+
+          return this.remove(selector);
+        }
+
+        if (_.isPlainObject(property)) {
+
+          this.tree[selector] = _.extend(_.isPlainObject(this.tree[selector]) ? this.tree[selector] : {}, property);
+        } else if (_.isString(property)) {
+
+          if (!value) {
+
+            this.tree[selector] = property;
+          } else {
+
+            return this.set(selector, _defineProperty({}, property, value));
+          }
+        }
+
+        this._refresh();
+      }
+    }, {
+      key: 'remove',
+      value: function remove(selector) {
+
+        if (selector in this.tree) {
+
+          delete this.tree[selector];
+
+          this._refresh();
+        }
+      }
+    }, {
+      key: 'clear',
+      value: function clear() {
+
+        if (_.size(this.tree)) {
+
+          this.tree = {};
+
+          this._refresh();
+        }
+      }
+    }, {
+      key: 'attach',
+      value: function attach() {
+
+        this.$stylesheet.appendTo(Svelto.$head);
+      }
+    }, {
+      key: 'detach',
+      value: function detach() {
+
+        this.$stylesheet.remove();
+      }
+    }]);
+
+    return EmbeddedCSS;
+  }();
+
+  /* EXPORT */
+
+  Svelto.EmbeddedCSS = new EmbeddedCSS();
+
+  /* READY */
+
+  Readify.add(Svelto.EmbeddedCSS.attach.bind(Svelto.EmbeddedCSS));
+})(Svelto.$, Svelto._, Svelto, Svelto.Readify);
 
 /* =========================================================================
  * Svelto - Core - Sizes
@@ -3772,383 +4861,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto);
 
 /* =========================================================================
- * Svelto - Core - Widgetize
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
-
-(function ($, _, Svelto) {
-
-  'use strict';
-
-  /* WIDGETIZE */
-
-  var Widgetize = function () {
-    function Widgetize() {
-      _classCallCheck(this, Widgetize);
-
-      this.widgetizers = {};
-    }
-
-    _createClass(Widgetize, [{
-      key: 'get',
-      value: function get() {
-
-        return this.widgetizers;
-      }
-    }, {
-      key: 'add',
-      value: function add(selector, widgetizer, data) {
-
-        if (!(selector in this.widgetizers)) {
-
-          this.widgetizers[selector] = [];
-        }
-
-        this.widgetizers[selector].push([widgetizer, data]);
-      }
-    }, {
-      key: 'remove',
-      value: function remove(selector, widgetizer) {
-
-        if (selector in this.widgetizers) {
-
-          if (widgetizer) {
-
-            for (var i = 0, l = this.widgetizers[selector].length; i < l; i++) {
-
-              if (this.widgetizers[selector][i][0] === widgetizer) {
-
-                this.widgetizers[selector].splice(i, 1);
-              }
-            }
-          }
-
-          if (!widgetizer || !this.widgetizers[selector].length) {
-
-            delete this.widgetizers[selector];
-          }
-        }
-      }
-    }, {
-      key: 'on',
-      value: function on($roots) {
-
-        for (var selector in this.widgetizers) {
-
-          if (!this.widgetizers.hasOwnProperty(selector)) continue;
-
-          var widgetizers = this.widgetizers[selector];
-
-          this.worker(widgetizers, $roots.filter(selector));
-          this.worker(widgetizers, $roots.find(selector));
-        }
-      }
-    }, {
-      key: 'worker',
-      value: function worker(widgetizers, $widgets) {
-        var _iteratorNormalCompletion7 = true;
-        var _didIteratorError7 = false;
-        var _iteratorError7 = undefined;
-
-        try {
-
-          for (var _iterator7 = $widgets[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-            var widget = _step7.value;
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
-
-            try {
-
-              for (var _iterator8 = widgetizers[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                var _step8$value = _slicedToArray(_step8.value, 2),
-                    widgetizer = _step8$value[0],
-                    data = _step8$value[1];
-
-                widgetizer($(widget), data);
-              }
-            } catch (err) {
-              _didIteratorError8 = true;
-              _iteratorError8 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                  _iterator8.return();
-                }
-              } finally {
-                if (_didIteratorError8) {
-                  throw _iteratorError8;
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _didIteratorError7 = true;
-          _iteratorError7 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion7 && _iterator7.return) {
-              _iterator7.return();
-            }
-          } finally {
-            if (_didIteratorError7) {
-              throw _iteratorError7;
-            }
-          }
-        }
-      }
-    }]);
-
-    return Widgetize;
-  }();
-
-  /* EXPORT */
-
-  Svelto.Widgetize = new Widgetize();
-
-  /* JQUERY PLUGIN */
-
-  $.fn.widgetize = function () {
-
-    Svelto.Widgetize.on(this);
-
-    return this;
-  };
-
-  /* READY */
-
-  $(function () {
-
-    $(document.body).widgetize();
-  });
-})(Svelto.$, Svelto._, Svelto);
-
-/* =========================================================================
- * Svelto - Core - Factory
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require core/readify/readify.js
- * @require core/widgetize/widgetize.js
- *=========================================================================*/
-
-(function ($, _, Svelto, Widgets, Readify, Widgetize) {
-
-  'use strict';
-
-  /* FACTORY */
-
-  var Factory = {
-
-    /* API */
-
-    instanciate: function instanciate(Widget, options, element) {
-
-      var name = Widget.config.name;
-
-      return $.data(element, 'instance.' + name) || new Widget(options, element);
-    },
-    make: function make(Widget, config) {
-      var namespace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Widgets;
-      var _iteratorNormalCompletion9 = true;
-      var _didIteratorError9 = false;
-      var _iteratorError9 = undefined;
-
-      try {
-
-        for (var _iterator9 = this.makers.order[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-          var maker = _step9.value;
-
-
-          this.makers[maker](Widget, config, namespace);
-        }
-      } catch (err) {
-        _didIteratorError9 = true;
-        _iteratorError9 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion9 && _iterator9.return) {
-            _iterator9.return();
-          }
-        } finally {
-          if (_didIteratorError9) {
-            throw _iteratorError9;
-          }
-        }
-      }
-    },
-    unmake: function unmake(Widget) {
-      var namespace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Widgets;
-      var _iteratorNormalCompletion10 = true;
-      var _didIteratorError10 = false;
-      var _iteratorError10 = undefined;
-
-      try {
-
-        for (var _iterator10 = this.unmakers.order[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-          var unmaker = _step10.value;
-
-
-          this.unmakers[unmaker](Widget, namespace);
-        }
-      } catch (err) {
-        _didIteratorError10 = true;
-        _iteratorError10 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion10 && _iterator10.return) {
-            _iterator10.return();
-          }
-        } finally {
-          if (_didIteratorError10) {
-            throw _iteratorError10;
-          }
-        }
-      }
-    },
-
-
-    /* MAKERS */
-
-    makers: {
-
-      order: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // The order in which the makers will be called
-
-      configure: function configure(Widget) {
-        var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-
-        Widget.config = config;
-      },
-      namespace: function namespace(Widget, config, _namespace) {
-
-        if (!_.isObject(_namespace)) return;
-
-        var name = _.upperFirst(Widget.config.name);
-
-        _namespace[name] = Widget;
-      },
-      ready: function ready(Widget) {
-
-        Readify.add(Widget);
-      },
-      widgetize: function widgetize(Widget) {
-        //TODO: Maybe add native support for Widgets to Widgetize and make this method as simple as `ready`
-
-        if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
-
-        var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
-
-        Widgetize.add(Widget.config.selector, widgetize, Widget);
-      },
-      plugin: function plugin(Widget) {
-
-        if (!Widget.config.plugin) return;
-
-        /* NAME */
-
-        var name = Widget.config.name;
-
-        /* JQUERY PLUGIN */
-
-        $.fn[name] = function (options) {
-
-          var isMethodCall = _.isString(options) && options.charAt(0) !== '_'; // Methods starting with '_' are private
-
-          for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-
-          var _iteratorNormalCompletion11 = true;
-          var _didIteratorError11 = false;
-          var _iteratorError11 = undefined;
-
-          try {
-            for (var _iterator11 = this[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-              var element = _step11.value;
-
-
-              var instance = Factory.instanciate(Widget, options, element);
-
-              if (isMethodCall && _.isFunction(instance[options])) {
-
-                var returnValue = instance[options].apply(instance, args);
-
-                if (!_.isUndefined(returnValue)) return returnValue;
-              }
-            }
-          } catch (err) {
-            _didIteratorError11 = true;
-            _iteratorError11 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                _iterator11.return();
-              }
-            } finally {
-              if (_didIteratorError11) {
-                throw _iteratorError11;
-              }
-            }
-          }
-
-          return this;
-        };
-      }
-    },
-
-    /* UNMAKERS */
-
-    unmakers: {
-
-      order: ['plugin', 'widgetize', 'ready', 'namespace', 'configure'], // The order in which the unmakers will be called
-
-      configure: function configure(Widget) {
-
-        delete Widget.config;
-      },
-      namespace: function namespace(Widget, _namespace2) {
-
-        if (!_.isObject(_namespace2)) return;
-
-        var name = _.upperFirst(Widget.config.name);
-
-        delete _namespace2[name];
-      },
-      ready: function ready(Widget) {
-
-        Readify.remove(Widget);
-      },
-      widgetize: function widgetize(Widget) {
-
-        if (!Widget.config.plugin || !_.isString(Widget.config.selector)) return;
-
-        var widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
-
-        Widgetize.remove(Widget.config.selector, widgetize);
-      },
-      plugin: function plugin(Widget) {
-
-        if (!Widget.config.plugin) return;
-
-        delete $.fn[Widget.config.name];
-      }
-    }
-
-  };
-
-  /* EXPORT */
-
-  Svelto.Factory = Factory;
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize);
-
-/* =========================================================================
  * Svelto - Core - Widget
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -4179,8 +4891,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     options: {
       characters: {}, // Used to store some characters needed by the widget
       regexes: {}, // Contains the used regexes
-      errors: {}, // It contains all the errors that a widget can trigger
-      messages: {}, // Messages that the widget somewhere outputs, maybe with a `$.toast`, maybe just logs it
+      messages: { // Messages that the widget somewhere outputs, maybe with a `$.toast`, maybe just logs it
+        error: 'An error occurred, please try again later'
+      },
       attributes: {}, // Attributes used by the widget
       datas: {}, // CSS data-* names
       classes: { // CSS classes to attach inside the widget
@@ -4236,7 +4949,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'whenReady',
       value: function whenReady(callback) {
 
-        var isReady = this.isReady || this.__proto__.isReady; //IE10 support -- static property
+        var isReady = this.isReady || this.__proto__.isReady || Widget.isReady; //IE10 support -- static property
 
         if (isReady.bind(this)()) {
 
@@ -4259,28 +4972,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._ready = true;
 
-        var _iteratorNormalCompletion12 = true;
-        var _didIteratorError12 = false;
-        var _iteratorError12 = undefined;
+        var _iteratorNormalCompletion11 = true;
+        var _didIteratorError11 = false;
+        var _iteratorError11 = undefined;
 
         try {
-          for (var _iterator12 = this._readyQueue[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-            var callback = _step12.value;
+          for (var _iterator11 = this._readyQueue[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+            var callback = _step11.value;
 
 
             callback();
           }
         } catch (err) {
-          _didIteratorError12 = true;
-          _iteratorError12 = err;
+          _didIteratorError11 = true;
+          _iteratorError11 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion12 && _iterator12.return) {
-              _iterator12.return();
+            if (!_iteratorNormalCompletion11 && _iterator11.return) {
+              _iterator11.return();
             }
           } finally {
-            if (_didIteratorError12) {
-              throw _iteratorError12;
+            if (_didIteratorError11) {
+              throw _iteratorError11;
             }
           }
         }
@@ -4309,6 +5022,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var _options = { //TODO: Maybe export them
           imports: {
+            Svelto: Svelto,
             Templates: Templates,
             self: Templates[this.templatesNamespace]
           },
@@ -4336,23 +5050,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /* WINDOW */
 
-      this.$window = $(window);
-      this.window = this.$window[0];
+      this.$window = Svelto.$window;
+      this.window = Svelto.window;
 
       /* DOCUMENT */
 
-      this.$document = $(document);
-      this.document = this.$document[0];
+      this.$document = Svelto.$document;
+      this.document = Svelto.document;
 
       /* HTML */
 
-      this.$html = $(document.documentElement);
-      this.html = this.$html[0];
+      this.$html = Svelto.$html;
+      this.html = Svelto.html;
 
       /* BODY */
 
-      this.$body = $(document.body);
-      this.body = this.$body[0];
+      this.$body = Svelto.$body;
+      this.body = Svelto.body;
 
       /* BINDINGS */
 
@@ -4374,8 +5088,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.eventNamespace = '.swns-' + this.guid;
 
+      /* LOCKS */
+
+      this._locks = {};
+      this._lockQueues = {};
+
       /* CALLBACKS */
 
+      if (this._make() === false) return this.destroy();
       if (this._variables() === false) return this.destroy();
       if (this._init() === false) return this.destroy();
       if (this._events() === false) return this.destroy();
@@ -4482,6 +5202,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /* SPECIAL */
 
     }, {
+      key: '_make',
+      value: function _make() {} // Creates the widget, if necessary
+
+    }, {
       key: '_variables',
       value: function _variables() {} // Init your variables inside this function
 
@@ -4586,6 +5310,78 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return this.$element.hasClass(this.options.classes.disabled);
       }
 
+      /* LOCKING */
+
+    }, {
+      key: 'lock',
+      value: function lock(namespace) {
+
+        this._locks[namespace] = true;
+      }
+    }, {
+      key: 'unlock',
+      value: function unlock(namespace) {
+
+        delete this._locks[namespace];
+
+        if (this._lockQueues[namespace]) {
+          var _iteratorNormalCompletion12 = true;
+          var _didIteratorError12 = false;
+          var _iteratorError12 = undefined;
+
+          try {
+
+            for (var _iterator12 = this._lockQueues[namespace][Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+              var callback = _step12.value;
+
+
+              callback();
+            }
+          } catch (err) {
+            _didIteratorError12 = true;
+            _iteratorError12 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                _iterator12.return();
+              }
+            } finally {
+              if (_didIteratorError12) {
+                throw _iteratorError12;
+              }
+            }
+          }
+
+          delete this._lockQueues[namespace];
+        }
+      }
+    }, {
+      key: 'isLocked',
+      value: function isLocked(namespace) {
+
+        return !!this._locks[namespace];
+      }
+    }, {
+      key: 'whenUnlocked',
+      value: function whenUnlocked(namespace, callback) {
+
+        if (!callback) {
+
+          callback = namespace;
+          namespace = undefined;
+        }
+
+        if (!this.isLocked(namespace)) {
+
+          callback();
+        } else {
+
+          if (!this._lockQueues[namespace]) this._lockQueues[namespace] = [];
+
+          this._lockQueues[namespace].push(callback);
+        }
+      }
+
       /* EVENTS */
 
       //TODO: Add support for custom data
@@ -4630,8 +5426,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /* PROXY */
 
         var handlerProxy = function handlerProxy() {
-          for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
+          for (var _len4 = arguments.length, args = Array(_len4), _key5 = 0; _key5 < _len4; _key5++) {
+            args[_key5] = arguments[_key5];
           }
 
           if (!suppressDisabledCheck && _this.$element.hasClass(_this.options.classes.disabled)) return;
@@ -4654,8 +5450,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_one',
       value: function _one() {
-        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-          args[_key3] = arguments[_key3];
+        for (var _len5 = arguments.length, args = Array(_len5), _key6 = 0; _key6 < _len5; _key6++) {
+          args[_key6] = arguments[_key6];
         }
 
         return this._on.apply(this, args.concat([true]));
@@ -4847,10 +5643,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   method = _.isArray(toCall) ? toCall[0] : toCall,
                   _args = _.isArray(toCall) ? _.castArray(toCall[1]) : [];
 
-              this[method].apply(this, _args);
+              if (this[method].apply(this, _args) !== false) {
 
-              event.preventDefault();
-              event.stopImmediatePropagation();
+                event.preventDefault();
+                event.stopImmediatePropagation();
+              }
 
               return;
             }
@@ -5047,6 +5844,991 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint);
 
 /* =========================================================================
+ * Svelto - Widgets - Autofocusable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.js
+ * @require lib/autofocus/autofocus.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Autofocus) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'autofocusable'
+  };
+
+  /* AUTOFOCUSABLE */
+
+  var Autofocusable = function (_Widgets$Widget) {
+    _inherits(Autofocusable, _Widgets$Widget);
+
+    function Autofocusable() {
+      _classCallCheck(this, Autofocusable);
+
+      return _possibleConstructorReturn(this, (Autofocusable.__proto__ || Object.getPrototypeOf(Autofocusable)).apply(this, arguments));
+    }
+
+    _createClass(Autofocusable, [{
+      key: 'autofocus',
+
+
+      /* API */
+
+      value: function autofocus() {
+        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
+
+
+        Autofocus.focus($ele);
+      }
+    }, {
+      key: 'autoblur',
+      value: function autoblur() {
+        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
+
+
+        Autofocus.blur($ele);
+      }
+    }]);
+
+    return Autofocusable;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(Autofocusable, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
+
+/* =========================================================================
+ * Svelto - Widgets - Expander
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expander',
+    plugin: true,
+    selector: '.expander',
+    options: {
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* EXPANDER */
+
+  var Expander = function (_Widgets$Autofocusabl) {
+    _inherits(Expander, _Widgets$Autofocusabl);
+
+    function Expander() {
+      _classCallCheck(this, Expander);
+
+      return _possibleConstructorReturn(this, (Expander.__proto__ || Object.getPrototypeOf(Expander)).apply(this, arguments));
+    }
+
+    _createClass(Expander, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$expander = this.$element;
+        this.$content = this.$expander.find(this.options.selectors.content);
+
+        this._isOpen = this.$expander.hasClass(this.options.classes.open);
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this._isOpen = !!force;
+
+          this.$expander.toggleClass(this.options.classes.open, this._isOpen);
+
+          this._isOpen ? this.autofocus() : this.autoblur();
+
+          this._trigger(this._isOpen ? 'open' : 'close');
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        this.toggle(true);
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        this.toggle(false);
+      }
+    }]);
+
+    return Expander;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.make(Expander, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Accordion
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/expander/expander.js
+ * ========================================================================= */
+
+//TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'accordion',
+    plugin: true,
+    selector: '.accordion',
+    options: {
+      multiple: false, // Wheter to allow multiple expanders open or not
+      selectors: {
+        expander: Widgets.Expander.config.selector
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* ACCORDION */
+
+  var Accordion = function (_Widgets$Widget2) {
+    _inherits(Accordion, _Widgets$Widget2);
+
+    function Accordion() {
+      _classCallCheck(this, Accordion);
+
+      return _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
+    }
+
+    _createClass(Accordion, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$accordion = this.$element;
+        this.$expanders = this.$accordion.children(this.options.selectors.expander);
+
+        this.instances = this.$expanders.get().map(function (expander) {
+          return $(expander).expander('instance');
+        });
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___open();
+        this.___close();
+      }
+
+      /* EXPANDER OPEN */
+
+    }, {
+      key: '___open',
+      value: function ___open() {
+
+        this._on(true, this.$expanders, 'expander:open', this.__open);
+      }
+    }, {
+      key: '__open',
+      value: function __open(event) {
+
+        this._trigger('open', { index: this.$expanders.index(event.target) });
+
+        this.__multiple(event.target);
+      }
+
+      /* EXPANDER CLOSE */
+
+    }, {
+      key: '___close',
+      value: function ___close() {
+
+        this._on(true, this.$expanders, 'expander:close', this.__close);
+      }
+    }, {
+      key: '__close',
+      value: function __close(event) {
+
+        this._trigger('close', { index: this.$expanders.index(event.target) });
+      }
+
+      /* MULTIPLE */
+
+    }, {
+      key: '__multiple',
+      value: function __multiple(expander) {
+
+        if (this.options.multiple) return;
+
+        this.instances.forEach(function (instance) {
+          return instance.element !== expander ? instance.close() : false;
+        });
+      }
+
+      /* API OVERRIDES */
+
+    }, {
+      key: 'enable',
+      value: function enable() {
+
+        _get(Accordion.prototype.__proto__ || Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
+
+        _.invokeMap(this.instances, 'enable');
+      }
+    }, {
+      key: 'disable',
+      value: function disable() {
+
+        _.invokeMap(this.instances, 'disable');
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen(index) {
+
+        return this.instances[index].isOpen();
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle(index, force) {
+
+        this.instances[index].toggle(force);
+      }
+    }, {
+      key: 'open',
+      value: function open(index) {
+
+        this.toggle(index, true);
+      }
+    }, {
+      key: 'close',
+      value: function close(index) {
+
+        this.toggle(index, false);
+      }
+    }]);
+
+    return Accordion;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(Accordion, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'flippable',
+    plugin: true,
+    selector: '.flippable',
+    options: {
+      classes: {
+        flip: 'flipped'
+      },
+      selectors: {
+        front: '.flippable-front',
+        back: '.flippable-back'
+      },
+      callbacks: {
+        front: _.noop,
+        back: _.noop
+      }
+    }
+  };
+
+  /* FLIPPABLE */
+
+  var Flippable = function (_Widgets$Autofocusabl2) {
+    _inherits(Flippable, _Widgets$Autofocusabl2);
+
+    function Flippable() {
+      _classCallCheck(this, Flippable);
+
+      return _possibleConstructorReturn(this, (Flippable.__proto__ || Object.getPrototypeOf(Flippable)).apply(this, arguments));
+    }
+
+    _createClass(Flippable, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$flippable = this.$element;
+        this.$front = this.$flippable.find(this.options.selectors.front);
+        this.$back = this.$flippable.find(this.options.selectors.back);
+
+        this._isFlipped = this.$flippable.hasClass(this.options.classes.flip);
+      }
+
+      /* API */
+
+    }, {
+      key: 'isFlipped',
+      value: function isFlipped() {
+
+        return this._isFlipped;
+      }
+    }, {
+      key: 'flip',
+      value: function flip() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFlipped;
+
+
+        if (!!force !== this._isFlipped) {
+
+          this._isFlipped = force;
+
+          this.$flippable.toggleClass(this.options.classes.flip, this._isFlipped);
+
+          this.autoblur(this._isFlipped ? this.$front : this.$back);
+          this.autofocus(this._isFlipped ? this.$back : this.$front);
+
+          this._trigger(this._isFlipped ? 'back' : 'front');
+        }
+      }
+    }, {
+      key: 'front',
+      value: function front() {
+
+        this.flip(false);
+      }
+    }, {
+      key: 'back',
+      value: function back() {
+
+        this.flip(true);
+      }
+    }]);
+
+    return Flippable;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.make(Flippable, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+//FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
+
+(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modal',
+    plugin: true,
+    selector: '.modal',
+    options: {
+      scroll: {
+        disable: true // Disable scroll when the modal is open
+      },
+      classes: {
+        show: 'show',
+        open: 'open',
+        backdrop: {
+          show: 'modal-backdrop obscured-show obscured',
+          open: 'obscured-open'
+        }
+      },
+      animations: {
+        open: Animations.normal,
+        close: Animations.normal
+      },
+      keystrokes: {
+        'esc': 'close'
+      },
+      callbacks: {
+        beforeopen: _.noop,
+        open: _.noop,
+        beforeclose: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* MODAL */
+
+  var Modal = function (_Widgets$Autofocusabl3) {
+    _inherits(Modal, _Widgets$Autofocusabl3);
+
+    function Modal() {
+      _classCallCheck(this, Modal);
+
+      return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
+    }
+
+    _createClass(Modal, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$modal = this.$element;
+        this.modal = this.element;
+
+        this.$backdrop = this.$html;
+
+        this._isOpen = this.$modal.hasClass(this.options.classes.open);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        if (this._isOpen) {
+
+          this.___keydown();
+          this.___tap();
+          this.___route();
+        }
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.close();
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._on(true, this.$html, Pointer.tap, this.__tap);
+      }
+    }, {
+      key: '__tap',
+      value: function __tap(event) {
+
+        if (this.isLocked() || event.isDefaultPrevented() || !$.isAttached(event.target) || $(event.target).closest(this.$modal).length) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        this.close();
+      }
+
+      /* ROUTE */
+
+    }, {
+      key: '__route',
+      value: function __route() {
+
+        if (this._isOpen && !$.isAttached(this.modal)) {
+
+          this.close();
+        }
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this.isLocked() || this._isOpen) return;
+
+        this.lock();
+
+        this._isOpen = true;
+
+        this._trigger('beforeopen');
+
+        if (this.options.scroll.disable) this.$layout.disableScroll();
+
+        this._frame(function () {
+
+          this.$modal.addClass(this.options.classes.show);
+          this.$backdrop.addClass(this.options.classes.backdrop.show);
+
+          this._frame(function () {
+
+            this.$modal.addClass(this.options.classes.open);
+            this.$backdrop.addClass(this.options.classes.backdrop.open);
+
+            this.autofocus();
+
+            this.unlock();
+
+            this._trigger('open');
+          });
+        });
+
+        this.___keydown();
+        this.___tap();
+        this.___route();
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this.isLocked() || !this._isOpen) return;
+
+        this.lock();
+
+        this._isOpen = false;
+
+        this._trigger('beforeclose');
+
+        this._frame(function () {
+
+          this.$modal.removeClass(this.options.classes.open);
+          this.$backdrop.removeClass(this.options.classes.backdrop.open);
+
+          this._delay(function () {
+
+            this.$modal.removeClass(this.options.classes.show);
+            this.$backdrop.removeClass(this.options.classes.backdrop.show);
+
+            this.autoblur();
+
+            if (this.options.scroll.disable) this.$layout.enableScroll();
+
+            this.unlock();
+
+            this._trigger('close');
+          }, this.options.animations.close);
+        });
+
+        this._reset();
+      }
+    }]);
+
+    return Modal;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.make(Modal, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require widgets/autofocusable/autofocusable.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlay',
+    plugin: true,
+    selector: '.overlay',
+    options: {
+      classes: {
+        show: 'show',
+        open: 'open',
+        parent: {
+          show: 'overlay-parent-show',
+          open: 'overlay-parent-open'
+        }
+      },
+      animations: {
+        open: Animations.fast,
+        close: Animations.fast
+      },
+      keystrokes: {
+        'esc': 'close'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* OVERLAY */
+
+  var Overlay = function (_Widgets$Autofocusabl4) {
+    _inherits(Overlay, _Widgets$Autofocusabl4);
+
+    function Overlay() {
+      _classCallCheck(this, Overlay);
+
+      return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
+    }
+
+    _createClass(Overlay, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$overlay = this.$element;
+
+        this._isOpen = this.$overlay.hasClass(this.options.classes.open);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        if (this._isOpen) {
+
+          this.___keydown();
+        }
+      }
+    }, {
+      key: '_destroy',
+      value: function _destroy() {
+
+        this.close();
+      }
+
+      /* PARENT */
+
+    }, {
+      key: '_getParent',
+      value: function _getParent() {
+
+        if (!this.$parent) {
+
+          this.$parent = this.$overlay.parent();
+        }
+
+        return this.$parent;
+      }
+
+      /* KEYDOWN */
+
+    }, {
+      key: '___keydown',
+      value: function ___keydown() {
+
+        this._onHover(true, [this.$document, 'keydown', this.__keydown]); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this._isOpen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
+
+
+        if (!!force !== this._isOpen) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this.isLocked() || this._isOpen) return;
+
+        this.lock();
+
+        this._isOpen = true;
+
+        this._frame(function () {
+
+          this.$overlay.addClass(this.options.classes.show);
+          this._getParent().addClass(this.options.classes.parent.show);
+
+          this._frame(function () {
+
+            this.$overlay.addClass(this.options.classes.open);
+            this._getParent().addClass(this.options.classes.parent.open);
+
+            this.autofocus();
+
+            this.unlock();
+
+            this._trigger('open');
+          });
+        });
+
+        this.___keydown();
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this.isLocked() || !this._isOpen) return;
+
+        this.lock();
+
+        this._isOpen = false;
+
+        this._frame(function () {
+
+          this.$overlay.removeClass(this.options.classes.open);
+          this._getParent().removeClass(this.options.classes.parent.open);
+
+          this._delay(function () {
+
+            this.$overlay.removeClass(this.options.classes.show);
+            this._getParent().removeClass(this.options.classes.parent.show);
+
+            this.autoblur();
+
+            this.unlock();
+
+            this._trigger('close');
+          }, this.options.animations.close);
+        });
+
+        this._reset();
+      }
+    }]);
+
+    return Overlay;
+  }(Widgets.Autofocusable);
+
+  /* FACTORY */
+
+  Factory.make(Overlay, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Spinner - Overlay
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/colors.js
+ * @require widgets/overlay/overlay.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Colors) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'spinnerOverlay',
+    plugin: true,
+    templates: {
+      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' + '<% if ( o.labeled ) { %>' + '<div class="spinner-label <%= o.colors.labeled %>">' + '<% } %>' + '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '<% if ( o.labeled ) { %>' + '</div>' + '<% } %>' + '</div>'
+    },
+    options: {
+      labeled: true,
+      dimmer: true,
+      multicolor: false,
+      colors: {
+        labeled: Colors.white,
+        unlabeled: Colors.secondary
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    }
+  };
+
+  /* SPINNER OVERLAY */
+
+  var SpinnerOverlay = function (_Widgets$Widget3) {
+    _inherits(SpinnerOverlay, _Widgets$Widget3);
+
+    function SpinnerOverlay() {
+      _classCallCheck(this, SpinnerOverlay);
+
+      return _possibleConstructorReturn(this, (SpinnerOverlay.__proto__ || Object.getPrototypeOf(SpinnerOverlay)).apply(this, arguments));
+    }
+
+    _createClass(SpinnerOverlay, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$overlayed = this.$element;
+        this.$overlay = $(this._template('overlay', this.options));
+
+        this.instance = this.$overlay.overlay('instance');
+      }
+
+      /* API */
+
+    }, {
+      key: 'isOpen',
+      value: function isOpen() {
+
+        return this.instance.isOpen();
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.isOpen();
+
+
+        if (!!force !== this.isOpen()) {
+
+          this[force ? 'open' : 'close']();
+        }
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+
+        if (this.isLocked() || this.isOpen()) return;
+
+        this.$overlay.prependTo(this.$overlayed);
+
+        this.instance.open();
+
+        this._trigger('open');
+      }
+    }, {
+      key: 'close',
+      value: function close() {
+
+        if (this.isLocked() || !this.isOpen()) return;
+
+        this.lock();
+
+        this.instance.close();
+
+        this._delay(function () {
+
+          this.$overlay.detach();
+
+          this.unlock();
+
+          this._trigger('close');
+        }, Widgets.Overlay.config.options.animations.close);
+      }
+    }]);
+
+    return SpinnerOverlay;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(SpinnerOverlay, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
+
+/* =========================================================================
  * Svelto - Widgets - Chart
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -5090,8 +6872,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CHART */
 
-  var Chart = function (_Widgets$Widget) {
-    _inherits(Chart, _Widgets$Widget);
+  var Chart = function (_Widgets$Widget4) {
+    _inherits(Chart, _Widgets$Widget4);
 
     function Chart() {
       _classCallCheck(this, Chart);
@@ -5154,7 +6936,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_getSettings',
       value: function _getSettings() {
-        var _this5 = this;
+        var _this12 = this;
 
         return {
           type: this.type,
@@ -5165,8 +6947,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             datasets: _.map(this.labels, function (label, index) {
               return {
                 label: label,
-                data: _this5.datas[index],
-                backgroundColor: _this5.colors[index]
+                data: _this12.datas[index],
+                backgroundColor: _this12.colors[index]
               };
             })
           }
@@ -5210,8 +6992,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CHECKBOX */
 
-  var Checkbox = function (_Widgets$Widget2) {
-    _inherits(Checkbox, _Widgets$Widget2);
+  var Checkbox = function (_Widgets$Widget5) {
+    _inherits(Checkbox, _Widgets$Widget5);
 
     function Checkbox() {
       _classCallCheck(this, Checkbox);
@@ -5398,8 +7180,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CLASS SWITCH */
 
-  var ClassSwitch = function (_Widgets$Widget3) {
-    _inherits(ClassSwitch, _Widgets$Widget3);
+  var ClassSwitch = function (_Widgets$Widget6) {
+    _inherits(ClassSwitch, _Widgets$Widget6);
 
     function ClassSwitch() {
       _classCallCheck(this, ClassSwitch);
@@ -5598,7 +7380,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
 // Accordion to ISO-8601 the first day of the week is Monday
 
-//FIXME: If 21/4/2013 is selected we get "30" selected on 5/2015's page
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 
 (function ($, _, Svelto, Widgets, Factory, Pointer) {
@@ -5690,8 +7471,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATEPICKER */
 
-  var Datepicker = function (_Widgets$Widget4) {
-    _inherits(Datepicker, _Widgets$Widget4);
+  var Datepicker = function (_Widgets$Widget7) {
+    _inherits(Datepicker, _Widgets$Widget7);
 
     function Datepicker() {
       _classCallCheck(this, Datepicker);
@@ -6214,8 +7995,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DRAGGABLE */
 
-  var Draggable = function (_Widgets$Widget5) {
-    _inherits(Draggable, _Widgets$Widget5);
+  var Draggable = function (_Widgets$Widget8) {
+    _inherits(Draggable, _Widgets$Widget8);
 
     function Draggable() {
       _classCallCheck(this, Draggable);
@@ -6524,7 +8305,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_revert',
       value: function _revert() {
 
-        this._lock = true;
+        this.lock();
 
         this._frame(function () {
 
@@ -6543,7 +8324,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this._destroyHelper();
               }
 
-              this._lock = false;
+              this.unlock();
             }, this.options.animations.revert);
           });
         });
@@ -6578,7 +8359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__down',
       value: function __down(event) {
 
-        if (this._lock || !this.options.draggable(this) || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
+        if (this.isLocked() || !this.options.draggable(this) || Mouse.hasButton(event, Mouse.buttons.RIGHT)) return;
 
         event.stopImmediatePropagation();
 
@@ -6806,8 +8587,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FLICKABLE */
 
-  var Flickable = function (_Widgets$Widget6) {
-    _inherits(Flickable, _Widgets$Widget6);
+  var Flickable = function (_Widgets$Widget9) {
+    _inherits(Flickable, _Widgets$Widget9);
 
     function Flickable() {
       _classCallCheck(this, Flickable);
@@ -6994,8 +8775,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM SYNC */
 
-  var FormSync = function (_Widgets$Widget7) {
-    _inherits(FormSync, _Widgets$Widget7);
+  var FormSync = function (_Widgets$Widget10) {
+    _inherits(FormSync, _Widgets$Widget10);
 
     function FormSync() {
       _classCallCheck(this, FormSync);
@@ -7142,8 +8923,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR */
 
-  var Infobar = function (_Widgets$Widget8) {
-    _inherits(Infobar, _Widgets$Widget8);
+  var Infobar = function (_Widgets$Widget11) {
+    _inherits(Infobar, _Widgets$Widget11);
 
     function Infobar() {
       _classCallCheck(this, Infobar);
@@ -7214,8 +8995,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT AUTOGROW */
 
-  var InputAutogrow = function (_Widgets$Widget9) {
-    _inherits(InputAutogrow, _Widgets$Widget9);
+  var InputAutogrow = function (_Widgets$Widget12) {
+    _inherits(InputAutogrow, _Widgets$Widget12);
 
     function InputAutogrow() {
       _classCallCheck(this, InputAutogrow);
@@ -7351,8 +9132,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INPUT FILE NAMES */
 
-  var InputFileNames = function (_Widgets$Widget10) {
-    _inherits(InputFileNames, _Widgets$Widget10);
+  var InputFileNames = function (_Widgets$Widget13) {
+    _inherits(InputFileNames, _Widgets$Widget13);
 
     function InputFileNames() {
       _classCallCheck(this, InputFileNames);
@@ -7492,8 +9273,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* NUMBOX */
 
-  var Numbox = function (_Widgets$Widget11) {
-    _inherits(Numbox, _Widgets$Widget11);
+  var Numbox = function (_Widgets$Widget14) {
+    _inherits(Numbox, _Widgets$Widget14);
 
     function Numbox() {
       _classCallCheck(this, Numbox);
@@ -7704,6 +9485,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/widget/widget.js
  * ========================================================================= */
 
+//FIXME: Doesn't actually check if the scroll event happened along the same direction of the key that has been pressed
+// It can detect scroll only on the document
+
 (function ($, _, Svelto, Widgets, Factory) {
 
   'use strict';
@@ -7717,8 +9501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     options: {
       selectors: {
         previous: '.previous',
-        next: '.next',
-        focusable: 'input, textarea, select, option, [contenteditable]'
+        next: '.next'
       },
       keystrokes: {
         'left': 'previous',
@@ -7729,8 +9512,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PAGER */
 
-  var Pager = function (_Widgets$Widget12) {
-    _inherits(Pager, _Widgets$Widget12);
+  var Pager = function (_Widgets$Widget15) {
+    _inherits(Pager, _Widgets$Widget15);
 
     function Pager() {
       _classCallCheck(this, Pager);
@@ -7755,32 +9538,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.___keydown();
       }
 
-      /* UTILITIES */
-
-    }, {
-      key: '_clickElement',
-      value: function _clickElement($ele) {
-
-        $ele[0].click(); // jQuery won't work
-      }
-
       /* KEYDOWN */
 
     }, {
       key: '__keydown',
       value: function __keydown(event) {
-        var _this18 = this;
+        var _this25 = this;
 
-        //FIXME: Shouldn't do anything if a scroll happens
+        if (this.isLocked() || $.isFocused(document.activeElement)) return;
 
-        if ($(document.activeElement).is(this.options.selectors.focusable)) return;
+        this.lock();
 
-        this._defer(function () {
+        this._scrolled = false;
 
-          if (event.isPropagationStopped()) return; // Probably another widget was listening for the same event, and it should take priority over this
+        this.___scroll();
 
-          _get(Pager.prototype.__proto__ || Object.getPrototypeOf(Pager.prototype), '__keydown', _this18).call(_this18, event);
-        });
+        this._delay(function () {
+          // Waiting for the `scroll` event to fire and giving other event handlers precedence
+
+          _this25.unlock();
+
+          if (_this25._scrolled) return;
+
+          _this25.___scrollReset();
+
+          if (event.isDefaultPrevented() || event.isPropagationStopped()) return; // Probably another widget was listening for the same event, and it should take priority over this
+
+          _get(Pager.prototype.__proto__ || Object.getPrototypeOf(Pager.prototype), '__keydown', _this25).call(_this25, event);
+        }, 50); //FIXME: Not exactly a solid implementation
+      }
+
+      /* SCROLL */
+
+    }, {
+      key: '___scroll',
+      value: function ___scroll() {
+
+        this._one(true, this.$document, 'scroll', this.__scroll);
+      }
+    }, {
+      key: '___scrollReset',
+      value: function ___scrollReset() {
+
+        this._off(this.$document, 'scroll', this.__scroll);
+      }
+    }, {
+      key: '__scroll',
+      value: function __scroll() {
+
+        this._scrolled = true;
       }
 
       /* API */
@@ -7793,7 +9599,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (!$previous.length) return;
 
-        this._clickElement($previous);
+        $previous[0].click();
       }
     }, {
       key: 'next',
@@ -7803,7 +9609,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (!$next.length) return;
 
-        this._clickElement($next);
+        $next[0].click();
       }
     }]);
 
@@ -7906,8 +9712,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* PROGRESSBAR */
 
-  var Progressbar = function (_Widgets$Widget13) {
-    _inherits(Progressbar, _Widgets$Widget13);
+  var Progressbar = function (_Widgets$Widget16) {
+    _inherits(Progressbar, _Widgets$Widget16);
 
     function Progressbar() {
       _classCallCheck(this, Progressbar);
@@ -8092,8 +9898,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RAILS */
 
-  var Rails = function (_Widgets$Widget14) {
-    _inherits(Rails, _Widgets$Widget14);
+  var Rails = function (_Widgets$Widget17) {
+    _inherits(Rails, _Widgets$Widget17);
 
     function Rails() {
       _classCallCheck(this, Rails);
@@ -8291,196 +10097,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer);
 
 /* =========================================================================
- * Svelto - Widgets - Remote
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * ========================================================================= */
-
-//TODO: Add locking capabilities
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'remote',
-    options: {
-      requests: {
-        multiple: {
-          parallel: false,
-          sequential: true
-        }
-      },
-      ajax: { // Options to pass to `$.ajax`
-        cache: true, // If set to false, it will force the requested url not to be cached by the browser
-        method: 'GET', // Method of the remote request
-        timeout: 31000 // 1 second more than the default value of PHP's `max_execution_time` setting
-      },
-      callbacks: {
-        beforesend: _.noop,
-        complete: _.noop,
-        error: _.noop,
-        success: _.noop,
-        abort: _.noop
-      }
-    }
-  };
-
-  /* REMOTE */
-
-  var Remote = function (_Widgets$Widget15) {
-    _inherits(Remote, _Widgets$Widget15);
-
-    function Remote() {
-      _classCallCheck(this, Remote);
-
-      return _possibleConstructorReturn(this, (Remote.__proto__ || Object.getPrototypeOf(Remote)).apply(this, arguments));
-    }
-
-    _createClass(Remote, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this._requestsNr = 0;
-      }
-    }, {
-      key: '_reset',
-      value: function _reset() {
-
-        this.abort();
-
-        _get(Remote.prototype.__proto__ || Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
-      }
-
-      /* PRIVATE */
-
-    }, {
-      key: '_getAjax',
-      value: function _getAjax(options) {
-
-        return _.extend({}, this.options.ajax, options, {
-          beforeSend: this.__beforesend.bind(this),
-          complete: this.__complete.bind(this),
-          error: this.__error.bind(this),
-          success: this.__success.bind(this)
-        });
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
-
-        if (this.isAborted()) return;
-
-        this._trigger('beforesend', res);
-      }
-    }, {
-      key: '__complete',
-      value: function __complete(res) {
-
-        if (this.isAborted()) return;
-
-        this._trigger('complete', res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        this._trigger('error', res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        this._trigger('success', res);
-      }
-    }, {
-      key: '__abort',
-      value: function __abort() {
-
-        this._trigger('abort');
-      }
-
-      /* API */
-
-    }, {
-      key: 'isRequesting',
-      value: function isRequesting() {
-
-        return !!this.xhr && !_.includes([0, 4], this.xhr.readyState); // 0: UNSENT, 4: DONE
-      }
-    }, {
-      key: 'getRequestsNr',
-      value: function getRequestsNr() {
-
-        return this._requestsNr;
-      }
-    }, {
-      key: 'canRequest',
-      value: function canRequest() {
-
-        if (!this.options.requests.multiple.parallel && this.isRequesting()) return false;
-
-        if (!this.options.requests.multiple.sequential && this._requestsNr) return false;
-
-        return true;
-      }
-    }, {
-      key: 'request',
-      value: function request(options) {
-
-        if (!this.canRequest()) return;
-
-        this._requestsNr++;
-        this._isAborted = false;
-
-        this.ajax = this._getAjax(options);
-        this.xhr = $.ajax(this.ajax);
-      }
-    }, {
-      key: 'isAborted',
-      value: function isAborted() {
-
-        return !!this._isAborted;
-      }
-    }, {
-      key: 'abort',
-      value: function abort() {
-
-        if (!this.xhr || !this.isRequesting()) return;
-
-        this._isAborted = true;
-
-        this.xhr.abort();
-
-        this.__abort();
-      }
-    }]);
-
-    return Remote;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.make(Remote, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
  * Svelto - Widgets - Remote (Trigger)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -8513,8 +10129,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE TRIGGER */
 
-  var RemoteTrigger = function (_Widgets$Widget16) {
-    _inherits(RemoteTrigger, _Widgets$Widget16);
+  var RemoteTrigger = function (_Widgets$Widget18) {
+    _inherits(RemoteTrigger, _Widgets$Widget18);
 
     function RemoteTrigger() {
       _classCallCheck(this, RemoteTrigger);
@@ -8531,8 +10147,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _variables() {
 
         this.$trigger = this.$element;
-
-        /* OPTIONS */
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
 
         this.options.ajax.url = this.$trigger.data(this.options.datas.url) || this.$trigger.attr(this.options.attributes.href) || this.options.ajax.url;
         this.options.ajax.data = this.$trigger.data(this.options.datas.data) || this.options.ajax.data;
@@ -8543,6 +10161,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _events() {
 
         this.___tap();
+      }
+
+      /* OPTIONS */
+
+    }, {
+      key: '_getOptions',
+      value: function _getOptions() {
+
+        return {
+          ajax: this.options.ajax,
+          storage: {
+            enabled: _.get(this.options.widget.config, 'storage.enabled') || _.get(Widgets.RemoteWidget.config, 'storage.enabled') || this.$trigger.is(Widgets.Storable.config.selector) //FIXME: We should merge the configs at factory time instead
+          }
+        };
       }
 
       /* TAP */
@@ -8560,7 +10192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'trigger',
       value: function trigger() {
 
-        new this.options.widget({ ajax: this.options.ajax }).request();
+        new this.options.widget(this._getOptions()).request();
       }
     }]);
 
@@ -8618,8 +10250,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RIPPLE */
 
-  var Ripple = function (_Widgets$Widget17) {
-    _inherits(Ripple, _Widgets$Widget17);
+  var Ripple = function (_Widgets$Widget19) {
+    _inherits(Ripple, _Widgets$Widget19);
 
     function Ripple() {
       _classCallCheck(this, Ripple);
@@ -8658,9 +10290,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__downTap',
       value: function __downTap(event) {
 
-        if (this._lock) return;
+        if (this.isLocked()) return;
 
-        this._lock = true;
+        this.lock();
 
         if (this.$ripple.hasClass(this.options.classes.center)) {
 
@@ -8687,7 +10319,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._defer(function () {
           // So that the `tap` event gets parsed before removing the lock
 
-          this._lock = false;
+          this.unlock();
 
           var _iteratorNormalCompletion17 = true;
           var _didIteratorError17 = false;
@@ -8857,8 +10489,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABLE SORTABLE */
 
-  var TableSortable = function (_Widgets$Widget18) {
-    _inherits(TableSortable, _Widgets$Widget18);
+  var TableSortable = function (_Widgets$Widget20) {
+    _inherits(TableSortable, _Widgets$Widget20);
 
     function TableSortable() {
       _classCallCheck(this, TableSortable);
@@ -9023,9 +10655,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.table.removeChild(this.tbody); // Detach
 
-          for (var _i = 0, _l = this.sortData[index].length; _i < _l; _i++) {
+          for (var _i2 = 0, _l = this.sortData[index].length; _i2 < _l; _i2++) {
 
-            this.tbody.appendChild(this.sortData[index][_i][0]); // Reorder
+            this.tbody.appendChild(this.sortData[index][_i2][0]); // Reorder
           }
 
           this.table.appendChild(this.tbody); // Attach
@@ -9112,8 +10744,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TABLE HELPER */
 
-  var TableHelper = function (_Widgets$Widget19) {
-    _inherits(TableHelper, _Widgets$Widget19);
+  var TableHelper = function (_Widgets$Widget21) {
+    _inherits(TableHelper, _Widgets$Widget21);
 
     function TableHelper() {
       _classCallCheck(this, TableHelper);
@@ -9155,8 +10787,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var rowId = id ? this._getRowId(id) : false;
 
-        for (var _len4 = arguments.length, datas = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-          datas[_key4 - 1] = arguments[_key4];
+        for (var _len6 = arguments.length, datas = Array(_len6 > 1 ? _len6 - 1 : 0), _key7 = 1; _key7 < _len6; _key7++) {
+          datas[_key7 - 1] = arguments[_key7];
         }
 
         if (datas.length) {
@@ -9209,8 +10841,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var $row = $('.' + this._getRowId(id));
 
-        for (var _len5 = arguments.length, datas = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-          datas[_key5 - 1] = arguments[_key5];
+        for (var _len7 = arguments.length, datas = Array(_len7 > 1 ? _len7 - 1 : 0), _key8 = 1; _key8 < _len7; _key8++) {
+          datas[_key8 - 1] = arguments[_key8];
         }
 
         if (datas.length && $row.length === 1) {
@@ -9304,8 +10936,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TARGETER */
 
-  var Targeter = function (_Widgets$Widget20) {
-    _inherits(Targeter, _Widgets$Widget20);
+  var Targeter = function (_Widgets$Widget22) {
+    _inherits(Targeter, _Widgets$Widget22);
 
     function Targeter() {
       _classCallCheck(this, Targeter);
@@ -9325,9 +10957,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest(this.options.widget.config.selector);
 
-        if (!this.$target.length) return false;
+        if (!this.$target.length) {
 
-        this._targetInstance = this.$target[this.options.widget.config.name]('instance');
+          if (this.options.$fallback && this.options.$fallback.length) {
+
+            this.$target = this.options.$fallback;
+          } else {
+
+            return false;
+          }
+        }
+
+        this.target = this.$target[0];
+
+        if (this.options.widget) this._targetInstance = this.$target[this.options.widget.config.name]('instance');
       }
     }, {
       key: '_events',
@@ -9404,7 +11047,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _events() {
 
-        this.___targetRemove();
+        _get(Closer.prototype.__proto__ || Object.getPrototypeOf(Closer.prototype), '_events', this).call(this);
+
         this.___tap();
       }
 
@@ -9448,6 +11092,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderCloser',
+    plugin: true,
+    selector: '.expander-closer',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER CLOSER */
+
+  var ExpanderCloser = function (_Widgets$Closer) {
+    _inherits(ExpanderCloser, _Widgets$Closer);
+
+    function ExpanderCloser() {
+      _classCallCheck(this, ExpanderCloser);
+
+      return _possibleConstructorReturn(this, (ExpanderCloser.__proto__ || Object.getPrototypeOf(ExpanderCloser)).apply(this, arguments));
+    }
+
+    return ExpanderCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.make(ExpanderCloser, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
  * Svelto - Widgets - Infobar - Targeters - Closer
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9474,8 +11162,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* INFOBAR CLOSER */
 
-  var InfobarCloser = function (_Widgets$Closer) {
-    _inherits(InfobarCloser, _Widgets$Closer);
+  var InfobarCloser = function (_Widgets$Closer2) {
+    _inherits(InfobarCloser, _Widgets$Closer2);
 
     function InfobarCloser() {
       _classCallCheck(this, InfobarCloser);
@@ -9489,6 +11177,94 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   Factory.make(InfobarCloser, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalCloser',
+    plugin: true,
+    selector: '.modal-closer',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL CLOSER */
+
+  var ModalCloser = function (_Widgets$Closer3) {
+    _inherits(ModalCloser, _Widgets$Closer3);
+
+    function ModalCloser() {
+      _classCallCheck(this, ModalCloser);
+
+      return _possibleConstructorReturn(this, (ModalCloser.__proto__ || Object.getPrototypeOf(ModalCloser)).apply(this, arguments));
+    }
+
+    return ModalCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.make(ModalCloser, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Closer
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayCloser',
+    plugin: true,
+    selector: '.overlay-closer',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY CLOSER */
+
+  var OverlayCloser = function (_Widgets$Closer4) {
+    _inherits(OverlayCloser, _Widgets$Closer4);
+
+    function OverlayCloser() {
+      _classCallCheck(this, OverlayCloser);
+
+      return _possibleConstructorReturn(this, (OverlayCloser.__proto__ || Object.getPrototypeOf(OverlayCloser)).apply(this, arguments));
+    }
+
+    return OverlayCloser;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.make(OverlayCloser, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
@@ -9525,8 +11301,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* OPENER */
 
-  var Opener = function (_Widgets$Closer2) {
-    _inherits(Opener, _Widgets$Closer2);
+  var Opener = function (_Widgets$Closer5) {
+    _inherits(Opener, _Widgets$Closer5);
 
     function Opener() {
       _classCallCheck(this, Opener);
@@ -9542,19 +11318,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _events() {
 
-        this.___targetRemove();
-        this.___tap();
+        _get(Opener.prototype.__proto__ || Object.getPrototypeOf(Opener.prototype), '_events', this).call(this);
+
         this.___hover();
       }
 
       /* TAP */
 
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        this._on(Pointer.tap, this.__tap);
-      }
     }, {
       key: '__tap',
       value: function __tap(event) {
@@ -9689,6 +11459,232 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer);
 
 /* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderOpener',
+    plugin: true,
+    selector: '.expander-opener',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER OPENER */
+
+  var ExpanderOpener = function (_Widgets$Opener) {
+    _inherits(ExpanderOpener, _Widgets$Opener);
+
+    function ExpanderOpener() {
+      _classCallCheck(this, ExpanderOpener);
+
+      return _possibleConstructorReturn(this, (ExpanderOpener.__proto__ || Object.getPrototypeOf(ExpanderOpener)).apply(this, arguments));
+    }
+
+    return ExpanderOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.make(ExpanderOpener, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalOpener',
+    plugin: true,
+    selector: '.modal-opener',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL OPENER */
+
+  var ModalOpener = function (_Widgets$Opener2) {
+    _inherits(ModalOpener, _Widgets$Opener2);
+
+    function ModalOpener() {
+      _classCallCheck(this, ModalOpener);
+
+      return _possibleConstructorReturn(this, (ModalOpener.__proto__ || Object.getPrototypeOf(ModalOpener)).apply(this, arguments));
+    }
+
+    return ModalOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.make(ModalOpener, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Opener
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayOpener',
+    plugin: true,
+    selector: '.overlay-opener',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY OPENER */
+
+  var OverlayOpener = function (_Widgets$Opener3) {
+    _inherits(OverlayOpener, _Widgets$Opener3);
+
+    function OverlayOpener() {
+      _classCallCheck(this, OverlayOpener);
+
+      return _possibleConstructorReturn(this, (OverlayOpener.__proto__ || Object.getPrototypeOf(OverlayOpener)).apply(this, arguments));
+    }
+
+    return OverlayOpener;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.make(OverlayOpener, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Scroller
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/animations/animations.js
+ * @require core/pointer/pointer.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+//TODO: Test with nested layouts
+//TODO: Make it work with nested scrollable elements
+// It only scrolls properly when the elements are not nested inside scrollable wrappers
+
+(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'scroller',
+    plugin: true,
+    selector: '.scroller',
+    options: {
+      animations: {
+        scroll: Animations.fast
+      },
+      callbacks: {
+        scroll: _.noop
+      }
+    }
+  };
+
+  /* SCROLLER */
+
+  var Scroller = function (_Widgets$Targeter2) {
+    _inherits(Scroller, _Widgets$Targeter2);
+
+    function Scroller() {
+      _classCallCheck(this, Scroller);
+
+      return _possibleConstructorReturn(this, (Scroller.__proto__ || Object.getPrototypeOf(Scroller)).apply(this, arguments));
+    }
+
+    _createClass(Scroller, [{
+      key: '_events',
+
+
+      /* SPECIAL */
+
+      value: function _events() {
+
+        _get(Scroller.prototype.__proto__ || Object.getPrototypeOf(Scroller.prototype), '_events', this).call(this);
+
+        this.___tap();
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._on(Pointer.tap, this.__tap);
+      }
+    }, {
+      key: '__tap',
+      value: function __tap(event) {
+
+        this.scroll();
+      }
+
+      /* API */
+
+    }, {
+      key: 'scroll',
+      value: function scroll() {
+
+        $.scrollTo(this.target, this.options.animations.scroll);
+
+        this._trigger('scroll');
+      }
+    }]);
+
+    return Scroller;
+  }(Widgets.Targeter);
+
+  /* FACTORY */
+
+  Factory.make(Scroller, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
+
+/* =========================================================================
  * Svelto - Widgets - Targeter - Toggler
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9714,8 +11710,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOGGLER */
 
-  var Toggler = function (_Widgets$Opener) {
-    _inherits(Toggler, _Widgets$Opener);
+  var Toggler = function (_Widgets$Opener4) {
+    _inherits(Toggler, _Widgets$Opener4);
 
     function Toggler() {
       _classCallCheck(this, Toggler);
@@ -9753,6 +11749,187 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
+ * Svelto - Widgets - Expander - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../expander.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'expanderToggler',
+    plugin: true,
+    selector: '.expander-toggler',
+    options: {
+      widget: Widgets.Expander
+    }
+  };
+
+  /* EXPANDER TOGGLER */
+
+  var ExpanderToggler = function (_Widgets$Toggler) {
+    _inherits(ExpanderToggler, _Widgets$Toggler);
+
+    function ExpanderToggler() {
+      _classCallCheck(this, ExpanderToggler);
+
+      return _possibleConstructorReturn(this, (ExpanderToggler.__proto__ || Object.getPrototypeOf(ExpanderToggler)).apply(this, arguments));
+    }
+
+    return ExpanderToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.make(ExpanderToggler, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Flippable - Targeters - Flipper
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../flippable.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'flippableFlipper',
+    plugin: true,
+    selector: '.flippable-flipper',
+    options: {
+      widget: Widgets.Flippable,
+      methods: {
+        toggle: 'flip',
+        open: 'front',
+        close: 'back'
+      }
+    }
+  };
+
+  /* FLIPPABLE FLIPPER */
+
+  var FlippableFlipper = function (_Widgets$Toggler2) {
+    _inherits(FlippableFlipper, _Widgets$Toggler2);
+
+    function FlippableFlipper() {
+      _classCallCheck(this, FlippableFlipper);
+
+      return _possibleConstructorReturn(this, (FlippableFlipper.__proto__ || Object.getPrototypeOf(FlippableFlipper)).apply(this, arguments));
+    }
+
+    return FlippableFlipper;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.make(FlippableFlipper, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Modal - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../modal.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'modalToggler',
+    plugin: true,
+    selector: '.modal-toggler',
+    options: {
+      widget: Widgets.Modal
+    }
+  };
+
+  /* MODAL TOGGLER */
+
+  var ModalToggler = function (_Widgets$Toggler3) {
+    _inherits(ModalToggler, _Widgets$Toggler3);
+
+    function ModalToggler() {
+      _classCallCheck(this, ModalToggler);
+
+      return _possibleConstructorReturn(this, (ModalToggler.__proto__ || Object.getPrototypeOf(ModalToggler)).apply(this, arguments));
+    }
+
+    return ModalToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.make(ModalToggler, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Overlay - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../overlay.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'overlayToggler',
+    plugin: true,
+    selector: '.overlay-toggler',
+    options: {
+      widget: Widgets.Overlay
+    }
+  };
+
+  /* OVERLAY TOGGLER */
+
+  var OverlayToggler = function (_Widgets$Toggler4) {
+    _inherits(OverlayToggler, _Widgets$Toggler4);
+
+    function OverlayToggler() {
+      _classCallCheck(this, OverlayToggler);
+
+      return _possibleConstructorReturn(this, (OverlayToggler.__proto__ || Object.getPrototypeOf(OverlayToggler)).apply(this, arguments));
+    }
+
+    return OverlayToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.make(OverlayToggler, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
  * Svelto - Widgets - Textarea - Autogrow
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9782,8 +11959,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* AUTOGROW TEXTAREA */
 
-  var AutogrowTextarea = function (_Widgets$Widget21) {
-    _inherits(AutogrowTextarea, _Widgets$Widget21);
+  var AutogrowTextarea = function (_Widgets$Widget23) {
+    _inherits(AutogrowTextarea, _Widgets$Widget23);
 
     function AutogrowTextarea() {
       _classCallCheck(this, AutogrowTextarea);
@@ -9903,8 +12080,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TEXTAREA SENDER */
 
-  var TextareaSender = function (_Widgets$Widget22) {
-    _inherits(TextareaSender, _Widgets$Widget22);
+  var TextareaSender = function (_Widgets$Widget24) {
+    _inherits(TextareaSender, _Widgets$Widget24);
 
     function TextareaSender() {
       _classCallCheck(this, TextareaSender);
@@ -9921,6 +12098,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _variables() {
 
         this.$textarea = this.$element;
+        this.textarea = this.element;
+
         this.$form = this.$textarea.closest(this.options.selectors.form);
       }
     }, {
@@ -9936,7 +12115,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'send',
       value: function send() {
 
-        if (!$(document.activeElement).is(this.$textarea)) return;
+        if (!$.isFocused(this.textarea)) return;
 
         this.$form.submit();
       }
@@ -9983,8 +12162,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TIME AGO */
 
-  var TimeAgo = function (_Widgets$Widget23) {
-    _inherits(TimeAgo, _Widgets$Widget23);
+  var TimeAgo = function (_Widgets$Widget25) {
+    _inherits(TimeAgo, _Widgets$Widget25);
 
     function TimeAgo() {
       _classCallCheck(this, TimeAgo);
@@ -10166,8 +12345,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE */
 
-  var Zoomable = function (_Widgets$Widget24) {
-    _inherits(Zoomable, _Widgets$Widget24);
+  var Zoomable = function (_Widgets$Widget26) {
+    _inherits(Zoomable, _Widgets$Widget26);
 
     function Zoomable() {
       _classCallCheck(this, Zoomable);
@@ -10267,7 +12446,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__tapOutside',
       value: function __tapOutside(event) {
 
-        if (this._lock || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$zoomable).length) return;
+        if (this.isLocked() || event.isDefaultPrevented() || !$.isAttached(event.target) || $(event.target).closest(this.$zoomable).length) return;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -10462,7 +12641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'preload',
       value: function preload(callback) {
-        var _this36 = this;
+        var _this53 = this;
 
         if (this._isPreloading || this._isPreloaded) return;
 
@@ -10474,7 +12653,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var xhr = new window.XMLHttpRequest();
             xhr.addEventListener('progress', function (event) {
               if (!event.lengthComputable) return;
-              _this36._trigger('loading', {
+              _this53._trigger('loading', {
                 loaded: event.loaded,
                 total: event.total,
                 percentage: event.loaded / event.total * 100
@@ -10483,17 +12662,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return xhr;
           },
           success: function success() {
-            _this36._isPreloaded = true;
-            if (_this36.options.original.substitute) {
-              _this36.$zoomable.attr('src', _this36.options.original.src);
+            _this53._isPreloaded = true;
+            if (_this53.options.original.substitute) {
+              _this53.$zoomable.attr('src', _this53.options.original.src);
             }
             if (callback) callback();
           },
           error: function error() {
-            console.error('Zoomable: failed to preload "' + _this36.options.original.src + '"');
+            console.error('Zoomable: failed to preload "' + _this53.options.original.src + '"');
           },
           complete: function complete() {
-            _this36._isPreloading = false;
+            _this53._isPreloading = false;
           }
         });
       }
@@ -10518,15 +12697,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'zoom',
       value: function zoom(event) {
-        var _this37 = this;
+        var _this54 = this;
 
-        if (this._lock || this._isZoomed) return;
+        if (this.isLocked() || this._isZoomed) return;
 
         if (this.options.original.src && this.options.preloading.wait && !this._isPreloaded) return this.preload(function () {
-          return _this37.zoom(event);
+          return _this54.zoom(event);
         });
 
-        this._lock = true;
+        this.lock();
+
         this._isZoomed = true;
 
         if (this.options.magnification.enabled) this.$layout.disableScroll();
@@ -10552,7 +12732,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (this.options.original.src) this.$zoomable.attr('src', this.options.original.src);
 
-              this._lock = false;
+              this.unlock();
 
               this._trigger('zoom');
             }, this.options.animations.zoom);
@@ -10573,10 +12753,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'unzoom',
       value: function unzoom() {
 
-        if (this._lock || !this._isZoomed) return;
+        if (this.isLocked() || !this._isZoomed) return;
 
-        this._lock = true;
         this._isZoomed = false;
+
+        this.lock();
 
         this._frame(function () {
 
@@ -10599,7 +12780,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (this.options.magnification.enabled) this.$layout.enableScroll();
 
-              this._lock = false;
+              this.unlock();
 
               this._trigger('unzoom');
             }, this.options.animations.unzoom);
@@ -10647,8 +12828,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE CLOSER */
 
-  var ZoomableCloser = function (_Widgets$Closer3) {
-    _inherits(ZoomableCloser, _Widgets$Closer3);
+  var ZoomableCloser = function (_Widgets$Closer6) {
+    _inherits(ZoomableCloser, _Widgets$Closer6);
 
     function ZoomableCloser() {
       _classCallCheck(this, ZoomableCloser);
@@ -10691,8 +12872,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE OPENER */
 
-  var ZoomableOpener = function (_Widgets$Opener2) {
-    _inherits(ZoomableOpener, _Widgets$Opener2);
+  var ZoomableOpener = function (_Widgets$Opener5) {
+    _inherits(ZoomableOpener, _Widgets$Opener5);
 
     function ZoomableOpener() {
       _classCallCheck(this, ZoomableOpener);
@@ -10735,8 +12916,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ZOOMABLE TOGGLER */
 
-  var ZoomableToggler = function (_Widgets$Toggler) {
-    _inherits(ZoomableToggler, _Widgets$Toggler);
+  var ZoomableToggler = function (_Widgets$Toggler5) {
+    _inherits(ZoomableToggler, _Widgets$Toggler5);
 
     function ZoomableToggler() {
       _classCallCheck(this, ZoomableToggler);
@@ -10820,1539 +13001,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return this.toggleClass('obscured', force);
   };
 })(Svelto.$, Svelto._, Svelto);
-
-/* =========================================================================
- * Svelto - Lib - Autofocus
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
-
-(function ($, _, Svelto) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  var $html = $('html');
-
-  /* AUTOFOCUS */
-
-  var Autofocus = {
-
-    /* VARIABLES */
-
-    history: [], // List of autofocused elements
-    historySize: 3, // How many elements to keep in the history
-
-    /* INIT */
-
-    init: function init() {
-
-      Autofocus.focus($html);
-    },
-
-
-    /* API */
-
-    set: function set(ele) {
-
-      Autofocus.history.unshift(ele);
-      Autofocus.history = _.uniq(Autofocus.history).slice(0, Autofocus.historySize);
-
-      ele.focus();
-
-      /* CARET TO THE END */
-
-      if (ele.setSelectionRange) {
-        var _ret2 = function () {
-
-          var length = ele.value.length * 2; // Double the length because Opera is inconsistent about whether a carriage return is one character or two
-
-          if (!length) return {
-              v: void 0
-            };
-
-          setTimeout(function () {
-            return ele.setSelectionRange(length, length);
-          }, 1); // Timeout seems to be required for Blink
-
-          ele.scrollTop = 1000000; // In case it's a tall textarea
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
-      }
-    },
-    find: function find() {
-      var $parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $html;
-      var focused = arguments[1];
-
-
-      var $focusable = $parent.find('[autofocus], .autofocus').filter(':visible');
-
-      if (_.isBoolean(focused)) {
-
-        $focusable = focused ? $focusable.filter(':focus') : $focusable.filter(':not(:focus)');
-      }
-
-      return $focusable.length ? $focusable[0] : null;
-    },
-    focus: function focus($parent) {
-
-      var focusable = Autofocus.find($parent);
-
-      if (!focusable || focusable === Autofocus.history[0]) return;
-
-      Autofocus.set(focusable);
-    },
-    blur: function blur($parent) {
-
-      if (!Autofocus.history[0] || !$.contains($parent[0], Autofocus.history[0])) return;
-
-      var previous = Autofocus.history.find(function (ele) {
-        return $(ele).is(':visible');
-      }) || Autofocus.find($html);
-
-      if (previous) Autofocus.set(previous);
-    }
-  };
-
-  /* READY */
-
-  $(Autofocus.init);
-
-  /* EXPORT */
-
-  Svelto.Autofocus = Autofocus;
-})(Svelto.$, Svelto._, Svelto);
-
-/* =========================================================================
- * Svelto - Widgets - Autofocusable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * @require lib/autofocus/autofocus.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Autofocus) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'autofocusable'
-  };
-
-  /* AUTOFOCUSABLE */
-
-  var Autofocusable = function (_Widgets$Widget25) {
-    _inherits(Autofocusable, _Widgets$Widget25);
-
-    function Autofocusable() {
-      _classCallCheck(this, Autofocusable);
-
-      return _possibleConstructorReturn(this, (Autofocusable.__proto__ || Object.getPrototypeOf(Autofocusable)).apply(this, arguments));
-    }
-
-    _createClass(Autofocusable, [{
-      key: 'autofocus',
-
-
-      /* API */
-
-      value: function autofocus() {
-        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
-
-
-        Autofocus.focus($ele);
-      }
-    }, {
-      key: 'autoblur',
-      value: function autoblur() {
-        var $ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
-
-
-        Autofocus.blur($ele);
-      }
-    }]);
-
-    return Autofocusable;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.make(Autofocusable, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus);
-
-/* =========================================================================
- * Svelto - Widgets - Expander
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expander',
-    plugin: true,
-    selector: '.expander',
-    options: {
-      classes: {
-        open: 'open'
-      },
-      selectors: {
-        content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
-      },
-      animations: {
-        open: Animations.normal,
-        close: Animations.normal
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* EXPANDER */
-
-  var Expander = function (_Widgets$Autofocusabl) {
-    _inherits(Expander, _Widgets$Autofocusabl);
-
-    function Expander() {
-      _classCallCheck(this, Expander);
-
-      return _possibleConstructorReturn(this, (Expander.__proto__ || Object.getPrototypeOf(Expander)).apply(this, arguments));
-    }
-
-    _createClass(Expander, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$expander = this.$element;
-        this.$content = this.$expander.find(this.options.selectors.content);
-
-        this._isOpen = this.$expander.hasClass(this.options.classes.open);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this._isOpen = !!force;
-
-          this.$expander.toggleClass(this.options.classes.open, this._isOpen);
-
-          this._isOpen ? this.autofocus() : this.autoblur();
-
-          this._trigger(this._isOpen ? 'open' : 'close');
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        this.toggle(true);
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        this.toggle(false);
-      }
-    }]);
-
-    return Expander;
-  }(Widgets.Autofocusable);
-
-  /* FACTORY */
-
-  Factory.make(Expander, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Accordion
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/expander/expander.js
- * ========================================================================= */
-
-//TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'accordion',
-    plugin: true,
-    selector: '.accordion',
-    options: {
-      multiple: false, // Wheter to allow multiple expanders open or not
-      selectors: {
-        expander: Widgets.Expander.config.selector
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* ACCORDION */
-
-  var Accordion = function (_Widgets$Widget26) {
-    _inherits(Accordion, _Widgets$Widget26);
-
-    function Accordion() {
-      _classCallCheck(this, Accordion);
-
-      return _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).apply(this, arguments));
-    }
-
-    _createClass(Accordion, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$accordion = this.$element;
-        this.$expanders = this.$accordion.children(this.options.selectors.expander);
-
-        this.instances = this.$expanders.get().map(function (expander) {
-          return $(expander).expander('instance');
-        });
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___open();
-        this.___close();
-      }
-
-      /* EXPANDER OPEN */
-
-    }, {
-      key: '___open',
-      value: function ___open() {
-
-        this._on(true, this.$expanders, 'expander:open', this.__open);
-      }
-    }, {
-      key: '__open',
-      value: function __open(event) {
-
-        this._trigger('open', { index: this.$expanders.index(event.target) });
-
-        this.__multiple(event.target);
-      }
-
-      /* EXPANDER CLOSE */
-
-    }, {
-      key: '___close',
-      value: function ___close() {
-
-        this._on(true, this.$expanders, 'expander:close', this.__close);
-      }
-    }, {
-      key: '__close',
-      value: function __close(event) {
-
-        this._trigger('close', { index: this.$expanders.index(event.target) });
-      }
-
-      /* MULTIPLE */
-
-    }, {
-      key: '__multiple',
-      value: function __multiple(expander) {
-
-        if (this.options.multiple) return;
-
-        this.instances.forEach(function (instance) {
-          return instance.element !== expander ? instance.close() : false;
-        });
-      }
-
-      /* API OVERRIDES */
-
-    }, {
-      key: 'enable',
-      value: function enable() {
-
-        _get(Accordion.prototype.__proto__ || Object.getPrototypeOf(Accordion.prototype), 'enable', this).call(this);
-
-        _.invokeMap(this.instances, 'enable');
-      }
-    }, {
-      key: 'disable',
-      value: function disable() {
-
-        _.invokeMap(this.instances, 'disable');
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen(index) {
-
-        return this.instances[index].isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle(index, force) {
-
-        this.instances[index].toggle(force);
-      }
-    }, {
-      key: 'open',
-      value: function open(index) {
-
-        this.toggle(index, true);
-      }
-    }, {
-      key: 'close',
-      value: function close(index) {
-
-        this.toggle(index, false);
-      }
-    }]);
-
-    return Accordion;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.make(Accordion, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderCloser',
-    plugin: true,
-    selector: '.expander-closer',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER CLOSER */
-
-  var ExpanderCloser = function (_Widgets$Closer4) {
-    _inherits(ExpanderCloser, _Widgets$Closer4);
-
-    function ExpanderCloser() {
-      _classCallCheck(this, ExpanderCloser);
-
-      return _possibleConstructorReturn(this, (ExpanderCloser.__proto__ || Object.getPrototypeOf(ExpanderCloser)).apply(this, arguments));
-    }
-
-    return ExpanderCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.make(ExpanderCloser, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderOpener',
-    plugin: true,
-    selector: '.expander-opener',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER OPENER */
-
-  var ExpanderOpener = function (_Widgets$Opener3) {
-    _inherits(ExpanderOpener, _Widgets$Opener3);
-
-    function ExpanderOpener() {
-      _classCallCheck(this, ExpanderOpener);
-
-      return _possibleConstructorReturn(this, (ExpanderOpener.__proto__ || Object.getPrototypeOf(ExpanderOpener)).apply(this, arguments));
-    }
-
-    return ExpanderOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.make(ExpanderOpener, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Expander - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../expander.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'expanderToggler',
-    plugin: true,
-    selector: '.expander-toggler',
-    options: {
-      widget: Widgets.Expander
-    }
-  };
-
-  /* EXPANDER TOGGLER */
-
-  var ExpanderToggler = function (_Widgets$Toggler2) {
-    _inherits(ExpanderToggler, _Widgets$Toggler2);
-
-    function ExpanderToggler() {
-      _classCallCheck(this, ExpanderToggler);
-
-      return _possibleConstructorReturn(this, (ExpanderToggler.__proto__ || Object.getPrototypeOf(ExpanderToggler)).apply(this, arguments));
-    }
-
-    return ExpanderToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.make(ExpanderToggler, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Flippable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'flippable',
-    plugin: true,
-    selector: '.flippable',
-    options: {
-      classes: {
-        flip: 'flipped'
-      },
-      selectors: {
-        front: '.flippable-front',
-        back: '.flippable-back'
-      },
-      callbacks: {
-        front: _.noop,
-        back: _.noop
-      }
-    }
-  };
-
-  /* FLIPPABLE */
-
-  var Flippable = function (_Widgets$Autofocusabl2) {
-    _inherits(Flippable, _Widgets$Autofocusabl2);
-
-    function Flippable() {
-      _classCallCheck(this, Flippable);
-
-      return _possibleConstructorReturn(this, (Flippable.__proto__ || Object.getPrototypeOf(Flippable)).apply(this, arguments));
-    }
-
-    _createClass(Flippable, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$flippable = this.$element;
-        this.$front = this.$flippable.find(this.options.selectors.front);
-        this.$back = this.$flippable.find(this.options.selectors.back);
-
-        this._isFlipped = this.$flippable.hasClass(this.options.classes.flip);
-      }
-
-      /* API */
-
-    }, {
-      key: 'isFlipped',
-      value: function isFlipped() {
-
-        return this._isFlipped;
-      }
-    }, {
-      key: 'flip',
-      value: function flip() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isFlipped;
-
-
-        if (!!force !== this._isFlipped) {
-
-          this._isFlipped = force;
-
-          this.$flippable.toggleClass(this.options.classes.flip, this._isFlipped);
-
-          this.autoblur(this._isFlipped ? this.$front : this.$back);
-          this.autofocus(this._isFlipped ? this.$back : this.$front);
-
-          this._trigger(this._isFlipped ? 'back' : 'front');
-        }
-      }
-    }, {
-      key: 'front',
-      value: function front() {
-
-        this.flip(false);
-      }
-    }, {
-      key: 'back',
-      value: function back() {
-
-        this.flip(true);
-      }
-    }]);
-
-    return Flippable;
-  }(Widgets.Autofocusable);
-
-  /* FACTORY */
-
-  Factory.make(Flippable, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Flippable - Targeters - Flipper
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../flippable.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'flippableFlipper',
-    plugin: true,
-    selector: '.flippable-flipper',
-    options: {
-      widget: Widgets.Flippable,
-      methods: {
-        toggle: 'flip',
-        open: 'front',
-        close: 'back'
-      }
-    }
-  };
-
-  /* FLIPPABLE FLIPPER */
-
-  var FlippableFlipper = function (_Widgets$Toggler3) {
-    _inherits(FlippableFlipper, _Widgets$Toggler3);
-
-    function FlippableFlipper() {
-      _classCallCheck(this, FlippableFlipper);
-
-      return _possibleConstructorReturn(this, (FlippableFlipper.__proto__ || Object.getPrototypeOf(FlippableFlipper)).apply(this, arguments));
-    }
-
-    return FlippableFlipper;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.make(FlippableFlipper, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
-
-//FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
-
-(function ($, _, Svelto, Widgets, Factory, Pointer, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modal',
-    plugin: true,
-    selector: '.modal',
-    options: {
-      scroll: {
-        disable: true // Disable scroll when the modal is open
-      },
-      classes: {
-        show: 'show',
-        open: 'open',
-        backdrop: {
-          show: 'modal-backdrop obscured-show obscured',
-          open: 'obscured-open'
-        }
-      },
-      animations: {
-        open: Animations.normal,
-        close: Animations.normal
-      },
-      keystrokes: {
-        'esc': 'close'
-      },
-      callbacks: {
-        beforeopen: _.noop,
-        open: _.noop,
-        beforeclose: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* MODAL */
-
-  var Modal = function (_Widgets$Autofocusabl3) {
-    _inherits(Modal, _Widgets$Autofocusabl3);
-
-    function Modal() {
-      _classCallCheck(this, Modal);
-
-      return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
-    }
-
-    _createClass(Modal, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$modal = this.$element;
-        this.modal = this.element;
-
-        this.$backdrop = this.$html;
-
-        this._isOpen = this.$modal.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-          this.___tap();
-          this.___route();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
-      }
-
-      /* TAP */
-
-    }, {
-      key: '___tap',
-      value: function ___tap() {
-
-        this._on(true, this.$html, Pointer.tap, this.__tap);
-      }
-    }, {
-      key: '__tap',
-      value: function __tap(event) {
-
-        if (this._lock || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$modal).length) return;
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        this.close();
-      }
-
-      /* ROUTE */
-
-    }, {
-      key: '__route',
-      value: function __route() {
-
-        if (this._isOpen && !this.$modal.isAttached()) {
-
-          this.close();
-        }
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._trigger('beforeopen');
-
-        if (this.options.scroll.disable) this.$layout.disableScroll();
-
-        this._frame(function () {
-
-          this.$modal.addClass(this.options.classes.show);
-          this.$backdrop.addClass(this.options.classes.backdrop.show);
-
-          this._frame(function () {
-
-            this.$modal.addClass(this.options.classes.open);
-            this.$backdrop.addClass(this.options.classes.backdrop.open);
-
-            this.autofocus();
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        this.___keydown();
-        this.___tap();
-        this.___route();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this.lock || !this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = false;
-
-        this._trigger('beforeclose');
-
-        this._frame(function () {
-
-          this.$modal.removeClass(this.options.classes.open);
-          this.$backdrop.removeClass(this.options.classes.backdrop.open);
-
-          this._delay(function () {
-
-            this.$modal.removeClass(this.options.classes.show);
-            this.$backdrop.removeClass(this.options.classes.backdrop.show);
-
-            this.autoblur();
-
-            if (this.options.scroll.disable) this.$layout.enableScroll();
-
-            this._lock = false;
-
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
-
-        this._reset();
-      }
-    }]);
-
-    return Modal;
-  }(Widgets.Autofocusable);
-
-  /* FACTORY */
-
-  Factory.make(Modal, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalCloser',
-    plugin: true,
-    selector: '.modal-closer',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL CLOSER */
-
-  var ModalCloser = function (_Widgets$Closer5) {
-    _inherits(ModalCloser, _Widgets$Closer5);
-
-    function ModalCloser() {
-      _classCallCheck(this, ModalCloser);
-
-      return _possibleConstructorReturn(this, (ModalCloser.__proto__ || Object.getPrototypeOf(ModalCloser)).apply(this, arguments));
-    }
-
-    return ModalCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.make(ModalCloser, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalOpener',
-    plugin: true,
-    selector: '.modal-opener',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL OPENER */
-
-  var ModalOpener = function (_Widgets$Opener4) {
-    _inherits(ModalOpener, _Widgets$Opener4);
-
-    function ModalOpener() {
-      _classCallCheck(this, ModalOpener);
-
-      return _possibleConstructorReturn(this, (ModalOpener.__proto__ || Object.getPrototypeOf(ModalOpener)).apply(this, arguments));
-    }
-
-    return ModalOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.make(ModalOpener, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'modalToggler',
-    plugin: true,
-    selector: '.modal-toggler',
-    options: {
-      widget: Widgets.Modal
-    }
-  };
-
-  /* MODAL TOGGLER */
-
-  var ModalToggler = function (_Widgets$Toggler4) {
-    _inherits(ModalToggler, _Widgets$Toggler4);
-
-    function ModalToggler() {
-      _classCallCheck(this, ModalToggler);
-
-      return _possibleConstructorReturn(this, (ModalToggler.__proto__ || Object.getPrototypeOf(ModalToggler)).apply(this, arguments));
-    }
-
-    return ModalToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.make(ModalToggler, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Animations) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlay',
-    plugin: true,
-    selector: '.overlay',
-    options: {
-      classes: {
-        show: 'show',
-        open: 'open',
-        parent: {
-          show: 'overlay-parent-show',
-          open: 'overlay-parent-open'
-        }
-      },
-      animations: {
-        open: Animations.fast,
-        close: Animations.fast
-      },
-      keystrokes: {
-        'esc': 'close'
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* OVERLAY */
-
-  var Overlay = function (_Widgets$Autofocusabl4) {
-    _inherits(Overlay, _Widgets$Autofocusabl4);
-
-    function Overlay() {
-      _classCallCheck(this, Overlay);
-
-      return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
-    }
-
-    _createClass(Overlay, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$overlay = this.$element;
-
-        this._isOpen = this.$overlay.hasClass(this.options.classes.open);
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        if (this._isOpen) {
-
-          this.___keydown();
-        }
-      }
-    }, {
-      key: '_destroy',
-      value: function _destroy() {
-
-        this.close();
-      }
-
-      /* PARENT */
-
-    }, {
-      key: '_getParent',
-      value: function _getParent() {
-
-        if (!this.$parent) {
-
-          this.$parent = this.$overlay.parent();
-        }
-
-        return this.$parent;
-      }
-
-      /* KEYDOWN */
-
-    }, {
-      key: '___keydown',
-      value: function ___keydown() {
-
-        this._onHover(true, [this.$document, 'keydown', this.__keydown]); //FIXME: Using _onHover in an undocumented way, the first value was supposed to be $element
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this._isOpen;
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._isOpen;
-
-
-        if (!!force !== this._isOpen) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = true;
-
-        this._frame(function () {
-
-          this.$overlay.addClass(this.options.classes.show);
-          this._getParent().addClass(this.options.classes.parent.show);
-
-          this._frame(function () {
-
-            this.$overlay.addClass(this.options.classes.open);
-            this._getParent().addClass(this.options.classes.parent.open);
-
-            this.autofocus();
-
-            this._lock = false;
-
-            this._trigger('open');
-          });
-        });
-
-        this.___keydown();
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this._lock || !this._isOpen) return;
-
-        this._lock = true;
-        this._isOpen = false;
-
-        this._frame(function () {
-
-          this.$overlay.removeClass(this.options.classes.open);
-          this._getParent().removeClass(this.options.classes.parent.open);
-
-          this._delay(function () {
-
-            this.$overlay.removeClass(this.options.classes.show);
-            this._getParent().removeClass(this.options.classes.parent.show);
-
-            this.autoblur();
-
-            this._lock = false;
-
-            this._trigger('close');
-          }, this.options.animations.close);
-        });
-
-        this._reset();
-      }
-    }]);
-
-    return Overlay;
-  }(Widgets.Autofocusable);
-
-  /* FACTORY */
-
-  Factory.make(Overlay, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayCloser',
-    plugin: true,
-    selector: '.overlay-closer',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY CLOSER */
-
-  var OverlayCloser = function (_Widgets$Closer6) {
-    _inherits(OverlayCloser, _Widgets$Closer6);
-
-    function OverlayCloser() {
-      _classCallCheck(this, OverlayCloser);
-
-      return _possibleConstructorReturn(this, (OverlayCloser.__proto__ || Object.getPrototypeOf(OverlayCloser)).apply(this, arguments));
-    }
-
-    return OverlayCloser;
-  }(Widgets.Closer);
-
-  /* FACTORY */
-
-  Factory.make(OverlayCloser, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayOpener',
-    plugin: true,
-    selector: '.overlay-opener',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY OPENER */
-
-  var OverlayOpener = function (_Widgets$Opener5) {
-    _inherits(OverlayOpener, _Widgets$Opener5);
-
-    function OverlayOpener() {
-      _classCallCheck(this, OverlayOpener);
-
-      return _possibleConstructorReturn(this, (OverlayOpener.__proto__ || Object.getPrototypeOf(OverlayOpener)).apply(this, arguments));
-    }
-
-    return OverlayOpener;
-  }(Widgets.Opener);
-
-  /* FACTORY */
-
-  Factory.make(OverlayOpener, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'overlayToggler',
-    plugin: true,
-    selector: '.overlay-toggler',
-    options: {
-      widget: Widgets.Overlay
-    }
-  };
-
-  /* OVERLAY TOGGLER */
-
-  var OverlayToggler = function (_Widgets$Toggler5) {
-    _inherits(OverlayToggler, _Widgets$Toggler5);
-
-    function OverlayToggler() {
-      _classCallCheck(this, OverlayToggler);
-
-      return _possibleConstructorReturn(this, (OverlayToggler.__proto__ || Object.getPrototypeOf(OverlayToggler)).apply(this, arguments));
-    }
-
-    return OverlayToggler;
-  }(Widgets.Toggler);
-
-  /* FACTORY */
-
-  Factory.make(OverlayToggler, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
-
-/* =========================================================================
- * Svelto - Widgets - Spinner - Overlay
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/colors/colors.js
- * @require widgets/overlay/overlay.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Colors) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'spinnerOverlay',
-    plugin: true,
-    templates: {
-      overlay: '<div class="overlay spinner-overlay <%= o.dimmer ? "dimmer" : "" %>">' + '<% if ( o.labeled ) { %>' + '<div class="spinner-label <%= o.colors.labeled %>">' + '<% } %>' + '<svg class="spinner <%= ( o.multicolor ? "multicolor" : ( o.labeled ? "" : o.unlabeled ) ) %>">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '<% if ( o.labeled ) { %>' + '</div>' + '<% } %>' + '</div>'
-    },
-    options: {
-      labeled: true,
-      dimmer: true,
-      multicolor: false,
-      colors: {
-        labeled: Colors.white,
-        unlabeled: Colors.secondary
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    }
-  };
-
-  /* SPINNER OVERLAY */
-
-  var SpinnerOverlay = function (_Widgets$Widget27) {
-    _inherits(SpinnerOverlay, _Widgets$Widget27);
-
-    function SpinnerOverlay() {
-      _classCallCheck(this, SpinnerOverlay);
-
-      return _possibleConstructorReturn(this, (SpinnerOverlay.__proto__ || Object.getPrototypeOf(SpinnerOverlay)).apply(this, arguments));
-    }
-
-    _createClass(SpinnerOverlay, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$overlayed = this.$element;
-        this.$overlay = $(this._template('overlay', this.options));
-
-        this.instance = this.$overlay.overlay('instance');
-      }
-
-      /* API */
-
-    }, {
-      key: 'isOpen',
-      value: function isOpen() {
-
-        return this.instance.isOpen();
-      }
-    }, {
-      key: 'toggle',
-      value: function toggle() {
-        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.isOpen();
-
-
-        if (!!force !== this.isOpen()) {
-
-          this[force ? 'open' : 'close']();
-        }
-      }
-    }, {
-      key: 'open',
-      value: function open() {
-
-        if (this._lock || this.isOpen()) return;
-
-        this.$overlay.prependTo(this.$overlayed);
-
-        this.instance.open();
-
-        this._trigger('open');
-      }
-    }, {
-      key: 'close',
-      value: function close() {
-
-        if (this._lock || !this.isOpen()) return;
-
-        this._lock = true;
-
-        this.instance.close();
-
-        this._delay(function () {
-
-          this.$overlay.detach();
-
-          this._lock = false;
-
-          this._trigger('close');
-        }, Widgets.Overlay.config.options.animations.close);
-      }
-    }]);
-
-    return SpinnerOverlay;
-  }(Widgets.Widget);
-
-  /* FACTORY */
-
-  Factory.make(SpinnerOverlay, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors);
 
 /* =========================================================================
  * Svelto - Lib - Color
@@ -12792,7 +13440,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: 'hex', // One of the formats implemented in the exporters
         data: undefined // Passed to the called the exporter
       },
-      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Whether it will update the input also on `Draggable.move` or just on `Draggable.end`
       selectors: {
         sb: {
           wrp: '.colorpicker-sb',
@@ -12812,8 +13460,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* COLORPICKER */
 
-  var Colorpicker = function (_Widgets$Widget28) {
-    _inherits(Colorpicker, _Widgets$Widget28);
+  var Colorpicker = function (_Widgets$Widget27) {
+    _inherits(Colorpicker, _Widgets$Widget27);
 
     function Colorpicker() {
       _classCallCheck(this, Colorpicker);
@@ -13253,7 +13901,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     selector: '.panel',
     options: {
       direction: 'left',
-      type: 'default', // `default`, `slim` (officially supported) or any other implemented type
+      type: 'default', // `default`, `slim`, `fullscreen` (officially supported) or any other implemented type
       pin: false, // If is a valid key of `Breakpoints` it will get auto pinned/unpinned when we are above or below that breakpoint
       flick: {
         open: false,
@@ -13278,6 +13926,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       },
       datas: {
+        direction: 'direction',
         type: 'type'
       },
       animations: {
@@ -13377,7 +14026,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__tap',
       value: function __tap(event) {
 
-        if (this._lock || this._isPinned || event.isDefaultPrevented() || !$(event.target).isAttached() || $(event.target).closest(this.$panel).length) return;
+        if (this.isLocked() || this._isPinned || event.isDefaultPrevented() || !$.isAttached(event.target) || $(event.target).closest(this.$panel).length) return;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -13484,7 +14133,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__route',
       value: function __route() {
 
-        if (this._isOpen && !this.$panel.isAttached()) {
+        if (this._isOpen && !$.isAttached(this.panel)) {
 
           this.close();
         }
@@ -13534,9 +14183,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'open',
       value: function open() {
 
-        if (this._lock || this._isOpen) return;
+        if (this.isLocked() || this._isOpen) return;
 
-        this._lock = true;
+        this.lock();
+
         this._isOpen = true;
 
         this._trigger('beforeopen');
@@ -13565,7 +14215,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.autofocus();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('open');
           });
@@ -13583,11 +14233,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'close',
       value: function close() {
 
-        if (this._lock || !this._isOpen) return;
+        if (this.isLocked() || !this._isOpen) return;
 
         this.unpin();
 
-        this._lock = true;
+        this.lock();
+
         this._isOpen = false;
 
         this._trigger('beforeclose');
@@ -13607,7 +14258,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (this.options.scroll.disable) this.$layout.enableScroll();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('close');
           }, this.options.animations.close);
@@ -14022,7 +14673,214 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Directions);
 
 /* =========================================================================
- * Svelto - Lib - Embedded CSS
+ * Svelto - Lib - Emoji - Data
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./raw/raw.js
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, EmojiDataRaw) {
+
+  'use strict';
+
+  /* EMOJI DATA */
+
+  var EmojiData = {
+
+    /* VARIABLES */
+
+    _raw: EmojiDataRaw,
+    _rawUrl: '/json/emoji.json',
+    _data: undefined,
+
+    /* UTILITIES */
+
+    _parse: function _parse(data) {
+
+      // data = JSON.parse ( JSON.stringify ( data ) );
+
+      data.alts = {};
+      // data.chars = [];
+      data.emojis = {};
+      data.emoticons = {};
+
+      var _iteratorNormalCompletion19 = true;
+      var _didIteratorError19 = false;
+      var _iteratorError19 = undefined;
+
+      try {
+        for (var _iterator19 = data.categories[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+          var category = _step19.value;
+          var _iteratorNormalCompletion20 = true;
+          var _didIteratorError20 = false;
+          var _iteratorError20 = undefined;
+
+          try {
+            var _loop2 = function _loop2() {
+              var emoji = _step20.value;
+
+
+              if (emoji.alts) {
+
+                emoji.alts.forEach(function (alt) {
+                  return data.alts[alt] = emoji;
+                });
+              }
+
+              // data.chars.push ([ emoji.char, emoji.id ]);
+
+              data.emojis[emoji.id] = emoji;
+
+              if (emoji.emoticons) {
+
+                emoji.emoticons.forEach(function (emoticon) {
+
+                  var prev = data.emoticons[emoticon];
+
+                  if (_.isUndefined(prev)) {
+
+                    data.emoticons[emoticon] = emoji;
+                  } else if (_.isArray(prev)) {
+
+                    data.emoticons[emoticon].push(emoji);
+                  } else {
+
+                    data.emoticons[emoticon] = [prev, emoji];
+                  }
+                });
+              }
+            };
+
+            for (var _iterator20 = category.emojis[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+              _loop2();
+            }
+          } catch (err) {
+            _didIteratorError20 = true;
+            _iteratorError20 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                _iterator20.return();
+              }
+            } finally {
+              if (_didIteratorError20) {
+                throw _iteratorError20;
+              }
+            }
+          }
+        }
+
+        // data.chars = data.chars.sort ( ( a, b ) => b[0].length - a[0].length );
+      } catch (err) {
+        _didIteratorError19 = true;
+        _iteratorError19 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion19 && _iterator19.return) {
+            _iterator19.return();
+          }
+        } finally {
+          if (_didIteratorError19) {
+            throw _iteratorError19;
+          }
+        }
+      }
+
+      return data;
+    },
+
+
+    /* METHODS */
+
+    getRemoteRaw: function getRemoteRaw() {
+      return regeneratorRuntime.async(function getRemoteRaw$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              return _context.abrupt('return', $.uniqueAjax('EmojiDataRaw', EmojiData._rawUrl));
+
+            case 1:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    },
+    getRaw: function getRaw() {
+      return regeneratorRuntime.async(function getRaw$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!EmojiData._raw) {
+                _context2.next = 2;
+                break;
+              }
+
+              return _context2.abrupt('return', EmojiData._raw);
+
+            case 2:
+              _context2.next = 4;
+              return regeneratorRuntime.awrap(EmojiData.getRemoteRaw());
+
+            case 4:
+              return _context2.abrupt('return', EmojiData._raw = _context2.sent);
+
+            case 5:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, null, this);
+    },
+    get: function get() {
+      var raw;
+      return regeneratorRuntime.async(function get$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              if (!EmojiData._data) {
+                _context3.next = 2;
+                break;
+              }
+
+              return _context3.abrupt('return', EmojiData._data);
+
+            case 2:
+              _context3.next = 4;
+              return regeneratorRuntime.awrap(EmojiData.getRaw());
+
+            case 4:
+              raw = _context3.sent;
+
+              if (!EmojiData._data) {
+                _context3.next = 7;
+                break;
+              }
+
+              return _context3.abrupt('return', EmojiData._data);
+
+            case 7:
+              return _context3.abrupt('return', EmojiData._data = EmojiData._parse(raw));
+
+            case 8:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, null, this);
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.EmojiData = EmojiData;
+})(Svelto.$, Svelto._, Svelto, Svelto.EmojiDataRaw);
+
+/* =========================================================================
+ * Svelto - Lib - Fullscreen
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -14030,144 +14888,275 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-/* EMBEDDED CSS */
-
 (function ($, _, Svelto) {
 
   'use strict';
 
-  /* EMBEDDED CSS */
+  /* VARIABLES */
 
-  var EmbeddedCSS = function () {
-    function EmbeddedCSS() {
-      _classCallCheck(this, EmbeddedCSS);
+  var html = document.documentElement,
+      keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element,
+      apis = [['requestFullscreen', 'exitFullscreen', 'fullscreenElement', 'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'], ['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'], ['mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement', 'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'], ['msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement', 'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError']],
+      api = apis.find(function (methods) {
+    return methods[1] in document;
+  }),
+      raw = {};
 
-      this.$stylesheet = $('<style class="svelto-embedded svelto-embedded-' + $.guid++ + '">');
-      this.tree = {};
-    }
+  if (api) api.forEach(function (method, index) {
+    return raw[apis[0][index]] = method;
+  });
 
-    /* PRIVATE */
+  /* FULLSCREEN */
 
-    _createClass(EmbeddedCSS, [{
-      key: '_cssfy',
-      value: function _cssfy() {
+  var Fullscreen = {
+    request: function request() {
+      var ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : html;
 
-        var css = '';
+      if (!raw.requestFullscreen) return;
+      ele[raw.requestFullscreen](keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT);
+    },
+    exit: function exit() {
+      if (!raw.exitFullscreen) return;
+      document[raw.exitFullscreen]();
+    },
+    toggle: function toggle(ele) {
+      Fullscreen.isFullscreen ? Fullscreen.exit() : Fullscreen.request(ele);
+    },
 
-        for (var selector in this.tree) {
-
-          if (!this.tree.hasOwnProperty(selector)) continue;
-
-          css += selector + '{';
-
-          if (_.isPlainObject(this.tree[selector])) {
-
-            for (var property in this.tree[selector]) {
-
-              if (!this.tree[selector].hasOwnProperty(property)) continue;
-
-              css += property + ':' + this.tree[selector][property] + ';';
-            }
-          } else if (_.isString(this.tree[selector])) {
-
-            css += this.tree[selector] + ';';
-          }
-
-          css += '}';
-        }
-
-        return css;
-      }
-    }, {
-      key: '_refresh',
-      value: function _refresh() {
-
-        this.$stylesheet.text(this._cssfy());
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get(selector) {
-
-        return this.tree[selector];
-      }
-    }, {
-      key: 'set',
-      value: function set(selector, property, value) {
-
-        if (property === false) {
-
-          return this.remove(selector);
-        }
-
-        if (_.isPlainObject(property)) {
-
-          this.tree[selector] = _.extend(_.isPlainObject(this.tree[selector]) ? this.tree[selector] : {}, property);
-        } else if (_.isString(property)) {
-
-          if (!value) {
-
-            this.tree[selector] = property;
-          } else {
-
-            return this.set(selector, _defineProperty({}, property, value));
-          }
-        }
-
-        this._refresh();
-      }
-    }, {
-      key: 'remove',
-      value: function remove(selector) {
-
-        if (selector in this.tree) {
-
-          delete this.tree[selector];
-
-          this._refresh();
-        }
-      }
-    }, {
-      key: 'clear',
-      value: function clear() {
-
-        if (_.size(this.tree)) {
-
-          this.tree = {};
-
-          this._refresh();
-        }
-      }
-    }, {
-      key: 'attach',
-      value: function attach() {
-
-        this.$stylesheet.appendTo($(document.head));
-      }
-    }, {
-      key: 'detach',
-      value: function detach() {
-
-        this.$stylesheet.remove();
-      }
-    }]);
-
-    return EmbeddedCSS;
-  }();
+    get isFullscreen() {
+      return !!Fullscreen.element;
+    },
+    get element() {
+      return document[raw.fullscreenElement];
+    },
+    get enabled() {
+      return !!document[raw.fullscreenEnabled];
+    },
+    raw: raw
+  };
 
   /* EXPORT */
 
-  Svelto.EmbeddedCSS = new EmbeddedCSS();
-
-  /* READY */
-
-  $(function () {
-
-    Svelto.EmbeddedCSS.attach();
-  });
+  Svelto.Fullscreen = Fullscreen;
 })(Svelto.$, Svelto._, Svelto);
+
+/* =========================================================================
+ * Svelto - Widgets - Fullscreenable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.js
+ * @require lib/fullscreen/fullscreen.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Fullscreen) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'fullscreenable',
+    plugin: true,
+    selector: '.fullscreenable'
+  };
+
+  /* FULLSCREENABLE */
+
+  var Fullscreenable = function (_Widgets$Widget28) {
+    _inherits(Fullscreenable, _Widgets$Widget28);
+
+    function Fullscreenable() {
+      _classCallCheck(this, Fullscreenable);
+
+      return _possibleConstructorReturn(this, (Fullscreenable.__proto__ || Object.getPrototypeOf(Fullscreenable)).apply(this, arguments));
+    }
+
+    _createClass(Fullscreenable, [{
+      key: 'isFullscreen',
+
+
+      /* API */
+
+      value: function isFullscreen() {
+
+        return Fullscreen.isFullscreen;
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !Fullscreen.isFullscreen;
+
+
+        if (!!force !== Fullscreen.isFullscreen) {
+
+          force ? this.request() : this.exit();
+        }
+      }
+    }, {
+      key: 'request',
+      value: function request() {
+
+        Fullscreen.request(this.element);
+      }
+    }, {
+      key: 'exit',
+      value: function exit() {
+
+        Fullscreen.exit();
+      }
+    }]);
+
+    return Fullscreenable;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(Fullscreenable, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Fullscreen);
+
+/* =========================================================================
+ * Svelto - Widgets - Fullscreenable - Targeters - Exiter
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../fullscreenable.js
+ * @require widgets/targeter/closer/closer.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'fullscreenableExiter',
+    plugin: true,
+    selector: '.fullscreenable-exiter, .fullscreen-exiter',
+    options: {
+      widget: Widgets.Fullscreenable,
+      $fallback: Svelto.$html,
+      methods: {
+        isOpen: 'isFullscreen',
+        close: 'exit'
+      }
+    }
+  };
+
+  /* FULLSCREENABLE EXITER */
+
+  var FullscreenableExiter = function (_Widgets$Closer8) {
+    _inherits(FullscreenableExiter, _Widgets$Closer8);
+
+    function FullscreenableExiter() {
+      _classCallCheck(this, FullscreenableExiter);
+
+      return _possibleConstructorReturn(this, (FullscreenableExiter.__proto__ || Object.getPrototypeOf(FullscreenableExiter)).apply(this, arguments));
+    }
+
+    return FullscreenableExiter;
+  }(Widgets.Closer);
+
+  /* FACTORY */
+
+  Factory.make(FullscreenableExiter, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Fullscreenable - Targeters - Requester
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../fullscreenable.js
+ * @require widgets/targeter/opener/opener.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'fullscreenableRequester',
+    plugin: true,
+    selector: '.fullscreenable-requester, .fullscreen-requester',
+    options: {
+      widget: Widgets.Fullscreenable,
+      $fallback: Svelto.$html,
+      methods: {
+        open: 'request'
+      }
+    }
+  };
+
+  /* FULLSCREENABLE REQUESTER */
+
+  var FullscreenableRequester = function (_Widgets$Opener7) {
+    _inherits(FullscreenableRequester, _Widgets$Opener7);
+
+    function FullscreenableRequester() {
+      _classCallCheck(this, FullscreenableRequester);
+
+      return _possibleConstructorReturn(this, (FullscreenableRequester.__proto__ || Object.getPrototypeOf(FullscreenableRequester)).apply(this, arguments));
+    }
+
+    return FullscreenableRequester;
+  }(Widgets.Opener);
+
+  /* FACTORY */
+
+  Factory.make(FullscreenableRequester, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Fullscreenable - Targeters - Toggler
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../fullscreenable.js
+ * @require widgets/targeter/toggler/toggler.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'fullscreenableToggler',
+    plugin: true,
+    selector: '.fullscreenable-toggler, .fullscreen-toggler',
+    options: {
+      widget: Widgets.Fullscreenable,
+      $fallback: Svelto.$html
+    }
+  };
+
+  /* FULLSCREENABLE TOGGLER */
+
+  var FullscreenableToggler = function (_Widgets$Toggler7) {
+    _inherits(FullscreenableToggler, _Widgets$Toggler7);
+
+    function FullscreenableToggler() {
+      _classCallCheck(this, FullscreenableToggler);
+
+      return _possibleConstructorReturn(this, (FullscreenableToggler.__proto__ || Object.getPrototypeOf(FullscreenableToggler)).apply(this, arguments));
+    }
+
+    return FullscreenableToggler;
+  }(Widgets.Toggler);
+
+  /* FACTORY */
+
+  Factory.make(FullscreenableToggler, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
  * Svelto - Lib - Fuzzy
@@ -14540,7 +15529,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     alpha: /^[a-zA-Z]+$/,
     alphanumeric: /^[a-zA-Z0-9]+$/,
     hexadecimal: /^[a-fA-F0-9]+$/,
-    integer: /^(?:-?(?:0|[1-9][0-9]*))$/, //FIXME: It breaks if multiple 0 are added at the beginning (should this case be supported?)
+    integer: /^(?:-?(?:[0-9]*))$/,
     float: /^-?(?:(?:\d+)(?:\.\d*)?|(?:\.\d+)+)$/,
 
     /* THINGS */
@@ -14557,6 +15546,331 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Svelto.Regexes = Regexes;
 })(Svelto.$, Svelto._, Svelto);
+
+/* =========================================================================
+ * Svelto - Lib - Storage
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+// TTL is expressed in seconds
+
+(function ($, _, Svelto) {
+
+  'use strict';
+
+  /* STORAGE */
+
+  var Storage = {
+    key: localStorage.key.bind(localStorage),
+    remove: localStorage.removeItem.bind(localStorage),
+    clear: localStorage.clear.bind(localStorage),
+    get: function get(key) {
+
+      var val = localStorage.getItem(key),
+          obj = _.attempt(JSON.parse, val);
+
+      if (_.isPlainObject(obj)) {
+
+        if ('exp' in obj && obj.exp < _.nowSecs()) {
+
+          Storage.remove(key);
+          return null;
+        }
+
+        return 'val' in obj ? obj.val : obj;
+      }
+
+      return val;
+    },
+    set: function set(key, val, ttl) {
+
+      var obj = { val: val };
+
+      if (ttl) obj.exp = _.nowSecs() + ttl;
+
+      try {
+
+        localStorage.setItem(key, JSON.stringify(obj));
+      } catch (e) {}
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.Storage = Storage;
+})(Svelto.$, Svelto._, Svelto);
+
+/* =========================================================================
+ * Svelto - Widgets - Storable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.js
+ * @require lib/storage/storage.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Storage) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'storable',
+    selector: '.storable'
+  };
+
+  /* STORABLE */
+
+  var Storable = function (_Widgets$Widget29) {
+    _inherits(Storable, _Widgets$Widget29);
+
+    function Storable() {
+      _classCallCheck(this, Storable);
+
+      return _possibleConstructorReturn(this, (Storable.__proto__ || Object.getPrototypeOf(Storable)).apply(this, arguments));
+    }
+
+    _createClass(Storable, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.storageNamespace = 'swns.' + this.name;
+      }
+
+      /* STORAGE */
+
+    }, {
+      key: '_storageGet',
+      value: function _storageGet(key) {
+
+        return Storage.get(this.storageNamespace + '.' + key);
+      }
+    }, {
+      key: '_storageSet',
+      value: function _storageSet(key, value, ttl) {
+
+        Storage.set(this.storageNamespace + '.' + key, value, ttl);
+      }
+    }, {
+      key: '_storageRemove',
+      value: function _storageRemove(key) {
+
+        Storage.remove(this.storageNamespace + '.' + key);
+      }
+    }]);
+
+    return Storable;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(Storable, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Storage);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/storable/storable.js
+ * ========================================================================= */
+
+//TODO: Add locking capabilities
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remote',
+    options: {
+      requests: {
+        multiple: {
+          parallel: false,
+          sequential: true
+        }
+      },
+      ajax: { // Options to pass to `$.ajax`
+        cache: true, // If set to false, it will force the requested url not to be cached by the browser
+        method: 'GET', // Method of the remote request
+        timeout: 31000 // 1 second more than the default value of PHP's `max_execution_time` setting
+      },
+      storage: {
+        enabled: false
+      },
+      callbacks: {
+        beforesend: _.noop,
+        complete: _.noop,
+        error: _.noop,
+        success: _.noop,
+        abort: _.noop
+      }
+    }
+  };
+
+  /* REMOTE */
+
+  var Remote = function (_Widgets$Storable) {
+    _inherits(Remote, _Widgets$Storable);
+
+    function Remote() {
+      _classCallCheck(this, Remote);
+
+      return _possibleConstructorReturn(this, (Remote.__proto__ || Object.getPrototypeOf(Remote)).apply(this, arguments));
+    }
+
+    _createClass(Remote, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        _get(Remote.prototype.__proto__ || Object.getPrototypeOf(Remote.prototype), '_variables', this).call(this);
+
+        this._requestsNr = 0;
+      }
+    }, {
+      key: '_reset',
+      value: function _reset() {
+
+        this.abort();
+
+        _get(Remote.prototype.__proto__ || Object.getPrototypeOf(Remote.prototype), '_reset', this).call(this);
+      }
+
+      /* PRIVATE */
+
+    }, {
+      key: '_getAjax',
+      value: function _getAjax(options) {
+
+        return _.extend({}, this.options.ajax, options, {
+          beforeSend: this.__beforesend.bind(this),
+          complete: this.__complete.bind(this),
+          error: this.__error.bind(this),
+          success: this.__success.bind(this)
+        });
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__beforesend',
+      value: function __beforesend(res) {
+
+        if (this.isAborted()) return;
+
+        this._trigger('beforesend', res);
+      }
+    }, {
+      key: '__complete',
+      value: function __complete(res) {
+
+        if (this.isAborted()) return;
+
+        this._trigger('complete', res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        this._trigger('error', res);
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        this._trigger('success', res);
+      }
+    }, {
+      key: '__abort',
+      value: function __abort() {
+
+        this._trigger('abort');
+      }
+
+      /* API */
+
+    }, {
+      key: 'isRequesting',
+      value: function isRequesting() {
+
+        return !!this.xhr && !_.includes([0, 4], this.xhr.readyState); // 0: UNSENT, 4: DONE
+      }
+    }, {
+      key: 'getRequestsNr',
+      value: function getRequestsNr() {
+
+        return this._requestsNr;
+      }
+    }, {
+      key: 'canRequest',
+      value: function canRequest() {
+
+        if (!this.options.requests.multiple.parallel && this.isRequesting()) return false;
+
+        if (!this.options.requests.multiple.sequential && this._requestsNr) return false;
+
+        return true;
+      }
+    }, {
+      key: 'request',
+      value: function request(options) {
+
+        if (!this.canRequest()) return;
+
+        this._requestsNr++;
+        this._isAborted = false;
+
+        this.ajax = this._getAjax(options);
+        this.xhr = $.ajax(this.ajax);
+      }
+    }, {
+      key: 'isAborted',
+      value: function isAborted() {
+
+        return !!this._isAborted;
+      }
+    }, {
+      key: 'abort',
+      value: function abort() {
+
+        if (!this.xhr || !this.isRequesting()) return;
+
+        this._isAborted = true;
+
+        this.xhr.abort();
+
+        this.__abort();
+      }
+    }]);
+
+    return Remote;
+  }(Widgets.Storable);
+
+  /* FACTORY */
+
+  Factory.make(Remote, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
  * Svelto - Lib - Timer
@@ -14605,7 +15919,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'once',
       value: function once(time) {
-        var _this66 = this;
+        var _this72 = this;
 
         if (isNaN(time)) {
 
@@ -14613,7 +15927,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         setTimeout(function () {
-          return _this66.action();
+          return _this72.action();
         }, time);
 
         return this;
@@ -14696,7 +16010,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'setTimer',
       value: function setTimer(time) {
-        var _this67 = this;
+        var _this73 = this;
 
         if (isNaN(time)) {
 
@@ -14708,7 +16022,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clearTimer();
 
         this.timeoutObject = setTimeout(function () {
-          return _this67.go();
+          return _this73.go();
         }, time);
       }
     }, {
@@ -14770,7 +16084,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     selector: '.carousel',
     options: {
       startIndex: 0,
-      wrap: true, // Wether we should connect the start with the end, so that when calling `previous` from the start we reach the end and vice versa
+      wrap: true, // Whether we should connect the start with the end, so that when calling `previous` from the start we reach the end and vice versa
       cycle: false, // If the carousel should auto-cycle or not
       interval: 5000, // Interval between auto-cycling slides
       intervalMinimumRemaining: 1000, // Auto-cycling will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
@@ -14800,8 +16114,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CAROUSEL */
 
-  var Carousel = function (_Widgets$Widget29) {
-    _inherits(Carousel, _Widgets$Widget29);
+  var Carousel = function (_Widgets$Widget30) {
+    _inherits(Carousel, _Widgets$Widget30);
 
     function Carousel() {
       _classCallCheck(this, Carousel);
@@ -15025,9 +16339,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         index = this._sanitizeIndex(index);
 
-        if (this._lock || _.isNaN(index) || this._current && index === this._current.index) return;
+        if (this.isLocked() || _.isNaN(index) || this._current && index === this._current.index) return;
 
-        this._lock = true;
+        this.lock();
 
         if (this._current) {
 
@@ -15060,7 +16374,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.timer.play();
           }
 
-          this._lock = false;
+          this.unlock();
 
           this._trigger('change');
         }, this.options.animations.cycle);
@@ -15171,13 +16485,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           nodes = [],
           areas = [];
 
-      var _iteratorNormalCompletion19 = true;
-      var _didIteratorError19 = false;
-      var _iteratorError19 = undefined;
+      var _iteratorNormalCompletion21 = true;
+      var _didIteratorError21 = false;
+      var _iteratorError21 = undefined;
 
       try {
-        for (var _iterator19 = $searchable[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
-          var searchable = _step19.value;
+        for (var _iterator21 = $searchable[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
+          var searchable = _step21.value;
 
 
           var rect2 = $.getRect(searchable),
@@ -15190,16 +16504,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       } catch (err) {
-        _didIteratorError19 = true;
-        _iteratorError19 = err;
+        _didIteratorError21 = true;
+        _iteratorError21 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion19 && _iterator19.return) {
-            _iterator19.return();
+          if (!_iteratorNormalCompletion21 && _iterator21.return) {
+            _iterator21.return();
           }
         } finally {
-          if (_didIteratorError19) {
-            throw _iteratorError19;
+          if (_didIteratorError21) {
+            throw _iteratorError21;
           }
         }
       }
@@ -15210,14 +16524,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* PUNCTUAL */
 
     if (options.point) {
-      var _iteratorNormalCompletion20 = true;
-      var _didIteratorError20 = false;
-      var _iteratorError20 = undefined;
+      var _iteratorNormalCompletion22 = true;
+      var _didIteratorError22 = false;
+      var _iteratorError22 = undefined;
 
       try {
 
-        for (var _iterator20 = $searchable[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
-          var _searchable = _step20.value;
+        for (var _iterator22 = $searchable[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
+          var _searchable = _step22.value;
 
 
           var rect = $.getRect(_searchable);
@@ -15228,16 +16542,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       } catch (err) {
-        _didIteratorError20 = true;
-        _iteratorError20 = err;
+        _didIteratorError22 = true;
+        _iteratorError22 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion20 && _iterator20.return) {
-            _iterator20.return();
+          if (!_iteratorNormalCompletion22 && _iterator22.return) {
+            _iterator22.return();
           }
         } finally {
-          if (_didIteratorError20) {
-            throw _iteratorError20;
+          if (_didIteratorError22) {
+            throw _iteratorError22;
           }
         }
       }
@@ -15289,8 +16603,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DROPPABLE */
 
-  var Droppable = function (_Widgets$Widget30) {
-    _inherits(Droppable, _Widgets$Widget30);
+  var Droppable = function (_Widgets$Widget31) {
+    _inherits(Droppable, _Widgets$Widget31);
 
     function Droppable() {
       _classCallCheck(this, Droppable);
@@ -15492,9 +16806,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var transformations2D = ['scale', 'skew', 'translate'],
       indexes2D = [[0, 3], [2, 1], [4, 5]];
 
-  for (var _i2 = 0, _l2 = transformations2D.length; _i2 < _l2; _i2++) {
+  for (var _i3 = 0, _l2 = transformations2D.length; _i3 < _l2; _i3++) {
 
-    $.fn[transformations2D[_i2]] = function (index) {
+    $.fn[transformations2D[_i3]] = function (index) {
 
       return function (X) {
         var Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : X;
@@ -15517,7 +16831,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
         }
       };
-    }(_i2);
+    }(_i3);
   }
 })(Svelto.$, Svelto._, Svelto.Modernizr, Svelto);
 
@@ -15849,11 +17163,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     plugin: true,
     selector: '.popover',
     options: {
-      contentChangeEvents: 'change datepicker:change inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
+      contentChangeEvents: 'change datepicker:change editor:fullscreen editor:unfullscreen editor:preview editor:unpreview inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
       mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
+      parentChangeEvents: 'popover:close modal:close panel:close editor:unfullscreen', // One one of these events happen, and the target is an anchestor of the anchor, we close the popover //FIXME: Ugly
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
+        fullscreen: 0,
         noTip: 5,
         normal: 12
       },
@@ -15861,6 +17177,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         anchorDirection: 'popover-anchor-$1',
         noTip: 'no-tip',
         affixed: 'affixed',
+        fullscreen: 'fullscreen',
+        fullscreenRequest: 'fullscreen-request',
         moving: 'moving',
         show: 'show',
         open: 'open'
@@ -15901,11 +17219,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _variables() {
 
         this.$popover = this.$element;
+        this.popover = this.$popover[0];
 
         this.$popover.addClass(this.guc);
 
         this.hasTip = !this.$popover.hasClass(this.options.classes.noTip);
         this.isAffixed = this.$popover.hasClass(this.options.classes.affixed);
+        this.isFullscreen = this.$popover.hasClass(this.options.classes.fullscreen);
 
         this._isOpen = this.$popover.hasClass(this.options.classes.open);
       }
@@ -15917,6 +17237,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.___contentChange();
           this.___mustClose();
+          this.___parentChange();
           this.___resize();
           this.___parentsScroll();
           this.___layoutTap();
@@ -15946,6 +17267,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function ___mustClose() {
 
         this._on(true, this.$layout, this.options.mustCloseEvents, this.close);
+      }
+
+      /* PARENT CHANGE */
+
+    }, {
+      key: '___parentChange',
+      value: function ___parentChange() {
+
+        this._on(true, this.$document, this.options.parentChangeEvents, this.__parentChange);
+      }
+    }, {
+      key: '__parentChange',
+      value: function __parentChange(event) {
+
+        if (!this.$anchor || !$.contains(event.target, this.$anchor[0])) return;
+
+        if (this.$anchor.is(':visible')) {
+
+          this._positionate();
+        } else {
+
+          this.close();
+        }
       }
 
       /* RESIZE */
@@ -15980,6 +17324,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__layoutTap',
       value: function __layoutTap(event) {
 
+        if (event.isDefaultPrevented()) return;
+
         if (event === this._openEvent || this.$popover.touching({ point: $.eventXY(event, 'clientX', 'clientY') }).length) return event.preventDefault();
 
         this.close();
@@ -16009,8 +17355,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* VARIABLES */
 
-        var noTip = this.$anchor && this.$anchor.hasClass(this.options.classes.noTip) || !this.hasTip || this.isAffixed,
-            spacing = this.isAffixed ? this.options.spacing.affixed : noTip ? this.options.spacing.noTip : this.options.spacing.normal;
+        var isFullscreenRequested = this.$popover.hasClass(this.options.classes.fullscreenRequest),
+            noTip = this.$anchor && this.$anchor.hasClass(this.options.classes.noTip) || !this.hasTip || this.isAffixed || this.isFullscreen || isFullscreenRequested,
+            spacing = this.isAffixed ? this.options.spacing.affixed : this.isFullscreen || isFullscreenRequested ? this.options.spacing.fullscreen : noTip ? this.options.spacing.noTip : this.options.spacing.normal;
 
         /* POSITIONATE */
 
@@ -16082,13 +17429,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* CHECKING */
 
-        if (this._lock || (!anchor || this._isOpen && this.$anchor && anchor === this.$anchor[0]) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate)) return;
+        if (this.isLocked() || (!anchor || this._isOpen && this.$anchor && anchor === this.$anchor[0]) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate)) return;
 
         /* VARIABLES */
 
-        this._lock = true;
-        this._isOpen = true;
+        this.lock();
 
+        this._isOpen = true;
         this._openEvent = event;
         this._wasMoving = false;
 
@@ -16131,7 +17478,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.autofocus();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('open');
           });
@@ -16145,6 +17492,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.___keydown();
         this.___contentChange();
         this.___mustClose();
+        this.___parentChange();
         this.___resize();
         this.___parentsScroll();
       }
@@ -16152,11 +17500,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'close',
       value: function close() {
 
-        if (this._lock || !this._isOpen) return;
+        if (this.isLocked() || !this._isOpen) return;
 
         /* VARIABLES */
 
-        this._lock = true;
+        this.lock();
+
         this._isOpen = false;
 
         /* ANCHOR */
@@ -16186,7 +17535,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.autoblur();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('close');
           }, this.options.animations.close);
@@ -16233,8 +17582,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER CLOSER */
 
-  var PopoverCloser = function (_Widgets$Closer8) {
-    _inherits(PopoverCloser, _Widgets$Closer8);
+  var PopoverCloser = function (_Widgets$Closer9) {
+    _inherits(PopoverCloser, _Widgets$Closer9);
 
     function PopoverCloser() {
       _classCallCheck(this, PopoverCloser);
@@ -16277,8 +17626,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER OPENER */
 
-  var PopoverOpener = function (_Widgets$Opener7) {
-    _inherits(PopoverOpener, _Widgets$Opener7);
+  var PopoverOpener = function (_Widgets$Opener8) {
+    _inherits(PopoverOpener, _Widgets$Opener8);
 
     function PopoverOpener() {
       _classCallCheck(this, PopoverOpener);
@@ -16321,8 +17670,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* POPOVER TOGGLER */
 
-  var PopoverToggler = function (_Widgets$Toggler7) {
-    _inherits(PopoverToggler, _Widgets$Toggler7);
+  var PopoverToggler = function (_Widgets$Toggler8) {
+    _inherits(PopoverToggler, _Widgets$Toggler8);
 
     function PopoverToggler() {
       _classCallCheck(this, PopoverToggler);
@@ -16398,8 +17747,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECT */
 
-  var Select = function (_Widgets$Widget31) {
-    _inherits(Select, _Widgets$Widget31);
+  var Select = function (_Widgets$Widget32) {
+    _inherits(Select, _Widgets$Widget32);
 
     function Select() {
       _classCallCheck(this, Select);
@@ -16501,13 +17850,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var previousOptgroup = void 0;
 
-        var _iteratorNormalCompletion21 = true;
-        var _didIteratorError21 = false;
-        var _iteratorError21 = undefined;
+        var _iteratorNormalCompletion23 = true;
+        var _didIteratorError23 = false;
+        var _iteratorError23 = undefined;
 
         try {
-          for (var _iterator21 = this.$options[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
-            var option = _step21.value;
+          for (var _iterator23 = this.$options[Symbol.iterator](), _step23; !(_iteratorNormalCompletion23 = (_step23 = _iterator23.next()).done); _iteratorNormalCompletion23 = true) {
+            var option = _step23.value;
 
 
             var $option = $(option),
@@ -16538,16 +17887,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
         } catch (err) {
-          _didIteratorError21 = true;
-          _iteratorError21 = err;
+          _didIteratorError23 = true;
+          _iteratorError23 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion21 && _iterator21.return) {
-              _iterator21.return();
+            if (!_iteratorNormalCompletion23 && _iterator23.return) {
+              _iterator23.return();
             }
           } finally {
-            if (_didIteratorError21) {
-              throw _iteratorError21;
+            if (_didIteratorError23) {
+              throw _iteratorError23;
             }
           }
         }
@@ -16749,8 +18098,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP CLOSER */
 
-  var TooltipCloser = function (_Widgets$Closer9) {
-    _inherits(TooltipCloser, _Widgets$Closer9);
+  var TooltipCloser = function (_Widgets$Closer10) {
+    _inherits(TooltipCloser, _Widgets$Closer10);
 
     function TooltipCloser() {
       _classCallCheck(this, TooltipCloser);
@@ -16796,8 +18145,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP OPENER */
 
-  var TooltipOpener = function (_Widgets$Opener8) {
-    _inherits(TooltipOpener, _Widgets$Opener8);
+  var TooltipOpener = function (_Widgets$Opener9) {
+    _inherits(TooltipOpener, _Widgets$Opener9);
 
     function TooltipOpener() {
       _classCallCheck(this, TooltipOpener);
@@ -16843,8 +18192,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TOOLTIP TOGGLER */
 
-  var TooltipToggler = function (_Widgets$Toggler8) {
-    _inherits(TooltipToggler, _Widgets$Toggler8);
+  var TooltipToggler = function (_Widgets$Toggler9) {
+    _inherits(TooltipToggler, _Widgets$Toggler9);
 
     function TooltipToggler() {
       _classCallCheck(this, TooltipToggler);
@@ -16888,7 +18237,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: 0,
       step: 1, // Only multiples of `step` are valid values
       decimals: 0, // Trunc the value to this amount of decimal numbers
-      live: false, // Wether it will update the input also on `Draggable.move` or just on `Draggable.end`
+      live: false, // Whether it will update the input also on `Draggable.move` or just on `Draggable.end`
       datas: {
         min: 'min',
         max: 'max',
@@ -16914,8 +18263,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SLIDER */
 
-  var Slider = function (_Widgets$Widget32) {
-    _inherits(Slider, _Widgets$Widget32);
+  var Slider = function (_Widgets$Widget33) {
+    _inherits(Slider, _Widgets$Widget33);
 
     function Slider() {
       _classCallCheck(this, Slider);
@@ -17236,8 +18585,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SWITCH */
 
-  var Switch = function (_Widgets$Widget33) {
-    _inherits(Switch, _Widgets$Widget33);
+  var Switch = function (_Widgets$Widget34) {
+    _inherits(Switch, _Widgets$Widget34);
 
     function Switch() {
       _classCallCheck(this, Switch);
@@ -17762,13 +19111,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* FOCUS */
 
-    var activeIDX = $(previous).find(document.activeElement).data('dt-idx');
+    var $previous = $(previous),
+        activeIDX = $previous.find(document.activeElement).data('dt-idx');
 
-    attach($(previous).empty(), buttons);
+    attach($previous.empty(), buttons);
 
     if (activeIDX) {
 
-      $(previous).find('[data-dt-idx=' + activeIDX + ']').focus();
+      $previous.find('[data-dt-idx=' + activeIDX + ']').focus();
     }
   };
 
@@ -17836,8 +19186,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATATABLE */
 
-  var DT = function (_Widgets$Widget34) {
-    _inherits(DT, _Widgets$Widget34);
+  var DT = function (_Widgets$Widget35) {
+    _inherits(DT, _Widgets$Widget35);
 
     function DT() {
       _classCallCheck(this, DT);
@@ -17932,8 +19282,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function api(method) {
         var _api;
 
-        for (var _len6 = arguments.length, args = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-          args[_key6 - 1] = arguments[_key6];
+        for (var _len8 = arguments.length, args = Array(_len8 > 1 ? _len8 - 1 : 0), _key9 = 1; _key9 < _len8; _key9++) {
+          args[_key9 - 1] = arguments[_key9];
         }
 
         return (_api = this._api)[method].apply(_api, args);
@@ -18010,8 +19360,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* DATATABLES PAGER */
 
-  var DatatablesPager = function (_Widgets$Targeter2) {
-    _inherits(DatatablesPager, _Widgets$Targeter2);
+  var DatatablesPager = function (_Widgets$Targeter3) {
+    _inherits(DatatablesPager, _Widgets$Targeter3);
 
     function DatatablesPager() {
       _classCallCheck(this, DatatablesPager);
@@ -18037,7 +19387,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_events',
       value: function _events() {
 
-        this.___targetRemove();
+        _get(DatatablesPager.prototype.__proto__ || Object.getPrototypeOf(DatatablesPager.prototype), '_events', this).call(this);
+
         this.___tap();
       }
 
@@ -18124,8 +19475,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECTABLE */
 
-  var Selectable = function (_Widgets$Widget35) {
-    _inherits(Selectable, _Widgets$Widget35);
+  var Selectable = function (_Widgets$Widget36) {
+    _inherits(Selectable, _Widgets$Widget36);
 
     function Selectable() {
       _classCallCheck(this, Selectable);
@@ -18484,37 +19835,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse);
 
 /* =========================================================================
- * Svelto - Widgets - _ - Scroll
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/pointer/pointer.js
- * @require core/svelto/svelto.js
- * @require core/widgetize/widgetize.js
- * ========================================================================= */
-
-//FIXME: It doesn't work if the layout is body, it also need html in some browsers (Which browsers?)
-//TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
-
-(function ($, _, Svelto, Widgetize, Pointer, Animations) {
-
-  'use strict';
-
-  /* SCROLL TO TOP */
-
-  Widgetize.add('.scroll-to-top', function ($scroller) {
-
-    var $layout = $scroller.parent().closest('.layout, body'); // `body` is used as a fallback
-
-    $scroller.on(Pointer.tap, function () {
-
-      $layout.animate({ scrollTop: 0 }, Animations.normal);
-    });
-  });
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer, Svelto.Animations);
-
-/* =========================================================================
  * Svelto - Widgets - Toasts
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -18594,7 +19914,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '___visibility',
       value: function ___visibility() {
 
-        $(document).on('visibilitychange', this.__visibility.bind(this));
+        Svelto.$document.on('visibilitychange', this.__visibility.bind(this));
       }
     }, {
       key: '__visibility',
@@ -18706,7 +20026,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       type: 'alert',
       color: Colors.black,
       css: '',
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      persistent: false, // Whether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
       ttl: 3500,
       ttlMinimumRemaining: 1000, // Auto-closing will be stopped on hover and started again on leave, with a remaining time of `Math.min ( what the remaining time was, this option )`;
@@ -18777,7 +20097,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.___breakpoint();
         } else if (this.options.autoplay) {
 
-          var whenReady = Toast.whenReady || Toast.__proto__.whenReady; //IE10 support -- static property
+          var whenReady = Toast.whenReady || Toast.__proto__.whenReady || Widgets.Widget.whenReady; //IE10 support -- static property
 
           whenReady.bind(Toast)(this.open.bind(this));
         }
@@ -18956,9 +20276,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'open',
       value: function open() {
 
-        if (this._lock || this._isOpen) return;
+        if (this.isLocked() || this._isOpen) return;
 
-        this._lock = true;
+        this.lock();
+
         this._isOpen = true;
 
         this._frame(function () {
@@ -18971,7 +20292,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.autofocus();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('open');
           });
@@ -18995,9 +20316,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'close',
       value: function close() {
 
-        if (this._lock || !this._isOpen) return;
+        if (this.isLocked() || !this._isOpen) return;
 
-        this._lock = true;
+        this.lock();
+
         this._isOpen = false;
         this._openUrl = false;
 
@@ -19011,7 +20333,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             this.$toast.remove();
 
-            this._lock = false;
+            this.unlock();
 
             this._trigger('close');
           }, this.options.animations.close);
@@ -19057,7 +20379,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-// If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
+// If the page isn't visible and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 
 (function ($, _, Svelto, Toast) {
 
@@ -19066,21 +20388,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* DEFAULTS */
 
   var defaults = {
-    title: false,
-    body: false,
-    img: false,
+    title: '',
+    body: '',
+    img: '',
     ttl: Toast.config.options.ttl
   };
 
   /* NOTIFICATION */
 
-  //TODO: Add support for string options
-
   $.notification = function (options) {
 
     /* OPTIONS */
 
-    options = _.extend({}, $.notification.defaults, options);
+    options = _.isPlainObject(options) ? _.extend({}, $.notification.defaults, options) : String(options);
 
     /* NOTIFICATIONS */
 
@@ -19089,18 +20409,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       Notification.requestPermission(function (status) {
 
         if (status === 'granted') {
-          (function () {
 
-            var notification = new Notification(options.title, { body: options.body, icon: options.img });
+          var notification = _.isString(options) ? new Notification(options) : new Notification(options.title, { body: options.body, icon: options.img });
 
-            if (_.isNumber(options.ttl) && !_.isNaN(options.ttl) && options.ttl !== Infinity) {
+          if (_.isNumber(options.ttl) && !_.isNaN(options.ttl) && options.ttl !== Infinity) {
 
-              setTimeout(function () {
-
-                notification.close();
-              }, options.ttl);
-            }
-          })();
+            setTimeout(notification.close.bind(notification), options.ttl);
+          }
         } else {
 
           $.toast(options);
@@ -19153,8 +20468,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return !Validator.empty(value);
         },
         values: function values(value) {
-          for (var _len7 = arguments.length, _values = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-            _values[_key7 - 1] = arguments[_key7];
+          for (var _len9 = arguments.length, _values = Array(_len9 > 1 ? _len9 - 1 : 0), _key10 = 1; _key10 < _len9; _key10++) {
+            _values[_key10 - 1] = arguments[_key10];
           }
 
           return Validator.included(value, _values);
@@ -19233,8 +20548,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = function (_Widgets$Widget36) {
-    _inherits(FormValidate, _Widgets$Widget36);
+  var FormValidate = function (_Widgets$Widget37) {
+    _inherits(FormValidate, _Widgets$Widget37);
 
     function FormValidate() {
       _classCallCheck(this, FormValidate);
@@ -19274,13 +20589,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.elements = {};
 
-        var _iteratorNormalCompletion22 = true;
-        var _didIteratorError22 = false;
-        var _iteratorError22 = undefined;
+        var _iteratorNormalCompletion24 = true;
+        var _didIteratorError24 = false;
+        var _iteratorError24 = undefined;
 
         try {
-          for (var _iterator22 = this.$elements[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
-            var element = _step22.value;
+          for (var _iterator24 = this.$elements[Symbol.iterator](), _step24; !(_iteratorNormalCompletion24 = (_step24 = _iterator24.next()).done); _iteratorNormalCompletion24 = true) {
+            var element = _step24.value;
 
 
             var $element = $(element),
@@ -19297,13 +20612,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               var validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-              var _iteratorNormalCompletion23 = true;
-              var _didIteratorError23 = false;
-              var _iteratorError23 = undefined;
+              var _iteratorNormalCompletion25 = true;
+              var _didIteratorError25 = false;
+              var _iteratorError25 = undefined;
 
               try {
-                for (var _iterator23 = validationsArr[Symbol.iterator](), _step23; !(_iteratorNormalCompletion23 = (_step23 = _iterator23.next()).done); _iteratorNormalCompletion23 = true) {
-                  var validationStr = _step23.value;
+                for (var _iterator25 = validationsArr[Symbol.iterator](), _step25; !(_iteratorNormalCompletion25 = (_step25 = _iterator25.next()).done); _iteratorNormalCompletion25 = true) {
+                  var validationStr = _step25.value;
 
 
                   var matches = validationStr.match(this.options.regexes.validation);
@@ -19322,16 +20637,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   };
                 }
               } catch (err) {
-                _didIteratorError23 = true;
-                _iteratorError23 = err;
+                _didIteratorError25 = true;
+                _iteratorError25 = err;
               } finally {
                 try {
-                  if (!_iteratorNormalCompletion23 && _iterator23.return) {
-                    _iterator23.return();
+                  if (!_iteratorNormalCompletion25 && _iterator25.return) {
+                    _iterator25.return();
                   }
                 } finally {
-                  if (_didIteratorError23) {
-                    throw _iteratorError23;
+                  if (_didIteratorError25) {
+                    throw _iteratorError25;
                   }
                 }
               }
@@ -19361,16 +20676,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             };
           }
         } catch (err) {
-          _didIteratorError22 = true;
-          _iteratorError22 = err;
+          _didIteratorError24 = true;
+          _iteratorError24 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion22 && _iterator22.return) {
-              _iterator22.return();
+            if (!_iteratorNormalCompletion24 && _iterator24.return) {
+              _iterator24.return();
             }
           } finally {
-            if (_didIteratorError22) {
-              throw _iteratorError22;
+            if (_didIteratorError24) {
+              throw _iteratorError24;
             }
           }
         }
@@ -19685,7 +21000,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         methods: 'close' // Maps each plugin with a method to call. Can also be a string if all the plugins have the same method name
       },
       messages: {
-        error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
         refreshing: 'Done! Refreshing the page...',
         redirecting: 'Done! Redirecting...'
@@ -19701,8 +21015,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM AJAX */
 
-  var FormAjax = function (_Widgets$Widget37) {
-    _inherits(FormAjax, _Widgets$Widget37);
+  var FormAjax = function (_Widgets$Widget38) {
+    _inherits(FormAjax, _Widgets$Widget38);
 
     function FormAjax() {
       _classCallCheck(this, FormAjax);
@@ -19733,24 +21047,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_autoclose',
       value: function _autoclose() {
-        var _this87 = this;
+        var _this93 = this;
 
         var _options$autoclose = this.options.autoclose,
             selectors = _options$autoclose.selectors,
             plugins = _options$autoclose.plugins,
             methods = _options$autoclose.methods;
 
-        var _loop2 = function _loop2(i, l) {
+        var _loop3 = function _loop3(i, l) {
 
-          var $closable = _this87.$form.closest(selectors[i]);
+          var $closable = _this93.$form.closest(selectors[i]);
 
           if (!$closable.length) return 'continue';
 
           var method = _.isArray(methods) ? methods[i] : methods;
 
-          if (_this87.options.spinnerOverlay) {
+          if (_this93.options.spinnerOverlay) {
 
-            _this87._on('spinneroverlay:close', function () {
+            _this93._on('spinneroverlay:close', function () {
               return $closable[plugins[i]](method);
             });
           } else {
@@ -19761,15 +21075,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return 'break';
         };
 
-        _loop3: for (var i = 0, l = selectors.length; i < l; i++) {
-          var _ret4 = _loop2(i, l);
+        _loop4: for (var i = 0, l = selectors.length; i < l; i++) {
+          var _ret4 = _loop3(i, l);
 
           switch (_ret4) {
             case 'continue':
               continue;
 
             case 'break':
-              break _loop3;}
+              break _loop4;}
         }
       }
 
@@ -19784,7 +21098,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '__submit',
       value: function __submit(event) {
-        var _this88 = this;
+        var _this94 = this;
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -19801,21 +21115,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           beforeSend: function beforeSend() {
 
-            if (_this88.options.spinnerOverlay) {
+            if (_this94.options.spinnerOverlay) {
 
-              _this88.$form.spinnerOverlay('open');
+              _this94.$form.spinnerOverlay('open');
             }
 
-            _this88._trigger('beforesend');
+            _this94._trigger('beforesend');
           },
 
           error: function error(res) {
 
             var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-            $.toast(_.isError(resj) || !('message' in resj) ? _this88.options.messages.error : resj.msg);
+            $.toast(_.isError(resj) || !('message' in resj) ? _this94.options.messages.error : resj.msg);
 
-            _this88._trigger('error');
+            _this94._trigger('error');
           },
 
           success: function success(res) {
@@ -19826,38 +21140,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (resj.refresh || resj.url === window.location.href || _.isString(resj.url) && _.trim(resj.url, '/') === _.trim(window.location.pathname, '/')) {
 
-                $.toast(resj.message || _this88.options.messages.refreshing);
+                $.toast(resj.message || _this94.options.messages.refreshing);
 
                 location.reload();
               } else if (resj.url) {
 
                 // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-                $.toast(resj.message || _this88.options.messages.redirecting);
+                $.toast(resj.message || _this94.options.messages.redirecting);
 
                 location.assign(resj.url);
               } else {
 
-                $.toast(resj.message || _this88.options.messages.success);
+                $.toast(resj.message || _this94.options.messages.success);
               }
 
-              if (_this88.options.autoclose.enabled) _this88._autoclose();
+              if (_this94.options.autoclose.enabled) _this94._autoclose();
             } else {
 
-              $.toast(_this88.options.messages.success);
+              $.toast(_this94.options.messages.success);
             }
 
-            _this88._trigger('success');
+            _this94._trigger('success');
           },
 
           complete: function complete() {
 
-            if (_this88.options.spinnerOverlay) {
+            if (_this94.options.spinnerOverlay) {
 
-              _this88.$form.spinnerOverlay('close');
+              _this94.$form.spinnerOverlay('close');
             }
 
-            _this88._trigger('complete');
+            _this94._trigger('complete');
           }
 
         });
@@ -19871,266 +21185,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Factory.make(FormAjax, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
-
-/* =========================================================================
- * Svelto - Widgets - Liker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/remote/remote.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
-
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'liker',
-    plugin: true,
-    selector: '.liker',
-    options: {
-      likes: 0,
-      dislikes: 0,
-      state: null,
-      stateUrl: false,
-      url: false,
-      ajax: {
-        cache: false,
-        method: 'POST'
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
-      datas: {
-        likes: 'likes',
-        dislikes: 'dislikes',
-        state: 'state',
-        stateUrl: 'state-url',
-        url: 'url'
-      },
-      selectors: {
-        like: '.like',
-        dislike: '.dislike'
-      }
-    }
-  };
-
-  /* LIKES */
-
-  var Liker = function (_Widgets$Remote) {
-    _inherits(Liker, _Widgets$Remote);
-
-    function Liker() {
-      _classCallCheck(this, Liker);
-
-      return _possibleConstructorReturn(this, (Liker.__proto__ || Object.getPrototypeOf(Liker)).apply(this, arguments));
-    }
-
-    _createClass(Liker, [{
-      key: '_variables',
-
-
-      /* SPECIAL */
-
-      value: function _variables() {
-
-        this.$liker = this.$element;
-        this.$like = this.$liker.find(this.options.selectors.like);
-        this.$dislike = this.$liker.find(this.options.selectors.dislike);
-      }
-    }, {
-      key: '_init',
-      value: function _init() {
-
-        this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
-        this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
-        this.options.stateUrl = this.$liker.data(this.options.datas.stateUrl) || this.options.stateUrl;
-        this.options.url = this.$liker.data(this.options.datas.url) || this.options.url;
-
-        var state = this.$liker.data(this.options.datas.state);
-        this.options.state = _.isBoolean(state) ? state : this.options.state;
-
-        this.___remoteState();
-        this._update();
-      }
-    }, {
-      key: '_events',
-      value: function _events() {
-
-        this.___like();
-        this.___dislike();
-      }
-
-      /* REMOTE STATE */
-
-    }, {
-      key: '___remoteState',
-      value: function ___remoteState() {
-
-        if (!this.options.stateUrl) return;
-
-        $.get(this.options.stateUrl, this.__remoteState.bind(this));
-      }
-    }, {
-      key: '__remoteState',
-      value: function __remoteState(res) {
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (_.isError(resj) || !('state' in resj) || resj.state === this.options.state) return;
-
-        this.options.state = resj.state;
-
-        this._update();
-      }
-
-      /* UPDATE */
-
-    }, {
-      key: '_update',
-      value: function _update() {
-
-        this.$liker.attr('data-' + this.options.datas.state, String(this.options.state));
-        this.$like.attr('data-' + this.options.datas.likes, this.options.likes);
-        this.$dislike.attr('data-' + this.options.datas.dislikes, this.options.dislikes);
-      }
-
-      /* LIKE */
-
-    }, {
-      key: '___like',
-      value: function ___like() {
-
-        this._on(this.$like, Pointer.tap, this.__like);
-      }
-    }, {
-      key: '__like',
-      value: function __like() {
-
-        this[this.options.state ? 'reset' : 'like']();
-      }
-
-      /* DISLIKE */
-
-    }, {
-      key: '___dislike',
-      value: function ___dislike() {
-
-        this._on(this.$dislike, Pointer.tap, this.__dislike);
-      }
-    }, {
-      key: '__dislike',
-      value: function __dislike() {
-
-        this[this.options.state === false ? 'reset' : 'dislike']();
-      }
-
-      /* REQUEST HANDLERS */
-
-    }, {
-      key: '__beforesend',
-      value: function __beforesend(res) {
-
-        this.disable();
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__beforesend', this).call(this, res);
-      }
-    }, {
-      key: '__error',
-      value: function __error(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.msg);
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__error', this).call(this, res);
-      }
-    }, {
-      key: '__success',
-      value: function __success(res) {
-
-        if (this.isAborted()) return;
-
-        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
-
-        if (_.isError(resj)) return this.__error(res);
-
-        _.extend(this.options, _.pick(resj, ['likes', 'dislikes', 'state']));
-
-        this._update();
-
-        if ('message' in resj) $.toast(resj.message);
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__success', this).call(this);
-      }
-    }, {
-      key: '__complete',
-      value: function __complete(res) {
-
-        this.enable();
-
-        return _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '__complete', this).call(this, res);
-      }
-
-      /* API */
-
-    }, {
-      key: 'get',
-      value: function get() {
-
-        return _.pick(this.options, ['likes', 'dislikes', 'state']);
-      }
-    }, {
-      key: 'set',
-      value: function set() {
-        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-
-        if (state === this.options.state) return;
-
-        var options = {
-          data: {
-            current: this.get(),
-            state: state
-          },
-          url: this.options.url || this.options.ajax.url
-        };
-
-        return this.request(options);
-      }
-    }, {
-      key: 'reset',
-      value: function reset() {
-
-        return this.set(null);
-      }
-    }, {
-      key: 'like',
-      value: function like() {
-
-        return this.set(true);
-      }
-    }, {
-      key: 'dislike',
-      value: function dislike() {
-
-        return this.set(false);
-      }
-    }]);
-
-    return Liker;
-  }(Widgets.Remote);
-
-  /* FACTORY */
-
-  Factory.make(Liker, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
  * Svelto - Widgets - Rater
@@ -20163,9 +21217,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       amount: 5,
       url: false,
       rated: false,
-      messages: {
-        error: 'An error occurred, please try again later'
-      },
       datas: {
         value: 'value',
         amount: 'amount',
@@ -20185,8 +21236,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* RATER */
 
-  var Rater = function (_Widgets$Widget38) {
-    _inherits(Rater, _Widgets$Widget38);
+  var Rater = function (_Widgets$Widget39) {
+    _inherits(Rater, _Widgets$Widget39);
 
     function Rater() {
       _classCallCheck(this, Rater);
@@ -20238,7 +21289,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '__tap',
       value: function __tap(event) {
-        var _this91 = this;
+        var _this96 = this;
 
         if (!this.options.rated && !this.doingAjax && this.options.url) {
 
@@ -20252,14 +21303,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             beforeSend: function beforeSend() {
 
-              _this91.doingAjax = true;
+              _this96.doingAjax = true;
             },
 
             error: function error(res) {
 
               var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
 
-              $.toast(_.isError(resj) || !('message' in resj) ? _this91.options.messages.error : resj.message);
+              $.toast(_.isError(resj) || !('message' in resj) ? _this96.options.messages.error : resj.message);
             },
 
             success: function success(res) {
@@ -20271,19 +21322,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (!_.isError(resj)) {
 
-                _.merge(_this91.options, resj);
+                _.merge(_this96.options, resj);
 
-                _this91.$rater.html(_this91._template('stars', _this91.options));
+                _this96.$rater.html(_this96._template('stars', _this96.options));
 
-                _this91.options.rated = true;
+                _this96.options.rated = true;
 
-                _this91._trigger('change');
+                _this96._trigger('change');
               }
             },
 
             complete: function complete() {
 
-              _this91.doingAjax = false;
+              _this96.doingAjax = false;
             }
 
           });
@@ -20326,7 +21377,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
 //TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`
 
-//FIXME: Not well written
+//FIXME: Not well written, maybe try to extend RemoteWidget, even though it was ment for a different kind of widgets
 //FIXME: Clicking an error/success toast doesn't close it
 
 (function ($, _, Svelto, Widgets, Factory, Colors, Sizes) {
@@ -20354,7 +21405,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       },
       messages: {
-        error: 'An error occurred, please try again later',
         success: 'Done! A page refresh may be needed',
         refreshing: 'Done! Refreshing the page...',
         redirecting: 'Done! Redirecting...'
@@ -20371,8 +21421,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE ACTION */
 
-  var RemoteAction = function (_Widgets$Remote2) {
-    _inherits(RemoteAction, _Widgets$Remote2);
+  var RemoteAction = function (_Widgets$Remote) {
+    _inherits(RemoteAction, _Widgets$Remote);
 
     function RemoteAction() {
       _classCallCheck(this, RemoteAction);
@@ -20668,17 +21718,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         data: 'data',
         method: 'method',
         target: 'target'
-      },
-      messages: {
-        error: 'An error occurred, please try again later'
       }
     }
   };
 
   /* REMOTE LOADER */
 
-  var RemoteLoader = function (_Widgets$Remote3) {
-    _inherits(RemoteLoader, _Widgets$Remote3);
+  var RemoteLoader = function (_Widgets$Remote2) {
+    _inherits(RemoteLoader, _Widgets$Remote2);
 
     function RemoteLoader() {
       _classCallCheck(this, RemoteLoader);
@@ -20701,7 +21748,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_init',
       value: function _init() {
-        var _this95 = this;
+        var _this100 = this;
 
         this.options.preloading.enabled = this.$loader.hasClass(this.options.classes.preload) || this.options.preloading.enabled;
         this.options.ajax.url = this.$loader.data(this.options.datas.url) || this.$loader.attr(this.options.attributes.href) || this.options.ajax.url;
@@ -20718,7 +21765,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.options.preloading.enabled) this.preload();
 
         this._defer(function () {
-          return !_this95.isRequesting() && _this95.disable();
+          return !_this100.isRequesting() && _this100.disable();
         }); //TODO: Maybe define as an external function //TODO: Maybe add an option for this
       }
     }, {
@@ -20956,18 +22003,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(RemoteLoaderTrigger, [{
-      key: 'trigger',
-      value: function trigger() {
-        var _this97 = this;
+      key: '_getOptions',
 
-        this.$trigger[this.options.widget.config.name]({
-          ajax: this.options.ajax,
+
+      /* OPTIONS */
+
+      value: function _getOptions() {
+
+        return _.merge(_get(RemoteLoaderTrigger.prototype.__proto__ || Object.getPrototypeOf(RemoteLoaderTrigger.prototype), '_getOptions', this).call(this), {
           callbacks: {
-            beforesend: function beforesend() {
-              return _this97.$trigger.addClass(_this97.options.classes.disabled);
-            } //TODO: Replace with a linear "spinner" overlay
+            beforesend: this.disable.bind(this) //TODO: Replace with a linear "spinner" overlay
           }
         });
+      }
+
+      /* API */
+
+    }, {
+      key: 'trigger',
+      value: function trigger() {
+
+        this.$trigger[this.options.widget.config.name](this._getOptions());
       }
     }]);
 
@@ -20978,6 +22034,532 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Factory.make(RemoteLoaderTrigger, config);
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Reaction
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require widgets/toast/toast.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remoteReaction',
+    options: {
+      state: undefined, // The state of the reaction
+      stateDefault: null, // The default state
+      stateUrl: false, // If provided, fetch the state from here
+      url: false, // Submit the reaction to this url
+      ajax: {
+        cache: false,
+        method: 'POST'
+      },
+      datas: {
+        state: 'state',
+        stateUrl: 'state-url',
+        url: 'url'
+      }
+    }
+  };
+
+  /* REMOTE REACTION */
+
+  var RemoteReaction = function (_Widgets$Remote3) {
+    _inherits(RemoteReaction, _Widgets$Remote3);
+
+    function RemoteReaction() {
+      _classCallCheck(this, RemoteReaction);
+
+      return _possibleConstructorReturn(this, (RemoteReaction.__proto__ || Object.getPrototypeOf(RemoteReaction)).apply(this, arguments));
+    }
+
+    _createClass(RemoteReaction, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        this.$reaction = this.$element;
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.options.state = this.$reaction.hasAttribute('data-' + this.options.datas.state) ? this.$reaction.data(this.options.datas.state) : this.options.state || this.options.stateDefault;
+        this.options.stateUrl = this.$reaction.data(this.options.datas.stateUrl) || this.options.stateUrl;
+        this.options.url = this.$reaction.data(this.options.datas.url) || this.options.url;
+
+        this._update();
+
+        this.___remoteState();
+      }
+
+      /* REMOTE STATE */
+
+    }, {
+      key: '___remoteState',
+      value: function ___remoteState() {
+
+        if (!this.options.stateUrl) return;
+
+        $.get(this.options.stateUrl, this.__remoteState.bind(this));
+      }
+    }, {
+      key: '__remoteState',
+      value: function __remoteState(res) {
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (_.isError(resj) || !('state' in resj)) return;
+
+        this._remoteState(resj);
+      }
+    }, {
+      key: '_remoteState',
+      value: function _remoteState(resj) {
+
+        if (resj.state === this.options.state) return;
+
+        this.options.state = resj.state;
+
+        this._update();
+      }
+
+      /* UPDATE */
+
+    }, {
+      key: '_update',
+      value: function _update() {
+
+        this.$reaction.attr('data-' + this.options.datas.state, String(this.options.state));
+      }
+
+      /* REQUEST HANDLERS */
+
+    }, {
+      key: '__beforesend',
+      value: function __beforesend(res) {
+
+        this.disable();
+
+        return _get(RemoteReaction.prototype.__proto__ || Object.getPrototypeOf(RemoteReaction.prototype), '__beforesend', this).call(this, res);
+      }
+    }, {
+      key: '__error',
+      value: function __error(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        $.toast(_.isError(resj) || !('message' in resj) ? this.options.messages.error : resj.msg);
+
+        return _get(RemoteReaction.prototype.__proto__ || Object.getPrototypeOf(RemoteReaction.prototype), '__error', this).call(this, res);
+      }
+    }, {
+      key: '__success',
+      value: function __success(res) {
+
+        if (this.isAborted()) return;
+
+        var resj = _.isPlainObject(res) ? res : _.attempt(JSON.parse, res);
+
+        if (_.isError(resj)) return this.__error(res);
+
+        this._success(resj);
+
+        if ('message' in resj) $.toast(resj.message);
+
+        return _get(RemoteReaction.prototype.__proto__ || Object.getPrototypeOf(RemoteReaction.prototype), '__success', this).call(this);
+      }
+    }, {
+      key: '__complete',
+      value: function __complete(res) {
+
+        this.enable();
+
+        return _get(RemoteReaction.prototype.__proto__ || Object.getPrototypeOf(RemoteReaction.prototype), '__complete', this).call(this, res);
+      }
+
+      /* REQUEST CALLBACKS */
+
+    }, {
+      key: '_success',
+      value: function _success(resj) {
+
+        this.options.state = resj.state;
+
+        this._update();
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return this.options.state;
+      }
+    }, {
+      key: 'set',
+      value: function set(state) {
+
+        if (state === this.options.state) return;
+
+        var current = this.get(),
+            ajax = {
+          data: { current: current, state: state },
+          url: this.options.url || this.options.ajax.url
+        };
+
+        return this.request(ajax);
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+
+        return this.set(this.options.stateDefault);
+      }
+    }]);
+
+    return RemoteReaction;
+  }(Widgets.Remote);
+
+  /* FACTORY */
+
+  Factory.make(RemoteReaction, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Liker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/remote/reaction/reaction.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'liker',
+    plugin: true,
+    selector: '.liker',
+    options: {
+      likes: 0,
+      dislikes: 0,
+      datas: {
+        likes: 'likes',
+        dislikes: 'dislikes'
+      },
+      selectors: {
+        like: '.like',
+        dislike: '.dislike'
+      }
+    }
+  };
+
+  /* LIKER */
+
+  var Liker = function (_Widgets$RemoteReacti) {
+    _inherits(Liker, _Widgets$RemoteReacti);
+
+    function Liker() {
+      _classCallCheck(this, Liker);
+
+      return _possibleConstructorReturn(this, (Liker.__proto__ || Object.getPrototypeOf(Liker)).apply(this, arguments));
+    }
+
+    _createClass(Liker, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '_variables', this).call(this);
+
+        this.$like = this.$reaction.find(this.options.selectors.like);
+        this.$dislike = this.$reaction.find(this.options.selectors.dislike);
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.options.likes = Number(this.$like.data(this.options.datas.likes)) || this.options.likes;
+        this.options.dislikes = Number(this.$dislike.data(this.options.datas.dislikes)) || this.options.dislikes;
+
+        _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '_init', this).call(this);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___like();
+        this.___dislike();
+      }
+
+      /* UPDATE */
+
+    }, {
+      key: '_update',
+      value: function _update() {
+
+        _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '_update', this).call(this);
+
+        this.$like.attr('data-' + this.options.datas.likes, this.options.likes);
+        this.$dislike.attr('data-' + this.options.datas.dislikes, this.options.dislikes);
+      }
+
+      /* LIKE */
+
+    }, {
+      key: '___like',
+      value: function ___like() {
+
+        this._on(this.$like, Pointer.tap, this.__like);
+      }
+    }, {
+      key: '__like',
+      value: function __like() {
+
+        var action = this.options.state ? 'reset' : 'like';
+
+        this[action]();
+      }
+
+      /* DISLIKE */
+
+    }, {
+      key: '___dislike',
+      value: function ___dislike() {
+
+        this._on(this.$dislike, Pointer.tap, this.__dislike);
+      }
+    }, {
+      key: '__dislike',
+      value: function __dislike() {
+
+        var action = this.options.state === false ? 'reset' : 'dislike';
+
+        this[action]();
+      }
+
+      /* REQUEST CALLBACKS */
+
+    }, {
+      key: '_success',
+      value: function _success(resj) {
+
+        this.options.likes = resj.likes;
+        this.options.dislikes = resj.dislikes;
+
+        _get(Liker.prototype.__proto__ || Object.getPrototypeOf(Liker.prototype), '_success', this).call(this, resj);
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return _.pick(this.options, ['likes', 'dislikes', 'state']);
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.options.state;
+
+
+        if (!!force !== this.options.state) {
+
+          this.set(!!force);
+        }
+      }
+    }, {
+      key: 'like',
+      value: function like() {
+
+        return this.set(true);
+      }
+    }, {
+      key: 'dislike',
+      value: function dislike() {
+
+        return this.set(false);
+      }
+    }]);
+
+    return Liker;
+  }(Widgets.RemoteReaction);
+
+  /* FACTORY */
+
+  Factory.make(Liker, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
+
+/* =========================================================================
+ * Svelto - Widgets - Subscriber
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/remote/reaction/reaction.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'subscriber',
+    plugin: true,
+    selector: '.subscriber',
+    options: {
+      counter: 0,
+      datas: {
+        counter: 'counter'
+      },
+      selectors: {
+        toggle: '.toggle',
+        counter: '.counter'
+      }
+    }
+  };
+
+  /* SUBSCRIBER */
+
+  var Subscriber = function (_Widgets$RemoteReacti2) {
+    _inherits(Subscriber, _Widgets$RemoteReacti2);
+
+    function Subscriber() {
+      _classCallCheck(this, Subscriber);
+
+      return _possibleConstructorReturn(this, (Subscriber.__proto__ || Object.getPrototypeOf(Subscriber)).apply(this, arguments));
+    }
+
+    _createClass(Subscriber, [{
+      key: '_variables',
+
+
+      /* SPECIAL */
+
+      value: function _variables() {
+
+        _get(Subscriber.prototype.__proto__ || Object.getPrototypeOf(Subscriber.prototype), '_variables', this).call(this);
+
+        this.$toggle = this.$reaction.find(this.options.selectors.toggle);
+        this.$counter = this.$reaction.find(this.options.selectors.counter);
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this.options.counter = Number(this.$counter.data(this.options.datas.counter)) || this.options.counter;
+
+        _get(Subscriber.prototype.__proto__ || Object.getPrototypeOf(Subscriber.prototype), '_init', this).call(this);
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___toggle();
+      }
+
+      /* UPDATE */
+
+    }, {
+      key: '_update',
+      value: function _update() {
+
+        _get(Subscriber.prototype.__proto__ || Object.getPrototypeOf(Subscriber.prototype), '_update', this).call(this);
+
+        this.$counter.attr('data-' + this.options.datas.counter, this.options.counter);
+      }
+
+      /* TOGGLE */
+
+    }, {
+      key: '___toggle',
+      value: function ___toggle() {
+
+        this._on(this.$toggle, Pointer.tap, this.__toggle);
+      }
+    }, {
+      key: '__toggle',
+      value: function __toggle() {
+
+        this.toggle();
+      }
+
+      /* REQUEST CALLBACKS */
+
+    }, {
+      key: '_success',
+      value: function _success(resj) {
+
+        this.options.counter = resj.counter;
+
+        _get(Subscriber.prototype.__proto__ || Object.getPrototypeOf(Subscriber.prototype), '_success', this).call(this, resj);
+      }
+
+      /* API */
+
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return _.pick(this.options, ['counter', 'state']);
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.options.state;
+
+
+        if (!!force !== this.options.state) {
+
+          this.set(!!force);
+        }
+      }
+    }, {
+      key: 'subscribe',
+      value: function subscribe() {
+
+        return this.set(true);
+      }
+    }, {
+      key: 'unsubscribe',
+      value: function unsubscribe() {
+
+        return this.set(false);
+      }
+    }]);
+
+    return Subscriber;
+  }(Widgets.RemoteReaction);
+
+  /* FACTORY */
+
+  Factory.make(Subscriber, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /* =========================================================================
  * Svelto - Widgets - Remote - Widget
@@ -21008,8 +22590,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       placeholder: false
     },
     options: {
-      persistent: false, // Wether it should survive a change of page or not. Needed when used in frameworks like Meteor
-      resize: true, // Wether performing a resize transition between the loading widget and the remove widget or not
+      persistent: false, // Whether it should survive a change of page or not. Needed when used in frameworks like Meteor
+      resize: true, // Whether performing a resize transition between the loading widget and the remove widget or not
       $wrapper: false, // The loading widget will be appended to it, fallback to the $layout
       widget: false,
       methods: {
@@ -21025,11 +22607,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         method: 'POST'
       },
       cache: {
-        enabled: false, // Wether remote widgets should be cached or not
+        enabled: false, // Whether remote widgets should be cached or not
         size: 50 // Maximum amount of cached widgets to store, shouldn't change from widget to widget
       },
-      messages: {
-        error: 'An error occurred, please try again later'
+      storage: {
+        enabled: false, // Whether to preserve the content across refreshes/sessions
+        ttl: 86400 // 1 day
       },
       attributes: {
         id: 'data-remote-widget-id'
@@ -21171,19 +22754,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_widgetDestroy',
       value: function _widgetDestroy() {
+        var _this106 = this;
 
         if (!this.$widget) return;
 
-        this.$widget[this.options.widget.config.name](this.options.methods.close);
+        var instance = this.$widget[this.options.widget.config.name]('instance');
 
-        this._delay(function () {
+        instance.whenUnlocked(function () {
 
-          if (!this.$widget) return;
+          instance[_this106.options.methods.close]();
 
-          this.$widget.remove();
+          _this106._delay(function () {
 
-          this.$widget = false;
-        }, this.options.widget.config.options.animations[this.options.methods.close]);
+            if (!this.$widget) return;
+
+            this.$widget.remove();
+
+            this.$widget = false;
+          }, instance.options.animations[_this106.options.methods.close]);
+        });
       }
 
       /* CACHE */
@@ -21272,6 +22861,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
 
+        /* STORAGE */
+
+        if (this.options.storage.enabled) {
+
+          var stored = this._storageGet(this.requestId);
+
+          if (stored) {
+
+            this._cacheShow(stored);
+
+            return false;
+          }
+        }
+
         /* REQUEST */
 
         this._defer(function () {
@@ -21330,10 +22933,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this._cacheSet(this.requestId, remoteWidget);
         }
 
+        /* STORAGE */
+
+        if (this.options.storage.enabled) {
+
+          var storable = {
+            id: this.requestId,
+            widget: remoteWidget
+          };
+
+          this._storageSet(this.requestId, storable, this.options.storage.ttl);
+        }
+
         /* REPLACING */
 
         this._frame(function () {
-          var _this99 = this;
+          var _this107 = this;
 
           this._widgetReplaceWith($remoteWidget);
 
@@ -21342,28 +22957,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.options.resize) {
             (function () {
 
-              var newRect = _this99.$widget.getRect();
+              var newRect = _this107.$widget.getRect(),
+                  needsResize = prevRect.width !== newRect.width || prevRect.height !== newRect.height;
 
-              _this99.$widget.css({
-                width: prevRect.width,
-                height: prevRect.height
-              });
+              if (needsResize) {
 
-              _this99.$widget.addClass(_this99.options.classes.placeholder).addClass(_this99.options.classes.resizing);
-
-              _this99._frame(function () {
-
-                this.$widget.addClass(this.options.classes.showing);
-
-                this.$widget.animate({
-                  width: newRect.width,
-                  height: newRect.height
-                }, {
-                  duration: this.options.animations.resize,
-                  step: this._widgetResizing.bind(this),
-                  always: this._widgetResized.bind(this)
+                _this107.$widget.css({
+                  width: prevRect.width,
+                  height: prevRect.height
                 });
-              });
+
+                _this107.$widget.addClass(_this107.options.classes.placeholder).addClass(_this107.options.classes.resizing);
+
+                _this107._frame(function () {
+
+                  this.$widget.addClass(this.options.classes.showing);
+
+                  this.$widget.animate({
+                    width: newRect.width,
+                    height: newRect.height
+                  }, {
+                    duration: this.options.animations.resize,
+                    step: this._widgetResizing.bind(this),
+                    always: this._widgetResized.bind(this)
+                  });
+                });
+              }
             })();
           }
         });
@@ -21398,8 +23017,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require ../widget/widget.js
  * @require widgets/modal/modal.js
- * @require widgets/remote/widget/widget.js
  * ========================================================================= */
 
 (function ($, _, Svelto, Widgets, Factory, Animations) {
@@ -21512,14 +23131,168 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote.js
+ * @require ../widget/widget.js
+ * @require widgets/panel/panel.js
+ * ========================================================================= */
+
+//TODO: Add support for pinned panels
+
+(function ($, _, Svelto, Widgets, Factory, Animations) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remotePanel',
+    templates: {
+      placeholder: '<div class="panel container <%= o.direction %> <%= o.type %> <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' + '<svg class="spinner">' + '<circle cx="1.625em" cy="1.625em" r="1.25em">' + '</svg>' + '</div>'
+    },
+    options: {
+      widget: Widgets.Panel,
+      diretion: Widgets.Panel.config.options.diretion,
+      type: Widgets.Panel.config.options.type,
+      classes: {
+        placeholder: 'remote-panel-placeholder',
+        loaded: 'remote-panel-loaded',
+        resizing: 'remote-panel-resizing',
+        showing: 'remote-panel-showing'
+      },
+      animations: {
+        resize: Animations.normal
+      }
+    }
+  };
+
+  /* REMOTE PANEL */
+
+  var RemotePanel = function (_Widgets$RemoteWidget2) {
+    _inherits(RemotePanel, _Widgets$RemoteWidget2);
+
+    function RemotePanel() {
+      _classCallCheck(this, RemotePanel);
+
+      return _possibleConstructorReturn(this, (RemotePanel.__proto__ || Object.getPrototypeOf(RemotePanel)).apply(this, arguments));
+    }
+
+    return RemotePanel;
+  }(Widgets.RemoteWidget);
+
+  /* FACTORY */
+
+  Factory.make(RemotePanel, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./panel.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, RemotePanel) {
+
+  'use strict';
+
+  /* HELPER */
+
+  $.remotePanel = function (ajax, direction, type) {
+
+    new RemotePanel({ ajax: ajax, direction: direction, type: type }).request();
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.RemotePanel);
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../remote_trigger.js
+ * @require ./panel.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'remotePanelTrigger',
+    plugin: true,
+    selector: '.remote-panel-trigger',
+    options: {
+      widget: Widgets.RemotePanel,
+      direction: undefined,
+      type: undefined
+    }
+  };
+
+  /* REMOTE PANEL TRIGGER */
+
+  var RemotePanelTrigger = function (_Widgets$RemoteTrigge4) {
+    _inherits(RemotePanelTrigger, _Widgets$RemoteTrigge4);
+
+    function RemotePanelTrigger() {
+      _classCallCheck(this, RemotePanelTrigger);
+
+      return _possibleConstructorReturn(this, (RemotePanelTrigger.__proto__ || Object.getPrototypeOf(RemotePanelTrigger)).apply(this, arguments));
+    }
+
+    _createClass(RemotePanelTrigger, [{
+      key: '_init',
+
+
+      /* SPECIAL */
+
+      value: function _init() {
+
+        _get(RemotePanelTrigger.prototype.__proto__ || Object.getPrototypeOf(RemotePanelTrigger.prototype), '_init', this).call(this);
+
+        this.options.direction = this.$trigger.data(Widgets.Panel.config.options.datas.direction) || this.options.direction;
+        this.options.type = this.$trigger.data(Widgets.Panel.config.options.datas.type) || this.options.type;
+      }
+
+      /* OPTIONS */
+
+    }, {
+      key: '_getOptions',
+      value: function _getOptions() {
+        var _options2 = this.options,
+            direction = _options2.direction,
+            type = _options2.type;
+
+
+        return _.merge(_get(RemotePanelTrigger.prototype.__proto__ || Object.getPrototypeOf(RemotePanelTrigger.prototype), '_getOptions', this).call(this), { direction: direction, type: type });
+      }
+    }]);
+
+    return RemotePanelTrigger;
+  }(Widgets.RemoteTrigger);
+
+  /* FACTORY */
+
+  Factory.make(RemotePanelTrigger, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory);
+
+/* =========================================================================
  * Svelto - Widgets - Remote - Popover
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../remote.js
+ * @require ../widget/widget.js
  * @require widgets/popover/popover.js
- * @require widgets/remote/widget/widget.js
  * ========================================================================= */
 
 //FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
@@ -21555,8 +23328,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE POPOVER */
 
-  var RemotePopover = function (_Widgets$RemoteWidget2) {
-    _inherits(RemotePopover, _Widgets$RemoteWidget2);
+  var RemotePopover = function (_Widgets$RemoteWidget3) {
+    _inherits(RemotePopover, _Widgets$RemoteWidget3);
 
     function RemotePopover() {
       _classCallCheck(this, RemotePopover);
@@ -21588,15 +23361,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_widgetReplaceWith',
       value: function _widgetReplaceWith($replacement) {
-
-        var classList = this.$widget.attr('class') || '',
-            pointingClass = classList.split(' ').find(function (cls) {
-          return cls.startsWith('pointing-');
-        }),
+        var _options$widget$confi = this.options.widget.config.options.classes,
+            fullscreen = _options$widget$confi.fullscreen,
+            fullscreenRequest = _options$widget$confi.fullscreenRequest,
+            isFullscreen = $replacement.hasClass(fullscreen) || $replacement.hasClass(fullscreenRequest),
             matrix = this.$widget.matrix(),
             positionateGuid = this.$widget[0]._positionateGuid;
 
-        if (pointingClass) $replacement.addClass(pointingClass);
+
+        if (!isFullscreen) {
+
+          var classList = this.$widget.attr('class') || '',
+              pointingClass = classList.split(' ').find(function (cls) {
+            return cls.startsWith('pointing-');
+          });
+
+          if (pointingClass) $replacement.addClass(pointingClass);
+        }
 
         _get(RemotePopover.prototype.__proto__ || Object.getPrototypeOf(RemotePopover.prototype), '_widgetReplaceWith', this).call(this, $replacement);
 
@@ -21679,8 +23460,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* REMOTE POPOVER TRIGGER */
 
-  var RemotePopoverTrigger = function (_Widgets$RemoteTrigge4) {
-    _inherits(RemotePopoverTrigger, _Widgets$RemoteTrigge4);
+  var RemotePopoverTrigger = function (_Widgets$RemoteTrigge5) {
+    _inherits(RemotePopoverTrigger, _Widgets$RemoteTrigge5);
 
     function RemotePopoverTrigger() {
       _classCallCheck(this, RemotePopoverTrigger);
@@ -21689,17 +23470,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(RemotePopoverTrigger, [{
-      key: 'trigger',
-      value: function trigger() {
+      key: '_getOptions',
 
-        var options = {
-          ajax: this.options.ajax,
+
+      /* OPTIONS */
+
+      value: function _getOptions() {
+
+        return _.merge(_get(RemotePopoverTrigger.prototype.__proto__ || Object.getPrototypeOf(RemotePopoverTrigger.prototype), '_getOptions', this).call(this), {
           positionate: {
             $anchor: this.$trigger
           }
-        };
-
-        new this.options.widget(options).request();
+        });
       }
     }]);
 
@@ -21719,6 +23501,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @before widgets/remote/action/action.js
  * @before widgets/remote/modal/modal.js
+ * @before widgets/remote/panel/panel.js
+ * @before widgets/remote/popover/popover.js
  * @require ../selectable.js
  * @require widgets/targeter/targeter.js
  * @require widgets/toast/toast.js
@@ -21737,23 +23521,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     options: {
       ajax: {}, // Default values
       actions: {
-        action: function action(ajax) {
-          new Widgets.RemoteAction({ ajax: ajax }).request();
-        },
-        modal: function modal(ajax) {
-          new Widgets.RemoteModal({ ajax: ajax }).request();
-        },
+        action: $.remoteAction,
+        modal: $.remoteModal,
+        panel: $.remotePanel,
+        popover: $.remotePopover,
         page: function page(ajax) {
           window.location.href = ajax.url;
         }
       },
       defaultAction: 'page',
+      actionsArgs: {
+        ajax: function ajax($trigger) {
+          return this._getAjax($trigger);
+        },
+        panel: function panel($trigger) {
+          return [this._getAjax($trigger), $trigger.data(Widgets.Panel.config.options.datas.direction), $trigger.data(Widgets.Panel.config.options.datas.type)];
+        },
+        popover: function popover($trigger) {
+          return [this._getAjax($trigger), $trigger];
+        }
+      },
+      defaultActionArgs: 'ajax',
       widget: Widgets.Selectable,
       characters: {
         separator: ','
-      },
-      messages: {
-        no_selected: 'No entries selected'
       },
       placeholders: {
         id: '%ID%'
@@ -21770,7 +23561,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       selectors: {
         action: '.action',
-        id: false // Selects the element containing the id (from it's `tr` element), for instance it could be `> td:first-child`. If falsy, `datas.id` will be used
+        id: false // Selects the element containing the id (from its `tr` element), for instance it could be `> td:first-child`. If falsy, `datas.id` will be used
       },
       callbacks: {
         action: _.noop
@@ -21780,8 +23571,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECTABLE ACTIONS */
 
-  var SelectableActions = function (_Widgets$Targeter3) {
-    _inherits(SelectableActions, _Widgets$Targeter3);
+  var SelectableActions = function (_Widgets$Targeter4) {
+    _inherits(SelectableActions, _Widgets$Targeter4);
 
     function SelectableActions() {
       _classCallCheck(this, SelectableActions);
@@ -21811,6 +23602,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.___action();
       }
 
+      /* UTILITIES */
+
+    }, {
+      key: '_getIds',
+      value: function _getIds() {
+        var _this115 = this;
+
+        var $rows = this._targetInstance.get(),
+            ids = $rows.get().map(function (row) {
+          return _this115.options.selectors.id ? $(row).find(_this115.options.selectors.id).text() : $(row).data(_this115.options.datas.id);
+        });
+
+        return _.compact(ids);
+      }
+    }, {
+      key: '_getAjax',
+      value: function _getAjax($trigger) {
+
+        var ids = this._getIds(),
+            url = $trigger.data(this.options.datas.url) || $trigger.attr(this.options.attributes.href) || this.options.ajax.url,
+            data = $trigger.data(this.options.datas.data) || this.options.ajax.data || {},
+            method = $trigger.data(this.options.datas.method) || this.options.ajax.method;
+
+        url = url.replace(this.options.placeholders.id, ids.join(this.options.characters.separator));
+        data = _.extend({}, data, { ids: ids });
+
+        return _.extend({}, this.options.ajax, { url: url, data: data, method: method });
+      }
+    }, {
+      key: '_getArgs',
+      value: function _getArgs(type, $trigger) {
+
+        var fn = this.options.actionsArgs[type] || this.options.actionsArgs[this.options.defaultActionArgs];
+
+        if (!fn) return;
+
+        var args = fn.call(this, $trigger);
+
+        return args ? _.castArray(args) : false;
+      }
+
       /* ACTION */
 
     }, {
@@ -21823,47 +23655,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__action',
       value: function __action(event) {
 
-        var ids = this._getIds();
-
-        if (!ids.length) return $.toast(this.options.messages.no_selected);
-
-        var $action = $(event.target),
-            type = $action.data(this.options.datas.type) || this.options.defaultAction,
+        var $trigger = $(event.target),
+            type = $trigger.data(this.options.datas.type) || this.options.defaultAction,
             action = this.options.actions[type];
 
         if (!action) return;
 
-        var url = $action.data(this.options.datas.url) || $action.attr(this.options.attributes.href) || this.options.ajax.url,
-            data = $action.data(this.options.datas.data) || this.options.ajax.data,
-            method = $action.data(this.options.datas.method) || this.options.ajax.method;
+        var args = this._getArgs(type, $trigger);
 
-        url = url.replace(this.options.placeholders.id, ids.join(this.options.characters.separator));
-        data = _.extend(data || {}, { ids: ids });
+        if (!args) return;
 
-        var ajax = _.extend({}, this.options.ajax, {
-          url: url,
-          data: data,
-          method: method
-        });
+        action.apply(undefined, _toConsumableArray(args));
 
-        action(ajax);
-
-        this._trigger('action', event, { type: type, ajax: ajax });
-      }
-
-      /* IDs */
-
-    }, {
-      key: '_getIds',
-      value: function _getIds() {
-        var _this105 = this;
-
-        var $rows = this._targetInstance.get(),
-            ids = $rows.get().map(function (row) {
-          return _this105.options.selectors.id ? $(row).find(_this105.options.selectors.id).text() : $(row).data(_this105.options.datas.id);
-        });
-
-        return _.compact(ids);
+        this._trigger('action', { type: type, args: args });
       }
     }]);
 
@@ -21910,8 +23714,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECTABLE ACTIONS CONTAINER */
 
-  var SelectableActionsContainer = function (_Widgets$Targeter4) {
-    _inherits(SelectableActionsContainer, _Widgets$Targeter4);
+  var SelectableActionsContainer = function (_Widgets$Targeter5) {
+    _inherits(SelectableActionsContainer, _Widgets$Targeter5);
 
     function SelectableActionsContainer() {
       _classCallCheck(this, SelectableActionsContainer);
@@ -22051,8 +23855,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* SELECTABLE ACTIONS POPOVER */
 
-  var SelectableActionsPopover = function (_Widgets$Targeter5) {
-    _inherits(SelectableActionsPopover, _Widgets$Targeter5);
+  var SelectableActionsPopover = function (_Widgets$Targeter6) {
+    _inherits(SelectableActionsPopover, _Widgets$Targeter6);
 
     function SelectableActionsPopover() {
       _classCallCheck(this, SelectableActionsPopover);
@@ -22225,8 +24029,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* TAGBOX */
 
-  var Tagbox = function (_Widgets$Widget39) {
-    _inherits(Tagbox, _Widgets$Widget39);
+  var Tagbox = function (_Widgets$Widget40) {
+    _inherits(Tagbox, _Widgets$Widget40);
 
     function Tagbox() {
       _classCallCheck(this, Tagbox);
@@ -22246,6 +24050,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$tags = this.$tagbox.find(this.options.selectors.tags);
         this.$input = this.$tagbox.find(this.options.selectors.input);
         this.$partial = this.$tagbox.find(this.options.selectors.partial);
+        this.partial = this.$partial[0];
       }
     }, {
       key: '_init',
@@ -22473,7 +24278,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__tapOnEmpty',
       value: function __tapOnEmpty(event) {
 
-        if (document.activeElement !== this.$partial[0] && !$(event.target).is(this.options.selectors.partial + ',' + this.options.selectors.tagLabel)) {
+        if (!$.isFocused(this.partial) && !$(event.target).is(this.options.selectors.partial + ',' + this.options.selectors.tagLabel)) {
           //TODO: Add an helper for checking if is focused
 
           this.$partial.focus();
@@ -22557,9 +24362,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (tags.length) {
 
-          for (var _i3 = 0, _l3 = tags.length; _i3 < _l3; _i3++) {
+          for (var _i4 = 0, _l3 = tags.length; _i4 < _l3; _i4++) {
 
-            this._remove($tags[_i3], tags[_i3]);
+            this._remove($tags[_i4], tags[_i4]);
           }
 
           this._updateInput();
@@ -22687,6 +24492,1620 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return new Toast(options);
   };
 })(Svelto.$, Svelto._, Svelto, Svelto.Widgets.Toast);
+
+/* =========================================================================
+ * Svelto - Lib - Emoji - Test
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/modernizr/modernizr.js
+ * ========================================================================= */
+
+(function (Modernizr) {
+
+  'use strict';
+
+  /* EMOJI */
+
+  Modernizr.addTest('emoji', function () {
+
+    var canvas = document.createElement('canvas');
+
+    if (!canvas.getContext) return false;
+
+    var ctx = canvas.getContext('2d');
+
+    if (!ctx || typeof ctx.fillText !== 'function') return false;
+
+    ctx.textBaseline = 'top';
+    ctx.font = '32px Arial';
+    ctx.fillText('😃', 0, 0);
+
+    return ctx.getImageData(16, 16, 1, 1).data[0] !== 0;
+  });
+})(Svelto.Modernizr);
+
+/* =========================================================================
+ * Svelto - Lib - Emoji
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./data/data.js
+ * @require ./test.js
+ * @require core/svelto/svelto.js
+ * ========================================================================= */
+
+(function ($, _, Modernizr, Svelto, EmojiData) {
+
+  'use strict';
+
+  /* EMOJI */
+
+  var Emoji = {
+
+    /* OPTIONS */
+
+    options: {
+      tone: 1, // Default tone
+      regexes: {
+        encoded: /:([a-zA-Z0-9+_-]+):(:tone-([1-6]):)?/g,
+        emoticon: /(:o\))|(=-?\))|(;-?[bpP)])|(:-?[bdDoOpP>|()\\\/*])|(8-?\))|([cCD()]:)|(<\/?3)|(>:-?\()|(:'\()/g
+      },
+      make: {
+        css: '', // Additional wrapper classes
+        sprite: false // Whether we should a sprite instead of single images
+      },
+      native: {
+        enabled: Modernizr.emoji, // If enabled the unicode character will be used
+        wrap: true // If enabled the emoji will be wrapped by a `i.emoji` element
+      },
+      image: {
+        path: '//cdn.jsdelivr.net/emojione/assets/png/$1.png'
+      },
+      sprite: {
+        columns: 41 // Number of columns in the sprite
+      }
+    },
+
+    /* METHODS */
+
+    getByName: function getByName(name) {
+      var data;
+      return regeneratorRuntime.async(function getByName$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(EmojiData.get());
+
+            case 2:
+              data = _context4.sent;
+              return _context4.abrupt('return', data.emojis[name] || data.alts[name]);
+
+            case 4:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, null, this);
+    },
+    getByEmoticon: function getByEmoticon(emoticon) {
+      var single = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var data, found;
+      return regeneratorRuntime.async(function getByEmoticon$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return regeneratorRuntime.awrap(EmojiData.get());
+
+            case 2:
+              data = _context5.sent;
+              found = data.emoticons[emoticon];
+              return _context5.abrupt('return', single && _.isArray(found) ? found[0] : found);
+
+            case 5:
+            case 'end':
+              return _context5.stop();
+          }
+        }
+      }, null, this);
+    },
+    getByUnicode: function getByUnicode(unicode) {
+      return regeneratorRuntime.async(function getByUnicode$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+            case 'end':
+              return _context6.stop();
+          }
+        }
+      }, null, this);
+    },
+    //TODO
+
+    getTone: function getTone(nr) {
+      var data;
+      return regeneratorRuntime.async(function getTone$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return regeneratorRuntime.awrap(EmojiData.get());
+
+            case 2:
+              data = _context7.sent;
+              return _context7.abrupt('return', data.tones[nr]);
+
+            case 4:
+            case 'end':
+              return _context7.stop();
+          }
+        }
+      }, null, this);
+    },
+    emoji2hex: function emoji2hex(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+      var codes;
+      return regeneratorRuntime.async(function emoji2hex$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              codes = _.range(emoji.char.length).map(function (nr) {
+                return emoji.char.codePointAt(nr);
+              }).filter(function (c) {
+                return c !== 0x200d && c !== 0xfe0f && (c < 0xd800 || c > 0xdfff);
+              });
+
+              if (!(tone > 1)) {
+                _context8.next = 6;
+                break;
+              }
+
+              _context8.next = 4;
+              return regeneratorRuntime.awrap(Emoji.getTone(tone));
+
+            case 4:
+              tone = _context8.sent;
+
+
+              codes.push(tone.char.codePointAt(0));
+
+            case 6:
+              return _context8.abrupt('return', codes.map(function (c) {
+                return _.padStart(c.toString(16), 4, 0);
+              }).join('-'));
+
+            case 7:
+            case 'end':
+              return _context8.stop();
+          }
+        }
+      }, null, this);
+    },
+    hex2emoji: function hex2emoji() {
+      return regeneratorRuntime.async(function hex2emoji$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+            case 'end':
+              return _context9.stop();
+          }
+        }
+      }, null, this);
+    },
+    //TODO
+
+    emoji2unicode: function emoji2unicode(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+      return regeneratorRuntime.async(function emoji2unicode$(_context10) {
+        while (1) {
+          switch (_context10.prev = _context10.next) {
+            case 0:
+              if (!_.isString(emoji)) {
+                _context10.next = 6;
+                break;
+              }
+
+              _context10.next = 3;
+              return regeneratorRuntime.awrap(Emoji.getByName(emoji));
+
+            case 3:
+              _context10.t0 = _context10.sent;
+              _context10.next = 7;
+              break;
+
+            case 6:
+              _context10.t0 = emoji;
+
+            case 7:
+              emoji = _context10.t0;
+
+              if (emoji) {
+                _context10.next = 10;
+                break;
+              }
+
+              return _context10.abrupt('return', '');
+
+            case 10:
+              if (!(!emoji.tones || tone < 2)) {
+                _context10.next = 12;
+                break;
+              }
+
+              return _context10.abrupt('return', emoji.char);
+
+            case 12:
+              _context10.next = 14;
+              return regeneratorRuntime.awrap(Emoji.getTone(tone));
+
+            case 14:
+              tone = _context10.sent;
+              return _context10.abrupt('return', '' + emoji.char + tone.char);
+
+            case 16:
+            case 'end':
+              return _context10.stop();
+          }
+        }
+      }, null, this);
+    },
+    unicode2emoji: function unicode2emoji(unicode) {
+      return regeneratorRuntime.async(function unicode2emoji$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+            case 'end':
+              return _context11.stop();
+          }
+        }
+      }, null, this);
+    },
+    //TODO
+
+    getImageUrl: function getImageUrl(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+      var hex;
+      return regeneratorRuntime.async(function getImageUrl$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              _context12.next = 2;
+              return regeneratorRuntime.awrap(Emoji.emoji2hex(emoji, tone));
+
+            case 2:
+              hex = _context12.sent;
+              return _context12.abrupt('return', _.format(Emoji.options.image.path, hex));
+
+            case 4:
+            case 'end':
+              return _context12.stop();
+          }
+        }
+      }, null, this);
+    },
+    getSpriteXY: function getSpriteXY(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+
+
+      var position = emoji.x + tone - 1,
+          x = Math.floor(position / Emoji.options.sprite.columns),
+          y = position % Emoji.options.sprite.columns;
+
+      return { x: x, y: y };
+    },
+    encode: function encode(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+
+
+      var name = _.isString(emoji) ? emoji : emoji.id;
+
+      return tone > 1 ? ':' + name + '::tone-' + tone + ':' : ':' + name + ':';
+    },
+    make: function make(emoji) {
+      var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Emoji.options.tone;
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Emoji.options.make;
+
+      var unicode, _Emoji$getSpriteXY, x, y, scale, posX, posY, url;
+
+      return regeneratorRuntime.async(function make$(_context13) {
+        while (1) {
+          switch (_context13.prev = _context13.next) {
+            case 0:
+              if (!_.isString(emoji)) {
+                _context13.next = 6;
+                break;
+              }
+
+              _context13.next = 3;
+              return regeneratorRuntime.awrap(Emoji.getByName(emoji));
+
+            case 3:
+              _context13.t0 = _context13.sent;
+              _context13.next = 7;
+              break;
+
+            case 6:
+              _context13.t0 = emoji;
+
+            case 7:
+              emoji = _context13.t0;
+
+              if (emoji) {
+                _context13.next = 10;
+                break;
+              }
+
+              return _context13.abrupt('return', '');
+
+            case 10:
+
+              tone = emoji.tones ? tone : 1;
+
+              if (!Emoji.options.native.enabled) {
+                _context13.next = 22;
+                break;
+              }
+
+              _context13.next = 14;
+              return regeneratorRuntime.awrap(Emoji.emoji2unicode(emoji, tone));
+
+            case 14:
+              unicode = _context13.sent;
+
+              if (!Emoji.options.native.wrap) {
+                _context13.next = 19;
+                break;
+              }
+
+              return _context13.abrupt('return', '<i class="emoji ' + options.css + '" data-id="' + emoji.id + '" data-tone="' + tone + '" data-tonable="' + !!emoji.tones + '" title="' + emoji.name + '">' + unicode + '</i>');
+
+            case 19:
+              return _context13.abrupt('return', unicode);
+
+            case 20:
+              _context13.next = 31;
+              break;
+
+            case 22:
+              if (!options.sprite) {
+                _context13.next = 27;
+                break;
+              }
+
+              _Emoji$getSpriteXY = Emoji.getSpriteXY(emoji, tone), x = _Emoji$getSpriteXY.x, y = _Emoji$getSpriteXY.y, scale = 100 / (Emoji.options.sprite.columns - 1), posX = x * scale, posY = y * scale;
+              return _context13.abrupt('return', '<i class="emoji ' + options.css + '" data-id="' + emoji.id + '" data-tone="' + tone + '" data-tonable="' + !!emoji.tones + '" title="' + emoji.name + '" style="background-position:' + posX + '% ' + posY + '%"></i>');
+
+            case 27:
+              _context13.next = 29;
+              return regeneratorRuntime.awrap(Emoji.getImageUrl(emoji, tone));
+
+            case 29:
+              url = _context13.sent;
+              return _context13.abrupt('return', '<i class="emoji ' + options.css + '" data-id="' + emoji.id + '" data-tone="' + tone + '" data-tonable="' + !!emoji.tones + '" title="' + emoji.name + '" style="background-image:url(' + url + ')"></i>');
+
+            case 31:
+            case 'end':
+              return _context13.stop();
+          }
+        }
+      }, null, this);
+    }
+  };
+
+  /* EXPORT */
+
+  Svelto.Emoji = Emoji;
+})(Svelto.$, Svelto._, Svelto.Modernizr, Svelto, Svelto.EmojiData);
+
+/* =========================================================================
+ * Svelto - Lib - Emojify
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widgetize/widgetize.js
+ * @require lib/emoji/emoji.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgetize, EmojiData, Emoji) {
+
+  'use strict';
+
+  /* EMOJIFY */
+
+  var Emojify = {
+
+    /* OPTIONS */
+
+    options: {
+      parse: {
+        emoticon: true,
+        encoded: true,
+        unicode: false //FIXME: Doesn't work properly, and it's very slow
+      }
+    },
+
+    /* UTILITIES */
+
+    getEmoticons: function getEmoticons(str) {
+
+      return _.findMatches(str, Emoji.options.regexes.emoticon).map(_.first).sort(function (a, b) {
+        return b.length - a.length;
+      });
+    },
+    getEncoded: function getEncoded(str) {
+
+      var matches = _.findMatches(str, Emoji.options.regexes.encoded).sort(function (a, b) {
+        return b[0].length - a[0].length;
+      });
+
+      return matches.reduce(function (acc, match) {
+        return _.set(acc, match[0], {
+          name: match[1],
+          tone: match[3] || Emoji.options.tone
+        });
+      }, {});
+    },
+
+
+    /* PARSE */
+
+    parseEmoticon: function parseEmoticon(str, options) {
+      var emoticons, _iteratorNormalCompletion26, _didIteratorError26, _iteratorError26, _iterator26, _step26, emoticon, _emoji;
+
+      return regeneratorRuntime.async(function parseEmoticon$(_context14) {
+        while (1) {
+          switch (_context14.prev = _context14.next) {
+            case 0:
+              if (Emojify.options.parse.emoticon) {
+                _context14.next = 2;
+                break;
+              }
+
+              return _context14.abrupt('return', str);
+
+            case 2:
+              emoticons = Emojify.getEmoticons(str);
+              _iteratorNormalCompletion26 = true;
+              _didIteratorError26 = false;
+              _iteratorError26 = undefined;
+              _context14.prev = 6;
+              _iterator26 = emoticons[Symbol.iterator]();
+
+            case 8:
+              if (_iteratorNormalCompletion26 = (_step26 = _iterator26.next()).done) {
+                _context14.next = 25;
+                break;
+              }
+
+              emoticon = _step26.value;
+              _context14.next = 12;
+              return regeneratorRuntime.awrap(Emoji.getByEmoticon(emoticon, true));
+
+            case 12:
+              _emoji = _context14.sent;
+
+              if (_emoji) {
+                _context14.next = 15;
+                break;
+              }
+
+              return _context14.abrupt('continue', 22);
+
+            case 15:
+              _context14.t0 = _;
+              _context14.t1 = str;
+              _context14.t2 = emoticon;
+              _context14.next = 20;
+              return regeneratorRuntime.awrap(Emoji.make(_emoji.id, Emoji.options.tone, options));
+
+            case 20:
+              _context14.t3 = _context14.sent;
+              str = _context14.t0.replaceAll.call(_context14.t0, _context14.t1, _context14.t2, _context14.t3);
+
+            case 22:
+              _iteratorNormalCompletion26 = true;
+              _context14.next = 8;
+              break;
+
+            case 25:
+              _context14.next = 31;
+              break;
+
+            case 27:
+              _context14.prev = 27;
+              _context14.t4 = _context14['catch'](6);
+              _didIteratorError26 = true;
+              _iteratorError26 = _context14.t4;
+
+            case 31:
+              _context14.prev = 31;
+              _context14.prev = 32;
+
+              if (!_iteratorNormalCompletion26 && _iterator26.return) {
+                _iterator26.return();
+              }
+
+            case 34:
+              _context14.prev = 34;
+
+              if (!_didIteratorError26) {
+                _context14.next = 37;
+                break;
+              }
+
+              throw _iteratorError26;
+
+            case 37:
+              return _context14.finish(34);
+
+            case 38:
+              return _context14.finish(31);
+
+            case 39:
+              return _context14.abrupt('return', str);
+
+            case 40:
+            case 'end':
+              return _context14.stop();
+          }
+        }
+      }, null, this, [[6, 27, 31, 39], [32,, 34, 38]]);
+    },
+    parseEncoded: function parseEncoded(str, options) {
+      var matches, match, _matches$match, name, tone, _emoji2;
+
+      return regeneratorRuntime.async(function parseEncoded$(_context15) {
+        while (1) {
+          switch (_context15.prev = _context15.next) {
+            case 0:
+              if (Emojify.options.parse.encoded) {
+                _context15.next = 2;
+                break;
+              }
+
+              return _context15.abrupt('return', str);
+
+            case 2:
+              matches = Emojify.getEncoded(str);
+              _context15.t0 = regeneratorRuntime.keys(matches);
+
+            case 4:
+              if ((_context15.t1 = _context15.t0()).done) {
+                _context15.next = 23;
+                break;
+              }
+
+              match = _context15.t1.value;
+              _matches$match = matches[match];
+              name = _matches$match.name;
+              tone = _matches$match.tone;
+              _context15.next = 11;
+              return regeneratorRuntime.awrap(Emoji.getByName(name));
+
+            case 11:
+              _emoji2 = _context15.sent;
+
+              if (_emoji2) {
+                _context15.next = 14;
+                break;
+              }
+
+              return _context15.abrupt('continue', 4);
+
+            case 14:
+              _context15.t2 = _;
+              _context15.t3 = str;
+              _context15.t4 = match;
+              _context15.next = 19;
+              return regeneratorRuntime.awrap(Emoji.make(_emoji2.id, tone, options));
+
+            case 19:
+              _context15.t5 = _context15.sent;
+              str = _context15.t2.replaceAll.call(_context15.t2, _context15.t3, _context15.t4, _context15.t5);
+              _context15.next = 4;
+              break;
+
+            case 23:
+              return _context15.abrupt('return', str);
+
+            case 24:
+            case 'end':
+              return _context15.stop();
+          }
+        }
+      }, null, this);
+    },
+    parseUnicode: function parseUnicode(str, options) {
+      var data, _iteratorNormalCompletion27, _didIteratorError27, _iteratorError27, _iterator27, _step27, _step27$value, char, _name2, _emoji3, tones, i, l, unicode;
+
+      return regeneratorRuntime.async(function parseUnicode$(_context16) {
+        while (1) {
+          switch (_context16.prev = _context16.next) {
+            case 0:
+              if (Emojify.options.parse.unicode) {
+                _context16.next = 2;
+                break;
+              }
+
+              return _context16.abrupt('return', str);
+
+            case 2:
+              _context16.next = 4;
+              return regeneratorRuntime.awrap(EmojiData.get());
+
+            case 4:
+              data = _context16.sent;
+              _iteratorNormalCompletion27 = true;
+              _didIteratorError27 = false;
+              _iteratorError27 = undefined;
+              _context16.prev = 8;
+              _iterator27 = data.chars[Symbol.iterator]();
+
+            case 10:
+              if (_iteratorNormalCompletion27 = (_step27 = _iterator27.next()).done) {
+                _context16.next = 36;
+                break;
+              }
+
+              _step27$value = _slicedToArray(_step27.value, 2), char = _step27$value[0], _name2 = _step27$value[1];
+              _context16.next = 14;
+              return regeneratorRuntime.awrap(Emoji.getByName(_name2));
+
+            case 14:
+              _emoji3 = _context16.sent;
+              tones = _emoji3.tones ? 6 : 1;
+              i = 6, l = 1;
+
+            case 17:
+              if (!(i >= l)) {
+                _context16.next = 33;
+                break;
+              }
+
+              _context16.next = 20;
+              return regeneratorRuntime.awrap(Emoji.emoji2unicode(_emoji3, i));
+
+            case 20:
+              unicode = _context16.sent;
+
+              if (!(str.indexOf(unicode) === -1)) {
+                _context16.next = 23;
+                break;
+              }
+
+              return _context16.abrupt('continue', 30);
+
+            case 23:
+              _context16.t0 = _;
+              _context16.t1 = str;
+              _context16.t2 = unicode;
+              _context16.next = 28;
+              return regeneratorRuntime.awrap(Emoji.make(_name2, i, options));
+
+            case 28:
+              _context16.t3 = _context16.sent;
+              str = _context16.t0.replaceAll.call(_context16.t0, _context16.t1, _context16.t2, _context16.t3);
+
+            case 30:
+              i--;
+              _context16.next = 17;
+              break;
+
+            case 33:
+              _iteratorNormalCompletion27 = true;
+              _context16.next = 10;
+              break;
+
+            case 36:
+              _context16.next = 42;
+              break;
+
+            case 38:
+              _context16.prev = 38;
+              _context16.t4 = _context16['catch'](8);
+              _didIteratorError27 = true;
+              _iteratorError27 = _context16.t4;
+
+            case 42:
+              _context16.prev = 42;
+              _context16.prev = 43;
+
+              if (!_iteratorNormalCompletion27 && _iterator27.return) {
+                _iterator27.return();
+              }
+
+            case 45:
+              _context16.prev = 45;
+
+              if (!_didIteratorError27) {
+                _context16.next = 48;
+                break;
+              }
+
+              throw _iteratorError27;
+
+            case 48:
+              return _context16.finish(45);
+
+            case 49:
+              return _context16.finish(42);
+
+            case 50:
+              return _context16.abrupt('return', str);
+
+            case 51:
+            case 'end':
+              return _context16.stop();
+          }
+        }
+      }, null, this, [[8, 38, 42, 50], [43,, 45, 49]]);
+    },
+
+
+    /* API */
+
+    emojify: function emojify(target, options) {
+      return regeneratorRuntime.async(function emojify$(_context17) {
+        while (1) {
+          switch (_context17.prev = _context17.next) {
+            case 0:
+              if (!(target instanceof $)) {
+                _context17.next = 4;
+                break;
+              }
+
+              return _context17.abrupt('return', Promise.all(target.get().map(function (node) {
+                return Emojify.node(node, options);
+              })));
+
+            case 4:
+              if (!_.isElement(target)) {
+                _context17.next = 8;
+                break;
+              }
+
+              return _context17.abrupt('return', Emojify.node(target, options));
+
+            case 8:
+              if (!_.isString(target)) {
+                _context17.next = 10;
+                break;
+              }
+
+              return _context17.abrupt('return', Emojify.string(target, options));
+
+            case 10:
+            case 'end':
+              return _context17.stop();
+          }
+        }
+      }, null, this);
+    },
+    string: function string(str, options) {
+      return regeneratorRuntime.async(function string$(_context18) {
+        while (1) {
+          switch (_context18.prev = _context18.next) {
+            case 0:
+              return _context18.abrupt('return', Emojify.parseUnicode(str, options).then(function (str) {
+                return Emojify.parseEncoded(str, options);
+              }).then(function (str) {
+                return Emojify.parseEmoticon(str, options);
+              }));
+
+            case 1:
+            case 'end':
+              return _context18.stop();
+          }
+        }
+      }, null, this);
+    },
+    node: function node(_node, options) {
+      var type, value, parsed, parent, replacement;
+      return regeneratorRuntime.async(function node$(_context19) {
+        while (1) {
+          switch (_context19.prev = _context19.next) {
+            case 0:
+              type = _node.nodeType;
+
+              if (!(type === 3)) {
+                _context19.next = 9;
+                break;
+              }
+
+              value = _node.nodeValue;
+              _context19.next = 5;
+              return regeneratorRuntime.awrap(Emojify.string(value, options));
+
+            case 5:
+              parsed = _context19.sent;
+
+
+              if (value !== parsed) {
+
+                if (Emoji.options.native.enabled && !Emoji.options.native.wrap) {
+
+                  _node.nodeValue = parsed;
+                } else {
+                  parent = _node.parentNode;
+
+
+                  if (parent.childNodes.length === 1) {
+
+                    parent.innerHTML = parsed;
+                  } else {
+                    replacement = $.parseHTML('<span>' + parsed + '</span>')[0];
+
+
+                    _node.parentNode.replaceChild(replacement, _node);
+                  }
+                }
+              }
+
+              _context19.next = 11;
+              break;
+
+            case 9:
+              if (!(type === 1)) {
+                _context19.next = 11;
+                break;
+              }
+
+              return _context19.abrupt('return', Promise.all(Array.prototype.map.call(_node.childNodes, function (node) {
+                return Emojify.node(node, options);
+              })));
+
+            case 11:
+            case 'end':
+              return _context19.stop();
+          }
+        }
+      }, null, this);
+    }
+  };
+
+  /* PLUGIN */
+
+  $.fn.emojify = function (options) {
+
+    return Emojify.emojify(this, options);
+  };
+
+  /* WIDGETIZE */
+
+  Widgetize.add('.emojify', Emojify.emojify);
+
+  /* EXPORT */
+
+  Svelto.Emojify = Emojify;
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.EmojiData, Svelto.Emoji);
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require lib/emojify/emojify.js
+ * @require widgets/storable/storable.js
+ * ========================================================================= */
+
+//TODO: Integration with editor
+
+(function ($, _, Svelto, Widgets, Factory, Pointer, EmojiData, Emoji) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'emojipicker',
+    plugin: true,
+    selector: '.emojipicker',
+    templates: {
+      base: '<div class="tabs emojipicker card bordered">' + '<% print ( self.triggers ( o ) ) %>' + '<% print ( self.containers ( o ) ) %>' + '<% print ( self.footer ( o ) ) %>' + '</div>',
+      triggers: '<div class="tabs-triggers emojipicker-triggers card-header bordered">' + '<% print ( self.triggerMain ( o ) ) %>' + '<% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>' + '<% print ( self.trigger ({ options: o, category: o.data.categories[i] }) ) %>' + '<% } %>' + '</div>',
+      trigger: '<div class="button" title="<%= o.category.title %>">' + '<i class="icon"><%= o.category.icon %></i>' + '</div>',
+      triggerMain: '<div class="button" title="Search & Frequent">' + '<i class="icon">access_time</i>' + '</div>',
+      containers: '<div class="tabs-containers emojipicker-containers card-block">' + '<% print ( self.containerMain ( o ) ) %>' + '<% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>' + '<% print ( self.container ({ options: o, category: o.data.categories[i] }) ) %>' + '<% } %>' + '</div>',
+      container: '<div class="container">' + '<% print ( self.emojis ({ emojis: o.category.emojis, tone: o.options.tone }) ) %>' + '</div>',
+      containerMain: '<div class="container main">' + '<input autofocus name="search" type="search" class="gray fluid" placeholder="Search emoji">' + '<% print ( self.search ( o ) ) %>' + '<% print ( self.frequent ( o ) ) %>' + '</div>',
+      search: '<div class="search-section section">' + '<% if ( !o.search.emojis.length ) { %>' + '<div class="search-emojis emojis empty">No emoji found</div>' + '<% } else { %>' + '<div class="search-emojis emojis">' + '<% print ( self.emojis ({ emojis: o.search.emojis, tone: o.tone }) ) %>' + '</div>' + '<% } %>' + '</div>',
+      frequent: '<div class="frequent-section section">' + '<% if ( !o.frequent.emojis.length ) { %>' + '<div class="frequent-emojis emojis empty">No emoji used recently</div>' + '<% } else { %>' + '<div class="frequent-emojis emojis">' + '<% print ( self.emojis ({ emojis: o.frequent.emojis, tones: o.frequent.tones }) ) %>' + '</div>' + '<% } %>' + '</div>',
+      footer: '<div class="emojipicker-footer card-footer bordered">' + '<% print ( self.preview ({ emoji: o.data.emojis[o.preview.id], tone: o.preview.tone }) ) %>' + '<% print ( self.tones ( o ) ) %>' + '</div>',
+      preview: '<div class="emojipicker-preview">' + '<div class="multiple center-y no-wrap">' + '<div class="enlarged">' + '<% print ( Svelto.Emoji.encode ( o.emoji.id, o.tone ) ) %>' + '</div>' + '<div class="multiple vertical joined texts">' + '<div class="title" title="<%= o.emoji.name %>"><%= o.emoji.name %></div>' + '<div class="short-names"><%= [o.emoji.id].concat ( o.emoji.alts || [] ).map ( Svelto.Emoji.encode ).join ( " " ) %></div>' + '</div>' + '</div>' + '</div>',
+      tones: '<div class="emojipicker-tones">' + '<div class="multiple center-x joined">' + '<div class="emojipicker-tone"></div>' + '<div class="emojipicker-tone"></div>' + '<div class="emojipicker-tone"></div>' + '<div class="emojipicker-tone"></div>' + '<div class="emojipicker-tone"></div>' + '<div class="emojipicker-tone"></div>' + '</div>' + '</div>',
+      emojis: '<div class="multiple emojis">' + '<% print ( o.emojis.map ( function ( emoji, index ) { return Svelto.Emoji.encode ( emoji, o.tone || o.tones[index] ) } ).join ( " " ) ) %>' + '</div>'
+    },
+    options: {
+      data: undefined,
+      tone: Emoji.options.tone,
+      make: { // Options passed to Emoji.make
+        css: 'actionable',
+        sprite: true
+      },
+      preview: {
+        id: 'grinning',
+        tone: Emoji.options.tone
+      },
+      frequent: {
+        limit: 126,
+        emojis: [],
+        tones: [],
+        rank: []
+      },
+      search: {
+        limit: 126,
+        emojis: [],
+        query: undefined
+      },
+      classes: {
+        searching: 'searching',
+        previewing: 'previewing',
+        toneActive: 'active',
+        emojified: 'emojified'
+      },
+      selectors: {
+        emoji: 'i.emoji',
+        tonables: '.container:not(.main) i.emoji[data-tonable="true"]',
+        input: 'input',
+        preview: '.emojipicker-preview',
+        enlarged: '.enlarged',
+        tones: '.emojipicker-tone',
+        search: '.search-section',
+        frequent: '.frequent-section',
+        containers: {
+          wrapper: '.emojipicker-containers',
+          all: '.emojipicker-containers > *'
+        }
+      },
+      callbacks: {
+        pick: _.noop
+      }
+    }
+  };
+
+  /* EMOJI PICKER */
+
+  var Emojipicker = function (_Widgets$Storable2) {
+    _inherits(Emojipicker, _Widgets$Storable2);
+
+    function Emojipicker() {
+      _classCallCheck(this, Emojipicker);
+
+      return _possibleConstructorReturn(this, (Emojipicker.__proto__ || Object.getPrototypeOf(Emojipicker)).apply(this, arguments));
+    }
+
+    _createClass(Emojipicker, [{
+      key: '_make',
+
+
+      /* SPECIAL */
+
+      value: function _make() {
+
+        if (!this.$element.is(':empty')) return;
+
+        var picker = this._template('base', this.options);
+
+        $(picker).replaceAll(this.$element).widgetize();
+
+        return false;
+      }
+    }, {
+      key: '_variables',
+      value: function _variables() {
+
+        _get(Emojipicker.prototype.__proto__ || Object.getPrototypeOf(Emojipicker.prototype), '_variables', this).call(this);
+
+        this.$picker = this.$element;
+        this.$input = this.$picker.find(this.options.selectors.input);
+        this.$preview = this.$picker.find(this.options.selectors.preview);
+        this.$tones = this.$picker.find(this.options.selectors.tones);
+        this.$containersWrapper = this.$picker.find(this.options.selectors.containers.wrapper);
+        this.$containers = this.$picker.find(this.options.selectors.containers.all);
+        this.$search = this.$picker.find(this.options.selectors.search);
+        this.$frequent = this.$picker.find(this.options.selectors.frequent);
+
+        this._tabsInstance = this.$picker.tabs('instance');
+        this._lazilyEmojified = {};
+      }
+    }, {
+      key: '_init',
+      value: function _init() {
+
+        this._updateToneIndicator();
+        this._frequentRestore();
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
+        this.___lazyEmojify();
+        this.___emojiTap();
+        this.___toneTap();
+        this.___preview();
+        this.___search();
+      }
+
+      /* LAZI EMOJIFY */
+
+    }, {
+      key: '___lazyEmojify',
+      value: function ___lazyEmojify() {
+
+        this._on(true, 'tabs:change', this.__lazyEmojify);
+      }
+    }, {
+      key: '__lazyEmojify',
+      value: function __lazyEmojify() {
+        var _this120 = this;
+
+        var index = this._tabsInstance.get();
+
+        if (!index || this._lazilyEmojified[index]) return;
+
+        var $container = this.$containers.eq(index);
+
+        $container.emojify(this.options.make).then(function () {
+          return $container.addClass(_this120.options.classes.emojified);
+        });
+
+        this._lazilyEmojified[index] = true;
+      }
+
+      /* EMOJI */
+
+    }, {
+      key: '___emojiTap',
+      value: function ___emojiTap() {
+
+        this._on(Pointer.tap, this.options.selectors.emoji, this.__emojiTap);
+      }
+    }, {
+      key: '__emojiTap',
+      value: function __emojiTap(event) {
+
+        var emoji = event.currentTarget.getAttribute('data-id'),
+            tone = Number(event.currentTarget.getAttribute('data-tone')),
+            data = { emoji: emoji, tone: tone };
+
+        this._frequentUpdate(emoji, tone);
+
+        this._trigger('pick', data);
+      }
+
+      /* TONE */
+
+    }, {
+      key: '___toneTap',
+      value: function ___toneTap() {
+
+        this._on(this.$tones, Pointer.tap, this.__toneTap);
+      }
+    }, {
+      key: '__toneTap',
+      value: function __toneTap(event) {
+
+        var tone = this.$tones.get().indexOf(event.target) + 1;
+
+        if (tone === this.options.tone) return;
+
+        this._previousTone = this.options.tone;
+
+        this.options.tone = tone;
+
+        this._updateTone();
+      }
+    }, {
+      key: '_updateTone',
+      value: function _updateTone() {
+
+        this._updateToneEmojis();
+        this._updateToneIndicator();
+      }
+    }, {
+      key: '_updateToneEmojis',
+      value: function _updateToneEmojis() {
+        var _this121 = this;
+
+        var $tonables = this.$picker.find(this.options.selectors.tonables),
+            tone = this.options.tone;
+
+        $tonables.get().forEach(function (emoji) {
+
+          var id = emoji.getAttribute('data-id');
+
+          Emoji.make(id, tone, _this121.options.make).then(function (replacement) {
+            return $(replacement).replaceAll(emoji);
+          });
+        });
+      }
+    }, {
+      key: '_updateToneIndicator',
+      value: function _updateToneIndicator() {
+
+        if (this._previousTone) {
+
+          this.$tones.eq(this._previousTone - 1).removeClass(this.options.classes.toneActive);
+        }
+
+        this.$tones.eq(this.options.tone - 1).addClass(this.options.classes.toneActive);
+      }
+
+      /* PREVIEW */
+
+    }, {
+      key: '___preview',
+      value: function ___preview() {
+
+        this._on(Pointer.enter, this.options.selectors.emoji, this.__previewEnter);
+        this._on(true, this.$containersWrapper, Pointer.leave, this.__previewLeave);
+      }
+    }, {
+      key: '__previewEnter',
+      value: function __previewEnter(event) {
+
+        var emoji = event.currentTarget;
+
+        this.options.preview.id = emoji.getAttribute('data-id');
+        this.options.preview.tone = emoji.getAttribute('data-tone');
+
+        this._updatePreview();
+
+        this._togglePreview(true);
+      }
+    }, {
+      key: '__previewLeave',
+      value: function __previewLeave(event) {
+
+        this._togglePreview(false);
+      }
+    }, {
+      key: '_updatePreview',
+      value: function _updatePreview() {
+        var _this122 = this;
+
+        var options = {
+          emoji: this.options.data.emojis[this.options.preview.id],
+          tone: this.options.preview.tone
+        };
+
+        var $preview = $(this._template('preview', options)),
+            $enlarged = $preview.find(this.options.selectors.enlarged);
+
+        $enlarged.emojify(this.options.make).then(function () {
+
+          _this122.$preview = $preview.replaceAll(_this122.$preview);
+        });
+      }
+    }, {
+      key: '_togglePreview',
+      value: function _togglePreview() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._previewing;
+
+
+        if (!!force !== this._previewing) {
+
+          this._previewing = !!force;
+
+          this.$picker.toggleClass(this.options.classes.previewing, this._previewing);
+        }
+      }
+
+      /* SEARCH */
+
+    }, {
+      key: '___search',
+      value: function ___search() {
+
+        this._on(this.$input, 'change cut paste keyup', this.__search);
+      }
+    }, {
+      key: '__search',
+      value: function __search() {
+        var _this123 = this;
+
+        var query = this.$input.val();
+
+        if (query === this.options.search.query) return;
+
+        this.options.search.query = query;
+
+        var emojis = [];
+
+        this._toggleSearch(!!query);
+
+        if (query) {
+
+          if (query[0] === '-') {
+
+            emojis = ['-1'];
+          } else if (query[0] === '+') {
+
+            emojis = ['+1'];
+          } else if (query.match(Emoji.options.regexes.emoticon)) {
+
+            var found = this.options.data.emoticons[query];
+
+            emojis = found ? _.castArray(found) : [];
+          } else {
+
+            var keywords = query.toLowerCase().split(/[\s,_-]+/);
+
+            for (var id in this.options.data.emojis) {
+
+              var _emoji4 = this.options.data.emojis[id],
+                  match = true;
+
+              var _iteratorNormalCompletion28 = true;
+              var _didIteratorError28 = false;
+              var _iteratorError28 = undefined;
+
+              try {
+                for (var _iterator28 = keywords[Symbol.iterator](), _step28; !(_iteratorNormalCompletion28 = (_step28 = _iterator28.next()).done); _iteratorNormalCompletion28 = true) {
+                  var keyword = _step28.value;
+
+
+                  if (_emoji4.tags.indexOf(keyword) === -1) {
+
+                    match = false;
+                    break;
+                  }
+                }
+              } catch (err) {
+                _didIteratorError28 = true;
+                _iteratorError28 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion28 && _iterator28.return) {
+                    _iterator28.return();
+                  }
+                } finally {
+                  if (_didIteratorError28) {
+                    throw _iteratorError28;
+                  }
+                }
+              }
+
+              if (match) {
+
+                emojis.push(id);
+
+                if (emojis.length === this.options.search.limit) break;
+              }
+            }
+          }
+        }
+
+        this.options.search.emojis = emojis;
+
+        var $search = $(this._template('search', this.options));
+
+        $search.emojify(this.options.make).then(function () {
+
+          _this123.$search = $search.replaceAll(_this123.$search);
+        });
+      }
+    }, {
+      key: '_toggleSearch',
+      value: function _toggleSearch() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this._searching;
+
+
+        if (!!force !== this._searching) {
+
+          this._searching = !!force;
+
+          this.$picker.toggleClass(this.options.classes.searching, this._searching);
+        }
+      }
+
+      /* FREQUENT */
+
+    }, {
+      key: '_frequentRefresh',
+      value: function _frequentRefresh() {
+        var _this124 = this;
+
+        this.options.frequent.emojis = this.options.frequent.rank.map(_.first);
+        this.options.frequent.tones = this.options.frequent.rank.map(function (entry) {
+          return entry[1];
+        });
+
+        var $frequent = $(this._template('frequent', this.options));
+
+        $frequent.emojify(this.options.make).then(function () {
+
+          _this124.$frequent = $frequent.replaceAll(_this124.$frequent);
+        });
+      }
+    }, {
+      key: '_frequentUpdate',
+      value: function _frequentUpdate(emoji) {
+        var tone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.options.tone;
+
+
+        var rank = this.options.frequent.rank,
+            entry = rank.find(function (entry) {
+          return entry[0] === emoji && entry[1] === tone;
+        });
+
+        if (entry) {
+
+          entry[2]++;
+        } else {
+
+          rank.push([emoji, tone, 1]);
+        }
+
+        rank = lodash.orderBy(rank, [_.last, _.first, _.property(1)], ['desc', 'asc', 'asc']).slice(0, this.options.frequent.limit);
+
+        this.options.frequent.rank = rank;
+
+        this._storageSet('frequent', rank, 2592000); // 1 Month
+
+        this._frequentRefresh();
+      }
+    }, {
+      key: '_frequentRestore',
+      value: function _frequentRestore() {
+
+        var rank = this._storageGet('frequent');
+
+        if (!rank || _.isEqual(this.options.frequent.rank, rank)) return;
+
+        this.options.frequent.rank = rank;
+
+        this._frequentRefresh();
+      }
+    }], [{
+      key: 'widgetize',
+
+
+      /* WIDGETIZE */
+
+      value: function widgetize($ele, Widget) {
+
+        EmojiData.get().then(function (data) {
+
+          Widget.config.options.data = data;
+          $ele[Widget.config.name]();
+        });
+      }
+    }]);
+
+    return Emojipicker;
+  }(Widgets.Storable);
+
+  /* FACTORY */
+
+  Factory.make(Emojipicker, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmojiData, Svelto.Emoji);
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../picker.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, EmojiData) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'emojipickerPopover',
+    templates: {
+      base: '<div>'
+    },
+    options: {
+      classes: {
+        popover: 'popover'
+      }
+    }
+  };
+
+  /* EMOJIPICKER POPOVER */
+
+  var EmojipickerPopover = function (_Widgets$Widget41) {
+    _inherits(EmojipickerPopover, _Widgets$Widget41);
+
+    function EmojipickerPopover() {
+      _classCallCheck(this, EmojipickerPopover);
+
+      return _possibleConstructorReturn(this, (EmojipickerPopover.__proto__ || Object.getPrototypeOf(EmojipickerPopover)).apply(this, arguments));
+    }
+
+    _createClass(EmojipickerPopover, [{
+      key: '___close',
+
+
+      /* CLOSE */
+
+      value: function ___close() {
+
+        this._on(true, 'popover:close', this.__close);
+      }
+    }, {
+      key: '__close',
+      value: function __close() {
+
+        this.$element.detach();
+
+        this._reset();
+      }
+
+      /* UTILITIES */
+
+    }, {
+      key: '_isEmpty',
+      value: function _isEmpty() {
+
+        return this.$element.is(':empty');
+      }
+
+      /* API */
+
+    }, {
+      key: 'open',
+      value: function open(anchor) {
+        var _this126 = this;
+
+        if (this.isLocked()) {
+
+          if (!this._isEmpty()) {
+
+            this.unlock();
+          } else {
+
+            return this.open(anchor);
+          }
+        } else {
+
+          if (this._isEmpty()) {
+
+            this.lock();
+
+            EmojiData.get().then(function (data) {
+
+              Widgets.Emojipicker.config.options.data = data;
+
+              _this126.$element = new Widgets.Emojipicker().$element.addClass(_this126.options.classes.popover);
+
+              _this126.open(anchor);
+            });
+
+            return;
+          }
+        }
+
+        if (!this.$element.isAttached()) {
+
+          this.$layout.append(this.$element);
+        }
+
+        this.$element.popover('toggle', undefined, anchor);
+
+        this.___close();
+      }
+    }]);
+
+    return EmojipickerPopover;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(EmojipickerPopover, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.EmojiData);
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover (Helper)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./popover.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, EmojipickerPopover) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var instance = void 0;
+
+  /* HELPER */
+
+  $.emojipickerPopover = function (anchor) {
+
+    if (!instance) {
+
+      instance = new EmojipickerPopover();
+    }
+
+    instance.open(anchor);
+  };
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets.EmojipickerPopover);
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover (Trigger)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ./popover_helper.js
+ * ========================================================================= */
+
+(function ($, _, Svelto, Widgets, Factory, Pointer) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'emojipickerPopoverTrigger',
+    plugin: true,
+    selector: '.emojipicker-popover-trigger'
+  };
+
+  /* EMOJIPICKER POPOVER TRIGGER */
+
+  var EmojipickerPopoverTrigger = function (_Widgets$Widget42) {
+    _inherits(EmojipickerPopoverTrigger, _Widgets$Widget42);
+
+    function EmojipickerPopoverTrigger() {
+      _classCallCheck(this, EmojipickerPopoverTrigger);
+
+      return _possibleConstructorReturn(this, (EmojipickerPopoverTrigger.__proto__ || Object.getPrototypeOf(EmojipickerPopoverTrigger)).apply(this, arguments));
+    }
+
+    _createClass(EmojipickerPopoverTrigger, [{
+      key: '_events',
+
+
+      /* SPECIAL */
+
+      value: function _events() {
+
+        this.___tap();
+      }
+
+      /* TAP */
+
+    }, {
+      key: '___tap',
+      value: function ___tap() {
+
+        this._on(Pointer.tap, this.trigger);
+      }
+
+      /* API */
+
+    }, {
+      key: 'trigger',
+      value: function trigger() {
+
+        $.emojipickerPopover(this.element);
+      }
+    }]);
+
+    return EmojipickerPopoverTrigger;
+  }(Widgets.Widget);
+
+  /* FACTORY */
+
+  Factory.make(EmojipickerPopoverTrigger, config);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
 
 /**
  * marked - a markdown parser
@@ -23866,16 +27285,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vendor/marked.js
- * @require core/widget/widget.js
+ * @before ./vendor/marked.js
+ * @before lib/emojify/emojify.js
+ * @require widgets/storable/storable.js
  * ========================================================================= */
 
 //TODO: Add headings support (level 1/3/5, like github does)
-//TODO: Add emoji support
-//TODO: MAYBE make a leaner editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
-//FIXME: Add history support
+//TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
+//TODO: Switch to a `contenteditable` version where the preview and editor actual are the same thing
 
-(function ($, _, Svelto, Widgets, Factory, Pointer) {
+(function ($, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify) {
 
   'use strict';
 
@@ -23886,7 +27305,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     plugin: true,
     selector: '.editor',
     options: {
-      parser: window.marked,
+      parentUnfullscreenEvents: 'popover:close modal:close panel:close', //FIXME: Ugly
+      parser: window.marked || _.identity,
+      storage: {
+        enabled: false, // Whether to preserve the content across refreshes/sessions
+        ttl: 604800 // 1 week
+      },
       actions: {
         bold: function bold() {
           this._action('**', '**', 'bold');
@@ -23924,6 +27348,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         redo: function redo() {
           document.execCommand('redo');
         },
+        store: function store() {
+          this._storageSet(this._storageKey, this.get(), this.options.storage.ttl);
+        },
+        unstore: function unstore() {
+          this._storageRemove(this._storageKey);
+        },
+        restore: function restore() {
+          this.set(this._storageGet(this._storageKey));
+        },
         preview: function preview() {
           this.togglePreview();
         },
@@ -23937,14 +27370,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       classes: {
         preview: 'preview',
         fullscreen: 'fullscreen',
+        fullscreenable: {
+          request: 'fullscreen-request'
+        },
         trigger: {
           active: 'active text-secondary'
         }
       },
       selectors: {
         actions: '[data-action]',
-        textarea: 'textarea',
+        fullscreenable: '.modal, .panel, .popover',
         preview: '.editor-preview',
+        textarea: 'textarea',
         triggers: {
           all: '[data-action]',
           preview: '[data-action="preview"]',
@@ -23964,18 +27401,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         'ctmd + d': ['action', 'divider'],
         'ctmd + p': ['action', 'preview'],
         'ctmd + f': ['action', 'fullscreen'],
-        'esc': 'unfullscreen'
+        'esc': '__esc'
       },
       callbacks: {
-        action: _.noop
+        action: _.noop,
+        preview: _.noop,
+        unpreview: _.noop,
+        fullscreen: _.noop,
+        unfullscreen: _.noop
       }
     }
   };
 
   /* EDITOR */
 
-  var Editor = function (_Widgets$Widget40) {
-    _inherits(Editor, _Widgets$Widget40);
+  var Editor = function (_Widgets$Storable3) {
+    _inherits(Editor, _Widgets$Storable3);
 
     function Editor() {
       _classCallCheck(this, Editor);
@@ -23991,7 +27432,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       value: function _variables() {
 
+        _get(Editor.prototype.__proto__ || Object.getPrototypeOf(Editor.prototype), '_variables', this).call(this);
+
         this.$editor = this.$element;
+        this.editor = this.$editor[0];
+
         this.$textarea = this.$editor.find(this.options.selectors.textarea);
         this.textarea = this.$textarea[0];
         this.$preview = this.$editor.find(this.options.selectors.preview);
@@ -24000,15 +27445,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$triggerPreview = this.$triggers.filter(this.options.selectors.triggers.preview);
         this.$triggerFullscreen = this.$triggers.filter(this.options.selectors.triggers.fullscreen);
 
-        this._isPreview = this.$editor.hasClass(this.options.classes.preview);
-        this._isFullscreen = this.$editor.hasClass(this.options.classes.fullscreen);
+        this.$fullscreenable = this.$editor.parents(this.options.selectors.fullscreenable);
       }
     }, {
       key: '_init',
       value: function _init() {
 
+        this._isPreview = this.$editor.hasClass(this.options.classes.preview);
+        this._isFullscreen = this.$editor.hasClass(this.options.classes.fullscreen);
+
+        /* STORAGE */
+
+        this.options.storage.enabled = this.options.storage.enabled || this.$editor.is(Widgets.Storable.config.selector);
+
+        if (this.options.storage.enabled) {
+
+          this._storageInit();
+
+          if (this._storageKey) {
+
+            var action = this.get() ? 'store' : 'restore';
+
+            this.options.actions[action].apply(this);
+          }
+        }
+      }
+    }, {
+      key: '_events',
+      value: function _events() {
+
         this.___keydown();
         this.___triggers();
+        this.___parentUnfullscreen();
+
+        if (this.options.storage.enabled && this._storageKey) this.___storage();
+        if (Emoji) this.___emojipicker();
       }
 
       /* KEYDOWN */
@@ -24020,19 +27491,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._onHover([this.$document, 'keydown', this.__keydown]);
       }
 
+      /* ESC */
+
+    }, {
+      key: '__esc',
+      value: function __esc() {
+
+        if (!this.isFullscreen()) return false;
+
+        this.unfullscreen();
+      }
+
       /* TRIGGERS */
 
     }, {
       key: '___triggers',
       value: function ___triggers() {
-        var _iteratorNormalCompletion24 = true;
-        var _didIteratorError24 = false;
-        var _iteratorError24 = undefined;
+        var _iteratorNormalCompletion29 = true;
+        var _didIteratorError29 = false;
+        var _iteratorError29 = undefined;
 
         try {
 
-          for (var _iterator24 = this.$triggers[Symbol.iterator](), _step24; !(_iteratorNormalCompletion24 = (_step24 = _iterator24.next()).done); _iteratorNormalCompletion24 = true) {
-            var trigger = _step24.value;
+          for (var _iterator29 = this.$triggers[Symbol.iterator](), _step29; !(_iteratorNormalCompletion29 = (_step29 = _iterator29.next()).done); _iteratorNormalCompletion29 = true) {
+            var trigger = _step29.value;
 
 
             var $trigger = $(trigger),
@@ -24041,19 +27523,68 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this._on($trigger, Pointer.tap, _.wrap(action, this.action));
           }
         } catch (err) {
-          _didIteratorError24 = true;
-          _iteratorError24 = err;
+          _didIteratorError29 = true;
+          _iteratorError29 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion24 && _iterator24.return) {
-              _iterator24.return();
+            if (!_iteratorNormalCompletion29 && _iterator29.return) {
+              _iterator29.return();
             }
           } finally {
-            if (_didIteratorError24) {
-              throw _iteratorError24;
+            if (_didIteratorError29) {
+              throw _iteratorError29;
             }
           }
         }
+      }
+
+      /* PARENT UNFULLSCREEN */
+
+    }, {
+      key: '___parentUnfullscreen',
+      value: function ___parentUnfullscreen() {
+
+        this._on(true, this.$document, this.options.parentUnfullscreenEvents, this.__parentUnfullscreen);
+      }
+    }, {
+      key: '__parentUnfullscreen',
+      value: function __parentUnfullscreen(event) {
+
+        if (!$.contains(event.target, this.editor)) return;
+
+        this.unfullscreen();
+      }
+
+      /* STORAGE */
+
+    }, {
+      key: '___storage',
+      value: function ___storage() {
+
+        this._on('change cut paste keyup', this._throttle(this.options.actions.store.bind(this), 1000));
+      }
+    }, {
+      key: '_storageInit',
+      value: function _storageInit() {
+
+        this._storageKey = this.$editor.attr('id');
+      }
+
+      /* EMOJIPICKER */
+
+    }, {
+      key: '___emojipicker',
+      value: function ___emojipicker() {
+
+        this._on(this.$document, 'emojipicker:pick', this.__emojipicker); //FIXME: We probably shouldn't listen to all the pickers... what if there are multiple editors?
+      }
+    }, {
+      key: '__emojipicker',
+      value: function __emojipicker(event, data) {
+
+        var encoded = Emoji.encode(data.emoji, data.tone);
+
+        this._insertAtSelection(encoded, true);
       }
 
       /* SELECTION */
@@ -24063,13 +27594,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _getSelection() {
 
         var start = this.textarea.selectionStart,
-            end = this.textarea.selectionEnd;
+            end = this.textarea.selectionEnd,
+            text = this.$textarea.val().substring(start, end);
 
-        return {
-          start: start,
-          end: end,
-          text: this.$textarea.val().substring(start, end)
-        };
+        return { start: start, end: end, text: text };
       }
     }, {
       key: '_getWordSelection',
@@ -24107,6 +27635,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.textarea.setSelectionRange(start, end);
 
         return this._getSelection();
+      }
+    }, {
+      key: '_insertAtSelection',
+      value: function _insertAtSelection(text) {
+        var padding = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+        var value = this.$textarea.val(),
+            selection = this._getSelection(),
+            padLeft = padding && selection.start && value[selection.start - 1] !== ' ' ? ' ' : '',
+            padRight = padding && selection.end < value.length && value[selection.end] !== ' ' ? ' ' : '',
+            newValue = value.substr(0, selection.start) + padLeft + text + padRight + value.substr(selection.end, value.length),
+            newRange = selection.start + padLeft.length + text.length;
+
+        this.$textarea.val(newValue).change();
+
+        this.textarea.setSelectionRange(newRange, newRange);
       }
     }, {
       key: '_replaceSelection',
@@ -24204,6 +27749,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _render() {
 
         this.$preview.html(this._parse());
+
+        if (Emojify) this.$preview.emojify();
       }
 
       /* API */
@@ -24215,18 +27762,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return parsed ? this._parse() : this.$textarea.val();
       }
     }, {
+      key: 'set',
+      value: function set(value) {
+
+        if (!_.isString(value) || value === this.$textarea.val()) return;
+
+        this.$textarea.val(value).change();
+
+        if (this._isPreview) this._render();
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+
+        return this.set('');
+      }
+    }, {
       key: 'action',
-      value: function action(name) {
+      value: function action(_action2, event) {
 
-        if (!name) return;
+        if (!_action2 || !this.options.actions.hasOwnProperty(_action2)) return;
 
-        if (!this.options.actions.hasOwnProperty(name)) return;
+        if (event) event.preventDefault();
 
-        this.options.actions[name].apply(this);
+        this.options.actions[_action2].apply(this);
 
         this.$textarea.focus();
 
-        this._trigger('action', { action: name });
+        this._trigger('action', { action: _action2 });
       }
 
       /* PREVIEW */
@@ -24263,6 +27826,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$editor.addClass(this.options.classes.preview);
 
         this.$triggerPreview.addClass(this.options.classes.trigger.active);
+
+        this._trigger('preview');
       }
     }, {
       key: 'unpreview',
@@ -24275,6 +27840,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$editor.removeClass(this.options.classes.preview);
 
         this.$triggerPreview.removeClass(this.options.classes.trigger.active);
+
+        this._trigger('unpreview');
       }
 
       /* FULLSCREEN */
@@ -24305,9 +27872,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._isFullscreen = true;
 
         this.$layout.disableScroll();
+        this.$fullscreenable.addClass(this.options.classes.fullscreenable.request);
         this.$editor.addClass(this.options.classes.fullscreen);
 
         this.$triggerFullscreen.addClass(this.options.classes.trigger.active);
+
+        this._trigger('fullscreen');
       }
     }, {
       key: 'unfullscreen',
@@ -24318,137 +27888,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._isFullscreen = false;
 
         this.$layout.enableScroll();
+        this.$fullscreenable.removeClass(this.options.classes.fullscreenable.request);
         this.$editor.removeClass(this.options.classes.fullscreen);
 
         this.$triggerFullscreen.removeClass(this.options.classes.trigger.active);
+
+        this._trigger('unfullscreen');
       }
     }]);
 
     return Editor;
-  }(Widgets.Widget);
+  }(Widgets.Storable);
 
   /* FACTORY */
 
   Factory.make(Editor, config);
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer);
-
-(function () {
-  'use strict';
-
-  var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
-
-  var fn = function () {
-    var val;
-    var valLength;
-
-    var fnMap = [['requestFullscreen', 'exitFullscreen', 'fullscreenElement', 'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'],
-    // new WebKit
-    ['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'],
-    // old WebKit (Safari 5.1)
-    ['webkitRequestFullScreen', 'webkitCancelFullScreen', 'webkitCurrentFullScreenElement', 'webkitCancelFullScreen', 'webkitfullscreenchange', 'webkitfullscreenerror'], ['mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement', 'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'], ['msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement', 'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError']];
-
-    var i = 0;
-    var l = fnMap.length;
-    var ret = {};
-
-    for (; i < l; i++) {
-      val = fnMap[i];
-      if (val && val[1] in document) {
-        for (i = 0, valLength = val.length; i < valLength; i++) {
-          ret[fnMap[0][i]] = val[i];
-        }
-        return ret;
-      }
-    }
-
-    return false;
-  }();
-
-  var screenfull = {
-    request: function request(elem) {
-      var request = fn.requestFullscreen;
-
-      elem = elem || document.documentElement;
-
-      // Work around Safari 5.1 bug: reports support for
-      // keyboard in fullscreen even though it doesn't.
-      // Browser sniffing, since the alternative with
-      // setTimeout is even worse.
-      if (/5\.1[\.\d]* Safari/.test(navigator.userAgent)) {
-        elem[request]();
-      } else {
-        elem[request](keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT);
-      }
-    },
-    exit: function exit() {
-      document[fn.exitFullscreen]();
-    },
-    toggle: function toggle(elem) {
-      if (this.isFullscreen) {
-        this.exit();
-      } else {
-        this.request(elem);
-      }
-    },
-    raw: fn
-  };
-
-  if (!fn) {
-    window.screenfull = false;
-    return;
-  }
-
-  Object.defineProperties(screenfull, {
-    isFullscreen: {
-      get: function get() {
-        return !!document[fn.fullscreenElement];
-      }
-    },
-    element: {
-      enumerable: true,
-      get: function get() {
-        return document[fn.fullscreenElement];
-      }
-    },
-    enabled: {
-      enumerable: true,
-      get: function get() {
-        // Coerce to boolean in case of old WebKit
-        return !!document[fn.fullscreenEnabled];
-      }
-    }
-  });
-
-  window.screenfull = screenfull;
-})();
-
-/* =========================================================================
- * Svelto - Widgets - Fullscreen
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/pointer/pointer.js
- * @require core/svelto/svelto.js
- * @require core/widgetize/widgetize.js
- * @require ./vendor/screenfull.js
- * ========================================================================= */
-
-//FIXME: It doesn't work in iOS's Safari and IE10
-//TODO: Rewrite it
-//TODO: Add the ability to trigger the fullscreen for a specific element
-
-(function ($, _, Svelto, Widgetize, Pointer) {
-
-  'use strict';
-
-  /* FULLSCREEN */
-
-  Widgetize.add('.fullscreen-toggler', function ($toggler) {
-
-    $toggler.on(Pointer.tap, screenfull.toggle);
-  });
-})(Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Pointer);
+})(Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify);
 
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
 var _self = typeof window !== 'undefined' ? window // if in browser

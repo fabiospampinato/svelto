@@ -569,11 +569,20 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
+ * @require ../widget/variables.scss
  * @require widgets/modal/variables.scss
- * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 /* REMOTE MODAL */
+/* ANIMATION */
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/variables.scss
+ * @require widgets/panel/variables.scss
+ * ========================================================================= */
 /* ANIMATION */
 /* =========================================================================
  * Svelto - Widgets - Spinner - Overlay (Variables)
@@ -916,9 +925,8 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
+ * @require ../widget/variables.scss
  * @require widgets/popover/variables.scss
- * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 /* REMOTE POPOVER */
 /* ANIMATION */
@@ -968,6 +976,33 @@
 /* SIZES */
 /* SIZES */
 /* =========================================================================
+ * Svelto - Widgets - Emoji - Picker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * @require core/sizes/variables.scss
+ * ========================================================================= */
+/* EMOJI PICKER */
+/* EMPTY EMOJIS */
+/* PREVIEW */
+/* TONE */
+/* TONES */
+/* TONE DOT */
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+/* POPOVER */
+/* PREVIEW */
+/* TONE */
+/* TONES */
+/* =========================================================================
  * Svelto - Widgets - Icon (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -987,6 +1022,19 @@
  * @require core/icon/variables.scss
  * ========================================================================= */
 /* CORNER */
+/* =========================================================================
+ * Svelto - Widgets - Emoji (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/icon/variables.scss
+ * @require core/typography/variables.scss
+ * ========================================================================= */
+/* EMOJI */
+/* TYPE */
+/* IMAGE */
+/* SPRITE */
 /* =========================================================================
  * Svelto - Core - Z-Depths (Variables)
  * =========================================================================
@@ -1293,6 +1341,16 @@
  * ========================================================================= */
 /* NUMBOX */
 /* =========================================================================
+ * Svelto - Widgets - Subscriber (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/label/variables.scss
+ * ========================================================================= */
+/* SUBSCRIBER */
+/* TOGGLE */
+/* =========================================================================
  * Svelto - Widgets - Table (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -1396,6 +1454,15 @@
  * @require decorators/border_radius/variables.scss
  * ========================================================================= */
 /* BLOCK */
+/* =========================================================================
+ * Svelto - Widgets - Icon - Actionable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/border_radius/variables.scss
+ * ========================================================================= */
+/* ACTIONABLE */
 /* =========================================================================
  * Svelto - Widgets - Slider (Variables)
  * =========================================================================
@@ -2504,6 +2571,13 @@
 }
 
 /* =========================================================================
+ * Svelto - Core - Browser (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* SUPPORT */
+/* =========================================================================
  * Svelto - Core - Multiple
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -2858,13 +2932,9 @@ script:last-child {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-align-items: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  overflow: auto;
   /* HEADER / CONTENT / FOOTER */
   /* HEADER */
   /* CONTENT */
@@ -2920,6 +2990,56 @@ script:last-child {
 }
 
 /* =========================================================================
+ * Svelto - Core - Layout - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+/* HORIZONTAL */
+.layout.horizontal {
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  overflow: hidden;
+  /* CONTENT */
+}
+
+.layout.horizontal > .layout-content {
+  overflow: auto;
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
+}
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Vertical
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+/* VERTICAL */
+.layout.vertical, .layout:not(.vertical):not(.horizontal) {
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: auto;
+}
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./horizontal.scss
+ * @before ./vertical.scss
+ * ========================================================================= */
+/* DEFAULT */
+/* =========================================================================
  * Svelto - Core - Layout - Sticky
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -2928,12 +3048,12 @@ script:last-child {
  * @require ../layout.scss
  * ========================================================================= */
 /* FIRST LAYOUT */
-.layout {
+.layout.vertical, .layout:not(.vertical):not(.horizontal) {
   /* HEADER */
   /* NOT FIRST */
 }
 
-.layout .layout-header.sticky {
+.layout.vertical > .layout-header.sticky, .layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   position: fixed;
   top: 0;
   right: 0;
@@ -2941,22 +3061,22 @@ script:last-child {
   z-index: 1100;
 }
 
-.layout .layout-header.sticky + .layout-content {
+.layout.vertical > .layout-header.sticky + .layout-content, .layout:not(.vertical):not(.horizontal) > .layout-header.sticky + .layout-content {
   margin-top: 57px;
 }
 
-.layout .layout {
+.layout.vertical .layout.vertical, .layout:not(.vertical):not(.horizontal) .layout.vertical, .layout.vertical .layout:not(.vertical):not(.horizontal), .layout:not(.vertical):not(.horizontal) .layout:not(.vertical):not(.horizontal) {
   /* HEADER */
 }
 
-.layout .layout .layout-header.sticky {
+.layout.vertical .layout.vertical > .layout-header.sticky, .layout:not(.vertical):not(.horizontal) .layout.vertical > .layout-header.sticky, .layout.vertical .layout:not(.vertical):not(.horizontal) > .layout-header.sticky, .layout:not(.vertical):not(.horizontal) .layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   position: relative;
   position: -webkit-sticky;
   position: sticky;
   z-index: 1099;
 }
 
-.layout .layout .layout-header.sticky + .layout-content {
+.layout.vertical .layout.vertical > .layout-header.sticky + .layout-content, .layout:not(.vertical):not(.horizontal) .layout.vertical > .layout-header.sticky + .layout-content, .layout.vertical .layout:not(.vertical):not(.horizontal) > .layout-header.sticky + .layout-content, .layout:not(.vertical):not(.horizontal) .layout:not(.vertical):not(.horizontal) > .layout-header.sticky + .layout-content {
   margin-top: 0;
 }
 
@@ -3558,41 +3678,27 @@ html {
 }
 
 /* =========================================================================
- * Svelto - Core - Reset (Input)
+ * Svelto - Core - Reset (Fullscreen)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-/* BORDER / iOS SHADOW */
-input {
-  border: 0;
-  -webkit-appearance: none !important;
-     -moz-appearance: none !important;
-          appearance: none !important;
+/* FULLSCREEN */
+:not(html):-webkit-full-screen {
+  width: 100% !important;
+  height: 100% !important;
 }
-
-/* NUMBER */
-[type="number"] {
-  -moz-appearance: textfield !important;
+:not(html):-moz-full-screen {
+  width: 100% !important;
+  height: 100% !important;
 }
-
-[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+:not(html):-ms-fullscreen {
+  width: 100% !important;
+  height: 100% !important;
 }
-
-/* UPLOAD */
-[type="file"]::-webkit-file-upload-button {
-  display: none;
-}
-
-/* INVALID */
-::-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/* CLEAR ICON */
-::-ms-clear {
-  display: none;
+:not(html):fullscreen {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* =========================================================================
@@ -3651,20 +3757,6 @@ input {
 /* NO SPACING */
 table {
   border-spacing: 0;
-}
-
-/* =========================================================================
- * Svelto - Core - Reset (Textarea)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* BORDER / iOS SHADOW */
-textarea {
-  border: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
 }
 
 /* =========================================================================
@@ -4138,22 +4230,81 @@ template {
 }
 
 /* =========================================================================
+ * Svelto - Core - Reset (Input)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/normalize.scss
+ * ========================================================================= */
+/* BORDER / iOS SHADOW */
+input {
+  border: 0;
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* NUMBER */
+[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* UPLOAD */
+[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+/* INVALID */
+::-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* CLEAR ICON */
+::-ms-clear {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Core - Reset (Textarea)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/normalize.scss
+ * ========================================================================= */
+/* BORDER / iOS SHADOW */
+textarea {
+  border: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* =========================================================================
  * Svelto - Core - Reset
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vendor/normalize.scss
- * @require ./border_color.scss
- * @require ./box_sizing.scss
- * @require ./flexbox.scss
- * @require ./input.scss
- * @require ./no_outline.scss
- * @require ./placeholder.scss
- * @require ./selection.scss
- * @require ./table.scss
- * @require ./textarea.scss
- * @require ./touch_action.scss
+ * @before ./vendor/normalize.scss
+ * @before ./border_color.scss
+ * @before ./box_sizing.scss
+ * @before ./flexbox.scss
+ * @before ./fullscreen.scss
+ * @before ./input.scss
+ * @before ./no_outline.scss
+ * @before ./placeholder.scss
+ * @before ./selection.scss
+ * @before ./table.scss
+ * @before ./textarea.scss
+ * @before ./touch_action.scss
  * ========================================================================= */
 /* HTML */
 html {
@@ -4490,11 +4641,11 @@ span > script:last-child {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* WIDGET */
-blockquote, blockquote > footer, .widget, .avatar, .breadcrumb, .carousel, .centerer, .placeholder, canvas.chart, .colorpicker, .divider.block, hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, .expander, .accordion, figure,
+blockquote, blockquote > footer, .widget, .avatar, .breadcrumb, .carousel, .centerer, .placeholder, canvas.chart, .colorpicker, .divider.block, hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text), .divider.linear.horizontal:not(:empty), .divider.linear:not(:empty):not(.vertical), .divider:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:not(:empty):not(.block):not(.text), .divider.linear.vertical, .vertical.divider:not(.block):not(.text), .divider.text, .editor, .embed, i.emoji, .expander, .accordion, figure,
 .figure, .flippable, form, label, header, footer, i.icon, .checkbox, .radio, .icons, img, .liker:not(.multiple), .numbox, .parallax, .progressbar, .rails, .rater, .sections, .section-left,
 .section-center,
 .section-right, .select, .circle, .square-sample, .square, .triangle, .slider, .spacer, svg.spinner, .remote-loader,
-.remote-loaded, .spinner-label, .statistic, .switch, .table, .tabs, .toolbar, address, ul,
+.remote-loaded, .spinner-label, .statistic, .subscriber:not(.multiple), .switch, .table, .tabs, .toolbar, address, ul,
 ol,
 dl, p, h1,
 h2,
@@ -4507,11 +4658,11 @@ h6, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-f
   margin: 0 0 0.625rem;
 }
 
-blockquote:last-child, blockquote > footer:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, canvas.chart:last-child, .colorpicker:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.vertical:last-child:empty, .vertical.divider:last-child:empty:not(.block):not(.text), .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
+blockquote:last-child, blockquote > footer:last-child, .widget:last-child, .avatar:last-child, .breadcrumb:last-child, .carousel:last-child, .centerer:last-child, .placeholder:last-child, canvas.chart:last-child, .colorpicker:last-child, .divider.block:last-child, hr.vertical:last-child, .divider.linear.vertical:last-child:empty, .vertical.divider:last-child:empty:not(.block):not(.text), .divider.linear.horizontal:last-child:not(:empty), .divider.linear:last-child:not(:empty):not(.vertical), .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .divider.linear.vertical:last-child, .vertical.divider:last-child:not(.block):not(.text), .divider.text:last-child, .editor:last-child, .embed:last-child, i.emoji:last-child, .expander:last-child, .accordion:last-child, figure:last-child,
 .figure:last-child, .flippable:last-child, form:last-child, label:last-child, header:last-child, footer:last-child, i.icon:last-child, .checkbox:last-child, .radio:last-child, .icons:last-child, img:last-child, .liker:last-child:not(.multiple), .numbox:last-child, .parallax:last-child, .progressbar:last-child, .rails:last-child, .rater:last-child, .sections:last-child, .section-left:last-child,
 .section-center:last-child,
 .section-right:last-child, .select:last-child, .circle:last-child, .square-sample:last-child, .square:last-child, .triangle:last-child, .slider:last-child, .spacer:last-child, svg.spinner:last-child, .remote-loader:last-child,
-.remote-loaded:last-child, .spinner-label:last-child, .statistic:last-child, .switch:last-child, .table:last-child, .tabs:last-child, .toolbar:last-child, address:last-child, ul:last-child,
+.remote-loaded:last-child, .spinner-label:last-child, .statistic:last-child, .subscriber:last-child:not(.multiple), .switch:last-child, .table:last-child, .tabs:last-child, .toolbar:last-child, address:last-child, ul:last-child,
 ol:last-child,
 dl:last-child, p:last-child, h1:last-child,
 h2:last-child,
@@ -4523,7 +4674,7 @@ h6:last-child, .container:last-child, .card-header:last-child:not(.multiple), .c
   margin-bottom: 0;
 }
 
-.multiple > blockquote:last-child, .pager > blockquote:last-child, .tagbox-tags > blockquote:last-child, blockquote.multiple > footer:last-child, blockquote.pager > footer:last-child, blockquote.tagbox-tags > footer:last-child, .multiple > .widget:last-child, .pager > .widget:last-child, .tagbox-tags > .widget:last-child, .multiple > .avatar:last-child, .pager > .avatar:last-child, .tagbox-tags > .avatar:last-child, .multiple > .breadcrumb:last-child, .pager > .breadcrumb:last-child, .tagbox-tags > .breadcrumb:last-child, .multiple > .carousel:last-child, .pager > .carousel:last-child, .tagbox-tags > .carousel:last-child, .multiple > .centerer:last-child, .pager > .centerer:last-child, .tagbox-tags > .centerer:last-child, .multiple > .placeholder:last-child, .pager > .placeholder:last-child, .tagbox-tags > .placeholder:last-child, .multiple > canvas.chart:last-child, .pager > canvas.chart:last-child, .tagbox-tags > canvas.chart:last-child, .multiple > .colorpicker:last-child, .pager > .colorpicker:last-child, .tagbox-tags > .colorpicker:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
+.multiple > blockquote:last-child, .pager > blockquote:last-child, .tagbox-tags > blockquote:last-child, blockquote.multiple > footer:last-child, blockquote.pager > footer:last-child, blockquote.tagbox-tags > footer:last-child, .multiple > .widget:last-child, .pager > .widget:last-child, .tagbox-tags > .widget:last-child, .multiple > .avatar:last-child, .pager > .avatar:last-child, .tagbox-tags > .avatar:last-child, .multiple > .breadcrumb:last-child, .pager > .breadcrumb:last-child, .tagbox-tags > .breadcrumb:last-child, .multiple > .carousel:last-child, .pager > .carousel:last-child, .tagbox-tags > .carousel:last-child, .multiple > .centerer:last-child, .pager > .centerer:last-child, .tagbox-tags > .centerer:last-child, .multiple > .placeholder:last-child, .pager > .placeholder:last-child, .tagbox-tags > .placeholder:last-child, .multiple > canvas.chart:last-child, .pager > canvas.chart:last-child, .tagbox-tags > canvas.chart:last-child, .multiple > .colorpicker:last-child, .pager > .colorpicker:last-child, .tagbox-tags > .colorpicker:last-child, .multiple > .divider.block:last-child, .pager > .divider.block:last-child, .tagbox-tags > .divider.block:last-child, .multiple > hr.vertical:last-child, .pager > hr.vertical:last-child, .tagbox-tags > hr.vertical:last-child, .multiple > .divider.linear.vertical:last-child:empty, .pager > .divider.linear.vertical:last-child:empty, .tagbox-tags > .divider.linear.vertical:last-child:empty, .multiple > .vertical.divider:last-child:empty:not(.block):not(.text), .pager > .vertical.divider:last-child:empty:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:empty:not(.block):not(.text), .multiple > .divider.linear.horizontal:last-child:not(:empty), .pager > .divider.linear.horizontal:last-child:not(:empty), .tagbox-tags > .divider.linear.horizontal:last-child:not(:empty), .multiple > .divider.linear:last-child:not(:empty):not(.vertical), .pager > .divider.linear:last-child:not(:empty):not(.vertical), .tagbox-tags > .divider.linear:last-child:not(:empty):not(.vertical), .multiple > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .pager > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .tagbox-tags > .divider:last-child:not(:empty):not(.vertical):not(.block):not(.text), .multiple > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .pager > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .tagbox-tags > .horizontal.divider:last-child:not(:empty):not(.block):not(.text), .multiple > .divider.linear.vertical:last-child, .pager > .divider.linear.vertical:last-child, .tagbox-tags > .divider.linear.vertical:last-child, .multiple > .vertical.divider:last-child:not(.block):not(.text), .pager > .vertical.divider:last-child:not(.block):not(.text), .tagbox-tags > .vertical.divider:last-child:not(.block):not(.text), .multiple > .divider.text:last-child, .pager > .divider.text:last-child, .tagbox-tags > .divider.text:last-child, .multiple > .editor:last-child, .pager > .editor:last-child, .tagbox-tags > .editor:last-child, .multiple > .embed:last-child, .pager > .embed:last-child, .tagbox-tags > .embed:last-child, .multiple > i.emoji:last-child, .pager > i.emoji:last-child, .tagbox-tags > i.emoji:last-child, .multiple > .expander:last-child, .pager > .expander:last-child, .tagbox-tags > .expander:last-child, .multiple > .accordion:last-child, .pager > .accordion:last-child, .tagbox-tags > .accordion:last-child, .multiple > figure:last-child, .pager > figure:last-child, .tagbox-tags > figure:last-child, .multiple >
 .figure:last-child, .pager >
 .figure:last-child, .tagbox-tags >
 .figure:last-child, .multiple > .flippable:last-child, .pager > .flippable:last-child, .tagbox-tags > .flippable:last-child, .multiple > form:last-child, .pager > form:last-child, .tagbox-tags > form:last-child, .multiple > label:last-child, .pager > label:last-child, .tagbox-tags > label:last-child, .multiple > header:last-child, .pager > header:last-child, .tagbox-tags > header:last-child, .multiple > footer:last-child, .pager > footer:last-child, .tagbox-tags > footer:last-child, .multiple > i.icon:last-child, .pager > i.icon:last-child, .tagbox-tags > i.icon:last-child, .multiple > .checkbox:last-child, .pager > .checkbox:last-child, .tagbox-tags > .checkbox:last-child, .multiple > .radio:last-child, .pager > .radio:last-child, .tagbox-tags > .radio:last-child, .multiple > .icons:last-child, .pager > .icons:last-child, .tagbox-tags > .icons:last-child, .multiple > img:last-child, .pager > img:last-child, .tagbox-tags > img:last-child, .multiple > .liker:last-child:not(.multiple), .pager > .liker:last-child:not(.multiple), .tagbox-tags > .liker:last-child:not(.multiple), .multiple > .numbox:last-child, .pager > .numbox:last-child, .tagbox-tags > .numbox:last-child, .multiple > .parallax:last-child, .pager > .parallax:last-child, .tagbox-tags > .parallax:last-child, .multiple > .progressbar:last-child, .pager > .progressbar:last-child, .tagbox-tags > .progressbar:last-child, .multiple > .rails:last-child, .pager > .rails:last-child, .tagbox-tags > .rails:last-child, .multiple > .rater:last-child, .pager > .rater:last-child, .tagbox-tags > .rater:last-child, .multiple > .sections:last-child, .pager > .sections:last-child, .tagbox-tags > .sections:last-child, .multiple > .section-left:last-child, .pager > .section-left:last-child, .tagbox-tags > .section-left:last-child, .multiple >
@@ -4535,7 +4686,7 @@ h6:last-child, .container:last-child, .card-header:last-child:not(.multiple), .c
 .section-right:last-child, .multiple > .select:last-child, .pager > .select:last-child, .tagbox-tags > .select:last-child, .multiple > .circle:last-child, .pager > .circle:last-child, .tagbox-tags > .circle:last-child, .multiple > .square-sample:last-child, .pager > .square-sample:last-child, .tagbox-tags > .square-sample:last-child, .multiple > .square:last-child, .pager > .square:last-child, .tagbox-tags > .square:last-child, .multiple > .triangle:last-child, .pager > .triangle:last-child, .tagbox-tags > .triangle:last-child, .multiple > .slider:last-child, .pager > .slider:last-child, .tagbox-tags > .slider:last-child, .multiple > .spacer:last-child, .pager > .spacer:last-child, .tagbox-tags > .spacer:last-child, .multiple > svg.spinner:last-child, .pager > svg.spinner:last-child, .tagbox-tags > svg.spinner:last-child, .multiple > .remote-loader:last-child, .pager > .remote-loader:last-child, .tagbox-tags > .remote-loader:last-child, .multiple >
 .remote-loaded:last-child, .pager >
 .remote-loaded:last-child, .tagbox-tags >
-.remote-loaded:last-child, .multiple > .spinner-label:last-child, .pager > .spinner-label:last-child, .tagbox-tags > .spinner-label:last-child, .multiple > .statistic:last-child, .pager > .statistic:last-child, .tagbox-tags > .statistic:last-child, .multiple > .switch:last-child, .pager > .switch:last-child, .tagbox-tags > .switch:last-child, .multiple > .table:last-child, .pager > .table:last-child, .tagbox-tags > .table:last-child, .multiple > .tabs:last-child, .pager > .tabs:last-child, .tagbox-tags > .tabs:last-child, .multiple > .toolbar:last-child, .pager > .toolbar:last-child, .tagbox-tags > .toolbar:last-child, .multiple > address:last-child, .pager > address:last-child, .tagbox-tags > address:last-child, .multiple > ul:last-child, .pager > ul:last-child, .tagbox-tags > ul:last-child, .multiple >
+.remote-loaded:last-child, .multiple > .spinner-label:last-child, .pager > .spinner-label:last-child, .tagbox-tags > .spinner-label:last-child, .multiple > .statistic:last-child, .pager > .statistic:last-child, .tagbox-tags > .statistic:last-child, .multiple > .subscriber:last-child:not(.multiple), .pager > .subscriber:last-child:not(.multiple), .tagbox-tags > .subscriber:last-child:not(.multiple), .multiple > .switch:last-child, .pager > .switch:last-child, .tagbox-tags > .switch:last-child, .multiple > .table:last-child, .pager > .table:last-child, .tagbox-tags > .table:last-child, .multiple > .tabs:last-child, .pager > .tabs:last-child, .tagbox-tags > .tabs:last-child, .multiple > .toolbar:last-child, .pager > .toolbar:last-child, .tagbox-tags > .toolbar:last-child, .multiple > address:last-child, .pager > address:last-child, .tagbox-tags > address:last-child, .multiple > ul:last-child, .pager > ul:last-child, .tagbox-tags > ul:last-child, .multiple >
 ol:last-child, .pager >
 ol:last-child, .tagbox-tags >
 ol:last-child, .multiple >
@@ -5367,6 +5518,99 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
 }
 
 /* =========================================================================
+ * Svelto - Widgets - Emoji
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+/* EMOJI */
+i.emoji {
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  font-size: 1.5em;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  width: 1em;
+  height: 1em;
+  -webkit-flex: 0 0 auto !important;
+      -ms-flex: 0 0 auto !important;
+          flex: 0 0 auto !important;
+  /* IMAGE */
+  /* SPRITE */
+  /* MACOS / IOS - NATIVE */
+  /* ANDROID - NATIVE */
+}
+
+i[style*='background-image'].emoji:empty {
+  background-size: 100%;
+}
+
+i.emoji:not([style*='background-image']):empty {
+  background-image: url("//unpkg.com/emoji-datasource@2.4.4/sheet_emojione_64.png");
+  background-size: 4100%;
+}
+
+html.mac i.emoji:not(:empty),
+html.ios i.emoji:not(:empty) {
+  line-height: 1.1;
+}
+
+html.android i.emoji:not(:empty) {
+  overflow: visible;
+  width: auto;
+  height: auto;
+}
+
+i.xxxxsmall.emoji {
+  font-size: 0.6306911783em;
+}
+
+i.xxxsmall.emoji {
+  font-size: 0.7500179492em;
+}
+
+i.xxsmall.emoji {
+  font-size: 0.8919213452em;
+}
+
+i.xsmall.emoji {
+  font-size: 1.125em;
+}
+
+i.small.emoji {
+  font-size: 1.2613521695em;
+}
+
+i.medium.emoji {
+  font-size: 1.5em;
+}
+
+i.large.emoji {
+  font-size: 1.7838em;
+}
+
+i.xlarge.emoji {
+  font-size: 2.25em;
+}
+
+i.xxlarge.emoji {
+  font-size: 2.5226439664em;
+}
+
+i.xxxlarge.emoji {
+  font-size: 3em;
+}
+
+i.xxxxlarge.emoji {
+  font-size: 3.5675146212em;
+}
+
+/* =========================================================================
  * Svelto - Widgets - Expander
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -6146,6 +6390,61 @@ input[type=radio] + label:after {
 }
 
 /* WRAPPER */
+/* =========================================================================
+ * Svelto - Widgets - Icon - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../icon.scss
+ * ========================================================================= */
+/* ACTIONABLE */
+i.icon.actionable, i.emoji.actionable {
+  /* ENABLED */
+}
+
+i.icon.actionable:not(.disabled), i.emoji.actionable:not(.disabled) {
+  /* HOVER / ACTIVE */
+  /* HOVER */
+  /* ACTIVE */
+}
+
+i.icon.actionable:not(.disabled).hover, i.emoji.actionable:not(.disabled).hover, i.icon.actionable:not(.disabled):hover, i.emoji.actionable:not(.disabled):hover, i.icon.actionable:not(.disabled).active, i.emoji.actionable:not(.disabled).active, i.icon.actionable:not(.disabled):active, i.emoji.actionable:not(.disabled):active {
+  overflow: visible;
+}
+
+i.icon.actionable:not(.disabled).hover:before, i.emoji.actionable:not(.disabled).hover:before, i.icon.actionable:not(.disabled):hover:before, i.emoji.actionable:not(.disabled):hover:before, i.icon.actionable:not(.disabled).active:before, i.emoji.actionable:not(.disabled).active:before, i.icon.actionable:not(.disabled):active:before, i.emoji.actionable:not(.disabled):active:before {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  background-color: #000000;
+  border-radius: 1000000px;
+}
+
+i.icon.actionable:not(.disabled):not(.active).hover:before, i.emoji.actionable:not(.disabled):not(.active).hover:before, i.icon.actionable:not(.disabled):not(.active):hover:before, i.emoji.actionable:not(.disabled):not(.active):hover:before {
+  opacity: 0.04;
+}
+
+i.icon.actionable:not(.disabled):not(.ripple).active:before, i.emoji.actionable:not(.disabled):not(.ripple).active:before, i.icon.actionable:not(.disabled):not(.ripple):active:before, i.emoji.actionable:not(.disabled):not(.ripple):active:before {
+  opacity: 0.06;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../emoji.scss
+ * @require widgets/icon/actionable/actionable.scss
+ * ========================================================================= */
+/* ACTIONABLE */
 /* =========================================================================
  * Svelto - Widgets - Table - Sortable
  * =========================================================================
@@ -8201,6 +8500,70 @@ svg.spinner.base circle {
 }
 
 /* =========================================================================
+ * Svelto - Widgets - Subscriber
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+/* SUBSCRIBER */
+.subscriber {
+  /* NOT MULTIPLE */
+  /* MARGIN */
+  /* TOGGLE */
+  /* COUNTER */
+  /* SUBSCRIBED */
+  /* UNSUBSCRIBED */
+}
+
+.subscriber:not(.multiple) {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.subscriber .toggle:last-child,
+.subscriber .counter:last-child {
+  margin-left: 0.605em;
+}
+
+.subscriber .toggle {
+  cursor: pointer;
+  /* AFTER */
+}
+
+.subscriber .toggle:after {
+  vertical-align: middle;
+  content: "Subscribe";
+}
+
+.subscriber .toggle[data-text-on]:after {
+  content: attr(data-text-on);
+}
+
+.subscriber .counter:before {
+  content: attr(data-counter);
+  vertical-align: middle;
+}
+
+.subscriber[data-state="true"] .toggle:after {
+  content: "Unsubscribe";
+}
+
+.subscriber[data-state="true"] .toggle[data-text-off]:after {
+  content: attr(data-text-off);
+}
+
+.subscriber[data-state="false"] .toggle:after {
+  content: "Subscribe";
+}
+
+.subscriber[data-state="false"] .toggle[data-text-on]:after {
+  content: attr(data-text-on);
+}
+
+/* =========================================================================
  * Svelto - Widgets - Switch
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9156,6 +9519,7 @@ svg.spinner.base circle {
 /* TOOLBAR */
 .toolbar {
   padding: 0.5em 1em;
+  z-index: 0;
   /* MULTIPLE */
 }
 
@@ -11461,7 +11825,7 @@ blockquote:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.bl
  * ========================================================================= */
 /* DEFAULT */
 /* =========================================================================
- * Svelto - Decorators - Hidden
+ * Svelto - Decorators - Hidden - Breakpoints
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11530,6 +11894,177 @@ blockquote:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.bl
 
 /* DOWN */
 .hidden-xl-down {
+  display: none !important;
+}
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - Browsers
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* BROWSERS */
+/* HIDDEN */
+html:not(.no-chrome) .hidden-chrome {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.chrome) .only-chrome {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-firefox) .hidden-firefox {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.firefox) .only-firefox {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-edge) .hidden-edge {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.edge) .only-edge {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-ie) .hidden-ie {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.ie) .only-ie {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-opera) .hidden-opera {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.opera) .only-opera {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-safari) .hidden-safari {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.safari) .only-safari {
+  display: none !important;
+}
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - Devices
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* DEVICES */
+/* HIDDEN */
+html:not(.no-desktop) .hidden-desktop {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.desktop) .only-desktop {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-mobile) .hidden-mobile {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.mobile) .only-mobile {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-tablet) .hidden-tablet {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.tablet) .only-tablet {
+  display: none !important;
+}
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - OSs
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* OSS */
+/* HIDDEN */
+html:not(.no-ios) .hidden-ios {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.ios) .only-ios {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-android) .hidden-android {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.android) .only-android {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-blackberry) .hidden-blackberry {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.blackberry) .only-blackberry {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-linux) .hidden-linux {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.linux) .only-linux {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-mac) .hidden-mac {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.mac) .only-mac {
+  display: none !important;
+}
+
+/* HIDDEN */
+html:not(.no-windows) .hidden-windows {
+  display: none !important;
+}
+
+/* ONLY */
+html:not(.windows) .only-windows {
   display: none !important;
 }
 
@@ -11753,8 +12288,8 @@ html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.di
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
@@ -11792,8 +12327,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -11853,8 +12388,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -11898,8 +12433,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.12#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -12113,6 +12648,7 @@ h6 > small {
 .figcaption, fieldset, .infobar, .tagbox {
   border-radius: 0.25em;
   padding: 0.625rem 0.625rem;
+  z-index: 0;
 }
 
 /* =========================================================================
@@ -12266,6 +12802,239 @@ h6 > small {
 }
 
 /* =========================================================================
+ * Svelto - Widgets - Emoji - Picker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * @before widgets/tabs/tabs.scss
+ * @require ../emoji.scss
+ * ========================================================================= */
+/* EMOJI PICKER */
+.emojipicker {
+  /* TRIGGERS */
+  /* CONTAINERS */
+  /* FOOTER */
+  /* PREVIEW */
+  /* TONES */
+  /* TONE */
+  /* SEARCHING */
+  /* NOT SEARCHING */
+  /* PREVIEWING */
+  /* NOT PREVIEWING */
+}
+
+.emojipicker-triggers {
+  padding: 0 !important;
+  /* TRIGGER */
+}
+
+.emojipicker-triggers .button {
+  padding-left: 0;
+  padding-right: 0;
+  min-width: 0;
+}
+
+.emojipicker-containers {
+  height: 180px;
+  padding: 0 !important;
+  /* CONTAINER */
+}
+
+.emojipicker-containers .container {
+  height: 100%;
+  border-radius: 0;
+  /* MAIN */
+  /* EMOJIFIABLE */
+}
+
+.emojipicker-containers .container.main {
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.emojipicker-containers .container.main.active {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emojipicker-containers .container.main input {
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
+.emojipicker-containers .container.main .section {
+  position: relative;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.emojipicker-containers .container.main .emojis {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  white-space: nowrap;
+  /* EMPTY */
+}
+
+.emojipicker-containers .container.main .emojis.empty {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  opacity: 0.5;
+}
+
+.emojipicker-containers .container:not(.main):not(.emojified) .emojis {
+  display: none;
+}
+
+.emojipicker-footer {
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.emojipicker-preview {
+  /* EMOJI */
+  /* TEXTS */
+}
+
+.emojipicker-preview i.emoji {
+  width: 38px;
+  height: 38px;
+  /* NATIVE */
+}
+
+.emojipicker-preview i.emoji:not(:empty) {
+  font-size: 38px;
+}
+
+.emojipicker-preview .texts {
+  white-space: nowrap;
+  overflow: hidden;
+  /* TITLE / SHORT NAMES */
+  /* SHORT NAMES */
+}
+
+.emojipicker-preview .texts .title,
+.emojipicker-preview .texts .short-names {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.emojipicker-preview .texts .short-names {
+  font-size: 0.75em;
+}
+
+.emojipicker-tones {
+  margin: calc( ( 38px - 1.1892em ) / 2) 0;
+}
+
+.emojipicker-tone {
+  width: 1.1892em;
+  height: 1.1892em;
+  border-radius: 1.1892em;
+  position: relative;
+  /* TONES */
+  /* INACTIVE */
+  /* HOVER / ACTIVE */
+}
+
+.emojipicker-tone:nth-child(1) {
+  background-color: #ffc93a;
+}
+
+.emojipicker-tone:nth-child(2) {
+  background-color: #fadcbc;
+}
+
+.emojipicker-tone:nth-child(3) {
+  background-color: #e0bb95;
+}
+
+.emojipicker-tone:nth-child(4) {
+  background-color: #bf8f68;
+}
+
+.emojipicker-tone:nth-child(5) {
+  background-color: #9b643d;
+}
+
+.emojipicker-tone:nth-child(6) {
+  background-color: #594539;
+}
+
+.emojipicker-tone:not(.active) {
+  cursor: pointer;
+}
+
+.emojipicker-tone.active:after {
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  content: '';
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.emojipicker.searching .frequent-section {
+  display: none;
+}
+
+.emojipicker:not(.searching) .search-section {
+  display: none;
+}
+
+.emojipicker.previewing .emojipicker-tones {
+  display: none;
+}
+
+.emojipicker:not(.previewing) .emojipicker-preview {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../picker.scss
+ * ========================================================================= */
+/* POPOVER */
+.emojipicker.popover, .emojipicker.tooltip {
+  width: 318px;
+  /* CONTAINERS */
+  /* TONES */
+  /* TONE */
+}
+
+.emojipicker.popover .emojipicker-containers, .emojipicker.tooltip .emojipicker-containers {
+  height: 248px;
+}
+
+.emojipicker.popover .emojipicker-tones, .emojipicker.tooltip .emojipicker-tones {
+  margin: calc( ( 38px - 1.1892em ) / 2) 0;
+}
+
+.emojipicker.popover .emojipicker-tone, .emojipicker.tooltip .emojipicker-tone {
+  width: 1.1892em;
+  height: 1.1892em;
+}
+
+/* =========================================================================
  * Svelto - Widgets - Modal
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -12340,7 +13109,8 @@ html.flexbox-tweener .modal.card > .card-block {
  * @require ../modal.scss
  * ========================================================================= */
 /* FULLSCREEN */
-.modal.fullscreen {
+.modal.fullscreen,
+.modal.fullscreen-request {
   border-width: 0;
   border-radius: 0;
   max-width: none;
@@ -12350,7 +13120,13 @@ html.flexbox-tweener .modal.card > .card-block {
 }
 
 /* VERTICAL SHRINKING FIX (IE-10/11) */
-html.flexbox-tweener .modal.fullscreen.card > .card-block {
+html.flexbox-tweener .modal.fullscreen,
+html.flexbox-tweener .modal.fullscreen-request {
+  /* CARD */
+}
+
+html.flexbox-tweener .modal.fullscreen.card > .card-block,
+html.flexbox-tweener .modal.fullscreen-request.card > .card-block {
   max-height: none;
 }
 
@@ -12389,9 +13165,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout {
   transition: padding 0.35s;
+  /* STICKY HEADER */
 }
 
-.panel-layout > .layout-header.sticky {
+.panel-layout.layout.vertical > .layout-header.sticky, .panel-layout.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   transition: none;
   transition-property: top, right, bottom, left;
   transition-duration: 0.35s;
@@ -12458,9 +13235,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-default-pinned-left {
   padding-left: 15rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-default-pinned-left > .layout-header.sticky {
+.panel-layout.panel-default-pinned-left.layout.vertical > .layout-header.sticky, .panel-layout.panel-default-pinned-left.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   left: 15rem;
 }
 
@@ -12487,9 +13265,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-default-pinned-right {
   padding-right: 15rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-default-pinned-right > .layout-header.sticky {
+.panel-layout.panel-default-pinned-right.layout.vertical > .layout-header.sticky, .panel-layout.panel-default-pinned-right.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   right: 15rem;
 }
 
@@ -12516,9 +13295,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-default-pinned-top {
   padding-top: 7.5rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-default-pinned-top > .layout-header.sticky {
+.panel-layout.panel-default-pinned-top.layout.vertical > .layout-header.sticky, .panel-layout.panel-default-pinned-top.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   top: 7.5rem;
 }
 
@@ -12599,6 +13379,131 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
  * ========================================================================= */
 /* DEFAULT */
 /* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* BOTTOM */
+.panel.fullscreen.bottom,
+.panel.fullscreen-request.bottom {
+  height: 100vh;
+  /* CLOSED */
+}
+
+.panel.fullscreen.bottom:not(.open),
+.panel.fullscreen-request.bottom:not(.open) {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+}
+
+/* LAYOUT */
+.panel-layout.panel-fullscreen-pinned-bottom {
+  padding-bottom: 100vh;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* LEFT */
+.panel.fullscreen.left, .fullscreen.panel:not(.top):not(.right):not(.bottom),
+.panel.fullscreen-request.left,
+.fullscreen-request.panel:not(.top):not(.right):not(.bottom) {
+  width: 100vw;
+  /* CLOSED */
+}
+
+.panel.fullscreen.left:not(.open), .fullscreen.panel:not(.open):not(.top):not(.right):not(.bottom),
+.panel.fullscreen-request.left:not(.open),
+.fullscreen-request.panel:not(.open):not(.top):not(.right):not(.bottom) {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+/* LAYOUT */
+.panel-layout.panel-fullscreen-pinned-left {
+  padding-left: 100vw;
+  /* STICKY HEADER */
+}
+
+.panel-layout.panel-fullscreen-pinned-left.layout.vertical > .layout-header.sticky, .panel-layout.panel-fullscreen-pinned-left.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
+  left: 100vw;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* RIGHT */
+.panel.fullscreen.right,
+.panel.fullscreen-request.right {
+  width: 100vw;
+  /* CLOSED */
+}
+
+.panel.fullscreen.right:not(.open),
+.panel.fullscreen-request.right:not(.open) {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+/* LAYOUT */
+.panel-layout.panel-fullscreen-pinned-right {
+  padding-right: 100vw;
+  /* STICKY HEADER */
+}
+
+.panel-layout.panel-fullscreen-pinned-right.layout.vertical > .layout-header.sticky, .panel-layout.panel-fullscreen-pinned-right.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
+  right: 100vw;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+/* TOP */
+.panel.fullscreen.top,
+.panel.fullscreen-request.top {
+  height: 100vh;
+  /* CLOSED */
+}
+
+.panel.fullscreen.top:not(.open),
+.panel.fullscreen-request.top:not(.open) {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+/* LAYOUT */
+.panel-layout.panel-fullscreen-pinned-top {
+  padding-top: 100vh;
+  /* STICKY HEADER */
+}
+
+.panel-layout.panel-fullscreen-pinned-top.layout.vertical > .layout-header.sticky, .panel-layout.panel-fullscreen-pinned-top.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
+  top: 100vh;
+}
+
+/* =========================================================================
  * Svelto - Widgets - Panel - Open
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -12650,6 +13555,7 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
           transform: translateY(4.25rem);
 }
 
+/* LAYOUT */
 .panel-layout.panel-slim-pinned-bottom {
   padding-bottom: 4.25rem;
 }
@@ -12677,9 +13583,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-slim-pinned-left {
   padding-left: 4.25rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-slim-pinned-left > .layout-header.sticky {
+.panel-layout.panel-slim-pinned-left.layout.vertical > .layout-header.sticky, .panel-layout.panel-slim-pinned-left.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   left: 4.25rem;
 }
 
@@ -12706,9 +13613,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-slim-pinned-right {
   padding-right: 4.25rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-slim-pinned-right > .layout-header.sticky {
+.panel-layout.panel-slim-pinned-right.layout.vertical > .layout-header.sticky, .panel-layout.panel-slim-pinned-right.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   right: 4.25rem;
 }
 
@@ -12735,9 +13643,10 @@ html.flexbox-tweener .modal.fullscreen.card > .card-block {
 /* LAYOUT */
 .panel-layout.panel-slim-pinned-top {
   padding-top: 4.25rem;
+  /* STICKY HEADER */
 }
 
-.panel-layout.panel-slim-pinned-top > .layout-header.sticky {
+.panel-layout.panel-slim-pinned-top.layout.vertical > .layout-header.sticky, .panel-layout.panel-slim-pinned-top.layout:not(.vertical):not(.horizontal) > .layout-header.sticky {
   top: 4.25rem;
 }
 
@@ -13565,7 +14474,7 @@ html.flexbox-tweener .toast-queue:not(.expanded):not(:empty) .toast {
   /* QUEUE */
 }
 
-.layout-header.sticky ~ .toast-queues.top {
+.layout.vertical > .layout-header.sticky ~ .toast-queues.top, .layout:not(.vertical):not(.horizontal) > .layout-header.sticky ~ .toast-queues.top {
   top: 57px;
 }
 
@@ -15112,10 +16021,10 @@ pre {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./top_right.scss
- * @require ./bottom_right.scss
- * @require ./bottom_left.scss
- * @require ./top_left.scss
+ * @before ./top_right.scss
+ * @before ./bottom_right.scss
+ * @before ./bottom_left.scss
+ * @before ./top_left.scss
  * ========================================================================= */
 /* DEFAULT */
 /* =========================================================================
@@ -15152,7 +16061,8 @@ pre {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* FULLSCREEN */
-.editor.fullscreen {
+.editor.fullscreen,
+.editor.fullscreen-request {
   position: fixed;
   top: 0;
   right: 0;
@@ -15204,7 +16114,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.7.12);
+  background-image: url(/images/flags.png?v=0.7.13);
 }
 
 /* FLAGS */
@@ -16221,7 +17131,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.12) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.12) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.13) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.13) format("woff");
 }
 
 /* =========================================================================
@@ -16370,6 +17280,39 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
 }
 
 /* =========================================================================
+ * Svelto - Widgets - Popover - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../popover.scss
+ * ========================================================================= */
+/* FULLSCREEN */
+.popover.fullscreen, .fullscreen.tooltip,
+.popover.fullscreen-request,
+.fullscreen-request.tooltip {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+html.flexbox-tweener .popover.fullscreen, html.flexbox-tweener .fullscreen.tooltip,
+html.flexbox-tweener .popover.fullscreen-request,
+html.flexbox-tweener .fullscreen-request.tooltip {
+  /* CARD */
+}
+
+html.flexbox-tweener .popover.fullscreen.card > .card-block, html.flexbox-tweener .fullscreen.card.tooltip > .card-block,
+html.flexbox-tweener .popover.fullscreen-request.card > .card-block,
+html.flexbox-tweener .fullscreen-request.card.tooltip > .card-block {
+  max-height: none;
+}
+
+/* =========================================================================
  * Svelto - Widgets - Popover - Moving
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -16509,11 +17452,11 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* REMOTE WIDGET PLACEHOLDER */
-.remote-modal-placeholder, .remote-popover-placeholder {
+.remote-modal-placeholder, .remote-panel-placeholder, .remote-popover-placeholder {
   /* CHILDREN */
 }
 
-.remote-modal-placeholder > *, .remote-popover-placeholder > * {
+.remote-modal-placeholder > *, .remote-panel-placeholder > *, .remote-popover-placeholder > * {
   overflow: hidden;
 }
 
@@ -16523,10 +17466,23 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* REMOTE MODAL PLACEHOLDER */
 .remote-modal-placeholder {
+  overflow: hidden;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/widget.scss
+ * ========================================================================= */
+/* REMOTE PANEL PLACEHOLDER */
+.remote-panel-placeholder {
   overflow: hidden;
 }
 
@@ -16536,7 +17492,7 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 /* REMOTE POPOVER PLACEHOLDER */
 /* =========================================================================
@@ -16548,16 +17504,16 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * @require ../widget.scss
  * ========================================================================= */
 /* RESIZING */
-.remote-modal-placeholder.remote-modal-resizing, .remote-modal-placeholder.remote-popover-resizing, .remote-popover-placeholder.remote-modal-resizing, .remote-popover-placeholder.remote-popover-resizing {
+.remote-modal-placeholder.remote-modal-resizing, .remote-modal-placeholder.remote-panel-resizing, .remote-modal-placeholder.remote-popover-resizing, .remote-panel-placeholder.remote-modal-resizing, .remote-panel-placeholder.remote-panel-resizing, .remote-panel-placeholder.remote-popover-resizing, .remote-popover-placeholder.remote-modal-resizing, .remote-popover-placeholder.remote-panel-resizing, .remote-popover-placeholder.remote-popover-resizing {
   /* SHOWING */
   /* NOT SHOWING */
 }
 
-.remote-modal-placeholder.remote-modal-resizing.remote-modal-showing > *, .remote-modal-placeholder.remote-modal-resizing.remote-popover-showing > *, .remote-modal-placeholder.remote-modal-showing.remote-popover-resizing > *, .remote-modal-placeholder.remote-popover-resizing.remote-popover-showing > *, .remote-popover-placeholder.remote-modal-resizing.remote-modal-showing > *, .remote-popover-placeholder.remote-modal-resizing.remote-popover-showing > *, .remote-popover-placeholder.remote-modal-showing.remote-popover-resizing > *, .remote-popover-placeholder.remote-popover-resizing.remote-popover-showing > * {
+.remote-modal-placeholder.remote-modal-resizing.remote-modal-showing > *, .remote-modal-placeholder.remote-modal-resizing.remote-panel-showing > *, .remote-modal-placeholder.remote-modal-resizing.remote-popover-showing > *, .remote-modal-placeholder.remote-modal-showing.remote-panel-resizing > *, .remote-modal-placeholder.remote-modal-showing.remote-popover-resizing > *, .remote-modal-placeholder.remote-panel-resizing.remote-panel-showing > *, .remote-modal-placeholder.remote-panel-resizing.remote-popover-showing > *, .remote-modal-placeholder.remote-panel-showing.remote-popover-resizing > *, .remote-modal-placeholder.remote-popover-resizing.remote-popover-showing > *, .remote-panel-placeholder.remote-modal-resizing.remote-modal-showing > *, .remote-panel-placeholder.remote-modal-resizing.remote-panel-showing > *, .remote-panel-placeholder.remote-modal-resizing.remote-popover-showing > *, .remote-panel-placeholder.remote-modal-showing.remote-panel-resizing > *, .remote-panel-placeholder.remote-modal-showing.remote-popover-resizing > *, .remote-panel-placeholder.remote-panel-resizing.remote-panel-showing > *, .remote-panel-placeholder.remote-panel-resizing.remote-popover-showing > *, .remote-panel-placeholder.remote-panel-showing.remote-popover-resizing > *, .remote-panel-placeholder.remote-popover-resizing.remote-popover-showing > *, .remote-popover-placeholder.remote-modal-resizing.remote-modal-showing > *, .remote-popover-placeholder.remote-modal-resizing.remote-panel-showing > *, .remote-popover-placeholder.remote-modal-resizing.remote-popover-showing > *, .remote-popover-placeholder.remote-modal-showing.remote-panel-resizing > *, .remote-popover-placeholder.remote-modal-showing.remote-popover-resizing > *, .remote-popover-placeholder.remote-panel-resizing.remote-panel-showing > *, .remote-popover-placeholder.remote-panel-resizing.remote-popover-showing > *, .remote-popover-placeholder.remote-panel-showing.remote-popover-resizing > *, .remote-popover-placeholder.remote-popover-resizing.remote-popover-showing > * {
   transition: opacity 0.35s !important;
 }
 
-.remote-modal-placeholder.remote-modal-resizing:not(.remote-modal-showing):not(.remote-popover-showing) > *, .remote-modal-placeholder.remote-popover-resizing:not(.remote-modal-showing):not(.remote-popover-showing) > *, .remote-popover-placeholder.remote-modal-resizing:not(.remote-modal-showing):not(.remote-popover-showing) > *, .remote-popover-placeholder.remote-popover-resizing:not(.remote-modal-showing):not(.remote-popover-showing) > * {
+.remote-modal-placeholder.remote-modal-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-modal-placeholder.remote-panel-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-modal-placeholder.remote-popover-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-panel-placeholder.remote-modal-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-panel-placeholder.remote-panel-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-panel-placeholder.remote-popover-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-popover-placeholder.remote-modal-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-popover-placeholder.remote-panel-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > *, .remote-popover-placeholder.remote-popover-resizing:not(.remote-modal-showing):not(.remote-panel-showing):not(.remote-popover-showing) > * {
   transition: none !important;
   opacity: 0 !important;
 }
@@ -16568,11 +17524,25 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/resizing/resizing.scss
+ * @require ../../widget/resizing/resizing.scss
  * @require ../modal.scss
  * ========================================================================= */
 /* RESIZING */
 .remote-modal-placeholder.remote-modal-resizing.remote-modal-showing > * {
+  transition-duration: 0.35s !important;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel - Resizing
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../widget/resizing/resizing.scss
+ * @require ../panel.scss
+ * ========================================================================= */
+/* RESIZING */
+.remote-panel-placeholder.remote-panel-resizing.remote-panel-showing > * {
   transition-duration: 0.35s !important;
 }
 
@@ -16582,7 +17552,7 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/resizing/resizing.scss
+ * @require ../../widget/resizing/resizing.scss
  * @require ../popover.scss
  * ========================================================================= */
 /* RESIZING */
@@ -16599,11 +17569,11 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * @require ../widget.scss
  * ========================================================================= */
 /* UNLOADED */
-.remote-modal-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded), .remote-popover-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) {
+.remote-modal-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded), .remote-panel-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded), .remote-popover-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) {
   /* SPINNER */
 }
 
-.remote-modal-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) svg.spinner, .remote-popover-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) svg.spinner {
+.remote-modal-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) svg.spinner, .remote-panel-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) svg.spinner, .remote-popover-placeholder:not(.remote-modal-loaded):not(.remote-popover-loaded) svg.spinner {
   position: absolute;
   top: 0;
   right: 0;
@@ -16618,7 +17588,7 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/unloaded/unloaded.scss
+ * @require ../../widget/unloaded/unloaded.scss
  * @require ../modal.scss
  * ========================================================================= */
 /* UNLOADED */
@@ -16633,7 +17603,7 @@ html.flexbox-tweener .popover.card > .card-block, html.flexbox-tweener .card.too
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/unloaded/unloaded.scss
+ * @require ../../widget/unloaded/unloaded.scss
  * @require ../popover.scss
  * ========================================================================= */
 /* UNLOADED */

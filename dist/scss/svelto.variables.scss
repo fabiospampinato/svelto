@@ -395,9 +395,8 @@ $remote-widget-animation-duration: $animation-normal !default;
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
+ * @require ../widget/variables.scss
  * @require widgets/modal/variables.scss
- * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 
 /* REMOTE MODAL */
@@ -408,6 +407,21 @@ $remote-modal-height: 8.75rem !default;
 /* ANIMATION */
 
 $remote-modal-animation-duration: $modal-animation-duration !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Remote - Panel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/variables.scss
+ * @require widgets/panel/variables.scss
+ * ========================================================================= */
+
+/* ANIMATION */
+
+$remote-panel-animation-duration: $panel-animation-duration !default;
 
 
 /* =========================================================================
@@ -2432,9 +2446,8 @@ $popover-animation-duration: $animation-fast !default;
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/animations/variables.scss
+ * @require ../widget/variables.scss
  * @require widgets/popover/variables.scss
- * @require widgets/remote/widget/variables.scss
  * ========================================================================= */
 
 /* REMOTE POPOVER */
@@ -2456,7 +2469,7 @@ $remote-popover-animation-duration: $popover-animation-duration !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.12' !default;
+$svelto-version: '0.7.13' !default;
 
 
 /* =========================================================================
@@ -2579,6 +2592,77 @@ $sizes: (
 
 
 /* =========================================================================
+ * Svelto - Widgets - Emoji - Picker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/colors/variables.scss
+ * @require core/sizes/variables.scss
+ * ========================================================================= */
+
+/* EMOJI PICKER */
+
+$emojipicker-containers-height: 180px !default;
+
+/* EMPTY EMOJIS */
+
+$emojipicker-emojis-empty-opacity: .5 !default;
+
+/* PREVIEW */
+
+$emojipicker-preview-emoji-size: 38px !default;
+$emojipicker-preview-short-names-size: 'xsmall' !default;
+
+/* TONE */
+
+$emojipicker-tone-size: $size-large !default;
+$emojipicker-tone-1-bg-color: #ffc93a !default;
+$emojipicker-tone-2-bg-color: #fadcbc !default;
+$emojipicker-tone-3-bg-color: #e0bb95 !default;
+$emojipicker-tone-4-bg-color: #bf8f68 !default;
+$emojipicker-tone-5-bg-color: #9b643d !default;
+$emojipicker-tone-6-bg-color: #594539 !default;
+
+/* TONES */
+
+$emojipicker-tones-spacing: calc( ( #{$emojipicker-preview-emoji-size} - #{$emojipicker-tone-size} ) / 2 ) !default;
+
+/* TONE DOT */
+
+$emojipicker-tone-dot-z-depth: 1 !default;
+$emojipicker-tone-dot-size: 5px !default;
+$emojipicker-tone-dot-bg-color: $color-white !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../variables.scss
+ * ========================================================================= */
+
+/* POPOVER */
+
+$emojipicker-popover-width: 318px !default;
+$emojipicker-popover-containers-height: 248px !default;
+
+/* PREVIEW */
+
+$emojipicker-popover-preview-emoji-size: $emojipicker-preview-emoji-size !default;
+
+/* TONE */
+
+$emojipicker-popover-tone-size: $emojipicker-tone-size !default;
+
+/* TONES */
+
+$emojipicker-popover-tones-spacing: calc( ( #{$emojipicker-popover-preview-emoji-size} - #{$emojipicker-popover-tone-size} ) / 2 ) !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Icon (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -2609,6 +2693,38 @@ $icon-path-fonts: $path-fonts !default;
 /* CORNER */
 
 $icon-corner-font-size: $icon-scale-factor / 2 * 1em !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/icon/variables.scss
+ * @require core/typography/variables.scss
+ * ========================================================================= */
+
+/* EMOJI */
+
+$emoji-size: $icon-size !default;
+$emoji-scale-factor: $emoji-size / $font-size !default;
+
+/* TYPE */
+
+$emoji-set: 'emojione' !default; // apple, google, twitter, emojione
+$emoji-tone: 1 !default;
+
+/* IMAGE */
+
+$emoji-image-path: '//cdn.jsdelivr.net/emojione/assets/png/' !default; //TODO: Add one path for each of the possible sets
+
+/* SPRITE */
+
+$emoji-sprite-columns: 41 !default;
+$emoji-sprite-version: '2.4.4' !default;
+$emoji-sprite-size: 64 !default; // 16, 20, 32, 64
+$emoji-sprite-url: '//unpkg.com/emoji-datasource@#{$emoji-sprite-version}/sheet_#{$emoji-set}_#{$emoji-sprite-size}.png' !default;
 
 
 /* =========================================================================
@@ -3376,6 +3492,25 @@ $numbox-border-radius: $label-border-radius !default;
 
 
 /* =========================================================================
+ * Svelto - Widgets - Subscriber (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require widgets/label/variables.scss
+ * ========================================================================= */
+
+/* SUBSCRIBER */
+
+$subscriber-inner-gutter: $label-inner-gutter + .23em !default; //FIXME: A little hacky, done for having the same spacing that it would have if we used plain buttons
+
+/* TOGGLE */
+
+$subscriber-toggle-text-on: 'Subscribe' !default;
+$subscriber-toggle-text-off: 'Unsubscribe' !default;
+
+
+/* =========================================================================
  * Svelto - Widgets - Table (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -3596,6 +3731,26 @@ $divider-block-x-padding: .625em !default;
 $divider-block-y-padding: $divider-block-x-padding / 2 !default;
 
 $divider-block-border-radius: $circular-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Widgets - Icon - Actionable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require decorators/border_radius/variables.scss
+ * ========================================================================= */
+
+/* ACTIONABLE */
+
+$icon-actionable-before-size: 140% !default;
+
+$icon-actionable-before-bg-color: #000000 !default;
+$icon-actionable-before-hover-opacity: .04 !default;
+$icon-actionable-before-active-opacity: .06 !default;
+
+$icon-actionable-before-border-radius: $circular-border-radius !default;
 
 
 /* =========================================================================

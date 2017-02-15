@@ -489,6 +489,20 @@
 
 
 /* =========================================================================
+ * Svelto - Core - Browser (Variables)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SUPPORT */
+
+$browser-support-browsers:  ( 'chrome', 'firefox', 'edge', 'ie', 'opera', 'safari' ) !default;
+$browser-support-devices: ( 'desktop', 'mobile', 'tablet' ) !default;
+$browser-support-oss: ( 'ios', 'android', 'blackberry', 'linux', 'mac', 'windows' ) !default;
+
+
+/* =========================================================================
  * Svelto - Core - Multiple
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -892,8 +906,6 @@ script:last-child {
  * @before core/multiple/multiple.scss
  * ========================================================================= */
 
-//TODO: Add support for horizontal layout
-
 /* LAYOUT */
 
 .layout {
@@ -901,9 +913,7 @@ script:last-child {
   @include children-no-gutter ();
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: stretch;
-  overflow: auto;
 
   /* HEADER / CONTENT / FOOTER */
 
@@ -924,7 +934,7 @@ script:last-child {
 
   &-content {
     padding: $layout-content-padding-y $layout-content-padding-x;
-    flex-grow: 1; // Needed for having the `.layout-footer` stick to the bottom
+    flex-grow: 1; // Needed for having the `.layout-footer` stick to the bottom/right
   }
 
   /* FOOTER */
@@ -960,6 +970,68 @@ script:last-child {
 
 
 /* =========================================================================
+ * Svelto - Core - Layout - Directions - Horizontal
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+
+// Header and Footer are always "sticky"
+
+/* HORIZONTAL */
+
+.layout.horizontal {
+
+  flex-direction: row;
+  overflow: hidden;
+
+  /* CONTENT */
+
+  > .layout-content {
+    overflow: auto;
+    flex-shrink: 1;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Vertical
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../layout.scss
+ * ========================================================================= */
+
+/* VERTICAL */
+
+.layout.vertical {
+  flex-direction: column;
+  overflow: auto
+}
+
+
+/* =========================================================================
+ * Svelto - Core - Layout - Directions - Default
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./horizontal.scss
+ * @before ./vertical.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+.layout:not(.vertical):not(.horizontal) {
+  @extend .layout.vertical;
+}
+
+
+/* =========================================================================
  * Svelto - Core - Layout - Sticky
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -970,11 +1042,11 @@ script:last-child {
 
 /* FIRST LAYOUT */
 
-.layout {
+.layout.vertical {
 
   /* HEADER */
 
-  .layout-header.sticky {
+  > .layout-header.sticky {
 
     @include position ( fixed, 0 0 false 0 );
     z-index: $layout-sticky-header-z-index;
@@ -987,11 +1059,11 @@ script:last-child {
 
   /* NOT FIRST */
 
-  .layout {
+  .layout.vertical {
 
     /* HEADER */
 
-    .layout-header.sticky {
+    > .layout-header.sticky {
 
       position: relative;
       position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)
@@ -1304,48 +1376,17 @@ html {
 
 
 /* =========================================================================
- * Svelto - Core - Reset (Input)
+ * Svelto - Core - Reset (Fullscreen)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BORDER / iOS SHADOW */
+/* FULLSCREEN */
 
-input {
-  border: 0;
-  appearance: none !important;
-}
-
-/* NUMBER */
-
-[type="number"] {
-
-  -moz-appearance: textfield !important;
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-  }
-
-}
-
-/* UPLOAD */
-
-[type="file"]::-webkit-file-upload-button {
-  display: none;
-}
-
-/* INVALID */
-
-::-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/* CLEAR ICON */
-
-::-ms-clear {
-  display: none;
+:not(html):fullscreen {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 
@@ -1405,21 +1446,6 @@ input {
 
 table {
   border-spacing: 0;
-}
-
-
-/* =========================================================================
- * Svelto - Core - Reset (Textarea)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* BORDER / iOS SHADOW */
-
-textarea {
-  border: 0;
-  appearance: none;
 }
 
 
@@ -1912,22 +1938,90 @@ template {
 
 
 /* =========================================================================
+ * Svelto - Core - Reset (Input)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/normalize.scss
+ * ========================================================================= */
+
+/* BORDER / iOS SHADOW */
+
+input {
+  border: 0;
+  appearance: none !important;
+  font-family: $font-family-root;
+}
+
+/* NUMBER */
+
+[type="number"] {
+
+  -moz-appearance: textfield !important;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+
+}
+
+/* UPLOAD */
+
+[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+/* INVALID */
+
+::-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* CLEAR ICON */
+
+::-ms-clear {
+  display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Core - Reset (Textarea)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before ./vendor/normalize.scss
+ * ========================================================================= */
+
+/* BORDER / iOS SHADOW */
+
+textarea {
+  border: 0;
+  appearance: none;
+  font-family: $font-family-root;
+}
+
+
+/* =========================================================================
  * Svelto - Core - Reset
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./vendor/normalize.scss
- * @require ./border_color.scss
- * @require ./box_sizing.scss
- * @require ./flexbox.scss
- * @require ./input.scss
- * @require ./no_outline.scss
- * @require ./placeholder.scss
- * @require ./selection.scss
- * @require ./table.scss
- * @require ./textarea.scss
- * @require ./touch_action.scss
+ * @before ./vendor/normalize.scss
+ * @before ./border_color.scss
+ * @before ./box_sizing.scss
+ * @before ./flexbox.scss
+ * @before ./fullscreen.scss
+ * @before ./input.scss
+ * @before ./no_outline.scss
+ * @before ./placeholder.scss
+ * @before ./selection.scss
+ * @before ./table.scss
+ * @before ./textarea.scss
+ * @before ./touch_action.scss
  * ========================================================================= */
 
 /* HTML */
@@ -3317,6 +3411,88 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Emoji
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//FIXME: Impossible to have bigger emojis on iOS
+
+/* EMOJI */
+
+%emoji-base {
+
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden; // So the text won't exceed the icon box even when some composed emojis are not rendered properly
+  font-size: 1em * $emoji-scale-factor;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap; // Needed for correctly displaying multi-emoji natively on Android
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto !important; // We don't want it to grow or shrink in any case
+
+  /* IMAGE */
+
+  &[style*='background-image']:empty {
+    background-size: 100%;
+  }
+
+  /* SPRITE */
+
+  &:not([style*='background-image']):empty {
+    background-image: url($emoji-sprite-url);
+    background-size: 100% * $emoji-sprite-columns;
+  }
+
+  /* MACOS / IOS - NATIVE */ //FIXME: Shouldn't be necessary to have these special rules
+
+  html.mac &:not(:empty),
+  html.ios &:not(:empty) {
+    line-height: 1.1; // Otherwise they are not precisely aligned
+  }
+
+  /* ANDROID - NATIVE */ //FIXME: Shouldn't be necessary to have these special rules
+
+  html.android &:not(:empty) {
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+
+}
+
+%emoji {
+  @extend %emoji-base;
+}
+
+%emoji-sizes-scaled {
+
+  @each $size, $font-size in $sizes {
+
+    $class: size-get-class( $size );
+
+    &.#{$class} {
+      font-size: $font-size * $emoji-scale-factor;
+    }
+
+  }
+
+}
+
+i.emoji {
+  @extend %widget;
+  @extend %emoji;
+  @extend %emoji-sizes-scaled;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Expander
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -4227,6 +4403,90 @@ input[type=radio] {
 
 .radio {
   @extend .checkbox;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Icon - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../icon.scss
+ * ========================================================================= */
+
+//FIXME: Once clicked it makes the header behave weirdly (ios safari)
+
+/* ACTIONABLE */
+
+i.icon.actionable {
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* HOVER / ACTIVE */
+
+    &.hover,
+    &:hover,
+    &.active,
+    &:active {
+
+      overflow: visible;
+
+      &:before {
+        @include center-transform ();
+        @include dimension ( $icon-actionable-before-size );
+        position: absolute;
+        z-index: -1;
+        content: '';
+        background-color: $icon-actionable-before-bg-color;
+        border-radius: $icon-actionable-before-border-radius;
+      }
+
+    }
+
+    /* HOVER */
+
+    &:not(.active) {
+
+      &.hover:before,
+      &:hover:before {
+        opacity: $icon-actionable-before-hover-opacity;
+      }
+
+    }
+
+    /* ACTIVE */
+
+    &:not(.ripple) {
+
+      &.active:before,
+      &:active:before {
+        opacity: $icon-actionable-before-active-opacity;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Actionable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../emoji.scss
+ * @require widgets/icon/actionable/actionable.scss
+ * ========================================================================= */
+
+/* ACTIONABLE */
+
+i.emoji.actionable {
+  @extend i.icon.actionable;
 }
 
 
@@ -6395,6 +6655,97 @@ svg.spinner {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Subscriber
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add liker-like icons support
+//TODO: Add liker-like classes
+
+/* SUBSCRIBER */
+
+.subscriber {
+
+  /* NOT MULTIPLE */
+
+  &:not(.multiple) {
+    @extend %widget;
+    display: flex;
+  }
+
+  /* MARGIN */
+
+  .toggle,
+  .counter {
+
+    &:last-child {
+      margin-left: $subscriber-inner-gutter;
+    }
+
+  }
+
+  /* TOGGLE */
+
+  .toggle {
+
+    cursor: pointer;
+
+    /* AFTER */
+
+    &:after {
+      vertical-align: middle;
+      content: $subscriber-toggle-text-on;
+    }
+
+    &[data-text-on]:after {
+      content: attr(data-text-on);
+    }
+
+  }
+
+  /* COUNTER */
+
+  .counter:before {
+    content: attr(data-counter);
+    vertical-align: middle;
+  }
+
+  /* SUBSCRIBED */
+
+  &[data-state="true"] {
+
+    .toggle:after {
+      content: $subscriber-toggle-text-off;
+    }
+
+    .toggle[data-text-off]:after {
+      content: attr(data-text-off);
+    }
+
+  }
+
+  /* UNSUBSCRIBED */
+
+  &[data-state="false"] {
+
+    .toggle:after {
+      content: $subscriber-toggle-text-on;
+    }
+
+    .toggle[data-text-on]:after {
+      content: attr(data-text-on);
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Switch
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -7619,6 +7970,7 @@ svg.spinner {
 
   @extend %widget;
   padding: $toolbar-padding-y $toolbar-padding-x;
+  z-index: 0; // In order to better support actionable icons etc.
 
   /* MULTIPLE */
 
@@ -8662,7 +9014,7 @@ a {
 
 
 /* =========================================================================
- * Svelto - Decorators - Hidden
+ * Svelto - Decorators - Hidden - Breakpoints
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8692,6 +9044,84 @@ a {
       display: none !important;
     }
 
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - Browsers
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BROWSERS */
+
+@each $browser in $browser-support-browsers {
+
+  /* HIDDEN */
+
+  html:not(.no-#{$browser}) .hidden-#{$browser} {
+    display: none !important;
+  }
+
+  /* ONLY */
+
+  html:not(.#{$browser}) .only-#{$browser} {
+    display: none !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - Devices
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* DEVICES */
+
+@each $device in $browser-support-devices {
+
+  /* HIDDEN */
+
+  html:not(.no-#{$device}) .hidden-#{$device} {
+    display: none !important;
+  }
+
+  /* ONLY */
+
+  html:not(.#{$device}) .only-#{$device} {
+    display: none !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Decorators - Hidden - OSs
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OSS */
+
+@each $os in $browser-support-oss {
+
+  /* HIDDEN */
+
+  html:not(.no-#{$os}) .hidden-#{$os} {
+    display: none !important;
+  }
+
+  /* ONLY */
+
+  html:not(.#{$os}) .only-#{$os} {
+    display: none !important;
   }
 
 }
@@ -9324,6 +9754,7 @@ h6 {
   @extend %widget;
   border-radius: $container-border-radius;
   padding: $container-padding-y $container-padding-x;
+  z-index: 0; // In order to better support actionable icons etc.
 }
 
 .container {
@@ -9515,6 +9946,269 @@ h6 {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Emoji - Picker
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @before widgets/card/card.scss
+ * @before widgets/tabs/tabs.scss
+ * @require ../emoji.scss
+ * ========================================================================= */
+
+/* EMOJI PICKER */
+
+.emojipicker {
+
+  /* TRIGGERS */
+
+  &-triggers {
+
+    padding: 0 !important;
+
+    /* TRIGGER */
+
+    .button {
+      padding-left: 0;
+      padding-right: 0;
+      min-width: 0;
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  &-containers {
+
+    height: $emojipicker-containers-height;
+    padding: 0 !important;
+
+    /* CONTAINER */
+
+    .container {
+
+      height: 100%; // If `min-height` instead the section won't grow in IE-10/11
+      border-radius: 0;
+
+      /* MAIN */
+
+      &.main {
+
+        flex-direction: column;
+
+        &.active {
+          display: flex;
+        }
+
+        input {
+          flex-grow: 0;
+        }
+
+        .section {
+          position: relative;
+          flex-grow: 1;
+        }
+
+        .emojis {
+
+          flex-grow: 1;
+          white-space: nowrap;
+
+          /* EMPTY */
+
+          &.empty {
+            @include center-transform ();
+            position: absolute;
+            opacity: $emojipicker-emojis-empty-opacity;
+          }
+
+        }
+
+      }
+
+      /* EMOJIFIABLE */
+
+      &:not(.main):not(.emojified) .emojis {
+        display: none;
+      }
+
+    }
+
+  }
+
+  /* FOOTER */
+
+  &-footer {
+    order: 1;
+  }
+
+  /* PREVIEW */
+
+  &-preview {
+
+    /* EMOJI */
+
+    i.emoji {
+
+      @include dimension ( $emojipicker-preview-emoji-size );
+
+      /* NATIVE */
+
+      &:not(:empty) {
+        font-size: $emojipicker-preview-emoji-size;
+      }
+
+    }
+
+    /* TEXTS */
+
+    .texts {
+
+      white-space: nowrap;
+      overflow: hidden;
+
+      /* TITLE / SHORT NAMES */
+
+      .title,
+      .short-names {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      /* SHORT NAMES */
+
+      .short-names {
+        @include size-inline ( $emojipicker-preview-short-names-size );
+      }
+
+    }
+
+  }
+
+  /* TONES */
+
+  &-tones {
+    margin: $emojipicker-tones-spacing 0;
+  }
+
+  /* TONE */
+
+  &-tone {
+
+    @include dimension ( $emojipicker-tone-size );
+    border-radius: $emojipicker-tone-size;
+    position: relative;
+
+    /* TONES */
+
+    &:nth-child(1) {
+      background-color: $emojipicker-tone-1-bg-color;
+    }
+
+    &:nth-child(2) {
+      background-color: $emojipicker-tone-2-bg-color;
+    }
+
+    &:nth-child(3) {
+      background-color: $emojipicker-tone-3-bg-color;
+    }
+
+    &:nth-child(4) {
+      background-color: $emojipicker-tone-4-bg-color;
+    }
+
+    &:nth-child(5) {
+      background-color: $emojipicker-tone-5-bg-color;
+    }
+
+    &:nth-child(6) {
+      background-color: $emojipicker-tone-6-bg-color;
+    }
+
+    /* INACTIVE */
+
+    &:not(.active) {
+      cursor: pointer;
+    }
+
+    /* HOVER / ACTIVE */
+
+    &.active:after {
+      @include dimension ( $emojipicker-tone-dot-size );
+      @include center-transform ();
+      @include z-depth-inline ( $emojipicker-tone-dot-z-depth );
+      position: absolute;
+      content: '';
+      border-radius: $emojipicker-tone-dot-size;
+      background-color: $emojipicker-tone-dot-bg-color;
+    }
+
+  }
+
+  /* SEARCHING */
+
+  &.searching .frequent-section {
+    display: none;
+  }
+
+  /* NOT SEARCHING */
+
+  &:not(.searching) .search-section {
+    display: none;
+  }
+
+  /* PREVIEWING */
+
+  &.previewing .emojipicker-tones {
+    display: none;
+  }
+
+  /* NOT PREVIEWING */
+
+  &:not(.previewing) .emojipicker-preview {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Emoji - Picker - Popover
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../picker.scss
+ * ========================================================================= */
+
+/* POPOVER */
+
+.emojipicker.popover {
+
+  width: $emojipicker-popover-width;
+
+  /* CONTAINERS */
+
+  .emojipicker-containers {
+    height: $emojipicker-popover-containers-height;
+  }
+
+  /* TONES */
+
+  .emojipicker-tones {
+    margin: $emojipicker-popover-tones-spacing 0;
+  }
+
+  /* TONE */
+
+  .emojipicker-tone {
+    @include dimension ( $emojipicker-popover-tone-size );
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Modal
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9600,9 +10294,12 @@ html.flexbox-tweener {
  * @require ../modal.scss
  * ========================================================================= */
 
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+
 /* FULLSCREEN */
 
-.modal.fullscreen {
+.modal.fullscreen,
+.modal.fullscreen-request {
   border-width: 0;
   border-radius: 0;
   max-width: none;
@@ -9615,8 +10312,15 @@ html.flexbox-tweener {
 
 html.flexbox-tweener {
 
-  .modal.fullscreen.card > .card-block {
-    max-height: none;
+  .modal.fullscreen,
+  .modal.fullscreen-request {
+
+    /* CARD */
+
+    &.card > .card-block {
+      max-height: none;
+    }
+
   }
 
 }
@@ -9632,6 +10336,8 @@ html.flexbox-tweener {
  * @before widgets/card/card.scss
  * ========================================================================= */
 
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+//FIXME: Pinning doesn't work with nested layouts
 //TODO: Add a class that makes the panel stays below the toolbar, in that case the toolbar should have an higher z-index than the panel probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
 
 /* PANEL */
@@ -9666,7 +10372,9 @@ html.flexbox-tweener {
 
   transition: padding $panel-animation-duration;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     transition: none; // Safari fix
     transition-property: top, right, bottom, left;
     transition-duration: $panel-animation-duration;
@@ -9752,7 +10460,9 @@ html.flexbox-tweener {
 
   padding-left: $panel-default-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     left: $panel-default-x-width;
   }
 
@@ -9789,7 +10499,9 @@ html.flexbox-tweener {
 
   padding-right: $panel-default-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     right: $panel-default-x-width;
   }
 
@@ -9826,7 +10538,9 @@ html.flexbox-tweener {
 
   padding-top: $panel-default-y-height;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     top: $panel-default-y-height;
   }
 
@@ -9917,6 +10631,158 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Bottom
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* BOTTOM */
+
+.panel.fullscreen.bottom,
+.panel.fullscreen-request.bottom {
+
+  height: 100vh;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(100%);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-fullscreen-pinned-bottom {
+  padding-bottom: 100vh;
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Left
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.panel.fullscreen.left,
+.panel.fullscreen-request.left {
+
+  width: 100vw;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(-100%);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-fullscreen-pinned-left {
+
+  padding-left: 100vw;
+
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
+    left: 100vw;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Right
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* RIGHT */
+
+.panel.fullscreen.right,
+.panel.fullscreen-request.right {
+
+  width: 100vw;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateX(100%);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-fullscreen-pinned-right {
+
+  padding-right: 100vw;
+
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
+    right: 100vw;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Panel - Fullscreen - Directions - Top
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../panel.scss
+ * @require core/layout/layout.scss
+ * ========================================================================= */
+
+/* TOP */
+
+.panel.fullscreen.top,
+.panel.fullscreen-request.top {
+
+  height: 100vh;
+
+  /* CLOSED */
+
+  &:not(.open) {
+    transform: translateY(-100%);
+  }
+
+}
+
+/* LAYOUT */
+
+.panel-layout.panel-fullscreen-pinned-top {
+
+  padding-top: 100vh;
+
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
+    top: 100vh;
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Panel - Open
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -9984,6 +10850,8 @@ html.flexbox-tweener {
 
 }
 
+/* LAYOUT */
+
 .panel-layout.panel-slim-pinned-bottom {
   padding-bottom: $panel-slim-y-height;
 }
@@ -10019,7 +10887,9 @@ html.flexbox-tweener {
 
   padding-left: $panel-slim-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     left: $panel-slim-x-width;
   }
 
@@ -10056,7 +10926,9 @@ html.flexbox-tweener {
 
   padding-right: $panel-slim-x-width;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     right: $panel-slim-x-width;
   }
 
@@ -10093,7 +10965,9 @@ html.flexbox-tweener {
 
   padding-top: $panel-slim-y-height;
 
-  > .layout-header.sticky {
+  /* STICKY HEADER */
+
+  &.layout.vertical > .layout-header.sticky {
     top: $panel-slim-y-height;
   }
 
@@ -11056,7 +11930,7 @@ html.flexbox-tweener {
 
     /* STICKY HEADER */
 
-    .layout-header.sticky ~ & {
+    .layout.vertical > .layout-header.sticky ~ & {
       top: $layout-sticky-header-height;
     }
 
@@ -12311,10 +13185,10 @@ pre {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ./top_right.scss
- * @require ./bottom_right.scss
- * @require ./bottom_left.scss
- * @require ./top_left.scss
+ * @before ./top_right.scss
+ * @before ./bottom_right.scss
+ * @before ./bottom_left.scss
+ * @before ./top_left.scss
  * ========================================================================= */
 
 /* DEFAULT */
@@ -12358,10 +13232,12 @@ pre {
  * ========================================================================= */
 
 //FIXME: When inside a modal it doens't quite look right
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
 
 /* FULLSCREEN */
 
-.editor.fullscreen {
+.editor.fullscreen,
+.editor.fullscreen-request {
   @include fill-fixed ();
   z-index: $editor-fullscreen-z-index;
   border-radius: 0;
@@ -12674,6 +13550,47 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Popover - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../popover.scss
+ * ========================================================================= */
+
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+
+/* FULLSCREEN */
+
+.popover.fullscreen,
+.popover.fullscreen-request {
+  border-width: 0;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .popover.fullscreen,
+  .popover.fullscreen-request {
+
+    /* CARD */
+
+    &.card > .card-block {
+      max-height: none;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Popover - Moving
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
@@ -12869,7 +13786,7 @@ html.flexbox-tweener {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 
 /* REMOTE MODAL PLACEHOLDER */
@@ -12881,12 +13798,29 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Panel
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../widget/widget.scss
+ * ========================================================================= */
+
+/* REMOTE PANEL PLACEHOLDER */
+
+.remote-panel-placeholder {
+  @extend %remote-widget-placeholder;
+  overflow: hidden;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Remote - Popover
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/widget.scss
+ * @require ../widget/widget.scss
  * ========================================================================= */
 
 /* REMOTE POPOVER PLACEHOLDER */
@@ -12931,7 +13865,7 @@ html.flexbox-tweener {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/resizing/resizing.scss
+ * @require ../../widget/resizing/resizing.scss
  * @require ../modal.scss
  * ========================================================================= */
 
@@ -12951,12 +13885,37 @@ html.flexbox-tweener {
 
 
 /* =========================================================================
+ * Svelto - Widgets - Remote - Panel - Resizing
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../../widget/resizing/resizing.scss
+ * @require ../panel.scss
+ * ========================================================================= */
+
+/* RESIZING */
+
+.remote-panel-resizing {
+  @extend %remote-widget-resizing;
+}
+
+.remote-panel-showing {
+  @extend %remote-widget-showing;
+}
+
+.remote-panel-placeholder.remote-panel-resizing.remote-panel-showing > * {
+  transition-duration: $remote-panel-animation-duration !important;
+}
+
+
+/* =========================================================================
  * Svelto - Widgets - Remote - Popover - Resizing
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/resizing/resizing.scss
+ * @require ../../widget/resizing/resizing.scss
  * @require ../popover.scss
  * ========================================================================= */
 
@@ -13003,7 +13962,7 @@ html.flexbox-tweener {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/unloaded/unloaded.scss
+ * @require ../../widget/unloaded/unloaded.scss
  * @require ../modal.scss
  * ========================================================================= */
 
@@ -13025,7 +13984,7 @@ html.flexbox-tweener {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require widgets/remote/widget/unloaded/unloaded.scss
+ * @require ../../widget/unloaded/unloaded.scss
  * @require ../popover.scss
  * ========================================================================= */
 
