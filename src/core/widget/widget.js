@@ -219,46 +219,25 @@
 
       /* VARIABLES */
 
-      let configs = [];
-
-      /* PROTOTYPE CHAIN */
-
-      let prototype = Object.getPrototypeOf ( this );
-
-      while ( prototype ) {
-
-        if ( prototype.constructor.config ) {
-
-          configs.push ( prototype.constructor.config );
-
-        }
-
-        prototype = Object.getPrototypeOf ( prototype );
-
-      }
-
-      configs.push ( {} ); // So that we merge them to a new object
-
-      configs.reverse ();
+      let config = this._getConfigInherited (),
+          configs = [config];
 
       /* DATA OPTIONS */
 
       if ( element ) {
 
-        let $element = $(element),
-            name = _.last ( configs ).name.toLowerCase (),
-            dataOptions = $element.data ( 'options' ),
-            dataNameOptions = $element.data ( name + '-options' );
+        let dataOptions = element.getAttribute ( 'data-options' ),
+            dataNameOptions = element.getAttribute ( `data-${config.name}-options` );
 
         if ( dataOptions ) {
 
-          configs.push ({ options: dataOptions });
+          configs.push ({ options: JSON.parse ( dataOptions ) });
 
         }
 
         if ( dataNameOptions ) {
 
-          configs.push ({ options: dataNameOptions });
+          configs.push ({ options: JSON.parse ( dataNameOptions ) });
 
         }
 
@@ -284,7 +263,51 @@
 
       /* RETURN */
 
-      return _.merge ( ...configs );
+      return configs.length > 1 ? _.merge ( {}, ...configs ) : config;
+
+    }
+
+    _getConfigInherited () {
+
+      /* BASE */
+
+      let prototype = Object.getPrototypeOf ( this ),
+          constructor = prototype.constructor,
+          config = constructor.config;
+
+      if ( config._inherited ) return config;
+
+      /* CONFIGS */
+
+      let configs = [config];
+
+      /* INHERITANCE CHAIN CHAIN */
+
+      prototype = Object.getPrototypeOf ( prototype );
+
+      while ( prototype ) {
+
+        if ( !prototype.constructor.config ) break;
+
+        configs.push ( prototype.constructor.config );
+
+        prototype = Object.getPrototypeOf ( prototype );
+
+      }
+
+      configs.push ( {} ); // So that we merge them into a new object
+
+      configs.reverse ();
+
+      /* RETURN */
+
+      config = _.merge ( ...configs );
+
+      config._inherited = true;
+
+      constructor.config = config;
+
+      return config;
 
     }
 
