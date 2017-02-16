@@ -173,7 +173,7 @@
 
       if ( this.element ) {
 
-        $.data ( this.element, `instance.${this.name}`, this );
+        this.element[`_${this.name}`] = this;
 
       }
 
@@ -302,7 +302,7 @@
 
       if ( this.element ) {
 
-        this.$element.removeData ( `instance.${this.name}` );
+        delete this.element[`_${this.name}`];
 
       }
 

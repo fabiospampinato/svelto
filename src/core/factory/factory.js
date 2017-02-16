@@ -22,9 +22,7 @@
 
     instanciate ( Widget, options, element ) {
 
-      let name = Widget.config.name;
-
-      return $.data ( element, `instance.${name}` ) || new Widget ( options, element );
+      return element[`_${Widget.config.name}`] || new Widget ( options, element );
 
     },
 
