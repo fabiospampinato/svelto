@@ -56,6 +56,8 @@
 
       configure ( Widget, config = {} ) {
 
+        config.Name = _.upperFirst ( config.name );
+
         Widget.config = config;
 
       },
@@ -64,9 +66,8 @@
 
         if ( !_.isObject ( namespace ) ) return;
 
-        let name = _.upperFirst ( Widget.config.name );
+        namespace[Widget.config.Name] = Widget;
 
-        namespace[name] = Widget;
 
       },
 
@@ -126,6 +127,7 @@
 
       configure ( Widget ) {
 
+        delete Widget.config.Name;
         delete Widget.config;
 
       },
@@ -134,9 +136,8 @@
 
         if ( !_.isObject ( namespace ) ) return;
 
-        let name = _.upperFirst ( Widget.config.name );
+        delete namespace[Widget.config.Name];
 
-        delete namespace[name];
 
       },
 

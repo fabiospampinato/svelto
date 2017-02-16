@@ -127,17 +127,15 @@
 
       /* CACHE TEMPLATES */
 
-      this.templatesNamespace = _.upperFirst ( this.name );
+      if ( !( this.Name in Templates ) ) {
 
-      if ( !( this.templatesNamespace in Templates ) ) {
-
-        Templates[this.templatesNamespace] = {};
+        Templates[this.Name] = {};
 
         let options = { //TODO: Maybe export them
           imports: {
             Svelto,
             Templates,
-            self: Templates[this.templatesNamespace]
+            self: Templates[this.Name]
           },
           variable: 'o'
         };
@@ -146,7 +144,7 @@
 
           if ( !this.templates.hasOwnProperty ( template ) || !this.templates[template] ) continue;
 
-          Templates[this.templatesNamespace][template] = _.template ( this.templates[template], options );
+          Templates[this.Name][template] = _.template ( this.templates[template], options );
 
         }
 
@@ -850,7 +848,7 @@
 
     _template ( name, options = {} ) {
 
-      return Templates[this.templatesNamespace][name] ( options );
+      return Templates[this.Name][name] ( options );
 
     }
 
