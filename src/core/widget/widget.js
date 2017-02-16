@@ -9,6 +9,7 @@
  * @require core/breakpoints/breakpoints.js
  * @require core/factory/factory.js
  * @require core/keyboard/keyboard.js
+ * @require core/layout/helpers.js
  * @require core/pointer/pointer.js
  * @require core/route/route.js
  * @require core/svelto/svelto.js
@@ -39,9 +40,7 @@
         disabled: 'disabled', // Attached to disabled widgets
         hidden: 'hidden' // Used to hide an element
       },
-      selectors: { // Selectors to use inside the widget
-        layout: '.layout, body' // `body` is used as a fallback
-      },
+      selectors: {}, // Selectors to use inside the widget
       animations: {}, // Object storing all the milliseconds required for each animation to occur
       breakpoints: { // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is a key of `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `only`, mimicking the respective SCSS mixins
         up: false,
@@ -161,8 +160,7 @@
 
       /* LAYOUT */
 
-      this.$layout = this.$element.length ? this.$element.parent ().closest ( this.options.selectors.layout ) : $(this.options.selectors.layout).first ();
-      this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first ();
+      this.$layout = $.getLayoutOf ( this.$element );
       this.layout = this.$layout[0];
 
       /* BINDINGS */
