@@ -52,7 +52,7 @@
 
     makers: {
 
-      order: ['configure', 'namespace', 'ready', 'widgetize', 'plugin'], // The order in which the makers will be called
+      order: ['configure', 'namespace', 'plugin', 'ready', 'widgetize'], // The order in which the makers will be called
 
       configure ( Widget, config = {} ) {
 
@@ -67,18 +67,6 @@
         let name = _.upperFirst ( Widget.config.name );
 
         namespace[name] = Widget;
-
-      },
-
-      ready ( Widget ) {
-
-        Readify.add ( Widget );
-
-      },
-
-      widgetize ( Widget ) {
-
-        Widgetize.add ( Widget );
 
       },
 
@@ -114,6 +102,18 @@
 
         };
 
+      },
+
+      ready ( Widget ) {
+
+        Readify.add ( Widget );
+
+      },
+
+      widgetize ( Widget ) {
+
+        Widgetize.add ( Widget );
+
       }
 
     },
@@ -122,7 +122,7 @@
 
     unmakers: {
 
-      order: ['plugin', 'widgetize', 'ready', 'namespace', 'configure'], // The order in which the unmakers will be called
+      order: ['widgetize', 'ready', 'plugin', 'namespace', 'configure'], // The order in which the unmakers will be called
 
       configure ( Widget ) {
 
@@ -140,6 +140,14 @@
 
       },
 
+      plugin ( Widget ) {
+
+        if ( !Widget.config.plugin ) return;
+
+        delete $.fn[Widget.config.name];
+
+      },
+
       ready ( Widget ) {
 
         Readify.remove ( Widget );
@@ -149,14 +157,6 @@
       widgetize ( Widget ) {
 
         Widgetize.remove ( Widget );
-
-      },
-
-      plugin ( Widget ) {
-
-        if ( !Widget.config.plugin ) return;
-
-        delete $.fn[Widget.config.name];
 
       }
 
