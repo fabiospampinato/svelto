@@ -72,6 +72,12 @@
 
     }
 
+    _destroy () {
+
+      this.instance.destroy ();
+
+    }
+
     /* PRIVATE */
 
     _getSettings () {
