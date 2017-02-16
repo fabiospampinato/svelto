@@ -165,26 +165,6 @@
       this.$layout = this.$layout.length ? this.$layout : $(this.options.selectors.layout).first ();
       this.layout = this.$layout[0];
 
-      /* WINDOW */
-
-      this.$window = $.$window;
-      this.window = $.window;
-
-      /* DOCUMENT */
-
-      this.$document = $.$document;
-      this.document = $.document;
-
-      /* HTML */
-
-      this.$html = $.$html;
-      this.html = $.html;
-
-      /* BODY */
-
-      this.$body = $.$body;
-      this.body = $.body;
-
       /* BINDINGS */
 
       this.$bindings = $();
@@ -647,7 +627,7 @@
 
     ___route () {
 
-      this._on ( true, this.$window, 'route', this.__route );
+      this._on ( true, $.$window, 'route', this.__route );
 
     }
 
@@ -655,7 +635,7 @@
 
     ___breakpoint () {
 
-      this._on ( true, this.$window, 'breakpoint:change', this.__breakpoint );
+      this._on ( true, $.$window, 'breakpoint:change', this.__breakpoint );
 
     }
 
@@ -711,7 +691,7 @@
 
     ___keydown () {
 
-      this._on ( this.$document, 'keydown', this.__keydown );
+      this._on ( $.$document, 'keydown', this.__keydown );
 
     }
 

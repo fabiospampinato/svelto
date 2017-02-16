@@ -119,17 +119,17 @@
 
       this.__request ();
 
-      let $scrollable = this.$window.add ( this.$loader.parents () ),
+      let $scrollable = $.$window.add ( this.$loader.parents () ),
           handler = this._frames ( this.__request, 60 );
 
-      this._on ( true, this.$window, 'resize', handler );
+      this._on ( true, $.$window, 'resize', handler );
       this._on ( true, $scrollable, 'scroll', handler );
 
     }
 
     __request () {
 
-      if ( this.$loader.getRect ().top - this.$window.outerHeight () > this.options.autorequest.threshold ) return;
+      if ( this.$loader.getRect ().top - $.$window.outerHeight () > this.options.autorequest.threshold ) return;
 
       this.request ();
 

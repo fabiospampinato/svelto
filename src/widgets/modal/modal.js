@@ -60,7 +60,7 @@
       this.$modal = this.$element;
       this.modal = this.element;
 
-      this.$backdrop = this.$html;
+      this.$backdrop = $.$html;
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -88,7 +88,7 @@
 
     ___tap () {
 
-      this._on ( true, this.$html, Pointer.tap, this.__tap );
+      this._on ( true, $.$html, Pointer.tap, this.__tap );
 
     }
 

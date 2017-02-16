@@ -102,7 +102,7 @@
 
     ___keydown () {
 
-      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+      this._onHover ( [$.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -176,11 +176,11 @@
       this.startEvent = event;
       this.$startElement = this._getEventElement ( event );
 
-      this._on ( true, this.$document, Pointer.move, this._frames ( this.__move ) );
+      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move ) );
 
-      this._one ( true, this.$document, Pointer.up, this.__up );
+      this._one ( true, $.$document, Pointer.up, this.__up );
 
-      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+      this._one ( true, $.$document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -201,11 +201,11 @@
 
       if ( absDeltaXY.x >= this.options.moveThreshold || absDeltaXY.y >= this.options.moveThreshold ) {
 
-        this._off ( this.$document, Pointer.move, this.__move );
+        this._off ( $.$document, Pointer.move, this.__move );
 
-        this._off ( this.$document, Pointer.up, this.__up );
+        this._off ( $.$document, Pointer.up, this.__up );
 
-        this._off ( this.$document, Pointer.cancel, this.__cancel );
+        this._off ( $.$document, Pointer.cancel, this.__cancel );
 
         this._resetPrev ();
 
@@ -219,7 +219,7 @@
 
         this._on ( true, Pointer.enter, this.options.selectors.element, this.__dragEnter );
 
-        this._one ( true, this.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
+        this._one ( true, $.$document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
 
         this._trigger ( 'change' );
 
@@ -243,9 +243,9 @@
 
     __up ( event ) {
 
-      this._off ( this.$document, Pointer.move, this.__move );
+      this._off ( $.$document, Pointer.move, this.__move );
 
-      this._off ( this.$document, Pointer.cancel, this.__cancel );
+      this._off ( $.$document, Pointer.cancel, this.__cancel );
 
       let isRightButton = Mouse.hasButton ( event, Mouse.buttons.RIGHT ); // When right clicking we suppose that we also want to select that element (useful when used in conjuction with SelectableActionsPopover)
 
@@ -286,9 +286,9 @@
 
     __cancel () {
 
-      this._off ( this.$document, Pointer.move, this.__move );
+      this._off ( $.$document, Pointer.move, this.__move );
 
-      this._off ( this.$document, Pointer.up, this.__up );
+      this._off ( $.$document, Pointer.up, this.__up );
 
     }
 

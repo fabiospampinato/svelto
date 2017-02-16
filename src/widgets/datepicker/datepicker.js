@@ -198,7 +198,7 @@
 
     ___keydown () {
 
-      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+      this._onHover ( [$.$document, 'keydown', this.__keydown] );
 
     }
 

@@ -171,7 +171,7 @@
 
         if ( this.options.constrainer.$element ) {
 
-          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: this.$window.scrollTop (), left: this.$window.scrollLeft () } : this.options.constrainer.$element.offset (),
+          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: $.$window.scrollTop (), left: $.$window.scrollLeft () } : this.options.constrainer.$element.offset (),
               movableOffset = this.$movable.offset ();
 
           if ( this.options.axis !== 'y' ) {
@@ -331,15 +331,15 @@
 
   			if ( this.options.axis !== 'x' ) {
 
-          let scrollTop = this.$document.scrollTop ();
+          let scrollTop = $.document.scrollTop ();
 
   				if ( pointXY.y - scrollTop <= this.options.scroll.sensitivity ) {
 
-          	this.$document.scrollTop ( scrollTop - this.options.scroll.speed );
+          	$.document.scrollTop ( scrollTop - this.options.scroll.speed );
 
-          } else if ( this.$window.height () - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
+          } else if ( $.$window.height () - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
-          	this.$document.scrollTop ( scrollTop + this.options.scroll.speed );
+          	$.document.scrollTop ( scrollTop + this.options.scroll.speed );
 
           }
 
@@ -347,15 +347,15 @@
 
   			if ( this.options.axis !== 'y' ) {
 
-          let scrollLeft = this.$document.scrollLeft ();
+          let scrollLeft = $.document.scrollLeft ();
 
   				if ( pointXY.x - scrollLeft <= this.options.scroll.sensitivity ) {
 
-          	this.$document.scrollLeft ( scrollLeft - this.options.scroll.speed );
+          	$.document.scrollLeft ( scrollLeft - this.options.scroll.speed );
 
-          } else if ( this.$window.width () - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
+          } else if ( $.$window.width () - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
-          	this.$document.scrollLeft ( scrollLeft + this.options.scroll.speed );
+          	$.document.scrollLeft ( scrollLeft + this.options.scroll.speed );
 
           }
 
@@ -479,11 +479,11 @@
 
       this._trigger ( 'start', { draggable: this.draggable, helper: this.helper, isProxyed: this.isProxyed, startEvent: this.startEvent, startXY: this.startXY } );
 
-      this._on ( true, this.$document, Pointer.move, this.__move );
-      this._one ( true, this.$document, Pointer.up, this.__up );
-      this._one ( true, this.$document, Pointer.cancel, this.__cancel );
+      this._on ( true, $.$document, Pointer.move, this.__move );
+      this._one ( true, $.$document, Pointer.up, this.__up );
+      this._one ( true, $.$document, Pointer.cancel, this.__cancel );
       this._one ( true, Pointer.click, this.__click );
-      this._one ( true, this.$document, 'dragstart', this.__dragStart );
+      this._one ( true, $.$document, 'dragstart', this.__dragStart );
 
     }
 
@@ -510,7 +510,7 @@
           let tolerance = this._getTolerance (),
               exceeded = ( this.options.axis === 'x' && y > tolerance && y > x ) || ( this.options.axis === 'y' && x > tolerance && x > y );
 
-          if ( exceeded ) return this._off ( this.$document, Pointer.move, this.__move );
+          if ( exceeded ) return this._off ( $.$document, Pointer.move, this.__move );
 
         }
 
@@ -611,9 +611,9 @@
 
       }
 
-      this._off ( this.$document, Pointer.move, this.__move );
-      this._off ( this.$document, Pointer.cancel, this.__cancel );
-      this._off ( this.$document, 'dragstart', this.__dragStart );
+      this._off ( $.$document, Pointer.move, this.__move );
+      this._off ( $.$document, Pointer.cancel, this.__cancel );
+      this._off ( $.$document, 'dragstart', this.__dragStart );
 
       if ( this.startEvent.target !== event.target ) this._off ( Pointer.click, this.__click );
 
@@ -653,10 +653,10 @@
 
       }
 
-      this._off ( this.$document, Pointer.move, this.__move );
-      this._off ( this.$document, Pointer.up, this.__up );
+      this._off ( $.$document, Pointer.move, this.__move );
+      this._off ( $.$document, Pointer.up, this.__up );
       this._off ( Pointer.click, this.__click );
-      this._off ( this.$document, 'dragstart', this.__dragStart );
+      this._off ( $.$document, 'dragstart', this.__dragStart );
 
       this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
 

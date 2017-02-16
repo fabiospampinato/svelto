@@ -83,13 +83,13 @@
 
     ___scroll () {
 
-      this._one ( true, this.$document, 'scroll', this.__scroll );
+      this._one ( true, $.$document, 'scroll', this.__scroll );
 
     }
 
     ___scrollReset () {
 
-      this._off ( this.$document, 'scroll', this.__scroll );
+      this._off ( $.$document, 'scroll', this.__scroll );
 
     }
 

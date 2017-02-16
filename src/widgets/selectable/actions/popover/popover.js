@@ -45,7 +45,7 @@
       super._init ();
 
       this._popoverInstance.option ( 'positionate.alignment.x', 'left' );
-      this._popoverInstance.option ( 'positionate.constrainer.$element', this.$window );
+      this._popoverInstance.option ( 'positionate.constrainer.$element', $.$window );
 
     }
 
@@ -73,7 +73,7 @@
 
       this._contextEvent = event;
 
-      this._one ( true, this.$document, Pointer.up, this._toggle ); // Selectable listens on this event, also `contextmenu` gets fired before, so we wouldn't get the updated list of selected elements
+      this._one ( true, $.$document, Pointer.up, this._toggle ); // Selectable listens on this event, also `contextmenu` gets fired before, so we wouldn't get the updated list of selected elements
 
     }
 

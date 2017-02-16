@@ -80,7 +80,7 @@
       this.$panel = this.$element;
       this.panel = this.element;
 
-      this.$backdrop = this.$html;
+      this.$backdrop = $.$html;
 
       this.options.direction = Directions.get ().find ( direction => this.$panel.hasClass ( direction ) ) || this.options.direction;
       this.options.flick.open = this.options.flick.open || this.$panel.hasClass ( this.options.classes.flickable );
@@ -136,7 +136,7 @@
 
     ___tap () {
 
-      this._on ( true, this.$html, Pointer.tap, this.__tap );
+      this._on ( true, $.$html, Pointer.tap, this.__tap );
 
     }
 
@@ -155,7 +155,7 @@
 
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-      this._on ( true, this.$document, 'keydown', this.__keydown );
+      this._on ( true, $.$document, 'keydown', this.__keydown );
 
     }
 

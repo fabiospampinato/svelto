@@ -198,7 +198,7 @@
 
     ___classSwitch () {
 
-      this._on ( true, this.$window, 'breakpoint:change', this.__classSwitch );
+      this._on ( true, $.$window, 'breakpoint:change', this.__classSwitch );
 
     }
 

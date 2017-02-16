@@ -198,7 +198,7 @@
 
     ___keydown () {
 
-      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+      this._onHover ( [$.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -231,7 +231,7 @@
 
     ___parentUnfullscreen () {
 
-      this._on ( true, this.$document, this.options.parentUnfullscreenEvents, this.__parentUnfullscreen );
+      this._on ( true, $.$document, this.options.parentUnfullscreenEvents, this.__parentUnfullscreen );
 
     }
 
@@ -261,7 +261,7 @@
 
     ___emojipicker () {
 
-      this._on ( this.$document, 'emojipicker:pick', this.__emojipicker ); //FIXME: We probably shouldn't listen to all the pickers... what if there are multiple editors?
+      this._on ( $.$document, 'emojipicker:pick', this.__emojipicker ); //FIXME: We probably shouldn't listen to all the pickers... what if there are multiple editors?
 
     }
 

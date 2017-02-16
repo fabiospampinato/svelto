@@ -90,7 +90,7 @@
 
     ___keydown () {
 
-      this._onHover ( [this.$document, 'keydown', this.__keydown] );
+      this._onHover ( [$.$document, 'keydown', this.__keydown] );
 
     }
 
@@ -162,7 +162,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
+      this._on ( true, $.$window, 'resize', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
 
     }
 

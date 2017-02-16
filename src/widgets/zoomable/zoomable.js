@@ -88,7 +88,7 @@
       this.$zoomable = this.$element;
       this.zoomable = this.element;
 
-      this.$backdrop = this.$html;
+      this.$backdrop = $.$html;
 
       this._isZoomed = false;
 
@@ -165,7 +165,7 @@
 
     ___tapOutside () {
 
-      this._on ( true, this.$html, Pointer.tap, this.__tapOutside );
+      this._on ( true, $.$html, Pointer.tap, this.__tapOutside );
 
     }
 
@@ -184,7 +184,7 @@
 
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-      this._on ( true, this.$document, 'keydown', this.__keydown );
+      this._on ( true, $.$document, 'keydown', this.__keydown );
 
     }
 
@@ -200,7 +200,7 @@
 
       if ( this.options.magnification.enabled ) return;
 
-      this._on ( true, this.$window.add ( this.$zoomable.parents () ), 'scroll', this._frames ( this.__scroll, 60 ) );
+      this._on ( true, $.$window.add ( this.$zoomable.parents () ), 'scroll', this._frames ( this.__scroll, 60 ) );
 
     }
 
@@ -214,7 +214,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._frames ( this.__resize, 60 ) );
+      this._on ( true, $.$window, 'resize', this._frames ( this.__resize, 60 ) );
 
     }
 
@@ -228,7 +228,7 @@
 
     ___move () {
 
-      this._on ( true, this.$document, Pointer.move, this._frames ( this.__move ) );
+      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move ) );
 
     }
 
@@ -278,7 +278,7 @@
 
       }
 
-      this._viewportRect = this.$window.getRect ();
+      this._viewportRect = $.$window.getRect ();
       this._viewportWidth = this._viewportRect.width;
       this._viewportHeight = this._viewportRect.height;
       this._viewportAspectRatio = this._viewportWidth / this._viewportHeight;

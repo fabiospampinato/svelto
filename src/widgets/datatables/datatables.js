@@ -103,7 +103,7 @@
 
     ___keydown () {
 
-      this._onHover ( this.$wrapper, [this.$document, 'keydown', this.__keydown] );
+      this._onHover ( this.$wrapper, [$.$document, 'keydown', this.__keydown] );
 
     }
 

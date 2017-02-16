@@ -123,7 +123,7 @@
 
     ___parentChange () {
 
-      this._on ( true, this.$document, this.options.parentChangeEvents, this.__parentChange );
+      this._on ( true, $.$document, this.options.parentChangeEvents, this.__parentChange );
 
     }
 
@@ -147,7 +147,7 @@
 
     ___resize () {
 
-      this._on ( true, this.$window, 'resize', this._frames ( this._positionate, 60 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `this.$window`
+      this._on ( true, $.$window, 'resize', this._frames ( this._positionate, 60 ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$.$window`
 
     }
 
@@ -155,7 +155,7 @@
 
     ___parentsScroll () {
 
-      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( this.$window );
+      let $parents = this.$popover.parents ().add ( this.$anchor ? this.$anchor.parents () : undefined ).add ( $.$window );
 
       this._on ( true, $parents, 'scroll', this._frames ( this._positionate, 60 ) );
 
@@ -183,7 +183,7 @@
 
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
-      this._on ( true, this.$document, 'keydown', this.__keydown );
+      this._on ( true, $.$document, 'keydown', this.__keydown );
 
     }
 
