@@ -165,23 +165,23 @@
 
       /* WINDOW */
 
-      this.$window = Svelto.$window;
-      this.window = Svelto.window;
+      this.$window = $.$window;
+      this.window = $.window;
 
       /* DOCUMENT */
 
-      this.$document = Svelto.$document;
-      this.document = Svelto.document;
+      this.$document = $.$document;
+      this.document = $.document;
 
       /* HTML */
 
-      this.$html = Svelto.$html;
-      this.html = Svelto.html;
+      this.$html = $.$html;
+      this.html = $.html;
 
       /* BODY */
 
-      this.$body = Svelto.$body;
-      this.body = Svelto.body;
+      this.$body = $.$body;
+      this.body = $.body;
 
       /* BINDINGS */
 

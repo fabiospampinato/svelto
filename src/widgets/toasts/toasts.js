@@ -76,7 +76,7 @@
 
     ___visibility () {
 
-      Svelto.$document.on ( 'visibilitychange', this.__visibility.bind ( this ) );
+      $.$document.on ( 'visibilitychange', this.__visibility.bind ( this ) );
 
     }
 

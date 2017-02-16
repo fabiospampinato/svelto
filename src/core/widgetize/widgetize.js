@@ -64,7 +64,7 @@
 
       if ( this._isReady ) {
 
-        let $widgets = this._getWidgets ( Svelto.$body, selector );
+        let $widgets = this._getWidgets ( $.$body, selector );
 
         this.worker ( [[widgetizer, data]], $widgets );
 
@@ -116,7 +116,7 @@
 
       this._isReady = true;
 
-      this.on ( Svelto.$body );
+      this.on ( $.$body );
 
     }
 

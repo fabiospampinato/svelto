@@ -7,6 +7,7 @@
  * =========================================================================
  * @before ./clean_data.js
  * @before ./diff.js
+ * @before ./elements.js
  * @before ./event_namespacer.js
  * @before ./event_xy.js
  * @before ./frame.js

@@ -1,40 +1,28 @@
 
 /* =========================================================================
- * Svelto - Core - Svelto
+ * Svelto - Core - jQuery - Helpers (Elements)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/jquery/jquery.js
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ../init.js
  * ========================================================================= */
 
-(function () {
+(function ( $ ) {
 
   'use strict';
 
-  /* SVELTO */
+  /* ELEMENTS */
 
-  let Svelto = {
+  $.$window = $(window);
+  $.window = window;
+  $.$document = $(document);
+  $.document = document;
+  $.$html = $(document.documentElement);
+  $.html = document.documentElement;
+  $.$head = $(document.head);
+  $.head = document.head;
+  $.$body = $(document.body);
+  $.body = document.body;
 
-    VERSION: '0.7.13',
-
-    /* DEPENDENCIES */
-
-    $: jQuery,
-    _: lodash,
-    Modernizr: Modernizr,
-
-    /* NAMESPACES */
-
-    Widgets: {},
-    Templates: {}
-
-  };
-
-  /* EXPORT */
-
-  window.Svelto = Svelto;
-
-}());
+}( jQuery ));

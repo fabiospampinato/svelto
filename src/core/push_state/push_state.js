@@ -28,7 +28,7 @@
 
       }
 
-      Svelto.$window.trigger ( 'pushstate' );
+      $.$window.trigger ( 'pushstate' );
 
       return pushState.apply ( history, arguments );
 

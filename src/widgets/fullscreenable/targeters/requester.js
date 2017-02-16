@@ -21,7 +21,7 @@
     selector: '.fullscreenable-requester, .fullscreen-requester',
     options: {
       widget: Widgets.Fullscreenable,
-      $fallback: Svelto.$html,
+      $fallback: $.$html,
       methods: {
         open: 'request'
       }

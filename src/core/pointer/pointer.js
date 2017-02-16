@@ -93,8 +93,7 @@
 
   /* VARIABLES */
 
-  let $document = Svelto.$document,
-      canTouch = Browser.is.touchDevice,
+  let canTouch = Browser.is.touchDevice,
       isTouch,
       delta = 0,
       skipping,
@@ -249,9 +248,9 @@
 
   /* INIT */
 
-  $document.on ( Pointer.down, downHandler );
-  $document.on ( Pointer.up, upHandler );
-  $document.on ( Pointer.cancel, reset );
+  $.$document.on ( Pointer.down, downHandler );
+  $.$document.on ( Pointer.up, upHandler );
+  $.$document.on ( Pointer.cancel, reset );
 
   /* EXPORT */
 

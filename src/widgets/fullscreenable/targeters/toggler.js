@@ -21,7 +21,7 @@
     selector: '.fullscreenable-toggler, .fullscreen-toggler',
     options: {
       widget: Widgets.Fullscreenable,
-      $fallback: Svelto.$html
+      $fallback: $.$html
     }
   };
 

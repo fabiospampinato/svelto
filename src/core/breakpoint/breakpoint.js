@@ -34,7 +34,7 @@
       this.previous = this.current;
       this.current = current;
 
-      Svelto.$window.trigger ( 'breakpoint:change' );
+      $.$window.trigger ( 'breakpoint:change' );
 
     },
 
@@ -43,7 +43,7 @@
     get () {
 
       let widths = _.sortBy ( _.values ( Breakpoints.widths ) ),
-          width = Svelto.$window.width ();
+          width = $.$window.width ();
 
       for ( let i = 0, l = widths.length; i < l; i++ ) {
 
@@ -65,7 +65,7 @@
 
     Breakpoint.current = Breakpoint.get ();
 
-    Svelto.$window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
+    $.$window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
 
   });
 
