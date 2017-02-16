@@ -44,9 +44,9 @@
       },
       animations: {}, // Object storing all the milliseconds required for each animation to occur
       breakpoints: { // Actions to be executed at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `action`, where `breakpoint-name` is a key of `Breakpoints` and `action` in a defined method (e.g. `xsmall`: `close`). In addition to this every pair must be specified under one of the following keys: `up`, `down`, `only`, mimicking the respective SCSS mixins
-        up: {},
-        down: {},
-        only: {}
+        up: false,
+        down: false,
+        only: false
       },
       keyboard: true, // Enable or disable the use of the keyboard, basically disables keystrokes and other keyboard-based interaction
       keystrokes: {}, // Easy way to automatically bind keystrokes to specific methods calls. For example: `{ 'ctrl + o': 'open', Keyaboard.keys.UP: 'up' }`. You can also pass variables to the method. For example: `{ 'ctrl + o': ['open', true], Keyaboard.keys.UP: ['open', array ( 1, 2 )] }`
@@ -200,8 +200,14 @@
 
       /* BREAKPOINT */
 
-      this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
-      this.__breakpoint ();
+      let {up, down, only} = this.options.breakpoints;
+
+      if ( up || down || only ) {
+
+        this.___breakpoint (); // It must be inited before calling `__breakpoint`, since that when `__breakpoint` gets called it may want to reset it (not inited yet) and init it again (with a result of double binding)
+        this.__breakpoint ();
+
+      }
 
       /* REMOVE */
 
@@ -645,13 +651,17 @@
 
       /* UP */
 
-      for ( let breakpoint in this.options.breakpoints.up ) {
+      if ( this.options.breakpoints.up ) {
 
-        if ( !this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) continue;
+        for ( let breakpoint in this.options.breakpoints.up ) {
 
-        if ( width >= Breakpoints.widths[breakpoint] ) {
+          if ( !this.options.breakpoints.up.hasOwnProperty ( breakpoint ) ) continue;
 
-          this[this.options.breakpoints.up[breakpoint]]();
+          if ( width >= Breakpoints.widths[breakpoint] ) {
+
+            this[this.options.breakpoints.up[breakpoint]]();
+
+          }
 
         }
 
@@ -659,13 +669,17 @@
 
       /* DOWN */
 
-      for ( let breakpoint in this.options.breakpoints.down ) {
+      if ( this.options.breakpoints.down ) {
 
-        if ( !this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) continue;
+        for ( let breakpoint in this.options.breakpoints.down ) {
 
-        if ( width <= Breakpoints.widths[breakpoint] ) {
+          if ( !this.options.breakpoints.down.hasOwnProperty ( breakpoint ) ) continue;
 
-          this[this.options.breakpoints.down[breakpoint]]();
+          if ( width <= Breakpoints.widths[breakpoint] ) {
+
+            this[this.options.breakpoints.down[breakpoint]]();
+
+          }
 
         }
 
@@ -673,13 +687,17 @@
 
       /* ONLY */
 
-      for ( let breakpoint in this.options.breakpoints.only ) {
+      if ( this.options.breakpoints.only ) {
 
-        if ( !this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) continue;
+        for ( let breakpoint in this.options.breakpoints.only ) {
 
-        if ( width === Breakpoints.widths[breakpoint] ) {
+          if ( !this.options.breakpoints.only.hasOwnProperty ( breakpoint ) ) continue;
 
-          this[this.options.breakpoints.only[breakpoint]]();
+          if ( width === Breakpoints.widths[breakpoint] ) {
+
+            this[this.options.breakpoints.only[breakpoint]]();
+
+          }
 
         }
 

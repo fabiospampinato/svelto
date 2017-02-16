@@ -124,6 +124,8 @@
 
       }
 
+      this.__breakpoint ();
+
     }
 
     _destroy () {
