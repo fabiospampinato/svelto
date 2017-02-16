@@ -167,7 +167,7 @@
 
       /* BINDINGS */
 
-      this.$bindings = $();
+      this.$bindings = $.$empty;
 
       /* ATTACH INSTANCE */
 

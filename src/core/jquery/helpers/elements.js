@@ -14,6 +14,8 @@
 
   /* ELEMENTS */
 
+  $.$empty = $();
+
   $.$window = $(window);
   $.window = window;
   $.$document = $(document);
