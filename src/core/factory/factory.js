@@ -10,7 +10,7 @@
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, Svelto, Widgets, Readify, Widgetize ) {
+(function ( $, _, Svelto, Instances, Widgets, Readify, Widgetize ) {
 
   'use strict';
 
@@ -28,21 +28,21 @@
 
     },
 
-    make ( Widget, config, namespace = Widgets ) {
+    make ( Widget, config, namespace = Widgets, instances = Instances ) {
 
       for ( let maker of this.makers.order ) {
 
-        this.makers[maker]( Widget, config, namespace );
+        this.makers[maker]( Widget, config, namespace, instances );
 
       }
 
     },
 
-    unmake ( Widget, namespace = Widgets ) {
+    unmake ( Widget, namespace = Widgets, instances = Instances ) {
 
       for ( let unmaker of this.unmakers.order ) {
 
-        this.unmakers[unmaker]( Widget, namespace );
+        this.unmakers[unmaker]( Widget, namespace, instances );
 
       }
 
@@ -52,7 +52,7 @@
 
     makers: {
 
-      order: ['configure', 'namespace', 'plugin', 'ready', 'widgetize'], // The order in which the makers will be called
+      order: ['configure', 'namespace', 'instances', 'plugin', 'ready', 'widgetize'], // The order in which the makers will be called
 
       configure ( Widget, config = {} ) {
 
@@ -68,6 +68,13 @@
 
         namespace[Widget.config.Name] = Widget;
 
+      },
+
+      instances ( Widget, config, namespace, instances ) {
+
+        if ( !_.isObject ( instances ) ) return;
+
+        instances[Widget.config.Name] = [];
 
       },
 
@@ -123,7 +130,7 @@
 
     unmakers: {
 
-      order: ['widgetize', 'ready', 'plugin', 'namespace', 'configure'], // The order in which the unmakers will be called
+      order: ['widgetize', 'ready', 'plugin', 'instances', 'namespace', 'configure'], // The order in which the unmakers will be called
 
       configure ( Widget ) {
 
@@ -138,6 +145,15 @@
 
         delete namespace[Widget.config.Name];
 
+      },
+
+      instances ( Widget, namespace, instances ) {
+
+        if ( !_.isObject ( instances ) ) return;
+
+        _.forEachRight ( instances[Widget.config.Name], instance => instance.destroy () );
+
+        delete instances[Widget.config.Name];
 
       },
 
@@ -169,4 +185,4 @@
 
   Svelto.Factory = Factory;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize ));

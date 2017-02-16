@@ -14,7 +14,7 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Templates, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
+(function ( $, _, Svelto, Instances, Templates, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
   'use strict';
 
@@ -124,6 +124,10 @@
       /* ATTACH CONFIG */
 
       _.extend ( this, this._getConfig ( options, element ) );
+
+      /* INSTANCE */
+
+      Instances[this.Name].push ( this );
 
       /* CACHE TEMPLATES */
 
@@ -307,6 +311,8 @@
       this._reset ();
 
       this._destroy ();
+
+      _.pull ( Instances[this.Name], this );
 
       if ( this.element ) {
 
@@ -896,4 +902,4 @@
 
   Factory.make ( Widget, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Templates, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Templates, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Keyboard, Svelto.Breakpoints, Svelto.Breakpoint ));

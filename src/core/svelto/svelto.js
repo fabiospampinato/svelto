@@ -28,8 +28,9 @@
 
     /* NAMESPACES */
 
-    Widgets: {},
-    Templates: {}
+    Instances: {},
+    Templates: {},
+    Widgets: {}
 
   };
 
