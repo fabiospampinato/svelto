@@ -6,11 +6,12 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/svelto/svelto.js
+ * @require core/pluginfy/pluginfy.js
  * @require core/readify/readify.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, Svelto, Instances, Widgets, Readify, Widgetize ) {
+(function ( $, _, Svelto, Instances, Widgets, Pluginfy, Readify, Widgetize ) {
 
   'use strict';
 
@@ -78,35 +79,7 @@
 
       plugin ( Widget ) {
 
-        if ( !Widget.config.plugin ) return;
-
-        /* NAME */
-
-        let name = Widget.config.name;
-
-        /* JQUERY PLUGIN */
-
-        $.fn[name] = function ( options, ...args ) {
-
-          let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
-
-          for ( let element of this ) {
-
-            let instance = Factory.instanciate ( Widget, options, element );
-
-            if ( isMethodCall && _.isFunction ( instance[options] ) ) {
-
-              let returnValue = instance[options]( ...args );
-
-              if ( !_.isUndefined ( returnValue ) ) return returnValue;
-
-            }
-
-          }
-
-          return this;
-
-        };
+        Pluginfy.add ( Widget );
 
       },
 
@@ -157,9 +130,7 @@
 
       plugin ( Widget ) {
 
-        if ( !Widget.config.plugin ) return;
-
-        delete $.fn[Widget.config.name];
+        Pluginfy.remove ( Widget );
 
       },
 
@@ -183,4 +154,4 @@
 
   Svelto.Factory = Factory;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Widgets, Svelto.Readify, Svelto.Widgetize ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Widgets, Svelto.Pluginfy, Svelto.Readify, Svelto.Widgetize ));
