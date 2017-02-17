@@ -5,12 +5,12 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/pluginfy/pluginfy.js
+ * @require core/plugin/plugin.js
  * @require core/readify/readify.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
-(function ( $, _, Svelto, Instances, Widgets, Pluginfy, Readify, Widgetize ) {
+(function ( $, _, Svelto, Instances, Widgets, Plugin, Readify, Widgetize ) {
 
   'use strict';
 
@@ -72,7 +72,7 @@
 
       plugin ( Widget ) {
 
-        Pluginfy.add ( Widget );
+        Plugin.make ( Widget );
 
       },
 
@@ -123,7 +123,7 @@
 
       plugin ( Widget ) {
 
-        Pluginfy.remove ( Widget );
+        Plugin.unmake ( Widget );
 
       },
 
@@ -147,4 +147,4 @@
 
   Svelto.Factory = Factory;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Widgets, Svelto.Pluginfy, Svelto.Readify, Svelto.Widgetize ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Instances, Svelto.Widgets, Svelto.Plugin, Svelto.Readify, Svelto.Widgetize ));

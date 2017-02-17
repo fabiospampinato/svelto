@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Core - Pluginfy
+ * Svelto - Core - Plugin
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,15 +9,14 @@
  * ========================================================================= */
 
 //TODO: Add support for plain functions
-//FIXME: We actually `require` Factory, but requiring it creates a circular dependency...
 
 (function ( $, _, Svelto ) {
 
   'use strict';
 
-  /* PLUGINFY */
+  /* PLUGIN */
 
-  let Pluginfy = {
+  let Plugin = {
 
     call ( Widget, options, ...args ) {
 
@@ -41,15 +40,15 @@
 
     },
 
-    add ( Widget ) {
+    make ( Widget ) {
 
       if ( !Widget.config.plugin ) return;
 
-      $.fn[Widget.config.name] = _.wrap ( Widget, Pluginfy.call );
+      $.fn[Widget.config.name] = _.wrap ( Widget, Plugin.call );
 
     },
 
-    remove ( Widget ) {
+    unmake ( Widget ) {
 
       if ( !Widget.config.plugin ) return;
 
@@ -61,6 +60,6 @@
 
   /* EXPORT */
 
-  Svelto.Pluginfy = Pluginfy;
+  Svelto.Plugin = Plugin;
 
 }( Svelto.$, Svelto._, Svelto ));
