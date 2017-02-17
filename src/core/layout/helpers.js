@@ -5,18 +5,23 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require core/readify/readify.js
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
 // `body` is used as a fallback
 
-(function ( $, _, Svelto ) {
+(function ( $, _, Svelto, Readify ) {
 
   'use strict';
 
   /* LAYOUT */
 
-  $.$layout = $('.layout, .body').first ();
+  Readify.add ( function () {
+
+    $.$layout = $('.layout, body').first ();
+
+  });
 
   $.getLayoutOf = function ( ele ) {
 
@@ -32,4 +37,4 @@
 
   };
 
-}( Svelto.$, Svelto._, Svelto ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Readify ));
