@@ -43,13 +43,15 @@
 
     getEncoded ( str ) {
 
-      let matches = _.findMatches ( str, Emoji.options.regexes.encoded )
-                     .sort ( ( a, b ) => b[0].length - a[0].length );
+      let matches = _.findMatches ( str, Emoji.options.regexes.encoded ),
+          uniq    = _.uniqBy ( matches, _.first ),
+          sorted  = uniq.sort ( ( a, b ) => b[0].length - a[0].length );
 
-      return matches.reduce ( ( acc, match ) => _.set ( acc, match[0], {
+      return sorted.map ( match => ({
+        encoded: match[0],
         name: match[1],
         tone: match[3] || Emoji.options.tone
-      }), {} );
+      }));
 
     },
 
@@ -87,14 +89,16 @@
 
       let matches = Emojify.getEncoded ( str );
 
-      for ( let match in matches ) {
+      for ( let match of matches ) {
 
-        let {name, tone} = matches[match],
+        let {encoded, name, tone} = match,
             emoji = await Emoji.getByName ( name );
 
         if ( !emoji ) continue;
 
-        str = _.replaceAll ( str, match, await Emoji.make ( emoji.id, tone, options ) );
+        let parsed = await Emoji.make ( emoji.id, tone, options );
+
+        str = _.replaceAll ( str, encoded, parsed );
 
       }
 
