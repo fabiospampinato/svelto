@@ -568,10 +568,6 @@
 
       }
 
-      /* BINDINGS */
-
-      this.$bindings = this.$bindings.add ( $element );
-
       /* BINDING */
 
       this._on ( $element, Pointer.enter, () => this._on ( ...args ) );
