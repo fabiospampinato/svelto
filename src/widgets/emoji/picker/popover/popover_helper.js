@@ -26,7 +26,7 @@
 
     }
 
-    instance.open ( anchor );
+    instance.toggle ( anchor );
 
   };
 

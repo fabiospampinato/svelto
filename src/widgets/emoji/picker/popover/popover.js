@@ -56,7 +56,7 @@
 
     /* API */
 
-    open ( anchor ) {
+    toggle ( anchor ) {
 
       if ( this.isLocked () ) {
 
@@ -82,7 +82,7 @@
 
             this.$element = new Widgets.Emojipicker ().$element.addClass ( this.options.classes.popover );
 
-            this.open ( anchor );
+            this.toggle ( anchor );
 
           });
 
