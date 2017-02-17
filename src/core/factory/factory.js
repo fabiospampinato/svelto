@@ -7,7 +7,6 @@
  * =========================================================================
  * @require core/pluginfy/pluginfy.js
  * @require core/readify/readify.js
- * @require core/widget/helpers.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
@@ -20,12 +19,6 @@
   let Factory = {
 
     /* API */
-
-    instanciate ( Widget, options, element ) {
-
-      return $.widget.get ( element, Widget ) || new Widget ( options, element );
-
-    },
 
     make ( Widget, config, namespace = Widgets, instances = Instances ) {
 

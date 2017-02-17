@@ -80,7 +80,7 @@
 
             Widgets.Emojipicker.config.options.data = data;
 
-            this.$element = new Widgets.Emojipicker ().$element.addClass ( this.options.classes.popover );
+            this.$element = $.widget.new ( Widgets.Emojipicker ).$element.addClass ( this.options.classes.popover );
 
             this.toggle ( anchor );
 

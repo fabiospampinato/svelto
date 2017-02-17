@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
+ * @require core/widget/helpers.js
  * ========================================================================= */
 
 //TODO: Add support for plain functions
@@ -25,7 +25,7 @@
 
       for ( let i = 0, l = this.length; i < l; i++ ) {
 
-        let instance = Svelto.Factory.instanciate ( Widget, options, this[i] );
+        let instance = $.widget.get ( this[0], Widget, options, true );
 
         if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 

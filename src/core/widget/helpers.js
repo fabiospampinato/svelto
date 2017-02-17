@@ -16,6 +16,12 @@
 
   let widget = {
 
+    new ( Widget, element, options ) {
+
+      return new Widget ( options, element );
+
+    },
+
     is ( element, Widget, loose = false ) { // `loose` controls whether we strictly require an instance of it or just a selector match
 
       if ( loose && Widget.config.selector && $(element).is ( Widget.config.selector ) ) return true;
@@ -24,9 +30,9 @@
 
     },
 
-    get ( element, Widget ) {
+    get ( element, Widget, options, instanciate = false ) {
 
-      return element[`_${Widget.config.name}`];
+      return element[`_${Widget.config.name}`] || instanciate && widget.new ( Widget, element, options );
 
     },
 
