@@ -7,6 +7,7 @@
  * =========================================================================
  * @before ./vendor/marked.js
  * @before lib/emojify/emojify.js
+ * @before widgets/form/ajax/ajax.js
  * @require widgets/storable/storable.js
  * ========================================================================= */
 
@@ -102,6 +103,7 @@
         fullscreenable: '.modal, .panel, .popover',
         preview: '.editor-preview',
         textarea: 'textarea',
+        form: 'form',
         triggers: {
           all: '[data-action]',
           preview: '[data-action="preview"]',
@@ -156,6 +158,8 @@
 
       this.$fullscreenable = this.$editor.parents ( this.options.selectors.fullscreenable );
 
+      this.$form = this.$editor.closest ( this.options.selectors.form );
+
     }
 
     _init () {
@@ -189,7 +193,14 @@
       this.___triggers ();
       this.___parentUnfullscreen ();
 
-      if ( this.options.storage.enabled && this._storageKey ) this.___storage ();
+      if ( this.options.storage.enabled && this._storageKey ) {
+
+        this.___storage ();
+
+        if ( this.$form.length ) this.___submit ();
+
+      }
+
       if ( Emoji ) this.___emojipicker ();
 
     }
@@ -254,6 +265,22 @@
     _storageInit () {
 
       this._storageKey = this.$editor.attr ( 'id' );
+
+    }
+
+    /* SUBMIT */
+
+    ___submit () {
+
+      let event = Widgets.FormAjax && this.$form.is ( Widgets.FormAjax.config.selector ) ? 'formajax:success' : 'submit';
+
+      this._on ( this.$form, event, this.__submit );
+
+    }
+
+    __submit () {
+
+      this.options.actions.unstore.apply ( this );
 
     }
 
