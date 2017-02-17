@@ -31,9 +31,13 @@
 
     getEmoticons ( str ) {
 
-      return _.findMatches ( str, Emoji.options.regexes.emoticon )
-              .map ( _.first )
-              .sort ( ( a, b ) => b.length - a.length );
+      let matches = _.findMatches ( str, Emoji.options.regexes.emoticon ),
+          sorted  = matches.sort ( ( a, b ) => b.index - a.index );
+
+      return sorted.map ( match => ({
+        emoticon: match[0],
+        index: match.index
+      }));
 
     },
 
@@ -51,19 +55,25 @@
 
     /* PARSE */
 
-    async parseEmoticon ( str, options ) { //FIXME: Won't work if we are parsing a `:/` emoticon and we have `http://` for instance (we should check if there's another forward slash immediately following the emoticon)
+    async parseEmoticon ( str, options ) {
 
       if ( !Emojify.options.parse.emoticon ) return str;
 
-      let emoticons = Emojify.getEmoticons ( str );
+      let matches = Emojify.getEmoticons ( str );
 
-      for ( let emoticon of emoticons ) {
+      for ( let match of matches ) {
+
+        let {emoticon, index} = match;
+
+        if ( ( index > 0 && !str[index - 1].match ( /\s/ ) ) || ( index + emoticon.length < str.length && !str[index + emoticon.length].match ( /\s/ ) ) ) continue;
 
         let emoji = await Emoji.getByEmoticon ( emoticon, true );
 
         if ( !emoji ) continue;
 
-        str = _.replaceAll ( str, emoticon, await Emoji.make ( emoji.id, Emoji.options.tone, options ) );
+        let parsed = await Emoji.make ( emoji.id, Emoji.options.tone, options );
+
+        str = str.substring ( 0, index ) + parsed + str.substring ( index + emoticon.length );
 
       }
 
