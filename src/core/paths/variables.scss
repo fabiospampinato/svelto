@@ -9,5 +9,6 @@
 /* PATHS */
 
 $path-root: '/' !default;
+$path-json: $path-root + 'json/' !default;
 $path-fonts: $path-root + 'fonts/' !default;
 $path-images: $path-root + 'images/' !default;
