@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require ./helpers.js
  * @require core/breakpoint/breakpoint.js
  * @require core/breakpoints/breakpoints.js
  * @require core/factory/factory.js
@@ -124,7 +125,7 @@
 
       _.extend ( this, this._getConfig ( options, element ) );
 
-      /* INSTANCE */
+      /* INSTANCES */
 
       Instances[this.Name].push ( this );
 
@@ -171,7 +172,7 @@
 
       if ( this.element ) {
 
-        this.element[`_${this.name}`] = this;
+        $.widget.set ( this.element, this );
 
       }
 
@@ -323,7 +324,7 @@
 
       if ( this.element ) {
 
-        delete this.element[`_${this.name}`];
+        $.widget.remove ( this.element, this );
 
       }
 

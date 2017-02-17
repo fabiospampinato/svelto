@@ -39,6 +39,7 @@
     _variables () {
 
       this.$trigger = this.$element;
+      this.trigger = this.element;
 
     }
 
@@ -63,7 +64,7 @@
       return {
         ajax: this.options.ajax,
         storage: {
-          enabled: _.get ( this.options.widget.config, 'storage.enabled' ) || _.get ( Widgets.RemoteWidget.config, 'storage.enabled' ) || this.$trigger.is ( Widgets.Storable.config.selector ) //FIXME: We should merge the configs at factory time instead
+          enabled: _.get ( this.options.widget.config, 'storage.enabled' ) || _.get ( Widgets.RemoteWidget.config, 'storage.enabled' ) || $.widget.is ( this.trigger, Widgets.Storable, true ) //FIXME: We should merge the configs at factory time instead, but it's quite expensive
         }
       };
 

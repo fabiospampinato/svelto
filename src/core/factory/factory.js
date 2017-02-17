@@ -5,9 +5,9 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/svelto/svelto.js
  * @require core/pluginfy/pluginfy.js
  * @require core/readify/readify.js
+ * @require core/widget/helpers.js
  * @require core/widgetize/widgetize.js
  *=========================================================================*/
 
@@ -23,7 +23,7 @@
 
     instanciate ( Widget, options, element ) {
 
-      return element[`_${Widget.config.name}`] || new Widget ( options, element );
+      return $.widget.get ( element, Widget ) || new Widget ( options, element );
 
     },
 

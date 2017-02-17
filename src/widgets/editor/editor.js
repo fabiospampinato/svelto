@@ -169,7 +169,7 @@
 
       /* STORAGE */
 
-      this.options.storage.enabled = this.options.storage.enabled || this.$editor.is ( Widgets.Storable.config.selector );
+      this.options.storage.enabled = this.options.storage.enabled || $.widget.is ( this.editor, Widgets.Storable, true );
 
       if ( this.options.storage.enabled ) {
 
@@ -272,7 +272,7 @@
 
     ___submit () {
 
-      let event = Widgets.FormAjax && this.$form.is ( Widgets.FormAjax.config.selector ) ? 'formajax:success' : 'submit';
+      let event = Widgets.FormAjax && $.widget.is ( this.$form[0], Widgets.FormAjax ) ? 'formajax:success' : 'submit';
 
       this._on ( this.$form, event, this.__submit );
 
