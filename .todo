@@ -1,7 +1,9 @@
 
 Now:
+  ☐ export some modules to github/npm
+  ☐ remote loader: if it fails, retry! (N times?)
   ☐ input autocomplete plugin (like typeahead.js)
-  ☐ add pure css tooltips like materializecss'
+  ☐ add pure css tooltips like materializecss' (we already have a `tooltip` component)
   ☐ add a storable form
   ☐ On mobile remove focus from liker after click (it should show the updated counter, not the text for removing the like...) (search for: "sticky hover")
   ☐ Test pointer with touchpad connected to a phone (working as a mouse), or on touchscreen laptop, or OTG a mouse to it

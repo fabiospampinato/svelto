@@ -841,6 +841,13 @@
 
 /* OTHERS */
 
+@mixin text-wrap () {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
 @mixin text-truncate () {
   overflow: hidden;
   text-overflow: ellipsis;

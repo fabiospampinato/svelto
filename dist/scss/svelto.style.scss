@@ -8082,6 +8082,7 @@ ul.no-bullet {
 p {
   @extend %widget;
   @include children-no-gutter ();
+  @include text-wrap ();
   max-width: 100%; // This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
   word-wrap: break-word;
 }
@@ -8123,6 +8124,7 @@ p {
 a {
 
   @extend %actionable;
+  @include text-wrap ();
   color: inherit;
   text-decoration: none;
 
@@ -11624,7 +11626,7 @@ figcaption,
 
 
 /* =========================================================================
- * Svelto - Widgets - Fieldset
+ * Svelto - Widgets - Form - Fieldset
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -13321,7 +13323,7 @@ i.flag {
 
 
 /* =========================================================================
- * Svelto - Widgets - Form Validate - Message - Invalid
+ * Svelto - Widgets - Form - Validate - Message - Invalid
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -13335,7 +13337,7 @@ i.flag {
 
 
 /* =========================================================================
- * Svelto - Widgets - Form Validate - Message - Valid
+ * Svelto - Widgets - Form - Validate - Message - Valid
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

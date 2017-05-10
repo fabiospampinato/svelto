@@ -1,7 +1,7 @@
 {
   "name": "svelto",
   "description": "Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.",
-  "version": "0.7.13",
+  "version": "0.7.14",
   "keywords": [
     "css",
     "sass",
@@ -65,10 +65,10 @@
     "gulp-util": "^3.0.7",
     "inflection": "^1.12.0",
     "lodash": "^4.16.6",
-    "node-notifier": "^4.6.1",
+    "node-notifier": "^5.0.0",
     "path": "^0.12.7",
     "require-dot-file": "^0.4.0",
     "through2": "^2.0.0",
-    "yargs": "^3.32.0"
+    "yargs": "^6.0.0"
   }
 }

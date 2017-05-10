@@ -8,6 +8,7 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
+//TODO: Maybe rename it, `Readify` doesn't sound right
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
 (function ( $, _, Svelto, Widgets ) {

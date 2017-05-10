@@ -1354,6 +1354,7 @@ $layout-sticky-header-z-index: 1100 !default;
 /* PATHS */
 
 $path-root: '/' !default;
+$path-json: $path-root + 'json/' !default;
 $path-fonts: $path-root + 'fonts/' !default;
 $path-images: $path-root + 'images/' !default;
 
@@ -2469,7 +2470,7 @@ $remote-popover-animation-duration: $popover-animation-duration !default;
 
 /* SVELTO */
 
-$svelto-version: '0.7.13' !default;
+$svelto-version: '0.7.14' !default;
 
 
 /* =========================================================================
@@ -4002,7 +4003,7 @@ $figcaption-color-basic: true !default;
 
 
 /* =========================================================================
- * Svelto - Widgets - Fieldset (Variables)
+ * Svelto - Widgets - Form - Fieldset (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
