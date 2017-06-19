@@ -24,7 +24,7 @@
 
       for ( let i = 0, l = this.length; i < l; i++ ) {
 
-        let instance = $.widget.get ( this[0], Widget, options, true );
+        let instance = $.widget.get ( this[i], Widget, options, true );
 
         if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 
