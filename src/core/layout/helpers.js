@@ -27,7 +27,8 @@
 
     if ( ele ) {
 
-      let $layout = $(ele).parent ().closest ( '.layout, body' );
+      const $ele = $(ele),
+            $layout = $ele[0] === $.body ? $.$body : $ele.parent ().closest ( '.layout, body' );
 
       if ( $layout.length ) return $layout;
 
