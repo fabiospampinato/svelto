@@ -235,6 +235,8 @@
 
       this._on ( this.$partial, 'paste', this.__paste );
 
+      this._on ( this.$partial, 'blur', this.___blur );
+
     }
 
     /* KEYPRESS / KEYDOWN */
@@ -289,6 +291,20 @@
 
         event.preventDefault ();
         event.stopImmediatePropagation ();
+
+    }
+
+    /* BLUR */
+
+    ___blur ( event ) {
+
+      let value = this.$partial.val ();
+
+      if ( !value ) return;
+
+      let added = this.add ( value );
+
+      if ( added ) this._clearPartial ();
 
     }
 
