@@ -136,7 +136,7 @@
     </div>
 
     <div class="chat-message level-5">
-      {{{sample.avatar}}}
+      {{{sample.avatar "chat-message-img"}}}
       <div class="chat-message-content card bordered">
         <div class="card-header bordered compact">
           <div class="sections center-y">
@@ -170,8 +170,19 @@
     {{{sw.checkAction "No tip" "toggle_class ( 'no-tip' )"}}}
     {{{sw.checkAction "No img" "toggle_class ( 'no-img' )"}}}
     <div class="multiple joined">
+      <div class="label bordered gray pointing-right">Remove</div>
+      {{{sw.action "Img" "remove_element ( '.chat-message-img' )"}}}
+      {{{sw.action "Header" "remove_element ( '.card-header' )"}}}
+    </div>
+    <div class="multiple joined">
       {{{sw.radioAction "Left" "direction" "set_direction ( 'left' )" true}}}
+      {{{sw.radioAction "Center" "direction" "set_direction ( 'center' )"}}}
       {{{sw.radioAction "Right" "direction" "set_direction ( 'right' )"}}}
+    </div>
+    <div class="multiple joined">
+      <div class="label bordered gray pointing-right">Width</div>
+      {{{sw.radioAction "100%" "width" "limit_width ( '100%' )" true}}}
+      {{{sw.radioAction "300px" "width" "limit_width ( 300 )"}}}
     </div>
   </div>
 
@@ -196,10 +207,18 @@
     }
 
     function set_direction ( direction ) {
-      var directions = ['left', 'right'];
+      var directions = ['left', 'center', 'right'];
       for ( var i = 0, l = directions.length; i < l; i++ ) {
         $('.chat-message').removeClass ( 'direction-' + directions[i] ).addClass ( 'direction-' + direction );
       }
+    }
+
+    function limit_width ( width ) {
+      $('.chat-message').css ({ maxWidth: width });
+    }
+
+    function remove_element ( selector ) {
+      $('.chat-message').find ( selector ).remove ();
     }
   </script>
 

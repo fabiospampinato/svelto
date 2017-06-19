@@ -1,17 +1,16 @@
 
 /* =========================================================================
- * Svelto - Widgets - Chat - Message - Directions - Default
+ * Svelto - Widgets - Chat - Message - Directions - Center
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ./center.scss
- * @before ./left.scss
- * @before ./right.scss
+ * @require ../message.scss
+ * @require decorators/pointing/directions/left.scss
  * ========================================================================= */
 
-/* DEFAULT */
+/* LEFT */
 
-.chat-message:not(.direction-center):not(.direction-right) {
-  @extend .chat-message.direction-left;
+.chat-message.direction-center {
+  align-self: center;
 }

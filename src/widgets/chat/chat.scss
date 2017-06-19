@@ -8,11 +8,11 @@
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-//TODO: Add support for bidirectional chat at the same time
-
 /* CHAT */
 
 .chat {
   @extend %container;
   @include color ( $chat-color, $chat-color-force, $chat-color-basic );
+  display: flex;
+  flex-direction: column;
 }

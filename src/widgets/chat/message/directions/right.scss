@@ -13,19 +13,21 @@
 
 .chat-message.direction-right {
 
+  align-self: flex-end;
+
   /* LEVELS */
 
   &.level-3,
   &[class*='level-'] {
-    margin-right: $chat-message-level-3-offset;
+    padding-right: $chat-message-level-3-offset;
   }
 
   &.level-2 {
-    margin-right: $chat-message-level-2-offset;
+    padding-right: $chat-message-level-2-offset;
   }
 
   &.level-1 {
-    margin-right: $chat-message-level-1-offset;
+    padding-right: $chat-message-level-1-offset;
   }
 
   /* IMAGE */

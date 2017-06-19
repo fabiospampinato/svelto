@@ -17,6 +17,7 @@
   @extend %widget;
   @include children-no-gutter ();
   display: flex;
+  width: 100%;
 
   /* TARGET */
 
@@ -66,7 +67,6 @@
 
   .chat-message-content {
     flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
-    width: 0;
   }
 
 }
