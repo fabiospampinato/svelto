@@ -62,7 +62,9 @@
 
     close ( event ) {
 
-      return this._targetInstance[this.options.methods.close]( this.element, event );
+      this._targetInstance.whenUnlocked ( () => this._targetInstance[this.options.methods.close]( this.element, event ) );
+
+      return this
 
     }
 

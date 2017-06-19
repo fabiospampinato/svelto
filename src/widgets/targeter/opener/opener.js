@@ -175,7 +175,9 @@
 
     open ( event ) {
 
-      return this._targetInstance[this.options.methods.open]( this.element, event );
+      this._targetInstance.whenUnlocked ( () => this._targetInstance[this.options.methods.open]( this.element, event ) );
+
+      return this;
 
     }
 
