@@ -69,6 +69,7 @@
         @extend %icon-base;
         position: absolute;
         right: 0;
+        top: 0; //Ensuring it won't wrap
         content: $select-icon-closed;
       }
 
