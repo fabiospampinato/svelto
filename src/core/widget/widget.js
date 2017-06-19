@@ -262,7 +262,7 @@
 
       /* RETURN */
 
-      return configs.length > 1 ? _.merge ( {}, ...configs ) : config;
+      return configs.length > 1 ? _.merge ( {}, ...configs ) : _.cloneDeep ( config );
 
     }
 
