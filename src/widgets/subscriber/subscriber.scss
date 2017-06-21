@@ -6,10 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-//TODO: Add liker-like icons support
-//TODO: Add liker-like classes
+//TODO: Add liker-like counter classes
 
 /* SUBSCRIBER */
 
@@ -22,12 +22,12 @@
     display: flex;
   }
 
-  /* MARGIN */
+  /* TOGGLE / COUNTER */
 
   .toggle,
   .counter {
 
-    &:last-child {
+    &:not(:first-child) {
       margin-left: $subscriber-inner-gutter;
     }
 
@@ -36,20 +36,7 @@
   /* TOGGLE */
 
   .toggle {
-
     cursor: pointer;
-
-    /* AFTER */
-
-    &:after {
-      vertical-align: middle;
-      content: $subscriber-toggle-text-on;
-    }
-
-    &[data-text-on]:after {
-      content: attr(data-text-on);
-    }
-
   }
 
   /* COUNTER */
@@ -59,30 +46,95 @@
     vertical-align: middle;
   }
 
-  /* SUBSCRIBED */
+  /* ICON */
 
-  &[data-state="true"] {
+  &:not(.no-icon) {
 
-    .toggle:after {
-      content: $subscriber-toggle-text-off;
+    /* TOGGLE */
+
+    .toggle {
+
+      /* BEFORE (ICON) */
+
+      &:not(.no-icon):before {
+        @extend %icon-base;
+        margin-bottom: 0;
+        content: $subscriber-icon;
+      }
+
+      &[data-icon]:not(.no-icon):before {
+        content: attr(data-icon);
+      }
+
     }
 
-    .toggle[data-text-off]:after {
-      content: attr(data-text-off);
+    /* SUBSCRIBED */
+
+    &[data-state="true"] .toggle:not(.no-icon):before {
+      color: $liker-icon-active-color;
     }
 
   }
 
-  /* UNSUBSCRIBED */
+  /* LABEL */
 
-  &[data-state="false"] {
+  &:not(.no-label) {
 
-    .toggle:after {
-      content: $subscriber-toggle-text-on;
+    /* TOGGLE */
+
+    .toggle:not(.no-label) {
+
+      /* AFTER */
+
+      &:after {
+        vertical-align: middle;
+        content: $subscriber-toggle-text-on;
+      }
+
+      &[data-text-on]:after {
+        content: attr(data-text-on);
+      }
+
     }
 
-    .toggle[data-text-on]:after {
-      content: attr(data-text-on);
+    /* SUBSCRIBED */
+
+    &[data-state="true"] {
+
+      .toggle:after {
+        content: $subscriber-toggle-text-off;
+      }
+
+      .toggle[data-text-off]:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* UNSUBSCRIBED */
+
+    &[data-state="false"] {
+
+      .toggle:after {
+        content: $subscriber-toggle-text-on;
+      }
+
+      .toggle[data-text-on]:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icon) {
+
+      /* TOGGLE */
+
+      .toggle:not(.no-icon):after {
+        margin-left: $subscriber-inner-gutter;
+      }
+
     }
 
   }

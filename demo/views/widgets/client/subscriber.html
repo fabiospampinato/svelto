@@ -29,9 +29,14 @@
     <div class="spacer"></div>
   </div>
 
+  <div class="subscriber" data-url="/subscriber-update">
+    <div class="toggle" data-icon="add"></div>
+    <div class="counter" data-counter="10"></div>
+  </div>
+
   <div class="subscriber multiple joined" data-url="/subscriber-update">
-    <div class="toggle button bordered secondary"></div>
-    <div class="counter label compact bordered pointing-left secondary inverted" data-counter="10"></div>
+    <div class="toggle button bordered"></div>
+    <div class="counter label compact bordered pointing-left" data-counter="10"></div>
   </div>
 
   {{> subscriber_actions}}
@@ -60,6 +65,13 @@
     {{{sw.action "Destroy" "api ( 'destroy' )"}}}
   </div>
 
+  {{{sw.divider "Style"}}}
+
+  <div class="multiple actions">
+    {{{sw.checkAction "No icon" "toggle_class ( 'no-icon' )"}}}
+    {{{sw.checkAction "No label" "toggle_class ( 'no-label' )"}}}
+  </div>
+
   {{{sw.divider "State"}}}
 
   <div class="multiple joined actions">
@@ -75,6 +87,10 @@
     function api_get () {
       var result = $('.subscriber').first ().subscriber ( 'get' );
       $.toast ( JSON.stringify ( result ) );
+    }
+
+    function toggle_class ( name ) {
+      $('.subscriber').toggleClass ( name );
     }
   </script>
 
