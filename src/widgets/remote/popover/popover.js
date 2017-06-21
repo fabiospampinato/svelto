@@ -72,7 +72,8 @@
       let {fullscreen, fullscreenRequest} = this.options.widget.config.options.classes,
           isFullscreen = $replacement.hasClass ( fullscreen ) || $replacement.hasClass ( fullscreenRequest ),
           matrix = this.$widget.matrix (),
-          positionateGuid = this.$widget[0]._positionateGuid;
+          positionateGuid = this.$widget[0]._positionateGuid,
+          {$anchor} = this.$widget.popover ( 'instance' );
 
       if ( !isFullscreen ) {
 
@@ -85,6 +86,7 @@
 
       super._widgetReplaceWith ( $replacement );
 
+      this.$widget.popover ( 'instance' ).$anchor = $anchor;
       this.$widget.matrix ( matrix );
       this.$widget[0]._positionateGuid = positionateGuid;
 
