@@ -6,14 +6,15 @@ tell application "System Events"
 	end repeat
 	# Base
 	keystroke "`" using control down
-	keystroke "clear && pwd"
-	keystroke return
+  delay 0.25
+	keystroke "gulp build --fresh && gulp watch"
 	# Demo
 	keystroke "n" using command down
+  delay 0.25
 	keystroke "cd demo"
 	keystroke return
-	keystroke "clear && pwd"
-	keystroke return
+  delay 0.1
+  keystroke "meteor run"
 	# End
 	keystroke "[" using {shift down, control down, option down, command down}
 	keystroke "`" using control down
