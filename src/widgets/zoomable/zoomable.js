@@ -171,7 +171,7 @@
 
     __tapOutside ( event ) {
 
-      if ( this.isLocked () || event.isDefaultPrevented () || !$.isAttached ( event.target ) || $(event.target).closest ( this.$zoomable ).length ) return;
+      if ( this.isLocked () || event.isDefaultPrevented () || event.isPropagationStopped () || !$.isAttached ( event.target ) || $(event.target).closest ( this.$zoomable ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
