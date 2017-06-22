@@ -11,7 +11,7 @@
 const gulp   = require ( 'gulp' ),
       concat = require ( 'gulp-concat' ),
       newer  = require ( 'gulp-newer' ),
-      touch  = require ( 'gulp-touch' ),
+      touch  = require ( 'gulp-touch-cmd' ),
       output = require ( '../../utilities/output' );
 
 /* TASK */

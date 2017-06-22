@@ -12,7 +12,7 @@ const gulp   = require ( 'gulp' ),
       concat = require ( 'gulp-concat' ),
       newer  = require ( 'gulp-newer' ),
       rename = require ( 'gulp-rename' ),
-      touch  = require ( 'gulp-touch' ),
+      touch  = require ( 'gulp-touch-cmd' ),
       input  = require ( '../../utilities/input' ),
       output = require ( '../../utilities/output' );
 

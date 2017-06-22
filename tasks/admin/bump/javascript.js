@@ -11,7 +11,7 @@
 const fs      = require ( 'fs' ),
       gulp    = require ( 'gulp' ),
       replace = require ( 'gulp-replace' ),
-      touch   = require ( 'gulp-touch' );
+      touch   = require ( 'gulp-touch-cmd' );
 
 /* TASK */
 

@@ -11,7 +11,7 @@
 const argv  = require ( 'yargs' ).argv,
       gulp  = require ( 'gulp' ),
       bump  = require ( 'gulp-bump' ),
-      touch = require ( 'gulp-touch' ),
+      touch = require ( 'gulp-touch-cmd' ),
       log   = require ( '../../utilities/log' );
 
 /* TASK */
