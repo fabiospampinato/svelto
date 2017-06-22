@@ -173,7 +173,7 @@
 
       if ( event.isDefaultPrevented () || event.isPropagationStopped () ) return;
 
-      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return event.preventDefault ();
+      if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return event.stopImmediatePropagation ();
 
       this.close ();
 
