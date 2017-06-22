@@ -22,6 +22,7 @@
   @extend %targetable;
   @include children-no-gutter ();
   @include color ( $label-color, $label-color-force, $label-color-basic );
+  @include text-no-wrap ();
   font-weight: $label-font-weight;
   display: inline-block;
   text-align: center;
