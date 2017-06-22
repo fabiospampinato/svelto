@@ -5862,6 +5862,7 @@ img {
         @extend %icon-base;
         position: absolute;
         right: 0;
+        top: 0; //Ensuring it won't wrap
         content: $select-icon-closed;
       }
 
@@ -6661,10 +6662,10 @@ svg.spinner {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
  * ========================================================================= */
 
-//TODO: Add liker-like icons support
-//TODO: Add liker-like classes
+//TODO: Add liker-like counter classes
 
 /* SUBSCRIBER */
 
@@ -6677,12 +6678,12 @@ svg.spinner {
     display: flex;
   }
 
-  /* MARGIN */
+  /* TOGGLE / COUNTER */
 
   .toggle,
   .counter {
 
-    &:last-child {
+    &:not(:first-child) {
       margin-left: $subscriber-inner-gutter;
     }
 
@@ -6691,20 +6692,7 @@ svg.spinner {
   /* TOGGLE */
 
   .toggle {
-
     cursor: pointer;
-
-    /* AFTER */
-
-    &:after {
-      vertical-align: middle;
-      content: $subscriber-toggle-text-on;
-    }
-
-    &[data-text-on]:after {
-      content: attr(data-text-on);
-    }
-
   }
 
   /* COUNTER */
@@ -6714,30 +6702,95 @@ svg.spinner {
     vertical-align: middle;
   }
 
-  /* SUBSCRIBED */
+  /* ICON */
 
-  &[data-state="true"] {
+  &:not(.no-icon) {
 
-    .toggle:after {
-      content: $subscriber-toggle-text-off;
+    /* TOGGLE */
+
+    .toggle {
+
+      /* BEFORE (ICON) */
+
+      &:not(.no-icon):before {
+        @extend %icon-base;
+        margin-bottom: 0;
+        content: $subscriber-icon;
+      }
+
+      &[data-icon]:not(.no-icon):before {
+        content: attr(data-icon);
+      }
+
     }
 
-    .toggle[data-text-off]:after {
-      content: attr(data-text-off);
+    /* SUBSCRIBED */
+
+    &[data-state="true"] .toggle:not(.no-icon):before {
+      color: $liker-icon-active-color;
     }
 
   }
 
-  /* UNSUBSCRIBED */
+  /* LABEL */
 
-  &[data-state="false"] {
+  &:not(.no-label) {
 
-    .toggle:after {
-      content: $subscriber-toggle-text-on;
+    /* TOGGLE */
+
+    .toggle:not(.no-label) {
+
+      /* AFTER */
+
+      &:after {
+        vertical-align: middle;
+        content: $subscriber-toggle-text-on;
+      }
+
+      &[data-text-on]:after {
+        content: attr(data-text-on);
+      }
+
     }
 
-    .toggle[data-text-on]:after {
-      content: attr(data-text-on);
+    /* SUBSCRIBED */
+
+    &[data-state="true"] {
+
+      .toggle:after {
+        content: $subscriber-toggle-text-off;
+      }
+
+      .toggle[data-text-off]:after {
+        content: attr(data-text-off);
+      }
+
+    }
+
+    /* UNSUBSCRIBED */
+
+    &[data-state="false"] {
+
+      .toggle:after {
+        content: $subscriber-toggle-text-on;
+      }
+
+      .toggle[data-text-on]:after {
+        content: attr(data-text-on);
+      }
+
+    }
+
+    /* MARGIN */
+
+    &:not(.no-icon) {
+
+      /* TOGGLE */
+
+      .toggle:not(.no-icon):after {
+        margin-left: $subscriber-inner-gutter;
+      }
+
     }
 
   }
@@ -11025,13 +11078,13 @@ html.flexbox-tweener {
  * @require widgets/container/container.scss
  * ========================================================================= */
 
-//TODO: Add support for bidirectional chat at the same time
-
 /* CHAT */
 
 .chat {
   @extend %container;
   @include color ( $chat-color, $chat-color-force, $chat-color-basic );
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -11053,6 +11106,7 @@ html.flexbox-tweener {
   @extend %widget;
   @include children-no-gutter ();
   display: flex;
+  width: 100%;
 
   /* TARGET */
 
@@ -11102,9 +11156,25 @@ html.flexbox-tweener {
 
   .chat-message-content {
     flex: 1 1 0%; // IE-10/11 misinterprets a unitless 0
-    width: 0;
   }
 
+}
+
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Directions - Center
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * @require decorators/pointing/directions/left.scss
+ * ========================================================================= */
+
+/* LEFT */
+
+.chat-message.direction-center {
+  align-self: center;
 }
 
 
@@ -11122,19 +11192,21 @@ html.flexbox-tweener {
 
 .chat-message.direction-left {
 
+  align-self: flex-start;
+
   /* LEVELS */
 
   &.level-3,
   &[class*='level-'] {
-    margin-left: $chat-message-level-3-offset;
+    padding-left: $chat-message-level-3-offset;
   }
 
   &.level-2 {
-    margin-left: $chat-message-level-2-offset;
+    padding-left: $chat-message-level-2-offset;
   }
 
   &.level-1 {
-    margin-left: $chat-message-level-1-offset;
+    padding-left: $chat-message-level-1-offset;
   }
 
   /* IMAGE */
@@ -11188,19 +11260,21 @@ html.clip-path-url {
 
 .chat-message.direction-right {
 
+  align-self: flex-end;
+
   /* LEVELS */
 
   &.level-3,
   &[class*='level-'] {
-    margin-right: $chat-message-level-3-offset;
+    padding-right: $chat-message-level-3-offset;
   }
 
   &.level-2 {
-    margin-right: $chat-message-level-2-offset;
+    padding-right: $chat-message-level-2-offset;
   }
 
   &.level-1 {
-    margin-right: $chat-message-level-1-offset;
+    padding-right: $chat-message-level-1-offset;
   }
 
   /* IMAGE */
@@ -11246,13 +11320,14 @@ html.clip-path-url {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @before ./center.scss
  * @before ./left.scss
  * @before ./right.scss
  * ========================================================================= */
 
 /* DEFAULT */
 
-.chat-message:not(.direction-right) {
+.chat-message:not(.direction-center):not(.direction-right) {
   @extend .chat-message.direction-left;
 }
 
@@ -12365,6 +12440,7 @@ textarea.disabled,
   @extend %targetable;
   @include children-no-gutter ();
   @include color ( $label-color, $label-color-force, $label-color-basic );
+  @include text-no-wrap ();
   font-weight: $label-font-weight;
   display: inline-block;
   text-align: center;

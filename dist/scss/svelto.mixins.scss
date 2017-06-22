@@ -848,6 +848,13 @@
   hyphens: auto;
 }
 
+@mixin text-no-wrap () {
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
+}
+
 @mixin text-truncate () {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1349,6 +1349,7 @@
  * @require widgets/label/variables.scss
  * ========================================================================= */
 /* SUBSCRIBER */
+/* ICON */
 /* TOGGLE */
 /* =========================================================================
  * Svelto - Widgets - Table (Variables)
@@ -1575,7 +1576,7 @@
  * ========================================================================= */
 /* FIGCAPTION */
 /* =========================================================================
- * Svelto - Widgets - Fieldset (Variables)
+ * Svelto - Widgets - Form - Fieldset (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2069,7 +2070,6 @@
   vertical-align: middle !important;
   -webkit-align-self: center !important;
       -ms-flex-item-align: center !important;
-              -ms-grid-row-align: center !important;
           align-self: center !important;
 }
 
@@ -4954,7 +4954,6 @@ span .avatar {
   margin: 0 0.625rem;
   -webkit-align-self: center;
       -ms-flex-item-align: center;
-              -ms-grid-row-align: center;
           align-self: center;
 }
 
@@ -5327,7 +5326,6 @@ hr.vertical, .divider.linear.vertical:empty, .vertical.divider:empty:not(.block)
   min-width: 0.625rem;
   -webkit-align-self: center;
       -ms-flex-item-align: center;
-              -ms-grid-row-align: center;
           align-self: center;
 }
 
@@ -5377,7 +5375,6 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
 .divider.linear.vertical:empty, .vertical.divider:empty:not(.block):not(.text) {
   -webkit-align-self: stretch;
       -ms-flex-item-align: stretch;
-              -ms-grid-row-align: stretch;
           align-self: stretch;
   -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
@@ -5393,7 +5390,6 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
           flex: 0 1 auto;
   -webkit-align-self: stretch;
       -ms-flex-item-align: stretch;
-              -ms-grid-row-align: stretch;
           align-self: stretch;
 }
 
@@ -5403,7 +5399,6 @@ html.flexbox-tweener .divider.linear.horizontal > .infobar > .infobar-center, ht
   content: '';
   -webkit-align-self: center;
       -ms-flex-item-align: center;
-              -ms-grid-row-align: center;
           align-self: center;
   min-height: 0.625rem;
   -webkit-flex: 1 1 auto;
@@ -5974,7 +5969,7 @@ i.icon, .carousel.inset .carousel-previous:after,
 .carousel.inset .carousel-next:after, input[type="checkbox"] + label:before, input[type=radio] + label:before, input[type="checkbox"] + label:after, input[type=radio] + label:after, table.sortable th[data-sort]:before, table.sortable th[data-sort]:after,
 table th.sortable:before,
 table th.sortable:after, .liker:not(.no-icons) .like:not(.no-icon):before,
-.liker:not(.no-icons) .dislike:not(.no-icon):before, .rater-star:before, .select select + label:after {
+.liker:not(.no-icons) .dislike:not(.no-icon):before, .rater-star:before, .select select + label:after, .subscriber:not(.no-icon) .toggle:not(.no-icon):before {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -7677,6 +7672,7 @@ html.scrollbar-size-17 .rails .rails-content.multiple {
 .select select + label:after {
   position: absolute;
   right: 0;
+  top: 0;
   content: "arrow_drop_down";
 }
 
@@ -8506,15 +8502,16 @@ svg.spinner.base circle {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/widget/widget.scss
+ * @require widgets/icon/icon.scss
  * ========================================================================= */
 /* SUBSCRIBER */
 .subscriber {
   /* NOT MULTIPLE */
-  /* MARGIN */
+  /* TOGGLE / COUNTER */
   /* TOGGLE */
   /* COUNTER */
-  /* SUBSCRIBED */
-  /* UNSUBSCRIBED */
+  /* ICON */
+  /* LABEL */
 }
 
 .subscriber:not(.multiple) {
@@ -8523,23 +8520,13 @@ svg.spinner.base circle {
   display: flex;
 }
 
-.subscriber .toggle:last-child,
-.subscriber .counter:last-child {
+.subscriber .toggle:not(:first-child),
+.subscriber .counter:not(:first-child) {
   margin-left: 0.605em;
 }
 
 .subscriber .toggle {
   cursor: pointer;
-  /* AFTER */
-}
-
-.subscriber .toggle:after {
-  vertical-align: middle;
-  content: "Subscribe";
-}
-
-.subscriber .toggle[data-text-on]:after {
-  content: attr(data-text-on);
 }
 
 .subscriber .counter:before {
@@ -8547,20 +8534,70 @@ svg.spinner.base circle {
   vertical-align: middle;
 }
 
-.subscriber[data-state="true"] .toggle:after {
-  content: "Unsubscribe";
+.subscriber:not(.no-icon) {
+  /* TOGGLE */
+  /* SUBSCRIBED */
 }
 
-.subscriber[data-state="true"] .toggle[data-text-off]:after {
-  content: attr(data-text-off);
+.subscriber:not(.no-icon) .toggle {
+  /* BEFORE (ICON) */
 }
 
-.subscriber[data-state="false"] .toggle:after {
+.subscriber:not(.no-icon) .toggle:not(.no-icon):before {
+  margin-bottom: 0;
+  content: "rss_feed";
+}
+
+.subscriber:not(.no-icon) .toggle[data-icon]:not(.no-icon):before {
+  content: attr(data-icon);
+}
+
+.subscriber:not(.no-icon)[data-state="true"] .toggle:not(.no-icon):before {
+  color: #ef6c00;
+}
+
+.subscriber:not(.no-label) {
+  /* TOGGLE */
+  /* SUBSCRIBED */
+  /* UNSUBSCRIBED */
+  /* MARGIN */
+}
+
+.subscriber:not(.no-label) .toggle:not(.no-label) {
+  /* AFTER */
+}
+
+.subscriber:not(.no-label) .toggle:not(.no-label):after {
+  vertical-align: middle;
   content: "Subscribe";
 }
 
-.subscriber[data-state="false"] .toggle[data-text-on]:after {
+.subscriber:not(.no-label) .toggle:not(.no-label)[data-text-on]:after {
   content: attr(data-text-on);
+}
+
+.subscriber:not(.no-label)[data-state="true"] .toggle:after {
+  content: "Unsubscribe";
+}
+
+.subscriber:not(.no-label)[data-state="true"] .toggle[data-text-off]:after {
+  content: attr(data-text-off);
+}
+
+.subscriber:not(.no-label)[data-state="false"] .toggle:after {
+  content: "Subscribe";
+}
+
+.subscriber:not(.no-label)[data-state="false"] .toggle[data-text-on]:after {
+  content: attr(data-text-on);
+}
+
+.subscriber:not(.no-label):not(.no-icon) {
+  /* TOGGLE */
+}
+
+.subscriber:not(.no-label):not(.no-icon) .toggle:not(.no-icon):after {
+  margin-left: 0.605em;
 }
 
 /* =========================================================================
@@ -9618,6 +9655,13 @@ ul.no-bullet {
  * ========================================================================= */
 /* PARAGRAPH */
 p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   max-width: 100%;
   word-wrap: break-word;
 }
@@ -9652,6 +9696,13 @@ p > script:last-child {
  * ========================================================================= */
 /* LINK */
 a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   color: inherit;
   text-decoration: none;
   /* STYLE */
@@ -11172,9 +11223,9 @@ figure:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black)
 }
 
 img:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .spinner-label:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .table:not(.primary):not(.secondary):not(.tertiary):not(.quaternary):not(.black):not(.blue):not(.brown):not(.gray):not(.green):not(.olive):not(.orange):not(.pink):not(.purple):not(.red):not(.teal):not(.violet):not(.white):not(.yellow):not(.error):not(.success):not(.warning):not(.base):not(.inherit):not(.transparent), .inherit, html.clip-path-polygon .pointing-left:after,
-html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header:after,
+html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after, html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after,
@@ -12205,9 +12256,9 @@ html:not(.windows) .only-windows {
  * ========================================================================= */
 /* POINTING */
 html.clip-path-polygon .pointing-left:after,
-html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header:after,
+html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after, html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after,
@@ -12226,9 +12277,9 @@ html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.poin
 }
 
 html.clip-path-polygon .bordered.pointing-left:after,
-html.clip-path-url .bordered.pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .bordered.card-header:after,
+html.clip-path-url .bordered.pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .bordered.card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .bordered.card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .bordered.pointing-right:after,
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .bordered.pointing-right:after,
 html.clip-path-url .bordered.pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .bordered.card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .bordered.pointing-bottom:after,
 html.clip-path-url .bordered.pointing-bottom:after, html.clip-path-polygon .bordered.pointing-top:after, html.clip-path-polygon .bordered.pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after,
@@ -12247,18 +12298,18 @@ html.clip-path-url .bordered.pointing:not(.pointing-left):not(.pointing-bottom):
  * ========================================================================= */
 /* HORIZONTAL */
 html.clip-path-polygon .pointing-left,
-html.clip-path-url .pointing-left, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header,
+html.clip-path-url .pointing-left, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header, html.clip-path-polygon .pointing-right,
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header, html.clip-path-polygon .pointing-right,
 html.clip-path-url .pointing-right, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header {
   /* TIP */
 }
 
 html.clip-path-polygon .pointing-left:after,
-html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header:after,
+html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after, html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   top: 50%;
@@ -12276,28 +12327,28 @@ html.clip-path-url .chat-message.direction-right .chat-message-content > .card-h
  * ========================================================================= */
 /* LEFT */
 html.clip-path-polygon .pointing-left,
-html.clip-path-url .pointing-left, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header,
+html.clip-path-url .pointing-left, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header {
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header {
   /* TIP */
   /* BORDERED */
 }
 
 html.clip-path-polygon .pointing-left:after,
-html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .card-header:after,
+html.clip-path-url .pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .card-header:after {
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .card-header:after {
   left: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-left);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-left);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-left);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-left);
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
 
 html.clip-path-polygon .bordered.pointing-left:after,
-html.clip-path-url .bordered.pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content > .bordered.card-header:after,
+html.clip-path-url .bordered.pointing-left:after, html.clip-path-polygon .chat-message.direction-left .chat-message-content > .bordered.card-header:after, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .bordered.card-header:after,
 html.clip-path-url .chat-message.direction-left .chat-message-content > .bordered.card-header:after,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content > .bordered.card-header:after {
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content > .bordered.card-header:after {
   margin-left: -1px;
 }
 
@@ -12327,8 +12378,8 @@ html.clip-path-polygon .pointing-right:after,
 html.clip-path-url .pointing-right:after, html.clip-path-polygon .chat-message.direction-right .chat-message-content > .card-header:after,
 html.clip-path-url .chat-message.direction-right .chat-message-content > .card-header:after {
   right: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-right);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-right);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-right);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-right);
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
 }
@@ -12388,8 +12439,8 @@ html.clip-path-url .pointing-bottom {
 html.clip-path-polygon .pointing-bottom:after,
 html.clip-path-url .pointing-bottom:after {
   bottom: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-bottom);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-bottom);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-bottom);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-bottom);
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
 }
@@ -12433,8 +12484,8 @@ html.clip-path-polygon .pointing-top:after, html.clip-path-polygon .pointing:not
 html.clip-path-url .pointing-top:after,
 html.clip-path-url .pointing:not(.pointing-left):not(.pointing-bottom):not(.pointing-right):after {
   top: -0.3125em;
-  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-top);
-          clip-path: url(/images/pointing-clips.svg?v=0.7.13#clip-top);
+  -webkit-clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-top);
+          clip-path: url(/images/pointing-clips.svg?v=0.7.14#clip-top);
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
 }
@@ -13690,6 +13741,15 @@ html.flexbox-tweener .modal.fullscreen-request.card > .card-block {
  * @require widgets/container/container.scss
  * ========================================================================= */
 /* CHAT */
+.chat {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 /* =========================================================================
  * Svelto - Widgets - Chat - Message
  * =========================================================================
@@ -13705,6 +13765,7 @@ html.flexbox-tweener .modal.fullscreen-request.card > .card-block {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
   /* TARGET */
   /* IMAGE */
   /* CONTENT */
@@ -13754,7 +13815,22 @@ html.flexbox-tweener .modal.fullscreen-request.card > .card-block {
   -webkit-flex: 1 1 0%;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
-  width: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Directions - Center
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * @require decorators/pointing/directions/left.scss
+ * ========================================================================= */
+/* LEFT */
+.chat-message.direction-center {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
 }
 
 /* =========================================================================
@@ -13767,31 +13843,34 @@ html.flexbox-tweener .modal.fullscreen-request.card > .card-block {
  * @require decorators/pointing/directions/left.scss
  * ========================================================================= */
 /* LEFT */
-.chat-message.direction-left, .chat-message:not(.direction-right) {
+.chat-message.direction-left, .chat-message:not(.direction-center):not(.direction-right) {
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start;
   /* LEVELS */
   /* IMAGE */
   /* CONTENT */
 }
 
-.chat-message.direction-left.level-3, .level-3.chat-message:not(.direction-right), .chat-message.direction-left[class*='level-'], [class*='level-'].chat-message:not(.direction-right) {
-  margin-left: 9em;
+.chat-message.direction-left.level-3, .level-3.chat-message:not(.direction-center):not(.direction-right), .chat-message.direction-left[class*='level-'], [class*='level-'].chat-message:not(.direction-center):not(.direction-right) {
+  padding-left: 9em;
 }
 
-.chat-message.direction-left.level-2, .level-2.chat-message:not(.direction-right) {
-  margin-left: 4.5em;
+.chat-message.direction-left.level-2, .level-2.chat-message:not(.direction-center):not(.direction-right) {
+  padding-left: 4.5em;
 }
 
-.chat-message.direction-left.level-1, .level-1.chat-message:not(.direction-right) {
-  margin-left: 0;
+.chat-message.direction-left.level-1, .level-1.chat-message:not(.direction-center):not(.direction-right) {
+  padding-left: 0;
 }
 
-.chat-message.direction-left .chat-message-img, .chat-message:not(.direction-right) .chat-message-img {
+.chat-message.direction-left .chat-message-img, .chat-message:not(.direction-center):not(.direction-right) .chat-message-img {
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;
 }
 
-.chat-message.direction-left .chat-message-content, .chat-message:not(.direction-right) .chat-message-content {
+.chat-message.direction-left .chat-message-content, .chat-message:not(.direction-center):not(.direction-right) .chat-message-content {
   -webkit-order: 2;
       -ms-flex-order: 2;
           order: 2;
@@ -13804,9 +13883,9 @@ html.clip-path-url {
   /* CONTENT */
 }
 
-html.clip-path-polygon .chat-message.direction-left .chat-message-content, html.clip-path-polygon .chat-message:not(.direction-right) .chat-message-content,
+html.clip-path-polygon .chat-message.direction-left .chat-message-content, html.clip-path-polygon .chat-message:not(.direction-center):not(.direction-right) .chat-message-content,
 html.clip-path-url .chat-message.direction-left .chat-message-content,
-html.clip-path-url .chat-message:not(.direction-right) .chat-message-content {
+html.clip-path-url .chat-message:not(.direction-center):not(.direction-right) .chat-message-content {
   margin-left: calc(0.3125rem + 0.4419417382em);
   /* HEADER */
 }
@@ -13822,21 +13901,24 @@ html.clip-path-url .chat-message:not(.direction-right) .chat-message-content {
  * ========================================================================= */
 /* RIGHT */
 .chat-message.direction-right {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
   /* LEVELS */
   /* IMAGE */
   /* CONTENT */
 }
 
 .chat-message.direction-right.level-3, .chat-message.direction-right[class*='level-'] {
-  margin-right: 9em;
+  padding-right: 9em;
 }
 
 .chat-message.direction-right.level-2 {
-  margin-right: 4.5em;
+  padding-right: 4.5em;
 }
 
 .chat-message.direction-right.level-1 {
-  margin-right: 0;
+  padding-right: 0;
 }
 
 .chat-message.direction-right .chat-message-img {
@@ -13870,6 +13952,7 @@ html.clip-path-url .chat-message.direction-right .chat-message-content {
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @before ./center.scss
  * @before ./left.scss
  * @before ./right.scss
  * ========================================================================= */
@@ -13914,9 +13997,9 @@ html.clip-path-url {
   /* LEFT */
 }
 
-html.clip-path-polygon .chat-message.no-tip.direction-left .chat-message-content, html.clip-path-polygon .no-tip.chat-message:not(.direction-right) .chat-message-content,
+html.clip-path-polygon .chat-message.no-tip.direction-left .chat-message-content, html.clip-path-polygon .no-tip.chat-message:not(.direction-center):not(.direction-right) .chat-message-content,
 html.clip-path-url .chat-message.no-tip.direction-left .chat-message-content,
-html.clip-path-url .no-tip.chat-message:not(.direction-right) .chat-message-content {
+html.clip-path-url .no-tip.chat-message:not(.direction-center):not(.direction-right) .chat-message-content {
   margin-left: 0.625rem;
 }
 
@@ -14184,7 +14267,7 @@ figcaption,
  * ========================================================================= */
 /* ATTACHED */
 /* =========================================================================
- * Svelto - Widgets - Fieldset
+ * Svelto - Widgets - Form - Fieldset
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -15169,6 +15252,13 @@ textarea.disabled,
  * ========================================================================= */
 /* LABEL */
 .label, .button {
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  -webkit-hyphens: manual;
+     -moz-hyphens: manual;
+      -ms-hyphens: manual;
+          hyphens: manual;
   font-weight: 500;
   display: inline-block;
   text-align: center;
@@ -16114,7 +16204,7 @@ i.flag {
   vertical-align: middle;
   width: 16px;
   height: 11px;
-  background-image: url(/images/flags.png?v=0.7.13);
+  background-image: url(/images/flags.png?v=0.7.14);
 }
 
 /* FLAGS */
@@ -17099,7 +17189,7 @@ i.flag {
 }
 
 /* =========================================================================
- * Svelto - Widgets - Form Validate - Message - Invalid
+ * Svelto - Widgets - Form - Validate - Message - Invalid
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -17110,7 +17200,7 @@ i.flag {
 }
 
 /* =========================================================================
- * Svelto - Widgets - Form Validate - Message - Valid
+ * Svelto - Widgets - Form - Validate - Message - Valid
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -17131,7 +17221,7 @@ i.flag {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.13) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.13) format("woff");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/fonts/MaterialIcons-Regular.woff2?v=0.7.14) format("woff2"), url(/fonts/MaterialIcons-Regular.woff?v=0.7.14) format("woff");
 }
 
 /* =========================================================================

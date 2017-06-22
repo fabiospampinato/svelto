@@ -246,7 +246,7 @@
 
       if ( _.isPlainObject ( options ) ) {
 
-        configs.push ({ options: options });
+        configs.push ({ options });
 
       }
 
