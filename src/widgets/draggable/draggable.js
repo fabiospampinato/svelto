@@ -23,6 +23,9 @@
     selector: '.draggable',
     options: {
       draggable: _.true, // Checks if we can drag it or not
+      multitouch: { // Multitouch-related options
+        enabled: false // Whether to abort on multitouch events or not
+      },
       threshold: { // Minimum moving treshold for triggering a drag. They can also be functions that return the threshold
         touch () { // Enabled on touch events
           return this.options.axis ? 0 : 5; // If an axis is specified we disable the threshold, in order to enable scrolling
@@ -457,6 +460,8 @@
 
       if ( this.isLocked () || !this.options.draggable ( this ) || Mouse.hasButton ( event, Mouse.buttons.RIGHT ) ) return;
 
+      if ( this.__isAbortable ( event ) ) return this.__abort ( event );
+
       event.stopImmediatePropagation ();
 
       this.inited = false;
@@ -488,6 +493,8 @@
     }
 
     __move ( event ) {
+
+      if ( this.__isAbortable ( event ) ) return this.__abort ( event );
 
       this.moveEvent = event;
       this.moveXY = $.eventXY ( event ),
@@ -659,6 +666,28 @@
       this._off ( $.$document, 'dragstart', this.__dragStart );
 
       this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
+
+    }
+
+    __isAbortable ( event ) {
+
+      if ( !this.options.multitouch.enabled ) {
+
+        const {originalEvent} = event;
+
+        if ( 'touches' in originalEvent && originalEvent.touches.length > 1 ) return true;
+
+      }
+
+      return false;
+
+    }
+
+    __abort ( event ) {
+
+      this._off ( $.$document, Pointer.cancel, this.__cancel );
+
+      this.__cancel ( event );
 
     }
 
