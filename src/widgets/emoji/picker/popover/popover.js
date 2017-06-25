@@ -22,6 +22,12 @@
     options: {
       classes: {
         popover: 'popover'
+      },
+      callbacks: {
+        beforeopen: _.noop,
+        open: _.noop,
+        beforeclose: _.noop,
+        close: _.noop
       }
     }
   };
@@ -29,6 +35,14 @@
   /* EMOJIPICKER POPOVER */
 
   class EmojipickerPopover extends Widgets.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this._initiated = false;
+
+    }
 
     /* CLOSE */
 
@@ -65,8 +79,8 @@
           this.unlock ();
 
         } else {
-
-          return this.open ( anchor );
+debugger;
+          return this.open ( anchor ); //FIXME: What is this for???
 
         }
 
@@ -95,6 +109,21 @@
       if ( !this.$element.isAttached () ) {
 
         this.$layout.append ( this.$element );
+
+      }
+
+      if ( !this._initiated ) {
+
+        this.$element.popover ({
+          callbacks: {
+            beforeopen: () => this._trigger ( 'beforeopen' ),
+            open: () => this._trigger ( 'open' ),
+            beforeclose: () => this._trigger ( 'beforeclose' ),
+            close: () => this._trigger ( 'close' )
+          }
+        });
+
+        this._initiated = true;
 
       }
 

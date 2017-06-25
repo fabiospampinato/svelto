@@ -26,6 +26,10 @@
         url: 'url',
         data: 'data',
         method: 'method'
+      },
+      callbacks: {
+        beforetrigger: _.noop,
+        trigger: _.noop
       }
     }
   };
@@ -82,7 +86,11 @@
 
     trigger () {
 
+      this._trigger ( 'beforetrigger' );
+
       new this.options.widget ( this._getOptions () ).request ();
+
+      this._trigger ( 'trigger' );
 
     }
 

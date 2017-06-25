@@ -17,7 +17,13 @@
   let config = {
     name: 'emojipickerPopoverTrigger',
     plugin: true,
-    selector: '.emojipicker-popover-trigger'
+    selector: '.emojipicker-popover-trigger',
+    options: {
+      callbacks: {
+        beforetrigger: _.noop,
+        trigger: _.noop
+      }
+    }
   };
 
   /* EMOJIPICKER POPOVER TRIGGER */
@@ -44,7 +50,11 @@
 
     trigger () {
 
+      this._trigger ( 'beforetrigger' );
+
       $.emojipickerPopover ( this.element );
+
+      this._trigger ( 'trigger' );
 
     }
 

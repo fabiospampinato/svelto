@@ -44,7 +44,11 @@
 
     trigger () {
 
+      this._trigger ( 'beforetrigger' );
+
       this.$trigger[this.options.widget.config.name] ( this._getOptions () );
+
+      this._trigger ( 'trigger' );
 
     }
 
