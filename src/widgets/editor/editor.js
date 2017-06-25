@@ -100,7 +100,7 @@
       },
       selectors: {
         actions: '[data-action]',
-        fullscreenable: '.modal, .panel, .popover',
+        fullscreenable: '.card, .modal, .panel, .popover',
         preview: '.editor-preview',
         textarea: 'textarea',
         form: 'form',
