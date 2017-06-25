@@ -12,6 +12,7 @@
     <div class="container bordered ie">IE</div>
     <div class="container bordered opera">Opera</div>
     <div class="container bordered safari">Safari</div>
+    <div class="container bordered uc">UCBrowser</div>
   </div>
 
   {{{sw.divider "OS"}}}
@@ -67,9 +68,10 @@
 <template name="browser_init">
 
   <script>
+    var $html = $('html');
     lodash.forOwn ( Svelto.Browser.is, function ( value, key ) {
       var matched = lodash.isFunction ( value ) ? value () : value;
-      $('.' + key).toggleClass ( Svelto.Colors.green, matched );
+      $('.' + key).not ( $html ).toggleClass ( Svelto.Colors.green, matched );
     });
   </script>
 

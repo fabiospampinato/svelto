@@ -38,7 +38,7 @@
 
   let Browser = {
     support: {
-      browsers: ['chrome', 'firefox', 'edge', 'ie', 'opera', 'safari'],
+      browsers: ['chrome', 'firefox', 'edge', 'ie', 'opera', 'safari', 'uc'],
       devices: ['desktop', 'mobile', 'tablet'],
       oss: ['ios', 'android', 'blackberry', 'linux', 'mac', 'windows']
     },
@@ -49,6 +49,7 @@
       ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
       opera: isOpera,
       safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
+      uc: /ucbrowser/i.test ( userAgent ),
       iphone: isIphone,
       ipad: isIpad,
       ipod: isIpod,
