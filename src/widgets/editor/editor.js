@@ -7,6 +7,7 @@
  * =========================================================================
  * @before ./vendor/marked.js
  * @before lib/emojify/emojify.js
+ * @before widgets/emoji/picker/popover/popover_trigger.js
  * @before widgets/form/ajax/ajax.js
  * @require widgets/storable/storable.js
  * ========================================================================= */
@@ -15,7 +16,7 @@
 //TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
 //TODO: Switch to a `contenteditable` version where the preview and editor actual are the same thing
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify, EmojipickerPopover, EmojipickerPopoverTrigger ) {
 
   'use strict';
 
@@ -158,6 +159,8 @@
 
       this.$fullscreenable = this.$editor.parents ( this.options.selectors.fullscreenable );
 
+      this.$emojipickerPopoverTrigger = EmojipickerPopoverTrigger ? this.$editor.find ( EmojipickerPopoverTrigger.config.selector ) : false;
+
       this.$form = this.$editor.closest ( this.options.selectors.form );
 
     }
@@ -201,7 +204,7 @@
 
       }
 
-      if ( Emoji ) this.___emojipicker ();
+      if ( this.$emojipickerPopoverTrigger && this.$emojipickerPopoverTrigger.length ) this.___emojipicker ();
 
     }
 
@@ -288,11 +291,30 @@
 
     ___emojipicker () {
 
-      this._on ( $.$document, 'emojipicker:pick', this.__emojipicker ); //FIXME: We probably shouldn't listen to all the pickers... what if there are multiple editors?
+      this._on ( true, this.$emojipickerPopoverTrigger, 'emojipickerpopovertrigger:beforetrigger', this.___emojipickerOpen );
 
     }
 
-    __emojipicker ( event, data ) {
+    ___emojipickerOpen () {
+
+      this._one ( true, $.$document, 'emojipickerpopover:open', this.__emojipickerOpen );
+
+    }
+
+    __emojipickerOpen () {
+
+      this._one ( true, $.$document, 'emojipickerpopover:beforeclose', this.__emojipickerClose );
+      this._on ( true, $.$document, 'emojipicker:pick', this.__emojipickerPick );
+
+    }
+
+    __emojipickerClose () {
+
+      this._off ( $.$document, 'emojipicker:pick', this.__emojipickerPick );
+
+    }
+
+    __emojipickerPick ( event, data ) {
 
       let encoded = Emoji.encode ( data.emoji, data.tone );
 
@@ -608,4 +630,4 @@
 
   Factory.make ( Editor, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify, Svelto.Widgets.EmojipickerPopover, Svelto.Widgets.EmojipickerPopoverTrigger ));
