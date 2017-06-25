@@ -104,11 +104,11 @@
         <div class="section-center">Header</div>
         <div class="section-right">
           <div class="multiple">
-            <div class="button xsmall compact">
-              <i class="icon">menu</i>
+            <div class="button xsmall compact" onclick="toggle_fullscreen ()">
+              <i class="icon">fullscreen</i>
             </div>
-            <div class="button xsmall compact">
-              <i class="icon">apps</i>
+            <div class="button xsmall compact" onclick="toggle_fullscreen ()">
+              <i class="icon">fullscreen_exit</i>
             </div>
             <div class="button xsmall compact">
               <i class="icon">refresh</i>
@@ -165,7 +165,10 @@
 
   {{{sw.divider "Others"}}}
 
-  {{{sw.checkAction "Fixed height (Advanced)" "toggle_fixed_height ()"}}}
+  <div class="multiple actions">
+    {{{sw.checkAction "Fixed height (Advanced)" "toggle_fixed_height ()"}}}
+    {{{sw.checkAction "Fullscreen (Advanced)" "toggle_fullscreen ()"}}}
+  </div>
 
   {{{sw.divider "State"}}}
 
@@ -193,6 +196,10 @@
 
     function toggle_fixed_height () {
       $('.card.advanced').height ( $('.card.advanced').height () > 250 ? 250 : 'auto' );
+    }
+
+    function toggle_fullscreen () {
+      $('.card.advanced').toggleClass ( 'fullscreen' );
     }
   </script>
 

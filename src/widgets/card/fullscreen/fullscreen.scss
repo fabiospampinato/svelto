@@ -1,0 +1,30 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Card - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../card.scss
+ * ========================================================================= */
+
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+
+/* FULLSCREEN */
+
+.card:not(.modal):not(.popover):not(.panel) {
+
+  &.fullscreen,
+  &.fullscreen-request {
+    @include fill-fixed ();
+    border-width: 0;
+    border-radius: 0;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    max-height: none;
+    height: 100%;
+    z-index: $card-fullscreen-z-index;
+  }
+
+}
