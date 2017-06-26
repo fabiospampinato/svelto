@@ -22,7 +22,7 @@
       timestamp: false, // UNIX timestamp
       title: false, // Update the title or the text?
       abort: { // Abort the loop if it has to wait more than `threshold`
-        enabled: true, // Wether the abort functionality should be enabled (recommended, at least to avoid overflowing the delay https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+        enabled: true, // Whether the abort functionality should be enabled (recommended, at least to avoid overflowing the delay https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
         threshold: 604800, // 1 week
       },
       datas: {
