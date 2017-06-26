@@ -665,7 +665,7 @@
       this._off ( Pointer.click, this.__click );
       this._off ( $.$document, 'dragstart', this.__dragStart );
 
-      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion } );
+      this._trigger ( 'end', { draggable: this.draggable, helper: this.helper, initialXY: this.initialXY, startEvent: this.startEvent, startXY: this.startXY, endEvent: event, endXY: endXY, dragXY: dragXY, motion: this.motion, cancelled: true } );
 
     }
 
