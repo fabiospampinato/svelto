@@ -79,7 +79,7 @@
           this.unlock ();
 
         } else {
-debugger;
+
           return this.open ( anchor ); //FIXME: What is this for???
 
         }
