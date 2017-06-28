@@ -26,9 +26,26 @@
 
     /* UTILITIES */
 
-    _getWidgets ( $root, selector ) {
+    _getWidgets ( selector, $root, $parent ) {
 
-      return $root.filter ( selector ).add ( $root.find ( selector ) );
+      let isSimpleSelector = !/ |>/.test ( selector );
+
+      if ( isSimpleSelector ) {
+
+        let $self = $root.filter ( selector ),
+            $nested = $root.find ( selector );
+
+        return $self.length ? $self.add ( $nested ) : $nested;
+
+      } else {
+
+        $parent = $parent ? $parent : $root.parent ();
+
+        let root = $root[0];
+
+        return $parent.find ( selector ).filter ( ( index, ele ) => ele === root || $.contains ( root, ele ) );
+
+      }
 
     }
 
@@ -64,7 +81,7 @@
 
       if ( this._isReady ) {
 
-        let $widgets = this._getWidgets ( $.$body, selector );
+        let $widgets = this._getWidgets ( selector, $.$body, $.$html );
 
         this.worker ( [[widgetizer, data]], $widgets );
 
@@ -122,12 +139,14 @@
 
     on ( $root ) {
 
+      let $parent = $root.parent ();
+
       for ( let selector in this.widgetizers ) {
 
         if ( !this.widgetizers.hasOwnProperty ( selector ) ) continue;
 
         let widgetizers = this.widgetizers[selector],
-            $widgets = this._getWidgets ( $root, selector );
+            $widgets = this._getWidgets ( selector, $root, $parent );
 
         this.worker ( widgetizers, $widgets );
 
