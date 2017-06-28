@@ -1,0 +1,34 @@
+
+/* =========================================================================
+ * Svelto - Decorators - Grid - Variables
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/breakpoints/variables.scss
+ * @require core/grid/variables.scss
+ * ========================================================================= */
+
+/* GRID */
+
+$grid-breakpoints-columns: false !default;
+
+@if not $grid-breakpoints-columns { // Using this convoluted way of doing this so that we may set only some specific columns for each breakpoint, outputting less code
+
+  $columns: ();
+
+  @for $column from 1 through $grid-columns {
+
+    $columns: append( $columns, $column );
+
+  }
+
+  $grid-breakpoints-columns: ();
+
+  @each $breakpoint, $value in $breakpoints {
+
+    $grid-breakpoints-columns: map-set( $grid-breakpoints-columns, $breakpoint, $columns );
+
+  }
+
+}

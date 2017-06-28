@@ -12,7 +12,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != 'transparent' {
+  @if ( index( $link-colors, $name ) and $name != 'transparent' ) {
 
     $class: color-link-get-class( $name );
 

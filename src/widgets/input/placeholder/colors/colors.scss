@@ -15,7 +15,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != 'inherit' and $name != 'transparent' {
+  @if index( $input-placeholder-colors, $name ) and  $name != 'inherit' and $name != 'transparent' {
 
     $class: color-get-class( $name );
 

@@ -13,7 +13,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != 'inherit' and $name != 'transparent' {
+  @if index( $actionable-inverted-colors, $name ) and $name != 'inherit' and $name != 'transparent' {
 
     %color-#{$name}%actionable.inverted:not(.disabled) {
 

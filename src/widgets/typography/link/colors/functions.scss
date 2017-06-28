@@ -30,7 +30,11 @@
 
   @each $name, $datas in $colors {
 
-    $classes: append( $classes, color-link-get-class( $name ) );
+    @if index( $link-colors, $name ) {
+
+      $classes: append( $classes, color-link-get-class( $name ) );
+
+    }
 
   }
 

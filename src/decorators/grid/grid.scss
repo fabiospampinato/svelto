@@ -18,28 +18,33 @@
 @each $breakpoint, $value in $breakpoints {
 
   $class: breakpoint-get-class( $breakpoint );
+  $columns: map-get( $grid-breakpoints-columns, $breakpoint );
 
-  @include media-breakpoint-up ( $breakpoint ) {
+  @if $columns {
 
-    @for $nr from 1 through $grid-columns {
+    @include media-breakpoint-up ( $breakpoint ) {
 
-      $percentage: ( 100% / $grid-columns ) * $nr;
+      @each $column in $columns {
 
-      .#{$class}-#{$nr} {
-        width: $percentage;
-      }
+        $percentage: ( 100% / $grid-columns ) * $column;
 
-      %grid-#{$breakpoint}-#{$nr}-no-gutter {
-        width: calc(#{$percentage} - #{$gutter});
-      }
+        .#{$class}-#{$column} {
+          width: $percentage;
+        }
 
-      .multiple:not(.no-wrap):not(.vertical):not(.joined) > .#{$class}-#{$nr} {
+        %grid-#{$breakpoint}-#{$column}-no-gutter {
+          width: calc(#{$percentage} - #{$gutter});
+        }
 
-        &:not(.multiple),
-        &.multiple.no-wrap,
-        &.multiple.vertical,
-        &.multiple.joined {
-          @extend %grid-#{$breakpoint}-#{$nr}-no-gutter;
+        .multiple:not(.no-wrap):not(.vertical):not(.joined) > .#{$class}-#{$column} {
+
+          &:not(.multiple),
+          &.multiple.no-wrap,
+          &.multiple.vertical,
+          &.multiple.joined {
+            @extend %grid-#{$breakpoint}-#{$column}-no-gutter;
+          }
+
         }
 
       }

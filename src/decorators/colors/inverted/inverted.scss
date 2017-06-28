@@ -12,7 +12,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != 'inherit' and $name != 'transparent' {
+  @if index( $inverted-colors, $name ) and $name != 'inherit' and $name != 'transparent' {
 
     $bg: nth( $datas, 1 );
     $bg-hover: nth( $datas, 2 );

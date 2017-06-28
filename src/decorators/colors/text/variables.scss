@@ -1,29 +1,13 @@
 
 /* =========================================================================
- * Svelto - Decorators - Highlighted - Colors
+ * Svelto - Decorators - Colors - Text (Variables)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require ../highlighted.scss
+ * @require core/colors/variables.scss
  * ========================================================================= */
 
 /* COLORS */
 
-@each $direction in $highlighted-colors-directions {
-
-  @each $name, $datas in $colors {
-
-    @if index( $highlighted-colors, $name ) {
-
-      $accent: nth( $datas, 5 );
-
-      %color-#{$name}.highlight-#{$direction}.highlighted {
-        border-#{$direction}-color: $accent;
-      }
-
-    }
-
-  }
-
-}
+$text-colors: map-keys( $colors ) !default;

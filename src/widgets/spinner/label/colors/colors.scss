@@ -12,7 +12,7 @@
 
 @each $name, $datas in $colors {
 
-  @if $name != 'inherit' and $name != 'transparent' {
+  @if index( $spinner-label-colors, $name ) and $name != 'inherit' and $name != 'transparent' {
 
     $class: color-get-class( $name );
 

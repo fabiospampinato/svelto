@@ -12,12 +12,16 @@
 
 @each $name, $datas in $colors {
 
-  $class: color-get-class( $name );
+  @if index( $text-colors, $name ) {
 
-  $bg: nth( $datas, 1 );
+    $class: color-get-class( $name );
 
-  .text-#{$class} {
-    color: $bg !important;
+    $bg: nth( $datas, 1 );
+
+    .text-#{$class} {
+      color: $bg !important;
+    }
+
   }
 
 }
