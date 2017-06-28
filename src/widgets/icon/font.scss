@@ -20,4 +20,16 @@
          url(#{$icon-path-fonts}MaterialIcons-Regular.woff#{$revision}) format('woff');
   }
 
+} @else if $icon-font-cdn {
+
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url(#{$icon-font-cdn-woff2}) format('woff2'),
+         url(#{$icon-font-cdn-woff}) format('woff');
+  }
+
 }
