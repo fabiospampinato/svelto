@@ -32,6 +32,7 @@
     > .tagbox-partial {
       @include margin-x ( $gutter-half );
       white-space: nowrap;
+      z-index: 0; // Needed by `i.icon.actionable`
     }
 
   }
