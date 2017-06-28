@@ -8,20 +8,25 @@
 
 /* REQUIRE */
 
-const notifier = require ( 'node-notifier' ),
-      path     = require ( 'path' ),
-      gulp     = require ( 'gulp' ),
-      project  = require ( '../config/project' ),
-      log      = require ( '../utilities/log' );
+const _            = require ( 'lodash' ),
+      notifier     = require ( 'node-notifier' ),
+      path         = require ( 'path' ),
+      gulp         = require ( 'gulp' ),
+      project      = require ( '../config/project' ),
+      environments = require ( '../utilities/environments' );
+      log          = require ( '../utilities/log' );
 
 /* NOTIFY */
 
 function notify ( done ) {
 
+  const envsPretty = environments.pretty ( project.environment ),
+        icon = path.join ( process.cwd (), 'logo.png' );
+
   notifier.notify ({
-    title: `Built [${project.environment}]`,
+    title: `Built [${envsPretty}]`,
     message: 'Svelto is ready to be used',
-    icon: path.join ( process.cwd (), 'logo.png' ),
+    icon,
     sound: 'Glass',
     wait: false
   }, done );
@@ -32,7 +37,7 @@ function notify ( done ) {
 
 const task = gulp.series ( gulp.parallel ( 'build-json', 'build-fonts', 'build-images', 'build-javascript', 'build-style' ), notify );
 
-task.description = 'Build Svelto ' + log.options ( ['env', '*'], ['environment', '*'], ['fresh'] );
+task.description = 'Build Svelto ' + log.options ( ['env', '*'], ['envs', '*,*'], ['environment', '*'], ['environments', '*,*'], ['fresh'] );
 
 /* GULP */
 

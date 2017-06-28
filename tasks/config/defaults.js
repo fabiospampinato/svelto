@@ -8,7 +8,7 @@
 
 /* DEFAULTS */
 
-// All the properties of the active environment will be merged with the basic object
+// All the properties of the active environment(s) will be merged with the basic object
 // Setting `isDevelopment: true` will basically make the build process faster, some plugins will be skipped and javascript will get partial compilation so it's much faster to watch and rebuild on changes
 
 const defaults = {
@@ -30,7 +30,7 @@ const defaults = {
     },
     production: {}
   },
-  environment: 'demo'
+  environment: 'demo' // Supports 'env', `[env1[, env2]]` and `env1[,env2[,..]]`
 
 };
 
