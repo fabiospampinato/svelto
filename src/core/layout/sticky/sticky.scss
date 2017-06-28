@@ -8,24 +8,9 @@
  * @require ../layout.scss
  * ========================================================================= */
 
-/* FIRST LAYOUT */
+@media not print { // Disabled when printing
 
-.layout.vertical {
-
-  /* HEADER */
-
-  > .layout-header.sticky {
-
-    @include position ( fixed, 0 0 false 0 );
-    z-index: $layout-sticky-header-z-index;
-
-    + .layout-content {
-      margin-top: $layout-sticky-header-height;
-    }
-
-  }
-
-  /* NOT FIRST */
+  /* FIRST LAYOUT */
 
   .layout.vertical {
 
@@ -33,12 +18,31 @@
 
     > .layout-header.sticky {
 
-      position: relative;
-      position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)
-      z-index: $layout-sticky-header-z-index - 1;
+      @include position ( fixed, 0 0 false 0 );
+      z-index: $layout-sticky-header-z-index;
 
       + .layout-content {
-        margin-top: 0;
+        margin-top: $layout-sticky-header-height;
+      }
+
+    }
+
+    /* NOT FIRST */
+
+    .layout.vertical {
+
+      /* HEADER */
+
+      > .layout-header.sticky {
+
+        position: relative;
+        position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)
+        z-index: $layout-sticky-header-z-index - 1;
+
+        + .layout-content {
+          margin-top: 0;
+        }
+
       }
 
     }
