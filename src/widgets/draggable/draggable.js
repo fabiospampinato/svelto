@@ -630,7 +630,6 @@
 
     __cancel ( event ) {
 
-      event.preventDefault ();
       event.stopImmediatePropagation ();
 
       this.ended = true;
