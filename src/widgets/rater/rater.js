@@ -114,9 +114,9 @@
 
           error: ( res ) => {
 
-            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+            let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-            $.toast ( _.isError ( resj ) || !( 'message' in resj ) ? this.options.messages.error : resj.message );
+            $.toast ( message );
 
           },
 
@@ -125,9 +125,9 @@
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
             //TODO: Make it work like formAjax's
 
-            let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+            let resj = $.ajaxParseResponse ( res );
 
-            if ( !_.isError ( resj ) ) {
+            if ( resj ) {
 
               _.merge ( this.options, resj );
 

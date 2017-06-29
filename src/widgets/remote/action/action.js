@@ -161,9 +161,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-      this._replaceToast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.message );
+      this._replaceToast ( message );
 
       this._destroyToast ( true );
 
@@ -175,9 +175,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let resj = $.ajaxParseResponse ( res );
 
-      if ( !_.isError ( resj ) ) {
+      if ( resj ) {
 
         if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
 

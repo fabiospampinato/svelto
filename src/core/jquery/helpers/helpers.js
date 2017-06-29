@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @before ./ajax.js
  * @before ./clean_data.js
  * @before ./diff.js
  * @before ./elements.js

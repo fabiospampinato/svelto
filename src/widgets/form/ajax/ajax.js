@@ -132,9 +132,9 @@
 
         error: ( res ) => {
 
-          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+          let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-          $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.msg );
+          $.toast ( message );
 
           this._trigger ( 'error' );
 
@@ -142,9 +142,9 @@
 
         success: ( res ) => {
 
-          let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+          let resj = $.ajaxParseResponse ( res );
 
-          if ( !_.isError ( resj ) ) {
+          if ( resj ) {
 
             if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
 

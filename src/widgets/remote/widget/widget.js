@@ -323,9 +323,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-      $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.message );
+      $.toast ( message );
 
       this._widgetDestroy ();
 
@@ -337,9 +337,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let resj = $.ajaxParseResponse ( res );
 
-      if ( _.isError ( resj ) || !(this.options.widget.config.name in resj) ) return this.__error ( res );
+      if ( !resj || !(this.options.widget.config.name in resj) ) return this.__error ( res );
 
       /* VARIABLES */
 

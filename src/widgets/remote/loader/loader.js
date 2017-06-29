@@ -149,9 +149,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-      $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.message );
+      $.toast ( message );
 
       super.__error ( res );
 
@@ -163,8 +163,8 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res ),
-          isJSON = !_.isError ( resj );
+      let resj = $.ajaxParseResponse ( res ),
+          isJSON = !!resj;
 
       if ( isJSON && !('html' in resj) ) return this.__error ( res );
 

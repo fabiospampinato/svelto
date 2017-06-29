@@ -70,9 +70,9 @@
 
     __remoteState ( res ) {
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let state = $.ajaxResponseGet ( res, 'state' );
 
-      if ( _.isError ( resj ) || !('state' in resj) ) return;
+      if ( _.isUndefined ( state ) ) return;
 
       this._remoteState ( resj );
 
@@ -110,9 +110,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
 
-      $.toast ( _.isError ( resj ) || !('message' in resj) ? this.options.messages.error : resj.msg );
+      $.toast ( message );
 
       return super.__error ( res );
 
@@ -122,9 +122,9 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = _.isPlainObject ( res ) ? res : _.attempt ( JSON.parse, res );
+      let resj = $.ajaxResponseGet ( res );
 
-      if ( _.isError ( resj ) ) return this.__error ( res );
+      if ( resj ) return this.__error ( res );
 
       this._success ( resj );
 
