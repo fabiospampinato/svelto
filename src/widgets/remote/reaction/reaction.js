@@ -72,9 +72,9 @@
 
       let state = $.ajaxResponseGet ( res, 'state' );
 
-      if ( _.isUndefined ( state ) ) return;
+      if ( _.isNull ( state ) ) return;
 
-      this._remoteState ( resj );
+      this._remoteState ( state );
 
     }
 
