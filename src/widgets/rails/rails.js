@@ -69,7 +69,7 @@
 
     _init () {
 
-      this._scrollToElement ( this.$active );
+      this._scrollToElement ( this.$active, false );
       this._updateNavigation ();
 
     }
@@ -132,9 +132,10 @@
 
       if ( !this.$navigation.length ) return;
 
-      let scrollLeft = this.$content.scrollLeft (),
+      let contentRect = this.$content.getRect (),
+          scrollLeft = this.$content.scrollLeft (),
           isStart = ( scrollLeft === 0 ),
-          isEnd = ( this.$content[0].scrollWidth - scrollLeft - this.$content.outerWidth () <= 1 ); // If we use `0`, as we should` it won't always trigger
+          isEnd = ( this.$content[0].scrollWidth - scrollLeft - contentRect.width <= 1 ); // If we use `0`, as we should it won't always trigger
 
       if ( this.$start.length || this.$left.length ) {
 
@@ -174,9 +175,17 @@
 
     }
 
-    _scroll ( left ) {
+    _scroll ( left, animate = true ) {
 
-      this.$content.animate ( { scrollLeft: left }, this.options.animations.scroll );
+      if ( animate ) {
+
+        this.$content.animate ( { scrollLeft: left }, this.options.animations.scroll );
+
+      } else {
+
+        this.$content.scrollLeft ( left );
+
+      }
 
     }
 
@@ -186,13 +195,15 @@
 
     }
 
-    _scrollToElement ( $element ) {
+    _scrollToElement ( $element, animate ) {
 
       if ( !$element.length ) return;
 
-      let left = $element.position ().left + this.$content.scrollLeft () + ( $element.outerWidth () / 2 ) - ( this.$content.outerWidth () / 2 );
+      let eleRect = $element.getRect (),
+          contentRect = this.$content.getRect (),
+          left = ( eleRect.left - contentRect.left ) + this.$content.scrollLeft () + ( eleRect.width / 2 ) - ( contentRect.width / 2 );
 
-      this._scroll ( left );
+      this._scroll ( left, animate );
 
     }
 

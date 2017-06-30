@@ -271,6 +271,7 @@
 
         this._minWidth = this.zoomable.width || this.$zoomable.outerWidth (); //FIXME: It may change on resize
         this._minHeight = this.zoomable.height || this.$zoomable.outerHeight (); //FIXME: It may change on resize
+
         this._maxWidth = this.options.original.src ? this.options.original.width : ( this.zoomable.naturalWidth ? this.zoomable.naturalWidth : this._minWidth );
         this._maxHeight = this.options.original.src ? this.options.original.height : ( this.zoomable.naturalHeight ? this.zoomable.naturalHeight : this._minHeight );
         this._aspectRatio = this._maxWidth / this._maxHeight;

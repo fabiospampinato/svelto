@@ -148,10 +148,11 @@
 
     _centerToPoint ( XY, suppressClasses ) {
 
-      let movableOffset = this.$movable.offset (),
+      let offset = this.$movable.offset (),
+          rect = this.$movable.getRect (),
           deltaXY = {
-            x: XY.x - ( movableOffset.left + ( this.$movable.outerWidth () / 2 ) ),
-            y: XY.y - ( movableOffset.top + ( this.$movable.outerHeight () / 2 ) )
+            x: XY.x - ( offset.left + ( rect.width / 2 ) ),
+            y: XY.y - ( offset.top + ( rect.height / 2 ) )
           };
 
       return this._actionMove ( deltaXY, suppressClasses );
@@ -174,24 +175,24 @@
 
         if ( this.options.constrainer.$element ) {
 
-          let constrainerOffset = this.options.constrainer.$element[0] === window ? { top: $.$window.scrollTop (), left: $.$window.scrollLeft () } : this.options.constrainer.$element.offset (),
-              movableOffset = this.$movable.offset ();
+          let constrainerRect = this.options.constrainer.$element.getRect (),
+              movableRect = this.$movable.getRect ();
 
           if ( this.options.axis !== 'y' ) {
 
-            let halfWidth = this.options.constrainer.center ? this.$movable.outerWidth () / 2 : 0;
+            let halfWidth = this.options.constrainer.center ? movableRect.width / 2 : 0;
 
-            this.translateX_min = constrainerOffset.left - ( movableOffset.left - this.initialXY.x ) - halfWidth;
-            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( movableOffset.left - this.initialXY.x ) + this.$movable.outerWidth () ) + halfWidth;
+            this.translateX_min = constrainerRect.left - ( movableRect.left - this.initialXY.x ) - halfWidth;
+            this.translateX_max = constrainerRect.left + constrainerRect.width - ( ( movableRect.left - this.initialXY.x ) + movableRect.width ) + halfWidth;
 
           }
 
           if ( this.options.axis !== 'x' ) {
 
-            let halfHeight = this.options.constrainer.center ? this.$movable.outerHeight () / 2 : 0;
+            let halfHeight = this.options.constrainer.center ? movableRect.height / 2 : 0;
 
-            this.translateY_min = constrainerOffset.top - ( movableOffset.top - this.initialXY.y ) - halfHeight;
-            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( movableOffset.top - this.initialXY.y ) + this.$movable.outerHeight () ) + halfHeight;
+            this.translateY_min = constrainerRect.top - ( movableRect.top - this.initialXY.y ) - halfHeight;
+            this.translateY_max = constrainerRect.top + constrainerRect.height - ( ( movableRect.top - this.initialXY.y ) + movableRect.height ) + halfHeight;
 
           }
 
