@@ -17,5 +17,7 @@ $icon-path-fonts: $path-fonts !default;
 /* CDN */
 
 $icon-font-cdn: false !default;
+$icon-font-cdn-eot: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.eot" !default;
+$icon-font-cdn-ttf: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.ttf" !default;
 $icon-font-cdn-woff: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.woff" !default;
 $icon-font-cdn-woff2: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.woff2" !default;

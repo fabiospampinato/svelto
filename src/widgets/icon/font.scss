@@ -14,10 +14,10 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: local('Material Icons'),
-         local('MaterialIcons-Regular'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff2#{$revision}) format('woff2'),
-         url(#{$icon-path-fonts}MaterialIcons-Regular.woff#{$revision}) format('woff');
+    src: url(#{$icon-path-fonts}MaterialIcons-Regular.woff2#{$revision}) format('woff2'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.woff#{$revision}) format('woff'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.ttf#{$revision}) format('truetype'),
+         url(#{$icon-path-fonts}MaterialIcons-Regular.eot#{$revision}) format('eot');
   }
 
 } @else if $icon-font-cdn {
@@ -26,10 +26,10 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: local('Material Icons'),
-         local('MaterialIcons-Regular'),
-         url(#{$icon-font-cdn-woff2}) format('woff2'),
-         url(#{$icon-font-cdn-woff}) format('woff');
+    src: url(#{$icon-font-cdn-woff2}) format('woff2'),
+         url(#{$icon-font-cdn-woff}) format('woff'),
+         url(#{$icon-font-cdn-eot}) format('eot'),
+         url(#{$icon-font-cdn-ttf}) format('truetype');
   }
 
 }
