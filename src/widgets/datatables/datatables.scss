@@ -96,6 +96,12 @@
 
 }
 
+/* STATIC USELESS LABEL */
+
+.datatable-length > label {
+  position: static;
+}
+
 /* EMPTY ROW */
 
 .datatable-row-empty {
