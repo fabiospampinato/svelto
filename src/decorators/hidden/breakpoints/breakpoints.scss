@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* HIDDEN-*-UP/DOWN */
+/* HIDDEN-*UP/DOWN/ONLY */
 
 @each $breakpoint, $value in $breakpoints {
 
@@ -27,6 +27,16 @@
   @include media-breakpoint-down ( $breakpoint ) {
 
     .hidden-#{$class}-down {
+      display: none !important;
+    }
+
+  }
+
+  /* ONLY */
+
+  @include media-breakpoint-only ( $breakpoint ) {
+
+    .hidden-#{$class}-only {
       display: none !important;
     }
 
