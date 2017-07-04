@@ -78,11 +78,11 @@
 
     }
 
-    _remoteState ( resj ) {
+    _remoteState ( state ) {
 
-      if ( resj.state === this.options.state ) return;
+      if ( state === this.options.state ) return;
 
-      this.options.state = resj.state;
+      this.options.state = state;
 
       this._update ();
 
@@ -124,7 +124,7 @@
 
       let resj = $.ajaxParseResponse ( res );
 
-      if ( resj ) return this.__error ( res );
+      if ( !resj ) return this.__error ( res );
 
       this._success ( resj );
 
