@@ -122,7 +122,7 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = $.ajaxResponseGet ( res );
+      let resj = $.ajaxParseResponse ( res );
 
       if ( resj ) return this.__error ( res );
 
