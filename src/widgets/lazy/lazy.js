@@ -1,0 +1,64 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Lazy
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.js
+ * @require ./worker.js
+ * ========================================================================= */
+
+(function ( $, _, Svelto, Widgets, Factory, LazyWorker ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'lazy',
+    options: {
+      datas: {
+        group: 'group'
+      },
+      callbacks: {
+        load: _.noop
+      }
+    }
+  };
+
+  /* LAZY */
+
+  class Lazy extends Widgets.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.group = this.$element.data ( this.options.datas.group );
+
+    }
+
+    _init () {
+
+      LazyWorker.add ( this, this.$element, this.group );
+
+    }
+
+    /* API */
+
+    load () {
+
+      this._trigger ( 'load' );
+
+      this.destroy ();
+
+    }
+
+  }
+
+  /* FACTORY */
+
+  Factory.make ( Lazy, config );
+
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.LazyWorker ));
