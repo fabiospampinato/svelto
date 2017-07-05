@@ -176,7 +176,7 @@
       this.startEvent = event;
       this.$startElement = this._getEventElement ( event );
 
-      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move ) );
+      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move.bind ( this ) ) );
 
       this._one ( true, $.$document, Pointer.up, this.__up );
 

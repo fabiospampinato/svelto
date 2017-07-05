@@ -163,7 +163,7 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
+      this._on ( true, $.$window, 'resize', this._frames ( this._updateNavigation.bind ( this ) ) );
 
     }
 
@@ -171,7 +171,7 @@
 
     ___scroll () {
 
-      this._on ( true, this.$content, 'scroll', this._frames ( this._updateNavigation, Math.max ( this.options.animations.scroll || 60 ) ) );
+      this._on ( true, this.$content, 'scroll', this._frames ( this._updateNavigation.bind ( this ) ) );
 
     }
 

@@ -200,7 +200,7 @@
 
       if ( this.options.magnification.enabled ) return;
 
-      this._on ( true, $.$window.add ( this.$zoomable.parents () ), 'scroll', this._frames ( this.__scroll, 60 ) );
+      this._on ( true, $.$window.add ( this.$zoomable.parents () ), 'scroll', this._frames ( this.__scroll.bind ( this ) ) );
 
     }
 
@@ -214,7 +214,7 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._frames ( this.__resize, 60 ) );
+      this._on ( true, $.$window, 'resize', this._frames ( this.__resize.bind ( this ) ) );
 
     }
 
@@ -228,7 +228,7 @@
 
     ___move () {
 
-      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move ) );
+      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move.bind ( this ) ) );
 
     }
 

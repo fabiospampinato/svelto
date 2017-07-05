@@ -95,7 +95,7 @@
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
 
-      this.__doMove = this._frames ( this.__doMove ); // For performance reasons
+      this.__doMove = this._frames ( this.__doMove.bind ( this ) ); // For performance reasons
 
     }
 

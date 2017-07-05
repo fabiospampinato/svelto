@@ -8,6 +8,7 @@
  * @before ./constants.js
  * @before ./find_matches.js
  * @before ./format.js
+ * @before ./frames.js
  * @before ./mkize.js
  * @before ./move.js
  * @before ./now_secs.js

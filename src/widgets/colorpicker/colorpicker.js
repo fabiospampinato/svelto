@@ -181,7 +181,7 @@
         },
         callbacks: {
           start: this.__sbDragStart.bind ( this ),
-          move: this._frames ( this.__sbDragMove.bind ( this ), 60 ),
+          move: this._frames ( this.__sbDragMove.bind ( this ) ),
           end: this.__sbDragEnd.bind ( this )
         }
       });
@@ -273,7 +273,7 @@
         },
         callbacks: {
           start: this.__hueDragStart.bind ( this ),
-          move: this._frames ( this.__hueDragMove.bind ( this ), 60 ),
+          move: this._frames ( this.__hueDragMove.bind ( this ) ),
           end: this.__hueDragEnd.bind ( this )
         }
       });
