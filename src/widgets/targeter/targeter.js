@@ -19,6 +19,7 @@
     options: {
       widget: false, // The target's widget class
       target: false, // Selector used to select the target
+      $fallback: false, // Fallback jQuery element
       datas: {
         target: 'target'
       }
@@ -35,21 +36,13 @@
 
       this._targetSelector = this.options.target || this.$element.data ( this.options.datas.target );
 
-      this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
+      this.$target = this._targetSelector
+                       ? $(this._targetSelector)
+                       : this.options.widget
+                         ? this.$element.closest ( this.options.widget.config.selector )
+                         : this.options.$fallback;
 
-      if ( !this.$target.length ) {
-
-        if ( this.options.$fallback && this.options.$fallback.length ) {
-
-          this.$target = this.options.$fallback;
-
-        }  else {
-
-          return false;
-
-        }
-
-      }
+      if ( !this.$target.length ) return false;
 
       this.target = this.$target[0];
 
