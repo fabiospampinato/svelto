@@ -410,7 +410,7 @@
 
     pin () {
 
-      if ( this._isPinned ) return;
+      if ( this.isLocked () || this._isPinned ) return;
 
       this._isPinned = true;
 
@@ -434,7 +434,7 @@
 
     unpin () {
 
-      if ( !this._isOpen || !this._isPinned ) return;
+      if ( this.isLocked () || !this._isOpen || !this._isPinned ) return;
 
       this._isPinned = false;
 
