@@ -1,0 +1,15 @@
+{
+  "terminals": [
+    {
+      "name": "Gulp",
+      "command": "gulp build --fresh && gulp watch"
+    },
+    {
+      "name": "Demo",
+      "commands": [
+        "cd demo",
+        "meteor run"
+      ]
+    }
+  ]
+}
