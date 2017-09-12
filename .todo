@@ -1,5 +1,6 @@
 
 Now:
+  ☐ tagbox: tag on empty partial input should do nothing
   ☐ export some modules to github/npm
   ☐ remote loader: if it fails, retry! (N times?)
   ☐ input autocomplete plugin (like typeahead.js)
@@ -16,6 +17,8 @@ Next:
   ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
 
 Future:
+  ☐ compile using webpack and proper imports
+    ☐ or just parse requires somehow
   ☐ use emojione v3
   ☐ [widget] add better support for updating after options are set at runtime
   ☐ adding `@require`s to extenders (.before, .after) doesn't work, since they get moved after... maybe we should move left or right the one more to the left in the dependencies list instead...
