@@ -14,7 +14,7 @@ $subscriber-inner-gutter: $label-inner-gutter + .23em !default; //FIXME: A littl
 
 /* ICON */
 
-$subscriber-icon: 'rss_feed' !default;
+$subscriber-icon: icon( 'rss' ) !default;
 $subscriber-icon-active-color: $color-secondary !default;
 
 /* TOGGLE */

@@ -6,10 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require lib/emojify/emojify.js
+ * @require widgets/icon/icon.js
  * @require widgets/storable/storable.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, EmojiData, Emoji ) {
+(function ( $, _, Svelto, Widgets, Factory, Icon, Pointer, EmojiData, Emoji ) {
 
   'use strict';
 
@@ -32,10 +33,10 @@
                   '<% } %>' +
                 '</div>',
       trigger: '<div class="button" title="<%= o.category.title %>">' +
-                 '<i class="icon"><%= o.category.icon %></i>' +
+                 '<i class="icon"><%= Svelto.Icon ( o.category.icon ) %></i>' +
                '</div>',
       triggerMain: '<div class="button" title="Search & Frequent">' +
-                     '<i class="icon">access_time</i>' +
+                     `<i class="icon">${Icon ( 'clock' )}</i>` +
                    '</div>',
       containers: '<div class="tabs-containers emojipicker-containers card-block">' +
                     '<% print ( self.containerMain ( o ) ) %>' +
@@ -523,4 +524,4 @@
 
   Factory.make ( Emojipicker, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.EmojiData, Svelto.Emoji ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Icon, Svelto.Pointer, Svelto.EmojiData, Svelto.Emoji ));

@@ -9,6 +9,25 @@
  * @require core/paths/variables.scss
  * ========================================================================= */
 
+/* ICON */
+
+$icons: (
+  'checkbox-off': 'check_box_outline_blank',
+  'checkbox-on': 'check_box',
+  'chevron-left': 'chevron_left',
+  'chevron-right': 'chevron_right',
+  'radiobox-off': 'radio_button_unchecked',
+  'radiobox-on': 'radio_button_checked',
+  'rss': 'rss_feed',
+  'star-half': 'star_half',
+  'star-off': 'star_border',
+  'star-on': 'star',
+  'thumb-down': 'thumb_down',
+  'thumb-up': 'thumb_up',
+  'triangle-down': 'arrow_drop_down',
+  'triangle-up': 'arrow_drop_up'
+) !default; // Maps each icon to its ligature/html entity, required for a  custom icon font
+
 /* LOCAL */
 
 $icon-font-local: true !default;
@@ -21,3 +40,11 @@ $icon-font-cdn-eot: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3
 $icon-font-cdn-ttf: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.ttf" !default;
 $icon-font-cdn-woff: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.woff" !default;
 $icon-font-cdn-woff2: "//cdn.rawgit.com/google/material-design-icons/a6145e167b4a3a65640dd6279319cbc77a7e4e96/iconfont/MaterialIcons-Regular.woff2" !default;
+
+/* FUNCTIONS */ //FIXME: Should be in a `functions.scss` file
+
+@function icon ( $name ) {
+
+  @return map-get( $icons, $name );
+
+}

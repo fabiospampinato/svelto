@@ -35,7 +35,7 @@ function dec2char ( dec ) {
 
 const categories = ['People',           'Nature',            'Foods',          'Activity',       'Places',          'Objects',       'Symbols',  'Flags'],
       titles     = ['Smileys & People', 'Animals & Nature',  'Food & Drink',   'Activity',       'Travel & Places', 'Objects',       'Symbols',  'Flags'],
-      icons      = ['insert_emoticon',  'pets',              'restaurant',     'fitness_center', 'directions_car',  'devices_other', 'favorite', 'flag'],
+      icons      = ['emoticon',         'paw',               'cutlery',        'gym',            'car',             'objects',       'heart',    'flag'],
       data       = { categories: [], tones: {} },
       indexes    = {};
 

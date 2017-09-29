@@ -25,13 +25,13 @@ $carousel-inset-previous-next-hover-opacity: $carousel-indicator-hover-opacity !
 
 $carousel-inset-previous-width: 20% !default;
 
-$carousel-inset-previous-icon: 'chevron_left' !default;
+$carousel-inset-previous-icon: icon( 'chevron-left' ) !default;
 
 /* NEXT */
 
 $carousel-inset-next-width: 100% - $carousel-inset-previous-width !default;
 
-$carousel-inset-next-icon: 'chevron_right' !default;
+$carousel-inset-next-icon: icon( 'chevron-right' ) !default;
 
 /* ANIMATION */
 

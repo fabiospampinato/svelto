@@ -14,6 +14,6 @@ $rater-star-active-color: $color-secondary !default;
 
 /* ICONS */
 
-$star-off-icon: 'star_border' !default;
-$star-half-icon: 'star_half' !default;
-$star-on-icon: 'start' !default;
+$star-on-icon: icon( 'star-on' ) !default;
+$star-off-icon: icon( 'star-off' ) !default;
+$star-half-icon: icon( 'star-half' ) !default;

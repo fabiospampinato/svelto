@@ -6,12 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require core/keyboard/keyboard.js
+ * @require widgets/icon/icon.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 
-(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, Pointer, Keyboard ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Icon, Sizes, Pointer, Keyboard ) {
 
   'use strict';
 
@@ -26,7 +27,7 @@
              '<span>' +
                '<%= o.value %>' +
              '</span>' +
-             `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">close</i>` +
+             `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">${Icon ( 'close' )}</i>` +
            '</div>'
     },
     options: {
@@ -527,4 +528,4 @@
 
   Factory.make ( Tagbox, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Icon, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));

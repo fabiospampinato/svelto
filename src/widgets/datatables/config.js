@@ -7,11 +7,12 @@
  * =========================================================================
  * @before ./vendor/datatables.js
  * @require core/svelto/svelto.js
+ * @require widgets/icon/icon.js
  * ========================================================================= */
 
 /* DATATABLES */
 
-(function ( $, _, Svelto, DataTable ) {
+(function ( $, _, Svelto, Icon, DataTable ) {
 
   'use strict';
 
@@ -47,15 +48,15 @@
     sInfoEmpty: 'No entries to show',
     sInfoFiltered: ' (_MAX_ total)',
     sLengthMenu: '_MENU_<label>Show <strong><span class="select-value">10</span></strong> entries</label>',
-    sSearch: '<div class="multiple joined no-separators">_INPUT_<div class="label compact bordered"><i class="icon">search</i></div></div>',
+    sSearch: `<div class="multiple joined no-separators">_INPUT_<div class="label compact bordered"><i class="icon">${Icon ( 'search' )}</i></div></div>`,
     sSearchPlaceholder: 'Search...'
   });
 
   _.extend ( DataTable.defaults.oLanguage.oPaginate, {
-    sFirst: '<i class="icon">first_page</i>',
-    sPrevious: '<i class="icon">chevron_left</i>',
-    sNext: '<i class="icon">chevron_right</i>',
-    sLast: '<i class="icon">last_page</i>'
+    sFirst: `<i class="icon">${Icon ( 'page-first' )}</i>`,
+    sPrevious: `<i class="icon">${Icon ( 'chevron-left' )}</i>`,
+    sNext: `<i class="icon">${Icon ( 'chevron-right' )}</i>`,
+    sLast: `<i class="icon">${Icon ( 'page-last' )}</i>`
   });
 
   _.extend ( DataTable.ext.classes, {
@@ -170,7 +171,7 @@
 				switch ( button ) {
 
 					case 'ellipsis':
-						btnText = '<i class="icon">more_horiz</i>';
+						btnText = `<i class="icon">${Icon ( 'dots-horizontal' )}</i>`;
             break;
 
 					case 'first':
@@ -241,4 +242,4 @@
 
   Svelto.DataTable = DataTable;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.$.fn.dataTable ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Icon, Svelto.$.fn.dataTable ));

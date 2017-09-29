@@ -14,5 +14,5 @@ $select-z-index: 200 !default;
 
 $select-inner-gutter: $checkbox-inner-gutter !default;
 
-$select-icon-closed: 'arrow_drop_down' !default;
-$select-icon-open: 'arrow_drop_up' !default;
+$select-icon-closed: icon( 'triangle-down' ) !default;
+$select-icon-open: icon( 'triangle-up' ) !default;

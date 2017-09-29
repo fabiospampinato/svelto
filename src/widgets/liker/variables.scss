@@ -31,12 +31,12 @@ $liker-label-hover-opacity: $liker-icon-hover-opacity !default;
 
 /* LIKE */
 
-$liker-like-icon: 'thumb_up' !default;
+$liker-like-icon: icon( 'thumb-up' ) !default;
 $liker-like-text-on: 'Like' !default;
 $liker-like-text-off: 'Remove Like' !default;
 
 /* DISLIKE */
 
-$liker-dislike-icon: 'thumb_down' !default;
+$liker-dislike-icon: icon( 'thumb-down' ) !default;
 $liker-dislike-text-on: 'Dislike' !default;
 $liker-dislike-text-off: 'Remove Dislike' !default;

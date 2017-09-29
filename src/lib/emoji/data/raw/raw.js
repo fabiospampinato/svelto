@@ -5,7 +5,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "People",
       "title": "Smileys & People",
-      "icon": "insert_emoticon",
+      "icon": "emoticon",
       "emojis": [
         {
           "name": "Grinning Face",
@@ -96,7 +96,7 @@ Svelto.EmojiDataRaw = {
             ";)",
             ";-)"
           ],
-          "tags": ";),;-),face,happy,mischievous,secret,smile,wink,winking",
+          "tags": ";),;-),eye,face,happy,mischievous,secret,smile,wink,winking",
           "id": "wink",
           "char": "😉",
           "x": 1090
@@ -118,15 +118,15 @@ Svelto.EmojiDataRaw = {
             "(:",
             ":-)"
           ],
+          "tags": "(:,:),:-),face,slightly,smile,smiling",
           "id": "slightly_smiling_face",
-          "tags": "(:,:),:-),face,slightly,smiling",
           "char": "🙂",
           "x": 1147
         },
         {
           "name": "Upside-Down Face",
+          "tags": "down,face,flipped,silly,smile,upside",
           "id": "upside_down_face",
-          "tags": "down,face,upside",
           "char": "🙃",
           "x": 1148
         },
@@ -225,15 +225,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Money-Mouth Face",
+          "tags": "dollar,face,money,mouth,rich",
           "id": "money_mouth_face",
-          "tags": "face,money,mouth",
           "char": "🤑",
           "x": 1314
         },
         {
           "name": "Nerd Face",
+          "tags": "dork,face,geek,nerd,nerdy",
           "id": "nerd_face",
-          "tags": "face,nerd",
           "char": "🤓",
           "x": 1316
         },
@@ -377,8 +377,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Slightly Frowning Face",
+          "tags": "disappointed,face,frowning,sad,slightly,upset",
           "id": "slightly_frowning_face",
-          "tags": "face,frowning,slightly",
           "char": "🙁",
           "x": 1146
         },
@@ -539,8 +539,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Zipper-Mouth Face",
+          "tags": "face,mouth,sealed,secret,zipper",
           "id": "zipper_mouth_face",
-          "tags": "face,mouth,zipper",
           "char": "🤐",
           "x": 1313
         },
@@ -553,15 +553,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Face with Thermometer",
+          "tags": "cold,face,fever,sick,temperature,thermometer,with",
           "id": "face_with_thermometer",
-          "tags": "face,thermometer,with",
           "char": "🤒",
           "x": 1315
         },
         {
           "name": "Face with Head-Bandage",
+          "tags": "bandage,clumsy,face,head,hurt,injured,with",
           "id": "face_with_head_bandage",
-          "tags": "bandage,face,head,with",
           "char": "🤕",
           "x": 1318
         },
@@ -574,19 +574,19 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Sleeping Symbol",
-          "tags": "sleeping,sleepy,symbol,tired,zzz",
+          "tags": "dream,sleeping,sleepy,symbol,tired,zzz",
           "id": "zzz",
           "char": "💤",
           "x": 831
         },
         {
           "name": "Pile of Poo",
-          "tags": "fail,hankey,of,pile,poo,poop,poop,shit,shit,shitface,turd",
           "id": "hankey",
           "alts": [
             "poop",
             "shit"
           ],
+          "tags": "hankey,of,pile,poo,poop,shit",
           "char": "💩",
           "x": 836
         },
@@ -727,7 +727,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Waving Hand Sign",
-          "tags": "farewell,gesture,goodbye,hand,hands,hello,palm,sign,solong,wave,waving",
+          "tags": "farewell,gesture,goodbye,hand,hands,hello,hi,palm,sign,solong,wave,waving",
           "id": "wave",
           "tones": 1,
           "char": "👋",
@@ -792,12 +792,12 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Raised Hand",
-          "tags": "ban,fingers,hand,highfive,palm,raised,raised hand,raised,hand,stop",
           "id": "hand",
           "tones": 1,
           "alts": [
             "raised_hand"
           ],
+          "tags": "hand,raised,raised,hand",
           "char": "✋",
           "x": 138
         },
@@ -867,20 +867,20 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Reversed Hand with Middle Finger Extended",
-          "tags": "extended,finger,fingers,hand,middle,reversed,reversed,hand,with,middle,finger,extended,rude,with",
           "id": "middle_finger",
           "tones": 1,
           "alts": [
             "reversed_hand_with_middle_finger_extended"
           ],
+          "tags": "extended,finger,hand,middle,reversed,reversed,hand,with,middle,finger,extended,with",
           "char": "🖕",
           "x": 1044
         },
         {
           "name": "Raised Hand with Fingers Splayed",
+          "tags": "fingers,hand,palm,raised,splayed,with",
           "id": "raised_hand_with_fingers_splayed",
           "tones": 1,
-          "tags": "fingers,hand,raised,splayed,with",
           "char": "🖐",
           "x": 1038
         },
@@ -905,7 +905,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Writing Hand",
-          "tags": "hand,pen,stationery,write,writing",
+          "tags": "compose,hand,lower left ballpoint pen,stationery,write,writing",
           "id": "writing_hand",
           "tones": 1,
           "char": "✍",
@@ -1026,9 +1026,9 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Person with Blond Hair",
-          "tags": "blond,blonde,boy,guy,hair,male,man,person,with",
           "id": "person_with_blond_hair",
           "tones": 1,
+          "tags": "blond,hair,person,with",
           "char": "👱",
           "x": 705
         },
@@ -1066,17 +1066,17 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Police Officer",
-          "tags": "911,arrest,cop,enforcement,law,legal,man,officer,police",
           "id": "cop",
           "tones": 1,
+          "tags": "cop,officer,police",
           "char": "👮",
           "x": 692
         },
         {
           "name": "Construction Worker",
-          "tags": "build,construction,guy,human,labor,male,wip,worker",
           "id": "construction_worker",
           "tones": 1,
+          "tags": "construction,worker",
           "char": "👷",
           "x": 741
         },
@@ -1130,20 +1130,20 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Pedestrian",
-          "tags": "feet,human,pedestrian,steps,walking",
           "id": "walking",
           "tones": 1,
+          "tags": "pedestrian,walking",
           "char": "🚶",
           "x": 1270
         },
         {
           "name": "Runner",
-          "tags": "exercise,man,race,runner,running,running,walking",
           "id": "runner",
           "tones": 1,
           "alts": [
             "running"
           ],
+          "tags": "runner,running",
           "char": "🏃",
           "x": 419
         },
@@ -1157,8 +1157,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Woman with Bunny Ears",
-          "tags": "bunny,dancers,ears,female,girls,with,woman,women",
           "id": "dancers",
+          "tags": "bunny,dancers,ears,with,woman",
           "char": "👯",
           "x": 698
         },
@@ -1188,25 +1188,25 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Person Bowing Deeply",
-          "tags": "bow,bowing,boy,deeply,male,man,person",
           "id": "bow",
           "tones": 1,
+          "tags": "bow,bowing,deeply,person",
           "char": "🙇",
           "x": 1162
         },
         {
           "name": "Information Desk Person",
-          "tags": "desk,female,girl,human,information,person,woman",
           "id": "information_desk_person",
           "tones": 1,
+          "tags": "desk,information,person",
           "char": "💁",
           "x": 766
         },
         {
           "name": "Face with No Good Gesture",
-          "tags": "face,female,gesture,girl,good,no,nope,with,woman",
           "id": "no_good",
           "tones": 1,
+          "tags": "face,gesture,good,no,with",
           "char": "🙅",
           "x": 1150
         },
@@ -1220,48 +1220,48 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Happy Person Raising One Hand",
-          "tags": "female,girl,hand,happy,one,person,raising,woman",
           "id": "raising_hand",
           "tones": 1,
+          "tags": "hand,happy,one,person,raising",
           "char": "🙋",
           "x": 1171
         },
         {
           "name": "Person with Pouting Face",
-          "tags": "face,female,girl,person,pouting,with,woman",
           "id": "person_with_pouting_face",
           "tones": 1,
+          "tags": "face,person,pouting,with",
           "char": "🙎",
           "x": 1189
         },
         {
           "name": "Person Frowning",
-          "tags": "depressed,discouraged,female,frowning,girl,person,sad,unhappy,woman",
           "id": "person_frowning",
           "tones": 1,
+          "tags": "frowning,person",
           "char": "🙍",
           "x": 1183
         },
         {
           "name": "Haircut",
-          "tags": "female,girl,haircut,woman",
           "id": "haircut",
           "tones": 1,
+          "tags": "haircut",
           "char": "💇",
           "x": 797
         },
         {
           "name": "Face Massage",
-          "tags": "face,female,girl,head,massage,woman",
           "id": "massage",
           "tones": 1,
+          "tags": "face,massage",
           "char": "💆",
           "x": 791
         },
         {
           "name": "Couple with Heart",
-          "tags": "affection,couple,dating,heart,human,like,love,marriage,pair,valentines,with",
           "id": "couple_with_heart",
+          "tags": "couple,heart,with",
           "char": "💑",
           "x": 812
         },
@@ -1281,8 +1281,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Kiss",
-          "tags": "couplekiss,dating,kiss,like,love,marriage,pair,valentines",
           "id": "couplekiss",
+          "tags": "couplekiss,kiss",
           "char": "💏",
           "x": 810
         },
@@ -1302,11 +1302,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Family",
-          "tags": "child,dad,family,father,home,human,man woman boy,mom,mother,parents,people",
           "id": "family",
           "alts": [
             "man-woman-boy"
           ],
+          "tags": "family,man woman boy",
           "char": "👪",
           "x": 688
         },
@@ -1410,18 +1410,18 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Womans Clothes",
-          "tags": "clothes,fashion,female,shopping,womans",
+          "tags": "clothes,fashion,female,shopping bags,womans",
           "id": "womans_clothes",
           "char": "👚",
           "x": 652
         },
         {
           "name": "T-Shirt",
-          "tags": "casual,cloth,fashion,shirt,t,tee,tshirt,tshirt",
           "id": "shirt",
           "alts": [
             "tshirt"
           ],
+          "tags": "shirt,t,tshirt",
           "char": "👕",
           "x": 647
         },
@@ -1626,7 +1626,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Nature",
       "title": "Animals & Nature",
-      "icon": "pets",
+      "icon": "paw",
       "emojis": [
         {
           "name": "Dog Face",
@@ -1644,7 +1644,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Mouse Face",
-          "tags": "animal,cheese,face,mouse,nature,rodent",
+          "tags": "animal,cheese wedge,face,mouse,nature,rodent",
           "id": "mouse",
           "char": "🐭",
           "x": 542
@@ -1693,8 +1693,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Lion Face",
-          "tags": "animal,face,lion,nature",
           "id": "lion_face",
+          "tags": "face,lion",
           "char": "🦁",
           "x": 1328
         },
@@ -1836,18 +1836,18 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Unicorn Face",
-          "tags": "animal,face,mystical,nature,unicorn",
           "id": "unicorn_face",
+          "tags": "face,unicorn",
           "char": "🦄",
           "x": 1331
         },
         {
           "name": "Honeybee",
-          "tags": "animal,bee,bug,honey,honeybee,honeybee,insect,nature,spring",
           "id": "bee",
           "alts": [
             "honeybee"
           ],
+          "tags": "bee,honeybee,honeybee",
           "char": "🐝",
           "x": 526
         },
@@ -2017,7 +2017,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Elephant",
-          "tags": "animal,circus,elephant,nature,nose,thailand",
+          "tags": "animal,circus,elephant,nature,nose,th",
           "id": "elephant",
           "char": "🐘",
           "x": 521
@@ -2087,8 +2087,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Dove of Peace",
-          "tags": "animal,bird,dove,of,peace",
           "id": "dove_of_peace",
+          "tags": "dove,of,peace",
           "char": "🕊",
           "x": 990
         },
@@ -2129,11 +2129,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Paw Prints",
-          "tags": "animal,cat,dog,feet,footprints,paw,paw prints,paw,prints,pet,prints,tracking",
           "id": "feet",
           "alts": [
             "paw_prints"
           ],
+          "tags": "feet,paw,paw,prints,prints",
           "char": "🐾",
           "x": 559
         },
@@ -2244,7 +2244,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Maple Leaf",
-          "tags": "canada,fall,leaf,maple,nature,plant,vegetable",
+          "tags": "ca,fall,leaf,maple,nature,plant,vegetable",
           "id": "maple_leaf",
           "char": "🍁",
           "x": 289
@@ -2412,11 +2412,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Waxing Gibbous Moon Symbol",
-          "tags": "evening,gibbous,gray,moon,nature,night,planet,sky,sleep,space,symbol,twilight,waxing,waxing,gibbous,moon",
           "id": "moon",
           "alts": [
             "waxing_gibbous_moon"
           ],
+          "tags": "gibbous,moon,symbol,waxing,waxing,gibbous,moon",
           "char": "🌔",
           "x": 246
         },
@@ -2557,8 +2557,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Thunder Cloud and Rain",
-          "tags": "and,cloud,lightning,rain,thunder,weather",
           "id": "thunder_cloud_and_rain",
+          "tags": "and,cloud,rain,thunder",
           "char": "⛈",
           "x": 104
         },
@@ -2626,8 +2626,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Wind Blowing Face",
-          "tags": "air,blowing,face,gust,wind",
           "id": "wind_blowing_face",
+          "tags": "blowing,face,wind",
           "char": "🌬",
           "x": 268
         },
@@ -2640,11 +2640,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Cloud with Tornado",
+          "tags": "cloud,cyclone,tornado,tornado,cloud,twister,weather,with",
           "id": "tornado",
           "alts": [
             "tornado_cloud"
           ],
-          "tags": "cloud,tornado,tornado,cloud,with",
           "char": "🌪",
           "x": 266
         },
@@ -2695,7 +2695,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Foods",
       "title": "Food & Drink",
-      "icon": "restaurant",
+      "icon": "cutlery",
       "emojis": [
         {
           "name": "Green Apple",
@@ -2839,8 +2839,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Cheese Wedge",
-          "tags": "chadder,cheese,food,wedge",
           "id": "cheese_wedge",
+          "tags": "cheese,wedge",
           "char": "🧀",
           "x": 1332
         },
@@ -2867,7 +2867,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Cooking",
-          "tags": "breakfast,cooking,egg,food,kitchen",
+          "tags": "breakfast,chicken,cooking,egg,food",
           "id": "egg",
           "char": "🍳",
           "x": 339
@@ -2888,8 +2888,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Hot Dog",
+          "tags": "dog,food,frankfurter,hot,hotdog",
           "id": "hotdog",
-          "tags": "dog,hot,hotdog",
           "char": "🌭",
           "x": 269
         },
@@ -3119,8 +3119,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Bottle with Popping Cork",
+          "tags": "bottle,celebration,champagne,cork,drink,popping,wine,with",
           "id": "champagne",
-          "tags": "bottle,champagne,cork,popping,with",
           "char": "🍾",
           "x": 350
         },
@@ -3171,7 +3171,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Activity",
       "title": "Activity",
-      "icon": "fitness_center",
+      "icon": "gym",
       "emojis": [
         {
           "name": "Soccer Ball",
@@ -3238,8 +3238,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Golfer",
-          "tags": "business,golfer,sports",
           "id": "golfer",
+          "tags": "golfer",
           "char": "🏌",
           "x": 448
         },
@@ -3322,25 +3322,25 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Rowboat",
-          "tags": "hobby,rowboat,ship,sports,water",
           "id": "rowboat",
           "tones": 1,
+          "tags": "rowboat",
           "char": "🚣",
           "x": 1236
         },
         {
           "name": "Swimmer",
-          "tags": "athlete,exercise,human,sports,summer,swimmer,water",
           "id": "swimmer",
           "tones": 1,
+          "tags": "swimmer",
           "char": "🏊",
           "x": 436
         },
         {
           "name": "Surfer",
-          "tags": "beach,ocean,sea,sports,summer,surfer",
           "id": "surfer",
           "tones": 1,
+          "tags": "surfer",
           "char": "🏄",
           "x": 425
         },
@@ -3354,33 +3354,33 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Person with Ball",
-          "tags": "ball,human,person,sports,with",
           "id": "person_with_ball",
           "tones": 1,
+          "tags": "ball,person,with",
           "char": "⛹",
           "x": 120
         },
         {
           "name": "Weight Lifter",
-          "tags": "exercise,lifter,sports,training,weight",
           "id": "weight_lifter",
           "tones": 1,
+          "tags": "lifter,weight",
           "char": "🏋",
           "x": 442
         },
         {
           "name": "Bicyclist",
-          "tags": "bicyclist,bike,exercise,hipster,sports",
           "id": "bicyclist",
           "tones": 1,
+          "tags": "bicyclist",
           "char": "🚴",
           "x": 1258
         },
         {
           "name": "Mountain Bicyclist",
-          "tags": "bicyclist,bike,human,mountain,race,sports,transportation",
           "id": "mountain_bicyclist",
           "tones": 1,
+          "tags": "bicyclist,mountain",
           "char": "🚵",
           "x": 1264
         },
@@ -3414,8 +3414,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Sports Medal",
-          "tags": "award,medal,sports,winning",
           "id": "sports_medal",
+          "tags": "medal,sports",
           "char": "🏅",
           "x": 431
         },
@@ -3477,7 +3477,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Microphone",
-          "tags": "microphone,music,pa,sound",
+          "tags": "microphone,music,pa,sing,sound,talkshow",
           "id": "microphone",
           "char": "🎤",
           "x": 388
@@ -3491,14 +3491,14 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Musical Score",
-          "tags": "clef,musical,score,treble",
+          "tags": "clef,compose,musical,score,treble",
           "id": "musical_score",
           "char": "🎼",
           "x": 412
         },
         {
           "name": "Musical Keyboard",
-          "tags": "instrument,keyboard,musical,piano",
+          "tags": "compose,instrument,keyboard,musical,piano",
           "id": "musical_keyboard",
           "char": "🎹",
           "x": 409
@@ -3585,15 +3585,15 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Places",
       "title": "Travel & Places",
-      "icon": "directions_car",
+      "icon": "car",
       "emojis": [
         {
           "name": "Automobile",
-          "tags": "automobile,car,red,red,car,transportation,vehicle",
           "id": "car",
           "alts": [
             "red_car"
           ],
+          "tags": "automobile,car,red,car",
           "char": "🚗",
           "x": 1224
         },
@@ -3683,8 +3683,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Racing Motorcycle",
-          "tags": "fast,motorcycle,race,racing,sports",
           "id": "racing_motorcycle",
+          "tags": "motorcycle,racing",
           "char": "🏍",
           "x": 449
         },
@@ -3858,8 +3858,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Airplane Departure",
-          "tags": "airplane,airport,departure,flight,landing",
           "id": "airplane_departure",
+          "tags": "airplane,departure",
           "char": "🛫",
           "x": 1309
         },
@@ -3872,11 +3872,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Sailboat",
-          "tags": "boat,sailboat,sailboat,sailing,ship,summer,transportation,water",
           "id": "boat",
           "alts": [
             "sailboat"
           ],
+          "tags": "boat,sailboat,sailboat",
           "char": "⛵",
           "x": 117
         },
@@ -4057,8 +4057,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Snow Capped Mountain",
-          "tags": "capped,cold,environment,mountain,nature,photo,snow,winter",
           "id": "snow_capped_mountain",
+          "tags": "capped,mountain,snow",
           "char": "🏔",
           "x": 456
         },
@@ -4141,8 +4141,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Beach with Umbrella",
-          "tags": "beach,mojito,sand,summer,sunny,umbrella,weather,with",
           "id": "beach_with_umbrella",
+          "tags": "beach,umbrella,with",
           "char": "🏖",
           "x": 458
         },
@@ -4218,7 +4218,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Rainbow",
-          "tags": "happy,nature,photo,rainbow,sky,spring,unicorn",
+          "tags": "happy,nature,photo,rainbow,sky,spring,unicorn face",
           "id": "rainbow",
           "char": "🌈",
           "x": 234
@@ -4295,7 +4295,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Japanese Post Office",
-          "tags": "building,communication,email,japanese,office,post",
+          "tags": "building,communication,envelope,japanese,office,post",
           "id": "post_office",
           "char": "🏣",
           "x": 471
@@ -4358,8 +4358,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Classical Building",
+          "tags": "art,building,classical,culture,history",
           "id": "classical_building",
-          "tags": "building,classical",
           "char": "🏛",
           "x": 463
         },
@@ -4403,7 +4403,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Objects",
       "title": "Objects",
-      "icon": "devices_other",
+      "icon": "objects",
       "emojis": [
         {
           "name": "Watch",
@@ -4456,8 +4456,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Three Button Mouse",
-          "tags": "button,click,mouse,three",
           "id": "three_button_mouse",
+          "tags": "button,mouse,three",
           "char": "🖱",
           "x": 1058
         },
@@ -4477,8 +4477,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Compression",
-          "tags": "compression,tool",
           "id": "compression",
+          "tags": "compression",
           "char": "🗜",
           "x": 1067
         },
@@ -4526,8 +4526,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Camera with Flash",
-          "tags": "camera,flash,gadgets,photography,with",
           "id": "camera_with_flash",
+          "tags": "camera,flash,with",
           "char": "📸",
           "x": 920
         },
@@ -4554,8 +4554,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Film Frames",
-          "tags": "film,frames,movie",
           "id": "film_frames",
+          "tags": "film,frames",
           "char": "🎞",
           "x": 382
         },
@@ -4606,7 +4606,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Studio Microphone",
-          "tags": "artist,microphone,recording,singer,studio",
+          "tags": "artist,microphone,recording,sing,studio,talkshow",
           "id": "studio_microphone",
           "char": "🎙",
           "x": 379
@@ -4781,8 +4781,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Scales",
-          "tags": "fairness,law,scales,weight",
           "id": "scales",
+          "tags": "scales",
           "char": "⚖",
           "x": 89
         },
@@ -4868,8 +4868,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Dagger Knife",
-          "tags": "dagger,knife,weapon",
           "id": "dagger_knife",
+          "tags": "dagger,knife",
           "char": "🗡",
           "x": 1070
         },
@@ -5050,8 +5050,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Sleeping Accommodation",
-          "tags": "accommodation,bed,rest,sleeping",
           "id": "sleeping_accommodation",
+          "tags": "accommodation,sleeping",
           "char": "🛌",
           "x": 1297
         },
@@ -5078,8 +5078,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Frame with Picture",
-          "tags": "frame,photography,picture,with",
           "id": "frame_with_picture",
+          "tags": "frame,picture,with",
           "char": "🖼",
           "x": 1060
         },
@@ -5092,8 +5092,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Umbrella on Ground",
-          "tags": "ground,on,summer,umbrella,weather",
           "id": "umbrella_on_ground",
+          "tags": "ground,on,umbrella",
           "char": "⛱",
           "x": 113
         },
@@ -5106,8 +5106,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Shopping Bags",
-          "tags": "bags,buy,mall,purchase,shopping",
           "id": "shopping_bags",
+          "tags": "bags,shopping",
           "char": "🛍",
           "x": 1298
         },
@@ -5148,7 +5148,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Party Popper",
-          "tags": "birthday,circus,contulations,magic,party,popper,tada",
+          "tags": "birthday,celebration,circus,congratulations,magic,party,popper,tada",
           "id": "tada",
           "char": "🎉",
           "x": 366
@@ -5186,7 +5186,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Envelope",
-          "tags": "communication,email,envelope,envelope,inbox",
+          "tags": "communication,email,envelope,envelope,inbox,letter,postal",
           "id": "email",
           "alts": [
             "envelope"
@@ -5210,8 +5210,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "E-Mail Symbol",
+          "tags": "communication,e,inbox,mail,symbol",
           "id": "e-mail",
-          "tags": "e,mail,symbol",
           "char": "📧",
           "x": 903
         },
@@ -5350,8 +5350,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Spiral Calendar Pad",
-          "tags": "calendar,date,pad,planning,schedule,spiral",
           "id": "spiral_calendar_pad",
+          "tags": "calendar,pad,spiral",
           "char": "🗓",
           "x": 1066
         },
@@ -5371,8 +5371,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Ballot Box with Ballot",
-          "tags": "ballot,box,election,vote,with",
           "id": "ballot_box_with_ballot",
+          "tags": "ballot,box,with",
           "char": "🗳",
           "x": 1074
         },
@@ -5392,8 +5392,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Spiral Note Pad",
-          "tags": "memo,note,pad,spiral,stationery",
           "id": "spiral_note_pad",
+          "tags": "note,pad,spiral",
           "char": "🗒",
           "x": 1065
         },
@@ -5420,8 +5420,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Rolled-Up Newspaper",
-          "tags": "headline,newspaper,press,rolled,up",
           "id": "rolled_up_newspaper",
+          "tags": "newspaper,rolled,up",
           "char": "🗞",
           "x": 1069
         },
@@ -5490,11 +5490,11 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Open Book",
-          "tags": "book,knowledge,learn,library,literature,open,open book,open,book,read,study",
           "id": "book",
           "alts": [
             "open_book"
           ],
+          "tags": "book,open,open,book",
           "char": "📖",
           "x": 886
         },
@@ -5514,8 +5514,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Linked Paperclips",
-          "tags": "documents,linked,paperclips,stationery",
           "id": "linked_paperclips",
+          "tags": "linked,paperclips",
           "char": "🖇",
           "x": 1033
         },
@@ -5563,15 +5563,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Waving White Flag",
-          "tags": "fail,flag,give up,loser,losing,lost,surrender,waving,white",
           "id": "waving_white_flag",
+          "tags": "flag,waving,white",
           "char": "🏳",
           "x": 485
         },
         {
           "name": "Waving Black Flag",
-          "tags": "black,flag,pirate,waving",
           "id": "waving_black_flag",
+          "tags": "black,flag,waving",
           "char": "🏴",
           "x": 486
         },
@@ -5605,15 +5605,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Lower Left Ballpoint Pen",
-          "tags": "ballpoint,left,lower,pen,stationery,write,writing",
           "id": "lower_left_ballpoint_pen",
+          "tags": "ballpoint,left,lower,pen",
           "char": "🖊",
           "x": 1034
         },
         {
           "name": "Lower Left Fountain Pen",
-          "tags": "fountain,left,lower,pen,stationery,write,writing",
           "id": "lower_left_fountain_pen",
+          "tags": "fountain,left,lower,pen",
           "char": "🖋",
           "x": 1035
         },
@@ -5626,7 +5626,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Memo",
-          "tags": "documents,exam,legal,memo,paper,pencil,pencil,quiz,stationery,study,test,write,writing",
+          "tags": "compose,documents,exam,legal,memo,paper,pencil,pencil,quiz,stationery,study,test,write,writing",
           "id": "memo",
           "alts": [
             "pencil"
@@ -5643,15 +5643,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Lower Left Crayon",
-          "tags": "crayon,creativity,drawing,left,lower",
           "id": "lower_left_crayon",
+          "tags": "crayon,left,lower",
           "char": "🖍",
           "x": 1037
         },
         {
           "name": "Lower Left Paintbrush",
-          "tags": "art,creativity,drawing,left,lower,paintbrush",
           "id": "lower_left_paintbrush",
+          "tags": "left,lower,paintbrush",
           "char": "🖌",
           "x": 1036
         },
@@ -5674,7 +5674,7 @@ Svelto.EmojiDataRaw = {
     {
       "name": "Symbols",
       "title": "Symbols",
-      "icon": "favorite",
+      "icon": "heart",
       "emojis": [
         {
           "name": "Heavy Black Heart",
@@ -5738,8 +5738,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Heavy Heart Exclamation Mark Ornament",
-          "tags": "decoration,exclamation,heart,heavy,love,mark,ornament",
           "id": "heavy_heart_exclamation_mark_ornament",
+          "tags": "exclamation,heart,heavy,mark,ornament",
           "char": "❣",
           "x": 173
         },
@@ -5822,8 +5822,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Om Symbol",
-          "tags": "buddhism,hinduism,jainism,om,sikhism,symbol",
           "id": "om_symbol",
+          "tags": "om,symbol",
           "char": "🕉",
           "x": 989
         },
@@ -5850,8 +5850,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Menorah with Nine Branches",
-          "tags": "branches,candles,hanukkah,jewish,menorah,nine,with",
           "id": "menorah_with_nine_branches",
+          "tags": "branches,menorah,nine,with",
           "char": "🕎",
           "x": 994
         },
@@ -5997,15 +5997,15 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Radioactive Sign",
-          "tags": "danger,nuclear,radioactive,sign",
           "id": "radioactive_sign",
+          "tags": "radioactive,sign",
           "char": "☢",
           "x": 58
         },
         {
           "name": "Biohazard Sign",
-          "tags": "biohazard,danger,sign",
           "id": "biohazard_sign",
+          "tags": "biohazard,sign",
           "char": "☣",
           "x": 59
         },
@@ -6413,7 +6413,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "White Heavy Check Mark",
-          "tags": "agree,answer,check,election,green square,heavy,mark,ok,vote,white",
+          "tags": "agree,answer,check,election,green square,heavy,mark,ok,tick,vote,white",
           "id": "white_check_mark",
           "char": "✅",
           "x": 129
@@ -6707,8 +6707,8 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Keycap Star",
-          "tags": "asterisk,keycap,star",
           "id": "keycap_star",
+          "tags": "keycap,star",
           "char": "*⃣",
           "x": 1334
         },
@@ -6728,22 +6728,22 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Double Vertical Bar",
-          "tags": "bar,blue square,double,pause,vertical",
           "id": "double_vertical_bar",
+          "tags": "bar,double,vertical",
           "char": "⏸",
           "x": 29
         },
         {
           "name": "Black Right-Pointing Triangle with Double Vertical Bar",
-          "tags": "bar,black,blue square,double,forward,next,pointing,right,triangle,vertical,with",
           "id": "black_right_pointing_triangle_with_double_vertical_bar",
+          "tags": "bar,black,double,pointing,right,triangle,vertical,with",
           "char": "⏯",
           "x": 24
         },
         {
           "name": "Black Square for Stop",
-          "tags": "black,blue square,for,square,stop",
           "id": "black_square_for_stop",
+          "tags": "black,for,square,stop",
           "char": "⏹",
           "x": 30
         },
@@ -6756,22 +6756,22 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Black Circle for Record",
-          "tags": "black,blue square,circle,for,record",
           "id": "black_circle_for_record",
+          "tags": "black,circle,for,record",
           "char": "⏺",
           "x": 31
         },
         {
           "name": "Black Right-Pointing Double Triangle with Vertical Bar",
-          "tags": "bar,black,blue square,double,pause,play,pointing,right,triangle,vertical,with",
           "id": "black_right_pointing_double_triangle_with_vertical_bar",
+          "tags": "bar,black,double,pointing,right,triangle,vertical,with",
           "char": "⏭",
           "x": 22
         },
         {
           "name": "Black Left-Pointing Double Triangle with Vertical Bar",
-          "tags": "backward,bar,black,double,left,pointing,triangle,vertical,with",
           "id": "black_left_pointing_double_triangle_with_vertical_bar",
+          "tags": "bar,black,double,left,pointing,triangle,vertical,with",
           "char": "⏮",
           "x": 23
         },
@@ -7134,7 +7134,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Ballot Box with Check",
-          "tags": "agree,ballot,black square,box,check,confirm,election,ok,vote,with,yes",
+          "tags": "agree,ballot,black square,box,check,confirm,election,ok,tick,vote,with,yes",
           "id": "ballot_box_with_check",
           "char": "☑",
           "x": 47
@@ -7393,7 +7393,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Thought Balloon",
-          "tags": "balloon,bubble,cloud,speech,thinking,thought",
+          "tags": "balloon,bubble,cloud,dream,speech,thinking,thought",
           "id": "thought_balloon",
           "char": "💭",
           "x": 845
