@@ -64,6 +64,8 @@
       this._usingSelectionToggler = !!this.options.selectors.selectionToggler;
       this.options.selectors.selectionToggler = this._usingSelectionToggler ? this.options.selectors.element + ' ' + this.options.selectors.selectionToggler : this.options.selectors.element;
 
+      this.__move = this._frames ( this.__move.bind ( this ) ); // For performance reasons
+
     }
 
     _events () {
@@ -176,7 +178,7 @@
       this.startEvent = event;
       this.$startElement = this._getEventElement ( event );
 
-      this._on ( true, $.$document, Pointer.move, this._frames ( this.__move.bind ( this ) ) );
+      this._on ( true, $.$document, Pointer.move, this.__move );
 
       this._one ( true, $.$document, Pointer.up, this.__up );
 
