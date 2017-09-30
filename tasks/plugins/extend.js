@@ -13,15 +13,16 @@
 const _       = require ( 'lodash' ),
       path    = require ( 'path' ),
       through = require ( 'through2' ),
-      gutil   = require ( 'gulp-util' );
+      gutil   = require ( 'gulp-util' ),
+      fileU   = require ( '../utilities/file' );
 
 /* UTILITIES */
 
 function getFilePaths ( file ) {
 
-  const relative  = file.relative,
-        basename  = path.basename ( relative ),
-        dirs      = relative.substr ( 0, relative.indexOf ( basename ) ),
+  const module    = fileU.file2module ( file ),
+        basename  = path.basename ( module ),
+        dirs      = module.substr ( 0, module.indexOf ( basename ) ),
         ext       = path.extname ( basename ),
         fullname  = basename.substr ( 0, basename.indexOf ( ext ) ),
         nameParts = fullname.split ( '.' ),
@@ -29,7 +30,7 @@ function getFilePaths ( file ) {
         suffix    = nameParts.length > 1 ? _.last ( nameParts ) : '';
 
   return {
-    relative,
+    module,
     dirs,
     basename,
     fullname,

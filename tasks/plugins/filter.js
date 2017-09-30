@@ -11,7 +11,8 @@
 const _       = require ( 'lodash' ),
       through = require ( 'through2' ),
       gutil   = require ( 'gulp-util' ),
-      project = require ( '../config/project' );
+      project = require ( '../config/project' ),
+      fileU   = require ( '../utilities/file' );
 
 /* COMPONENTS */
 
@@ -49,8 +50,8 @@ function parseComponents ( obj, prefix ) {
 
 function needsFiltering ( components, file ) {
 
-  const relative = file.relative.replace ( /\\\\/g, '/' ).replace ( /\/\//g, '/' ),
-        maxPriority = relative.split ( '/' ).length;
+  const module = fileU.file2module ( file ),
+        maxPriority = module.split ( '/' ).length;
 
   let priority = 0,
       needs = false;
@@ -61,7 +62,7 @@ function needsFiltering ( components, file ) {
 
       const newPriority = component.split ( '/' ).length;
 
-      if ( newPriority > priority && newPriority <= maxPriority && _.startsWith ( relative, component ) ) {
+      if ( newPriority > priority && newPriority <= maxPriority && _.startsWith ( module, component ) ) {
 
         priority = newPriority;
         needs = !components[component];

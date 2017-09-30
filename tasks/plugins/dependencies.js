@@ -11,7 +11,8 @@
 const _       = require ( 'lodash' ),
       path    = require ( 'path' ),
       through = require ( 'through2' ),
-      gutil   = require ( 'gulp-util' );
+      gutil   = require ( 'gulp-util' ),
+      fileU   = require ( '../utilities/file' );
 
 /* UTILITIES */
 
@@ -35,7 +36,7 @@ function getMatches ( string, regex ) {
 
 function getFileTargets ( file, regex ) {
 
-  const dirname = path.dirname ( file.relative ),
+  const dirname = path.dirname ( fileU.file2module ( file ) ),
         content = file.contents.toString ( 'utf8' ),
         targets = getMatches ( content, regex );
 
@@ -60,7 +61,7 @@ function getGraph ( files, config ) {
     graph[file.path] = {
       file: file,
       path: file.path,
-      module: file.relative,
+      module: fileU.file2module ( file ),
       befores: getFileTargets ( file, config.before ),
       requires: getFileTargets ( file, config.require )
     };

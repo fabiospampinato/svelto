@@ -8,9 +8,10 @@
 
 /* REQUIRE */
 
-const _   = require ( 'lodash' ),
-      fs  = require ( 'fs' ),
-      rdf = require ( 'require-dot-file' );
+const _    = require ( 'lodash' ),
+      fs   = require ( 'fs' ),
+      path = require ( 'path' ),
+      rdf  = require ( 'require-dot-file' );
 
 /* FILE */
 
@@ -33,6 +34,18 @@ const file = {
   write ( path, content ) {
 
     fs.writeFileSync ( path, JSON.stringify ( content ) );
+
+  },
+
+  file2module ( file ) { //TODO: Maybe implement some caching mechanism
+
+    const cwd = process.cwd (),
+          roots = require ( '../config/project' ).paths.input.roots, // In order to avoid a cyclic dependency
+          absRoots = roots.map ( root => path.isAbsolute ( root ) ? root : path.resolve ( cwd, root ) ),
+          absRootRe = new RegExp ( `^(${absRoots.map ( _.escapeRegExp ).join ( '|' )})\/?` );
+
+    return file.path.replace ( /[\\|/]+/g, '/' )
+                    .replace ( absRootRe, '' );
 
   }
 
