@@ -128,7 +128,7 @@ function workerOverride ( partition, paths, config ) {
     remove: 1,
     callback: function ( base, overrider ) {
       if ( config.log ) {
-        console.log ( '`' + overrider.path + '` has overridden `' + base.path + '`' );
+        console.log ( '"' + overrider.path + '" has overridden "' + base.path + '"' );
       }
       overrider.path = base.path;
     }
