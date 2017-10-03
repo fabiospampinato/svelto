@@ -54,37 +54,50 @@
 
       this.groups = {};
 
+      this.__scroll = _.frames ( this.__scroll.bind ( this ) );
+      this.__resize = _.frames ( this.__resize.bind ( this ) );
+
+    }
+
+    /* EVENTS */
+
+    ___events () {
+
+      if ( this._eventsOn ) return;
+
+      this._eventsOn = true;
+
+      $.$document.on ( 'scroll', this.__scroll );
+      $.$window.on ( 'resize', this.__resize );
+
+    }
+
+    ___events_off () {
+
+      if ( !this._eventsOn ) return;
+
+      this._eventsOn = false;
+
+      $.$document.off ( 'scroll', this.__scroll );
+      $.$window.off ( 'resize', this.__resize );
+
     }
 
     /* SCROLL */
-
-    ___scroll () {
-
-      if ( this._scrollId ) return;
-
-      this._scrollId = true;
-
-      this.__throttledScroll = this.__throttledScroll || _.frames ( this.__scroll.bind ( this ) );
-
-      $.$document.on ( 'scroll', this.__throttledScroll );
-
-    }
-
-    ___scroll_off () {
-
-      if ( !this._scrollId ) return;
-
-      this._scrollId = false;
-
-      $.$document.off ( 'scroll', this.__throttledScroll );
-
-    }
 
     __scroll ( event ) {
 
       this.process ( this._scrolled ? this.options.multipliers.scroll : this.options.multipliers.firstScroll );
 
       this._scrolled = true;
+
+    }
+
+    /* RESIZE */
+
+    __resize () {
+
+      this.process ();
 
     }
 
@@ -193,7 +206,7 @@
 
       }
 
-      this[hasLeftovers ? '___scroll' : '___scroll_off']();
+      this[hasLeftovers ? '___events' : '___events_off']();
 
     }
 
