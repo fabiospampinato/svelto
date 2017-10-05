@@ -135,7 +135,7 @@
 
     __request () {
 
-      if ( this.$loader.getRect ().top - $.window.innerHeight > this.options.autorequest.threshold ) return;
+      if ( this.isDisabled () || this.$loader.getRect ().top - $.window.innerHeight > this.options.autorequest.threshold ) return;
 
       this.request ();
 
