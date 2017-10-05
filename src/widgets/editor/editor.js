@@ -27,7 +27,7 @@
     plugin: true,
     selector: '.editor',
     options: {
-      parentUnfullscreenEvents: 'popover:close modal:close panel:close', //FIXME: Ugly
+      parentUnfullscreenEvents: 'popover:close modal:close panel:close chatmessageeditable:unedit chatmessagereplyable:unreply chatmessagereplyablereply:unreply', //FIXME: Ugly
       parser: window.marked || _.identity,
       storage: {
         enabled: false, // Whether to preserve the content across refreshes/sessions
@@ -101,7 +101,7 @@
       },
       selectors: {
         actions: '[data-action]',
-        fullscreenable: '.card, .modal, .panel, .popover',
+        fullscreenable: '.card, .chat, .chat-message-content, .modal, .panel, .popover',
         preview: '.editor-preview',
         textarea: 'textarea',
         form: 'form',
