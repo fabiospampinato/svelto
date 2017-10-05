@@ -1,0 +1,37 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Editable
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * ========================================================================= */
+
+.chat-message.editable {
+
+  /* EDITING */
+
+  &.editing {
+
+    /* HIDE */
+
+    .editable-hide {
+      display: none;
+    }
+
+  }
+
+  /* NOT EDITING */
+
+  &:not(.editing) {
+
+    /* SHOW */
+
+    .editable-show {
+      display: none;
+    }
+
+  }
+
+}
