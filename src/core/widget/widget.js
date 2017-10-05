@@ -747,7 +747,7 @@
               method = _.isArray ( toCall ) ? toCall[0] : toCall,
               args   = _.isArray ( toCall ) ? _.castArray ( toCall[1] ) : [];
 
-          if ( this[method].apply ( this, args ) !== false ) {
+          if ( this[method].apply ( this, args ) !== null ) {
 
             event.preventDefault ();
             event.stopImmediatePropagation ();

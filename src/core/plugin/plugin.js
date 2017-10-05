@@ -30,7 +30,7 @@
 
           let returnValue = instance[options]( ...args );
 
-          if ( !_.isUndefined ( returnValue ) ) return returnValue;
+          if ( !_.isNil ( returnValue ) ) return returnValue;
 
         }
 

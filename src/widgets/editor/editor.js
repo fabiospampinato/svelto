@@ -220,7 +220,7 @@
 
     __esc () {
 
-      if ( !this.isFullscreen () ) return false;
+      if ( !this.isFullscreen () ) return null;
 
       this.unfullscreen ();
 
