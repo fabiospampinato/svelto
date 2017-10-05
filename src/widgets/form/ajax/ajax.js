@@ -160,7 +160,7 @@
 
               location.assign ( resj.url );
 
-            } else {
+            } else if ( !resj.noop ) {
 
               $.toast ( resj.message || this.options.messages.success );
 

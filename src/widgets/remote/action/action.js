@@ -193,7 +193,7 @@
 
           location.assign ( resj.url );
 
-        } else {
+        } else if ( !resj.noop ) {
 
           this._replaceToast ( resj.message || this.options.messages.success );
 
