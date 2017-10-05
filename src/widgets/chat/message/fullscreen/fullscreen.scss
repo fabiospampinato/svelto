@@ -1,0 +1,42 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Chat - Message - Fullscreen
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require ../message.scss
+ * ========================================================================= */
+
+//FIXME: Doesn't work properly inside a nested layout (shouldn't influence the parent layouts)
+//TODO: Add a demo for this under `widgets/editor` and `widgets/chat`
+
+/* FULLSCREEN */
+
+.chat-message-content.fullscreen,
+.chat-message-content.fullscreen-request {
+  border-width: 0;
+  border-radius: 0;
+  margin: 0 !important;
+  max-width: none;
+  width: 100%;
+  max-height: none;
+  height: 100%;
+}
+
+/* VERTICAL SHRINKING FIX (IE-10/11) */
+
+html.flexbox-tweener {
+
+  .chat-message-content.fullscreen,
+  .chat-message-content.fullscreen-request {
+
+    /* CARD */
+
+    &.card > .card-block {
+      max-height: none;
+    }
+
+  }
+
+}
