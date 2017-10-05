@@ -22,6 +22,7 @@
     selector: '.remote-loader',
     options: {
       target: false, // Selector pointing to the element that cointains the content
+      wrap: true, // Wrap the content into a `.remote-loaded` element
       autorequest: {
         threshold: 400
       },
@@ -39,7 +40,8 @@
         href: 'href' // In order to better support `a` elements (the data value has higher priority)
       },
       classes: {
-        preload: 'preload'
+        preload: 'preload',
+        nowrap: 'no-wrap'
       },
       datas: {
         url: 'url',
@@ -71,6 +73,7 @@
       this.options.ajax.data = this.$loader.data ( this.options.datas.data ) || this.options.ajax.data;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
       this.options.target = this.$loader.data ( this.options.datas.target ) || this.options.target;
+      this.options.wrap = this.$loader.hasClass ( this.options.classes.nowrap ) ? false : this.options.wrap;
 
       if ( this.options.target ) {
 
@@ -97,17 +100,20 @@
 
       let content = isJSON ? resj.html : res,
           id = `remote-loaded-${$.guid++}`,
-          container = `<div id="${id}" class="remote-loaded">${content}</div>`;
+          contentWrapped = `<div id="${id}" class="remote-loaded">${content}</div>`,
+          html = this.options.wrap ? contentWrapped : content,
+          $loader = this.$loader.first (),
+          $loaderWrp = $loader.parent ();
 
-      this.$loader[0].outerHTML = container;
+      $loader[0].outerHTML = html;
 
-      let $loaded = $(`#${id}`);
+      let $container = this.options.wrap ? $(`#${id}`) : $loaderWrp;
 
-      $loaded.widgetize ();
+      $container.widgetize ();
 
-      Autofocus.focus ( $loaded );
+      Autofocus.focus ( $container );
 
-      this.$loader.remove ();
+      $loader.remove ();
 
       this._replaced = true;
 
