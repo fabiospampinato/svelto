@@ -53,7 +53,7 @@
 
     send () {
 
-      if ( !$.isFocused ( this.textarea ) ) return;
+      if ( !$.isFocused ( this.textarea ) ) return null;
 
       this.$form.submit ();
 
