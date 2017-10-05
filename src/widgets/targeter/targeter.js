@@ -34,7 +34,7 @@
 
     _variables () {
 
-      this._targetSelector = this.options.target || this.$element.data ( this.options.datas.target );
+      this._targetSelector = this.options.target || this.$element.data ( `${this.options.widget.config.name.toLowerCase ()}-${this.options.datas.target}` ) || this.$element.data ( this.options.datas.target );
 
       this.$target = this._targetSelector
                        ? $(this._targetSelector)
