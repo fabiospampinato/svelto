@@ -32,6 +32,10 @@ const plugins = {
       compact: false
     }
   },
+  babili: {
+    enabled: false,
+    options: {}
+  },
   closure: {
     enabled: false,
     options: {

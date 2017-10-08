@@ -45,6 +45,7 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.1",
+    "gulp-babili": "^0.1.4",
     "gulp-bump": "^2.6.1",
     "gulp-bytediff": "^1.0.0",
     "gulp-concat": "^2.6.0",
