@@ -175,7 +175,8 @@
 
       if ( this.isAborted () ) return;
 
-      let resj = await fetch.getValue ( res );
+      let resj = await fetch.getValue ( res ),
+          destroyDelay = true;
 
       if ( resj ) {
 
@@ -193,7 +194,11 @@
 
           location.assign ( resj.url );
 
-        } else if ( !resj.noop ) {
+        } else if ( resj.noop ) {
+
+          destroyDelay = false;
+
+        } else {
 
           this._replaceToast ( resj.message || this.options.messages.success );
 
@@ -205,7 +210,7 @@
 
       }
 
-      this._destroyToast ( true );
+      this._destroyToast ( destroyDelay );
 
       super.__success ( res );
 
