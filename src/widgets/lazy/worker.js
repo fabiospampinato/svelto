@@ -114,7 +114,7 @@
              eRect.bottom >= -deltaY &&
              eRect.left - wRect.width <= deltaX &&
              eRect.right >= -deltaX;
-            //  $element.is ( ':visible' ); //FIXME: We should load it only when needed (for instance when its tab becomes active, if this is the case
+            //  $element.isVisible (); //FIXME: We should load it only when needed (for instance when its tab becomes active, if this is the case
 
     }
 

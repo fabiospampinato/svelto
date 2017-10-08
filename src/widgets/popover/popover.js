@@ -131,7 +131,7 @@
 
       if ( !this.$anchor || !$.contains ( event.target, this.$anchor[0] ) ) return;
 
-      if ( this.$anchor.is ( ':visible' ) ) {
+      if ( this.$anchor.isVisible () ) {
 
         this._positionate ();
 

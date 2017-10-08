@@ -30,7 +30,7 @@
   let config = {
     name: 'dt',
     plugin: true,
-    selector: 'table.datatable:visible',
+    selector: 'table.datatable',
     options: {
       select: false, // Select rows, even after a draw occurs -- basically supporting deferred loading
       /*
@@ -64,7 +64,7 @@
 
     static widgetize ( $ele ) {
 
-      $ele.dataTable ().dt ();
+      $ele.filter ( ( i, ele ) => $.isVisible ( ele ) ).dataTable ().dt ();
 
     }
 

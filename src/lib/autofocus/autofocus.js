@@ -64,7 +64,7 @@
 
     find ( $parent = $html, focused ) {
 
-      let $focusable = $parent.find ( '[autofocus], .autofocus' ).filter ( ':visible' );
+      let $focusable = $parent.find ( '[autofocus], .autofocus' ).filter ( ( i, ele ) => $.isVisible ( ele ) );
 
       if ( _.isBoolean ( focused ) ) {
 
@@ -92,7 +92,7 @@
 
       if ( !Autofocus.enabled || !Autofocus.history[0] || !$.contains ( $parent[0], Autofocus.history[0] ) ) return;
 
-      let previous = Autofocus.history.find ( ele => $(ele).is ( ':visible' ) ) || Autofocus.find ( $html );
+      let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $html );
 
       if ( previous ) Autofocus.set ( previous );
 

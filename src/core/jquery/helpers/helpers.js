@@ -16,6 +16,7 @@
  * @before ./hsl.js
  * @before ./is_attached.js
  * @before ./is_focused.js
+ * @before ./is_visible.js
  * @before ./iterator.js
  * @before ./scroll.js
  * @before ./selection.js
