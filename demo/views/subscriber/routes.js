@@ -4,9 +4,9 @@
 Router.route ( '/subscriber-update', function () {
 
   let body = this.request.body,
-      counter = Number ( body['current[counter]'] ),
-      prevState = JSON.parse ( body['current[state]'] || null ),
-      state = JSON.parse ( body.state || null );
+      counter = Number ( body.current.counter ),
+      prevState = body.current.state,
+      state = body.state;
 
   if ( state !== prevState ) {
     if ( state === true ) counter++;

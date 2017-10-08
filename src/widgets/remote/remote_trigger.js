@@ -24,7 +24,7 @@
       },
       datas: {
         url: 'url',
-        data: 'data',
+        body: 'body',
         method: 'method'
       },
       callbacks: {
@@ -50,7 +50,7 @@
     _init () {
 
       this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
-      this.options.ajax.data = this.$trigger.data ( this.options.datas.data ) || this.options.ajax.data;
+      this.options.ajax.body = this.$trigger.data ( this.options.datas.body ) || this.options.ajax.data;
       this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
 
     }

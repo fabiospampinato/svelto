@@ -7,9 +7,10 @@
  * =========================================================================
  * @before ./raw/raw.js
  * @require core/svelto/svelto.js
+ * @require lib/fetch/fetch.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, EmojiDataRaw ) {
+(function ( $, _, Svelto, EmojiDataRaw, fetch ) {
 
   'use strict';
 
@@ -86,7 +87,7 @@
 
     async getRemoteRaw () {
 
-      return $.uniqueAjax ( 'EmojiDataRaw', EmojiData._rawUrl );
+      return ( await fetch ( EmojiData._rawUrl ) ).json ();
 
     },
 
@@ -116,4 +117,4 @@
 
   Svelto.EmojiData = EmojiData;
 
-}( Svelto.$, Svelto._, Svelto, Svelto.EmojiDataRaw ));
+}( Svelto.$, Svelto._, Svelto, Svelto.EmojiDataRaw, Svelto.fetch ));

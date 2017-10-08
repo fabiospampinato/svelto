@@ -17,7 +17,7 @@
 //FIXME: Not well written, maybe try to extend RemoteWidget, even though it was ment for a different kind of widgets
 //FIXME: Clicking an error/success toast doesn't close it
 
-(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, fetch ) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
       closingDelay: Widgets.Toast.config.options.ttl / 2,
       ajax: {
         cache: false,
-        method: 'POST'
+        method: 'post'
       },
       confirmation: { // Options to pass to a confirmation toast, if falsy or `buttons.length === 0` we won't ask for confirmation. If a button as `isConfirmative` it will be used for confirmation, otherwise the last one will be picked
         body: 'Execute action?',
@@ -147,21 +147,21 @@
 
     /* REQUEST HANDLERS */
 
-    __beforesend ( res ) {
+    __beforesend ( req ) {
 
       if ( this.isAborted () ) return;
 
       this.___loadingToast ();
 
-      super.__beforesend ( res );
+      super.__beforesend ( req );
 
     }
 
-    __error ( res ) {
+    async __error ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
 
       this._replaceToast ( message );
 
@@ -171,11 +171,11 @@
 
     }
 
-    __success ( res ) {
+    async __success ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let resj = $.ajaxParseResponse ( res );
+      let resj = await fetch.getValue ( res );
 
       if ( resj ) {
 
@@ -241,4 +241,4 @@
 
   Factory.make ( RemoteAction, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.fetch ));

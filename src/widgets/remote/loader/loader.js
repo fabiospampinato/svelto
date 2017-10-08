@@ -10,7 +10,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Autofocus ) {
+(function ( $, _, Svelto, Widgets, Factory, Autofocus, fetch ) {
 
   'use strict';
 
@@ -45,7 +45,7 @@
       },
       datas: {
         url: 'url',
-        data: 'data',
+        body: 'body',
         method: 'method',
         target: 'target'
       }
@@ -70,7 +70,7 @@
 
       this.options.preloading.enabled = this.$loader.hasClass ( this.options.classes.preload ) || this.options.preloading.enabled;
       this.options.ajax.url = this.$loader.data ( this.options.datas.url ) || this.$loader.attr ( this.options.attributes.href ) || this.options.ajax.url;
-      this.options.ajax.data = this.$loader.data ( this.options.datas.data ) || this.options.ajax.data;
+      this.options.ajax.body = this.$loader.data ( this.options.datas.body ) || this.options.ajax.body;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
       this.options.target = this.$loader.data ( this.options.datas.target ) || this.options.target;
       this.options.wrap = this.$loader.hasClass ( this.options.classes.nowrap ) ? false : this.options.wrap;
@@ -96,9 +96,9 @@
 
     /* UTILITIES */
 
-    _replace ( res, resj, isJSON ) {
+    async _replace ( res, resj, isJSON ) {
 
-      let content = isJSON ? resj.html : res,
+      let content = isJSON ? resj.html : ( _.isString ( res ) ? res : await res.text () ),
           id = `remote-loaded-${$.guid++}`,
           contentWrapped = `<div id="${id}" class="remote-loaded">${content}</div>`,
           html = this.options.wrap ? contentWrapped : content,
@@ -143,19 +143,11 @@
 
     /* REQUEST HANDLERS */
 
-    __complete ( res ) {
-
-      this._preloading = false;
-
-      super.__complete ( res );
-
-    }
-
-    __error ( res ) {
+    async __error ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
 
       $.toast ( message );
 
@@ -165,11 +157,11 @@
 
     }
 
-    __success ( res ) {
+    async __success ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let resj = $.ajaxParseResponse ( res ),
+      let resj = await fetch.getValue ( res ),
           isJSON = !!resj;
 
       if ( isJSON && !('html' in resj) ) return this.__error ( res );
@@ -189,6 +181,14 @@
         this._replace ( res, resj, isJSON );
 
       }
+
+    }
+
+    __complete ( res ) {
+
+      this._preloading = false;
+
+      super.__complete ( res );
 
     }
 
@@ -230,4 +230,4 @@
 
   Factory.make ( RemoteLoader, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus, Svelto.fetch ));

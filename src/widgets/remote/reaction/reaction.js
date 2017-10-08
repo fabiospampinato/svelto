@@ -9,7 +9,7 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, fetch ) {
 
   'use strict';
 
@@ -24,7 +24,7 @@
       url: false, // Submit the reaction to this url
       ajax: {
         cache: false,
-        method: 'POST'
+        method: 'post'
       },
       datas: {
         state: 'state',
@@ -60,17 +60,19 @@
 
     /* REMOTE STATE */
 
-    ___remoteState () {
+    async ___remoteState () {
 
       if ( !this.options.stateUrl ) return;
 
-      $.get ( this.options.stateUrl, this.__remoteState.bind ( this ) );
+      let res = await fetch ( this.options.stateUrl );
+
+      this.__remoteState ( res );
 
     }
 
-    __remoteState ( res ) {
+    async __remoteState ( res ) {
 
-      let state = $.ajaxResponseGet ( res, 'state' );
+      let state = await fetch.getValue ( res, 'state' );
 
       if ( _.isNull ( state ) ) return;
 
@@ -98,19 +100,19 @@
 
     /* REQUEST HANDLERS */
 
-    __beforesend ( res ) {
+    __beforesend ( req ) {
 
       this.disable ();
 
-      return super.__beforesend ( res );
+      return super.__beforesend ( req );
 
     }
 
-    __error ( res ) {
+    async __error ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
 
       $.toast ( message );
 
@@ -118,11 +120,11 @@
 
     }
 
-    __success ( res ) {
+    async __success ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let resj = $.ajaxParseResponse ( res );
+      let resj = await fetch.getValue ( res );
 
       if ( !resj ) return this.__error ( res );
 
@@ -166,8 +168,8 @@
 
       let current = this.get (),
           ajax = {
-            data: { current, state },
-            url: this.options.url || this.options.ajax.url
+            url: this.options.url || this.options.ajax.url,
+            body: {current, state},
           };
 
       return this.request ( ajax );
@@ -186,4 +188,4 @@
 
   Factory.make ( RemoteReaction, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.fetch ));

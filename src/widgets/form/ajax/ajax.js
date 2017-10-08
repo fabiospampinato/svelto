@@ -7,13 +7,14 @@
  * =========================================================================
  * @before ../validate/validate.js
  * @require core/svelto/svelto.js
+ * @require lib/fetch/fetch.js
  * @require widgets/toast/toast.js
  * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Widgets, Factory, fetch ) {
 
   'use strict';
 
@@ -108,89 +109,91 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      $.ajax ({
-
-        cache: false,
-        contentType: false,
-        data: new FormData ( this.form ),
-        processData: false,
-        timeout: this.options.timeout,
-        type: this.$form.attr ( 'method' ) || 'POST',
+      fetch ({
         url: this.$form.attr ( 'action' ),
+        method: this.$form.attr ( 'method' ) || 'post',
+        body: new FormData ( this.form ),
+        cache: false,
+        timeout: this.options.timeout,
+        beforesend: this.__beforesend.bind ( this ),
+        error: this.__error.bind ( this ),
+        success: this.__success.bind ( this ),
+        complete: this.__complete.bind ( this )
+      });
 
-        beforeSend: () => {
+    }
 
-          if ( this.options.spinnerOverlay ) {
+    /* REQUEST HANDLERS */
 
-            this.$form.spinnerOverlay ( 'open' );
+    __beforesend ( req ) {
 
-          }
+      if ( this.options.spinnerOverlay ) {
 
-          this._trigger ( 'beforesend' );
+        this.$form.spinnerOverlay ( 'open' );
 
-        },
+      }
 
-        error: ( res ) => {
+      this._trigger ( 'beforesend', req );
 
-          let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
+    }
 
-          $.toast ( message );
+    async __error ( res ) {
 
-          this._trigger ( 'error' );
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
 
-        },
+      $.toast ( message );
 
-        success: ( res ) => {
+      this._trigger ( 'error', res );
 
-          let resj = $.ajaxParseResponse ( res );
+    }
 
-          if ( resj ) {
+    async __success ( res ) {
 
-            if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
+      let resj = await fetch.getValue ( res );
 
-              $.toast ( resj.message || this.options.messages.refreshing );
+      if ( resj ) {
 
-              location.reload ();
+        if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
 
-            } else if ( resj.url ) {
+          $.toast ( resj.message || this.options.messages.refreshing );
 
-              // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+          location.reload ();
 
-              $.toast ( resj.message || this.options.messages.redirecting );
+        } else if ( resj.url ) {
 
-              location.assign ( resj.url );
+          // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-            } else if ( !resj.noop ) {
+          $.toast ( resj.message || this.options.messages.redirecting );
 
-              $.toast ( resj.message || this.options.messages.success );
+          location.assign ( resj.url );
 
-            }
+        } else if ( !resj.noop ) {
 
-            if ( this.options.autoclose.enabled ) this._autoclose ();
-
-          } else {
-
-            $.toast ( this.options.messages.success );
-
-          }
-
-          this._trigger ( 'success' );
-
-        },
-
-        complete: () => {
-
-          if ( this.options.spinnerOverlay ) {
-
-            this.$form.spinnerOverlay ( 'close' );
-
-          }
-
-          this._trigger ( 'complete' );
+          $.toast ( resj.message || this.options.messages.success );
 
         }
 
-      });
+        if ( this.options.autoclose.enabled ) this._autoclose ();
+
+      } else {
+
+        $.toast ( this.options.messages.success );
+
+      }
+
+      this._trigger ( 'success', res );
+
+    }
+
+    __complete ( res ) {
+
+      if ( this.options.spinnerOverlay ) {
+
+        this.$form.spinnerOverlay ( 'close' );
+
+      }
+
+      this._trigger ( 'complete', res );
 
     }
 
@@ -200,4 +203,4 @@
 
   Factory.make ( FormAjax, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.fetch ));

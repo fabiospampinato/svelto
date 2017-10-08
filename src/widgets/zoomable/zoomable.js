@@ -8,11 +8,12 @@
  * @require core/animations/animations.js
  * @require core/browser/browser.js
  * @require core/widget/widget.js
+ * @require lib/fetch/fetch.js
  * ========================================================================= */
 
 //TODO: Generalize it for other kind of elements other than `img`
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Keyboard, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Keyboard, Animations, fetch ) {
 
   'use strict';
 
@@ -353,6 +354,54 @@
 
     }
 
+    /* REQUEST HANDLERS */
+
+    __request () {
+
+      let request = fetch.defaults.request ();
+
+      request.addEventListener ( 'progress', event => {
+
+        if ( !event.lengthComputable ) return;
+
+        this._trigger ( 'loading', {
+          loaded: event.loaded,
+          total: event.total,
+          percentage: event.loaded / event.total * 100
+        });
+
+      }, false );
+
+      return request;
+
+    }
+
+    __error () {
+
+      console.error ( `Zoomable: failed to preload "${this.options.original.src}"` );
+
+    }
+
+    __success ( callback ) {
+
+      this._isPreloaded = true;
+
+      if ( this.options.original.substitute ) {
+
+        this.$zoomable.attr ( 'src', this.options.original.src );
+
+      }
+
+      if ( callback ) callback ();
+
+    }
+
+    __complete () {
+
+      this._isPreloading = false;
+
+    }
+
     /* API */
 
     isPreloading () {
@@ -373,33 +422,12 @@
 
       this._isPreloading = true;
 
-      $.ajax ({
+      fetch ({
         url: this.options.original.src,
-        xhr: () => {
-          let xhr = new window.XMLHttpRequest ();
-          xhr.addEventListener ( 'progress', event => {
-            if ( !event.lengthComputable ) return;
-            this._trigger ( 'loading', {
-              loaded: event.loaded,
-              total: event.total,
-              percentage: event.loaded / event.total * 100
-            });
-          }, false );
-          return xhr;
-        },
-        success: () => {
-          this._isPreloaded = true;
-          if ( this.options.original.substitute ) {
-            this.$zoomable.attr ( 'src', this.options.original.src );
-          }
-          if ( callback ) callback ();
-        },
-        error: () => {
-          console.error ( `Zoomable: failed to preload "${this.options.original.src}"` );
-        },
-        complete: () => {
-          this._isPreloading = false;
-        }
+        request: this.__request.bind ( this ),
+        error: this.__error.bind ( this ),
+        success: () => this.__success ( callback ),
+        complete: this.__complete.bind ( this )
       });
 
     }
@@ -526,4 +554,4 @@
 
   Factory.make ( Zoomable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations, Svelto.fetch ));

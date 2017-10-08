@@ -7,12 +7,13 @@
  * =========================================================================
  * @require ../remote.js
  * @require lib/autofocus/autofocus.js
+ * @require lib/fetch/fetch.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 
-(function ( $, _, Svelto, Widgets, Factory, Animations, Autofocus ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, Autofocus, fetch ) {
 
   'use strict';
 
@@ -42,7 +43,7 @@
       },
       ajax: {
         cache: false,
-        method: 'POST'
+        method: 'post'
       },
       cache: {
         enabled: false, // Whether remote widgets should be cached or not
@@ -250,7 +251,7 @@
 
     /* REQUEST HANDLERS */
 
-    __beforesend ( res ) {
+    __beforesend ( req ) {
 
       if ( this.isAborted () ) return;
 
@@ -315,15 +316,15 @@
       this._widgetInit ();
       this._widgetOpen ();
 
-      super.__beforesend ( res );
+      super.__beforesend ( req );
 
     }
 
-    __error ( res ) {
+    async __error ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
 
       $.toast ( message );
 
@@ -333,11 +334,11 @@
 
     }
 
-    __success ( res ) {
+    async __success ( res ) {
 
       if ( this.isAborted () ) return;
 
-      let resj = $.ajaxParseResponse ( res );
+      let resj = await fetch.getValue ( res );
 
       if ( !resj || !(this.options.widget.config.name in resj) ) return this.__error ( res );
 
@@ -436,4 +437,4 @@
 
   Factory.make ( RemoteWidget, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus, Svelto.fetch ));

@@ -59,7 +59,7 @@
       datas: {
         type: 'type',
         url: 'url',
-        data: 'data',
+        body: 'body',
         method: 'method'
       },
       selectors: {
@@ -98,10 +98,10 @@
     _getAjax ( $trigger ) {
 
       let url = $trigger.data ( this.options.datas.url ) || $trigger.attr ( this.options.attributes.href ) || this.options.ajax.url,
-          data = $trigger.data ( this.options.datas.data ) || this.options.ajax.data || {},
+          body = $trigger.data ( this.options.datas.body ) || this.options.ajax.body || {},
           method = $trigger.data ( this.options.datas.method ) || this.options.ajax.method;
 
-      return _.extend ( {}, this.options.ajax, { url, data, method } );
+      return _.extend ( {}, this.options.ajax, { url, body, method } );
 
     }
 

@@ -5,13 +5,14 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @require lib/fetch/fetch.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
 //FIXME: Crappy, not working ATM, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, fetch ) {
 
   'use strict';
 
@@ -100,56 +101,60 @@
 
         let rating = this.$stars.index ( event.currentTarget ) + 1;
 
-        $.ajax ({
-
-          data: { rating: rating },
-          type: 'POST',
+        fetch ({
           url: this.options.url,
-
-          beforeSend: () => {
-
-            this.doingAjax = true;
-
-          },
-
-          error: ( res ) => {
-
-            let message = $.ajaxResponseGet ( res, 'message' ) || this.options.messages.error;
-
-            $.toast ( message );
-
-          },
-
-          success: ( res ) => {
-
-            //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
-            //TODO: Make it work like formAjax's
-
-            let resj = $.ajaxParseResponse ( res );
-
-            if ( resj ) {
-
-              _.merge ( this.options, resj );
-
-              this.$rater.html ( this._template ( 'stars', this.options ) );
-
-              this.options.rated = true;
-
-              this._trigger ( 'change' );
-
-            }
-
-          },
-
-          complete: () => {
-
-            this.doingAjax = false;
-
-          }
-
+          method: 'post',
+          body: {rating},
+          beforesend: this.__beforesend.bind ( this ),
+          error: this.__error.bind ( this ),
+          success: this.__success.bind ( this ),
+          complete: this.__complete.bind ( this )
         });
 
       }
+
+    }
+
+    /* REQUEST HANDLERS */
+
+    __beforesend () {
+
+      this.doingAjax = true;
+
+    }
+
+    async __error ( res ) {
+
+      let message = await fetch.getValue ( res, 'message' ) || this.options.messages.error;
+
+      $.toast ( message );
+
+    }
+
+    async __success ( res ) {
+
+      //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
+      //TODO: Make it work like formAjax's
+
+      let resj = await fetch.getValue ( res );
+
+      if ( resj ) {
+
+        _.merge ( this.options, resj );
+
+        this.$rater.html ( this._template ( 'stars', this.options ) );
+
+        this.options.rated = true;
+
+        this._trigger ( 'change' );
+
+      }
+
+    }
+
+    __complete () {
+
+      this.doingAjax = false;
 
     }
 
@@ -170,4 +175,4 @@
 
   Factory.make ( Rater, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.fetch ));

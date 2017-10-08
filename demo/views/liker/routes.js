@@ -4,10 +4,10 @@
 Router.route ( '/liker-update', function () {
 
   let body = this.request.body,
-      likes = Number ( body['current[likes]'] ),
-      dislikes = Number ( body['current[dislikes]'] ),
-      prevState = JSON.parse ( body['current[state]'] || null ),
-      state = JSON.parse ( body.state || null );
+      likes = Number ( body.current.likes ),
+      dislikes = Number ( body.current.dislikes ),
+      prevState = body.current.state,
+      state = body.state;
 
   if ( state !== prevState ) {
     if ( state === true ) likes++;
