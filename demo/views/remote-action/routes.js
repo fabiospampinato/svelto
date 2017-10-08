@@ -54,3 +54,17 @@ Router.route ( '/remote-action-4', function () {
   }, 1500 );
 
 }, { where: 'server' });
+
+/* REMOTE ACTION 5 */
+
+Router.route ( '/remote-action-5', function () {
+
+  setTimeout ( () => {
+
+    this.response.end ( JSON.stringify ({
+      noop: true
+    }));
+
+  }, 1500 );
+
+}, { where: 'server' });
