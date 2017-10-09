@@ -10,7 +10,6 @@
 
 //URL: https://github.com/developit/unfetch
 
-//TODO: Add bulk/batching support
 //TODO: Add a demo for it
 
 (function ( $, _, Svelto ) {
@@ -51,6 +50,8 @@
     let isMethodCacheable = _.includes ( ['get', 'head'], options.method );
 
     if ( options.cache && isMethodCacheable && fetch.cache[url] ) return fetch.cache[url];
+
+    if ( options.batchUrl ) return fetch.batch ( url, options.batchUrl, options );
 
     let response = new Promise ( ( resolve, reject ) => {
 
@@ -109,6 +110,35 @@
 
   }
 
+  /* BATCH */
+
+  async function batch ( url, batchUrl, options ) {
+
+    options = _.omit ( options, ['url', 'batchUrl'] );
+
+    const responses = await ( await fetch ( batchUrl, options ) ).json ();
+
+    _.forOwn ( responses, ( response, url ) => {
+
+      const responseText = _.isString ( response ) ? response : JSON.stringify ( response );
+      const request = {
+        __fake: true,
+        getAllResponseHeaders: () => '',
+        status: 200,
+        statusText: 'OK',
+        responseURL: url,
+        response: responseText,
+        responseText
+      };
+
+      fetch.cache[url] = Promise.resolve ( fetch.request2response ( request ) );
+
+    });
+
+    return fetch.cache[url] || fetch ( url, options );
+
+  }
+
   /* REQUEST 2 RESPONSE */
 
   function request2response ( request ) {
@@ -147,6 +177,7 @@
 
   /* BINDING */
 
+  fetch.batch = batch;
   fetch.defaults = defaults;
   fetch.cache = {};
   fetch.request2response = request2response;
