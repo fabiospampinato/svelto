@@ -154,6 +154,8 @@
 
     _success ( resj ) {
 
+      if ( !resj.hasOwnProperty ( 'state' ) ) return;
+
       this.options.state = resj.state;
 
       this._update ();
