@@ -6,12 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../variables.scss
+ * @require widgets/card/fullscreen/variables.scss
  * ========================================================================= */
 
 /* POPOVER */
 
 $emojipicker-popover-width: 318px !default;
 $emojipicker-popover-containers-height: 248px !default;
+$emojipicker-popover-z-index: $card-fullscreen-z-index + 1 !default;
 
 /* PREVIEW */
 
