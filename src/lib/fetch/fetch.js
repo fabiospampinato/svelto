@@ -25,7 +25,9 @@
     // body: {},
     cache: true,
     credentials: 'include', // Include cookies
-    headers: {},
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    },
     timeout: 0,
     notOKisError: true,
     request: () => new XMLHttpRequest (),
