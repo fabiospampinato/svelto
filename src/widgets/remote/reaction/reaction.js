@@ -21,6 +21,7 @@
       state: undefined, // The state of the reaction
       stateDefault: null, // The default state
       stateUrl: false, // If provided, fetch the state from here
+      stateBatchUrl: false, // If provided, fetch the state from here
       url: false, // Submit the reaction to this url
       ajax: {
         cache: false,
@@ -29,6 +30,7 @@
       datas: {
         state: 'state',
         stateUrl: 'state-url',
+        stateBatchUrl: 'state-batch-url',
         url: 'url'
       }
     }
@@ -50,6 +52,7 @@
 
       this.options.state = this.$reaction.hasAttribute ( `data-${this.options.datas.state}` ) ? this.$reaction.data ( this.options.datas.state ) : this.options.state || this.options.stateDefault;
       this.options.stateUrl = this.$reaction.data ( this.options.datas.stateUrl ) || this.options.stateUrl;
+      this.options.stateBatchUrl = this.$reaction.data ( this.options.datas.stateBatchUrl ) || this.options.stateBatchUrl;
       this.options.url = this.$reaction.data ( this.options.datas.url ) || this.options.url;
 
       this._update ();
@@ -64,7 +67,10 @@
 
       if ( !this.options.stateUrl ) return;
 
-      let res = await fetch ( this.options.stateUrl );
+      let res = await fetch ({
+        url: this.options.stateUrl,
+        batchUrl: this.options.stateBatchUrl
+      });
 
       this.__remoteState ( res );
 
