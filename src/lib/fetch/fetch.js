@@ -55,7 +55,7 @@
       request.timeout = options.timeout;
       request.withCredentials = ( options.credentials === 'include' );
 
-      if ( options.cache === false ) {
+      if ( options.cache === false && _.includes ( ['get', 'head'], options.method ) ) {
         url += ( url.includes ( '?' ) ? '&' : '?' ) + `anticache=${new Date ().getTime ()}`
       }
 
