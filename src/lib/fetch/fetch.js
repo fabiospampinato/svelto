@@ -48,15 +48,19 @@
 
     options = _.merge ( {}, fetch.defaults, options );
 
-    return new Promise ( ( resolve, reject ) => {
+    let isMethodCacheable = _.includes ( ['get', 'head'], options.method );
+
+    if ( options.cache && isMethodCacheable && fetch.cache[url] ) return fetch.cache[url];
+
+    let response = new Promise ( ( resolve, reject ) => {
 
       let request = options.request ();
 
       request.timeout = options.timeout;
       request.withCredentials = ( options.credentials === 'include' );
 
-      if ( options.cache === false && _.includes ( ['get', 'head'], options.method ) ) {
-        url += ( url.includes ( '?' ) ? '&' : '?' ) + `anticache=${new Date ().getTime ()}`
+      if ( !options.cache && isMethodCacheable ) {
+        url += ( url.includes ( '?' ) ? '&' : '?' ) + `anticache=${new Date ().getTime ()}`;
       }
 
       request.open ( options.method, url );
@@ -99,6 +103,10 @@
 
     });
 
+    if ( options.cache && isMethodCacheable ) fetch.cache[url] = response;
+
+    return response;
+
   }
 
   /* REQUEST 2 RESPONSE */
@@ -140,6 +148,7 @@
   /* BINDING */
 
   fetch.defaults = defaults;
+  fetch.cache = {};
   fetch.request2response = request2response;
 
   /* EXPORT */
