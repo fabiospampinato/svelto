@@ -48,6 +48,9 @@
         body: 'body',
         method: 'method',
         target: 'target'
+      },
+      callbacks: {
+        loaded: _.noop
       }
     }
   };
@@ -178,9 +181,11 @@
 
       } else {
 
-        this._replace ( res, resj, isJSON );
+        await this._replace ( res, resj, isJSON );
 
       }
+
+      this._trigger ( 'loaded' );
 
     }
 
