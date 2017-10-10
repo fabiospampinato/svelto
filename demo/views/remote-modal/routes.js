@@ -63,7 +63,8 @@ Router.route ( '/remote-modal-fullscreen', function () {
       modal: '<div class="card modal fullscreen">' +
                 '<div class="card-header">' +
                   '<div class="multiple">' +
-                    '<div class="spacer">This is a fullscreen remote modal!</div>' +
+                    '<span>This is a fullscreen remote modal!</span>' +
+                    '<div class="spacer"></div>' +
                     '<div class="button small modal-closer compact">' +
                       '<i class="icon">close</i>' +
                     '</div>' +
