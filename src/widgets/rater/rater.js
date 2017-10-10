@@ -11,6 +11,7 @@
 
 //FIXME: Crappy, not working ATM, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
+//TODO: Rewrite as a RemoteReaction widget maybe
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, fetch ) {
 
