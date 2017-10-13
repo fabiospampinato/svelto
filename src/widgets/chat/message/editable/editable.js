@@ -29,7 +29,7 @@
         editing: 'editing'
       },
       selectors: {
-        message: 'p',
+        message: '.chat-message-content > *:only-child, .chat-message-content > .card-header:first-child + .card-block',
         blocks: {
           hide: '.editable-hide',
           show: '.editable-show'
