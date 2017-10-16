@@ -78,8 +78,11 @@
       if ( !isFullscreen ) {
 
         let classList = this.$widget.attr ( 'class' ) || '',
-            pointingClass = classList.split ( ' ' ).find ( cls => cls.startsWith ( 'pointing-' ) );
+            classes = classList.split ( ' ' ),
+            positionateClass = classes.find ( cls => cls.startsWith ( 'positionate-' ) ),
+            pointingClass = classes.find ( cls => cls.startsWith ( 'pointing-' ) );
 
+        if ( positionateClass ) $replacement.addClass ( positionateClass );
         if ( pointingClass ) $replacement.addClass ( pointingClass );
 
       }
