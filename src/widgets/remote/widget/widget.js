@@ -338,6 +338,8 @@
 
       if ( this.isAborted () ) return;
 
+      if ( !this.$widget ) return;
+
       let resj = await fetch.getValue ( res );
 
       if ( !resj || !(this.options.widget.config.name in resj) ) return this.__error ( res );
