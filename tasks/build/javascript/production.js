@@ -18,9 +18,11 @@ const gulp         = require ( 'gulp' ),
       newer        = require ( 'gulp-newer' ),
       plumber      = require ( 'gulp-plumber' ),
       rename       = require ( 'gulp-rename' ),
+      replace      = require ( 'gulp-replace' ),
       touch        = require ( 'gulp-touch-cmd' ),
       uglify       = require ( 'gulp-uglify' ),
       changed      = require ( '../../utilities/changed' ),
+      environments = require ( '../../utilities/environments' ),
       log          = require ( '../../utilities/log' ),
       input        = require ( '../../utilities/input' ),
       output       = require ( '../../utilities/output' ),
@@ -28,7 +30,8 @@ const gulp         = require ( 'gulp' ),
       extend       = require ( '../../plugins/extend' ),
       filter       = require ( '../../plugins/filter' ),
       override     = require ( '../../plugins/override' ),
-      plugins      = require ( '../../config/project' ).plugins;
+      project      = require ( '../../config/project' ),
+      plugins      = project.plugins;
 
 /* TASK */
 
@@ -45,6 +48,7 @@ function task () {
              .pipe ( gulpif ( plugins.extend.enabled, extend ( plugins.extend.options ) ) )
              .pipe ( flatten () )
              .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
+             .pipe ( replace ( /ENVIRONMENT: '(.*)'/, `ENVIRONMENT: '${environments.pretty ( project.environment )}'` ) ) //TODO: Write a plugin for this
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
              .pipe ( gulpif ( plugins.babili.enabled, babili ( plugins.babili.options ) ) )

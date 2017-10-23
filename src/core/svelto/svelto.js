@@ -19,6 +19,7 @@
   let Svelto = {
 
     VERSION: '0.7.15',
+    ENVIRONMENT: 'production',
 
     /* DEPENDENCIES */
 
