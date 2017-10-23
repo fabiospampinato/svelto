@@ -7,6 +7,7 @@
  * =========================================================================
  * @before ./vendor/marked.js
  * @before lib/emojify/emojify.js
+ * @before lib/markdown/markdown.js
  * @before widgets/emoji/picker/popover/popover_trigger.js
  * @before widgets/form/ajax/ajax.js
  * @require widgets/storable/storable.js
@@ -16,7 +17,7 @@
 //TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
 //TODO: Switch to a `contenteditable` version where the preview and editor actual are the same thing
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify, EmojipickerPopover, EmojipickerPopoverTrigger ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify, EmojipickerPopover, EmojipickerPopoverTrigger, Markdown ) {
 
   'use strict';
 
@@ -28,7 +29,7 @@
     selector: '.editor',
     options: {
       parentUnfullscreenEvents: 'popover:close modal:close panel:close chatmessageeditable:unedit chatmessagereplyable:unreply chatmessagereplyablereply:unreply', //FIXME: Ugly
-      parser: window.marked || _.identity,
+      parser: Markdown.parse,
       storage: {
         enabled: false, // Whether to preserve the content across refreshes/sessions
         ttl: 604800 // 1 week
@@ -478,9 +479,9 @@
 
     /* RENDER */
 
-    _render () {
+    async _render () {
 
-      this.$preview.html ( this._parse () );
+      this.$preview.html ( await this._parse () );
 
       if ( Emojify ) this.$preview.emojify ();
 
@@ -630,4 +631,4 @@
 
   Factory.make ( Editor, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify, Svelto.Widgets.EmojipickerPopover, Svelto.Widgets.EmojipickerPopoverTrigger ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Emoji, Svelto.Emojify, Svelto.Widgets.EmojipickerPopover, Svelto.Widgets.EmojipickerPopoverTrigger, Svelto.Markdown ));

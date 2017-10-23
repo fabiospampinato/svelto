@@ -71,10 +71,10 @@
 
     }
 
-    __submit () {
+    async __submit () {
 
       const content = this.$editable.find ( 'textarea' ).first ().val (),
-            rendered = Widgets.Editor ? Widgets.Editor.config.options.parser ( content ) : content;
+            rendered = Widgets.Editor ? await Widgets.Editor.config.options.parser ( content ) : content;
 
       this.$message.html ( rendered );
 
