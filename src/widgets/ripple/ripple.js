@@ -5,6 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @priority 500
  * @require core/animations/animations.js
  * @require core/browser/browser.js
  * @require core/widget/widget.js

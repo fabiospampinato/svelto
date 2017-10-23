@@ -9,6 +9,7 @@
 /* REQUIRE */
 
 const _       = require ( 'lodash' ),
+      chalk   = require ( 'chalk' ),
       path    = require ( 'path' ),
       through = require ( 'through2' ),
       gutil   = require ( 'gulp-util' ),
@@ -34,6 +35,15 @@ function getMatches ( string, regex ) {
 
 }
 
+function getFilePriority ( file, regex ) {
+
+  const content = file.contents.toString ( 'utf8' );
+        matches = getMatches ( content, regex );
+
+  return Number ( _.last ( matches ) ) || 0;
+
+}
+
 function getFileTargets ( file, regex ) {
 
   const dirname = path.dirname ( fileU.file2module ( file ) ),
@@ -48,23 +58,48 @@ function getFileTargets ( file, regex ) {
 
 }
 
+function inheritPriority ( modules, module ) {
+
+  if ( module.dependencies && module.dependencies.length ) {
+
+    for ( let di = 0, dl = module.dependencies.length; di < dl; di++ ) {
+
+      const dep = modules[module.dependencies[di]],
+            newPriority = Math.max ( dep.priority, module.priority );
+
+      if ( dep.priority === newPriority ) continue;
+
+      dep.priority = newPriority;
+
+      inheritPriority ( modules, dep );
+
+    }
+
+  }
+
+}
+
 function getGraph ( files, config ) {
 
-  const graph = {};
+  const graph = {},
+        modules = {};
 
   /* POPULATING */
 
   for ( let i = 0, l = files.length; i < l; i++ ) {
 
     const file = files[i];
-
-    graph[file.path] = {
+    const module = {
       file: file,
       path: file.path,
       module: fileU.file2module ( file ),
-      befores: getFileTargets ( file, config.before ),
-      requires: getFileTargets ( file, config.require )
+      priority: config.priority ? getFilePriority ( file, config.priorityRe ) : 0,
+      befores: getFileTargets ( file, config.beforeRe ),
+      requires: getFileTargets ( file, config.requireRe )
     };
+
+    graph[file.path] = module;
+    modules[module.module] = module;
 
   }
 
@@ -72,22 +107,33 @@ function getGraph ( files, config ) {
 
   for ( let i = 0, l = files.length; i < l; i++ ) {
 
-    const file = files[i];
+    const module = graph[files[i].path];
 
-    for ( let bi = 0, bl = graph[file.path].befores.length; bi < bl; bi++ ) {
+    /* CHECKING BEFORE EXISTENCE */
 
-      const found = _.find ( graph, n => n.module === graph[file.path].befores[bi] );
+    if ( module.befores && module.befores.length ) {
 
-      if ( !found ) {
+      for ( let bi = 0, bl = module.befores.length; bi < bl; bi++ ) {
 
-        graph[file.path].befores[bi] = false;
+        if ( !modules[module.befores[bi]] ) {
+
+          module.befores[bi] = false;
+
+        }
 
       }
 
+      module.befores = _.compact ( module.befores );
+
     }
 
-    graph[file.path].befores = _.compact ( graph[file.path].befores );
-    graph[file.path].dependencies = graph[file.path].befores.concat ( graph[file.path].requires );
+    /* DEPENDENCIES */
+
+    module.dependencies = module.befores.concat ( module.requires );
+
+    /* INHERITING PRIORITY */
+
+    inheritPriority ( modules, module );
 
   }
 
@@ -97,12 +143,26 @@ function getGraph ( files, config ) {
 
 function resolveGraph ( graph ) {
 
-  const paths = _.keys ( graph ).sort (),
+  const paths = _.sortBy ( _.keys ( graph ), [path => - graph[path].priority, _.identity] ),
         partition = _.partition ( paths, key => !graph[key].dependencies.length );
 
   let files = [],
       roots = partition[0],
       nodes = partition[1];
+
+  function sortRoots ( roots ) {
+
+    return _.sortBy ( roots, [root => - graph[root].priority, _.identity] );
+
+  }
+
+  function addRoot ( root ) {
+
+    roots.push ( root );
+
+    roots = sortRoots ( roots );
+
+  }
 
   function resolveRoot ( root ) {
 
@@ -124,7 +184,7 @@ function resolveGraph ( graph ) {
 
           nodes[ni] = false;
 
-          resolveRoot ( node );
+          addRoot ( node );
 
         }
 
@@ -134,7 +194,13 @@ function resolveGraph ( graph ) {
 
   };
 
-  roots.forEach ( resolveRoot );
+  while ( roots.length ) { // The length will probably change dynamically
+
+    let root = roots.shift ();
+
+    resolveRoot ( root );
+
+  }
 
   nodes = _.compact ( nodes );
 
@@ -171,21 +237,37 @@ function resolveGraph ( graph ) {
 
 }
 
-function logFiles ( files ) {
+function logFiles ( graph, graphFiles ) {
 
-  if ( files.length ) {
+  if ( graphFiles.length ) {
 
-    let list = 'Dependencies order:\n';
+    let nrLength = graphFiles.length.toString ().length,
+        list = 'Dependencies order:\n';
 
-    for ( let i = 0, l = files.length; i < l; i++ ) {
+    for ( let i = 0, l = graphFiles.length; i < l; i++ ) {
 
-      list += _.padEnd ( i + 1, l.toString ().length ) + ' - ' + files[i].path;
+      let path = graphFiles[i].path,
+          priority = graph[path].priority,
+          line = `${_.padEnd ( i + 1, nrLength )} - ${path}`;
+
+      if ( priority ) {
+
+        let arrow = priority > 0 ? '↑' : '↓',
+            color = priority > 0 ? 'green' : 'red';
+
+        line += ` (${priority}${arrow})`;
+
+        line = chalk[color]( line );
+
+      }
 
       if ( i + 1 < l ) {
 
-        list += '\n';
+        line += '\n';
 
       }
+
+      list += line;
 
     }
 
@@ -199,7 +281,10 @@ function logFiles ( files ) {
 
 function worker ( files, config ) {
 
-  return resolveGraph ( getGraph ( files, config ) );
+  const graph = getGraph ( files, config ),
+        graphFiles = resolveGraph ( graph );
+
+  return {graph, graphFiles};
 
 }
 
@@ -210,8 +295,10 @@ function dependencies ( config ) {
   /* CONFIG */
 
   config = _.merge ({
-    before: /@before[\s]+([\S]+\.[\S]+)[\s]*/g,
-    require: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
+    priority: true,
+    priorityRe: /@priority[\s]+([0-9]+)[\s]*/g, //TODO: Add support for float priorities
+    beforeRe: /@before[\s]+([\S]+\.[\S]+)[\s]*/g,
+    requireRe: /@require[\s]+([\S]+\.[\S]+)[\s]*/g,
     log: false
   }, config );
 
@@ -229,23 +316,23 @@ function dependencies ( config ) {
 
   }, function ( callback ) {
 
-    files = worker ( files, config );
+    let {graph, graphFiles} = worker ( files, config );
 
-    if ( files instanceof gutil.PluginError ) {
+    if ( graphFiles instanceof gutil.PluginError ) {
 
-      callback ( files );
+      callback ( graphFiles );
 
     } else {
 
       if ( config.log ) {
 
-        logFiles ( files );
+        logFiles ( graph, graphFiles );
 
       }
 
-      for ( let i = 0, l = files.length; i < l; i++ ) {
+      for ( let i = 0, l = graphFiles.length; i < l; i++ ) {
 
-        this.push ( files[i] );
+        this.push ( graphFiles[i] );
 
       }
 
