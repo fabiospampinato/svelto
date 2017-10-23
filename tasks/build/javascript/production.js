@@ -49,6 +49,7 @@ function task () {
              .pipe ( flatten () )
              .pipe ( concat ( output.getName ( 'javascript.uncompressed' ) ) )
              .pipe ( replace ( /ENVIRONMENT: '(.*)'/, `ENVIRONMENT: '${environments.pretty ( project.environment )}'` ) ) //TODO: Write a plugin for this
+             .pipe ( replace ( /DEVELOPMENT: (.*),/, `DEVELOPMENT: ${!!project.isDevelopment},` ) ) //TODO: Write a plugin for this
              .pipe ( gulpif ( plugins.babel.enabled, babel ( plugins.babel.options ) ) )
              .pipe ( gulp.dest ( output.getDir ( 'javascript.uncompressed' ) ) )
              .pipe ( gulpif ( plugins.babili.enabled, babili ( plugins.babili.options ) ) )

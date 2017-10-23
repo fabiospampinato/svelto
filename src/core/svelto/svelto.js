@@ -20,6 +20,7 @@
 
     VERSION: '0.7.15',
     ENVIRONMENT: 'production',
+    DEVELOPMENT: false,
 
     /* DEPENDENCIES */
 
