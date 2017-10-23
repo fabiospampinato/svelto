@@ -79,7 +79,7 @@
 
       this.widgetizers[selector].push ( [widgetizer, data] );
 
-      if ( this._isReady ) {
+      if ( Readify.isReady () ) {
 
         let $widgets = this._getWidgets ( selector, $.$body, $.$html );
 
@@ -130,8 +130,6 @@
     }
 
     ready () {
-
-      this._isReady = true;
 
       this.on ( $.$body );
 
@@ -188,6 +186,10 @@
 
   /* READY */
 
-  Readify.add ( Svelto.Widgetize.ready.bind ( Svelto.Widgetize ) );
+  if ( !Readify.isReady () ) {
+
+    Readify.add ( Svelto.Widgetize.ready.bind ( Svelto.Widgetize ) );
+
+  }
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify ));
