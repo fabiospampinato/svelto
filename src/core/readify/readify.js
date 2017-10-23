@@ -22,6 +22,7 @@
     constructor () {
 
       this.queue = [];
+      this._isReady = !!window.__svelto_readify_ready;
 
     }
 
@@ -53,7 +54,15 @@
 
     }
 
+    isReady () {
+
+      return this._isReady;
+
+    }
+
     ready () {
+
+      if ( this._isReady ) return;
 
       this._isReady = true;
 
@@ -92,6 +101,10 @@
 
   /* READY */
 
-  $(Svelto.Readify.ready.bind ( Svelto.Readify ));
+  if ( !Svelto.Readify.isReady () ) {
+
+    $(Svelto.Readify.ready.bind ( Svelto.Readify ));
+
+  }
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
