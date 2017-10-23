@@ -2,6 +2,7 @@
   "name": "svelto",
   "description": "Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.",
   "version": "0.7.15",
+  "bin": "bin/index.js",
   "keywords": [
     "css",
     "sass",
@@ -40,6 +41,7 @@
     "del": "^3.0.0",
     "emoji-datasource": "^2.4.4",
     "emojilib": "^2.2.6",
+    "execa": "^0.8.0",
     "github": "^0.2.4",
     "google-closure-compiler-js": "^20170521.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
