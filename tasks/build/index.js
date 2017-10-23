@@ -37,7 +37,7 @@ function notify ( done ) {
 
 const task = gulp.series ( gulp.parallel ( 'build-json', 'build-fonts', 'build-images', 'build-javascript', 'build-style' ), notify );
 
-task.description = 'Build Svelto ' + log.options ( ['env', '*'], ['envs', '*,*'], ['environment', '*'], ['environments', '*,*'], ['fresh'] );
+task.description = 'Build Svelto ' + log.options ( ['config', '/path/to/svelto.json'], ['env', '*'], ['envs', '*,*'], ['environment', '*'], ['environments', '*,*'], ['fresh'] );
 
 /* GULP */
 

@@ -15,7 +15,8 @@ const _            = require ( 'lodash' ),
       environments = require ( '../utilities/environments' ),
       file         = require ( '../utilities/file' ),
       custom       = file.load ( path.resolve ( __dirname, '../../svelto.json' ), {} ),
-      dot          = file.loadRecursive ( '.svelto.json', {} );
+      dot          = file.loadRecursive ( '.svelto.json', {} ),
+      arg          = argv.config ? file.load ( argv.config ) : {};
 
 /* ENVIRONMENT */
 
@@ -23,11 +24,12 @@ const envsRaw = argv.environments || argv.environment || argv.envs || argv.env |
       envs = environments.parse ( envsRaw ),
       defaultsEnvs = environments.get ( defaults, envs ),
       customEnvs = environments.get ( custom, envs ),
-      dotEnvs = environments.get ( dot, envs );
+      dotEnvs = environments.get ( dot, envs ),
+      argEnvs = environments.get ( arg, envs );
 
 /* PROJECT */
 
-const project = _.merge ( {}, defaults, ...defaultsEnvs, custom, ...customEnvs, dot, ...dotEnvs );
+const project = _.merge ( {}, defaults, ...defaultsEnvs, custom, ...customEnvs, dot, ...dotEnvs, arg, ...argEnvs );
 
 project.environment = envs;
 
