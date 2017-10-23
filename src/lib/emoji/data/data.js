@@ -21,7 +21,7 @@
     /* VARIABLES */
 
     _raw: EmojiDataRaw,
-    _rawUrl: '/json/emoji.json',
+    _rawUrl: `/json/emoji.json?v=${Svelto.VERSION}`,
     _data: undefined,
 
     /* UTILITIES */
