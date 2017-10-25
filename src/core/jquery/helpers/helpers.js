@@ -18,6 +18,7 @@
  * @before ./is_focused.js
  * @before ./is_visible.js
  * @before ./iterator.js
+ * @before ./on_ready.js
  * @before ./scroll.js
  * @before ./selection.js
  * @before ./top_index.js

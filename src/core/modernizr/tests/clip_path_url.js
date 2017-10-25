@@ -15,7 +15,7 @@
 
   /* CLIP PATH URL */
 
-  $( function () {
+  $.onReady ( function () {
 
     /* SVG */
 
