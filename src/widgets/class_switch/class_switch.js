@@ -15,28 +15,12 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let names = _.filter ( _.values ( Breakpoints ), _.isString ),
-      datas = [];
-
-  for ( let name of names ) {
-
-    datas.push ( `${name}-up` );
-    datas.push ( `${name}-down` );
-    datas.push ( `${name}-only` );
-    datas.push ( name );
-
-  }
-
-  let selector = datas.map ( name => `[data-${name}]` ).join ( ',' );
-
   /* CONFIG */
 
   let config = {
     name: 'classSwitch',
     plugin: true,
-    selector,
+    selector: '.class-switch',
     options: {
       switch: { // Classes to attach at specifc breakpoints, every key/val pair should be in the form of `breakpoint-name`: `class`, where `breakpoint-name` is a key of `Breakpoints` and `class` can be any class string. In addition to this every pair must be specified under one of the following keys: `up`, `down`, `only`, mimicking the respective SCSS mixins
         up: {},
