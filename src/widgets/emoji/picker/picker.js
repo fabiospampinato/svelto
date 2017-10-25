@@ -153,12 +153,13 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele, Widget ) {
+    static widgetize ( ele, Widget ) {
 
       EmojiData.get ().then ( data => {
 
         Widget.config.options.data = data;
-        $ele[Widget.config.name]();
+
+        $.widget.new ( Widget, ele );
 
       });
 

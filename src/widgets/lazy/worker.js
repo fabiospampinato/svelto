@@ -48,9 +48,9 @@
 
     /* SPECIAL */
 
-    constructor ( options = {} ) {
+    constructor () {
 
-      this.options = _.merge ( {}, defaults, options );
+      this.options = defaults;
 
       this.groups = {};
 
@@ -103,18 +103,17 @@
 
     /* UTILITIES */
 
-    _shouldLoad ( $element, multipliers, _wRect ) {
+    _shouldLoad ( $element, multipliers, _windowWidth, _windowHeight ) {
 
-      let wRect = _wRect || $.$window.getRect (),
+      let windowWidth = _windowWidth || $.window.innerWidth,
+          windowHeight = _windowHeight || $.window.innerHeight,
           eRect = $element.getRect (),
           deltaX = this.options.thresholds.x * multipliers.x * this.options.multipliers.dynamic.factor,
           deltaY = this.options.thresholds.y * multipliers.y * this.options.multipliers.dynamic.factor;
 
-      return eRect.top - wRect.height <= deltaY &&
-             eRect.bottom >= -deltaY &&
-             eRect.left - wRect.width <= deltaX &&
-             eRect.right >= -deltaX;
-            //  $element.isVisible (); //FIXME: We should load it only when needed (for instance when its tab becomes active, if this is the case
+      return eRect.top - windowHeight <= deltaY &&
+             eRect.left - windowWidth <= deltaX &&
+             $element.isVisible ();
 
     }
 
@@ -131,7 +130,7 @@
       this._addId = setTimeout ( () => {
         this._addId = false;
         this.process ();
-      }, 7 );
+      }, 10 );
 
     }
 
@@ -140,7 +139,8 @@
       let hadElements = false,
           hasLeftovers = false,
           hasLoaded = false,
-          wRect = $.$window.getRect ();
+          windowWidth = $.window.innerWidth,
+          windowHeight = $.window.innerHeight;
 
       for ( let group in this.groups ) {
 
@@ -158,7 +158,7 @@
           let item = queue[i],
               [widget, $element] = item;
 
-          if ( this._shouldLoad ( $element, multipliers, wRect ) ) {
+          if ( this._shouldLoad ( $element, multipliers, windowWidth, windowHeight ) ) {
 
             hasLoaded = true;
 

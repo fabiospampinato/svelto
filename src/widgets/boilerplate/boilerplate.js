@@ -43,7 +43,7 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele, Widget ) {}
+    static widgetize ( ele, Widget ) {}
 
     /* READY */
 

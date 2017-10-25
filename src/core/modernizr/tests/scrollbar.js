@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Core - Modernizr - Tests (Overlay Scrollbars)
+ * Svelto - Core - Modernizr - Tests (Scrollbar)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,10 +12,13 @@
 
   'use strict';
 
-  /* OVERLAY SCROLLBARS */
+  /* SCROLLBAR */
 
-  let overlay = Modernizr.testStyles ( '#modernizr {width:100px;height:100px;overflow:scroll;position:absolute;z-index:-1}', ele => ele.offsetWidth === ele.clientWidth ); // The absolute position ensures that the height is setted correctly (FF and IE bug)
+  let size;
 
-  Modernizr.addTest ( 'overlay-scrollbars', overlay );
+  Modernizr.testStyles ( '#modernizr {width:100px;height:100px;overflow:scroll;position:absolute;z-index:-1}', ele => size = ele.offsetWidth - ele.clientWidth ); // The absolute position ensures that the height is setted correctly (FF and IE bug)
+
+  Modernizr.addTest ( 'overlay-scrollbars', !size );
+  Modernizr.addTest ( 'scrollbar-size-' + size, true );
 
 }( Modernizr ));

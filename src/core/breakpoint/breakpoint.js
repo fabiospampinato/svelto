@@ -19,7 +19,6 @@
 
     /* VARIABLES */
 
-    throttle: 150, // Milliseconds used to throttle the `$window.on ( 'resize' )` handler
     previous: undefined, // Previous breakpoint
     current: undefined, // Current breakpoint
 
@@ -42,14 +41,16 @@
 
     get () {
 
-      let widths = _.sortBy ( _.values ( Breakpoints.widths ) ),
-          width = $.$window.width ();
+      this._widths = this._widths || _.sortBy ( _.values ( Breakpoints.widths ) );
+      this._width2breakpoint = this._width2breakpoint || _.invert ( Breakpoints.widths );
 
-      for ( let i = 0, l = widths.length; i < l; i++ ) {
+      let width = $.window.innerWidth;
 
-        if ( width >= widths[i] && ( i === l - 1 || width < widths[i+1] ) ) {
+      for ( let i = 0, l = this._widths.length; i < l; i++ ) {
 
-          return _.findKey ( Breakpoints.widths, width => width === widths[i] );
+        if ( width >= this._widths[i] && ( i === l - 1 || width < this._widths[i+1] ) ) {
+
+          return this._width2breakpoint[this._widths[i]];
 
         }
 
@@ -65,7 +66,7 @@
 
     Breakpoint.current = Breakpoint.get ();
 
-    $.$window.on ( 'resize', _.throttle ( Breakpoint.__resize.bind ( Breakpoint ), Breakpoint.throttle ) );
+    $.$window.on ( 'resize', _.frames ( Breakpoint.__resize.bind ( Breakpoint ) ) );
 
   });
 

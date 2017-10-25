@@ -32,10 +32,14 @@
 
       if ( isSimpleSelector ) {
 
-        let $self = $root.filter ( selector ),
+        let isSelf = $root.is ( selector ),
             $nested = $root.find ( selector );
 
-        return $self.length ? $self.add ( $nested ) : $nested;
+        return isSelf
+                 ? $nested.length
+                   ? $nested.add ( $root )
+                   : $root
+                 : $nested;
 
       } else {
 
@@ -154,13 +158,13 @@
 
     worker ( widgetizers, $widgets ) {
 
-      for ( let widget of $widgets ) {
+      for ( let ei = 0, el = $widgets.length; ei < el; ei++ ) {
 
-        let $widget = $(widget);
+        const widget = $widgets[ei];
 
-        for ( let [widgetizer, data] of widgetizers ) {
+        for ( let wi = 0, wl = widgetizers.length; wi < wl; wi++ ) {
 
-          widgetizer ( $widget, data );
+          widgetizers[wi][0] ( widget, widgetizers[wi][1] );
 
         }
 

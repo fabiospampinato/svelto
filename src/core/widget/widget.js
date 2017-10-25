@@ -60,9 +60,9 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele, Widget ) { // Called for widgetizing an element
+    static widgetize ( ele, Widget ) { // Called for widgetizing an element
 
-      $ele[Widget.config.name]();
+      $.widget.new ( Widget, ele );
 
     }
 
@@ -122,6 +122,8 @@
     constructor ( options, element ) {
 
       /* ATTACH CONFIG */
+
+      options = _.isObject ( options ) ? options : undefined;
 
       _.extend ( this, this._getConfig ( options, element ) );
 
@@ -225,14 +227,15 @@
 
       if ( element ) {
 
-        let dataOptions = element.getAttribute ( 'data-options' ),
-            dataNameOptions = element.getAttribute ( `data-${config.name}-options` );
+        let dataOptions = element.getAttribute ( 'data-options' );
 
         if ( dataOptions ) {
 
           configs.push ({ options: JSON.parse ( dataOptions ) });
 
         }
+
+        let dataNameOptions = element.getAttribute ( `data-${config.name}-options` );
 
         if ( dataNameOptions ) {
 
@@ -244,7 +247,7 @@
 
       /* OPTIONS */
 
-      if ( _.isPlainObject ( options ) ) {
+      if ( options ) {
 
         configs.push ({ options });
 
@@ -254,7 +257,7 @@
 
       let createOptions = this._createOptions ();
 
-      if ( _.isPlainObject ( createOptions ) ) {
+      if ( createOptions ) {
 
         configs.push ({ options: createOptions });
 

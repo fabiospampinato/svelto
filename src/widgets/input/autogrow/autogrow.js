@@ -35,7 +35,7 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $input ) {
+    static widgetize ( ele, Widget ) {
 
       /* SKIP IE/EDGE */
 
@@ -45,7 +45,7 @@
 
       /* WIDGETIZE */
 
-      $input.inputAutogrow ();
+      $.widget.new ( Widget, ele );
 
     }
 

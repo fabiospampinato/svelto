@@ -22,9 +22,9 @@
 
     make ( Widget, config, namespace = Widgets, instances = Instances ) {
 
-      for ( let maker of this.makers.order ) {
+      for ( let i = 0, l = this.makers.order.length; i < l; i++ ) {
 
-        this.makers[maker]( Widget, config, namespace, instances );
+        this.makers[this.makers.order[i]]( Widget, config, namespace, instances );
 
       }
 
@@ -32,9 +32,9 @@
 
     unmake ( Widget, namespace = Widgets, instances = Instances ) {
 
-      for ( let unmaker of this.unmakers.order ) {
+      for ( let i = 0, l = this.unmakers.order.length; i < l; i++ ) {
 
-        this.unmakers[unmaker]( Widget, namespace, instances );
+        this.unmakers[this.unmakers.order[i]]( Widget, config, namespace, instances );
 
       }
 

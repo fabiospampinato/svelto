@@ -18,17 +18,18 @@
 
   let Plugin = {
 
-    call ( Widget, options, ...args ) {
+    call ( Widget, $ele, args ) {
 
-      let isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
+      let options = args[0],
+          isMethodCall = ( _.isString ( options ) && options.charAt ( 0 ) !== '_' ); // Methods starting with '_' are private
 
-      for ( let i = 0, l = this.length; i < l; i++ ) {
+      for ( let i = 0, l = $ele.length; i < l; i++ ) {
 
-        let instance = $.widget.get ( this[i], Widget, options, true );
+        let instance = $.widget.get ( $ele[i], Widget, options, true );
 
         if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 
-          let returnValue = instance[options]( ...args );
+          let returnValue = args.length > 1 ? instance[options]( ...Array.prototype.slice.call ( args, 1 ) ) : instance[options]();
 
           if ( !_.isNil ( returnValue ) ) return returnValue;
 
@@ -36,7 +37,7 @@
 
       }
 
-      return this;
+      return $ele;
 
     },
 
@@ -44,7 +45,9 @@
 
       if ( !Widget.config.plugin ) return;
 
-      $.fn[Widget.config.name] = _.wrap ( Widget, Plugin.call );
+      $.fn[Widget.config.name] = function () {
+        return Plugin.call ( Widget, this, arguments );
+      };
 
     },
 

@@ -341,7 +341,7 @@
 
           	$.document.scrollTop ( scrollTop - this.options.scroll.speed );
 
-          } else if ( $.$window.height () - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
+          } else if ( $.window.innerHeight - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
           	$.document.scrollTop ( scrollTop + this.options.scroll.speed );
 
@@ -357,7 +357,7 @@
 
           	$.document.scrollLeft ( scrollLeft - this.options.scroll.speed );
 
-          } else if ( $.$window.width () - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
+          } else if ( $.window.innerWidth - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
           	$.document.scrollLeft ( scrollLeft + this.options.scroll.speed );
 

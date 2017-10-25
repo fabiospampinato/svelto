@@ -62,9 +62,11 @@
 
     /* WIDGETIZE */
 
-    static widgetize ( $ele ) {
+    static widgetize ( ele ) {
 
-      $ele.filter ( ( i, ele ) => $.isVisible ( ele ) ).dataTable ().dt ();
+      if ( !$.isVisible ( ele ) ) return;
+
+      $(ele).dataTable ().dt ();
 
     }
 
