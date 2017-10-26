@@ -227,7 +227,7 @@ function resolveGraph ( graph ) {
 
     }
 
-    return new gutil.PluginError ( 'Dependencies', 'Circular dependencies found. Files involved: ' + nodes.join ( ', ' ) );
+    return new gutil.PluginError ( 'Dependencies', 'Circular dependencies found. Files involved: \n' + nodes.map ( node => `  ${node}` ).join ( '\n' ) );
 
   } else {
 
