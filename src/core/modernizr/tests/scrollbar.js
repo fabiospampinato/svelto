@@ -21,4 +21,4 @@
   Modernizr.addTest ( 'overlay-scrollbars', !size );
   Modernizr.addTest ( 'scrollbar-size-' + size, true );
 
-}( Modernizr ));
+}( window.__svelto_modernizr ));

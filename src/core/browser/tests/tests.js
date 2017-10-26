@@ -9,5 +9,4 @@
  * @before ./browsers.js
  * @before ./devices.js
  * @before ./oss.js
- * @require ../browser.js
  * ========================================================================= */

@@ -32,4 +32,4 @@
 
   });
 
-}( Svelto.Modernizr ));
+}( window.__svelto_modernizr ));

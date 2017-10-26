@@ -16,4 +16,4 @@
 
   Modernizr.addTest ( 'flexbox', Modernizr.testAllProps ( 'flexBasis', '1px' ) );
 
-}( Modernizr ));
+}( window.__svelto_modernizr ));

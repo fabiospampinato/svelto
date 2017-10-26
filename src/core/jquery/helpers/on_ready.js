@@ -19,4 +19,4 @@
     return document.addEventListener ( 'DOMContentLoaded', callback );
   }
 
-}( jQuery ));
+}( window.__svelto_jquery ));

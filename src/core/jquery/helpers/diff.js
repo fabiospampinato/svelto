@@ -221,4 +221,4 @@
 
   };
 
-}( jQuery ));
+}( window.__svelto_jquery ));

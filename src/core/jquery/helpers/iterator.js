@@ -16,4 +16,4 @@
 
   $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
-}( jQuery ));
+}( window.__svelto_jquery ));

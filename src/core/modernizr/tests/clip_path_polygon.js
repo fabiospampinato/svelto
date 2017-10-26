@@ -16,4 +16,4 @@
 
   Modernizr.addTest ( 'clip-path-polygon', Modernizr.testAllProps ( 'clip-path', 'polygon( 0 0 )' ) );
 
-}( Modernizr ));
+}( window.__svelto_modernizr ));

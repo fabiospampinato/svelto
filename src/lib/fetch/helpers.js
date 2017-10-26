@@ -28,4 +28,4 @@
 
   };
 
-}( jQuery, lodash, Svelto, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.fetch ));

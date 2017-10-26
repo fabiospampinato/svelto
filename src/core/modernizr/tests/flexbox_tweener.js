@@ -16,4 +16,4 @@
 
   Modernizr.addTest ( 'flexbox-tweener', Modernizr.testAllProps ( 'flexAlign', 'end' ) );
 
-}( Modernizr ));
+}( window.__svelto_modernizr ));

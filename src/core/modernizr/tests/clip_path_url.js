@@ -58,4 +58,4 @@
 
   });
 
-}( Modernizr, jQuery ));
+}( window.__svelto_modernizr, window.__svelto_jquery ));

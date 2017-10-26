@@ -27,4 +27,4 @@
   $.$body = $(document.body);
   $.body = document.body;
 
-}( jQuery ));
+}( window.__svelto_jquery ));
