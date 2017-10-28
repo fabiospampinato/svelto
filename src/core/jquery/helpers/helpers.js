@@ -10,7 +10,6 @@
  * @before ./elements.js
  * @before ./event_namespacer.js
  * @before ./event_xy.js
- * @before ./frame.js
  * @before ./get_rect.js
  * @before ./has_attribute.js
  * @before ./hsl.js
