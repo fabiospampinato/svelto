@@ -6,18 +6,14 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
+ * @require ./animate_prop.js
+ * @require ./elements.js
  * @require ./iterator.js
  * ========================================================================= */
 
 (function ( $ ) {
 
   'use strict';
-
-  /* VARIABLES */
-
-  let $html = $(document.documentElement),
-      $document = $(document),
-      $body = $(document.body);
 
   /* SCROLL */
 
@@ -46,9 +42,10 @@
 
   $.scrollTo = function ( target, ...args ) {
 
-    let scrollTop = $(target).offset ().top;
+    let scrollTop = $(target).offset ().top,
+        eles = [$.html, $.body];
 
-    $html.add ( $body ).animate ( { scrollTop }, ...args );
+    $.animateProp ( eles, { scrollTop }, ...args );
 
   };
 
@@ -56,7 +53,7 @@
 
     let position = this.css ( 'position' );
 
-    if ( position === 'fixed' ) return $document;
+    if ( position === 'fixed' ) return $.$document;
 
     let excludeStaticParent = ( position === 'absolute' ),
         overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
@@ -75,7 +72,7 @@
 
     }
 
-    return $document;
+    return $.$document;
 
   };
 

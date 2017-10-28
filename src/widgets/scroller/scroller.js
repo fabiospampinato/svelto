@@ -66,7 +66,7 @@
 
     scroll () {
 
-      $.scrollTo ( this.target, this.options.animations.scroll );
+      $.scrollTo ( this.target, { duration: this.options.animations.scroll } );
 
       this._trigger ( 'scroll' );
 

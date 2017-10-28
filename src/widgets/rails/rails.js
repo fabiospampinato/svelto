@@ -179,7 +179,7 @@
 
       if ( animate ) {
 
-        this.$content.animate ( { scrollLeft: left }, this.options.animations.scroll );
+        $.animateProp ( this.$content[0], { scrollLeft: left }, { duration: this.options.animations.scroll } );
 
       } else {
 

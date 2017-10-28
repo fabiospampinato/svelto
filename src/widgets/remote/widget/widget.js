@@ -402,13 +402,15 @@
 
               this.$widget.addClass ( this.options.classes.showing );
 
-              this.$widget.animate ({
+              $.animate ( this.$widget[0], {
                 width: newRect.width,
                 height: newRect.height
               }, {
                 duration: this.options.animations.resize,
-                step: this._widgetResizing.bind ( this ),
-                always: this._widgetResized.bind ( this )
+                callbacks: {
+                  tick: this._widgetResizing.bind ( this ),
+                  end: this._widgetResized.bind ( this )
+                }
               });
 
             });
