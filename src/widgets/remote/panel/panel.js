@@ -38,6 +38,7 @@
         showing: 'remote-panel-showing'
       },
       animations: {
+        placeholder: Animations.normal,
         resize: Animations.normal
       }
     }

@@ -40,6 +40,7 @@
         showing: 'remote-popover-showing'
       },
       animations: {
+        placeholder: Animations.fast,
         resize: Animations.fast
       }
     }

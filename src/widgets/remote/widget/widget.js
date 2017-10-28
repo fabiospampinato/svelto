@@ -33,6 +33,7 @@
       resize: true, // Whether performing a resize transition between the loading widget and the remove widget or not
       $wrapper: false, // The loading widget will be appended to it, fallback to the $layout
       widget: false,
+      waitPlaceholderAnimation: true, // Whether to wait at least `animations.placeholder` or not //FIXME: Ugly name
       methods: {
         open: 'open',
         close: 'close'
@@ -64,6 +65,7 @@
         showing: 'remote-widget-showing'
       },
       animations: {
+        placeholder: 0,
         resize: Animations.normal
       }
     }
@@ -174,7 +176,10 @@
         height: ''
       });
 
-      this.$widget.removeClass ( this.options.classes.placeholder ).removeClass ( this.options.classes.loaded ).removeClass ( this.options.classes.resizing ).removeClass ( this.options.classes.showing );
+      this.$widget.removeClass ( this.options.classes.placeholder )
+                  .removeClass ( this.options.classes.loaded )
+                  .removeClass ( this.options.classes.resizing )
+                  .removeClass ( this.options.classes.showing );
 
     }
 
@@ -256,6 +261,7 @@
       if ( this.isAborted () ) return;
 
       this.requestId = this._getRequestId ( this.ajax );
+      this.requestTimestamp = Date.now ();
 
       /* CLOSING */
 
@@ -343,6 +349,16 @@
       let resj = await fetch.getValue ( res );
 
       if ( !resj || !(this.options.widget.config.name in resj) ) return this.__error ( res );
+
+      /* WAIT */
+
+      if ( this.options.waitPlaceholderAnimation ) {
+
+        let wait = this.options.animations.placeholder - ( Date.now () - this.requestTimestamp );
+
+        if ( wait > 0 ) await _.wait ( wait );
+
+      }
 
       /* VARIABLES */
 

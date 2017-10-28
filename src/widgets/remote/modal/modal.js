@@ -34,6 +34,7 @@
         showing: 'remote-modal-showing'
       },
       animations: {
+        placeholder: Animations.normal,
         resize: Animations.normal
       }
     }

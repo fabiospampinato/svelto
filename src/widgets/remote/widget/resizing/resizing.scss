@@ -12,6 +12,8 @@
 
 %remote-widget-placeholder%remote-widget-resizing {
 
+  overflow: hidden;
+
   /* SHOWING */
 
   &%remote-widget-showing > * {
