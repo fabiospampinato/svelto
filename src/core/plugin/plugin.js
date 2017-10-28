@@ -25,7 +25,7 @@
 
       for ( let i = 0, l = $ele.length; i < l; i++ ) {
 
-        let instance = $.widget.get ( $ele[i], Widget, options, true );
+        let instance = $.widget.get ( $ele[i], Widget, options );
 
         if ( isMethodCall && _.isFunction ( instance[options] ) ) {
 

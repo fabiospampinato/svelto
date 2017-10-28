@@ -26,11 +26,11 @@
 
       if ( loose && Widget.config.selector && $(element).is ( Widget.config.selector ) ) return true;
 
-      return !!widget.get ( element, Widget );
+      return !!widget.get ( element, Widget, undefined, false );
 
     },
 
-    get ( element, Widget, options, instanciate = false ) {
+    get ( element, Widget, options, instanciate = true ) {
 
       return element[`_${Widget.config.name}`] || instanciate && widget.new ( Widget, element, options );
 

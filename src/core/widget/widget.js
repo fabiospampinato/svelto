@@ -62,7 +62,7 @@
 
     static widgetize ( ele, Widget ) { // Called for widgetizing an element
 
-      $.widget.new ( Widget, ele );
+      $.widget.get ( ele, Widget );
 
     }
 

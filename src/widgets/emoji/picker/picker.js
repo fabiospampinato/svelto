@@ -159,7 +159,7 @@
 
         Widget.config.options.data = data;
 
-        $.widget.new ( Widget, ele );
+        $.widget.get ( ele, Widget );
 
       });
 
