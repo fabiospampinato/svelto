@@ -427,13 +427,13 @@ SWHelpers.define ( 'pagination', function ( options ) {
 
 });
 
-SWHelpers.define ( 'placeholder', function ( width = 0, height = 0, content = true ) {
+SWHelpers.define ( 'placeholder', function ( width = 0, height = 0, content = true, ratio = false ) {
 
   width = lodash.isNumber ( width ) ? width + 'px' : width;
   height = lodash.isNumber ( height ) ? height + 'px' : height;
   content = content !== false ? ( lodash.isString ( content ) ? content : width + ' - ' + height ) : '';
 
-  return `<div class="placeholder" style="width:${width}; height:${height};">${content}</div>`;
+  return `<div class="placeholder" ${ratio ? `data-ratio="${ratio}"` : ''} style="width:${width}; height:${height};">${content}</div>`;
 
 });
 

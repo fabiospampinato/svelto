@@ -22,6 +22,7 @@
     plugin: true,
     selector: '.remote-loader',
     options: {
+      externalUpdateEvents: 'justifiedlayout:firstrender', // When one of these events happen, check again if the remote loader can load //FIXME: Ugly
       target: false, // Selector pointing to the element that cointains the content
       wrap: true, // Wrap the content into a `.remote-loaded` element
       autorequest: {
@@ -95,6 +96,7 @@
     _events () {
 
       this.___request ();
+      this.___externalUpdate ();
 
     }
 
@@ -120,6 +122,14 @@
       $loader.remove ();
 
       this._replaced = true;
+
+    }
+
+    /* EXTERNAL UPDATE */
+
+    ___externalUpdate () {
+
+      this._on ( true, $.$document, this.options.externalUpdateEvents, this.__request );
 
     }
 

@@ -1,0 +1,46 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Justified Layout
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add `fixed` or `oneliner` or something class for single-line justified layout, no need for javascript there
+
+/* JUSTIFIED LAYOUT */
+
+.justified-layout {
+
+  @extend %widget;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  transform: translateZ(0);
+
+  /* NOT RENDERED */
+
+  &:not(.rendered) {
+
+    height: 200vh; // So that remote loaded content won't get loaded without need, but was if the screen is very very large? Then we would have the opposite problem, right?
+
+    > * {
+      visibility: hidden;
+    }
+
+  }
+
+  /* RENDERED */
+
+  &.rendered {
+
+    > * {
+      display: inline-flex;
+      position: absolute;
+    }
+
+  }
+
+}
