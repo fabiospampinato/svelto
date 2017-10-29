@@ -21,7 +21,7 @@
     selector: '.rails',
     options: {
       navigation: {
-        hidable: false // Controls whether the navigation should be hidden when all the buttons are disabled
+        hidable: true // Controls whether the navigation should be hidden when all the buttons are disabled
       },
       scroll: {
         speed: 200 // The distance scrolled when calling `left` or `right`
