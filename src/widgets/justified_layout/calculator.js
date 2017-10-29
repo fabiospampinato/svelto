@@ -30,7 +30,10 @@
     row: {
       height: 250, // Target row's height
       margin: 5, // Vertical margin between rows
-      maxBoxesNr: Infinity, // Maximum number of boxes in the row
+      boxes: {
+        min: 1, // Minimum number of boxes in the row
+        max: Infinity, // Maximum number of boxes in the row
+      },
       tolerance: {
         min: .85, // Tunes the minimum ratio
         max: 1.85 // Tunes the maximum ratio
@@ -115,11 +118,11 @@
       let newRatio = this.ratio + box.ratio,
           widthWithoutMargin = this.width - ( this.boxesNr * this.options.row.margin );
 
-      if ( newRatio < this.minRatio ) { // There's enough space for this and probably another box
+      if ( newRatio < this.minRatio || this.boxesNr < this.options.row.boxes.min ) { // There's enough space for this and probably another box
 
         this._add ( box );
 
-        if ( this.boxesNr >= this.options.row.maxBoxesNr ) {
+        if ( this.boxesNr >= this.options.row.boxes.max || ( this.boxesNr > this.options.row.boxes.min && newRatio >= this.maxRatio ) ) {
 
           this.complete ( widthWithoutMargin / newRatio );
 
