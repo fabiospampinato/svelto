@@ -42,6 +42,7 @@
     "emoji-datasource": "^2.4.4",
     "emojilib": "^2.2.6",
     "execa": "^0.8.0",
+    "fsevents": "^1.1.2",
     "github": "^0.2.4",
     "google-closure-compiler-js": "^20170521.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
