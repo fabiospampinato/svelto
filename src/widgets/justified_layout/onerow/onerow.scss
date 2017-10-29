@@ -1,0 +1,37 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Justified Layout - One Row
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @require core/widget/widget.scss
+ * ========================================================================= */
+
+/* JUSTIFIED LAYOUT - ONE ROW */
+
+.justified-layout.onerow {
+
+  flex-wrap: nowrap;
+
+  /* NOT RAILS CONTENT */
+
+  &:not(.rails-content) {
+    padding: $justified-layout-padding;
+  }
+
+  /* CHILDREN */
+
+  > * {
+
+    position: relative;
+    flex-shrink: 0;
+    margin-bottom: 0 !important;
+
+    &:not(:last-child) {
+      margin-right: $justified-layout-box-margin;
+    }
+
+  }
+
+}

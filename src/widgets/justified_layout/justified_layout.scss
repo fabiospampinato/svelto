@@ -8,8 +8,6 @@
  * @require core/widget/widget.scss
  * ========================================================================= */
 
-//TODO: Add `fixed` or `oneliner` or something class for single-line justified layout, no need for javascript there
-
 /* JUSTIFIED LAYOUT */
 
 .justified-layout {
@@ -20,6 +18,13 @@
   flex-wrap: wrap;
   transform: translateZ(0);
 
+  /* CHILDREN */
+
+  > * {
+    display: inline-flex;
+    position: absolute;
+  }
+
   /* NOT RENDERED */
 
   &:not(.rendered) {
@@ -28,17 +33,6 @@
 
     > * {
       visibility: hidden;
-    }
-
-  }
-
-  /* RENDERED */
-
-  &.rendered {
-
-    > * {
-      display: inline-flex;
-      position: absolute;
     }
 
   }

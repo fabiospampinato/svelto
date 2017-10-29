@@ -22,8 +22,11 @@
     selector: '.justified-layout',
     options: {
       calculatorOptions: {}, // Custom options to pass to `justifiedLayoutCalculator`
+      oneRow: false, // Switch to `One Row` logic
+      oneRowHeights: [110, calculator.defaults.row.height], // Min and Max height, adjusted according to the viewport size
       singleRowBelowWidth: 500, // Force 1 box per row below this width
       classes: {
+        onerow: 'onerow',
         rendered: 'rendered'
       },
       selectors: {
@@ -48,6 +51,7 @@
       this.$justified = this.$element;
 
       this.$boxes = this.$justified.find ( this.options.selectors.boxes );
+      this.options.oneRow = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow;
 
     }
 
@@ -99,8 +103,23 @@
 
       if ( !this._options ) this._options = _.merge ( {}, calculator.defaults, this.options.calculatorOptions );
 
-      this._options.container.width = this.justified.offsetWidth;
-      this._options.row.maxBoxesNr =  this._options.container.width <= this.options.singleRowBelowWidth ? 1 : calculator.defaults.row.maxBoxesNr;
+      if ( this.options.oneRow ) {
+
+        this._options.container.width = Infinity;
+        this._options.row.boxes.min = Infinity;
+
+        if ( this.options.oneRowHeights ) {
+
+          this._options.row.height = _.clamp ( ( 1 / 11 * this.justified.offsetWidth ) + 90, this.options.oneRowHeights[0], this.options.oneRowHeights[1] );
+
+        }
+
+      } else {
+
+        this._options.container.width = this.justified.offsetWidth;
+        this._options.row.boxes.max = this._options.container.width <= this.options.singleRowBelowWidth ? 1 : calculator.defaults.row.maxBoxesNr;
+
+      }
 
       return this._options;
 
@@ -120,14 +139,16 @@
           options = this._getCalculatorOptions (),
           layout = calculator ( ratios, options, false );
 
-      this.justified.style.height = `${layout.height}px`;
+      this.$justified.height ( layout.height );
 
       layout.boxes.forEach ( ( layout, i ) => {
         let box = this.$boxes[i];
         box.style.width = `${layout.width}px`;
         box.style.height = `${layout.height}px`;
-        box.style.top = `${layout.top}px`;
-        box.style.left = `${layout.left}px`;
+        if ( !this.options.oneRow ) {
+          box.style.top = `${layout.top}px`;
+          box.style.left = `${layout.left}px`;
+        }
       });
 
       if ( !this._rendered ) {

@@ -186,10 +186,21 @@
 
       if ( isWidows && !this.options.row.widows.justify ) { // Checking for sane height values
 
-        let widthWithoutMargin = this.width - ( ( this.boxesNr - 1 ) * this.options.row.margin ),
-            maxHeight = widthWithoutMargin / this.ratio;
+        let maxHeight;
 
-        this.height = Math.min ( maxHeight, this.height );
+        if ( this.options.container.width !== Infinity ) {
+
+          let widthWithoutMargin = this.width - ( ( this.boxesNr - 1 ) * this.options.row.margin );
+
+          maxHeight = widthWithoutMargin / this.ratio;
+
+        } else {
+
+          maxHeight = this.options.row.height;
+
+        }
+
+        this.height = _.isNaN ( this.height ) ? maxHeight : Math.min ( maxHeight, this.height );
 
       }
 
