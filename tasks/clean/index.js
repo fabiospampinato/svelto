@@ -10,14 +10,14 @@
 
 const del     = require ( 'del' ),
       gulp    = require ( 'gulp' ),
-      project = require ( '../config/project' ),
-      plugins = project.plugins;
+      plugins = require ( '../config/project' ).plugins,
+      clean   = require ( '../utilities/paths/clean' );
 
 /* TASK */
 
 function task () {
 
-  return del ( project.paths.clean, plugins.del.options );
+  return del ( clean.getPath (), plugins.del.options );
 
 }
 

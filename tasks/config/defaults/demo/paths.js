@@ -9,23 +9,10 @@
 /* PATHS */
 
 const paths = {
-  input: {
-    javascript: {
-      temp: 'demo/svelto/client/lib/**/*.js'
-    }
-  },
-  output: {
-    json: 'demo/public/json',
-    fonts: 'demo/public/fonts',
-    images: 'demo/public/images',
-    javascript: {
-      temp: 'demo/svelto/client/lib'
-    },
-    css: {
-      uncompressed: 'demo/svelto/client/stylesheet/svelto.css'
-    }
-  },
-  clean: ['dist', '.temp', 'demo/svelto', 'demo/public/json', 'demo/public/fonts', 'demo/public/images']
+  tokens: {
+    dist: 'demo/public',
+    temp: 'demo/svelto/client'
+  }
 };
 
 /* EXPORT */

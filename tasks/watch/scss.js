@@ -9,7 +9,7 @@
 /* REQUIRE */
 
 const gulp  = require ( 'gulp' );
-      input = require ( '../utilities/input' );
+      input = require ( '../utilities/paths/input' );
 
 /* TASK */
 

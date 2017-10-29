@@ -6,58 +6,62 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-// `<root>` will be replaced with values defined in `roots`
-// In order to extend Svelto just add another source root
-// Source roots may be either relative: `ext`, `../ext` or absolute `/Users/me/ext`
-
-//TODO: Add `root` key also for output
+// `[token]` will be replaced with values defined in `tokens`
+// In order to extend Svelto just add another source to `tokens.src`
+// Sources may be either relative: `ext`, `../ext` or absolute `/Users/me/ext`
 
 /* PATHS */
 
 const paths = {
+  tokens: {
+    src: ['src'],
+    dist: 'dist',
+    temp: '.temp',
+    bundle: 'svelto'
+    //TODO: Add an `env`/`environment` token
+  },
   input: {
-    roots: ['src'],
-    json: '<root>/**/*.json',
-    fonts: '<root>/**/*.{eot,ttf,woff,woff2}',
-    images: '<root>/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
+    json: '[src]/**/*.json',
+    fonts: '[src]/**/*.{eot,ttf,woff,woff2}',
+    images: '[src]/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}',
     javascript: {
-      all: '<root>/**/*.js',
-      temp: '.temp/javascript/**/*.js'
+      all: '[src]/**/*.js',
+      temp: '[temp]/javascript/**/*.js'
     },
     scss: {
-      all: '<root>/**/*.scss',
-      variables: '<root>/**/variables*.scss',
-      functions: '<root>/**/functions*.scss',
-      mixins: '<root>/**/mixins*.scss',
-      keyframes: '<root>/**/keyframes*.scss',
-      style: ['<root>/**/*.scss', '!<root>/**/variables*.scss', '!<root>/**/functions*.scss', '!<root>/**/mixins*.scss', '!<root>/**/keyframes*.scss'],
-      temp: '.temp/scss/**/*.scss'
+      all: '[src]/**/*.scss',
+      variables: '[src]/**/variables*.scss',
+      functions: '[src]/**/functions*.scss',
+      mixins: '[src]/**/mixins*.scss',
+      keyframes: '[src]/**/keyframes*.scss',
+      style: ['[src]/**/*.scss', '![src]/**/variables*.scss', '![src]/**/functions*.scss', '![src]/**/mixins*.scss', '![src]/**/keyframes*.scss'],
+      temp: '[temp]/scss/**/*.scss'
     }
   },
   output: {
-    json: 'dist/json',
-    fonts: 'dist/fonts',
-    images: 'dist/images',
+    json: '[dist]/json',
+    fonts: '[dist]/fonts',
+    images: '[dist]/images',
     javascript: {
-      uncompressed: 'dist/javascript/svelto.js',
-      compressed: 'dist/javascript/svelto.min.js',
-      temp: '.temp/javascript'
+      uncompressed: '[dist]/javascript/[bundle].js',
+      compressed: '[dist]/javascript/[bundle].min.js',
+      temp: '[temp]/javascript'
     },
     scss: {
-      all: 'dist/scss/svelto.scss',
-      variables: 'dist/scss/svelto.variables.scss',
-      functions: 'dist/scss/svelto.functions.scss',
-      mixins: 'dist/scss/svelto.mixins.scss',
-      keyframes: 'dist/scss/svelto.keyframes.scss',
-      style: 'dist/scss/svelto.style.scss',
-      temp: '.temp/scss'
+      all: '[dist]/scss/[bundle].scss',
+      variables: '[dist]/scss/[bundle].variables.scss',
+      functions: '[dist]/scss/[bundle].functions.scss',
+      mixins: '[dist]/scss/[bundle].mixins.scss',
+      keyframes: '[dist]/scss/[bundle].keyframes.scss',
+      style: '[dist]/scss/[bundle].style.scss',
+      temp: '[temp]/scss'
     },
     css: {
-      uncompressed: 'dist/css/svelto.css',
-      compressed: 'dist/css/svelto.min.css'
+      uncompressed: '[dist]/css/[bundle].css',
+      compressed: '[dist]/css/[bundle].min.css'
     }
   },
-  clean: ['dist', '.temp']
+  clean: ['[dist]', '[temp]']
 };
 
 /* EXPORT */

@@ -8,9 +8,7 @@
 
 /* REQUIRE */
 
-const _       = require ( 'lodash' ),
-      path    = require ( 'path' ),
-      project = require ( '../config/project' );
+const paths = require ( './paths' );
 
 /* OUTPUT */
 
@@ -18,29 +16,25 @@ const output = {
 
   getDir ( key ) {
 
-    const p = output.getPath ( key );
-
-    return _.last ( p.split ( '/' ) ).includes ( '.' ) ? path.parse ( p ).dir : p;
+    return paths.getDir ( `output.${key}` );
 
   },
 
   getDirs ( key ) {
 
-    const path = output.getPath ( key );
-
-    return _.isPlainObject ( path ) ? _.uniq ( Object.keys ( path ).map ( subkey => output.getDir ( `${key}.${subkey}` ) ) ) : path;
+    return paths.getDirs ( `output.${key}` );
 
   },
 
   getName ( key ) {
 
-    return path.parse ( output.getPath ( key ) ).base;
+    return paths.getName ( `output.${key}` );
 
   },
 
   getPath ( key ) {
 
-    return _.get ( project.paths.output, key );
+    return paths.getPath ( `output.${key}` );
 
   }
 

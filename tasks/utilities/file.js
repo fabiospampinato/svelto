@@ -40,9 +40,9 @@ const file = {
   file2module ( file ) { //TODO: Maybe implement some caching mechanism
 
     const cwd = process.cwd (),
-          roots = require ( '../config/project' ).paths.input.roots, // In order to avoid a cyclic dependency
-          absRoots = roots.map ( root => path.isAbsolute ( root ) ? root : path.resolve ( cwd, root ) ),
-          absRootRe = new RegExp ( `^(${absRoots.map ( _.escapeRegExp ).join ( '|' )})\/?` );
+          src = require ( '../config/project' ).paths.tokens.src, // In order to avoid a cyclic dependency
+          absSrc = src.map ( src => path.isAbsolute ( src ) ? src : path.resolve ( cwd, src ) ),
+          absRootRe = new RegExp ( `^(${absSrc.map ( _.escapeRegExp ).join ( '|' )})\/?` );
 
     return file.path.replace ( /[\\|/]+/g, '/' )
                     .replace ( absRootRe, '' );

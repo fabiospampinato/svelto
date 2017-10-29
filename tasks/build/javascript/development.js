@@ -15,8 +15,8 @@ const gulp         = require ( 'gulp' ),
       replace      = require ( 'gulp-replace' ),
       touch        = require ( 'gulp-touch-cmd' ),
       environments = require ( '../../utilities/environments' ),
-      input        = require ( '../../utilities/input' ),
-      output       = require ( '../../utilities/output' ),
+      input        = require ( '../../utilities/paths/input' ),
+      output       = require ( '../../utilities/paths/output' ),
       project      = require ( '../../config/project' );
 
 /* TASK */

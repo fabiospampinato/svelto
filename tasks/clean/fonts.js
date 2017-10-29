@@ -11,7 +11,7 @@
 const del     = require ( 'del' ),
       gulp    = require ( 'gulp' ),
       plugins = require ( '../config/project' ).plugins,
-      output  = require ( '../utilities/output' );
+      output  = require ( '../utilities/paths/output' );
 
 /* TASK */
 

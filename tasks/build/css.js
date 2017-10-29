@@ -19,7 +19,7 @@ const gulp         = require ( 'gulp' ),
       touch        = require ( 'gulp-touch-cmd' ),
       changed      = require ( '../utilities/changed' ),
       log          = require ( '../utilities/log' ),
-      output       = require ( '../utilities/output' ),
+      output       = require ( '../utilities/paths/output' ),
       plugins      = require ( '../config/project' ).plugins;
 
 /* TASK */
