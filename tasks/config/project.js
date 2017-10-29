@@ -22,6 +22,7 @@ const _            = require ( 'lodash' ),
 
 const envsRaw = argv.environments || argv.environment || argv.envs || argv.env || dot.environment || custom.environment || defaults.environment,
       envs = environments.parse ( envsRaw ),
+      prettyEnvs = environments.pretty ( envs ),
       defaultsEnvs = environments.get ( defaults, envs ),
       customEnvs = environments.get ( custom, envs ),
       dotEnvs = environments.get ( dot, envs ),
@@ -32,6 +33,8 @@ const envsRaw = argv.environments || argv.environment || argv.envs || argv.env |
 const project = _.merge ( {}, defaults, ...defaultsEnvs, custom, ...customEnvs, dot, ...dotEnvs, arg, ...argEnvs );
 
 project.environment = envs;
+project.paths.tokens.env = prettyEnvs;
+project.paths.tokens.environment = prettyEnvs
 
 /* EXPORT */
 

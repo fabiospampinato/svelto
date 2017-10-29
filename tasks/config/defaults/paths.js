@@ -17,8 +17,9 @@ const paths = {
     src: ['src'],
     dist: 'dist',
     temp: '.temp',
-    bundle: 'svelto'
-    //TODO: Add an `env`/`environment` token
+    bundle: 'svelto',
+    env: undefined, // Setted dynamically
+    environment: undefined // Setted dynamically
   },
   input: {
     json: '[src]/**/*.json',
