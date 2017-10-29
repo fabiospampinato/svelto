@@ -26,7 +26,7 @@
     options: {
       contentChangeEvents: 'change datepicker:change editor:fullscreen editor:unfullscreen editor:preview editor:unpreview inputautogrow:change tabs:change tablehelper:change tagbox:change textareaautogrow:change', // When one of these events are triggered update the position because the content probably changed
       mustCloseEvents: 'modal:beforeopen modal:beforeclose panel:beforeopen panel:beforeclose', //FIXME: This way opening/closing a modal/panel from inside a popover while still keeping it open is not supported
-      parentChangeEvents: 'popover:close modal:close panel:close editor:fullscreen editor:unfullscreen', // One one of these events happen, and the target is an anchestor of the anchor, we close the popover //FIXME: Ugly
+      parentChangeEvents: 'popover:close modal:close panel:close editor:fullscreen editor:unfullscreen', // When one of these events happen, and the target is an anchestor of the anchor, we close the popover //FIXME: Ugly
       positionate: {}, // Extending `$.positionate` options
       spacing: {
         affixed: 0,
