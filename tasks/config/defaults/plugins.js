@@ -49,7 +49,7 @@ const plugins = {
   },
   del: {
     options: {
-      force: false
+      force: true
     }
   },
   dependencies: {
