@@ -184,6 +184,15 @@
 
       this.height = height;
 
+      if ( isWidows && !this.options.row.widows.justify ) { // Checking for sane height values
+
+        let widthWithoutMargin = this.width - ( ( this.boxesNr - 1 ) * this.options.row.margin ),
+            maxHeight = widthWithoutMargin / this.ratio;
+
+        this.height = Math.min ( maxHeight, this.height );
+
+      }
+
       let boxLeft = this.left;
 
       this.forEachBox ( box => {
