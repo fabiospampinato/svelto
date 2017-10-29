@@ -7,6 +7,7 @@
  * =========================================================================
  * @require core/widget/widget.js
  * @require lib/touching/touching.js
+ * @require widgets/draggable/draggable.js
  * ========================================================================= */
 
 (function ( $, _, Svelto, Widgets, Factory ) {

@@ -8,6 +8,7 @@
  * @require core/widget/widget.js
  * @require lib/color/color.js
  * @require lib/transform/transform.js
+ * @require widgets/draggable/draggable.js
  * ========================================================================= */
 
 //FIXME: Add support of it working without a `startColor`
