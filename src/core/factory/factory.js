@@ -34,7 +34,7 @@
 
       for ( let i = 0, l = this.unmakers.order.length; i < l; i++ ) {
 
-        this.unmakers[this.unmakers.order[i]]( Widget, config, namespace, instances );
+        this.unmakers[this.unmakers.order[i]]( Widget, namespace, instances );
 
       }
 
