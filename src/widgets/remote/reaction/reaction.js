@@ -136,7 +136,7 @@
 
       this._success ( resj );
 
-      if ( 'message' in resj && resj.message ) $.toast ( resj.message );
+      if ( resj.message && !resj.noop ) $.toast ( resj.message );
 
       return super.__success ();
 
