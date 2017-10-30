@@ -270,13 +270,15 @@
 
       if ( !row.isComplete () ) {
 
-        let height = options.row.widows.justify || !row.boxesNr
+        let height = options.row.widows.justify
                        ? undefined
-                       : options.row.widows.average
-                         ? layout.height / layout.heightsIndex
-                         : options.row.widows.previous
-                           ? layout.heights[layout.heightsIndex - 1]
-                           : undefined;
+                       : !layout.heightsIndex
+                         ? options.row.height
+                         : options.row.widows.average
+                           ? layout.height / layout.heightsIndex
+                           : options.row.widows.previous
+                             ? layout.heights[layout.heightsIndex - 1]
+                             : undefined;
 
         row.complete ( height, true );
 
