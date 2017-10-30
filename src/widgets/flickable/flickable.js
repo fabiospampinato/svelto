@@ -20,7 +20,7 @@
     selector: '.flickable',
     options: {
       duration: 150, // Maximum duration of the flick gesture
-      threshold: 5, // Minimum moving treshold of the flick gesture
+      threshold: 5, // Minimum moving threshold of the flick gesture
       callbacks: {
         flick: _.noop
       }

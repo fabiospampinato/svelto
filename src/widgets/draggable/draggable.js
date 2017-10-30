@@ -26,7 +26,7 @@
       multitouch: { // Multitouch-related options
         enabled: false // Whether to abort on multitouch events or not
       },
-      threshold: { // Minimum moving treshold for triggering a drag. They can also be functions that return the threshold
+      threshold: { // Minimum moving threshold for triggering a drag. They can also be functions that return the threshold
         touch () { // Enabled on touch events
           return this.options.axis ? 0 : 5; // If an axis is specified we disable the threshold, in order to enable scrolling
         },

@@ -30,7 +30,7 @@
       flick: {
         open: false,
         close: true,
-        treshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
+        threshold: 20 // Amount of pixels close to the window border where the opening flick gesture should be considered intentional
       },
       scroll: {
         disable: true // Disable scroll when the panel is open
@@ -194,19 +194,19 @@
       switch ( this.options.direction ) {
 
         case 'left':
-          if ( data.startXY.x - layoutOffset.left > this.options.flick.treshold ) return;
+          if ( data.startXY.x - layoutOffset.left > this.options.flick.threshold ) return;
           break;
 
         case 'right':
-          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.x > this.options.flick.treshold ) return;
+          if ( this.$layout.outerWidth () + layoutOffset.left - data.startXY.x > this.options.flick.threshold ) return;
           break;
 
         case 'top':
-          if ( data.startXY.y - layoutOffset.top > this.options.flick.treshold ) return;
+          if ( data.startXY.y - layoutOffset.top > this.options.flick.threshold ) return;
           break;
 
         case 'bottom':
-          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.y > this.options.flick.treshold ) return;
+          if ( this.$layout.outerHeight () + layoutOffset.top - data.startXY.y > this.options.flick.threshold ) return;
           break;
 
       }
