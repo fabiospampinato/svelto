@@ -28,13 +28,8 @@
   /* NOT RENDERED */
 
   &:not(.rendered) {
-
     height: 200vh; // So that remote loaded content won't get loaded without need, but was if the screen is very very large? Then we would have the opposite problem, right?
-
-    > * {
-      visibility: hidden;
-    }
-
+    visibility: hidden;
   }
 
 }
