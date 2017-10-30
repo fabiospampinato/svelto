@@ -178,7 +178,7 @@
       let resj = await fetch.getValue ( res ),
           isJSON = !!resj;
 
-      if ( isJSON && !('html' in resj) ) return this.__error ( res );
+      if ( isJSON && ( resj.error || !('html' in resj) ) ) return this.__error ( res );
 
       super.__success ( res );
 

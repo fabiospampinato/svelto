@@ -97,9 +97,13 @@
 
     }
 
-    __success ( res ) {
+    async __success ( res ) {
 
       if ( this.isAborted () ) return;
+
+      let resj = await fetch.getValue ( res );
+
+      if ( resj && resj.error ) return this.__error ( res );
 
       this._trigger ( 'success', res );
 

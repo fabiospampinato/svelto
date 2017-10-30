@@ -139,17 +139,17 @@
 
       let resj = await fetch.getValue ( res );
 
-      if ( resj ) {
+      if ( !resj ) return;
 
-        _.merge ( this.options, resj );
+      if ( resj.error ) return this.__error ( res );
 
-        this.$rater.html ( this._template ( 'stars', this.options ) );
+      _.merge ( this.options, resj );
 
-        this.options.rated = true;
+      this.$rater.html ( this._template ( 'stars', this.options ) );
 
-        this._trigger ( 'change' );
+      this.options.rated = true;
 
-      }
+      this._trigger ( 'change' );
 
     }
 

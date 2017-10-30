@@ -180,7 +180,11 @@
 
       if ( resj ) {
 
-        if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
+        if ( resj.error ) {
+
+          return this.__error ( res );
+
+        } else if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
 
           this._replaceToast ( resj.message || this.options.messages.refreshing );
 

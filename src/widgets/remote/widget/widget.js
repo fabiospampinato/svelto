@@ -348,7 +348,7 @@
 
       let resj = await fetch.getValue ( res );
 
-      if ( !resj || !(this.options.widget.config.name in resj) ) return this.__error ( res );
+      if ( !resj || resj.error || !(this.options.widget.config.name in resj) ) return this.__error ( res );
 
       /* WAIT */
 

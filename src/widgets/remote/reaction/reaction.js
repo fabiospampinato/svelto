@@ -132,7 +132,7 @@
 
       let resj = await fetch.getValue ( res );
 
-      if ( !resj ) return this.__error ( res );
+      if ( !resj || resj.error ) return this.__error ( res );
 
       this._success ( resj );
 
