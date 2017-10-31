@@ -64,7 +64,7 @@
         url += ( url.includes ( '?' ) ? '&' : '?' ) + `anticache=${new Date ().getTime ()}`;
       }
 
-      request.open ( options.method, url );
+      request.open ( options.method, url, true );
 
       if ( _.isPlainObject ( options.body ) ) {
 
