@@ -22,6 +22,8 @@
 
     undefined: _.constant (),
 
+    null: _.constant ( null )
+
   });
 
 }( window.__svelto_lodash ));
