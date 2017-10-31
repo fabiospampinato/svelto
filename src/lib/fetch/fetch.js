@@ -57,14 +57,13 @@
 
       let request = options.request ();
 
-      request.timeout = options.timeout;
-      request.withCredentials = ( options.credentials === 'include' );
-
       if ( !options.cache && isMethodCacheable ) {
         url += ( url.includes ( '?' ) ? '&' : '?' ) + `anticache=${new Date ().getTime ()}`;
       }
 
       request.open ( options.method, url, true );
+      request.timeout = options.timeout;
+      request.withCredentials = ( options.credentials === 'include' );
 
       if ( _.isPlainObject ( options.body ) ) {
 
