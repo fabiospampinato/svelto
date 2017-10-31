@@ -7,6 +7,7 @@
  * =========================================================================
  * @require ../init.js
  * @require core/lodash/lodash.js
+ * @require core/shims/shims/requestAnimationFrame.js
  * ========================================================================= */
 
 // Pretty simple, lightweight, alternative of $.fn.animate implementing a subset of its functionalities

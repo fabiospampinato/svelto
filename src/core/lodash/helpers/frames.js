@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require ../init.js
+ * @require core/shims/shims/requestAnimationFrame.js
  * ========================================================================= */
 
 (function ( _ ) {
