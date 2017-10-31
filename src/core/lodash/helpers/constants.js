@@ -18,8 +18,9 @@
 
     true: _.constant ( true ),
 
-    false: _.constant ( false )
+    false: _.constant ( false ),
 
+    undefined: _.constant (),
 
   });
 
