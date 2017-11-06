@@ -6,11 +6,19 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @require widgets/checkbox/variables.scss
+ * @require widgets/label/variables.scss
  * ========================================================================= */
 
 /* SELECT */
 
 $select-z-index: 200 !default;
+
+$select-color: 'white' !default;
+$select-color-force: false !default;
+$select-color-basic: true !default;
+
+$select-padding-x: $label-padding-x / 2 !default;
+$select-padding-y: $label-padding-y / 2 !default;
 
 $select-inner-gutter: $checkbox-inner-gutter !default;
 

@@ -1,0 +1,40 @@
+
+/* =========================================================================
+ * Svelto - Widgets - Select (Native)
+ * =========================================================================
+ * Copyright (c) 2015-2017 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SELECT */
+
+select {
+  @include color ( $select-color, $select-color-force, $select-color-basic );
+  font-family: $font-family-sans-serif;
+}
+
+/* OPTION */
+
+option {
+  padding: $select-padding-y $select-padding-x;
+}
+
+/* OPTGROUP */
+
+optgroup {
+
+  font-style: normal;
+
+  /* LABEL */
+
+  &::before {
+    padding: $select-padding-y $select-padding-x;
+  }
+
+  /* OPTION */
+
+  option {
+    padding: $select-padding-y $select-padding-x $select-padding-y ( $select-padding-x * 3 );
+  }
+
+}
