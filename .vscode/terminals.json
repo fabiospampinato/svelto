@@ -1,4 +1,5 @@
 {
+  "autorun": true,
   "terminals": [
     {
       "name": "Gulp",
