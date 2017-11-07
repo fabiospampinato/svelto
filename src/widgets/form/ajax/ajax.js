@@ -8,13 +8,14 @@
  * @before ../validate/validate.js
  * @require core/svelto/svelto.js
  * @require lib/fetch/fetch.js
+ * @require lib/url/url.js
  * @require widgets/toast/toast.js
  * @require widgets/spinner/overlay/overlay.js
  * ========================================================================= */
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
-(function ( $, _, Svelto, Widgets, Factory, fetch ) {
+(function ( $, _, Svelto, Widgets, Factory, fetch, URL ) {
 
   'use strict';
 
@@ -157,7 +158,7 @@
 
           return this.__error ( res );
 
-        } else if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
+        } else if ( resj.refresh || URL.isEqual ( resj.url, window.location.href ) ) {
 
           $.toast ( resj.message || this.options.messages.refreshing );
 
@@ -169,7 +170,15 @@
 
           $.toast ( resj.message || this.options.messages.redirecting );
 
+          const needsReload = URL.isEqual ( resj.url, window.location.href, true ); // Supporting #target changes
+
           location.assign ( resj.url );
+
+          if ( needsReload ) {
+
+            location.reload ();
+
+          }
 
         } else if ( !resj.noop ) {
 
@@ -207,4 +216,4 @@
 
   Factory.make ( FormAjax, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.fetch, Svelto.URL ));

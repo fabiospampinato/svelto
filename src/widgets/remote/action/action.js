@@ -8,6 +8,7 @@
  * @require ../remote.js
  * @require core/colors/colors.js
  * @require core/sizes/sizes.js
+ * @require lib/url/url.js
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
@@ -17,7 +18,7 @@
 //FIXME: Not well written, maybe try to extend RemoteWidget, even though it was ment for a different kind of widgets
 //FIXME: Clicking an error/success toast doesn't close it
 
-(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, fetch ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, fetch, URL ) {
 
   'use strict';
 
@@ -184,7 +185,7 @@
 
           return this.__error ( res );
 
-        } else if ( resj.refresh || resj.url === window.location.href || ( _.isString ( resj.url ) && _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) ) {
+        } else if ( resj.refresh || URL.isEqual ( resj.url, window.location.href ) ) {
 
           this._replaceToast ( resj.message || this.options.messages.refreshing );
 
@@ -196,7 +197,15 @@
 
           this._replaceToast ( resj.message || this.options.messages.redirecting );
 
+          const needsReload = URL.isEqual ( resj.url, window.location.href, true ); // Supporting #target changes
+
           location.assign ( resj.url );
+
+          if ( needsReload ) {
+
+            location.reload ();
+
+          }
 
         } else if ( resj.noop ) {
 
@@ -250,4 +259,4 @@
 
   Factory.make ( RemoteAction, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes, Svelto.fetch, Svelto.URL ));
