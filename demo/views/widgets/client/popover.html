@@ -20,6 +20,7 @@
     <div class="button popover-toggler bordered" data-target="#long_text">Long text</div>
     <div class="button popover-toggler bordered" data-target="#fullscreen">Fullscreen</div>
     <div class="button popover-toggler bordered" data-target="#size_change">Size change</div>
+    <div class="button popover-toggler bordered" data-target="#size_change_2">Size change 2</div>
     <div class="button modal-toggler bordered" data-target="#modal">Nested</div>
   </div>
 
@@ -101,10 +102,14 @@
         <input name="partial_name" placeholder="Add tag..." class="tagbox-partial autogrow compact">
       </div>
     </div>
-    <!-- datepicker:change -->
-    <!-- tabs:change -->
-    <!-- tablehelper:change -->
-    <!-- textarea increase in size -->
+    <!-- //TODO: datepicker:change -->
+    <!-- //TODO: tabs:change -->
+    <!-- //TODO: tablehelper:change -->
+    <!-- //TODO: textarea increase in dimensions -->
+  </div>
+
+  <div id="size_change_2" class="popover container bordered">
+    <span class="timeago" data-timestamp="{{sw.nowSecs}}">{{sw.timeAgo sw.nowSecs}}</span>
   </div>
 
   <div id="fullscreen" class="popover fullscreen container">
