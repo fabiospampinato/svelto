@@ -166,7 +166,7 @@
 
         } else if ( resj.url ) {
 
-          // In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+          // In order to redirect to another domain the protocol must be provided. For instance `https://www.domain.tld` will work while `www.domain.tld` won't
 
           $.toast ( resj.message || this.options.messages.redirecting );
 

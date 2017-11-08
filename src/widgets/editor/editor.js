@@ -51,10 +51,10 @@
           this._action ( '\n1. ', '\n', 'List element' );
         },
         link () {
-          this._action ( '[', '](http://example.com)', 'Link' );
+          this._action ( '[', '](https://example.com)', 'Link' );
         },
         image () {
-          this._action ( '![', '](http://example.com/image.jpg)', 'Image' );
+          this._action ( '![', '](https://example.com/image.jpg)', 'Image' );
         },
         code () {
           this._action ( '`', '`', 'code' );
