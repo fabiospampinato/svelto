@@ -18,4 +18,15 @@
 
   window.log = console.log.bind ( console );
 
+  const timeMarks = {};
+  window.time = function ( mark = '?' ) {
+    if ( !timeMarks[mark] ) {
+      timeMarks[mark] = true;
+      console.time ( mark );
+    } else {
+      console.timeEnd ( mark );
+      delete timeMarks[mark];
+    }
+  }
+
 }( Svelto.$, Svelto._, Svelto ));
