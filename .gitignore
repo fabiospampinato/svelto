@@ -40,6 +40,7 @@ node_modules
 .svelto.json
 .project.previous.json
 demo/public
+demo/client
 !demo/public/sample
 !demo/public/favicon.ico
 demo/svelto
