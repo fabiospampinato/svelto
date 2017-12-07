@@ -14,7 +14,7 @@
 
   /* EMOJI */
 
-  Modernizr.addTest ( 'emoji', function () {
+  function supportsEmoji () {
 
     let canvas = document.createElement ( 'canvas' );
 
@@ -30,6 +30,8 @@
 
     return ctx.getImageData ( 16, 16, 1, 1 ).data[0] !== 0;
 
-  });
+  }
+
+  Modernizr.addTest ( 'emoji', supportsEmoji () );
 
 }( window.__svelto_modernizr ));
