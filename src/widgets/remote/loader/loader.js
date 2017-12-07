@@ -23,7 +23,7 @@
     selector: '.remote-loader',
     options: {
       externalUpdateEvents: 'justifiedlayout:firstrender', // When one of these events happen, check again if the remote loader can load //FIXME: Ugly
-      target: false, // Selector pointing to the element that cointains the content
+      cache: false, // Selector pointing to the element that cointains the content
       wrap: true, // Wrap the content into a `.remote-loaded` element
       autorequest: {
         threshold: 400
@@ -49,7 +49,7 @@
         url: 'url',
         body: 'body',
         method: 'method',
-        target: 'target'
+        cache: 'cache'
       },
       callbacks: {
         loaded: _.noop
@@ -77,13 +77,13 @@
       this.options.ajax.url = this.$loader.data ( this.options.datas.url ) || this.$loader.attr ( this.options.attributes.href ) || this.options.ajax.url;
       this.options.ajax.body = this.$loader.data ( this.options.datas.body ) || this.options.ajax.body;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
-      this.options.target = this.$loader.data ( this.options.datas.target ) || this.options.target;
+      this.options.cache = this.$loader.data ( this.options.datas.cache ) || this.options.cache;
       this.options.wrap = this.$loader.hasClass ( this.options.classes.nowrap ) ? false : this.options.wrap;
 
-      if ( this.options.target ) {
+      if ( this.options.cache ) {
 
-        this.$target = $(this.options.target);
-        this.$target = this.$target.length ? this.$target : false;
+        this.$cache = $(this.options.cache);
+        this.$cache = this.$cache.length ? this.$cache : false;
 
       }
 
@@ -214,7 +214,7 @@
 
       if ( this._replaced ) return;
 
-      if ( this.$target ) return this._replace ( this.$target.html (), null, false );
+      if ( this.$cache ) return this._replace ( this.$cache.html (), null, false );
 
       if ( this._res ) return this._replace ( this._res, this._resj, this._isJSON );
 
@@ -232,7 +232,7 @@
 
     preload () {
 
-      if ( this.$target ) return;
+      if ( this.$cache ) return;
 
       this._preloading = true;
 
