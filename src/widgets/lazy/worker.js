@@ -134,17 +134,21 @@
 
     }
 
-    process ( multipliers = this.options.multipliers.default ) {
+    process ( multipliers = this.options.multipliers.default, onlyGroup ) {
 
       let hadElements = false,
           hasLeftovers = false,
           hasLoaded = false,
+          isOnlyGroup = !_.isUndefined ( onlyGroup ),
           windowWidth = $.window.innerWidth,
           windowHeight = $.window.innerHeight;
+
+      onlyGroup = String ( onlyGroup );
 
       for ( let group in this.groups ) {
 
         if ( !this.groups.hasOwnProperty ( group ) ) continue;
+        if ( isOnlyGroup && group !== onlyGroup ) continue;
 
         hadElements = true;
 
@@ -206,7 +210,13 @@
 
       }
 
-      this[hasLeftovers ? '___events' : '___events_off']();
+      if ( !isOnlyGroup ) {
+
+        this[hasLeftovers ? '___events' : '___events_off']();
+
+      }
+
+      return !hasLeftovers; // Completed?
 
     }
 
