@@ -10,7 +10,9 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-(function ( $, _, Svelto, Widgets, Factory, calculator ) {
+//TODO: In case we have `normal image + very wide image` add an option for swapping them
+
+(function ( $, _, Svelto, Widgets, Widgetize, Factory, calculator ) {
 
   'use strict';
 
@@ -25,6 +27,10 @@
       oneRow: false, // Switch to `One Row` logic
       oneRowHeights: [110, calculator.defaults.row.height], // Min and Max height, adjusted according to the viewport size
       singleRowBelowWidth: 500, // Force 1 box per row below this width
+      sizes: {
+        set: true, // Set the `sizes` attribute of the found images
+        threshold: 50 // It will be re-set if the previous differs by at least this amount of pixels
+      },
       classes: {
         onerow: 'onerow',
         rendered: 'rendered'
@@ -68,6 +74,16 @@
     }
 
     /* PRIVATE */
+
+    _getImages () {
+
+      if ( this._images ) return this._images;
+
+      this._images = this.$boxes.get ().map ( box => Widgetize._getWidgets ( 'img', $(box) ).get ()[0] ); //FIXME: Ugly, `Widgetize._getWidgets` should be an external utility
+
+      return this._images;
+
+    }
 
     async _box2ratio ( box ) {
 
@@ -136,6 +152,7 @@
     async render () {
 
       let ratios = await this._getCalculatorRatios (),
+          images = this._getImages (),
           options = this._getCalculatorOptions (),
           layout = calculator ( ratios, options, false );
 
@@ -148,6 +165,11 @@
         if ( !this.options.oneRow ) {
           box.style.top = `${layout.top}px`;
           box.style.left = `${layout.left}px`;
+        }
+        let image = images[i];
+        if ( this.options.sizes.set && image && ( !this.options.sizes.threshold || !image.__justified_layout_sizes || Math.abs ( image.__justified_layout_sizes - layout.width ) >= this.options.sizes.threshold ) ) {
+          image.setAttribute ( 'sizes', `${layout.width}px` );
+          image.__justified_layout_sizes = layout.width;
         }
       });
 
@@ -171,4 +193,4 @@
 
   Factory.make ( JustifiedLayout, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.justifiedLayoutCalculator ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Widgetize, Svelto.Factory, Svelto.justifiedLayoutCalculator ));
