@@ -11,7 +11,12 @@
 const paths = {
   tokens: {
     dist: 'demo/public',
-    temp: 'demo/svelto/client'
+    temp: 'demo/public/temp'
+  },
+  output: {
+    javascript: {
+      uncompressed: 'demo/client/svelto.js'
+    }
   }
 };
 
