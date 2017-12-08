@@ -389,6 +389,7 @@
       if ( this.options.original.substitute ) {
 
         this.$zoomable.attr ( 'src', this.options.original.src );
+        this.$zoomable.attr ( 'srcset', this.options.original.src );
 
       }
 
