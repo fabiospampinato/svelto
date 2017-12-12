@@ -40,6 +40,16 @@
 
     },
 
+    ready ( Widget, namespace = Widgets, instances = Instances ) {
+
+      for ( let i = 0, l = this.readifiers.order.length; i < l; i++ ) {
+
+        this.readifiers[this.readifiers.order[i]]( Widget, namespace, instances );
+
+      }
+
+    },
+
     /* MAKERS */
 
     makers: {
@@ -76,15 +86,15 @@
 
       },
 
-      ready ( Widget ) {
+      ready ( Widget, config ) {
 
-        Readify.add ( Widget );
+        Readify.add ( Widget, config.ready );
 
       },
 
-      widgetize ( Widget ) {
+      widgetize ( Widget, config ) {
 
-        Widgetize.add ( Widget );
+        Widgetize.add ( Widget, config.ready );
 
       }
 
@@ -136,6 +146,29 @@
       widgetize ( Widget ) {
 
         Widgetize.remove ( Widget );
+
+      }
+
+    },
+
+    /* READIFIERS */
+
+    readifiers: {
+
+      order: ['ready', 'widgetize'], // The order in which the readifiers will be called
+
+      ready ( Widget ) {
+
+        Factory.unmakers.ready ( Widget );
+
+      },
+
+      widgetize ( Widget ) { //TODO: Code duplication, look at `Widgetize.add`
+
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize, //IE10 support -- static property
+            $widgets = Widgetize._getWidgets ( Widget.config.selector, $.$body, $.$html );
+
+        Widgetize.worker ( [[widgetize, Widget]], $widgets );
 
       }
 

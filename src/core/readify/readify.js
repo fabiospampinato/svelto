@@ -34,9 +34,9 @@
 
     }
 
-    add ( fn ) {
+    add ( fn, ready = false ) {
 
-      if ( this._isReady ) {
+      if ( ready || this._isReady ) {
 
         this.worker ( fn );
 

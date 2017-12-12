@@ -26,6 +26,7 @@
     name: 'widget', // The name of widget, it will be used for the the jQuery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     plugin: false, // A boolean that defines wheter the Widget is also a jQuery plugin or not
     selector: false, // The selector used to select the website in the DOM, used for `Svelto.Widgetize`
+    ready: false, // If ready `Widgetize` will be triggered right away, without waiting for `Readify.isReady ()`
     templates: { // Object containing lodash template strings
       base: false // It will be used as the constructor if no element is provided
     },
@@ -98,7 +99,7 @@
 
     static _initReady () {
 
-      this._ready = false;
+      this._ready = !!this.config.ready;
       this._readyQueue = [];
 
     }

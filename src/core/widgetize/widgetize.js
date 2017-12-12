@@ -61,7 +61,7 @@
 
     }
 
-    add ( selector, widgetizer, data ) {
+    add ( selector, widgetizer, data, ready = false ) {
 
       if ( _.isObject ( selector ) ) {
 
@@ -71,7 +71,7 @@
 
         let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
 
-        return this.add ( Widget.config.selector, widgetize, Widget );
+        return this.add ( Widget.config.selector, widgetize, Widget, widgetizer );
 
       }
 
@@ -83,7 +83,7 @@
 
       this.widgetizers[selector].push ( [widgetizer, data] );
 
-      if ( Readify.isReady () ) {
+      if ( ready || Readify.isReady () ) {
 
         let $widgets = this._getWidgets ( selector, $.$body, $.$html );
 
