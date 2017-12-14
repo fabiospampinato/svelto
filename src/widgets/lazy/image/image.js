@@ -38,7 +38,7 @@
 
     load () {
 
-      let attrs = ['src', 'srcset', 'sizes'],
+      let attrs = ['sizes', 'srcset', 'src'],
           datas = attrs.map ( attr => this.$element.data ( this.options.datas[attr] ) );
 
       datas.forEach ( ( data, index ) => data && this.$element.attr ( attrs[index], data ) );
