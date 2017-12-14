@@ -18,14 +18,20 @@
 
   const defaults = {
     thresholds: {
-      x: 200,
+      x: 150,
       y: 450
     },
     multipliers: {
       dynamic: {
         enabled: true,
-        factor: 1,
-        multiplier: 1.05
+        factor: {
+          x: 1,
+          y: 1
+        },
+        multiplier: {
+          x: 1,
+          y: 1.35
+        }
       },
       default: {
         x: 1,
@@ -108,8 +114,8 @@
       let windowWidth = _windowWidth || $.window.innerWidth,
           windowHeight = _windowHeight || $.window.innerHeight,
           eRect = $element.getRect (),
-          deltaX = this.options.thresholds.x * multipliers.x * this.options.multipliers.dynamic.factor,
-          deltaY = this.options.thresholds.y * multipliers.y * this.options.multipliers.dynamic.factor;
+          deltaX = this.options.thresholds.x * multipliers.x * this.options.multipliers.dynamic.factor.x,
+          deltaY = this.options.thresholds.y * multipliers.y * this.options.multipliers.dynamic.factor.y;
 
       return eRect.top - windowHeight <= deltaY &&
              eRect.left - windowWidth <= deltaX &&
@@ -206,7 +212,8 @@
 
       if ( hasLoaded && this.options.multipliers.dynamic.enabled ) {
 
-        this.options.multipliers.dynamic.factor *= this.options.multipliers.dynamic.multiplier;
+        this.options.multipliers.dynamic.factor.x *= this.options.multipliers.dynamic.multiplier.x;
+        this.options.multipliers.dynamic.factor.y *= this.options.multipliers.dynamic.multiplier.y;
 
       }
 
