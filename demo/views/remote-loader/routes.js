@@ -5,7 +5,7 @@ Router.route ( '/remote-loader-text', function () {
 
   setTimeout ( () => {
 
-    this.response.end ( 'Remote loaded content' );
+    this.response.end ( '<span>Remote loaded content</span>' );
 
   }, 1500 );
 
@@ -18,7 +18,7 @@ Router.route ( '/remote-loader-json', function () {
   setTimeout ( () => {
 
     this.response.end ( JSON.stringify ({
-      html: 'JSON-loaded content'
+      html: '<span>JSON-loaded content</span>'
     }));
 
   }, 1500 );
@@ -32,6 +32,18 @@ Router.route ( '/remote-loader-widget', function () {
   setTimeout ( () => {
 
     this.response.end ( '<div class="button ripple ripple-primary">Rippable</div>' );
+
+  }, 1500 );
+
+}, { where: 'server' });
+
+/* REMOTE LOADER - NO WRAP */
+
+Router.route ( '/remote-loader-no-wrap', function () {
+
+  setTimeout ( () => {
+
+    this.response.end ( '<span>Not wrapped content</span>' );
 
   }, 1500 );
 
@@ -56,7 +68,7 @@ Router.route ( '/remote-loader-json-message', function () {
   setTimeout ( () => {
 
     this.response.end ( JSON.stringify ({
-      message: 'Error message...'
+      message: '<span>Error message...</span>'
     }));
 
   }, 1500 );
@@ -68,7 +80,7 @@ Router.route ( '/remote-loader-json-message', function () {
 Router.route ( '/remote-loader-scroll', function () {
 
   this.response.end ( JSON.stringify ({
-    message: 'Loaded!'
+    message: '<span>Loaded!</span>'
   }));
 
 }, { where: 'server' });
@@ -78,7 +90,7 @@ Router.route ( '/remote-loader-scroll', function () {
 Router.route ( '/remote-loader-preload', function () {
 
   this.response.end ( JSON.stringify ({
-    html: 'Preloaded!'
+    html: '<span>Preloaded!</span>'
   }));
 
 }, { where: 'server' });
@@ -90,5 +102,24 @@ Router.route ( '/remote-loader-autofocus', function () {
   this.response.end ( JSON.stringify ({
     html: '<input class="bordered" autofocus>'
   }));
+
+}, { where: 'server' });
+
+
+/* REMOTE LOADER - TARGET */
+
+Router.route ( '/remote-loader-target', function () {
+
+  setTimeout ( () => {
+
+    this.response.end ( JSON.stringify ({
+      html: `
+        <p class="ok">...remote loaded content...</p>
+        <p class="ok">...that matches the selector</p>
+        <p>I don't match the selector</p>
+      `
+    }));
+
+  }, 1500 );
 
 }, { where: 'server' });

@@ -11,6 +11,8 @@
  * @require widgets/toast/toast.js
  * ========================================================================= */
 
+// Remote loaded content should always be properly wrapped html elements
+
 (function ( $, _, Svelto, Widgets, Factory, Autofocus, fetch ) {
 
   'use strict';
@@ -24,6 +26,8 @@
     options: {
       externalUpdateEvents: 'justifiedlayout:firstrender', // When one of these events happen, check again if the remote loader can load //FIXME: Ugly
       cache: false, // Selector pointing to the element that cointains the content
+      target: false, // Selector pointing to the element to which the content (always unwrapped) will be appended
+      targetFilter: false, // Selector for appending only the matching children to the target
       wrap: true, // Wrap the content into a `.remote-loaded` element
       autorequest: {
         threshold: 400
@@ -49,7 +53,9 @@
         url: 'url',
         body: 'body',
         method: 'method',
-        cache: 'cache'
+        cache: 'cache',
+        target: 'target',
+        targetFilter: 'target-filter'
       },
       callbacks: {
         loaded: _.noop
@@ -78,12 +84,21 @@
       this.options.ajax.body = this.$loader.data ( this.options.datas.body ) || this.options.ajax.body;
       this.options.ajax.method = this.$loader.data ( this.options.datas.method ) || this.options.ajax.method;
       this.options.cache = this.$loader.data ( this.options.datas.cache ) || this.options.cache;
+      this.options.target = this.$loader.data ( this.options.datas.target ) || this.options.target;
+      this.options.targetFilter = this.$loader.data ( this.options.datas.targetFilter ) || this.options.targetFilter;
       this.options.wrap = this.$loader.hasClass ( this.options.classes.nowrap ) ? false : this.options.wrap;
 
       if ( this.options.cache ) {
 
         this.$cache = $(this.options.cache);
         this.$cache = this.$cache.length ? this.$cache : false;
+
+      }
+
+      if ( this.options.target ) {
+
+        this.$target = $(this.options.target);
+        this.$target = this.$target.length ? this.$target : false;
 
       }
 
@@ -105,21 +120,54 @@
     async _replace ( res, resj, isJSON ) {
 
       let content = isJSON ? resj.html : ( _.isString ( res ) ? res : await res.text () ),
-          id = `remote-loaded-${$.guid++}`,
-          contentWrapped = `<div id="${id}" class="remote-loaded">${content}</div>`,
-          html = this.options.wrap ? contentWrapped : content,
-          $loader = this.$loader.first (),
-          $loaderWrp = $loader.parent ();
+          $elements = $(content);
 
-      $loader[0].outerHTML = html;
+      /* TARGET */
 
-      let $container = this.options.wrap ? $(`#${id}`) : $loaderWrp;
+      let $targetElements = this.$target ? ( this.options.targetFilter ? $elements.filter ( this.options.targetFilter ) : $elements ) : $.$empty;
 
-      $container.widgetize ();
+      if ( $targetElements.length ) {
 
-      Autofocus.focus ( $container );
+        this.$target.append ( $targetElements );
 
-      $loader.remove ();
+        $targetElements.widgetize ();
+
+        this.$target.trigger ( 'remoteloader:target', { //FIXME: Kind of ugly, we should use `_trigger` instead
+          $elements: $targetElements
+        });
+
+        this._trigger ( 'loaded', {
+          $container: this.$target,
+          $elements: $targetElements
+        });
+
+      }
+
+      /* OTHERS */
+
+      let $otherElements = $targetElements.length ? $elements.not ( $targetElements ) : $elements,
+          $otherWrapper = this.options.wrap ? $(`<div id="remote-loaded-${$.guid++}"></div>`) : this.$loader.parent ();
+
+      if ( this.options.wrap ) {
+
+        $otherWrapper.append ( $otherElements );
+
+        this.$loader.replaceWith ( $otherWrapper );
+
+        $otherWrapper.widgetize ();
+
+      } else {
+
+        this.$loader.replaceWith ( $otherElements );
+
+        $otherElements.widgetize ();
+
+      }
+
+      this._trigger ( 'loaded', {
+        $container: $otherWrapper,
+        $elements: $otherElements
+      });
 
       this._replaced = true;
 
@@ -195,8 +243,6 @@
         await this._replace ( res, resj, isJSON );
 
       }
-
-      this._trigger ( 'loaded' );
 
     }
 
