@@ -39,6 +39,14 @@
 
     /* API */
 
+    init () {
+
+      Breakpoint.current = Breakpoint.get ();
+
+      $.$window.on ( 'resize', _.frames ( Breakpoint.__resize.bind ( Breakpoint ) ) );
+
+    },
+
     get () {
 
       this._widths = this._widths || _.sortBy ( _.values ( Breakpoints.widths ) );
@@ -60,15 +68,9 @@
 
   };
 
-  /* READY */
+  /* INIT */
 
-  Readify.add ( function () {
-
-    Breakpoint.current = Breakpoint.get ();
-
-    $.$window.on ( 'resize', _.frames ( Breakpoint.__resize.bind ( Breakpoint ) ) );
-
-  });
+  Breakpoint.init ();
 
   /* EXPORT */
 
