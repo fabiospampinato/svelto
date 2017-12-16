@@ -29,7 +29,7 @@
       singleRowBelowWidth: 500, // Force 1 box per row below this width
       sizes: {
         set: true, // Set the `sizes` attribute of the found images
-        threshold: 50 // It will be re-set if the previous differs by at least this amount of pixels
+        threshold: Infinity // It will be re-set if the previous differs by at least this amount of pixels // Effectively disabled by default
       },
       classes: {
         onerow: 'onerow',
@@ -61,7 +61,10 @@
 
     }
 
-    _init () {
+    async _init () {
+
+      this._images = this._getImages ( this.$boxes );
+      this._ratios = await this._getRatios ( this.$boxes );
 
       this.render ();
 
@@ -69,19 +72,44 @@
 
     _events () {
 
+      this.___remoteLoaderTarget ();
+      this.___resize ();
+
+    }
+
+    /* REMOTE LOADER TARGET */
+
+    ___remoteLoaderTarget () {
+
+      this._on ( true, 'remoteloader:target', this.__remoteLoaderTarget );
+
+    }
+
+    async __remoteLoaderTarget ( event, { $elements } ) { //TODO: Make it faster, leverage the fact that the previous boxes minus widows are already well positionated
+
+      this.$boxes = this.$boxes.add ( $elements );
+      this._images = this._images.concat ( this._getImages ( $elements ) );
+      this._ratios = this._ratios.concat ( await this._getRatios ( $elements ) );
+
+      this.render ();
+
+      $elements.removeClass ( this.options.classes.hidden );
+
+    }
+
+    /* RESIZE */
+
+    ___resize () {
+
       this._on ( true, $.$window, 'resize', this._frames ( this.render.bind ( this ) ) );
 
     }
 
     /* PRIVATE */
 
-    _getImages () {
+    _getImages ( $boxes ) {
 
-      if ( this._images ) return this._images;
-
-      this._images = this.$boxes.get ().map ( box => Widgetize._getWidgets ( 'img', $(box) ).get ()[0] ); //FIXME: Ugly, `Widgetize._getWidgets` should be an external utility
-
-      return this._images;
+      return $boxes.get ().map ( box => Widgetize._getWidgets ( 'img', $(box) )[0] ); //FIXME: Ugly, `Widgetize._getWidgets` should be an external utility
 
     }
 
@@ -105,17 +133,13 @@
 
     }
 
-    async _getCalculatorRatios () {
+    async _getRatios ( $boxes ) {
 
-      if ( this._ratios ) return this._ratios;
-
-      this._ratios = ( await Promise.all ( this.$boxes.get ().map ( this._box2ratio ) ) ).map ( ratio => ({ratio}) );
-
-      return this._ratios;
+      return ( await Promise.all ( $boxes.get ().map ( this._box2ratio ) ) ).map ( ratio => ({ratio}) );
 
     }
 
-    _getCalculatorOptions () {
+    _getOptions () {
 
       if ( !this._options ) this._options = _.merge ( {}, calculator.defaults, this.options.calculatorOptions );
 
@@ -149,12 +173,10 @@
 
     }
 
-    async render () {
+    render () {
 
-      let ratios = await this._getCalculatorRatios (),
-          images = this._getImages (),
-          options = this._getCalculatorOptions (),
-          layout = calculator ( ratios, options, false );
+      let options = this._getOptions (),
+          layout = calculator ( this._ratios, options, false );
 
       this.$justified.height ( layout.height );
 
@@ -166,7 +188,7 @@
           box.style.top = `${layout.top}px`;
           box.style.left = `${layout.left}px`;
         }
-        let image = images[i];
+        let image = this._images[i];
         if ( this.options.sizes.set && image && ( !this.options.sizes.threshold || !image.__justified_layout_sizes || Math.abs ( image.__justified_layout_sizes - layout.width ) >= this.options.sizes.threshold ) ) {
           image.setAttribute ( 'sizes', `${layout.width}px` );
           image.__justified_layout_sizes = layout.width;
