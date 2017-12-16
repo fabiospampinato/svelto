@@ -27,7 +27,7 @@
       externalUpdateEvents: 'justifiedlayout:firstrender', // When one of these events happen, check again if the remote loader can load //FIXME: Ugly
       cache: false, // Selector pointing to the element that cointains the content
       target: false, // Selector pointing to the element to which the content (always unwrapped) will be appended
-      targetFilter: false, // Selector for appending only the matching children to the target
+      targetFilter: '*', // Selector for appending only the matching children to the target
       wrap: true, // Wrap the content into a `.remote-loaded` element
       autorequest: {
         threshold: 400
