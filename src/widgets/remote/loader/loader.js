@@ -120,7 +120,7 @@
     async _replace ( res, resj, isJSON ) {
 
       let content = isJSON ? resj.html : ( _.isString ( res ) ? res : await res.text () ),
-          $elements = $(content);
+          $elements = $(content).filter ( ( i, ele ) => ele.nodeType === 1 ); // Text nodes will create some problem
 
       /* TARGET */
 
