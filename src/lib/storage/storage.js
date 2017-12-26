@@ -17,9 +17,15 @@
   /* STORAGE */
 
   let Storage = {
-    key: localStorage.key.bind ( localStorage ),
-    remove: localStorage.removeItem.bind ( localStorage ),
-    clear: localStorage.clear.bind ( localStorage ),
+    key ( nr ) {
+      return localStorage.key ( nr );
+    },
+    remove ( key ) {
+      return localStorage.removeItem ( key );
+    },
+    clear () {
+      return localStorage.clear ();
+    },
     get ( key ) {
 
       let val = localStorage.getItem ( key ),
