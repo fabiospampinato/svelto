@@ -1,28 +1,38 @@
 
 /* =========================================================================
- * Svelto - Core - Shims - Shims (localStorage)
+ * Svelto - Core - Modernizr - Tests (Local Storage)
  * =========================================================================
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @require core/lodash/lodash.js
- * @require core/modernizr/modernizr.js
+ * @require ../init.js
  * ========================================================================= */
 
-(function ( _, Modernizr ) {
+(function ( Modernizr ) {
 
   'use strict';
 
   /* LOCAL STORAGE */
 
-  if ( Modernizr.localstorage ) return;
+  function supportsLocalStorage () {
 
-  window.localStorage = {
-    key: _.null,
-    removeItem: _.undefined,
-    clear: _.undefined,
-    getItem: _.null,
-    setItem: _.undefined
-  };
+    const test = 'modernizr';
 
-}( window.__svelto_lodash, window.__svelto_modernizr ));
+    try {
+
+      localStorage.setItem ( test, test );
+      localStorage.removeItem ( test );
+
+      return true;
+
+    } catch ( e ) {
+
+      return false;
+
+    }
+
+  }
+
+  Modernizr.addTest ( 'localstorage', supportsLocalStorage );
+
+}( window.__svelto_modernizr ));

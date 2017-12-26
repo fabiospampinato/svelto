@@ -10,6 +10,7 @@
  * @before ./flexbox.js
  * @before ./flexbox_legacy.js
  * @before ./flexbox_tweener.js
+ * @before ./local_storage.js
  * @before ./position_sticky.js
  * @before ./scrollbar.js
  * ========================================================================= */
