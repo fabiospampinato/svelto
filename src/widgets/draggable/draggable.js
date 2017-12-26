@@ -92,6 +92,7 @@
 
       this.draggable = this.element;
       this.$draggable = this.$element;
+      this.$movable = this.$draggable;
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
 
