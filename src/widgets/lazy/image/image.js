@@ -26,6 +26,13 @@
         src: 'src',
         srcset: 'srcset',
         sizes: 'sizes'
+      },
+      attrsFetchers: { // Get values for attributes attributes
+        src: _.noop,
+        srcset: _.noop,
+        sizes ()  {
+          return `${this.element.offsetWidth}px`;
+        }
       }
     }
   };
@@ -34,14 +41,36 @@
 
   class LazyImage extends Widgets.Lazy {
 
+    /* PRIVATE */
+
+    _getAttrValue ( attr ) {
+
+      const attrValue = this.element.getAttribute ( attr ),
+            dataAttr = `data-${this.options.datas[attr]}`,
+            dataValue = this.element.getAttribute ( dataAttr ),
+            hasDataValue = !_.isNull ( dataValue );
+
+      if ( !hasDataValue && !_.isNull ( attrValue ) ) return; //TODO: Is this actually the right thing to do? Ignoring fetchers?
+
+      return hasDataValue ? dataValue : this.options.attrsFetchers[attr].call ( this );
+
+    }
+
     /* API */
 
     load () {
 
-      let attrs = ['sizes', 'srcset', 'src'],
-          datas = attrs.map ( attr => this.$element.data ( this.options.datas[attr] ) );
+      const attrs = ['sizes', 'srcset', 'src'];
 
-      datas.forEach ( ( data, index ) => data && this.$element.attr ( attrs[index], data ) );
+      attrs.forEach ( attr => {
+
+        const value = this._getAttrValue ( attr );
+
+        if ( _.isUndefined ( value ) ) return;
+
+        this.element.setAttribute ( attr, value );
+
+      });
 
       super.load ();
 
