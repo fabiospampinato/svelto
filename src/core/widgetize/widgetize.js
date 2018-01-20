@@ -182,7 +182,13 @@
 
   $.fn.widgetize = function () {
 
-    Svelto.Widgetize.on ( this );
+    for ( let i = 0, l = this.length; i < l; i++ ) {
+
+      if ( this[i].nodeType !== 1 ) continue; // It doesn't make sense to widgetize other type of nodes
+
+      Svelto.Widgetize.on ( $(this[i]) );
+
+    }
 
     return this;
 
