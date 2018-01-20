@@ -181,6 +181,8 @@
 
             let parent = node.parentNode;
 
+            if ( !parent ) return; // Maybe `node` is a remotely loaded element, not attached to the DOM
+
             if ( parent.childNodes.length === 1 ) {
 
               parent.innerHTML = parsed;
