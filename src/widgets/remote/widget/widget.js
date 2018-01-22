@@ -44,7 +44,7 @@
       },
       ajax: {
         cache: false,
-        method: 'post'
+        method: 'get'
       },
       cache: {
         enabled: false, // Whether remote widgets should be cached or not

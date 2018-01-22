@@ -18,7 +18,10 @@
     name: 'remoteTrigger',
     options: {
       widget: false, // The `Remote` widget class to call
-      ajax: {}, // Using as `new widget ( ajax )`
+      ajax: { // Using as `new widget ( ajax )`
+        cache: false,
+        method: 'get'
+      },
       attributes: {
         href: 'href' // In order to better support `a` elements (the data value has higher priority)
       },
