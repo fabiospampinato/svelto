@@ -179,7 +179,7 @@
       this.$justified.height ( layout.height );
 
       layout.boxesRearrangements.forEach ( ([ from, to ]) => {
-        $(this.$boxes[to]).after ( this.$boxes[from] );
+        $(this.$boxes[from]).after ( this.$boxes[to] );
         _.move ( this.$boxes, from, to );
         _.move ( this._images, from, to );
         _.move ( this._ratios, from, to );
