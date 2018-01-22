@@ -29,6 +29,9 @@
         set: true, // Set the `sizes` attribute of the found images
         threshold: Infinity // It will be re-set if the previous differs by at least this amount of pixels // Effectively disabled by default
       },
+      datas: {
+        calculatorOptions: 'calculator-options'
+      },
       classes: {
         onerow: 'onerow',
         rendered: 'rendered'
@@ -56,6 +59,11 @@
 
       this.$boxes = this.$justified.find ( this.options.selectors.boxes );
       this.options.oneRow = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow;
+
+      const calculatorOptions = this.$justified.data ( this.options.datas.calculatorOptions );
+      if ( calculatorOptions ) {
+        this.options.calculatorOptions = _.merge ( this.options.calculatorOptions, calculatorOptions );
+      }
 
     }
 
