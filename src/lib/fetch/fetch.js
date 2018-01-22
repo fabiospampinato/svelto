@@ -47,7 +47,7 @@
 
     options = _.merge ( {}, fetch.defaults, options );
 
-    let isMethodCacheable = _.includes ( ['get', 'head'], options.method );
+    let isMethodCacheable = /^(get|head)$/i.test ( options.method );
 
     if ( options.cache && isMethodCacheable && fetch.cache[url] ) return fetch.cache[url];
 
