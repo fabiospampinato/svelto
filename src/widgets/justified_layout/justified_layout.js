@@ -57,6 +57,8 @@
       this.justified = this.element;
       this.$justified = this.$element;
 
+      this.$widows = $.$empty;
+
       this.$boxes = this.$justified.find ( this.options.selectors.boxes );
       this.options.oneRow = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow;
 
@@ -208,6 +210,17 @@
           image.__justified_layout_sizes = layout.width;
         }
       });
+
+      if ( !options.row.widows.show && ( layout.widows !== this.$widows.length ) ) {
+
+        let $nextWidows = $(_.takeRight ( this.$boxes.get (), layout.widows ) ),
+            $changed = $(_.xor ( this.$widows.get (), $nextWidows.get () ));
+
+        $changed.toggleClass ( this.options.classes.hidden );
+
+        this.$widows = $nextWidows;
+
+      }
 
       if ( !this._rendered ) {
 
