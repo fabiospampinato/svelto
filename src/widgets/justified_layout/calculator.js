@@ -8,7 +8,6 @@
  * @require core/svelto/svelto.js
  * ========================================================================= */
 
-//TODO: normal image + ultra-wide image looks bad, we should add the ultra wide one to its own row, and move the other image to the next row ( http://localhost:8888/most/viewed/13)
 //TODO: limit ultra portrait images height
 
 (function ( $, _, Svelto ) {
@@ -32,7 +31,7 @@
       margin: 5, // Vertical margin between rows
       boxes: {
         min: 1, // Minimum number of boxes in the row
-        max: Infinity, // Maximum number of boxes in the row
+        max: Infinity // Maximum number of boxes in the row
       },
       tolerance: {
         min: .85, // Tunes the minimum ratio
@@ -46,6 +45,10 @@
       }
     },
     box: {
+      rearrange: {
+        enabled: true, // Boxes can be rearranged in order to achieve the best grid possible
+        deltaThreshold: 0.5 // Minimum difference in ratio that will trigger a rearrangement
+      },
       margin: 5, // Horizontal margin between boxes
       ratio: undefined // Fixed ratio for all boxes
     }
@@ -73,10 +76,34 @@
 
   const row = { //FIXME: It's global-ish, which it's bad, but it's fast
 
-    init ( options, layout ) {
+    init ( options, layout, boxes ) {
 
       this.options = options;
       this.layout = layout;
+      this.boxes = boxes;
+
+      this.reset ();
+
+    },
+
+    reset () {
+
+      if ( this.prevState ) { // Restoring state
+
+        this._setState ( this.prevState );
+
+        this.prevState = undefined;
+
+      } else { // New state
+
+        this._resetState ();
+
+      }
+
+    },
+
+    _resetState () {
+
       this.width = this.options.container.width - this.options.container.padding.left - this.options.container.padding.right;
       this.height = 0;
       this.ratio = 0;
@@ -85,9 +112,24 @@
       this.minRatio = this.width / this.options.row.height * this.options.row.tolerance.min;
       this.maxRatio = this.width / this.options.row.height * this.options.row.tolerance.max;
       this.boxesStartIndex = this.layout.boxesIndex;
+      this.boxesSkipIndexes = undefined;
       this.boxesNr = 0;
 
       this._complete = false;
+
+    },
+
+    _getStateKeys: ['width', 'height', 'ratio', 'left', 'top', 'minRatio', 'maxRatio', 'boxesStartIndex', 'boxesSkipIndexes', 'boxesNr', '_complete'],
+
+    _getState () {
+
+      return _.pick ( this, this._getStateKeys );
+
+    },
+
+    _setState ( state ) {
+
+      _.extend ( this, state );
 
     },
 
@@ -96,6 +138,8 @@
       let index = 0;
 
       for ( let i = this.boxesStartIndex, l = this.layout.boxesIndex; i < l; i++ ) {
+
+        if ( this.boxesSkipIndexes && this.boxesSkipIndexes.indexOf ( i ) !== -1 ) continue;
 
         callback ( this.layout.boxes[i], index++ );
 
@@ -148,11 +192,41 @@
 
         if ( Math.abs ( newRatio - newTargetRatio ) > Math.abs ( this.ratio - prevTargetRatio ) ) { // The ratio is closer to the ranges without it
 
+          if ( this.options.box.rearrange.enabled ) { // Put this box before the current row (in order to fix the "normal before very wide" situation)
+
+            const deltaRatio = box.ratio - this.ratio;
+
+            if ( ( this.boxesNr === 1 && deltaRatio > this.options.box.rearrange.deltaThreshold ) || ( this.boxesNr > 1 && deltaRatio >= this.options.box.rearrange.deltaThreshold ) ) {
+
+              const insertIndex = this.boxesStartIndex + ( this.boxesSkipIndexes ? this.boxesSkipIndexes.length : 0 );
+
+              this.prevState = this._getState ();
+              if ( !this.prevState.boxesSkipIndexes ) this.prevState.boxesSkipIndexes = [];
+              this.prevState.boxesSkipIndexes.push ( this.layout.boxesIndex );
+
+              this.layout.boxesRearrangements.push ([ this.layout.boxesIndex, insertIndex ]);
+
+              this._resetState ();
+
+              this._add ( box );
+
+              this.complete ( this.width / this.ratio );
+
+              this.prevState.top += this.height + this.options.row.margin;
+
+              return true;
+
+            }
+
+          }
+
+          // Just complete the row without it
+
           this.complete ( prevWidthWithoutMargin / this.ratio );
 
           return false;
 
-        } else { // The ratio is clsoer to the ranges with it
+        } else { // The ratio is closer to the ranges with it
 
           this._add ( box );
 
@@ -302,7 +376,7 @@
 
       addRow ( options, layout );
 
-      row.init ( options, layout );
+      row.reset ();
 
       if ( !added ) addBox ( options, layout, box );
 
@@ -319,10 +393,11 @@
       heightsIndex: 0,
       boxes: Array ( boxes.length ),
       boxesIndex: 0,
+      boxesRearrangements: [],
       widows: 0
     };
 
-    row.init ( options, layout );
+    row.init ( options, layout, boxes );
 
     boxes.forEach ( box => addBox ( options, layout, box ) );
 
@@ -330,19 +405,60 @@
       addRowWidows ( options, layout );
     }
 
-    if ( layout.heightsIndex !== boxes.length ) {
-      layout.heights = layout.heights.slice ( 0, layout.heightsIndex );
+    const entraHeightsNr = layout.heights.length - layout.heightsIndex;
+    if ( entraHeightsNr ) {
+      layout.heights.splice ( layout.heightsIndex, entraHeightsNr );
     }
 
-    if ( layout.boxesIndex !== boxes.length ) {
-      layout.boxes = layout.boxes.slice ( 0, layout.boxesIndex );
+    const extraBoxesNr = layout.boxes.length - layout.boxesIndex;
+    if ( extraBoxesNr ) {
+      layout.boxes.splice ( layout.boxesIndex, extraBoxesNr );
     }
 
     if ( layout.heightsIndex ) {
       layout.height -= options.row.margin;
     }
 
+    if ( layout.boxesRearrangements.length > 1 ) {
+      layout.boxesRearrangements = getOptimalRearrangements ( layout.boxesRearrangements );
+    }
+
     return layout;
+
+  }
+
+  function getOptimalRearrangements ( rearrangements ) { //TODO: Maybe this algorithm does not generate optimal rearrangements
+
+    let rearrangement, previous;
+
+    const optimal = [];
+
+    for ( let i = 0, l = rearrangements.length; i < l; i++ ) {
+      let current = rearrangements[i];
+      if ( current[0] === ( current[1] + 1 ) ) { // Is potentially collapsible
+        if ( previous ) {
+          if ( current[1] === previous[0] ) { // They are contiguous
+            if ( rearrangement ) {
+              rearrangement[1] = current[0];
+            } else {
+              rearrangement = [previous[1], current[0]];
+            }
+          } else {
+            optimal.push ( rearrangement || previous );
+            rearrangement = undefined;
+          }
+        }
+        previous = current;
+      } else {
+        optimal.push ( current );
+      }
+    }
+
+    if ( rearrangement || previous ) {
+      optimal.push ( rearrangement || previous );
+    }
+
+    return optimal;
 
   }
 

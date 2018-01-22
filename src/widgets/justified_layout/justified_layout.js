@@ -10,8 +10,6 @@
  * @require core/widget/widget.js
  * ========================================================================= */
 
-//TODO: In case we have `normal image + very wide image` add an option for swapping them
-
 (function ( $, _, Svelto, Widgets, Widgetize, Factory, calculator ) {
 
   'use strict';
@@ -179,6 +177,14 @@
           layout = calculator ( this._ratios, options, false );
 
       this.$justified.height ( layout.height );
+
+      layout.boxesRearrangements.forEach ( ([ from, to ]) => {
+        $(this.$boxes[to]).after ( this.$boxes[from] );
+        _.move ( this.$boxes, from, to );
+        _.move ( this._images, from, to );
+        _.move ( this._ratios, from, to );
+        _.move ( layout.boxes, from, to );
+      });
 
       layout.boxes.forEach ( ( layout, i ) => {
         let box = this.$boxes[i];
