@@ -49,7 +49,12 @@
 
     let isMethodCacheable = /^(get|head)$/i.test ( options.method );
 
-    if ( options.cache && isMethodCacheable && fetch.cache[url] ) return fetch.cache[url];
+    if ( options.cache && isMethodCacheable && fetch.cache[url] ) {
+      let response = fetch.cache[url];
+      response.then ( res => callbacksOnBeforeSend ( options, res.request ) );
+      response.then ( res => callbacksOnLoad ( options, res ) );
+      return response;
+    }
 
     if ( options.batchUrl ) return fetch.batch ( url, options.batchUrl, options );
 
@@ -81,23 +86,17 @@
 
       request.onload = () => {
         let response = fetch.request2response ( request );
-        if ( options.notOKisError && !response.ok ) {
-          options.error ( response );
-        } else {
-          options.success ( response );
-        }
-        options.complete ( response );
+        callbacksOnLoad ( options, response );
         resolve ( response );
       };
 
       request.onerror = () => {
         let response = fetch.request2response ( request );
-        options.error ( response );
-        options.complete ( response );
+        callbacksOnError ( options, response );
         reject ( response );
       };
 
-      options.beforesend ( request );
+      callbacksOnBeforeSend ( options, request );
 
       request.send ( options.body );
 
@@ -172,6 +171,26 @@
       }
     };
 
+  }
+
+  /* CALLBACKS */
+
+  function callbacksOnLoad ( options, res ) {
+    if ( options.notOKisError && !res.ok ) {
+      options.error ( res );
+    } else {
+      options.success ( res );
+    }
+    options.complete ( res );
+  }
+
+  function callbacksOnError ( options, res ) {
+    options.error ( res );
+    options.complete ( res );
+  }
+
+  function callbacksOnBeforeSend ( options, req ) {
+    options.beforesend ( req );
   }
 
   /* BINDING */
