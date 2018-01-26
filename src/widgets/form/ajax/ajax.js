@@ -172,7 +172,7 @@
 
           const needsReload = URL.isEqual ( resj.url, window.location.href, true ); // Supporting #target changes
 
-          location.assign ( resj.url );
+          location.assign ( URL.makeAbsolute ( resj.url ) );
 
           if ( needsReload ) {
 
