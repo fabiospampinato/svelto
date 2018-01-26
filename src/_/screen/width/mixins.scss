@@ -31,3 +31,11 @@
   }
 
 }
+
+@mixin media-width-xrange ( $width-min, $width-max ) {
+
+  @media screen and ( max-width: $width-min ), screen and ( min-width: $width-max ) {
+    @content;
+  }
+
+}
