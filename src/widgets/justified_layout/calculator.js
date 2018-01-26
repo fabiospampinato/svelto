@@ -26,6 +26,9 @@
         left: 0
       }
     },
+    rows: {
+      max: Infinity // Maximum number of rows to calculate dimensions for
+    },
     row: {
       height: 250, // Target row's height
       margin: 5, // Vertical margin between rows
@@ -158,6 +161,14 @@
     },
 
     add ( box ) {
+
+      if ( this.layout.heightsIndex === this.options.rows.max ) { // Maximum number of rows reached
+
+        this._add ( box );
+
+        return true;
+
+      }
 
       let newRatio = this.ratio + box.ratio,
           widthWithoutMargin = this.width - ( this.boxesNr * this.options.row.margin );
