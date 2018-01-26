@@ -22,15 +22,18 @@
     selector: '.justified-layout',
     options: {
       calculatorOptions: {}, // Custom options to pass to `justifiedLayoutCalculator`
-      oneRow: false, // Switch to `One Row` logic
-      oneRowHeights: [110, calculator.defaults.row.height], // Min and Max height, adjusted according to the viewport size
-      singleRowBelowWidth: 500, // Force 1 box per row below this width
+      oneRow: {
+        enabled: false, // Switch to `One Row` logic
+        heights: [110, calculator.defaults.row.height], // Min and Max height, adjusted according to the viewport size
+        belowWidth: 500 // Force 1 box per row below this width, set to -1 to disable it
+      },
       sizes: {
         set: true, // Set the `sizes` attribute of the found images
         threshold: Infinity // It will be re-set if the previous differs by at least this amount of pixels // Effectively disabled by default
       },
       datas: {
-        calculatorOptions: 'calculator-options'
+        calculatorOptions: 'calculator-options',
+        onerowBelowWidth: 'onerow-below-width'
       },
       classes: {
         onerow: 'onerow',
@@ -60,7 +63,8 @@
       this.$widows = $.$empty;
 
       this.$boxes = this.$justified.find ( this.options.selectors.boxes );
-      this.options.oneRow = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow;
+      this.options.oneRow.enabled = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow.enabled;
+      this.options.oneRow.belowWidth = this.$justified.data ( this.options.datas.onerowBelowWidth ) || this.options.oneRow.belowWidth;
 
       const calculatorOptions = this.$justified.data ( this.options.datas.calculatorOptions );
       if ( calculatorOptions ) {
@@ -151,21 +155,21 @@
 
       if ( !this._options ) this._options = _.merge ( {}, calculator.defaults, this.options.calculatorOptions );
 
-      if ( this.options.oneRow ) {
+      if ( this.options.oneRow.enabled ) {
 
         this._options.container.width = Infinity;
         this._options.row.boxes.min = Infinity;
 
-        if ( this.options.oneRowHeights ) {
+        if ( this.options.oneRow.heights ) {
 
-          this._options.row.height = _.clamp ( ( 1 / 11 * this.justified.offsetWidth ) + 90, this.options.oneRowHeights[0], this.options.oneRowHeights[1] );
+          this._options.row.height = _.clamp ( ( 1 / 11 * this.justified.offsetWidth ) + 90, this.options.oneRow.heights[0], this.options.oneRow.heights[1] );
 
         }
 
       } else {
 
         this._options.container.width = this.justified.offsetWidth;
-        this._options.row.boxes.max = this._options.container.width <= this.options.singleRowBelowWidth ? 1 : calculator.defaults.row.maxBoxesNr;
+        this._options.row.boxes.max = this._options.container.width <= this.options.oneRow.belowWidth ? 1 : calculator.defaults.row.maxBoxesNr;
 
       }
 
@@ -200,7 +204,7 @@
         let box = this.$boxes[i];
         box.style.width = `${layout.width}px`;
         box.style.height = `${layout.height}px`;
-        if ( !this.options.oneRow ) {
+        if ( !this.options.oneRow.enabled ) {
           box.style.top = `${layout.top}px`;
           box.style.left = `${layout.left}px`;
         }
