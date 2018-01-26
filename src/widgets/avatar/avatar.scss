@@ -17,6 +17,7 @@
   transition: opacity $avatar-animation-duration;
   border-radius: $avatar-border-radius;
   display: block;
+  overflow: hidden; // Preventing `alt` attribute overflow
 
   /* IMAGE */
 
