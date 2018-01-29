@@ -31,3 +31,11 @@
   }
 
 }
+
+@mixin media-height-xrange ( $height-min, $height-max ) {
+
+  @media screen and ( max-height: $height-min ), screen and ( min-height: $height-max ) {
+    @content;
+  }
+
+}
