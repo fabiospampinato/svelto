@@ -79,3 +79,16 @@
   }
 
 }
+
+// Viewport outside 2 `$breakpoint-lower` and `$breakpoint-upper`
+
+@mixin media-breakpoint-xrange ( $breakpoint-lower, $breakpoint-upper ) {
+
+  $width-min: breakpoint-min( $breakpoint-lower );
+  $width-max: breakpoint-max( $breakpoint-upper );
+
+  @media screen and ( max-width: $width-min ), screen and ( min-width: $width-max ) {
+    @content;
+  }
+
+}
