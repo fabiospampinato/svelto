@@ -13,4 +13,4 @@
 $label-compact-padding-x: $label-padding-y !default;
 $label-compact-padding-y: $label-compact-padding-x !default;
 
-$label-compact-inner-gutter: $label-compact-padding-x / 2 !default;
+$label-compact-inner-gutter: $label-compact-padding-x * .70 !default; // Works best without spaces in the middle
