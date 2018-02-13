@@ -1,5 +1,12 @@
 
 Now:
+  ☐ autofocus should probably be called when widgetizing
+  ☐ lazy inside a modal doesn't work
+  ☐ toast: option for moving the bottom queues up on scrolling (so that they don't go over the footer)
+  ☐ editor: link and image should highlight the link, not the alt/name text
+  ☐ add global error/success handlers, so that we can implement a `login to do that` functionality
+  ☐ add an option for keeping checkbox/radio buttons active when active
+  ☐ add an option for keeping togglers/openers active when their target is open
   ☐ tagbox: tag on empty partial input should do nothing
   ☐ export some modules to github/npm
   ☐ remote loader: if it fails, retry! (N times?)
@@ -14,7 +21,7 @@ Next:
   ☐ center sortable names, or when also `text-align: center` they will look misaligned
   ☐ dinamically check for classes, like when using `isOpen` etc.
   ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
-  ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers (maybe when call it passe true or false)
+  ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers... maybe when call it pass true or false... maybe just ___foo_off
 
 Future:
   ☐ compile using webpack and proper imports

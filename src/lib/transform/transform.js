@@ -19,7 +19,7 @@
   let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) ),
       precision = 3; // Or sometimes we may get weird values like `2.4492935982947064e-16` on Safari
 
-  $.fn.matrix = function ( values ) {
+  $.fn.matrix = function ( values ) { //TODO: Add not jquery-wrapped version fo this maybe
 
     if ( values ) {
 
@@ -45,9 +45,9 @@
 
   for ( let i = 0, l = transformations.length; i < l; i++ ) {
 
-    $.fn[transformations[i]] = (function ( index ) {
+    $.fn[transformations[i]] = (function ( index ) { //TODO: Add not jquery-wrapped version fo this maybe
 
-       return function ( value ) {
+       return function ( value ) { //TODO: Maybe add an optional `_matrix` argument, so that we can batch reads and writes
 
          let matrix = this.matrix ();
 
@@ -76,9 +76,9 @@
 
   for ( let i = 0, l = transformations2D.length; i < l; i++ ) {
 
-    $.fn[transformations2D[i]] = (function ( index ) {
+    $.fn[transformations2D[i]] = (function ( index ) { //TODO: Add not jquery-wrapped version fo this maybe
 
-      return function ( X, Y = X ) {
+      return function ( X, Y = X ) { //TODO: Maybe add an optional `_matrix` argument, so that we can batch reads and writes
 
         let matrix = this.matrix (),
             indexes = indexes2D[index];
