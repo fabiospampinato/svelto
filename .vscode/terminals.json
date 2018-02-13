@@ -9,6 +9,7 @@
       "name": "Demo",
       "commands": [
         "cd demo",
+        "rm -rf .meteor/local/bundler-cache/linker",
         "meteor run"
       ]
     }
