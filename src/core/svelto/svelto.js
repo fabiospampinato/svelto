@@ -19,9 +19,9 @@
 
   let Svelto = {
 
-    VERSION: '0.7.15',
-    ENVIRONMENT: 'production',
-    DEVELOPMENT: false,
+    VERSION: '[pacco.svelto.version]',
+    ENVIRONMENT: '[pacco.environment]',
+    DEVELOPMENT: '[pacco.environment]' === 'development',
 
     /* DEPENDENCIES */
 

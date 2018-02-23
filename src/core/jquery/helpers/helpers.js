@@ -5,24 +5,24 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ./animate.js
- * @before ./animate_prop.js
- * @before ./clean_data.js
- * @before ./diff.js
- * @before ./elements.js
- * @before ./event_namespacer.js
- * @before ./event_xy.js
- * @before ./get_rect.js
- * @before ./has_attribute.js
- * @before ./hsl.js
- * @before ./is_attached.js
- * @before ./is_focused.js
- * @before ./is_visible.js
- * @before ./iterator.js
- * @before ./on_ready.js
- * @before ./outer_html.js
- * @before ./scroll.js
- * @before ./selection.js
- * @before ./top_index.js
- * @before ./z_index.js
+ * @optional ./animate.js
+ * @optional ./animate_prop.js
+ * @optional ./clean_data.js
+ * @optional ./diff.js
+ * @optional ./elements.js
+ * @optional ./event_namespacer.js
+ * @optional ./event_xy.js
+ * @optional ./get_rect.js
+ * @optional ./has_attribute.js
+ * @optional ./hsl.js
+ * @optional ./is_attached.js
+ * @optional ./is_focused.js
+ * @optional ./is_visible.js
+ * @optional ./iterator.js
+ * @optional ./on_ready.js
+ * @optional ./outer_html.js
+ * @optional ./scroll.js
+ * @optional ./selection.js
+ * @optional ./top_index.js
+ * @optional ./z_index.js
  * ========================================================================= */

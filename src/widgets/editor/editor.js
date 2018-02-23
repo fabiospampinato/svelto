@@ -5,11 +5,11 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ./vendor/marked.js
- * @before lib/emojify/emojify.js
- * @before lib/markdown/markdown.js
- * @before widgets/emoji/picker/popover/popover_trigger.js
- * @before widgets/form/ajax/ajax.js
+ * @optional ./vendor/marked.js
+ * @optional lib/emojify/emojify.js
+ * @optional lib/markdown/markdown.js
+ * @optional widgets/emoji/picker/popover/popover_trigger.js
+ * @optional widgets/form/ajax/ajax.js
  * @require widgets/storable/storable.js
  * ========================================================================= */
 

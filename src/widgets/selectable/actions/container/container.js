@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before widgets/datatables/datatables.js
+ * @optional widgets/datatables/datatables.js
  * @require ../actions.js
  * ========================================================================= */
 

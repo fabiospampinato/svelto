@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @priority 900
- * @before ./browsers.js
- * @before ./devices.js
- * @before ./oss.js
+ * @optional ./browsers.js
+ * @optional ./devices.js
+ * @optional ./oss.js
  * ========================================================================= */

@@ -1,4 +1,10 @@
 
+☐ update lodash templates
+☐ remove stupid headers
+☐ test bump
+
+☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
+
 Now:
   ☐ autofocus should probably be called when widgetizing
   ☐ lazy inside a modal doesn't work
@@ -24,14 +30,10 @@ Next:
   ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers... maybe when call it pass true or false... maybe just ___foo_off
 
 Future:
-  ☐ compile using webpack and proper imports
-    ☐ or just parse requires somehow
   ☐ use emojione v3
   ☐ [widget] add better support for updating after options are set at runtime
-  ☐ adding `@require`s to extenders (.before, .after) doesn't work, since they get moved after... maybe we should move left or right the one more to the left in the dependencies list instead...
   ☐ an utility for dinamically creating a dialog, like a modal for confirmation and stuff
   ☐ [SASS] add string related functions to _, take them from here: https://github.com/HugoGiraudel/SassyStrings/tree/master/stylesheets
-  ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
   ☐ add this._onFocus ()
   ☐ selecter, like numbox but with custom values and chevrons, not editable (once it's done add it for editing the colors of the widgets)
   ☐ new checkable widget, like selectable but with checkboxes (should work like gmail's)

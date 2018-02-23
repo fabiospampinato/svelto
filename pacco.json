@@ -1,0 +1,35 @@
+{
+  "components": {
+    "_": true,
+    "core": {
+      "jquery/vendor": false,
+      "lodash/vendor": false
+    },
+    "decorators": true,
+    "lib": {
+      "emoji/data/raw/make": false,
+      "emoji/data/raw/raw": false
+    },
+    "widgets": {
+      "boilerplate": false,
+      "chart/vendor": false,
+      "datatables/vendor": false
+    }
+  },
+  "paths": {
+    "tokens": {
+      "bundle": "svelto"
+    }
+  },
+  "plugins": {
+    "substitute": {
+      "options": {
+        "substitutions": {
+          "svelto": {
+            "version": "1.0.0"
+          }
+        }
+      }
+    }
+  }
+}

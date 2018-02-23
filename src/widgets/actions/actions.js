@@ -5,10 +5,10 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before widgets/remote/action/action_helper.js
- * @before widgets/remote/modal/modal_helper.js
- * @before widgets/remote/panel/panel_helper.js
- * @before widgets/remote/popover/popover_helper.js
+ * @optional widgets/remote/action/action_helper.js
+ * @optional widgets/remote/modal/modal_helper.js
+ * @optional widgets/remote/panel/panel_helper.js
+ * @optional widgets/remote/popover/popover_helper.js
  * @require widgets/targeter/targeter.js
  * @require widgets/toast/toast.js
  * ========================================================================= */

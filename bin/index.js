@@ -1,16 +1,26 @@
 #!/usr/bin/env node
 
-/* IMPORT */
+//TODO: replace `pacco` to `svelto` in the help text
+
+/* REQUIRE */
 
 const execa = require ( 'execa' ),
-      path = require ( 'path' );
+      path = require ( 'path' ),
+      config = require ( '../pacco.json' );
+
+/* VARIABLES */
+
+const root = path.resolve ( __dirname, '..' ),
+      src = path.join ( root, 'src' ),
+      icon = path.join ( root, 'resources', 'icon', 'icon.png' ),
+      iconError = path.join ( root, 'resources', 'icon', 'icon_error.png' );
 
 /* EXECUTE */
 
-const args = process.argv.slice ( 2 );
+const args = ['--config', JSON.stringify ( config ), '--source', src, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
 const opts = {
-  cwd: path.resolve ( __dirname, '..' ),
+  cwd: root,
   stdio: 'inherit'
 };
 
-execa.sync ( 'gulp', args, opts );
+execa ( 'pacco', args, opts );

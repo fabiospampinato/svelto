@@ -418,7 +418,7 @@
 
     }
 
-    /* IMPORT */
+    /* REQUIRE */
 
     _import ( date )  {
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2015-2017 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @before ./raw/raw.js
+ * @optional ./raw/raw.js
  * @require core/svelto/svelto.js
  * @require lib/fetch/fetch.js
  * ========================================================================= */

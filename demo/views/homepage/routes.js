@@ -1,4 +1,0 @@
-
-/* HOME */
-
-SRouter.page ( 'homepage', '/' );
