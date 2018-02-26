@@ -19,7 +19,7 @@ const root = path.resolve ( __dirname, '..' ),
 
 const args = ['--config', JSON.stringify ( config ), '--source', src, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
 const opts = {
-  cwd: root,
+  cwd: process.cwd (),
   stdio: 'inherit'
 };
 
