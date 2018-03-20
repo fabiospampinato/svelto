@@ -32,6 +32,9 @@
         stateUrl: 'state-url',
         stateBatchUrl: 'state-batch-url',
         url: 'url'
+      },
+      classes: {
+        noRemoteState: 'no-remote-state'
       }
     }
   };
@@ -57,7 +60,11 @@
 
       this._update ();
 
-      this.___remoteState ();
+      if ( !this.$reaction.hasClass ( this.options.classes.noRemoteState ) ) {
+
+        this.___remoteState ();
+
+      }
 
     }
 
