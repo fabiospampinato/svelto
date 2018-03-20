@@ -78,12 +78,9 @@
 
         let Widget = fn,
             ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property
-            initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady, //IE10 support -- static property
             setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
 
-        initReady.bind ( Widget )();
-
-        ready.bind ( Widget )( setReady.bind ( Widget ) );
+        ready.call ( Widget, setReady.bind ( Widget ) );
 
       } else {
 

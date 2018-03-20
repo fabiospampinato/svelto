@@ -88,6 +88,10 @@
 
       ready ( Widget, config ) {
 
+        const initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady; //IE10 support -- static property
+
+        initReady.call ( Widget );
+
         Readify.add ( Widget, config.ready );
 
       },
