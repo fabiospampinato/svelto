@@ -12,6 +12,7 @@
 // Accordion to ISO-8601 the first day of the week is Monday
 
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
+//FIXME: `today` button doesn't work when the same month is active but the wrong day is selected
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 

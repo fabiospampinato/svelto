@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 //TODO: Replace `pacco` to `svelto` in the help text, we probably need to add an API for this to Caporal
+//FIXME: Since we are setting the `--source` flag we can't no longer set the source via the config
 
 /* REQUIRE */
 

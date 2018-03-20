@@ -80,7 +80,7 @@
 
         } else {
 
-          return this.open ( anchor ); //FIXME: What is this for???
+          return this.open ( anchor ); //FIXME: What is this for??? (it actually gets called, if an error gets thrown the first time)
 
         }
 
