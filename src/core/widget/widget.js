@@ -87,7 +87,7 @@
 
       if ( isReady.bind ( this )() ) {
 
-        callback ();
+        return callback ();
 
       } else {
 

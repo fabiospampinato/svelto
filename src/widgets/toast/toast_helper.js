@@ -30,7 +30,7 @@
 
     /* TOAST */
 
-    return new Toast ( options );
+    return Toast.whenReady.call ( Toast, () => new Toast ( options ) );
 
   };
 
