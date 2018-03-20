@@ -139,9 +139,7 @@
 
       _.delay ( function () { // In order to better support client size rendering
 
-        let $layout = $('.layout, body').first (); // `body` is used as a fallback
-
-        $layout.append ( Toast.config.templates.queues );
+        $.$layout.append ( Toast.config.templates.queues );
 
         done ();
 
