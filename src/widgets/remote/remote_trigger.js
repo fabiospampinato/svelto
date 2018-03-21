@@ -53,7 +53,7 @@
     _init () {
 
       this.options.ajax.url = this.$trigger.data ( this.options.datas.url ) || this.$trigger.attr ( this.options.attributes.href ) || this.options.ajax.url;
-      this.options.ajax.body = this.$trigger.data ( this.options.datas.body ) || this.options.ajax.data;
+      this.options.ajax.body = this.$trigger.data ( this.options.datas.body ) || this.options.ajax.body;
       this.options.ajax.method = this.$trigger.data ( this.options.datas.method ) || this.options.ajax.method;
 
     }

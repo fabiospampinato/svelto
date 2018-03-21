@@ -54,7 +54,7 @@
           ids = this._getIds ();
 
       ajax.url = ajax.url.replace ( this.options.placeholders.id, ids.join ( this.options.characters.separator ) );
-      ajax.data = _.extend ( ajax.data, {ids} );
+      ajax.body = _.extend ( ajax.body, {ids} );
 
       return ajax;
 
