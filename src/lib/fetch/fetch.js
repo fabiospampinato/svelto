@@ -21,6 +21,8 @@
   let defaults = {
     // url: 'https://example.com',
     method: 'get',
+    methodCacheableRe: /^(get|head)$/i,
+    methodBodyableRe: /^(?!get|head)$/i,
     // body: {},
     cache: true,
     credentials: 'include', // Include cookies
@@ -47,7 +49,13 @@
 
     options = _.merge ( {}, fetch.defaults, options );
 
-    let isMethodCacheable = /^(get|head)$/i.test ( options.method );
+    let isMethodBodyable = options.methodBodyableRe.test ( options.method );
+
+    if ( options.body && !isMethodBodyable ) {
+      options.method = 'post';
+    }
+
+    let isMethodCacheable = options.methodCacheableRe.test ( options.method );
 
     if ( options.cache && isMethodCacheable && fetch.cache[url] ) {
       let response = fetch.cache[url];
