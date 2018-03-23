@@ -18,11 +18,13 @@
     %color-#{$name}%actionable:not(.disabled) {
 
       &:not(.active):hover {
-        @extend %color-#{$name}-hover;
+        // @extend %color-#{$name}-hover;
+        @include color-inline ( $name, 'hover' ); // For performance reasons
       }
 
       &:not(.ripple):active {
-        @extend %color-#{$name}-active;
+        // @extend %color-#{$name}-active;
+        @include color-inline ( $name, 'active' ); // For performance reasons
       }
 
     }
