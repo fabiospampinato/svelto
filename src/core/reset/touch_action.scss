@@ -19,7 +19,6 @@ input,
 label,
 select,
 summary,
-textarea,
-%actionable {
+textarea {
   touch-action: manipulation;
 }
