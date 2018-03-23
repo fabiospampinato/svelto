@@ -16,7 +16,7 @@
 
 a {
 
-  @extend %actionable;
+  @include actionable-inline ();
   @include text-wrap ();
   color: inherit;
   text-decoration: none;
