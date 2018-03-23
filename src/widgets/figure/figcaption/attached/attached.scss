@@ -11,6 +11,7 @@
 
 /* ATTACHED */
 
-%figcaption%attached {
+// %figcaption%attached {
+%figcaption[class*="attached"] { // For performance reasons
   @include color ( $figcaption-attached-color, $figcaption-attached-color-force, $figcaption-attached-color-basic );
 }
