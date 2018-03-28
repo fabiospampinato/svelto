@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let NODE_INDEX    = '_diff_index',

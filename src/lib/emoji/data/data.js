@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, EmojiDataRaw, fetch ) {
 
-  'use strict';
-
   /* EMOJI DATA */
 
   let EmojiData = {

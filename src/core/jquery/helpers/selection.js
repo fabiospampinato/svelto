@@ -5,8 +5,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* SELECTION */
 
   $.fn.disableSelection = (function () {

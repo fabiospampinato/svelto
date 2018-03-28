@@ -3,8 +3,6 @@
 
 (function ( Modernizr ) {
 
-  'use strict';
-
   /* EMOJI */
 
   function supportsEmoji () {

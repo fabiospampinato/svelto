@@ -4,8 +4,6 @@
 
 (function ( Modernizr, $ ) {
 
-  'use strict';
-
   /* CLIP PATH URL */
 
   $.onReady ( function () {

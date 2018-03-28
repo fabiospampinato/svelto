@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, RemoteModal ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.remoteModal = function ( ajax ) {

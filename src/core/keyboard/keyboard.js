@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, Browser ) {
 
-  'use strict';
-
   /* KEYBOARD */
 
   let Keyboard = {

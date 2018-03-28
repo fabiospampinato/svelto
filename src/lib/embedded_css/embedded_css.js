@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Readify ) {
 
-  'use strict';
-
   /* EMBEDDED CSS */
 
   class EmbeddedCSS {

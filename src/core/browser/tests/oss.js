@@ -3,8 +3,6 @@
 
 (function ( Modernizr, Browser ) {
 
-  'use strict';
-
   /* OSS */
 
   for ( let os of Browser.support.oss ) {

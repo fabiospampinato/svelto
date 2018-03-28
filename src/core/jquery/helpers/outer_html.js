@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* OUTER HTML */
 
   $.fn.outerHTML = function ( replacement ) {

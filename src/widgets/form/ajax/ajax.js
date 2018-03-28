@@ -10,8 +10,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, fetch, URL ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

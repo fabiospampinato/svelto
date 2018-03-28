@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* ITERATOR */
 
   $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];

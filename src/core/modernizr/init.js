@@ -3,8 +3,6 @@
 
 (function () {
 
-  'use strict';
-
   /* MODERNIZR */
 
   window.__svelto_modernizr = window.Modernizr;

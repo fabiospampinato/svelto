@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, getScript ) {
 
-  'use strict';
-
   /* MARKDOWN */
 
   const Markdown = {

@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* FUZZY */
 
   let Fuzzy = {

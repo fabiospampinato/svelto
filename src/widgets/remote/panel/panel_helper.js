@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, RemotePanel ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.remotePanel = function ( ajax, direction, type ) {

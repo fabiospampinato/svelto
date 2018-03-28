@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* UTILITIES */
 
   let getOverlappingArea = function ( rect1, rect2 ) {

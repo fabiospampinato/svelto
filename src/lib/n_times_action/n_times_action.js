@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, NTA ) {
 
-  'use strict';
-
   /* DEFAULTS */
 
   let defaults = {

@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, RemotePopover ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.remotePopover = function ( ajax, target ) {

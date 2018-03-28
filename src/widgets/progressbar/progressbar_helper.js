@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, Progressbar ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.progressbar = function ( options ) {

@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, Toast ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.toast = function ( options = {} ) {

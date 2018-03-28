@@ -3,8 +3,6 @@
 
 (function ( Modernizr, Browser ) {
 
-  'use strict';
-
   /* BROWSERS */
 
   for ( let browser of Browser.support.browsers ) {

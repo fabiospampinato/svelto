@@ -3,8 +3,6 @@
 
 (function ( Modernizr ) {
 
-  'use strict';
-
   /* CLIP PATH POLYGON */
 
   Modernizr.addTest ( 'clip-path-polygon', Modernizr.testAllProps ( 'clip-path', 'polygon( 0 0 )' ) );

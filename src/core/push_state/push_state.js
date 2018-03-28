@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Readify, history ) {
 
-  'use strict';
-
   /* PUSH STATE */
 
   Readify.add ( function () {

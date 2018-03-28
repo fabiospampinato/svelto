@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, fetch ) {
 
-  'use strict';
-
   /* HELPERS */
 
   fetch.getValue = async function ( res, key ) {

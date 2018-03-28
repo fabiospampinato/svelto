@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* EVENT XY */
 
   $.eventXY = function ( event, X = 'pageX', Y = 'pageY' ) {

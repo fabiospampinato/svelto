@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, RemoteLoader ) {
 
-  'use strict';
-
   /* DEFAULTS */
 
   let datas = RemoteLoader.config.options.datas;

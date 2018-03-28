@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* EVENT NAMESPACER */
 
   $.eventNamespacer = function ( events, namespace ) {

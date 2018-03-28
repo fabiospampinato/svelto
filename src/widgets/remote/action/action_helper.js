@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, RemoteAction ) {
 
-  'use strict';
-
   /* HELPER */
 
   $.remoteAction = function ( ajax ) {

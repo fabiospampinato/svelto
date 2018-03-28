@@ -6,8 +6,6 @@
 
 (function ( $, _ ) {
 
-  'use strict';
-
   /* Z INDEX */
 
 	$.fn.zIndex = function ( val ) {

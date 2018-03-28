@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, EmojipickerPopover ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let instance;

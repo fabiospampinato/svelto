@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* CONSTANTS */
 
   _.mixin ({

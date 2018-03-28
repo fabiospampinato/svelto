@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* BLURRED */
 
   $.fn.blurred = function ( force ) {

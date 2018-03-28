@@ -6,8 +6,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* COLOR */
 
   let Color = class {

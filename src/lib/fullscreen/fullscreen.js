@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let html = document.documentElement,

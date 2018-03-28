@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* STORAGE */
 
   let Storage = {

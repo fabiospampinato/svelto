@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, Cookie, NTA ) {
 
-  'use strict';
-
   /* UTILITIES */
 
   let getExpiry = function ( expiry ) {

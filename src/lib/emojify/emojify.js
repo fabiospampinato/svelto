@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Widgetize, EmojiData, Emoji ) {
 
-  'use strict';
-
   /* EMOJIFY */
 
   let Emojify = {

@@ -8,8 +8,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Keyboard, Animations, fetch ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

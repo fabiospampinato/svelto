@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, LazyWorker ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

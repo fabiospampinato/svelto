@@ -4,8 +4,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* FRAMES */
 
   _.mixin ({

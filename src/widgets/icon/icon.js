@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* ICON */
 
   let Icons = { // Maps each icon to its ligature/html entity, required for a  custom icon font

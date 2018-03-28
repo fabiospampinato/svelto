@@ -7,8 +7,6 @@
 
 (function ( $, _, Svelto, Browser, Mouse ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let prefix = 'spointer';

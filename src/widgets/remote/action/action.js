@@ -7,13 +7,10 @@
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
 //TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`
-
 //FIXME: Not well written, maybe try to extend RemoteWidget, even though it was ment for a different kind of widgets
 //FIXME: Clicking an error/success toast doesn't close it
 
 (function ( $, _, Svelto, Widgets, Factory, Colors, Sizes, fetch, URL ) {
-
-  'use strict';
 
   /* CONFIG */
 

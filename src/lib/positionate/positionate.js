@@ -8,8 +8,6 @@
 
 (function ( $, _, Svelto, Directions, EmbeddedCSS ) {
 
-  'use strict';
-
   /* DEFAULTS */
 
   let defaults = {

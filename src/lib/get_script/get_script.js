@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* GET SCRIPT */
 
   function getScript ( url ) {

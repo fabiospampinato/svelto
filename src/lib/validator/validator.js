@@ -9,8 +9,6 @@
 
 (function ( $, _, Svelto, Regexes ) {
 
-  'use strict';
-
   /* VALIDATOR */
 
   let Validator = {

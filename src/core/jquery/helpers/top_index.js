@@ -7,8 +7,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* TOP INDEX */
 
   $.fn.topIndex = function () {

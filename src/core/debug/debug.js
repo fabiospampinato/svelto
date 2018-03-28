@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* DEBUG */
 
   if ( !Svelto.DEVELOPMENT ) return;

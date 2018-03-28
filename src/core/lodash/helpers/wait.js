@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* WAIT */
 
   _.mixin ({

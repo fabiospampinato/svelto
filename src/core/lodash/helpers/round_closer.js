@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* DIRECTION */
 
   _.mixin ({

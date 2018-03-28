@@ -10,8 +10,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Color, Keyboard ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

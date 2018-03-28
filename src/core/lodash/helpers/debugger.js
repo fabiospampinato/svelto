@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* DEBUGGER */
 
   _.mixin ({

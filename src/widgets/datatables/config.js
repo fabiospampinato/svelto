@@ -7,8 +7,6 @@
 
 (function ( $, _, Svelto, Icon, DataTable ) {
 
-  'use strict';
-
   /* CHECK IF LOADED */
 
   if ( !DataTable ) return;

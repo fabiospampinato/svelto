@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* Z-DEPTHS */
 
   let ZDepths = {};

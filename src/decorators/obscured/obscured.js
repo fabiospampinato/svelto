@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* OBSCURED */
 
   $.fn.obscured = function ( force ) {

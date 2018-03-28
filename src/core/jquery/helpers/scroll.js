@@ -6,8 +6,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* SCROLL */
 
   //TODO: Not working but probably needed, like for scrolling down a chat

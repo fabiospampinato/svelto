@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, Breakpoints, Readify ) {
 
-  'use strict';
-
   /* BREAKPOINT */
 
   let Breakpoint = {

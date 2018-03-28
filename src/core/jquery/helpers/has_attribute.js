@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* HAS ATTRIBUTE */
 
   $.fn.hasAttribute = function ( attr ) {

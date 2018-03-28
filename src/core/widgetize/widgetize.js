@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Widgets, Readify ) {
 
-  'use strict';
-
   /* WIDGETIZE */
 
   class Widgetize {

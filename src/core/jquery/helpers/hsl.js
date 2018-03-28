@@ -5,8 +5,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* HSL */
 
   $.fn.hsl = function ( h, s, l ) {

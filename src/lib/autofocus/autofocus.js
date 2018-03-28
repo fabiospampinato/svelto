@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, Browser, Readify ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let $html = $('html');

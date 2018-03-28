@@ -2,8 +2,6 @@
 
 (function () {
 
-  'use strict';
-
   /* REQUEST ANIMATION FRAME */
 
   if ( window.requestAnimationFrame ) return;

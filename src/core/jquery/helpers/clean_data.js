@@ -6,8 +6,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* CLEAN DATA */
 
   const _cleanData = $.cleanData;

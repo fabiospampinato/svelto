@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto, NTA ) {
 
-  'use strict';
-
   /* ACTION */
 
   class Action {

@@ -5,8 +5,6 @@
 
 (function ( $, _, Modernizr, Svelto ) {
 
-  'use strict';
-
   /* MATRIX */
 
   let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) ),

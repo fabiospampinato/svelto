@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* IS FOCUSED */
 
   $.isFocused = function ( ele ) {

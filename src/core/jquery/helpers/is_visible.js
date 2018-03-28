@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* IS VISIBLE */
 
   $.isVisible = function ( ele ) {

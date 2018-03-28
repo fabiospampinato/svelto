@@ -6,8 +6,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, ChartLib ) {
 
-  'use strict';
-
   /* CHECK IF LOADED */
 
   if ( !ChartLib ) return;

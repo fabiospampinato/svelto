@@ -11,8 +11,6 @@
 
 (function ( $, _, Svelto, Instances, Templates, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

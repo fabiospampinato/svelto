@@ -4,8 +4,6 @@
 
 (function ( $, _, Svelto ) {
 
-  'use strict';
-
   /* ONE TIME ACTION */
 
   $.oneTimeAction = function ( options ) {

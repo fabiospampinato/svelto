@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Instances, Widgets, Plugin, Readify, Widgetize ) {
 
-  'use strict';
-
   /* FACTORY */
 
   let Factory = {

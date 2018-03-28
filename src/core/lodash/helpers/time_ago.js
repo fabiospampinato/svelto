@@ -4,8 +4,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* TIME AGO */
 
   _.mixin ({

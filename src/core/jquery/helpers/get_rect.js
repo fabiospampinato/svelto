@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* RECT */
 
   $.getRect = function ( node ) {

@@ -8,8 +8,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Animations, Autofocus, fetch ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside

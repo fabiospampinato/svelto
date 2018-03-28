@@ -9,8 +9,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Emojify ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

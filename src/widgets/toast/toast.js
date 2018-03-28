@@ -11,8 +11,6 @@
 
 (function ( $, _, Svelto, Toasts, Widgets, Factory, Pointer, Timer, Animations, Colors, Sizes ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

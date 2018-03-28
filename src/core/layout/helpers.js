@@ -6,8 +6,6 @@
 
 (function ( $, _, Svelto, Readify ) {
 
-  'use strict';
-
   /* LAYOUT */
 
   Readify.add ( function () {

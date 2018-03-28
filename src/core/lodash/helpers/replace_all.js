@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* REPLACE ALL */
 
   _.mixin ({

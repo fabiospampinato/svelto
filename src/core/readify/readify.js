@@ -6,8 +6,6 @@
 
 (function ( $, _, Svelto, Widgets ) {
 
-  'use strict';
-
   /* READIFY */
 
   class Readify {

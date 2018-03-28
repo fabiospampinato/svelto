@@ -3,8 +3,6 @@
 
 (function ( Modernizr ) {
 
-  'use strict';
-
   /* POSITION STICKY */
 
   Modernizr.addTest ( 'position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );

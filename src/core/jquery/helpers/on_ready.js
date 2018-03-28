@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* ON READY */
 
   $.onReady = function ( callback ) { //TODO: Remove after migrating to cash or zepto

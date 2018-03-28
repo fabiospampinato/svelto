@@ -12,8 +12,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Emoji, Emojify, EmojipickerPopover, EmojipickerPopoverTrigger, Markdown ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

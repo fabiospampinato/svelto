@@ -6,8 +6,6 @@
 
 (function ( $, _, Svelto, Readify ) {
 
-  'use strict';
-
   Readify.add ( function () {
 
     let previous = window.location.href.split ( '#' )[0];

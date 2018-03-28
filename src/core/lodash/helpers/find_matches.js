@@ -3,8 +3,6 @@
 
 (function ( _ ) {
 
-  'use strict';
-
   /* FIND MATCHES */
 
   _.mixin ({

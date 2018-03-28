@@ -8,8 +8,6 @@
 
 (function ( $, _ ) {
 
-  'use strict';
-
   /* DEFAULTS */
 
   const defaults = {

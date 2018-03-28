@@ -3,8 +3,6 @@
 
 (function ( $ ) {
 
-  'use strict';
-
   /* VARIABLES */
 
   let html = document.documentElement;

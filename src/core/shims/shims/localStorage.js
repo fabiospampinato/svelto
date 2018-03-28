@@ -4,8 +4,6 @@
 
 (function ( _, Modernizr ) {
 
-  'use strict';
-
   /* LOCAL STORAGE */
 
   if ( Modernizr.localstorage ) return;

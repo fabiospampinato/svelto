@@ -3,8 +3,6 @@
 
 (function ( Modernizr, Browser ) {
 
-  'use strict';
-
   /* DEVICES */
 
   for ( let device of Browser.support.devices ) {

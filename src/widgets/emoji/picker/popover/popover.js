@@ -3,8 +3,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, EmojiData ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

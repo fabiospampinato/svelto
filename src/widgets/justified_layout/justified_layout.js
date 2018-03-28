@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Widgets, Widgetize, Factory, calculator ) {
 
-  'use strict';
-
   /* CONFIG */
 
   let config = {

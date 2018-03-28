@@ -6,8 +6,6 @@
 
 (function () {
 
-  'use strict';
-
   /* SVELTO */
 
   let Svelto = {

@@ -3,8 +3,6 @@
 
 (function ( Modernizr ) {
 
-  'use strict';
-
   /* LOCAL STORAGE */
 
   function supportsLocalStorage () {

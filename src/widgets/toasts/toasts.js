@@ -5,8 +5,6 @@
 
 (function ( $, _, Svelto, Widgets ) {
 
-  'use strict';
-
   /* TOASTS */
 
   class Toasts {
