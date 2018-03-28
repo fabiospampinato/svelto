@@ -1,17 +1,10 @@
 
-/* =========================================================================
- * Svelto - Widgets - Form - Ajax
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional ../validate/validate.js
- * @require core/svelto/svelto.js
- * @require lib/fetch/fetch.js
- * @require lib/url/url.js
- * @require widgets/toast/toast.js
- * @require widgets/spinner/overlay/overlay.js
- * ========================================================================= */
+// @optional ../validate/validate.js
+// @require core/svelto/svelto.js
+// @require lib/fetch/fetch.js
+// @require lib/url/url.js
+// @require widgets/toast/toast.js
+// @require widgets/spinner/overlay/overlay.js
 
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 

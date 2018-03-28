@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - Keyboard
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/browser/browser.js
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/browser/browser.js
+// @require core/svelto/svelto.js
 
 (function ( $, _, Svelto, Browser ) {
 

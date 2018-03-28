@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Colorpicker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * @require lib/color/color.js
- * @require lib/transform/transform.js
- * @require widgets/draggable/draggable.js
- * ========================================================================= */
+// @require core/widget/widget.js
+// @require lib/color/color.js
+// @require lib/transform/transform.js
+// @require widgets/draggable/draggable.js
 
 //FIXME: Add support of it working without a `startColor`
 //TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default

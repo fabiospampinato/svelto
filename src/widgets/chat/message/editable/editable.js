@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - Editable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional lib/emojify/emojify.js
- * @optional widgets/editor/editor.js
- * @require core/widget/widget.js
- * @require widgets/remote/loader/loader.js
- * ========================================================================= */
+// @optional lib/emojify/emojify.js
+// @optional widgets/editor/editor.js
+// @require core/widget/widget.js
+// @require widgets/remote/loader/loader.js
 
 //FIXME: If the editor gets empty, and it's supposed to be required, we output an error message that messes up the chat message layout
 //TODO: Add a demo for it

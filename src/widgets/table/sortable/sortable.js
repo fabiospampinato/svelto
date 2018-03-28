@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Table - Sortable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * ========================================================================= */
+// @require core/widget/widget.js
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
 

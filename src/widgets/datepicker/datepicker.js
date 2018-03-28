@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Datepicker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * ========================================================================= */
+// @require core/widget/widget.js
 
 // When using using an incomplete-information format (those where not all the info are exported, like YYYYMMDD) the behaviour when used in combination with, for instance, `formSync` would be broken: at GTM+5 it may be the day 10, but at UTC may actually be day 9, and when syncing we won't get the right date synced between both datepickers
 // Accordion to ISO-8601 the first day of the week is Monday

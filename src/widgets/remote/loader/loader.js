@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 600
- * @require ../remote.js
- * @require lib/autofocus/autofocus.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @priority 600
+// @require ../remote.js
+// @require lib/autofocus/autofocus.js
+// @require widgets/toast/toast.js
 
 // Remote loaded content should always be properly wrapped html elements
 

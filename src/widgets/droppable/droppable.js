@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Droppable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * @require lib/touching/touching.js
- * @require widgets/draggable/draggable.js
- * ========================================================================= */
+// @require core/widget/widget.js
+// @require lib/touching/touching.js
+// @require widgets/draggable/draggable.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

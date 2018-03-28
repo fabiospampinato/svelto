@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Autofocusable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 400
- * @require core/widget/widget.js
- * @require lib/autofocus/autofocus.js
- * ========================================================================= */
+// @priority 400
+// @require core/widget/widget.js
+// @require lib/autofocus/autofocus.js
 
 (function ( $, _, Svelto, Widgets, Factory, Autofocus ) {
 

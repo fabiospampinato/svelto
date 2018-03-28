@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Core - Factory
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/plugin/plugin.js
- * @require core/readify/readify.js
- * @require core/widgetize/widgetize.js
- *=========================================================================*/
+// @require core/plugin/plugin.js
+// @require core/readify/readify.js
+// @require core/widgetize/widgetize.js
 
 (function ( $, _, Svelto, Instances, Widgets, Plugin, Readify, Widgetize ) {
 

@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Switch
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/colors/colors.js
- * @require lib/transform/transform.js
- * @require widgets/draggable/draggable.js
- * ========================================================================= */
+// @require core/colors/colors.js
+// @require lib/transform/transform.js
+// @require widgets/draggable/draggable.js
 
 //TODO: Add flick support
 

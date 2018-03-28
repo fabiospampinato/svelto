@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - Layout (Helpers)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/readify/readify.js
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/readify/readify.js
+// @require core/svelto/svelto.js
 
 // `body` is used as a fallback
 

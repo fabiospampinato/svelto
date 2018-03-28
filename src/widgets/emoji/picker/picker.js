@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Emoji - Picker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require lib/emojify/emojify.js
- * @require widgets/icon/icon.js
- * @require widgets/storable/storable.js
- * ========================================================================= */
+// @require lib/emojify/emojify.js
+// @require widgets/icon/icon.js
+// @require widgets/storable/storable.js
 
 (function ( $, _, Svelto, Widgets, Factory, Icon, Pointer, EmojiData, Emoji ) {
 

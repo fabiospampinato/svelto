@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Accordion
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/expander/expander.js
- * ========================================================================= */
+// @require widgets/expander/expander.js
 
 //TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
 

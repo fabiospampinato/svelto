@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Tagbox
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/keyboard/keyboard.js
- * @require widgets/icon/icon.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require core/keyboard/keyboard.js
+// @require widgets/icon/icon.js
+// @require widgets/toast/toast.js
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 

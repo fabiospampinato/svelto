@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Justified Layout
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 750
- * @require ./calculator.js
- * @require core/widget/widget.js
- * ========================================================================= */
+// @priority 750
+// @require ./calculator.js
+// @require core/widget/widget.js
 
 (function ( $, _, Svelto, Widgets, Widgetize, Factory, calculator ) {
 

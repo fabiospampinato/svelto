@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Flippable - Targeters - Flipper
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../flippable.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
+// @require ../flippable.js
+// @require widgets/targeter/toggler/toggler.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

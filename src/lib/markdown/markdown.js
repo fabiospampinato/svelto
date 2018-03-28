@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Lib - Markdown
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require lib/get_script/get_script.js
- * ========================================================================= */
+// @require lib/get_script/get_script.js
 
 (function ( $, _, Svelto, getScript ) {
 

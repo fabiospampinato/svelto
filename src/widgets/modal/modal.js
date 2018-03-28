@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Modal
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
+// @require core/animations/animations.js
+// @require widgets/autofocusable/autofocusable.js
 
 //FIXME: Multiple open modals (read it: multiple backdrops) are not well supported
 

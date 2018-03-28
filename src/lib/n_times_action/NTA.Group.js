@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Lib - N Times Action (Group)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/cookie/cookie.js
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/cookie/cookie.js
+// @require core/svelto/svelto.js
 
 (function ( $, _, Svelto, Cookie, NTA ) {
 

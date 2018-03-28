@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Popover
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require ../widget/widget.js
- * @require widgets/popover/popover.js
- * ========================================================================= */
+// @require ../remote.js
+// @require ../widget/widget.js
+// @require widgets/popover/popover.js
 
 //FIXME: The tip will disappear during a resize (not fixable without changing the markup of a popover just for this)
 

@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Reaction
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require ../remote.js
+// @require widgets/toast/toast.js
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, fetch ) {
 

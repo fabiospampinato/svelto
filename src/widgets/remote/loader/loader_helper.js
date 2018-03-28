@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader (Helper)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./loader.js
- * ========================================================================= */
+// @require ./loader.js
 
 //TODO: Maybe namespace ajax-related options into an `ajax` key -> easier to read, harder to use
 

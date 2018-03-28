@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Core - jQuery - Helpers (Scroll)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../init.js
- * @require ./animate_prop.js
- * @require ./elements.js
- * @require ./iterator.js
- * ========================================================================= */
+// @require ../init.js
+// @require ./animate_prop.js
+// @require ./elements.js
+// @require ./iterator.js
 
 (function ( $ ) {
 

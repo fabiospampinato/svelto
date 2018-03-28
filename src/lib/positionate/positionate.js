@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Lib - Positionate
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require lib/directions/directions.js
- * @require lib/embedded_css/embedded_css.js
- * @require lib/transform/transform.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
+// @require lib/directions/directions.js
+// @require lib/embedded_css/embedded_css.js
+// @require lib/transform/transform.js
 
 //FIXME: If the positionable element is less than half of the anchor, and it must be pointed, than the pointer may be not well positionated (expecially if we are not aligning to the center)
 

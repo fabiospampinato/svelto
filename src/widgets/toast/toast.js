@@ -1,17 +1,10 @@
 
-/* =========================================================================
- * Svelto - Widgets - Toast
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/colors/colors.js
- * @require core/sizes/sizes.js
- * @require lib/timer/timer.js
- * @require widgets/autofocusable/autofocusable.js
- * @require widgets/toasts/toasts.js
- * ========================================================================= */
+ // @require core/animations/animations.js
+ // @require core/colors/colors.js
+ // @require core/sizes/sizes.js
+ // @require lib/timer/timer.js
+ // @require widgets/autofocusable/autofocusable.js
+ // @require widgets/toasts/toasts.js
 
 //TODO: Add support for dismissing a toast that contains only one button
 //TODO: Add better support for swipe to dismiss

@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Lib - Notification
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
+// @require widgets/toast/toast.js
 
 // If the page isn't visible and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a toast
 

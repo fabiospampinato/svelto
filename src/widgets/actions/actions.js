@@ -1,17 +1,10 @@
 
-/* =========================================================================
- * Svelto - Widgets - Actions
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional widgets/remote/action/action_helper.js
- * @optional widgets/remote/modal/modal_helper.js
- * @optional widgets/remote/panel/panel_helper.js
- * @optional widgets/remote/popover/popover_helper.js
- * @require widgets/targeter/targeter.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @optional widgets/remote/action/action_helper.js
+// @optional widgets/remote/modal/modal_helper.js
+// @optional widgets/remote/panel/panel_helper.js
+// @optional widgets/remote/popover/popover_helper.js
+// @require widgets/targeter/targeter.js
+// @require widgets/toast/toast.js
 
 //FIXME: Shouldn't extend `Targeter`, but `SelectableActions` needs that
 

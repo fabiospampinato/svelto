@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - Modernizr - Tests (Clip Path Url)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../init.js
- * @require core/jquery/jquery.js
- * ========================================================================= */
+// @require ../init.js
+// @require core/jquery/jquery.js
 
 (function ( Modernizr, $ ) {
 

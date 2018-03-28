@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Popover
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require lib/embedded_css/embedded_css.js
- * @require lib/positionate/positionate.js
- * @require lib/touching/touching.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
+// @require lib/embedded_css/embedded_css.js
+// @require lib/positionate/positionate.js
+// @require lib/touching/touching.js
+// @require widgets/autofocusable/autofocusable.js
 
 //FIXME: Close it if after a `route` event if the trigger element is no longer visible
 

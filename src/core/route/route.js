@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - Route
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/push_state/push_state.js
- * @require core/readify/readify.js
- * ========================================================================= */
+// @require core/push_state/push_state.js
+// @require core/readify/readify.js
 
 /* ROUTE */
 

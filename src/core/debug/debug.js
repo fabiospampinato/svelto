@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - Debug
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 1000000
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @priority 1000000
+// @require core/svelto/svelto.js
 
 (function ( $, _, Svelto ) {
 

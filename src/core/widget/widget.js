@@ -1,20 +1,13 @@
 
-/* =========================================================================
- * Svelto - Core - Widget
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./helpers.js
- * @require core/breakpoint/breakpoint.js
- * @require core/breakpoints/breakpoints.js
- * @require core/factory/factory.js
- * @require core/keyboard/keyboard.js
- * @require core/layout/helpers.js
- * @require core/pointer/pointer.js
- * @require core/route/route.js
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require ./helpers.js
+// @require core/breakpoint/breakpoint.js
+// @require core/breakpoints/breakpoints.js
+// @require core/factory/factory.js
+// @require core/keyboard/keyboard.js
+// @require core/layout/helpers.js
+// @require core/pointer/pointer.js
+// @require core/route/route.js
+// @require core/svelto/svelto.js
 
 (function ( $, _, Svelto, Instances, Templates, Widgets, Factory, Pointer, Keyboard, Breakpoints, Breakpoint ) {
 

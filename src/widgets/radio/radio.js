@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Radio
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/checkbox/checkbox.js
- * ========================================================================= */
+// @require widgets/checkbox/checkbox.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

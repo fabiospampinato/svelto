@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Zoomable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/browser/browser.js
- * @require core/widget/widget.js
- * @require lib/fetch/fetch.js
- * ========================================================================= */
+// @require core/animations/animations.js
+// @require core/browser/browser.js
+// @require core/widget/widget.js
+// @require lib/fetch/fetch.js
 
 //TODO: Generalize it for other kind of elements other than `img`
 

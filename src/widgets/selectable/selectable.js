@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Selectable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional widgets/datatables/datatables.js
- * @require core/browser/browser.js
- * @require core/mouse/mouse.js
- * @require core/widget/widget.js
- * ========================================================================= */
+// @optional widgets/datatables/datatables.js
+// @require core/browser/browser.js
+// @require core/mouse/mouse.js
+// @require core/widget/widget.js
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse ) {
 

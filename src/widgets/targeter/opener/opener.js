@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Targeter - Opener
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../closer/closer.js
- * @require core/browser/browser.js
- * ========================================================================= */
+// @require ../closer/closer.js
+// @require core/browser/browser.js
 
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer ) {
 

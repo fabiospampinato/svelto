@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Widget
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require lib/autofocus/autofocus.js
- * @require lib/fetch/fetch.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require ../remote.js
+// @require lib/autofocus/autofocus.js
+// @require lib/fetch/fetch.js
+// @require widgets/toast/toast.js
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 

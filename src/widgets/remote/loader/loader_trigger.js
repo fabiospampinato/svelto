@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Loader (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./loader.js
- * ========================================================================= */
+// @require ../remote_trigger.js
+// @require ./loader.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

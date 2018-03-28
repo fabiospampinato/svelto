@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Liker
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 200
- * @require widgets/remote/reaction/reaction.js
- * ========================================================================= */
+// @priority 200
+// @require widgets/remote/reaction/reaction.js
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 

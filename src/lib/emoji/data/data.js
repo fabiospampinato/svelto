@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Lib - Emoji - Data
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional ./raw/raw.js
- * @require core/svelto/svelto.js
- * @require lib/fetch/fetch.js
- * ========================================================================= */
+// @optional ./raw/raw.js
+// @require core/svelto/svelto.js
+// @require lib/fetch/fetch.js
 
 (function ( $, _, Svelto, EmojiDataRaw, fetch ) {
 

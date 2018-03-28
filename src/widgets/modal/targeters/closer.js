@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Modal - Targeters - Closer
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../modal.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
+// @require ../modal.js
+// @require widgets/targeter/closer/closer.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

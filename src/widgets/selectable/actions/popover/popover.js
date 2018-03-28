@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Selectable - Actions - Popover
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../actions.js
- * @require widgets/popover/popover.js
- * ========================================================================= */
+// @require ../actions.js
+// @require widgets/popover/popover.js
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 

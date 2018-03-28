@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Modal (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./modal.js
- * ========================================================================= */
+// @require ../remote_trigger.js
+// @require ./modal.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

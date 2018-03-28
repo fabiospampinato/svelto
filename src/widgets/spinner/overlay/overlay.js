@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Spinner - Overlay
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/colors/colors.js
- * @require widgets/overlay/overlay.js
- * ========================================================================= */
+// @require core/colors/colors.js
+// @require widgets/overlay/overlay.js
 
 (function ( $, _, Svelto, Widgets, Factory, Colors ) {
 

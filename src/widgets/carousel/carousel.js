@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Carousel
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/widget/widget.js
- * @require lib/timer/timer.js
- * ========================================================================= */
+// @require core/animations/animations.js
+// @require core/widget/widget.js
+// @require lib/timer/timer.js
 
 //TODO: Add slides drag support
 //TODO: Maybe add `autofocus` capabilities

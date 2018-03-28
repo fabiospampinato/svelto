@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Overlay - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../overlay.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
+// @require ../overlay.js
+// @require widgets/targeter/toggler/toggler.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

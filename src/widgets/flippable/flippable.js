@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Flippable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
+// @require widgets/autofocusable/autofocusable.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

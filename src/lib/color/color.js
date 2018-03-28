@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Lib - Color
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
 
 //TODO: Add support for the alpha channel
 //TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format

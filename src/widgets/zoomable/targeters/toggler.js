@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Zoomable - Targeters - Toggler
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../zoomable.js
- * @require widgets/targeter/toggler/toggler.js
- * ========================================================================= */
+// @require ../zoomable.js
+// @require widgets/targeter/toggler/toggler.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Tabs
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require lib/directions/directions.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
+// @require lib/directions/directions.js
+// @require widgets/autofocusable/autofocusable.js
 
 //TODO: Add again the super cool moving indicator
 //TODO: Not well written, make it better

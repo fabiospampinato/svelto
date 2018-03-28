@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Selectable - Actions
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require widgets/actions/actions.js
- * @require ../selectable.js
- * ========================================================================= */
+// @require widgets/actions/actions.js
+// @require ../selectable.js
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer ) {
 

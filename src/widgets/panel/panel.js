@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Panel
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require lib/directions/directions.js
- * @require widgets/autofocusable/autofocusable.js
- * ========================================================================= */
+// @require core/animations/animations.js
+// @require lib/directions/directions.js
+// @require widgets/autofocusable/autofocusable.js
 
 //FIXME: Multiple open panels (read it: multiple backdrops) are not well supported
 //TODO: Replace flickable support with a smooth moving panel, so operate on drag

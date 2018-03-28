@@ -10675,7 +10675,6 @@ jQuery.expr.filters.animated = function( elem ) {
 
 
 
-
 /**
  * Gets a window from an element
  */

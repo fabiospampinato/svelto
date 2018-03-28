@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - ClassSwitch
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 800
- * @require core/widget/widget.js
- * ========================================================================= */
+// @priority 800
+// @require core/widget/widget.js
 
 //TODO: Maybe rename it
 

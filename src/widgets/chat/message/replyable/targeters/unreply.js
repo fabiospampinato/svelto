@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Chat - Message - Replyable - Targeters - Unreply
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../replyable.js
- * @require widgets/targeter/closer/closer.js
- * ========================================================================= */
+// @require ../replyable.js
+// @require widgets/targeter/closer/closer.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

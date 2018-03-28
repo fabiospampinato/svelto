@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Lib - Validator
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require lib/regexes/regexes.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
+// @require lib/regexes/regexes.js
 
 //TODO: Most of them will return false for empty strings, is this the wanted behaviour?
 

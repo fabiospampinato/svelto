@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Storable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * @require lib/storage/storage.js
- * ========================================================================= */
+// @require core/widget/widget.js
+// @require lib/storage/storage.js
 
 (function ( $, _, Svelto, Widgets, Factory, Storage ) {
 

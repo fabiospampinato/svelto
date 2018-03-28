@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Scroller
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/animations/animations.js
- * @require core/pointer/pointer.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
+// @require core/animations/animations.js
+// @require core/pointer/pointer.js
+// @require widgets/targeter/opener/opener.js
 
 //TODO: Test with nested layouts
 //TODO: Make it work with nested scrollable elements

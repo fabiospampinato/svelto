@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Datatables
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato - All rights reserved.
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ./config.js
- * @require core/widget/widget.js
- * ========================================================================= */
+// @require ./config.js
+// @require core/widget/widget.js
 
 //TODO: Add a spinnerOverlay when processing
 //TODO: Proxy all `*.dt` events as `dt:*`

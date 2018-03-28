@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Core - Readify
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
 
 //TODO: Maybe rename it, `Readify` doesn't sound right
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...

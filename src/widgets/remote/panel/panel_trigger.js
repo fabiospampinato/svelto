@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Panel (Trigger)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote_trigger.js
- * @require ./panel.js
- * ========================================================================= */
+// @require ../remote_trigger.js
+// @require ./panel.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

@@ -1,17 +1,10 @@
 
-/* =========================================================================
- * Svelto - Widgets - Editor
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional ./vendor/marked.js
- * @optional lib/emojify/emojify.js
- * @optional lib/markdown/markdown.js
- * @optional widgets/emoji/picker/popover/popover_trigger.js
- * @optional widgets/form/ajax/ajax.js
- * @require widgets/storable/storable.js
- * ========================================================================= */
+// @optional ./vendor/marked.js
+// @optional lib/emojify/emojify.js
+// @optional lib/markdown/markdown.js
+// @optional widgets/emoji/picker/popover/popover_trigger.js
+// @optional widgets/form/ajax/ajax.js
+// @require widgets/storable/storable.js
 
 //TODO: Add headings support (level 1/3/5, like github does)
 //TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...

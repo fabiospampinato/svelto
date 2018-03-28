@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Lib - One Time Action
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * @require lib/n_times_action/n_times_action.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
+// @require lib/n_times_action/n_times_action.js
 
 (function ( $, _, Svelto ) {
 

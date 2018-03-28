@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Lazy (Worker)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/svelto/svelto.js
- * ========================================================================= */
+// @require core/svelto/svelto.js
 
 //TODO: Add a good way of extending the default options
 

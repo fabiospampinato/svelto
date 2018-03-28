@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Core - Widgetize
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/readify/readify.js
- * ========================================================================= */
+// @require core/readify/readify.js
 
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 

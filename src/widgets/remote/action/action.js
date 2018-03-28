@@ -1,16 +1,9 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote - Action
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../remote.js
- * @require core/colors/colors.js
- * @require core/sizes/sizes.js
- * @require lib/url/url.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require ../remote.js
+// @require core/colors/colors.js
+// @require core/sizes/sizes.js
+// @require lib/url/url.js
+// @require widgets/toast/toast.js
 
 //TODO: Add locking capabilities (Disable the ability to trigger the same action multiple times simultaneously)
 //TODO: Add support for customizable `confirmation` option //TODO: Update also `selectable actions`

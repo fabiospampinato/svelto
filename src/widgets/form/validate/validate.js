@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Widgets - Form - Validate
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * @require lib/validator/validator.js
- * @require widgets/toast/toast.js
- * ========================================================================= */
+// @require core/widget/widget.js
+// @require lib/validator/validator.js
+// @require widgets/toast/toast.js
 
 //TODO: Add support for multiple checkboxes validation
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex

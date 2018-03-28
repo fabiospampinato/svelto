@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Lazy - Image
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @priority 700
- * @require ../lazy.js
- * ========================================================================= */
+// @priority 700
+// @require ../lazy.js
 
 //TODO: Add <picture/> support
 

@@ -1,11 +1,4 @@
 
-/* =========================================================================
- * Svelto - Core - Layout - Sticky (Variables)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
 /* STICKY */
 
 $layout-sticky-header-height: 57px !default; //FIXME: Shouldn't exist, or should be calculated automatically // Unfortunately `position: sticky` is almost totally unsupported atm

@@ -1,15 +1,8 @@
 
-/* =========================================================================
- * Svelto - Core - Svelto
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/shims/shims.js
- * @require core/lodash/lodash.js
- * @require core/jquery/jquery.js
- * @require core/modernizr/modernizr.js
- * ========================================================================= */
+// @require core/shims/shims.js
+// @require core/lodash/lodash.js
+// @require core/jquery/jquery.js
+// @require core/modernizr/modernizr.js
 
 (function () {
 

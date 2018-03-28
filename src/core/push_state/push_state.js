@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Core - Push state
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/readify/readify.js
- * ========================================================================= */
+// @require core/readify/readify.js
 
 // Monkey patching `history.pushState` so that it will trigger an event that we can then use to properly trigger a `route` event
 

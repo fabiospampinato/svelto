@@ -1,14 +1,7 @@
 
-/* =========================================================================
- * Svelto - Decorators - Raisable
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @optional decorators/blurred/blurred.scss
- * @optional decorators/disabled/disabled.scss
- * @require decorators/z_depths/z_depths.scss
- * ========================================================================= */
+// @optional decorators/blurred/blurred.scss
+// @optional decorators/disabled/disabled.scss
+// @require decorators/z_depths/z_depths.scss
 
 // The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
 // It raises even if the `z-depth-0` class has not been included

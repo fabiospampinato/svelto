@@ -1460,7 +1460,6 @@ for (var func in conversions) {
   })(func);
 }
 
-
 /* Converter does lazy conversion and caching */
 var Converter = function() {
    this.convs = {};

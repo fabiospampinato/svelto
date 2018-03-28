@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Datatables - Pager
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../datatables.js
- * @require widgets/targeter/targeter.js
- * ========================================================================= */
+// @require ../datatables.js
+// @require widgets/targeter/targeter.js
 
 //FIXME: Doesn't work with custom sorting
 

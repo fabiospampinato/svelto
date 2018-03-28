@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Remote
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require lib/fetch/fetch.js
- * @require widgets/storable/storable.js
- * ========================================================================= */
+// @require lib/fetch/fetch.js
+// @require widgets/storable/storable.js
 
 //TODO: Add locking capabilities
 

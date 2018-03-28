@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Widgets - Fullscreenable - Targeters - Requester
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../fullscreenable.js
- * @require widgets/targeter/opener/opener.js
- * ========================================================================= */
+// @require ../fullscreenable.js
+// @require widgets/targeter/opener/opener.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 

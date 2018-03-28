@@ -1,10 +1,4 @@
 
-/* =========================================================================
- * Svelto - Lib - Emoji - Data - Raw (Make)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
 
 //TODO: Maybe add a gulp task for executing this file
 

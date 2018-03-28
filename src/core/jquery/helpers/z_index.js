@@ -1,13 +1,6 @@
 
-/* =========================================================================
- * Svelto - Core - jQuery - Helpers (Z Index)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require ../init.js
- * @require core/lodash/lodash.js
- * ========================================================================= */
+// @require ../init.js
+// @require core/lodash/lodash.js
 
 //SOURCE: jQuery UI
 

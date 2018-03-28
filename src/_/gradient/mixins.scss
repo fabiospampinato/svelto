@@ -1,11 +1,4 @@
 
-/* =========================================================================
- * Svelto - _ - Gradient (Mixins)
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
 /* GRADIENT */
 
 @mixin gradient-x ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {

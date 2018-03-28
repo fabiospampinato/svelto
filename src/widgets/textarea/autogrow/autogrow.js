@@ -1,12 +1,5 @@
 
-/* =========================================================================
- * Svelto - Widgets - Textarea - Autogrow
- * =========================================================================
- * Copyright (c) 2015-2017 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @require core/widget/widget.js
- * ========================================================================= */
+// @require core/widget/widget.js
 
 // It supports only `box-sizing: border-box` textareas
 
