@@ -2,6 +2,7 @@
 // @optional ./constants.js
 // @optional ./css2dom.js
 // @optional ./debugger.js
+// @optional ./extend.js
 // @optional ./find_matches.js
 // @optional ./flatten.js
 // @optional ./format.js
