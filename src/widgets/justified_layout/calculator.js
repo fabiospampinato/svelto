@@ -58,7 +58,7 @@
 
     }
 
-    ratios = options.box.ratio ? _.fill ( Array ( ratios.length ), options.box.ratio ) : ratios;
+    ratios = options.box.ratio ? Array ( ratios.length ).fill ( options.box.ratio ) : ratios;
 
     let boxes = _.isNumber ( ratios[0] ) ? ratios.map ( ratio => ({ratio}) ) : ratios;
 
