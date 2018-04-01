@@ -18,5 +18,6 @@
 // @optional ./replace_all.js
 // @optional ./round_closer.js
 // @optional ./time_ago.js
+// @optional ./uniq.js
 // @optional ./upper_first.js
 // @optional ./wait.js
