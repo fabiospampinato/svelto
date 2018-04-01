@@ -2,7 +2,6 @@
 // @require ../init.js
 // @require ./animate_prop.js
 // @require ./elements.js
-// @require ./iterator.js
 
 (function ( $ ) {
 
@@ -47,11 +46,12 @@
     if ( position === 'fixed' ) return $.$document;
 
     let excludeStaticParent = ( position === 'absolute' ),
-        overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+        overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/,
+        $parents = this.parents ();
 
-    for ( let parent of this.parents () ) {
+    for ( let i = 0, l = $parents.length; i < l; i++ ) {
 
-      let $parent = $(parent);
+      let $parent = $($parents[i]);
 
       if ( excludeStaticParent && $parent.css ( 'position' ) === 'static' ) continue;
 

@@ -43,9 +43,10 @@
           nodes = [],
           areas = [];
 
-      for ( let searchable of $searchable ) {
+      for ( let i = 0, l = $searchable.length; i < l; i++ ) {
 
-        let rect2 = $.getRect ( searchable ),
+        let searchable = $searchable[i],
+            rect2 = $.getRect ( searchable ),
             area = getOverlappingArea ( rect1, rect2 );
 
         if ( area > 0 ) {
@@ -69,9 +70,10 @@
 
     if ( options.point ) {
 
-      for ( let searchable of $searchable ) {
+      for ( let i = 0, l = $searchable.length; i < l; i++ ) {
 
-        let rect = $.getRect ( searchable );
+        let searchable = $searchable[i],
+            rect = $.getRect ( searchable );
 
         if ( options.point.y >= rect.top && options.point.y <= rect.bottom && options.point.x >= rect.left && options.point.x <= rect.right ) {
 

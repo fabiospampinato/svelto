@@ -141,9 +141,10 @@
       this.elements = {};
       this.elementsByName = {};
 
-      for ( let element of this.$elements ) {
+      for ( let i = 0, l = this.$elements.length; i < l; i++ ) {
 
-        let $element = $(element),
+        let element = this.$elements[i],
+            $element = $(element),
             $wrappers = $element.parents ( this.options.selectors.wrapper ),
             isWrapped = !!$wrappers.length,
             $wrapper = isWrapped ? $wrappers.first () : $element,
@@ -155,17 +156,17 @@
 
           let validationsArr = validationsStr.split ( this.options.characters.separators.validations );
 
-          for ( let validationStr of validationsArr ) {
+          validationsArr.forEach ( validationStr => {
 
             let matches = validationStr.match ( this.options.regexes.validation );
 
-            if ( !matches ) continue;
+            if ( !matches ) return;
 
             let validationName = matches[1],
                 validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
                 validator = this.options.validators[validationName] || Validator[validationName];
 
-            if ( !validator ) continue;
+            if ( !validator ) return;
 
             if ( !validations ) validations = {};
 
@@ -174,7 +175,7 @@
               validator: validator
             };
 
-          }
+          });
 
         }
 

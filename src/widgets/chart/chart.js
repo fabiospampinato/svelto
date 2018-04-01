@@ -45,11 +45,11 @@
 
       let properties = ['type', 'colors', 'labels', 'datas'];
 
-      for ( let property of properties ) {
+      properties.forEach ( property => {
 
         this[property] = this.$chart.data ( this.options.datas[property] ) || this.options.defaults[property];
 
-      }
+      });
 
       if ( !_.isArray ( this.datas[0] ) ) this.datas = [this.datas];
 

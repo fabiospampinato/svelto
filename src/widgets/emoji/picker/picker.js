@@ -433,9 +433,9 @@
             let emoji = this.options.data.emojis[id],
                 match = true;
 
-            for ( let keyword of keywords ) {
+            for ( let i = 0, l = keywords.length; i < l; i++ ) {
 
-              if ( emoji.tags.indexOf ( keyword ) === -1 ) {
+              if ( emoji.tags.indexOf ( keywords[i] ) === -1 ) {
 
                 match = false;
                 break;

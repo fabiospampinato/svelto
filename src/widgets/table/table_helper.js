@@ -80,13 +80,13 @@
         let chunks = _.chunk ( datas, this.columnsNr ),
             $rows = $();
 
-        for ( let chunk of chunks ) {
+        chunks.forEach ( chunk => {
 
           let rowHtml = this._template ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
 
           $rows = $rows.add ( rowHtml );
 
-        }
+        });
 
         this.$body.append ( $rows );
 

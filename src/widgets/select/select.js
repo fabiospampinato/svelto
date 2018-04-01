@@ -156,9 +156,10 @@
 
       let previousOptgroup;
 
-      for ( let option of this.$options ) {
+      for ( let i = 0, l = this.$options.length; i < l; i++ ) {
 
-        let $option = $(option),
+        let option = this.$options[i],
+            $option = $(option),
             $parent = $option.parent ();
 
         if ( $parent.is ( 'optgroup' ) ) {

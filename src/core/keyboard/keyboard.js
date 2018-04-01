@@ -51,7 +51,9 @@
         if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
         if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
 
-        for ( let key of keys ) {
+        for ( let i = 0, l = keys.length; i < l; i++ ) {
+
+          let key = keys[i];
 
           if ( specialKeys.includes ( key ) ) {
 

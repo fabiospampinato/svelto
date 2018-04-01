@@ -96,11 +96,11 @@
 
         this.unlock ();
 
-        for ( let [$circle, timestamp] of this.circles ) {
+        this.circles.forEach ( ([ $circle, timestamp ]) => {
 
           this._hide ( $circle, timestamp );
 
-        }
+        });
 
         this.circles = [];
 

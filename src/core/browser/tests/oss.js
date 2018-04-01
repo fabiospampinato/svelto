@@ -5,10 +5,10 @@
 
   /* OSS */
 
-  for ( let os of Browser.support.oss ) {
+  Browser.support.oss.forEach ( os => {
 
     Modernizr.addTest ( os, Browser.is[os] );
 
-  }
+  });
 
 }( Svelto.Modernizr, Svelto.Browser ));

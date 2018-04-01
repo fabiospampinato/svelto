@@ -99,11 +99,7 @@
 
       this._ready = true;
 
-      for ( let callback of this._readyQueue ) {
-
-        callback ();
-
-      }
+      this._readyQueue.forEach ( callback => callback () );
 
       this._readyQueue = [];
 
@@ -441,11 +437,7 @@
 
       if ( this._lockQueues[namespace] ) {
 
-        for ( let callback of this._lockQueues[namespace] ) {
-
-          callback ();
-
-        }
+        this._lockQueues[namespace].forEach ( callback => callback () );
 
         delete this._lockQueues[namespace];
 
@@ -735,7 +727,11 @@
 
         if ( !this.options.keystrokes.hasOwnProperty ( keystrokes ) ) continue;
 
-        for ( let keystroke of keystrokes.split ( ',' ) ) {
+        let keystrokesParts = keystrokes.split ( ',' );
+
+        for ( let i = 0, l = keystrokesParts.length; i < l; i++ ) {
+
+          let keystroke = keystrokesParts[i];
 
           if ( !Keyboard.keystroke.match ( event, keystroke ) ) continue;
 

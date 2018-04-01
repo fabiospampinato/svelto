@@ -55,15 +55,15 @@
 
       let matches = Emojify.getEmoticons ( str );
 
-      for ( let match of matches ) {
+      for ( let i = 0, l = matches.length; i < l; i++ ) {
 
-        let {emoticon, index} = match;
+        let {emoticon, index} = matches[i];
 
         if ( ( index > 0 && !str[index - 1].match ( /\s/ ) ) || ( index + emoticon.length < str.length && !str[index + emoticon.length].match ( /\s/ ) ) ) continue;
 
         let emoji = await Emoji.getByEmoticon ( emoticon, true );
 
-        if ( !emoji ) continue;
+        if ( !emoji ) return;
 
         let parsed = await Emoji.make ( emoji.id, Emoji.options.tone, options );
 
@@ -81,9 +81,9 @@
 
       let matches = Emojify.getEncoded ( str );
 
-      for ( let match of matches ) {
+      for ( let i = 0, l = matches.length; i < l; i++ ) {
 
-        let {encoded, name, tone} = match,
+        let {encoded, name, tone} = matches[i],
             emoji = await Emoji.getByName ( name );
 
         if ( !emoji ) continue;
@@ -104,18 +104,19 @@
 
       let data = await EmojiData.get ();
 
-      for ( let [char, name] of data.chars ) {
+      for ( let i = 0, l = data.chars.length; i < l; i++ ) {
 
-        let emoji = await Emoji.getByName ( name ),
+        let [char, name] = data.chars[i],
+            emoji = await Emoji.getByName ( name ),
             tones = emoji.tones ? 6 : 1;
 
-        for ( let i = 6, l = 1; i >= l; i-- ) {
+        for ( let ti = 6, tl = 1; ti >= tl; ti-- ) {
 
-          let unicode = await Emoji.emoji2unicode ( emoji, i );
+          let unicode = await Emoji.emoji2unicode ( emoji, ti );
 
           if ( str.indexOf ( unicode ) === -1 ) continue;
 
-          str = _.replaceAll ( str, unicode, await Emoji.make ( name, i, options ) );
+          str = _.replaceAll ( str, unicode, await Emoji.make ( name, ti, options ) );
 
         }
 

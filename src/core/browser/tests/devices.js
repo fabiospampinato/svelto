@@ -5,10 +5,10 @@
 
   /* DEVICES */
 
-  for ( let device of Browser.support.devices ) {
+  Browser.support.devices.forEach ( device => {
 
     Modernizr.addTest ( device, Browser.is[device] );
 
-  }
+  });
 
 }( Svelto.Modernizr, Svelto.Browser ));

@@ -26,9 +26,9 @@
       data.emojis = {};
       data.emoticons = {};
 
-      for ( let category of data.categories ) {
+      data.categories.forEach ( category => {
 
-        for ( let emoji of category.emojis ) {
+        category.emojis.forEach ( emoji => {
 
           if ( emoji.alts ) {
 
@@ -64,9 +64,9 @@
 
           }
 
-        }
+        });
 
-      }
+      });
 
       // data.chars = data.chars.sort ( ( a, b ) => b[0].length - a[0].length );
 

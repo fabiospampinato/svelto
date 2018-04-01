@@ -89,9 +89,10 @@
       let value = $element.val (),
           checked = !!$element.prop ( 'checked' );
 
-      for ( let otherElement of $otherElements ) {
+      for ( let i = 0, l = $otherElements.length; i < l; i++ ) {
 
-        let $otherElement = $(otherElement),
+        let otherElements = $otherElements[i],
+            $otherElement = $(otherElement),
             otherValue = $otherElement.val (),
             otherChecked = !!$otherElement.prop ( 'checked' );
 

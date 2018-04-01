@@ -222,9 +222,10 @@
 
     ___triggers () {
 
-      for ( let trigger of this.$triggers ) {
+      for ( let i = 0, l = this.$triggers.length; i < l; i++ ) {
 
-        let $trigger = $(trigger),
+        let trigger = this.$triggers[i],
+            $trigger = $(trigger),
             action = $trigger.data ( this.options.datas.action );
 
         this._on ( $trigger, Pointer.tap, event => this.action ( action, event ) );
