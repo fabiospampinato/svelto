@@ -40,7 +40,7 @@
 
     get () {
 
-      this._widths = this._widths || _.sortBy ( _.values ( Breakpoints.widths ) );
+      this._widths = this._widths || _.natSort ( Object.values ( Breakpoints.widths ) );
       this._width2breakpoint = this._width2breakpoint || _.invert ( Breakpoints.widths );
 
       let width = $.window.innerWidth;

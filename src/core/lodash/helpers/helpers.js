@@ -6,6 +6,7 @@
 // @optional ./frames.js
 // @optional ./mkize.js
 // @optional ./move.js
+// @optional ./nat_sort.js
 // @optional ./now_secs.js
 // @optional ./replace_all.js
 // @optional ./round_closer.js
