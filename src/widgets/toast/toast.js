@@ -128,7 +128,7 @@
 
     static ready ( done ) {
 
-      _.delay ( function () { // In order to better support client size rendering
+      setTimeout ( function () { // In order to better support client size rendering
 
         $.$layout.append ( Toast.config.templates.queues );
 
