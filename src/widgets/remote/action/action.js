@@ -60,7 +60,7 @@
       /* VARIABLES */
 
       let options = _.cloneDeep ( this.options.confirmation ),
-          index = _.findIndex ( options.buttons, 'isConfirmative' ),
+          index = options.buttons.findIndex ( button => button.isConfirmative ),
           button = ( index >= 0 ) ? options.buttons[index] : _.last ( options.buttons );
 
       /* ON CLICK */
