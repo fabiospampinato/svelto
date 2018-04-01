@@ -198,9 +198,9 @@
 
     ___navigation () {
 
-      this._on ( this.$navigationPrev, Pointer.tap, _.wrap ( 'previousMonth', this.__navigation ) );
-      this._on ( this.$navigationNext, Pointer.tap, _.wrap ( 'nextMonth', this.__navigation ) );
-      this._on ( this.$navigationToday, Pointer.tap, _.wrap ( 'navigateToToday', this.__navigation ) );
+      this._on ( this.$navigationPrev, Pointer.tap, event => this.__navigation ( 'previousMonth', event ) );
+      this._on ( this.$navigationNext, Pointer.tap, event => this.__navigation ( 'nextMonth', event ) );
+      this._on ( this.$navigationToday, Pointer.tap, event => this.__navigation ( 'navigateToToday', event ) );
 
     }
 

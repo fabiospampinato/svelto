@@ -227,7 +227,7 @@
         let $trigger = $(trigger),
             action = $trigger.data ( this.options.datas.action );
 
-        this._on ( $trigger, Pointer.tap, _.wrap ( action, this.action ) );
+        this._on ( $trigger, Pointer.tap, event => this.action ( action, event ) );
 
       }
 
