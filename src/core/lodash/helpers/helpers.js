@@ -23,3 +23,4 @@
 // @optional ./uniq.js
 // @optional ./upper_first.js
 // @optional ./wait.js
+// @optional ./xor.js
