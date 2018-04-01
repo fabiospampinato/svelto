@@ -355,7 +355,7 @@
       let tags = tag.split ( this.options.characters.separator ),
           adds = tags.map ( tag => this._add ( tag ) );
 
-      let added = !!_.compact ( adds ).length;
+      let added = !!adds.find ( _.identity );
 
       if ( added ) {
 

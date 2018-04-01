@@ -33,9 +33,9 @@
     _getIds () {
 
       let $rows = this._targetInstance.get (),
-          ids = $rows.get ().map ( row => this.options.selectors.id ? $(row).find ( this.options.selectors.id ).text () : $(row).data ( this.options.datas.id ) );
+          ids = $rows.get ().map ( row => this.options.selectors.id ? $(row).find ( this.options.selectors.id ).text () : $(row).data ( this.options.datas.id ) ).filter ( _.identity );
 
-      return _.compact ( ids );
+      return ids;
 
     }
 
