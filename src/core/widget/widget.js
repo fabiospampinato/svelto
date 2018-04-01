@@ -134,8 +134,7 @@
             Svelto,
             Templates,
             self: Templates[this.Name]
-          },
-          variable: 'o'
+          }
         };
 
         for ( let template in this.templates ) {

@@ -33,7 +33,7 @@
 
     /* LOADER */
 
-    let template = _.isFunction ( options.template ) ? options.template : _.template ( options.template, { variable: 'o' } ),
+    let template = _.isFunction ( options.template ) ? options.template : _.template ( options.template ),
         html = template ( options ),
         $loader = $(html);
 
