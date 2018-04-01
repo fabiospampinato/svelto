@@ -37,23 +37,23 @@
         let specialKeys = ['ctrl', 'cmd', 'ctmd', 'alt', 'shift'],
             keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
 
-        if ( _.includes ( keys, 'ctmd' ) ) {
+        if ( keys.includes ( 'ctmd' ) ) {
 
           if ( !Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
 
         } else {
 
-          if ( _.includes ( keys, 'ctrl' ) !== event.ctrlKey ) return false;
-          if ( _.includes ( keys, 'cmd' ) !== event.metaKey ) return false;
+          if ( keys.includes ( 'ctrl' ) !== event.ctrlKey ) return false;
+          if ( keys.includes ( 'cmd' ) !== event.metaKey ) return false;
 
         }
 
-        if ( _.includes ( keys, 'alt' ) !== event.altKey ) return false;
-        if ( _.includes ( keys, 'shift' ) !== event.shiftKey ) return false;
+        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
+        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
 
         for ( let key of keys ) {
 
-          if ( !_.includes ( specialKeys, key ) ) {
+          if ( specialKeys.includes ( key ) ) {
 
             if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
 

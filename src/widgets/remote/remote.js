@@ -118,7 +118,7 @@
 
     isRequesting () {
 
-      return !!this.req && !_.includes ( [0, 4], this.req.readyState ); // 0: UNSENT, 4: DONE
+      return !!this.req && ![0, 4].includes ( this.req.readyState ); // 0: UNSENT, 4: DONE
 
     }
 

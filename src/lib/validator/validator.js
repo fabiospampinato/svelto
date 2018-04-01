@@ -89,7 +89,7 @@
     included ( value, values ) {
       value = value.toLowerCase ();
       values = values.map ( value => value.toLowerCase () );
-      return _.includes ( values, value );
+      return values.includes ( value );
     }
 
   };

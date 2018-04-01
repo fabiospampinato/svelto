@@ -163,7 +163,7 @@
 
         }
 
-      } else if ( _.includes ( this.options.tags, value ) ) {
+      } else if ( this.options.tags.includes ( value ) ) {
 
         $.toast ( _.format ( this.options.messages.duplicate, value ) );
 
@@ -237,7 +237,7 @@
 
       let value = this.$partial.val ();
 
-      if ( _.includes ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+      if ( this.options.characters.inserters.includes ( event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
         let added = this.add ( value );
 
@@ -264,7 +264,7 @@
 
         }
 
-      } else if ( this.options.characters.forbid && _.includes ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+      } else if ( this.options.characters.forbid && this.options.characters.forbidden.includes ( String.fromCharCode ( event.keyCode ) ) ) {
 
         $.toast ( this.options.messages.forbidden );
 

@@ -118,7 +118,7 @@
 
         let column = this.options.select.column,
             values = this.options.select.values || [this.options.select.value],
-            rows   = data.aoData.filter ( row => _.includes ( values, row._aData[column] ) );
+            rows   = data.aoData.filter ( row => values.includes ( row._aData[column] ) );
 
         if ( !rows.length ) return;
 

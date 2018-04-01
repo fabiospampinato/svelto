@@ -26,7 +26,7 @@
 
       position = $elem.css ( 'position' );
 
-      if ( _.includes ( ['absolute', 'relative', 'fixed'], position ) ) {
+      if ( ['absolute', 'relative', 'fixed'].includes ( position ) ) {
 
 				// IE returns 0 when zIndex is not specified
 				// other browsers return a string
