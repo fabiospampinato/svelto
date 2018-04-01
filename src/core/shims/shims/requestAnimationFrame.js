@@ -1,5 +1,4 @@
 
-
 (function () {
 
   /* REQUEST ANIMATION FRAME */
