@@ -9,6 +9,7 @@
 // @optional ./format.js
 // @optional ./frames.js
 // @optional ./is_equal_json.js
+// @optional ./merge.js
 // @optional ./mkize.js
 // @optional ./move.js
 // @optional ./nat_sort.js
