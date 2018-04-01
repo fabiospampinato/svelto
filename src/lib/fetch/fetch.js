@@ -79,9 +79,10 @@
 
       }
 
-      _.forOwn ( options.headers, ( val, key ) => {
-        request.setRequestHeader ( key, val );
-      });
+      for ( let key in options.headers ) {
+        if ( !options.headers.hasOwnProperty ( key ) ) continue;
+        request.setRequestHeader ( key, options.headers[key] );
+      }
 
       request.onload = () => {
         let response = fetch.request2response ( request );
@@ -115,9 +116,13 @@
 
     const responses = await ( await fetch ( batchUrl, options ) ).json ();
 
-    _.forOwn ( responses, ( response, url ) => {
+    for ( let url in responses ) {
 
-      const responseText = _.isString ( response ) ? response : JSON.stringify ( response );
+      if ( !responses.hasOwnProperty ( url ) ) continue;
+
+      const response = responses[url],
+            responseText = _.isString ( response ) ? response : JSON.stringify ( response );
+
       const request = {
         __fake: true,
         getAllResponseHeaders: () => '',
@@ -130,7 +135,7 @@
 
       fetch.cache[url] = Promise.resolve ( fetch.request2response ( request ) );
 
-    });
+    }
 
     return fetch.cache[url] || fetch ( url, options );
 
