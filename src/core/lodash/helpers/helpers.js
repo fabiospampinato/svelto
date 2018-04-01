@@ -1,4 +1,5 @@
 
+// @optional ./clone_deep.js
 // @optional ./constants.js
 // @optional ./css2dom.js
 // @optional ./debugger.js
