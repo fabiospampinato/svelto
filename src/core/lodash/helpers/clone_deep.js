@@ -7,7 +7,7 @@
 
   _.cloneDeep = function ( obj ) {
 
-    if ( obj === null || typeof ( obj ) !== 'object' || _.isElement ( obj ) || '__is_cloning__' in obj ) return obj;
+    if ( obj === null || typeof ( obj ) !== 'object' || _.isElement ( obj ) || _.isRegExp ( obj ) || 'jquery' in obj || '__is_cloning__' in obj ) return obj;
 
     const dupe = obj instanceof Date ? new obj.constructor () : obj.constructor ();
 
