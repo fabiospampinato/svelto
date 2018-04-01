@@ -13,4 +13,5 @@
 // @optional ./replace_all.js
 // @optional ./round_closer.js
 // @optional ./time_ago.js
+// @optional ./upper_first.js
 // @optional ./wait.js
