@@ -54,7 +54,7 @@
     /* METHODS */
 
     isDeviceEvent ( event, device ) {
-      return _.startsWith ( event.type, device.toLowerCase () );
+      return event.type.startsWith ( device.toLowerCase () );
     },
     isPointerEvent ( event ) {
       return Pointer.isDeviceEvent ( event, Pointer.options.events.prefix );
