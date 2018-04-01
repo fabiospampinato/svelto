@@ -91,13 +91,13 @@
 
       super.enable ();
 
-      _.invokeMap ( this.instances, 'enable' );
+      this.instances.forEach ( instance => instance.enable () );
 
     }
 
     disable () {
 
-      _.invokeMap ( this.instances, 'disable' );
+      this.instances.forEach ( instance => instance.disable () );
 
     }
 
