@@ -31,5 +31,14 @@
         }
       }
     }
+  },
+  "environments": {
+    "development": {
+      "components": {
+        "core": {
+          "regenerator_runtime.js": false
+        }
+      }
+    }
   }
 }
