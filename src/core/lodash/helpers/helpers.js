@@ -1,5 +1,6 @@
 
 // @optional ./constants.js
+// @optional ./css2dom.js
 // @optional ./debugger.js
 // @optional ./find_matches.js
 // @optional ./format.js

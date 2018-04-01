@@ -7,7 +7,7 @@
 
   /* MATRIX */
 
-  let property = _.camelCase ( Modernizr.prefixedCSS ( 'transform' ) ),
+  let property = _.CSS2DOM ( Modernizr.prefixedCSS ( 'transform' ) ),
       precision = 3; // Or sometimes we may get weird values like `2.4492935982947064e-16` on Safari
 
   $.fn.matrix = function ( values ) { //TODO: Add not jquery-wrapped version fo this maybe
