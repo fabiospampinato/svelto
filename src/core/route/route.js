@@ -12,7 +12,7 @@
 
     $.$window.on ( 'popstate pushstate', function () {
 
-      _.defer ( function () { // We need the `window.location.href` to get updated before
+      setTimeout ( function () { // We need the `window.location.href` to get updated before
 
         let current = window.location.href.split ( '#' )[0];
 
