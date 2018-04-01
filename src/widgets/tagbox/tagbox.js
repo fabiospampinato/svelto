@@ -365,7 +365,7 @@
 
           this._trigger ( 'change' );
 
-          let addedTags = _.filter ( tags, ( tag, index ) => adds[index] );
+          let addedTags = tags.filter ( ( tag, index ) => adds[index] );
 
           this._trigger ( 'add', addedTags );
 
