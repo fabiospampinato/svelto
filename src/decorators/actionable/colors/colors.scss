@@ -11,13 +11,19 @@
     %color-#{$name}%actionable:not(.disabled) {
 
       &:not(.active):hover {
-        // @extend %color-#{$name}-hover;
-        @include color-inline ( $name, 'hover' ); // For performance reasons
+        @if $svelto-development { // For performance reasons
+          @include color-inline ( $name, 'hover' );
+        } @else {
+          @extend %color-#{$name}-hover;
+        }
       }
 
       &:not(.ripple):active {
-        // @extend %color-#{$name}-active;
-        @include color-inline ( $name, 'active' ); // For performance reasons
+        @if $svelto-development { // For performance reasons
+          @include color-inline ( $name, 'active' );
+        } @else {
+          @extend %color-#{$name}-active;
+        }
       }
 
     }

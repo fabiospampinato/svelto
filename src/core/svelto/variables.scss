@@ -2,3 +2,5 @@
 /* SVELTO */
 
 $svelto-version: '[pacco.svelto.version]' !default;
+$svelto-environment: '[pacco.environment[0]]' !default;
+$svelto-development: $svelto-environment == 'development' !default;

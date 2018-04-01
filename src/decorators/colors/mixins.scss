@@ -11,13 +11,19 @@
 
       @if not $basic {
 
-        // @extend %color-#{$color};
-        @include color-inline ( $color, 'full' ); // For performance reasons
+        @if $svelto-development { // For performance reasons
+          @include color-inline ( $color, 'full' );
+        } @else {
+          @extend %color-#{$color};
+        }
 
       } @else {
 
-        // @extend %color-#{$color}-base;
-        @include color-inline ( $color, 'base' ); // For performance reasons
+        @if $svelto-development { // For performance reasons
+          @include color-inline ( $color, 'base' );
+        } @else {
+          @extend %color-#{$color}-base;
+        }
 
       }
 
