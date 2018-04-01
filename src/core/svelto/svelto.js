@@ -1,4 +1,5 @@
 
+// @optional core/polyfills/polyfills.js
 // @optional core/shims/shims.js
 // @require core/lodash/lodash.js
 // @require core/jquery/jquery.js

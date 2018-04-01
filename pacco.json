@@ -36,7 +36,8 @@
     "development": {
       "components": {
         "core": {
-          "regenerator_runtime.js": false
+          "regenerator_runtime.js": false,
+          "polyfills": false
         }
       }
     }

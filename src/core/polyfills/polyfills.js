@@ -1,0 +1,2 @@
+
+// @require ./polyfills/polyfills.js
