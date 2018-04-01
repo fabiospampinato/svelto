@@ -34,7 +34,7 @@
           return Validator.included ( value, values );
         },
         field ( value, fieldName ) {
-          let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
+          const fieldValue = this.elementsByName[fieldName].value;
           return ( value === fieldValue );
         },
         checked () {
@@ -135,6 +135,7 @@
     ___elements () {
 
       this.elements = {};
+      this.elementsByName = {};
 
       for ( let element of this.$elements ) {
 
@@ -147,8 +148,6 @@
             validations = false;
 
         if ( validationsStr ) {
-
-          validations = {};
 
           let validationsArr = validationsStr.split ( this.options.characters.separators.validations );
 
@@ -164,16 +163,12 @@
 
             if ( !validator ) continue;
 
+            if ( !validations ) validations = {};
+
             validations[validationName] = {
               args: validationArgs,
               validator: validator
             };
-
-          }
-
-          if ( _.isEmpty ( validations ) ) {
-
-            validations = false;
 
           }
 
@@ -196,6 +191,8 @@
             valid: isWrapped ? $element.data ( this.options.datas.messages.valid ) || $wrapper.data ( this.options.datas.messages.valid ) : $element.data ( this.options.datas.messages.valid )
           }
         };
+
+        this.elementsByName[this.elements[id].name] = this.elements[id];
 
       }
 
@@ -226,7 +223,7 @@
 
         let otherElementObj = this.elements[id],
             isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf ( elementObj.name ) !== -1,
-            hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
+            hasSameName = elementObj.name.length && otherElementObj.name === elementObj.name;
 
         if ( isDepending || hasSameName ) {
 
@@ -368,7 +365,7 @@
           if ( !validations.hasOwnProperty ( name ) ) continue;
 
           let validation = validations[name],
-              isValid = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
+              isValid = validation.validator.call ( this, elementObj.value, ...validation.args );
 
           if ( !isValid ) {
 
@@ -382,7 +379,7 @@
 
       }
 
-      return _.isEmpty ( errors ) ? true : errors;
+      return !errors.length ? true : errors;
 
     }
 
