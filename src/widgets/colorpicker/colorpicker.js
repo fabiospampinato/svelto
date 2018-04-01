@@ -394,7 +394,7 @@
 
       let hsv = color.getHsv ();
 
-      if ( _.isEqual ( this.hsv, hsv ) ) return;
+      if ( _.isEqualJSON ( this.hsv, hsv ) ) return;
 
       this.hsv = hsv;
 

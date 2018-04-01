@@ -483,7 +483,7 @@
 
       this._init ( true );
 
-      if ( !_.isEqual ( previous, this.options.tags ) ) {
+      if ( !_.isEqualJSON ( previous, this.options.tags ) ) {
 
         this._trigger ( 'change' );
 

@@ -502,7 +502,7 @@
 
       let rank = this._storageGet ( 'frequent' );
 
-      if ( !rank || _.isEqual ( this.options.frequent.rank, rank ) ) return;
+      if ( !rank || _.isEqualJSON ( this.options.frequent.rank, rank ) ) return;
 
       this.options.frequent.rank = rank;
 
