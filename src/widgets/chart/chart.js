@@ -77,7 +77,7 @@
         type: this.type,
         data: {
           labels: this.datas[0].map ( ( point, index ) => index + 1 ),
-          datasets: _.map ( this.labels, ( label, index ) => ({
+          datasets: this.labels.map ( ( label, index ) => ({
             label,
             data: this.datas[index],
             backgroundColor: this.colors[index]

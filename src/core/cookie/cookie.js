@@ -78,7 +78,7 @@
 
       let keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
 
-      return _.map ( keys, this.decoder );
+      return keys.map ( this.decoder );
 
     }
 
