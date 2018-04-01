@@ -360,31 +360,31 @@
 
     // We cannot have a `options` alias to `option`, since `options` is already defined in the config
 
-    option ( key, value ) {
+    option ( selector, value ) {
 
-      if ( !key ) {
+      if ( !selector ) {
 
         return _.cloneDeep ( this.options );
 
-      } else if ( _.isString ( key ) ) {
+      } else if ( _.isString ( selector ) ) {
 
         if ( _.isUndefined ( value ) ) {
 
-          return _.cloneDeep ( _.get ( this.options, key ) );
+          return _.cloneDeep ( _.get ( this.options, selector ) );
 
         } else {
 
-          this._setOption ( key, value );
+          this._setOption ( selector, value );
 
         }
 
-      } else if ( _.isPlainObject ( key ) ) {
+      } else if ( _.isPlainObject ( selector ) ) {
 
-        for ( let prop in key ) {
+        for ( let prop in selector ) {
 
-          if ( !key.hasOwnProperty ( prop ) ) continue;
+          if ( !selector.hasOwnProperty ( prop ) ) continue;
 
-          this._setOption ( key, value );
+          this._setOption ( selector, value );
 
         }
 
@@ -392,9 +392,9 @@
 
     }
 
-    _setOption ( key, value ) {
+    _setOption ( selector, value ) {
 
-      _.set ( this.options, key, value );
+      _.set ( this.options, selector, value );
 
     }
 
