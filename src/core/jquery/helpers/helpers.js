@@ -12,7 +12,6 @@
 // @optional ./is_attached.js
 // @optional ./is_focused.js
 // @optional ./is_visible.js
-// @optional ./iterator.js
 // @optional ./on_ready.js
 // @optional ./outer_html.js
 // @optional ./scroll.js
