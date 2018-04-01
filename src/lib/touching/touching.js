@@ -59,7 +59,7 @@
 
       return nodes.length
                ? options.onlyBest
-                 ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ])
+                 ? $(nodes[ areas.indexOf ( Math.max ( ...areas ) ) ])
                  : $(nodes)
                : false;
 

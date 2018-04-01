@@ -130,7 +130,7 @@
 
     /* BEST DIRECTION */
 
-    let bestIndex = areas.indexOf ( _.max ( areas ) ),
+    let bestIndex = areas.indexOf ( Math.max ( ...areas ) ),
         bestDirection = directions[bestIndex],
         coordinates = {};
 
