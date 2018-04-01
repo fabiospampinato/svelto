@@ -5,14 +5,10 @@
 
   /* DEBUGGER */
 
-  _.mixin ({
+  _.debugger = function () {
 
-    debugger () {
+    debugger;
 
-      debugger;
-
-    }
-
-  });
+  };
 
 }( window.__svelto_lodash ));

@@ -5,16 +5,12 @@
 
   /* REPLACE ALL */
 
-  _.mixin ({
+  _.replaceAll = function ( string, pattern, replacement ) {
 
-    replaceAll ( string, pattern, replacement ) {
+    let escaped = pattern.replace ( /[.*+?^${}()|[\]\\]/g, '\\$&' );
 
-      let escaped = pattern.replace ( /[.*+?^${}()|[\]\\]/g, '\\$&' );
+    return string.replace ( new RegExp ( escaped, 'g' ), replacement );
 
-      return string.replace ( new RegExp ( escaped, 'g' ), replacement );
-
-    }
-
-  });
+  };
 
 }( window.__svelto_lodash ));

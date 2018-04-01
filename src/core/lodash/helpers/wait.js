@@ -5,14 +5,10 @@
 
   /* WAIT */
 
-  _.mixin ({
+  _.wait = function ( ms ) {
 
-    wait ( ms ) {
+    return new Promise ( resolve => setTimeout ( resolve, ms ) );
 
-      return new Promise ( resolve => setTimeout ( resolve, ms ) );
-
-    }
-
-  });
+  };
 
 }( window.__svelto_lodash ));

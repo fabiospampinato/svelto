@@ -5,14 +5,10 @@
 
   /* NOW SECS */
 
-  _.mixin ({
+  _.nowSecs = function () {
 
-    nowSecs () {
+    return Math.floor ( _.now () / 1000 );
 
-      return Math.floor ( _.now () / 1000 );
-
-    }
-
-  });
+  };
 
 }( window.__svelto_lodash ));

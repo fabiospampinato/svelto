@@ -5,16 +5,9 @@
 
   /* CONSTANTS */
 
-  _.mixin ({
-
-    true: _.constant ( true ),
-
-    false: _.constant ( false ),
-
-    undefined: _.constant (),
-
-    null: _.constant ( null )
-
-  });
+  _.true = _.constant ( true );
+  _.false = _.constant ( false );
+  _.undefined = _.constant ();
+  _.null = _.constant ( null );
 
 }( window.__svelto_lodash ));

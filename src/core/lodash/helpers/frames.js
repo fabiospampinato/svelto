@@ -6,28 +6,24 @@
 
   /* FRAMES */
 
-  _.mixin ({
+  _.frames = function ( fn ) {
 
-    frames ( fn ) {
+    let wait, args;
 
-      let wait, args;
-
-      function proxy () {
-        wait = false;
-        fn.apply ( undefined, args );
-      }
-
-      function framed () {
-        if ( wait ) return;
-        wait = true;
-        args = arguments;
-        requestAnimationFrame ( proxy );
-      }
-
-      return framed;
-
+    function proxy () {
+      wait = false;
+      fn.apply ( undefined, args );
     }
 
-  });
+    function framed () {
+      if ( wait ) return;
+      wait = true;
+      args = arguments;
+      requestAnimationFrame ( proxy );
+    }
+
+    return framed;
+
+  };
 
 }( window.__svelto_lodash ));
