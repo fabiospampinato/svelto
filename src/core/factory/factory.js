@@ -120,7 +120,7 @@
 
         if ( !_.isObject ( instances ) ) return;
 
-        _.forEachRight ( instances[Widget.config.Name], instance => instance.destroy () );
+        instances[Widget.config.Name].forEach ( instance => instance.destroy () );
 
         delete instances[Widget.config.Name];
 
