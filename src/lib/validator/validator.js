@@ -84,7 +84,7 @@
     /* OTHERS */
 
     empty ( value ) {
-      return _.isEmpty ( value.trim () );
+      return !value.trim ().length;
     },
     included ( value, values ) {
       value = value.toLowerCase ();
