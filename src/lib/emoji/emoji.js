@@ -76,7 +76,7 @@
 
       }
 
-      return codes.map ( c => _.padStart ( c.toString ( 16 ), 4, 0 ) ).join ( '-' );
+      return codes.map ( c => c.toString ( 16 ).padStart ( 4, '0' ) ).join ( '-' );
 
     },
 

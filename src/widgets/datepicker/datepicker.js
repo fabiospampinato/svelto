@@ -18,7 +18,7 @@
     options: {
       exporters: {
         YYYYMMDD ( date, data ) {
-          return [_.padStart ( date.getUTCFullYear (), 4, 0 ), _.padStart ( parseInt ( date.getUTCMonth (), 10 ) + 1, 2, 0 ), _.padStart ( date.getUTCDate (), 2, 0 )].join ( data.separator );
+          return [date.getUTCFullYear ().toString ().padStart ( 4, '0' ), ( parseInt ( date.getUTCMonth (), 10 ) + 1 ).toString ().padStart ( 2, '0' ), date.getUTCDate ().toString ().padStart ( 2, '0' )].join ( data.separator );
         },
         UNIXTIMESTAMP ( date ) {
           return Math.floor ( date.getTime () / 1000 );

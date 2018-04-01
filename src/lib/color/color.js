@@ -16,8 +16,6 @@
 
     }
 
-    /* ----- API ----- */
-
     /* SET */
 
     set ( color, colorspace ) {
@@ -380,7 +378,7 @@
 
     static dec2hex ( dec ) {
 
-      return _.padStart ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
+      return parseInt ( dec, 10 ).toString ( 16 ).padStart ( 2, '0' );
 
     }
 
