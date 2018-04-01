@@ -12,83 +12,109 @@
     plugin: true,
     selector: '.emojipicker',
     templates: {
-      base: '<div class="tabs emojipicker card bordered">' +
-              '<% print ( self.triggers ( o ) ) %>' +
-              '<% print ( self.containers ( o ) ) %>' +
-              '<% print ( self.footer ( o ) ) %>' +
-            '</div>',
-      triggers: '<div class="tabs-triggers emojipicker-triggers card-header bordered">' +
-                  '<% print ( self.triggerMain ( o ) ) %>' +
-                  '<% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>' +
-                    '<% print ( self.trigger ({ options: o, category: o.data.categories[i] }) ) %>' +
-                  '<% } %>' +
-                '</div>',
-      trigger: '<div class="button" title="<%= o.category.title %>">' +
-                 '<i class="icon"><%= Svelto.Icon ( o.category.icon ) %></i>' +
-               '</div>',
-      triggerMain: '<div class="button" title="Search & Frequent">' +
-                     `<i class="icon">${Icon ( 'clock' )}</i>` +
-                   '</div>',
-      containers: '<div class="tabs-containers emojipicker-containers card-block">' +
-                    '<% print ( self.containerMain ( o ) ) %>' +
-                    '<% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>' +
-                      '<% print ( self.container ({ options: o, category: o.data.categories[i] }) ) %>' +
-                    '<% } %>' +
-                   '</div>',
-      container: '<div class="container">' +
-                   '<% print ( self.emojis ({ emojis: o.category.emojis, tone: o.options.tone }) ) %>' +
-                 '</div>',
-      containerMain: '<div class="container main">' +
-                       '<input autofocus name="search" type="search" class="gray fluid" placeholder="Search emoji">' +
-                       '<% print ( self.search ( o ) ) %>' +
-                       '<% print ( self.frequent ( o ) ) %>' +
-                     '</div>',
-      search: '<div class="search-section section">' +
-                '<% if ( !o.search.emojis.length ) { %>' +
-                  '<div class="search-emojis emojis empty">No emoji found</div>' +
-                '<% } else { %>' +
-                  '<div class="search-emojis emojis">' +
-                    '<% print ( self.emojis ({ emojis: o.search.emojis, tone: o.tone }) ) %>' +
-                  '</div>' +
-                '<% } %>' +
-              '</div>',
-      frequent: '<div class="frequent-section section">' +
-                  '<% if ( !o.frequent.emojis.length ) { %>' +
-                    '<div class="frequent-emojis emojis empty">No emoji used recently</div>' +
-                  '<% } else { %>' +
-                    '<div class="frequent-emojis emojis">' +
-                      '<% print ( self.emojis ({ emojis: o.frequent.emojis, tones: o.frequent.tones }) ) %>' +
-                    '</div>' +
-                  '<% } %>' +
-                '</div>',
-      footer: '<div class="emojipicker-footer card-footer bordered">' +
-                '<% print ( self.preview ({ emoji: o.data.emojis[o.preview.id], tone: o.preview.tone }) ) %>' +
-                '<% print ( self.tones ( o ) ) %>' +
-              '</div>',
-      preview: '<div class="emojipicker-preview">' +
-                 '<div class="multiple center-y no-wrap">' +
-                   '<div class="enlarged">' +
-                     '<% print ( Svelto.Emoji.encode ( o.emoji.id, o.tone ) ) %>' +
-                   '</div>' +
-                   '<div class="multiple vertical joined texts">' +
-                     '<div class="title" title="<%= o.emoji.name %>"><%= o.emoji.name %></div>' +
-                     '<div class="short-names"><%= [o.emoji.id].concat ( o.emoji.alts || [] ).map ( Svelto.Emoji.encode ).join ( " " ) %></div>' +
-                   '</div>' +
-                 '</div>' +
-               '</div>',
-      tones: '<div class="emojipicker-tones">' +
-               '<div class="multiple center-x joined">' +
-                 '<div class="emojipicker-tone"></div>' +
-                 '<div class="emojipicker-tone"></div>' +
-                 '<div class="emojipicker-tone"></div>' +
-                 '<div class="emojipicker-tone"></div>' +
-                 '<div class="emojipicker-tone"></div>' +
-                 '<div class="emojipicker-tone"></div>' +
-               '</div>' +
-             '</div>',
-      emojis: '<div class="multiple emojis">' +
-                '<% print ( o.emojis.map ( function ( emoji, index ) { return Svelto.Emoji.encode ( emoji, o.tone || o.tones[index] ) } ).join ( " " ) ) %>' +
-              '</div>'
+      base: _.template ( `
+        <div class="tabs emojipicker card bordered">
+          <% print ( Svelto.Templates.Emojipicker.triggers ( o ) ) %>
+          <% print ( Svelto.Templates.Emojipicker.containers ( o ) ) %>
+          <% print ( Svelto.Templates.Emojipicker.footer ( o ) ) %>
+        </div>
+      ` ),
+      triggers: _.template ( `
+        <div class="tabs-triggers emojipicker-triggers card-header bordered">
+          <% print ( Svelto.Templates.Emojipicker.triggerMain ( o ) ) %>
+          <% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>
+            <% print ( Svelto.Templates.Emojipicker.trigger ({ options: o, category: o.data.categories[i] }) ) %>
+          <% } %>
+        </div>
+      ` ),
+      trigger: _.template ( `
+        <div class="button" title="<%= o.category.title %>">
+          <i class="icon"><%= Svelto.Icon ( o.category.icon ) %></i>
+        </div>
+      ` ),
+      triggerMain: _.template ( `
+        <div class="button" title="Search & Frequent">
+          <i class="icon"><%= Svelto.Icon ( 'clock' ) %></i>
+        </div>
+      ` ),
+      containers: _.template ( `
+        <div class="tabs-containers emojipicker-containers card-block">
+          <% print ( Svelto.Templates.Emojipicker.containerMain ( o ) ) %>
+          <% for ( var i = 0, l = o.data.categories.length; i < l; i++ ) { %>
+            <% print ( Svelto.Templates.Emojipicker.container ({ options: o, category: o.data.categories[i] }) ) %>
+          <% } %>
+        </div>
+      ` ),
+      container: _.template ( `
+        <div class="container">
+          <% print ( Svelto.Templates.Emojipicker.emojis ({ emojis: o.category.emojis, tone: o.options.tone }) ) %>
+        </div>
+      ` ),
+      containerMain: _.template ( `
+        <div class="container main">
+          <input autofocus name="search" type="search" class="gray fluid" placeholder="Search emoji">
+          <% print ( Svelto.Templates.Emojipicker.search ( o ) ) %>
+          <% print ( Svelto.Templates.Emojipicker.frequent ( o ) ) %>
+        </div>
+      ` ),
+      search: _.template ( `
+        <div class="search-section section">
+          <% if ( !o.search.emojis.length ) { %>
+            <div class="search-emojis emojis empty">No emoji found</div>
+          <% } else { %>
+            <div class="search-emojis emojis">
+              <% print ( Svelto.Templates.Emojipicker.emojis ({ emojis: o.search.emojis, tone: o.tone }) ) %>
+            </div>
+          <% } %>
+        </div>
+      ` ),
+      frequent: _.template ( `
+        <div class="frequent-section section">
+          <% if ( !o.frequent.emojis.length ) { %>
+            <div class="frequent-emojis emojis empty">No emoji used recently</div>
+          <% } else { %>
+            <div class="frequent-emojis emojis">
+              <% print ( Svelto.Templates.Emojipicker.emojis ({ emojis: o.frequent.emojis, tones: o.frequent.tones }) ) %>
+            </div>
+          <% } %>
+        </div>
+      ` ),
+      footer: _.template ( `
+        <div class="emojipicker-footer card-footer bordered">
+          <% print ( Svelto.Templates.Emojipicker.preview ({ emoji: o.data.emojis[o.preview.id], tone: o.preview.tone }) ) %>
+          <% print ( Svelto.Templates.Emojipicker.tones ( o ) ) %>
+        </div>
+      ` ),
+      preview: _.template ( `
+        <div class="emojipicker-preview">
+          <div class="multiple center-y no-wrap">
+            <div class="enlarged">
+              <% print ( Svelto.Emoji.encode ( o.emoji.id, o.tone ) ) %>
+            </div>
+            <div class="multiple vertical joined texts">
+              <div class="title" title="<%= o.emoji.name %>"><%= o.emoji.name %></div>
+              <div class="short-names"><%= [o.emoji.id].concat ( o.emoji.alts || [] ).map ( Svelto.Emoji.encode ).join ( ' ' ) %></div>
+            </div>
+          </div>
+        </div>
+      ` ),
+      tones: _.template ( `
+        <div class="emojipicker-tones">
+          <div class="multiple center-x joined">
+            <div class="emojipicker-tone"></div>
+            <div class="emojipicker-tone"></div>
+            <div class="emojipicker-tone"></div>
+            <div class="emojipicker-tone"></div>
+            <div class="emojipicker-tone"></div>
+            <div class="emojipicker-tone"></div>
+          </div>
+        </div>
+      ` ),
+      emojis: _.template ( `
+        <div class="multiple emojis">
+          <% print ( o.emojis.map ( function ( emoji, index ) { return Svelto.Emoji.encode ( emoji, o.tone || o.tones[index] ) } ).join ( ' ' ) ) %>
+        </div>
+      ` )
     },
     options: {
       data: undefined,

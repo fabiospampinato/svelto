@@ -14,12 +14,12 @@
     plugin: true,
     selector: '.tagbox',
     templates: {
-      tag: '<div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">' +
-             '<span>' +
-               '<%= o.value %>' +
-             '</span>' +
-             `<i class="icon ${Sizes.xsmall} actionable tagbox-tag-remover">${Icon ( 'close' )}</i>` +
-           '</div>'
+      tag: _.template ( `
+        <div class="label tagbox-tag <%= o.color %> <%= o.size %> <%= o.css %>" data-tag-value="<%= o.value %>">
+          <span><%= o.value %></span>
+          <i class="icon <%= Svelto.Sizes.xsmall %> actionable tagbox-tag-remover"><%= Svelto.Icon ( 'close' ) %></i>
+        </div>
+      ` )
     },
     options: {
       init: '', // Initial value

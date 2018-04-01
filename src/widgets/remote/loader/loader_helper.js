@@ -7,17 +7,19 @@
 
   /* DEFAULTS */
 
-  let datas = RemoteLoader.config.options.datas;
   let defaults = {
-    template: `<div class="remote-loader" data-${datas.method}="<%= o.method %>" data-${datas.data}='<%= JSON.stringify ( o.data ) %>' data-${datas.url}="<%= o.url %>">` +
-                '<svg class="spinner">' +
-                  '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' +
-                '</svg>' +
-              '</div>',
+    template: _.template ( `
+      <div class="remote-loader" data-<%= o.datas.method %>="<%= o.method %>" data-<%= o.datas.data %>='<%= JSON.stringify ( o.data ) %>' data-<%= o.datas.url %>="<%= o.url %>">
+        <svg class="spinner">
+          <circle cx="1.625em" cy="1.625em" r="1.25em"></circle>
+        </svg>
+      </div>
+    ` ),
     url: '',
     data: {
-      text: "test"
+      text: 'text'
     },
+    datas: RemoteLoader.config.options.datas,
     method: ''
   };
 

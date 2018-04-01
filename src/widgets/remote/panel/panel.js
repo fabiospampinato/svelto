@@ -12,15 +12,17 @@
   let config = {
     name: 'remotePanel',
     templates: {
-      placeholder : '<div class="panel container <%= o.direction %> <%= o.type %> <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' +
-                      '<svg class="spinner">' +
-                        '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
-                      '</svg>' +
-                    '</div>'
+      placeholder: _.template ( `
+        <div class="panel container <%= o.direction %> <%= o.type %> <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">
+          <svg class="spinner">
+            <circle cx="1.625em" cy="1.625em" r="1.25em">
+          </svg>
+        </div>
+      ` )
     },
     options: {
       widget: Widgets.Panel,
-      diretion: Widgets.Panel.config.options.diretion,
+      direction: Widgets.Panel.config.options.direction,
       type: Widgets.Panel.config.options.type,
       classes: {
         placeholder: 'remote-panel-placeholder',

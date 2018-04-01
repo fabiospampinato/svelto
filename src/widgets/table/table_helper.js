@@ -10,16 +10,16 @@
     plugin: true,
     selector: 'table.table',
     templates: {
-      row: '<tr <%= o.id ? "class=" + o.id : "" %> >' +
-             '<% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %>' +
-               '<td>' +
-                 '<%= o.datas[i] %>' +
-               '</td>' +
-             '<% } %>' +
-             '<% for ( var i = 0, l = o.missing; i < l; i++ ) { %>' +
-               '<td></td>' +
-             '<% } %>' +
-           '</tr>'
+      row: _.template ( `
+        <tr <%= o.id ? 'class=' + o.id : '' %> >
+          <% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %>
+            <td><%= o.datas[i] %></td>
+          <% } %>
+          <% for ( var i = 0, l = o.missing; i < l; i++ ) { %>
+            <td></td>
+          <% } %>
+        </tr>
+      ` )
     },
     options: {
       rowIdPrefix: 'srid',

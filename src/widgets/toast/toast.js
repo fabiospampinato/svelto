@@ -18,59 +18,65 @@
     plugin: true,
     selector: '.toast',
     templates: {
-      queues: '<div class="toast-queues top">' +
-                '<div class="toast-queue expanded"></div>' +
-                '<div class="toast-queues-row">' +
-                  '<div class="toast-queue left"></div>' +
-                  '<div class="toast-queue center"></div>' +
-                  '<div class="toast-queue right"></div>' +
-                '</div>' +
-              '</div>' +
-              '<div class="toast-queues bottom">' +
-                '<div class="toast-queues-row">' +
-                  '<div class="toast-queue left"></div>' +
-                  '<div class="toast-queue center"></div>' +
-                  '<div class="toast-queue right"></div>' +
-                '</div>' +
-                '<div class="toast-queue expanded"></div>' +
-              '</div>',
-      base: '<div class="toast <%= o.type %> <%= o.color %> <%= o.type !== "action" ? "actionable" : "" %> <%= o.css %>">' +
-              `<div class="infobar ${Colors.transparent}">` +
-                '<% if ( o.img ) { %>' +
-                  '<img src="<%= o.img %>" class="toast-img infobar-left">' +
-                '<% } %>' +
-                '<% if ( o.icon ) { %>' +
-                  '<i class="icon <%= o.title && o.body ? "xlarge" : "" %> infobar-left"><%= o.icon %></i>' +
-                '<% } %>' +
-                '<% if ( o.title || o.body ) { %>' +
-                  '<div class="infobar-center">' +
-                    '<% if ( o.title ) { %>' +
-                      '<p class="infobar-title">' +
-                         '<%= o.title %>' +
-                       '</p>' +
-                    '<% } %>' +
-                    '<% if ( o.body ) { %>' +
-                      '<%= o.body %>' +
-                    '<% } %>' +
-                  '</div>' +
-                '<% } %>' +
-                '<% if ( o.buttons.length === 1 ) { %>' +
-                  '<div class="infobar-right">' +
-                    '<% print ( self.button ( o.buttons[0] ) ) %>' +
-                  '</div>' +
-                '<% } %>' +
-              '</div>' +
-              '<% if ( o.buttons.length > 1 ) { %>' +
-                '<div class="toast-buttons multiple center-x">' +
-                  '<% for ( var i = 0; i < o.buttons.length; i++ ) { %>' +
-                    '<% print ( self.button ( o.buttons[i] ) ) %>' +
-                  '<% } %>' +
-                '</div>' +
-              '<% } %>' +
-            '</div>',
-      button: `<div class="button <%= o.color || "${Colors.white}" %> <%= o.size || "${Sizes.small}" %> <%= o.css || "" %>">` +
-                '<%= o.text || "" %>' +
-              '</div>'
+      queues: _.template ( `
+        <div class="toast-queues top">
+          <div class="toast-queue expanded"></div>
+          <div class="toast-queues-row">
+            <div class="toast-queue left"></div>
+            <div class="toast-queue center"></div>
+            <div class="toast-queue right"></div>
+          </div>
+        </div>
+        <div class="toast-queues bottom">
+          <div class="toast-queues-row">
+            <div class="toast-queue left"></div>
+            <div class="toast-queue center"></div>
+            <div class="toast-queue right"></div>
+          </div>
+          <div class="toast-queue expanded"></div>
+        </div>
+      ` ),
+      base: _.template ( `
+        <div class="toast <%= o.type %> <%= o.color %> <%= o.type !== 'action' ? 'actionable' : '' %> <%= o.css %>">
+          <div class="infobar <%= Svelto.Colors.transparent %>">
+            <% if ( o.img ) { %>
+              <img src="<%= o.img %>" class="toast-img infobar-left">
+            <% } %>
+            <% if ( o.icon ) { %>
+              <i class="icon <%= o.title && o.body ? 'xlarge' : '' %> infobar-left"><%= o.icon %></i>
+            <% } %>
+            <% if ( o.title || o.body ) { %>
+              <div class="infobar-center">
+                <% if ( o.title ) { %>
+                  <p class="infobar-title">
+                      <%= o.title %>
+                    </p>
+                <% } %>
+                <% if ( o.body ) { %>
+                  <%= o.body %>
+                <% } %>
+              </div>
+            <% } %>
+            <% if ( o.buttons.length === 1 ) { %>
+              <div class="infobar-right">
+                <% print ( Svelto.Templates.Toast.button ( o.buttons[0] ) ) %>
+              </div>
+            <% } %>
+          </div>
+          <% if ( o.buttons.length > 1 ) { %>
+            <div class="toast-buttons multiple center-x">
+              <% for ( var i = 0; i < o.buttons.length; i++ ) { %>
+                <% print ( Svelto.Templates.Toast.button ( o.buttons[i] ) ) %>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+      ` ),
+      button: _.template ( `
+        <div class="button <%= o.color || Svelto.Colors.white %> <%= o.size || Svelto.Sizes.small %> <%= o.css || '' %>">
+          <%= o.text || '' %>
+        </div>
+      ` )
     },
     options: {
       anchor: { // Used for selecting the proper queue where this Toast should be attached

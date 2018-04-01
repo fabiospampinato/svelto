@@ -14,19 +14,25 @@
     plugin: true,
     selector: '.select',
     templates: {
-      base: '<div class="popover select-popover card <%= o.size %> <%= o.color %> <%= o.css %> <%= o.guc %>">' +
-              '<div class="card-block">' +
-                '<% for ( var i = 0, l = o.options.length; i < l; i++ ) { %>' +
-                  '<% print ( self[ o.options[i].value ? "option" : "optgroup" ] ( { opt: o.options[i], color: o.color } ) ) %>' +
-                '<% } %>' +
-              '</div>' +
-            '</div>',
-      optgroup: '<div class="divider">' +
-                  '<%= o.opt.prop %>' +
-                '</div>',
-      option: '<div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">' +
-                '<%= o.opt.value %>' +
-              '</div>'
+      base: _.template ( `
+        <div class="popover select-popover card <%= o.size %> <%= o.color %> <%= o.css %> <%= o.guc %>">
+          <div class="card-block">
+            <% for ( var i = 0, l = o.options.length; i < l; i++ ) { %>
+              <% print ( Svelto.Templates.Select[ o.options[i].value ? 'option' : 'optgroup' ] ({ opt: o.options[i], color: o.color }) ) %>
+            <% } %>
+          </div>
+        </div>
+      ` ),
+      optgroup: _.template ( `
+        <div class="divider">
+          <%= o.opt.prop %>
+        </div>
+      ` ),
+      option: _.template ( `
+        <div class="button <%= o.color %>" data-value="<%= o.opt.prop %>">
+          <%= o.opt.value %>
+        </div>
+      ` )
     },
     options: {
       native: true, // Don't show the popover and use the native select, enabled by default

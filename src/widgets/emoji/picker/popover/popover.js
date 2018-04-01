@@ -8,7 +8,7 @@
   let config = {
     name: 'emojipickerPopover',
     templates: {
-      base: '<div>'
+      base: _.template ( '<div>' )
     },
     options: {
       classes: {

@@ -15,12 +15,16 @@
     plugin: true,
     selector: '.rater',
     templates: {
-      base: '<div class="rater">' +
-              '<% print ( self.stars ( o ) ) %>' +
-            '</div>',
-      stars: '<% for ( var i = 1; i <= o.amount; i++ ) { %>' +
-               '<div class="rater-star <%= ( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) ) %>"></div>' +
-             '<% } %>'
+      base: _.template ( `
+        <div class="rater">
+          <% print ( Svelto.Templates.Rater.stars ( o ) ) %>
+        </div>
+      ` ),
+      stars: _.template ( `
+        <% for ( var i = 1; i <= o.amount; i++ ) { %>
+          <div class="rater-star <%= ( o.value >= i ? 'active' : ( o.value >= i - 0.5 ? 'half-active' : '' ) ) %>"></div>
+        <% } %>
+      ` )
     },
     options: {
       value: 0,

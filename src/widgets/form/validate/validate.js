@@ -16,14 +16,18 @@
     plugin: true,
     selector: 'form.validate',
     templates: {
-      message: '<p class="form-validate-message <%= o.validity %>">' +
-                 '<%= o.message %>' +
-               '</p>',
-      messages: '<ul class="form-validate-message <%= o.validity %>">' +
-                  '<% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %>' +
-                    '<li><%= o.messages[i] %></li>' +
-                  '<% } %>' +
-                '</ul>'
+      message: _.template ( `
+        <p class="form-validate-message <%= o.validity %>">
+          <%= o.message %>
+        </p>
+      ` ),
+      messages: _.template ( `
+        <ul class="form-validate-message <%= o.validity %>">
+          <% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %>
+            <li><%= o.messages[i] %></li>
+          <% } %>
+        </ul>
+      ` )
     },
     options: {
       validators: { // If not found here it will use `Validator`'s validators

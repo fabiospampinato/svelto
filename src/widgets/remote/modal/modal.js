@@ -10,11 +10,13 @@
   let config = {
     name: 'remoteModal',
     templates: {
-      placeholder : '<div class="modal container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">' +
-                      '<svg class="spinner">' +
-                        '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
-                      '</svg>' +
-                    '</div>'
+      placeholder: _.template ( `
+        <div class="modal container <%= o.classes.placeholder %> <%= o.classes.placeholderExtra %>">
+          <svg class="spinner">
+            <circle cx="1.625em" cy="1.625em" r="1.25em">
+          </svg>
+        </div>
+      ` )
     },
     options: {
       widget: Widgets.Modal,

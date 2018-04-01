@@ -13,7 +13,7 @@
     plugin: true,
     selector: '.ripple',
     templates: {
-      circle: '<div class="ripple-circle"></div>'
+      circle: _.template ( '<div class="ripple-circle"></div>' )
     },
     options: {
       classes: {

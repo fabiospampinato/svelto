@@ -14,14 +14,16 @@
     plugin: true,
     selector: '.chat-message.replyable',
     templates: {
-      reply: '<div class="chat-message-reply no-tip <%= o.cls %>">' +
-               '<%= o.img ? \'<div class="chat-message-img"></div>\' : "" %>' +
-               '<div class="chat-message-content remote-loader no-wrap container bordered" data-url="<%= o.url %>">' +
-                 '<svg class="spinner">' +
-                   '<circle cx="1.625em" cy="1.625em" r="1.25em"></circle>' +
-                 '</svg>' +
-               '</div>' +
-             '</div>'
+      reply: _.template ( `
+        <div class="chat-message-reply no-tip <%= o.cls %>">
+          <%= o.img ? '<div class="chat-message-img"></div>' : '' %>
+          <div class="chat-message-content remote-loader no-wrap container bordered" data-url="<%= o.url %>">
+            <svg class="spinner">
+              <circle cx="1.625em" cy="1.625em" r="1.25em"></circle>
+            </svg>
+          </div>
+        </div>
+      ` )
     },
     options: {
       url: false, // Url for remote-loading the actual reply widget
