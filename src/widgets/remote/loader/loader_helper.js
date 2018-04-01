@@ -31,7 +31,8 @@
 
     /* LOADER */
 
-    let html = _.template ( options.template, { variable: 'o' } )( options ),
+    let template = _.isFunction ( options.template ) ? options.template : _.template ( options.template, { variable: 'o' } ),
+        html = template ( options ),
         $loader = $(html);
 
     $anchor[method]( $loader );

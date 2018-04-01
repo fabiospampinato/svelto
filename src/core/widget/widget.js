@@ -140,9 +140,11 @@
 
         for ( let template in this.templates ) {
 
-          if ( !this.templates.hasOwnProperty ( template ) || !this.templates[template] ) continue;
+          const source = this.templates[template];
 
-          Templates[this.Name][template] = _.template ( this.templates[template], options );
+          if ( !this.templates.hasOwnProperty ( template ) || !source ) continue;
+
+          Templates[this.Name][template] = _.isFunction ( source ) ? source : _.template ( source, options );
 
         }
 
