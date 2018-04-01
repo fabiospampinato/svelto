@@ -110,7 +110,7 @@
 
     clear () {
 
-      if ( _.size ( this.tree ) ) {
+      if ( Object.keys ( this.tree ).length ) {
 
         this.tree = {};
 

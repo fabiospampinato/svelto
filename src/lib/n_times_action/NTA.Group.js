@@ -118,7 +118,7 @@
 
       if ( action ) {
 
-        if ( _.size ( this.actions ) > 1 ) {
+        if ( Object.keys ( this.actions ).length > 1 ) {
 
           delete this.actions[action];
 
