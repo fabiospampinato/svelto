@@ -11,8 +11,8 @@
   let Svelto = {
 
     VERSION: '[pacco.svelto.version]',
-    ENVIRONMENT: '[pacco.environment]',
-    DEVELOPMENT: '[pacco.environment]' === 'development',
+    ENVIRONMENT: '[pacco.environment[0]]',
+    DEVELOPMENT: '[pacco.environment[0]]' === 'development',
 
     /* DEPENDENCIES */
 
