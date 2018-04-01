@@ -1,11 +1,11 @@
 
-☐ update lodash templates
-☐ remove stupid headers
+☐ require less jquery
+☐ try chunked bundles
 ☐ test bump
 
-☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
-
 Now:
+  ☐ require less polyfills (https://github.com/zloirock/core-js/issues/388)
+  ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
   ☐ autofocus should probably be called when widgetizing
   ☐ lazy inside a modal doesn't work
   ☐ toast: option for moving the bottom queues up on scrolling (so that they don't go over the footer)
