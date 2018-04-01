@@ -3,6 +3,7 @@
 // @optional ./css2dom.js
 // @optional ./debugger.js
 // @optional ./find_matches.js
+// @optional ./flatten.js
 // @optional ./format.js
 // @optional ./frames.js
 // @optional ./is_equal_json.js
