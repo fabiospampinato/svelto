@@ -109,7 +109,7 @@
 
     _sanitizeTag ( value ) {
 
-      value = _.trim ( value );
+      value = value.trim ();
 
       if ( this.options.escape ) {
 
@@ -151,7 +151,7 @@
 
     _add ( value ) {
 
-      let valueTrimmed = _.trim ( value );
+      let valueTrimmed = value.trim ();
 
       value = this._sanitizeTag ( value );
 
