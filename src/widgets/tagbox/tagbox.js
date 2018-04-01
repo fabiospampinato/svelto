@@ -340,7 +340,7 @@
 
     get () {
 
-      return _.clone ( this.options.tags );
+      return _.cloneDeep ( this.options.tags );
 
     }
 
