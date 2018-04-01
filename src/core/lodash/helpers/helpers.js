@@ -17,6 +17,7 @@
 // @optional ./now_secs.js
 // @optional ./omit.js
 // @optional ./pick.js
+// @optional ./prop.js
 // @optional ./replace_all.js
 // @optional ./round_closer.js
 // @optional ./time_ago.js
