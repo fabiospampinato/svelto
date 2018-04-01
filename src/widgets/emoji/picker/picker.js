@@ -488,7 +488,7 @@
 
       }
 
-      rank = _.orderBy ( rank, [_.last, _.first, _.property ( 1 )], ['desc', 'asc', 'asc'] ).slice ( 0, this.options.frequent.limit );
+      rank = rank.sort ( ( a, b ) => b[2] - a[2] ).slice ( 0, this.options.frequent.limit );
 
       this.options.frequent.rank = rank;
 
