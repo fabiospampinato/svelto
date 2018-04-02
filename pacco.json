@@ -3,7 +3,8 @@
     "_": true,
     "core": {
       "jquery/vendor": false,
-      "lodash/vendor": false
+      "lodash/vendor": false,
+      "polyfills": false
     },
     "decorators": true,
     "lib": {
@@ -36,8 +37,7 @@
     "development": {
       "components": {
         "core": {
-          "regenerator_runtime.js": false,
-          "polyfills": false
+          "regenerator_runtime.js": false
         }
       }
     }
