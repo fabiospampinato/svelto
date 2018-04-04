@@ -168,7 +168,8 @@
         this.___tap ();
         this.___flick ();
         this.___buttonTap ();
-        this.___hover ();
+        this.___enter ();
+        this.___leave ();
         this.___persistent ();
         this.___keydown ();
         this.___breakpoint ();
@@ -257,26 +258,38 @@
 
     }
 
-    /* HOVER */
+    /* ENTER */
 
-    ___hover () {
+    ___enter () {
 
-      this.$toast.hover ( function () {
+      this._on ( true, Pointer.enter, this.__enter );
 
-        Toasts.setHovering ( true );
-        Toasts.pauseAll ();
+    }
 
-      }, function () {
+    __enter () {
 
-        Toasts.setHovering ( false );
+      Toasts.setHovering ( true );
+      Toasts.pauseAll ();
 
-        if ( !document.hidden ) {
+    }
 
-          Toasts.resumeAll ();
+    /* LEAVE */
 
-        }
+    ___leave () {
 
-      });
+      this._on ( true, Pointer.leave, this.__leave );
+
+    }
+
+    __leave () {
+
+      Toasts.setHovering ( false );
+
+      if ( !document.hidden ) {
+
+        Toasts.resumeAll ();
+
+      }
 
     }
 
@@ -386,7 +399,8 @@
       this.___tap ();
       this.___flick ();
       this.___buttonTap ();
-      this.___hover ();
+      this.___enter ();
+      this.___leave ();
       this.___persistent ();
       this.___keydown ();
       this.___breakpoint ();
