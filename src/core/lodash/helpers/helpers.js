@@ -10,6 +10,7 @@
 // @optional ./format.js
 // @optional ./frames.js
 // @optional ./is_equal_json.js
+// @optional ./is_widget.js
 // @optional ./merge.js
 // @optional ./mkize.js
 // @optional ./move.js

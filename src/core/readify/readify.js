@@ -65,7 +65,7 @@
 
     worker ( fn ) {
 
-      if ( 'config' in fn ) { //FIXME: Not really future proof
+      if ( _.isWidget ( fn ) ) {
 
         let Widget = fn,
             ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property

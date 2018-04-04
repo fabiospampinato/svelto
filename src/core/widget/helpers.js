@@ -35,7 +35,7 @@
 
     remove ( element, instance ) { // Both widgets and instances can be passed
 
-      let name = 'config' in instance ? instance.config.name : instance.name;
+      let name = _.isWidget ( instance ) ? instance.config.name : instance.name;
 
       delete element[`_${name}`];
 
