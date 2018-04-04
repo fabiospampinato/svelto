@@ -376,7 +376,7 @@
           newValue  = value.substr ( 0, selection.start ) + padLeft + text + padRight + value.substr ( selection.end, value.length ),
           newRange  = selection.start + padLeft.length + text.length;
 
-      this.$textarea.val ( newValue ).change ();
+      this.$textarea.val ( newValue ).trigger ( 'change' );
 
       this.textarea.setSelectionRange ( newRange, newRange );
 
@@ -388,7 +388,7 @@
           selection = this._getSelection (),
           newValue  = value.substr ( 0, selection.start ) + prefix + placeholder + suffix + value.substr ( selection.end, value.length );
 
-      this.$textarea.val ( newValue ).change ();
+      this.$textarea.val ( newValue ).trigger ( 'change' );
 
       this.textarea.setSelectionRange ( selection.start + prefix.length, selection.start + prefix.length + placeholder.length );
 
@@ -424,7 +424,7 @@
           selection = this._getSelection (),
           newValue  = value.substr ( 0, selection.start ) + prefix + selection.text + suffix + value.substr ( selection.end, value.length );
 
-      this.$textarea.val ( newValue ).change ();
+      this.$textarea.val ( newValue ).trigger ( 'change' );
 
       this.textarea.setSelectionRange ( selection.start + prefix.length, selection.end + prefix.length );
 
@@ -437,7 +437,7 @@
           isPlaceholder = selection.text === placeholder,
           newValue      = value.substr ( 0, selection.start - prefix.length ) + ( isPlaceholder ? '' : selection.text ) + value.substr ( selection.end + suffix.length, value.length );
 
-      this.$textarea.val ( newValue ).change ();
+      this.$textarea.val ( newValue ).trigger ( 'change' );
 
       this.textarea.setSelectionRange ( selection.start - prefix.length, selection.end - prefix.length - ( isPlaceholder ? selection.text.length : 0 ) );
 
@@ -491,7 +491,7 @@
 
       if ( !_.isString ( value ) || value === this.$textarea.val () ) return;
 
-      this.$textarea.val ( value ).change ();
+      this.$textarea.val ( value ).trigger ( 'change' );
 
       if ( this._isPreview ) this._render ();
 
