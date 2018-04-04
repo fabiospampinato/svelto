@@ -124,7 +124,7 @@
       if ( !this.$navigation.length ) return;
 
       let contentRect = this.$content.getRect (),
-          scrollLeft = this.$content.scrollLeft (),
+          scrollLeft = this.$content[0].scrollLeft,
           isStart = ( scrollLeft === 0 ),
           isEnd = ( this.$content[0].scrollWidth - scrollLeft - contentRect.width <= 1 ); // If we use `0`, as we should it won't always trigger
 
@@ -174,7 +174,7 @@
 
       } else {
 
-        this.$content.scrollLeft ( left );
+        this.$content[0].scrollLeft = left;
 
       }
 
@@ -182,7 +182,7 @@
 
     _deltaScroll ( delta )  {
 
-      this._scroll ( this.$content.scrollLeft () + delta );
+      this._scroll ( this.$content[0].scrollLeft + delta );
 
     }
 
@@ -192,7 +192,7 @@
 
       let eleRect = $element.getRect (),
           contentRect = this.$content.getRect (),
-          left = ( eleRect.left - contentRect.left ) + this.$content.scrollLeft () + ( eleRect.width / 2 ) - ( contentRect.width / 2 );
+          left = ( eleRect.left - contentRect.left ) + this.$content[0].scrollLeft + ( eleRect.width / 2 ) - ( contentRect.width / 2 );
 
       this._scroll ( left, animate );
 

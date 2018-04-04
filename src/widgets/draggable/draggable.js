@@ -343,15 +343,15 @@
 
   			if ( this.options.axis !== 'y' ) {
 
-          let scrollLeft = $.document.scrollLeft ();
+          let scrollLeft = $.document.scrollLeft;
 
   				if ( pointXY.x - scrollLeft <= this.options.scroll.sensitivity ) {
 
-          	$.document.scrollLeft ( scrollLeft - this.options.scroll.speed );
+          	$.document.scrollLeft = scrollLeft - this.options.scroll.speed;
 
           } else if ( $.window.innerWidth - ( pointXY.x - scrollLeft ) <= this.options.scroll.sensitivity ) {
 
-          	$.document.scrollLeft ( scrollLeft + this.options.scroll.speed );
+          	$.document.scrollLeft = scrollLeft + this.options.scroll.speed;
 
           }
 

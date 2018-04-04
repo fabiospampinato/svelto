@@ -26,7 +26,7 @@
   //   let width = this.innerWidth (),
   //       scrollWidth = this[0].scrollWidth || width;
   //
-  //   return _.isUndefined ( value ) ? scrollWidth - width - this.scrollLeft () : this.scrollLeft ( scrollWidth - width - value);
+  //   return _.isUndefined ( value ) ? scrollWidth - width - this[0].scrollLeft : this[0].scrollLeft = scrollWidth - width - value;
   //
   // };
 
