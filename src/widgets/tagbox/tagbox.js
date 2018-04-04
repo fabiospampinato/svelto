@@ -330,7 +330,7 @@
 
       if ( !$.isFocused ( this.partial ) && !$(event.target).is ( this.options.selectors.partial + ',' + this.options.selectors.tagLabel ) ) { //TODO: Add an helper for checking if is focused
 
-        this.$partial.focus ();
+        this.$partial.trigger ( 'focus' );
 
       }
 

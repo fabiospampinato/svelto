@@ -223,7 +223,7 @@
 
   	if ( activeIDX ) {
 
-  		$previous.find ( '[data-dt-idx=' + activeIDX + ']' ).focus ();
+  		$previous.find ( '[data-dt-idx=' + activeIDX + ']' ).trigger ( 'focus' );
 
   	}
 
