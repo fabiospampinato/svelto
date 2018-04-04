@@ -1,7 +1,6 @@
 
 // @optional ./animate.js
 // @optional ./animate_prop.js
-// @optional ./clean_data.js
 // @optional ./diff.js
 // @optional ./elements.js
 // @optional ./event_namespacer.js
@@ -14,6 +13,7 @@
 // @optional ./is_visible.js
 // @optional ./on_ready.js
 // @optional ./outer_html.js
+// @optional ./remove.js
 // @optional ./scroll.js
 // @optional ./selection.js
 // @optional ./top_index.js

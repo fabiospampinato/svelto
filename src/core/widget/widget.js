@@ -760,13 +760,13 @@
 
       if ( this.element ) {
 
-        this._on ( true, 'remove', this.__remove );
+        this._one ( true, 'remove', this.__remove );
 
       }
 
     }
 
-    __remove ( event ) {
+    __remove ( event ) { //FIXME: This gets triggered twice, I don't know why
 
       if ( !event || event.target === this.element ) {
 
