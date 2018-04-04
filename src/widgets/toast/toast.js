@@ -136,7 +136,9 @@
 
       setTimeout ( function () { // In order to better support client size rendering
 
-        $.$layout.append ( Toast.config.templates.queues );
+        const queues = Toast.config.templates.queues ();
+
+        $.$layout.append ( queues );
 
         done ();
 
