@@ -46,7 +46,7 @@
 
       if ( !$.isFocused ( this.textarea ) ) return null;
 
-      this.$form.submit ();
+      this.$form.trigger ( 'submit' );
 
     }
 
