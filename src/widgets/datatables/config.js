@@ -148,7 +148,7 @@
 
   			let button = buttons[i];
 
-  			if ( $.isArray ( button ) ) {
+  			if ( _.isArray ( button ) ) {
 
           attach ( container, button );
 
