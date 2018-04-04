@@ -15,7 +15,7 @@
   //   let height = this.innerHeight (),
   //       scrollHeight = this[0].scrollHeight || height;
   //
-  //   return _.isUndefined ( value ) ? scrollHeight - height - this.scrollTop () : this.scrollTop ( scrollHeight - height - value);
+  //   return _.isUndefined ( value ) ? scrollHeight - height - this[0].scrollTop : this[0].scrollTop = scrollHeight - height - value;
   //
   // };
   //

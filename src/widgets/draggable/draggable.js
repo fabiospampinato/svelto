@@ -327,15 +327,15 @@
 
   			if ( this.options.axis !== 'x' ) {
 
-          let scrollTop = $.document.scrollTop ();
+          let scrollTop = $.document.scrollTop;
 
   				if ( pointXY.y - scrollTop <= this.options.scroll.sensitivity ) {
 
-          	$.document.scrollTop ( scrollTop - this.options.scroll.speed );
+          	$.document.scrollTop = scrollTop - this.options.scroll.speed;
 
           } else if ( $.window.innerHeight - ( pointXY.y - scrollTop ) <= this.options.scroll.sensitivity ) {
 
-          	$.document.scrollTop ( scrollTop + this.options.scroll.speed );
+          	$.document.scrollTop = scrollTop + this.options.scroll.speed;
 
           }
 
