@@ -11,6 +11,7 @@
 // @optional ./is_attached.js
 // @optional ./is_focused.js
 // @optional ./is_visible.js
+// @optional ./is_widget.js
 // @optional ./on_ready.js
 // @optional ./outer_html.js
 // @optional ./remove.js
