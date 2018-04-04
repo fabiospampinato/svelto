@@ -55,7 +55,7 @@
 
           let key = keys[i];
 
-          if ( specialKeys.includes ( key ) ) {
+          if ( !specialKeys.includes ( key ) ) {
 
             if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
 
