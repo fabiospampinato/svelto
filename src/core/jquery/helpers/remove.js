@@ -13,7 +13,7 @@
 
     this.trigger ( 'remove' );
 
-    _remove.call ( this );
+    return _remove.call ( this );
 
 	};
 
