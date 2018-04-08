@@ -7,4 +7,4 @@
 
   Modernizr.addTest ( 'position-sticky', Modernizr.testAllProps ( 'position', 'sticky' ) );
 
-}( window.__svelto_modernizr ));
+}( window.Modernizr ));

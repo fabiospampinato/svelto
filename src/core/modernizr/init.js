@@ -1,10 +1,10 @@
 
 // @optional ./vendor/modernizr.js
 
-(function () {
+(function () { //FIXME: Pretty useless
 
   /* MODERNIZR */
 
-  window.__svelto_modernizr = window.Modernizr;
+  window.Modernizr = window.Modernizr;
 
 }());

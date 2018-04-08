@@ -12,4 +12,4 @@
   Modernizr.addTest ( 'overlay-scrollbars', !size );
   Modernizr.addTest ( 'scrollbar-size-' + size, true );
 
-}( window.__svelto_modernizr ));
+}( window.Modernizr ));

@@ -19,7 +19,7 @@
 
     _: window.__svelto_lodash,
     $: window.__svelto_jquery,
-    Modernizr: window.__svelto_modernizr,
+    Modernizr: window.Modernizr,
 
     /* NAMESPACES */
 

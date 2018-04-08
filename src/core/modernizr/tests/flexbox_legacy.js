@@ -7,4 +7,4 @@
 
   Modernizr.addTest ( 'flexbox-legacy', Modernizr.testAllProps ( 'boxDirection', 'reverse' ) );
 
-}( window.__svelto_modernizr ));
+}( window.Modernizr ));

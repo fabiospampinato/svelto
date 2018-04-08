@@ -16,4 +16,4 @@
     setItem: _.undefined
   };
 
-}( window.__svelto_lodash, window.__svelto_modernizr ));
+}( window._, window.Modernizr ));

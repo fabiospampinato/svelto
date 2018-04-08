@@ -49,4 +49,4 @@
 
   });
 
-}( window.__svelto_modernizr, window.__svelto_jquery ));
+}( window.Modernizr, window.$ ));

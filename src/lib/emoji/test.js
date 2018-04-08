@@ -25,4 +25,4 @@
 
   Modernizr.addTest ( 'emoji', supportsEmoji () );
 
-}( window.__svelto_modernizr ));
+}( window.Modernizr ));

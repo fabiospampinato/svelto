@@ -26,4 +26,4 @@
 
   Modernizr.addTest ( 'localstorage', supportsLocalStorage );
 
-}( window.__svelto_modernizr ));
+}( window.Modernizr ));
