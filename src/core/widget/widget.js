@@ -595,7 +595,7 @@
 
         if ( $.isEvent ( event ) ) {
 
-          data = {};
+          data = event.data || {};
 
         } else {
 
