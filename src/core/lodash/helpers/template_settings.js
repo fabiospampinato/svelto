@@ -7,4 +7,4 @@
 
   _.templateSettings.variable = 'o';
 
-}( window.__svelto_lodash ));
+}( window._ ));

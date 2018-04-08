@@ -7,4 +7,4 @@
 
   _.extend = _.assignIn = Object.assign;
 
-}( window.__svelto_lodash ));
+}( window._ ));

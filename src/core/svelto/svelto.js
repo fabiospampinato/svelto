@@ -17,8 +17,8 @@
 
     /* DEPENDENCIES */
 
-    _: window.__svelto_lodash,
     $: window.__svelto_jquery,
+    _: window._,
     Modernizr: window.Modernizr,
 
     /* NAMESPACES */

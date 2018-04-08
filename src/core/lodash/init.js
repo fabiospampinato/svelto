@@ -5,6 +5,6 @@
 
   /* LODASH */
 
-  window.__svelto_lodash = window.lodash || window._;
+  window._ = window.lodash || window._;
 
 }());

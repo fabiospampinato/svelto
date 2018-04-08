@@ -1,7 +1,8 @@
 
 // @require ../init.js
+// @require core/jquery/init.js
 
-(function ( _ ) {
+(function ( _, $ ) {
 
   /* CLONE DEEP */ // Much smaller than lodash's implementation
 
@@ -29,4 +30,4 @@
 
   };
 
-}( window.__svelto_lodash ));
+}( window._, window.$ ));

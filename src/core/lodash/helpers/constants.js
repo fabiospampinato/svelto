@@ -10,4 +10,4 @@
   _.undefined = _.constant ();
   _.null = _.constant ( null );
 
-}( window.__svelto_lodash ));
+}( window._ ));
