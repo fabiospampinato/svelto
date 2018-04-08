@@ -1,5 +1,6 @@
 
 // @require ../init.js
+// @require ./template_minify.js
 
 (function ( _ ) {
 
@@ -9,9 +10,7 @@
 
   _.template = function ( str, options ) {
 
-    const minified = str.trim ().replace ( />\n\s*</gm, '><' ); // Minifying templates during development, it should be disabled on production
-
-    return _prev.call ( _, minified, options );
+    return _prev.call ( _, _.templateMinify ( str ), options );
 
   };
 
