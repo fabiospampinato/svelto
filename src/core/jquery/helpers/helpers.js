@@ -18,5 +18,4 @@
 // @optional ./remove.js
 // @optional ./scroll.js
 // @optional ./selection.js
-// @optional ./top_index.js
 // @optional ./z_index.js
