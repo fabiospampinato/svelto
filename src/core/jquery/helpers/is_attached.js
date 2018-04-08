@@ -1,17 +1,14 @@
 
 // @require ../init.js
+// @require ./elements.js
 
 (function ( $ ) {
-
-  /* VARIABLES */
-
-  let html = document.documentElement;
 
   /* IS ATTACHED */
 
   $.isAttached = function ( ele ) {
 
-    return ele === html || $.contains ( html, ele );
+    return !!ele && ( ele === $.html || $.contains ( $.html, ele ) );
 
   };
 
