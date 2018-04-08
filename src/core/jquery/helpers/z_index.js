@@ -51,4 +51,4 @@
 
 	};
 
-}( window.__svelto_jquery, window.__svelto_lodash ));
+}( window.$, window._ ));

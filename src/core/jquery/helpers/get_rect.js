@@ -34,4 +34,4 @@
 
   };
 
-}( window.__svelto_jquery ));
+}( window.$ ));

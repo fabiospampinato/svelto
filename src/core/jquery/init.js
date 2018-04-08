@@ -5,6 +5,6 @@
 
   /* JQUERY */
 
-  window.__svelto_jquery = window.jQuery || window.$;
+  window.$ = window.jQuery || window.$;
 
 }());
