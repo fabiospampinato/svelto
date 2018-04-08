@@ -75,11 +75,13 @@
 
   $.fn.hasScrollbars = function () {
 
-    return this.length && $.hasScrollbars ( this[0] );
+    return $.hasScrollbars ( this[0] );
 
   };
 
   $.hasScrollbarX = function ( node ) { //FIXME: Doesn't work on body
+
+    if ( !node ) return false;
 
     let style = getComputedStyle ( node );
 
@@ -93,11 +95,13 @@
 
   $.fn.hasScrollbarX = function () {
 
-    return this.length && $.hasScrollbarX ( this[0] );
+    return $.hasScrollbarX ( this[0] );
 
   };
 
   $.hasScrollbarY = function ( node ) {
+
+    if ( !node ) return false;
 
     let style = getComputedStyle ( node );
 
@@ -111,7 +115,7 @@
 
   $.fn.hasScrollbarY = function () {
 
-    return this.length && $.hasScrollbarY ( this[0] );
+    return $.hasScrollbarY ( this[0] );
 
   };
 
