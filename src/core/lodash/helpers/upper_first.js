@@ -7,9 +7,7 @@
 
   _.upperFirst = function ( str ) {
 
-    if ( !str ) return str;
-
-    return `${str[0].toUpperCase ()}${str.substring ( 1 )}`;
+    return str ? `${str[0].toUpperCase ()}${str.substring ( 1 )}` : str;
 
   };
 
