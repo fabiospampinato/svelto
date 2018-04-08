@@ -15,4 +15,3 @@
 // @optional ./make_event.js
 // @optional ./remove.js
 // @optional ./scroll.js
-// @optional ./z_index.js
