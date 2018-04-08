@@ -7,7 +7,7 @@
 
   $.fn.hasAttribute = function ( attr ) {
 
-    return this.length && this[0].hasAttribute ( attr );
+    return !!this[0] && this[0].hasAttribute ( attr );
 
   };
 
