@@ -593,7 +593,7 @@
 
       if ( !data ) {
 
-        if ( event instanceof $.Event ) {
+        if ( $.isEvent ( event ) ) {
 
           data = {};
 
