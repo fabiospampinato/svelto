@@ -7,22 +7,18 @@
 
   /* SELECTION */
 
-  $.fn.disableSelection = (function () {
+  const preventer = event => event.preventDefault ();
 
-    let event = ( 'onselectstart' in document.createElement ( 'div' ) ) ? 'selectstart' : 'mousedown';
+  $.fn.disableSelection = function () {
 
-    return function () {
-
-      return this.on ( event + '.svelto-disable-selection', event => event.preventDefault () );
-
-    };
-
-  })();
-
-  $.fn.enableSelection = function () {
-
-    return this.off ( '.svelto-disable-selection' );
+    return this.on ( 'selectstart', preventer );
 
   };
 
-}( window.__svelto_jquery ));
+  $.fn.enableSelection = function () {
+
+    return this.off ( 'selectstart', preventer );
+
+  };
+
+}( window.$ ));
