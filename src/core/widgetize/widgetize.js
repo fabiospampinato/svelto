@@ -38,7 +38,7 @@
 
         let root = $root[0];
 
-        return $parent.find ( selector ).filter ( ( index, ele ) => ele === root || $.contains ( root, ele ) );
+        return $parent.find ( selector ).filter ( ( index, ele ) => ele === root || root.contains ( ele ) );
 
       }
 

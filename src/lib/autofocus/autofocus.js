@@ -81,7 +81,7 @@
 
     blur ( $parent ) {
 
-      if ( !Autofocus.enabled || !Autofocus.history[0] || !$.contains ( $parent[0], Autofocus.history[0] ) ) return;
+      if ( !Autofocus.enabled || !Autofocus.history[0] || !$parent[0].contains ( Autofocus.history[0] ) ) return;
 
       let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $html );
 

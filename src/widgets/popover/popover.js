@@ -120,7 +120,7 @@
 
     __parentChange ( event ) {
 
-      if ( !this.$anchor || !$.contains ( event.target, this.$anchor[0] ) ) return;
+      if ( !this.$anchor || !event.target.contains ( this.$anchor[0] ) ) return;
 
       if ( this.$anchor.isVisible () ) {
 

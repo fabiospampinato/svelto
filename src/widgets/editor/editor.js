@@ -244,7 +244,7 @@
 
     __parentUnfullscreen ( event ) {
 
-      if ( !$.contains ( event.target, this.editor ) ) return;
+      if ( !event.target.contains ( this.editor ) ) return;
 
       this.unfullscreen ();
 

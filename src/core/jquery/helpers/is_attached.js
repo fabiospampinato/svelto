@@ -8,7 +8,7 @@
 
   $.isAttached = function ( ele ) {
 
-    return !!ele && ( ele === $.html || $.contains ( $.html, ele ) );
+    return !!ele && ( ele === $.html || $.html.contains ( ele ) );
 
   };
 
