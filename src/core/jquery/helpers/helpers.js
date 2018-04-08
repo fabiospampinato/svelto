@@ -14,7 +14,6 @@
 // @optional ./is_widget.js
 // @optional ./make_event.js
 // @optional ./on_ready.js
-// @optional ./outer_html.js
 // @optional ./remove.js
 // @optional ./scroll.js
 // @optional ./selection.js
