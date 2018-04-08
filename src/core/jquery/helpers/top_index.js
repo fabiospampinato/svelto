@@ -9,16 +9,12 @@
 
   /* TOP INDEX */
 
+  let topIndex = 1000000000;
+
   $.fn.topIndex = function () {
 
-    let topIndex = 1000000000;
-
-    return function () {
-
-      return this.zIndex ( ++topIndex );
-
-    };
+    return this.zIndex ( topIndex++ );
 
   };
 
-}( window.__svelto_jquery ));
+}( window.$ ));
