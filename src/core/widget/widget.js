@@ -608,24 +608,9 @@
 
       /* EVENT */
 
-      event = $.Event ( event );
-      event.type = ( this.name + ':' + type ).toLowerCase ();
-      event.target = this.element;
+      const name = ( this.name + ':' + type ).toLowerCase ();
 
-      let originalEvent = event.originalEvent;
-
-      if ( originalEvent ) {
-
-        for ( let prop in originalEvent ) {
-
-          if ( !originalEvent.hasOwnProperty ( prop ) ) continue;
-          if ( prop in event ) continue;
-
-          event[prop] = originalEvent[prop];
-
-        }
-
-      }
+      event = $.makeEvent ( name, event );
 
       /* TRIGGERING */
 
