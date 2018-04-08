@@ -32,4 +32,8 @@
     return hash;
   };
 
+  _.debugger = function () {
+    debugger;
+  };
+
 }( Svelto.$, Svelto._, Svelto ));

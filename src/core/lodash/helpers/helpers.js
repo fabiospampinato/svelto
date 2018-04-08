@@ -2,7 +2,6 @@
 // @optional ./clone_deep.js
 // @optional ./constants.js
 // @optional ./css2dom.js
-// @optional ./debugger.js
 // @optional ./difference.js
 // @optional ./extend.js
 // @optional ./find_matches.js
