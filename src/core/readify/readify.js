@@ -91,7 +91,7 @@
 
   if ( !Svelto.Readify.isReady () ) {
 
-    $.onReady ( Svelto.Readify.ready.bind ( Svelto.Readify ) );
+    $( Svelto.Readify.ready.bind ( Svelto.Readify ) );
 
   }
 

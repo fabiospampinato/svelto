@@ -6,7 +6,7 @@
 
   /* CLIP PATH URL */
 
-  $.onReady ( function () {
+  $(function () {
 
     /* SVG */
 
