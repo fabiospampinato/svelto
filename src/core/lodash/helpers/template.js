@@ -6,11 +6,11 @@
 
   /* TEMPLATE */
 
-  const _prev = _.template;
+  const _template = _.template;
 
   _.template = function ( str, options ) {
 
-    return _prev.call ( _, _.templateMinify ( str ), options );
+    return _template.call ( _, _.templateMinify ( str ), options );
 
   };
 
