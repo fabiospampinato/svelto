@@ -3,15 +3,9 @@
 
 (function ( _ ) {
 
-  /* DIRECTION */
+  /* ROUND CLOSER */
 
-  _.roundCloser = function ( number, step ) {
-
-    if ( _.isUndefined ( step ) ) {
-
-      step = 1;
-
-    }
+  _.roundCloser = function ( number, step = 1 ) {
 
     let left = ( number % step ),
         halfStep = step / 2;
