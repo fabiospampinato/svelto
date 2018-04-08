@@ -31,7 +31,7 @@
         rendered: 'rendered'
       },
       selectors: {
-        boxes: '> *'
+        // boxes: ':scope > *' //TODO: Limited browser support for `:scope`
       },
       callbacks: {
         firstrender: _.noop,
@@ -53,7 +53,7 @@
 
       this.$widows = $.$empty;
 
-      this.$boxes = this.$justified.find ( this.options.selectors.boxes );
+      this.$boxes = this.$justified.children ();
       this.options.oneRow.enabled = this.$justified.hasClass ( this.options.classes.onerow ) || this.options.oneRow.enabled;
       this.options.oneRow.belowWidth = this.$justified.data ( this.options.datas.onerowBelowWidth ) || this.options.oneRow.belowWidth;
 
