@@ -140,10 +140,12 @@
 
     __tap ( event ) {
 
+      let originalEvent = event.originalEvent || event;
+
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      if ( Keyboard.keystroke.match ( event.originalEvent, 'ctmd' ) ) {
+      if ( Keyboard.keystroke.match ( originalEvent, 'ctmd' ) ) {
 
         window.open ( this.options.original.src || this.options.src, '_new' );
 

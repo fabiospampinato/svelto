@@ -279,10 +279,12 @@
 
     __paste ( event ) {
 
-        this.add ( event.originalEvent.clipboardData.getData ( 'text' ) );
+      let originalEvent = event.originalEvent || event;
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+      this.add ( originalEvent.clipboardData.getData ( 'text' ) );
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     }
 

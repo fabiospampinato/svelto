@@ -665,7 +665,7 @@
 
       if ( !this.options.multitouch.enabled ) {
 
-        const {originalEvent} = event;
+        let originalEvent = event.originalEvent || event;
 
         if ( 'touches' in originalEvent && originalEvent.touches.length > 1 ) return true;
 
