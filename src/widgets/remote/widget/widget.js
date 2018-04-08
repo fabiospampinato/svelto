@@ -353,7 +353,7 @@
 
       /* VARIABLES */
 
-      let remoteWidget = resj[this.options.widget.config.name],
+      let remoteWidget = _.templateMinify ( resj[this.options.widget.config.name] ),
           $remoteWidget = $(remoteWidget),
           prevRect;
 
