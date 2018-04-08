@@ -31,7 +31,7 @@
         url: 'reply-url'
       },
       selectors: {
-        reply: '+ .chat-message-reply'
+        // reply: '+ .chat-message-reply' //TODO: Limited DOM libraries support
       },
       callbacks: {
         reply: _.noop,
@@ -58,7 +58,7 @@
 
     _getReply () {
 
-      return this.$replyable.find ( this.options.selectors.reply );
+      return this.$replyable.next ().filter ( '.chat-message-reply' ); //TODO: Test me
 
     }
 
