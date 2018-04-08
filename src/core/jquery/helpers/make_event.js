@@ -1,12 +1,8 @@
 
 // @require ../init.js
+// @require core/lodash/lodash.js
 
-(function ( $ ) {
-
-  /* UTILITIES */
-
-  const returnTrue = () => true,
-        returnFalse = () => false;
+(function ( $, _ ) {
 
   /* MAKE EVENT */ // Creates an event by name
 
@@ -28,18 +24,18 @@
         return this.defaultPrevented;
       };
 
-      event.isPropagationStopped = returnFalse;
+      event.isPropagationStopped = _.false;
       const stopPropagation = event.stopPropagation;
       event.stopPropagation = function () {
-        event.isPropagationStopped = returnTrue;
+        event.isPropagationStopped = _.true;
         return stopPropagation.call ( this );
       };
 
-      event.isImmediatePropagationStopped = returnFalse;
+      event.isImmediatePropagationStopped = _.false;
       const stopImmediatePropagation = event.stopImmediatePropagation;
       event.stopImmediatePropagation = function () {
-        event.isPropagationStopped = returnTrue;
-        event.isImmediatePropagationStopped = returnTrue;
+        event.isPropagationStopped = _.true;
+        event.isImmediatePropagationStopped = _.true;
         return stopImmediatePropagation.call ( this );
       };
 
@@ -51,4 +47,4 @@
 
   };
 
-}( window.$ ));
+}( window.$, window._ ));
