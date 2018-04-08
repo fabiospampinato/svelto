@@ -3,7 +3,6 @@
 // @optional ./animate_prop.js
 // @optional ./diff.js
 // @optional ./elements.js
-// @optional ./event_namespacer.js
 // @optional ./event_xy.js
 // @optional ./get_rect.js
 // @optional ./has_attribute.js
