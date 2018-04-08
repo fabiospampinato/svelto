@@ -35,13 +35,6 @@
     }
   },
   "environments": {
-    "production": {
-      "components": {
-        "core": {
-          "lodash/helpers/template.js": false
-        }
-      }
-    },
     "development": {
       "components": {
         "core": {
