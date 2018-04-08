@@ -7,7 +7,7 @@
 
   $.isVisible = function ( ele ) {
 
-    return !!( ele.offsetWidth || ele.offsetHeight || ele.getClientRects ().length );
+    return !!ele && !!( ele.offsetWidth || ele.offsetHeight || ele.getClientRects ().length );
 
   };
 
