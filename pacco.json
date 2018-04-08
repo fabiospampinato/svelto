@@ -35,6 +35,13 @@
     }
   },
   "environments": {
+    "production": {
+      "components": {
+        "core": {
+          "debug/debug.js": false
+        }
+      }
+    },
     "development": {
       "components": {
         "core": {

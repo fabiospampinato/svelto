@@ -6,8 +6,6 @@
 
   /* DEBUG */
 
-  if ( !Svelto.DEVELOPMENT ) return;
-
   window.log = console.log.bind ( console );
 
   const timeMarks = {};
