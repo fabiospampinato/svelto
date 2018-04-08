@@ -95,18 +95,6 @@
       prevTapTimestamp = 0,
       dbltapTriggerable = true;
 
-  /* EVENT CREATOR */
-
-  function createEvent ( name, originalEvent ) {
-
-    let event = $.Event ( name );
-
-    event.originalEvent = originalEvent;
-
-    return event;
-
-  }
-
   /* HANDLERS */
 
   function downHandler ( event ) {
@@ -173,15 +161,18 @@
     }
 
     let tapTimestamp = event.timeStamp || Date.now (),
+        tapEvent = $.makeEvent ( Pointer.tap, event ),
         $target = $(downEvent.target);
 
-    $target.trigger ( createEvent ( Pointer.tap, event ) );
+    $target.trigger ( tapEvent );
 
     if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
       if ( dbltapTriggerable ) {
 
-        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+        const dbltapEvent = $.makeEvent ( Pointer.dbltap, event );
+
+        $target.trigger ( dbltapEvent );
 
         dbltapTriggerable = false;
 
