@@ -1,6 +1,6 @@
 
 // @require lib/directions/directions.js
-// @require widgets/autofocusable/autofocusable.js
+// @require lib/autofocus/helpers.js
 
 //TODO: Add again the super cool moving indicator
 //TODO: Not well written, make it better
@@ -35,7 +35,7 @@
 
   /* TABS */
 
-  class Tabs extends Widgets.Autofocusable {
+  class Tabs extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -104,13 +104,11 @@
 
       if ( !force ) {
 
-        this.autoblur ( $container );
+        $container.autoblur ();
 
       } else {
 
-        $container.widgetize ();
-
-        this.autofocus ( $container );
+        $container.widgetize ().autofocus ();
 
       }
 

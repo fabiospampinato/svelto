@@ -1,12 +1,12 @@
 
 // @require ../remote.js
-// @require lib/autofocus/autofocus.js
+// @require lib/autofocus/helpers.js
 // @require lib/fetch/fetch.js
 // @require widgets/toast/toast.js
 
 //TODO: Add locking capabilities, both at class-level and global-level (should be layout-level but seems impossible to implement)
 
-(function ( $, _, Svelto, Widgets, Factory, Animations, Autofocus, fetch ) {
+(function ( $, _, Svelto, Widgets, Factory, Animations, fetch ) {
 
   /* VARIABLES */
 
@@ -132,9 +132,7 @@
 
     _widgetInit () {
 
-      this.$widget.widgetize ();
-
-      Autofocus.focus ( this.$widget );
+      this.$widget.widgetize ().autofocus ();
 
     }
 
@@ -448,4 +446,4 @@
 
   Factory.make ( RemoteWidget, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Autofocus, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.fetch ));

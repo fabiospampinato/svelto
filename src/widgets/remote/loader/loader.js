@@ -1,12 +1,12 @@
 
 // @priority 600
 // @require ../remote.js
-// @require lib/autofocus/autofocus.js
+// @require lib/autofocus/helpers.js
 // @require widgets/toast/toast.js
 
 // Remote loaded content should always be properly wrapped html elements
 
-(function ( $, _, Svelto, Widgets, Factory, Autofocus, fetch ) {
+(function ( $, _, Svelto, Widgets, Factory, fetch ) {
 
   /* CONFIG */
 
@@ -145,13 +145,13 @@
 
         this.$loader.replaceWith ( $otherWrapper );
 
-        $otherWrapper.widgetize ();
+        $otherWrapper.widgetize ().autofocus ();
 
       } else {
 
         this.$loader.replaceWith ( $otherElements );
 
-        $otherElements.widgetize ();
+        $otherElements.widgetize ().autofocus ();
 
       }
 
@@ -283,4 +283,4 @@
 
   Factory.make ( RemoteLoader, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.fetch ));

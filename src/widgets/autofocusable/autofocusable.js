@@ -17,15 +17,15 @@
 
     /* API */
 
-    autofocus ( $ele = this.$element ) {
+    autofocus () {
 
-      Autofocus.focus ( $ele );
+      Autofocus.focus ( this.$element );
 
     }
 
-    autoblur ( $ele = this.$element ) {
+    autoblur () {
 
-      Autofocus.blur ( $ele );
+      Autofocus.blur ( this.$element );
 
     }
 

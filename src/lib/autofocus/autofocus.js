@@ -4,17 +4,13 @@
 
 (function ( $, _, Svelto, Browser, Readify ) {
 
-  /* VARIABLES */
-
-  let $html = $('html');
-
   /* AUTOFOCUS */
 
   let Autofocus = {
 
     /* VARIABLES */
 
-    enabled: Browser.is.desktop,
+    enabled: Browser.is.desktop, // On touch devices the keyboard will pop up
     history: [], // List of autofocused elements
     historySize: 3, // How many elements to keep in the history
 
@@ -22,7 +18,7 @@
 
     init () {
 
-      Autofocus.focus ( $html );
+      Autofocus.focus ( $.$html );
 
     },
 
@@ -53,7 +49,7 @@
 
     },
 
-    find ( $parent = $html, focused ) {
+    find ( $parent = $.$html, focused ) {
 
       let $focusable = $parent.find ( '[autofocus], .autofocus' ).filter ( ( i, ele ) => $.isVisible ( ele ) );
 
@@ -83,7 +79,7 @@
 
       if ( !Autofocus.enabled || !Autofocus.history[0] || !$parent[0].contains ( Autofocus.history[0] ) ) return;
 
-      let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $html );
+      let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $.$html );
 
       if ( previous ) Autofocus.set ( previous );
 

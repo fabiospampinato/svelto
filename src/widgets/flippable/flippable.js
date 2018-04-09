@@ -1,5 +1,5 @@
 
-// @require widgets/autofocusable/autofocusable.js
+// @require lib/autofocus/helpers.js
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
@@ -26,7 +26,7 @@
 
   /* FLIPPABLE */
 
-  class Flippable extends Widgets.Autofocusable {
+  class Flippable extends Widgets.Widget {
 
     /* SPECIAL */
 
@@ -56,8 +56,11 @@
 
         this.$flippable.toggleClass ( this.options.classes.flip, this._isFlipped );
 
-        this.autoblur ( this._isFlipped ? this.$front : this.$back );
-        this.autofocus ( this._isFlipped ? this.$back : this.$front );
+        const $blurrable = this._isFlipped ? this.$front : this.$back;
+        $blurrable.autoblur ();
+
+        const $focusable = this._isFlipped ? this.$back : this.$front;
+        $focusable.autofocus ();
 
         this._trigger ( this._isFlipped ? 'back' : 'front' );
 
