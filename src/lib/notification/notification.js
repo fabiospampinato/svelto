@@ -25,7 +25,7 @@
 
     /* NOTIFICATIONS */
 
-    if ( document.hidden && window.Notification && Notification.permission !== 'denied' ) {
+    if ( window.Notification && Notification.permission !== 'denied' && ( document.hasFocus ? !document.hasFocus () : document.hidden ) ) {
 
       Notification.requestPermission ( function ( status ) {
 
