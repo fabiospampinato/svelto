@@ -13,6 +13,7 @@
     enabled: Browser.is.desktop, // On touch devices the keyboard will pop up
     history: [], // List of autofocused elements
     historySize: 3, // How many elements to keep in the history
+    restore: false, // Switch focus to the previously focused element
 
     /* INIT */
 
@@ -75,13 +76,25 @@
 
     },
 
-    blur ( $parent ) {
+    blur ( $parent, restore = Autofocus.restore ) {
 
       if ( !Autofocus.enabled || !Autofocus.history[0] || !$parent[0].contains ( Autofocus.history[0] ) ) return;
 
-      let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $.$html );
+      if ( restore ) {
 
-      if ( previous ) Autofocus.set ( previous );
+        let previous = Autofocus.history.find ( $.isVisible ) || Autofocus.find ( $.$html );
+
+        if ( previous && !$.isFocused ( previous ) && $.isVisible ( previous ) ) {
+
+          Autofocus.set ( previous );
+
+          return;
+
+        }
+
+      }
+
+      Autofocus.history[0].blur ();
 
     }
 
