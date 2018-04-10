@@ -14,9 +14,9 @@
     border-radius: 0;
     margin: 0;
     max-width: none;
-    width: 100%;
     max-height: none;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     z-index: $card-fullscreen-z-index;
   }
 
