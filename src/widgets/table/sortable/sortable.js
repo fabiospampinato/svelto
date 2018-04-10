@@ -123,7 +123,7 @@
 
     __tap ( event ) {
 
-      let newIndex = this.$headers.index ( event.target ),
+      let newIndex = this.$headers.index ( event.currentTarget ),
           newDirection = this.currentIndex === newIndex
                            ? this.currentDirection === 'asc'
                              ? 'desc'
