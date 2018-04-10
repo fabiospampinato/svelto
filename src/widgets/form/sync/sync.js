@@ -91,7 +91,7 @@
 
       for ( let i = 0, l = $otherElements.length; i < l; i++ ) {
 
-        let otherElements = $otherElements[i],
+        let otherElement = $otherElements[i],
             $otherElement = $(otherElement),
             otherValue = $otherElement.val (),
             otherChecked = !!$otherElement.prop ( 'checked' );
