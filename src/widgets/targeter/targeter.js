@@ -55,9 +55,9 @@
 
     }
 
-    __targetRemove () {
+    __targetRemove ( event ) {
 
-      this.__remove ();
+      this.__remove ( event );
 
     }
 

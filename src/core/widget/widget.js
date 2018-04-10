@@ -740,7 +740,7 @@
 
     }
 
-    __remove ( event ) { //FIXME: This gets triggered twice, I don't know why
+    __remove ( event ) {
 
       if ( !event || event.target === this.element ) {
 
