@@ -126,8 +126,6 @@
 
         this._delay ( function () {
 
-          this.$toast.remove ();
-
           this.$toast = false;
 
         }, Widgets.Toast.config.options.animations.close );
