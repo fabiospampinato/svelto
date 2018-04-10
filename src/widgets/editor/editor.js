@@ -543,7 +543,7 @@
 
       this._render ();
 
-      this.$preview.outerHeight ( this.$textarea.outerHeight () );
+      this.$preview.height ( this.$textarea.height () );
 
       this.$editor.addClass ( this.options.classes.preview );
 
