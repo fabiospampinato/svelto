@@ -114,7 +114,7 @@
         'ctmd + k': ['action', 'code'],
         'ctmd + m': ['action', 'quote'],
         'ctmd + d': ['action', 'divider'],
-        'ctmd + p': ['action', 'preview'],
+        'ctrl + shift + p': ['action', 'preview'],
         'ctmd + f': ['action', 'fullscreen'],
         'esc': '__esc'
       },
