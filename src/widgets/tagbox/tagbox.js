@@ -314,7 +314,7 @@
 
       event.stopImmediatePropagation ();
 
-      let $tag = $(event.currentTarget).closest ( this.options.selectors.tag );
+      let $tag = $(event.target).closest ( this.options.selectors.tag );
 
       this.remove ( $tag );
 

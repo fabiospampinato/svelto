@@ -146,7 +146,7 @@
 
       this.$popover.popover ( 'close' );
 
-      this.set ( $(event.currentTarget).data ( this.options.datas.value ) );
+      this.set ( $(event.target).closest ( this.$buttons ).data ( this.options.datas.value ) );
 
     }
 

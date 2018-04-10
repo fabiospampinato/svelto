@@ -327,7 +327,7 @@
 
     _getEventElement ( event ) {
 
-      let $target = $(event.currentTarget);
+      let $target = $(event.target);
 
       return this._usingSelectionToggler ? $target.closest ( this.options.selectors.element) : $target;
 

@@ -55,9 +55,9 @@
 
     __open ( event ) {
 
-      this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
+      this._trigger ( 'open', { index: this.$expanders.index ( event.currentTarget ) } );
 
-      this.__multiple ( event.target );
+      this.__multiple ( event.currentTarget );
 
     }
 
@@ -71,7 +71,7 @@
 
     __close ( event ) {
 
-      this._trigger ( 'close', { index: this.$expanders.index ( event.target) } );
+      this._trigger ( 'close', { index: this.$expanders.index ( event.currentTarget ) } );
 
     }
 

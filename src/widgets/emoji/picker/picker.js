@@ -264,8 +264,9 @@
 
     __emojiTap ( event ) {
 
-      let emoji = event.currentTarget.getAttribute ( 'data-id' ),
-          tone = Number ( event.currentTarget.getAttribute ( 'data-tone' ) ),
+      let $emoji = $(event.target).closest ( this.options.selectors.emoji ),
+          emoji = $emoji.data ( 'id' ),
+          tone = Number ( $emoji.data ( 'tone' ) ),
           data = { emoji, tone };
 
       this._frequentUpdate ( emoji, tone );
@@ -284,7 +285,7 @@
 
     __toneTap ( event ) {
 
-      let tone = this.$tones.get ().indexOf ( event.target ) + 1;
+      let tone = this.$tones.get ().indexOf ( event.currentTarget ) + 1;
 
       if ( tone === this.options.tone ) return;
 
@@ -334,17 +335,21 @@
 
     ___preview () {
 
-      this._on ( Pointer.enter, this.options.selectors.emoji, this.__previewEnter );
+      this._on ( Pointer.move, this.options.selectors.emoji, this._frames ( this.__previewMove.bind ( this ) ) );
       this._on ( true, this.$containersWrapper, Pointer.leave, this.__previewLeave );
 
     }
 
-    __previewEnter ( event ) {
+    __previewMove ( event ) {
 
-      let emoji = event.currentTarget;
+      let $emoji = $(event.target).closest ( this.options.selectors.emoji ),
+          id = $emoji.data ( 'id' ),
+          tone = $emoji.data ( 'tone' );
 
-      this.options.preview.id = emoji.getAttribute ( 'data-id' );
-      this.options.preview.tone = emoji.getAttribute ( 'data-tone' );
+      if ( this.options.preview.id === id && this.options.preview.tone === tone ) return;
+
+      this.options.preview.id = id;
+      this.options.preview.tone = tone;
 
       this._updatePreview ();
 

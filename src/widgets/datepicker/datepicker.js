@@ -223,7 +223,7 @@
 
     __dayTap ( event ) {
 
-      let $day = $(event.currentTarget);
+      let $day = $(event.target).closest ( this.$daysCurrent );
 
       if ( $day.is ( this.options.selectors.day.selected ) || $day.is ( this.options.selectors.day.clamped ) ) return;
 

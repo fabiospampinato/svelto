@@ -57,6 +57,7 @@
     _variables () {
 
       this.$rater = this.$element;
+      this.$stars = this.$rater.find ( this.options.selectors.star );
 
       this.doingAjax = false;
 
@@ -95,7 +96,7 @@
 
       if ( !this.options.rated && !this.doingAjax && this.options.url ) {
 
-        let rating = this.$stars.index ( event.currentTarget ) + 1;
+        let rating = this.$stars.index ( $(event.target).closest ( this.$stars ) ) + 1;
 
         fetch ({
           url: this.options.url,

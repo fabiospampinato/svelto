@@ -118,7 +118,7 @@
 
     __action ( event ) {
 
-      let $trigger = $(event.target),
+      let $trigger = $(event.currentTarget),
           type = $trigger.data ( this.options.datas.type ) || this.options.defaultAction,
           action = this.options.actions[type];
 
