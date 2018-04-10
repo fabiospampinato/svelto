@@ -15,7 +15,7 @@
     fn: false, // The function to execute
     cookie: { // Values that will get passed to `Cookie` when appropriate
       end: Infinity,
-      path: undefined,
+      path: '/',
       domain: undefined,
       secure: undefined
     }
