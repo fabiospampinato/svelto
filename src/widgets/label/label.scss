@@ -33,8 +33,7 @@
       margin-left: $label-inner-gutter;
     }
 
-    + %icon,
-    + %icons {
+    + %icon {
       margin-left: $label-inner-gutter / $icon-scale-factor;
     }
 
