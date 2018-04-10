@@ -73,7 +73,7 @@
         },
         day: {
           previous: '.datepicker-days .previous',
-          current: '.datepicker-days :not(.previous):not(.next)',
+          current: '.datepicker-days *:not(.previous):not(.next)',
           next: '.datepicker-days .next',
           today: '.datepicker-day-today',
           selected: '.datepicker-day-selected',
