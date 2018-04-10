@@ -68,7 +68,7 @@
 
       let $reply = this._getReply ();
 
-      if ( $reply.length ) return $reply.trigger ( 'focus' );
+      if ( $reply.length ) return $reply[0].focus ();
 
       let cls = this.$replyable.attr ( 'class' ),
           img = !!this.$replyable.children ( '.chat-message-img' ).length,
@@ -79,7 +79,7 @@
 
       this.$replyable.after ( $reply );
 
-      $reply.trigger ( 'focus' ).widgetize ();
+      $reply.widgetize ()[0].focus ();
 
       this._trigger ( 'reply' );
 

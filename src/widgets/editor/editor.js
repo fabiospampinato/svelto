@@ -511,7 +511,7 @@
 
       this.options.actions[action].apply ( this );
 
-      this.$textarea.trigger ( 'focus' );
+      this.textarea.focus ();
 
       this._trigger ( 'action', {action} );
 
