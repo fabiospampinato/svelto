@@ -31,6 +31,7 @@
       this.textarea = this.element;
 
       this.$form = this.$textarea.closest ( this.options.selectors.form );
+      this.form = this.$form[0];
 
     }
 
@@ -46,7 +47,7 @@
 
       if ( !$.isFocused ( this.textarea ) ) return null;
 
-      this.$form.trigger ( 'submit' );
+      this.form.submit ();
 
     }
 
