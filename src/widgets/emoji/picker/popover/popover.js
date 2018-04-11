@@ -7,9 +7,6 @@
 
   let config = {
     name: 'emojipickerPopover',
-    templates: {
-      base: _.template ( '<div>' )
-    },
     options: {
       classes: {
         popover: 'popover'
@@ -51,21 +48,13 @@
 
     }
 
-    /* UTILITIES */
-
-    _isEmpty () {
-
-      return this.$element.is ( ':empty' );
-
-    }
-
     /* API */
 
     toggle ( anchor ) {
 
       if ( this.isLocked () ) {
 
-        if ( !this._isEmpty () ) {
+        if ( this.element ) {
 
           this.unlock ();
 
@@ -77,7 +66,7 @@
 
       } else {
 
-        if ( this._isEmpty () ) {
+        if ( !this.element ) {
 
           this.lock ();
 
@@ -86,6 +75,7 @@
             Widgets.Emojipicker.config.options.data = data;
 
             this.$element = $.widget.new ( Widgets.Emojipicker ).$element.addClass ( this.options.classes.popover );
+            this.element = this.$element[0];
 
             this.toggle ( anchor );
 
