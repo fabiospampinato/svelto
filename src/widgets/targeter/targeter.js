@@ -33,6 +33,8 @@
                          ? this.$element.closest ( this.options.widget.config.selector )
                          : this.options.$fallback;
 
+      this.$target = this.$target.length ? this.$target : this.options.$fallback;
+
       if ( !this.$target.length ) return false;
 
       this.target = this.$target[0];
