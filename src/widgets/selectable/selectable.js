@@ -22,7 +22,7 @@
       },
       selectors: {
         element: 'tbody tr:not(.table-row-empty)', //FIXME: Add support for datatables' empty row
-        selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler
+        selectionToggler: undefined // Selector having `element` as context. If falsy the entire `element` will be the selection toggler //FIXME: Is this actually working?
       },
       keystrokes: {
         'ctmd + a': 'all',
@@ -327,9 +327,7 @@
 
     _getEventElement ( event ) {
 
-      let $target = $(event.target);
-
-      return this._usingSelectionToggler ? $target.closest ( this.options.selectors.element) : $target;
+      return $(event.target).closest ( this.$elements );
 
     }
 
