@@ -42,7 +42,7 @@
           return ( value === fieldValue );
         },
         checked () {
-          return this.element.$element.prop ( 'checked' );
+          return this.context.$element.prop ( 'checked' );
         },
         regex ( value, regex ) {
           return !!value.match ( new RegExp ( regex ) );
@@ -368,6 +368,8 @@
         for ( let name in validations ) {
 
           if ( !validations.hasOwnProperty ( name ) ) continue;
+
+          this.context = elementObj;
 
           let validation = validations[name],
               isValid = validation.validator.call ( this, elementObj.value, ...validation.args );
