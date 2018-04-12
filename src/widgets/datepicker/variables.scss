@@ -2,10 +2,14 @@
 // @require core/animations/variables.scss
 // @require core/colors/variables.scss
 
+/* DATEPICKER */
+
+$datepicker-max-width: 32em !default;
+
 /* DAY */
 
 $datepicker-day-width: 100% / 7 !default;
-$datepicker-day-height: 2.5em !default;
+$datepicker-day-height: 3em !default;
 
 /* DAY NAME */
 
@@ -13,7 +17,7 @@ $datepicker-day-name-font-weight: bold !default;
 
 /* DAY CIRCLE */
 
-$datepicker-day-circle-size: $datepicker-day-height * .95 !default;
+$datepicker-day-circle-size: 2.5em !default;
 
 /* DAY HOVER */
 

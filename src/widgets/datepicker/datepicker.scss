@@ -6,6 +6,8 @@
 .datepicker {
 
   @extend %container;
+  @include center-margin ();
+  max-width: $datepicker-max-width;
 
   /* INPUT */
 
