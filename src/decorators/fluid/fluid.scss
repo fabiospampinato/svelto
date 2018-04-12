@@ -9,6 +9,7 @@
 
   &:not(.multiple) {
     width: 100%;
+    max-width: 100%;
     flex: 1 1 auto;
   }
 
@@ -24,6 +25,7 @@
 
     &.vertical > * {
       width: 100%;
+      max-width: 100%;
     }
 
   }
