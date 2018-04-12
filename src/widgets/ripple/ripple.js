@@ -4,6 +4,8 @@
 // @require core/browser/browser.js
 // @require core/widget/widget.js
 
+//FIXME: The animation is ugly
+
 (function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Animations ) {
 
   /* CONFIG */

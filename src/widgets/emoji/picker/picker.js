@@ -131,7 +131,7 @@
         limit: 126,
         emojis: [],
         tones: [],
-        rank: []
+        rank: [] //TODO: Add some popular emoji here, or it will be pretty useless
       },
       search: {
         limit: 126,

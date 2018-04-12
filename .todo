@@ -1,12 +1,11 @@
 
-☐ require less jquery
 ☐ try chunked bundles
 ☐ test bump
 
 Now:
   ☐ require less polyfills (https://github.com/zloirock/core-js/issues/388)
+    ☐ core-js' should be bundled after those included in Svelto (maybe they require the Symbol polyfill for instance)
   ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
-  ☐ autofocus should probably be called when widgetizing
   ☐ lazy inside a modal doesn't work
   ☐ toast: option for moving the bottom queues up on scrolling (so that they don't go over the footer)
   ☐ editor: link and image should highlight the link, not the alt/name text

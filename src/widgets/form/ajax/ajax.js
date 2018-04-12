@@ -6,6 +6,7 @@
 // @require widgets/toast/toast.js
 // @require widgets/spinner/overlay/overlay.js
 
+//TODO: The spinner overlay shouldn't be closable
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
 (function ( $, _, Svelto, Widgets, Factory, fetch, URL ) {
