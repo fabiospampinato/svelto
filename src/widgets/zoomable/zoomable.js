@@ -434,7 +434,9 @@
 
     zoom ( event ) {
 
-      if ( this.isLocked () || this._isZoomed ) return null;
+      if ( this._isZoomed ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( () => this.zoom ( event ) );
 
       if ( this.options.original.src && this.options.preloading.wait && !this._isPreloaded ) return this.preload ( () => this.zoom ( event ) );
 
@@ -489,7 +491,9 @@
 
     unzoom () {
 
-      if ( this.isLocked () || !this._isZoomed ) return null;
+      if ( !this._isZoomed ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.unzoom.bind ( this ) );
 
       this._isZoomed = false;
 

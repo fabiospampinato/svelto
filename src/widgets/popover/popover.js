@@ -267,7 +267,9 @@
 
       /* CHECKING */
 
-      if ( this.isLocked () || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return null;
+      if ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( () => this.open ( anchor, event ) );
 
       /* VARIABLES */
 
@@ -342,7 +344,9 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return null;
+      if ( !this._isOpen ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.close.bind ( this ) );
 
       /* VARIABLES */
 

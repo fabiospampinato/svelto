@@ -255,7 +255,9 @@
 
       index = this._sanitizeIndex ( index );
 
-      if ( this.isLocked () || _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
+      if ( _.isNaN ( index ) || ( this._current && index === this._current.index ) ) return;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( () => this.set ( index ) );
 
       this.lock ();
 

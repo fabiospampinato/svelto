@@ -70,7 +70,11 @@
 
     open () {
 
-      if ( this.isLocked () || this.isOpen () ) return null;
+      if ( this.isOpen () ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.open.bind ( this ) );
+
+      if ( this.instance.isLocked () ) return this.instance.whenUnlocked ( this.open.bind ( this ) );
 
       this.$overlay.prependTo ( this.$overlayed );
 
@@ -82,7 +86,11 @@
 
     close () {
 
-      if ( this.isLocked () || !this.isOpen () ) return null;
+      if ( !this.isOpen () ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.close.bind ( this ) );
+
+      if ( this.instance.isLocked () ) return this.instance.whenUnlocked ( this.close.bind ( this ) );
 
       this.lock ();
 

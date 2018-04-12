@@ -101,7 +101,9 @@
 
     open () {
 
-      if ( this.isLocked () || this._isOpen ) return null;
+      if ( this._isOpen ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.open.bind ( this ) );
 
       this.lock ();
 
@@ -133,7 +135,9 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return null;
+      if ( !this._isOpen ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.close.bind ( this ) );
 
       this.lock ();
 

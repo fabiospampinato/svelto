@@ -280,7 +280,9 @@
 
     open () {
 
-      if ( this.isLocked () || this._isOpen ) return null;
+      if ( this._isOpen ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.open.bind ( this ) );
 
       this.lock ();
 
@@ -335,7 +337,9 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return null;
+      if ( !this._isOpen ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.close.bind ( this ) );
 
       this.unpin ();
 
@@ -395,7 +399,9 @@
 
     pin () {
 
-      if ( this.isLocked () || this._isPinned ) return null;
+      if ( this._isPinned ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.pin.bind ( this ) );
 
       this._isPinned = true;
 
@@ -419,7 +425,9 @@
 
     unpin () {
 
-      if ( this.isLocked () || !this._isOpen || !this._isPinned ) return null;
+      if ( !this._isOpen || !this._isPinned ) return null;
+
+      if ( this.isLocked () ) return this.whenUnlocked ( this.unpin.bind ( this ) );
 
       this._isPinned = false;
 
