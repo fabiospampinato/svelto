@@ -1,5 +1,6 @@
 
 // @require core/widget/widget.scss
+// @require core/z_index/z_index.scss
 // @require decorators/target/target.scss
 
 // If we set is as `display: flex` then the padding-bottom will collpase when used as `overlay`
@@ -8,6 +9,7 @@
 
 %container {
   @extend %widget;
+  @extend %layout-priority-z-index-provider;
   border-radius: $container-border-radius;
   padding: $container-padding-y $container-padding-x;
   z-index: 0; // In order to better support actionable icons etc.

@@ -448,8 +448,8 @@
 
       this._frame ( function () {
 
-        this.$zoomable.addClass ( this.options.classes.show );
-        this.$backdrop.addClass ( this.options.classes.backdrop.show );
+        this.$zoomable.addClass ( this.options.classes.show ).addClass ( this.options.classes.priorityZIndex );
+        this.$backdrop.addClass ( this.options.classes.backdrop.show ).addClass ( this.options.classes.layout.priorityZIndex );
 
         this._frame ( function () {
 
@@ -515,8 +515,8 @@
 
             if ( this.options.original.src && !this.options.original.substitute ) this.$zoomable.attr ( 'src', this.options.src );
 
-            this.$zoomable.removeClass ( this.options.classes.show );
-            this.$backdrop.removeClass ( this.options.classes.backdrop.show );
+            this.$zoomable.removeClass ( this.options.classes.show ).removeClass ( this.options.classes.priorityZIndex );
+            this.$backdrop.removeClass ( this.options.classes.backdrop.show ).removeClass ( this.options.classes.layout.priorityZIndex );
 
             if ( this.options.magnification.enabled ) this.$layout.enableScroll ();
 

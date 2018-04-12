@@ -1,12 +1,14 @@
 
 // @optional core/multiple/multiple.scss
 // @require core/widget/widget.scss
+// @require core/z_index/z_index.scss
 
 /* TOOLBAR */
 
 .toolbar {
 
   @extend %widget;
+  @extend %layout-priority-z-index-provider;
   padding: $toolbar-padding-y $toolbar-padding-x;
   z-index: 0; // In order to better support actionable icons etc.
 

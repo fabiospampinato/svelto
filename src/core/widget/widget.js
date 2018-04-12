@@ -31,7 +31,11 @@
       datas: {}, // CSS data-* names
       classes: { // CSS classes to attach inside the widget
         disabled: 'disabled', // Attached to disabled widgets
-        hidden: 'hidden' // Used to hide an element
+        hidden: 'hidden', // Used to hide an element
+        priorityZIndex: 'priority-z-index', // Used for giving a priority z-index to an element
+        layout: {
+          priorityZIndex: 'layout-priority-z-index' // Used when there's an element with priority z-index
+        }
       },
       selectors: {}, // Selectors to use inside the widget
       animations: {}, // Object storing all the milliseconds required for each animation to occur

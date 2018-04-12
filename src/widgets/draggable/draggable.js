@@ -54,10 +54,7 @@
       },
       classes: {
         dragging: 'draggable-dragging',
-        reverting: 'draggable-reverting',
-        layout: {
-          dragging: 'draggable-layout-dragging'
-        }
+        reverting: 'draggable-reverting'
       },
       selectors: {
         handler: '.draggable-handler'
@@ -263,8 +260,8 @@
 
     _toggleClasses ( force ) {
 
-      this.$layout.toggleClass ( this.options.classes.layout.dragging, force );
-      this.$movable.toggleClass ( this.options.classes.dragging, force );
+      this.$layout.toggleClass ( this.options.classes.layout.priorityZIndex, force );
+      this.$movable.toggleClass ( this.options.classes.dragging, force ).toggleClass ( this.options.classes.priorityZIndex, force );
 
     }
 
