@@ -157,7 +157,7 @@
 
       /* BINDINGS */
 
-      this.bindings = [];
+      this.$bindings = $.$empty;
 
       /* ATTACH INSTANCE */
 
@@ -171,6 +171,10 @@
 
       this.guid = $.guid++;
       this.guc = this.name + '-' + this.guid;
+
+      /* EVENT NAMESPACE */
+
+      this.eventNamespace = `.swns-${this.guid}`;
 
       /* LOCKS */
 
@@ -327,10 +331,9 @@
     _init () {} // Perform the init stuff inside this function
     _events () {} // Bind the event handlers inside this function
 
-    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality //FIXME: The why this is implemented may cause an increased memory usage (duplication and references to elements that maybe could be garbage collected)
+    _reset () { //TODO: Maybe remove or rename it, I don't like it but I currently need its functionality
 
-      this.bindings.forEach ( ([ $element, events, handler ]) => $element.off ( events, handler ) );
-      this.bindings = [];
+      this.$bindings.off ( this.eventNamespace );
 
     }
 
@@ -508,6 +511,10 @@
 
       }
 
+      /* BINDINGS */
+
+      this.$bindings = this.$bindings.add ( $element );
+
       /* PROXY */
 
       let handlerProxy = ( event, data ) => {
@@ -522,9 +529,9 @@
 
       handlerProxy.guid = handler.guid = ( handler.guid || $.guid++ );
 
-      /* BINDINGS */
+      /* EVENTS NAMESPACING */
 
-      this.bindings.push ([ $element, events, handlerProxy ]);
+      events = $.eventNamespacer ( events, this.eventNamespace );
 
       /* TRIGGERING */
 
@@ -569,6 +576,10 @@
         $element = this.$element;
 
       }
+
+      /* EVENTS NAMESPACING */
+
+      events = $.eventNamespacer ( events, this.eventNamespace );
 
       /* REMOVING HANDLER */
 
