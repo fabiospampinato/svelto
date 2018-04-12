@@ -19,6 +19,8 @@
   filter: blur($blurred-blur-radius) !important;
 }
 
-.blurred {
+.blurred,
+.blurred-next ~ *,
+.blurred-children > * {
   @extend %blurred;
 }
