@@ -527,17 +527,13 @@
 
     togglePreview ( force = !this._isPreview ) {
 
-      if ( !!force !== this._isPreview ) {
-
-        this[force ? 'preview' : 'unpreview']();
-
-      }
+      return this[force ? 'preview' : 'unpreview']();
 
     }
 
     preview () {
 
-      if ( this._isPreview ) return;
+      if ( this._isPreview ) return null;
 
       this._isPreview = true;
 
@@ -555,7 +551,7 @@
 
     unpreview () {
 
-      if ( !this._isPreview ) return;
+      if ( !this._isPreview ) return null;
 
       this._isPreview = false;
 
@@ -577,17 +573,13 @@
 
     toggleFullscreen ( force = !this._isFullscreen ) {
 
-      if ( !!force !== this._isFullscreen ) {
-
-        this[force ? 'fullscreen' : 'unfullscreen']();
-
-      }
+      return this[force ? 'fullscreen' : 'unfullscreen']();
 
     }
 
     fullscreen () {
 
-      if ( this._isFullscreen ) return;
+      if ( this._isFullscreen ) return null;
 
       this._isFullscreen = true;
 
@@ -603,7 +595,7 @@
 
     unfullscreen () {
 
-      if ( !this._isFullscreen ) return;
+      if ( !this._isFullscreen ) return null;
 
       this._isFullscreen = false;
 

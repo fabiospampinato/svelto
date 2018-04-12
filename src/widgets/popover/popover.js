@@ -40,7 +40,7 @@
         close: Animations.fast
       },
       keystrokes: {
-        'esc': '__esc'
+        'esc': 'close'
       },
       callbacks: {
         beforeopen: _.noop,
@@ -178,12 +178,6 @@
 
     }
 
-    __esc () {
-
-      this.close ();
-
-    }
-
     /* POSITIONATE */
 
     _positionate () {
@@ -257,7 +251,7 @@
 
       }
 
-      this[force ? 'open' : 'close']( anchor, event );
+      return this[force ? 'open' : 'close']( anchor, event );
 
     }
 
@@ -273,7 +267,7 @@
 
       /* CHECKING */
 
-      if ( this.isLocked () || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return;
+      if ( this.isLocked () || ( ( !anchor || ( this._isOpen && this.$anchor && anchor === this.$anchor[0] ) ) && !('point' in this.options.positionate) && !('$anchor' in this.options.positionate) ) ) return null;
 
       /* VARIABLES */
 
@@ -348,7 +342,7 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return null;
 
       /* VARIABLES */
 

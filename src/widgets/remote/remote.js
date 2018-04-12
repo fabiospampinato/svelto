@@ -140,7 +140,7 @@
 
     request ( options ) {
 
-      if ( !this.canRequest () ) return;
+      if ( !this.canRequest () ) return null;
 
       this._requestsNr++;
       this._isAborted = false;
@@ -164,7 +164,7 @@
 
     abort () {
 
-      if ( !this.req || !this.isRequesting () ) return;
+      if ( !this.req || !this.isRequesting () ) return null;
 
       this._isAborted = true;
 

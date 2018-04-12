@@ -59,7 +59,7 @@
         unzoom: Animations.normal
       },
       keystrokes: {
-        'esc': '__esc'
+        'esc': 'unzoom'
       },
       callbacks: {
         loading: _.noop,
@@ -179,12 +179,6 @@
     ___keydown () { //TODO: Listen to `keydown` only within the layout, so maybe just if the layout is hovered or focused (right?)
 
       this._on ( true, $.$document, 'keydown', this.__keydown );
-
-    }
-
-    __esc () {
-
-      this.unzoom ();
 
     }
 
@@ -412,7 +406,7 @@
 
     preload ( callback ) {
 
-      if ( this._isPreloading || this._isPreloaded ) return;
+      if ( this._isPreloading || this._isPreloaded ) return null;
 
       this._isPreloading = true;
 
@@ -434,17 +428,13 @@
 
     toggle ( force = !this._isZoomed, event ) {
 
-      if ( !!force !== this._isZoomed ) {
-
-        this[force ? 'zoom' : 'unzoom']( event );
-
-      }
+      return this[force ? 'zoom' : 'unzoom']( event );
 
     }
 
     zoom ( event ) {
 
-      if ( this.isLocked () || this._isZoomed ) return;
+      if ( this.isLocked () || this._isZoomed ) return null;
 
       if ( this.options.original.src && this.options.preloading.wait && !this._isPreloaded ) return this.preload ( () => this.zoom ( event ) );
 
@@ -499,7 +489,7 @@
 
     unzoom () {
 
-      if ( this.isLocked () || !this._isZoomed ) return;
+      if ( this.isLocked () || !this._isZoomed ) return null;
 
       this._isZoomed = false;
 

@@ -95,17 +95,13 @@
 
     toggle ( force = !this._isOpen ) {
 
-      if ( !!force !== this._isOpen ) {
-
-        this[force ? 'open' : 'close']();
-
-      }
+      return this[force ? 'open' : 'close']();
 
     }
 
     open () {
 
-      if ( this.isLocked () || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return null;
 
       this.lock ();
 
@@ -137,7 +133,7 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return null;
 
       this.lock ();
 

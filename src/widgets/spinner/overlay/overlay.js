@@ -64,17 +64,13 @@
 
     toggle ( force = !this.isOpen () ) {
 
-      if ( !!force !== this.isOpen () ) {
-
-        this[force ? 'open' : 'close']();
-
-      }
+      return this[force ? 'open' : 'close']();
 
     }
 
     open () {
 
-      if ( this.isLocked () || this.isOpen () ) return;
+      if ( this.isLocked () || this.isOpen () ) return null;
 
       this.$overlay.prependTo ( this.$overlayed );
 
@@ -86,7 +82,7 @@
 
     close () {
 
-      if ( this.isLocked () || !this.isOpen () ) return;
+      if ( this.isLocked () || !this.isOpen () ) return null;
 
       this.lock ();
 

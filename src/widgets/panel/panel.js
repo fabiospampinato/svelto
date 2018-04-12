@@ -154,11 +154,9 @@
 
     __esc () {
 
-      if ( !this._isPinned ) {
+      if ( this._isPinned ) return null;
 
-        this.close ();
-
-      }
+      this.close ();
 
     }
 
@@ -276,17 +274,13 @@
 
     toggle ( force = !this._isOpen ) {
 
-      if ( !!force !== this._isOpen ) {
-
-        this[force ? 'open' : 'close']();
-
-      }
+      return this[force ? 'open' : 'close']();
 
     }
 
     open () {
 
-      if ( this.isLocked () || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return null;
 
       this.lock ();
 
@@ -341,7 +335,7 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return null;
 
       this.unpin ();
 
@@ -401,7 +395,7 @@
 
     pin () {
 
-      if ( this.isLocked () || this._isPinned ) return;
+      if ( this.isLocked () || this._isPinned ) return null;
 
       this._isPinned = true;
 
@@ -425,7 +419,7 @@
 
     unpin () {
 
-      if ( this.isLocked () || !this._isOpen || !this._isPinned ) return;
+      if ( this.isLocked () || !this._isOpen || !this._isPinned ) return null;
 
       this._isPinned = false;
 

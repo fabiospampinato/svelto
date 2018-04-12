@@ -373,7 +373,7 @@
 
     open () {
 
-      if ( this.isLocked () || this._isOpen ) return;
+      if ( this.isLocked () || this._isOpen ) return null;
 
       this.lock ();
 
@@ -417,7 +417,7 @@
 
     close () {
 
-      if ( this.isLocked () || !this._isOpen ) return;
+      if ( this.isLocked () || !this._isOpen ) return null;
 
       this.lock ();
 
