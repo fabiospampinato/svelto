@@ -1,0 +1,8 @@
+
+// @require ../overlay.scss
+
+/* BLURRER */
+
+.overlay.open.blurrer ~ * {
+  @extend %blurred;
+}
