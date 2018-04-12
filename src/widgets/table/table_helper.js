@@ -82,9 +82,10 @@
 
         chunks.forEach ( chunk => {
 
-          let rowHtml = this._template ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
+          let rowHtml = this._template ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } ),
+              $row = $(`<table>${rowHtml}</table>`).find ( 'tr' ); // Parsing a `tr` tag without a table might not be supported by the DOM library
 
-          $rows = $rows.add ( rowHtml );
+          $rows = $rows.add ( $row );
 
         });
 
