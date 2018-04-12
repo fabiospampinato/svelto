@@ -115,7 +115,7 @@
         'ctmd + m': ['action', 'quote'],
         'ctmd + d': ['action', 'divider'],
         'ctrl + shift + p': ['action', 'preview'],
-        'ctmd + f': ['action', 'fullscreen'],
+        'ctrl + shift + f': ['action', 'fullscreen'],
         'esc': '__esc'
       },
       callbacks: {
