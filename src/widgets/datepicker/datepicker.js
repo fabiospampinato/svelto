@@ -87,7 +87,8 @@
         'right, down': 'nextMonth'
       },
       callbacks: {
-        change: _.noop
+        change: _.noop,
+        render: _.noop
       }
     }
   };
@@ -431,6 +432,8 @@
       this._highlightToday ();
 
       this._updateTitle ();
+
+      this._trigger ( 'render' );
 
     }
 
