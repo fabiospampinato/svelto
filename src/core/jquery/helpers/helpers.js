@@ -5,6 +5,7 @@
 // @optional ./elements.js
 // @optional ./event_namespacer.js
 // @optional ./event_xy.js
+// @optional ./find_all.js
 // @optional ./get_rect.js
 // @optional ./has_attribute.js
 // @optional ./hsl.js
