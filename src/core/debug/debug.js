@@ -9,13 +9,26 @@
   window.log = console.log.bind ( console );
 
   const timeMarks = {};
-  window.time = function ( mark = '?' ) {
+  const timeComulatives = {};
+  window.time = function ( mark = '?', cumulative = false ) {
+    if ( cumulative && !timeComulatives[mark] ) {
+      timeComulatives[mark] = { total: 0 };
+    }
     if ( !timeMarks[mark] ) {
       timeMarks[mark] = true;
+      if ( cumulative ) {
+        timeComulatives[mark].start = performance.now ();
+      }
       console.time ( mark );
     } else {
+      if ( cumulative ) {
+        timeComulatives[mark].total += performance.now () - timeComulatives[mark].start;
+      }
       console.timeEnd ( mark );
       delete timeMarks[mark];
+      if ( cumulative ) {
+        console.log ( `Σ${mark}: ${timeComulatives[mark].total}ms` );
+      }
     }
   }
 
