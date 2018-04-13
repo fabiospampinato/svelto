@@ -712,6 +712,8 @@
 
       if ( !this.options.keyboard ) return;
 
+      if ( $.isEditable ( document.activeElement ) && !this.element.contains ( document.activeElement ) ) return;
+
       for ( let keystrokes in this.options.keystrokes ) {
 
         if ( !this.options.keystrokes.hasOwnProperty ( keystrokes ) ) continue;
