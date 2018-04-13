@@ -521,7 +521,7 @@
 
       /* PROXY */
 
-      let handlerProxy = ( event, data ) => {
+      let proxyCallback = ( event, data ) => {
 
         if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
 
@@ -531,7 +531,7 @@
 
       /* PROXY GUID */
 
-      handlerProxy.guid = handler.guid = ( handler.guid || $.guid++ );
+      proxyCallback.guid = handler.guid = ( handler.guid || $.guid++ );
 
       /* EVENTS NAMESPACING */
 
@@ -539,7 +539,7 @@
 
       /* TRIGGERING */
 
-      $element[_onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
+      $element[_onlyOne ? 'one' : 'on'] ( events, selector, proxyCallback );
 
     }
 
