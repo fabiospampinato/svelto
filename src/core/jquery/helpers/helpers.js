@@ -9,6 +9,7 @@
 // @optional ./has_attribute.js
 // @optional ./hsl.js
 // @optional ./is_attached.js
+// @optional ./is_editable.js
 // @optional ./is_event.js
 // @optional ./is_focused.js
 // @optional ./is_visible.js
