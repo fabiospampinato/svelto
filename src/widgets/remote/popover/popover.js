@@ -93,6 +93,8 @@
 
     _widgetResizing () {
 
+      if ( !this.$widget ) return;
+
       this._positionate ();
 
     }
