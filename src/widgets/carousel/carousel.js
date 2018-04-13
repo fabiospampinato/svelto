@@ -4,7 +4,6 @@
 // @require lib/timer/timer.js
 
 //TODO: Add slides drag support
-//TODO: Maybe add `autofocus` capabilities
 
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
 
@@ -263,7 +262,7 @@
 
       if ( this._current ) {
 
-        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.previous );
+        this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.previous ).autoblur ();
         this._current.$indicator.removeClass ( this.options.classes.current );
 
         this._previous = this._current;
@@ -283,6 +282,8 @@
       }
 
       this._delay ( function () {
+
+        this._current.$item.autofocus ();
 
         if ( this._previous ) {
 
