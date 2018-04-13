@@ -1,0 +1,7 @@
+
+// @require widgets/icon/icon.scss
+// @require ../icons.scss
+
+.icons.actionable {
+  @extend %icon-actionable;
+}
