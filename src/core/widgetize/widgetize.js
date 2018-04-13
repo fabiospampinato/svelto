@@ -15,35 +15,6 @@
 
     }
 
-    /* UTILITIES */
-
-    _getWidgets ( selector, $root, $parent ) {
-
-      let isSimpleSelector = !/ |>/.test ( selector );
-
-      if ( isSimpleSelector ) {
-
-        let isSelf = $root.is ( selector ),
-            $nested = $root.find ( selector );
-
-        return isSelf
-                 ? $nested.length
-                   ? $nested.add ( $root )
-                   : $root
-                 : $nested;
-
-      } else {
-
-        $parent = $parent ? $parent : $root.parent ();
-
-        let root = $root[0];
-
-        return $parent.find ( selector ).filter ( ( index, ele ) => ele === root || root.contains ( ele ) );
-
-      }
-
-    }
-
     /* METHODS */
 
     get () {
@@ -76,7 +47,7 @@
 
       if ( ready || Readify.isReady () ) {
 
-        let $widgets = this._getWidgets ( selector, $.$body, $.$html );
+        let $widgets = $.$html.findAll ( selector );
 
         this.worker ( [[widgetizer, data]], $widgets );
 
@@ -132,14 +103,12 @@
 
     on ( $root ) {
 
-      let $parent = $root.parent ();
-
       for ( let selector in this.widgetizers ) {
 
         if ( !this.widgetizers.hasOwnProperty ( selector ) ) continue;
 
         let widgetizers = this.widgetizers[selector],
-            $widgets = this._getWidgets ( selector, $root, $parent );
+            $widgets = $root.findAll ( selector );
 
         this.worker ( widgetizers, $widgets );
 

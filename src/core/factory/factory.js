@@ -161,7 +161,7 @@
       widgetize ( Widget ) { //TODO: Code duplication, look at `Widgetize.add`
 
         let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize, //IE10 support -- static property
-            $widgets = Widgetize._getWidgets ( Widget.config.selector, $.$body, $.$html );
+            $widgets = $.$html.findAll ( Widget.config.selector );
 
         Widgetize.worker ( [[widgetize, Widget]], $widgets );
 

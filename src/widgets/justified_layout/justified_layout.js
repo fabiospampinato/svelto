@@ -112,7 +112,7 @@
 
     _getImages ( $boxes ) {
 
-      return $boxes.get ().map ( box => Widgetize._getWidgets ( 'img', $(box) )[0] ); //FIXME: Ugly, `Widgetize._getWidgets` should be an external utility
+      return $boxes.get ().map ( box => $(box).findAll ( 'img' )[0] );
 
     }
 
