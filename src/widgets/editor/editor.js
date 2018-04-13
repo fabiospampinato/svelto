@@ -202,9 +202,10 @@
 
     /* KEYDOWN */
 
-    ___keydown () {
+    ___keydown ( $target ) {
 
       this._onHover ( [$.$document, 'keydown', this.__keydown] );
+      this._on ( this.$textarea, 'keydown', this.__keydown );
 
     }
 
