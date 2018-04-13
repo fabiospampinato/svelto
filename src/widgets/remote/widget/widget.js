@@ -8,10 +8,6 @@
 
 (function ( $, _, Svelto, Widgets, Factory, Animations, fetch ) {
 
-  /* VARIABLES */
-
-  let cache = []; // Storing remote widgets here //TODO: Maybe make this variable accessible from the outside
-
   /* CONFIG */
 
   let config = {
@@ -200,17 +196,17 @@
 
     _cacheGet ( id ) {
 
-      return cache.find ( obj => obj.id === id );
+      return RemoteWidget.cache.find ( obj => obj.id === id );
 
     }
 
     _cacheSet ( id, widget ) {
 
-      cache.unshift ({ id, widget });
+      RemoteWidget.cache.unshift ({ id, widget });
 
-      if ( cache.length > this.options.cache.size ) {
+      if ( RemoteWidget.cache.length > this.options.cache.size ) {
 
-        cache = cache.slice ( 0, this.options.cache.size );
+        RemoteWidget.cache = RemoteWidget.cache.slice ( 0, this.options.cache.size );
 
       }
 
@@ -441,6 +437,10 @@
     }
 
   }
+
+  /* CACHE */
+
+  RemoteWidget.cache = []; // Storing remote widgets here
 
   /* FACTORY */
 
