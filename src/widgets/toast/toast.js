@@ -271,7 +271,7 @@
     __enter () {
 
       Toasts.setHovering ( true );
-      Toasts.pauseAll ();
+      Toasts.pause ();
 
     }
 
@@ -289,7 +289,7 @@
 
       if ( !document.hidden ) {
 
-        Toasts.resumeAll ();
+        Toasts.resume ();
 
       }
 
@@ -447,6 +447,18 @@
       });
 
       this._reset ();
+
+    }
+
+    pause () {
+
+      this.timer.pause ();
+
+    }
+
+    resume () {
+
+      this.timer.remaining ( Math.max ( this.options.ttlMinimumRemaining, this.timer.remaining () ) ).play ();
 
     }
 

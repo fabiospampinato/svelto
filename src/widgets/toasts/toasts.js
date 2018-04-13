@@ -1,8 +1,6 @@
 
 // @require core/svelto/svelto.js
 
-//TODO: Add a page to the demo
-
 (function ( $, _, Svelto, Widgets ) {
 
   /* TOASTS */
@@ -38,6 +36,8 @@
     }
 
     add ( toast ) {
+
+      if ( this.toasts.includes ( toast ) ) return;
 
       this.toasts.push ( toast );
 
@@ -77,41 +77,49 @@
 
       if ( document.hidden ) {
 
-        this.pauseAll ();
+        this.pause ();
 
       } else {
 
-        this.resumeAll ();
+        this.resume ();
 
       }
 
     }
 
-    /* PAUSE */
+    /* API MAPPING */
 
-    pause ( toast ) {
+    _callMethod ( method ) {
 
-      toast.timer.pause ();
+      for ( let i = this.toasts.length - 1; i >= 0; i-- ) { // The array might get mutated in the process
 
-    }
+        this.toasts[i][method]();
 
-    pauseAll () {
-
-      this.toasts.forEach ( this.pause );
+      }
 
     }
 
-    /* RESUME */
+    open () {
 
-    resume ( toast ) {
-
-      toast.timer.remaining ( Math.max ( toast.options.ttlMinimumRemaining, toast.timer.remaining () ) ).play ();
+      this._callMethod ( 'open' );
 
     }
 
-    resumeAll () {
+    close () {
 
-      this.toasts.forEach ( this.resume );
+      this._callMethod ( 'close' );
+
+    }
+
+    pause () {
+
+      this._callMethod ( 'pause' );
+
+    }
+
+    resume () {
+
+      this._callMethod ( 'resume' );
 
     }
 
