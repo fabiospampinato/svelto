@@ -41,11 +41,17 @@
 
     }
 
+    /* KEYDOWN */
+
+    ___keydown ( $target ) {
+
+      this._on ( this.$textarea, 'keydown', this.__keydown );
+
+    }
+
     /* SEND */
 
     send () {
-
-      if ( !$.isFocused ( this.textarea ) ) return;
 
       this.form.submit ();
 
