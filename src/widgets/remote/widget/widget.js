@@ -84,11 +84,11 @@
 
     _getRequestId ( ajax ) {
 
-      let {method, url, data} = ajax;
+      let {method, url, body} = ajax;
 
-      if ( _.isPlainObject ( data ) ) data = JSON.stringify ( data );
+      if ( _.isPlainObject ( body ) ) body = JSON.stringify ( body );
 
-      return btoa ( [method, url, data].join () ); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
+      return btoa ( [method, url, body].join () ); // Using base64 as a fast hash function (we need to strip out apices for the selectors)
 
     }
 
