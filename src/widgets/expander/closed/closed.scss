@@ -11,8 +11,22 @@
 
     //FIXME: We are taking for granted that there will be only the toggler visible
 
-    > :not(.expander-content) {
-      @include border-bottom-radius ( inherit );
+    &:not(.horizontal) { //TODO: Move direction-related styles to their own files
+
+      > :not(.expander-content) {
+        @include border-bottom-radius ( inherit );
+      }
+
+    }
+
+    &.horizontal { //TODO: Move direction-related styles to their own files
+
+      display: inline-flex;
+
+      > :not(.expander-content) {
+        @include border-right-radius ( inherit );
+      }
+
     }
 
     &.bordered > :not(.expander-content) {
