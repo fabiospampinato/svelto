@@ -18,8 +18,8 @@
         content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
       },
       animations: {
-        open: Animations.normal,
-        close: Animations.normal
+        open: Animations.fast,
+        close: Animations.fast
       },
       callbacks: {
         open: _.noop,
