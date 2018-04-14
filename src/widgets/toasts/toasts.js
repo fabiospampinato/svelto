@@ -73,7 +73,7 @@
 
     __visibility () {
 
-      if ( this.isHovering () ) return;
+      if ( !this.toasts.length || this.isHovering () ) return;
 
       if ( document.hidden ) {
 
