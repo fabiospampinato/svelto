@@ -1,0 +1,9 @@
+
+// @optional ./horizontal.scss
+// @optional ./vertical.scss
+
+/* DEFAULT */
+
+.card:not(.vertical):not(.horizontal) {
+  @extend .card.vertical;
+}

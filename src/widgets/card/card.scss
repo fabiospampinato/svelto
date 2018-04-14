@@ -14,7 +14,6 @@
   @include children-no-gutter ();
   @include color ( $card-color, $card-color-force, $card-color-basic );
   display: flex;
-  flex-direction: column;
   border-radius: $card-border-radius;
 
   /* HEADER / BLOCK / FOOTER */
@@ -55,56 +54,6 @@
   > *,
   > .table {
     border-radius: 0;
-  }
-
-  /* BORDER RADIUS INHERITANCE */
-
-  > :first-child:not(.overlay):not(.ripple-circle),
-  > :first-child.overlay + *,
-  > :first-child.ripple-circle + * {
-    @include border-top-radius ( inherit );
-  }
-
-  > .multiple:first-child {
-
-    > :first-child {
-      border-top-left-radius: inherit;
-    }
-
-    > :last-child {
-      border-top-right-radius: inherit;
-    }
-
-  }
-
-  > :last-child {
-    @include border-bottom-radius ( inherit );
-  }
-
-  > .multiple:last-child {
-
-    > :first-child {
-      border-bottom-left-radius: inherit;
-    }
-
-    > :last-child {
-      border-bottom-right-radius: inherit;
-    }
-
-  }
-
-  /* NEXT CHILDREN BORDERED */
-
-  > .bordered + .bordered {
-
-    &:not(.card-footer) {
-      border-top-width: 0;
-    }
-
-    &.card-footer {
-      margin-top: - $border-width;
-    }
-
   }
 
 }
