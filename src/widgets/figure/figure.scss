@@ -19,6 +19,7 @@
   > img {
     @include center-margin ();
     border-radius: $figure-image-border-radius;
+    width: 100%;
   }
 
   /* INLINE */
