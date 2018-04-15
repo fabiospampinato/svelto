@@ -109,7 +109,7 @@
 
         this.addClass ( options.classes[`before${status}`] ).removeClass ( options.classes[oppositeStatus] );
 
-        setTimeout ( () => {
+        this.one ( 'transitionend', () => {
 
           this.addClass ( options.classes[status] ).removeClass ( options.classes[`before${status}`] ).removeClass ( options.classes.init );
 
@@ -119,7 +119,7 @@
 
           options.callbacks.end ();
 
-        }, options.duration );
+        });
 
       });
 
