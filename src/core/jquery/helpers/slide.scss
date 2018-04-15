@@ -2,7 +2,7 @@
 /* SLIDE */
 
 .slide {
-  transition: height $animation-normal, width $animation-normal, padding $animation-normal, border-width $animation-normal !important;
+  transition: height $animation-fast, width $animation-fast, padding $animation-fast, border-width $animation-fast !important;
 }
 
 .slide-before-up,
