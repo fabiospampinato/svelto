@@ -1,7 +1,5 @@
 
-// @require ../init.js
-// @require core/lodash/lodash.js
-// @require core/shims/shims/requestAnimationFrame.js
+// @require core/svelto/svelto.js
 
 // CSS-based alternative methods for jQuery's
 // It assumes the height/width will be `auto`, otherwise pure-CSS can be used for this
@@ -11,7 +9,6 @@
   /* DEFAULTS */
 
   const defaults = {
-    duration: 350,
     axis: 'y',
     classes: {
       init: 'slide',

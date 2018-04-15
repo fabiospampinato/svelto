@@ -18,4 +18,3 @@
 // @optional ./make_event.js
 // @optional ./remove.js
 // @optional ./scroll.js
-// @optional ./slide.js
