@@ -30,6 +30,7 @@
       }
     },
     callbacks: {
+      start: _.noop,
       end: _.noop
     }
   };
@@ -89,6 +90,8 @@
     if ( this.hasClass ( options.classes[status] ) ) return;
 
     ele._sliding = true;
+
+    options.callbacks.start ();
 
     if ( force ) this.addClass ( options.classes.noAnimations ).removeClass ( options.classes.off ).addClass ( options.classes.on );
 
