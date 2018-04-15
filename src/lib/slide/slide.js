@@ -1,14 +1,16 @@
 
-// @require core/svelto/svelto.js
+// @require core/animations/animations.js
+// @require lib/embedded_css/embedded_css.js
 
 // CSS-based alternative methods for jQuery's
 // It assumes the height/width will be `auto`, otherwise pure-CSS can be used for this
 
-(function ( $, _ ) {
+(function ( $, _, Svelto, Animations, EmbeddedCSS ) {
 
   /* DEFAULTS */
 
   const defaults = {
+    duration: Animations.fast,
     axis: 'y',
     classes: {
       init: 'slide',
@@ -31,6 +33,25 @@
       end: _.noop
     }
   };
+
+  /* UTILITIES */
+
+  function getDurationClass ( duration ) {
+
+    const cls = `slide-${duration}`,
+          selector = `.${cls}`;
+
+    if ( !EmbeddedCSS.get ( selector ) ) {
+
+      const seconds = duration / 1000;
+
+      EmbeddedCSS.set ( selector, 'transition', `height ${seconds}s, width ${seconds}s, padding ${seconds}s, border-width ${seconds}s !important` );
+
+    }
+
+    return cls;
+
+  }
 
   /* DIRECTIONS */
 
@@ -88,6 +109,8 @@
 
     ele._sliding = true;
 
+    const durationCls = ( options.duration !== $.fn.slideToggle.defaults.duration ) ? getDurationClass ( options.duration ) : '';
+
     options.callbacks.start ();
 
     if ( force ) this.addClass ( options.classes.noAnimations ).removeClass ( options.classes.off ).addClass ( options.classes.on );
@@ -98,7 +121,7 @@
 
     requestAnimationFrame ( () => {
 
-      this.addClass ( options.classes.init );
+      this.addClass ( options.classes.init ).addClass ( durationCls );
 
       if ( force ) this.removeClass ( options.classes.noAnimations );
 
@@ -108,7 +131,7 @@
 
         this.one ( 'transitionend', () => {
 
-          this.addClass ( options.classes[status] ).removeClass ( options.classes[`before${status}`] ).removeClass ( options.classes.init );
+          this.addClass ( options.classes[status] ).removeClass ( options.classes[`before${status}`] ).removeClass ( options.classes.init ).removeClass ( durationCls );
 
           this.css ( dimension, '' );
 
@@ -126,4 +149,4 @@
 
   $.fn.slideToggle.defaults = defaults;
 
-}( window.$, window._ ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Animations, Svelto.EmbeddedCSS ));
