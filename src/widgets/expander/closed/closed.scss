@@ -1,9 +1,10 @@
 
 // @require ../expander.scss
 
-/* CLOSED */
+/* CLOSING & CLOSED */
 
-.expander:not(.open) {
+.expander.closing,
+.expander:not(.open):not(.opening) {
 
   /* IS A CARD */
 
@@ -21,12 +22,26 @@
 
     &.horizontal { //TODO: Move direction-related styles to their own files
 
-      display: inline-flex;
-
       > :not(.expander-content) {
         @include border-right-radius ( inherit );
       }
 
+    }
+
+  }
+
+}
+
+/* CLOSED */
+
+.expander:not(.open):not(.opening):not(.closing) {
+
+  /* IS CARD */
+
+  &.card {
+
+    &.horizontal { //TODO: Move direction-related styles to their own files
+      display: inline-flex;
     }
 
     &.bordered > :not(.expander-content) {
@@ -37,8 +52,28 @@
 
   /* CONTENT */
 
-  > .expander-content {
-    display: none;
+  &:not(.horizontal) { //TODO: Move direction-related styles to their own files
+
+    > .expander-content:not([class*="slide"]) {
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-top-width: 0;
+      border-bottom-width: 0;
+    }
+
+  }
+
+  &.horizontal { //TODO: Move direction-related styles to their own files
+
+    > .expander-content:not([class*="slide"]) {
+      width: 0;
+      padding-left: 0;
+      padding-right: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+    }
+
   }
 
 }

@@ -1,13 +1,19 @@
 
 // @require core/widget/widget.scss
 
-//TODO: Add a sliding animation
-
 /* EXPANDER */
 
 .expander {
 
   @extend %widget;
+
+  /* IS A CARD */
+
+  &.card > :not(.expander-content) {
+    transition: border-radius $expander-animation-duration;
+  }
+
+  /* ICON */
 
   &-icon {
     transition: transform $expander-animation-duration;

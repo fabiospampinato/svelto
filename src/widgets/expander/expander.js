@@ -1,6 +1,9 @@
 
 // @require core/animations/animations.js
+// @require lib/slide/slide.js
 // @require widgets/autofocusable/autofocusable.js
+
+//FIXME: Broken horizontal sliding animation
 
 (function ( $, _, Svelto, Widgets, Factory, Animations ) {
 
@@ -12,7 +15,10 @@
     selector: '.expander',
     options: {
       classes: {
-        open: 'open'
+        horizontal: 'horizontal',
+        open: 'open',
+        opening: 'opening',
+        closing: 'closing'
       },
       selectors: {
         content: '.expander-content' //TODO: Maybe rename it to `.expander-block`
@@ -40,6 +46,7 @@
       this.$content = this.$expander.find ( this.options.selectors.content );
 
       this._isOpen = this.$expander.hasClass ( this.options.classes.open );
+      this._isHorizontal = this.$expander.hasClass ( this.options.classes.horizontal );
 
     }
 
@@ -53,17 +60,36 @@
 
     toggle ( force = !this._isOpen ) {
 
-      if ( !!force !== this._isOpen ) {
+      if ( !!force === this._isOpen ) return;
 
-        this._isOpen = !!force;
+      if ( this.isLocked () ) return this.whenUnlocked ( () => this.toggle ( force ) );
 
-        this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
+      this.lock ();
 
-        this._isOpen ? this.autofocus () : this.autoblur ();
+      this._isOpen = !!force;
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
+      this.$content.slideToggle ({
+        duration: this._isOpen ? this.options.animations.open : this.options.animations.close,
+        axis: this._isHorizontal ? 'x' : 'y',
+        callbacks: {
+          start: () => {
 
-      }
+            this.$expander.addClass ( this._isOpen ? this.options.classes.opening : this.options.classes.closing );
+
+          },
+          end: () => {
+
+            this.$expander.removeClass ( this._isOpen ? this.options.classes.opening : this.options.classes.closing ).toggleClass ( this.options.classes.open, this._isOpen );
+
+            this._isOpen ? this.autofocus () : this.autoblur ();
+
+            this.unlock ();
+
+            this._trigger ( this._isOpen ? 'open' : 'close' );
+
+          }
+        }
+      }, force );
 
     }
 

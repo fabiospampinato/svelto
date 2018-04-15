@@ -1,9 +1,10 @@
 
 // @require ../expander.scss
 
-/* OPENED */
+/* OPENING & OPENED */
 
-.expander.open {
+.expander.opening,
+.expander.open:not(.closing) {
 
   /* ICON */
 
