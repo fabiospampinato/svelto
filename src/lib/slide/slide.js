@@ -81,16 +81,16 @@
 
   /* TOGGLE */
 
-  $.fn.slideToggle = function ( options, force, axis = $.fn.slideToggle.defaults.axis ) {
+  $.fn.slideToggle = function ( options, force, axis ) {
 
     const ele = this[0];
 
     if ( !ele || ele._sliding ) return;
 
     options = _.merge ( {}, $.fn.slideToggle.defaults, options );
-    _.extend ( options.classes, options.classes[axis] );
+    _.extend ( options.classes, options.classes[axis || options.axis] );
 
-    const dimension = axis === 'x' ? 'width' : 'height';
+    const dimension = ( axis || options.axis ) === 'x' ? 'width' : 'height';
 
     if ( _.isUndefined ( force ) ) {
 
