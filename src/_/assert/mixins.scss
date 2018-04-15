@@ -24,7 +24,7 @@
 
     }
 
-  } @elseif $type == 'map' {
+  } @else if $type == 'map' {
 
     @each $key, $value in $obj {
 
@@ -69,7 +69,7 @@
 
     }
 
-  } @elseif $type == 'map' {
+  } @else if $type == 'map' {
 
     @each $key, $value in $obj {
 

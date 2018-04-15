@@ -27,7 +27,7 @@
 
     }
 
-  } @elseif $type == 'map' {
+  } @else if $type == 'map' {
 
     @each $hdpi, $image in $images {
 

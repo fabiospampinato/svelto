@@ -9,11 +9,11 @@
 
     @return $length;
 
-  } @elseif $unit == 'em' {
+  } @else if $unit == 'em' {
 
     @return $length / 1em * $font-size;
 
-  } @elseif $unit == 'rem' {
+  } @else if $unit == 'rem' {
 
     @return $length / 1rem * $font-size;
 
@@ -33,11 +33,11 @@
 
     @return $length;
 
-  } @elseif $unit == 'rem' {
+  } @else if $unit == 'rem' {
 
     @return $length / 1rem * 1em;
 
-  } @elseif $unit == 'px' {
+  } @else if $unit == 'px' {
 
     @return $length / $font-size * 1em;
 
@@ -57,11 +57,11 @@
 
     @return $length;
 
-  } @elseif $unit == 'em' {
+  } @else if $unit == 'em' {
 
     @return $length / 1em * 1rem;
 
-  } @elseif $unit == 'px' {
+  } @else if $unit == 'px' {
 
     @return $length / $font-size * 1rem;
 
