@@ -1,0 +1,31 @@
+
+/* SLIDE */
+
+.slide {
+  transition: height $animation-normal, width $animation-normal, padding $animation-normal, border-width $animation-normal !important;
+}
+
+.slide-before-up,
+.slide-up {
+  overflow: hidden !important;
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+}
+
+.slide-before-left,
+.slide-left {
+  overflow: hidden !important;
+  width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-left-width: 0 !important;
+  border-right-width: 0 !important;
+}
+
+.slide-before-down,
+.slide-before-right {
+  overflow: hidden !important;
+}
