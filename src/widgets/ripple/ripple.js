@@ -1,12 +1,10 @@
 
 // @priority 500
 // @require core/animations/animations.js
-// @require core/browser/browser.js
 // @require core/widget/widget.js
 
-//FIXME: The animation is ugly
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Animations ) {
+(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   /* CONFIG */
 
@@ -19,16 +17,10 @@
     },
     options: {
       classes: {
-        circle: {
-          show: 'show',
-          hide: 'hide'
-        },
         center: 'ripple-center'
       },
       animations: {
-        show: Animations.xslow,
-        hide: Animations.xslow,
-        overlap: Animations.xslow / 100 * 58 // Used for triggering the hide animation while still opening, for a better visual effect
+        show: Animations.slow
       },
       callbacks: {
         show: _.noop,
@@ -47,29 +39,23 @@
 
       this.$ripple = this.$element;
 
-      this.circles = [];
-
     }
 
     _events () {
 
-      this.___downTap ();
+      this.___up ();
 
     }
 
-    /* DOWN / TAP */
+    /* UP */
 
-    ___downTap () {
+    ___up () {
 
-      this._on ( `${Pointer.tap} mousedown`, this.__downTap );
+      this._on ( `${Pointer.up}`, this.__up );
 
     }
 
-    __downTap ( event ) {
-
-      if ( this.isLocked () ) return;
-
-      this.lock ();
+    __up ( event ) {
 
       if ( this.$ripple.hasClass ( this.options.classes.center ) ) {
 
@@ -85,28 +71,6 @@
         this._show ( $.eventXY ( event ) );
 
       }
-
-      this._one ( true, $.$document, Pointer.up, this.__up );
-
-    }
-
-    /* UP */
-
-    __up () {
-
-      this._defer ( function () { // So that the `tap` event gets parsed before removing the lock
-
-        this.unlock ();
-
-        this.circles.forEach ( ([ $circle, timestamp ]) => {
-
-          this._hide ( $circle, timestamp );
-
-        });
-
-        this.circles = [];
-
-      });
 
     }
 
@@ -126,56 +90,26 @@
           radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), // Basically the max the distances from the point to the corners
           diameter = radius * 2;
 
-      /* ADDING */
-
-      this.circles.push ( [$circle, _.now ()] );
-
       /* SHOW */
 
-      this._frame ( function () {
+      $circle.css ({
+        width: diameter,
+        height: diameter,
+        top: insetY,
+        left: insetX,
+      }).prependTo ( this.$ripple );
 
-        /* PREPEND */
+      this._trigger ( 'show' );
 
-        $circle.css ({
-          width: diameter,
-          height: diameter,
-          top: insetY,
-          left: insetX,
-        }).prependTo ( this.$ripple );
+      /* HIDE */
 
-        /* SHOW */
+      $circle.one ( 'animationend', () => {
 
-        this._frame ( function () {
+        $circle.remove ();
 
-          $circle.addClass ( this.options.classes.circle.show );
+        this._trigger ( 'hide' );
 
-          this._trigger ( 'show' );
-
-        });
-
-      });
-
-    }
-
-    /* HIDE */
-
-    _hide ( $circle, timestamp ) {
-
-      let remaining = Math.max ( 0, this.options.animations.show - this.options.animations.overlap + timestamp - _.now () );
-
-      this._delay ( function () {
-
-        $circle.addClass ( this.options.classes.circle.hide );
-
-        this._delay ( function () {
-
-          $circle.remove ();
-
-          this._trigger ( 'hide' );
-
-        }, this.options.animations.hide );
-
-      }, remaining );
+      }, this.options.animations.show );
 
     }
 
@@ -185,4 +119,4 @@
 
   Factory.make ( Ripple, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

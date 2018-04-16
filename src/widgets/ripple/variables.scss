@@ -6,8 +6,6 @@
 
 $ripple-bg-color: $color-black !default;
 
-$ripple-opacity: .2 !default;
-
 /* CIRCLE */
 
 $ripple-circle-z-index: 100 !default;
@@ -16,4 +14,4 @@ $ripple-circle-z-index: 100 !default;
 
 $ripple-animation-timing-function: cubic-bezier( .25, .8, .25, 1 ) !default; // Taken from Angular Material
 
-$ripple-animation-duration: $animation-xslow !default;
+$ripple-animation-duration: $animation-slow !default;
