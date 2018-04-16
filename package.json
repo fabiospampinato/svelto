@@ -29,20 +29,12 @@
     "url": "https://github.com/svelto/svelto.git"
   },
   "dependencies": {
-    "core-js": "^2.5.3",
     "country-data": "0.0.31",
     "emoji-datasource": "^2.4.4",
     "emojilib": "^2.2.6",
     "execa": "^0.8.0",
-    "github": "^0.2.4",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-bump": "^2.6.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
-    "gulp-touch-cmd": "0.0.1",
     "lodash": "^4.16.6",
-    "require-dot-file": "^0.4.0",
-    "yargs": "^6.0.0"
+    "require-dot-file": "^0.4.0"
   },
   "peerDependencies": {
     "pacco": "^1.0.0"
