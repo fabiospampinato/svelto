@@ -6,7 +6,6 @@
 // @optional widgets/form/ajax/ajax.js
 // @require widgets/storable/storable.js
 
-//TODO: Add headings support (level 1/3/5, like github does)
 //TODO: MAYBE make a simpler editor with some stuff unimplemented, then extend it with a `EditorMarkdown` etc...
 //TODO: Switch to a `contenteditable` version where the preview and editor actual are the same thing
 
@@ -40,6 +39,15 @@
         },
         list_ordered () {
           this._action ( '\n1. ', '\n', 'List element' );
+        },
+        header_1 () {
+          this._action ( '\n# ', '\n', 'Header' );
+        },
+        header_2 () {
+          this._action ( '\n## ', '\n', 'Header' );
+        },
+        header_3 () {
+          this._action ( '\n### ', '\n', 'Header' );
         },
         link () {
           this._action ( '[', '](https://example.com)', 'Link' );
