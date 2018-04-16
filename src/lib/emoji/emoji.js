@@ -118,7 +118,7 @@
 
     encode ( emoji, tone = Emoji.options.tone ) {
 
-      let name = _.isString ( emoji ) ? emoji : emoji.id;
+      let name = _.isObject ( emoji ) ? emoji.id : emoji;
 
       return tone > 1 ? `:${name}::tone-${tone}:` : `:${name}:`;
 
