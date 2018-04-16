@@ -40,8 +40,25 @@
 
     _events () {
 
+      this.___beforeopen ();
       this.___open ();
       this.___close ();
+
+    }
+
+    /* EXPANDER BEFOREOPEN */
+
+    ___beforeopen () {
+
+      this._on ( true, this.$expanders, 'expander:beforeopen', this.__beforeopen );
+
+    }
+
+    __beforeopen ( event ) { // Close others
+
+      if ( this.options.multiple ) return;
+
+      this.instances.forEach ( instance => instance.element !== event.currentTarget ? instance.close () : false );
 
     }
 
@@ -57,8 +74,6 @@
 
       this._trigger ( 'open', { index: this.$expanders.index ( event.currentTarget ) } );
 
-      this.__multiple ( event.currentTarget );
-
     }
 
     /* EXPANDER CLOSE */
@@ -72,16 +87,6 @@
     __close ( event ) {
 
       this._trigger ( 'close', { index: this.$expanders.index ( event.currentTarget ) } );
-
-    }
-
-    /* MULTIPLE */
-
-    __multiple ( expander ) {
-
-      if ( this.options.multiple ) return;
-
-      this.instances.forEach ( instance => instance.element !== expander ? instance.close () : false );
 
     }
 
