@@ -1,0 +1,36 @@
+
+// @require ../accordion.scss
+
+/* HORIZONTAL */
+
+.accordion.horizontal {
+
+  display: flex;
+
+  /* EXPANDER */
+
+  > .expander {
+
+    &.open {
+      flex-grow: 1;
+    }
+
+    &:not(:first-child) {
+      @include border-left-radius ( 0 );
+    }
+
+    &:not(:last-child) {
+
+      @include border-right-radius ( 0 );
+
+      /* BORDERED */
+
+      &.bordered {
+        border-right-width: 0;
+      }
+
+    }
+
+  }
+
+}

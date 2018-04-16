@@ -1,0 +1,9 @@
+
+// @optional ./horizontal.scss
+// @optional ./vertical.scss
+
+/* DEFAULT */
+
+.accordion:not(.vertical):not(.horizontal) {
+  @extend .accordion.vertical;
+}

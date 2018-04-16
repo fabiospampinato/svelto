@@ -2,6 +2,7 @@
 // @require widgets/expander/expander.js
 
 //TODO: Add better support for changing `options.multiple` at runtime. `multiple: true` -> opening multiple, -> `multiple: false` -> multiple still opened
+//FIXME: Broken horizontal sliding animation
 
 (function ( $, _, Svelto, Widgets, Factory ) {
 
