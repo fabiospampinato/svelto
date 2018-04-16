@@ -1,6 +1,4 @@
 
-//TODO: Maybe add a gulp task for executing this file
-
 /* REQUIRE */
 
 const _          = require ( 'lodash' ),
@@ -8,7 +6,8 @@ const _          = require ( 'lodash' ),
       countries  = require ( 'country-data' ).countries,
       emojiData  = require ( 'emoji-datasource' ),
       emojiLib   = require ( 'emojilib' ),
-      inflection = require ( 'inflection' );
+      inflection = require ( 'inflection' ),
+      path       = require ( 'path' );
 
 /* UTILITIES */
 
@@ -148,10 +147,13 @@ data.tones[2].name = data.tones[2].name.replace ( 'Type-1-2', 'Type-2' );
 
 /* WRITE */
 
+const EMOJI_JSON_PATH = path.join ( __dirname, 'emoji.json' ),
+      EMOJI_RAW_PATH = path.join ( __dirname, 'raw.js' );
+
 const content = JSON.stringify ( data, undefined, 2 );
 
-fs.writeFile ( 'emoji.json', content );
-fs.writeFile ( 'raw.js', `
+fs.writeFileSync ( EMOJI_JSON_PATH, content );
+fs.writeFileSync ( EMOJI_RAW_PATH, `
 /* @require core/svelto/svelto.js */
 Svelto.EmojiDataRaw = ${content};
 `);

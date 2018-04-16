@@ -357,7 +357,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Pensive Face",
-          "tags": "depressed,face,okay,pensive,sad,upset",
+          "tags": "depressed,face,pensive,sad,upset",
           "id": "pensive",
           "char": "😔",
           "x": 1101
@@ -620,7 +620,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Skull",
-          "tags": "creepy,dead,skeleton,skull",
+          "tags": "creepy,dead,death,skeleton,skull",
           "id": "skull",
           "char": "💀",
           "x": 765
@@ -784,7 +784,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Ok Hand Sign",
-          "tags": "fingers,hand,limbs,ok,perfect,sign",
+          "tags": "fingers,hand,limbs,ok,okay,perfect,sign",
           "id": "ok_hand",
           "tones": 1,
           "char": "👌",
@@ -1588,7 +1588,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Briefcase",
-          "tags": "briefcase,business,documents,law,legal,work",
+          "tags": "briefcase,business,career,documents,job,law,legal,work",
           "id": "briefcase",
           "char": "💼",
           "x": 860
@@ -2937,7 +2937,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Fish Cake with Swirl Design",
-          "tags": "beach,cake,design,fish,food,japan,sea,swirl,with",
+          "tags": "beach,cake,design,fish,food,japan,kamaboko,narutomaki,pink,ramen,sea,surimi,swirl,with",
           "id": "fish_cake",
           "char": "🍥",
           "x": 325
@@ -4896,14 +4896,14 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Skull and Crossbones",
-          "tags": "and,crossbones,danger,deadly,poison,scary,skull",
+          "tags": "and,crossbones,danger,deadly,death,evil,pirate,poison,scary,skull",
           "id": "skull_and_crossbones",
           "char": "☠",
           "x": 57
         },
         {
           "name": "Coffin",
-          "tags": "cemetery,coffin,dead,death,die,graveyard,rip,vampire",
+          "tags": "box,casket,cemetery,coffin,dead,death,die,funeral,graveyard,rip,vampire",
           "id": "coffin",
           "char": "⚰",
           "x": 98
@@ -4945,14 +4945,14 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Alembic",
-          "tags": "alembic,distilling,experiment,science",
+          "tags": "alembic,chemistry,distilling,experiment,science",
           "id": "alembic",
           "char": "⚗",
           "x": 90
         },
         {
           "name": "Telescope",
-          "tags": "space,stars,telescope,zoom",
+          "tags": "astronomy,science,space,stars,telescope,zoom",
           "id": "telescope",
           "char": "🔭",
           "x": 972
@@ -5976,7 +5976,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Atom Symbol",
-          "tags": "atom,science,symbol",
+          "tags": "atom,chemistry,physics,science,symbol",
           "id": "atom_symbol",
           "char": "⚛",
           "x": 92
@@ -6427,7 +6427,7 @@ Svelto.EmojiDataRaw = {
         },
         {
           "name": "Cyclone",
-          "tags": "blue,cloud,cyclone,spin,spiral,swirl,vortex,weather,whirlpool",
+          "tags": "blue,cloud,cyclone,hurricane,spin,spiral,swirl,tornado,typhoon,vortex,weather,whirlpool",
           "id": "cyclone",
           "char": "🌀",
           "x": 226
