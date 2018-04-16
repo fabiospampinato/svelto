@@ -131,7 +131,7 @@
         limit: 126,
         emojis: [],
         tones: [],
-        rank: [] //TODO: Add some popular emoji here, or it will be pretty useless
+        rank: []
       },
       search: {
         limit: 126,
@@ -489,6 +489,14 @@
 
     /* FREQUENT */
 
+    _frequentDefault () {
+
+      const emojis = ['smile', 'smiley', 'grin', 'joy', 'wink', 'smirk', 'sunglasses', 'relaxed', 'blush', 'heart_eyes', 'kissing_heart', 'thinking_face', 'sweat_smile', 'unamused', 'cry', 'pensive', 'weary', 'sob', 'rage', '+1', '-1', 'v', 'ok_hand', 'muscle', 'clap', 'pray', 'see_no_evil', '100', 'tada', 'heart'];
+
+      return emojis.map ( emoji => [emoji, 1, 1] );
+
+    }
+
     _frequentRefresh () {
 
       this.options.frequent.emojis = this.options.frequent.rank.map ( _.first );
@@ -531,11 +539,13 @@
 
     _frequentRestore () {
 
-      let rank = this._storageGet ( 'frequent' );
+      let rank = this._storageGet ( 'frequent' ) || this._frequentDefault ();
 
-      if ( !rank || _.isEqualJSON ( this.options.frequent.rank, rank ) ) return;
+      if ( rank && !_.isEqualJSON ( this.options.frequent.rank, rank ) ) {
 
-      this.options.frequent.rank = rank;
+        this.options.frequent.rank = rank;
+
+      }
 
       this._frequentRefresh ();
 
