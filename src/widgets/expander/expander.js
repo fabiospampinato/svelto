@@ -28,7 +28,9 @@
         close: Animations.fast
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
+        beforeclose: _.noop,
         close: _.noop
       }
     }
@@ -67,6 +69,8 @@
       this.lock ();
 
       this._isOpen = !!force;
+
+      this._trigger ( this._isOpen ? 'beforeopen' : 'beforeclose' );
 
       this.$content.slideToggle ({
         duration: this._isOpen ? this.options.animations.open : this.options.animations.close,
