@@ -2,10 +2,10 @@
 // @optional lib/emojify/emojify.js
 // @optional widgets/editor/editor.js
 // @require core/widget/widget.js
+// @require lib/autofocus/helpers.js
 // @require widgets/remote/loader/loader.js
 
 //FIXME: If the editor gets empty, and it's supposed to be required, we output an error message that messes up the chat message layout
-//TODO: Add a demo for it
 
 (function ( $, _, Svelto, Widgets, Factory, Emojify ) {
 
@@ -79,13 +79,18 @@
 
     _update () {
 
-      let {hide, show} = this.options.selectors.blocks,
-          blocks = this._isEditing ? show : hide;
+      const $show = this.$editable.find ( this.options.selectors.blocks.show ),
+            $hide = this.$editable.find ( this.options.selectors.blocks.hide ),
+            $on = this._isEditing ? $show : $hide,
+            $off = this._isEditing ? $hide : $show;
 
-      this.$editable.toggleClass ( this.options.classes.editing, this._isEditing )
-                    .find ( blocks )
-                    .filter ( ( i, ele ) => $.widget.is ( ele, Widgets.RemoteLoader ) )
-                    .remoteLoader ( 'request' );
+      $off.autoblur ();
+
+      this.$editable.toggleClass ( this.options.classes.editing, this._isEditing );
+
+      $on.autofocus ()
+         .filter ( ( i, ele ) => $.widget.is ( ele, Widgets.RemoteLoader ) )
+         .remoteLoader ( 'request' );
 
     }
 
