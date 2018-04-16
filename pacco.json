@@ -15,7 +15,8 @@
     "widgets": {
       "boilerplate": false,
       "chart/vendor": false,
-      "datatables/vendor": false
+      "datatables/vendor": false,
+      "editor/vendor": false
     }
   },
   "paths": {

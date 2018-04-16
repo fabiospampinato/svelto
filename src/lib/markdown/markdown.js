@@ -7,7 +7,7 @@
 
   const Markdown = {
 
-    markedUrl: `template/dist/javascript/marked.js?v=${Svelto.VERSION}`,
+    markedUrl: `/static/vendor/marked.js?v=${Svelto.VERSION}`,
 
     async parse ( str ) {
 
