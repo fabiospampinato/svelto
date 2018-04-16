@@ -1,6 +1,6 @@
 
-☐ try chunked bundles
 ☐ test bump
+☐ try chunked bundles
 
 Now:
   ☐ require less polyfills (https://github.com/zloirock/core-js/issues/388)

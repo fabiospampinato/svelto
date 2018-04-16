@@ -72,6 +72,12 @@
       flex: 1 0 auto;
     }
 
+    /* NOT MULTIPLE */
+
+    &:not(.multiple) {
+      padding-bottom: calc( #{$rails-extra-padding} + #{$max-scrollbar-size} );
+    }
+
     /* MULTIPLE */
 
     &.multiple {
@@ -99,6 +105,10 @@
       .rails-content {
 
         margin-bottom: calc( ( #{$rails-extra-padding} + #{$size} ) * -1 );
+
+        &:not(.multiple) {
+          padding-bottom: calc( #{$rails-extra-padding} + #{$size} );
+        }
 
         &.multiple {
           margin-bottom: calc( ( #{$rails-extra-padding} + #{$size} + #{$gutter} ) * -1 );

@@ -1,8 +1,6 @@
 
 // @require core/widget/helpers.js
 
-//TODO: Add support for plain functions
-
 (function ( $, _, Svelto ) {
 
   /* PLUGIN */

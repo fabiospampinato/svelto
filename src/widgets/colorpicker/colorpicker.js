@@ -4,7 +4,6 @@
 // @require lib/transform/transform.js
 // @require widgets/draggable/draggable.js
 
-//FIXME: Add support of it working without a `startColor`
 //TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 

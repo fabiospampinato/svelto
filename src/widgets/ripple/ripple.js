@@ -3,7 +3,6 @@
 // @require core/animations/animations.js
 // @require core/widget/widget.js
 
-
 (function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
 
   /* CONFIG */

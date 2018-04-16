@@ -3,8 +3,6 @@
 // @require core/widget/widget.js
 // @require widgets/remote/loader/loader.js
 
-//TODO: Add a demo for it
-
 (function ( $, _, Svelto, Widgets, Factory, Colors ) {
 
   /* CONFIG */
@@ -58,7 +56,7 @@
 
     _getReply () {
 
-      return this.$replyable.next ().filter ( '.chat-message-reply' ); //TODO: Test me
+      return this.$replyable.next ().filter ( '.chat-message-reply' );
 
     }
 

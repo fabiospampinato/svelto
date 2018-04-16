@@ -131,7 +131,7 @@
       if ( imgRatio ) return imgRatio;
 
       return new Promise ( resolve => { //FIXME: Won't work that good if the image takes forever to load, or doesn't load at all
-        img.onload = ({srcElement}) => resolve ( srcElement.width / srcElement.height );
+        img.onload = ({ srcElement }) => resolve ( srcElement.width / srcElement.height );
       });
 
     }

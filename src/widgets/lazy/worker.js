@@ -1,8 +1,6 @@
 
 // @require core/svelto/svelto.js
 
-//TODO: Add a good way of extending the default options
-
 (function ( $, _, Svelto ) {
 
   /* CONFIG */

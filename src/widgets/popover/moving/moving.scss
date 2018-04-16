@@ -11,7 +11,7 @@
 
   &:after {
     transition: none; // Safari fix
-    transition-property: left, top; //TODO: Animate `transform` instead
+    transition-property: left, top; //TODO: Animate `transform` instead (this might be tricky, since `transform` is used by `pointing` for centering the pointer)
     transition-duration: $popover-animation-duration;
   }
 

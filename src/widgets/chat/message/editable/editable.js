@@ -5,8 +5,6 @@
 // @require lib/autofocus/helpers.js
 // @require widgets/remote/loader/loader.js
 
-//FIXME: If the editor gets empty, and it's supposed to be required, we output an error message that messes up the chat message layout
-
 (function ( $, _, Svelto, Widgets, Factory, Emojify ) {
 
   /* CONFIG */

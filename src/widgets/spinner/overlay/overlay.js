@@ -3,6 +3,8 @@
 // @require core/sizes/sizes.js
 // @require widgets/overlay/overlay.js
 
+//TODO: Add a `IconSpinner` or something, basically if we are applying this to a button with an icon just replace the icon with a spinning one, and make the whole element kind of "disabled", but with animations running. Then make a `waitSpinner` or something that abstracts both `IconSpinner` and `SpinnerOverlay`
+
 (function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
 
   /* CONFIG */

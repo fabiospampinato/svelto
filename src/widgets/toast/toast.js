@@ -134,7 +134,7 @@
 
     static ready ( done ) {
 
-      setTimeout ( function () { // In order to better support client size rendering
+      setTimeout ( function () { // In order to better support client size rendering //TODO: Maybe do this lazily
 
         const queues = Toast.config.templates.queues ();
 

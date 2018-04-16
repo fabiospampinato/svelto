@@ -3,6 +3,8 @@
 
 /* EMBEDDED CSS */
 
+//TODO: Lazily instanciate this
+
 (function ( $, _, Svelto, Readify ) {
 
   /* EMBEDDED CSS */
