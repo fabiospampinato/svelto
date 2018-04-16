@@ -104,7 +104,8 @@
       selectors: {
         element: 'input:not([type="button"]), textarea, select',
         textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
-        wrapper: '.checkbox, .colorpicker, .datepicker, .editor, .radio, .select, .slider, .switch'
+        wrapper: '.checkbox, .colorpicker, .datepicker, .editor, .radio, .select, .slider, .switch',
+        output: '.form-validate-output'
       }
     }
   };
@@ -118,6 +119,7 @@
     _variables () {
 
       this.$form = this.$element;
+      this.$output = this.$form.find ( this.options.selectors.output );
       this.$elements = this.$form.find ( this.options.selectors.element );
       this.$textfields = this.$elements.filter ( this.options.selectors.textfield );
 
@@ -437,7 +439,15 @@
 
         elementObj.$message = $(msgHtml);
 
-        elementObj.$wrapper.after ( elementObj.$message );
+        if ( this.$output.length ) {
+
+          this.$output.append ( elementObj.$message );
+
+        } else {
+
+          elementObj.$wrapper.after ( elementObj.$message );
+
+        }
 
       } else {
 
