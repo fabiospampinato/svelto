@@ -11,7 +11,7 @@
     plugin: true,
     templates: {
       overlay: _.template ( `
-        <div class="overlay spinner-overlay <%= o.dimmer ? 'dimmer' : '' %> <%= o.blurrer ? 'blurrer' : '' %>">
+        <div class="overlay spinner-overlay <%= o.size || '' %> <%= o.dimmer ? 'dimmer' : '' %> <%= o.blurrer ? 'blurrer' : '' %>">
           <% if ( o.labeled ) { %>
             <div class="spinner-label <%= o.colors.labeled %>">
           <% } %>
@@ -25,6 +25,7 @@
       ` )
     },
     options: {
+      size: false,
       labeled: true,
       blurrer: false,
       dimmer: true,
