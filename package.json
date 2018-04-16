@@ -29,15 +29,17 @@
     "url": "https://github.com/svelto/svelto.git"
   },
   "dependencies": {
-    "country-data": "0.0.31",
-    "emoji-datasource": "^2.4.4",
-    "emojilib": "^2.2.6",
     "execa": "^0.8.0",
-    "lodash": "^4.16.6",
     "require-dot-file": "^0.4.0"
   },
   "peerDependencies": {
     "pacco": "^1.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "country-data": "0.0.31",
+    "emoji-datasource": "^2.4.4",
+    "emojilib": "^2.2.6",
+    "lodash": "^4.16.6",
+    "inflection": "^1.12.0"
+  }
 }
