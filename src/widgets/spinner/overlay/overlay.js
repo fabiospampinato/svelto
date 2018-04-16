@@ -1,8 +1,9 @@
 
 // @require core/colors/colors.js
+// @require core/sizes/sizes.js
 // @require widgets/overlay/overlay.js
 
-(function ( $, _, Svelto, Widgets, Factory, Colors ) {
+(function ( $, _, Svelto, Widgets, Factory, Colors, Sizes ) {
 
   /* CONFIG */
 
@@ -30,6 +31,16 @@
       blurrer: false,
       dimmer: true,
       multicolor: false,
+      smart: { // Adjust options dynamically
+        enabled: true,
+        options: [ // Ordered map of dimensions to options. If the outerWidth/outerHeight of the element is <= the dimension then merge over the options
+          [40, { size: Sizes.xxxxsmall }],
+          [60, { size: Sizes.xxxsmall }],
+          [80, { size: Sizes.xxsmall }],
+          [100, { size: Sizes.xsmall }],
+          [120, { size: Sizes.small, labeled: false }]
+        ]
+      },
       colors: {
         labeled: Colors.white,
         unlabeled: Colors.secondary
@@ -50,9 +61,23 @@
     _variables () {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._template ( 'overlay', this.options ));
+      this.$overlay = $(this._template ( 'overlay', this._getOverlayOptions () ) );
 
       this.instance = this.$overlay.overlay ( 'instance' );
+
+    }
+
+    /* PRIVATE */
+
+    _getOverlayOptions () {
+
+      if ( !this.options.smart.enabled ) return this.options;
+
+      const width = this.$overlayed.outerWidth (),
+            height = this.$overlayed.outerHeight (),
+            opts = this.options.smart.options.map ( ([ dimension, options ]) => ( width <= dimension || height <= dimension ) && options ).reverse ();
+
+      return _.merge ( {}, this.options, ...opts );
 
     }
 
@@ -116,4 +141,4 @@
 
   Factory.make ( SpinnerOverlay, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Sizes ));
