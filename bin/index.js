@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 //TODO: Replace `pacco` to `svelto` in the help text, we probably need to add an API for this to Caporal
-//FIXME: Since we are setting the `--source` flag we can't no longer set the source via the config
 
 /* REQUIRE */
 
-const execa = require ( 'execa' ),
+const _ = require ( 'lodash' ),
+      execa = require ( 'execa' ),
       path = require ( 'path' ),
       rdf = require ( 'require-dot-file' ),
       config = require ( '../pacco.json' );
@@ -18,9 +18,23 @@ const root = path.resolve ( __dirname, '..' ),
       iconError = path.join ( root, 'resources', 'icon', 'icon_error.png' ),
       sveltoConfig = rdf ( 'svelto.json', process.cwd () ) || {};
 
+/* SRC */
+
+let argsSrc = [];
+
+if ( _.get ( sveltoConfig, 'paths.tokens.src' ) ) {
+
+  sveltoConfig.paths.tokens.src = [src].concat ( _.castArray ( sveltoConfig.paths.tokens.src ) );
+
+} else {
+
+  argsSrc = ['--source', src];
+
+}
+
 /* EXECUTE */
 
-const args = ['--config', JSON.stringify ( config ), '--config', JSON.stringify ( sveltoConfig ), '--source', src, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
+const args = ['--config', JSON.stringify ( config ), '--config', JSON.stringify ( sveltoConfig ), ...argsSrc, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
 const opts = {
   cwd: process.cwd (),
   stdio: 'inherit'
