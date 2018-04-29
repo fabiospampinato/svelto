@@ -14,4 +14,10 @@
     font-size: $progressbar-label-font-size;
   }
 
+  /* AFTER (CUSTOM LABEL) */
+
+  .progressbar-highlight[data-label]:after {
+    content: attr(data-label);
+  }
+
 }
