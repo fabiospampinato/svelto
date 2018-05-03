@@ -59,13 +59,13 @@
 
       let settings = this._getSettings ();
 
-      this.instance = new ChartLib ( this.chart, settings );
+      this.chartInstance = new ChartLib ( this.chart, settings );
 
     }
 
     _destroy () {
 
-      this.instance.destroy ();
+      this.chartInstance.destroy ();
 
     }
 
