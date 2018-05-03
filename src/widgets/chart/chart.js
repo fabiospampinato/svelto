@@ -49,6 +49,20 @@
       this.$chart = this.$element;
       this.chart = this.element;
 
+    }
+
+    _init () {
+
+      this._initDatas ();
+
+      let settings = this._getSettings ();
+
+      this.chartInstance = new ChartLib ( this.chart, settings );
+
+    }
+
+    _initDatas () {
+
       Object.keys ( this.options.datas ).forEach ( property => {
 
         this[property] = this.$chart.data ( this.options.datas[property] ) || this.options.defaults[property];
@@ -56,14 +70,6 @@
       });
 
       if ( !_.isArray ( this.datas[0] ) ) this.datas = [this.datas];
-
-    }
-
-    _init () {
-
-      let settings = this._getSettings ();
-
-      this.chartInstance = new ChartLib ( this.chart, settings );
 
     }
 
@@ -103,6 +109,25 @@
       }
 
       return settings;
+
+    }
+
+    /* API */
+
+    update () {
+
+      this.$chart.removeData ();
+
+      this._initDatas ();
+
+      const {data} = this._getSettings ();
+
+      this.chartInstance.data.labels = data.labels;
+      this.chartInstance.data.datasets.forEach ( ( dataset, i ) => {
+        _.merge ( dataset, data.datasets[i] );
+      });
+
+      this.chartInstance.update ();
 
     }
 
