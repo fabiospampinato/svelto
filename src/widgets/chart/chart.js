@@ -21,13 +21,15 @@
         type: 'line',
         colors: ['#1565c0'], // Primary color
         labels: ['Dataset'],
-        datas: [[]]
+        datas: [[]],
+        chartOptions: {}
       },
       datas: {
         type: 'type',
         colors: 'colors',
         labels: 'labels',
-        datas: 'datas'
+        datas: 'datas',
+        chartOptions: 'chart-options'
       }
     }
   };
@@ -43,9 +45,7 @@
       this.$chart = this.$element;
       this.chart = this.element;
 
-      let properties = ['type', 'colors', 'labels', 'datas'];
-
-      properties.forEach ( property => {
+      Object.keys ( this.options.datas ).forEach ( property => {
 
         this[property] = this.$chart.data ( this.options.datas[property] ) || this.options.defaults[property];
 
@@ -82,7 +82,8 @@
             data: this.datas[index],
             backgroundColor: this.colors[index]
           }))
-        }
+        },
+        options: this.chartOptions
       };
 
     }
