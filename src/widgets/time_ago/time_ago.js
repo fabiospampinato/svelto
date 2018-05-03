@@ -45,11 +45,7 @@
 
       }
 
-      if ( this.isEnabled () ) {
-
-        this._loop ();
-
-      }
+      this._loop ();
 
     }
 
