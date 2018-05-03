@@ -10,6 +10,7 @@
     plugin: true,
     selector: '.timeago, .time-ago',
     options: {
+      template: '[timeago]', // Template used for rendering the text
       timestamp: false, // UNIX timestamp
       title: false, // Update the title or the text?
       abort: { // Abort the loop if it has to wait more than `threshold`
@@ -17,6 +18,7 @@
         threshold: 604800, // 1 week
       },
       datas: {
+        template: 'template',
         timestamp: 'timestamp'
       },
       callbacks: {
@@ -38,6 +40,8 @@
     }
 
     _init () {
+
+      this.options.template = this.$timeAgoElement.data ( this.options.datas.template ) || this.options.template;
 
       if ( !this.options.timestamp ) {
 
@@ -73,15 +77,16 @@
 
     _update () {
 
-      let timeAgo = _.timeAgo ( this.options.timestamp );
+      let timeAgo = _.timeAgo ( this.options.timestamp ),
+          str = this.options.template.replace ( '[timeago]', timeAgo.str );;
 
       if ( this.options.title ) {
 
-        this.$timeAgoElement.attr ( 'title', timeAgo.str );
+        this.$timeAgoElement.attr ( 'title', str );
 
       } else {
 
-        this.$timeAgoElement.text ( timeAgo.str );
+        this.$timeAgoElement.text ( str );
 
       }
 
