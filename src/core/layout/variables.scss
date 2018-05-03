@@ -5,7 +5,9 @@
 
 /* HEADER */
 
-$layout-header-bg-color: darken( nth( map-get( $colors, $body-color ), 1 ), 10 ) !default;
+$layout-header-bg-color: darken( nth( map-get( $colors, $body-color ), 1 ), 70 ) !default;
+$layout-header-border-color: darken( $layout-header-bg-color, $color-border-darken-amount ) !default;
+$layout-header-color: $color-black-text !default; // The bg color is quite a bit darkened
 
 /* CONTENT */
 
@@ -15,3 +17,5 @@ $layout-content-padding-y: $layout-content-padding-x !default;
 /* FOOTER */
 
 $layout-footer-bg-color: $layout-header-bg-color !default;
+$layout-footer-border-color: $layout-header-border-color !default;
+$layout-footer-color: $layout-header-color !default;

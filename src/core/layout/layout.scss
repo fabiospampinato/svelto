@@ -23,6 +23,8 @@
 
   &-header {
     background-color: $layout-header-bg-color;
+    border-color: $layout-header-border-color;
+    color: $layout-header-color;
   }
 
   /* CONTENT */
@@ -36,6 +38,8 @@
 
   &-footer {
     background-color: $layout-footer-bg-color;
+    border-color: $layout-footer-border-color;
+    color: $layout-footer-color;
   }
 
 }
