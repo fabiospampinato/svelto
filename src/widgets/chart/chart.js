@@ -22,6 +22,7 @@
         colors: ['#1565c0'], // Primary color
         labels: ['Dataset'],
         datas: [[]],
+        ticks: undefined,
         tooltips: undefined,
         chartOptions: {}
       },
@@ -30,6 +31,7 @@
         colors: 'colors',
         labels: 'labels',
         datas: 'datas',
+        ticks: 'ticks',
         tooltips: 'tooltips',
         chartOptions: 'chart-options'
       }
@@ -78,7 +80,7 @@
       const settings = {
         type: this.type,
         data: {
-          labels: this.datas[0].map ( ( point, index ) => index + 1 ),
+          labels: this.ticks || this.datas[0].map ( ( point, index ) => index + 1 ),
           datasets: this.labels.map ( ( label, index ) => ({
             label,
             data: this.datas[index],
