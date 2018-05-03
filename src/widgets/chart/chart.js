@@ -22,6 +22,7 @@
         colors: ['#1565c0'], // Primary color
         labels: ['Dataset'],
         datas: [[]],
+        tooltips: undefined,
         chartOptions: {}
       },
       datas: {
@@ -29,6 +30,7 @@
         colors: 'colors',
         labels: 'labels',
         datas: 'datas',
+        tooltips: 'tooltips',
         chartOptions: 'chart-options'
       }
     }
@@ -73,7 +75,7 @@
 
     _getSettings () {
 
-      return {
+      const settings = {
         type: this.type,
         data: {
           labels: this.datas[0].map ( ( point, index ) => index + 1 ),
@@ -85,6 +87,20 @@
         },
         options: this.chartOptions
       };
+
+      if ( this.tooltips ) {
+
+        _.merge ( settings.options, {
+          tooltips: {
+            callbacks: {
+              title: datas => this.tooltips[datas[0].index]
+            }
+          }
+        });
+
+      }
+
+      return settings;
 
     }
 
