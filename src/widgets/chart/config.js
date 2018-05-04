@@ -35,7 +35,7 @@
       bodyFontSize: 16,
       footerFontSize: 16
     },
-    animations: {
+    animation: {
       duration: Animations.normal
     }
   });
