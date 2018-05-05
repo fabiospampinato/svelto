@@ -5,18 +5,16 @@
 
   /* PROP */ // Tiny, limited (doesn't support arrays), not very fast, alternative to `get` and `set`
 
-  _.prop = _.get = _.set = function ( obj, selector, value ) {
+  _.get = function ( obj, selector, value, _isGet = true ) {
 
     if ( !selector ) return;
-
-    const get = ( arguments.length === 2 );
 
     const result = selector
                      .split ( '.' )
                      .filter ( _.identity )
                      .reduce ( ( obj, key, keyIndex, keys ) => {
-                       if ( get ) {
-                         return obj && obj[key];
+                       if ( _isGet ) {
+                         return obj && ( obj[key] !== undefined ? obj[key] : value );
                        } else {
                          if ( obj ) {
                            if ( keyIndex === ( keys.length - 1 ) ) {
@@ -28,8 +26,12 @@
                        }
                      }, obj );
 
-    return get ? result : obj;
+    return _isGet ? result : obj;
 
   };
+
+  _.set = function ( obj, selector, value ) {
+    return _.get ( obj, selector, value, false );
+  }
 
 }( window._ ));
