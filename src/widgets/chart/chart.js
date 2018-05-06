@@ -24,6 +24,7 @@
         datas: [[]],
         ticks: undefined,
         tooltips: undefined,
+        visibilities: [],
         chartOptions: {}
       },
       datas: {
@@ -33,6 +34,7 @@
         datas: 'datas',
         ticks: 'ticks',
         tooltips: 'tooltips',
+        visibilities: 'visibilities',
         chartOptions: 'chart-options'
       }
     }
@@ -90,6 +92,7 @@
           datasets: this.labels.map ( ( label, index ) => ({
             label,
             data: this.datas[index],
+            hidden: this.visibilities[index] === false,
             backgroundColor: this.colors[index]
           }))
         },
