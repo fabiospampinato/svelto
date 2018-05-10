@@ -70,7 +70,7 @@
 
       } else if ( _.isString ( color ) ) {
 
-        color = _.trim ( color, '#' );
+        color = color.slice ( -6 );
 
         if ( /^[0-9a-f]{6}$/i.test ( color ) ) { // Full 6-chars hex color notation
 
