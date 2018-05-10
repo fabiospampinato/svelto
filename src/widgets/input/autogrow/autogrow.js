@@ -4,7 +4,7 @@
 
 // It supports only `box-sizing: border-box` inputs
 
-(function ( $, _, Svelto, Widgets, Factory, Browser ) {
+(function ( $, _, Svelto, Factory, Browser ) {
 
   /* CONFIG */
 
@@ -22,7 +22,7 @@
 
   /* INPUT AUTOGROW */
 
-  class InputAutogrow extends Widgets.Widget {
+  class InputAutogrow extends Svelto.Widget {
 
     /* WIDGETIZE */
 
@@ -112,4 +112,4 @@
 
   Factory.make ( InputAutogrow, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Browser ));

@@ -79,7 +79,7 @@
 
       ready ( Widget, config ) {
 
-        const initReady = Widget._initReady || Widget.__proto__._initReady || Widgets.Widget._initReady; //IE10 support -- static property
+        const initReady = Widget._initReady || Widget.__proto__._initReady || Svelto.Widget._initReady; //IE10 support -- static property
 
         initReady.call ( Widget );
 
@@ -160,7 +160,7 @@
 
       widgetize ( Widget ) { //TODO: Code duplication, look at `Widgetize.add`
 
-        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize, //IE10 support -- static property
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Svelto.Widget.widgetize, //IE10 support -- static property
             $widgets = $.$html.findAll ( Widget.config.selector );
 
         Widgetize.worker ( [[widgetize, Widget]], $widgets );

@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -30,7 +30,7 @@
 
   /* BOILERPLATE */
 
-  class Boilerplate extends Widgets.Widget {
+  class Boilerplate extends Svelto.Widget {
 
     /* WIDGETIZE */
 
@@ -64,4 +64,4 @@
 
   Factory.make ( Boilerplate, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

@@ -2,7 +2,7 @@
 // @require core/widget/widget.js
 // @require lib/storage/storage.js
 
-(function ( $, _, Svelto, Widgets, Factory, Storage ) {
+(function ( $, _, Svelto, Factory, Storage ) {
 
   /* CONFIG */
 
@@ -13,7 +13,7 @@
 
   /* STORABLE */
 
-  class Storable extends Widgets.Widget {
+  class Storable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -49,4 +49,4 @@
 
   Factory.make ( Storable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Storage ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Storage ));

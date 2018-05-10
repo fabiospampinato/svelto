@@ -3,7 +3,7 @@
 
 //TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Factory, Pointer ) {
 
   /* CONFIG */
 
@@ -50,7 +50,7 @@
 
   /* TABLE SORTABLE */
 
-  class TableSortable extends Widgets.Widget {
+  class TableSortable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -262,4 +262,4 @@
 
   Factory.make ( TableSortable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer ));

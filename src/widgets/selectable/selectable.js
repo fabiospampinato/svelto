@@ -4,7 +4,7 @@
 // @require core/mouse/mouse.js
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Browser, Keyboard, Mouse ) {
+(function ( $, _, Svelto, Factory, Pointer, Browser, Keyboard, Mouse ) {
 
   /* CONFIG */
 
@@ -37,7 +37,7 @@
 
   /* SELECTABLE */
 
-  class Selectable extends Widgets.Widget {
+  class Selectable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -386,4 +386,4 @@
 
   Factory.make ( Selectable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer, Svelto.Browser, Svelto.Keyboard, Svelto.Mouse ));

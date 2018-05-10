@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -19,7 +19,7 @@
 
   /* INPUT FILE NAMES */
 
-  class InputFileNames extends Widgets.Widget {
+  class InputFileNames extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -99,4 +99,4 @@
 
   Factory.make ( InputFileNames, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

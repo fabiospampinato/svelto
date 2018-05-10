@@ -56,7 +56,7 @@
 
   /* SPINNER OVERLAY */
 
-  class SpinnerOverlay extends Widgets.Widget {
+  class SpinnerOverlay extends Svelto.Widget {
 
     /* SPECIAL */
 

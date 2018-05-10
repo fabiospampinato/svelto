@@ -33,7 +33,7 @@
 
   /* CHAT MESSAGE EDITABLE */
 
-  class ChatMessageEditable extends Widgets.Widget {
+  class ChatMessageEditable extends Svelto.Widget {
 
     /* SPECIAL */
 

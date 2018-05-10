@@ -3,7 +3,7 @@
 // @require lib/touching/touching.js
 // @require widgets/draggable/draggable.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -27,7 +27,7 @@
 
   /* DROPPABLE */
 
-  class Droppable extends Widgets.Widget {
+  class Droppable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -148,4 +148,4 @@
 
   Factory.make ( Droppable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

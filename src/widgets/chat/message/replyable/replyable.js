@@ -3,7 +3,7 @@
 // @require core/widget/widget.js
 // @require widgets/remote/loader/loader.js
 
-(function ( $, _, Svelto, Widgets, Factory, Colors ) {
+(function ( $, _, Svelto, Factory, Colors ) {
 
   /* CONFIG */
 
@@ -40,7 +40,7 @@
 
   /* CHAT MESSAGE REPLY */
 
-  class ChatMessageReplyable extends Widgets.Widget {
+  class ChatMessageReplyable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -101,4 +101,4 @@
 
   Factory.make ( ChatMessageReplyable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Colors ));

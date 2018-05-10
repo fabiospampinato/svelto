@@ -6,7 +6,7 @@
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 //TODO: Rewrite as a RemoteReaction widget maybe
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, fetch ) {
+(function ( $, _, Svelto, Factory, Pointer, fetch ) {
 
   /* CONFIG */
 
@@ -50,7 +50,7 @@
 
   /* RATER */
 
-  class Rater extends Widgets.Widget {
+  class Rater extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -172,4 +172,4 @@
 
   Factory.make ( Rater, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer, Svelto.fetch ));

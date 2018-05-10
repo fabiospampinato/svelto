@@ -2,7 +2,7 @@
 // @require core/widget/widget.js
 // @require lib/fullscreen/fullscreen.js
 
-(function ( $, _, Svelto, Widgets, Factory, Fullscreen ) {
+(function ( $, _, Svelto, Factory, Fullscreen ) {
 
   /* CONFIG */
 
@@ -14,7 +14,7 @@
 
   /* FULLSCREENABLE */
 
-  class Fullscreenable extends Widgets.Widget {
+  class Fullscreenable extends Svelto.Widget {
 
     /* API */
 
@@ -52,4 +52,4 @@
 
   Factory.make ( Fullscreenable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Fullscreen ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Fullscreen ));

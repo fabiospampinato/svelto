@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Factory, Pointer ) {
 
   /* CONFIG */
 
@@ -20,7 +20,7 @@
 
   /* FLICKABLE */
 
-  class Flickable extends Widgets.Widget {
+  class Flickable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -155,4 +155,4 @@
 
   Factory.make ( Flickable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer ));

@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -29,7 +29,7 @@
 
   /* TIME AGO */
 
-  class TimeAgo extends Widgets.Widget {
+  class TimeAgo extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -120,4 +120,4 @@
 
   Factory.make ( TimeAgo, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Timer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Timer ));

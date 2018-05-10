@@ -7,7 +7,7 @@
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome) //TODO: Make a SO question, maybe we can workaround it
 //FIXME: `today` button doesn't work when the same month is active but the wrong day is selected
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Factory, Pointer ) {
 
   /* CONFIG */
 
@@ -95,7 +95,7 @@
 
   /* DATEPICKER */
 
-  class Datepicker extends Widgets.Widget {
+  class Datepicker extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -527,4 +527,4 @@
 
   Factory.make ( Datepicker, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer ));

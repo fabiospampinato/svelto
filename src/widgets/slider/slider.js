@@ -4,7 +4,7 @@
 
 //TODO: Add vertical slider
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -44,7 +44,7 @@
 
   /* SLIDER */
 
-  class Slider extends Widgets.Widget {
+  class Slider extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -291,4 +291,4 @@
 
   Factory.make ( Slider, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

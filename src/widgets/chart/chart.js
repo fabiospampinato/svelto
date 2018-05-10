@@ -4,7 +4,7 @@
 
 /* CHART */
 
-(function ( $, _, Svelto, Widgets, Factory, ChartLib ) {
+(function ( $, _, Svelto, Factory, ChartLib ) {
 
   /* CHECK IF LOADED */
 
@@ -42,7 +42,7 @@
 
   /* CHART */
 
-  class Chart extends Widgets.Widget {
+  class Chart extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -140,4 +140,4 @@
 
   Factory.make ( Chart, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, window.Chart ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, window.Chart ));

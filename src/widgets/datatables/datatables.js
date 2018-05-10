@@ -49,7 +49,7 @@
 
   /* DATATABLE */
 
-  class DT extends Widgets.Widget {
+  class DT extends Svelto.Widget {
 
     /* WIDGETIZE */
 

@@ -883,6 +883,10 @@
 
   }
 
+  /* EXPORT */
+
+  Svelto.Widget = Widget;
+
   /* FACTORY */
 
   Factory.make ( Widget, config );

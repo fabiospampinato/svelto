@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -21,7 +21,7 @@
 
   /* TEXTAREA SENDER */
 
-  class TextareaSender extends Widgets.Widget {
+  class TextareaSender extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -63,4 +63,4 @@
 
   Factory.make ( TextareaSender, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

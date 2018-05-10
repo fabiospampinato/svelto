@@ -26,7 +26,7 @@
 
   /* ACCORDION */
 
-  class Accordion extends Widgets.Widget {
+  class Accordion extends Svelto.Widget {
 
     /* SPECIAL */
 

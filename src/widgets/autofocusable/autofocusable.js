@@ -3,7 +3,7 @@
 // @require core/widget/widget.js
 // @require lib/autofocus/autofocus.js
 
-(function ( $, _, Svelto, Widgets, Factory, Autofocus ) {
+(function ( $, _, Svelto, Factory, Autofocus ) {
 
   /* CONFIG */
 
@@ -13,7 +13,7 @@
 
   /* AUTOFOCUSABLE */
 
-  class Autofocusable extends Widgets.Widget {
+  class Autofocusable extends Svelto.Widget {
 
     /* API */
 
@@ -35,4 +35,4 @@
 
   Factory.make ( Autofocusable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Autofocus ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Autofocus ));

@@ -30,7 +30,7 @@
 
   /* REMOTE TRIGGER */
 
-  class RemoteTrigger extends Widgets.Widget {
+  class RemoteTrigger extends Svelto.Widget {
 
     /* SPECIAL */
 

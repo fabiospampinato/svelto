@@ -4,7 +4,7 @@
 
 //TODO: Maybe rename it
 
-(function ( $, _, Svelto, Widgets, Factory, Breakpoints, Breakpoint ) {
+(function ( $, _, Svelto, Factory, Breakpoints, Breakpoint ) {
 
   /* CONFIG */
 
@@ -23,7 +23,7 @@
 
   /* CLASS SWITCH */
 
-  class ClassSwitch extends Widgets.Widget {
+  class ClassSwitch extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -207,4 +207,4 @@
 
   Factory.make ( ClassSwitch, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Breakpoints, Svelto.Breakpoint ));

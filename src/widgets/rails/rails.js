@@ -2,7 +2,7 @@
 // @require core/animations/animations.js
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory, Animations, Pointer ) {
+(function ( $, _, Svelto, Factory, Animations, Pointer ) {
 
   /* CONFIG */
 
@@ -40,7 +40,7 @@
 
   /* RAILS */
 
-  class Rails extends Widgets.Widget {
+  class Rails extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -230,4 +230,4 @@
 
   Factory.make ( Rails, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Animations, Svelto.Pointer ));

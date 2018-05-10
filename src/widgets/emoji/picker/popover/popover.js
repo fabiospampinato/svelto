@@ -22,7 +22,7 @@
 
   /* EMOJIPICKER POPOVER */
 
-  class EmojipickerPopover extends Widgets.Widget {
+  class EmojipickerPopover extends Svelto.Widget {
 
     /* SPECIAL */
 

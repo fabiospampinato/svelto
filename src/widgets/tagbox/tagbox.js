@@ -5,7 +5,7 @@
 
 //FIXME: Auto focus on the partial input doesn't work good on mobile, the keyboard keeps opening and closing
 
-(function ( $, _, Svelto, Widgets, Factory, Colors, Icon, Sizes, Pointer, Keyboard ) {
+(function ( $, _, Svelto, Factory, Colors, Icon, Sizes, Pointer, Keyboard ) {
 
   /* CONFIG */
 
@@ -66,7 +66,7 @@
 
   /* TAGBOX */
 
-  class Tagbox extends Widgets.Widget {
+  class Tagbox extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -521,4 +521,4 @@
 
   Factory.make ( Tagbox, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors, Svelto.Icon, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Colors, Svelto.Icon, Svelto.Sizes, Svelto.Pointer, Svelto.Keyboard ));

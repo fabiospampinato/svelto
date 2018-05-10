@@ -66,7 +66,7 @@
 
   /* SELECT */
 
-  class Select extends Widgets.Widget {
+  class Select extends Svelto.Widget {
 
     /* SPECIAL */
 

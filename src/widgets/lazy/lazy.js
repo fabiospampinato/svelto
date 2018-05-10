@@ -2,7 +2,7 @@
 // @require core/widget/widget.js
 // @require ./worker.js
 
-(function ( $, _, Svelto, Widgets, Factory, LazyWorker ) {
+(function ( $, _, Svelto, Factory, LazyWorker ) {
 
   /* CONFIG */
 
@@ -20,7 +20,7 @@
 
   /* LAZY */
 
-  class Lazy extends Widgets.Widget {
+  class Lazy extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -52,4 +52,4 @@
 
   Factory.make ( Lazy, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.LazyWorker ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.LazyWorker ));

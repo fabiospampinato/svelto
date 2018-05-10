@@ -3,7 +3,7 @@
 
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
-(function ( $, _, Svelto, Widgets, Readify ) {
+(function ( $, _, Svelto, Readify ) {
 
   /* WIDGETIZE */
 
@@ -31,7 +31,7 @@
 
         if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
 
-        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Svelto.Widget.widgetize; //IE10 support -- static property
 
         return this.add ( Widget.config.selector, widgetize, Widget, widgetizer );
 
@@ -63,7 +63,7 @@
 
         if ( !Widget.config.plugin || !_.isString ( Widget.config.selector ) ) return;
 
-        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Widgets.Widget.widgetize; //IE10 support -- static property
+        let widgetize = Widget.widgetize || Widget.__proto__.widgetize || Svelto.Widget.widgetize; //IE10 support -- static property
 
         return this.remove ( Widget.config.selector, widgetize );
 
@@ -162,4 +162,4 @@
 
   }
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Readify ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Readify ));

@@ -5,7 +5,7 @@
 
 //TODO: Add flick support
 
-(function ( $, _, Svelto, Widgets, Factory, Colors ) {
+(function ( $, _, Svelto, Factory, Colors ) {
 
   /* CONFIG */
 
@@ -47,7 +47,7 @@
 
   /* SWITCH */
 
-  class Switch extends Widgets.Widget {
+  class Switch extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -238,4 +238,4 @@
 
   Factory.make ( Switch, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Colors ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Colors ));

@@ -7,7 +7,7 @@
 //TODO: Add support for not setting a starting color, in some cases it might be needed not to set a color by default
 //TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
-(function ( $, _, Svelto, Widgets, Factory, Color, Keyboard ) {
+(function ( $, _, Svelto, Factory, Color, Keyboard ) {
 
   /* CONFIG */
 
@@ -47,7 +47,7 @@
 
   /* COLORPICKER */
 
-  class Colorpicker extends Widgets.Widget {
+  class Colorpicker extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -407,4 +407,4 @@
 
   Factory.make ( Colorpicker, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Color, Svelto.Keyboard ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Color, Svelto.Keyboard ));

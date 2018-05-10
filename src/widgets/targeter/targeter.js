@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -19,7 +19,7 @@
 
   /* TARGETER */
 
-  class Targeter extends Widgets.Widget {
+  class Targeter extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -69,4 +69,4 @@
 
   Factory.make ( Targeter, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

@@ -4,7 +4,7 @@
 //FIXME: Doesn't actually check if the scroll event happened along the same direction of the key that has been pressed
 // It can detect scroll only on the document
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -26,7 +26,7 @@
 
   /* PAGER */
 
-  class Pager extends Widgets.Widget {
+  class Pager extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -118,4 +118,4 @@
 
   Factory.make ( Pager, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

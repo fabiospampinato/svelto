@@ -6,7 +6,7 @@
 
 //TODO: Generalize it for other kind of elements other than `img`
 
-(function ( $, _, Svelto, Widgets, Factory, Browser, Pointer, Keyboard, Animations, fetch ) {
+(function ( $, _, Svelto, Factory, Browser, Pointer, Keyboard, Animations, fetch ) {
 
   /* CONFIG */
 
@@ -71,7 +71,7 @@
 
   /* ZOOMABLE */
 
-  class Zoomable extends Widgets.Widget {
+  class Zoomable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -542,4 +542,4 @@
 
   Factory.make ( Zoomable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations, Svelto.fetch ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Browser, Svelto.Pointer, Svelto.Keyboard, Svelto.Animations, Svelto.fetch ));

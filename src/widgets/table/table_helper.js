@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -43,7 +43,7 @@
 
   /* TABLE HELPER */
 
-  class TableHelper extends Widgets.Widget {
+  class TableHelper extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -171,4 +171,4 @@
 
   Factory.make ( TableHelper, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

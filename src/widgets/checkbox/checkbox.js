@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Factory, Pointer ) {
 
   /* CONFIG */
 
@@ -18,7 +18,7 @@
 
   /* CHECKBOX */
 
-  class Checkbox extends Widgets.Widget {
+  class Checkbox extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -61,4 +61,4 @@
 
   Factory.make ( Checkbox, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer ));

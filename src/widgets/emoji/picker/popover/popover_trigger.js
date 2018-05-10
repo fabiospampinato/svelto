@@ -1,7 +1,7 @@
 
 // @require ./popover_helper.js
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer ) {
+(function ( $, _, Svelto, Factory, Pointer ) {
 
   /* CONFIG */
 
@@ -19,7 +19,7 @@
 
   /* EMOJIPICKER POPOVER TRIGGER */
 
-  class EmojipickerPopoverTrigger extends Widgets.Widget {
+  class EmojipickerPopoverTrigger extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -55,4 +55,4 @@
 
   Factory.make ( EmojipickerPopoverTrigger, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer ));

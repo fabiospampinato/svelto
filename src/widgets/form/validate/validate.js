@@ -7,7 +7,7 @@
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
 //TODO: Maybe make it generic (so that it can be used in single elements) and just call it `validate`
 
-(function ( $, _, Svelto, Widgets, Factory, Validator ) {
+(function ( $, _, Svelto, Factory, Validator ) {
 
   /* CONFIG */
 
@@ -112,7 +112,7 @@
 
   /* FORM VALIDATE */
 
-  class FormValidate extends Widgets.Widget {
+  class FormValidate extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -501,4 +501,4 @@
 
   Factory.make ( FormValidate, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Validator ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Validator ));

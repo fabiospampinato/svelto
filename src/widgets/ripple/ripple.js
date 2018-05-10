@@ -3,7 +3,7 @@
 // @require core/animations/animations.js
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Animations ) {
+(function ( $, _, Svelto, Factory, Pointer, Animations ) {
 
   /* CONFIG */
 
@@ -30,7 +30,7 @@
 
   /* RIPPLE */
 
-  class Ripple extends Widgets.Widget {
+  class Ripple extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -118,4 +118,4 @@
 
   Factory.make ( Ripple, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer, Svelto.Animations ));

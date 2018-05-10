@@ -1,7 +1,7 @@
 
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -18,7 +18,7 @@
 
   /* INFOBAR */
 
-  class Infobar extends Widgets.Widget {
+  class Infobar extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -44,4 +44,4 @@
 
   Factory.make ( Infobar, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

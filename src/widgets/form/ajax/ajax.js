@@ -9,7 +9,7 @@
 //TODO: The spinner overlay shouldn't be closable
 //TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
 
-(function ( $, _, Svelto, Widgets, Factory, fetch, URL ) {
+(function ( $, _, Svelto, Factory, fetch, URL ) {
 
   /* CONFIG */
 
@@ -42,7 +42,7 @@
 
   /* FORM AJAX */
 
-  class FormAjax extends Widgets.Widget {
+  class FormAjax extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -208,4 +208,4 @@
 
   Factory.make ( FormAjax, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.fetch, Svelto.URL ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.fetch, Svelto.URL ));

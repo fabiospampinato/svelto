@@ -3,7 +3,7 @@
 // @require ./calculator.js
 // @require core/widget/widget.js
 
-(function ( $, _, Svelto, Widgets, Widgetize, Factory, calculator ) {
+(function ( $, _, Svelto, Widgetize, Factory, calculator ) {
 
   /* CONFIG */
 
@@ -42,7 +42,7 @@
 
   /* JUSTIFIED LAYOUT */
 
-  class JustifiedLayout extends Widgets.Widget {
+  class JustifiedLayout extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -237,4 +237,4 @@
 
   Factory.make ( JustifiedLayout, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Widgetize, Svelto.Factory, Svelto.justifiedLayoutCalculator ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Widgetize, Svelto.Factory, Svelto.justifiedLayoutCalculator ));

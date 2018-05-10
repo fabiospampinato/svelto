@@ -4,7 +4,7 @@
 //TODO: Maybe rename it, `Readify` doesn't sound right
 //FIXME: We actually `require` Widget, but requiring it creates a circular dependency...
 
-(function ( $, _, Svelto, Widgets ) {
+(function ( $, _, Svelto ) {
 
   /* READIFY */
 
@@ -68,8 +68,8 @@
       if ( $.isWidget ( fn ) ) {
 
         let Widget = fn,
-            ready = Widget.ready || Widget.__proto__.ready || Widgets.Widget.ready, //IE10 support -- static property
-            setReady = Widget._setReady || Widget.__proto__._setReady || Widgets.Widget._setReady; //IE10 support -- static property
+            ready = Widget.ready || Widget.__proto__.ready || Svelto.Widget.ready, //IE10 support -- static property
+            setReady = Widget._setReady || Widget.__proto__._setReady || Svelto.Widget._setReady; //IE10 support -- static property
 
         ready.call ( Widget, setReady.bind ( Widget ) );
 
@@ -95,4 +95,4 @@
 
   }
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets ));
+}( Svelto.$, Svelto._, Svelto ));

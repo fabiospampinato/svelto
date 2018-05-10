@@ -1,7 +1,7 @@
 
 // @require lib/autofocus/helpers.js
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -26,7 +26,7 @@
 
   /* FLIPPABLE */
 
-  class Flippable extends Widgets.Widget {
+  class Flippable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -86,4 +86,4 @@
 
   Factory.make ( Flippable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));

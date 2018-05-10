@@ -4,7 +4,7 @@
 //FIXME: Reposition the draggable properly when autoscrolling inside a container (not document/html)
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
-(function ( $, _, Svelto, Widgets, Factory, Animations, Browser, Pointer, Mouse ) {
+(function ( $, _, Svelto, Factory, Animations, Browser, Pointer, Mouse ) {
 
   /* CONFIG */
 
@@ -72,7 +72,7 @@
 
   /* DRAGGABLE */
 
-  class Draggable extends Widgets.Widget {
+  class Draggable extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -686,4 +686,4 @@
 
   Factory.make ( Draggable, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Animations, Svelto.Browser, Svelto.Pointer, Svelto.Mouse ));

@@ -5,7 +5,7 @@
 
 //TODO: Add slides drag support
 
-(function ( $, _, Svelto, Widgets, Factory, Pointer, Timer, Animations ) {
+(function ( $, _, Svelto, Factory, Pointer, Timer, Animations ) {
 
   /* CONFIG */
 
@@ -45,7 +45,7 @@
 
   /* CAROUSEL */
 
-  class Carousel extends Widgets.Widget {
+  class Carousel extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -354,4 +354,4 @@
 
   Factory.make ( Carousel, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory, Svelto.Pointer, Svelto.Timer, Svelto.Animations ));

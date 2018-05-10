@@ -3,7 +3,7 @@
 
 //TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
 
-(function ( $, _, Svelto, Widgets, Factory ) {
+(function ( $, _, Svelto, Factory ) {
 
   /* CONFIG */
 
@@ -32,7 +32,7 @@
 
   /* FORM SYNC */
 
-  class FormSync extends Widgets.Widget {
+  class FormSync extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -120,4 +120,4 @@
 
   Factory.make ( FormSync, config );
 
-}( Svelto.$, Svelto._, Svelto, Svelto.Widgets, Svelto.Factory ));
+}( Svelto.$, Svelto._, Svelto, Svelto.Factory ));
