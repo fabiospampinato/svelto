@@ -208,7 +208,7 @@
 
       if ( !options.row.widows.show && ( layout.widows !== this.$widows.length ) ) {
 
-        let $nextWidows = $(_.takeRight ( this.$boxes.get (), layout.widows ) ),
+        let $nextWidows = $(this.$boxes.get ().slice ( - layout.widows ) ),
             $changed = $(_.xor ( this.$widows.get (), $nextWidows.get () ));
 
         $changed.toggleClass ( this.options.classes.hidden );
