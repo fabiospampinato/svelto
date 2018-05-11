@@ -10,7 +10,7 @@
 
   Readify.add ( function () {
 
-    $.$layout = $('.layout, body').first ();
+    $.$layout = $.$layout || $('.layout, body').first ();
 
   });
 
