@@ -61,9 +61,7 @@
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 
-      this.sbWrpSize = this.$sbWrp.width ();
-
-      this.hueWrpHeight = this.sbWrpSize;
+      this.dimension = this.$colorpicker.width () || 174; //FIXME: It shouldn't be set manually, but this widget might be hidden at init time
 
       this.hsv = false;
 
@@ -181,8 +179,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.hsv.s =  _.clamp ( XY.x, 0, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.hsv.v =  100 - ( _.clamp ( XY.y, 0, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( XY.x, 0, this.dimension ) * 100 / this.dimension;
+      this.hsv.v =  100 - ( _.clamp ( XY.y, 0, this.dimension ) * 100 / this.dimension );
 
       this._updateSb ( false );
 
@@ -273,7 +271,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.hsv.h = 359 - ( _.clamp ( XY.y, 0, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( XY.y, 0, this.dimension ) * 359 / this.dimension );
 
       this._updateHue ( false );
 
@@ -322,8 +320,8 @@
 
       if ( _translate ) {
 
-        let translateX = this.sbWrpSize / 100 * this.hsv.s,
-            translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
+        let translateX = this.dimension / 100 * this.hsv.s,
+            translateY = this.dimension / 100 * ( 100 - this.hsv.v );
 
         this.$sbHandler.translate ( translateX, translateY );
 
@@ -345,7 +343,7 @@
 
       if ( _translate ) {
 
-        let translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
+        let translateY = this.dimension / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
         this.$hueHandler.translateY ( translateY );
 
