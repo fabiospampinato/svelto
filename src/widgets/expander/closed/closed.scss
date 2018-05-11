@@ -52,6 +52,10 @@
 
   /* CONTENT */
 
+  > .expander-content:not([class*="slide"]) {
+    overflow: hidden;
+  }
+
   &:not(.horizontal) { //TODO: Move direction-related styles to their own files
 
     > .expander-content:not([class*="slide"]) {
