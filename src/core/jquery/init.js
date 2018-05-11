@@ -1,4 +1,5 @@
 
+// @optional ./vendor/cash.js
 // @optional ./vendor/jquery.js
 
 (function () {
