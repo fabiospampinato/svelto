@@ -28,10 +28,8 @@
     _variables () {
 
       this.$textarea = this.$element;
-      this.textarea = this.element;
 
       this.$form = this.$textarea.closest ( this.options.selectors.form );
-      this.form = this.$form[0];
 
     }
 
@@ -53,7 +51,17 @@
 
     send () {
 
-      this.form.submit ();
+      const $submit = this.$form.find ( '[type="submit"]' );
+
+      if ( $submit.length ) {
+
+        $submit[0].click ();
+
+      } else {
+
+        this.$form[0].submit ();
+
+      }
 
     }
 
