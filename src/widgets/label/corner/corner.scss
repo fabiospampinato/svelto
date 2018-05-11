@@ -6,7 +6,7 @@
 .label.corner {
 
   @include dimension ( $label-corner-size );
-  z-index: $label-corner-z-index;
+  z-index: $label-corner-z-index !important;
   margin: 0 !important;
   border-width: 0 !important;
   background-color: transparent !important;

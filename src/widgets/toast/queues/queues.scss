@@ -7,7 +7,7 @@
 .toast-queues {
 
   @include fixed ( false 0 false 0 );
-  z-index: $toast-queues-z-index;
+  z-index: $toast-queues-z-index !important;
   display: flex;
   flex-wrap: wrap;
   width: 100%;

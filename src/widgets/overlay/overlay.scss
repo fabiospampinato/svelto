@@ -4,7 +4,7 @@
 .overlay {
 
   @include absolute ( 0 );
-  z-index: $overlay-z-index;
+  z-index: $overlay-z-index !important;
   margin: 0 !important;
   transition: opacity $overlay-animation-duration;
   border-radius: inherit;

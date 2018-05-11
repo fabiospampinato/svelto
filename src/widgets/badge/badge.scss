@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   line-height: 1em;
-  z-index: $badge-z-index;
+  z-index: $badge-z-index !important;
   font-weight: $badge-font-weight;
   border-radius: $badge-border-radius;
   padding: $badge-padding-y $badge-padding-x;

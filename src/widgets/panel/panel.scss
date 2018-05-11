@@ -11,7 +11,7 @@
 .panel {
   @include z-depth ( $panel-z-depth, $panel-z-depth-force, $panel-z-depth-basic );
   position: fixed;
-  z-index: $panel-z-index;
+  z-index: $panel-z-index !important;
   margin: 0;
   border-radius: 0 !important;
   transition: transform $panel-animation-duration;

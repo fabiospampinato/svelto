@@ -17,7 +17,7 @@
   width: 100%;
   max-height: none;
   min-height: 100%;
-  z-index: $card-fullscreen-z-index;
+  z-index: $card-fullscreen-z-index !important;
 }
 
 /* VERTICAL SHRINKING FIX (IE-10/11) */

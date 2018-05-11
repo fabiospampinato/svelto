@@ -15,7 +15,7 @@
     position: absolute;
     pointer-events: none;
     margin: 0 !important;
-    z-index: $ripple-circle-z-index;
+    z-index: $ripple-circle-z-index !important;
 
     &:before {
       @include absolute ( ( - 50% ) false false ( - 50% ) );

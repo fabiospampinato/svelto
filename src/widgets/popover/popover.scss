@@ -7,7 +7,7 @@
 
   @include fixed ( 0 false false 0 );
   @include z-depth ( $popover-z-depth, $popover-z-depth-force, $popover-z-depth-basic );
-  z-index: $popover-z-index;
+  z-index: $popover-z-index !important;
   overflow: visible;
   max-width: $popover-max-width;
   margin: 0;

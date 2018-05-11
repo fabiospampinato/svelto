@@ -5,7 +5,7 @@
 
 .zoomable.show {
 
-  z-index: $zoomable-show-z-index;
+  z-index: $zoomable-show-z-index !important;
   cursor: zoom-out;
 
   /* UNZOOMED */

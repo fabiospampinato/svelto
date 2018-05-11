@@ -32,7 +32,7 @@
     opacity: 0;
     border: 0;
     border-radius: inherit;
-    z-index: $select-z-index;
+    z-index: $select-z-index !important;
 
     /* BORDERED */
 

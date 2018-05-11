@@ -17,7 +17,7 @@
     max-height: none;
     width: 100% !important;
     height: 100% !important;
-    z-index: $card-fullscreen-z-index;
+    z-index: $card-fullscreen-z-index !important;
   }
 
 }

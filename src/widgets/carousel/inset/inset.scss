@@ -14,7 +14,7 @@
   .carousel-next {
 
     @include absolute ( 0 false 0 false );
-    z-index: $carousel-inset-previous-next-z-index;
+    z-index: $carousel-inset-previous-next-z-index !important;
     display: flex;
     align-items: center;
     font-size: $carousel-inset-previous-next-font-size;

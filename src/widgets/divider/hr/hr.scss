@@ -5,7 +5,7 @@
 
 %hr-base {
   display: flex;
-  z-index: $hr-z-index;
+  z-index: $hr-z-index !important;
   background-color: $hr-bg-color;
   margin-top: 0;
 }

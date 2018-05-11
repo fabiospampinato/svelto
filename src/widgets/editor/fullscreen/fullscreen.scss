@@ -7,7 +7,7 @@
 .editor.fullscreen,
 .editor.fullscreen-request {
   @include fill-fixed ();
-  z-index: $editor-fullscreen-z-index;
+  z-index: $editor-fullscreen-z-index !important;
   border-radius: 0;
   max-width: none; // Since the editor may as well be `.limited`
   width: auto; // Since the editor may have some `size-columns` classes set

@@ -12,7 +12,7 @@
     > .layout-header.sticky {
 
       @include position ( fixed, 0 0 false 0 );
-      z-index: $layout-sticky-header-z-index;
+      z-index: $layout-sticky-header-z-index !important;
 
       + .layout-content {
         margin-top: $layout-sticky-header-height;
@@ -30,7 +30,7 @@
 
         position: relative;
         position: sticky; // Unfortunately not well supported at the moment (FF >= 32, Safari >= 6.1)
-        z-index: $layout-sticky-header-z-index - 1;
+        z-index: $layout-sticky-header-z-index - 1 !important;
 
         + .layout-content {
           margin-top: 0;

@@ -15,7 +15,7 @@
   /* INDICATORS */
 
   &-indicators {
-    z-index: $carousel-indicators-z-index;
+    z-index: $carousel-indicators-z-index !important;
     display: flex;
     position: absolute;
     bottom: $gutter;
