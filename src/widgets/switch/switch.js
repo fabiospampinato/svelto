@@ -60,8 +60,8 @@
 
       this.isChecked = this.$input.prop ( 'checked' );
 
-      this.switchWidth = this.$switch.width ();
-      this.handlerWidth = this.$handler.width ();
+      this.switchWidth = this.$switch.width () || 47; //FIXME: It shouldn't be set manually, but this widget might be hidden at init time
+      this.handlerWidth = this.$handler.width () || 21; //FIXME: It shouldn't be set manually, but this widget might be hidden at init time
 
     }
 
