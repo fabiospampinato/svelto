@@ -185,7 +185,9 @@
 
       layout.boxesRearrangements.forEach ( ([ from, to ]) => {
         $(this.$boxes[from]).after ( this.$boxes[to] );
-        _.move ( this.$boxes, from, to );
+        let boxes = this.$boxes.get ();
+        _.move ( boxes, from, to );
+        this.$boxes = $(boxes);
         _.move ( this._images, from, to );
         _.move ( this._ratios, from, to );
         _.move ( layout.boxes, from, to );
