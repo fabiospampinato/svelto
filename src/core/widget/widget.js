@@ -620,7 +620,7 @@
 
       this.$element.trigger ( event, data );
 
-      return !( this.options.callbacks[type].apply ( this.element, [event].concat ( data ) ) === false || event.isDefaultPrevented () );
+      return !( this.options.callbacks[type].apply ( this.element, [event].concat ( data ) ) === false || $.isDefaultPrevented ( event ) );
 
     }
 

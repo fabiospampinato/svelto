@@ -135,7 +135,7 @@
 
     __tap ( event ) {
 
-      if ( this.isLocked () || this._isPinned || event.isDefaultPrevented () || event.isPropagationStopped () || !$.isAttached ( event.target ) || $(event.target).closest ( this.$panel ).length ) return;
+      if ( this.isLocked () || this._isPinned || $.isDefaultPrevented ( event ) || !$.isAttached ( event.target ) || $(event.target).closest ( this.$panel ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();

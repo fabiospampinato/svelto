@@ -62,7 +62,7 @@
 
         this.___scrollReset ();
 
-        if ( event.isDefaultPrevented () || event.isPropagationStopped () ) return; // Probably another widget was listening for the same event, and it should take priority over this
+        if ( $.isDefaultPrevented ( event ) ) return; // Probably another widget was listening for the same event, and it should take priority over this
 
         super.__keydown ( event );
 

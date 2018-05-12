@@ -164,7 +164,7 @@
 
       if ( this.isLocked () ) return;
 
-      if ( event.isDefaultPrevented () || event.isPropagationStopped () ) return;
+      if ( $.isDefaultPrevented ( event ) ) return;
 
       if ( event === this._openEvent || this.$popover.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return event.stopImmediatePropagation ();
 
