@@ -26,7 +26,7 @@
     } else {
 
       event = document.createEvent ( 'HTMLEvents' );
-      event.initEvent ( name, true, false );
+      event.initEvent ( name, true, true );
       event.originalEvent = originalEvent;
 
     }
