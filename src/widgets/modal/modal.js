@@ -124,7 +124,7 @@
 
       if ( this._isOpen ) return null;
 
-      if ( this.isLocked () ) return this.whenUnlocked ( this.open.bind ( open ) );
+      if ( this.isLocked () ) return this.whenUnlocked ( this.open.bind ( this ) );
 
       this.lock ();
 
