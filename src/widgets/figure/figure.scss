@@ -14,6 +14,12 @@
   padding: $figure-padding-y $figure-padding-x;
   border-radius: $figure-border-radius;
 
+  /* CHILDREN */
+
+  > * {
+    max-width: 100%; // Otherwise the content might overflow
+  }
+
   /* IMAGE */
 
   > img,
