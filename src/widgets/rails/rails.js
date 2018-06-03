@@ -17,12 +17,19 @@
       scroll: {
         speed: 200 // The distance scrolled when calling `left` or `right`
       },
+      classes: {
+        shadow: {
+          left: 'rails-shadow-left',
+          right: 'rails-shadow-right'
+        }
+      },
       selectors: {
         start: '.rails-start',
         left: '.rails-left',
         right: '.rails-right',
         end: '.rails-end',
         navigation: '.rails-navigation, .rails-start, .rails-left, .rails-right, .rails-end',
+        shadow: '.rails-shadow',
         content: '.rails-content',
         active: '.rails-active'
       },
@@ -53,6 +60,7 @@
       this.$right = this.$rails.find ( this.options.selectors.right );
       this.$end = this.$rails.find ( this.options.selectors.end );
       this.$navigation = this.$rails.find ( this.options.selectors.navigation );
+      this.$shadow = this.$rails.find ( this.options.selectors.shadow );
       this.$content = this.$rails.find ( this.options.selectors.content );
       this.$active = this.$content.find ( this.options.selectors.active );
 
@@ -121,7 +129,7 @@
 
     _updateNavigation () {
 
-      if ( !this.$navigation.length ) return;
+      if ( !this.$navigation.length && !this.$shadow.length ) return;
 
       let contentRect = this.$content.getRect (),
           scrollLeft = this.$content[0].scrollLeft,
@@ -134,9 +142,21 @@
 
       }
 
+      if ( this.$shadow.length ) {
+
+        this.$shadow.toggleClass ( this.options.classes.shadow.left, !isStart );
+
+      }
+
       if ( this.$end.length || this.$right.length ) {
 
         this.$end.add ( this.$right ).toggleClass ( this.options.classes.disabled, isEnd );
+
+      }
+
+      if ( this.$shadow.length ) {
+
+        this.$shadow.toggleClass ( this.options.classes.shadow.right, !isEnd );
 
       }
 

@@ -54,6 +54,49 @@
     flex-shrink: 0;
   }
 
+  /* SHADOW */
+
+  &-shadow {
+
+    position: relative;
+    overflow: hidden;
+
+    /* LEFT & RIGHT */
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+      width: $rails-shadow-width;
+      opacity: 0;
+      transition: opacity $rails-animation-duration;
+    }
+
+    &-left:before,
+    &-right:after {
+      opacity: 1;
+    }
+
+    /* LEFT */
+
+    &:before {
+      @include gradient-x( $rails-shadow-color, transparent );
+      left: 0;
+    }
+
+    /* RIGHT */
+
+    &:after {
+      @include gradient-x( transparent, $rails-shadow-color );
+      right: 0;
+    }
+
+  }
+
   /* CONTENT */
 
   $max-scrollbar-size: last( $rails-scrollbar-sizes );
