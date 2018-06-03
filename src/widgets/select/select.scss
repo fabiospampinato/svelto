@@ -49,6 +49,7 @@
       padding-right: ( 1em * $icon-scale-factor ) + $select-inner-gutter;
       min-height: 1em * $icon-scale-factor;
       min-width: 1em * $icon-scale-factor;
+      flex-grow: 1;
       cursor: pointer;
 
       /* EMPTY */
