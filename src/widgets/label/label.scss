@@ -17,8 +17,11 @@
   @include color ( $label-color, $label-color-force, $label-color-basic );
   @include text-no-wrap ();
   font-weight: $label-font-weight;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  line-height: 1 * $icon-scale-factor;
   border-radius: $label-border-radius;
   padding: $label-padding-y $label-padding-x;
   min-width: $line-height-em + ( $label-padding-x * 2 ); // In order to always maintain a reasonable aspect ratio
