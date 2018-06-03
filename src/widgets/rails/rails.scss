@@ -100,32 +100,22 @@
 
   /* CONTENT */
 
-  $max-scrollbar-size: last( $rails-scrollbar-sizes );
-
   &-content {
 
     flex: 1 1 auto;
     overflow-x: scroll;
     overflow-y: hidden;
-    padding-bottom: $rails-extra-padding;
-    margin-bottom: calc( ( #{$rails-extra-padding} + #{$max-scrollbar-size} ) * -1 );
+
+    /* READY */
+
+    html[class*="scrollbar-size-"] & {
+      padding-bottom: $rails-extra-padding;
+    }
 
     /* CHILDREN */
 
     > * {
       flex: 1 0 auto;
-    }
-
-    /* NOT MULTIPLE */
-
-    &:not(.multiple) {
-      padding-bottom: calc( #{$rails-extra-padding} + #{$max-scrollbar-size} );
-    }
-
-    /* MULTIPLE */
-
-    &.multiple {
-      margin-bottom: calc( ( #{$rails-extra-padding} + #{$max-scrollbar-size} + #{$gutter} ) * -1 );
     }
 
   }
