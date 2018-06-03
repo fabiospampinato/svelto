@@ -61,7 +61,7 @@
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 
-      this.dimension = this.$colorpicker.width () || 174; //FIXME: It shouldn't be set manually, but this widget might be hidden at init time
+      this.dimension = this.$sbWrp.width () || 174; //FIXME: It shouldn't be set manually, but this widget might be hidden at init time
 
       this.hsv = false;
 
