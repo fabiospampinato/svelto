@@ -4,6 +4,12 @@
 /* TOP */
 
 .highlight-top {
-  border-top-width: $highlight-width;
-  border-top-style: $highlight-style;
+
+  border-top-color: $highlight-color !important;
+  box-shadow: inset 0 $highlight-width 0 0 $highlight-color !important;
+
+  &.bordered {
+    box-shadow: inset 0 $highlight-bordered-width 0 0 $highlight-color !important;
+  }
+
 }

@@ -4,6 +4,12 @@
 /* LEFT */
 
 .highlight-left {
-  border-left-width: $highlight-width;
-  border-left-style: $highlight-style;
+
+  border-left-color: $highlight-color !important;
+  box-shadow: inset $highlight-width 0 0 0 $highlight-color !important;
+
+  &.bordered {
+    box-shadow: inset $highlight-bordered-width 0 0 0 $highlight-color !important;
+  }
+
 }

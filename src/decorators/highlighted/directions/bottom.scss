@@ -4,6 +4,12 @@
 /* BOTTOM */
 
 .highlight-bottom {
-  border-bottom-width: $highlight-width;
-  border-bottom-style: $highlight-style;
+
+  border-bottom-color: $highlight-color !important;
+  box-shadow: inset 0 #{-$highlight-width} 0 0 $highlight-color !important;
+
+  &.bordered {
+    box-shadow: inset 0 #{-$highlight-bordered-width} 0 0 $highlight-color !important;
+  }
+
 }

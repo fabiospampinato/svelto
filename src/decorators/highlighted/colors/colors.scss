@@ -3,16 +3,40 @@
 
 /* COLORS */
 
+$offsets: (
+  'top': ( 0 $highlight-width ),
+  'right': ( #{-$highlight-width} 0 ),
+  'bottom': ( 0 #{-$highlight-width} ),
+  'left': ( $highlight-width 0 )
+);
+
+$offsets-bordered: (
+  'top': ( 0 $highlight-bordered-width ),
+  'right': ( #{-$highlight-bordered-width} 0 ),
+  'bottom': ( 0 #{-$highlight-bordered-width} ),
+  'left': ( $highlight-bordered-width 0 )
+);
+
 @each $direction in $highlighted-colors-directions {
+
+  $offset: map-get( $offsets, $direction );
+  $offset-bordered: map-get( $offsets-bordered, $direction );
 
   @each $name, $datas in $colors {
 
     @if index( $highlighted-colors, $name ) {
 
-      $accent: nth( $datas, 5 );
+      $color: nth( $datas, 5 );
 
       %color-#{$name}.highlight-#{$direction}.highlighted {
-        border-#{$direction}-color: $accent;
+
+        border-#{$direction}-color: $color !important;
+        box-shadow: inset #{$offset} 0 0 $color !important;
+
+        &.bordered {
+          box-shadow: inset #{$offset-bordered} 0 0 $color !important;
+        }
+
       }
 
     }

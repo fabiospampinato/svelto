@@ -1,6 +1,10 @@
 
-// @optional decorators/bordered/bordered.scss
-
 /* HIGHLIGHTED */
 
-.highlighted {}
+// It looks kind of ugly for `.bordered` stuff, especially when zomming in
+//FIXME: Avoiding animating `box-shadow` (at least when adding the class), while still supporting `.blurred` and `.disabled`
+
+.highlighted {
+  transition: opacity $disabled-animation-duration,
+              filter $blurred-animation-duration;
+}

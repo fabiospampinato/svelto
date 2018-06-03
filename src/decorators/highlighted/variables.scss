@@ -1,5 +1,11 @@
 
+
+// @require core/colors/variables.scss
+// @require decorators/bordered/variables.scss
+// @require widgets/container/variables.scss
+
 /* HIGHLIGHTED */
 
-$highlight-width: 2px !default;
-$highlight-style: solid !default;
+$highlight-width: $border-width * 2 !default;
+$highlight-bordered-width: $border-width !default;
+$highlight-color: nth( map-get( $colors, $container-color ), 5 ) !default;
