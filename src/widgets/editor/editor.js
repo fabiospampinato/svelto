@@ -192,6 +192,7 @@
 
     _events () {
 
+      this.___change ();
       this.___keydown ();
       this.___triggers ();
       this.___parentUnfullscreen ();
@@ -205,6 +206,22 @@
       }
 
       if ( this.$emojipickerPopoverTrigger && this.$emojipickerPopoverTrigger.length ) this.___emojipicker ();
+
+    }
+
+    /* CHANGE */
+
+    ___change () {
+
+      this._on ( true, 'change', this.__change );
+
+    }
+
+    __change () {
+
+      if ( !this._isPreview ) return;
+
+      this._render ();
 
     }
 
