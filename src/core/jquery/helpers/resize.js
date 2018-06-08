@@ -9,13 +9,15 @@
   /* RESIZE */
 
   let width = $.window.outerWidth,
-      height = $.window.outerHeight;
+      height = $.window.outerHeight,
+      pixelRatio = $.window.devicePixelRatio || 1; // Used for more reliable zoom detection
 
-  $.$window.on ( 'resize', () => {
+  $.$window.on ( 'resize', (e) => {
 
-    const newWidth = $.window.outerWidth;
+    const newPixelRatio = $.window.devicePixelRatio || 1,
+          newWidth = $.window.outerWidth;
 
-    if ( newWidth !== width ) {
+    if ( newWidth !== width || newPixelRatio !== pixelRatio ) {
 
       width = newWidth;
 
@@ -25,13 +27,15 @@
 
     const newHeight = $.window.outerHeight;
 
-    if ( newHeight !== height ) {
+    if ( newHeight !== height || newPixelRatio !== pixelRatio ) {
 
       height = newHeight;
 
       $.$window.trigger ( 'resize:height' );
 
     }
+
+    pixelRatio = newPixelRatio;
 
   });
 
