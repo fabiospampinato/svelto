@@ -181,8 +181,8 @@
       let $scrollable = $.$window.add ( this.$loader.parents () ),
           handler = this._frames ( this.__request.bind ( this ) );
 
-      this._on ( true, $.$window, 'resize', handler );
       this._on ( true, $scrollable, 'scroll', handler );
+      this._on ( true, $.$window, 'resize:width', handler );
 
     }
 

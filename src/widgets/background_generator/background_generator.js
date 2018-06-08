@@ -123,7 +123,7 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._throttle ( this._init.bind ( this ), 250 ) );
+      this._on ( true, $.$window, 'resize:width', this._throttle ( this._init.bind ( this ), 250 ) );
 
     }
 

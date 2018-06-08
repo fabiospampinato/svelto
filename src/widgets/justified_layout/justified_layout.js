@@ -104,7 +104,7 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._frames ( this.render.bind ( this ) ) );
+      this._on ( true, $.$window, 'resize:width', this._frames ( this.render.bind ( this ) ) );
 
     }
 

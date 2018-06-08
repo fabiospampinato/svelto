@@ -18,4 +18,5 @@
 // @optional ./is_widget.js
 // @optional ./make_event.js
 // @optional ./remove.js
+// @optional ./resize.js
 // @optional ./scroll.js

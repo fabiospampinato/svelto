@@ -138,7 +138,7 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._frames ( this._positionate.bind ( this ) ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$.$window`
+      this._on ( true, $.$window, 'resize:width', this._frames ( this._positionate.bind ( this ) ) ); //FIXME: It should handle a generic parent `resize`-like event, not just on `$.$window`
 
     }
 
