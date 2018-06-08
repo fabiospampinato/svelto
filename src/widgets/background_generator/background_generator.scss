@@ -1,0 +1,10 @@
+
+// @require core/widget/widget.scss
+
+/* BACKGROUND GENERATOR */
+
+canvas.background-generator {
+  @extend %widget;
+  display: block;
+  background-color: $background-generator-bg-color;
+}
