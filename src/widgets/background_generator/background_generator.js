@@ -15,6 +15,7 @@
     plugin: true,
     selector: 'canvas.background-generator',
     options: {
+      pausable: true, // Pause the animation when the canvas is no longer visible in the viewport
       density: 15000 * pixelRatio, // One shape every this number of pixels
       shapes: 200,
       shapeOptions: {}, // Options to pass to the shape
@@ -68,6 +69,8 @@
 
       }
 
+      this._loopUpdate ();
+
     }
 
     _initCanvas () {
@@ -108,6 +111,7 @@
 
       this.___resize ();
       this.___loop ();
+      this.___scroll ();
 
     }
 
@@ -131,9 +135,47 @@
 
     ___loop () {
 
-      if ( !this.options.animations.enabled ) return;
+      if ( !this.options.animations.enabled || this.loopIntervalId ) return;
 
-      setInterval ( this._frames ( this.loop.bind ( this ) ), 1000 / 30 );
+      this.loopIntervalId = setInterval ( this._frames ( this.loop.bind ( this ) ), 1000 / 30 );
+
+    }
+
+    ___loop_off () {
+
+      if ( !this.options.pausable || !this.loopIntervalId ) return;
+
+      clearInterval ( this.loopIntervalId );
+
+      delete this.loopIntervalId;
+
+    }
+
+    _loopUpdate () {
+
+      const isVisible = $.isVisible ( this.canvas, true );
+
+      if ( isVisible ) {
+
+        this.___loop ();
+
+      } else {
+
+        this.___loop_off ();
+
+      }
+
+    }
+
+    /* SCROLL */
+
+    ___scroll () {
+
+      if ( !this.options.animations.enabled || !this.options.pausable ) return;
+
+      this._on ( true, $.$window, 'scroll', this._debounce ( this._loopUpdate.bind ( this ), 150 ) );
+
+      this._loopUpdate ();
 
     }
 
