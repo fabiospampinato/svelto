@@ -14,6 +14,7 @@
     history: [], // List of autofocused elements
     historySize: 3, // How many elements to keep in the history
     restore: false, // Switch focus to the previously focused element
+    selectionTypeRe: /text|search|url|tel|password/i,
 
     /* INIT */
 
@@ -36,7 +37,7 @@
 
       /* CARET TO THE END */
 
-      if ( ele.setSelectionRange ) {
+      if ( ele.setSelectionRange && Autofocus.selectionTypeRe.test ( ele.type ) ) {
 
         let length = ele.value.length * 2; // Double the length because Opera is inconsistent about whether a carriage return is one character or two
 
