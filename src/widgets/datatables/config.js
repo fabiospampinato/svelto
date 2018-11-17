@@ -156,50 +156,50 @@
 
         }
 
-				let btnText = '',
+        let btnText = '',
             btnClasses = button;
 
-				switch ( button ) {
+        switch ( button ) {
 
-					case 'ellipsis':
-						btnText = `<i class="icon">${Icon ( 'dots-horizontal' )}</i>`;
+          case 'ellipsis':
+            btnText = `<i class="icon">${Icon ( 'dots-horizontal' )}</i>`;
             break;
 
-					case 'first':
+          case 'first':
             if ( page === 0 ) continue;
-						btnText = lang.sFirst;
-						break;
+            btnText = lang.sFirst;
+            break;
 
-					case 'previous':
+          case 'previous':
             if ( page === 0 ) continue;
-						btnText = lang.sPrevious;
-						break;
+            btnText = lang.sPrevious;
+            break;
 
-					case 'next':
+          case 'next':
             if ( pages === 0 || page === pages - 1 ) continue;
-						btnText = lang.sNext;
-						break;
+            btnText = lang.sNext;
+            break;
 
-					case 'last':
+          case 'last':
             if ( pages === 0 || page === pages - 1 ) continue;
-						btnText = lang.sLast;
-						break;
+            btnText = lang.sLast;
+            break;
 
-					default:
-						btnText = button + 1;
-						btnClasses += page === button ? ' ' + classes.sPageButtonActive : '';
-						break;
+          default:
+            btnText = button + 1;
+            btnClasses += page === button ? ' ' + classes.sPageButtonActive : '';
+            break;
 
-				}
+        }
 
-				let node = $('<div>', {
+        let node = $('<div>', {
           'aria-controls': settings.sTableId,
           'aria-label': aria[button],
           'data-dt-idx': counter,
           'tabindex': settings.iTabIndex,
-					'class': classes.sPageButton + ' ' + btnClasses,
-					'id': idx === 0 && typeof button === 'string' ? settings.sTableId + '_' + button : null
-				}).html ( btnText )
+          'class': classes.sPageButton + ' ' + btnClasses,
+          'id': idx === 0 && typeof button === 'string' ? settings.sTableId + '_' + button : null
+        }).html ( btnText )
           .appendTo ( container );
 
         if ( button !== 'ellipsis' ) {
@@ -208,7 +208,7 @@
 
         }
 
-				counter++;
+        counter++;
 
   		}
 

@@ -15,6 +15,6 @@
 
     return _remove.call ( this );
 
-	};
+  };
 
 }( window.$ ));

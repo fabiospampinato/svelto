@@ -29,9 +29,9 @@
       if ( !raw.exitFullscreen ) return;
       document[raw.exitFullscreen]();
     },
-		toggle ( ele ) {
+    toggle ( ele ) {
       Fullscreen.isFullscreen ? Fullscreen.exit () : Fullscreen.request ( ele );
-		},
+    },
     get isFullscreen () {
       return !!Fullscreen.element;
     },
