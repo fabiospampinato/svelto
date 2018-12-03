@@ -36,6 +36,7 @@
         separator: ',', // It will also become kind of a forbidden character, used for insertion
         inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
       },
+      addOnBlur: true, // Treat a blur event like a submit event
       sort: false, // The tags will be outputted in alphanumeric-sort order
       escape: false, // Escape potential XSS characters
       deburr: false, // Replace non basic-latin characters
@@ -227,7 +228,7 @@
 
       this._on ( this.$partial, 'paste', this.__paste );
 
-      this._on ( this.$partial, 'blur', this.___blur );
+      if ( this.options.addOnBlur ) this._on ( this.$partial, 'blur', this.___blur );
 
     }
 
