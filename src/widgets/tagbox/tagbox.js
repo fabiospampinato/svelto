@@ -256,13 +256,18 @@
 
         if ( this.options.editBackspace && !value.length && this.options.tags.length ) {
 
-          let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
-              edit = !Keyboard.keystroke.hasCtrlOrCmd ( event );
+          let $tag = this.$tagbox.find ( this.options.selectors.tag ).last ();
 
-          this.remove ( $tag, edit );
+          if ( $tag.length ) {
 
-          event.preventDefault ();
-          event.stopImmediatePropagation ();
+            let edit = !Keyboard.keystroke.hasCtrlOrCmd ( event );
+
+            this.remove ( $tag, edit );
+
+            event.preventDefault ();
+            event.stopImmediatePropagation ();
+
+          }
 
         }
 
