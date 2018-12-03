@@ -237,6 +237,10 @@
 
     __keypressKeydown ( event ) {
 
+      let isShortcut = event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
+
+      if ( isShortcut ) return;
+
       let value = this.$partial.val ();
 
       if ( this.options.characters.inserters.includes ( event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
