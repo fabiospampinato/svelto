@@ -37,6 +37,7 @@
         inserters: [Keyboard.keys.ENTER, Keyboard.keys.TAB] // They are keyCodes
       },
       addOnBlur: true, // Treat a blur event like a submit event
+      editBackspace: true, // Enable editing the last tag when pressing backspace with an empty input
       sort: false, // The tags will be outputted in alphanumeric-sort order
       escape: false, // Escape potential XSS characters
       deburr: false, // Replace non basic-latin characters
@@ -253,7 +254,7 @@
 
       } else if ( event.keyCode === Keyboard.keys.BACKSPACE ) {
 
-        if ( !value.length && this.options.tags.length ) {
+        if ( this.options.editBackspace && !value.length && this.options.tags.length ) {
 
           let $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
               edit = !Keyboard.keystroke.hasCtrlOrCmd ( event );
