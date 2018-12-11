@@ -25,7 +25,7 @@
         hsla: {
           h: Date.now ().toString ().slice ( -5 ) / 100000 * 360, // Tying the starting hue to the timestamp
           s: 100,
-          l: 15,
+          l: 10,
           a: 1
         },
         color: 'hsla( 0, 100%, 15%, 1 )',

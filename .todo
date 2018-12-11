@@ -1,8 +1,10 @@
 
-☐ test bump
-☐ try chunked bundles
-
 Now:
+  ☐ add a global "before.scss" or something, so that we can supply variables on a single file
+  ☐ _frames, ensure the tail call get's always called, otherwise we can't rely on it for scrolling handlers for instance, since the last scroll event might not actually call the handler
+  ☐ boost rails priority (initing the scrolling may be slow otherwise)
+  ☐ create svelto-react
+  ☐ try chunked bundles
   ☐ require less polyfills (https://github.com/zloirock/core-js/issues/388)
     ☐ core-js' should be bundled after those included in Svelto (maybe they require the Symbol polyfill for instance)
   ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
@@ -12,7 +14,7 @@ Now:
   ☐ add global error/success handlers, so that we can implement a `login to do that` functionality
   ☐ add an option for keeping checkbox/radio buttons active when active
   ☐ add an option for keeping togglers/openers active when their target is open
-  ☐ tagbox: tag on empty partial input should do nothing
+  ☐ tagbox: tag (or did I mean "tap"?) on empty partial input should do nothing
   ☐ export some modules to github/npm
   ☐ remote loader: if it fails, retry! (N times?)
   ☐ input autocomplete plugin (like typeahead.js)
