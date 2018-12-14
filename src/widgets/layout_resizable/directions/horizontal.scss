@@ -5,6 +5,10 @@
 
 .layout.horizontal.resizable {
 
+  &.sash-dragging {
+    cursor: col-resize !important;
+  }
+
   & > .sash {
     @include absolute ( 0 auto 0 auto );
     cursor: col-resize;

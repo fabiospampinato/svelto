@@ -130,6 +130,11 @@
 
       this.$sashes.draggable ({
         axis: this.isHorizontal ? 'x' : 'y',
+        classes: {
+          layout: {
+            priorityZIndex: 'layout-priority-z-index sash-dragging'
+          }
+        },
         callbacks: {
           start: this.__dragStart.bind ( this ),
           move: this.__dragMove.bind ( this ),

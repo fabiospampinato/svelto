@@ -5,6 +5,10 @@
 
 .layout.vertical.resizable {
 
+  &.sash-dragging {
+    cursor: row-resize !important;
+  }
+
   & > .sash {
     @include absolute ( auto 0 auto 0 );
     cursor: row-resize;
