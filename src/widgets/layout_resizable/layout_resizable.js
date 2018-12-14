@@ -191,6 +191,7 @@
 
       if ( !accDimension ) return;
 
+      this.isHorizontal ? data.moveXY.x -= remDimension : data.moveXY.y -= remDimension; // Removing remaining dimension in order to improve the alignment between the cursor and the sash
       this._prevMoveXY = data.moveXY; // If this event didn't cause any change, we don't consider it at all
 
       const incSign = - decSign, // Direction of the increment
