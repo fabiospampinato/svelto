@@ -1,0 +1,12 @@
+
+// @require core/layout/layout.scss
+
+/* LAYOUT RESIZABLE */
+
+.layout.resizable {
+
+  & > .sash {
+    z-index: $layout-resizable-sash-z-index;
+  }
+
+}

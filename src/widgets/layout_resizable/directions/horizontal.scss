@@ -1,0 +1,16 @@
+
+// @require ../layout_resizable.scss
+
+/* HORIZONTAL */
+
+.layout.horizontal.resizable {
+
+  & > .sash {
+    @include absolute ( 0 auto 0 auto );
+    cursor: col-resize;
+    width: $layout-resizable-sash-size;
+    margin-left: - $layout-resizable-sash-size / 2;
+    transform: translateX( - $layout-resizable-sash-size / 2 ); // Starting hidden
+  }
+
+}

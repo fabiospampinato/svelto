@@ -1,0 +1,9 @@
+
+// @optional ./horizontal.scss
+// @optional ./vertical.scss
+
+/* DEFAULT */
+
+.layout.resizable:not(.vertical):not(.horizontal) {
+  @extend .layout.resizable.horizontal;
+}
