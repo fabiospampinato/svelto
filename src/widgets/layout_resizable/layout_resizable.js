@@ -15,7 +15,7 @@
     },
     options: {
       classes: {
-        horizontal: 'horizontal',
+        vertical: 'vertical',
         nosash: 'no-sash'
       }
     }
@@ -32,7 +32,7 @@
       this.$layout = this.$element;
       this.$panes = this.$layout.children ();
       this.$sashes = $.$empty;
-      this.isHorizontal = this.$layout.hasClass ( this.options.classes.horizontal );
+      this.isHorizontal = !this.$layout.hasClass ( this.options.classes.vertical );
       this.mapping = {}; // id => [$pane, $sash, hasSash, isResizable, minDimension, dimension]
 
     }
