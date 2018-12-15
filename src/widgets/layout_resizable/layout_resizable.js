@@ -109,8 +109,8 @@
         const $pane = mapping[0];
         const dimension = mapping[6];
         this.isHorizontal ? $pane.css ( 'width', dimension ) : $pane.css ( 'height', dimension );
-        if ( !isResizable ) continue;
-        $pane.css ( 'flex-grow', dimension ); // So that panes scale properly on resize
+        if ( !mapping[3] ) continue;
+        $pane.css ( 'flex-basis', dimension ); // So that panes scale properly on resize
       }
 
     }
