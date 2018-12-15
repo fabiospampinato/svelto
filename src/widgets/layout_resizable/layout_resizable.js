@@ -170,13 +170,34 @@
 
       let decSign = Math.sign ( deltaDimension ), // Direction of the decrement
           decId = decSign > 0 ? id + 1 : id, // Next id to target
+          incSign = - decSign, // Direction of the increment
+          incId = incSign > 0 ? id + 1 : id, // Id to increment
+          extraId = incId, // Just a copy of incId, so that we can mutate it
           remDimension = Math.abs ( deltaDimension ), // Amount of remaining dimension left to distribute
-          extraDimension = Math.max ( 0, mapping[6] + deltaDimension - mapping[5] ), // Dimension that goes over max-dimension and therefore can't be assigned
+          extraDimension = remDimension, // Dimension that goes over max-dimension and therefore can't be assigned
           accDimension = 0; // Amount of accumulated dimension that has been redistributed
+
+      while ( true ) { // Checking how much extra dimension there is
+
+        const mapping = this.mapping[extraId];
+
+        if ( !mapping ) break;
+
+        if ( mapping[3] ) {
+
+          extraDimension -= Math.min ( extraDimension, ( mapping[5] - mapping[6] ) )
+
+          if ( !extraDimension ) break;
+
+        }
+
+        extraId += incSign;
+
+      }
 
       remDimension -= extraDimension;
 
-      while ( true ) {
+      while ( true ) { // Decreasing dimension
 
         const mapping = this.mapping[decId];
 
@@ -205,10 +226,26 @@
       this.isHorizontal ? data.moveXY.x -= remDimension + extraDimension : data.moveXY.y -= remDimension + extraDimension; // Removing remaining dimension in order to improve the alignment between the cursor and the sash
       this._prevMoveXY = data.moveXY; // If this event didn't cause any change, we don't consider it at all
 
-      const incSign = - decSign, // Direction of the increment
-            incId = incSign > 0 ? id + 1 : id; // Id to increment
+      while ( true ) { // Increasing dimension
 
-      this.mapping[incId][6] += accDimension;
+        const mapping = this.mapping[incId];
+
+        if ( !mapping ) break;
+
+        if ( mapping[3] ) {
+
+          const partial = Math.min ( accDimension, ( mapping[5] - mapping[6] ) );
+
+          mapping[6] += partial;
+          accDimension -= partial;
+
+          if ( !accDimension ) break;
+
+        }
+
+        incId += incSign;
+
+      }
 
       this._updatePanes ();
 
