@@ -59,6 +59,12 @@
 
     /* HELPERS */
 
+    _calcProp ( $ele, prop, fallback = 0 ) {
+
+      return parseFloat ( $ele.css ( prop ) ) || fallback;
+
+    }
+
     _initMapping () {
 
       this.$panes.get ().forEach ( ( pane, id ) => {
@@ -68,8 +74,8 @@
               hasSash = !isLast && !$pane.hasClass ( this.options.classes.nosash ),
               isResizable = hasSash || ( id && this.mapping[id - 1][2] ),
               $sash = hasSash ? $(this._template ( 'sash' )) : undefined,
-              minDimensionRaw = parseFloat ( $pane.css ( this.isHorizontal ? 'min-width' : 'min-height' ) ),
-              minDimension = minDimensionRaw || ( parseFloat ( $pane.css ( this.isHorizontal ? 'padding-left' : 'padding-top' ) ) + parseFloat ( $pane.css ( this.isHorizontal ? 'padding-right' : 'padding-bottom' ) ) ) || 0,
+              minDimensionRaw = this._calcProp ( $pane, this.isHorizontal ? 'min-width' : 'min-height' ),
+              minDimension = minDimensionRaw || ( this._calcProp ( $pane, this.isHorizontal ? 'padding-left' : 'padding-top' ) + this._calcProp ( $pane, this.isHorizontal ? 'padding-right' : 'padding-bottom' ) + this._calcProp ( $pane, this.isHorizontal ? 'border-left-width' : 'border-top-width' ) + this._calcProp ( $pane, this.isHorizontal ? 'border-right-width' : 'border-bottom-width' ) ) || 0,
               maxDimensionRaw = parseFloat ( $pane.css ( this.isHorizontal ? 'max-width' : 'max-height' ) ),
               maxDimension = maxDimensionRaw || Infinity,
               dimension = 0;
