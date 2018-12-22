@@ -19,6 +19,7 @@ a {
   // Elsewhere this might be an unwanted style
 
   p &,
+  li &,
   address & {
 
     @include color-link ( $link-color, $link-color-force, $link-color-basic );
