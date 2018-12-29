@@ -57,6 +57,12 @@
 
     }
 
+    _destroy () {
+
+      this.$sashes.remove ();
+
+    }
+
     /* HELPERS */
 
     _calcProp ( $ele, prop, fallback = 0 ) {
