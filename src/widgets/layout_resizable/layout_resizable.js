@@ -286,6 +286,34 @@
 
     }
 
+    /* API */
+
+    getDimensions () {
+
+      const dimensions = {};
+
+      for ( let id in this.mapping ) {
+        dimensions[id] = this.mapping[id][6];
+      }
+
+      return dimensions;
+
+    }
+
+    setDimensions ( dimensions ) {
+
+      for ( let id in dimensions ) {
+        if ( !this.mapping[id] ) break;
+        this.mapping[id][6] = dimensions[id];
+      }
+
+      this._updatePanes ();
+      this._updateDimension ();
+      this._updateMapping ();
+      this._updateSashes ();
+
+    }
+
   }
 
   /* FACTORY */
