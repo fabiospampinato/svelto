@@ -1,6 +1,8 @@
 
 // @require core/svelto/svelto.js
 
+//URL: https://github.com/bevacqua/fuzzysearch
+
 (function ( $, _, Svelto ) {
 
   /* FUZZY */
@@ -9,6 +11,11 @@
 
     match ( str, search, isCaseSensitive = true ) {
 
+      const searchLength = search.length,
+            strLength = str.length;
+
+      if ( searchLength > strLength ) return false;
+
       if ( !isCaseSensitive ) {
 
         str = str.toLowerCase ();
@@ -16,28 +23,19 @@
 
       }
 
-      let currentIndex = -1,
-          str_i,
-          str_l = str.length;
+      if ( searchLength === strLength ) return search === str;
 
-      for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+      outer: for ( let i = 0, j = 0; i < searchLength; i++) {
 
-        for ( str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
+        const searchChar = search.charCodeAt ( i );
 
-          if ( str[str_i] === search[search_i] ) {
+        while ( j < strLength ) {
 
-            currentIndex = str_i;
-            str_i = str_l + 1;
-
-          }
+          if ( str.charCodeAt ( j++ ) === searchChar ) continue outer;
 
         }
 
-        if ( str_i === str_l ) {
-
-          return false;
-
-        }
+        return false;
 
       }
 
