@@ -34,7 +34,9 @@ if ( _.get ( sveltoConfig, 'paths.tokens.src' ) ) {
 
 /* EXECUTE */
 
-const args = ['--config', JSON.stringify ( config ), '--config', JSON.stringify ( sveltoConfig ), ...argsSrc, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
+const encodeObj = obj => Buffer.from ( JSON.stringify ( obj ) ).toString ( 'base64' );
+
+const args = ['--config', encodeObj ( config ), '--config', encodeObj ( sveltoConfig ), ...argsSrc, '--icon', icon, '--icon-error', iconError, ...process.argv.slice ( 2 )];
 const opts = {
   cwd: process.cwd (),
   stdio: 'inherit'
