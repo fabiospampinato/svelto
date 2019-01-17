@@ -1,5 +1,0 @@
-{
-  "bump.files": {
-    "pacco.json": ["\"version\":\\s*\"([^\"]*)\"", "\"version\": \"[version]\""]
-  }
-}
