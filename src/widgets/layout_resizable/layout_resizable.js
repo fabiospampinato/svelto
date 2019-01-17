@@ -17,6 +17,9 @@
       classes: {
         nosash: 'no-sash',
         vertical: 'vertical'
+      },
+      callbacks: {
+        resize: _.noop
       }
     }
   };
@@ -124,6 +127,8 @@
         if ( !mapping[3] ) continue;
         $pane.css ( 'flex-basis', dimension ); // So that panes scale properly on resize
       }
+
+      this._trigger ( 'resize' );
 
     }
 
