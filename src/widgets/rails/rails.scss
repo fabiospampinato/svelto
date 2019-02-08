@@ -103,7 +103,7 @@
   &-content {
 
     flex: 1 1 auto;
-    overflow-x: scroll;
+    overflow-x: hidden; /* In order to avoid displaying any scrollbars, even while loading */
     overflow-y: hidden;
 
     /* READY */
@@ -138,6 +138,7 @@
 
       .rails-content {
 
+        overflow-x: scroll;
         margin-bottom: calc( ( #{$rails-extra-padding} + #{$size} ) * -1 );
 
         &:not(.multiple) {
