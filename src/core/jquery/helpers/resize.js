@@ -15,9 +15,15 @@
   $.$window.on ( 'resize', (e) => {
 
     const newPixelRatio = $.window.devicePixelRatio || 1,
-          newWidth = $.window.outerWidth;
+          newWidth = $.window.outerWidth,
+          newHeight = $.window.outerHeight;
 
-    if ( newWidth !== width || newPixelRatio !== pixelRatio ) {
+    const didPixelRatioChange = newPixelRatio !== pixelRatio,
+          didWidthChange = newWidth !== width,
+          didHeightChange = newHeight !== height,
+          didSomethingChange = didPixelRatioChange || didWidthChange || didHeightChange; // Sometimes for some reason nothing actually changed
+
+    if ( !didSomethingChange || didWidthChange || didPixelRatioChange ) {
 
       width = newWidth;
 
@@ -25,9 +31,7 @@
 
     }
 
-    const newHeight = $.window.outerHeight;
-
-    if ( newHeight !== height || newPixelRatio !== pixelRatio ) {
+    if ( !didSomethingChange || didHeightChange || didPixelRatioChange ) {
 
       height = newHeight;
 
