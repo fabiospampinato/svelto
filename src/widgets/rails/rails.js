@@ -1,4 +1,5 @@
 
+// @priority 550
 // @require core/animations/animations.js
 // @require core/widget/widget.js
 
