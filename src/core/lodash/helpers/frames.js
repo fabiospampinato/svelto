@@ -8,18 +8,24 @@
 
   _.frames = function ( fn ) {
 
-    let wait, args;
+    let wait, timeout, args;
 
-    function proxy () {
-      wait = false;
+    function fnProxy () {
       fn.apply ( undefined, args );
+    }
+
+    function rafProxy () {
+      wait = false;
+      clearTimeout ( timeout );
+      timeout = setTimeout ( fnProxy, 50 );
+      fnProxy ();
     }
 
     function framed () {
       if ( wait ) return;
       wait = true;
       args = arguments;
-      requestAnimationFrame ( proxy );
+      requestAnimationFrame ( rafProxy );
     }
 
     return framed;
