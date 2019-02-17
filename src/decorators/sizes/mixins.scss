@@ -3,11 +3,27 @@
 
 @mixin size ( $size, $force: false, $basic: false ) {
 
-  @if not $force {
+  @if size-exists( $size ) {
 
-    $selector: sizes-get-undefined-selector();
+    @if not $force {
 
-    &#{$selector} {
+      $selector: sizes-get-undefined-selector();
+
+      &#{$selector} {
+
+        @if not $basic {
+
+          @extend %size-#{$size};
+
+        } @else {
+
+          @extend %size-#{$size}-base;
+
+        }
+
+      }
+
+    } @else {
 
       @if not $basic {
 
@@ -21,26 +37,18 @@
 
     }
 
-  } @else {
-
-    @if not $basic {
-
-      @extend %size-#{$size};
-
-    } @else {
-
-      @extend %size-#{$size}-base;
-
-    }
-
   }
 
 }
 
 @mixin size-inline ( $size ) {
 
-  $font-size: map-get( $sizes, $size );
+  @if size-exists( $size ) {
 
-  font-size: $font-size;
+    $font-size: map-get( $sizes, $size );
+
+    font-size: $font-size;
+
+  }
 
 }

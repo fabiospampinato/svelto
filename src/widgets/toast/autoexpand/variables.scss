@@ -4,4 +4,4 @@
 /* AUTOEXPAND */
 
 $toast-autoexpand-breakpoint: 'small' !default;
-$toast-autoexpand-width: map-get( $breakpoints, $toast-autoexpand-breakpoint ) - $breakpoint-epsilon !default;
+$toast-autoexpand-width: if( breakpoint-exists( $toast-autoexpand-breakpoint ), map-get( $breakpoints, $toast-autoexpand-breakpoint ) - $breakpoint-epsilon, -1px ) !default;

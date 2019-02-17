@@ -4,6 +4,12 @@
 
 /* BREAKPOINTS */
 
+@function breakpoint-exists ( $breakpoint ) {
+
+  @return map-has-key( $breakpoints, $breakpoint );
+
+}
+
 @function breakpoint-previous ( $breakpoint ) {
 
   @return map-previous( $breakpoints, $breakpoint );
@@ -18,9 +24,13 @@
 
 @function breakpoint-min ( $breakpoint ) {
 
-  $value: map-get( $breakpoints, $breakpoint );
+  @if breakpoint-exists( $breakpoint ) {
 
-  @return if( unit-strip( $value ) != 0, $value, null );
+    $value: map-get( $breakpoints, $breakpoint );
+
+    @return if( unit-strip( $value ) != 0, $value, null );
+
+  }
 
 }
 

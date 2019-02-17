@@ -1,4 +1,12 @@
 
+/* EXISTS */
+
+@function size-exists ( $size ) {
+
+  @return map-has-key( $sizes, $size );
+
+}
+
 /* SIZES */
 
 // Returning the proper font-size at which the icons will look `$icon-size`x`$icon-size`

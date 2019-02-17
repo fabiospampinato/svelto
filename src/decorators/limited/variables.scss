@@ -3,4 +3,4 @@
 
 /* LIMITED */
 
-$limited-width: map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 1.05 !default;
+$limited-width: if( is-empty( $breakpoints ), 1000000px, map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 1.05 ) !default;

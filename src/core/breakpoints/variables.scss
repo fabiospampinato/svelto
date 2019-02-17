@@ -25,4 +25,4 @@ $breakpoints: (
 
 /* EPSILON */
 
-$breakpoint-epsilon: .1 + ( map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) * 0 ) !default; // A value of `.01` for some reasons breaks the iPad Air (iOS 9.2)
+$breakpoint-epsilon: .1 + ( if( is-empty( $breakpoints ), 0px, map-get( $breakpoints, last( map-keys( $breakpoints ) ) ) ) * 0 ) !default; // A value of `.01` for some reasons breaks the iPad Air (iOS 9.2)

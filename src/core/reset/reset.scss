@@ -24,10 +24,7 @@ html {
 /* BODY */
 
 body {
-  $datas: map-get( $colors, $body-color );
-  background-color: nth( $datas, 1 );
-  color: nth( $datas, 6 );
-  border-color: nth( $datas, 4 );
+  @include color-inline ( $body-color, 'base' );
   font-family: $font-family-root;
   font-size: 1rem;
   line-height: $line-height;

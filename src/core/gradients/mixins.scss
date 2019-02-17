@@ -4,11 +4,21 @@
 /* GRADIENT */
 
 @mixin gradient-x-from-color ( $color ) {
+
   $start-end: gradient-get-start-end-from-color( $color );
-  @include gradient-x ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100% );
+
+  @if $start-end {
+    @include gradient-x ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100% );
+  }
+
 }
 
 @mixin gradient-y-from-color ( $color ) {
+
   $start-end: gradient-get-start-end-from-color( $color );
-  @include gradient-y ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100% );
+
+  @if $start-end {
+    @include gradient-y ( nth( $start-end, 1 ), nth( $start-end, 2 ), 0%, 100% );
+  }
+
 }

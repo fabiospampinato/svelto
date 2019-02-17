@@ -1,4 +1,12 @@
 
+/* EXISTS */
+
+@function z-depth-exists ( $z-depth ) {
+
+  @return map-has-key( $z-depths, $z-depth );
+
+}
+
 /* SELECTOR */
 
 @function z-depths-get-undefined-selector () {

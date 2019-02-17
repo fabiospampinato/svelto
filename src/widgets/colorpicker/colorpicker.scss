@@ -17,7 +17,11 @@
   /* HANDLER */
 
   &-handler {
-    box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow;
+    @if z-depth-exists( $colorpicker-handler-z-depth ) {
+      box-shadow: map-get( $z-depths, $colorpicker-handler-z-depth ), $colorpicker-handler-shadow;
+    } @else {
+      box-shadow: $colorpicker-handler-shadow;
+    }
     position: absolute;
     z-index: 2;
     cursor: move;

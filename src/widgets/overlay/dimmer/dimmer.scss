@@ -5,5 +5,5 @@
 
 .overlay.dimmer {
   @include color ( $overlay-dimmer-color, $overlay-dimmer-color-force, $overlay-dimmer-color-basic );
-  background-color: rgba( nth( map-get( $colors, $overlay-dimmer-color ), 1 ), $overlay-dimmer-bg-opacity );
+  background-color: rgba( if( color-exists( $overlay-dimmer-color ), nth( map-get( $colors, $overlay-dimmer-color ), 1 ), #212121 ), $overlay-dimmer-bg-opacity );
 }

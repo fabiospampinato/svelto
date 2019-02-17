@@ -8,4 +8,4 @@
 
 $highlight-width: $border-width * 2 !default;
 $highlight-bordered-width: $border-width !default;
-$highlight-color: nth( map-get( $colors, $container-color ), 5 ) !default;
+$highlight-color: if( color-exists( $container-color ), nth( map-get( $colors, $container-color ), 5 ), #ef6c00 ) !default;

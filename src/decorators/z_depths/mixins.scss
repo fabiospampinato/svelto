@@ -3,11 +3,27 @@
 
 @mixin z-depth ( $depth, $force: false, $basic: false ) {
 
-  @if not $force {
+  @if z-depth-exists( $depth ) {
 
-    $selector: z-depths-get-undefined-selector();
+    @if not $force {
 
-    &#{$selector} {
+      $selector: z-depths-get-undefined-selector();
+
+      &#{$selector} {
+
+        @if not $basic {
+
+          @extend %z-depth-#{$depth};
+
+        } @else {
+
+          @extend %z-depth-#{$depth}-base;
+
+        }
+
+      }
+
+    } @else {
 
       @if not $basic {
 
@@ -21,26 +37,18 @@
 
     }
 
-  } @else {
-
-    @if not $basic {
-
-      @extend %z-depth-#{$depth};
-
-    } @else {
-
-      @extend %z-depth-#{$depth}-base;
-
-    }
-
   }
 
 }
 
 @mixin z-depth-inline ( $depth ) {
 
-  $z-depth: map-get( $z-depths, $depth );
+  @if z-depth-exists( $depth ) {
 
-  box-shadow: $z-depth;
+    $z-depth: map-get( $z-depths, $depth );
+
+    box-shadow: $z-depth;
+
+  }
 
 }

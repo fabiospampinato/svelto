@@ -5,7 +5,7 @@
 
 /* HEADER */
 
-$layout-header-bg-color: darken( nth( map-get( $colors, $body-color ), 1 ), 70 ) !default;
+$layout-header-bg-color: darken( if( color-exists( $body-color ), nth( map-get( $colors, $body-color ), 1 ), #eceff1 ), 70 ) !default;
 $layout-header-border-color: darken( $layout-header-bg-color, $color-border-darken-amount ) !default;
 $layout-header-color: $color-black-text !default; // The bg color is quite a bit darkened
 

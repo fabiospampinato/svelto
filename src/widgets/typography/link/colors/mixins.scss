@@ -3,11 +3,27 @@
 
 @mixin color-link ( $color, $force: false, $basic: false ) {
 
-  @if not $force {
+  @if color-exists( $color ) {
 
-    $selector: colors-link-get-undefined-selector();
+    @if not $force {
 
-    &#{$selector} {
+      $selector: colors-link-get-undefined-selector();
+
+      &#{$selector} {
+
+        @if not $basic {
+
+          @extend %color-#{$color}-link;
+
+        } @else {
+
+          @extend %color-#{$color}-link-base;
+
+        }
+
+      }
+
+    } @else {
 
       @if not $basic {
 
@@ -21,52 +37,44 @@
 
     }
 
-  } @else {
-
-    @if not $basic {
-
-      @extend %color-#{$color}-link;
-
-    } @else {
-
-      @extend %color-#{$color}-link-base;
-
-    }
-
   }
 
 }
 
 @mixin color-link-inline ( $color, $type ) {
 
-  $datas: map-get( $colors, $color );
+  @if color-exists( $color ) {
 
-  $bg: nth( $datas, 1 );
-  $bg-hover: nth( $datas, 2 );
-  $bg-active: nth( $datas, 3 );
+    $datas: map-get( $colors, $color );
 
-  @if $type == 'base' {
+    $bg: nth( $datas, 1 );
+    $bg-hover: nth( $datas, 2 );
+    $bg-active: nth( $datas, 3 );
 
-    color: $bg;
+    @if $type == 'base' {
 
-  } @else if $type == 'hover' {
+      color: $bg;
 
-    color: $bg-hover;
+    } @else if $type == 'hover' {
 
-  } @else if $type == 'active' {
+      color: $bg-hover;
 
-    color: $bg-active;
+    } @else if $type == 'active' {
 
-  } @else if $type == 'full' {
+      color: $bg-active;
 
-    @include color-link-inline ( $color, 'base' );
+    } @else if $type == 'full' {
 
-    &:hover {
-      @include color-link-inline ( $color, 'hover' );
-    }
+      @include color-link-inline ( $color, 'base' );
 
-    &:active {
-      @include color-link-inline ( $color, 'active' );
+      &:hover {
+        @include color-link-inline ( $color, 'hover' );
+      }
+
+      &:active {
+        @include color-link-inline ( $color, 'active' );
+      }
+
     }
 
   }

@@ -1,13 +1,19 @@
 
+// @require core/colors/functions.scss
+
 /* GRADIENT */
 
 @function gradient-get-start-end-from-color ( $color ) {
 
-  $datas: map-get( $colors, $color );
+  @if color-exists( $color ) {
 
-  $start: nth( $datas, 2 ); // Hover
-  $end: nth( $datas, 3 ); // Active
+    $datas: map-get( $colors, $color );
 
-  @return ( $start, $end );
+    $start: nth( $datas, 2 ); // Hover
+    $end: nth( $datas, 3 ); // Active
+
+    @return ( $start, $end );
+
+  }
 
 }

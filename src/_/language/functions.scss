@@ -1,0 +1,16 @@
+
+/* LANGUAGE */
+
+@function is-empty ( $x ) {
+
+  @if not $x or $x == '' or $x == 0 or $x == () or length( $x ) == 0 {
+
+    @return true;
+
+  } @else {
+
+    @return false;
+
+  }
+
+}

@@ -1,4 +1,12 @@
 
+/* EXISTS */
+
+@function color-exists ( $color ) {
+
+  @return map-has-key( $colors, $color );
+
+}
+
 /* SELECTOR */
 
 @function colors-get-undefined-selector () {

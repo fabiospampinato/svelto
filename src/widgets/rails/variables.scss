@@ -11,7 +11,7 @@ $rails-scrollbar-sizes: 0px, 12px, 15px, 16px, 17px !default; // Possible scroll
 /* SHADOW */
 
 $rails-shadow-width: 5em !default;
-$rails-shadow-color: nth( map-get( $colors, $container-color ), 1 ) !default;
+$rails-shadow-color: if( color-exists( $container-color ), nth( map-get( $colors, $container-color ), 1 ), #ffffff ) !default;
 
 /* ANIMATION */
 

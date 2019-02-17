@@ -7,15 +7,19 @@
 
   @if $depth != false {
 
-    @include z-depth ( $depth, $force );
+    @if z-depth-exists( $depth ) {
 
-    @if not $force {
+      @include z-depth ( $depth, $force );
 
-      @extend %raisable;
+      @if not $force {
 
-    } @else {
+        @extend %raisable;
 
-      @extend %raisable%z-depth-#{$depth};
+      } @else {
+
+        @extend %raisable%z-depth-#{$depth};
+
+      }
 
     }
 
