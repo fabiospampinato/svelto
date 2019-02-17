@@ -16,6 +16,20 @@
 
 // `$axis` can be either: `x`, `y` or `false` for both
 
+@mixin center-flex ( $axis: false ) {
+
+  display: flex;
+
+  @if $axis != x {
+    align-items: center;
+  }
+
+  @if $axis != y {
+    justify-content: center;
+  }
+
+}
+
 @mixin center-transform ( $axis: false ) {
 
   @if $axis != x {
