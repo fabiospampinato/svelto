@@ -1,23 +1,21 @@
 
 Now:
-  ☐ add a global "before.scss" or something, so that we can supply variables on a single file
-  ☐ _frames, ensure the tail call get's always called, otherwise we can't rely on it for scrolling handlers for instance, since the last scroll event might not actually call the handler
-  ☐ boost rails priority (initing the scrolling may be slow otherwise)
+  ☐ editor: link and image should highlight the link, not the alt/name text
+  ☐ toast: option for moving the bottom queues up on scrolling (so that they don't go over the footer)
+    ☐ do the same for the header
+  ☐ input autocomplete plugin (like typeahead.js)
+  ☐ layout-resizable: handle double click on the sash
+  ☐ add global error/success handlers, so that we can implement a `login to do that` functionality
+  ☐ add an option for keeping checkbox/radio buttons active when active
   ☐ create svelto-react
-  ☐ try chunked bundles
   ☐ require less polyfills (https://github.com/zloirock/core-js/issues/388)
     ☐ core-js' should be bundled after those included in Svelto (maybe they require the Symbol polyfill for instance)
   ☐ [demo] add init/destroy api to for Openers, Closers, and Togglers
   ☐ lazy inside a modal doesn't work
-  ☐ toast: option for moving the bottom queues up on scrolling (so that they don't go over the footer)
-  ☐ editor: link and image should highlight the link, not the alt/name text
-  ☐ add global error/success handlers, so that we can implement a `login to do that` functionality
-  ☐ add an option for keeping checkbox/radio buttons active when active
   ☐ add an option for keeping togglers/openers active when their target is open
   ☐ tagbox: tag (or did I mean "tap"?) on empty partial input should do nothing
   ☐ export some modules to github/npm
   ☐ remote loader: if it fails, retry! (N times?)
-  ☐ input autocomplete plugin (like typeahead.js)
   ☐ add pure css tooltips like materializecss' (we already have a `tooltip` component)
   ☐ add a storable form
   ☐ On mobile remove focus from liker after click (it should show the updated counter, not the text for removing the like...) (search for: "sticky hover")
@@ -25,13 +23,13 @@ Now:
   ☐ add style on :focus, also add better keyboard navigation support
 
 Next:
+  ☐ use emojione v3
+  ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
   ☐ center sortable names, or when also `text-align: center` they will look misaligned
   ☐ dinamically check for classes, like when using `isOpen` etc.
-  ☐ reorganize widget_helper (like progressbar or noty), it currently conflicts with table_helper which is an entirely different thing
   ☐ find a pattern like ___ but for UNinitialize, use in combination with initializers... maybe when call it pass true or false... maybe just ___foo_off
 
 Future:
-  ☐ use emojione v3
   ☐ [widget] add better support for updating after options are set at runtime
   ☐ an utility for dinamically creating a dialog, like a modal for confirmation and stuff
   ☐ [SASS] add string related functions to _, take them from here: https://github.com/HugoGiraudel/SassyStrings/tree/master/stylesheets
