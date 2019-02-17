@@ -20,6 +20,8 @@ a {
 
   p &,
   li &,
+  th &,
+  td &,
   address & {
 
     @include color-link ( $link-color, $link-color-force, $link-color-basic );
