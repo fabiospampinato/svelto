@@ -5,10 +5,10 @@
 /* TIP */
 
 $pointing-tip-size: .625em !default;
-$pointing-tip-size-half: $pointing-tip-size / 2;
+$pointing-tip-size-half: $pointing-tip-size / 2 !default;
 
-$pointing-tip-diagonal: $pointing-tip-size * $SQRT2;
-$pointing-tip-diagonal-half: $pointing-tip-diagonal / 2;
+$pointing-tip-diagonal: $pointing-tip-size * $SQRT2 !default;
+$pointing-tip-diagonal-half: $pointing-tip-diagonal / 2 !default;
 
 $pointing-tip-color: 'inherit' !default;
 $pointing-tip-color-force: true !default;
