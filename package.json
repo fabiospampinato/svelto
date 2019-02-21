@@ -1,7 +1,7 @@
 {
   "name": "svelto",
   "description": "Modular front end framework for modern browsers, with battery included: 100+ widgets and tools.",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "bin": "bin/index.js",
   "scripts": {
     "make:emoji": "node src/lib/emoji/data/raw/make.js"
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "execa": "^0.8.0",
-    "pacco": "^2.1.2",
+    "pacco": "^2.1.5",
     "require-dot-file": "^0.4.0"
   },
   "devDependencies": {
