@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "execa": "^0.8.0",
-    "pacco": "^2.1.7",
+    "pacco": "^2.1.8",
     "require-dot-file": "^0.4.0"
   },
   "devDependencies": {
