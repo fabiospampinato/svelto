@@ -119,8 +119,6 @@
 
     update () {
 
-      this.$chart.removeData ();
-
       this._initDatas ();
 
       const {data} = this._getSettings ();
