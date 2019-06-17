@@ -4,7 +4,27 @@
 
 (function ( Modernizr, $ ) {
 
-  /* CLIP PATH URL */
+  /* CSS SUPPORTS CHECK */
+
+  if ( 'CSS' in window && 'supports' in window.CSS ) {
+
+    for ( let i = 0, l = Modernizr._prefixes.length; i < l; i++ ) {
+
+      const prop = `${Modernizr._prefixes[i]}clip-path`;
+
+      if ( window.CSS.supports ( prop, 'url(#test)' ) ) {
+
+        return Modernizr.addTest ( 'clip-path-url', true );
+
+      }
+
+    }
+
+    return Modernizr.addTest ( 'clip-path-url', false );
+
+  }
+
+  /* VISUAL CHECK */
 
   $(function () {
 
