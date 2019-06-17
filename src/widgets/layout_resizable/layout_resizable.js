@@ -43,13 +43,11 @@
     _init () {
 
       this._initMapping ();
-
-      this.$layout.prepend ( this.$sashes );
-
-      this._updateDimension ();
       this._updateMapping ();
       this._updatePanes ();
       this._updateSashes ();
+
+      this.$layout.prepend ( this.$sashes );
 
     }
 
@@ -98,12 +96,6 @@
         this.$sashes = this.$sashes.add ( $sash );
 
       });
-
-    }
-
-    _updateDimension () {
-
-      this.dimension = this.isHorizontal ? this.$layout.outerWidth () : this.$layout.outerHeight ();
 
     }
 
@@ -285,7 +277,6 @@
 
     __resize () {
 
-      this._updateDimension ();
       this._updateMapping ();
       this._updateSashes ();
 
@@ -313,7 +304,6 @@
       }
 
       this._updatePanes ();
-      this._updateDimension ();
       this._updateMapping ();
       this._updateSashes ();
 
