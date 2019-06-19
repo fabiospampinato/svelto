@@ -42,8 +42,8 @@
       escape: false, // Escape potential XSS characters
       deburr: false, // Replace non basic-latin characters
       messages: {
-        tooShort: '`$1` is shorter than $2 characters',
-        duplicate: '`$1` is a duplicate',
+        tooShort: '"$1" is shorter than $2 characters',
+        duplicate: '"$1" is a duplicate',
         forbidden: 'The character you entered is forbidden'
       },
       datas: {
