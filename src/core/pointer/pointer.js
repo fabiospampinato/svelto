@@ -74,7 +74,7 @@
 
     $.fn[name] = function ( data, fn ) {
 
-      return arguments.length ? this.on ( Pointer[name], null, data, fn ) : this.triggger ( name );
+      return arguments.length ? this.on ( Pointer[name], undefined, data, fn ) : this.triggger ( name );
 
     };
 

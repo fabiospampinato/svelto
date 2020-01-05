@@ -511,7 +511,7 @@
 
         _onlyOne = handler;
         handler = selector;
-        selector = false;
+        selector = undefined;
 
       }
 
