@@ -6,7 +6,6 @@
   /* VARIABLES */
 
   let html = document.documentElement,
-      keyboardAllowed = ( typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element ),
       apis = [
         ['requestFullscreen',       'exitFullscreen',       'fullscreenElement',       'fullscreenEnabled',       'fullscreenchange',       'fullscreenerror'],
         ['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'],
@@ -23,7 +22,7 @@
   let Fullscreen = {
     request ( ele = html ) {
       if ( !raw.requestFullscreen ) return;
-      ele[raw.requestFullscreen]( keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT );
+      ele[raw.requestFullscreen]();
     },
     exit () {
       if ( !raw.exitFullscreen ) return;
