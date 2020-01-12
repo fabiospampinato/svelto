@@ -51,13 +51,17 @@
         if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
         if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
 
+        let keyCode = event.keyCode;
+
+        if ( keyCode >= 96 && keyCode <= 105 ) keyCode -= 48; // Numpad patch
+
         for ( let i = 0, l = keys.length; i < l; i++ ) {
 
           let key = keys[i];
 
           if ( !specialKeys.includes ( key ) ) {
 
-            if ( !( event.keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( event.keyCode ).toLowerCase () === key ) ) return false;
+            if ( !( keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( keyCode ).toLowerCase () === key ) ) return false;
 
           }
 
