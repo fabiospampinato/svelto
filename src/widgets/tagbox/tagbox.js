@@ -241,9 +241,13 @@
 
       if ( isShortcut ) return;
 
+      let keyCode = event.keyCode;
+
+      if ( keyCode >= 96 && keyCode <= 105 ) keyCode -= 48; // Numpad patch
+
       let value = this.$partial.val ();
 
-      if ( this.options.characters.inserters.includes ( event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+      if ( this.options.characters.inserters.includes ( keyCode ) || keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
         let added = this.add ( value );
 
@@ -256,7 +260,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-      } else if ( event.keyCode === Keyboard.keys.BACKSPACE ) {
+      } else if ( keyCode === Keyboard.keys.BACKSPACE ) {
 
         if ( this.options.editBackspace && !value.length && this.options.tags.length ) {
 
@@ -275,7 +279,7 @@
 
         }
 
-      } else if ( this.options.characters.forbid && this.options.characters.forbidden.includes ( String.fromCharCode ( event.keyCode ) ) ) {
+      } else if ( this.options.characters.forbid && this.options.characters.forbidden.includes ( String.fromCharCode ( keyCode ) ) ) {
 
         $.toast ( this.options.messages.forbidden );
 
