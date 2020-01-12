@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-//TODO: Replace `pacco` to `svelto` in the help text, we probably need to add an API for this to Caporal
+//TODO: Replace "pacco" with "svelto" in the help text, we probably need to add an API for this to Caporal
 
 /* REQUIRE */
 
