@@ -100,6 +100,7 @@
       type: 'alert',
       color: Colors.black,
       css: '',
+      unique: false, // Whether to avoid showing this if another equal toast is already shown
       persistent: false, // Whether it should survive a change of page or not. Needed when used in frameworks like Meteor
       autoplay: true,
       ttl: 3500,
@@ -164,6 +165,8 @@
 
       this.$toast.widgetize ();
 
+      if ( this.options.unique && this._existsOtherEqualToast () ) return this.close ();
+
       if ( this._isOpen ) {
 
         this.___timer ();
@@ -191,6 +194,20 @@
     _getUrl () {
 
       return window.location.href.split ( '#' )[0];
+
+    }
+
+    _existsOtherEqualToast () {
+
+      const pickProps = toast => {
+        const props = _.pick ( toast.options, ['anchor', 'title', 'body', 'img', 'icon', 'buttons', 'type', 'color', 'css'] );
+        props.buttons = props.buttons.map ( button => _.omit ( button, 'onClick' ) );
+        return props;
+      };
+
+      const props = pickProps ( this );
+
+      return !!Toasts.get ().find ( toast => _.isEqualJSON ( props, pickProps ( toast ) ) );
 
     }
 
