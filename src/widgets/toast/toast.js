@@ -198,6 +198,8 @@
 
     ___timer () {
 
+      Toasts.add ( this );
+
       if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
         if ( !this.timer ) {
@@ -209,8 +211,6 @@
           this.timer.reset ();
 
         }
-
-        Toasts.add ( this );
 
       }
 
@@ -452,11 +452,15 @@
 
     pause () {
 
+      if ( !this.timer ) return;
+
       this.timer.pause ();
 
     }
 
     resume () {
+
+      if ( !this.timer ) return;
 
       this.timer.remaining ( Math.max ( this.options.ttlMinimumRemaining, this.timer.remaining () ) ).play ();
 
