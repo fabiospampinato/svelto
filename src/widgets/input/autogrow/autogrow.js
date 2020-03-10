@@ -72,7 +72,11 @@
 
     _getNeededWidth () {
 
-      this.$tempInput.css ( 'font', this.$input.css ( 'font' ) ).val ( this.$input.val () ).appendTo ( this.$layout );
+      const val = this.$input.val ();
+
+      if ( !val ) return this.options.minWidth;
+
+      this.$tempInput.css ( 'font', this.$input.css ( 'font' ) ).val ( val ).appendTo ( this.$layout );
 
       let width = this.$tempInput[0].scrollWidth;
 
