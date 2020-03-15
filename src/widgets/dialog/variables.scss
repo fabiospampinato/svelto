@@ -1,0 +1,18 @@
+
+// @require widgets/container/variables.scss
+// @require widgets/label/variables.scss
+
+/* DIALOG */
+
+$dialog-min-width: 19rem !default;
+$dialog-padding-x: $container-padding-x + ( unit-strip( $label-padding-x ) * 1rem ) !default;
+$dialog-padding-y: $container-padding-y !default;
+
+/* TITLE */
+
+$dialog-title-size: 'large' !default;
+$dialog-title-font-weight: 500 !default;
+
+/* BUTTON */
+
+$dialog-button-font-weight: 500 !default;

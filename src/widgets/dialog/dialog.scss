@@ -1,0 +1,40 @@
+
+/* DIALOG */
+
+.dialog {
+
+  min-width: $dialog-min-width;
+
+  & > .card-header {
+
+    @include size-inline ( $dialog-title-size );
+    padding: $dialog-padding-y $dialog-padding-x !important;
+    font-weight: $dialog-title-font-weight;
+
+    &:not(.bordered) {
+      padding-bottom: 0 !important;
+    }
+
+  }
+
+  & > .card-block {
+    padding: $dialog-padding-y $dialog-padding-x !important;
+  }
+
+  & > .card-footer {
+
+    .multiple.stack {
+      align-items: flex-end;
+    }
+
+    .button {
+      font-weight: $dialog-button-font-weight;
+    }
+
+    &:not(:only-child):not(.bordered) {
+      padding-top: 0 !important;
+    }
+
+  }
+
+}
