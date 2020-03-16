@@ -15,9 +15,9 @@
 
       return new Promise ( resolve => {
 
-        $dialogs.one ( 'modal:close dialog:close', () => resolve ( $.dialog ( options ) ) );
+        $modals.one ( 'modal:close dialog:close', () => resolve ( $.dialog ( options ) ) );
 
-        $dialogs.dialog ( 'close' );
+        $modals.dialog ( 'close' );
 
       });
 
