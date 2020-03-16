@@ -172,7 +172,7 @@
 
       if ( withCtmd ) {
 
-        if ( !this.$dialog.find ( 'textarea' ).isFocused () ) return null;
+        if ( !this.$dialog.find ( 'textarea' ).isFocused () && !this.$dialog.find ( 'input' ).isFocused () ) return null;
 
       } else {
 
