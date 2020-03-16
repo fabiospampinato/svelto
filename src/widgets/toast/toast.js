@@ -127,19 +127,19 @@
     }
   };
 
+  /* INIT QUEUE */
+
+  const initQueues = _.once ( () => {
+
+    const queues = Toast.config.templates.queues ();
+
+    $.$layout.append ( queues );
+
+  });
+
   /* TOAST */
 
   class Toast extends Widgets.Autofocusable {
-
-    /* STATIC */
-
-    static _initQueues = _.once ( () => {
-
-      const queues = Toast.config.templates.queues ();
-
-      $.$layout.append ( queues );
-
-    })
 
     /* SPECIAL */
 
@@ -394,7 +394,7 @@
 
       this._frame ( function () {
 
-        Toast._initQueues ();
+        initQueues ();
 
         $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$toast );
 
