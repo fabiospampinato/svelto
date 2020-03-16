@@ -136,7 +136,8 @@
 
       let $button = $(event.target),
           index = this.$buttons.index ( $button ),
-          buttonObj = this.options.buttons[index];
+          indexNormalized = this.$buttons.parent ().is ( this.options.selectors.stack ) ? this.options.buttons.length - index - 1 : index,
+          buttonObj = this.options.buttons[indexNormalized];
 
       if ( buttonObj && buttonObj.onClick ) {
 
