@@ -37,7 +37,7 @@
 
       $dialog.one ( 'dialog:close', () => {
 
-        _.defer ( () => $dialog.remove () ); // Deferring because we need the cleanup event to be triggered too
+        _.defer ( () => $dialog.dialog ( 'destroy' ) ); // Deferring because we need the cleanup event to be triggered too
 
         resolve ();
 
