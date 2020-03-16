@@ -98,6 +98,10 @@
       },
       selectors: {
         button: '.card-footer .button'
+      },
+      keystrokes: {
+        'ctmd + enter': ['__enter', true],
+        'enter': ['__enter', false]
       }
     }
   };
@@ -142,6 +146,24 @@
       }
 
       this.close ();
+
+    }
+
+    /* ENTER */
+
+    __enter ( withCtmd ) {
+
+      if ( withCtmd ) {
+
+        if ( !this.$dialog.find ( 'textarea' ).isFocused () ) return null;
+
+      } else {
+
+        if ( !this.$dialog.find ( 'input' ).isFocused () ) return null;
+
+      }
+
+      this.$buttons.last ().trigger ( Pointer.tap );
 
     }
 
