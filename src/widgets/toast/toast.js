@@ -131,21 +131,15 @@
 
   class Toast extends Widgets.Autofocusable {
 
-    /* READY */
+    /* STATIC */
 
-    static ready ( done ) {
+    static _initQueues = _.once ( () => {
 
-      setTimeout ( function () { // In order to better support client size rendering //TODO: Maybe do this lazily
+      const queues = Toast.config.templates.queues ();
 
-        const queues = Toast.config.templates.queues ();
+      $.$layout.append ( queues );
 
-        $.$layout.append ( queues );
-
-        done ();
-
-      });
-
-    }
+    })
 
     /* SPECIAL */
 
@@ -399,6 +393,8 @@
       this._isOpen = true;
 
       this._frame ( function () {
+
+        Toast._initQueues ();
 
         $(this.options.selectors.queues + '.' + this.options.anchor.y + ' ' + this.options.selectors.queue + '.' + this.options.anchor.x).append ( this.$toast );
 
