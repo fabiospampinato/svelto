@@ -3,8 +3,6 @@
 
 /* EMBEDDED CSS */
 
-//TODO: Lazily instanciate this
-
 (function ( $, _, Svelto, Readify ) {
 
   /* EMBEDDED CSS */
@@ -57,6 +55,16 @@
     _refresh () {
 
       this.$stylesheet.text ( this._cssfy () );
+
+      if ( _.isEmpty ( this.tree ) ) { // Empty, detaching
+
+        this.detach ();
+
+      } else { // Not empty, attaching
+
+        this.attach ();
+
+      }
 
     }
 
@@ -139,9 +147,5 @@
   /* EXPORT */
 
   Svelto.EmbeddedCSS = new EmbeddedCSS ();
-
-  /* READY */
-
-  Readify.add ( Svelto.EmbeddedCSS.attach.bind ( Svelto.EmbeddedCSS ) );
 
 }( Svelto.$, Svelto._, Svelto, Svelto.Readify ));
