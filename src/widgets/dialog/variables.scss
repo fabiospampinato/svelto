@@ -1,4 +1,5 @@
 
+// @require core/colors/variables.scss
 // @require widgets/container/variables.scss
 // @require widgets/label/variables.scss
 
@@ -16,3 +17,4 @@ $dialog-title-font-weight: 500 !default;
 /* BUTTON */
 
 $dialog-button-font-weight: 500 !default;
+$dialog-button-focus-color: $color-secondary !default;

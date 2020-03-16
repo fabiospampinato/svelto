@@ -28,7 +28,13 @@
     }
 
     .button {
+
       font-weight: $dialog-button-font-weight;
+
+      &:not(:hover):not(.hover):not(:active):not(.active):focus {
+        color: $dialog-button-focus-color !important;
+      }
+
     }
 
     &:not(:only-child):not(.bordered) {

@@ -55,7 +55,7 @@
         </div>
       ` ),
       button: _.template ( `
-        <div class="button <%= o.color || '' %> <%= o.size || '' %> <%= o.css || '' %>">
+        <div class="button <%= o.color || '' %> <%= o.size || '' %> <%= o.css || '' %>" tabindex="0">
           <%= o.text || '' %>
         </div>
       ` )
@@ -97,7 +97,8 @@
         }
       },
       selectors: {
-        button: '.card-footer .button'
+        button: '.card-footer .button',
+        stack: '.stack'
       },
       keystrokes: {
         'ctmd + enter': ['__enter', true],
@@ -149,6 +150,22 @@
 
     }
 
+    /* FOCUS */
+
+    ___focus () {
+
+      this._frame ( function () { // The modal needs to get opened first
+
+        if ( this.$dialog.find ( 'input, textarea' ).isFocused () ) return;
+
+        const $button = this.$buttons.parent ().is ( this.options.selectors.stack ) ? this.$buttons.first () : this.$buttons.last ();
+
+        $button.trigger ( 'focus' );
+
+      });
+
+    }
+
     /* ENTER */
 
     __enter ( withCtmd ) {
@@ -176,6 +193,7 @@
       if ( !_.isUndefined ( result ) ) return result;
 
       this.___buttonTap ();
+      this.___focus ();
 
     }
 
