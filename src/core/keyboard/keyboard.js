@@ -28,52 +28,67 @@
       TAB: 9,
       UP: 38
     },
+    keysModifiers: {
+      ALT: true,
+      CMD: true,
+      CTRL: true,
+      CTMD: true, // `ctmd` is treated as `cmd` on Mac, and as `ctrl` elsewhere
+      SHIFT: true
+    },
     keystroke: {
+
+      parse: (() => {
+
+        const cache = {};
+
+        return keystroke => {
+
+          const cached = cache[keystroke];
+
+          if ( cached ) return cached;
+
+          const keys = {};
+
+          keystroke.split ( '+' ).forEach ( key => {
+
+            key = key.trim ().toUpperCase ();
+
+            keys[key] = true;
+
+            if ( !Keyboard.keysModifiers[key] ) keys.trigger = key;
+
+          });
+
+          if ( keys.CTMD ) keys[Browser.is.mac ? 'CMD' : 'CTRL'] = true;
+
+          return cache[keystroke] = keys;
+
+        };
+
+      })(),
 
       match ( event, keystroke ) {
 
-        // `ctmd` is treated as `cmd` on Mac, and as `ctrl` elsewhere
+        const keys = Keyboard.keystroke.parse ( keystroke );
 
-        let specialKeys = ['ctrl', 'cmd', 'ctmd', 'alt', 'shift'],
-            keys = keystroke.split ( '+' ).map ( key => key.trim ().toLowerCase () );
-
-        if ( keys.includes ( 'ctmd' ) ) {
-
-          if ( !Keyboard.keystroke.hasCtrlOrCmd ( event ) ) return false;
-
-        } else {
-
-          if ( keys.includes ( 'ctrl' ) !== event.ctrlKey ) return false;
-          if ( keys.includes ( 'cmd' ) !== event.metaKey ) return false;
-
-        }
-
-        if ( keys.includes ( 'alt' ) !== event.altKey ) return false;
-        if ( keys.includes ( 'shift' ) !== event.shiftKey ) return false;
+        if ( !!keys.CTRL !== event.ctrlKey ) return false;
+        if ( !!keys.CMD !== event.metaKey ) return false;
+        if ( !!keys.ALT !== event.altKey ) return false;
+        if ( !!keys.SHIFT !== event.shiftKey ) return false;
 
         let keyCode = event.keyCode;
 
+        if ( keyCode === Keyboard.keys[keys.trigger] ) return true;
+
         if ( keyCode >= 96 && keyCode <= 105 ) keyCode -= 48; // Numpad patch
 
-        for ( let i = 0, l = keys.length; i < l; i++ ) {
-
-          let key = keys[i];
-
-          if ( !specialKeys.includes ( key ) ) {
-
-            if ( !( keyCode === Keyboard.keys[key.toUpperCase ()] || String.fromCharCode ( keyCode ).toLowerCase () === key ) ) return false;
-
-          }
-
-        }
-
-        return true;
+        return String.fromCharCode ( keyCode ).toUpperCase () === keys.trigger;
 
       },
 
       hasCtrlOrCmd ( event ) {
 
-        return ( !Browser.is.mac && event.ctrlKey ) || ( Browser.is.mac && event.metaKey );
+        return Browser.is.mac ? !!event.metaKey : !!event.ctrlKey;
 
       }
 
