@@ -12,8 +12,11 @@ img {
   @include color ( $image-color, $image-color-force, $image-color-basic );
   display: block;
   max-width: 100%;
-  height: auto;
   min-height: 1px; // It fixes a bug in IE11 where the images are stretched vertically
+
+  &:not([height]) {
+    height: auto;
+  }
 
   /* INLINE */
 
