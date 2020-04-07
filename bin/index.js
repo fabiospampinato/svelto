@@ -26,7 +26,7 @@ if ( _.get ( sveltoConfig, 'paths.tokens.src' ) ) {
 
   sveltoConfig.paths.tokens.src = [src].concat ( _.castArray ( sveltoConfig.paths.tokens.src ) );
 
-} else {
+} else if ( !process.argv.includes ( '--config' ) ) {
 
   argsSrc = ['--source', src];
 
