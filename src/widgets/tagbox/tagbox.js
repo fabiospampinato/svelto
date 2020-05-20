@@ -61,6 +61,7 @@
         change: _.noop,
         add: _.noop,
         remove: _.noop,
+        trigger: _.noop,
         empty: _.noop
       }
     }
@@ -245,11 +246,19 @@
 
       if ( this.options.characters.inserters.includes ( keyCode ) || keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
 
-        let added = this.add ( value );
+        if ( !value ) {
 
-        if ( added ) {
+          this._trigger ( 'trigger' );
 
-          this._clearPartial ();
+        } else {
+
+          let added = this.add ( value );
+
+          if ( added ) {
+
+            this._clearPartial ();
+
+          }
 
         }
 
