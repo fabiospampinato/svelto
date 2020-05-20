@@ -237,10 +237,6 @@
 
     __keypressKeydown ( event ) {
 
-      let isShortcut = event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
-
-      if ( isShortcut ) return;
-
       let keyCode = event.keyCode;
 
       if ( keyCode >= 96 && keyCode <= 105 ) keyCode -= 48; // Numpad patch
@@ -279,7 +275,7 @@
 
         }
 
-      } else if ( this.options.characters.forbid && this.options.characters.forbidden.includes ( String.fromCharCode ( keyCode ) ) ) {
+      } else if ( this.options.characters.forbid && this.options.characters.forbidden.includes ( event.key ) ) {
 
         $.toast ( this.options.messages.forbidden );
 
