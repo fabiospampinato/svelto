@@ -85,7 +85,7 @@
 
     __tap ( event ) {
 
-      if ( this.isLocked () || $.isDefaultPrevented ( event ) || !$.isAttached ( event.target ) || $(event.target).closest ( this.$modal ).length ) return;
+      if ( this.isLocked () || $.isDefaultPrevented ( event ) || !$.isAttached ( event.target ) || $(event.target).closest ( this.$modal ).length || this.$modal.touching ({ point: $.eventXY ( event, 'clientX', 'clientY' )} ).length ) return;
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
