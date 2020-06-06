@@ -6,6 +6,7 @@
 /* DIALOG */
 
 $dialog-min-width: 19rem !default;
+$dialog-max-width: 30rem !default;
 $dialog-padding-x: $container-padding-x + ( unit-strip( $label-padding-x ) * 1rem ) !default;
 $dialog-padding-y: $container-padding-y !default;
 

@@ -4,6 +4,7 @@
 .dialog {
 
   min-width: $dialog-min-width;
+  max-width: $dialog-max-width !important;
 
   & > .card-header {
 
