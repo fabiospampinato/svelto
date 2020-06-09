@@ -54,6 +54,7 @@
     _events () {
 
       this.___drag ();
+      this.___resizeRelative ();
       this.___resize ();
 
     }
@@ -264,6 +265,22 @@
 
       this._updateMapping ();
       this._updateSashes ();
+
+    }
+
+    /* RESIZE RELATIVE */
+
+    ___resizeRelative () {
+
+      this._on ( true, $.$window, 'layoutresizable:resize', this._throttle ( this.__resizeRelative.bind ( this ), 500 ) );
+
+    }
+
+    __resizeRelative ( event ) {
+
+      if ( !event.target.contains ( this.element ) && !this.element.contains ( event.target ) ) return; // The resize happened in another tree, ignoring
+
+      this.__resize ();
 
     }
 
