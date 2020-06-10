@@ -6,7 +6,13 @@
 .layout.vertical.resizable {
 
   &.sash-dragging {
+
     cursor: row-resize !important;
+
+    & > *:not(.sash) {
+      pointer-events: none !important;
+    }
+
   }
 
   & > .sash {

@@ -6,7 +6,13 @@
 .layout.horizontal.resizable {
 
   &.sash-dragging {
+
     cursor: col-resize !important;
+
+    & > *:not(.sash) {
+      pointer-events: none !important;
+    }
+
   }
 
   & > .sash {
