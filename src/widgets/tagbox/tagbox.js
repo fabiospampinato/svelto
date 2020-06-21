@@ -38,6 +38,7 @@
       },
       addOnBlur: true, // Treat a blur event like a submit event
       editBackspace: true, // Enable editing the last tag when pressing backspace with an empty input
+      minPasteTags: 3, // Minimum number of pasted tags to trigger a submit event
       sort: false, // The tags will be outputted in alphanumeric-sort order
       escape: false, // Escape potential XSS characters
       deburr: false, // Replace non basic-latin characters
@@ -299,9 +300,15 @@
 
     __paste ( event ) {
 
-      let originalEvent = event.originalEvent || event;
+      let originalEvent = event.originalEvent || event,
+          text = originalEvent.clipboardData.getData ( 'text' ),
+          inserterRe = /[,\r\n\t]/gi, //TODO: This regex shouldn't be hardcoded but generated from options
+          tagsNr = _.findMatches ( text, inserterRe ).length + 1,
+          shouldAdd = tagsNr >= this.options.minPasteTags;
 
-      this.add ( originalEvent.clipboardData.getData ( 'text' ) );
+      if ( !shouldAdd ) return;
+
+      this.add ( text );
 
       event.preventDefault ();
       event.stopImmediatePropagation ();
