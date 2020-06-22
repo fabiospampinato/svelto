@@ -38,7 +38,7 @@
       },
       addOnBlur: true, // Treat a blur event like a submit event
       editBackspace: true, // Enable editing the last tag when pressing backspace with an empty input
-      minPasteTags: 3, // Minimum number of pasted tags to trigger a submit event
+      minPasteTags: 2, // Minimum number of pasted tags to trigger a submit event
       sort: false, // The tags will be outputted in alphanumeric-sort order
       escape: false, // Escape potential XSS characters
       deburr: false, // Replace non basic-latin characters
