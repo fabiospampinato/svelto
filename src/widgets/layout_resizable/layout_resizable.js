@@ -56,6 +56,7 @@
       this.___drag ();
       this.___resizeRelative ();
       this.___resize ();
+      this.___sashDoubleclick ();
 
     }
 
@@ -296,6 +297,33 @@
 
       this._updateMapping ();
       this._updateSashes ();
+
+    }
+
+    /* SASH DOUBLE CLICK */
+
+    ___sashDoubleclick () {
+
+      this._on ( this.$sashes, 'dblclick', this.__sashDoubleclick );
+
+    }
+
+    __sashDoubleclick ( event ) {
+
+      const originalEvent = event.originalEvent || event,
+            sash = originalEvent.target,
+            index = sash._resid,
+            mappingLeft = this.mapping[index],
+            mappingRight = this.mapping[index + 1],
+            centerDelta = ( ( mappingLeft[6] + mappingRight[6] ) / 2 ) - mappingLeft[6],
+            clickXY = $.eventXY ( event ),
+            x = this.isHorizontal ? clickXY.x + centerDelta : clickXY.x,
+            y = this.isHorizontal ? clickXY.y : clickXY.y + centerDelta;
+
+      this.__dragMove ( event, { // A little hacky, but it gets the job done with minimal code
+        draggable: sash,
+        moveXY: {x, y}
+      });
 
     }
 
