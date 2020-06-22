@@ -315,7 +315,8 @@
             index = sash._resid,
             mappingLeft = this.mapping[index],
             mappingRight = this.mapping[index + 1],
-            centerDelta = ( ( mappingLeft[6] + mappingRight[6] ) / 2 ) - mappingLeft[6],
+            centerDeltaRaw = ( ( mappingLeft[6] + mappingRight[6] ) / 2 ) - mappingLeft[6],
+            centerDelta = centerDeltaRaw >= 0 ? Math.min ( centerDeltaRaw, mappingLeft[5] - mappingLeft[6] ) : centerDeltaRaw,
             clickXY = $.eventXY ( event ),
             x = this.isHorizontal ? clickXY.x + centerDelta : clickXY.x,
             y = this.isHorizontal ? clickXY.y : clickXY.y + centerDelta;
