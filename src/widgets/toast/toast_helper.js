@@ -21,7 +21,17 @@
 
     /* TOAST */
 
-    return Toast.whenReady.call ( Toast, () => new Toast ( options ) );
+    return Toast.whenReady.call ( Toast, () => {
+
+      const toast = new Toast ( options );
+
+      toast.$element.one ( 'toast:close', () => {
+
+        _.defer ( () => toast.destroy () );
+
+      });
+
+    });
 
   };
 
