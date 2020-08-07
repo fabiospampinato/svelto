@@ -449,11 +449,11 @@
 
         this._delay ( function () {
 
+          this._trigger ( 'close' );
+
           this.$toast.remove ();
 
           this.unlock ();
-
-          this._trigger ( 'close' );
 
         }, this.options.animations.close );
 
