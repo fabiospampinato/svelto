@@ -16,7 +16,7 @@
     $anchor: false, // Positionate next to an $anchor element
     point: false, // Positionate at coordinates, ex: { x: number, y: number }
     pointer: false, // The element pointing to the anchor, can be: false -> no pointer, 'auto' -> pointer using the `pointing` decorator, $element -> element used as pointer
-    spacing: 0, // Extra space to leave around the positionable element
+    spacing: 0, // Extra space to leave around the positionable element, number or { x: number, y: number }
     constrainer: { // Constrain the $positionable inside the $element
       $element: false, // If we want to keep the $positionable inside this $element
       center: false, // Set the constrain type, it will constrain the whole shape, or the center
@@ -56,6 +56,8 @@
     let positionable = this[0],
         $positionable = $(positionable),
         positionableRect = $positionable.getRect (),
+        spacingX = _.isNumber ( options.spacing.x ) ? options.spacing.x : options.spacing || 0,
+        spacingY = _.isNumber ( options.spacing.y ) ? options.spacing.y : options.spacing || 0,
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight,
         directions = _.uniq ( [].concat ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
@@ -139,19 +141,19 @@
     switch ( bestDirection ) {
 
       case 'top':
-        coordinates.top = anchorRect.top - positionableRect.height - options.spacing;
+        coordinates.top = anchorRect.top - positionableRect.height - spacingY;
         break;
 
       case 'bottom':
-        coordinates.top = anchorRect.bottom + options.spacing;
+        coordinates.top = anchorRect.bottom + spacingY;
         break;
 
       case 'left':
-        coordinates.left = anchorRect.left - positionableRect.width - options.spacing;
+        coordinates.left = anchorRect.left - positionableRect.width - spacingX;
         break;
 
       case 'right':
-        coordinates.left = anchorRect.right + options.spacing;
+        coordinates.left = anchorRect.right + spacingX;
         break;
 
     }
@@ -198,8 +200,8 @@
           isExtendedX = anchorRect.top + anchorRect.height >= 0 && anchorRect.top <= windowHeight,
           isExtendedY = anchorRect.left + anchorRect.width >= 0 && anchorRect.left <= windowWidth;
 
-      if ( isExtendedX ) coordinates.top = _.clamp ( coordinates.top, options.spacing, windowHeight - positionableRect.height - options.spacing );
-      if ( isExtendedY ) coordinates.left = _.clamp ( coordinates.left, options.spacing, windowWidth - positionableRect.width - options.spacing );
+      if ( isExtendedX ) coordinates.top = _.clamp ( coordinates.top, spacingY, windowHeight - positionableRect.height - spacingY );
+      if ( isExtendedY ) coordinates.left = _.clamp ( coordinates.left, spacingX, windowWidth - positionableRect.width - spacingX );
 
     } else if ( options.constrainer.$element ) {
 
@@ -209,8 +211,8 @@
 
       /* COORDINATES */
 
-      coordinates.top = _.clamp ( coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + options.spacing, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - options.spacing );
-      coordinates.left = _.clamp ( coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + options.spacing, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - options.spacing );
+      coordinates.top = _.clamp ( coordinates.top, constrainerRect.top - halfHeight - options.constrainer.tolerance.y + spacingY, constrainerRect.bottom - positionableRect.height + halfHeight + options.constrainer.tolerance.y - spacingY );
+      coordinates.left = _.clamp ( coordinates.left, constrainerRect.left - halfWidth - options.constrainer.tolerance.x + spacingX, constrainerRect.right - positionableRect.width + halfWidth + options.constrainer.tolerance.x - spacingX );
 
     }
 
