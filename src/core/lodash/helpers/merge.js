@@ -17,15 +17,17 @@
 
           const value = obj[key];
 
-          if ( !_.isPlainObject ( value ) || !_.isPlainObject ( acc[key] ) ) {
+          if ( !_.isPlainObject ( value ) ) {
 
             acc[key] = value;
 
+          } else if ( !_.isPlainObject ( acc[key] ) ) {
+
+            acc[key] = _.merge ( {}, value );
+
           } else {
 
-            if ( !acc[key] ) acc[key] = {};
-
-            _.merge ( acc[key], obj[key] );
+            acc[key] = _.merge ( acc[key], value );
 
           }
 
