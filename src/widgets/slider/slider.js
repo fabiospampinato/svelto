@@ -206,7 +206,7 @@
 
     _dragValue () {
 
-      return this._sanitizeValue ( this.options.value + ( this._dragDistance / this.stepWidth * this.options.step ) );
+      return this._sanitizeValue ( this._dragInitialValue + ( this._dragDistance / this.stepWidth * this.options.step ) );
 
     }
 
@@ -229,6 +229,7 @@
       this._dragIsProxyed = data.isProxyed;
       this._dragProxyDistance = 0;
       this._dragDistance = 0;
+      this._dragInitialValue = this.get ();
 
       this._updateVariables ();
 
