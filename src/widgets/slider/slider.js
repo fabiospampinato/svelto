@@ -100,6 +100,12 @@
 
     }
 
+    _destroy () {
+
+      this.$handler.draggable ( 'destroy' );
+
+    }
+
     /* PRIVATE */
 
     _sanitizeValue ( value ) {
