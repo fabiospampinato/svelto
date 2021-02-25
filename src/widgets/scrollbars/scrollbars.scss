@@ -1,0 +1,218 @@
+
+/* SCROLLBARS */
+
+.scrollbars {
+
+  @include fill-absolute ();
+  position: absolute;
+
+  /* TRACK */
+
+  &-track {
+
+    position: absolute;
+    z-index: $scrollbars-track-z-index;
+    user-select: none !important;
+    overflow: hidden;
+    transition-duration: $scrollbars-track-animation-duration;
+
+    /* HORIZONTAL */
+
+    &.horizontal {
+
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: $scrollbars-track-size;
+
+      .scrollbars-thumb {
+        min-width: $scrollbars-thumb-min-size;
+        top: $scrollbars-track-size - $scrollbars-thumb-collapsed-size;
+        height: $scrollbars-thumb-collapsed-size;
+        transition-property: top, height;
+        transition-duration: $scrollbars-thumb-animation-duration;
+      }
+
+    }
+
+    /* VERTICAL */
+
+    &.vertical {
+
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: $scrollbars-track-size;
+
+      .scrollbars-thumb {
+        min-height: $scrollbars-thumb-min-size;
+        left: $scrollbars-track-size - $scrollbars-thumb-collapsed-size;
+        width: $scrollbars-thumb-collapsed-size;
+        transition-property: left, width;
+        transition-duration: $scrollbars-thumb-animation-duration;
+      }
+
+    }
+
+  }
+
+  /* THUMB */
+
+  &-thumb {
+    position: absolute;
+    z-index: $scrollbars-thumb-z-index;
+    background-color: #00000088;
+  }
+
+  /* CORNER */
+
+  &-corner {
+    display: none;
+    position: absolute;
+    z-index: $scrollbars-corner-z-index;
+    right: 0;
+    bottom: 0;
+    width: $scrollbars-corner-size;
+    height: $scrollbars-corner-size;
+  }
+
+  /* VIEWPORT */
+
+  &-viewport {
+
+    @include fill-absolute ();
+    position: absolute;
+    overflow: scroll;
+    scrollbar-width: 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+  }
+
+  /* CONTENT */
+
+  &-content {}
+
+  /* HAS HORIZONTAL */
+
+  &:not(.has-horizontal) {
+
+    > .scrollbars-track.horizontal {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+  }
+
+  /* HAS VERTICAL */
+
+  &:not(.has-vertical) {
+
+    > .scrollbars-track.vertical {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+  }
+
+  /* HAS HORIZONTAL & HAS VERTICAL & HAS CORNER */
+
+  &.has-horizontal.has-vertical.has-corner {
+
+    > .scrollbars-track.horizontal {
+      right: $scrollbars-corner-size;
+    }
+
+    > .scrollbars-track.vertical {
+      bottom: $scrollbars-corner-size;
+    }
+
+  }
+
+  /* IS DRAGGING HORIZONTAL */
+
+  &-track.horizontal:hover,
+  &-track.horizontal:active,
+  &.dragging-horizontal > .scrollbars-track.horizontal {
+
+    .scrollbars-thumb {
+      top: $scrollbars-track-size - $scrollbars-thumb-expanded-size;
+      height: $scrollbars-thumb-expanded-size;
+    }
+
+  }
+
+  /* IS DRAGGING VERTICAL */
+
+  &-track.vertical:hover,
+  &-track.vertical:active,
+  &.dragging-vertical > .scrollbars-track.vertical {
+
+    .scrollbars-thumb {
+      left: $scrollbars-track-size - $scrollbars-thumb-expanded-size;
+      width: $scrollbars-thumb-expanded-size;
+    }
+
+  }
+
+  /* AUTOHIDE */
+
+  &.autohide {
+
+    /* HORIZONTAL SCROLLING */
+
+    &:not(.is-horizontal-scrolling) {
+
+      > .scrollbars-track:not(:hover):not(:active).horizontal {
+        opacity: 0;
+      }
+
+    }
+
+    &.is-horizontal-scrolling {
+
+      > .scrollbars-track.horizontal {
+        transition-duration: 0s;
+      }
+
+    }
+
+    /* VERTICAL SCROLLING */
+
+    &:not(.is-vertical-scrolling) {
+
+      > .scrollbars-track:not(:hover):not(:active).vertical {
+        opacity: 0;
+      }
+
+    }
+
+    &.is-vertical-scrolling {
+
+      > .scrollbars-track.vertical {
+        transition-duration: 0s;
+      }
+
+    }
+
+  }
+
+  /* IS MOBILE */
+
+  html.mobile &-track {
+    pointer-events: none;
+  }
+
+  /* IS DRAGGING */
+
+  html.scrollbars-dragging &-track {
+    pointer-events: none;
+  }
+
+}
