@@ -135,11 +135,22 @@
 
   }
 
+  /* IS DRAGGING */
+
+  &.is-horizontal-dragging,
+  &.is-vertical-dragging {
+
+    > .scrollbars-viewport {
+      pointer-events: none;
+    }
+
+  }
+
   /* IS DRAGGING HORIZONTAL */
 
   &-track.horizontal:hover,
   &-track.horizontal:active,
-  &.dragging-horizontal > .scrollbars-track.horizontal {
+  &.is-horizontal-dragging > .scrollbars-track.horizontal {
 
     .scrollbars-thumb {
       top: $scrollbars-track-size - $scrollbars-thumb-expanded-size;
@@ -152,7 +163,7 @@
 
   &-track.vertical:hover,
   &-track.vertical:active,
-  &.dragging-vertical > .scrollbars-track.vertical {
+  &.is-vertical-dragging > .scrollbars-track.vertical {
 
     .scrollbars-thumb {
       left: $scrollbars-track-size - $scrollbars-thumb-expanded-size;
@@ -211,8 +222,28 @@
 
   /* IS DRAGGING */
 
-  html.scrollbars-dragging &-track {
-    pointer-events: none;
+  html.scrollbars-dragging & {
+
+    /* HORIZONTAL SCROLLING */
+
+    &:not(.is-horizontal-dragging) {
+
+      > .scrollbars-track.horizontal {
+        pointer-events: none;
+      }
+
+    }
+
+    /* VERTICAL SCROLLING */
+
+    &:not(.is-vertical-dragging) {
+
+      > .scrollbars-track.vertical {
+        pointer-events: none;
+      }
+
+    }
+
   }
 
 }

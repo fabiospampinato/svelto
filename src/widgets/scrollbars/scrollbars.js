@@ -9,7 +9,7 @@
     selector: '.scrollbars',
     options: {
       thumb: {
-        minSize: 5,
+        minSize: 20
       },
       classes: {
         dragging: 'scrollbars-dragging',
@@ -115,6 +115,63 @@
 
     /* PRIVATE */
 
+    _getThumbStateBySizeScrolled ( trackState, sizeScrolled ) {
+
+      const {sizeVisible, sizeTotal, sizeTrack} = trackState;
+
+      const percentageCenterMin = this.options.thumb.minSize / sizeTrack,
+            percentageCenterVisible = sizeVisible / sizeTotal,
+            percentageCenter = Math.max ( percentageCenterMin, percentageCenterVisible ),
+            size = percentageCenter;
+
+      const sizeScrollable = sizeTotal - sizeVisible,
+            percentageScrolled = sizeScrolled / sizeScrollable,
+            percentageDistance = percentageScrolled - ( percentageCenter / 2 ),
+            percentageDistanceOffset = percentageCenter / 2,
+            percentageDistanceOffsetWeight = ( percentageScrolled <= .5 ? 1 - ( percentageScrolled / .5 ): - ( percentageScrolled - .5 ) * 2 ),
+            percentageDistanceAdjustment = percentageDistanceOffset * percentageDistanceOffsetWeight,
+            distance = percentageDistance + percentageDistanceAdjustment;
+
+      const midpoint = distance + ( size / 2 );
+
+      return { size, sizeScrolled, percentageScrolled, distance, midpoint };
+
+    }
+
+    _getThumbStateByTargetMidpoint ( trackState, midpoint, iterations = 20, epsilon = .0001 ) { //UGLY: Binary searching is a brute force approach here, there should be a closed form equation that just returns the right value we need
+
+      const sizeScrollable = trackState.sizeTotal - trackState.sizeVisible;
+
+      const min = this._getThumbStateBySizeScrolled ( trackState, 0 );
+
+      if ( midpoint <= min.midpoint ) return min;
+
+      const max = this._getThumbStateBySizeScrolled ( trackState, sizeScrollable );
+
+      if ( midpoint >= max.midpoint ) return max;
+
+      for ( let i = 0, start = 0, end = 1; true; i++ ) {
+
+        const mid = ( start + end ) / 2,
+              sizeScrolled = sizeScrollable * mid,
+              state = this._getThumbStateBySizeScrolled ( trackState, sizeScrolled );
+
+        if ( i >= iterations || Math.abs ( state.midpoint - midpoint ) <= epsilon ) return state; // Found a good enough one
+
+        if ( state.midpoint < midpoint ) {
+
+          start = mid;
+
+        } else {
+
+          end = mid;
+
+        }
+
+      }
+
+    }
+
     _update () {
 
       this._updateHorizontalTrack ();
@@ -169,20 +226,12 @@
 
     _updateHorizontalThumb () {
 
-      const {enabled, sizeVisible, sizeTotal, sizeTrack} = this.horizontal;
+      if ( !this.horizontal.enabled ) return;
 
-      if ( !enabled ) return;
+      const {size, distance} = this._getThumbStateBySizeScrolled ( this.horizontal, this.viewport.scrollLeft );
 
-      const sizeScrolled = this.viewport.scrollLeft,
-            percentageBefore = sizeScrolled / sizeTotal,
-            percentageAfter = ( sizeTotal - sizeScrolled - sizeVisible ) / sizeTotal,
-            percentageCenterMin = this.options.thumb.minSize / sizeTrack,
-            percentageCenterOffset = Math.max ( 0, percentageCenterMin - ( 1 - percentageBefore - percentageAfter ) ) * ( percentageBefore < percentageAfter ? percentageBefore : 1 - percentageAfter ),
-            left = percentageBefore - percentageCenterOffset,
-            right = percentageAfter;
-
-      this.thumbHorizontal.style.left = `${left * 100}%`;
-      this.thumbHorizontal.style.right = `${right * 100}%`;
+      this.thumbHorizontal.style.left = `${distance * 100}%`;
+      this.thumbHorizontal.style.width = `${size * 100}%`;
 
     }
 
@@ -233,20 +282,12 @@
 
     _updateVerticalThumb () {
 
-      const {enabled, sizeVisible, sizeTotal, sizeTrack} = this.vertical;
+      if ( !this.vertical.enabled ) return;
 
-      if ( !enabled ) return;
+      const {size, distance} = this._getThumbStateBySizeScrolled ( this.vertical, this.viewport.scrollTop );
 
-      const sizeScrolled = this.viewport.scrollTop,
-            percentageBefore = sizeScrolled / sizeTotal,
-            percentageAfter = ( sizeTotal - sizeScrolled - sizeVisible ) / sizeTotal,
-            percentageCenterMin = this.options.thumb.minSize / sizeTrack,
-            percentageCenterOffset = Math.max ( 0, percentageCenterMin - ( 1 - percentageBefore - percentageAfter ) ) * ( percentageBefore < percentageAfter ? percentageBefore : 1 - percentageAfter ),
-            top = percentageBefore - percentageCenterOffset,
-            bottom = percentageAfter;
-
-      this.thumbVertical.style.top = `${top * 100}%`;
-      this.thumbVertical.style.bottom = `${bottom * 100}%`;
+      this.thumbVertical.style.top = `${distance * 100}%`;
+      this.thumbVertical.style.height = `${size * 100}%`;
 
     }
 
@@ -386,53 +427,56 @@
 
     /* DRAG */
 
-    ___drag ( track, thumb, handler, draggingClass ) {
+    ___drag ( isHorizontal, handler ) {
 
       if ( Browser.is.mobile ) return;
 
+      const track = isHorizontal ? this.trackHorizontal : this.trackVertical,
+            thumb = isHorizontal ? this.thumbHorizontal : this.thumbVertical,
+            draggingClass = isHorizontal ? this.options.classes.isHorizontalDragging : this.options.classes.isVerticalDragging,
+            eventCoordinate = isHorizontal ? 'clientX' : 'clientY',
+            rectDistance = isHorizontal ? 'left' : 'top',
+            rectSize = isHorizontal ? 'width' : 'height';
+
       let isDragging = false,
-          pointOffset = { x: 0, y: 0 }, // Recentering coordinates to make sure it feels like thumbs are dragged rather than recentered
-          pointEvent = { x: 0, y: 0 };
+          isThumbDragging = false,
+          trackRect = null,
+          thumbRect = null,
+          startOffset = 0,
+          startPercentage = 0,
+          startPosition = 0;
 
-      const updatePointOffset = event => {
-        if ( event.target === thumb ) {
-          const thumbRect = thumb.getBoundingClientRect ();
-          const thumbX = thumbRect.left + ( thumbRect.width / 2 );
-          const thumbY = thumbRect.top + ( thumbRect.height / 2 );
-          pointOffset = {
-            x: thumbX - event.clientX,
-            y: thumbY - event.clientY
-          };
-        } else {
-          pointOffset = { x: 0, y: 0 };
-        }
+      const onDragStart = event => {
+        trackRect = track.getBoundingClientRect ();
+        thumbRect = thumb.getBoundingClientRect ();
+        startPosition = event[eventCoordinate];
+        startOffset = isThumbDragging ? ( thumbRect[rectDistance] + ( thumbRect[rectSize] / 2 ) ) - startPosition : 0;
+        startPercentage = ( startPosition + startOffset - trackRect[rectDistance] ) / trackRect[rectSize];
+        onDragMove ( event );
       };
 
-      const updatePointEvent = event => {
-        pointEvent = {
-          x: event.clientX + pointOffset.x,
-          y: event.clientY + pointOffset.y
-        };
-      };
-
-      const onDrag = event => {
-        updatePointEvent ( event );
-        handler ( pointEvent );
+      const onDragMove = event => {
+        const deltaPosition = event[eventCoordinate] - startPosition;
+        const deltaPercentage = deltaPosition / trackRect[rectSize];
+        const dragPercentage = startPercentage + deltaPercentage;
+        const trackState = isHorizontal ? this.horizontal : this.vertical;
+        const thumbState = this._getThumbStateByTargetMidpoint ( trackState, dragPercentage );
+        handler ( thumbState.percentageScrolled );
       };
 
       const onStart = event => {
         isDragging = true;
+        isThumbDragging = ( event.target === thumb );
         $.$document.on ( Pointer.move, onMove );
         $.$document.one ( Pointer.up, onEnd );
         this.scrollbars.classList.toggle ( draggingClass, true );
         $.html.classList.toggle ( this.options.classes.dragging, true );
-        updatePointOffset ( event );
-        onDrag ( event );
+        onDragStart ( event );
       };
 
       const onMove = _.frames ( event => {
         if ( !isDragging ) return;
-        onDrag ( event );
+        onDragMove ( event );
       });
 
       const onEnd = event => {
@@ -441,7 +485,6 @@
         $.$document.off ( Pointer.up, onEnd );
         this.scrollbars.classList.toggle ( draggingClass, false );
         $.html.classList.toggle ( this.options.classes.dragging, false );
-        onDrag ( event );
       };
 
       this._on ( false, $(track), Pointer.down, onStart );
@@ -452,14 +495,11 @@
 
     ___dragHorizontal () {
 
-      this.___drag ( this.trackHorizontal, this.thumbHorizontal, this.__dragHorizontal.bind ( this ), this.options.classes.isHorizontalDragging );
+      this.___drag ( true, this.__dragHorizontal.bind ( this ) );
 
     }
 
-    __dragHorizontal ( point ) {
-
-      const rect = this.trackHorizontal.getBoundingClientRect (),
-            percentage = ( point.x - rect.left ) / rect.width;
+    __dragHorizontal ( percentage ) {
 
       return this.setHorizontalThumbPercentage ( percentage );
 
@@ -469,14 +509,11 @@
 
     ___dragVertical () {
 
-      this.___drag ( this.trackVertical, this.thumbVertical, this.__dragVertical.bind ( this ), this.options.classes.isVerticalDragging );
+      this.___drag ( false, this.__dragVertical.bind ( this ) );
 
     }
 
-    __dragVertical ( point ) {
-
-      const rect = this.trackVertical.getBoundingClientRect (),
-            percentage = ( point.y - rect.top ) / rect.height;
+    __dragVertical ( percentage ) {
 
       return this.setVerticalThumbPercentage ( percentage );
 
@@ -488,7 +525,7 @@
 
       percentage = _.clamp ( percentage, 0, 1 );
 
-      const scrollLeft = ( this.horizontal.sizeTotal * percentage ) - ( this.horizontal.sizeVisible / 2 );
+      const scrollLeft = ( this.horizontal.sizeTotal - this.horizontal.sizeVisible ) * percentage;
 
       this.viewport.scrollLeft = scrollLeft;
 
@@ -498,7 +535,7 @@
 
       percentage = _.clamp ( percentage, 0, 1 );
 
-      const scrollTop = ( this.vertical.sizeTotal * percentage ) - ( this.vertical.sizeVisible / 2 );
+      const scrollTop = ( this.vertical.sizeTotal - this.vertical.sizeVisible ) * percentage;
 
       this.viewport.scrollTop = scrollTop;
 
