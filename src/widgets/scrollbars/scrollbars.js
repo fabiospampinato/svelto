@@ -17,6 +17,10 @@
         hasVertical: 'has-vertical',
         isHorizontalDragging: 'is-horizontal-dragging',
         isVerticalDragging: 'is-vertical-dragging',
+        isHorizontalScrolledStart: 'is-horizontal-scrolled-start',
+        isVerticalScrolledStart: 'is-vertical-scrolled-start',
+        isHorizontalScrolledEnd: 'is-horizontal-scrolled-end',
+        isVerticalScrolledEnd: 'is-vertical-scrolled-end',
         isHorizontalScrolling: 'is-horizontal-scrolling',
         isVerticalScrolling: 'is-vertical-scrolling'
       },
@@ -61,6 +65,10 @@
       this.viewportObserver = null;
       this.contentObserver = null;
 
+      this._isHorizontalScrolledStart = false;
+      this._isVerticalScrolledStart = false;
+      this._isHorizontalScrolledEnd = false;
+      this._isVerticalScrolledEnd = false;
       this._isHorizontalScrolling = false;
       this._isVerticalScrolling = false;
       this._scrollTop = 0;
@@ -75,14 +83,16 @@
         enabled: false,
         sizeVisible: -1,
         sizeTotal: -1,
-        sizeTrack: -1
+        sizeTrack: -1,
+        sizeScrollable: -1
       };
 
       this.vertical = {
         enabled: false,
         sizeVisible: -1,
         sizeTotal: -1,
-        sizeTrack: -1
+        sizeTrack: -1,
+        sizeScrollable: -1
       };
 
     }
@@ -117,15 +127,14 @@
 
     _getThumbStateBySizeScrolled ( trackState, sizeScrolled ) {
 
-      const {sizeVisible, sizeTotal, sizeTrack} = trackState;
+      const {sizeVisible, sizeTotal, sizeTrack, sizeScrollable} = trackState;
 
       const percentageCenterMin = this.options.thumb.minSize / sizeTrack,
             percentageCenterVisible = sizeVisible / sizeTotal,
             percentageCenter = Math.max ( percentageCenterMin, percentageCenterVisible ),
             size = percentageCenter;
 
-      const sizeScrollable = sizeTotal - sizeVisible,
-            percentageScrolled = sizeScrolled / sizeScrollable,
+      const percentageScrolled = sizeScrolled / sizeScrollable,
             percentageDistance = percentageScrolled - ( percentageCenter / 2 ),
             percentageDistanceOffset = percentageCenter / 2,
             percentageDistanceOffsetWeight = ( percentageScrolled <= .5 ? 1 - ( percentageScrolled / .5 ): - ( percentageScrolled - .5 ) * 2 ),
@@ -140,7 +149,7 @@
 
     _getThumbStateByTargetMidpoint ( trackState, midpoint, iterations = 20, epsilon = .0001 ) { //UGLY: Binary searching is a brute force approach here, there should be a closed form equation that just returns the right value we need
 
-      const sizeScrollable = trackState.sizeTotal - trackState.sizeVisible;
+      const {sizeScrollable} = trackState;
 
       const min = this._getThumbStateBySizeScrolled ( trackState, 0 );
 
@@ -174,8 +183,45 @@
 
     _update () {
 
+      this._updateScrollOffsets ();
+
       this._updateHorizontalTrack ();
       this._updateVerticalTrack ();
+
+      this._updateHorizontalScrolled ();
+      this._updateVerticalScrolled ();
+
+    }
+
+    _updateScrollOffsets () {
+
+      this._scrollTop = this.viewport.scrollTop;
+      this._scrollLeft = this.viewport.scrollLeft;
+
+    }
+
+    _updateHorizontalScrolled () {
+
+      const scrolledStartPrev = this._isHorizontalScrolledStart,
+            scrolledEndPrev = this._isHorizontalScrolledEnd,
+            scrolledStart = !!this._scrollLeft,
+            scrolledEnd = this._scrollLeft !== this.horizontal.sizeScrollable;
+
+      if ( scrolledStartPrev !== scrolledStart ) {
+
+        this._isHorizontalScrolledStart = scrolledStart;
+
+        this.scrollbars.classList.toggle ( this.options.classes.isHorizontalScrolledStart, this._isHorizontalScrolledStart );
+
+      }
+
+      if ( scrolledEndPrev !== scrolledEnd ) {
+
+        this._isHorizontalScrolledEnd = scrolledEnd;
+
+        this.scrollbars.classList.toggle ( this.options.classes.isHorizontalScrolledEnd, this._isHorizontalScrolledEnd );
+
+      }
 
     }
 
@@ -204,9 +250,10 @@
             sizeVisible = this.viewport.clientWidth,
             sizeTotal = this.viewport.scrollWidth,
             sizeTrack = this.trackHorizontal.clientWidth,
+            sizeScrollable = sizeTotal - sizeVisible,
             enabled = ( sizeVisible < sizeTotal );
 
-      this.horizontal = { sizeVisible, sizeTotal, sizeTrack, enabled };
+      this.horizontal = { sizeVisible, sizeTotal, sizeTrack, sizeScrollable, enabled };
 
       if ( sizeVisible !== prev.sizeVisible || sizeTotal !== prev.sizeTotal || sizeTrack !== prev.sizeTrack ) {
 
@@ -235,6 +282,30 @@
 
     }
 
+    _updateVerticalScrolled () {
+
+      const scrolledStartPrev = this._isVerticalScrolledStart,
+            scrolledEndPrev = this._isVerticalScrolledEnd,
+            scrolledStart = !!this._scrollTop,
+            scrolledEnd = this._scrollTop !== this.vertical.sizeScrollable;
+
+      if ( scrolledStartPrev !== scrolledStart ) {
+
+        this._isVerticalScrolledStart = scrolledStart;
+
+        this.scrollbars.classList.toggle ( this.options.classes.isVerticalScrolledStart, this._isVerticalScrolledStart );
+
+      }
+
+      if ( scrolledEndPrev !== scrolledEnd ) {
+
+        this._isVerticalScrolledEnd = scrolledEnd;
+
+        this.scrollbars.classList.toggle ( this.options.classes.isVerticalScrolledEnd, this._isVerticalScrolledEnd );
+
+      }
+    }
+
     _updateVerticalScrolling () {
 
       const scrollTopPrev = this._scrollTop,
@@ -260,9 +331,10 @@
             sizeVisible = this.viewport.clientHeight,
             sizeTotal = this.viewport.scrollHeight,
             sizeTrack = this.trackVertical.clientHeight,
+            sizeScrollable = sizeTotal - sizeVisible,
             enabled = ( sizeVisible < sizeTotal );
 
-      this.vertical = { sizeVisible, sizeTotal, sizeTrack, enabled };
+      this.vertical = { sizeVisible, sizeTotal, sizeTrack, sizeScrollable, enabled };
 
       if ( sizeVisible !== prev.sizeVisible || sizeTotal !== prev.sizeTotal || sizeTrack !== prev.sizeTrack ) {
 
@@ -375,6 +447,9 @@
 
       this._updateHorizontalScrolling ();
       this._updateVerticalScrolling ();
+
+      this._updateHorizontalScrolled ();
+      this._updateVerticalScrolled ();
 
       this._updateHorizontalThumb ();
       this._updateVerticalThumb ();
@@ -525,7 +600,7 @@
 
       percentage = _.clamp ( percentage, 0, 1 );
 
-      const scrollLeft = ( this.horizontal.sizeTotal - this.horizontal.sizeVisible ) * percentage;
+      const scrollLeft = this.horizontal.sizeScrollable * percentage;
 
       this.viewport.scrollLeft = scrollLeft;
 
@@ -535,7 +610,7 @@
 
       percentage = _.clamp ( percentage, 0, 1 );
 
-      const scrollTop = ( this.vertical.sizeTotal - this.vertical.sizeVisible ) * percentage;
+      const scrollTop = this.vertical.sizeScrollable * percentage;
 
       this.viewport.scrollTop = scrollTop;
 

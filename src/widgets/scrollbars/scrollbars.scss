@@ -76,6 +76,17 @@
     height: $scrollbars-corner-size;
   }
 
+  /* SHADOWS */
+
+  &-shadows {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: $scrollbars-shadows-z-index;
+    transition-duration: $scrollbars-shadows-animation-duration;
+  }
+
   /* VIEWPORT */
 
   &-viewport {
@@ -135,6 +146,58 @@
 
     > .scrollbars-track.vertical {
       bottom: $scrollbars-corner-size;
+    }
+
+  }
+
+  /* HAS SHADOWS */
+
+  &.has-shadows {
+
+    $directions-classes: (
+      top: ".is-vertical-scrolled-start",
+      bottom: ".is-vertical-scrolled-end",
+      left: ".is-horizontal-scrolled-start",
+      right: ".is-horizontal-scrolled-end"
+    );
+
+    $directions-shadows: (
+      top: inset 0 #{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
+      bottom: inset 0 -#{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
+      left: inset #{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
+      right: inset -#{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color}
+    );
+
+    $permutations: (
+      /* 1 DIRECTION */
+      ( "top" ), ( "right" ), ( "bottom" ), ( "left" ),
+      /* 2 DIRECTIONS */
+      ( "top", "right" ), ( "top", "bottom" ), ( "top", "left" ), ( "right", "bottom" ), ( "right", "left" ), ( "bottom", "left" ),
+      /* 3 DIRECTIONS */
+      ( "top", "right", "bottom" ), ( "top", "right", "left" ), ( "top", "bottom", "left" ), ( "right", "bottom", "left" ),
+      /* 4 DIRECTIONS */
+      ( "top", "right", "bottom", "left" )
+    );
+
+    @each $permutation in $permutations {
+
+      $classes: "";
+      $shadows: ();
+
+      @each $direction in $permutation {
+
+        $class: map-get( $directions-classes, $direction );
+        $classes: "#{$classes}#{$class}";
+
+        $shadow: map-get( $directions-shadows, $direction );
+        $shadows: append( $shadows, $shadow, "comma" );
+
+      }
+
+      &#{$classes} > .scrollbars-shadows {
+        box-shadow: #{$shadows};
+      }
+
     }
 
   }
