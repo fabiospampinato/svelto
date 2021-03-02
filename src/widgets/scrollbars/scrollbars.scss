@@ -121,13 +121,17 @@
 
   }
 
-  /* HAS HORIZONTAL & HAS VERTICAL & HAS CORNER */
+  /* HAS CORNER */
 
-  &.has-horizontal.has-vertical.has-corner {
+  &.has-corner {
+
+    /* HORIZONTAL */
 
     > .scrollbars-track.horizontal {
       right: $scrollbars-corner-size;
     }
+
+    /* VERTICAL */
 
     > .scrollbars-track.vertical {
       bottom: $scrollbars-corner-size;
