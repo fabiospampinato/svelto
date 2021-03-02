@@ -5,6 +5,8 @@
 
   @include fill-absolute ();
   position: absolute;
+  border-radius: inherit;
+  overflow: hidden;
 
   /* TRACK */
 
