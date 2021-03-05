@@ -110,7 +110,12 @@
 
   /* CONTENT */
 
-  &-content {}
+  &-content {
+    position: relative !important;
+    overflow: visible;
+    min-height: 100%;
+    min-width: 100%;
+  }
 
   /* HAS HORIZONTAL */
 
