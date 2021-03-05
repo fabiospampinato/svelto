@@ -12,6 +12,9 @@
         minSize: 20
       },
       classes: {
+        autosize: 'autosize',
+        autosizeFixedHeight: 'autosize-fixed-height',
+        autosizeFixedWidth: 'autosize-fixed-width',
         dragging: 'scrollbars-dragging',
         hasHorizontal: 'has-horizontal',
         hasVertical: 'has-vertical',
@@ -65,6 +68,10 @@
       this.viewportObserver = null;
       this.contentObserver = null;
 
+      this._isAutosize = this.$scrollbars.hasClass ( this.options.classes.autosize );
+      this._isAutosizeHeight = this._isAutosize && this.$scrollbars.hasClass ( this.options.classes.autosizeFixedHeight );
+      this._isAutosizeWidth = this._isAutosize && this.$scrollbars.hasClass ( this.options.classes.autosizeFixedWidth );
+
       this._isHorizontalScrolledStart = false;
       this._isVerticalScrolledStart = false;
       this._isHorizontalScrolledEnd = false;
@@ -100,6 +107,7 @@
     _init () {
 
       this._update ();
+      this._updateAutoSize ();
 
     }
 
@@ -190,6 +198,22 @@
 
       this._updateHorizontalScrolled ();
       this._updateVerticalScrolled ();
+
+    }
+
+    _updateAutoSize () {
+
+      if ( this._isAutosizeHeight ) {
+
+        this.scrollbars.style.height = `${this.vertical.sizeTotal}px`;
+
+      }
+
+      if ( this._isAutosizeWidth ) {
+
+        this.scrollbars.style.width = `${this.horizontal.sizeTotal}px`;
+
+      }
 
     }
 
@@ -398,6 +422,7 @@
     __resizeContent () {
 
       this._update ();
+      this._updateAutoSize ();
 
     }
 

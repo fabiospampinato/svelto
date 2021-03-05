@@ -4,7 +4,7 @@
 .scrollbars {
 
   @include fill-absolute ();
-  position: absolute;
+  padding: 0;
   border-radius: inherit;
   overflow: hidden;
 
@@ -94,7 +94,6 @@
   &-viewport {
 
     @include fill-absolute ();
-    position: absolute;
     overflow: scroll;
     scrollbar-width: 0;
 
@@ -284,6 +283,30 @@
         transition-duration: 0s;
       }
 
+    }
+
+  }
+
+  /* AUTOSIZE */
+
+  &.autosize {
+
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;
+    height: stretch;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    width: stretch;
+
+    > .scrollbars-viewport {
+      position: relative;
+      height: 100%;
+      width: 100%;
     }
 
   }
