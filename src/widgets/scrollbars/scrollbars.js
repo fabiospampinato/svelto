@@ -8,6 +8,12 @@
     plugin: true,
     selector: '.scrollbars',
     options: {
+      scroll: {
+        fast: {
+          enabled: true,
+          multiplier: 5
+        }
+      },
       thumb: {
         minSize: 20
       },
@@ -114,8 +120,9 @@
     _events () {
 
       this.___scrollViewport ();
-      this.___scrollTrackHorizontal ();
-      this.___scrollTrackVertical ();
+      this.___wheelViewport ();
+      this.___wheelTrackHorizontal ();
+      this.___wheelTrackVertical ();
       this.___resizeContent ();
       this.___resizeViewport ();
       this.___dragHorizontal ();
@@ -481,18 +488,42 @@
 
     }
 
-    /* SCROLL TRACK HORIZONTAL */
+    /* WHEEL VIEWPORT */
 
-    ___scrollTrackHorizontal () {
+    ___wheelViewport () {
 
-      this._on ( false, this.$trackHorizontal, 'wheel', this.__scrollTrackHorizontal );
+      if ( !this.options.scroll.fast.enabled ) return;
+
+      if ( this.options.scroll.fast.multiplier === 1 ) return;
+
+      this._on ( false, this.$viewport, 'wheel', this.__wheelViewport );
 
     }
 
-    __scrollTrackHorizontal ( event ) {
+    __wheelViewport ( event ) {
+
+      if ( !event.altKey ) return;
+
+      this.__wheelTrackHorizontal ( event );
+      this.__wheelTrackVertical ( event );
+
+    }
+
+    /* WHEEL TRACK HORIZONTAL */
+
+    ___wheelTrackHorizontal () {
+
+      this._on ( false, this.$trackHorizontal, 'wheel', this.__wheelTrackHorizontal );
+
+    }
+
+    __wheelTrackHorizontal ( event ) {
+
+      const deltaMultiplier = ( event.altKey && this.options.scroll.fast.enabled ) ? this.options.scroll.fast.multiplier : 1,
+            deltaDistance = event.deltaX * deltaMultiplier;
 
       const scrollLeftPrev = this.viewport.scrollLeft,
-            scrollLeft = _.clamp ( scrollLeftPrev + event.deltaX, 0, this.viewport.scrollWidth - this.viewport.clientWidth );
+            scrollLeft = _.clamp ( scrollLeftPrev + deltaDistance, 0, this.viewport.scrollWidth - this.viewport.clientWidth );
 
       if ( scrollLeft === scrollLeftPrev ) return;
 
@@ -503,18 +534,21 @@
 
     }
 
-    /* SCROLL TRACK VERTICAL */
+    /* WHEEL TRACK VERTICAL */
 
-    ___scrollTrackVertical () {
+    ___wheelTrackVertical () {
 
-      this._on ( false, this.$trackVertical, 'wheel', this.__scrollTrackVertical );
+      this._on ( false, this.$trackVertical, 'wheel', this.__wheelTrackVertical );
 
     }
 
-    __scrollTrackVertical ( event ) {
+    __wheelTrackVertical ( event ) {
+
+      const deltaMultiplier = ( event.altKey && this.options.scroll.fast.enabled ) ? this.options.scroll.fast.multiplier : 1,
+            deltaDistance = event.deltaY * deltaMultiplier;
 
       const scrollTopPrev = this.viewport.scrollTop,
-            scrollTop = _.clamp ( scrollTopPrev + event.deltaY, 0, this.viewport.scrollHeight - this.viewport.clientHeight );
+            scrollTop = _.clamp ( scrollTopPrev + deltaDistance, 0, this.viewport.scrollHeight - this.viewport.clientHeight );
 
       if ( scrollTop === scrollTopPrev ) return;
 
