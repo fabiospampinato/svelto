@@ -504,8 +504,17 @@
 
       if ( !event.altKey ) return;
 
-      this.__wheelTrackHorizontal ( event );
-      this.__wheelTrackVertical ( event );
+      const isPrimaryHorizonal = Math.abs ( event.deltaX ) >= Math.abs ( event.deltaY );
+
+      if ( isPrimaryHorizonal ) {
+
+        this.__wheelTrackHorizontal ( event );
+
+      } else {
+
+        this.__wheelTrackVertical ( event );
+
+      }
 
     }
 
