@@ -9,6 +9,10 @@
 
     cursor: row-resize !important;
 
+    html.windows & {
+      cursor: ns-resize !important; // Windows doesn't even use the right one...
+    }
+
     & > *:not(.sash) {
       pointer-events: none !important;
     }
@@ -16,11 +20,17 @@
   }
 
   & > .sash {
+
     @include absolute ( auto 0 auto 0 );
     cursor: row-resize;
     height: $layout-resizable-sash-size;
     margin-top: - $layout-resizable-sash-size / 2;
     transform: translateY( - $layout-resizable-sash-size / 2 ); // Starting hidden
+
+    html.windows & {
+      cursor: ns-resize !important; // Windows doesn't even use the right one...
+    }
+
   }
 
 }
