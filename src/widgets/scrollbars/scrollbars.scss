@@ -168,10 +168,10 @@
     );
 
     $directions-shadows: (
-      top: inset 0 #{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
-      bottom: inset 0 -#{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
-      left: inset #{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color},
-      right: inset -#{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color}
+      top: $scrollbars-shadow-top,
+      bottom: $scrollbars-shadow-bottom,
+      left: $scrollbars-shadow-left,
+      right: $scrollbars-shadow-right
     );
 
     $permutations: (
