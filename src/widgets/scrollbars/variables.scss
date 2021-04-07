@@ -19,7 +19,7 @@ $scrollbars-shadows-color: rgba(0, 0, 0, .2) !default;
 $scrollbars-shadows-z-index: $scrollbars-z-index + 1 !default;
 $scrollbars-shadows-animation-duration: 0s !default;
 
-$scrollbars-shadow-top: inset 0 #{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color};
-$scrollbars-shadow-bottom: inset 0 -#{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color};
-$scrollbars-shadow-left: inset #{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color};
-$scrollbars-shadow-right: inset -#{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color};
+$scrollbars-shadow-top: inset 0 #{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color} !default;
+$scrollbars-shadow-bottom: inset 0 -#{$scrollbars-shadows-size} #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color} !default;
+$scrollbars-shadow-left: inset #{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color} !default;
+$scrollbars-shadow-right: inset -#{$scrollbars-shadows-size} 0 #{$scrollbars-shadows-size} -#{$scrollbars-shadows-size} #{$scrollbars-shadows-color} !default;
