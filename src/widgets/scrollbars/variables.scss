@@ -5,8 +5,8 @@ $scrollbars-track-size: 12px !default;
 $scrollbars-track-z-index: $scrollbars-z-index + 2 !default;
 $scrollbars-track-animation-duration: $animation-fast !default;
 
-$scrollbars-thumb-collapsed-size: 3px !default;
-$scrollbars-thumb-expanded-size: 9px !default;
+$scrollbars-thumb-collapsed-size: 10px !default;
+$scrollbars-thumb-expanded-size: $scrollbars-thumb-collapsed-size !default;
 $scrollbars-thumb-min-size: 20px !default;
 $scrollbars-thumb-z-index: $scrollbars-z-index + 3 !default;
 $scrollbars-thumb-animation-duration: $animation-xfast !default;
