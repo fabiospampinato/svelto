@@ -251,7 +251,8 @@
 
     /* HORIZONTAL SCROLLING */
 
-    &:not(.is-horizontal-scrolling) {
+    &:not(.autohide-hover):not(.is-horizontal-scrolling),
+    &.autohide-hover:not(.is-horizontal-scrolling):not(:hover):not(:active) {
 
       > .scrollbars-track:not(:hover):not(:active).horizontal {
         opacity: 0;
@@ -269,7 +270,8 @@
 
     /* VERTICAL SCROLLING */
 
-    &:not(.is-vertical-scrolling) {
+    &:not(.autohide-hover):not(.is-vertical-scrolling),
+    &.autohide-hover:not(.is-vertical-scrolling):not(:hover):not(:active) {
 
       > .scrollbars-track:not(:hover):not(:active).vertical {
         opacity: 0;
