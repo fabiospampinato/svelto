@@ -6,6 +6,7 @@
 
 $pointing-tip-size: .625em !default;
 $pointing-tip-size-half: $pointing-tip-size / 2 !default;
+$pointing-tip-border-radius: $pointing-tip-size / 3 !default;
 
 $pointing-tip-diagonal: $pointing-tip-size * $SQRT2 !default;
 $pointing-tip-diagonal-half: $pointing-tip-diagonal / 2 !default;

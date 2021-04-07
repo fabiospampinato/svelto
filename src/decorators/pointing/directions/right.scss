@@ -11,6 +11,7 @@
 
   &:after {
     right: - $pointing-tip-size-half;
+    border-top-right-radius: $pointing-tip-border-radius;
     clip-path: url(#{$pointing-path-images}pointing-clips.svg#{$revision}#clip-right); // The polygon is not supported on Firefox
     clip-path: polygon(0 0, 100% 100%, 100% 0);
   }
