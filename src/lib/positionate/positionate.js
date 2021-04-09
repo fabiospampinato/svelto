@@ -65,7 +65,9 @@
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight,
         directions = _.uniq ( [].concat ( options.direction ? [options.direction] : [], options.axis ? options.directions[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.directions.all : [] ) ),
-        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y - window.scrollY, bottom: options.point.y - window.scrollY, left: options.point.x - window.scrollX, right: options.point.x - window.scrollX, width: 0, height: 0 };
+        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y - window.scrollY, bottom: options.point.y - window.scrollY, left: options.point.x - window.scrollX, right: options.point.x - window.scrollX, width: 0, height: 0 },
+        constrainerRect = options.constrainer.$element ? options.constrainer.$element.getRect () : null,
+        isAnchorInsideConstrainer = !!constrainerRect && ( anchorRect.top >= constrainerRect.top && anchorRect.bottom <= constrainerRect.bottom && anchorRect.left >= constrainerRect.left && anchorRect.right <= constrainerRect.right );
 
     /* ID */
 
@@ -81,16 +83,16 @@
       switch ( direction ) {
 
         case 'top':
-          return anchorRect.top;
+          return isAnchorInsideConstrainer ? Math.max ( 0, anchorRect.top - constrainerRect.top + options.constrainer.tolerance.y ) : anchorRect.top;
 
         case 'bottom':
-          return windowHeight - anchorRect.bottom;
+          return isAnchorInsideConstrainer ? Math.max ( 0, constrainerRect.bottom - anchorRect.bottom + options.constrainer.tolerance.y ) : windowHeight - anchorRect.bottom;
 
         case 'left':
-          return anchorRect.left;
+          return isAnchorInsideConstrainer ? Math.max ( 0, anchorRect.left - constrainerRect.left + options.constrainer.tolerance.x ) : anchorRect.left;
 
         case 'right':
-          return windowWidth - anchorRect.right;
+          return isAnchorInsideConstrainer ? Math.max ( 0, constrainerRect.right - anchorRect.right + options.constrainer.tolerance.x ) : windowWidth - anchorRect.right;
 
       }
 
@@ -207,10 +209,9 @@
       if ( isExtendedX ) coordinates.top = _.clamp ( coordinates.top, spacingY, windowHeight - positionableRect.height - spacingY );
       if ( isExtendedY ) coordinates.left = _.clamp ( coordinates.left, spacingX, windowWidth - positionableRect.width - spacingX );
 
-    } else if ( options.constrainer.$element ) {
+    } else if ( options.constrainer.$element && constrainerRect ) {
 
-      let constrainerRect = options.constrainer.$element.getRect (),
-          halfWidth = options.constrainer.center ? positionableRect.width / 2 : 0,
+      let halfWidth = options.constrainer.center ? positionableRect.width / 2 : 0,
           halfHeight = options.constrainer.center ? positionableRect.height / 2 : 0;
 
       /* COORDINATES */
