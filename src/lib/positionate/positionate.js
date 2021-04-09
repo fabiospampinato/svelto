@@ -25,6 +25,10 @@
         y: 0
       }
     },
+    dimensions: { // A way to override the measured dimensions when computing the available areas, this allows for positioning elements in a stable manner when their dimensions can vary quickly
+      width: 0,
+      height: 0
+    },
     directions: { // How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
       x: ['right', 'left'],
       y: ['bottom', 'top'],
@@ -120,11 +124,11 @@
 
         case 'top':
         case 'bottom':
-          return Math.min ( positionableRect.height, spaces[index] ) * Math.min ( windowWidth, positionableRect.width );
+          return Math.min ( Math.max ( options.dimensions.height, positionableRect.height ), spaces[index] ) * Math.min ( windowWidth, positionableRect.width );
 
         case 'left':
         case 'right':
-          return Math.min ( positionableRect.width, spaces[index] ) * Math.min ( windowHeight, positionableRect.height );
+          return Math.min ( Math.max ( options.dimensions.width, positionableRect.width ), spaces[index] ) * Math.min ( windowHeight, positionableRect.height );
 
       }
 
