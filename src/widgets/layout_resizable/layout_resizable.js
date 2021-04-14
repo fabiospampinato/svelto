@@ -62,6 +62,8 @@
 
     _destroy () {
 
+      this._resetPanes ();
+
       this.$sashes.remove ();
 
     }
@@ -98,6 +100,17 @@
         this.$sashes = this.$sashes.add ( $sash );
 
       });
+
+    }
+
+    _resetPanes () {
+
+      for ( let id in this.mapping ) {
+        const mapping = this.mapping[id];
+        const $pane = mapping[0];
+        this.isHorizontal ? $pane.css ( 'width', '' ) : $pane.css ( 'height', '' );
+        $pane.css ( 'flex-basis', '' );
+      }
 
     }
 
