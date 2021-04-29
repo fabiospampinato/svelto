@@ -410,6 +410,8 @@
 
       if ( !window.ResizeObserver ) return;
 
+      if ( !this.content ) return;
+
       this.contentObserver = new ResizeObserver ( this.__resizeContent );
 
       this.contentObserver.observe ( this.content );
