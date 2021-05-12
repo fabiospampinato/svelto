@@ -7,7 +7,7 @@
 const _ = require ( 'lodash' ),
       execa = require ( 'execa' ),
       path = require ( 'path' ),
-      rdf = require ( 'require-dot-file' ),
+      findUp = require ( 'find-up-json' ),
       config = require ( '../pacco.json' );
 
 /* VARIABLES */
@@ -16,7 +16,8 @@ const root = path.resolve ( __dirname, '..' ),
       src = path.join ( root, 'src' ),
       icon = path.join ( root, 'resources', 'icon', 'icon.png' ),
       iconError = path.join ( root, 'resources', 'icon', 'icon_error.png' ),
-      sveltoConfig = rdf ( 'svelto.json', process.cwd () ) || {};
+      sveltoDotfile = findUp ( 'svelto.json', process.cwd () ),
+      sveltoConfig = sveltoDotfile ? sveltoDotfile.content : {};
 
 /* SRC */
 
