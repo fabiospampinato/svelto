@@ -34,7 +34,7 @@
   "dependencies": {
     "execa": "^0.8.0",
     "find-up-json": "^1.0.0",
-    "pacco": "^2.1.15"
+    "pacco": "^2.1.16"
   },
   "devDependencies": {
     "country-data": "0.0.31",
