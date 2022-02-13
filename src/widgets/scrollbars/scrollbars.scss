@@ -211,14 +211,16 @@
 
   /* IS DRAGGING */
 
-  &.is-horizontal-dragging,
-  &.is-vertical-dragging {
+  // Disabled, because otherwise elements inside it can't be found with document.elementAtPoint
 
-    > .scrollbars-viewport {
-      pointer-events: none;
-    }
+  // &.is-horizontal-dragging,
+  // &.is-vertical-dragging {
 
-  }
+    // > .scrollbars-viewport {
+    //   pointer-events: none;
+    // }
+
+  // }
 
   /* IS DRAGGING HORIZONTAL */
 
