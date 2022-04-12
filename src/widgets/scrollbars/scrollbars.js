@@ -412,6 +412,8 @@
 
       if ( !this.content ) return;
 
+      if ( !this._isAutosize ) return;
+
       this.contentObserver = new ResizeObserver ( this.__resizeContent );
 
       this.contentObserver.observe ( this.content );
