@@ -302,7 +302,9 @@
 
     ___resize () {
 
-      this._on ( true, $.$window, 'resize', this._throttle ( this.__resize.bind ( this ), 500 ) );
+      const resizeEvent = this.isHorizontal ? 'resize:width' : 'resize:height';
+
+      this._on ( true, $.$window, resizeEvent, this._throttle ( this.__resize.bind ( this ), 500 ) );
 
     }
 
