@@ -34,6 +34,8 @@
 
       Breakpoint.current = Breakpoint.get ();
 
+      if ( _.isEmpty ( Breakpoints.widths ) ) return;
+
       $.$window.on ( 'resize:width', _.frames ( Breakpoint.__resize.bind ( Breakpoint ) ) );
 
     },
