@@ -18,6 +18,8 @@
         minSize: 20
       },
       classes: {
+        autohide: 'autohide',
+        autohideHover: 'autohide-hover',
         autosize: 'autosize',
         autosizeFixedHeight: 'autosize-fixed-height',
         autosizeFixedWidth: 'autosize-fixed-width',
@@ -74,6 +76,8 @@
       this.viewportObserver = null;
       this.contentObserver = null;
 
+      this._isAutohide = this.$scrollbars.hasClass ( this.options.classes.autohide );
+      this._isAutohideHover = this._isAutohide && this.$scrollbars.hasClass ( this.options.classes.autohideHover );
       this._isAutosize = this.$scrollbars.hasClass ( this.options.classes.autosize );
       this._isAutosizeHeight = this._isAutosize && this.$scrollbars.hasClass ( this.options.classes.autosizeFixedHeight );
       this._isAutosizeWidth = this._isAutosize && this.$scrollbars.hasClass ( this.options.classes.autosizeFixedWidth );
@@ -91,6 +95,7 @@
       this.__resizeContent = this.__resizeContent.bind ( this );
       this.__resizeViewport = this.__resizeViewport.bind ( this );
       this.__scrollViewport = this.__scrollViewport.bind ( this );
+      this.__enter = this.__enter.bind ( this );
 
       this.horizontal = {
         enabled: false,
@@ -127,6 +132,7 @@
       this.___resizeViewport ();
       this.___dragHorizontal ();
       this.___dragVertical ();
+      this.___enter ();
 
     }
 
@@ -443,6 +449,8 @@
 
       if ( !window.ResizeObserver ) return;
 
+      if ( this._isAutohideHover ) return;
+
       this.viewportObserver = new ResizeObserver ( this.__resizeViewport );
 
       this.viewportObserver.observe ( this.viewport );
@@ -663,6 +671,22 @@
     __dragVertical ( percentage ) {
 
       return this.setVerticalThumbPercentage ( percentage );
+
+    }
+
+    /* ENTER */
+
+    ___enter () {
+
+      if ( !this._isAutohideHover ) return;
+
+      this.viewport.addEventListener ( 'mouseenter', this.__enter );
+
+    }
+
+    __enter () {
+
+      this._update ();
 
     }
 
